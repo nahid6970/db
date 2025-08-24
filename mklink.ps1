@@ -1,1 +1,2 @@
 New-Item -ItemType SymbolicLink -Path "C:\Users\nahid\ms\ms1\scripts\flask\5013_movie_tracker\data.json" -Target "C:\Users\nahid\ms\db\5013_movie_tracker\data.json" -Force
+Pause
