@@ -1,0 +1,4133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Home</title>
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4021/4021539.png" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>/* Import the JetBrains Mono font */
+@import url("https://www.nerdfonts.com/assets/css/webfont.css");
+
+/* Thin scrollbar with custom styles for html and body */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  min-height: 100vh;
+  margin: 0;
+  background-color: #31343a;
+  font-family: Calibri;
+  scrollbar-width: thin;
+  scrollbar-color: #ff0000 #000000;
+  /* black background and red thumb */
+}
+
+/* WebKit browsers (Chrome, Safari) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 1px;
+  /* Set the width of the scrollbar */
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: #ff000f;
+  /* Color of the thumb (red) */
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background-color: #000000;
+  /* Color of the track (black) */
+}
+
+/* For html part 2 ############################################################*/
+.flex-container2 {
+  display: flex;
+  flex-direction: column;
+  background-color: #31343a;
+  gap: 3px;
+  flex-wrap: wrap;
+  text-align: left;
+  line-height: auto;
+  align-items: flex-start;
+  font-size: auto;
+  color: rgb(255, 255, 255);
+  padding: 1cm;
+  border-radius: 1cm;
+  position: relative;
+  /* Added for positioning context */
+}
+
+.flex-container2>div {
+  font-weight: normal;
+  flex-grow: 1;
+  border-radius: 0px;
+  width: max-content;
+  margin: 1px;
+  text-align: left;
+}
+
+p {
+  text-align: justify;
+  line-height: 1.5;
+  height: auto;
+  color: #4a90e2;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+}
+
+a:link {
+  color: #b5ac97;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #bbd853;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+img {
+  border: 1px solid transparent;
+  vertical-align: middle;
+  border-radius: 10px;
+}
+
+.link-group-content {
+  list-style: none;
+  /* Remove default list bullets */
+  padding: 10px;
+  /* Remove default padding */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  background-color: #252525;
+  border-radius: 10px;
+  border: #0056b3 solid 1px;
+}
+
+.link-group-content[style*="display: list-item"] {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: fit-content;
+  padding-right: 18px;
+}
+
+.link-group-content[style*="display: list-item"] .link-item {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.link-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Center the link and buttons horizontally */
+  margin: 5px;
+  /* Add some margin around each item */
+  padding: 0;
+  background-color: #474747;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  /* width: 80px;
+  height: 80px; */
+  min-width: 40px;
+  /* min-height: 80px; */
+  cursor: pointer !important;
+}
+
+.link-item * {
+  cursor: pointer !important;
+}
+
+/* Text links should be rectangular */
+.link-item.link-type-text {
+  /* width: 120px;
+  height: 60px; */
+  min-width: 120px;
+  min-height: 60px;
+}
+
+/* Icon and image links stay square */
+.link-item.link-type-nerd-font,
+.link-item.link-type-img {
+  /* width: 80px;
+  height: 80px; */
+  min-width: 80px;
+  min-height: 80px;
+}
+
+.link-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.link-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  background-color: #000000;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.link-item:hover::before {
+  left: 100%;
+}
+
+.link-item a {
+  /* Styles for the link itself within the container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  font-family: jetbrainsmono nfp;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  /* Space between link and buttons */
+}
+
+.add-link-item {
+  max-height: fit-content;
+  align-self: center;
+  cursor: pointer !important;
+  flex-grow: 0 !important;
+  flex-shrink: 0 !important;
+  flex-basis: auto !important;
+}
+
+.add-link-item * {
+  cursor: pointer !important;
+}
+
+.add-link-item:hover {
+  background-color: #4CAF50;
+  /* Green color on hover */
+}
+
+.toggle-container span {
+  /* Reset properties for the toggle label span */
+  display: inline;
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  transition: none;
+  margin: 0;
+  width: auto;
+  height: auto;
+  font-family: Calibri;
+  /* Or your preferred default font */
+  font-size: 16px;
+  /* Or your preferred default font size */
+  align-content: center;
+}
+
+.toggle-container span:hover {
+  transform: none;
+  background-color: transparent;
+}
+
+.toggle-container {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  transform: none;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+.edit-button,
+.delete-button {
+  display: none;
+  /* Hidden by default */
+  font-family: jetbrainsmono nfp;
+}
+
+.edit-mode .edit-button,
+.edit-mode .delete-button {
+  display: inline-block;
+  /* Show when edit mode is active */
+}
+
+/* Popup styles - Enhanced centering */
+.popup-container {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
+  /* Override any parent flex properties */
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  /* Ensure it's not affected by parent container */
+  pointer-events: auto;
+}
+
+#add-link-popup,
+#edit-link-popup,
+#edit-group-popup {
+  z-index: 10001 !important;
+}
+
+#horizontal-stack-popup {
+  z-index: 10000 !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+.popup-content {
+  background-color: #31343a;
+  padding: 20px;
+  border-radius: 8px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  max-width: fit-content;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+  /* max-width: 90vw; */
+  /* max-height: 90vh; */
+}
+
+ #horizontal-stack-popup .popup-content-inner {                                   
+   display: flex;                                                                 
+   flex-wrap: wrap;                                                               
+   gap: 10px;                                                                     
+   max-height: calc(90vh - 100px); /* Adjust based on padding and header height */
+   overflow-y: auto;                                                              
+ }                                                                                
+
+.popup-content .close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #ff2d2d;
+  height: 25px;
+  width: 25px;
+  text-align: center;
+  border-radius: 15%;
+  padding-bottom: 30px;
+}
+
+.link-group h3 {
+  color: #ffffff;
+  margin-bottom: 10px;
+  padding-bottom: 0px;
+}
+
+.edit-button,
+.delete-button {
+  background-color: #4CAF50;
+  /* Green */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 5px;
+}
+
+.delete-button {
+  background-color: #f44336;
+  /* Red */
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button:hover {
+  background-color: #da190b;
+}
+
+.popup-container input[type="text"],
+.popup-container input[type="url"],
+.popup-container input[type="color"] {
+  flex-grow: 1;
+  /* Allow inputs to grow within a flex container */
+  min-width: 120px;
+  /* Ensure a minimum width */
+  padding: 8px;
+  margin-bottom: 0;
+  /* Remove individual margin-bottom, use gap on parent */
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #555;
+  color: white;
+}
+
+.popup-container button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.popup-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
+/* Group header container for title and edit button */
+.group-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0px;
+}
+
+.group-title {
+  flex-grow: 1;
+  margin: 0;
+  padding-right: 10px;
+}
+
+/* Edit group button styling */
+.edit-group-button {
+  display: none;
+  /* Hidden by default */
+  background-color: #ffffff;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.edit-group-button:hover {
+  background-color: #45a049;
+}
+
+/* Show edit group button in edit mode */
+.edit-mode .edit-group-button {
+  display: inline-block;
+}
+
+/* Additional styling for the edit group popup */
+#edit-group-popup .popup-content {
+  min-width: 400px;
+}
+
+#edit-group-popup input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  background-color: #555;
+  color: white;
+}
+
+#edit-group-popup label {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#edit-group-popup button[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#edit-group-popup button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+
+/* items modified to make it look good */
+ul.link-group-content {
+  /* margin-top: 0; */
+  margin: 0;
+}
+
+div.group-header-container {
+  /* margin-top: 0; */
+  margin: 0;
+  padding-left: 10px;
+}
+
+html body {
+  margin-top: 20px;
+}
+
+div.toggle-container {
+  margin-top: -16px;
+}
+
+/* Collapsible groups styling */
+.collapsible-groups-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+
+.collapsible-groups-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.collapsible-group {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 10px;
+  min-width: 200px;
+  max-width: 300px;
+  transition: all 0.3s ease;
+}
+
+.collapsible-group.expanded {
+  width: 100%;
+  max-width: 100%;
+  order: -1;
+}
+
+.collapsible-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 5px 0;
+  border-bottom: 1px solid #444;
+  margin-bottom: 10px;
+}
+
+.collapsible-group-header .edit-buttons {
+  display: none;
+  gap: 5px;
+  margin-left: 10px;
+}
+
+.edit-mode .collapsible-group-header .edit-buttons {
+  display: flex;
+}
+
+.collapsible-group-title {
+  color: #ffffff;
+  margin: 0;
+  font-size: 16px;
+  flex-grow: 1;
+}
+
+.collapsible-toggle-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collapsible-group-content {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.collapsible-group-content.expanded {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.collapsible-group-content .link-item {
+  margin: 5px 0;
+  padding: 0;
+  background-color: #3a3a3a;
+  flex: 0 0 auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  min-width: 80px;
+  min-height: 80px;
+  cursor: pointer !important;
+}
+
+.collapsible-group-content .link-item * {
+  cursor: pointer !important;
+}
+
+/* Text links in collapsible groups should be flexible */
+.collapsible-group-content .link-item.link-type-text {
+  width: auto;
+  height: auto;
+  min-width: 80px;
+  min-height: 40px;
+  max-width: 200px;
+  padding: 8px 12px;
+}
+
+.collapsible-group-content .link-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.collapsible-group-content .link-item:hover {
+  background-color: #4a4a4a;
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.collapsible-group-content .link-item:hover::before {
+  left: 100%;
+}
+
+.collapsible-edit-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 3px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.collapsible-edit-btn:hover {
+  background-color: #45a049;
+}
+
+/* Drag and drop styling for collapsible groups */
+.collapsible-group.dragging {
+  opacity: 0.5;
+  transform: rotate(2deg);
+}
+
+.collapsible-group {
+  cursor: move;
+}
+
+.collapsible-group-header {
+  cursor: pointer;
+}
+
+/* Prevent header clicks during drag operations */
+.collapsible-group.drag-active .collapsible-group-header {
+  pointer-events: none;
+}
+
+.collapsible-group.drag-active .collapsible-group-content {
+  pointer-events: auto;
+}
+
+/* Enhanced styling for expanded groups */
+.collapsible-groups-row.expanded-row {
+  order: -1;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #444;
+}
+
+.collapsible-groups-row.expanded-row .collapsible-group {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Ensure expanded row is properly cleaned up */
+.collapsible-groups-row:empty {
+  display: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Drag over effect */
+.collapsible-group.drag-over {
+  border: 2px dashed #4CAF50;
+  background-color: #2a4a2a;
+}
+
+/* Visual feedback for dragging items */
+.link-item.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+  z-index: 1000;
+}
+
+.link-group {
+  background-color: #2d2d2d;
+  border-radius: 8px;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-width: 200px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  display: flex; /* Default to flex container */
+  flex-direction: column; /* Default to vertical stacking of content */
+  flex: 1 0 100%; /* Take full width by default */
+}
+
+/* Horizontal stacking for groups */
+.horizontal-stack {
+  flex: 0 0 auto; /* Allow to sit side-by-side, fixed width */
+  margin-right: 10px; /* Add some space between horizontally stacked groups */
+  vertical-align: top; /* Align groups at the top */
+  border: #0056b3 solid 1px;
+  border-radius: 0px;
+  font-family: jetbrainsmono nfp;
+}
+
+.horizontal-stack .link-group-content {
+  flex-direction: row; /* Items inside this group will be in a row */
+  flex-wrap: nowrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.horizontal-stack .link-item:not(:first-child):not(.add-link-item) {
+  display: none;
+}
+
+.extend-icon {
+  cursor: pointer;
+  padding: 5px;
+  display: inline-block;
+  font-weight: bold;
+  border: 1px rgb(193, 214, 182) solid;
+  border-radius: 15px;
+  align-self: center;
+  text-align: center;
+  width: 100%;
+}
+.extend-icon:hover  {
+  background-color: #474747;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px rgb(255, 118, 83) solid;
+}
+
+#horizontal-stack-popup .popup-content-inner .link-item { 
+  flex-grow: 1;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  cursor: pointer !important;
+}
+
+#horizontal-stack-popup .popup-content-inner .link-item * {
+  cursor: pointer !important;
+}
+
+/* Text links in horizontal stack popup should be rectangular */
+#horizontal-stack-popup .popup-content-inner .link-item.link-type-text {
+  width: 120px;
+  height: 60px;
+  min-width: 120px;
+  min-height: 60px;
+}
+
+#horizontal-stack-popup .popup-content-inner .link-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+#horizontal-stack-popup .popup-content-inner .link-item:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+#horizontal-stack-popup .popup-content-inner .link-item:hover::before {
+  left: 100%;
+}                                                         
+
+@media (max-width: 600px) {
+.popup-content {
+  max-width: 90vw;
+  max-height: 90vh;
+}
+}</style>
+</head>
+
+<body>
+  <div class="flex-container2">
+
+    <div class="toggle-container" style="margin-left: 25px;">
+      <label class="switch">
+        <input type="checkbox" id="edit-mode-toggle">
+        <span class="slider round"></span>
+      </label>
+      <span style="color: white; margin-left: 10px;">Modify</span>
+    </div>
+
+    <!-- Updated styling for better edit mode control -->
+    <style>
+      .dragging {
+        opacity: 0.5;
+      }
+      
+      .reorder-buttons {
+        display: none;
+        flex-direction: column;
+        gap: 2px;
+        margin-left: 5px;
+      }
+      .edit-mode .reorder-buttons {
+        display: none;
+      }
+      .reorder-btn {
+        background: #333;
+        color: white;
+        background-color: rgb(255, 218, 54);
+        border: none;
+        padding: 2px 6px;
+        cursor: pointer;
+        font-size: 12px;
+        border-radius: 3px;
+      }
+      .reorder-btn:hover {
+        background: #555;
+      }
+      
+      /* Group reorder buttons - only visible in edit mode */
+      .group-reorder-buttons {
+        display: none;
+        gap: 5px;
+        margin-left: 10px;
+      }
+      .edit-mode .group-reorder-buttons {
+        display: flex;
+      }
+      
+      .link-item {
+        cursor: move;
+      }
+
+    </style>
+
+  <div id="links-container" style="display: flex; width: 100%; flex-wrap: wrap; justify-content: left; flex-direction: row;">
+  </div>
+
+<div id="edit-group-popup" class="popup-container hidden">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h3>Group Settings</h3>
+      <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+        <input type="hidden" id="edit-group-original-name">
+        <label for="edit-group-name">Group Name:</label>
+        <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required>
+        <label for="edit-group-display">Display Style:</label>
+        <select id="edit-group-display">
+          <option value="flex">Flex</option>
+          <option value="list-item">List Item</option>
+        </select>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="edit-group-collapsible">
+            <input type="checkbox" id="edit-group-collapsible">
+            Enable Collapsible Toggle (shows at top when enabled)
+          </label>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="edit-group-horizontal-stack">
+            <input type="checkbox" id="edit-group-horizontal-stack">
+            Stack Horizontally
+          </label>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="edit-group-password-protect">
+            <input type="checkbox" id="edit-group-password-protect">
+            Require Password to Extend
+          </label>
+        </div>
+        <div id="collapsible-rename-section" style="display: none;">
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top Group Display Settings</h4>
+          
+          <label for="edit-group-top-name">Display Name (optional):</label>
+          <input type="text" id="edit-group-top-name" placeholder="Custom name for top display (leave empty to use group name)">
+          
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top Group Color Settings</h4>
+          
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-group-top-bg-color" placeholder="Background Color (e.g., #2d2d2d or blue)">
+            <input type="text" id="edit-group-top-text-color" placeholder="Text Color (e.g., #ffffff or white)">
+          </div>
+          
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-group-top-border-color" placeholder="Border Color (e.g., #444444 or gray)">
+            <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color (e.g., #3a3a3a or darkgray)">
+          </div>
+        </div>
+        <button type="submit">Save Group Settings</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="add-link-popup" class="popup-container hidden">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h3>Add New Link</h3>
+      <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+        <input type="text" id="link-name" placeholder="Name" required>
+        <input type="text" id="link-group" placeholder="Group (optional)">
+        <input type="url" id="link-url" placeholder="URL" required>
+        <label for="link-default-type">Default Type:</label>
+        <select id="link-default-type">
+          <option value="nerd-font">nerd-font</option>
+          <option value="img">img</option>
+          <option value="text">text</option>
+        </select>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="link-text" placeholder="Text (if no icon/image)">
+          <input type="url" id="link-img-src" placeholder="Image URL (if no icon)">
+          <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="link-color" placeholder="Color (e.g., #f46613 or red)">
+          <input type="text" id="link-background-color" placeholder="Background Color">
+        </div>
+        <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="link-li-bg-color" placeholder="List Item BG Color">
+          <input type="text" id="link-li-hover-color" placeholder="List Item Hover Color">
+        </div>
+        <input type="text" id="link-border-radius" placeholder="Border Radius">
+        <input type="text" id="link-title" placeholder="Title (for tooltip)">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="link-hidden">
+            <input type="checkbox" id="link-hidden">
+            Hide this item
+          </label>
+        </div>
+        <button type="submit">Add Link</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="edit-link-popup" class="popup-container hidden">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h3>Edit Link</h3>
+      <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+        <input type="hidden" id="edit-link-index">
+        <input type="text" id="edit-link-name" placeholder="Name" required>
+        <input type="text" id="edit-link-group" placeholder="Group (optional)">
+        <input type="url" id="edit-link-url" placeholder="URL" required>
+        <label for="edit-link-default-type">Default Type:</label>
+        <select id="edit-link-default-type">
+          <option value="nerd-font">nerd-font</option>
+          <option value="img">img</option>
+          <option value="text">text</option>
+        </select>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="edit-link-text" placeholder="Text (if no icon/image)">
+          <input type="url" id="edit-link-img-src" placeholder="Image URL (if no icon)">
+          <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
+          <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="edit-link-color" placeholder="Color (e.g., #f46613 or red)">
+          <input type="text" id="edit-link-background-color" placeholder="Background Color">
+        </div>
+        <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
+        <div style="display: flex; gap: 10px;">
+          <input type="text" id="edit-link-li-bg-color" placeholder="List Item BG Color">
+          <input type="text" id="edit-link-li-hover-color" placeholder="List Item Hover Color">
+        </div>
+        <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
+        <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="edit-link-hidden">
+            <input type="checkbox" id="edit-link-hidden">
+            Hide this item
+          </label>
+        </div>
+        <button type="submit">Save Changes</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="horizontal-stack-popup" class="popup-container hidden">
+    <div class="popup-content">
+      <span class="close-button">&times;</span>
+      <h3>Group Items</h3>
+      <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+    </div>
+  </div>
+
+
+
+
+  <script>document.addEventListener('DOMContentLoaded', function () {
+  const linksContainer = document.getElementById('links-container');
+  const addLinkForm = document.getElementById('add-link-form');
+  let links = []; // Declare links here so it's accessible globally
+
+  // Function to fetch and display links
+  async function fetchAndDisplayLinks() {
+    try {
+      const response = await fetch('/api/links');
+      links = await response.json(); // Assign to the global links variable
+      linksContainer.innerHTML = ''; // Clear existing links
+
+      const groupedElements = {}; // Store HTML elements grouped by name
+      const groupedLinks = {}; // Store original links grouped by name
+      const collapsibleGroups = {}; // Store collapsible groups separately
+
+      links.forEach((link, index) => { // Use the index from the original links array
+        // Skip hidden items unless in edit mode
+        if (link.hidden && !document.querySelector('.flex-container2').classList.contains('edit-mode')) {
+          return;
+        }
+
+        const groupName = link.group || 'Ungrouped';
+        if (!groupedElements[groupName]) {
+          groupedElements[groupName] = [];
+          groupedLinks[groupName] = [];
+        }
+
+        const listItem = document.createElement('li');
+        listItem.className = `link-item ${link.default_type ? 'link-type-' + link.default_type : 'link-type-default'}`;
+        listItem.draggable = true;
+        listItem.dataset.linkIndex = index;
+
+        // Add drag event listeners
+        listItem.addEventListener('dragstart', handleDragStart);
+        listItem.addEventListener('dragover', handleDragOver);
+        listItem.addEventListener('drop', handleDrop);
+        listItem.addEventListener('dragend', handleDragEnd);
+
+        // Add visual indicator for hidden items in edit mode
+        if (link.hidden && document.querySelector('.flex-container2').classList.contains('edit-mode')) {
+          listItem.classList.add('hidden-item');
+          listItem.style.opacity = '0.5';
+          listItem.style.border = '2px dashed #666';
+        }
+
+        if (link.li_bg_color) {
+          listItem.style.backgroundColor = link.li_bg_color;
+        }
+        if (link.li_hover_color) {
+          listItem.addEventListener('mouseover', () => {
+            listItem.style.backgroundColor = link.li_hover_color;
+          });
+          listItem.addEventListener('mouseout', () => {
+            listItem.style.backgroundColor = link.li_bg_color || '';
+          });
+        }
+
+        let linkContent;
+
+        if (link.default_type === 'nerd-font' && link.icon_class) {
+          linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+        } else if (link.default_type === 'img' && link.img_src) {
+          const width = link.width || '50';
+          const height = link.height || '50';
+          linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+        } else if (link.default_type === 'text' && link.text) {
+          linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
+        } else {
+          // Fallback if default_type is not set or doesn't match available content
+          if (link.icon_class) {
+            linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+          } else if (link.img_src) {
+            const width = link.width || '50';
+            const height = link.height || '50';
+            linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+          } else {
+            linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
+          }
+        }
+
+        listItem.innerHTML = linkContent;
+
+        const buttonContainer = document.createElement('div');
+        buttonContainer.className = 'link-buttons';
+
+        // Add reorder buttons
+        const reorderButtonsContainer = document.createElement('div');
+        reorderButtonsContainer.className = 'reorder-buttons';
+
+        const upButton = document.createElement('button');
+        upButton.textContent = '↑';
+        upButton.className = 'reorder-btn';
+        upButton.onclick = (e) => {
+          e.stopPropagation();
+          moveLink(index, -1);
+        };
+        reorderButtonsContainer.appendChild(upButton);
+
+        const downButton = document.createElement('button');
+        downButton.textContent = '↓';
+        downButton.className = 'reorder-btn';
+        downButton.onclick = (e) => {
+          e.stopPropagation();
+          moveLink(index, 1);
+        };
+        reorderButtonsContainer.appendChild(downButton);
+
+        buttonContainer.appendChild(reorderButtonsContainer);
+
+        const editButton = document.createElement('button');
+        editButton.textContent = ''; //✏️
+        editButton.className = 'edit-button';
+        editButton.onclick = () => openEditLinkPopup(link, index); // Pass original index
+        buttonContainer.appendChild(editButton);
+
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = ''; //🗑️
+        deleteButton.className = 'delete-button';
+        deleteButton.onclick = () => deleteLink(index); // Pass original index
+        buttonContainer.appendChild(deleteButton);
+
+        listItem.appendChild(buttonContainer);
+        groupedElements[groupName].push(listItem);
+        groupedLinks[groupName].push({ link, index });
+
+        // Check if this group should be collapsible
+        if (link.collapsible) {
+          collapsibleGroups[groupName] = true;
+        }
+      });
+
+      // Create collapsible groups container at the top
+      const collapsibleGroupNames = Object.keys(collapsibleGroups);
+      if (collapsibleGroupNames.length > 0) {
+        const collapsibleContainer = document.createElement('div');
+        collapsibleContainer.className = 'collapsible-groups-container';
+
+        // Create regular row for collapsed groups
+        const regularRow = document.createElement('div');
+        regularRow.className = 'collapsible-groups-row regular-row';
+
+        // Sort groups by their original order in the links array to maintain consistent positioning
+        const sortedGroupNames = collapsibleGroupNames.sort((a, b) => {
+          const aFirstIndex = links.findIndex(link => (link.group || 'Ungrouped') === a);
+          const bFirstIndex = links.findIndex(link => (link.group || 'Ungrouped') === b);
+          return aFirstIndex - bFirstIndex;
+        });
+
+        sortedGroupNames.forEach((groupName, index) => {
+          if (groupedElements[groupName] && groupedElements[groupName].length > 0) {
+            const collapsibleGroup = createCollapsibleGroup(groupName, groupedElements[groupName], groupedLinks[groupName], index);
+            regularRow.appendChild(collapsibleGroup);
+          }
+        });
+
+        collapsibleContainer.appendChild(regularRow);
+        linksContainer.appendChild(collapsibleContainer);
+      }
+
+      // Now append the regular grouped elements to the container
+      const groupNames = Object.keys(groupedElements);
+      for (let i = 0; i < groupNames.length; i++) {
+        const groupName = groupNames[i];
+
+        // Skip collapsible groups as they're already rendered above
+        if (collapsibleGroups[groupName]) {
+          continue;
+        }
+
+        // Skip empty groups (when all items are hidden)
+        if (groupedElements[groupName].length === 0) {
+          continue;
+        }
+
+        const groupDiv = createRegularGroup(groupName, groupedElements[groupName], groupedLinks[groupName]);
+        linksContainer.appendChild(groupDiv);
+      }
+    } catch (error) {
+      console.error('Error fetching links:', error);
+    }
+  }
+
+  // Function to create a collapsible group
+  function createCollapsibleGroup(groupName, elements, links, originalIndex) {
+    const collapsibleGroup = document.createElement('div');
+    collapsibleGroup.className = 'collapsible-group';
+    collapsibleGroup.dataset.groupName = groupName;
+    collapsibleGroup.draggable = true;
+
+    // Store original position for proper restoration
+    collapsibleGroup.dataset.originalIndex = originalIndex;
+
+    // Add drag event listeners for the group itself
+    collapsibleGroup.addEventListener('dragstart', handleGroupDragStart);
+    collapsibleGroup.addEventListener('dragover', handleGroupDragOver);
+    collapsibleGroup.addEventListener('drop', handleGroupDrop);
+    collapsibleGroup.addEventListener('dragend', handleGroupDragEnd);
+
+    const header = document.createElement('div');
+    header.className = 'collapsible-group-header';
+
+    const title = document.createElement('h4');
+    title.className = 'collapsible-group-title';
+
+    // Use custom top name if available, otherwise use group name
+    const firstLink = links[0];
+    const displayName = (firstLink && firstLink.link.top_name) ? firstLink.link.top_name : groupName;
+    title.textContent = displayName;
+
+    // Apply custom styling if available
+    if (firstLink && firstLink.link) {
+      const linkData = firstLink.link;
+
+      // Apply background color
+      if (linkData.top_bg_color) {
+        collapsibleGroup.style.backgroundColor = linkData.top_bg_color;
+      }
+
+      // Apply text color
+      if (linkData.top_text_color) {
+        title.style.color = linkData.top_text_color;
+      }
+
+      // Apply border color
+      if (linkData.top_border_color) {
+        collapsibleGroup.style.border = `1px solid ${linkData.top_border_color}`;
+      }
+
+      // Apply hover color
+      if (linkData.top_hover_color) {
+        collapsibleGroup.addEventListener('mouseenter', () => {
+          collapsibleGroup.style.backgroundColor = linkData.top_hover_color;
+        });
+        collapsibleGroup.addEventListener('mouseleave', () => {
+          collapsibleGroup.style.backgroundColor = linkData.top_bg_color || '';
+        });
+      }
+    }
+
+    // Add edit buttons container
+    const editButtons = document.createElement('div');
+    editButtons.className = 'edit-buttons';
+
+    const editBtn = document.createElement('button');
+    editBtn.className = 'collapsible-edit-btn';
+    editBtn.textContent = ''; //⚙️
+    editBtn.onclick = (e) => {
+      e.stopPropagation();
+      openEditGroupPopup(groupName);
+    };
+    editButtons.appendChild(editBtn);
+
+    const toggleBtn = document.createElement('button');
+    toggleBtn.className = 'collapsible-toggle-btn';
+    toggleBtn.textContent = '▼';
+
+    header.appendChild(title);
+    header.appendChild(editButtons);
+    header.appendChild(toggleBtn);
+
+    const content = document.createElement('ul');
+    content.className = 'collapsible-group-content';
+
+    // Create elements for collapsible group with full functionality
+    elements.forEach((element, index) => {
+      const clonedElement = element.cloneNode(true);
+
+      // Re-add drag functionality to cloned elements
+      clonedElement.addEventListener('dragstart', handleDragStart);
+      clonedElement.addEventListener('dragover', handleDragOver);
+      clonedElement.addEventListener('drop', handleDrop);
+      clonedElement.addEventListener('dragend', handleDragEnd);
+
+      // Keep edit buttons but update their functionality for top groups
+      const buttons = clonedElement.querySelector('.link-buttons');
+      if (buttons) {
+        const editButton = buttons.querySelector('.edit-button');
+        const deleteButton = buttons.querySelector('.delete-button');
+
+        if (editButton) {
+          const originalIndex = parseInt(clonedElement.dataset.linkIndex);
+          editButton.onclick = () => openEditLinkPopup(links.find(l => l.index === originalIndex).link, originalIndex);
+        }
+
+        if (deleteButton) {
+          const originalIndex = parseInt(clonedElement.dataset.linkIndex);
+          deleteButton.onclick = () => deleteLink(originalIndex);
+        }
+      }
+
+      content.appendChild(clonedElement);
+    });
+
+    // Add button for adding new links to this collapsible group
+    const addLinkItem = document.createElement('li');
+    addLinkItem.className = 'link-item add-link-item';
+
+    const addLinkSpan = document.createElement('span');
+    addLinkSpan.textContent = '+';
+    addLinkSpan.style.cursor = 'pointer';
+    addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
+    addLinkSpan.style.fontSize = '25px';
+    addLinkSpan.style.alignContent = 'center';
+
+    addLinkSpan.addEventListener('click', () => {
+      document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
+      const addLinkPopup = document.getElementById('add-link-popup');
+      addLinkPopup.classList.remove('hidden'); // Remove hidden class
+    });
+    addLinkItem.appendChild(addLinkSpan);
+    content.appendChild(addLinkItem);
+
+    // Add toggle functionality with repositioning
+    let isDragging = false;
+    let dragTimeout = null;
+
+    // Create a more robust drag state management
+    const setDragState = (dragging) => {
+      isDragging = dragging;
+      if (dragging) {
+        collapsibleGroup.classList.add('drag-active');
+        // Clear any existing timeout
+        if (dragTimeout) {
+          clearTimeout(dragTimeout);
+        }
+      } else {
+        // Use a longer timeout to ensure drag operations are complete
+        dragTimeout = setTimeout(() => {
+          isDragging = false;
+          collapsibleGroup.classList.remove('drag-active');
+        }, 300);
+      }
+    };
+
+    // Track drag state on the content area
+    content.addEventListener('dragstart', (e) => {
+      setDragState(true);
+      e.stopPropagation();
+    });
+
+    content.addEventListener('dragend', (e) => {
+      setDragState(false);
+    });
+
+    // Prevent all drag-related events from bubbling to header
+    content.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+
+    content.addEventListener('drop', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      // Reset drag state after drop
+      setDragState(false);
+    });
+
+    // Also listen for mouse events during drag to prevent accidental clicks
+    content.addEventListener('mousedown', (e) => {
+      if (e.target.closest('.link-item')) {
+        // Small delay to detect if this is start of a drag
+        setTimeout(() => {
+          if (document.querySelector('.link-item.dragging')) {
+            setDragState(true);
+          }
+        }, 50);
+      }
+    });
+
+    header.addEventListener('click', (e) => {
+      // Don't trigger if clicking on edit button or during drag operations
+      if (e.target.classList.contains('collapsible-edit-btn') ||
+        isDragging ||
+        collapsibleGroup.classList.contains('drag-active')) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+
+      const wasExpanded = content.classList.contains('expanded');
+
+      // Close all other expanded groups first and properly restore them
+      const allGroups = document.querySelectorAll('.collapsible-group');
+      const groupsToRestore = [];
+
+      allGroups.forEach(group => {
+        const groupContent = group.querySelector('.collapsible-group-content');
+        const groupToggle = group.querySelector('.collapsible-toggle-btn');
+        if (group !== collapsibleGroup) {
+          // Always ensure proper state cleanup for all other groups
+          groupContent.classList.remove('expanded');
+          groupToggle.textContent = '▼';
+          group.classList.remove('expanded');
+
+          // Collect groups that need to be moved back
+          if (group.closest('.expanded-row')) {
+            groupsToRestore.push(group);
+          }
+        }
+      });
+
+      // Move all groups back to regular row in their original order
+      groupsToRestore.forEach(group => {
+        moveToRegularRowInOrder(group);
+      });
+
+      // Clean up empty expanded rows
+      cleanupEmptyRows();
+
+      // Toggle current group
+      content.classList.toggle('expanded');
+      toggleBtn.textContent = content.classList.contains('expanded') ? '▲' : '▼';
+
+      // Move expanded group to top by adding expanded class
+      if (content.classList.contains('expanded')) {
+        collapsibleGroup.classList.add('expanded');
+        // Move to expanded row
+        moveToExpandedRow(collapsibleGroup);
+      } else {
+        collapsibleGroup.classList.remove('expanded');
+        // Move back to regular row
+        moveToRegularRow(collapsibleGroup);
+        // Clean up empty rows after moving
+        cleanupEmptyRows();
+      }
+    });
+
+    collapsibleGroup.appendChild(header);
+    collapsibleGroup.appendChild(content);
+
+    return collapsibleGroup;
+  }
+
+  // Function to move group to expanded row (top)
+  function moveToExpandedRow(group) {
+    const container = document.querySelector('.collapsible-groups-container');
+    let expandedRow = container.querySelector('.expanded-row');
+
+    if (!expandedRow) {
+      expandedRow = document.createElement('div');
+      expandedRow.className = 'collapsible-groups-row expanded-row';
+      container.insertBefore(expandedRow, container.firstChild);
+    }
+
+    expandedRow.appendChild(group);
+  }
+
+  // Function to move group back to regular row (maintain original position)
+  function moveToRegularRow(group) {
+    const container = document.querySelector('.collapsible-groups-container');
+    let regularRow = container.querySelector('.regular-row');
+
+    if (!regularRow) {
+      regularRow = document.createElement('div');
+      regularRow.className = 'collapsible-groups-row regular-row';
+      container.appendChild(regularRow);
+    }
+
+    // Get the original index to maintain position
+    const originalIndex = parseInt(group.dataset.originalIndex) || 0;
+    const existingGroups = Array.from(regularRow.children);
+
+    // Find the correct position to insert based on original index
+    let insertPosition = 0;
+    for (let i = 0; i < existingGroups.length; i++) {
+      const existingIndex = parseInt(existingGroups[i].dataset.originalIndex) || 0;
+      if (originalIndex < existingIndex) {
+        insertPosition = i;
+        break;
+      }
+      insertPosition = i + 1;
+    }
+
+    // Insert at the correct position
+    if (insertPosition >= existingGroups.length) {
+      regularRow.appendChild(group);
+    } else {
+      regularRow.insertBefore(group, existingGroups[insertPosition]);
+    }
+  }
+
+  // Function to move group back to regular row maintaining original order
+  function moveToRegularRowInOrder(group) {
+    const container = document.querySelector('.collapsible-groups-container');
+    let regularRow = container.querySelector('.regular-row');
+
+    if (!regularRow) {
+      regularRow = document.createElement('div');
+      regularRow.className = 'collapsible-groups-row regular-row';
+      container.appendChild(regularRow);
+    }
+
+    // Get the original index to maintain position
+    const originalIndex = parseInt(group.dataset.originalIndex) || 0;
+    const existingGroups = Array.from(regularRow.children);
+
+    // Find the correct position to insert based on original index
+    let insertPosition = 0;
+    for (let i = 0; i < existingGroups.length; i++) {
+      const existingIndex = parseInt(existingGroups[i].dataset.originalIndex) || 0;
+      if (originalIndex < existingIndex) {
+        insertPosition = i;
+        break;
+      }
+      insertPosition = i + 1;
+    }
+
+    // Insert at the correct position
+    if (insertPosition >= existingGroups.length) {
+      regularRow.appendChild(group);
+    } else {
+      regularRow.insertBefore(group, existingGroups[insertPosition]);
+    }
+  }
+
+  // Function to clean up empty rows
+  function cleanupEmptyRows() {
+    const container = document.querySelector('.collapsible-groups-container');
+    if (!container) return;
+
+    const expandedRows = container.querySelectorAll('.expanded-row');
+    expandedRows.forEach(row => {
+      if (row.children.length === 0) {
+        row.remove();
+      }
+    });
+
+    const regularRows = container.querySelectorAll('.regular-row');
+    regularRows.forEach(row => {
+      if (row.children.length === 0) {
+        row.remove();
+      }
+    });
+  }
+
+  // Function to create a regular group
+  function createRegularGroup(groupName, elements, links) {
+    const groupDiv = document.createElement('div');
+    groupDiv.className = 'link-group';
+    groupDiv.dataset.groupName = groupName;
+
+    const firstLinkInGroup = links[0];
+    if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
+      groupDiv.classList.add('horizontal-stack');
+    }
+
+    const groupHeaderContainer = document.createElement('div');
+    groupHeaderContainer.className = 'group-header-container';
+
+    const groupTitle = document.createElement('h3');
+    groupTitle.textContent = groupName;
+    groupTitle.className = 'group-title';
+    groupHeaderContainer.appendChild(groupTitle);
+
+    // Add group reorder buttons
+    const groupReorderButtons = document.createElement('div');
+    groupReorderButtons.className = 'group-reorder-buttons';
+
+    const groupUpButton = document.createElement('button');
+    groupUpButton.textContent = ''; //↑
+    groupUpButton.className = 'reorder-btn';
+    groupUpButton.onclick = (e) => {
+      e.stopPropagation();
+      moveGroup(groupName, -1);
+    };
+    groupReorderButtons.appendChild(groupUpButton);
+
+    const groupDownButton = document.createElement('button');
+    groupDownButton.textContent = ''; //↓
+    groupDownButton.className = 'reorder-btn';
+    groupDownButton.onclick = (e) => {
+      e.stopPropagation();
+      moveGroup(groupName, 1);
+    };
+    groupReorderButtons.appendChild(groupDownButton);
+
+    groupHeaderContainer.appendChild(groupReorderButtons);
+
+    // Add edit group button (only visible in edit mode)
+    const editGroupButton = document.createElement('button');
+    editGroupButton.textContent = ''; //⚙️
+    editGroupButton.className = 'edit-group-button';
+    editGroupButton.onclick = () => openEditGroupPopup(groupName);
+    groupHeaderContainer.appendChild(editGroupButton);
+
+    groupDiv.appendChild(groupHeaderContainer);
+
+    if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
+      const icon = document.createElement('div');
+      icon.className = 'extend-icon';
+      icon.innerHTML = '<i class="nf nf-md-google_circles_extended"></i>'; // Or use an icon font
+      icon.draggable = false;
+
+      const isPasswordProtected = firstLinkInGroup.link.password_protect;
+
+      icon.onclick = () => {
+        if (isPasswordProtected) {
+          const password = prompt("Please enter the password to extend the group:");
+          if (password !== "1823") {
+            alert("Incorrect password!");
+            return;
+          }
+        }
+
+        const popup = document.getElementById('horizontal-stack-popup');
+        const popupContent = popup.querySelector('.popup-content-inner');
+        popupContent.innerHTML = '';
+        elements.forEach(element => {
+          const clonedElement = element.cloneNode(true);
+          const linkIndex = parseInt(clonedElement.dataset.linkIndex);
+          const linkData = links.find(l => l.index === linkIndex);
+
+          clonedElement.addEventListener('dragstart', handleDragStart);
+          clonedElement.addEventListener('dragover', handleDragOver);
+          clonedElement.addEventListener('drop', handleDrop);
+          clonedElement.addEventListener('dragend', handleDragEnd);
+
+          if (linkData.link.li_bg_color) {
+            clonedElement.style.backgroundColor = linkData.link.li_bg_color;
+          }
+          if (linkData.link.li_hover_color) {
+            clonedElement.addEventListener('mouseover', () => {
+              clonedElement.style.backgroundColor = linkData.link.li_hover_color;
+            });
+            clonedElement.addEventListener('mouseout', () => {
+              clonedElement.style.backgroundColor = linkData.link.li_bg_color || '';
+            });
+          }
+
+          const editButton = clonedElement.querySelector('.edit-button');
+          if (editButton && linkData) {
+            editButton.onclick = () => openEditLinkPopup(linkData.link, linkIndex);
+          }
+
+          const deleteButton = clonedElement.querySelector('.delete-button');
+          if (deleteButton) {
+            deleteButton.onclick = () => deleteLink(linkIndex);
+          }
+
+          popupContent.appendChild(clonedElement);
+        });
+
+        const addLinkItem = document.createElement('li');
+        addLinkItem.className = 'link-item add-link-item';
+        addLinkItem.draggable = false;
+
+        const addLinkSpan = document.createElement('span');
+        addLinkSpan.textContent = '+';
+        addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
+        addLinkSpan.style.fontSize = '25px';
+        addLinkSpan.style.width = '100%';
+        addLinkSpan.style.height = '100%';
+        addLinkSpan.style.display = 'flex';
+        addLinkSpan.style.alignItems = 'center';
+        addLinkSpan.style.justifyContent = 'center';
+
+        addLinkItem.addEventListener('click', () => {
+          document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
+          const addLinkPopup = document.getElementById('add-link-popup');
+          addLinkPopup.classList.remove('hidden'); // Remove hidden class
+        });
+        addLinkItem.appendChild(addLinkSpan);
+        popupContent.appendChild(addLinkItem);
+        popup.classList.remove('hidden');
+      };
+      groupDiv.appendChild(icon);
+    } else {
+      const groupList = document.createElement('ul');
+      groupList.className = 'link-group-content';
+      // Set display style based on the first link in the group, or default to flex
+      const firstLinkInGroupDisplay = links[0];
+      if (firstLinkInGroupDisplay && firstLinkInGroupDisplay.link.display_style) {
+        groupList.style.display = firstLinkInGroupDisplay.link.display_style;
+      } else {
+        groupList.style.display = 'flex'; // Default display style
+      }
+
+      elements.forEach(element => {
+        groupList.appendChild(element);
+      });
+
+      // Add button for adding new links to this group
+      const addLinkItem = document.createElement('li');
+      addLinkItem.className = 'link-item add-link-item';
+      addLinkItem.draggable = false;
+
+      const addLinkSpan = document.createElement('span');
+      addLinkSpan.textContent = '+';
+      addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
+      addLinkSpan.style.fontSize = '25px';
+      addLinkSpan.style.width = '100%';
+      addLinkSpan.style.height = '100%';
+      addLinkSpan.style.display = 'flex';
+      addLinkSpan.style.alignItems = 'center';
+      addLinkSpan.style.justifyContent = 'center';
+
+      addLinkItem.addEventListener('click', () => {
+        document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
+        const addLinkPopup = document.getElementById('add-link-popup');
+        addLinkPopup.classList.remove('hidden'); // Remove hidden class
+      });
+      addLinkItem.appendChild(addLinkSpan);
+      groupList.appendChild(addLinkItem);
+
+      groupDiv.appendChild(groupList);
+    }
+
+    return groupDiv;
+  }
+  // Function to open edit group popup
+  function openEditGroupPopup(currentGroupName) {
+    const editGroupPopup = document.getElementById('edit-group-popup');
+    const editGroupNameInput = document.getElementById('edit-group-name');
+    const editGroupOriginalName = document.getElementById('edit-group-original-name');
+    const editGroupDisplaySelect = document.getElementById('edit-group-display');
+    const editGroupCollapsibleCheckbox = document.getElementById('edit-group-collapsible');
+    const editGroupHorizontalStackCheckbox = document.getElementById('edit-group-horizontal-stack');
+    const editGroupPasswordProtectCheckbox = document.getElementById('edit-group-password-protect');
+    const editGroupTopNameInput = document.getElementById('edit-group-top-name');
+    const editGroupTopBgColorInput = document.getElementById('edit-group-top-bg-color');
+    const editGroupTopTextColorInput = document.getElementById('edit-group-top-text-color');
+    const editGroupTopBorderColorInput = document.getElementById('edit-group-top-border-color');
+    const editGroupTopHoverColorInput = document.getElementById('edit-group-top-hover-color');
+    const collapsibleRenameSection = document.getElementById('collapsible-rename-section');
+
+    editGroupNameInput.value = currentGroupName === 'Ungrouped' ? '' : currentGroupName;
+    editGroupOriginalName.value = currentGroupName;
+
+    // Find a link in the current group to get its display_style, collapsible setting, and styling options
+    const linksInGroup = links.filter(link => (link.group || 'Ungrouped') === currentGroupName);
+    if (linksInGroup.length > 0) {
+      editGroupDisplaySelect.value = linksInGroup[0].display_style || 'flex';
+      editGroupCollapsibleCheckbox.checked = linksInGroup[0].collapsible || false;
+      editGroupHorizontalStackCheckbox.checked = linksInGroup[0].horizontal_stack || false;
+      editGroupPasswordProtectCheckbox.checked = linksInGroup[0].password_protect || false;
+      editGroupTopNameInput.value = linksInGroup[0].top_name || '';
+      editGroupTopBgColorInput.value = linksInGroup[0].top_bg_color || '#2d2d2d';
+      editGroupTopTextColorInput.value = linksInGroup[0].top_text_color || '#ffffff';
+      editGroupTopBorderColorInput.value = linksInGroup[0].top_border_color || '#444444';
+      editGroupTopHoverColorInput.value = linksInGroup[0].top_hover_color || '#3a3a3a';
+    } else {
+      editGroupDisplaySelect.value = 'flex'; // Default if no links in group
+      editGroupCollapsibleCheckbox.checked = false;
+      editGroupHorizontalStackCheckbox.checked = false;
+      editGroupPasswordProtectCheckbox.checked = false;
+      editGroupTopNameInput.value = '';
+      editGroupTopBgColorInput.value = '#2d2d2d';
+      editGroupTopTextColorInput.value = '#ffffff';
+      editGroupTopBorderColorInput.value = '#444444';
+      editGroupTopHoverColorInput.value = '#3a3a3a';
+    }
+
+    // Show/hide the rename section based on collapsible checkbox
+    function toggleRenameSection() {
+      if (editGroupCollapsibleCheckbox.checked) {
+        collapsibleRenameSection.style.display = 'block';
+      } else {
+        collapsibleRenameSection.style.display = 'none';
+      }
+    }
+
+    // Initial toggle
+    toggleRenameSection();
+
+    // Add event listener for checkbox changes
+    editGroupCollapsibleCheckbox.addEventListener('change', toggleRenameSection);
+
+    editGroupPopup.classList.remove('hidden');
+  }
+
+  // Drag and Drop functionality for collapsible groups
+  let draggedGroup = null;
+
+  function handleGroupDragStart(e) {
+    draggedGroup = this;
+    this.style.opacity = '0.5';
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.outerHTML);
+  }
+
+  function handleGroupDragOver(e) {
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+  }
+
+  function handleGroupDrop(e) {
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+
+    if (draggedGroup !== this) {
+      const draggedGroupName = draggedGroup.dataset.groupName;
+      const targetGroupName = this.dataset.groupName;
+      swapCollapsibleGroups(draggedGroupName, targetGroupName);
+    }
+    return false;
+  }
+
+  function handleGroupDragEnd(e) {
+    this.style.opacity = '';
+    draggedGroup = null;
+  }
+
+  // Function to swap collapsible groups
+  async function swapCollapsibleGroups(group1Name, group2Name) {
+    try {
+      const response = await fetch('/api/links');
+      const links = await response.json();
+
+      // Find all links in both groups
+      const group1Links = [];
+      const group2Links = [];
+      const otherLinks = [];
+
+      links.forEach((link, index) => {
+        const linkGroup = link.group || 'Ungrouped';
+        if (linkGroup === group1Name) {
+          group1Links.push({ link, index });
+        } else if (linkGroup === group2Name) {
+          group2Links.push({ link, index });
+        } else {
+          otherLinks.push({ link, index });
+        }
+      });
+
+      // Create new links array with swapped group positions
+      const newLinks = [];
+
+      // Add other groups first (maintain their positions)
+      const processedGroups = new Set([group1Name, group2Name]);
+      const groupOrder = [...new Set(links.map(link => link.group || 'Ungrouped'))];
+
+      groupOrder.forEach(groupName => {
+        if (groupName === group1Name) {
+          group2Links.forEach(item => newLinks.push(item.link));
+        } else if (groupName === group2Name) {
+          group1Links.forEach(item => newLinks.push(item.link));
+        } else {
+          const groupLinks = links.filter(link => (link.group || 'Ungrouped') === groupName);
+          groupLinks.forEach(link => newLinks.push(link));
+        }
+      });
+
+      // Update the entire list of links on the server
+      await fetch('/api/links', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newLinks),
+      });
+
+      fetchAndDisplayLinks();
+
+    } catch (error) {
+      console.error('Error swapping collapsible groups:', error);
+    }
+  }
+
+  // Function to update group name for all links in that group
+  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor) {
+    try {
+      const response = await fetch('/api/links');
+      const links = await response.json();
+
+      // Create a new array with the updated group names, display styles, collapsible setting, and styling options
+      const newLinks = links.map(link => {
+        const linkGroupName = link.group || 'Ungrouped';
+        if (linkGroupName === originalGroupName) {
+          const updatedLink = { ...link };
+          if (newGroupName && newGroupName !== '') {
+            updatedLink.group = newGroupName;
+          } else {
+            delete updatedLink.group; // For "Ungrouped"
+          }
+          updatedLink.display_style = newDisplayStyle;
+          updatedLink.collapsible = isCollapsible;
+          updatedLink.horizontal_stack = isHorizontalStack;
+          updatedLink.password_protect = isPasswordProtected;
+
+          // Handle top group styling options
+          if (topName && topName !== '') {
+            updatedLink.top_name = topName;
+          } else {
+            delete updatedLink.top_name;
+          }
+
+          updatedLink.top_bg_color = topBgColor || '#2d2d2d';
+          updatedLink.top_text_color = topTextColor || '#ffffff';
+          updatedLink.top_border_color = topBorderColor || '#444444';
+          updatedLink.top_hover_color = topHoverColor || '#3a3a3a';
+
+          return updatedLink;
+        }
+        return link;
+      });
+
+      // Update the entire list on the server
+      const updateResponse = await fetch('/api/links', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newLinks),
+      });
+
+      if (!updateResponse.ok) {
+        throw new Error('Failed to update links on the server.');
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error updating group name:', error);
+      return false;
+    }
+  }
+
+  // Handle form submission for adding new links
+  if (addLinkForm) {
+    addLinkForm.addEventListener('submit', async function (event) {
+      event.preventDefault();
+
+      const newLink = {
+        name: document.getElementById('link-name').value,
+        group: document.getElementById('link-group').value || undefined,
+        url: document.getElementById('link-url').value,
+        icon_class: document.getElementById('link-icon-class').value || undefined,
+        color: document.getElementById('link-color').value || undefined,
+        img_src: document.getElementById('link-img-src').value || undefined,
+        text: document.getElementById('link-text').value || undefined,
+        default_type: document.getElementById('link-default-type').value || undefined,
+        background_color: document.getElementById('link-background-color').value || undefined,
+        border_radius: document.getElementById('link-border-radius').value || undefined,
+        font_size: document.getElementById('link-font-size').value || undefined,
+        title: document.getElementById('link-title').value || undefined,
+        li_bg_color: document.getElementById('link-li-bg-color').value || undefined,
+        li_hover_color: document.getElementById('link-li-hover-color').value || undefined,
+        hidden: document.getElementById('link-hidden').checked || undefined,
+      };
+
+      // Clean up empty strings and false values for optional fields
+      Object.keys(newLink).forEach(key => {
+        if (newLink[key] === '' || newLink[key] === false) {
+          delete newLink[key];
+        }
+      });
+
+      try {
+        const response = await fetch('/api/add_link', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(newLink),
+        });
+
+        if (response.ok) {
+          alert('Link added successfully!');
+          addLinkForm.reset(); // Clear form
+          fetchAndDisplayLinks(); // Refresh links
+        } else {
+          alert('Failed to add link.');
+        }
+      } catch (error) {
+        console.error('Error adding link:', error);
+        alert('Error adding link.');
+      }
+    });
+  }
+
+  // Edit Link functionality
+  const editLinkPopup = document.getElementById('edit-link-popup');
+  const editLinkForm = document.getElementById('edit-link-form');
+  const editLinkIndexInput = document.getElementById('edit-link-index');
+
+  function openEditLinkPopup(link, index) {
+    editLinkIndexInput.value = index;
+    document.getElementById('edit-link-name').value = link.name || '';
+    document.getElementById('edit-link-group').value = link.group || '';
+    document.getElementById('edit-link-url').value = link.url || '';
+    document.getElementById('edit-link-icon-class').value = link.icon_class || '';
+    document.getElementById('edit-link-color').value = link.color || '';
+    document.getElementById('edit-link-img-src').value = link.img_src || '';
+    document.getElementById('edit-link-width').value = link.width || '';
+    document.getElementById('edit-link-height').value = link.height || '';
+    document.getElementById('edit-link-text').value = link.text || '';
+    document.getElementById('edit-link-default-type').value = link.default_type || 'nerd-font';
+    document.getElementById('edit-link-background-color').value = link.background_color || '';
+    document.getElementById('edit-link-border-radius').value = link.border_radius || '';
+    document.getElementById('edit-link-title').value = link.title || '';
+    document.getElementById('edit-link-font-size').value = link.font_size || '';
+    document.getElementById('edit-link-li-bg-color').value = link.li_bg_color || '';
+    document.getElementById('edit-link-li-hover-color').value = link.li_hover_color || '';
+    document.getElementById('edit-link-hidden').checked = link.hidden || false;
+    editLinkPopup.classList.remove('hidden');
+  }
+
+  if (editLinkForm) {
+    if (!editLinkForm.hasAttribute('data-listener-attached')) {
+      editLinkForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const linkId = editLinkIndexInput.value;
+        const updatedLink = {
+          name: document.getElementById('edit-link-name').value,
+          group: document.getElementById('edit-link-group').value || undefined,
+          url: document.getElementById('edit-link-url').value,
+          icon_class: document.getElementById('edit-link-icon-class').value || undefined,
+          color: document.getElementById('edit-link-color').value || undefined,
+          img_src: document.getElementById('edit-link-img-src').value || undefined,
+          width: document.getElementById('edit-link-width').value || undefined,
+          height: document.getElementById('edit-link-height').value || undefined,
+          text: document.getElementById('edit-link-text').value || undefined,
+          default_type: document.getElementById('edit-link-default-type').value || undefined,
+          background_color: document.getElementById('edit-link-background-color').value || undefined,
+          border_radius: document.getElementById('edit-link-border-radius').value || undefined,
+          title: document.getElementById('edit-link-title').value || undefined,
+          font_size: document.getElementById('edit-link-font-size').value || undefined,
+          li_bg_color: document.getElementById('edit-link-li-bg-color').value || undefined,
+          li_hover_color: document.getElementById('edit-link-li-hover-color').value || undefined,
+          hidden: document.getElementById('edit-link-hidden').checked || undefined,
+        };
+
+        // Preserve group-level properties if not explicitly changed in link edit
+        const originalLink = links[linkId];
+        if (originalLink) {
+          updatedLink.collapsible = originalLink.collapsible;
+          updatedLink.display_style = originalLink.display_style;
+          updatedLink.horizontal_stack = originalLink.horizontal_stack;
+          updatedLink.top_name = originalLink.top_name;
+          updatedLink.top_bg_color = originalLink.top_bg_color;
+          updatedLink.top_text_color = originalLink.top_text_color;
+          updatedLink.top_border_color = originalLink.top_border_color;
+          updatedLink.top_hover_color = originalLink.top_hover_color;
+        }
+
+        try {
+          const response = await fetch(`/api/links/${linkId}`, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedLink),
+          });
+
+          if (response.ok) {
+            editLinkPopup.classList.add('hidden');
+            fetchAndDisplayLinks();
+          } else {
+            alert('Failed to update link.');
+          }
+        } catch (error) {
+          console.error('Error updating link:', error);
+          alert('Error updating link.');
+        }
+      });
+      editLinkForm.setAttribute('data-listener-attached', 'true');
+    }
+  }
+
+  // Edit Group functionality
+  const editGroupForm = document.getElementById('edit-group-form');
+  if (editGroupForm) {
+    if (!editGroupForm.hasAttribute('data-listener-attached')) {
+      editGroupForm.addEventListener('submit', async function (event) {
+        event.preventDefault();
+
+        const originalGroupName = document.getElementById('edit-group-original-name').value;
+        const newGroupName = document.getElementById('edit-group-name').value;
+        const newDisplayStyle = document.getElementById('edit-group-display').value;
+        const isCollapsible = document.getElementById('edit-group-collapsible').checked;
+        const isHorizontalStack = document.getElementById('edit-group-horizontal-stack').checked;
+        const isPasswordProtected = document.getElementById('edit-group-password-protect').checked;
+        const topName = document.getElementById('edit-group-top-name').value;
+        const topBgColor = document.getElementById('edit-group-top-bg-color').value;
+        const topTextColor = document.getElementById('edit-group-top-text-color').value;
+        const topBorderColor = document.getElementById('edit-group-top-border-color').value;
+        const topHoverColor = document.getElementById('edit-group-top-hover-color').value;
+
+        try {
+          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor);
+          if (success) {
+            document.getElementById('edit-group-popup').classList.add('hidden');
+            fetchAndDisplayLinks();
+          } else {
+            alert('Failed to update group settings.');
+          }
+        } catch (error) {
+          console.error('Error updating group settings:', error);
+          alert('Error updating group settings.');
+        }
+      });
+      editGroupForm.setAttribute('data-listener-attached', 'true');
+    }
+  }
+
+  // Delete Link functionality
+  async function deleteLink(linkId) {
+    if (confirm('Are you sure you want to delete this link?')) {
+      try {
+        const linkToDelete = links[linkId];
+        const groupName = linkToDelete.group || 'Ungrouped';
+
+        const response = await fetch(`/api/links/${linkId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert('Link deleted successfully!');
+          await fetchAndDisplayLinks();
+
+          const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
+          if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
+            const icon = groupDiv.querySelector('.extend-icon');
+            if (icon) {
+              icon.click();
+            }
+          }
+        } else {
+          alert('Failed to delete link.');
+        }
+      } catch (error) {
+        console.error('Error deleting link:', error);
+        alert('Error deleting link.');
+      }
+    }
+  }
+
+  // Initial fetch and display of links
+  fetchAndDisplayLinks();
+
+  // Edit Mode Toggle functionality
+  const editModeToggle = document.getElementById('edit-mode-toggle');
+  const flexContainer2 = document.querySelector('.flex-container2');
+
+  if (editModeToggle && flexContainer2) {
+    editModeToggle.addEventListener('change', async function () {
+      const expandedGroups = [];
+      // Capture currently expanded groups before re-rendering
+      document.querySelectorAll('.collapsible-group.expanded').forEach(group => {
+        expandedGroups.push(group.dataset.groupName);
+      });
+
+      if (this.checked) {
+        flexContainer2.classList.add('edit-mode');
+      } else {
+        flexContainer2.classList.remove('edit-mode');
+      }
+
+      // Refresh the display when edit mode is toggled to show/hide items
+      await fetchAndDisplayLinks();
+
+      // Re-expand previously expanded groups
+      expandedGroups.forEach(groupName => {
+        const groupElement = document.querySelector(`.collapsible-group[data-group-name="${groupName}"]`);
+        if (groupElement) {
+          const content = groupElement.querySelector('.collapsible-group-content');
+          const toggleBtn = groupElement.querySelector('.collapsible-toggle-btn');
+          if (content && toggleBtn) {
+            content.classList.add('expanded');
+            toggleBtn.textContent = '▲';
+            groupElement.classList.add('expanded');
+            // Move to expanded row if it's a collapsible group
+            moveToExpandedRow(groupElement);
+          }
+        }
+      });
+    });
+  }
+
+  // Drag and Drop functionality for links
+  let draggedElement = null;
+  let draggedIndex = null;
+
+  function handleDragStart(e) {
+    if (e.target.classList.contains('add-link-item') || e.target.classList.contains('extend-icon')) {
+      e.preventDefault();
+      return;
+    }
+    draggedElement = this;
+    draggedIndex = parseInt(this.dataset.linkIndex);
+    this.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this.outerHTML);
+    e.stopPropagation(); // Prevent bubbling to group header
+
+    // Disable group toggle during drag
+    document.body.classList.add('dragging-active');
+  }
+
+  function handleDragOver(e) {
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
+    e.dataTransfer.dropEffect = 'move';
+    return false;
+  }
+
+  function handleDrop(e) {
+    if (e.stopPropagation) {
+      e.stopPropagation();
+    }
+
+    if (draggedElement !== this) {
+      const targetIndex = parseInt(this.dataset.linkIndex);
+      reorderLink(draggedIndex, targetIndex);
+    }
+    return false;
+  }
+
+  function handleDragEnd(e) {
+    this.classList.remove('dragging');
+    draggedElement = null;
+    draggedIndex = null;
+
+    // Re-enable group toggle after drag
+    document.body.classList.remove('dragging-active');
+  }
+
+  // Move link up or down within the same group
+  async function moveLink(linkIndex, direction) {
+    try {
+      const response = await fetch('/api/links');
+      const links = await response.json();
+
+      const currentLink = links[linkIndex];
+      const currentGroup = currentLink.group || 'Ungrouped';
+
+      // Find all links in the same group
+      const groupLinks = links.map((link, index) => ({ link, index }))
+        .filter(item => (item.link.group || 'Ungrouped') === currentGroup);
+
+      // Find current position within the group
+      const currentGroupIndex = groupLinks.findIndex(item => item.index === linkIndex);
+      const targetGroupIndex = currentGroupIndex + direction;
+
+      // Check bounds
+      if (targetGroupIndex < 0 || targetGroupIndex >= groupLinks.length) {
+        return;
+      }
+
+      // Swap with target
+      const targetLinkIndex = groupLinks[targetGroupIndex].index;
+      reorderLink(linkIndex, targetLinkIndex);
+
+    } catch (error) {
+      console.error('Error moving link:', error);
+    }
+  }
+
+  // Move entire group up or down
+  async function moveGroup(groupName, direction) {
+    try {
+      const response = await fetch('/api/links');
+      const links = await response.json();
+
+      // Get all unique group names in their current order
+      const groupNames = [...new Set(links.map(link => link.group || 'Ungrouped'))];
+      const currentIndex = groupNames.indexOf(groupName);
+      const targetIndex = currentIndex + direction;
+
+      // Check bounds
+      if (targetIndex < 0 || targetIndex >= groupNames.length) {
+        return;
+      }
+
+      // Swap the group names
+      [groupNames[currentIndex], groupNames[targetIndex]] = [groupNames[targetIndex], groupNames[currentIndex]];
+
+      // Rebuild the links array based on the new group order
+      const newLinks = [];
+      const linksByGroup = links.reduce((acc, link) => {
+        const group = link.group || 'Ungrouped';
+        if (!acc[group]) {
+          acc[group] = [];
+        }
+        acc[group].push(link);
+        return acc;
+      }, {});
+
+      groupNames.forEach(group => {
+        newLinks.push(...(linksByGroup[group] || []));
+      });
+
+      // Update the entire list of links on the server
+      await fetch('/api/links', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newLinks),
+      });
+
+      fetchAndDisplayLinks();
+
+    } catch (error) {
+      console.error('Error moving group:', error);
+    }
+  }
+
+  // Reorder a link by moving it from oldIndex to newIndex
+  async function reorderLink(oldIndex, newIndex) {
+    try {
+      // Ensure we have the latest links data
+      const response = await fetch('/api/links');
+      let currentLinks = await response.json();
+
+      const movedLink = currentLinks[oldIndex];
+      const groupName = movedLink.group || 'Ungrouped';
+
+      // Remove the dragged link from its original position
+      const [draggedLink] = currentLinks.splice(oldIndex, 1);
+
+      // Insert the dragged link at the new position
+      currentLinks.splice(newIndex, 0, draggedLink);
+
+      // Update the entire list of links on the server
+      await fetch('/api/links', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(currentLinks),
+      });
+
+      await fetchAndDisplayLinks(); // Re-render the UI
+
+      // Re-open the popup if it was open
+      const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
+      if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
+        const icon = groupDiv.querySelector('.extend-icon');
+        if (icon) {
+          icon.click();
+        }
+      }
+
+    } catch (error) {
+      console.error('Error reordering link:', error);
+    }
+  }
+});
+
+// Functions from original index.js
+function updateSearchEngine() {
+  var selectedEngine = document.getElementById('search-engine').value;
+  document.getElementById('current-search-engine').textContent = selectedEngine;
+}
+
+function checkEnter(event) {
+  if (event.key === 'Enter') {
+    search();
+  }
+}
+
+function search() {
+  var query = document.getElementById('searchQuery').value;
+  var selectedEngine = document.getElementById('search-engine').value;
+
+  if (query) {
+    window.location.href = 'https://' + selectedEngine + '.com/search?q=' + encodeURIComponent(query);
+  }
+}
+
+function updateDateTime() {
+  const now = new Date();
+  const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+  const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+  document.getElementById('currentDate').innerText = now.toLocaleDateString('en-US', optionsDate);
+  document.getElementById('currentTime').innerText = now.toLocaleTimeString('en-US', optionsTime);
+}
+
+// Update the date and time on page load
+updateDateTime();
+
+// Update the time every second
+setInterval(updateDateTime, 1000);</script>
+  <script>/* For Showing Markdown Table in HTML properly but lines also show */
+ function parseMarkdownTable(markdown) {
+  const rows = markdown.trim().split('\n');
+  const headers = rows[1].split('|').map(header => header.trim()).filter(Boolean);
+  const data = rows.slice(2, -1).map(row => row.split('|').map(cell => cell.trim()).filter(Boolean));
+
+  return { headers, data };
+}
+
+function renderTable(headers, data) {
+  const tableElement = document.createElement('table');
+  const theadElement = document.createElement('thead');
+  const tbodyElement = document.createElement('tbody');
+
+  const headerRow = document.createElement('tr');
+  headers.forEach(header => {
+      const thElement = document.createElement('th');
+      thElement.textContent = header;
+      headerRow.appendChild(thElement);
+  });
+
+  theadElement.appendChild(headerRow);
+
+  data.forEach(rowData => {
+      const rowElement = document.createElement('tr');
+      rowData.forEach(cellData => {
+          const tdElement = document.createElement('td');
+          tdElement.textContent = cellData;
+          rowElement.appendChild(tdElement);
+      });
+      tbodyElement.appendChild(rowElement);
+  });
+
+  tableElement.appendChild(theadElement);
+  tableElement.appendChild(tbodyElement);
+
+  return tableElement;
+}
+
+function convertMarkdownTables() {
+  const elements = document.querySelectorAll('[id^="markdown-table-"]');
+  elements.forEach(element => {
+      const markdownContent = element.innerHTML;
+      const { headers, data } = parseMarkdownTable(markdownContent);
+      const tableElement = renderTable(headers, data);
+      element.innerHTML = ''; // Clear the original content
+      element.appendChild(tableElement);
+  });
+}
+// Call the function to convert Markdown tables on page load
+window.addEventListener('load', convertMarkdownTables); 
+ 
+
+/* // Get all the spans
+const spans = document.querySelectorAll('span');
+
+// Find the span with the maximum width
+let maxWidth = 0;
+spans.forEach(span => {
+  const width = span.offsetWidth;
+  if (width > maxWidth) {
+    maxWidth = width;
+  }
+});
+
+// Set the width of all spans to the maximum width
+spans.forEach(span => {
+  span.style.width = `${maxWidth}px`;
+}); */
+
+
+// Popup functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const addLinkPopup = document.getElementById('add-link-popup');
+  const editLinkPopup = document.getElementById('edit-link-popup');
+  const editGroupPopup = document.getElementById('edit-group-popup');
+  const horizontalStackPopup = document.getElementById('horizontal-stack-popup');
+
+  // Close buttons for addLinkPopup
+  const addCloseButton = addLinkPopup ? addLinkPopup.querySelector('.close-button') : null;
+  if (addCloseButton) {
+    addCloseButton.addEventListener('click', () => {
+      addLinkPopup.classList.add('hidden');
+    });
+  }
+
+  // Close buttons for editLinkPopup
+  const editCloseButton = editLinkPopup ? editLinkPopup.querySelector('.close-button') : null;
+  if (editCloseButton) {
+    editCloseButton.addEventListener('click', () => {
+      editLinkPopup.classList.add('hidden');
+    });
+  }
+
+  // Close buttons for editGroupPopup
+  const editGroupCloseButton = editGroupPopup ? editGroupPopup.querySelector('.close-button') : null;
+  if (editGroupCloseButton) {
+    editGroupCloseButton.addEventListener('click', () => {
+      editGroupPopup.classList.add('hidden');
+    });
+  }
+
+  // Close buttons for horizontalStackPopup
+  const horizontalStackCloseButton = horizontalStackPopup ? horizontalStackPopup.querySelector('.close-button') : null;
+  if (horizontalStackCloseButton) {
+    horizontalStackCloseButton.addEventListener('click', () => {
+      horizontalStackPopup.classList.add('hidden');
+    });
+  }
+
+  // Close popups when clicking outside
+  window.addEventListener('click', (event) => {
+    if (event.target === addLinkPopup) {
+      addLinkPopup.classList.add('hidden');
+    }
+    if (event.target === editLinkPopup) {
+      editLinkPopup.classList.add('hidden');
+    }
+    if (event.target === editGroupPopup) {
+      editGroupPopup.classList.add('hidden');
+    }
+    if (event.target === horizontalStackPopup) {
+      horizontalStackPopup.classList.add('hidden');
+    }
+  });
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'F1') {
+    event.preventDefault();
+    const toggle = document.getElementById('edit-mode-toggle');
+    toggle.checked = !toggle.checked;
+    const changeEvent = new Event('change');
+    toggle.dispatchEvent(changeEvent);
+  }
+});</script>
+
+
+  </div>
+
+  <script>
+    // Embedded data
+    const STATIC_LINKS_DATA = [
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "erecruitment",
+    "url": "https://erecruitment.bb.org.bd/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "bepza",
+    "title": "Bangladesh Export Processing Zones Authority",
+    "url": "https://www.bepza.gov.bd/career"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "dnc",
+    "title": "Department of Narcotics Control Security Services Division Ministry of Home Affairs",
+    "url": "http://dnc.teletalk.com.bd/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "bpsc",
+    "title": "Bangladesh Public Service Commission",
+    "url": "http://bpsc.teletalk.com.bd/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "brdb",
+    "url": "http://brdb.teletalk.com.bd/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "ndr",
+    "text": "ndr",
+    "url": "http://ndr.teletalk.com.bd/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "bscic",
+    "title": "Bangladesh Small and Cottage Industries Corporation",
+    "url": "http://bscic.teletalk.com.bd/bscic25/index.php"
+  },
+  {
+    "default_type": "text",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "wewb",
+    "url": "https://wewb.teletalk.com.bd/"
+  },
+  {
+    "default_type": "text",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "brac",
+    "url": "https://careers.brac.net/jobs"
+  },
+  {
+    "default_type": "text",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "bou",
+    "url": "https://www.bou.ac.bd/NoticeBoard/Recruitmentmore"
+  },
+  {
+    "default_type": "text",
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "dcsunamganj",
+    "url": "https://dcsunamganj.teletalk.com.bd/"
+  },
+  {
+    "color": "#f46613",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-cod-mail",
+    "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
+    "name": "Google Mail",
+    "url": "https://mail.google.com/"
+  },
+  {
+    "default_type": "img",
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
+    "name": "Outlook",
+    "url": "https://outlook.live.com"
+  },
+  {
+    "color": "#1399f4",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-dev-facebook",
+    "img_src": "https://img.icons8.com/ios11/512/facebook-new.png",
+    "name": "Facebook",
+    "url": "https://www.facebook.com/"
+  },
+  {
+    "color": "#3675ff",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-fa-facebook_messenger",
+    "name": "Messenger",
+    "url": "https://www.messenger.com/"
+  },
+  {
+    "color": "#ff0000",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-fa-youtube",
+    "name": "YouTube",
+    "url": "https://www.youtube.com/"
+  },
+  {
+    "color": "#5765f2",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-fa-discord",
+    "name": "Discord",
+    "url": "https://discord.com/channels/@me"
+  },
+  {
+    "color": "#4b70cc",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-md-dots_hexagon",
+    "name": "Tailscale",
+    "url": "https://login.tailscale.com/admin/machines"
+  },
+  {
+    "default_type": "text",
+    "horizontal_stack": false,
+    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
+    "name": "noip",
+    "text": "noip<br>Aug7",
+    "url": "https://my.noip.com/dynamic-dns"
+  },
+  {
+    "color": "#b259e6",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-md-microsoft_onenote",
+    "name": "OneNote",
+    "url": "https://www.onenote.com/"
+  },
+  {
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-fa-github_square",
+    "name": "github",
+    "url": "https://github.com/nahid6970"
+  },
+  {
+    "color": "#fbbc04",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "icon_class": "nf nf-md-google_keep",
+    "name": "Keep",
+    "url": "https://keep.google.com/"
+  },
+  {
+    "color": "#ff2e2e",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "hidden": true,
+    "icon_class": "nf nf-fa-battery_2",
+    "name": "mi9t",
+    "title": "mi9t",
+    "url": "http://mi9t:5002"
+  },
+  {
+    "default_type": "img",
+    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
+    "name": "VLR.gg",
+    "url": "https://www.vlr.gg/"
+  },
+  {
+    "color": "#69e8ff",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "horizontal_stack": false,
+    "icon_class": "nf nf-seti-font",
+    "name": "nerdfonts",
+    "url": "https://www.nerdfonts.com/cheat-sheet"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "img_src": "https://cdn-icons-png.flaticon.com/512/4400/4400968.png",
+    "name": "ShareTXT",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5001/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "img_src": "https://cdn-icons-png.flaticon.com/512/2840/2840124.png",
+    "name": "ShareFile",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5002/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "img_src": "https://cdn-icons-png.flaticon.com/512/2250/2250195.png",
+    "name": "Browse",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5003/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "name": "GameARR",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5005/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-oct-command_palette",
+    "name": "Command",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5007/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "img_src": "https://cdn-icons-png.flaticon.com/512/4021/4021539.png",
+    "name": "myhome",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://nahid6970.github.io/ms1/myhome/myhome"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "name": "TV List",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5011"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "name": "Movies",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5013"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
+    "name": "JOB Search",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5015"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-md-television_classic",
+    "img_src": "http://192.168.0.101:8989/Content/Images/logo.svg",
+    "name": "Sonarr",
+    "password_protect": false,
+    "text": "Sonarr",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:8989/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "icon_class": "nf-md-movie_roll",
+    "img_src": "http://192.168.0.101:7878/Content/Images/Icons/logo-radarr.png",
+    "name": "Radarr",
+    "password_protect": false,
+    "text": "Radarr",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:7878/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Apps)",
+    "height": "50",
+    "horizontal_stack": true,
+    "img_src": "http://192.168.0.101:9696/Content/Images/logo.png",
+    "name": "Prowlarr",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:9696/",
+    "width": "50"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "img_src": "http://localhost:11011/icons/128.png",
+    "name": "Cleanuparr",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://localhost:11011/dashboard"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Apps)",
+    "hidden": true,
+    "horizontal_stack": true,
+    "img_src": "http://localhost:9705/static/logo/256.png",
+    "name": "Huntarr",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://localhost:9705"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "img_src": "http://192.168.0.101:6767/images/logo64.png",
+    "name": "Bazarr",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:6767/series"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "img_src": "http://127.0.0.1:9117/jacket_medium.png",
+    "name": "JackettAPI ",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://127.0.0.1:9117/UI/Dashboard"
+  },
+  {
+    "collapsible": false,
+    "color": "#20acd7",
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-md-folder_sync",
+    "img_src": "http://127.0.0.1:8384/assets/img/logo-horizontal.svg",
+    "name": "Syncthing",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://127.0.0.1:8384/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-linux-tor",
+    "img_src": "http://192.168.0.101:8080/images/qbittorrent-tray.svg",
+    "name": "qBittorrent",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:8080/"
+  },
+  {
+    "collapsible": false,
+    "color": "#009fff",
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Local (Apps)",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-fa-wifi",
+    "name": "WIFI",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.1/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "img_src": "https://www.techspot.com/images2/downloads/topdownload/2025/07/2025-07-14-ts3_thumbs-d25.png",
+    "li_bg_color": "white",
+    "name": "KIRO",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://kiro.dev/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "img_src": "https://ollama.com/public/ollama.png",
+    "li_bg_color": "white",
+    "name": "ollama-chat",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://localhost:8000/",
+    "width": "40"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "mcp",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/modelcontextprotocol/servers"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "mcp-host",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/mark3labs/mcphost"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "AgentOS",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/buildermethods/agent-os"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "openrouter",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://openrouter.ai/"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "SuperDesign Dev",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/superdesigndev/superdesign"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "TTS-WebUI",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/rsxdalv/TTS-WebUI?tab=readme-ov-file#installation"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "https://static.vecteezy.com/system/resources/previews/024/558/807/non_2x/openai-chatgpt-logo-icon-free-png.png",
+    "name": "ChatGPT",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chatgpt.com/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "https://img.icons8.com/fluent/512/claude-ai.png",
+    "li_hover_color": "#d97757",
+    "name": "Claude",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://claude.ai/new"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/deepseek-color.png",
+    "name": "DeepSeek",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chat.deepseek.com/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAaVBMVEVHcEwdHR0AAAEFBQYCAgIDAwQJCQkBAQJaWlojJScLOGwXhf0TExQQWq8QEBE8PDxLS0swMDH09PT///+FhYVaW1qam5oaGxvd3d27u7tvcG8sLixCQ0NSUlF0dXVvcHB7fHw/QEBNTk0iDk46AAAAI3RSTlMAN4O42en//yb///+F//////////7////////LuoK35YLWhTozBjoAAAGBSURBVHgBfZMFlsMwDAUdkqqCoYmqxst7/0Put1PK0pQ7E9N7cZWm7fqB+AYNfdc27sqm41/pNpfLB/6DoanX/+mJhzJGx//QYYI/lAgXGtf+7re73ZbB/q8ZDrvdgYl953pe8CEKV1KMEcEBP8n37rqHdBwnLuhxHE9w9SoaHK2Dq68QhnC8Dq6ersU6uHoCsP5HcPUVBObXgY6L50tgtl7DGdef4a94T+ugcg5LUqQQyzqYz+N4nFDA4+FNwiqYWeaSGbP3CCSl9BDAg1OZZhICCAKC344aX30pQgo/jprqNBNZRYIbeElkPmcGHj91zgICnsn1VIMrtPQpWNJgQZ9c50uxithblBRDTBqf3V7MY1g8ES5p2Z4FSRJVX1zjBXu2uvFlEkkgpCQJwca5J5MURPBuaMjgTOBDjFFfy42jQSMIQeCyxmCGVoKqvmEAFG85K4gxT3hoEjOTePWleM2T5pynE8iao4kE9M8XD5r31zfoGcE05USUPl4/m6q+ALq7K1Ui7+ebAAAAAElFTkSuQmCC",
+    "name": "KIMI-K2",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.kimi.com/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Google_Bard_logo.svg",
+    "name": "Google Bard",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://bard.google.com/"
+  },
+  {
+    "background_color": "black",
+    "border_radius": "5px",
+    "collapsible": false,
+    "color": "red",
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Chat-BOT",
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAgVBMVEVHcExNOe5hVu5ua/FiTe2AbO3HxPhhUetpYu5va/BaS/FDCubc2fr///9jWO2Hf/Dl4/xaQ+pdVu94ffRZQuvv7f13e/Kll/GZivBeQer5+P9NC+RXOOhcS+vCvPbUz/i5svVlXe5YTO5WHeVSLOetpPNiMuZiPuhiSephU+xfI+XgKL3tAAAAK3RSTlMALsbAa/3/////Fnz///////+Ifqv//v//1P/////////dWP////////XBmCbmPwAAAWxJREFUeAFtkQViwzAMAMMqGLO6dZgTb/9/4CRv5V4xOZGV4EYYxXGcBJ9JM9jt94eP7sj4Xux28UcpOVcabf71x6M7Gc65Fmix9v58lg/dwws6qwFIe3v+E4cwDAtVclXVWjdN8x/w5d0+a9tLZnjXejJ8I50kGWlFJVnJn1A5dROwx/9Zb56l7zkIoTNK7Tv2QD+SzIWAhspU0zTPc13X89Ijp4BAqRdKXdcNcdqWxphyCUmOAmDGhuVE1m31/2RDQAwAWuJVP1Fq3eNfWkmXkAwB3MzwcvOp+IfNLX7Lv72C24Biq3WdOvyzczSiyX1XcM7Hpuua4k9buya11vqu3yi3mWKrilZRO+doxzRvDoAzThYHlpamIQkAkT8oTmuX5cJLZUtMnzbn7SHwmU5wwrR/jbetwMdIDoGakSuZpZEnPCx1+2dMjULYcj3sKXggOf7R05pQBp/4KTm6NfkoD/ZCMvhM8oPcp/kFeWsqRiVRXjsAAAAASUVORK5CYII=",
+    "name": "qwen",
+    "top_bg_color": "#",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chat.qwen.ai/"
+  },
+  {
+    "collapsible": false,
+    "color": "#ffffff",
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "edu",
+    "horizontal_stack": false,
+    "icon_class": "nf nf-md-google_translate",
+    "name": "Google Translate",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://translate.google.com/?hl=en&tab=TT&sl=bn&tl=en&op=translate"
+  },
+  {
+    "collapsible": false,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "edu",
+    "horizontal_stack": false,
+    "name": "speechtyping",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://speechtyping.com/voice-typing/speech-to-text-bengali"
+  },
+  {
+    "collapsible": false,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "edu",
+    "horizontal_stack": false,
+    "name": "banglaconverter",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "img_src": "http://fitgirl-repacks.site/wp-content/uploads/2016/08/cropped-icon-192x192.jpg",
+    "name": "Fitgirl",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://fitgirl-repacks.site/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "name": "romsfun",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://romsfun.com/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "name": "DODI",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://dodi-repacks.site/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "img_src": "https://avatars.githubusercontent.com/u/16618068?s=30",
+    "name": "Scoop",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://scoop.sh/#/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "img_src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MC40OTIiIGhlaWdodD0iNDUuOTg2IiB2aWV3Qm94PSIwIDAgNDAuNDkyIDQ1Ljk4NiI+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTgzNS4xMzEgLTcyLjEzNikiPjxsaW5lIHkyPSIyMS41NDciIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg1NS4yOTUgOTUuMjExKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHgxPSIxOC45NiIgeTI9IjExLjAyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NTUuMjk1IDg0LjE5MSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB4MT0iMTguOTYiIHkyPSIxMC42OTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg1NS4yOTUgMTA2LjA2NykiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB5Mj0iMjEuODc2IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NzQuMjU1IDg0LjE5MSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB4MT0iMTguOTYiIHkxPSIxMC42OTEiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg1NS4yOTUgNzMuNSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB5MT0iMTAuNjkxIiB4Mj0iMTguNzk1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4MzYuNSA3My41KSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHgyPSIxOC43OTUiIHkyPSIxMS4wMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODM2LjUgODQuMTkxKSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHkxPSIyMS44NzYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDgzNi41IDg0LjE5MSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB4MT0iMTguNzk1IiB5MT0iMTAuNjkxIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4MzYuNSAxMDYuMDY3KSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHkxPSI1LjA5OSIgeDI9IjguNzM4IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4MzYuNSAxMDAuOTY4KSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHkyPSIxMS42NzgiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg0NS4yMzggODkuMjkpIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PGxpbmUgeDI9IjEwLjA1NyIgeTI9IjUuNzU3IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NDUuMjM4IDEwMC45NjgpIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PGxpbmUgeTE9IjUuNzU3IiB4Mj0iMTAuMjIyIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NTUuMjk1IDEwMC45NjgpIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PGxpbmUgeTI9IjExLjY3OCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODY1LjUxNyA4OS4yOSkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48bGluZSB4Mj0iMTAuMjIyIiB5Mj0iNi4wODYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg1NS4yOTUgODMuMjA0KSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2U9IiNmZmYiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgZmlsbD0ibm9uZSIvPjxsaW5lIHgxPSIxMC4wNTciIHkyPSI2LjA4NiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoODQ1LjIzOCA4My4yMDQpIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PGxpbmUgeTI9IjkuNzA0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg4NTUuMjk1IDczLjUpIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBmaWxsPSJub25lIi8+PGxpbmUgeDI9IjguNzM4IiB5Mj0iNS4wOTkiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDg2NS41MTcgMTAwLjk2OCkiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlPSIjZmZmIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGZpbGw9Im5vbmUiLz48L2c+PC9zdmc+",
+    "name": "Winget",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://winget.run/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "img_src": "https://apps.evozi.com/apk-downloader/assets/img/mini_icon.png",
+    "name": "evozi",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://apps.evozi.com/apk-downloader/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Download PKG",
+    "horizontal_stack": true,
+    "icon_class": "nf nf-fa-microsoft",
+    "img_src": "https://store.rg-adguard.net/img/Store.png",
+    "name": "MS-Store",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://store.rg-adguard.net/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Linux",
+    "horizontal_stack": true,
+    "name": "protondb",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.protondb.com/explore"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Linux",
+    "horizontal_stack": true,
+    "name": "ProtonPLUS",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/Vysp3r/ProtonPlus"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Linux",
+    "horizontal_stack": true,
+    "name": "Wayland-Protocol addoption info",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://absurdlysuspicious.github.io/wayland-protocols-table/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Linux",
+    "horizontal_stack": true,
+    "name": "niri",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/YaLTeR/niri"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "diyabari milestone school & college \ud83c\udfaf proshikhon biman blast // 21 july // Chengdu F-7BGI (Combat Jet)",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://example.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Thailand Launches Airstrikes on Cambodia Amid Deadly Clashes",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "https://example.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Thai and Cambodian forces clash as escalating border dispute leaves at least 11 dead",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": " Canada \u203a Prime minister Mark Carney Since 2025",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Dragon Bravo Fire in Grand Canyon National Park grows to \"megafire\"  \u2794  A lightning strik",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "wise words of Mohammed Ali Jinnah, India Muslims will have to prove their loyalty to India throughout their lifetime in order to be accepted as equal citizens.",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "The 2025 Sydney Harbour Bridge protest was a pro-Palestine protest that occurred on 3 August 2025 on the Harbour Bridge in Sydney, Australia",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Trump slaps 50 percent tariff on Indian goods over imports ...",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "\u0989\u09a4\u09cd\u09a4\u09b0\u09be \u09a5\u09c7\u0995\u09c7 \u09ae\u09a4\u09bf\u099d\u09bf\u09b2 \u09aa\u09b0\u09cd\u09af\u09a8\u09cd\u09a4 \u09ae\u09c7\u099f\u09cd\u09b0\u09cb\u09b0\u09c7\u09b2 \u099a\u09be\u09b2\u09c1 \u0986\u099b\u09c7",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "1 United States Dollar equals 121.56 Bangladeshi Taka",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "\u09ae\u09c2\u09b2\u09cd\u09af\u09b8\u09cd\u09ab\u09c0\u09a4\u09bf \u09b9\u09b2 \u098f\u0995\u099f\u09bf \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df\u09c7 \u09aa\u09a3\u09cd\u09af \u0993 \u09b8\u09c7\u09ac\u09be\u09b0 \u09a6\u09be\u09ae \u09ac\u09c3\u09a6\u09cd\u09a7\u09bf \u09aa\u09be\u0993\u09df\u09be\u0964 \u09b8\u09b9\u099c \u09ad\u09be\u09b7\u09be\u09df, \u099c\u09bf\u09a8\u09bf\u09b8\u09aa\u09a4\u09cd\u09b0\u09c7\u09b0 \u09a6\u09be\u09ae \u09ac\u09c7\u09dc\u09c7 \u09af\u09be\u0993\u09df\u09be\u0995\u09c7 \u09ae\u09c2\u09b2\u09cd\u09af\u09b8\u09cd\u09ab\u09c0\u09a4\u09bf \u09ac\u09b2\u09be \u09b9\u09df\u0964 \u098f\u09b0 \u09ab\u09b2\u09c7, \u0986\u0997\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u098f\u0995\u0987 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u099c\u09bf\u09a8\u09bf\u09b8 \u0995\u09bf\u09a8\u09a4\u09c7 \u09ac\u09c7\u09b6\u09bf \u0985\u09b0\u09cd\u09a5 \u09ac\u09cd\u09af\u09df \u0995\u09b0\u09a4\u09c7 \u09b9\u09df, \u0985\u09a5\u09ac\u09be \u098f\u0995\u0987 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u0985\u09b0\u09cd\u09a5 \u09a6\u09bf\u09df\u09c7 \u0986\u0997\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u0995\u09ae \u099c\u09bf\u09a8\u09bf\u09b8 \u0995\u09c7\u09a8\u09be \u09af\u09be\u09df\u0964",
+    "top_bg_color": "#fff",
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_stack": true,
+    "img_src": "https://avatars.githubusercontent.com/u/241032?s=48&v=4",
+    "name": "copyparty",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/9001/copyparty/?tab=readme-ov-file#quickstart"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_stack": true,
+    "img_src": "https://avatars.githubusercontent.com/u/585534?s=48&v=4",
+    "name": "ublock Origin",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/gorhill/ublock/releases"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_stack": true,
+    "name": "glance",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/glanceapp/glance"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_stack": true,
+    "name": "corsproxy",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://console.corsproxy.io/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_stack": true,
+    "name": "CrapFixer",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/builtbybel/CrapFixer/releases"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Android-Apps",
+    "horizontal_stack": true,
+    "img_src": "https://play-lh.googleusercontent.com/Sg6FawqRvKQYeebQcbZ-DTtF8nzVpnZIWxNSzdF4PjgopILrvX6AP6beOb3AE6WDKSg=w240-h480-rw",
+    "name": "Blackr: OLED Screen Off",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Android-Apps",
+    "horizontal_stack": true,
+    "img_src": "https://play-lh.googleusercontent.com/k1Qzd6BjDsg2nYJWo_krDVIOBxpw0WUvB-V2HbDjRObUKL0nqa3nWruDBhys5OudD1qCgQztsYP0cU9-TniHzQ=w240-h480-rw",
+    "name": "Athena",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://play.google.com/store/apps/details?id=com.kin.athena"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Android-Apps",
+    "horizontal_stack": true,
+    "img_src": "https://avatars.githubusercontent.com/u/75154889?s=48&v=4",
+    "name": "AppLock",
+    "title": "AppLock",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/PranavPurwar/AppLock"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Android-Apps",
+    "horizontal_stack": true,
+    "li_hover_color": "green",
+    "name": "myapk",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://1drv.ms/u/c/da530b4cfac2c115/EQuEqLjroUBNlt-57R4sLyQB9DuqqSRZ61fmk_yWgEYuTQ?e=AwU9Bd"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Android-Apps",
+    "horizontal_stack": true,
+    "img_src": "https://play-lh.googleusercontent.com/_tTQatRSbDfLSZe-eUKy9C4ktIwJ59wsBkSoqORymZ6C4T44q3TtUasA81HCbOz-JY4=w240-h480-rw",
+    "name": "NotiNotes",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg",
+    "name": "Chromeweb",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "name": "Hotkeys",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "chrome://extensions/shortcuts"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/cvfpnTKw3B67DtM1ZpJG2PNAIjP6hVMOyYy403X4FMkOuStgG1y4cjCn21vmTnnsip1dTZSVsWBA9IxutGuA3dVDWhg=s60",
+    "name": "Picture in Picture",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/picture-in-picture-extens/hkgfoiooedgoejojocmhlaklaeopbecg"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/yZdBpDxpemTSDZpJu4SQNDPy0Mq4rimQs0a1Veor3Zr8qCQZJuZAvcR1QdTQv_PfUaY6kWrwphGspygur8A0uc5y3w=s60",
+    "name": "WOT: Website Security & Safety Checker",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/wot-website-security-safe/bhmmomiinigofkjcapegjjndpbikblnp"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/T66wTLk-gpBBGsMm0SDJJ3VaI8YM0Utr8NaGCSANmXOfb84K-9GmyXORLKoslfxtasKtQ4spDCdq_zlp_t3QQ6SI0A=s60",
+    "name": "Dark Reader",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/dark-reader/eimadpbcbfnmbkopoojfekhnkhdbieeh"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/6y1HnDyFGr1RzFbTU7-ELvuKo2eT6kB7ZPGOS7o7mDoQPP4MsmAKqfFgiS6Z_8s66Ewm6vnSgd0SOWonF4pDZ170=s60",
+    "name": "Fonts Ninja",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/fonts-ninja/eljapbgkmlngdpckoiiibecpemleclhh"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/ccI-6ZTiIvHbgau47UJbzNsaceYMSr-zmaAttO5zF3IyO3suuol4WBz5PRgX5qQxGKjhHBYhJa64fXpui22K0wFb=s60",
+    "name": "What the font",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/what-the-font/kmmpcmiabjkmpfjkjmekkhlkpoegglbl"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/iCQO7yxKPsoAiDzaX00nWICmeba4Fj4t7ZCDzgHuWy_qU97aGTzxlju1WjdudTkQRM4Iz7ofusYXeuqesfpgZiHoeA=s60",
+    "name": "Text Blaze: Templates and Snippets",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/text-blaze-templates-and/idgadaccgipmpannjkmfddolnnhmeklj"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/NPdAH77xk1xO-J90MzWakzPyGMmGft8oBo0OFTGGPdfB-V7fcBUiAr1Vo5S1JaS1lSgl9S92gucJBH1as7y7erghDSQ=s60",
+    "name": "Just Read",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/just-read/dgmanlpmmkibanfdgjocnabmcaclkmod"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/7wz7zn8tPEC1A6jhRoJaTCzC0cyYsOu-CbJRvgzf_Jgg06dSVHGxRL_ub_bJ2KcOs7dDfFAXbWMv0clnZMdfoRVgGQ=s60",
+    "name": "Image downloader - Imageye",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/image-downloader-imageye/agionbommeaifngbhincahgmoflcikhm"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/swCXHOJsdbD3TnhxwE6q0gLoftw_0q4aMmnRU1ONZrP3s2Hf_LfRE6oVroHhpr_7sm7zT5tO8Ig3zp51LDnX5IetxQ=s60",
+    "li_bg_color": "white",
+    "li_hover_color": "black",
+    "name": "Bulk Media Downloader",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/Bulk%20Media%20Downloader/ehfdcgbfcboceiclmjaofdannmjdeaoi"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/59sP8gVHACcpJbrx_Mm1XKSSEmRhp8KQFbmXWmPosXMAiKPq9lfXp4F7jtdOhCyp0MO9bE0i1fSnI8Xu6L17tlAq=s60",
+    "name": "Wayback Machine",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/wayback-machine/fpnmgdkabkmnadcjpehmlllkndpkmiak"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/J_l8abQyJgx7POjRoDfGaFYWFnYQNpRSy4kH5IlbwSdM-l_gZf2rJlk2NLSQTY8g-U2vrclpb0EZApHyOe6sjzbKcUc=s60",
+    "name": "Bitwarden Password Manager",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/bitwarden-password-manage/nngceckbapebfimnlniiiahkandclblb"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/LjccpFwpySy3W1nskjMI4tFTXGd2RwwNECpZ4mg479VPucuJ4-1TrL0neG3AesuRXbZbV85JIxba5d-193WfE1voHg=s60",
+    "name": "Copy on Select",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/copy-on-select/kdfngfkkopeoejecmfejlcpblohnbael"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/9TeenHOMtvRMaxumEPhUtfQJup263sqY-bNzi_HcBmrNiRfQpQa13hv8eN4hVGiWZiPDO00jm4XYXKUT9xLYam6--w=s60",
+    "name": "Custom New Tab URL",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/custom-new-tab-url/mmjbdbjnoablegbkcklggeknkfcjkjia/related"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/uiFZE3XQ4RPY7H_MyDNnYwCrtHxYDVI1QyqQCQQlFXOIzv1su6CrfA82zgd5nDHkdi7pZtJfJoL__0VMzHyyPo5joA=s60",
+    "name": "Free Download Manager",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/9lrq9YRbtkkV6UURyRG4tReN46gXtDe2OFpMjDlzK9u87eJMWQIkdssSi9RVd4iv4PIfADqSRMGzF0mdrsHsra1T=s60",
+    "name": "IDM Integration Module Created by the owner of the listed website. The publisher has a good record with no history of violations. Learn more.",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/idm-integration-module/ngpampappnmepgilojfohadhhmbhlaek"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/gwsAX70XlMtLhQH0Nqtm7ZtCT-O3io7QJIdxOKTK9ITygrTKm6zI7NqO22MDdGeSSWBZrK5Er5EOhyCB63hHjbb9cQ=s60",
+    "name": "Selection Search",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/selection-search/gipnlpdeieaidmmeaichnddnmjmcakoe"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "chrome_ext",
+    "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/lsanoOfx5N_t-7gh5Qg9FGIirVEjdCqalZXyLZYRd5d7Fydm83FQhu4Oq0JmlRyMtyF_LfwuQQZyKRTHs6emnFirsA=s60",
+    "name": "uBlock Origin Lite",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh"
+  }
+];
+    
+    // Override fetch for static version
+    const originalFetch = window.fetch;
+    window.fetch = function(url, options) {
+      if (url === '/api/links' && (!options || options.method === 'GET' || !options.method)) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(STATIC_LINKS_DATA)
+        });
+      }
+      // For other requests, show a message that editing is not available
+      if (url.startsWith('/api/')) {
+        alert('Editing is not available in static version. Use the live version to make changes.');
+        return Promise.reject(new Error('Static version - editing disabled'));
+      }
+      return originalFetch.apply(this, arguments);
+    };
+    
+    // Disable edit functionality in static version
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide edit toggle
+      const editToggle = document.querySelector('.toggle-container');
+      if (editToggle) {
+        editToggle.style.display = 'none';
+      }
+      
+      // Remove edit buttons and functionality
+      const style = document.createElement('style');
+      style.textContent = `
+        .edit-button, .delete-button, .add-link-item, .edit-group-button, .collapsible-edit-btn {
+          display: none !important;
+        }
+        .link-item {
+          cursor: default !important;
+        }
+        .collapsible-group {
+          cursor: default !important;
+        }
+      `;
+      document.head.appendChild(style);
+    });
+  </script>
+</body>
+
+<!-- Generated on 2025-08-24 11:30:31 --></html>
