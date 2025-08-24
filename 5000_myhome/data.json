@@ -194,10 +194,11 @@
     "url": "http://mi9t:5002"
   },
   {
-    "default_type": "img",
-    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
     "name": "VLR.gg",
-    "url": "https://www.vlr.gg/"
+    "url": "https://www.vlr.gg/",
+    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
+    "default_type": "img",
+    "horizontal_stack": false
   },
   {
     "color": "#69e8ff",
