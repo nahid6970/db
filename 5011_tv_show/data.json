@@ -1782,5 +1782,22 @@
                 "added_date": "2025-08-23T00:21:15.135304"
             }
         ]
+    },
+    {
+        "id": 30,
+        "title": "Scissor Seven",
+        "year": "2018",
+        "cover_image": "https://artworks.thetvdb.com/banners/posters/5c494a49ae264.jpg",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Scissor Seven",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Scissor Seven - S05E01 - Ah Qi's Special Mission WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-08-24T16:30:15.466395"
+            }
+        ]
     }
 ]
