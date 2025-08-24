@@ -4,3 +4,118 @@ C:\Users\nahid\ms\db\clipboard
 2025-08-24 12:21 PM
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 -----x-----
+2025-08-24 12:25 PM
+#! Github status
+# Define your repositories here
+queue = Queue()
+repos = [
+    {"name": "ms1", "path": "C:\\Users\\nahid\\ms\\ms1", "label": "ms1"},
+    {"name": "db", "path": "C:\\Users\\nahid\\ms\\db", "label": "db"},
+    {"name": "test", "path": "C:\\Users\\nahid\\ms\\test", "label": "test"},
+    # {"name": "ms2", "path": "C:\\ms2", "label": "2"},
+    # {"name": "ms3", "path": "C:\\ms3", "label": "3"},
+    # Add more as needed
+]
+
+status_labels = {}
+
+def check_git_status(git_path, queue):
+    if not os.path.exists(git_path):
+        queue.put((git_path, "Invalid", "#000000"))
+        return
+    os.chdir(git_path)
+    git_status = subprocess.run(["git", "status"], capture_output=True, text=True)
+    
+    label_text = next((r["label"] for r in repos if r["path"] == git_path), "?")
+    
+    if "nothing to commit, working tree clean" in git_status.stdout:
+        queue.put((git_path, label_text, "#00ff21"))  # Green
+    else:
+        queue.put((git_path, label_text, "#fe1616"))  # Red
+
+
+def show_git_changes(git_path):
+    if not os.path.exists(git_path):
+        print("Invalid path")
+        return
+    os.chdir(git_path)
+    subprocess.Popen(["cmd", "/c", "start", "cmd", "/k", "git status && git diff --stat"])
+
+def git_backup(event):
+    commands = " ; ".join([f"{r['path']}\\scripts\\Github\\{r['name']}u.ps1" for r in repos])
+    subprocess.Popen([
+        "Start", "pwsh", "-NoExit", "-Command",
+        f"& {{$host.UI.RawUI.WindowTitle='GiTSync' ; {commands} ; cd ~}}"
+    ], shell=True)
+
+def delete_git_lock_files(event=None):
+    for repo in repos:
+        lock_file = os.path.join(repo["path"], ".git", "index.lock")
+        try:
+            if os.path.exists(lock_file):
+                os.remove(lock_file)
+                print(f"Deleted: {lock_file}")
+            else:
+                print(f"File not found: {lock_file}")
+        except Exception as e:
+            print(f"Error deleting {lock_file}: {e}")
+
+def update_status():
+    while True:
+        for repo in repos:
+            check_git_status(repo["path"], queue)
+        time.sleep(1)
+
+def update_gui():
+    while True:
+        try:
+            git_path, text, color = queue.get_nowait()
+            for repo in repos:
+                if git_path == repo["path"]:
+                    status_labels[repo["name"]].config(text=text, fg=color)
+        except:
+            pass
+        time.sleep(0.1)
+
+# Git Backup All Icon
+bkup = tk.Label(ROOT1, text="\udb80\udea2", bg="#1d2027", fg="#009fff", font=("JetBrainsMono NFP", 18, "bold"))
+bkup.pack(side="left")
+bkup.bind("<Button-1>", git_backup)
+
+# Add repo-specific labels and bindings dynamically
+for repo in repos:
+    label = tk.Label(
+        ROOT1, bg="#1d2027", fg="#FFFFFF",
+        font=("JetBrainsMono NFP", 12, "bold"), text=repo["label"]
+    )
+    label.pack(side="left")
+    label.bind("<Button-1>", lambda e, p=repo["path"]: subprocess.Popen(
+        ["Start", "pwsh", "-NoExit", "-Command", f"& {{$host.UI.RawUI.WindowTitle='GiTSync' ; cd {p.replace(os.sep, '/')} ; gitter}}"], shell=True
+    ))
+    label.bind("<Button-3>", lambda e, p=repo["path"]: subprocess.Popen('start pwsh -NoExit -Command "lazygit"', cwd=p, shell=True))
+    label.bind("<Control-Button-3>", lambda e, p=repo["path"]: subprocess.Popen(
+        ["Start", "pwsh", "-NoExit", "-Command", f"& {{$host.UI.RawUI.WindowTitle='Git Restore' ; cd {p.replace(os.sep, '/')} ; git restore . }}"], shell=True
+    ))
+    status_labels[repo["name"]] = label
+
+# Git Lock File Cleaner Icon
+DelGitIgnore = tk.Label(ROOT1, text="\udb82\udde7", bg="#1d2027", fg="#ffffff", font=("JetBrainsMono NFP", 18, "bold"))
+DelGitIgnore.pack(side="left")
+DelGitIgnore.bind("<Button-1>", delete_git_lock_files)
+
+# Start background threads
+threading.Thread(target=update_status, daemon=True).start()
+threading.Thread(target=update_gui, daemon=True).start()
+
+#! For Github Status
+status_thread = threading.Thread(target=update_status, daemon=True)
+gui_thread = threading.Thread(target=update_gui, daemon=True)
+status_thread.start()
+gui_thread.start()
+-----x-----
+2025-08-24 12:26 PM
+    # Ctrl + Left click → open repo folder in Explorer
+    label.bind("<Control-Button-1>", lambda e, p=repo["path"]: subprocess.Popen(
+        f'explorer "{p}"', shell=True
+    ))
+-----x-----
