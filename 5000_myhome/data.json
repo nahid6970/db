@@ -1451,5 +1451,12 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://chromewebstore.google.com/detail/selection-search/gipnlpdeieaidmmeaichnddnmjmcakoe"
+  },
+  {
+    "name": "Windows-Sandbox-Tools",
+    "group": "Git-Projects",
+    "url": "https://github.com/ThioJoe/Windows-Sandbox-Tools",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
