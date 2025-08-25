@@ -393,7 +393,8 @@
             }
         ],
         "radarr_id": "1003581",
-        "folder_exists": true
+        "folder_exists": true,
+        "seen": false
     },
     {
         "id": 32,
