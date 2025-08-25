@@ -2093,5 +2093,23 @@
                 "notify": "seen"
             }
         ]
+    },
+    {
+        "id": 31,
+        "title": "aaaaaaaaaaa",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\aaaaaaaaaaa",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "asdasdasdasdasd",
+                "watched": false,
+                "added_date": "2025-08-25T19:07:52.389489",
+                "notify": "seen"
+            }
+        ]
     }
 ]
