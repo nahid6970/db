@@ -7,6 +7,12 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 11,
+                "title": "One Piece - s22e56 - [1141] - Reliable Reinforcements! Dorry and Brogy Arrive! WEBDL-1080p v2 - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-08-25T13:10:10.187620"
+            },
+            {
                 "id": 10,
                 "title": "One Piece - s22e55 - [1140] - An Admired Hero - The Warrior of Liberation Who Saves Bonney HDTV-720p - [SubsPlease]",
                 "watched": false,
@@ -1769,8 +1775,8 @@
     {
         "id": 29,
         "title": "Peacemaker",
-        "year": "",
-        "cover_image": "",
+        "year": "2022",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/391153/posters/6883da0cd5deb.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Peacemaker",
         "rating": null,
         "status": "Continuing",
