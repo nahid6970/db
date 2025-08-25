@@ -7,62 +7,80 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 12,
+                "title": "asdasd",
+                "watched": false,
+                "added_date": "2025-08-25T14:53:17.587023",
+                "notify": "seen"
+            },
+            {
                 "id": 11,
                 "title": "One Piece - s22e56 - [1141] - Reliable Reinforcements! Dorry and Brogy Arrive! WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
-                "added_date": "2025-08-25T13:10:10.187620"
+                "added_date": "2025-08-25T13:10:10.187620",
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "One Piece - s22e55 - [1140] - An Admired Hero - The Warrior of Liberation Who Saves Bonney HDTV-720p - [SubsPlease]",
                 "watched": false,
-                "added_date": "2025-08-17T22:40:44.257628"
+                "added_date": "2025-08-17T22:40:44.257628",
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "One Piece - s22e54 - [1139] - Destroy Egghead - The Buster Call Is Invoked WEBDL-1080p - [Erai-raws]",
                 "watched": false,
-                "added_date": "2025-08-10T22:56:05.155822"
+                "added_date": "2025-08-10T22:56:05.155822",
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "One Piece - s22e53 - [1138] - Thank You, Dad - Bonney and Kuma's Warm Embrace WEBDL-1080p v2 - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "One Piece - s22e53 - [1138] - Thank You, Dad - Bonney and Kuma's Warm Embrace WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "One Piece - s22e52 - [1137] - I'm Sorry, Dad - Bonney's Tears and Kuma's Fist WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "One Piece - s22e51 - [1136] - Kuma's Life WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "One Piece - s22e50 - [1135] - To the Sea Where My Father Is! The Future Bonney Chooses WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "One Piece - s22e49 - [1134] - Cruel Fate - Kuma's Decision as a Father WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "One Piece - s22e48 - [1133] - To Save His Daughter - Kuma the Timid Pacifist WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "One Piece - s22e47 - [1132] - A Pledge to Ginny - Kuma Becomes a Father WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "3"
@@ -77,62 +95,74 @@
             {
                 "id": 12,
                 "title": "Andor - S02E12 - Jedha, Kyber, Erso WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Andor - S02E11 - Who Else Knows WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Andor - S02E10 - Make It Stop WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Andor - S02E09 - Welcome to the Rebellion WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Andor - S02E08 - Who Are You WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Andor - S02E07 - Messenger WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Andor - S02E06 - What a Festive Evening WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Andor - S02E05 - I Have Friends Everywhere WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Andor - S02E04 - Ever Been to Ghorman WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Andor - S02E03 - Harvest WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Andor - S02E02 - Sagrona Teema WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Andor - S02E01 - One Year Later WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "4",
@@ -150,207 +180,248 @@
             {
                 "id": 41,
                 "title": "Re - ZERO, Starting Life in Another World - s03e16 - [66] - The Result of the Battle for Priestella WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 40,
                 "title": "Re - ZERO, Starting Life in Another World - s03e15 - [65] - A Hideous Dinner Party WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 39,
                 "title": "Re - ZERO, Starting Life in Another World - s03e14 - [64] - Theresia van Astrea WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 38,
                 "title": "Re - ZERO, Starting Life in Another World - s03e13 - [63] - The Warrior's Commendation WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 37,
                 "title": "Re - ZERO, Starting Life in Another World - s03e12 - [62] - Regulus Corneas WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 36,
                 "title": "Re - ZERO, Starting Life in Another World - s03e11 - [61] - Liliana Masquerade WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 35,
                 "title": "Re - ZERO, Starting Life in Another World - s03e10 - [60] - The Plan to Conquer Greed WEBDL-1080p - [FLE]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 34,
                 "title": "Re - ZERO, Starting Life in Another World - s03e09 - [59] - City Scramble WEBDL-1080p - [FLE]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 33,
                 "title": "Re - ZERO, Starting Life in Another World - s03e08 - [58] - The One I'll Love Someday WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 32,
                 "title": "Re - ZERO, Starting Life in Another World - s03e07 - [57] - The Newest of Heroes and the Most Ancient of Heroes WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 31,
                 "title": "Re - ZERO, Starting Life in Another World - s03e06 - [56] - Conditions of the Knight WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 30,
                 "title": "Re - ZERO, Starting Life in Another World - s03e05 - [55] - A Dark Torrent HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 29,
                 "title": "Re - ZERO, Starting Life in Another World - s03e04 - [54] - Operation - Take Back the Government Office HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 28,
                 "title": "Re - ZERO, Starting Life in Another World - s03e03 - [53] - Gorgeous Tiger WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 27,
                 "title": "Re - ZERO, Starting Life in Another World - s03e02 - [52] - A Showdown of Fire and Ice WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 26,
                 "title": "Re - ZERO, Starting Life in Another World - s03e01 - [51] - Theatrical Malice WEBDL-1080p - [Sonarr]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 25,
                 "title": "Re - ZERO, Starting Life in Another World - s01e25 - [25] - That's All This Story Is About Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 24,
                 "title": "Re - ZERO, Starting Life in Another World - s01e24 - [24] - The Self-Proclaimed Knight and the Greatest Knight Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 23,
                 "title": "Re - ZERO, Starting Life in Another World - s01e23 - [23] - Nefarious Sloth Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 22,
                 "title": "Re - ZERO, Starting Life in Another World - s01e22 - [22] - A Flash of Sloth Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 21,
                 "title": "Re - ZERO, Starting Life in Another World - s01e21 - [21] - A Wager That Defies Despair Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 20,
                 "title": "Re - ZERO, Starting Life in Another World - s01e20 - [20] - Wilhelm van Astrea Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 19,
                 "title": "Re - ZERO, Starting Life in Another World - s01e19 - [19] - Battle Against the White Whale Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 18,
                 "title": "Re - ZERO, Starting Life in Another World - s01e18 - [18] - From Zero Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 17,
                 "title": "Re - ZERO, Starting Life in Another World - s01e17 - [17] - Disgrace in the Extreme Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 16,
                 "title": "Re - ZERO, Starting Life in Another World - s01e16 - [16] - The Greed of a Pig Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "Re - ZERO, Starting Life in Another World - s01e15 - [15] - The Outside of Madness Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Re - ZERO, Starting Life in Another World - s01e14 - [14] - The Sickness Called Despair Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Re - ZERO, Starting Life in Another World - s01e13 - [13] - Self-Proclaimed Knight Natsuki Subaru Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Re - ZERO, Starting Life in Another World - s01e12 - [12] - Return to the Capital Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Re - ZERO, Starting Life in Another World - s01e11 - [11] - Rem Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Re - ZERO, Starting Life in Another World - s01e10 - [10] - Fanatical Methods Like a Demon Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Re - ZERO, Starting Life in Another World - s01e09 - [9] - The Meaning of Courage Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Re - ZERO, Starting Life in Another World - s01e08 - [8] - I Cried, Cried My Lungs Out, and Stopped Crying Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Re - ZERO, Starting Life in Another World - s01e07 - [7] - Natsuki Subaru's Restart Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Re - ZERO, Starting Life in Another World - s01e06 - [6] - The Sound of Chains Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Re - ZERO, Starting Life in Another World - s01e05 - [5] - The Morning of Our Promise Is Still Distant Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Re - ZERO, Starting Life in Another World - s01e04 - [4] - The Happy Roswaal Mansion Family Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Re - ZERO, Starting Life in Another World - s01e03 - [3] - Starting Life from Zero in Another World Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Re - ZERO, Starting Life in Another World - s01e02 - [2] - Reunion with the Witch Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Re - ZERO, Starting Life in Another World - s01e01 - [1] - The End of the Beginning and the Beginning of the End Bluray-1080p - [Flugel]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ]
     },
@@ -364,22 +435,26 @@
             {
                 "id": 4,
                 "title": "Black Mirror - S07E06 - USS Callister - Into Infinity WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Black Mirror - S07E05 - Eulogy WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Black Mirror - S07E04 - Plaything WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Black Mirror - S07E03 - Hotel Reverie WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "4"
@@ -394,90 +469,106 @@
             {
                 "id": 8,
                 "title": "Blood of Zeus - S03E08 - A Champion\u2019s Challenge WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Blood of Zeus - S03E07 - Land of the Dead WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Blood of Zeus - S03E06 - The Tower of the Winds WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Blood of Zeus - S03E05 - The Head of the Maenads WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Blood of Zeus - S03E04 - Brothers\u2019 Journey WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Blood of Zeus - S03E03 - Hellebore WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Blood of Zeus - S03E02 - Hades\u2019 Choice WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Blood of Zeus - S03E01 - A Breath Before Dying WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Blood of Zeus - S02E08 - The Three Trials WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T19:01:49.484510"
+                "added_date": "2025-08-07T19:01:49.484510",
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Blood of Zeus - S02E07 - The Hidden Realm WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T14:14:22.447447"
+                "added_date": "2025-08-07T14:14:22.447447",
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Blood of Zeus - S02E06 - Crossing Paths WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T14:14:22.447447"
+                "added_date": "2025-08-07T14:14:22.447447",
+                "notify": "seen"
             },
             {
                 "id": 16,
                 "title": "Blood of Zeus - S02E05 - Judgement Day WEBDL-720p",
                 "watched": false,
-                "added_date": "2025-08-18T19:55:42.469395"
+                "added_date": "2025-08-18T19:55:42.469395",
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Blood of Zeus - S02E04 - Funeral Games WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-14T17:02:11.248214"
+                "added_date": "2025-08-14T17:02:11.248214",
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Blood of Zeus - S02E03 - Winter Is Born WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-14T19:02:11.283495"
+                "added_date": "2025-08-14T19:02:11.283495",
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Blood of Zeus - S02E02 - Weights & Measures WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-10T23:56:05.167425"
+                "added_date": "2025-08-10T23:56:05.167425",
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "Blood of Zeus - S02E01 - A Shadow Emerges WEBDL-720p",
                 "watched": false,
-                "added_date": "2025-08-18T19:55:42.469395"
+                "added_date": "2025-08-18T19:55:42.469395",
+                "notify": "seen"
             }
         ],
         "rating": "4",
@@ -495,22 +586,26 @@
             {
                 "id": 4,
                 "title": "Cobra Kai - S06E15 - Ex-Degenerate WEBDL-1080p",
-                "watched": true
+                "watched": true,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Cobra Kai - S06E14 - Strike Last HDTV-720p",
-                "watched": true
+                "watched": true,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Cobra Kai - S06E13 - Skeletons WEBDL-1080p",
-                "watched": true
+                "watched": true,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Cobra Kai - S06E12 - Rattled HDTV-720p",
-                "watched": true
+                "watched": true,
+                "notify": "seen"
             }
         ],
         "rating": "3",
@@ -526,47 +621,56 @@
             {
                 "id": 9,
                 "title": "Daredevil - Born Again - S01E09 - Straight to Hell WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Daredevil - Born Again - S01E08 - Isle of Joy WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Daredevil - Born Again - S01E07 - Art for Art's Sake WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Daredevil - Born Again - S01E06 - Excessive Force WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Daredevil - Born Again - S01E05 - With Interest WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Daredevil - Born Again - S01E04 - Sic Semper Systema WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Daredevil - Born Again - S01E03 - The Hollow of His Hand WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Daredevil - Born Again - S01E02 - Optics WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Daredevil - Born Again - S01E01 - Heaven's Half Hour WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -582,102 +686,122 @@
             {
                 "id": 20,
                 "title": "Dragon Ball DAIMA - s01e20 - [20] - Maximum WEBDL-720p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 19,
                 "title": "Dragon Ball DAIMA - s01e19 - [19] - Betrayal WEBDL-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 18,
                 "title": "Dragon Ball DAIMA - s01e18 - [18] - Awakening WEBRip-1080p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 17,
                 "title": "Dragon Ball DAIMA - s01e17 - [17] - Gomah WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 16,
                 "title": "Dragon Ball DAIMA - s01e16 - [16] - Degesu WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "Dragon Ball DAIMA - s01e15 - [15] - Third Eye HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Dragon Ball DAIMA - s01e14 - [14] - Taboo HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Dragon Ball DAIMA - s01e13 - [13] - Surprise HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Dragon Ball DAIMA - s01e12 - [12] - True Strength HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Dragon Ball DAIMA - s01e11 - [11] - Legend HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Dragon Ball DAIMA - s01e10 - [10] - Ocean HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Dragon Ball DAIMA - s01e09 - [9] - Thieves HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Dragon Ball DAIMA - s01e08 - [8] - Tamagami HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Dragon Ball DAIMA - s01e07 - [7] - Collar HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Dragon Ball DAIMA - s01e06 - [6] - Lightning HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Dragon Ball DAIMA - s01e05 - [5] - Panzy HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Dragon Ball DAIMA - s01e04 - [4] - Chatty WEBRip-1080p - [EMBER]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Dragon Ball DAIMA - s01e03 - [3] - Daima HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Dragon Ball DAIMA - s01e02 - [2] - Glorio WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Dragon Ball Daima - s01e01 - [1] - Conspiracy WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -694,24 +818,28 @@
                 "id": 4,
                 "title": "Dr. STONE - s04e19 - [77] - Stone Sanctuary HDTV-1080p - [SubsPlease]",
                 "watched": true,
-                "added_date": "2025-08-21T21:38:15.529318"
+                "added_date": "2025-08-21T21:38:15.529318",
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Dr. STONE - s04e18 - [76] - Diamond Heart HDTV-1080p - [SubsPlease]",
                 "watched": true,
-                "added_date": "2025-08-15T12:31:30.907386"
+                "added_date": "2025-08-15T12:31:30.907386",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Dr. STONE - s04e17 - [75] - Sickening Yet Beautiful HDTV-1080p - [SubsPlease]",
                 "watched": true,
-                "added_date": "2025-08-11T14:57:50.329021"
+                "added_date": "2025-08-11T14:57:50.329021",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Dr. STONE - s04e16 - [74] - MEDUSA MECHANISM HDTV-1080p - [SubsPlease]",
-                "watched": true
+                "watched": true,
+                "notify": "seen"
             }
         ],
         "rating": "5"
@@ -726,42 +854,50 @@
             {
                 "id": 8,
                 "title": "Invincible (2021) - S03E08 - I THOUGHT YOU'D NEVER SHUT UP HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Invincible (2021) - S03E07 - WHAT HAVE I DONE WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Invincible (2021) - S03E06 - ALL I CAN SAY IS I'M SORRY WEBDL-1080p Proper",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "INVINCIBLE (2021) - S03E05 - THIS WAS SUPPOSED TO BE EASY WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Invincible (2021) - S03E04 - YOU WERE MY HERO WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Invincible (2021) - S03E03 - YOU WANT A REAL COSTUME, RIGHT WEBDL-1080p REAL",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Invincible (2021) - S03E02 - A DEAL WITH THE DEVIL WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Invincible (2021) - S03E01 - YOU'RE NOT LAUGHING NOW WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -777,77 +913,92 @@
             {
                 "id": 15,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e15 - [83] - Syr First Love WEBDL-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e14 - [82] - Einherjar The Warriors of the Goddess WEBDL-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e13 - [81] - Revenge Counterattack WEBDL-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e12 - [80] - Astrea Record Inheritance WEBDL-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e11 - [79] - F\u00f3lkvangr Hell HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e10 - [78] - War Game The Great Faction Battle HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e09 - [77] - Vesta Altar of the Sacred Flame WEBDL-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e08 - [76] - Bell Cranel Desires HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e07 - [75] - Loneliness Separated HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e06 - [74] - Orario Distorted City HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e05 - [73] - Freya Familia Invasion HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e04 - [72] - Seidr God and Girl HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e03 - [71] - Odr Partner HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e02 - [70] - Master Training HDTV-720p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon! - s05e01 - [64] - TBA HDTV-720p - [Erai-raws]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "3"
@@ -862,52 +1013,62 @@
             {
                 "id": 10,
                 "title": "Mirzapur - S02E10 - King of Mirzapur WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Mirzapur - S02E09 - Butterscotch WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Mirzapur - S02E08 - Chauchak WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Mirzapur - S02E07 - Ood Bilaav WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Mirzapur - S02E06 - Ankush WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Mirzapur - S02E05 - Langda WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Mirzapur - S02E04 - Bhaymukt WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Mirzapur - S02E03 - Viklaang Quota WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Mirzapur - S02E02 - Khargosh WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Mirzapur - S02E01 - Dhenkul WEBRip-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ]
     },
@@ -921,57 +1082,68 @@
             {
                 "id": 11,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e24 - [49] - Succession WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e23 - [48] - Let's Go Home WEBDL-1080p - [Global]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e22 - [47] - Parents WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e21 - [46] - Magic Circles of the Sixth Stratum WEBDL-1080p - [Global]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e20 - [45] - Into the Labyrinth WEBDL-1080p - [VARYG]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e19 - [44] - Desert Journey WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e18 - [43] - Turning Point 3 WEBDL-1080p - [NanDesuKa]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e17 - [42] - My Older Brother's Feelings WEBDL-1080p - [Global]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e16 - [41] - Norn and Aisha WEBDL-1080p - [ToonsHub]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e15 - [40] - Afar HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s02e14 - [39] - Wedding Reception WEBDL-1080p - [MTBB]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "3",
@@ -987,62 +1159,74 @@
             {
                 "id": 12,
                 "title": "NieR-Automata Ver1.1a - s01e24 - [24] - the [E]nd of YoRHa HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "NieR-Automata Ver1.1a - s01e23 - [23] - meaningless [C]ode HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "NieR-Automata Ver1.1a - s01e22 - [22] - just y[O]u and me HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "NieR-Automata Ver1.1a - s01e21 - [21] - [N]o man's village HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "NieR-Automata Ver1.1a - s01e20 - [20] - deb[U]nked HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "NieR-Automata Ver1.1a - s01e19 - [19] - corru[P]tion HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "NieR-Automata Ver1.1a - s01e18 - [18] - chil[D]hood's end HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "NieR-Automata Ver1.1a - s01e17 - [17] - bad [J]udgment HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "NieR-Automata Ver1.1a - s01e16 - [16] - broken [W]ings HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "NieR-Automata Ver1.1a - s01e15 - [15] - no [I] in team HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "NieR-Automata Ver1.1a - s01e14 - [14] - mission [F]ailed HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "NieR-Automata Ver1.1a - s01e13 - [13] - reckless bra[V]ery HDTV-1080p - [SubsPlease]",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "3",
@@ -1058,42 +1242,50 @@
             {
                 "id": 8,
                 "title": "Reacher - S03E08 - Unfinished Business WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Reacher - S03E07 - L.A. Story WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Reacher - S03E06 - Smoke on the Water HDTV-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Reacher - S03E05 - Smackdown WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Reacher - S03E04 - Dominique WEBDL-1080p Proper REAL",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Reacher - S03E03 - Number 2 with a Bullet WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Reacher - S03E02 - Truckin' HDTV-720p Proper",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Reacher - S03E01 - Persuader WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "4"
@@ -1108,77 +1300,92 @@
             {
                 "id": 15,
                 "title": "Secret Level - S01E15 - Playtime - Fulfillment WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Secret Level - S01E14 - Honor of Kings - The Way of All Things WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Secret Level - S01E13 - Concord - Tale of the Implacable WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Secret Level - S01E12 - Spelunky - Tally WEBDL-1080p Proper",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Secret Level - S01E11 - Exodus - Odyssey WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Secret Level - S01E10 - Mega Man - Start WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Secret Level - S01E09 - The Outer Worlds - The Company We Keep WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Secret Level - S01E08 - Armored Core - Asset Management WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Secret Level - S01E07 - Crossfire - Good Conflict WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Secret Level - S01E06 - PAC-MAN - Circle WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Secret Level - S01E05 - Warhammer 40,000 - And They Shall Know No Fear WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Secret Level - S01E04 - Unreal Tournament - Xan WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Secret Level - S01E03 - New World - The Once and Future King WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Secret Level - S01E02 - Sifu - It Takes a Life WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Secret Level - S01E01 - Dungeons & Dragons - The Queen's Cradle WEBRip-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ]
     },
@@ -1192,42 +1399,50 @@
             {
                 "id": 8,
                 "title": "Star Wars - Skeleton Crew - S01E08 - The Real Good Guys WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Star Wars - Skeleton Crew - S01E07 - We're Gonna Be In So Much Trouble WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Star Wars - Skeleton Crew - S01E06 - Zero Friends Again WEBDL-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Star Wars - Skeleton Crew - S01E05 - You Have A Lot To Learn About Pirates WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Star Wars - Skeleton Crew - S01E04 - Can't Say I Remember No At Attin WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Star Wars - Skeleton Crew - S01E03 - Coming of Age WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Star Wars - Skeleton Crew - S01E02 - Way, Way Out Past The Barrier WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Star Wars - Skeleton Crew - S01E01 - This Could Be A Real Adventure WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -1243,32 +1458,38 @@
             {
                 "id": 6,
                 "title": "The Last of Us - S02E06 - The Price WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "The Last of Us - S02E05 - Feel Her Love WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "The Last of Us - S02E04 - Day One WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "The Last of Us - S02E03 - The Path WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "The Last of Us - S02E02 - Through the Valley WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Last of Us - S02E01 - Future Days WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ]
     },
@@ -1282,87 +1503,104 @@
             {
                 "id": 17,
                 "title": "The Rookie - S07E18 - The Good, the Bad, and the Oscar HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 16,
                 "title": "The Rookie - S07E17 - Mutiny and the Bounty WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "The Rookie - S07E16 - The Return HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "The Rookie - S07E15 - A Deadly Secret HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "The Rookie - S07E14 - Mad About Murder HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "The Rookie - S07E13 - Three Billboards HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "The Rookie - S07E12 - April Fools WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "The Rookie - S07E11 - Speed WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "The Rookie - S07E10 - Chaos Agent WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "The Rookie - S07E09 - The Kiss WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "The Rookie - S07E08 - Wildfire WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "The Rookie - S07E07 - The Mickey WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "The Rookie - S07E06 - The Gala HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "The Rookie - S07E05 - Till Death WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "The Rookie - S07E04 - Darkness Falling HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "The Rookie - S07E03 - Out of Pocket HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Rookie - S07E02 - The Watcher HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "4"
@@ -1378,44 +1616,52 @@
                 "id": 6,
                 "title": "The Walking Dead - Dead City - S02E08 - If History Were a Conflagration WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T22:37:26.744673"
+                "added_date": "2025-08-12T22:37:26.744673",
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "The Walking Dead - Dead City - S02E07 - Novi Dan, Novi Po\u010detak WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-13T08:37:59.853660"
+                "added_date": "2025-08-13T08:37:59.853660",
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "The Walking Dead - Dead City - S02E06 - Bridge Partners Are Hard to Come By These Days HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "The Walking Dead - Dead City - S02E05 - The Bird Always Knows WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-13T08:37:59.853660"
+                "added_date": "2025-08-13T08:37:59.853660",
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "The Walking Dead - Dead City - S02E04 - Feisty Friendly WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "The Walking Dead - Dead City - S02E03 - Why Did the Mainlanders Cross the River WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "The Walking Dead - Dead City - S02E02 - Another Shitty Lesson WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Walking Dead - Dead City - S02E01 - Power Equals Power WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "3",
@@ -1433,42 +1679,50 @@
             {
                 "id": 8,
                 "title": "The Wheel of Time - S03E08 - He Who Comes with the Dawn WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "The Wheel of Time - S03E07 - Goldeneyes WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "The Wheel of Time - S03E06 - The Shadow in the Night HDTV-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "The Wheel of Time - S03E05 - Tel\u2019aran\u2019rhiod WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "The Wheel of Time - S03E04 - The Road to the Spear WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "The Wheel of Time - S03E03 - Seeds of Shadow HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "The Wheel of Time - S03E02 - A Question of Crimson WEBDL-1080p Proper",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Wheel of Time - S03E01 - To Race The Shadow HDTV-720p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -1484,22 +1738,26 @@
             {
                 "id": 4,
                 "title": "Uzumaki - S01E04 - Episode 4 WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Uzumaki - S01E03 - Episode 3 WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Uzumaki - S01E02 - Episode 2 WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Uzumaki - S01E01 - Episode 1 WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": null,
@@ -1515,32 +1773,38 @@
             {
                 "id": 6,
                 "title": "What If\u2026! - S03E08 - What If\u2026What If! (2) WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "What If\u2026! - S03E07 - What If\u2026The Watcher Disappeared WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "What If\u2026! - S03E06 - What If\u20261872 WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "What If\u2026! - S03E05 - What if\u2026 The Emergence Destroyed the Earth WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "What If\u2026! - S03E04 - What if\u2026 Howard the Duck Got Hitched WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "What If\u2026! - S03E03 - What if\u2026 The Red Guardian Stopped The Winter Soldier WEBDL-1080p",
-                "watched": false
+                "watched": false,
+                "notify": "seen"
             }
         ],
         "rating": "4",
@@ -1558,19 +1822,22 @@
                 "id": 3,
                 "title": "WWE Raw - 2025-08-18 - RAW 1682 HDTV-1080p",
                 "watched": true,
-                "added_date": "2025-08-19T15:23:08.015772"
+                "added_date": "2025-08-19T15:23:08.015772",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "WWE Raw - 2025-08-11 - RAW 1681 HDTV-1080p",
                 "watched": true,
-                "added_date": "2025-08-12T17:36:08.636607"
+                "added_date": "2025-08-12T17:36:08.636607",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "WWE Raw - 2025-08-04 - RAW 1680 HDTV-1080p",
                 "watched": true,
-                "added_date": "2025-08-05T17:11:40.597364"
+                "added_date": "2025-08-05T17:11:40.597364",
+                "notify": "seen"
             }
         ]
     },
@@ -1586,25 +1853,29 @@
                 "id": 4,
                 "title": "Wednesday - S02E04 - If These Woes Could Talk WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T10:35:24.652821"
+                "added_date": "2025-08-07T10:35:24.652821",
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Wednesday - S02E03 - Call of the Woe WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T10:35:24.652821"
+                "added_date": "2025-08-07T10:35:24.652821",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Wednesday - S02E02 - The Devil You Woe WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T10:35:24.652821"
+                "added_date": "2025-08-07T10:35:24.652821",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Wednesday - S02E01 - Here We Woe Again WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-07T10:35:24.652821"
+                "added_date": "2025-08-07T10:35:24.652821",
+                "notify": "seen"
             }
         ]
     },
@@ -1620,19 +1891,22 @@
                 "id": 3,
                 "title": "WWE SmackDown - 2025-08-22 - SmackDown 1357 HDTV-1080p",
                 "watched": true,
-                "added_date": "2025-08-23T12:16:25.918663"
+                "added_date": "2025-08-23T12:16:25.918663",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "WWE SmackDown - 2025-08-15 - SmackDown 1356 HDTV-1080p",
                 "watched": true,
-                "added_date": "2025-08-16T11:25:27.975890"
+                "added_date": "2025-08-16T11:25:27.975890",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "WWE SmackDown - 2025-08-08 - SmackDown 1355 WEBDL-1080p",
                 "watched": true,
-                "added_date": "2025-08-11T21:18:24.917923"
+                "added_date": "2025-08-11T21:18:24.917923",
+                "notify": "seen"
             }
         ]
     },
@@ -1648,97 +1922,113 @@
                 "id": 16,
                 "title": "Descendants of the Sun - S01E16 - This Is Unbelievable WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "Descendants of the Sun - S01E15 - I Will Stay Alive WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "Descendants of the Sun - S01E14 - The Movie We Missed WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 13,
                 "title": "Descendants of the Sun - S01E13 - You're Not My Director Anymore WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Descendants of the Sun - S01E12 - As of This Moment, Everyone Will Return to Team Alpha WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Descendants of the Sun - S01E11 - Who on Earth Stole It WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Descendants of the Sun - S01E10 - You Got a Parcel from Shin Ji Young WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Descendants of the Sun - S01E09 - That Wasn't Me WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Descendants of the Sun - S01E08 - Comfort the Deceased with a Silent Prayer WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Descendants of the Sun - S01E07 - I Missed You WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Descendants of the Sun - S01E06 - I Shouldn't Have Received His Apology WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Descendants of the Sun - S01E05 - What Should I Do About the Kiss WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Descendants of the Sun - S01E04 - I Will Find a Way to Drink WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Descendants of the Sun - S01E03 - How Have You Been WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Descendants of the Sun - S01E02 - We Bump into Each Other While Passing By WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Descendants of the Sun - S01E01 - Will You Be My Doctor WEBRip-1080p",
                 "watched": false,
-                "added_date": "2025-08-12T10:18:13.020554"
+                "added_date": "2025-08-12T10:18:13.020554",
+                "notify": "seen"
             }
         ],
         "status": "Ended"
@@ -1756,19 +2046,22 @@
                 "id": 3,
                 "title": "Alien - Earth - S01E03 - Metamorphosis WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-20T11:20:52.386818"
+                "added_date": "2025-08-20T11:20:52.386818",
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Alien - Earth - S01E02 - Mr. October WEBDL-1080p Proper",
                 "watched": false,
-                "added_date": "2025-08-14T22:12:37.611945"
+                "added_date": "2025-08-14T22:12:37.611945",
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Alien - Earth - S01E01 - Neverland WEBDL-1080p Proper",
                 "watched": false,
-                "added_date": "2025-08-14T22:12:37.611945"
+                "added_date": "2025-08-14T22:12:37.611945",
+                "notify": "seen"
             }
         ]
     },
@@ -1785,7 +2078,8 @@
                 "id": 1,
                 "title": "Peacemaker - S02E01 - The Ties That Grind WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-23T00:21:15.135304"
+                "added_date": "2025-08-23T00:21:15.135304",
+                "notify": "seen"
             }
         ]
     },
@@ -1802,7 +2096,8 @@
                 "id": 1,
                 "title": "Scissor Seven - S05E01 - Ah Qi's Special Mission WEBDL-1080p",
                 "watched": false,
-                "added_date": "2025-08-24T16:30:15.466395"
+                "added_date": "2025-08-24T16:30:15.466395",
+                "notify": "seen"
             }
         ]
     }
