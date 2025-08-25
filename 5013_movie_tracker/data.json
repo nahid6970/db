@@ -14,7 +14,8 @@
             }
         ],
         "radarr_id": "395",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 6,
@@ -32,7 +33,8 @@
         ],
         "radarr_id": "1022789",
         "seen": false,
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 7,
@@ -49,7 +51,8 @@
             }
         ],
         "radarr_id": "1106739",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 9,
@@ -66,7 +69,8 @@
             }
         ],
         "radarr_id": "1209288",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 10,
@@ -83,7 +87,8 @@
             }
         ],
         "radarr_id": "1155089",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 13,
@@ -100,7 +105,8 @@
             }
         ],
         "radarr_id": "653346",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 14,
@@ -117,7 +123,8 @@
             }
         ],
         "radarr_id": "539972",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 15,
@@ -134,7 +141,8 @@
             }
         ],
         "radarr_id": "1011985",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 16,
@@ -151,7 +159,8 @@
             }
         ],
         "radarr_id": "1201015",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 17,
@@ -168,7 +177,8 @@
             }
         ],
         "radarr_id": "872585",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 18,
@@ -185,7 +195,8 @@
             }
         ],
         "radarr_id": "857598",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 19,
@@ -202,7 +213,8 @@
             }
         ],
         "radarr_id": "1061474",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 20,
@@ -219,7 +231,8 @@
             }
         ],
         "radarr_id": "138843",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 21,
@@ -236,7 +249,8 @@
             }
         ],
         "radarr_id": "839033",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 22,
@@ -253,7 +267,8 @@
             }
         ],
         "radarr_id": "986056",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 23,
@@ -270,7 +285,8 @@
             }
         ],
         "radarr_id": "1216385",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 24,
@@ -287,7 +303,8 @@
             }
         ],
         "radarr_id": "698687",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 25,
@@ -305,7 +322,8 @@
         ],
         "seen": false,
         "radarr_id": "329865",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 27,
@@ -323,7 +341,8 @@
         ],
         "seen": false,
         "radarr_id": "126889",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 28,
@@ -340,7 +359,8 @@
             }
         ],
         "radarr_id": "440",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 29,
@@ -358,7 +378,8 @@
         ],
         "radarr_id": "786892",
         "seen": false,
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 30,
@@ -376,7 +397,8 @@
         ],
         "radarr_id": "1209290",
         "seen": false,
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 31,
@@ -394,7 +416,8 @@
         ],
         "radarr_id": "1003581",
         "folder_exists": true,
-        "seen": false
+        "seen": false,
+        "notify": "unseen"
     },
     {
         "id": 32,
@@ -411,7 +434,8 @@
             }
         ],
         "radarr_id": "736069",
-        "folder_exists": true
+        "folder_exists": true,
+        "notify": "unseen"
     },
     {
         "id": 33,
@@ -429,6 +453,7 @@
         ],
         "seen": true,
         "radarr_id": "575265",
-        "folder_exists": false
+        "folder_exists": false,
+        "notify": "unseen"
     }
 ]
