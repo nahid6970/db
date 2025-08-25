@@ -184,6 +184,13 @@
     "url": "https://keep.google.com/"
   },
   {
+    "default_type": "img",
+    "horizontal_stack": false,
+    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
+    "name": "VLR.gg",
+    "url": "https://www.vlr.gg/"
+  },
+  {
     "color": "#ff2e2e",
     "default_type": "nerd-font",
     "font_size": "35px",
@@ -192,13 +199,6 @@
     "name": "mi9t",
     "title": "mi9t",
     "url": "http://mi9t:5002"
-  },
-  {
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
-    "name": "VLR.gg",
-    "url": "https://www.vlr.gg/"
   },
   {
     "color": "#69e8ff",
@@ -948,20 +948,20 @@
     "url": "http://x.com"
   },
   {
-    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
-    "group": "info / News",
-    "url": "http://x.com",
-    "color": "black",
-    "default_type": "text",
     "background_color": "white",
     "border_radius": "50px",
     "collapsible": true,
+    "color": "black",
+    "default_type": "text",
     "display_style": "flex",
+    "group": "info / News",
     "horizontal_stack": false,
+    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
     "top_bg_color": "#fff",
-    "top_text_color": "#000",
     "top_border_color": "#fff",
-    "top_hover_color": "#fff"
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
   },
   {
     "collapsible": true,
