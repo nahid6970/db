@@ -971,7 +971,10 @@ div.toggle-container {
 
 <body>
   <div class="top-center-controls">
-    <a href="http://192.168.0.101:5011/" class="add-button" target="_blank"><i class="nf nf-md-television_classic"></i></a>
+    <div class="notification-button-container">
+      <a href="#" id="tv-button" class="add-button"><i class="nf nf-md-television_classic"></i></a>
+      <span id="tv-notification-badge" class="notification-badge" style="display: none;">0</span>
+    </div>
     <a href="http://192.168.0.101:5013/" class="add-button" target="_blank"><i class="nf nf-md-movie_roll"></i></a>
     <a href="http://192.168.0.101:5003/" class="add-button" target="_blank"><i class="nf nf-fa-hard_drive"></i></a>
     <a href="http://192.168.0.101:5015/" class="add-button" target="_blank"><i class="nf nf-md-book_education"></i></a>
@@ -1029,6 +1032,32 @@ div.toggle-container {
       
       .link-item {
         cursor: move;
+      }
+
+      /* Notification badge styles */
+      .notification-button-container {
+        position: relative;
+        display: inline-block;
+      }
+      
+      .notification-badge {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: #ff4444;
+        color: white;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-size: 12px;
+        font-weight: bold;
+        min-width: 18px;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        z-index: 1000;
+      }
+      
+      .notification-badge.zero {
+        display: none !important;
       }
 
     </style>
@@ -2779,6 +2808,74 @@ async function triggerScans() {
   }
 }</script>
 
+  <script>
+    // TV notification functionality
+    let tvNotificationCount = 0;
+    
+    // Function to update TV notification badge
+    function updateTVNotifications() {
+      fetch('/api/tv-notifications')
+        .then(response => response.json())
+        .then(data => {
+          tvNotificationCount = data.unseen_count || 0;
+          const badge = document.getElementById('tv-notification-badge');
+          
+          if (tvNotificationCount > 0) {
+            badge.textContent = tvNotificationCount;
+            badge.style.display = 'block';
+            badge.classList.remove('zero');
+          } else {
+            badge.style.display = 'none';
+            badge.classList.add('zero');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching TV notifications:', error);
+        });
+    }
+    
+    // Function to mark all TV episodes as seen
+    function markAllTVSeen() {
+      if (tvNotificationCount === 0) {
+        // If no notifications, just open the TV app
+        window.open('http://192.168.0.101:5011/', '_blank');
+        return;
+      }
+      
+      // Show confirmation dialog
+      if (confirm(`Mark all ${tvNotificationCount} unseen episodes as seen?`)) {
+        fetch('/api/mark-all-tv-seen', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log(`Marked ${data.updated_count} episodes as seen`);
+              updateTVNotifications(); // Refresh the count
+              // Open TV app after marking as seen
+              window.open('http://192.168.0.101:5011/', '_blank');
+            } else {
+              console.error('Failed to mark episodes as seen:', data.error);
+              alert('Failed to mark episodes as seen');
+            }
+          })
+          .catch(error => {
+            console.error('Error marking episodes as seen:', error);
+            alert('Error marking episodes as seen');
+          });
+      }
+    }
+    
+    // Add click handler to TV button
+    document.getElementById('tv-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      markAllTVSeen();
+    });
+    
+    // Update notifications on page load
+    updateTVNotifications();
+    
+    // Update notifications every 30 seconds
+    setInterval(updateTVNotifications, 30000);
+  </script>
 
   </div>
 
