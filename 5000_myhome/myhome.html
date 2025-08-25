@@ -975,7 +975,10 @@ div.toggle-container {
       <a href="#" id="tv-button" class="add-button"><i class="nf nf-md-television_classic"></i></a>
       <span id="tv-notification-badge" class="notification-badge" style="display: none;">0</span>
     </div>
-    <a href="http://192.168.0.101:5013/" class="add-button" target="_blank"><i class="nf nf-md-movie_roll"></i></a>
+    <div class="notification-button-container">
+      <a href="#" id="movie-button" class="add-button"><i class="nf nf-md-movie_roll"></i></a>
+      <span id="movie-notification-badge" class="notification-badge" style="display: none;">0</span>
+    </div>
     <a href="http://192.168.0.101:5003/" class="add-button" target="_blank"><i class="nf nf-fa-hard_drive"></i></a>
     <a href="http://192.168.0.101:5015/" class="add-button" target="_blank"><i class="nf nf-md-book_education"></i></a>
     <!-- <a href="http://192.168.0.101:5003/" class="add-button" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2250/2250195.png" height="25px" width="25px" alt=""></a> -->
@@ -2809,8 +2812,9 @@ async function triggerScans() {
 }</script>
 
   <script>
-    // TV notification functionality
+    // TV and Movie notification functionality
     let tvNotificationCount = 0;
+    let movieNotificationCount = 0;
     
     // Function to update TV notification badge
     function updateTVNotifications() {
@@ -2831,6 +2835,28 @@ async function triggerScans() {
         })
         .catch(error => {
           console.error('Error fetching TV notifications:', error);
+        });
+    }
+    
+    // Function to update Movie notification badge
+    function updateMovieNotifications() {
+      fetch('/api/movie-notifications')
+        .then(response => response.json())
+        .then(data => {
+          movieNotificationCount = data.unseen_count || 0;
+          const badge = document.getElementById('movie-notification-badge');
+          
+          if (movieNotificationCount > 0) {
+            badge.textContent = movieNotificationCount;
+            badge.style.display = 'block';
+            badge.classList.remove('zero');
+          } else {
+            badge.style.display = 'none';
+            badge.classList.add('zero');
+          }
+        })
+        .catch(error => {
+          console.error('Error fetching movie notifications:', error);
         });
     }
     
@@ -2864,17 +2890,56 @@ async function triggerScans() {
       }
     }
     
-    // Add click handler to TV button
+    // Function to mark all movies as seen
+    function markAllMoviesSeen() {
+      if (movieNotificationCount === 0) {
+        // If no notifications, just open the movie app
+        window.open('http://192.168.0.101:5013/', '_blank');
+        return;
+      }
+      
+      // Show confirmation dialog
+      if (confirm(`Mark all ${movieNotificationCount} unseen movies as seen?`)) {
+        fetch('/api/mark-all-movies-seen', { method: 'POST' })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              console.log(`Marked ${data.updated_count} movies as seen`);
+              updateMovieNotifications(); // Refresh the count
+              // Open movie app after marking as seen
+              window.open('http://192.168.0.101:5013/', '_blank');
+            } else {
+              console.error('Failed to mark movies as seen:', data.error);
+              alert('Failed to mark movies as seen');
+            }
+          })
+          .catch(error => {
+            console.error('Error marking movies as seen:', error);
+            alert('Error marking movies as seen');
+          });
+      }
+    }
+    
+    // Add click handlers
     document.getElementById('tv-button').addEventListener('click', function(e) {
       e.preventDefault();
       markAllTVSeen();
     });
     
+    document.getElementById('movie-button').addEventListener('click', function(e) {
+      e.preventDefault();
+      markAllMoviesSeen();
+    });
+    
     // Update notifications on page load
     updateTVNotifications();
+    updateMovieNotifications();
     
     // Update notifications every 30 seconds
-    setInterval(updateTVNotifications, 30000);
+    setInterval(() => {
+      updateTVNotifications();
+      updateMovieNotifications();
+    }, 30000);
   </script>
 
   </div>
