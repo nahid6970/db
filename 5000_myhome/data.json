@@ -335,6 +335,8 @@
     "default_type": "nerd-font",
     "background_color": "red",
     "border_radius": "100px",
+    "li_bg_color": "#31343a",
+    "li_hover_color": "#31343a",
     "collapsible": false,
     "display_style": "flex",
     "horizontal_stack": true,
