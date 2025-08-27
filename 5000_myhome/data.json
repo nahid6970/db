@@ -1485,5 +1485,12 @@
     "url": "https://bracbank.taleo.net/careersection/external/jobsearch.ftl",
     "default_type": "nerd-font",
     "horizontal_stack": false
+  },
+  {
+    "name": "omarchy",
+    "group": "Git-Projects",
+    "url": "https://omarchy.org/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
