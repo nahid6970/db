@@ -2043,6 +2043,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 4,
+                "title": "Alien - Earth - S01E04 - Observation WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-08-27T08:28:16.157865",
+                "notify": "seen"
+            },
+            {
                 "id": 3,
                 "title": "Alien - Earth - S01E03 - Metamorphosis WEBDL-1080p",
                 "watched": false,
