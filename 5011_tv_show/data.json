@@ -808,6 +808,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 5,
+                "title": "Dr. STONE - s04e20 - [78] - What I Once Sought to Destroy HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-08-28T21:52:36.679334",
+                "notify": "seen"
+            },
+            {
                 "id": 4,
                 "title": "Dr. STONE - s04e19 - [77] - Stone Sanctuary HDTV-1080p - [SubsPlease]",
                 "watched": true,
