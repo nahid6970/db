@@ -96,6 +96,14 @@
     "url": "https://dcsunamganj.teletalk.com.bd/"
   },
   {
+    "name": "Google",
+    "url": "https://www.google.com/",
+    "icon_class": "nf-dev-google",
+    "default_type": "nerd-font",
+    "font_size": "35px",
+    "horizontal_stack": false
+  },
+  {
     "color": "#f46613",
     "default_type": "nerd-font",
     "font_size": "35px",
@@ -329,21 +337,21 @@
     "url": "http://192.168.0.101:5013"
   },
   {
-    "name": "JOB Search",
-    "group": "Local (Flask)",
-    "url": "http://192.168.0.101:5015",
-    "default_type": "nerd-font",
     "background_color": "red",
     "border_radius": "100px",
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_stack": true,
     "li_bg_color": "#31343a",
     "li_hover_color": "#31343a",
-    "collapsible": false,
-    "display_style": "flex",
-    "horizontal_stack": true,
+    "name": "JOB Search",
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5015"
   },
   {
     "collapsible": false,
@@ -1473,24 +1481,31 @@
     "url": "https://github.com/ThioJoe/Windows-Sandbox-Tools"
   },
   {
-    "name": "EBL Career",
-    "group": "JobCircular",
-    "url": "https://ebl.bdjobs.com/EditOptions.asp",
     "default_type": "text",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Brac Bank",
     "group": "JobCircular",
-    "url": "https://bracbank.taleo.net/careersection/external/jobsearch.ftl",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "name": "EBL Career",
+    "url": "https://ebl.bdjobs.com/EditOptions.asp"
   },
   {
-    "name": "omarchy",
-    "group": "Linux Distro",
-    "url": "https://omarchy.org/",
     "default_type": "nerd-font",
-    "horizontal_stack": false
+    "group": "JobCircular",
+    "horizontal_stack": false,
+    "name": "Brac Bank",
+    "url": "https://bracbank.taleo.net/careersection/external/jobsearch.ftl"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Linux Distro",
+    "horizontal_stack": false,
+    "name": "omarchy",
+    "url": "https://omarchy.org/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Powerful Website",
+    "horizontal_stack": false,
+    "name": "exercism",
+    "url": "https://exercism.org/"
   }
 ]
