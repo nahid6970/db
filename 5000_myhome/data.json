@@ -1507,5 +1507,12 @@
     "horizontal_stack": false,
     "name": "exercism",
     "url": "https://exercism.org/"
+  },
+  {
+    "name": "QuickLook",
+    "group": "Git-Projects",
+    "url": "https://github.com/QL-Win/QuickLook",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
