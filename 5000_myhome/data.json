@@ -983,20 +983,20 @@
     "url": "http://x.com"
   },
   {
-    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
-    "group": "info / News",
-    "url": "http://x.com",
-    "color": "black",
-    "default_type": "text",
     "background_color": "yellow",
     "border_radius": "50px",
     "collapsible": true,
+    "color": "black",
+    "default_type": "text",
     "display_style": "flex",
+    "group": "info / News",
     "horizontal_stack": false,
+    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
     "top_bg_color": "#fff",
-    "top_text_color": "#000",
     "top_border_color": "#fff",
-    "top_hover_color": "#fff"
+    "top_hover_color": "#fff",
+    "top_text_color": "#000",
+    "url": "http://x.com"
   },
   {
     "collapsible": true,
@@ -1179,7 +1179,22 @@
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Android-Apps",
+    "group": "PC + Android",
+    "horizontal_stack": true,
+    "img_src": "https://github.com/mkckr0/audio-share/raw/main/metadata/en-US/images/icon.png",
+    "name": "audio-share",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/mkckr0/audio-share"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "Android-Apps \uf17b",
     "horizontal_stack": true,
     "img_src": "https://play-lh.googleusercontent.com/Sg6FawqRvKQYeebQcbZ-DTtF8nzVpnZIWxNSzdF4PjgopILrvX6AP6beOb3AE6WDKSg=w240-h480-rw",
     "name": "Blackr: OLED Screen Off",
@@ -1187,13 +1202,14 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
+    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr",
+    "password_protect": false
   },
   {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Android-Apps",
+    "group": "Android-Apps \uf17b",
     "horizontal_stack": true,
     "img_src": "https://play-lh.googleusercontent.com/k1Qzd6BjDsg2nYJWo_krDVIOBxpw0WUvB-V2HbDjRObUKL0nqa3nWruDBhys5OudD1qCgQztsYP0cU9-TniHzQ=w240-h480-rw",
     "name": "Athena",
@@ -1208,7 +1224,7 @@
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Android-Apps",
+    "group": "Android-Apps \uf17b",
     "horizontal_stack": true,
     "img_src": "https://avatars.githubusercontent.com/u/75154889?s=48&v=4",
     "name": "AppLock",
@@ -1216,13 +1232,14 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/PranavPurwar/AppLock"
+    "url": "https://github.com/PranavPurwar/AppLock",
+    "password_protect": false
   },
   {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Android-Apps",
+    "group": "Android-Apps \uf17b",
     "horizontal_stack": true,
     "img_src": "https://play-lh.googleusercontent.com/_tTQatRSbDfLSZe-eUKy9C4ktIwJ59wsBkSoqORymZ6C4T44q3TtUasA81HCbOz-JY4=w240-h480-rw",
     "name": "NotiNotes",
@@ -1249,19 +1266,19 @@
     "url": "https://chromewebstore.google.com/"
   },
   {
-    "name": "uBlock Origin Lite",
-    "group": "chrome_ext",
-    "url": "https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh",
-    "img_src": "https://lh3.googleusercontent.com/lsanoOfx5N_t-7gh5Qg9FGIirVEjdCqalZXyLZYRd5d7Fydm83FQhu4Oq0JmlRyMtyF_LfwuQQZyKRTHs6emnFirsA=s60",
-    "default_type": "img",
     "collapsible": false,
+    "default_type": "img",
     "display_style": "flex",
+    "group": "chrome_ext",
     "horizontal_stack": true,
+    "img_src": "https://lh3.googleusercontent.com/lsanoOfx5N_t-7gh5Qg9FGIirVEjdCqalZXyLZYRd5d7Fydm83FQhu4Oq0JmlRyMtyF_LfwuQQZyKRTHs6emnFirsA=s60",
+    "name": "uBlock Origin Lite",
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://chromewebstore.google.com/detail/ublock-origin-lite/ddkjiahejlhfcafbddmgiahcphecmpfh"
   },
   {
     "collapsible": false,
