@@ -121,6 +121,7 @@
     "color": "#f46613",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-cod-mail",
     "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
     "name": "Google Mail",
@@ -137,6 +138,7 @@
     "color": "#1399f4",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-dev-facebook",
     "img_src": "https://img.icons8.com/ios11/512/facebook-new.png",
     "name": "Facebook",
@@ -146,6 +148,7 @@
     "color": "#3675ff",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-fa-facebook_messenger",
     "name": "Messenger",
     "url": "https://www.messenger.com/"
@@ -154,6 +157,7 @@
     "color": "#ff0000",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-fa-youtube",
     "name": "YouTube",
     "url": "https://www.youtube.com/"
@@ -162,6 +166,7 @@
     "color": "#5765f2",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-fa-discord",
     "name": "Discord",
     "url": "https://discord.com/channels/@me"
@@ -170,6 +175,7 @@
     "color": "#4b70cc",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-md-dots_hexagon",
     "name": "Tailscale",
     "url": "https://login.tailscale.com/admin/machines"
@@ -186,6 +192,7 @@
     "color": "#b259e6",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-md-microsoft_onenote",
     "name": "OneNote",
     "url": "https://www.onenote.com/"
@@ -193,6 +200,7 @@
   {
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-fa-github_square",
     "name": "github",
     "url": "https://github.com/nahid6970"
@@ -201,22 +209,17 @@
     "color": "#fbbc04",
     "default_type": "nerd-font",
     "font_size": "35px",
+    "horizontal_stack": false,
     "icon_class": "nf nf-md-google_keep",
     "name": "Keep",
     "url": "https://keep.google.com/"
-  },
-  {
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
-    "name": "VLR.gg",
-    "url": "https://www.vlr.gg/"
   },
   {
     "color": "#ff2e2e",
     "default_type": "nerd-font",
     "font_size": "35px",
     "hidden": true,
+    "horizontal_stack": false,
     "icon_class": "nf nf-fa-battery_2",
     "name": "mi9t",
     "title": "mi9t",
@@ -532,6 +535,36 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "http://192.168.0.1/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
+    "name": "VLR.gg",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.vlr.gg/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://liquipedia.net/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png",
+    "name": "liquipedia VLR",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://liquipedia.net/valorant/VALORANT_Champions_Tour"
   },
   {
     "collapsible": true,
@@ -1198,12 +1231,12 @@
     "horizontal_stack": true,
     "img_src": "https://play-lh.googleusercontent.com/Sg6FawqRvKQYeebQcbZ-DTtF8nzVpnZIWxNSzdF4PjgopILrvX6AP6beOb3AE6WDKSg=w240-h480-rw",
     "name": "Blackr: OLED Screen Off",
+    "password_protect": false,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr",
-    "password_protect": false
+    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
   },
   {
     "collapsible": false,
@@ -1228,12 +1261,12 @@
     "horizontal_stack": true,
     "img_src": "https://avatars.githubusercontent.com/u/75154889?s=48&v=4",
     "name": "AppLock",
+    "password_protect": false,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/PranavPurwar/AppLock",
-    "password_protect": false
+    "url": "https://github.com/PranavPurwar/AppLock"
   },
   {
     "collapsible": false,
@@ -1586,5 +1619,13 @@
     "horizontal_stack": false,
     "name": "neal.fun",
     "url": "https://neal.fun/"
+  },
+  {
+    "name": "valorantesports",
+    "group": "VLR",
+    "url": "https://valorantesports.com/en-US/",
+    "img_src": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzUwIDM4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBmaWxsPSIjZmY0NjU1IiBkPSJNOTEuMzkgNjkuNzlhNC41OSA0LjU5IDAgMCAxLTEtMi44OFYxLjA4QTEuMDggMS4wOCAwIDAgMSA5Mi4zLjQxbDEwOS41MSAxMzYuODhhMS4wOSAxLjA5IDAgMCAxLS44NSAxLjc2SDE0OWE0LjU5IDQuNTkgMCAwIDEtMy42LTEuNzRaTTE4Ni42NSA5Mmg1MS45NWE0LjU4IDQuNTggMCAwIDAgMy42LTEuNzNsMTYuNDEtMjAuNTFhNC41OSA0LjU5IDAgMCAwIDEtMi44OFYxLjA4YTEuMDggMS4wOCAwIDAgMC0xLjkxLS42N2wtNzEuOSA4OS44N2ExLjA4IDEuMDggMCAwIDAgLjg1IDEuNzJabS02OS4xMiAxMTV2LTM1LjM4YTQuNTcgNC41NyAwIDAgMC0xLTIuODhsLTU5Ljg4LTc1QTQuNjMgNC42MyAwIDAgMCA1MyA5MkgxLjA4YTEuMDggMS4wOCAwIDAgMC0uODQgMS43Nmw3NSA5My43MWEyLjg2IDIuODYgMCAwIDEgMCAzLjU2bC03NSA5My43MmExLjA4IDEuMDggMCAwIDAgLjg0IDEuNzVINTNhNC42NSA0LjY1IDAgMCAwIDMuNjEtMS43M2w1OS44OC03NWE0LjU3IDQuNTcgMCAwIDAgMS4wNC0yLjc3Wm0xNTcuMjYtMTUuOTFhMi44NiAyLjg2IDAgMCAxIDAtMy41Nmw3NS05My43MWExLjA4IDEuMDggMCAwIDAtLjg0LTEuNzZIMjk3YTQuNjMgNC42MyAwIDAgMC0zLjYxIDEuNzRsLTU5Ljg4IDc0Ljk0YTQuNTcgNC41NyAwIDAgMC0xIDIuODh2MzUuMzVhNC41NSA0LjU1IDAgMCAwIDEgMi44OGw1OS44OCA3NWE0LjY1IDQuNjUgMCAwIDAgMy42MSAxLjczaDUxLjk1YTEuMDggMS4wOCAwIDAgMCAuODQtMS43NVptLTE2LjE4IDExNy42OGwtNTQtNjcuNTJhNC41OCA0LjU4IDAgMCAwLTMuNi0xLjczaC01MS44YTUgNSAwIDAgMC0zLjg5IDEuODZsLTUzLjkzIDY3LjM5YTQuNiA0LjYgMCAwIDAtMSAyLjg5djY1LjgyYTEuMDggMS4wOCAwIDAgMCAxLjkyLjY3TDE3My4xOCAyNzdhMi4zMSAyLjMxIDAgMCAxIDMuNjEgMGw4MC45MSAxMDEuMTVhMS4wOCAxLjA4IDAgMCAwIDEuOTItLjY3di02NS44MmE0LjYgNC42IDAgMCAwLTEuMDEtMi44OVoiLz4KPC9zdmc+",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
