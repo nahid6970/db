@@ -983,20 +983,20 @@
     "url": "http://x.com"
   },
   {
-    "background_color": "white",
-    "border_radius": "50px",
-    "collapsible": true,
+    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
+    "group": "info / News",
+    "url": "http://x.com",
     "color": "black",
     "default_type": "text",
+    "background_color": "red",
+    "border_radius": "50px",
+    "collapsible": true,
     "display_style": "flex",
-    "group": "info / News",
     "horizontal_stack": false,
-    "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
     "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
     "top_text_color": "#000",
-    "url": "http://x.com"
+    "top_border_color": "#fff",
+    "top_hover_color": "#fff"
   },
   {
     "collapsible": true,
@@ -1120,18 +1120,18 @@
     "url": "https://github.com/gorhill/ublock/releases"
   },
   {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Git-Projects",
-    "horizontal_stack": true,
     "name": "glance",
+    "group": "Git-Projects",
+    "url": "https://github.com/glanceapp/glance",
+    "default_type": "nerd-font",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/glanceapp/glance"
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -1176,18 +1176,18 @@
     "url": "https://github.com/QL-Win/QuickLook"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "Android-Apps",
-    "horizontal_stack": true,
-    "img_src": "https://play-lh.googleusercontent.com/Sg6FawqRvKQYeebQcbZ-DTtF8nzVpnZIWxNSzdF4PjgopILrvX6AP6beOb3AE6WDKSg=w240-h480-rw",
     "name": "Blackr: OLED Screen Off",
+    "group": "Android-Apps",
+    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr",
+    "img_src": "https://play-lh.googleusercontent.com/Sg6FawqRvKQYeebQcbZ-DTtF8nzVpnZIWxNSzdF4PjgopILrvX6AP6beOb3AE6WDKSg=w240-h480-rw",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -1205,34 +1205,33 @@
     "url": "https://play.google.com/store/apps/details?id=com.kin.athena"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "Android-Apps",
-    "horizontal_stack": true,
-    "img_src": "https://avatars.githubusercontent.com/u/75154889?s=48&v=4",
     "name": "AppLock",
-    "title": "AppLock",
+    "group": "Android-Apps",
+    "url": "https://github.com/PranavPurwar/AppLock",
+    "img_src": "https://avatars.githubusercontent.com/u/75154889?s=48&v=4",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/PranavPurwar/AppLock"
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "Android-Apps",
-    "horizontal_stack": true,
-    "img_src": "https://play-lh.googleusercontent.com/_tTQatRSbDfLSZe-eUKy9C4ktIwJ59wsBkSoqORymZ6C4T44q3TtUasA81HCbOz-JY4=w240-h480-rw",
     "name": "NotiNotes",
+    "group": "Android-Apps",
+    "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl",
+    "img_src": "https://play-lh.googleusercontent.com/_tTQatRSbDfLSZe-eUKy9C4ktIwJ59wsBkSoqORymZ6C4T44q3TtUasA81HCbOz-JY4=w240-h480-rw",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl"
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -1476,19 +1475,19 @@
     "url": "https://chromewebstore.google.com/detail/custom-new-tab-url/mmjbdbjnoablegbkcklggeknkfcjkjia/related"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "chrome_ext",
-    "horizontal_stack": true,
-    "img_src": "https://lh3.googleusercontent.com/uiFZE3XQ4RPY7H_MyDNnYwCrtHxYDVI1QyqQCQQlFXOIzv1su6CrfA82zgd5nDHkdi7pZtJfJoL__0VMzHyyPo5joA=s60",
     "name": "Free Download Manager",
+    "group": "chrome_ext",
+    "url": "https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp",
+    "img_src": "https://lh3.googleusercontent.com/uiFZE3XQ4RPY7H_MyDNnYwCrtHxYDVI1QyqQCQQlFXOIzv1su6CrfA82zgd5nDHkdi7pZtJfJoL__0VMzHyyPo5joA=s60",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": true,
     "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://chromewebstore.google.com/detail/free-download-manager/ahmpjcflkgiildlgicmcieglgoilbfdp"
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
