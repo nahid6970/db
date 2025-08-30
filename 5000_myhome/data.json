@@ -1538,11 +1538,11 @@
     "horizontal_stack": true,
     "img_src": "https://yt3.googleusercontent.com/evMv5MOOF25UVDdurrXNUWasuUICQ6_jmi_0IbNC1FrZkLVi7gxF8fDLhArXoKn7cmDJRhFcnQ=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "valorant",
-    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@valorant/posts"
+    "url": "https://www.youtube.com/@valorant/posts",
+    "password_protect": true
   }
 ]
