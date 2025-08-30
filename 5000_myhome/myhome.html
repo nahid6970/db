@@ -921,6 +921,11 @@ div.toggle-container {
   border: 1px rgb(255, 118, 83) solid;
 }
 
+.lock-icon {
+  margin-left: 5px;
+  color: #ffc107;
+}
+
 #horizontal-stack-popup .popup-content-inner .link-item {
   flex-grow: 1;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1759,13 +1764,12 @@ div.toggle-container {
     });
   }
 
-  // Function to create a regular group
-  function createRegularGroup(groupName, elements, links) {
+  function createRegularGroup(groupName, elements, linksInGroup) {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'link-group';
     groupDiv.dataset.groupName = groupName;
 
-    const firstLinkInGroup = links[0];
+    const firstLinkInGroup = linksInGroup[0];
     if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
       groupDiv.classList.add('horizontal-stack');
     }
@@ -1819,6 +1823,10 @@ div.toggle-container {
 
       const isPasswordProtected = firstLinkInGroup.link.password_protect;
 
+      if (isPasswordProtected) {
+        icon.innerHTML += '<span class="lock-icon"><i class="nf nf-fa-lock"></i></span>';
+      }
+
       icon.onclick = () => {
         if (isPasswordProtected) {
           const password = prompt("Please enter the password to extend the group:");
@@ -1834,7 +1842,7 @@ div.toggle-container {
         elements.forEach(element => {
           const clonedElement = element.cloneNode(true);
           const linkIndex = parseInt(clonedElement.dataset.linkIndex);
-          const linkData = links.find(l => l.index === linkIndex);
+          const linkData = linksInGroup.find(l => l.index === linkIndex);
 
           clonedElement.addEventListener('dragstart', handleDragStart);
           clonedElement.addEventListener('dragover', handleDragOver);
@@ -1894,7 +1902,7 @@ div.toggle-container {
       const groupList = document.createElement('ul');
       groupList.className = 'link-group-content';
       // Set display style based on the first link in the group, or default to flex
-      const firstLinkInGroupDisplay = links[0];
+      const firstLinkInGroupDisplay = linksInGroup[0];
       if (firstLinkInGroupDisplay && firstLinkInGroupDisplay.link.display_style) {
         groupList.style.display = firstLinkInGroupDisplay.link.display_style;
       } else {
@@ -2105,7 +2113,7 @@ div.toggle-container {
           updatedLink.display_style = newDisplayStyle;
           updatedLink.collapsible = isCollapsible;
           updatedLink.horizontal_stack = isHorizontalStack;
-          updatedLink.password_protect = isPasswordProtected;
+          updatedLink.password_protect = isPasswordProtected; // Make sure this is applied
 
           // Handle top group styling options
           if (topName && topName !== '') {
@@ -2256,6 +2264,7 @@ div.toggle-container {
           updatedLink.collapsible = originalLink.collapsible;
           updatedLink.display_style = originalLink.display_style;
           updatedLink.horizontal_stack = originalLink.horizontal_stack;
+          updatedLink.password_protect = originalLink.password_protect;
           updatedLink.top_name = originalLink.top_name;
           updatedLink.top_bg_color = originalLink.top_bg_color;
           updatedLink.top_text_color = originalLink.top_text_color;
@@ -4187,12 +4196,13 @@ async function triggerScans() {
   },
   {
     "collapsible": false,
-    "default_type": "img",
+    "default_type": "nerd-font",
     "display_style": "flex",
     "group": "chrome_ext",
     "horizontal_stack": true,
     "img_src": "https://fonts.gstatic.com/s/i/productlogos/chrome_store/v7/192px.svg",
     "name": "Chromeweb",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4207,6 +4217,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/lsanoOfx5N_t-7gh5Qg9FGIirVEjdCqalZXyLZYRd5d7Fydm83FQhu4Oq0JmlRyMtyF_LfwuQQZyKRTHs6emnFirsA=s60",
     "name": "uBlock Origin Lite",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4220,6 +4231,7 @@ async function triggerScans() {
     "group": "chrome_ext",
     "horizontal_stack": true,
     "name": "Hotkeys",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4234,6 +4246,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/cvfpnTKw3B67DtM1ZpJG2PNAIjP6hVMOyYy403X4FMkOuStgG1y4cjCn21vmTnnsip1dTZSVsWBA9IxutGuA3dVDWhg=s60",
     "name": "Picture in Picture",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4248,6 +4261,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/yZdBpDxpemTSDZpJu4SQNDPy0Mq4rimQs0a1Veor3Zr8qCQZJuZAvcR1QdTQv_PfUaY6kWrwphGspygur8A0uc5y3w=s60",
     "name": "WOT: Website Security & Safety Checker",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4262,6 +4276,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/T66wTLk-gpBBGsMm0SDJJ3VaI8YM0Utr8NaGCSANmXOfb84K-9GmyXORLKoslfxtasKtQ4spDCdq_zlp_t3QQ6SI0A=s60",
     "name": "Dark Reader",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4276,6 +4291,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/6y1HnDyFGr1RzFbTU7-ELvuKo2eT6kB7ZPGOS7o7mDoQPP4MsmAKqfFgiS6Z_8s66Ewm6vnSgd0SOWonF4pDZ170=s60",
     "name": "Fonts Ninja",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4290,6 +4306,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/ccI-6ZTiIvHbgau47UJbzNsaceYMSr-zmaAttO5zF3IyO3suuol4WBz5PRgX5qQxGKjhHBYhJa64fXpui22K0wFb=s60",
     "name": "What the font",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4304,6 +4321,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/iCQO7yxKPsoAiDzaX00nWICmeba4Fj4t7ZCDzgHuWy_qU97aGTzxlju1WjdudTkQRM4Iz7ofusYXeuqesfpgZiHoeA=s60",
     "name": "Text Blaze: Templates and Snippets",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4318,6 +4336,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/NPdAH77xk1xO-J90MzWakzPyGMmGft8oBo0OFTGGPdfB-V7fcBUiAr1Vo5S1JaS1lSgl9S92gucJBH1as7y7erghDSQ=s60",
     "name": "Just Read",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4332,6 +4351,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/7wz7zn8tPEC1A6jhRoJaTCzC0cyYsOu-CbJRvgzf_Jgg06dSVHGxRL_ub_bJ2KcOs7dDfFAXbWMv0clnZMdfoRVgGQ=s60",
     "name": "Image downloader - Imageye",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4348,6 +4368,7 @@ async function triggerScans() {
     "li_bg_color": "white",
     "li_hover_color": "black",
     "name": "Bulk Media Downloader",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4362,6 +4383,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/59sP8gVHACcpJbrx_Mm1XKSSEmRhp8KQFbmXWmPosXMAiKPq9lfXp4F7jtdOhCyp0MO9bE0i1fSnI8Xu6L17tlAq=s60",
     "name": "Wayback Machine",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4376,6 +4398,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/J_l8abQyJgx7POjRoDfGaFYWFnYQNpRSy4kH5IlbwSdM-l_gZf2rJlk2NLSQTY8g-U2vrclpb0EZApHyOe6sjzbKcUc=s60",
     "name": "Bitwarden Password Manager",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4390,6 +4413,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/LjccpFwpySy3W1nskjMI4tFTXGd2RwwNECpZ4mg479VPucuJ4-1TrL0neG3AesuRXbZbV85JIxba5d-193WfE1voHg=s60",
     "name": "Copy on Select",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4404,6 +4428,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/9TeenHOMtvRMaxumEPhUtfQJup263sqY-bNzi_HcBmrNiRfQpQa13hv8eN4hVGiWZiPDO00jm4XYXKUT9xLYam6--w=s60",
     "name": "Custom New Tab URL",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4418,6 +4443,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/uiFZE3XQ4RPY7H_MyDNnYwCrtHxYDVI1QyqQCQQlFXOIzv1su6CrfA82zgd5nDHkdi7pZtJfJoL__0VMzHyyPo5joA=s60",
     "name": "Free Download Manager",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4432,6 +4458,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/9lrq9YRbtkkV6UURyRG4tReN46gXtDe2OFpMjDlzK9u87eJMWQIkdssSi9RVd4iv4PIfADqSRMGzF0mdrsHsra1T=s60",
     "name": "IDM Integration Module Created by the owner of the listed website. The publisher has a good record with no history of violations. Learn more.",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4446,6 +4473,7 @@ async function triggerScans() {
     "horizontal_stack": true,
     "img_src": "https://lh3.googleusercontent.com/gwsAX70XlMtLhQH0Nqtm7ZtCT-O3io7QJIdxOKTK9ITygrTKm6zI7NqO22MDdGeSSWBZrK5Er5EOhyCB63hHjbb9cQ=s60",
     "name": "Selection Search",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4458,14 +4486,29 @@ async function triggerScans() {
     "display_style": "flex",
     "group": "Sussy",
     "horizontal_stack": true,
-    "img_src": "https://yt3.googleusercontent.com/ag0uKiPA1AOG17bGmL4RVQCjCDdYfkd76YEOzi0LK-deirPMpUCLsGHg6NRk_j9VN5WuVchQwg=s48-c-k-c0x00ffffff-no-rj-mo",
-    "name": "kzagamerTV",
+    "img_src": "https://yt3.googleusercontent.com/evMv5MOOF25UVDdurrXNUWasuUICQ6_jmi_0IbNC1FrZkLVi7gxF8fDLhArXoKn7cmDJRhFcnQ=s48-c-k-c0x00ffffff-no-rj-mo",
+    "name": "valorant",
+    "password_protect": true,
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@kzagamerTV/posts",
-    "password_protect": true
+    "url": "https://www.youtube.com/@valorant/posts"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_stack": true,
+    "img_src": "https://yt3.googleusercontent.com/ag0uKiPA1AOG17bGmL4RVQCjCDdYfkd76YEOzi0LK-deirPMpUCLsGHg6NRk_j9VN5WuVchQwg=s48-c-k-c0x00ffffff-no-rj-mo",
+    "name": "kzagamerTV",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@kzagamerTV/posts"
   },
   {
     "default_type": "nerd-font",
@@ -4480,21 +4523,6 @@ async function triggerScans() {
     "horizontal_stack": false,
     "name": "exercism",
     "url": "https://exercism.org/"
-  },
-  {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "Sussy",
-    "horizontal_stack": true,
-    "img_src": "https://yt3.googleusercontent.com/evMv5MOOF25UVDdurrXNUWasuUICQ6_jmi_0IbNC1FrZkLVi7gxF8fDLhArXoKn7cmDJRhFcnQ=s48-c-k-c0x00ffffff-no-rj-mo",
-    "name": "valorant",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@valorant/posts",
-    "password_protect": true
   }
 ];
     
