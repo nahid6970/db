@@ -1099,14 +1099,17 @@ div.toggle-container {
 
 /* Custom sidebar button styling with higher specificity */
 .top-center-controls .notification-button-container .custom-sidebar-button.add-button {
-  background-color: var(--custom-bg-color, #ffffff) !important;
   color: var(--custom-text-color, #000000) !important;
+  background-color: var(--custom-bg-color, #ffffff) !important;
+  border: 2px solid var(--custom-border-color, #cccccc) !important;
+  border-radius: var(--custom-border-radius, 4px) !important;
+  font-size: var(--custom-font-size, 16px) !important;
   transition: background-color 0.2s ease, transform 0.2s ease !important;
 }
 
 .top-center-controls .notification-button-container .custom-sidebar-button.add-button:hover {
-  background-color: var(--custom-hover-color, #e0e0e0) !important;
   color: var(--custom-text-color, #000000) !important;
+  background-color: var(--custom-hover-color, #e0e0e0) !important;
   transform: scale(1.05) !important;
 }
 
@@ -1441,12 +1444,19 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="url" id="sidebar-button-img-src" placeholder="Image URL">
           </div>
           
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors</h4>
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors & Styling</h4>
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
             <input type="text" id="sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
+            <input type="text" id="sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
           </div>
-          <input type="text" id="sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+            <input type="text" id="sidebar-button-border-color" placeholder="Border Color (e.g., #cccccc)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-border-radius" placeholder="Border Radius (e.g., 4px, 50%)">
+            <input type="text" id="sidebar-button-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
+          </div>
           
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="sidebar-button-notification">
@@ -1486,12 +1496,19 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL">
           </div>
           
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors</h4>
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors & Styling</h4>
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
             <input type="text" id="edit-sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
+            <input type="text" id="edit-sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
           </div>
-          <input type="text" id="edit-sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+            <input type="text" id="edit-sidebar-button-border-color" placeholder="Border Color (e.g., #cccccc)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-border-radius" placeholder="Border Radius (e.g., 4px, 50%)">
+            <input type="text" id="edit-sidebar-button-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
+          </div>>
           
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="edit-sidebar-button-notification">
@@ -3150,20 +3167,29 @@ function createSidebarButtonElement(button, index) {
     buttonElement.id = button.id;
     
     // Apply custom styling using both CSS custom properties and direct styles
-    const bgColor = button.bg_color || '#ffffff';
     const textColor = button.text_color || '#000000';
+    const bgColor = button.bg_color || '#ffffff';
     const hoverColor = button.hover_color || '#e0e0e0';
+    const borderColor = button.border_color || '#cccccc';
+    const borderRadius = button.border_radius || '4px';
+    const fontSize = button.font_size || '16px';
     
-    console.log(`Applying colors to ${button.name}: bg=${bgColor}, text=${textColor}, hover=${hoverColor}`);
+    console.log(`Applying styles to ${button.name}: text=${textColor}, bg=${bgColor}, hover=${hoverColor}, border=${borderColor}, radius=${borderRadius}, fontSize=${fontSize}`);
     
     // Set CSS custom properties
-    buttonElement.style.setProperty('--custom-bg-color', bgColor);
     buttonElement.style.setProperty('--custom-text-color', textColor);
+    buttonElement.style.setProperty('--custom-bg-color', bgColor);
     buttonElement.style.setProperty('--custom-hover-color', hoverColor);
+    buttonElement.style.setProperty('--custom-border-color', borderColor);
+    buttonElement.style.setProperty('--custom-border-radius', borderRadius);
+    buttonElement.style.setProperty('--custom-font-size', fontSize);
     
     // Also set direct styles as fallback
-    buttonElement.style.setProperty('background-color', bgColor, 'important');
     buttonElement.style.setProperty('color', textColor, 'important');
+    buttonElement.style.setProperty('background-color', bgColor, 'important');
+    buttonElement.style.setProperty('border', `2px solid ${borderColor}`, 'important');
+    buttonElement.style.setProperty('border-radius', borderRadius, 'important');
+    buttonElement.style.setProperty('font-size', fontSize, 'important');
     
     // Add hover event listeners for guaranteed hover effect
     buttonElement.addEventListener('mouseenter', function() {
@@ -3355,9 +3381,12 @@ function addSidebarButton() {
     const displayType = document.getElementById('sidebar-button-display-type').value;
     const iconClass = document.getElementById('sidebar-button-icon').value;
     const imgSrc = document.getElementById('sidebar-button-img-src').value;
-    const bgColor = document.getElementById('sidebar-button-bg-color').value;
     const textColor = document.getElementById('sidebar-button-text-color').value;
+    const bgColor = document.getElementById('sidebar-button-bg-color').value;
     const hoverColor = document.getElementById('sidebar-button-hover-color').value;
+    const borderColor = document.getElementById('sidebar-button-border-color').value;
+    const borderRadius = document.getElementById('sidebar-button-border-radius').value;
+    const fontSize = document.getElementById('sidebar-button-font-size').value;
     const hasNotification = document.getElementById('sidebar-button-notification').checked;
     
     const newButton = {
@@ -3368,9 +3397,12 @@ function addSidebarButton() {
         img_src: imgSrc,
         url: url,
         has_notification: hasNotification,
-        bg_color: bgColor || '#ffffff',
         text_color: textColor || '#000000',
-        hover_color: hoverColor || '#e0e0e0'
+        bg_color: bgColor || '#ffffff',
+        hover_color: hoverColor || '#e0e0e0',
+        border_color: borderColor || '#cccccc',
+        border_radius: borderRadius || '4px',
+        font_size: fontSize || '16px'
     };
 
     if (hasNotification) {
@@ -3409,9 +3441,12 @@ function editSidebarButton(index) {
     document.getElementById('edit-sidebar-button-display-type').value = button.display_type || 'icon';
     document.getElementById('edit-sidebar-button-icon').value = button.icon_class || '';
     document.getElementById('edit-sidebar-button-img-src').value = button.img_src || '';
-    document.getElementById('edit-sidebar-button-bg-color').value = button.bg_color || '';
     document.getElementById('edit-sidebar-button-text-color').value = button.text_color || '';
+    document.getElementById('edit-sidebar-button-bg-color').value = button.bg_color || '';
     document.getElementById('edit-sidebar-button-hover-color').value = button.hover_color || '';
+    document.getElementById('edit-sidebar-button-border-color').value = button.border_color || '';
+    document.getElementById('edit-sidebar-button-border-radius').value = button.border_radius || '';
+    document.getElementById('edit-sidebar-button-font-size').value = button.font_size || '';
     document.getElementById('edit-sidebar-button-notification').checked = button.has_notification || false;
     
     // Show/hide settings based on display type
@@ -3445,9 +3480,12 @@ function saveSidebarButtonEdit() {
     const displayType = document.getElementById('edit-sidebar-button-display-type').value;
     const iconClass = document.getElementById('edit-sidebar-button-icon').value;
     const imgSrc = document.getElementById('edit-sidebar-button-img-src').value;
-    const bgColor = document.getElementById('edit-sidebar-button-bg-color').value;
     const textColor = document.getElementById('edit-sidebar-button-text-color').value;
+    const bgColor = document.getElementById('edit-sidebar-button-bg-color').value;
     const hoverColor = document.getElementById('edit-sidebar-button-hover-color').value;
+    const borderColor = document.getElementById('edit-sidebar-button-border-color').value;
+    const borderRadius = document.getElementById('edit-sidebar-button-border-radius').value;
+    const fontSize = document.getElementById('edit-sidebar-button-font-size').value;
     const hasNotification = document.getElementById('edit-sidebar-button-notification').checked;
     
     const updatedButton = {
@@ -3458,9 +3496,12 @@ function saveSidebarButtonEdit() {
         img_src: imgSrc,
         url: url,
         has_notification: hasNotification,
-        bg_color: bgColor || '#ffffff',
         text_color: textColor || '#000000',
-        hover_color: hoverColor || '#e0e0e0'
+        bg_color: bgColor || '#ffffff',
+        hover_color: hoverColor || '#e0e0e0',
+        border_color: borderColor || '#cccccc',
+        border_radius: borderRadius || '4px',
+        font_size: fontSize || '16px'
     };
 
     if (hasNotification) {
@@ -4523,7 +4564,7 @@ async function triggerScans() {
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
+    "horizontal_text_color": "black",
     "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
     "name": "VLR.gg",
     "password_protect": false,
@@ -4546,7 +4587,7 @@ async function triggerScans() {
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
+    "horizontal_text_color": "black",
     "img_src": "https://liquipedia.net/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png",
     "name": "liquipedia VLR",
     "password_protect": false,
@@ -5625,7 +5666,7 @@ async function triggerScans() {
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
+    "horizontal_text_color": "black",
     "img_src": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzUwIDM4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBmaWxsPSIjZmY0NjU1IiBkPSJNOTEuMzkgNjkuNzlhNC41OSA0LjU5IDAgMCAxLTEtMi44OFYxLjA4QTEuMDggMS4wOCAwIDAgMSA5Mi4zLjQxbDEwOS41MSAxMzYuODhhMS4wOSAxLjA5IDAgMCAxLS44NSAxLjc2SDE0OWE0LjU5IDQuNTkgMCAwIDEtMy42LTEuNzRaTTE4Ni42NSA5Mmg1MS45NWE0LjU4IDQuNTggMCAwIDAgMy42LTEuNzNsMTYuNDEtMjAuNTFhNC41OSA0LjU5IDAgMCAwIDEtMi44OFYxLjA4YTEuMDggMS4wOCAwIDAgMC0xLjkxLS42N2wtNzEuOSA4OS44N2ExLjA4IDEuMDggMCAwIDAgLjg1IDEuNzJabS02OS4xMiAxMTV2LTM1LjM4YTQuNTcgNC41NyAwIDAgMC0xLTIuODhsLTU5Ljg4LTc1QTQuNjMgNC42MyAwIDAgMCA1MyA5MkgxLjA4YTEuMDggMS4wOCAwIDAgMC0uODQgMS43Nmw3NSA5My43MWEyLjg2IDIuODYgMCAwIDEgMCAzLjU2bC03NSA5My43MmExLjA4IDEuMDggMCAwIDAgLjg0IDEuNzVINTNhNC42NSA0LjY1IDAgMCAwIDMuNjEtMS43M2w1OS44OC03NWE0LjU3IDQuNTcgMCAwIDAgMS4wNC0yLjc3Wm0xNTcuMjYtMTUuOTFhMi44NiAyLjg2IDAgMCAxIDAtMy41Nmw3NS05My43MWExLjA4IDEuMDggMCAwIDAtLjg0LTEuNzZIMjk3YTQuNjMgNC42MyAwIDAgMC0zLjYxIDEuNzRsLTU5Ljg4IDc0Ljk0YTQuNTcgNC41NyAwIDAgMC0xIDIuODh2MzUuMzVhNC41NSA0LjU1IDAgMCAwIDEgMi44OGw1OS44OCA3NWE0LjY1IDQuNjUgMCAwIDAgMy42MSAxLjczaDUxLjk1YTEuMDggMS4wOCAwIDAgMCAuODQtMS43NVptLTE2LjE4IDExNy42OGwtNTQtNjcuNTJhNC41OCA0LjU4IDAgMCAwLTMuNi0xLjczaC01MS44YTUgNSAwIDAgMC0zLjg5IDEuODZsLTUzLjkzIDY3LjM5YTQuNiA0LjYgMCAwIDAtMSAyLjg5djY1LjgyYTEuMDggMS4wOCAwIDAgMCAxLjkyLjY3TDE3My4xOCAyNzdhMi4zMSAyLjMxIDAgMCAxIDMuNjEgMGw4MC45MSAxMDEuMTVhMS4wOCAxLjA4IDAgMCAwIDEuOTItLjY3di02NS44MmE0LjYgNC42IDAgMCAwLTEuMDEtMi44OVoiLz4KPC9zdmc+",
     "name": "valorantesports",
     "password_protect": false,
@@ -5663,18 +5704,112 @@ async function triggerScans() {
     "url": "https://www.gnome-look.org/browse?cat=109"
   },
   {
-    "name": "MAS",
-    "group": "Git-Projects",
-    "url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
-    "img_src": "https://camo.githubusercontent.com/c4bf704c89aef3827dcd81b0ab9c90536d842a9ab47336863154ebbfbceb6e7e/68747470733a2f2f6d61737367726176652e6465762f696d672f6c6f676f5f736d616c6c2e706e67",
     "default_type": "img",
-    "horizontal_stack": false
+    "group": "Git-Projects",
+    "horizontal_stack": false,
+    "img_src": "https://camo.githubusercontent.com/c4bf704c89aef3827dcd81b0ab9c90536d842a9ab47336863154ebbfbceb6e7e/68747470733a2f2f6d61737367726176652e6465762f696d672f6c6f676f5f736d616c6c2e706e67",
+    "name": "MAS",
+    "url": "https://github.com/massgravel/Microsoft-Activation-Scripts"
+  },
+  {
+    "default_type": "img",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://yt3.ggpht.com/HKKYmHn3N9252WgIQ9MxXE_Q-GbyGnq6rphq3dCoUJrMOSiJHG_07iA7vrKQEBnOB48haUJ6bA=s176-c-k-c0x00ffffff-no-rj-mo",
+    "name": "VALORANT Champions Tour Pacific",
+    "url": "https://www.youtube.com/@VCTPacific/streams",
+    "display_style": "flex",
+    "collapsible": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_text_color": "black",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461"
+  },
+  {
+    "default_type": "img",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://yt3.ggpht.com/QrLiMQRdqnlgd4mrASdj5ZlQhiUII4XjtJc8lAMXhhNJtCRcUKST5uxXJXcKwdra6J65l7HM=s48-c-k-c0x00ffffff-no-rj",
+    "name": "VALORANT Champions Tour Americas",
+    "url": "https://www.youtube.com/@valorant_americas/streams",
+    "display_style": "flex",
+    "collapsible": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_text_color": "black",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461"
+  },
+  {
+    "default_type": "img",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://yt3.ggpht.com/4b6g7KAuoOgs3sAMQa2E5X_xULYii1lacZjYI7xGPfmzzJXPnnNuboVrpf8RECkldC-wfEBC8aA=s48-c-k-c0x00ffffff-no-rj",
+    "name": "VALORANT Champions Tour EMEA",
+    "url": "http://youtube.com/@VALORANTEsportsEMEA/streams",
+    "display_style": "flex",
+    "collapsible": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_text_color": "black",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461"
+  },
+  {
+    "default_type": "img",
+    "group": "VLR",
+    "horizontal_stack": true,
+    "img_src": "https://yt3.ggpht.com/xrNHXovwEnmL-35_sA5hm8OMeTmQfBRYPR941E7I6PhuSK12DY_IGOxhKnpEaXP6lzuLyPq2=s68-c-k-c0x00ffffff-no-rj",
+    "name": "VALORANT Champions Tour CN",
+    "url": "https://www.youtube.com/@VALORANTEsportsCN",
+    "display_style": "flex",
+    "collapsible": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_text_color": "black",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
   {
     "bg_color": "transparent",
-    "display_type": "icon",
+    "border_color": "red",
+    "border_radius": "4px",
+    "display_type": "image",
     "has_notification": true,
     "hover_color": "red",
     "icon_class": "nf nf-md-television_classic",
@@ -5684,11 +5819,13 @@ async function triggerScans() {
     "name": "TV Shows",
     "notification_api": "/api/tv-notifications",
     "text_color": "white",
-    "url": "http://192.168.0.101:5011/"
+    "url": "http://192.168.0.101:5011/",
+    "font_size": "16px"
   },
   {
-    "bg_color": "transparent",
-    "display_type": "icon",
+    "bg_color": "white",
+    "display_type": "image",
+    "font_size": "16px",
     "has_notification": true,
     "hover_color": "red",
     "icon_class": "nf nf-md-movie_roll",
@@ -5698,66 +5835,81 @@ async function triggerScans() {
     "name": "Movies",
     "notification_api": "/api/movie-notifications",
     "text_color": "white",
-    "url": "http://192.168.0.101:5013/"
+    "url": "http://192.168.0.101:5013/",
+    "border_color": "#cccccc",
+    "border_radius": "4px"
   },
   {
-    "bg_color": "#ffffff",
-    "display_type": "icon",
+    "bg_color": "transparent",
+    "display_type": "image",
     "has_notification": false,
     "hover_color": "red",
     "icon_class": "nf nf-fa-hard_drive",
     "id": "drive-button",
-    "img_src": "",
+    "img_src": "https://cdn-icons-png.flaticon.com/512/2250/2250195.png",
     "name": "Drive",
     "text_color": "#000000",
-    "url": "http://192.168.0.101:5003/"
+    "url": "http://192.168.0.101:5003/",
+    "font_size": "16px"
   },
   {
-    "bg_color": "#ffffff",
-    "display_type": "icon",
+    "bg_color": "transparent",
+    "border_color": "#cccccc",
+    "border_radius": "4px",
+    "display_type": "image",
     "has_notification": false,
     "hover_color": "red",
     "icon_class": "nf nf-md-book_education",
     "id": "education-button",
-    "img_src": "",
+    "img_src": "https://cdn-icons-png.flaticon.com/512/3588/3588110.png",
     "name": "Education",
-    "text_color": "#000000",
-    "url": "http://192.168.0.101:5015/"
+    "text_color": "white",
+    "url": "http://192.168.0.101:5015/",
+    "font_size": "16px"
   },
   {
-    "bg_color": "#ffffff",
+    "bg_color": "transparent",
+    "border_color": "#cccccc",
+    "border_radius": "4px",
     "display_type": "icon",
+    "font_size": "25px",
     "has_notification": false,
     "hover_color": "red",
     "icon_class": "nf nf-fa-rocket",
     "id": "rocket-button",
-    "img_src": "",
+    "img_src": "https://upload.wikimedia.org/wikipedia/commons/3/33/Cartoon_space_rocket.png",
     "name": "Rocket",
-    "text_color": "#000000",
+    "text_color": "white",
     "url": "http://192.168.0.101:4999/"
   },
   {
-    "bg_color": "#ffffff",
+    "bg_color": "transparent",
+    "border_color": "#cccccc",
+    "border_radius": "4px",
     "display_type": "icon",
+    "font_size": "25px",
     "has_notification": false,
     "hover_color": "red",
     "icon_class": "nf nf-oct-apps",
     "id": "apps-button",
     "img_src": "",
     "name": "Apps",
-    "text_color": "#000000",
+    "text_color": "white",
     "url": "http://192.168.0.101:4998/"
   },
   {
-    "bg_color": "#ffffff",
+    "bg_color": "transparent",
+    "border_color": "#cccccc",
+    "border_radius": "4px",
     "display_type": "icon",
+    "font_size": "25px",
     "has_notification": false,
     "hover_color": "red",
     "icon_class": "nf nf-dev-terminal",
     "id": "terminal-button",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "name": "Terminal",
-    "text_color": "#000000",
+    "text_color": "white",
     "url": "http://192.168.0.101:5555/"
   }
 ];
