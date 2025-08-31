@@ -3076,7 +3076,618 @@ updateDateTime();
 
 // Update the time every second
 setInterval(updateDateTime, 1000);</script>
-    <script src="../static/sidebar-handler.js"></script>
+    <script>// Sidebar buttons management
+let sidebarButtons = [];
+let sidebarEditMode = false;
+
+// Load sidebar buttons on page load
+document.addEventListener('DOMContentLoaded', function() {
+    setupSidebarToggle(); // Setup toggle first
+    loadSidebarButtons(); // Then load buttons
+    setupSidebarEventListeners(); // Finally setup other listeners
+});
+
+// Load sidebar buttons from API
+function loadSidebarButtons() {
+    fetch('/api/sidebar-buttons')
+        .then(response => response.json())
+        .then(buttons => {
+            sidebarButtons = buttons;
+            renderSidebarButtons();
+            setupNotificationUpdates();
+            // Update toggle position after buttons are rendered
+            setTimeout(() => {
+                if (typeof updateTogglePosition === 'function') {
+                    updateTogglePosition();
+                }
+            }, 100);
+        })
+        .catch(error => {
+            console.error('Error loading sidebar buttons:', error);
+        });
+}
+
+// Render sidebar buttons in the container
+function renderSidebarButtons() {
+    const container = document.getElementById('sidebar-buttons-container');
+    container.innerHTML = '';
+
+    sidebarButtons.forEach((button, index) => {
+        const buttonElement = createSidebarButtonElement(button, index);
+        container.appendChild(buttonElement);
+    });
+
+    // Add the "+" button for adding new buttons
+    const addButton = document.createElement('div');
+    addButton.className = 'notification-button-container';
+    addButton.innerHTML = `
+        <a href="#" id="add-sidebar-button" class="add-button sidebar-add-button" title="Add New Button">
+            <i class="nf nf-fa-plus"></i>
+        </a>
+    `;
+    container.appendChild(addButton);
+
+    // Show/hide edit buttons based on edit mode
+    updateSidebarEditMode();
+    
+    // Update toggle position after rendering buttons
+    setTimeout(() => {
+        if (typeof updateTogglePosition === 'function') {
+            updateTogglePosition();
+        }
+    }, 100);
+}
+
+// Create a sidebar button element
+function createSidebarButtonElement(button, index) {
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'notification-button-container';
+    
+    // Create the button element
+    const buttonElement = document.createElement('a');
+    buttonElement.className = 'add-button custom-sidebar-button';
+    buttonElement.title = button.name;
+    buttonElement.id = button.id;
+    
+    // Apply custom styling using both CSS custom properties and direct styles
+    const bgColor = button.bg_color || '#ffffff';
+    const textColor = button.text_color || '#000000';
+    const hoverColor = button.hover_color || '#e0e0e0';
+    
+    console.log(`Applying colors to ${button.name}: bg=${bgColor}, text=${textColor}, hover=${hoverColor}`);
+    
+    // Set CSS custom properties
+    buttonElement.style.setProperty('--custom-bg-color', bgColor);
+    buttonElement.style.setProperty('--custom-text-color', textColor);
+    buttonElement.style.setProperty('--custom-hover-color', hoverColor);
+    
+    // Also set direct styles as fallback
+    buttonElement.style.setProperty('background-color', bgColor, 'important');
+    buttonElement.style.setProperty('color', textColor, 'important');
+    
+    // Add hover event listeners for guaranteed hover effect
+    buttonElement.addEventListener('mouseenter', function() {
+        this.style.setProperty('background-color', hoverColor, 'important');
+    });
+    
+    buttonElement.addEventListener('mouseleave', function() {
+        this.style.setProperty('background-color', bgColor, 'important');
+    });
+    
+    // Set content based on display type
+    if (button.display_type === 'image' && button.img_src) {
+        const img = document.createElement('img');
+        img.src = button.img_src;
+        img.style.width = '25px';
+        img.style.height = '25px';
+        img.alt = button.name;
+        buttonElement.appendChild(img);
+    } else {
+        const icon = document.createElement('i');
+        icon.className = button.icon_class || 'nf nf-fa-question';
+        buttonElement.appendChild(icon);
+    }
+    
+    // Set up click behavior
+    if (button.has_notification) {
+        buttonElement.href = '#';
+    } else {
+        buttonElement.href = button.url;
+        buttonElement.target = '_blank';
+    }
+    
+    buttonContainer.appendChild(buttonElement);
+    
+    // Add notification badge if needed
+    if (button.has_notification) {
+        const badge = document.createElement('span');
+        badge.id = `${button.id}-notification-badge`;
+        badge.className = 'notification-badge';
+        badge.style.display = 'none';
+        badge.textContent = '0';
+        buttonContainer.appendChild(badge);
+    }
+    
+    // Add edit and delete buttons (hidden by default)
+    const editButtons = document.createElement('div');
+    editButtons.className = 'sidebar-edit-buttons';
+    editButtons.style.display = 'none';
+    editButtons.innerHTML = `
+        <button class="edit-sidebar-btn" onclick="editSidebarButton(${index})" title="Edit">✏️</button>
+        <button class="delete-sidebar-btn" onclick="deleteSidebarButton(${index})" title="Delete">🗑️</button>
+    `;
+    buttonContainer.appendChild(editButtons);
+    
+    return buttonContainer;
+}
+
+// Setup event listeners for sidebar functionality
+function setupSidebarEventListeners() {
+    // Add button click handler
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('#add-sidebar-button')) {
+            e.preventDefault();
+            showAddSidebarButtonPopup();
+        }
+    });
+
+    // Add sidebar button form submission
+    const addForm = document.getElementById('add-sidebar-button-form');
+    if (addForm) {
+        addForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            addSidebarButton();
+        });
+    }
+
+    // Edit sidebar button form submission
+    const editForm = document.getElementById('edit-sidebar-button-form');
+    if (editForm) {
+        editForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            saveSidebarButtonEdit();
+        });
+    }
+
+    // Display type handlers
+    const displayTypeSelect = document.getElementById('sidebar-button-display-type');
+    if (displayTypeSelect) {
+        displayTypeSelect.addEventListener('change', function() {
+            const iconSettings = document.getElementById('icon-settings');
+            const imageSettings = document.getElementById('image-settings');
+            if (this.value === 'image') {
+                iconSettings.style.display = 'none';
+                imageSettings.style.display = 'block';
+            } else {
+                iconSettings.style.display = 'block';
+                imageSettings.style.display = 'none';
+            }
+        });
+    }
+
+    const editDisplayTypeSelect = document.getElementById('edit-sidebar-button-display-type');
+    if (editDisplayTypeSelect) {
+        editDisplayTypeSelect.addEventListener('change', function() {
+            const iconSettings = document.getElementById('edit-icon-settings');
+            const imageSettings = document.getElementById('edit-image-settings');
+            if (this.value === 'image') {
+                iconSettings.style.display = 'none';
+                imageSettings.style.display = 'block';
+            } else {
+                iconSettings.style.display = 'block';
+                imageSettings.style.display = 'none';
+            }
+        });
+    }
+
+    // Notification checkbox handlers
+    const notificationCheckbox = document.getElementById('sidebar-button-notification');
+    if (notificationCheckbox) {
+        notificationCheckbox.addEventListener('change', function() {
+            const settings = document.getElementById('notification-settings');
+            settings.style.display = this.checked ? 'block' : 'none';
+        });
+    }
+
+    const editNotificationCheckbox = document.getElementById('edit-sidebar-button-notification');
+    if (editNotificationCheckbox) {
+        editNotificationCheckbox.addEventListener('change', function() {
+            const settings = document.getElementById('edit-notification-settings');
+            settings.style.display = this.checked ? 'block' : 'none';
+        });
+    }
+
+    // Close popup handlers
+    setupSidebarPopupCloseHandlers();
+}
+
+// Setup popup close handlers
+function setupSidebarPopupCloseHandlers() {
+    const addPopup = document.getElementById('add-sidebar-button-popup');
+    const editPopup = document.getElementById('edit-sidebar-button-popup');
+
+    // Close buttons
+    const addCloseBtn = addPopup?.querySelector('.close-button');
+    const editCloseBtn = editPopup?.querySelector('.close-button');
+
+    if (addCloseBtn) {
+        addCloseBtn.addEventListener('click', () => {
+            addPopup.classList.add('hidden');
+        });
+    }
+
+    if (editCloseBtn) {
+        editCloseBtn.addEventListener('click', () => {
+            editPopup.classList.add('hidden');
+        });
+    }
+
+    // Click outside to close
+    window.addEventListener('click', (e) => {
+        if (e.target === addPopup) {
+            addPopup.classList.add('hidden');
+        }
+        if (e.target === editPopup) {
+            editPopup.classList.add('hidden');
+        }
+    });
+}
+
+// Show add sidebar button popup
+function showAddSidebarButtonPopup() {
+    const popup = document.getElementById('add-sidebar-button-popup');
+    popup.classList.remove('hidden');
+    
+    // Reset form
+    document.getElementById('add-sidebar-button-form').reset();
+    document.getElementById('notification-settings').style.display = 'none';
+    
+    // Reset display type settings
+    document.getElementById('icon-settings').style.display = 'block';
+    document.getElementById('image-settings').style.display = 'none';
+    document.getElementById('sidebar-button-display-type').value = 'icon';
+}
+
+// Add new sidebar button
+function addSidebarButton() {
+    const name = document.getElementById('sidebar-button-name').value;
+    const url = document.getElementById('sidebar-button-url').value;
+    const displayType = document.getElementById('sidebar-button-display-type').value;
+    const iconClass = document.getElementById('sidebar-button-icon').value;
+    const imgSrc = document.getElementById('sidebar-button-img-src').value;
+    const bgColor = document.getElementById('sidebar-button-bg-color').value;
+    const textColor = document.getElementById('sidebar-button-text-color').value;
+    const hoverColor = document.getElementById('sidebar-button-hover-color').value;
+    const hasNotification = document.getElementById('sidebar-button-notification').checked;
+    
+    const newButton = {
+        id: `custom-button-${Date.now()}`,
+        name: name,
+        display_type: displayType,
+        icon_class: iconClass,
+        img_src: imgSrc,
+        url: url,
+        has_notification: hasNotification,
+        bg_color: bgColor || '#ffffff',
+        text_color: textColor || '#000000',
+        hover_color: hoverColor || '#e0e0e0'
+    };
+
+    if (hasNotification) {
+        newButton.notification_api = document.getElementById('sidebar-button-notification-api').value;
+        newButton.mark_seen_api = document.getElementById('sidebar-button-mark-seen-api').value;
+    }
+
+    fetch('/api/sidebar-buttons', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newButton)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Button added successfully');
+        loadSidebarButtons(); // Reload buttons
+        document.getElementById('add-sidebar-button-popup').classList.add('hidden');
+    })
+    .catch(error => {
+        console.error('Error adding button:', error);
+        alert('Error adding button');
+    });
+}
+
+// Edit sidebar button
+function editSidebarButton(index) {
+    const button = sidebarButtons[index];
+    const popup = document.getElementById('edit-sidebar-button-popup');
+    
+    // Fill form with current values
+    document.getElementById('edit-sidebar-button-index').value = index;
+    document.getElementById('edit-sidebar-button-name').value = button.name;
+    document.getElementById('edit-sidebar-button-url').value = button.url;
+    document.getElementById('edit-sidebar-button-display-type').value = button.display_type || 'icon';
+    document.getElementById('edit-sidebar-button-icon').value = button.icon_class || '';
+    document.getElementById('edit-sidebar-button-img-src').value = button.img_src || '';
+    document.getElementById('edit-sidebar-button-bg-color').value = button.bg_color || '';
+    document.getElementById('edit-sidebar-button-text-color').value = button.text_color || '';
+    document.getElementById('edit-sidebar-button-hover-color').value = button.hover_color || '';
+    document.getElementById('edit-sidebar-button-notification').checked = button.has_notification || false;
+    
+    // Show/hide settings based on display type
+    const displayType = button.display_type || 'icon';
+    const iconSettings = document.getElementById('edit-icon-settings');
+    const imageSettings = document.getElementById('edit-image-settings');
+    if (displayType === 'image') {
+        iconSettings.style.display = 'none';
+        imageSettings.style.display = 'block';
+    } else {
+        iconSettings.style.display = 'block';
+        imageSettings.style.display = 'none';
+    }
+    
+    if (button.has_notification) {
+        document.getElementById('edit-notification-settings').style.display = 'block';
+        document.getElementById('edit-sidebar-button-notification-api').value = button.notification_api || '';
+        document.getElementById('edit-sidebar-button-mark-seen-api').value = button.mark_seen_api || '';
+    } else {
+        document.getElementById('edit-notification-settings').style.display = 'none';
+    }
+    
+    popup.classList.remove('hidden');
+}
+
+// Save sidebar button edit
+function saveSidebarButtonEdit() {
+    const index = parseInt(document.getElementById('edit-sidebar-button-index').value);
+    const name = document.getElementById('edit-sidebar-button-name').value;
+    const url = document.getElementById('edit-sidebar-button-url').value;
+    const displayType = document.getElementById('edit-sidebar-button-display-type').value;
+    const iconClass = document.getElementById('edit-sidebar-button-icon').value;
+    const imgSrc = document.getElementById('edit-sidebar-button-img-src').value;
+    const bgColor = document.getElementById('edit-sidebar-button-bg-color').value;
+    const textColor = document.getElementById('edit-sidebar-button-text-color').value;
+    const hoverColor = document.getElementById('edit-sidebar-button-hover-color').value;
+    const hasNotification = document.getElementById('edit-sidebar-button-notification').checked;
+    
+    const updatedButton = {
+        ...sidebarButtons[index],
+        name: name,
+        display_type: displayType,
+        icon_class: iconClass,
+        img_src: imgSrc,
+        url: url,
+        has_notification: hasNotification,
+        bg_color: bgColor || '#ffffff',
+        text_color: textColor || '#000000',
+        hover_color: hoverColor || '#e0e0e0'
+    };
+
+    if (hasNotification) {
+        updatedButton.notification_api = document.getElementById('edit-sidebar-button-notification-api').value;
+        updatedButton.mark_seen_api = document.getElementById('edit-sidebar-button-mark-seen-api').value;
+    } else {
+        delete updatedButton.notification_api;
+        delete updatedButton.mark_seen_api;
+    }
+
+    fetch(`/api/sidebar-buttons/${index}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedButton)
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Button updated successfully');
+        loadSidebarButtons(); // Reload buttons
+        document.getElementById('edit-sidebar-button-popup').classList.add('hidden');
+    })
+    .catch(error => {
+        console.error('Error updating button:', error);
+        alert('Error updating button');
+    });
+}
+
+// Delete sidebar button
+function deleteSidebarButton(index) {
+    const button = sidebarButtons[index];
+    if (confirm(`Delete "${button.name}" button?`)) {
+        fetch(`/api/sidebar-buttons/${index}`, {
+            method: 'DELETE'
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Button deleted successfully');
+            loadSidebarButtons(); // Reload buttons
+        })
+        .catch(error => {
+            console.error('Error deleting button:', error);
+            alert('Error deleting button');
+        });
+    }
+}
+
+// Update sidebar edit mode visibility
+function updateSidebarEditMode() {
+    const editButtons = document.querySelectorAll('.sidebar-edit-buttons');
+    editButtons.forEach(btn => {
+        btn.style.display = sidebarEditMode ? 'flex' : 'none';
+    });
+}
+
+// Toggle sidebar edit mode (called from main edit mode toggle)
+function toggleSidebarEditMode(enabled) {
+    sidebarEditMode = enabled;
+    updateSidebarEditMode();
+}
+
+// Setup notification updates for buttons with notifications
+function setupNotificationUpdates() {
+    sidebarButtons.forEach((button, index) => {
+        if (button.has_notification && button.notification_api) {
+            setupButtonNotifications(button);
+        }
+    });
+}
+
+// Setup notifications for a specific button
+function setupButtonNotifications(button) {
+    // Update notifications on page load
+    updateButtonNotifications(button);
+    
+    // Update notifications every 30 seconds
+    setInterval(() => {
+        updateButtonNotifications(button);
+    }, 30000);
+    
+    // Setup click handler for notification buttons
+    const buttonElement = document.getElementById(button.id);
+    if (buttonElement) {
+        buttonElement.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleNotificationButtonClick(button);
+        });
+    }
+}
+
+// Update notification badge for a button
+function updateButtonNotifications(button) {
+    if (!button.notification_api) return;
+    
+    fetch(button.notification_api)
+        .then(response => response.json())
+        .then(data => {
+            const count = data.unseen_count || 0;
+            const badge = document.getElementById(`${button.id}-notification-badge`);
+            
+            if (badge) {
+                if (count > 0) {
+                    badge.textContent = count;
+                    badge.style.display = 'block';
+                    badge.classList.remove('zero');
+                } else {
+                    badge.style.display = 'none';
+                    badge.classList.add('zero');
+                }
+            }
+        })
+        .catch(error => {
+            console.error(`Error fetching notifications for ${button.name}:`, error);
+        });
+}
+
+// Handle click on notification button
+function handleNotificationButtonClick(button) {
+    const badge = document.getElementById(`${button.id}-notification-badge`);
+    const count = badge ? parseInt(badge.textContent) || 0 : 0;
+    
+    if (count === 0) {
+        // No notifications, just open the URL
+        window.open(button.url, '_blank');
+        return;
+    }
+    
+    if (button.mark_seen_api && confirm(`Mark all ${count} items as seen?`)) {
+        fetch(button.mark_seen_api, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log(`Marked items as seen for ${button.name}`);
+                    updateButtonNotifications(button); // Refresh the count
+                    window.open(button.url, '_blank');
+                } else {
+                    console.error(`Failed to mark items as seen for ${button.name}:`, data.error);
+                    alert('Failed to mark items as seen');
+                }
+            })
+            .catch(error => {
+                console.error(`Error marking items as seen for ${button.name}:`, error);
+                alert('Error marking items as seen');
+            });
+    } else {
+        // Just open the URL without marking as seen
+        window.open(button.url, '_blank');
+    }
+}
+
+// Setup sidebar toggle functionality
+function setupSidebarToggle() {
+    const sidebarContainer = document.getElementById('sidebar-container');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const toggleIcon = sidebarToggle.querySelector('i');
+    let isExpanded = false;
+    
+    // Load saved state from localStorage (per-window basis)
+    const windowId = Date.now() + Math.random(); // Unique ID for this window
+    const savedState = sessionStorage.getItem('sidebar-expanded'); // Use sessionStorage instead of localStorage
+    if (savedState === 'true') {
+        isExpanded = true;
+        sidebarContainer.classList.add('expanded');
+    }
+    
+    // Update toggle icon based on state
+    function updateToggleIcon() {
+        if (isExpanded) {
+            toggleIcon.className = 'nf nf-fa-chevron_left';
+            sidebarToggle.title = 'Close Sidebar';
+        } else {
+            toggleIcon.className = 'nf nf-fa-chevron_right';
+            sidebarToggle.title = 'Open Sidebar';
+        }
+    }
+    
+    // Calculate dynamic toggle button position
+    function updateTogglePosition() {
+        setTimeout(() => {
+            if (isExpanded) {
+                const sidebarContent = document.getElementById('sidebar-buttons-container');
+                if (sidebarContent) {
+                    const sidebarWidth = sidebarContent.offsetWidth;
+                    sidebarToggle.style.left = (sidebarWidth + 10) + 'px';
+                }
+            } else {
+                sidebarToggle.style.left = '5px';
+            }
+        }, 50); // Small delay to ensure DOM is updated
+    }
+    
+    // Toggle sidebar on button click only
+    sidebarToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        isExpanded = !isExpanded;
+        
+        if (isExpanded) {
+            sidebarContainer.classList.add('expanded');
+        } else {
+            sidebarContainer.classList.remove('expanded');
+        }
+        
+        updateToggleIcon();
+        updateTogglePosition();
+        
+        // Save state to sessionStorage (per-window)
+        sessionStorage.setItem('sidebar-expanded', isExpanded.toString());
+    });
+    
+    // Close sidebar when clicking outside
+    document.addEventListener('click', function(e) {
+        if (isExpanded && !sidebarContainer.contains(e.target) && !sidebarToggle.contains(e.target)) {
+            isExpanded = false;
+            sidebarContainer.classList.remove('expanded');
+            updateToggleIcon();
+            updateTogglePosition();
+            sessionStorage.setItem('sidebar-expanded', 'false');
+        }
+    });
+    
+    // Initialize icon and position after a delay to ensure buttons are rendered
+    setTimeout(() => {
+        updateToggleIcon();
+        updateTogglePosition();
+    }, 200);
+}</script>
     <script>/* For Showing Markdown Table in HTML properly but lines also show */
 function parseMarkdownTable(markdown) {
   const rows = markdown.trim().split('\n');
@@ -5060,6 +5671,96 @@ async function triggerScans() {
     "horizontal_stack": false
   }
 ];
+    const STATIC_SIDEBAR_BUTTONS_DATA = [
+  {
+    "bg_color": "transparent",
+    "display_type": "icon",
+    "has_notification": true,
+    "hover_color": "red",
+    "icon_class": "nf nf-md-television_classic",
+    "id": "tv-button",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEpElEQVR4Aa1XA3QlWRD9a+8ejm3bto1YY3zEtm3bdsa2bdsTrpnU1ns/eUnP/N/dwTvnNqvr3qeqaonYVl5e/kN1dfUqRGJVVdVpxCPEb/V4jDiLSK2srNTA80+StmpI2AMdpiP+RoBI/IPIrqmp6d1i4hcvXnyD5EHCxIJCwt++fftds8jd3IInX7h49SZz1Eo8fvrshqtr4GxR5LKY/O3zl+jXLl5uBNdv3Go1+dOnz0HXUAFzF+rUSWPzTXjJXdyDZ0zXUdT2l/vBpOkrobUiHj9+Clr6Uuqrv8wXZmpKa108QqapXeXZuSXPJ89YBWOWbYD+Cn8m4sLFK80mv3nrDmjobCM+qK+xiwzpdWhk0kuyvj4SgNsnmHyYX7gTqIiljSKmz1kLaRkF8P79e0HiiooKKCrZDXMX6dJv+xkHwLgF+kry8ERqQxY3hxw/GlC/YoGgoGgXE9HbMgJGr9hMHSxZYQTefhGQnJoLu3YfBFyocPnyddi99xAkpeTQdyvWbKS2w3XMoJd9PIyfrxQSFpnUVOjfZHs33et5H/YkM7uYftjTIQG+OPYzjFq5ldyLwghtU/js5O/Q1yyY3geGxKkarfSGof8Rb/5UYQAOLsop6OKTD18crYFRq7YJko/UkFPy3tZR9F5Tdzu8Ly9XJeBvsu5I7w3Uzefdew/oVBBHPZxTYMh6B0Y0avV26GcSSEGumYC1MuhnGszujx0/o3a9YOdXEwHxfItqq8yW08MJc7WgfcQ+kFyERlyog44hu2DCbA2OrcLUifjgE5AswYujfEYe3mEcp+0jDxBSlegUVMax9fGLFNo1Z4iAl3xG8UlZnGFXQ85GYvSKTcw+Oi5NSMBjIuA/PqOynfuZwz6W4YSIDyx2EGTlFAsJ+E1QwL4DR5nD3tbRzRKQm18mSsB7PqPM7CLmcNxCfbLFRE9BRHSKqCm4yGcUHBbPWVjdPLLUL8KAEo6ts1ug8CLErRDCZ2Tn6MtxSrZah9A98PmJXxkxXuOz3R9tw+0Ke+FtiIdJ6gxI8lm0TJnFhulawOjljcM7ceYaGLTZlYBcs+e97OJYYJo5TxOePX/BH4gA4BO8eaHKIC9fua+Ha5vSfDBA6iMYinvZxsKXhyph5Bqp0DqgoZiTipvixs07MGehDozQUMAXR6qhr3koIxEl4nAlHYlps9bAmbMX1Scj0vBmGOKfJpVMQzGBxCGY1UKY89kLtEFLTwpSnF8n1wBw9QimIVfHUA7zF+sxO6yq2HdLV62HW7fuqk3HDaNgSsmfPCUEzAnZeuR6/WYLGhPQjndhnTx1DmQmjvSbsYsNabIi18uYCE5Bwm2Y/XY31HADZD6EnMX08vIKLhn/6qZzryxq1pOOMBFXrt64obIkI22z1G7U/CV6/w2QejPy2PiMFhelJBISEbh7yAImU1Rr7xIwTcLXpHEF6+dqbq8l5FGxLJm0WsQUXeM6Uyz5JWKab2DUBOw5y5KtRU5e6Rs/v8gFzf41w7k0Q7xrBXklwhYD2veSljbyX4dOrBEVzSCuxuZI6k1Bgub+nqNzGxLD63/RK+pxGp+lkN6S8Nqc3/P/AWxGIK9VWdyBAAAAAElFTkSuQmCC",
+    "mark_seen_api": "/api/mark-all-tv-seen",
+    "name": "TV Shows",
+    "notification_api": "/api/tv-notifications",
+    "text_color": "white",
+    "url": "http://192.168.0.101:5011/"
+  },
+  {
+    "bg_color": "transparent",
+    "display_type": "icon",
+    "has_notification": true,
+    "hover_color": "red",
+    "icon_class": "nf nf-md-movie_roll",
+    "id": "movie-button",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAADC0lEQVR4AbTXU7AlPRSG4Tnmj7Ft27Zt27Zt27Zt27Zt21jzXuSiK5Xu4131bKfztZKscPojUfI0LoiL8miCCkgA13Bh/aATH7TEJXzBL3zFdfRBjLDs3BU98Q1i8BunURv+YREgK55D8AbzsBNfIRbfsBH54B6aAQZClNlwxT+ojZP4DbF4jUlIBpeQdu6B9RCll/Z7NHTBbYjmNjohSkgC+GI/ROltc3ckxTi8hFj8whFUhm9wr/59EKWvw3/dkAMr8Bli8RkrkB1uQQngjd0QZUAgQ5fHfvyEWDzHSCQIbAAv7IQog6y/y4F0EZAVnoa2EdACl/EHovzBVbREhMAE2A5RhmgBUuAGZiENXA3biItBeASx+Im9KAUvuwCe2AJRhmsBUuMVBA/RH7FtBrN0mI13EIuPmIWYdrfhJogyUguQDm8gyh9cRFOEt9mhwthiGFmX41+9gbs2DozRAmTEW4jmB/agDLz1IDYD2Q/UMt1aayDKOC1AFryH2PiEpcgGN0OQaOhmuT4Ww1UPsAqiTNACZMdHSABeYwD8bK61/LiLQ/DVL57lEGWyFiAXPkEc/MR+lIOHwx3XEBvgpQdYAlGmagHy4QvE4A+uoAUiOAx0FVEHsVDNNM4vgijTtQAF8RWieYphiO+wxsiAhfiCK4gJD9Of50OUWVqAovgGUT5iMTLD1abzmOiPxxDlKZLanZs5EGWOFqAEfuAn9mm3nb4df9TBWfyBWKyDn12AWRBlnhagNC6gpcN5dkcerDcMPp+xBImd5oPpEGUBXCwBYiCeQ9tEGIdXhnXCIVSAT0AT0hSIstgawKFNBLTCdYjmFjogcmCn5IkQZSlcA5g9S2IvfhrWihPNF5tzgBHahOFqsyxLg7n4YFgtbwj2almdp88QrISb9nt09MIDQ71wJsT1gjqsTbEXw+GqvvdDdZul+cMQV0yGkSsKwuM/5MdqQ3HyAXOQNsQ1geEcV8FmnMF7iMUP7EYJeIZVjeiPNoYC9Rya4e8E6NFLZoSW5X5QS0OAWI4WdgEA8jfiwVylwG4AAAAASUVORK5CYII=",
+    "mark_seen_api": "/api/mark-all-movies-seen",
+    "name": "Movies",
+    "notification_api": "/api/movie-notifications",
+    "text_color": "white",
+    "url": "http://192.168.0.101:5013/"
+  },
+  {
+    "bg_color": "#ffffff",
+    "display_type": "icon",
+    "has_notification": false,
+    "hover_color": "red",
+    "icon_class": "nf nf-fa-hard_drive",
+    "id": "drive-button",
+    "img_src": "",
+    "name": "Drive",
+    "text_color": "#000000",
+    "url": "http://192.168.0.101:5003/"
+  },
+  {
+    "bg_color": "#ffffff",
+    "display_type": "icon",
+    "has_notification": false,
+    "hover_color": "red",
+    "icon_class": "nf nf-md-book_education",
+    "id": "education-button",
+    "img_src": "",
+    "name": "Education",
+    "text_color": "#000000",
+    "url": "http://192.168.0.101:5015/"
+  },
+  {
+    "bg_color": "#ffffff",
+    "display_type": "icon",
+    "has_notification": false,
+    "hover_color": "red",
+    "icon_class": "nf nf-fa-rocket",
+    "id": "rocket-button",
+    "img_src": "",
+    "name": "Rocket",
+    "text_color": "#000000",
+    "url": "http://192.168.0.101:4999/"
+  },
+  {
+    "bg_color": "#ffffff",
+    "display_type": "icon",
+    "has_notification": false,
+    "hover_color": "red",
+    "icon_class": "nf nf-oct-apps",
+    "id": "apps-button",
+    "img_src": "",
+    "name": "Apps",
+    "text_color": "#000000",
+    "url": "http://192.168.0.101:4998/"
+  },
+  {
+    "bg_color": "#ffffff",
+    "display_type": "icon",
+    "has_notification": false,
+    "hover_color": "red",
+    "icon_class": "nf nf-dev-terminal",
+    "id": "terminal-button",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
+    "name": "Terminal",
+    "text_color": "#000000",
+    "url": "http://192.168.0.101:5555/"
+  }
+];
     
     // Override fetch for static version
     const originalFetch = window.fetch;
@@ -5068,6 +5769,19 @@ async function triggerScans() {
         return Promise.resolve({
           ok: true,
           json: () => Promise.resolve(STATIC_LINKS_DATA)
+        });
+      }
+      if (url === '/api/sidebar-buttons' && (!options || options.method === 'GET' || !options.method)) {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(STATIC_SIDEBAR_BUTTONS_DATA)
+        });
+      }
+      // For notification APIs, return empty data
+      if (url === '/api/tv-notifications' || url === '/api/movie-notifications') {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ unseen_count: 0 })
         });
       }
       // For other requests, show a message that editing is not available
@@ -5089,7 +5803,8 @@ async function triggerScans() {
       // Remove edit buttons and functionality
       const style = document.createElement('style');
       style.textContent = `
-        .edit-button, .delete-button, .add-link-item, .edit-group-button, .collapsible-edit-btn {
+        .edit-button, .delete-button, .add-link-item, .edit-group-button, .collapsible-edit-btn,
+        .sidebar-edit-buttons, .sidebar-add-button {
           display: none !important;
         }
         .link-item {
