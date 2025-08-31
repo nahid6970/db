@@ -9,24 +9,25 @@
   <style>/* Import the JetBrains Mono font */
 @import url("https://www.nerdfonts.com/assets/css/webfont.css");
 
-/* Top center controls styling */
+/* Left side middle controls styling */
 .top-center-controls {
   position: fixed;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 15px;
-  padding: 10px 0;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px;
   z-index: 1000;
 }
 
 .add-button {
   color: #000000 !important;
   background-color: #ffffff !important;
-  padding: 10px 14px;
+  padding: 12px 14px;
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -36,6 +37,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  min-width: 50px;
+  min-height: 50px;
 }
 
 .add-button:hover {
@@ -458,9 +461,11 @@ input:checked+.slider:before {
 
 
 .popup-content {
-  background-color: #31343a;
+  background-color: var(--popup-bg-color, #31343a);
+  color: var(--popup-text-color, #ffffff);
+  border: 1px solid var(--popup-border-color, transparent);
+  border-radius: var(--popup-border-radius, 8px);
   padding: 20px;
-  border-radius: 8px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -647,10 +652,12 @@ div.group-header-container {
 
 html body {
   margin-top: 20px;
+  margin-left: 80px; /* Add left margin to account for left-side buttons */
 }
 
 div.toggle-container {
   margin-top: -16px;
+  margin-left: -55px; /* Adjust toggle position to account for body margin */
 }
 
 /* Collapsible groups styling */
@@ -884,9 +891,20 @@ div.toggle-container {
   /* Add some space between horizontally stacked groups */
   vertical-align: top;
   /* Align groups at the top */
-  border: #0056b3 solid 1px;
+  border: var(--horizontal-border-color, #0056b3) solid 1px;
   border-radius: 0px;
   font-family: jetbrainsmono nfp;
+  background-color: var(--horizontal-bg-color, #2d2d2d);
+  color: var(--horizontal-text-color, #ffffff);
+  transition: background-color 0.3s ease;
+}
+
+.horizontal-stack .group-title {
+  color: inherit;
+}
+
+.horizontal-stack:hover {
+  background-color: var(--horizontal-hover-color, #3a3a3a);
 }
 
 .horizontal-stack .link-group-content {
@@ -966,6 +984,69 @@ div.toggle-container {
   left: 100%;
 }
 
+/* Sidebar edit buttons */
+.sidebar-edit-buttons {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  z-index: 1001;
+}
+
+.edit-sidebar-btn,
+.delete-sidebar-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 10px;
+  min-width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.delete-sidebar-btn {
+  background-color: #f44336;
+}
+
+.edit-sidebar-btn:hover {
+  background-color: #45a049;
+}
+
+.delete-sidebar-btn:hover {
+  background-color: #da190b;
+}
+
+/* Custom sidebar button styling with higher specificity */
+.top-center-controls .custom-sidebar-button {
+  background-color: var(--custom-bg-color, #ffffff) !important;
+  color: var(--custom-text-color, #000000) !important;
+  transition: background-color 0.2s ease, transform 0.2s ease !important;
+}
+
+.top-center-controls .custom-sidebar-button:hover {
+  background-color: var(--custom-hover-color, #e0e0e0) !important;
+  color: var(--custom-text-color, #000000) !important;
+  transform: scale(1.05) !important;
+}
+
+/* Sidebar add button styling */
+.sidebar-add-button {
+  background-color: #4CAF50 !important;
+  color: white !important;
+}
+
+.sidebar-add-button:hover {
+  background-color: #45a049 !important;
+  color: white !important;
+}
+
 @media (max-width: 600px) {
   .popup-content {
     max-width: 90vw;
@@ -975,21 +1056,8 @@ div.toggle-container {
 </head>
 
 <body>
-  <div class="top-center-controls">
-    <div class="notification-button-container">
-      <a href="#" id="tv-button" class="add-button"><i class="nf nf-md-television_classic"></i></a>
-      <span id="tv-notification-badge" class="notification-badge" style="display: none;">0</span>
-    </div>
-    <div class="notification-button-container">
-      <a href="#" id="movie-button" class="add-button"><i class="nf nf-md-movie_roll"></i></a>
-      <span id="movie-notification-badge" class="notification-badge" style="display: none;">0</span>
-    </div>
-    <a href="http://192.168.0.101:5003/" class="add-button" target="_blank"><i class="nf nf-fa-hard_drive"></i></a>
-    <a href="http://192.168.0.101:5015/" class="add-button" target="_blank"><i class="nf nf-md-book_education"></i></a>
-    <a href="http://192.168.0.101:4999/" class="add-button" target="_blank"><i class="nf nf-fa-rocket"></i></a>
-    <a href="http://192.168.0.101:4998/" class="add-button" target="_blank"><i class="nf nf-oct-apps"></i></a>
-    <a href="http://192.168.0.101:5555/" class="add-button" target="_blank"><i class="nf nf-dev-terminal"></i></a>
-    <!-- <a href="http://192.168.0.101:5003/" class="add-button" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/2250/2250195.png" height="25px" width="25px" alt=""></a> -->
+  <div class="top-center-controls" id="sidebar-buttons-container">
+    <!-- Sidebar buttons will be dynamically loaded here -->
   </div>
 
   <div class="flex-container2">
@@ -1007,16 +1075,18 @@ div.toggle-container {
       .dragging {
         opacity: 0.5;
       }
-      
+
       .reorder-buttons {
         display: none;
         flex-direction: column;
         gap: 2px;
         margin-left: 5px;
       }
+
       .edit-mode .reorder-buttons {
         display: none;
       }
+
       .reorder-btn {
         background: #333;
         color: white;
@@ -1027,20 +1097,22 @@ div.toggle-container {
         font-size: 12px;
         border-radius: 3px;
       }
+
       .reorder-btn:hover {
         background: #555;
       }
-      
+
       /* Group reorder buttons - only visible in edit mode */
       .group-reorder-buttons {
         display: none;
         gap: 5px;
         margin-left: 10px;
       }
+
       .edit-mode .group-reorder-buttons {
         display: flex;
       }
-      
+
       .link-item {
         cursor: move;
       }
@@ -1050,7 +1122,7 @@ div.toggle-container {
         position: relative;
         display: inline-block;
       }
-      
+
       .notification-badge {
         position: absolute;
         top: -8px;
@@ -1063,172 +1135,297 @@ div.toggle-container {
         font-weight: bold;
         min-width: 18px;
         text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         z-index: 1000;
       }
-      
+
       .notification-badge.zero {
         display: none !important;
       }
-
     </style>
 
-  <div id="links-container" style="display: flex; width: 100%; flex-wrap: wrap; justify-content: left; flex-direction: row;">
-  </div>
+    <div id="links-container"
+      style="display: flex; width: 100%; flex-wrap: wrap; justify-content: left; flex-direction: row;">
+    </div>
 
-<div id="edit-group-popup" class="popup-container hidden">
-    <div class="popup-content">
-      <span class="close-button">&times;</span>
-      <h3>Group Settings</h3>
-      <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-        <input type="hidden" id="edit-group-original-name">
-        <label for="edit-group-name">Group Name:</label>
-        <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required>
-        <label for="edit-group-display">Display Style:</label>
-        <select id="edit-group-display">
-          <option value="flex">Flex</option>
-          <option value="list-item">List Item</option>
-        </select>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <label for="edit-group-collapsible">
-            <input type="checkbox" id="edit-group-collapsible">
-            Enable Collapsible Toggle (shows at top when enabled)
-          </label>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <label for="edit-group-horizontal-stack">
-            <input type="checkbox" id="edit-group-horizontal-stack">
-            Stack Horizontally
-          </label>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <label for="edit-group-password-protect">
-            <input type="checkbox" id="edit-group-password-protect">
-            Require Password to Extend
-          </label>
-        </div>
-        <div id="collapsible-rename-section" style="display: none;">
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top Group Display Settings</h4>
-          
-          <label for="edit-group-top-name">Display Name (optional):</label>
-          <input type="text" id="edit-group-top-name" placeholder="Custom name for top display (leave empty to use group name)">
-          
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top Group Color Settings</h4>
-          
+    <div id="edit-group-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Group Settings</h3>
+        <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+          <input type="hidden" id="edit-group-original-name">
+          <label for="edit-group-name">Group Name:</label>
+          <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required>
+          <label for="edit-group-display">Display Style:</label>
+          <select id="edit-group-display">
+            <option value="flex">Flex</option>
+            <option value="list-item">List Item</option>
+          </select>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="edit-group-collapsible">
+              <input type="checkbox" id="edit-group-collapsible">
+              Enable Collapsible Toggle (shows at top when enabled)
+            </label>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="edit-group-horizontal-stack">
+              <input type="checkbox" id="edit-group-horizontal-stack">
+              Stack Horizontally
+            </label>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="edit-group-password-protect">
+              <input type="checkbox" id="edit-group-password-protect">
+              Require Password to Extend
+            </label>
+          </div>
+          <div id="collapsible-rename-section" style="display: none;">
+            <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top
+              Group Display Settings</h4>
+
+            <label for="edit-group-top-name">Display Name (optional):</label>
+            <input type="text" id="edit-group-top-name"
+              placeholder="Custom name for top display (leave empty to use group name)">
+
+            <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top
+              Group Color Settings</h4>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-top-bg-color" placeholder="Background Color (e.g., #2d2d2d or blue)">
+              <input type="text" id="edit-group-top-text-color" placeholder="Text Color (e.g., #ffffff or white)">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-top-border-color" placeholder="Border Color (e.g., #444444 or gray)">
+              <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color (e.g., #3a3a3a or darkgray)">
+            </div>
+          </div>
+
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Popup
+            Content Styling</h4>
+
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-group-top-bg-color" placeholder="Background Color (e.g., #2d2d2d or blue)">
-            <input type="text" id="edit-group-top-text-color" placeholder="Text Color (e.g., #ffffff or white)">
+            <input type="text" id="edit-group-popup-bg-color" placeholder="Popup Background Color (e.g., #31343a)">
+            <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text Color (e.g., #ffffff)">
+          </div>
+
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border Color (e.g., #555555)">
+            <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Border Radius (e.g., 8px)">
+          </div>
+
+          <div id="horizontal-stack-styling-section" style="display: none;">
+            <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">
+              Horizontal Stack Group Colors</h4>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-horizontal-bg-color"
+                placeholder="Horizontal Stack Background Color (e.g., #2d2d2d)">
+              <input type="text" id="edit-group-horizontal-text-color"
+                placeholder="Horizontal Stack Text Color (e.g., #ffffff)">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-horizontal-border-color"
+                placeholder="Horizontal Stack Border Color (e.g., #0056b3)">
+              <input type="text" id="edit-group-horizontal-hover-color"
+                placeholder="Horizontal Stack Hover Color (e.g., #3a3a3a)">
+            </div>
+          </div>
+
+          <button type="submit">Save Group Settings</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="add-link-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Add New Link</h3>
+        <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+          <input type="text" id="link-name" placeholder="Name" required>
+          <input type="text" id="link-group" placeholder="Group (optional)">
+          <input type="url" id="link-url" placeholder="URL">
+          <label for="link-default-type">Default Type:</label>
+          <select id="link-default-type">
+            <option value="nerd-font">nerd-font</option>
+            <option value="img">img</option>
+            <option value="text">text</option>
+          </select>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-text" placeholder="Text (if no icon/image)">
+            <input type="url" id="link-img-src" placeholder="Image URL (if no icon)">
+            <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-color" placeholder="Color (e.g., #f46613 or red)">
+            <input type="text" id="link-background-color" placeholder="Background Color">
+          </div>
+          <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-li-bg-color" placeholder="List Item BG Color">
+            <input type="text" id="link-li-hover-color" placeholder="List Item Hover Color">
+          </div>
+          <input type="text" id="link-border-radius" placeholder="Border Radius">
+          <input type="text" id="link-title" placeholder="Title (for tooltip)">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="link-hidden">
+              <input type="checkbox" id="link-hidden">
+              Hide this item
+            </label>
+          </div>
+          <button type="submit">Add Link</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="edit-link-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Edit Link</h3>
+        <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
+          <input type="hidden" id="edit-link-index">
+          <input type="text" id="edit-link-name" placeholder="Name" required>
+          <input type="text" id="edit-link-group" placeholder="Group (optional)">
+          <input type="url" id="edit-link-url" placeholder="URL">
+          <label for="edit-link-default-type">Default Type:</label>
+          <select id="edit-link-default-type">
+            <option value="nerd-font">nerd-font</option>
+            <option value="img">img</option>
+            <option value="text">text</option>
+          </select>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-text" placeholder="Text (if no icon/image)">
+            <input type="url" id="edit-link-img-src" placeholder="Image URL (if no icon)">
+            <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
+            <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-color" placeholder="Color (e.g., #f46613 or red)">
+            <input type="text" id="edit-link-background-color" placeholder="Background Color">
+          </div>
+          <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-li-bg-color" placeholder="List Item BG Color">
+            <input type="text" id="edit-link-li-hover-color" placeholder="List Item Hover Color">
+          </div>
+          <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
+          <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="edit-link-hidden">
+              <input type="checkbox" id="edit-link-hidden">
+              Hide this item
+            </label>
+          </div>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="horizontal-stack-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Group Items</h3>
+        <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+      </div>
+    </div>
+
+    <div id="add-sidebar-button-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Add Sidebar Button</h3>
+        <form id="add-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
+          <input type="text" id="sidebar-button-name" placeholder="Button Name" required>
+          <input type="url" id="sidebar-button-url" placeholder="URL" required>
+          
+          <label for="sidebar-button-display-type">Display Type:</label>
+          <select id="sidebar-button-display-type">
+            <option value="icon">Icon (Nerd Font)</option>
+            <option value="image">Image</option>
+          </select>
+          
+          <div id="icon-settings">
+            <input type="text" id="sidebar-button-icon" placeholder="Icon Class (e.g., nf nf-fa-home)">
           </div>
           
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-group-top-border-color" placeholder="Border Color (e.g., #444444 or gray)">
-            <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color (e.g., #3a3a3a or darkgray)">
+          <div id="image-settings" style="display: none;">
+            <input type="url" id="sidebar-button-img-src" placeholder="Image URL">
           </div>
-        </div>
-        <button type="submit">Save Group Settings</button>
-      </form>
+          
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors</h4>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
+            <input type="text" id="sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
+          </div>
+          <input type="text" id="sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+          
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="sidebar-button-notification">
+              <input type="checkbox" id="sidebar-button-notification">
+              Has Notification Badge
+            </label>
+          </div>
+          <div id="notification-settings" style="display: none;">
+            <input type="text" id="sidebar-button-notification-api" placeholder="Notification API endpoint">
+            <input type="text" id="sidebar-button-mark-seen-api" placeholder="Mark as seen API endpoint">
+          </div>
+          <button type="submit">Add Button</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <div id="add-link-popup" class="popup-container hidden">
-    <div class="popup-content">
-      <span class="close-button">&times;</span>
-      <h3>Add New Link</h3>
-      <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-        <input type="text" id="link-name" placeholder="Name" required>
-        <input type="text" id="link-group" placeholder="Group (optional)">
-        <input type="url" id="link-url" placeholder="URL">
-        <label for="link-default-type">Default Type:</label>
-        <select id="link-default-type">
-          <option value="nerd-font">nerd-font</option>
-          <option value="img">img</option>
-          <option value="text">text</option>
-        </select>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="link-text" placeholder="Text (if no icon/image)">
-          <input type="url" id="link-img-src" placeholder="Image URL (if no icon)">
-          <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="link-color" placeholder="Color (e.g., #f46613 or red)">
-          <input type="text" id="link-background-color" placeholder="Background Color">
-        </div>
-        <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="link-li-bg-color" placeholder="List Item BG Color">
-          <input type="text" id="link-li-hover-color" placeholder="List Item Hover Color">
-        </div>
-        <input type="text" id="link-border-radius" placeholder="Border Radius">
-        <input type="text" id="link-title" placeholder="Title (for tooltip)">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <label for="link-hidden">
-            <input type="checkbox" id="link-hidden">
-            Hide this item
-          </label>
-        </div>
-        <button type="submit">Add Link</button>
-      </form>
+    <div id="edit-sidebar-button-popup" class="popup-container hidden">
+      <div class="popup-content">
+        <span class="close-button">&times;</span>
+        <h3>Edit Sidebar Button</h3>
+        <form id="edit-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
+          <input type="hidden" id="edit-sidebar-button-index">
+          <input type="text" id="edit-sidebar-button-name" placeholder="Button Name" required>
+          <input type="url" id="edit-sidebar-button-url" placeholder="URL" required>
+          
+          <label for="edit-sidebar-button-display-type">Display Type:</label>
+          <select id="edit-sidebar-button-display-type">
+            <option value="icon">Icon (Nerd Font)</option>
+            <option value="image">Image</option>
+          </select>
+          
+          <div id="edit-icon-settings">
+            <input type="text" id="edit-sidebar-button-icon" placeholder="Icon Class (e.g., nf nf-fa-home)">
+          </div>
+          
+          <div id="edit-image-settings" style="display: none;">
+            <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL">
+          </div>
+          
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors</h4>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
+            <input type="text" id="edit-sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
+          </div>
+          <input type="text" id="edit-sidebar-button-hover-color" placeholder="Hover Color (e.g., #e0e0e0)">
+          
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label for="edit-sidebar-button-notification">
+              <input type="checkbox" id="edit-sidebar-button-notification">
+              Has Notification Badge
+            </label>
+          </div>
+          <div id="edit-notification-settings" style="display: none;">
+            <input type="text" id="edit-sidebar-button-notification-api" placeholder="Notification API endpoint">
+            <input type="text" id="edit-sidebar-button-mark-seen-api" placeholder="Mark as seen API endpoint">
+          </div>
+          <button type="submit">Save Changes</button>
+        </form>
+      </div>
     </div>
-  </div>
-
-  <div id="edit-link-popup" class="popup-container hidden">
-    <div class="popup-content">
-      <span class="close-button">&times;</span>
-      <h3>Edit Link</h3>
-      <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-        <input type="hidden" id="edit-link-index">
-        <input type="text" id="edit-link-name" placeholder="Name" required>
-        <input type="text" id="edit-link-group" placeholder="Group (optional)">
-        <input type="url" id="edit-link-url" placeholder="URL">
-        <label for="edit-link-default-type">Default Type:</label>
-        <select id="edit-link-default-type">
-          <option value="nerd-font">nerd-font</option>
-          <option value="img">img</option>
-          <option value="text">text</option>
-        </select>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="edit-link-text" placeholder="Text (if no icon/image)">
-          <input type="url" id="edit-link-img-src" placeholder="Image URL (if no icon)">
-          <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
-          <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
-        </div>
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="edit-link-color" placeholder="Color (e.g., #f46613 or red)">
-          <input type="text" id="edit-link-background-color" placeholder="Background Color">
-        </div>
-        <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
-        <div style="display: flex; gap: 10px;">
-          <input type="text" id="edit-link-li-bg-color" placeholder="List Item BG Color">
-          <input type="text" id="edit-link-li-hover-color" placeholder="List Item Hover Color">
-        </div>
-        <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
-        <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <label for="edit-link-hidden">
-            <input type="checkbox" id="edit-link-hidden">
-            Hide this item
-          </label>
-        </div>
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="horizontal-stack-popup" class="popup-container hidden">
-    <div class="popup-content">
-      <span class="close-button">&times;</span>
-      <h3>Group Items</h3>
-      <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
-    </div>
-  </div>
 
 
 
 
-  <script>document.addEventListener('DOMContentLoaded', function () {
+    <script>document.addEventListener('DOMContentLoaded', function () {
   const linksContainer = document.getElementById('links-container');
   const addLinkForm = document.getElementById('add-link-form');
   let links = []; // Declare links here so it's accessible globally
@@ -1537,6 +1734,7 @@ div.toggle-container {
       document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
       const addLinkPopup = document.getElementById('add-link-popup');
       addLinkPopup.classList.remove('hidden'); // Remove hidden class
+      applyPopupStyling(groupName);
     });
     addLinkItem.appendChild(addLinkSpan);
     content.appendChild(addLinkItem);
@@ -1772,6 +1970,21 @@ div.toggle-container {
     const firstLinkInGroup = linksInGroup[0];
     if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
       groupDiv.classList.add('horizontal-stack');
+      
+      // Apply custom horizontal stack styling
+      const linkData = firstLinkInGroup.link;
+      if (linkData.horizontal_bg_color) {
+        groupDiv.style.setProperty('--horizontal-bg-color', linkData.horizontal_bg_color);
+      }
+      if (linkData.horizontal_text_color) {
+        groupDiv.style.setProperty('--horizontal-text-color', linkData.horizontal_text_color);
+      }
+      if (linkData.horizontal_border_color) {
+        groupDiv.style.setProperty('--horizontal-border-color', linkData.horizontal_border_color);
+      }
+      if (linkData.horizontal_hover_color) {
+        groupDiv.style.setProperty('--horizontal-hover-color', linkData.horizontal_hover_color);
+      }
     }
 
     const groupHeaderContainer = document.createElement('div');
@@ -1895,10 +2108,12 @@ div.toggle-container {
           document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
           const addLinkPopup = document.getElementById('add-link-popup');
           addLinkPopup.classList.remove('hidden'); // Remove hidden class
+          applyPopupStyling(groupName);
         });
         addLinkItem.appendChild(addLinkSpan);
         popupContent.appendChild(addLinkItem);
         popup.classList.remove('hidden');
+        applyPopupStyling(groupName);
       };
       groupDiv.appendChild(icon);
     } else {
@@ -1935,6 +2150,7 @@ div.toggle-container {
         document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
         const addLinkPopup = document.getElementById('add-link-popup');
         addLinkPopup.classList.remove('hidden'); // Remove hidden class
+        applyPopupStyling(groupName);
       });
       addLinkItem.appendChild(addLinkSpan);
       groupList.appendChild(addLinkItem);
@@ -1958,6 +2174,14 @@ div.toggle-container {
     const editGroupTopTextColorInput = document.getElementById('edit-group-top-text-color');
     const editGroupTopBorderColorInput = document.getElementById('edit-group-top-border-color');
     const editGroupTopHoverColorInput = document.getElementById('edit-group-top-hover-color');
+    const editGroupPopupBgColorInput = document.getElementById('edit-group-popup-bg-color');
+    const editGroupPopupTextColorInput = document.getElementById('edit-group-popup-text-color');
+    const editGroupPopupBorderColorInput = document.getElementById('edit-group-popup-border-color');
+    const editGroupPopupBorderRadiusInput = document.getElementById('edit-group-popup-border-radius');
+    const editGroupHorizontalBgColorInput = document.getElementById('edit-group-horizontal-bg-color');
+    const editGroupHorizontalTextColorInput = document.getElementById('edit-group-horizontal-text-color');
+    const editGroupHorizontalBorderColorInput = document.getElementById('edit-group-horizontal-border-color');
+    const editGroupHorizontalHoverColorInput = document.getElementById('edit-group-horizontal-hover-color');
     const collapsibleRenameSection = document.getElementById('collapsible-rename-section');
 
     editGroupNameInput.value = currentGroupName === 'Ungrouped' ? '' : currentGroupName;
@@ -1975,6 +2199,14 @@ div.toggle-container {
       editGroupTopTextColorInput.value = linksInGroup[0].top_text_color || '#ffffff';
       editGroupTopBorderColorInput.value = linksInGroup[0].top_border_color || '#444444';
       editGroupTopHoverColorInput.value = linksInGroup[0].top_hover_color || '#3a3a3a';
+      editGroupPopupBgColorInput.value = linksInGroup[0].popup_bg_color || '#31343a';
+      editGroupPopupTextColorInput.value = linksInGroup[0].popup_text_color || '#ffffff';
+      editGroupPopupBorderColorInput.value = linksInGroup[0].popup_border_color || 'transparent';
+      editGroupPopupBorderRadiusInput.value = linksInGroup[0].popup_border_radius || '8px';
+      editGroupHorizontalBgColorInput.value = linksInGroup[0].horizontal_bg_color || '#2d2d2d';
+      editGroupHorizontalTextColorInput.value = linksInGroup[0].horizontal_text_color || '#ffffff';
+      editGroupHorizontalBorderColorInput.value = linksInGroup[0].horizontal_border_color || '#0056b3';
+      editGroupHorizontalHoverColorInput.value = linksInGroup[0].horizontal_hover_color || '#3a3a3a';
     } else {
       editGroupDisplaySelect.value = 'flex'; // Default if no links in group
       editGroupCollapsibleCheckbox.checked = false;
@@ -1985,6 +2217,14 @@ div.toggle-container {
       editGroupTopTextColorInput.value = '#ffffff';
       editGroupTopBorderColorInput.value = '#444444';
       editGroupTopHoverColorInput.value = '#3a3a3a';
+      editGroupPopupBgColorInput.value = '#31343a';
+      editGroupPopupTextColorInput.value = '#ffffff';
+      editGroupPopupBorderColorInput.value = 'transparent';
+      editGroupPopupBorderRadiusInput.value = '8px';
+      editGroupHorizontalBgColorInput.value = '#2d2d2d';
+      editGroupHorizontalTextColorInput.value = '#ffffff';
+      editGroupHorizontalBorderColorInput.value = '#0056b3';
+      editGroupHorizontalHoverColorInput.value = '#3a3a3a';
     }
 
     // Show/hide the rename section based on collapsible checkbox
@@ -1996,13 +2236,32 @@ div.toggle-container {
       }
     }
 
+    // Show/hide styling sections based on group type
+    function toggleStylingSections() {
+      const horizontalStackStylingSection = document.getElementById('horizontal-stack-styling-section');
+      
+      // Show horizontal stack styling for horizontal stack groups, but not for collapsible groups
+      if (editGroupHorizontalStackCheckbox.checked && !editGroupCollapsibleCheckbox.checked) {
+        horizontalStackStylingSection.style.display = 'block';
+      } else {
+        horizontalStackStylingSection.style.display = 'none';
+      }
+    }
+
     // Initial toggle
     toggleRenameSection();
+    toggleStylingSections();
 
     // Add event listener for checkbox changes
-    editGroupCollapsibleCheckbox.addEventListener('change', toggleRenameSection);
+    editGroupCollapsibleCheckbox.addEventListener('change', () => {
+      toggleRenameSection();
+      toggleStylingSections();
+    });
+    
+    editGroupHorizontalStackCheckbox.addEventListener('change', toggleStylingSections);
 
     editGroupPopup.classList.remove('hidden');
+    applyPopupStyling(currentGroupName);
   }
 
   // Drag and Drop functionality for collapsible groups
@@ -2098,7 +2357,7 @@ div.toggle-container {
   }
 
   // Function to update group name for all links in that group
-  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor) {
+  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor) {
     try {
       const response = await fetch('/api/links');
       const links = await response.json();
@@ -2129,6 +2388,18 @@ div.toggle-container {
           updatedLink.top_text_color = topTextColor || '#ffffff';
           updatedLink.top_border_color = topBorderColor || '#444444';
           updatedLink.top_hover_color = topHoverColor || '#3a3a3a';
+
+          // Handle popup styling options
+          updatedLink.popup_bg_color = popupBgColor || '#31343a';
+          updatedLink.popup_text_color = popupTextColor || '#ffffff';
+          updatedLink.popup_border_color = popupBorderColor || 'transparent';
+          updatedLink.popup_border_radius = popupBorderRadius || '8px';
+
+          // Handle horizontal stack styling options
+          updatedLink.horizontal_bg_color = horizontalBgColor || '#2d2d2d';
+          updatedLink.horizontal_text_color = horizontalTextColor || '#ffffff';
+          updatedLink.horizontal_border_color = horizontalBorderColor || '#0056b3';
+          updatedLink.horizontal_hover_color = horizontalHoverColor || '#3a3a3a';
 
           return updatedLink;
         }
@@ -2256,6 +2527,7 @@ div.toggle-container {
     document.getElementById('edit-link-li-hover-color').value = link.li_hover_color || '';
     document.getElementById('edit-link-hidden').checked = link.hidden || false;
     editLinkPopup.classList.remove('hidden');
+    applyPopupStyling(link.group || 'Ungrouped');
   }
 
   if (editLinkForm) {
@@ -2366,9 +2638,17 @@ div.toggle-container {
         const topTextColor = document.getElementById('edit-group-top-text-color').value;
         const topBorderColor = document.getElementById('edit-group-top-border-color').value;
         const topHoverColor = document.getElementById('edit-group-top-hover-color').value;
+        const popupBgColor = document.getElementById('edit-group-popup-bg-color').value;
+        const popupTextColor = document.getElementById('edit-group-popup-text-color').value;
+        const popupBorderColor = document.getElementById('edit-group-popup-border-color').value;
+        const popupBorderRadius = document.getElementById('edit-group-popup-border-radius').value;
+        const horizontalBgColor = document.getElementById('edit-group-horizontal-bg-color').value;
+        const horizontalTextColor = document.getElementById('edit-group-horizontal-text-color').value;
+        const horizontalBorderColor = document.getElementById('edit-group-horizontal-border-color').value;
+        const horizontalHoverColor = document.getElementById('edit-group-horizontal-hover-color').value;
 
         try {
-          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor);
+          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor);
           if (success) {
             document.getElementById('edit-group-popup').classList.add('hidden');
             fetchAndDisplayLinks();
@@ -2710,7 +2990,8 @@ updateDateTime();
 
 // Update the time every second
 setInterval(updateDateTime, 1000);</script>
-  <script>/* For Showing Markdown Table in HTML properly but lines also show */
+    <script src="../static/sidebar-handler.js"></script>
+    <script>/* For Showing Markdown Table in HTML properly but lines also show */
 function parseMarkdownTable(markdown) {
   const rows = markdown.trim().split('\n');
   const headers = rows[1].split('|').map(header => header.trim()).filter(Boolean);
@@ -2781,6 +3062,49 @@ spans.forEach(span => {
 }); */
 
 
+// Function to apply popup styling based on group settings
+function applyPopupStyling(groupName) {
+  // Fetch current links to get group styling
+  fetch('/api/links')
+    .then(response => response.json())
+    .then(links => {
+      const groupLinks = links.filter(link => (link.group || 'Ungrouped') === groupName);
+      if (groupLinks.length > 0) {
+        const groupSettings = groupLinks[0];
+        const popupContents = document.querySelectorAll('.popup-content');
+        
+        popupContents.forEach(popup => {
+          if (groupSettings.popup_bg_color) {
+            popup.style.setProperty('--popup-bg-color', groupSettings.popup_bg_color);
+          }
+          if (groupSettings.popup_text_color) {
+            popup.style.setProperty('--popup-text-color', groupSettings.popup_text_color);
+          }
+          if (groupSettings.popup_border_color) {
+            popup.style.setProperty('--popup-border-color', groupSettings.popup_border_color);
+          }
+          if (groupSettings.popup_border_radius) {
+            popup.style.setProperty('--popup-border-radius', groupSettings.popup_border_radius);
+          }
+        });
+      }
+    })
+    .catch(error => {
+      console.error('Error fetching group settings for popup styling:', error);
+    });
+}
+
+// Function to reset popup styling to defaults
+function resetPopupStyling() {
+  const popupContents = document.querySelectorAll('.popup-content');
+  popupContents.forEach(popup => {
+    popup.style.removeProperty('--popup-bg-color');
+    popup.style.removeProperty('--popup-text-color');
+    popup.style.removeProperty('--popup-border-color');
+    popup.style.removeProperty('--popup-border-radius');
+  });
+}
+
 // Popup functionality
 document.addEventListener('DOMContentLoaded', () => {
   const addLinkPopup = document.getElementById('add-link-popup');
@@ -2793,6 +3117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (addCloseButton) {
     addCloseButton.addEventListener('click', () => {
       addLinkPopup.classList.add('hidden');
+      resetPopupStyling();
     });
   }
 
@@ -2801,6 +3126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (editCloseButton) {
     editCloseButton.addEventListener('click', () => {
       editLinkPopup.classList.add('hidden');
+      resetPopupStyling();
     });
   }
 
@@ -2809,6 +3135,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (editGroupCloseButton) {
     editGroupCloseButton.addEventListener('click', () => {
       editGroupPopup.classList.add('hidden');
+      resetPopupStyling();
     });
   }
 
@@ -2817,6 +3144,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (horizontalStackCloseButton) {
     horizontalStackCloseButton.addEventListener('click', () => {
       horizontalStackPopup.classList.add('hidden');
+      resetPopupStyling();
     });
   }
 
@@ -2824,15 +3152,19 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('click', (event) => {
     if (event.target === addLinkPopup) {
       addLinkPopup.classList.add('hidden');
+      resetPopupStyling();
     }
     if (event.target === editLinkPopup) {
       editLinkPopup.classList.add('hidden');
+      resetPopupStyling();
     }
     if (event.target === editGroupPopup) {
       editGroupPopup.classList.add('hidden');
+      resetPopupStyling();
     }
     if (event.target === horizontalStackPopup) {
       horizontalStackPopup.classList.add('hidden');
+      resetPopupStyling();
     }
   });
 });
@@ -2844,6 +3176,19 @@ document.addEventListener('keydown', (event) => {
     toggle.checked = !toggle.checked;
     const changeEvent = new Event('change');
     toggle.dispatchEvent(changeEvent);
+  }
+});
+
+// Listen for edit mode changes to update sidebar
+document.addEventListener('DOMContentLoaded', function() {
+  const editModeToggle = document.getElementById('edit-mode-toggle');
+  if (editModeToggle) {
+    editModeToggle.addEventListener('change', function() {
+      // Update sidebar edit mode when main edit mode changes
+      if (typeof toggleSidebarEditMode === 'function') {
+        toggleSidebarEditMode(this.checked);
+      }
+    });
   }
 });
 
@@ -2921,136 +3266,7 @@ async function triggerScans() {
   }
 }</script>
 
-  <script>
-    // TV and Movie notification functionality
-    let tvNotificationCount = 0;
-    let movieNotificationCount = 0;
-    
-    // Function to update TV notification badge
-    function updateTVNotifications() {
-      fetch('/api/tv-notifications')
-        .then(response => response.json())
-        .then(data => {
-          tvNotificationCount = data.unseen_count || 0;
-          const badge = document.getElementById('tv-notification-badge');
-          
-          if (tvNotificationCount > 0) {
-            badge.textContent = tvNotificationCount;
-            badge.style.display = 'block';
-            badge.classList.remove('zero');
-          } else {
-            badge.style.display = 'none';
-            badge.classList.add('zero');
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching TV notifications:', error);
-        });
-    }
-    
-    // Function to update Movie notification badge
-    function updateMovieNotifications() {
-      fetch('/api/movie-notifications')
-        .then(response => response.json())
-        .then(data => {
-          movieNotificationCount = data.unseen_count || 0;
-          const badge = document.getElementById('movie-notification-badge');
-          
-          if (movieNotificationCount > 0) {
-            badge.textContent = movieNotificationCount;
-            badge.style.display = 'block';
-            badge.classList.remove('zero');
-          } else {
-            badge.style.display = 'none';
-            badge.classList.add('zero');
-          }
-        })
-        .catch(error => {
-          console.error('Error fetching movie notifications:', error);
-        });
-    }
-    
-    // Function to mark all TV episodes as seen
-    function markAllTVSeen() {
-      if (tvNotificationCount === 0) {
-        // If no notifications, just open the TV app
-        window.open('http://192.168.0.101:5011/', '_blank');
-        return;
-      }
-      
-      // Show confirmation dialog
-      if (confirm(`Mark all ${tvNotificationCount} unseen episodes as seen?`)) {
-        fetch('/api/mark-all-tv-seen', { method: 'POST' })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              console.log(`Marked ${data.updated_count} episodes as seen`);
-              updateTVNotifications(); // Refresh the count
-              // Open TV app after marking as seen
-              window.open('http://192.168.0.101:5011/', '_blank');
-            } else {
-              console.error('Failed to mark episodes as seen:', data.error);
-              alert('Failed to mark episodes as seen');
-            }
-          })
-          .catch(error => {
-            console.error('Error marking episodes as seen:', error);
-            alert('Error marking episodes as seen');
-          });
-      }
-    }
-    
-    // Function to mark all movies as seen
-    function markAllMoviesSeen() {
-      if (movieNotificationCount === 0) {
-        // If no notifications, just open the movie app
-        window.open('http://192.168.0.101:5013/', '_blank');
-        return;
-      }
-      
-      // Show confirmation dialog
-      if (confirm(`Mark all ${movieNotificationCount} unseen movies as seen?`)) {
-        fetch('/api/mark-all-movies-seen', { method: 'POST' })
-          .then(response => response.json())
-          .then(data => {
-            if (data.success) {
-              console.log(`Marked ${data.updated_count} movies as seen`);
-              updateMovieNotifications(); // Refresh the count
-              // Open movie app after marking as seen
-              window.open('http://192.168.0.101:5013/', '_blank');
-            } else {
-              console.error('Failed to mark movies as seen:', data.error);
-              alert('Failed to mark movies as seen');
-            }
-          })
-          .catch(error => {
-            console.error('Error marking movies as seen:', error);
-            alert('Error marking movies as seen');
-          });
-      }
-    }
-    
-    // Add click handlers
-    document.getElementById('tv-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      markAllTVSeen();
-    });
-    
-    document.getElementById('movie-button').addEventListener('click', function(e) {
-      e.preventDefault();
-      markAllMoviesSeen();
-    });
-    
-    // Update notifications on page load
-    updateTVNotifications();
-    updateMovieNotifications();
-    
-    // Update notifications every 30 seconds
-    setInterval(() => {
-      updateTVNotifications();
-      updateMovieNotifications();
-    }, 30000);
-  </script>
+
 
   </div>
 
@@ -3599,10 +3815,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "VLR",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
     "name": "VLR.gg",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -3614,10 +3838,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "VLR",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://liquipedia.net/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png",
     "name": "liquipedia VLR",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -4685,10 +4917,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "VLR",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
     "img_src": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzUwIDM4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBmaWxsPSIjZmY0NjU1IiBkPSJNOTEuMzkgNjkuNzlhNC41OSA0LjU5IDAgMCAxLTEtMi44OFYxLjA4QTEuMDggMS4wOCAwIDAgMSA5Mi4zLjQxbDEwOS41MSAxMzYuODhhMS4wOSAxLjA5IDAgMCAxLS44NSAxLjc2SDE0OWE0LjU5IDQuNTkgMCAwIDEtMy42LTEuNzRaTTE4Ni42NSA5Mmg1MS45NWE0LjU4IDQuNTggMCAwIDAgMy42LTEuNzNsMTYuNDEtMjAuNTFhNC41OSA0LjU5IDAgMCAwIDEtMi44OFYxLjA4YTEuMDggMS4wOCAwIDAgMC0xLjkxLS42N2wtNzEuOSA4OS44N2ExLjA4IDEuMDggMCAwIDAgLjg1IDEuNzJabS02OS4xMiAxMTV2LTM1LjM4YTQuNTcgNC41NyAwIDAgMC0xLTIuODhsLTU5Ljg4LTc1QTQuNjMgNC42MyAwIDAgMCA1MyA5MkgxLjA4YTEuMDggMS4wOCAwIDAgMC0uODQgMS43Nmw3NSA5My43MWEyLjg2IDIuODYgMCAwIDEgMCAzLjU2bC03NSA5My43MmExLjA4IDEuMDggMCAwIDAgLjg0IDEuNzVINTNhNC42NSA0LjY1IDAgMCAwIDMuNjEtMS43M2w1OS44OC03NWE0LjU3IDQuNTcgMCAwIDAgMS4wNC0yLjc3Wm0xNTcuMjYtMTUuOTFhMi44NiAyLjg2IDAgMCAxIDAtMy41Nmw3NS05My43MWExLjA4IDEuMDggMCAwIDAtLjg0LTEuNzZIMjk3YTQuNjMgNC42MyAwIDAgMC0zLjYxIDEuNzRsLTU5Ljg4IDc0Ljk0YTQuNTcgNC41NyAwIDAgMC0xIDIuODh2MzUuMzVhNC41NSA0LjU1IDAgMCAwIDEgMi44OGw1OS44OCA3NWE0LjY1IDQuNjUgMCAwIDAgMy42MSAxLjczaDUxLjk1YTEuMDggMS4wOCAwIDAgMCAuODQtMS43NVptLTE2LjE4IDExNy42OGwtNTQtNjcuNTJhNC41OCA0LjU4IDAgMCAwLTMuNi0xLjczaC01MS44YTUgNSAwIDAgMC0zLjg5IDEuODZsLTUzLjkzIDY3LjM5YTQuNiA0LjYgMCAwIDAtMSAyLjg5djY1LjgyYTEuMDggMS4wOCAwIDAgMCAxLjkyLjY3TDE3My4xOCAyNzdhMi4zMSAyLjMxIDAgMCAxIDMuNjEgMGw4MC45MSAxMDEuMTVhMS4wOCAxLjA4IDAgMCAwIDEuOTItLjY3di02NS44MmE0LjYgNC42IDAgMCAwLTEuMDEtMi44OVoiLz4KPC9zdmc+",
     "name": "valorantesports",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
