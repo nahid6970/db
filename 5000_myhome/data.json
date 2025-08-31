@@ -1668,5 +1668,20 @@
     "img_src": "https://img.icons8.com/win10/512/whatsapp.png",
     "name": "hh",
     "url": ""
+  },
+  {
+    "name": "VentoyThemer",
+    "group": "Git-Projects",
+    "url": "https://github.com/ErrorGone-YT/VentoyThemer",
+    "img_src": "https://github.com/ErrorGone-YT/VentoyThemer/raw/master/VentoyThemer/Logo.ico",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Ventoy Themes",
+    "group": "Git-Projects",
+    "url": "https://www.gnome-look.org/browse?cat=109",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]

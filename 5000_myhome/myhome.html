@@ -9,25 +9,99 @@
   <style>/* Import the JetBrains Mono font */
 @import url("https://www.nerdfonts.com/assets/css/webfont.css");
 
-/* Left side middle controls styling */
-.top-center-controls {
+/* Sidebar container */
+.sidebar-container {
   position: fixed;
   top: 50%;
-  left: 10px;
+  left: 0;
   transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  width: auto;
+}
+
+/* Sidebar toggle button - transparent with white arrow */
+.sidebar-toggle {
+  position: fixed;
+  left: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 1001;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-toggle:hover {
+  transform: translateY(-50%) scale(1.1);
+}
+
+.sidebar-toggle i {
+  font-size: 16px;
+  color: #ffffff;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+}
+
+/* Sidebar content - transparent background */
+.top-center-controls {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translate(-100%, -50%);
+  background: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 10px;
-  padding: 10px;
+  gap: 8px;
+  padding: 15px 8px;
+  transition: transform 0.3s ease;
+  width: auto;
   z-index: 1000;
+}
+
+/* Sidebar expanded state */
+.sidebar-container.expanded .top-center-controls {
+  transform: translate(0, -50%);
+}
+
+/* Move toggle button to right side when expanded - position set by JavaScript */
+.sidebar-container.expanded .sidebar-toggle {
+  /* Position will be set dynamically by JavaScript */
+}
+
+/* Icon changes are handled by JavaScript, no rotation needed */
+
+/* Adjust button styling for sidebar - keep original styling */
+.top-center-controls .add-button {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-center-controls .add-button:hover {
+  background-color: #e0e0e0 !important;
+}
+
+/* Make sure the toggle button is always visible */
+.sidebar-toggle {
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .add-button {
   color: #000000 !important;
   background-color: #ffffff !important;
-  padding: 12px 14px;
+  padding: 8px 10px;
   border: none;
   border-radius: 4px;
   text-decoration: none;
@@ -37,8 +111,8 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  min-width: 50px;
-  min-height: 50px;
+  min-width: 36px;
+  min-height: 36px;
 }
 
 .add-button:hover {
@@ -652,12 +726,12 @@ div.group-header-container {
 
 html body {
   margin-top: 20px;
-  margin-left: 80px; /* Add left margin to account for left-side buttons */
+  margin-left: 20px; /* Reduced margin since sidebar is now collapsible */
 }
 
 div.toggle-container {
   margin-top: -16px;
-  margin-left: -55px; /* Adjust toggle position to account for body margin */
+  margin-left: -15px; /* Adjust toggle position for new sidebar */
 }
 
 /* Collapsible groups styling */
@@ -1024,27 +1098,34 @@ div.toggle-container {
 }
 
 /* Custom sidebar button styling with higher specificity */
-.top-center-controls .custom-sidebar-button {
+.top-center-controls .notification-button-container .custom-sidebar-button.add-button {
   background-color: var(--custom-bg-color, #ffffff) !important;
   color: var(--custom-text-color, #000000) !important;
   transition: background-color 0.2s ease, transform 0.2s ease !important;
 }
 
-.top-center-controls .custom-sidebar-button:hover {
+.top-center-controls .notification-button-container .custom-sidebar-button.add-button:hover {
   background-color: var(--custom-hover-color, #e0e0e0) !important;
   color: var(--custom-text-color, #000000) !important;
   transform: scale(1.05) !important;
 }
 
-/* Sidebar add button styling */
-.sidebar-add-button {
-  background-color: #4CAF50 !important;
-  color: white !important;
+/* Force override for custom buttons */
+a.add-button.custom-sidebar-button[style*="background-color"] {
+  /* This will be overridden by inline styles */
 }
 
-.sidebar-add-button:hover {
-  background-color: #45a049 !important;
-  color: white !important;
+/* Sidebar add button styling - black background with higher specificity */
+.top-center-controls .add-button.sidebar-add-button {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+  border: 1px solid #333333 !important;
+}
+
+.top-center-controls .add-button.sidebar-add-button:hover {
+  background-color: #333333 !important;
+  color: #ffffff !important;
+  border: 1px solid #555555 !important;
 }
 
 @media (max-width: 600px) {
@@ -1056,8 +1137,13 @@ div.toggle-container {
 </head>
 
 <body>
-  <div class="top-center-controls" id="sidebar-buttons-container">
-    <!-- Sidebar buttons will be dynamically loaded here -->
+  <div class="sidebar-container" id="sidebar-container">
+    <div class="top-center-controls" id="sidebar-buttons-container">
+      <!-- Sidebar buttons will be dynamically loaded here -->
+    </div>
+    <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle Sidebar">
+      <i class="nf nf-fa-chevron_right"></i>
+    </button>
   </div>
 
   <div class="flex-container2">
@@ -4942,6 +5028,21 @@ async function triggerScans() {
     "img_src": "https://img.icons8.com/win10/512/whatsapp.png",
     "name": "hh",
     "url": ""
+  },
+  {
+    "name": "VentoyThemer",
+    "group": "Git-Projects",
+    "url": "https://github.com/ErrorGone-YT/VentoyThemer",
+    "img_src": "https://github.com/ErrorGone-YT/VentoyThemer/raw/master/VentoyThemer/Logo.ico",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Ventoy Themes",
+    "group": "Git-Projects",
+    "url": "https://www.gnome-look.org/browse?cat=109",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ];
     
