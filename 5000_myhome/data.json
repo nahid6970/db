@@ -1024,6 +1024,8 @@
     "display_style": "flex",
     "group": "info / News",
     "horizontal_stack": false,
+    "li_bg_color": "white",
+    "li_hover_color": "green",
     "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
     "top_bg_color": "#fff",
     "top_border_color": "#fff",
@@ -1634,5 +1636,13 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://valorantesports.com/en-US/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "chrome_ext",
+    "horizontal_stack": false,
+    "img_src": "https://img.icons8.com/win10/512/whatsapp.png",
+    "name": "hh",
+    "url": ""
   }
 ]

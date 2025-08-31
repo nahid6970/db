@@ -1137,7 +1137,7 @@ div.toggle-container {
       <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
         <input type="text" id="link-name" placeholder="Name" required>
         <input type="text" id="link-group" placeholder="Group (optional)">
-        <input type="url" id="link-url" placeholder="URL" required>
+        <input type="url" id="link-url" placeholder="URL">
         <label for="link-default-type">Default Type:</label>
         <select id="link-default-type">
           <option value="nerd-font">nerd-font</option>
@@ -1179,7 +1179,7 @@ div.toggle-container {
         <input type="hidden" id="edit-link-index">
         <input type="text" id="edit-link-name" placeholder="Name" required>
         <input type="text" id="edit-link-group" placeholder="Group (optional)">
-        <input type="url" id="edit-link-url" placeholder="URL" required>
+        <input type="url" id="edit-link-url" placeholder="URL">
         <label for="edit-link-default-type">Default Type:</label>
         <select id="edit-link-default-type">
           <option value="nerd-font">nerd-font</option>
@@ -2155,10 +2155,11 @@ div.toggle-container {
     }
   }
 
-  // Handle form submission for adding new links
   if (addLinkForm) {
     addLinkForm.addEventListener('submit', async function (event) {
       event.preventDefault();
+
+      const groupName = document.getElementById('link-group').value || 'Ungrouped';
 
       const newLink = {
         name: document.getElementById('link-name').value,
@@ -2197,7 +2198,29 @@ div.toggle-container {
         if (response.ok) {
           alert('Link added successfully!');
           addLinkForm.reset(); // Clear form
-          fetchAndDisplayLinks(); // Refresh links
+          await fetchAndDisplayLinks(); // Refresh links
+
+          // Re-open the collapsible group if it was open
+          const groupElement = document.querySelector(`.collapsible-group[data-group-name="${groupName}"]`);
+          if (groupElement) {
+            const content = groupElement.querySelector('.collapsible-group-content');
+            const toggleBtn = groupElement.querySelector('.collapsible-toggle-btn');
+            if (content && toggleBtn) {
+              content.classList.add('expanded');
+              toggleBtn.textContent = '▲';
+              groupElement.classList.add('expanded');
+              moveToExpandedRow(groupElement);
+            }
+          }
+
+          // Re-open the horizontal stack popup if it was open
+          const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
+          if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
+            const icon = groupDiv.querySelector('.extend-icon');
+            if (icon) {
+              icon.click();
+            }
+          }
         } else {
           alert('Failed to add link.');
         }
@@ -2375,6 +2398,19 @@ div.toggle-container {
         if (response.ok) {
           alert('Link deleted successfully!');
           await fetchAndDisplayLinks();
+
+          // Re-open the collapsible group if it was open
+          const groupElement = document.querySelector(`.collapsible-group[data-group-name="${groupName}"]`);
+          if (groupElement) {
+            const content = groupElement.querySelector('.collapsible-group-content');
+            const toggleBtn = groupElement.querySelector('.collapsible-toggle-btn');
+            if (content && toggleBtn) {
+              content.classList.add('expanded');
+              toggleBtn.textContent = '▲';
+              groupElement.classList.add('expanded');
+              moveToExpandedRow(groupElement);
+            }
+          }
 
           const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
           if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
@@ -2611,6 +2647,19 @@ div.toggle-container {
       });
 
       await fetchAndDisplayLinks(); // Re-render the UI
+
+      // Re-open the collapsible group if it was open
+      const groupElement = document.querySelector(`.collapsible-group[data-group-name="${groupName}"]`);
+      if (groupElement) {
+        const content = groupElement.querySelector('.collapsible-group-content');
+        const toggleBtn = groupElement.querySelector('.collapsible-toggle-btn');
+        if (content && toggleBtn) {
+          content.classList.add('expanded');
+          toggleBtn.textContent = '▲';
+          groupElement.classList.add('expanded');
+          moveToExpandedRow(groupElement);
+        }
+      }
 
       // Re-open the popup if it was open
       const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
@@ -4033,6 +4082,8 @@ async function triggerScans() {
     "display_style": "flex",
     "group": "info / News",
     "horizontal_stack": false,
+    "li_bg_color": "white",
+    "li_hover_color": "green",
     "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
     "top_bg_color": "#fff",
     "top_border_color": "#fff",
@@ -4643,6 +4694,14 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://valorantesports.com/en-US/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "chrome_ext",
+    "horizontal_stack": false,
+    "img_src": "https://img.icons8.com/win10/512/whatsapp.png",
+    "name": "hh",
+    "url": ""
   }
 ];
     
