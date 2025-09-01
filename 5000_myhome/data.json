@@ -1896,5 +1896,13 @@
     "img_src": "https://smart.servier.com/wp-content/uploads/2019/08/cropped-Logosmart-favicon-180x180.png",
     "name": "free medical images",
     "url": "https://smart.servier.com/"
+  },
+  {
+    "name": "lumi",
+    "group": "Powerful Website",
+    "url": "https://lumi.new/",
+    "img_src": "https://lumi.new/favicon.ico",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
