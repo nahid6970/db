@@ -645,12 +645,13 @@ input:checked+.slider:before {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0px;
+  padding-right: 9px;
 }
 
 .group-title {
   flex-grow: 1;
   margin: 0;
-  padding-right: 10px;
+  padding-top: 11px;
 }
 
 /* Edit group button styling */
@@ -989,8 +990,15 @@ div.toggle-container {
   align-items: center;
 }
 
-.horizontal-stack .link-item:not(:first-child):not(.add-link-item) {
-  display: none;
+.horizontal-stack .group-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.horizontal-stack .group-title {
+  text-align: center;
 }
 
 .extend-icon {
@@ -2065,7 +2073,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     });
   }
 
-  function createRegularGroup(groupName, elements, linksInGroup) {
+    function createRegularGroup(groupName, elements, linksInGroup) {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'link-group';
     groupDiv.dataset.groupName = groupName;
@@ -2088,65 +2096,9 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       if (linkData.horizontal_hover_color) {
         groupDiv.style.setProperty('--horizontal-hover-color', linkData.horizontal_hover_color);
       }
-    }
 
-    const groupHeaderContainer = document.createElement('div');
-    groupHeaderContainer.className = 'group-header-container';
-
-    const groupTitle = document.createElement('h3');
-    groupTitle.textContent = groupName;
-    groupTitle.className = 'group-title';
-    groupHeaderContainer.appendChild(groupTitle);
-
-    // Add group reorder buttons
-    const groupReorderButtons = document.createElement('div');
-    groupReorderButtons.className = 'group-reorder-buttons';
-
-    const groupUpButton = document.createElement('button');
-    groupUpButton.textContent = ''; //↑
-    groupUpButton.className = 'reorder-btn';
-    groupUpButton.onclick = (e) => {
-      e.stopPropagation();
-      moveGroup(groupName, -1);
-    };
-    groupReorderButtons.appendChild(groupUpButton);
-
-    const groupDownButton = document.createElement('button');
-    groupDownButton.textContent = ''; //↓
-    groupDownButton.className = 'reorder-btn';
-    groupDownButton.onclick = (e) => {
-      e.stopPropagation();
-      moveGroup(groupName, 1);
-    };
-    groupReorderButtons.appendChild(groupDownButton);
-
-    groupHeaderContainer.appendChild(groupReorderButtons);
-
-    // Add edit group button (only visible in edit mode)
-    const editGroupButton = document.createElement('button');
-    editGroupButton.textContent = ''; //⚙️
-    editGroupButton.className = 'edit-group-button';
-    editGroupButton.onclick = () => openEditGroupPopup(groupName);
-    groupHeaderContainer.appendChild(editGroupButton);
-
-    groupDiv.appendChild(groupHeaderContainer);
-
-    if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
-      const icon = document.createElement('div');
-      icon.className = 'extend-icon';
-      icon.innerHTML = '<i class="nf nf-md-google_circles_extended"></i>'; // Or use an icon font
-      icon.draggable = false;
-
-      const isPasswordProtected = firstLinkInGroup.link.password_protect;
-
-      if (isPasswordProtected) {
-        const lockIcon = document.createElement('span');
-        lockIcon.className = 'lock-icon';
-        lockIcon.innerHTML = '<i class="nf nf-fa-lock"></i>';
-        groupTitle.appendChild(lockIcon);
-      }
-
-      icon.onclick = () => {
+      groupDiv.onclick = () => {
+        const isPasswordProtected = firstLinkInGroup.link.password_protect;
         if (isPasswordProtected) {
           const password = prompt("Please enter the password to extend the group:");
           if (password !== "1823") {
@@ -2218,8 +2170,59 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         popup.classList.remove('hidden');
         applyPopupStyling(groupName);
       };
-      groupDiv.appendChild(icon);
-    } else {
+    }
+
+    const groupHeaderContainer = document.createElement('div');
+    groupHeaderContainer.className = 'group-header-container';
+
+    const groupTitle = document.createElement('h3');
+    groupTitle.textContent = groupName;
+    groupTitle.className = 'group-title';
+    groupHeaderContainer.appendChild(groupTitle);
+
+    const isPasswordProtected = firstLinkInGroup.link.password_protect;
+
+    if (isPasswordProtected) {
+      const lockIcon = document.createElement('span');
+      lockIcon.className = 'lock-icon';
+      lockIcon.innerHTML = '<i class="nf nf-fa-lock"></i>';
+      groupTitle.appendChild(lockIcon);
+    }
+
+    // Add group reorder buttons
+    const groupReorderButtons = document.createElement('div');
+    groupReorderButtons.className = 'group-reorder-buttons';
+
+    const groupUpButton = document.createElement('button');
+    groupUpButton.textContent = ''; //↑
+    groupUpButton.className = 'reorder-btn';
+    groupUpButton.onclick = (e) => {
+      e.stopPropagation();
+      moveGroup(groupName, -1);
+    };
+    groupReorderButtons.appendChild(groupUpButton);
+
+    const groupDownButton = document.createElement('button');
+    groupDownButton.textContent = ''; //↓
+    groupDownButton.className = 'reorder-btn';
+    groupDownButton.onclick = (e) => {
+      e.stopPropagation();
+      moveGroup(groupName, 1);
+    };
+    groupReorderButtons.appendChild(groupDownButton);
+
+    groupHeaderContainer.appendChild(groupReorderButtons);
+
+    // Add edit group button (only visible in edit mode)
+    const editGroupButton = document.createElement('button');
+    editGroupButton.textContent = ''; //⚙️
+    editGroupButton.className = 'edit-group-button';
+    editGroupButton.onclick = () => openEditGroupPopup(groupName);
+    groupHeaderContainer.appendChild(editGroupButton);
+
+    groupDiv.appendChild(groupHeaderContainer);
+
+    if (firstLinkInGroup && !firstLinkInGroup.link.horizontal_stack) {
       const groupList = document.createElement('ul');
       groupList.className = 'link-group-content';
       // Set display style based on the first link in the group, or default to flex
@@ -2590,10 +2593,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           // Re-open the horizontal stack popup if it was open
           const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
           if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
-            const icon = groupDiv.querySelector('.extend-icon');
-            if (icon) {
-              icon.click();
-            }
+            groupDiv.click();
           }
         } else {
           alert('Failed to add link.');
@@ -2704,10 +2704,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             } else if (originalLink.horizontal_stack) {
               const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
               if (groupDiv) {
-                const icon = groupDiv.querySelector('.extend-icon');
-                if (icon) {
-                  icon.click();
-                }
+                groupDiv.click();
               }
             }
 
@@ -2797,10 +2794,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
           const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
           if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
-            const icon = groupDiv.querySelector('.extend-icon');
-            if (icon) {
-              icon.click();
-            }
+            groupDiv.click();
           }
         } else {
           alert('Failed to delete link.');
@@ -2882,14 +2876,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     return false;
   }
 
-  function handleDrop(e) {
+  async function handleDrop(e) {
     if (e.stopPropagation) {
       e.stopPropagation();
     }
 
     if (draggedElement !== this) {
       const targetIndex = parseInt(this.dataset.linkIndex);
-      reorderLink(draggedIndex, targetIndex);
+      await reorderLink(draggedIndex, targetIndex);
     }
     return false;
   }
@@ -3047,10 +3041,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       // Re-open the popup if it was open
       const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
       if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
-        const icon = groupDiv.querySelector('.extend-icon');
-        if (icon) {
-          icon.click();
-        }
+        groupDiv.click();
       }
 
     } catch (error) {
@@ -4562,7 +4553,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
@@ -4585,7 +4576,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://liquipedia.net/commons/extensions/TeamLiquidIntegration/resources/pagelogo/liquipedia_icon_menu.png",
@@ -5665,10 +5656,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "Sussy",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://yt3.googleusercontent.com/evMv5MOOF25UVDdurrXNUWasuUICQ6_jmi_0IbNC1FrZkLVi7gxF8fDLhArXoKn7cmDJRhFcnQ=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "valorant",
     "password_protect": true,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -5680,15 +5679,45 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "display_style": "flex",
     "group": "Sussy",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://yt3.googleusercontent.com/ag0uKiPA1AOG17bGmL4RVQCjCDdYfkd76YEOzi0LK-deirPMpUCLsGHg6NRk_j9VN5WuVchQwg=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "kzagamerTV",
     "password_protect": true,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@kzagamerTV/posts"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "name": "wutheringwavescafe",
+    "password_protect": true,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/wutheringwavescafe/?ref=share&mibextid=NSMWBT"
   },
   {
     "default_type": "nerd-font",
@@ -5728,18 +5757,10 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "VLR",
-    "horizontal_bg_color": "#ff5461",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
     "horizontal_stack": true,
-    "horizontal_text_color": "black",
     "img_src": "data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMzUwIDM4MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cGF0aCBmaWxsPSIjZmY0NjU1IiBkPSJNOTEuMzkgNjkuNzlhNC41OSA0LjU5IDAgMCAxLTEtMi44OFYxLjA4QTEuMDggMS4wOCAwIDAgMSA5Mi4zLjQxbDEwOS41MSAxMzYuODhhMS4wOSAxLjA5IDAgMCAxLS44NSAxLjc2SDE0OWE0LjU5IDQuNTkgMCAwIDEtMy42LTEuNzRaTTE4Ni42NSA5Mmg1MS45NWE0LjU4IDQuNTggMCAwIDAgMy42LTEuNzNsMTYuNDEtMjAuNTFhNC41OSA0LjU5IDAgMCAwIDEtMi44OFYxLjA4YTEuMDggMS4wOCAwIDAgMC0xLjkxLS42N2wtNzEuOSA4OS44N2ExLjA4IDEuMDggMCAwIDAgLjg1IDEuNzJabS02OS4xMiAxMTV2LTM1LjM4YTQuNTcgNC41NyAwIDAgMC0xLTIuODhsLTU5Ljg4LTc1QTQuNjMgNC42MyAwIDAgMCA1MyA5MkgxLjA4YTEuMDggMS4wOCAwIDAgMC0uODQgMS43Nmw3NSA5My43MWEyLjg2IDIuODYgMCAwIDEgMCAzLjU2bC03NSA5My43MmExLjA4IDEuMDggMCAwIDAgLjg0IDEuNzVINTNhNC42NSA0LjY1IDAgMCAwIDMuNjEtMS43M2w1OS44OC03NWE0LjU3IDQuNTcgMCAwIDAgMS4wNC0yLjc3Wm0xNTcuMjYtMTUuOTFhMi44NiAyLjg2IDAgMCAxIDAtMy41Nmw3NS05My43MWExLjA4IDEuMDggMCAwIDAtLjg0LTEuNzZIMjk3YTQuNjMgNC42MyAwIDAgMC0zLjYxIDEuNzRsLTU5Ljg4IDc0Ljk0YTQuNTcgNC41NyAwIDAgMC0xIDIuODh2MzUuMzVhNC41NSA0LjU1IDAgMCAwIDEgMi44OGw1OS44OCA3NWE0LjY1IDQuNjUgMCAwIDAgMy42MSAxLjczaDUxLjk1YTEuMDggMS4wOCAwIDAgMCAuODQtMS43NVptLTE2LjE4IDExNy42OGwtNTQtNjcuNTJhNC41OCA0LjU4IDAgMCAwLTMuNi0xLjczaC01MS44YTUgNSAwIDAgMC0zLjg5IDEuODZsLTUzLjkzIDY3LjM5YTQuNiA0LjYgMCAwIDAtMSAyLjg5djY1LjgyYTEuMDggMS4wOCAwIDAgMCAxLjkyLjY3TDE3My4xOCAyNzdhMi4zMSAyLjMxIDAgMCAxIDMuNjEgMGw4MC45MSAxMDEuMTVhMS4wOCAxLjA4IDAgMCAwIDEuOTItLjY3di02NS44MmE0LjYgNC42IDAgMCAwLTEuMDEtMi44OVoiLz4KPC9zdmc+",
     "name": "valorantesports",
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -5747,11 +5768,18 @@ async function triggerScans() {
     "url": "https://valorantesports.com/en-US/"
   },
   {
+    "collapsible": false,
     "default_type": "nerd-font",
+    "display_style": "flex",
     "group": "chrome_ext",
-    "horizontal_stack": false,
+    "horizontal_stack": true,
     "img_src": "https://img.icons8.com/win10/512/whatsapp.png",
     "name": "hh",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": ""
   },
   {
@@ -5784,7 +5812,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://yt3.ggpht.com/HKKYmHn3N9252WgIQ9MxXE_Q-GbyGnq6rphq3dCoUJrMOSiJHG_07iA7vrKQEBnOB48haUJ6bA=s176-c-k-c0x00ffffff-no-rj-mo",
@@ -5807,7 +5835,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://yt3.ggpht.com/QrLiMQRdqnlgd4mrASdj5ZlQhiUII4XjtJc8lAMXhhNJtCRcUKST5uxXJXcKwdra6J65l7HM=s48-c-k-c0x00ffffff-no-rj",
@@ -5830,7 +5858,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://yt3.ggpht.com/4b6g7KAuoOgs3sAMQa2E5X_xULYii1lacZjYI7xGPfmzzJXPnnNuboVrpf8RECkldC-wfEBC8aA=s48-c-k-c0x00ffffff-no-rj",
@@ -5853,7 +5881,7 @@ async function triggerScans() {
     "group": "VLR",
     "horizontal_bg_color": "#ff5461",
     "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#ff5461",
+    "horizontal_hover_color": "red",
     "horizontal_stack": true,
     "horizontal_text_color": "black",
     "img_src": "https://yt3.ggpht.com/xrNHXovwEnmL-35_sA5hm8OMeTmQfBRYPR941E7I6PhuSK12DY_IGOxhKnpEaXP6lzuLyPq2=s68-c-k-c0x00ffffff-no-rj",
@@ -5970,13 +5998,6 @@ async function triggerScans() {
     "img_src": "https://lumi.new/favicon.ico",
     "name": "lumi",
     "url": "https://lumi.new/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Sussy",
-    "horizontal_stack": false,
-    "name": "wutheringwavescafe",
-    "url": "https://www.facebook.com/groups/wutheringwavescafe/?ref=share&mibextid=NSMWBT"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
