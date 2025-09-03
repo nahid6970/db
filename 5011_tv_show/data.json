@@ -1864,18 +1864,32 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 8,
+                "title": "Wednesday - S02E06 - Woe Thyself WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-03T20:05:02.701691",
+                "notify": "unseen"
+            },
+            {
+                "id": 7,
+                "title": "Wednesday - S02E05 - Hyde and Woe Seek WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-03T19:29:57.770248",
+                "notify": "unseen"
+            },
+            {
                 "id": 6,
                 "title": "Wednesday - S02E08 - This Means Woe WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-03T18:05:02.880088",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Wednesday - S02E07 - Woe Me the Money WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-03T14:51:07.929834",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
@@ -2082,7 +2096,7 @@
                 "title": "Alien - Earth - S01E05 - In Space, No One WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-03T14:51:07.974507",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
