@@ -1864,6 +1864,20 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 6,
+                "title": "Wednesday - S02E08 - This Means Woe WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-03T18:05:02.880088",
+                "notify": "unseen"
+            },
+            {
+                "id": 5,
+                "title": "Wednesday - S02E07 - Woe Me the Money WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-03T14:51:07.929834",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "Wednesday - S02E04 - If These Woes Could Talk WEBDL-1080p",
                 "watched": false,
@@ -2063,6 +2077,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 5,
+                "title": "Alien - Earth - S01E05 - In Space, No One WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-03T14:51:07.974507",
+                "notify": "unseen"
+            },
             {
                 "id": 4,
                 "title": "Alien - Earth - S01E04 - Observation WEBDL-1080p",
