@@ -245,6 +245,51 @@
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
+    "group": "EDU",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
+    "name": "Math Bangla GK",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@mathbanglagk"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
+  },
+  {
+    "default_type": "img",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
+    "name": "My Classroom",
+    "url": "https://www.youtube.com/@MyClassroombd"
+  },
+  {
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "flex",
     "group": "Local (Flask)",
     "horizontal_stack": true,
     "img_src": "https://cdn-icons-png.flaticon.com/512/4400/4400968.png",
@@ -565,6 +610,14 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.facebook.com/groups/233541297572633/"
+  },
+  {
+    "default_type": "img",
+    "group": "FB Groups",
+    "horizontal_stack": false,
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/264861231_3102076750110616_8104799463133022082_n.png?stp=c486.0.1076.1076a_cp0_dst-png_s50x50&_nc_cat=109&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeFRzJ1t2nGBi_wL85krZ5Q9PXumwqLJtH89e6bCosm0fwdpaX0O11qNIP0Ts_GLUm1J5DSvbcUrC2bvgIDFzMDa&_nc_ohc=oPNmfai8JmIQ7kNvwFYkccs&_nc_oc=AdlMT57WQzLIjDrih0A7SazqqKR8_9AjOO1ufpbN0dBoldH2hUxpff0h5L9jb3JAQx8&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=N64immf7bMXZFUDoL0sifg&oh=00_AfUpTZeYZwHl3IrZva7Ma7QMD8CGNvcBBbUU7M2uuWCnXw&oe=68BCB5C4",
+    "name": "23rd batch, Department of Finance,D.U., Notice Board",
+    "url": "https://www.facebook.com/groups/224922691256166/"
   },
   {
     "collapsible": false,
@@ -1894,18 +1947,18 @@
     "url": "https://www.facebook.com/saved/?cref=28"
   },
   {
-    "name": "wutheringwavescafe",
-    "group": "Sussy",
-    "url": "https://www.facebook.com/groups/wutheringwavescafe/media",
-    "default_type": "nerd-font",
     "collapsible": false,
+    "default_type": "nerd-font",
     "display_style": "flex",
+    "group": "Sussy",
     "horizontal_stack": true,
+    "name": "wutheringwavescafe",
     "password_protect": true,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
     "default_type": "nerd-font",
@@ -2041,21 +2094,5 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black",
     "url": ""
-  },
-  {
-    "default_type": "img",
-    "group": "FB Groups",
-    "horizontal_stack": false,
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/264861231_3102076750110616_8104799463133022082_n.png?stp=c486.0.1076.1076a_cp0_dst-png_s50x50&_nc_cat=109&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeFRzJ1t2nGBi_wL85krZ5Q9PXumwqLJtH89e6bCosm0fwdpaX0O11qNIP0Ts_GLUm1J5DSvbcUrC2bvgIDFzMDa&_nc_ohc=oPNmfai8JmIQ7kNvwFYkccs&_nc_oc=AdlMT57WQzLIjDrih0A7SazqqKR8_9AjOO1ufpbN0dBoldH2hUxpff0h5L9jb3JAQx8&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=N64immf7bMXZFUDoL0sifg&oh=00_AfUpTZeYZwHl3IrZva7Ma7QMD8CGNvcBBbUU7M2uuWCnXw&oe=68BCB5C4",
-    "name": "23rd batch, Department of Finance,D.U., Notice Board",
-    "url": "https://www.facebook.com/groups/224922691256166/"
-  },
-  {
-    "name": "Math Bangla GK",
-    "group": "EDU",
-    "url": "https://www.youtube.com/@mathbanglagk",
-    "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
-    "default_type": "img",
-    "horizontal_stack": false
   }
 ]
