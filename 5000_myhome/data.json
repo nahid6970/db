@@ -2140,5 +2140,43 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black",
     "url": ""
+  },
+  {
+    "name": "\u09ab\u09bf\u09b2\u09bf\u09b8\u09cd\u09a4\u09bf\u09a8\u0995\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u09bf \u09a6\u09c7\u09ac\u09c7 \u09ac\u09c7\u09b2\u099c\u09bf\u09df\u09be\u09ae",
+    "group": "info / News",
+    "url": "",
+    "default_type": "text",
+    "horizontal_stack": false
+  },
+  {
+    "name": "bfdc",
+    "group": "JobCircular",
+    "url": "https://bfdc.teletalk.com.bd/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Career Guide BD",
+    "group": "FB Groups",
+    "url": "https://www.facebook.com/groups/CareerGuideBD/",
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/366319805_670012881825450_1287078359249561208_n.jpg?stp=c268.0.315.315a_cp0_dst-jpg_s50x50_tt6&_nc_cat=105&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeETwXSLNQV2AKcSwJirV28C-HJ6sUuvlOH4cnqxS6-U4Yf784josjV465kZ3zSKUUfa7NBy4kLfidyWp59TOPLX&_nc_ohc=gDxnxlcDrJkQ7kNvwEXDR3F&_nc_oc=Adnx_FyZv7LRg5Vl1D2nihBebGky_89gZTp5V-0UkzuA9-u3T8_HRT7B47H0rq6sMYg&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=TT1OIoZWY7jpnr8q51N_Ag&oh=00_AfYU2jlSGbKktPaY43hJuw_T-4uHGkbJW3RhtkRA0RMF8g&oe=68C0A9A2",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Career Guide - \u0995\u09cd\u09af\u09be\u09b0\u09bf\u09af\u09bc\u09be\u09b0 \u0997\u09be\u0987\u09a1 ",
+    "group": "FB Groups",
+    "url": "https://www.facebook.com/BDCareerGuide",
+    "img_src": "https://scontent.fdac41-2.fna.fbcdn.net/v/t39.30808-1/348243851_557385559658525_1410048643805516327_n.png?stp=cp0_dst-png_s40x40&_nc_cat=107&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeG_uvL1P2LYFc0R90AmV3URkTOy_Aj_9n2RM7L8CP_2fccPpCavW55Cmrh4a_z1MHBM_59N8HPW8b6aKFbKIb2j&_nc_ohc=WSwFmyGgE7IQ7kNvwGJ5QkL&_nc_oc=Adne4bDyzn7TW4tsW7NuyZXQbqMjsaGbfTmoxaqp_fPnsEjctYeSrfeguqzXSYfQxCk&_nc_zt=24&_nc_ht=scontent.fdac41-2.fna&_nc_gid=XwjnQ7rXOHyqJM2czIXJpw&oh=00_AfYj5BXMQD-dANnobl9yvuZ3zICdvB_b_Czf4B3TEuQ_SQ&oe=68C0C315",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "idra",
+    "group": "JobCircular",
+    "url": "http://idra.teletalk.com.bd/index.php",
+    "default_type": "nerd-font",
+    "title": "Insurance Development and Regulatory Authority",
+    "horizontal_stack": false
   }
 ]
