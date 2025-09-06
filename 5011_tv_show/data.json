@@ -1937,6 +1937,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 5,
+                "title": "WWE SmackDown - 2025-09-05 - SmackDown 1359 HDTV-1080p",
+                "watched": true,
+                "added_date": "2025-09-06T12:17:57.916609",
+                "notify": "seen"
+            },
+            {
                 "id": 4,
                 "title": "WWE SmackDown - 2025-08-29 - SmackDown 1358 WEBDL-1080p",
                 "watched": true,

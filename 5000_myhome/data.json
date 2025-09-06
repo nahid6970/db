@@ -125,14 +125,14 @@
     "url": "https://www.google.com/"
   },
   {
-    "color": "#f46613",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-cod-mail",
-    "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
     "name": "Google Mail",
-    "url": "https://mail.google.com/"
+    "url": "https://mail.google.com/",
+    "icon_class": "nf nf-cod-mail",
+    "color": "#f46613",
+    "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
+    "default_type": "img",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "default_type": "img",
