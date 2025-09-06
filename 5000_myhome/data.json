@@ -2234,5 +2234,53 @@
     "horizontal_stack": false,
     "name": "\u09a5\u09be\u0987\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7\u09b0 \u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0 \u0986\u09a8\u09c1\u09a4\u09bf\u09a8 \u099a\u09be\u09b0\u09cd\u09a8\u09ad\u09bf\u09b0\u09be\u0995\u09c1\u09b2, \u09ad\u09c2\u09ae\u099c\u09be\u0987\u09a5\u09be\u0987 \u09aa\u09be\u09b0\u09cd\u099f\u09bf\u09b0 \u09aa\u09cd\u09b0\u09c7\u09b8\u09bf\u09a1\u09c7\u09a8\u09cd\u099f",
     "url": ""
+  },
+  {
+    "name": "The Linux Cast",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@TheLinuxCast",
+    "img_src": "https://yt3.ggpht.com/DG_lVY22NScOmqsYHeVA2kQ46D3h_L4QLQSCySU1rDpKoF3Vg-M1dBNprrsgpJ6-5lJiHcHCDw=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "DistroTube",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@DistroTube",
+    "img_src": "https://yt3.ggpht.com/VDlSkuG9wKTXEVar7gwY-onJFh3l5wwK95Uy3JQwrm5RGz5vkv_M3-hJdVeBKDP1aN6ec9Jf=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Chris Titus Tech",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@ChrisTitusTech",
+    "img_src": "https://yt3.ggpht.com/ZfxzyYBtuZRA4ju9t5veuPJJEs-UPkExpnkngHIMdw8KILfIKSmaoYJ6MTpQ5MXUkt5mFPpbBA=s176-c-k-c0x00ffffff-no-rj-mo",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Chris Titus Technical",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@ChrisTitusTechnical",
+    "img_src": "https://yt3.ggpht.com/rgUAt711ktJ3CVgLGs6sKNAZeCJuzqBrK5422YnY9ywh0MX0SneEfhzGZ3bORLt6NBnt50Zy1w=s176-c-k-c0x00ffffff-no-rj-mo",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "JayzTwoCents",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@Jayztwocents",
+    "img_src": "https://yt3.ggpht.com/60ZHdHfspX1q6YI8_RW8Zz8fyR8Ne5aDHIwQ0TGN-vFkBWp5J1htI2VsLQQsnVoQbGhIxmJ3lQ=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "SpaceRex",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@SpaceRexWill",
+    "img_src": "https://yt3.ggpht.com/VldkPRI8P0lsNHqNCtTVq83jpGoW6STL3Uu5Ccc_XnrrfgoAIJqCktNITev3cBFaPeM1S_Z_wRM=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
