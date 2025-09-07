@@ -2677,5 +2677,21 @@
     "url": "",
     "default_type": "nerd-font",
     "horizontal_stack": false
+  },
+  {
+    "name": "Brodie Robertson",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@BrodieRobertson",
+    "img_src": "https://yt3.ggpht.com/ytc/AIdro_mfmPEv0_faow63TOWIMqzx3Idan_GRCOtQubiP32skc38=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Filmi Indian",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@FilmiIndian",
+    "img_src": "https://yt3.ggpht.com/tzmPscCSmXXujDTaI1RVYiVBsw7xzWTOkyY-66-pVpqtQeEvTIkiiyRx06_5OI5YH9dEB36Jqw=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
