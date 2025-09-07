@@ -1152,7 +1152,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     width: 150px;
     background-color: #383838;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
 }
 
@@ -1163,6 +1163,30 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 .context-menu-item:hover {
     background-color: #4f4f4f;
+}
+
+.context-menu-item.context-menu-edit {
+    color: #4CAF50; /* Green */
+}
+.context-menu-item.context-menu-edit:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.context-menu-item.context-menu-copy {
+    color: #2196F3; /* Blue */
+}
+.context-menu-item.context-menu-copy:hover {
+    background-color: #2196F3;
+    color: white;
+}
+
+.context-menu-item.context-menu-delete {
+    color: #f44336; /* Red */
+}
+.context-menu-item.context-menu-delete:hover {
+    background-color: #f44336;
+    color: white;
 }
 
 .add-link-item {
@@ -2784,7 +2808,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         });
 
         if (response.ok) {
-          alert('Link deleted successfully!');
           await fetchAndDisplayLinks();
 
           // Re-open the collapsible group if it was open
@@ -6009,20 +6032,6 @@ async function triggerScans() {
   },
   {
     "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Sussy",
-    "horizontal_stack": true,
-    "name": "wutheringwavescafe",
-    "password_protect": true,
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
-  },
-  {
-    "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
     "group": "Sussy",
@@ -6035,6 +6044,20 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@otakucollection-SP"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_stack": true,
+    "name": "wutheringwavescafe",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
     "color": "red",

@@ -1998,20 +1998,6 @@
   },
   {
     "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Sussy",
-    "horizontal_stack": true,
-    "name": "wutheringwavescafe",
-    "password_protect": true,
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
-  },
-  {
-    "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
     "group": "Sussy",
@@ -2024,6 +2010,20 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@otakucollection-SP"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_stack": true,
+    "name": "wutheringwavescafe",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
     "color": "red",
