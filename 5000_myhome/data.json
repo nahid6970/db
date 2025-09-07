@@ -204,6 +204,15 @@
     "url": "https://my.noip.com/dynamic-dns"
   },
   {
+    "default_type": "text",
+    "group": "Deadline",
+    "horizontal_stack": false,
+    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
+    "name": "noip (copy)",
+    "text": "noip<br>Aug7",
+    "url": "https://my.noip.com/dynamic-dns"
+  },
+  {
     "color": "#b259e6",
     "default_type": "nerd-font",
     "font_size": "35px",
@@ -250,9 +259,7 @@
     "url": "http://mi9t:5002"
   },
   {
-    "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
     "group": "EDU",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -261,30 +268,11 @@
     "horizontal_text_color": "#ffffff",
     "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "Math Bangla GK",
-    "password_protect": false,
     "popup_bg_color": "#31343a",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
     "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@mathbanglagk"
-  },
-  {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
-    "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
     "default_type": "img",
@@ -293,6 +281,13 @@
     "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "My Classroom",
     "url": "https://www.youtube.com/@MyClassroombd"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
     "collapsible": false,
@@ -2016,11 +2011,18 @@
     "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
+    "collapsible": false,
     "default_type": "img",
+    "display_style": "flex",
     "group": "Sussy",
-    "horizontal_stack": false,
+    "horizontal_stack": true,
     "img_src": "https://yt3.googleusercontent.com/0pVM9unu9LV22b8_JgwvQO7S05i7c-ubShDpQJQThdctDdAz66b6waT1QrQrJjwA_5g2MDBn6Wc=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "Otaku collection",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@otakucollection-SP"
   },
   {

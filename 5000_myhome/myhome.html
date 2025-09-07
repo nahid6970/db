@@ -1144,6 +1144,29 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     max-width: 90vw;
     max-height: 90vh;
   }
+}
+
+.context-menu {
+    position: fixed;
+    z-index: 10002;
+    width: 150px;
+    background-color: #383838;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.context-menu-item {
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+.context-menu-item:hover {
+    background-color: #4f4f4f;
+}
+
+.add-link-item {
+    display: none !important;
 }</style>
 </head>
 
@@ -1536,6 +1559,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 
 
+    <script src="../static/context-menu.js"></script>
     <script>document.addEventListener('DOMContentLoaded', function () {
   const linksContainer = document.getElementById('links-container');
   const addLinkForm = document.getElementById('add-link-form');
@@ -1619,46 +1643,24 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
         listItem.innerHTML = linkContent;
 
-        const buttonContainer = document.createElement('div');
-        buttonContainer.className = 'link-buttons';
+        listItem.addEventListener('contextmenu', (event) => {
+            const items = [
+                {
+                    label: 'Edit',
+                    action: () => openEditLinkPopup(link, index)
+                },
+                {
+                    label: 'Copy',
+                    action: () => copyLink(link, index)
+                },
+                {
+                    label: 'Delete',
+                    action: () => deleteLink(index)
+                }
+            ];
+            showContextMenu(event, items);
+        });
 
-        // Add reorder buttons
-        const reorderButtonsContainer = document.createElement('div');
-        reorderButtonsContainer.className = 'reorder-buttons';
-
-        const upButton = document.createElement('button');
-        upButton.textContent = '↑';
-        upButton.className = 'reorder-btn';
-        upButton.onclick = (e) => {
-          e.stopPropagation();
-          moveLink(index, -1);
-        };
-        reorderButtonsContainer.appendChild(upButton);
-
-        const downButton = document.createElement('button');
-        downButton.textContent = '↓';
-        downButton.className = 'reorder-btn';
-        downButton.onclick = (e) => {
-          e.stopPropagation();
-          moveLink(index, 1);
-        };
-        reorderButtonsContainer.appendChild(downButton);
-
-        buttonContainer.appendChild(reorderButtonsContainer);
-
-        const editButton = document.createElement('button');
-        editButton.textContent = ''; //✏️
-        editButton.className = 'edit-button';
-        editButton.onclick = () => openEditLinkPopup(link, index); // Pass original index
-        buttonContainer.appendChild(editButton);
-
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = ''; //🗑️
-        deleteButton.className = 'delete-button';
-        deleteButton.onclick = () => deleteLink(index); // Pass original index
-        buttonContainer.appendChild(deleteButton);
-
-        listItem.appendChild(buttonContainer);
         groupedElements[groupName].push(listItem);
         groupedLinks[groupName].push({ link, index });
 
@@ -1810,6 +1812,26 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       clonedElement.addEventListener('drop', handleDrop);
       clonedElement.addEventListener('dragend', handleDragEnd);
 
+      // Re-add context menu
+      const linkInfo = links[index];
+      clonedElement.addEventListener('contextmenu', (event) => {
+        const items = [
+            {
+                label: 'Edit',
+                action: () => openEditLinkPopup(linkInfo.link, linkInfo.index)
+            },
+            {
+                label: 'Copy',
+                action: () => copyLink(linkInfo.link, linkInfo.index)
+            },
+            {
+                label: 'Delete',
+                action: () => deleteLink(linkInfo.index)
+            }
+        ];
+        showContextMenu(event, items);
+      });
+
       // Keep edit buttons but update their functionality for top groups
       const buttons = clonedElement.querySelector('.link-buttons');
       if (buttons) {
@@ -1829,26 +1851,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
       content.appendChild(clonedElement);
     });
-
-    // Add button for adding new links to this collapsible group
-    const addLinkItem = document.createElement('li');
-    addLinkItem.className = 'link-item add-link-item';
-
-    const addLinkSpan = document.createElement('span');
-    addLinkSpan.textContent = '+';
-    addLinkSpan.style.cursor = 'pointer';
-    addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
-    addLinkSpan.style.fontSize = '25px';
-    addLinkSpan.style.alignContent = 'center';
-
-    addLinkSpan.addEventListener('click', () => {
-      document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
-      const addLinkPopup = document.getElementById('add-link-popup');
-      addLinkPopup.classList.remove('hidden'); // Remove hidden class
-      applyPopupStyling(groupName);
-    });
-    addLinkItem.appendChild(addLinkSpan);
-    content.appendChild(addLinkItem);
 
     // Add toggle functionality with repositioning
     let isDragging = false;
@@ -2120,6 +2122,27 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           clonedElement.addEventListener('drop', handleDrop);
           clonedElement.addEventListener('dragend', handleDragEnd);
 
+          // Re-add context menu
+          if (linkData) {
+            clonedElement.addEventListener('contextmenu', (event) => {
+                const items = [
+                    {
+                        label: 'Edit',
+                        action: () => openEditLinkPopup(linkData.link, linkData.index)
+                    },
+                    {
+                        label: 'Copy',
+                        action: () => copyLink(linkData.link, linkData.index)
+                    },
+                    {
+                        label: 'Delete',
+                        action: () => deleteLink(linkData.index)
+                    }
+                ];
+                showContextMenu(event, items);
+            });
+          }
+
           if (linkData.link.li_bg_color) {
             clonedElement.style.backgroundColor = linkData.link.li_bg_color;
           }
@@ -2144,29 +2167,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
           popupContent.appendChild(clonedElement);
         });
-
-        const addLinkItem = document.createElement('li');
-        addLinkItem.className = 'link-item add-link-item';
-        addLinkItem.draggable = false;
-
-        const addLinkSpan = document.createElement('span');
-        addLinkSpan.textContent = '+';
-        addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
-        addLinkSpan.style.fontSize = '25px';
-        addLinkSpan.style.width = '100%';
-        addLinkSpan.style.height = '100%';
-        addLinkSpan.style.display = 'flex';
-        addLinkSpan.style.alignItems = 'center';
-        addLinkSpan.style.justifyContent = 'center';
-
-        addLinkItem.addEventListener('click', () => {
-          document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
-          const addLinkPopup = document.getElementById('add-link-popup');
-          addLinkPopup.classList.remove('hidden'); // Remove hidden class
-          applyPopupStyling(groupName);
-        });
-        addLinkItem.appendChild(addLinkSpan);
-        popupContent.appendChild(addLinkItem);
         popup.classList.remove('hidden');
         applyPopupStyling(groupName);
       };
@@ -2236,30 +2236,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       elements.forEach(element => {
         groupList.appendChild(element);
       });
-
-      // Add button for adding new links to this group
-      const addLinkItem = document.createElement('li');
-      addLinkItem.className = 'link-item add-link-item';
-      addLinkItem.draggable = false;
-
-      const addLinkSpan = document.createElement('span');
-      addLinkSpan.textContent = '+';
-      addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
-      addLinkSpan.style.fontSize = '25px';
-      addLinkSpan.style.width = '100%';
-      addLinkSpan.style.height = '100%';
-      addLinkSpan.style.display = 'flex';
-      addLinkSpan.style.alignItems = 'center';
-      addLinkSpan.style.justifyContent = 'center';
-
-      addLinkItem.addEventListener('click', () => {
-        document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
-        const addLinkPopup = document.getElementById('add-link-popup');
-        addLinkPopup.classList.remove('hidden'); // Remove hidden class
-        applyPopupStyling(groupName);
-      });
-      addLinkItem.appendChild(addLinkSpan);
-      groupList.appendChild(addLinkItem);
 
       groupDiv.appendChild(groupList);
     }
@@ -2761,6 +2737,38 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         }
       });
       editGroupForm.setAttribute('data-listener-attached', 'true');
+    }
+  }
+
+  // Copy Link functionality
+  async function copyLink(linkToCopy, index) {
+    const newLink = { ...linkToCopy };
+    newLink.name = `${newLink.name} (copy)`;
+
+    try {
+        const response = await fetch('/api/links');
+        const links = await response.json();
+
+        links.splice(index + 1, 0, newLink);
+
+        // Update the entire list on the server
+        const updateResponse = await fetch('/api/links', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(links),
+        });
+
+        if (!updateResponse.ok) {
+            throw new Error('Failed to update links on the server.');
+        }
+
+        fetchAndDisplayLinks();
+
+    } catch (error) {
+        console.error('Error copying link:', error);
+        alert('Error copying link.');
     }
   }
 
@@ -4207,6 +4215,15 @@ async function triggerScans() {
     "url": "https://my.noip.com/dynamic-dns"
   },
   {
+    "default_type": "text",
+    "group": "Deadline",
+    "horizontal_stack": false,
+    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
+    "name": "noip (copy)",
+    "text": "noip<br>Aug7",
+    "url": "https://my.noip.com/dynamic-dns"
+  },
+  {
     "color": "#b259e6",
     "default_type": "nerd-font",
     "font_size": "35px",
@@ -4253,9 +4270,7 @@ async function triggerScans() {
     "url": "http://mi9t:5002"
   },
   {
-    "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
     "group": "EDU",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -4264,30 +4279,11 @@ async function triggerScans() {
     "horizontal_text_color": "#ffffff",
     "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "Math Bangla GK",
-    "password_protect": false,
     "popup_bg_color": "#31343a",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
     "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@mathbanglagk"
-  },
-  {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
-    "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
     "default_type": "img",
@@ -4296,6 +4292,13 @@ async function triggerScans() {
     "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "My Classroom",
     "url": "https://www.youtube.com/@MyClassroombd"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
     "collapsible": false,
@@ -6019,11 +6022,18 @@ async function triggerScans() {
     "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
+    "collapsible": false,
     "default_type": "img",
+    "display_style": "flex",
     "group": "Sussy",
-    "horizontal_stack": false,
+    "horizontal_stack": true,
     "img_src": "https://yt3.googleusercontent.com/0pVM9unu9LV22b8_JgwvQO7S05i7c-ubShDpQJQThdctDdAz66b6waT1QrQrJjwA_5g2MDBn6Wc=s48-c-k-c0x00ffffff-no-rj-mo",
     "name": "Otaku collection",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": "https://www.youtube.com/@otakucollection-SP"
   },
   {
