@@ -2664,19 +2664,19 @@
     "url": "https://www.youtube.com/@SpaceRexWill"
   },
   {
+    "collapsible": false,
     "default_type": "img",
+    "display_style": "flex",
     "group": "Youtube Channel",
     "horizontal_stack": false,
     "img_src": "https://yt3.ggpht.com/y_myu5CoUFndBkJ5sZFCiSoi-rM6UY-x-Wog6C7nl_6pgXt9M0Z-YPfVCHSvIYS5PlyRidhE=s48-c-k-c0x00ffffff-no-rj",
     "name": "Ray William Johnson",
-    "url": "https://www.youtube.com/channel/UCGt7X90Au6BV8rf49BiM6Dg",
-    "collapsible": false,
-    "display_style": "flex",
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/channel/UCGt7X90Au6BV8rf49BiM6Dg"
   },
   {
     "default_type": "nerd-font",
@@ -2686,33 +2686,46 @@
     "url": ""
   },
   {
+    "collapsible": false,
     "default_type": "img",
+    "display_style": "flex",
     "group": "Youtube Channel",
     "horizontal_stack": false,
     "img_src": "https://yt3.ggpht.com/ytc/AIdro_mfmPEv0_faow63TOWIMqzx3Idan_GRCOtQubiP32skc38=s48-c-k-c0x00ffffff-no-rj",
     "name": "Brodie Robertson",
-    "url": "https://www.youtube.com/@BrodieRobertson",
-    "collapsible": false,
-    "display_style": "flex",
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@BrodieRobertson"
   },
   {
+    "collapsible": false,
     "default_type": "img",
+    "display_style": "flex",
     "group": "Youtube Channel",
     "horizontal_stack": false,
     "img_src": "https://yt3.ggpht.com/tzmPscCSmXXujDTaI1RVYiVBsw7xzWTOkyY-66-pVpqtQeEvTIkiiyRx06_5OI5YH9dEB36Jqw=s48-c-k-c0x00ffffff-no-rj",
     "name": "Filmi Indian",
-    "url": "https://www.youtube.com/@FilmiIndian",
-    "collapsible": false,
-    "display_style": "flex",
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@FilmiIndian"
+  },
+  {
+    "name": "DU MBA Result",
+    "url": "https://result.du.ac.bd/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "\u09b8\u09c1\u09aa\u09be\u09b0 \u09ac\u09cd\u09b2\u09be\u09a1 \u09ae\u09c1\u09a8 <br> 7 Sep",
+    "group": "info / News",
+    "url": "",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
