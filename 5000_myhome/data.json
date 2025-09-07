@@ -296,11 +296,11 @@
     "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
-    "name": "Right Form Verb",
-    "group": "EDU",
-    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/",
     "default_type": "nerd-font",
-    "horizontal_stack": false
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "Right Form Verb",
+    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
   },
   {
     "collapsible": false,
@@ -685,27 +685,27 @@
     "url": "http://192.168.0.1/"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "FB Groups",
-    "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
     "name": "23rd Batch-Section B, Department of Finance, University of Dhaka",
+    "group": "FB Groups",
+    "url": "https://www.facebook.com/groups/233541297572633/",
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/233541297572633/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2176ff",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
