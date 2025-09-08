@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 12,
+                "title": "One Piece - s22e57 - [1142] - Come In, World - Vegapunk's Message WEBDL-1080p v2 - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-09-08T11:28:59.728907",
+                "notify": "unseen"
+            },
+            {
                 "id": 11,
                 "title": "One Piece - s22e56 - [1141] - Reliable Reinforcements! Dorry and Brogy Arrive! WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
@@ -2189,6 +2196,24 @@
                 "watched": false,
                 "added_date": "2025-08-24T16:30:15.466395",
                 "notify": "seen"
+            }
+        ]
+    },
+    {
+        "id": 31,
+        "title": "The Walking Dead - Daryl Dixon",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\The Walking Dead - Daryl Dixon",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "The Walking Dead - Daryl Dixon - S03E01 - Costa Da Morte WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-08T00:51:20.424008",
+                "notify": "unseen"
             }
         ]
     }
