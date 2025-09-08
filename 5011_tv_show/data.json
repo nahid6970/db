@@ -2202,8 +2202,8 @@
     {
         "id": 31,
         "title": "The Walking Dead - Daryl Dixon",
-        "year": "",
-        "cover_image": "",
+        "year": "2023",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/427464/posters/66e308a4e2c1b.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\The Walking Dead - Daryl Dixon",
         "rating": null,
         "status": "Continuing",
@@ -2215,6 +2215,7 @@
                 "added_date": "2025-09-08T00:51:20.424008",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": "http://192.168.0.101:8989/series/the-walking-dead-daryl-dixon"
     }
 ]
