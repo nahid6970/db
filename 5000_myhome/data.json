@@ -158,11 +158,11 @@
     "url": "https://mail.google.com/"
   },
   {
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "name": "Outlook",
-    "url": "https://outlook.live.com"
+    "url": "https://outlook.live.com",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
+    "default_type": "img",
+    "horizontal_stack": false
   },
   {
     "color": "#1399f4",
@@ -2823,6 +2823,14 @@
     "group": "Sussy",
     "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w",
     "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "mantine",
+    "group": "Powerful Website",
+    "url": "https://mantine.dev/",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
+    "default_type": "img",
     "horizontal_stack": false
   }
 ]
