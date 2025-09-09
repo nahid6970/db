@@ -276,7 +276,7 @@ img {
   flex-wrap: nowrap;
   justify-content: flex-start;
   width: fit-content;
-  padding-right: 18px;
+  padding-right: 180px;
 }
 
 .link-group-content[style*="display: list-item"] .link-item {
@@ -1140,12 +1140,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   border: 1px solid #555555 !important;
 }
 
-@media (max-width: 600px) {
-  .popup-content {
-    max-width: 90vw;
-    max-height: 90vh;
-  }
-}
 
 .context-menu {
     position: fixed;
@@ -1197,7 +1191,65 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   min-height: 50px;
 }
 
-</style>
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 600px) {
+  .popup-content {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  html, body {
+    margin: 5px;
+    margin-left: -3%;
+  }
+  .flex-container2 {
+    padding: 0px;
+    border-radius: 15px;
+  }
+  .toggle-container span {
+    display: none;
+  }
+  .link-item a {
+  /* Styles for the link itself within the container */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 5px;
+  font-family: jetbrainsmono nfp;
+  background-color: transparent;
+  box-shadow: none;
+  margin: 0;
+  }
+  .link-group-content {
+  list-style: none;
+  /* Remove default list bullets */
+  padding: 0px;
+  /* Remove default padding */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  background-color: #252525;
+  border-radius: 10px;
+  border: #0056b3 solid 1px;
+  }
+ul.link-group-content {
+  /* margin-top: 0; */
+  margin: -4px;
+  }
+}</style>
 </head>
 
 <body>
@@ -4254,6 +4306,14 @@ async function triggerScans() {
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
     "name": "Home",
     "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
+  },
+  {
+    "name": "Home (copy)",
+    "url": "http://192.168.0.101:5000/",
+    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
+    "default_type": "img",
+    "li_bg_color": "white",
+    "horizontal_stack": false
   },
   {
     "default_type": "nerd-font",

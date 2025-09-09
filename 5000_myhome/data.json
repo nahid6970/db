@@ -132,6 +132,14 @@
     "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
   },
   {
+    "name": "Home (copy)",
+    "url": "http://192.168.0.101:5000/",
+    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
+    "default_type": "img",
+    "li_bg_color": "white",
+    "horizontal_stack": false
+  },
+  {
     "default_type": "nerd-font",
     "font_size": "35px",
     "horizontal_stack": false,
