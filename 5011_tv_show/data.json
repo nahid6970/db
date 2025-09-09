@@ -1833,6 +1833,13 @@
         "rating": null,
         "episodes": [
             {
+                "id": 6,
+                "title": "WWE Raw - 2025-09-08 - RAW 1685 HDTV-1080p",
+                "watched": true,
+                "added_date": "2025-09-09T15:51:00.206419",
+                "notify": "seen"
+            },
+            {
                 "id": 5,
                 "title": "WWE Raw - 2025-09-01 - RAW 1684 WEBRip-480p",
                 "watched": true,
