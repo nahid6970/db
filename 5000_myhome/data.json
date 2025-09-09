@@ -274,20 +274,21 @@
     "url": "https://service.du.ac.bd/login"
   },
   {
-    "default_type": "nerd-font",
-    "group": "Deadline",
-    "horizontal_stack": false,
     "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
-    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule"
+    "group": "Deadline",
+    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule",
+    "default_type": "nerd-font",
+    "background_color": "#c00000",
+    "horizontal_stack": false
   },
   {
-    "default_type": "text",
-    "group": "Deadline",
-    "horizontal_stack": false,
-    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
     "name": "noip",
-    "text": "noip<br>Aug7",
-    "url": "https://my.noip.com/dynamic-dns"
+    "group": "Deadline",
+    "url": "https://my.noip.com/dynamic-dns",
+    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
+    "text": "NO-IP<br>August 7",
+    "default_type": "text",
+    "horizontal_stack": false
   },
   {
     "default_type": "img",
@@ -2808,6 +2809,13 @@
     "url": "https://www.youtube.com/@thedeshbhakt",
     "img_src": "https://yt3.ggpht.com/OZXhQ0ekBJseGOgV00O0czWxMxp3cy1fKJ8KH5lh7FY9NOlx2elF6KraO-hISusYuHZQVz9f=s48-c-k-c0x00ffffff-no-rj",
     "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "omakub",
+    "group": "Linux Distro",
+    "url": "https://omakub.org/",
+    "default_type": "nerd-font",
     "horizontal_stack": false
   }
 ]
