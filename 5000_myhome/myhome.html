@@ -525,7 +525,7 @@ input:checked+.slider:before {
 }
 
 
-.popup-content {
+.popup-content, .horizontal-stack-popup-content {
   background-color: var(--popup-bg-color, #31343a);
   color: var(--popup-text-color, #ffffff);
   border: 1px solid var(--popup-border-color, transparent);
@@ -552,7 +552,7 @@ input:checked+.slider:before {
   overflow-y: auto;
 }
 
-.popup-content .close-button {
+.popup-content .close-button, .horizontal-stack-popup-content .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -963,6 +963,7 @@ div.toggle-container {
   background-color: var(--horizontal-bg-color, #2d2d2d);
   color: var(--horizontal-text-color, #ffffff);
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .horizontal-stack .group-title {
@@ -1183,6 +1184,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 .simple-link-item {
   padding: 2px 0;
+  list-style-type: none;
 }
 
 .simple-link-item a {
@@ -1207,7 +1209,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 
 @media (max-width: 600px) {
-  .popup-content {
+  .popup-content, .horizontal-stack-popup-content {
     max-width: 90vw;
     max-height: 90vh;
   }
@@ -1531,7 +1533,7 @@ ul.link-group-content {
     </div>
 
     <div id="horizontal-stack-popup" class="popup-container hidden">
-      <div class="popup-content">
+      <div class="horizontal-stack-popup-content">
         <span class="close-button">&times;</span>
         <h3>Group Items</h3>
         <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -4052,7 +4054,7 @@ function applyPopupStyling(groupName) {
       const groupLinks = links.filter(link => (link.group || 'Ungrouped') === groupName);
       if (groupLinks.length > 0) {
         const groupSettings = groupLinks[0];
-        const popupContents = document.querySelectorAll('.popup-content');
+        const popupContents = document.querySelectorAll('.popup-content, .horizontal-stack-popup-content');
         
         popupContents.forEach(popup => {
           if (groupSettings.popup_bg_color) {
@@ -4077,7 +4079,7 @@ function applyPopupStyling(groupName) {
 
 // Function to reset popup styling to defaults
 function resetPopupStyling() {
-  const popupContents = document.querySelectorAll('.popup-content');
+  const popupContents = document.querySelectorAll('.popup-content, .horizontal-stack-popup-content');
   popupContents.forEach(popup => {
     popup.style.removeProperty('--popup-bg-color');
     popup.style.removeProperty('--popup-text-color');
@@ -4559,6 +4561,94 @@ async function triggerScans() {
     "url": "https://bfdc.teletalk.com.bd/"
   },
   {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://bfdc.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://bfdc.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://bfdc.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://bfdc.teletalk.com.bd/"
+  },
+  {
     "default_type": "nerd-font",
     "group": "Temporary",
     "horizontal_stack": false,
@@ -4985,7 +5075,7 @@ async function triggerScans() {
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/264861231_3102076750110616_8104799463133022082_n.png?stp=c486.0.1076.1076a_cp0_dst-png_s50x50&_nc_cat=109&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeFRzJ1t2nGBi_wL85krZ5Q9PXumwqLJtH89e6bCosm0fwdpaX0O11qNIP0Ts_GLUm1J5DSvbcUrC2bvgIDFzMDa&_nc_ohc=oPNmfai8JmIQ7kNvwFYkccs&_nc_oc=AdlMT57WQzLIjDrih0A7SazqqKR8_9AjOO1ufpbN0dBoldH2hUxpff0h5L9jb3JAQx8&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=N64immf7bMXZFUDoL0sifg&oh=00_AfUpTZeYZwHl3IrZva7Ma7QMD8CGNvcBBbUU7M2uuWCnXw&oe=68BCB5C4",
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/264861231_3102076750110616_8104799463133022082_n.png?stp=c486.0.1076.1076a_cp0_dst-png_s50x50&_nc_cat=109&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeFRzJ1t2nGBi_wL85krZ5Q9PXumwqLJtH89e6bCosm0fwdpaX0O11qNIP0Ts_GLUm1J5DSvbcUrC2bvgIDFzMDa&_nc_ohc=LWV3YNoHGFYQ7kNvwHgd_63&_nc_oc=AdmYN-C9M6YQyu0tyQH5bulFbe5FaDCmaGhiqHN9iZZRpvNftXYdzsHSO_3kW8LBxAI&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=co7TMYK-DurCO_3DtcX7Bw&oh=00_AfbRXYZuTjrIniBb-Y3BSu_I_Z7rDfNHLPGW_-EmNuL0lw&oe=68C70984",
     "name": "23rd batch, Department of Finance,D.U., Notice Board",
     "password_protect": false,
     "popup_bg_color": "#31343a",
