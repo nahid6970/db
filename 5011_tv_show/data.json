@@ -2120,6 +2120,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "Alien - Earth - S01E06 - The Fly WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-10T10:44:37.069141",
+                "notify": "unseen"
+            },
+            {
                 "id": 5,
                 "title": "Alien - Earth - S01E05 - In Space, No One WEBDL-1080p",
                 "watched": false,

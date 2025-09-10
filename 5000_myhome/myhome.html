@@ -272,17 +272,7 @@ img {
   border: #0056b3 solid 1px;
 }
 
-.link-group-content[style*="display: list-item"] {
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  width: fit-content;
-  padding-right: 180px;
-}
 
-.link-group-content[style*="display: list-item"] .link-item {
-  margin-bottom: 10px;
-  width: 100%;
-}
 
 .link-item {
   display: flex;
@@ -1191,6 +1181,19 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   min-height: 50px;
 }
 
+.simple-link-item {
+  padding: 2px 0;
+}
+
+.simple-link-item a {
+  color: #8ab4f8;
+  text-decoration: underline;
+}
+
+.simple-link-item a:hover {
+  color: #c58af9;
+}
+
 
 
 
@@ -1445,7 +1448,7 @@ ul.link-group-content {
         <span class="close-button">&times;</span>
         <h3>Add New Link</h3>
         <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-          <input type="text" id="link-name" placeholder="Name" required>
+          <input type="text" id="link-name" placeholder="Name">
           <input type="text" id="link-group" placeholder="Group (optional)">
           <input type="url" id="link-url" placeholder="URL">
           <label for="link-default-type">Default Type:</label>
@@ -1487,7 +1490,7 @@ ul.link-group-content {
         <h3>Edit Link</h3>
         <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
           <input type="hidden" id="edit-link-index">
-          <input type="text" id="edit-link-name" placeholder="Name" required>
+          <input type="text" id="edit-link-name" placeholder="Name">
           <input type="text" id="edit-link-group" placeholder="Group (optional)">
           <input type="url" id="edit-link-url" placeholder="URL">
           <label for="edit-link-default-type">Default Type:</label>
@@ -1670,80 +1673,106 @@ ul.link-group-content {
           groupedLinks[groupName] = [];
         }
 
-        const listItem = document.createElement('li');
-        listItem.className = `link-item ${link.default_type ? 'link-type-' + link.default_type : 'link-type-default'}`;
-        listItem.draggable = true;
-        listItem.dataset.linkIndex = index;
+        let elementToAdd;
 
-        // Add drag event listeners
-        listItem.addEventListener('dragstart', handleDragStart);
-        listItem.addEventListener('dragover', handleDragOver);
-        listItem.addEventListener('drop', handleDrop);
-        listItem.addEventListener('dragend', handleDragEnd);
+        if ((!link.name || link.name.trim() === '') && link.url) {
+            const simpleListItem = document.createElement('li');
+            simpleListItem.className = 'simple-link-item';
 
-        // Add visual indicator for hidden items in edit mode
-        if (link.hidden && document.querySelector('.flex-container2').classList.contains('edit-mode')) {
-          listItem.classList.add('hidden-item');
-          listItem.style.opacity = '0.5';
-          listItem.style.border = '2px dashed #666';
-        }
+            const simpleLink = document.createElement('a');
+            simpleLink.href = link.url;
+            simpleLink.textContent = link.url;
+            simpleLink.target = '_blank';
+            simpleListItem.appendChild(simpleLink);
 
-        if (link.li_bg_color) {
-          listItem.style.backgroundColor = link.li_bg_color;
-        }
-        if (link.li_hover_color) {
-          listItem.addEventListener('mouseover', () => {
-            listItem.style.backgroundColor = link.li_hover_color;
-          });
-          listItem.addEventListener('mouseout', () => {
-            listItem.style.backgroundColor = link.li_bg_color || '';
-          });
-        }
-
-        let linkContent;
-
-        if (link.default_type === 'nerd-font' && link.icon_class) {
-          linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
-        } else if (link.default_type === 'img' && link.img_src) {
-          const width = link.width || '50';
-          const height = link.height || '50';
-          linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
-        } else if (link.default_type === 'text' && link.text) {
-          linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
+            // Add context menu
+            simpleListItem.addEventListener('contextmenu', (event) => {
+                const items = [
+                    { label: 'Edit', action: () => openEditLinkPopup(link, index) },
+                    { label: 'Copy', action: () => copyLink(link, index) },
+                    { label: 'Delete', action: () => deleteLink(index) }
+                ];
+                showContextMenu(event, items);
+            });
+            
+            elementToAdd = simpleListItem;
         } else {
-          // Fallback if default_type is not set or doesn't match available content
-          if (link.icon_class) {
-            linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
-          } else if (link.img_src) {
-            const width = link.width || '50';
-            const height = link.height || '50';
-            linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
-          } else {
-            linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
-          }
+            const listItem = document.createElement('li');
+            listItem.className = `link-item ${link.default_type ? 'link-type-' + link.default_type : 'link-type-default'}`;
+            listItem.draggable = true;
+            listItem.dataset.linkIndex = index;
+
+            // Add drag event listeners
+            listItem.addEventListener('dragstart', handleDragStart);
+            listItem.addEventListener('dragover', handleDragOver);
+            listItem.addEventListener('drop', handleDrop);
+            listItem.addEventListener('dragend', handleDragEnd);
+
+            // Add visual indicator for hidden items in edit mode
+            if (link.hidden && document.querySelector('.flex-container2').classList.contains('edit-mode')) {
+              listItem.classList.add('hidden-item');
+              listItem.style.opacity = '0.5';
+              listItem.style.border = '2px dashed #666';
+            }
+
+            if (link.li_bg_color) {
+              listItem.style.backgroundColor = link.li_bg_color;
+            }
+            if (link.li_hover_color) {
+              listItem.addEventListener('mouseover', () => {
+                listItem.style.backgroundColor = link.li_hover_color;
+              });
+              listItem.addEventListener('mouseout', () => {
+                listItem.style.backgroundColor = link.li_bg_color || '';
+              });
+            }
+
+            let linkContent;
+
+            if (link.default_type === 'nerd-font' && link.icon_class) {
+              linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+            } else if (link.default_type === 'img' && link.img_src) {
+              const width = link.width || '50';
+              const height = link.height || '50';
+              linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+            } else if (link.default_type === 'text' && link.text) {
+              linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
+            } else {
+              // Fallback if default_type is not set or doesn't match available content
+              if (link.icon_class) {
+                linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+              } else if (link.img_src) {
+                const width = link.width || '50';
+                const height = link.height || '50';
+                linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+              } else {
+                linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
+              }
+            }
+
+            listItem.innerHTML = linkContent;
+
+            listItem.addEventListener('contextmenu', (event) => {
+                const items = [
+                    {
+                        label: 'Edit',
+                        action: () => openEditLinkPopup(link, index)
+                    },
+                    {
+                        label: 'Copy',
+                        action: () => copyLink(link, index)
+                    },
+                    {
+                        label: 'Delete',
+                        action: () => deleteLink(index)
+                    }
+                ];
+                showContextMenu(event, items);
+            });
+            elementToAdd = listItem;
         }
 
-        listItem.innerHTML = linkContent;
-
-        listItem.addEventListener('contextmenu', (event) => {
-            const items = [
-                {
-                    label: 'Edit',
-                    action: () => openEditLinkPopup(link, index)
-                },
-                {
-                    label: 'Copy',
-                    action: () => copyLink(link, index)
-                },
-                {
-                    label: 'Delete',
-                    action: () => deleteLink(index)
-                }
-            ];
-            showContextMenu(event, items);
-        });
-
-        groupedElements[groupName].push(listItem);
+        groupedElements[groupName].push(elementToAdd);
         groupedLinks[groupName].push({ link, index });
 
         // Check if this group should be collapsible
@@ -2177,6 +2206,60 @@ ul.link-group-content {
     });
   }
 
+    function createMultiColumnList(elements, groupName) {
+    const container = document.createElement('div');
+    container.style.display = 'flex';
+    container.style.flexDirection = 'row';
+    container.style.gap = '20px';
+
+    let currentColumn = document.createElement('div');
+    currentColumn.style.display = 'flex';
+    currentColumn.style.flexDirection = 'column';
+    container.appendChild(currentColumn);
+
+    elements.forEach((element, index) => {
+        if (index > 0 && index % 5 === 0) {
+            currentColumn = document.createElement('div');
+            currentColumn.style.display = 'flex';
+            currentColumn.style.flexDirection = 'column';
+            container.appendChild(currentColumn);
+        }
+        currentColumn.appendChild(element);
+    });
+
+    // Add the '+' button
+    const addLinkItem = document.createElement('li');
+    addLinkItem.className = 'link-item add-link-item';
+    addLinkItem.style.width = 'auto'; // Override default size
+    addLinkItem.style.height = '30px';
+
+    const addLinkSpan = document.createElement('span');
+    addLinkSpan.textContent = '+';
+    addLinkSpan.style.cursor = 'pointer';
+    addLinkSpan.style.fontSize = '20px';
+
+    addLinkItem.addEventListener('click', () => {
+        document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
+        const addLinkPopup = document.getElementById('add-link-popup');
+        addLinkPopup.classList.remove('hidden');
+        applyPopupStyling(groupName);
+    });
+
+    addLinkItem.appendChild(addLinkSpan);
+    
+    // Add to the last column, or a new one if the last is full
+    if (elements.length % 5 === 0 && elements.length > 0) {
+        currentColumn = document.createElement('div');
+        currentColumn.style.display = 'flex';
+        currentColumn.style.flexDirection = 'column';
+        container.appendChild(currentColumn);
+    }
+    currentColumn.appendChild(addLinkItem);
+
+
+    return container;
+}
+
     function createRegularGroup(groupName, elements, linksInGroup) {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'link-group';
@@ -2349,45 +2432,49 @@ ul.link-group-content {
     groupDiv.appendChild(groupHeaderContainer);
 
     if (firstLinkInGroup && !firstLinkInGroup.link.horizontal_stack) {
-      const groupList = document.createElement('ul');
-      groupList.className = 'link-group-content';
-      // Set display style based on the first link in the group, or default to flex
       const firstLinkInGroupDisplay = linksInGroup[0];
-      if (firstLinkInGroupDisplay && firstLinkInGroupDisplay.link.display_style) {
-        groupList.style.display = firstLinkInGroupDisplay.link.display_style;
+      if (firstLinkInGroupDisplay && firstLinkInGroupDisplay.link.display_style === 'list-item') {
+        const multiColumnList = createMultiColumnList(elements, groupName);
+        groupDiv.appendChild(multiColumnList);
       } else {
-        groupList.style.display = 'flex'; // Default display style
+        const groupList = document.createElement('ul');
+        groupList.className = 'link-group-content';
+        if (firstLinkInGroupDisplay && firstLinkInGroupDisplay.link.display_style) {
+          groupList.style.display = firstLinkInGroupDisplay.link.display_style;
+        } else {
+          groupList.style.display = 'flex'; // Default display style
+        }
+
+        elements.forEach(element => {
+          groupList.appendChild(element);
+        });
+
+        // Add button for adding new links to this group
+        const addLinkItem = document.createElement('li');
+        addLinkItem.className = 'link-item add-link-item';
+        addLinkItem.draggable = false;
+
+        const addLinkSpan = document.createElement('span');
+        addLinkSpan.textContent = '+';
+        addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
+        addLinkSpan.style.fontSize = '25px';
+        addLinkSpan.style.width = '100%';
+        addLinkSpan.style.height = '100%';
+        addLinkSpan.style.display = 'flex';
+        addLinkSpan.style.alignItems = 'center';
+        addLinkSpan.style.justifyContent = 'center';
+
+        addLinkItem.addEventListener('click', () => {
+          document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
+          const addLinkPopup = document.getElementById('add-link-popup');
+          addLinkPopup.classList.remove('hidden'); // Remove hidden class
+          applyPopupStyling(groupName);
+        });
+        addLinkItem.appendChild(addLinkSpan);
+        groupList.appendChild(addLinkItem);
+
+        groupDiv.appendChild(groupList);
       }
-
-      elements.forEach(element => {
-        groupList.appendChild(element);
-      });
-
-      // Add button for adding new links to this group
-      const addLinkItem = document.createElement('li');
-      addLinkItem.className = 'link-item add-link-item';
-      addLinkItem.draggable = false;
-
-      const addLinkSpan = document.createElement('span');
-      addLinkSpan.textContent = '+';
-      addLinkSpan.style.fontFamily = 'jetbrainsmono nfp';
-      addLinkSpan.style.fontSize = '25px';
-      addLinkSpan.style.width = '100%';
-      addLinkSpan.style.height = '100%';
-      addLinkSpan.style.display = 'flex';
-      addLinkSpan.style.alignItems = 'center';
-      addLinkSpan.style.justifyContent = 'center';
-
-      addLinkItem.addEventListener('click', () => {
-        document.getElementById('link-group').value = groupName === 'Ungrouped' ? '' : groupName;
-        const addLinkPopup = document.getElementById('add-link-popup');
-        addLinkPopup.classList.remove('hidden'); // Remove hidden class
-        applyPopupStyling(groupName);
-      });
-      addLinkItem.appendChild(addLinkSpan);
-      groupList.appendChild(addLinkItem);
-
-      groupDiv.appendChild(groupList);
     }
 
     return groupDiv;
@@ -4334,11 +4421,11 @@ async function triggerScans() {
     "url": "https://mail.google.com/"
   },
   {
-    "name": "Outlook",
-    "url": "https://outlook.live.com",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "default_type": "img",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
+    "name": "Outlook",
+    "url": "https://outlook.live.com"
   },
   {
     "color": "#1399f4",
@@ -4450,21 +4537,21 @@ async function triggerScans() {
     "url": "https://service.du.ac.bd/login"
   },
   {
-    "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
-    "group": "Deadline",
-    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule",
-    "default_type": "nerd-font",
     "background_color": "#c00000",
-    "horizontal_stack": false
+    "default_type": "nerd-font",
+    "group": "Deadline",
+    "horizontal_stack": false,
+    "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
+    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule"
   },
   {
-    "name": "noip",
-    "group": "Deadline",
-    "url": "https://my.noip.com/dynamic-dns",
-    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
-    "text": "NO-IP<br>August 7",
     "default_type": "text",
-    "horizontal_stack": false
+    "group": "Deadline",
+    "horizontal_stack": false,
+    "img_src": "https://d2qr50rz2oof04.cloudfront.net/assets/img/logo/logo-bug.png",
+    "name": "noip",
+    "text": "NO-IP<br>August 7",
+    "url": "https://my.noip.com/dynamic-dns"
   },
   {
     "default_type": "img",
@@ -5420,9 +5507,18 @@ async function triggerScans() {
     "display_style": "flex",
     "font_size": "35px",
     "group": "edu",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "icon_class": "nf nf-md-google_translate",
     "name": "Google Translate",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -5434,8 +5530,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "edu",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "speechtyping",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -5447,8 +5552,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "edu",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "banglaconverter",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -6707,7 +6821,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6730,7 +6844,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6753,7 +6867,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6776,7 +6890,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6799,7 +6913,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6822,7 +6936,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6845,7 +6959,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6868,7 +6982,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6891,7 +7005,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6914,7 +7028,7 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
@@ -6937,12 +7051,20 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "red",
     "img_src": "https://yt3.ggpht.com/y_myu5CoUFndBkJ5sZFCiSoi-rM6UY-x-Wog6C7nl_6pgXt9M0Z-YPfVCHSvIYS5PlyRidhE=s48-c-k-c0x00ffffff-no-rj",
     "name": "Ray William Johnson",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -6952,12 +7074,20 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "red",
     "img_src": "https://yt3.ggpht.com/ytc/AIdro_mfmPEv0_faow63TOWIMqzx3Idan_GRCOtQubiP32skc38=s48-c-k-c0x00ffffff-no-rj",
     "name": "Brodie Robertson",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -6967,12 +7097,20 @@ async function triggerScans() {
   {
     "collapsible": false,
     "default_type": "img",
-    "display_style": "flex",
+    "display_style": "list-item",
     "group": "Youtube Channel",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "red",
     "img_src": "https://yt3.ggpht.com/tzmPscCSmXXujDTaI1RVYiVBsw7xzWTOkyY-66-pVpqtQeEvTIkiiyRx06_5OI5YH9dEB36Jqw=s48-c-k-c0x00ffffff-no-rj",
     "name": "Filmi Indian",
     "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -6980,34 +7118,49 @@ async function triggerScans() {
     "url": "https://www.youtube.com/@FilmiIndian"
   },
   {
-    "name": "The Deshbhakt",
+    "collapsible": false,
+    "default_type": "img",
+    "display_style": "list-item",
     "group": "Youtube Channel",
-    "url": "https://www.youtube.com/@thedeshbhakt",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "red",
     "img_src": "https://yt3.ggpht.com/OZXhQ0ekBJseGOgV00O0czWxMxp3cy1fKJ8KH5lh7FY9NOlx2elF6KraO-hISusYuHZQVz9f=s48-c-k-c0x00ffffff-no-rj",
-    "default_type": "img",
-    "horizontal_stack": false
+    "name": "The Deshbhakt",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@thedeshbhakt"
   },
   {
-    "name": "omakub",
+    "default_type": "nerd-font",
     "group": "Linux Distro",
-    "url": "https://omakub.org/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "name": "omakub",
+    "url": "https://omakub.org/"
   },
   {
-    "name": "hm",
+    "default_type": "nerd-font",
     "group": "Sussy",
-    "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "name": "hm",
+    "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w"
   },
   {
-    "name": "mantine",
-    "group": "Powerful Website",
-    "url": "https://mantine.dev/",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
     "default_type": "img",
-    "horizontal_stack": false
+    "group": "Powerful Website",
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
+    "name": "mantine",
+    "url": "https://mantine.dev/"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
