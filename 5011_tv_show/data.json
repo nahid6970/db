@@ -1958,6 +1958,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 6,
+                "title": "WWE SmackDown - 2025-09-12 - SmackDown 1360 HDTV-1080p",
+                "watched": true,
+                "added_date": "2025-09-13T17:04:11.956351",
+                "notify": "unseen"
+            },
+            {
                 "id": 5,
                 "title": "WWE SmackDown - 2025-09-05 - SmackDown 1359 HDTV-1080p",
                 "watched": true,
