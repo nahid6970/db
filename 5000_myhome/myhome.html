@@ -1254,6 +1254,17 @@ ul.link-group-content {
   /* margin-top: 0; */
   margin: -4px;
   }
+
+  .link-group-content[style*="display: list-item"] {
+    display: flex !important;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    max-height: none !important;
+  }
+
+  .link-group-content[style*="display: list-item"] .link-item {
+    width: 100%;
+  }
 }</style>
 </head>
 
@@ -2211,8 +2222,15 @@ ul.link-group-content {
     function createMultiColumnList(elements, groupName) {
     const container = document.createElement('div');
     container.style.display = 'flex';
-    container.style.flexDirection = 'row';
-    container.style.gap = '20px';
+
+    if (window.innerWidth <= 600) {
+        // Single column for small screens
+        container.style.flexDirection = 'column';
+    } else {
+        // Multi-column for larger screens
+        container.style.flexDirection = 'row';
+        container.style.gap = '20px';
+    }
 
     let currentColumn = document.createElement('div');
     currentColumn.style.display = 'flex';
@@ -2220,7 +2238,7 @@ ul.link-group-content {
     container.appendChild(currentColumn);
 
     elements.forEach((element, index) => {
-        if (index > 0 && index % 5 === 0) {
+        if (window.innerWidth > 600 && index > 0 && index % 5 === 0) {
             currentColumn = document.createElement('div');
             currentColumn.style.display = 'flex';
             currentColumn.style.flexDirection = 'column';
@@ -2250,7 +2268,7 @@ ul.link-group-content {
     addLinkItem.appendChild(addLinkSpan);
     
     // Add to the last column, or a new one if the last is full
-    if (elements.length % 5 === 0 && elements.length > 0) {
+    if (window.innerWidth > 600 && elements.length % 5 === 0 && elements.length > 0) {
         currentColumn = document.createElement('div');
         currentColumn.style.display = 'flex';
         currentColumn.style.flexDirection = 'column';
