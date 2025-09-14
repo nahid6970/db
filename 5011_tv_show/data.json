@@ -1962,7 +1962,7 @@
                 "title": "WWE SmackDown - 2025-09-12 - SmackDown 1360 HDTV-1080p",
                 "watched": true,
                 "added_date": "2025-09-13T17:04:11.956351",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 5,
@@ -2243,6 +2243,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 2,
+                "title": "The Walking Dead - Daryl Dixon - S03E02 - La Ofrenda WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-14T17:41:08.112633",
+                "notify": "seen"
+            },
             {
                 "id": 1,
                 "title": "The Walking Dead - Daryl Dixon - S03E01 - Costa Da Morte WEBRip-1080p",
