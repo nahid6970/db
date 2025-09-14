@@ -237,14 +237,14 @@
     "url": "https://keep.google.com/"
   },
   {
-    "name": "nerdfonts",
-    "url": "https://www.nerdfonts.com/cheat-sheet",
-    "icon_class": "nf nf-seti-font",
     "color": "#69e8ff",
-    "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
     "default_type": "img",
     "font_size": "35px",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "icon_class": "nf nf-seti-font",
+    "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
+    "name": "nerdfonts",
+    "url": "https://www.nerdfonts.com/cheat-sheet"
   },
   {
     "color": "#ff2e2e",
@@ -279,7 +279,6 @@
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
     "horizontal_text_color": "#ffffff",
-    "name": "",
     "password_protect": false,
     "popup_bg_color": "#31343a",
     "popup_border_color": "transparent",
@@ -289,36 +288,69 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://bfdc.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
     "url": "https://baec.teletalk.com.bd/"
   },
   {
+    "collapsible": false,
     "default_type": "nerd-font",
+    "display_style": "list-item",
     "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": "https://rdajamalpur.teletalk.com.bd/"
   },
   {
+    "collapsible": false,
     "default_type": "nerd-font",
+    "display_style": "list-item",
     "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": "http://dcnaogaon.teletalk.com.bd/"
   },
   {
+    "collapsible": false,
     "default_type": "nerd-font",
+    "display_style": "list-item",
     "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
-    "url": "https://baera.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
     "url": "https://jobs.bdjobs.com/jobdetails/?id=1402638&fcatId=-1&ln=1"
   },
   {
@@ -3076,10 +3108,10 @@
     "url": "https://www.youtube.com/@thedeshbhakt"
   },
   {
-    "name": "Charlie Kirk died September 10, 2025",
-    "group": "info / News",
-    "url": "",
     "default_type": "text",
-    "horizontal_stack": false
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Charlie Kirk died September 10, 2025",
+    "url": ""
   }
 ]
