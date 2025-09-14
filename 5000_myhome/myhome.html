@@ -1196,6 +1196,20 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   color: #c58af9;
 }
 
+.simple-link-item .link-separator {
+  color: #ffffff;
+  margin: 0 5px;
+}
+
+.simple-link-item .link-url {
+  color: #8ab4f8;
+  text-decoration: underline;
+}
+
+.simple-link-item .link-name {
+  color: yellow;
+}
+
 
 
 
@@ -1674,6 +1688,17 @@ ul.link-group-content {
       const groupedLinks = {}; // Store original links grouped by name
       const collapsibleGroups = {}; // Store collapsible groups separately
 
+      const groupStyles = {};
+      links.forEach(link => {
+        const groupName = link.group || 'Ungrouped';
+        if (!groupStyles[groupName]) {
+            const groupLink = links.find(l => (l.group || 'Ungrouped') === groupName && l.display_style);
+            if (groupLink) {
+                groupStyles[groupName] = groupLink.display_style;
+            }
+        }
+      });
+
       links.forEach((link, index) => { // Use the index from the original links array
         // Skip hidden items unless in edit mode
         if (link.hidden && !document.querySelector('.flex-container2').classList.contains('edit-mode')) {
@@ -1686,16 +1711,23 @@ ul.link-group-content {
           groupedLinks[groupName] = [];
         }
 
+        const displayStyle = groupStyles[groupName] || 'flex';
         let elementToAdd;
 
-        if ((!link.name || link.name.trim() === '') && link.url) {
+        if (displayStyle === 'list-item') {
             const simpleListItem = document.createElement('li');
             simpleListItem.className = 'simple-link-item';
 
             const simpleLink = document.createElement('a');
             simpleLink.href = link.url;
-            simpleLink.textContent = link.url;
             simpleLink.target = '_blank';
+
+            if (link.name && link.name.trim() !== '') {
+                simpleLink.innerHTML = `<span class="link-name">${link.name}</span><span class="link-separator"> </span><span class="link-url">${link.url}</span>`;
+            } else {
+                simpleLink.textContent = link.url;
+            }
+            
             simpleListItem.appendChild(simpleLink);
 
             // Add context menu
@@ -7054,17 +7086,31 @@ async function triggerScans() {
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "Note",
     "horizontal_stack": false,
     "name": "here can u rename the groups from collapsible-group to group_type_top  and link-group-content to        group_type_normal and also link-group.horizontal-stack to group_type_box and popup-content to           group_type_box_expanded ",
+    "password_protect": false,
+    "top_bg_color": "#fbbc04",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "Note",
     "horizontal_stack": false,
-    "name": "div.collapsible-group.expanded div.collapsible-group  div.link-group ul.link-group-content  div.link-group.horizontal-stack div.popup-content"
+    "name": "div.collapsible-group.expanded div.collapsible-group  div.link-group ul.link-group-content  div.link-group.horizontal-stack div.popup-content",
+    "password_protect": false,
+    "top_bg_color": "#fbbc04",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "black"
   },
   {
     "collapsible": false,
@@ -7394,6 +7440,28 @@ async function triggerScans() {
     "horizontal_stack": false,
     "name": "Charlie Kirk died September 10, 2025",
     "url": ""
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Starts 15 Sep 2025",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://acc.teletalk.com.bd/"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [

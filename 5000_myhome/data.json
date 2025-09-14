@@ -2773,17 +2773,31 @@
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "Note",
     "horizontal_stack": false,
     "name": "here can u rename the groups from collapsible-group to group_type_top  and link-group-content to        group_type_normal and also link-group.horizontal-stack to group_type_box and popup-content to           group_type_box_expanded ",
+    "password_protect": false,
+    "top_bg_color": "#fbbc04",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "Note",
     "horizontal_stack": false,
-    "name": "div.collapsible-group.expanded div.collapsible-group  div.link-group ul.link-group-content  div.link-group.horizontal-stack div.popup-content"
+    "name": "div.collapsible-group.expanded div.collapsible-group  div.link-group ul.link-group-content  div.link-group.horizontal-stack div.popup-content",
+    "password_protect": false,
+    "top_bg_color": "#fbbc04",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "black"
   },
   {
     "collapsible": false,
@@ -3113,5 +3127,27 @@
     "horizontal_stack": false,
     "name": "Charlie Kirk died September 10, 2025",
     "url": ""
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Starts 15 Sep 2025",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://acc.teletalk.com.bd/"
   }
 ]
