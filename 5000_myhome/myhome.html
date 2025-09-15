@@ -2316,6 +2316,13 @@ ul.link-group-content {
     const groupDiv = document.createElement('div');
     groupDiv.className = 'link-group';
     groupDiv.dataset.groupName = groupName;
+    groupDiv.draggable = true;
+
+    // Add drag event listeners for the group itself
+    groupDiv.addEventListener('dragstart', handleGroupDragStart);
+    groupDiv.addEventListener('dragover', handleGroupDragOver);
+    groupDiv.addEventListener('drop', handleGroupDrop);
+    groupDiv.addEventListener('dragend', handleGroupDragEnd);
 
     const firstLinkInGroup = linksInGroup[0];
     if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack) {
@@ -2637,6 +2644,10 @@ ul.link-group-content {
   let draggedGroup = null;
 
   function handleGroupDragStart(e) {
+    if (!document.querySelector('.flex-container2').classList.contains('edit-mode')) {
+        e.preventDefault();
+        return;
+    }
     draggedGroup = this;
     this.style.opacity = '0.5';
     e.dataTransfer.effectAllowed = 'move';
@@ -2659,7 +2670,12 @@ ul.link-group-content {
     if (draggedGroup !== this) {
       const draggedGroupName = draggedGroup.dataset.groupName;
       const targetGroupName = this.dataset.groupName;
-      swapCollapsibleGroups(draggedGroupName, targetGroupName);
+      
+      if (draggedGroup.classList.contains('collapsible-group')) {
+        swapCollapsibleGroups(draggedGroupName, targetGroupName);
+      } else {
+        moveGroup(draggedGroupName, targetGroupName);
+      }
     }
     return false;
   }
@@ -3231,23 +3247,20 @@ ul.link-group-content {
   }
 
   // Move entire group up or down
-  async function moveGroup(groupName, direction) {
+  async function moveGroup(draggedGroupName, targetGroupName) {
     try {
       const response = await fetch('/api/links');
       const links = await response.json();
 
       // Get all unique group names in their current order
       const groupNames = [...new Set(links.map(link => link.group || 'Ungrouped'))];
-      const currentIndex = groupNames.indexOf(groupName);
-      const targetIndex = currentIndex + direction;
+      
+      const draggedIndex = groupNames.indexOf(draggedGroupName);
+      const targetIndex = groupNames.indexOf(targetGroupName);
 
-      // Check bounds
-      if (targetIndex < 0 || targetIndex >= groupNames.length) {
-        return;
-      }
-
-      // Swap the group names
-      [groupNames[currentIndex], groupNames[targetIndex]] = [groupNames[targetIndex], groupNames[currentIndex]];
+      // Remove the dragged group name and insert it at the target position
+      groupNames.splice(draggedIndex, 1);
+      groupNames.splice(targetIndex, 0, draggedGroupName);
 
       // Rebuild the links array based on the new group order
       const newLinks = [];
@@ -4690,6 +4703,35 @@ async function triggerScans() {
   },
   {
     "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Exam Date",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "47 BCS Exam 19 Sep",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": ""
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Exam Date",
+    "horizontal_stack": false,
+    "name": "49 bcs 10/10/2025",
+    "url": ""
+  },
+  {
+    "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
     "group": "Local (Flask)",
@@ -5442,6 +5484,55 @@ async function triggerScans() {
     "url": "https://valorantesports.com/en-US/gpr/2025/current"
   },
   {
+    "default_type": "img",
+    "group": "EDU",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
+    "li_bg_color": "#ff0033",
+    "name": "Math Bangla GK",
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "url": "https://www.youtube.com/@mathbanglagk"
+  },
+  {
+    "default_type": "img",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
+    "li_bg_color": "#ff0033",
+    "name": "My Classroom",
+    "url": "https://www.youtube.com/@MyClassroombd"
+  },
+  {
+    "default_type": "img",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-1/475469693_602805549383269_6189720639875721339_n.jpg?stp=cp0_dst-jpg_s40x40_tt6&_nc_cat=1&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeGWFlxSdit_Il7-jUzvuFKfDp8_j9etQAMOnz-P161AA_ZJL514LCTwCPxo9HoOS8u3zRe1txM7yQkhp6UXP-AV&_nc_ohc=wG_hwOt_iP0Q7kNvwHiUxX2&_nc_oc=AdlQ775g0B5zQPlyyWHGJ9jH98TnB8AtPCLr5L7Gq7xxjtgmOoq2xeAXriLMfIjqDoE&_nc_zt=24&_nc_ht=scontent.fdac41-1.fna&_nc_gid=C5FGhvBOB5eUPK9-aPuX7w&oh=00_Afbw_p9gdZpbnzkeKlIvxQfo-cm1YBOKhLvONM1AjOMXLw&oe=68C8F100",
+    "li_bg_color": "#2176ff",
+    "name": "Turning Point Job Aid ",
+    "url": "https://www.facebook.com/turningpointjobaid"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "Right Form Verb",
+    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
+  },
+  {
     "collapsible": false,
     "color": "#ffffff",
     "default_type": "nerd-font",
@@ -5509,55 +5600,6 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
-  },
-  {
-    "default_type": "img",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "img_src": "https://yt3.googleusercontent.com/uJypYXBFdxtiLccPY8OPNLfgrk2f4y5_QhFHl_WzpfBg5SdwcrGsJ2fKEumqoj4AkevyqmR8BUQ=s48-c-k-c0x00ffffff-no-rj-mo",
-    "li_bg_color": "#ff0033",
-    "name": "Math Bangla GK",
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@mathbanglagk"
-  },
-  {
-    "default_type": "img",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
-    "li_bg_color": "#ff0033",
-    "name": "My Classroom",
-    "url": "https://www.youtube.com/@MyClassroombd"
-  },
-  {
-    "default_type": "img",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-1/475469693_602805549383269_6189720639875721339_n.jpg?stp=cp0_dst-jpg_s40x40_tt6&_nc_cat=1&ccb=1-7&_nc_sid=2d3e12&_nc_eui2=AeGWFlxSdit_Il7-jUzvuFKfDp8_j9etQAMOnz-P161AA_ZJL514LCTwCPxo9HoOS8u3zRe1txM7yQkhp6UXP-AV&_nc_ohc=wG_hwOt_iP0Q7kNvwHiUxX2&_nc_oc=AdlQ775g0B5zQPlyyWHGJ9jH98TnB8AtPCLr5L7Gq7xxjtgmOoq2xeAXriLMfIjqDoE&_nc_zt=24&_nc_ht=scontent.fdac41-1.fna&_nc_gid=C5FGhvBOB5eUPK9-aPuX7w&oh=00_Afbw_p9gdZpbnzkeKlIvxQfo-cm1YBOKhLvONM1AjOMXLw&oe=68C8F100",
-    "li_bg_color": "#2176ff",
-    "name": "Turning Point Job Aid ",
-    "url": "https://www.facebook.com/turningpointjobaid"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
-    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "name": "Right Form Verb",
-    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
   },
   {
     "background_color": "#c00000",
@@ -6835,28 +6877,6 @@ async function triggerScans() {
   },
   {
     "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "list-item",
-    "group": "Exam Date",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "name": "47 BCS Exam 19 Sep",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": ""
-  },
-  {
-    "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
     "group": "Sussy",
@@ -7484,13 +7504,6 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black"
-  },
-  {
-    "name": "49 bcs 10/10/2025",
-    "group": "Exam Date",
-    "url": "",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
