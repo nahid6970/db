@@ -128,16 +128,16 @@
     "default_type": "img",
     "horizontal_stack": false,
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "name": "Home",
-    "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
+    "li_bg_color": "white",
+    "name": "Home (copy)",
+    "url": "http://192.168.0.101:5000/"
   },
   {
     "default_type": "img",
     "horizontal_stack": false,
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "li_bg_color": "white",
-    "name": "Home (copy)",
-    "url": "http://192.168.0.101:5000/"
+    "name": "Home",
+    "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
   },
   {
     "default_type": "nerd-font",
