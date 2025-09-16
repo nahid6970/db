@@ -3178,5 +3178,11 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black"
+  },
+  {
+    "name": "playroms",
+    "url": "https://www.playroms.net/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
