@@ -1465,6 +1465,19 @@ ul.link-group-content {
             </div>
           </div>
 
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">
+            Group Item Sizing
+          </h4>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-group-ul-padding" placeholder="UL Padding (e.g., 10px)">
+            <input type="text" id="edit-group-li-margin" placeholder="LI Margin (e.g., 5px)">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-group-li-padding" placeholder="LI Padding (e.g., 0)">
+            <input type="text" id="edit-group-a-padding" placeholder="A Padding (e.g., 5px)">
+          </div>
+          <input type="text" id="edit-group-a-font-size" placeholder="A Font Size (e.g., 16px)">
+
           <button type="submit">Save Group Settings</button>
         </form>
       </div>
@@ -1661,7 +1674,7 @@ ul.link-group-content {
           </div>
           <div id="edit-notification-settings" style="display: none;">
             <input type="text" id="edit-sidebar-button-notification-api" placeholder="Notification API endpoint">
-            <input type="text" id="edit-sidebar-button-mark-seen-api" placeholder="Mark as seen API endpoint">
+            <input type="text" id="sidebar-button-mark-seen-api" placeholder="Mark as seen API endpoint">
           </div>
           <button type="submit">Save Changes</button>
         </form>
@@ -2502,7 +2515,17 @@ ul.link-group-content {
         groupList.className = 'link-group-content';
         groupList.style.display = displayStyle;
 
+        const groupLinkData = linksInGroup.length > 0 ? linksInGroup[0].link : {};
+        if (groupLinkData.ul_padding) groupList.style.padding = groupLinkData.ul_padding;
+
         elements.forEach(element => {
+          if (groupLinkData.li_margin) element.style.margin = groupLinkData.li_margin;
+          if (groupLinkData.li_padding) element.style.padding = groupLinkData.li_padding;
+          const a = element.querySelector('a');
+          if (a) {
+            if (groupLinkData.a_padding) a.style.padding = groupLinkData.a_padding;
+            if (groupLinkData.a_font_size) a.style.fontSize = groupLinkData.a_font_size;
+          }
           groupList.appendChild(element);
         });
 
@@ -2558,6 +2581,11 @@ ul.link-group-content {
     const editGroupHorizontalTextColorInput = document.getElementById('edit-group-horizontal-text-color');
     const editGroupHorizontalBorderColorInput = document.getElementById('edit-group-horizontal-border-color');
     const editGroupHorizontalHoverColorInput = document.getElementById('edit-group-horizontal-hover-color');
+    const editGroupUlPaddingInput = document.getElementById('edit-group-ul-padding');
+    const editGroupLiMarginInput = document.getElementById('edit-group-li-margin');
+    const editGroupLiPaddingInput = document.getElementById('edit-group-li-padding');
+    const editGroupAPaddingInput = document.getElementById('edit-group-a-padding');
+    const editGroupAFontSizeInput = document.getElementById('edit-group-a-font-size');
     const collapsibleRenameSection = document.getElementById('collapsible-rename-section');
 
     editGroupNameInput.value = currentGroupName === 'Ungrouped' ? '' : currentGroupName;
@@ -2583,6 +2611,11 @@ ul.link-group-content {
       editGroupHorizontalTextColorInput.value = linksInGroup[0].horizontal_text_color || '#ffffff';
       editGroupHorizontalBorderColorInput.value = linksInGroup[0].horizontal_border_color || '#0056b3';
       editGroupHorizontalHoverColorInput.value = linksInGroup[0].horizontal_hover_color || '#3a3a3a';
+      editGroupUlPaddingInput.value = linksInGroup[0].ul_padding || '';
+      editGroupLiMarginInput.value = linksInGroup[0].li_margin || '';
+      editGroupLiPaddingInput.value = linksInGroup[0].li_padding || '';
+      editGroupAPaddingInput.value = linksInGroup[0].a_padding || '';
+      editGroupAFontSizeInput.value = linksInGroup[0].a_font_size || '';
     } else {
       editGroupDisplaySelect.value = 'flex'; // Default if no links in group
       editGroupCollapsibleCheckbox.checked = false;
@@ -2601,6 +2634,11 @@ ul.link-group-content {
       editGroupHorizontalTextColorInput.value = '#ffffff';
       editGroupHorizontalBorderColorInput.value = '#0056b3';
       editGroupHorizontalHoverColorInput.value = '#3a3a3a';
+      editGroupUlPaddingInput.value = '';
+      editGroupLiMarginInput.value = '';
+      editGroupLiPaddingInput.value = '';
+      editGroupAPaddingInput.value = '';
+      editGroupAFontSizeInput.value = '';
     }
 
     // Show/hide the rename section based on collapsible checkbox
@@ -2742,7 +2780,7 @@ ul.link-group-content {
   }
 
   // Function to update group name for all links in that group
-  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor) {
+  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor, ulPadding, liMargin, liPadding, aPadding, aFontSize) {
     try {
       const response = await fetch('/api/links');
       const links = await response.json();
@@ -2785,6 +2823,12 @@ ul.link-group-content {
           updatedLink.horizontal_text_color = horizontalTextColor || '#ffffff';
           updatedLink.horizontal_border_color = horizontalBorderColor || '#0056b3';
           updatedLink.horizontal_hover_color = horizontalHoverColor || '#3a3a3a';
+
+          updatedLink.ul_padding = ulPadding;
+          updatedLink.li_margin = liMargin;
+          updatedLink.li_padding = liPadding;
+          updatedLink.a_padding = aPadding;
+          updatedLink.a_font_size = aFontSize;
 
           return updatedLink;
         }
@@ -3033,9 +3077,14 @@ ul.link-group-content {
         const horizontalTextColor = document.getElementById('edit-group-horizontal-text-color').value;
         const horizontalBorderColor = document.getElementById('edit-group-horizontal-border-color').value;
         const horizontalHoverColor = document.getElementById('edit-group-horizontal-hover-color').value;
+        const ulPadding = document.getElementById('edit-group-ul-padding').value;
+        const liMargin = document.getElementById('edit-group-li-margin').value;
+        const liPadding = document.getElementById('edit-group-li-padding').value;
+        const aPadding = document.getElementById('edit-group-a-padding').value;
+        const aFontSize = document.getElementById('edit-group-a-font-size').value;
 
         try {
-          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor);
+          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor, ulPadding, liMargin, liPadding, aPadding, aFontSize);
           if (success) {
             document.getElementById('edit-group-popup').classList.add('hidden');
             fetchAndDisplayLinks();
@@ -4510,13 +4559,13 @@ async function triggerScans() {
     "url": "https://www.messenger.com/"
   },
   {
-    "color": "#ff0000",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-youtube",
     "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "url": "https://www.youtube.com/",
+    "icon_class": "nf nf-fa-youtube",
+    "color": "#ff0000",
+    "default_type": "img",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "color": "#5765f2",
@@ -7513,6 +7562,13 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black"
+  },
+  {
+    "name": "25 Sep",
+    "group": "Temporary",
+    "url": "https://www.burobd.org/career",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [

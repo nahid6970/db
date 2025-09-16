@@ -184,13 +184,13 @@
     "url": "https://www.messenger.com/"
   },
   {
-    "color": "#ff0000",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-youtube",
     "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "url": "https://www.youtube.com/",
+    "icon_class": "nf nf-fa-youtube",
+    "color": "#ff0000",
+    "default_type": "img",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "color": "#5765f2",
@@ -3187,5 +3187,12 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black"
+  },
+  {
+    "name": "25 Sep",
+    "group": "Temporary",
+    "url": "https://www.burobd.org/career",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
