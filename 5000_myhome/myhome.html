@@ -525,7 +525,7 @@ input:checked+.slider:before {
 }
 
 
-.group_type_box_expanded,
+.Menu,
 .group_type_box.expanded {
   background-color: var(--popup-bg-color, #31343a);
   color: var(--popup-text-color, #ffffff);
@@ -553,7 +553,7 @@ input:checked+.slider:before {
   overflow-y: auto;
 }
 
-.group_type_box_expanded .close-button,
+.Menu .close-button,
 .group_type_box.expanded .close-button {
   position: absolute;
   top: 10px;
@@ -671,7 +671,7 @@ input:checked+.slider:before {
 }
 
 /* Additional styling for the edit group popup */
-#edit-group-popup .group_type_box_expanded {
+#edit-group-popup .Menu {
   min-width: 400px;
 }
 
@@ -1234,7 +1234,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 @media (max-width: 600px) {
 
-  .group_type_box_expanded,
+  .Menu,
   .group_type_box.expanded {
     max-width: 90vw;
     max-height: 90vh;
@@ -1411,7 +1411,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="edit-group-popup" class="popup-container hidden">
-      <div class="group_type_box_expanded">
+      <div class="Menu">
         <span class="close-button">&times;</span>
         <h3>Group Settings</h3>
         <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
@@ -1501,7 +1501,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="add-link-popup" class="popup-container hidden">
-      <div class="group_type_box_expanded">
+      <div class="Menu">
         <span class="close-button">&times;</span>
         <h3>Add New Link</h3>
         <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
@@ -1542,7 +1542,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="edit-link-popup" class="popup-container hidden">
-      <div class="group_type_box_expanded">
+      <div class="Menu">
         <span class="close-button">&times;</span>
         <h3>Edit Link</h3>
         <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
@@ -1596,7 +1596,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="add-sidebar-button-popup" class="popup-container hidden">
-      <div class="group_type_box_expanded">
+      <div class="Menu">
         <span class="close-button">&times;</span>
         <h3>Add Sidebar Button</h3>
         <form id="add-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
@@ -1647,7 +1647,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="edit-sidebar-button-popup" class="popup-container hidden">
-      <div class="group_type_box_expanded">
+      <div class="Menu">
         <span class="close-button">&times;</span>
         <h3>Edit Sidebar Button</h3>
         <form id="edit-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
@@ -3440,10 +3440,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       await fetchAndDisplayLinks(); // Re-render the UI
 
       // Re-open the collapsible group if it was open
-      const groupElement = document.querySelector(`.collapsible-group[data-group-name="${groupName}"]`);
+      const groupElement = document.querySelector(`.group_type_top[data-group-name="${groupName}"]`);
       if (groupElement) {
-        const content = groupElement.querySelector('.collapsible-group-content');
-        const toggleBtn = groupElement.querySelector('.collapsible-toggle-btn');
+        const content = groupElement.querySelector('.group_type_top-content');
+        const toggleBtn = groupElement.querySelector('.group_type_top-toggle-btn');
         if (content && toggleBtn) {
           content.classList.add('expanded');
           toggleBtn.textContent = '▲';
@@ -3454,7 +3454,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
       // Re-open the popup if it was open
       const groupDiv = document.querySelector(`.link-group[data-group-name="${groupName}"]`);
-      if (groupDiv && groupDiv.classList.contains('horizontal-stack')) {
+      if (groupDiv && groupDiv.classList.contains('group_type_box')) {
         groupDiv.click();
       }
 
@@ -4214,7 +4214,7 @@ function applyPopupStyling(groupName) {
       const groupLinks = links.filter(link => (link.group || 'Ungrouped') === groupName);
       if (groupLinks.length > 0) {
         const groupSettings = groupLinks[0];
-        const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box.expanded');
+        const popupContents = document.querySelectorAll('.Menu, .group_type_box.expanded');
         
         popupContents.forEach(popup => {
           if (groupSettings.popup_bg_color) {
@@ -4239,7 +4239,7 @@ function applyPopupStyling(groupName) {
 
 // Function to reset popup styling to defaults
 function resetPopupStyling() {
-  const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box.expanded');
+  const popupContents = document.querySelectorAll('.Menu, .group_type_box.expanded');
   popupContents.forEach(popup => {
     popup.style.removeProperty('--popup-bg-color');
     popup.style.removeProperty('--popup-text-color');
@@ -5492,27 +5492,27 @@ async function triggerScans() {
     "url": "http://192.168.0.1/"
   },
   {
-    "name": "23rd Batch-Section B, Department of Finance, University of Dhaka",
-    "group": "FB Groups",
-    "url": "https://www.facebook.com/groups/233541297572633/",
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
-    "default_type": "img",
     "collapsible": false,
+    "default_type": "img",
     "display_style": "flex",
+    "group": "FB Groups",
+    "horizontal_bg_color": "#2176ff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
+    "name": "23rd Batch-Section B, Department of Finance, University of Dhaka",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2176ff",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/233541297572633/"
   },
   {
     "collapsible": false,
@@ -6178,12 +6178,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "diyabari milestone school & college \ud83c\udfaf proshikhon biman blast // 21 july // Chengdu F-7BGI (Combat Jet)",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6191,12 +6200,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "Thailand Launches Airstrikes on Cambodia Amid Deadly Clashes",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6204,12 +6222,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "Thai and Cambodian forces clash as escalating border dispute leaves at least 11 dead",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6217,12 +6244,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": " Canada \u203a Prime minister Mark Carney Since 2025",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6233,14 +6269,23 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "li_bg_color": "white",
     "li_hover_color": "green",
     "name": "\u09e7\u09eb \u09ad\u09be\u0997 \u0995\u09ae\u09bf\u09df\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0993\u09aa\u09b0 \u09e8\u09e6 \u09b6\u09a4\u09be\u0982\u09b6 \u09b6\u09c1\u09b2\u09cd\u0995 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09c7\u09b0 35  \u2794  20",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6248,12 +6293,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "Dragon Bravo Fire in Grand Canyon National Park grows to \"megafire\"  \u2794  A lightning strik",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6261,12 +6315,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "wise words of Mohammed Ali Jinnah, India Muslims will have to prove their loyalty to India throughout their lifetime in order to be accepted as equal citizens.",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6274,12 +6337,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "The 2025 Sydney Harbour Bridge protest was a pro-Palestine protest that occurred on 3 August 2025 on the Harbour Bridge in Sydney, Australia",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6287,12 +6359,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "Trump slaps 50 percent tariff on Indian goods over imports ...",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6300,12 +6381,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "\u0989\u09a4\u09cd\u09a4\u09b0\u09be \u09a5\u09c7\u0995\u09c7 \u09ae\u09a4\u09bf\u099d\u09bf\u09b2 \u09aa\u09b0\u09cd\u09af\u09a8\u09cd\u09a4 \u09ae\u09c7\u099f\u09cd\u09b0\u09cb\u09b0\u09c7\u09b2 \u099a\u09be\u09b2\u09c1 \u0986\u099b\u09c7",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6313,12 +6403,21 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "1 United States Dollar equals 121.56 Bangladeshi Taka",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -6326,40 +6425,131 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "\u09ae\u09c2\u09b2\u09cd\u09af\u09b8\u09cd\u09ab\u09c0\u09a4\u09bf \u09b9\u09b2 \u098f\u0995\u099f\u09bf \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df\u09c7 \u09aa\u09a3\u09cd\u09af \u0993 \u09b8\u09c7\u09ac\u09be\u09b0 \u09a6\u09be\u09ae \u09ac\u09c3\u09a6\u09cd\u09a7\u09bf \u09aa\u09be\u0993\u09df\u09be\u0964 \u09b8\u09b9\u099c \u09ad\u09be\u09b7\u09be\u09df, \u099c\u09bf\u09a8\u09bf\u09b8\u09aa\u09a4\u09cd\u09b0\u09c7\u09b0 \u09a6\u09be\u09ae \u09ac\u09c7\u09dc\u09c7 \u09af\u09be\u0993\u09df\u09be\u0995\u09c7 \u09ae\u09c2\u09b2\u09cd\u09af\u09b8\u09cd\u09ab\u09c0\u09a4\u09bf \u09ac\u09b2\u09be \u09b9\u09df\u0964 \u098f\u09b0 \u09ab\u09b2\u09c7, \u0986\u0997\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u098f\u0995\u0987 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u099c\u09bf\u09a8\u09bf\u09b8 \u0995\u09bf\u09a8\u09a4\u09c7 \u09ac\u09c7\u09b6\u09bf \u0985\u09b0\u09cd\u09a5 \u09ac\u09cd\u09af\u09df \u0995\u09b0\u09a4\u09c7 \u09b9\u09df, \u0985\u09a5\u09ac\u09be \u098f\u0995\u0987 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u0985\u09b0\u09cd\u09a5 \u09a6\u09bf\u09df\u09c7 \u0986\u0997\u09c7\u09b0 \u099a\u09c7\u09df\u09c7 \u0995\u09ae \u099c\u09bf\u09a8\u09bf\u09b8 \u0995\u09c7\u09a8\u09be \u09af\u09be\u09df\u0964",
-    "top_bg_color": "#fff",
-    "top_border_color": "#fff",
-    "top_hover_color": "#fff",
-    "top_text_color": "#000",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "\u09ab\u09bf\u09b2\u09bf\u09b8\u09cd\u09a4\u09bf\u09a8\u0995\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u09bf \u09a6\u09c7\u09ac\u09c7 \u09ac\u09c7\u09b2\u099c\u09bf\u09df\u09be\u09ae",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "\u09a5\u09be\u0987\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7\u09b0 \u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0 \u0986\u09a8\u09c1\u09a4\u09bf\u09a8 \u099a\u09be\u09b0\u09cd\u09a8\u09ad\u09bf\u09b0\u09be\u0995\u09c1\u09b2, \u09ad\u09c2\u09ae\u099c\u09be\u0987\u09a5\u09be\u0987 \u09aa\u09be\u09b0\u09cd\u099f\u09bf\u09b0 \u09aa\u09cd\u09b0\u09c7\u09b8\u09bf\u09a1\u09c7\u09a8\u09cd\u099f",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "img",
+    "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "\u09b8\u09c1\u09aa\u09be\u09b0 \u09ac\u09cd\u09b2\u09be\u09a1 \u09ae\u09c1\u09a8 <br> 7 Sep",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
+    "collapsible": true,
     "default_type": "text",
+    "display_style": "flex",
     "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "Charlie Kirk died September 10, 2025",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
+    "url": ""
+  },
+  {
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Charlie Kirk died September 10, 2025 (copy)",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
     "url": ""
   },
   {
@@ -7106,6 +7296,20 @@ async function triggerScans() {
     "display_style": "flex",
     "group": "Sussy",
     "horizontal_stack": true,
+    "name": "hm",
+    "password_protect": true,
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_stack": true,
     "name": "wutheringwavescafe",
     "password_protect": true,
     "top_bg_color": "#2d2d2d",
@@ -7113,13 +7317,6 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Sussy",
-    "horizontal_stack": false,
-    "name": "hm",
-    "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w"
   },
   {
     "color": "red",
