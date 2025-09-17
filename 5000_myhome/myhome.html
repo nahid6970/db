@@ -526,7 +526,7 @@ input:checked+.slider:before {
 
 
 .group_type_box_expanded,
-.group_type_box-popup-content {
+.group_type_box.expanded {
   background-color: var(--popup-bg-color, #31343a);
   color: var(--popup-text-color, #ffffff);
   border: 1px solid var(--popup-border-color, transparent);
@@ -554,7 +554,7 @@ input:checked+.slider:before {
 }
 
 .group_type_box_expanded .close-button,
-.group_type_box-popup-content .close-button {
+.group_type_box.expanded .close-button {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -1235,7 +1235,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 @media (max-width: 600px) {
 
   .group_type_box_expanded,
-  .group_type_box-popup-content {
+  .group_type_box.expanded {
     max-width: 90vw;
     max-height: 90vh;
   }
@@ -1588,7 +1588,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="group_type_box-popup" class="popup-container hidden">
-      <div class="group_type_box-popup-content">
+      <div class="group_type_box expanded">
         <span class="close-button">&times;</span>
         <h3>Group Items</h3>
         <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -4214,7 +4214,7 @@ function applyPopupStyling(groupName) {
       const groupLinks = links.filter(link => (link.group || 'Ungrouped') === groupName);
       if (groupLinks.length > 0) {
         const groupSettings = groupLinks[0];
-        const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box-popup-content');
+        const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box.expanded');
         
         popupContents.forEach(popup => {
           if (groupSettings.popup_bg_color) {
@@ -4239,7 +4239,7 @@ function applyPopupStyling(groupName) {
 
 // Function to reset popup styling to defaults
 function resetPopupStyling() {
-  const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box-popup-content');
+  const popupContents = document.querySelectorAll('.group_type_box_expanded, .group_type_box.expanded');
   popupContents.forEach(popup => {
     popup.style.removeProperty('--popup-bg-color');
     popup.style.removeProperty('--popup-text-color');
@@ -5492,27 +5492,27 @@ async function triggerScans() {
     "url": "http://192.168.0.1/"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "FB Groups",
-    "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
     "name": "23rd Batch-Section B, Department of Finance, University of Dhaka",
+    "group": "FB Groups",
+    "url": "https://www.facebook.com/groups/233541297572633/",
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t1.6435-9/49074614_1426546947475173_6204354342409994240_n.jpg?stp=c392.0.856.856a_cp0_dst-jpg_s50x50_tt6&_nc_cat=104&ccb=1-7&_nc_sid=33e84f&_nc_eui2=AeEB8oRbwNI2aH6rxD2zijoSpfzLEpa2AWSl_MsSlrYBZJUwi_0GtJccHHEBWHiYgjVBZV0reeRyVEXLSuWLHXsT&_nc_ohc=QoLD7PBjR1sQ7kNvwEWY7Yq&_nc_oc=AdkjMtzW3gyBIXtJZo4c6a_LGue7Jp5kiD6dG0KVORU3FsS4AOL9Q4syqoGS6NU24OM&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=Nhbx917nEORWQcwv4HyoMg&oh=00_AfWdotdpKcXSxSY5GUewMn2TDeCjjnYnftaBBDq02O1boA&oe=68DE7906",
+    "default_type": "img",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/233541297572633/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2176ff",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
