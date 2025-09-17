@@ -2095,28 +2095,6 @@
     "url": ""
   },
   {
-    "collapsible": true,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "info / News",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "name": "Charlie Kirk died September 10, 2025 (copy)",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "white",
-    "top_border_color": "#444444",
-    "top_hover_color": "white",
-    "top_text_color": "black",
-    "url": ""
-  },
-  {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
