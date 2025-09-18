@@ -829,6 +829,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 8,
+                "title": "Dr. STONE - s04e23 - [81] - Scientist, All Alone HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-09-18T21:12:38.192420",
+                "notify": "unseen"
+            },
+            {
                 "id": 7,
                 "title": "Dr. STONE - s04e22 - [80] - Until We Meet Again HDTV-1080p - [SubsPlease]",
                 "watched": true,
