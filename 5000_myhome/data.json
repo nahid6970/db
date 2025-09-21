@@ -2051,26 +2051,26 @@
     "url": ""
   },
   {
-    "collapsible": true,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "info / News",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
     "name": "\u09b8\u09c1\u09aa\u09be\u09b0 \u09ac\u09cd\u09b2\u09be\u09a1 \u09ae\u09c1\u09a8 <br> 7 Sep",
+    "group": "info / News",
+    "url": "",
+    "default_type": "text",
+    "collapsible": true,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "white",
+    "top_text_color": "black",
     "top_border_color": "#444444",
     "top_hover_color": "white",
-    "top_text_color": "black",
-    "url": ""
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": true,
@@ -3438,5 +3438,19 @@
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "black"
+  },
+  {
+    "name": "Pakistan-Saudi Defence Pact -- 17 September 2025 by Saudi Crown Prince Mohammed Bin Salman and Pakistan Prime Minister Shehbaz Sharif in Riyadh",
+    "group": "info / News",
+    "url": "",
+    "default_type": "text",
+    "horizontal_stack": false
+  },
+  {
+    "name": "7 Oct",
+    "group": "Temporary",
+    "url": "https://npo.teletalk.com.bd/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
