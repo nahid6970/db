@@ -11,14 +11,14 @@
                 "title": "One Piece - s22e59 - [1144] - The Worst Nightmare - The Five Elders Come Together WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-09-22T13:59:00.336469",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "One Piece - s22e59 - [1144] - The Worst Nightmare - The Five Elders Come Together WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-09-21T23:25:03.503040",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 14,
@@ -1879,7 +1879,7 @@
                 "title": "WWE Raw - 2025-09-22 - RAW 1687 HDTV-1080p",
                 "watched": true,
                 "added_date": "2025-09-23T13:23:54.718952",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 7,
@@ -2190,6 +2190,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "Alien - Earth - S01E08 - The Real Monsters WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-24T09:56:48.768186",
+                "notify": "seen"
+            },
+            {
                 "id": 7,
                 "title": "Alien - Earth - S01E07 - Emergence WEBDL-1080p",
                 "watched": false,
@@ -2318,7 +2325,7 @@
                 "title": "The Walking Dead - Daryl Dixon - S03E03 - El Sacrificio WEBRip-1080p",
                 "watched": false,
                 "added_date": "2025-09-21T20:00:34.913616",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
@@ -2340,12 +2347,19 @@
     {
         "id": 32,
         "title": "Gen V",
-        "year": "",
-        "cover_image": "",
+        "year": "2023",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/417909/posters/687fcb3525d62.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Gen V",
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 4,
+                "title": "Gen V - S02E04 - Bags WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-24T15:56:48.378951",
+                "notify": "seen"
+            },
             {
                 "id": 3,
                 "title": "Gen V - S02E03 - H is for Human WEBDL-1080p",
@@ -2367,6 +2381,7 @@
                 "added_date": "2025-09-18T09:28:37.587421",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
