@@ -843,6 +843,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 9,
+                "title": "Dr. STONE - s04e24 - [82] - WHOLE NEW WORLD HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-09-25T21:21:42.348729",
+                "notify": "unseen"
+            },
+            {
                 "id": 8,
                 "title": "Dr. STONE - s04e23 - [81] - Scientist, All Alone HDTV-1080p - [SubsPlease]",
                 "watched": true,
