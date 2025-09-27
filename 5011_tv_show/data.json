@@ -2401,6 +2401,20 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "Alice in Borderland (2020) - S03E05 - Episode 5 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-27T10:11:05.549219",
+                "notify": "unseen"
+            },
+            {
+                "id": 4,
+                "title": "Alice in Borderland (2020) - S03E04 - Episode 4 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-26T22:11:34.937136",
+                "notify": "unseen"
+            },
+            {
                 "id": 3,
                 "title": "Alice in Borderland (2020) - S03E03 - Episode 3 WEBDL-1080p",
                 "watched": false,
