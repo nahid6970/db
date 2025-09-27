@@ -845,9 +845,9 @@
             {
                 "id": 9,
                 "title": "Dr. STONE - s04e24 - [82] - WHOLE NEW WORLD HDTV-1080p - [SubsPlease]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-09-25T21:21:42.348729",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 8,
@@ -905,7 +905,9 @@
                 "notify": "seen"
             }
         ],
-        "rating": "5"
+        "rating": "5",
+        "status": "Continuing",
+        "sonarr_url": "http://192.168.0.101:8989/series/dr-stone"
     },
     {
         "id": 10,
@@ -2014,6 +2016,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 8,
+                "title": "WWE SmackDown - 2025-09-26 - SmackDown 1362 HDTV-1080p",
+                "watched": true,
+                "added_date": "2025-09-27T18:25:13.218526",
+                "notify": "seen"
+            },
+            {
                 "id": 7,
                 "title": "WWE SmackDown - 2025-09-19 - SmackDown 1361 HDTV-1080p",
                 "watched": true,
@@ -2401,39 +2410,46 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "Alice in Borderland (2020) - S03E06 - Episode 6 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-27T12:02:14.283229",
+                "notify": "seen"
+            },
+            {
                 "id": 5,
                 "title": "Alice in Borderland (2020) - S03E05 - Episode 5 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-27T10:11:05.549219",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Alice in Borderland (2020) - S03E04 - Episode 4 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-26T22:11:34.937136",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Alice in Borderland (2020) - S03E03 - Episode 3 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-26T21:11:34.940701",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Alice in Borderland (2020) - S03E02 - Episode 2 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-26T19:11:35.070638",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Alice in Borderland (2020) - S03E01 - Episode 1 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-26T19:11:35.070638",
-                "notify": "unseen"
+                "notify": "seen"
             }
         ]
     }
