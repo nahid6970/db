@@ -2344,6 +2344,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 4,
+                "title": "The Walking Dead - Daryl Dixon - S03E04 - La Justicia Fronteriza WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-09-28T16:55:53.569050",
+                "notify": "unseen"
+            },
+            {
                 "id": 3,
                 "title": "The Walking Dead - Daryl Dixon - S03E03 - El Sacrificio WEBRip-1080p",
                 "watched": false,
@@ -2457,6 +2464,45 @@
                 "watched": false,
                 "added_date": "2025-09-26T19:11:35.070638",
                 "notify": "seen"
+            }
+        ]
+    },
+    {
+        "id": 34,
+        "title": "Marvel Zombies",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Marvel Zombies",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 4,
+                "title": "Marvel Zombies - S01E04 - Episode 4 WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-28T18:00:33.612089",
+                "notify": "unseen"
+            },
+            {
+                "id": 3,
+                "title": "Marvel Zombies - S01E03 - Episode 3 WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-28T18:00:33.612089",
+                "notify": "unseen"
+            },
+            {
+                "id": 2,
+                "title": "Marvel Zombies - S01E02 - Episode 2 WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-28T18:00:33.612089",
+                "notify": "unseen"
+            },
+            {
+                "id": 1,
+                "title": "Marvel Zombies - S01E01 - Episode 1 WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-09-28T18:00:33.612089",
+                "notify": "unseen"
             }
         ]
     }
