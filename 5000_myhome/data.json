@@ -3458,5 +3458,41 @@
     "img_src": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgBCgkLARYDDQwMARsIFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclFSU3Nzc3Nzc3Nys3Nzc3Nys3Nzc3Nzc3Nzc3Nzc3Kzc3Nzc3Nzc3NzcrNzc3KysrNys3K//AABEIABAAEAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAGBQH/xAAlEAACAQIFAwUAAAAAAAAAAAABAgQDIQUGBxESABMxCBRRgpH/xAAVAQEBAAAAAAAAAAAAAAAAAAAFA//EABYRAQEBAAAAAAAAAAAAAAAAABEAAv/aAAwDAQACEQMRAD8AORINcRmiwsv+nepMXSwY2xr5DWW3Hirb3tZeRIHyvUyrIer2HfBtDgraHHFmaLoII3JeRHIAWI8dKMZEPEoSyY9fLj93SOjhkiM2aRQJ2UblW+q/nW1jEjw6RVtLo1NPSe2UqFCnmb3HAMOTEnySSdr2sb32CBpaTf/Z",
     "default_type": "img",
     "horizontal_stack": false
+  },
+  {
+    "name": "aider",
+    "group": "Chat-BOTE",
+    "url": "https://aider.chat/",
+    "img_src": "https://aider.chat/assets/logo.svg",
+    "default_type": "img",
+    "horizontal_stack": false
+  },
+  {
+    "name": "pythagora",
+    "group": "Chat-BOTE",
+    "url": "https://www.pythagora.ai/?utm_source=openalternative.co",
+    "default_type": "text",
+    "horizontal_stack": false
+  },
+  {
+    "name": "tabbyml",
+    "group": "Chat-BOTE",
+    "url": "https://www.tabbyml.com/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "voideditor",
+    "group": "Chat-BOTE",
+    "url": "https://voideditor.com/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "plandex",
+    "group": "Chat-BOTE",
+    "url": "https://docs.plandex.ai/models/ollama/",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   }
 ]
