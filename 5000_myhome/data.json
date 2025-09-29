@@ -505,6 +505,55 @@
     "url": "https://www.burobd.org/career"
   },
   {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "7 Oct",
+    "url": "https://npo.teletalk.com.bd/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "19 oct",
+    "url": "https://dcd.teletalk.com.bd/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "Starts 5oct ends 5 nov",
+    "url": "https://rdarajshahi.teletalk.com.bd/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "15 oct",
+    "url": "https://hotjobs.bdjobs.com/jobs/abconsumerpl/abconsumerpl1.htm"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "Start 24sep END 20oct",
+    "url": "http://bpsc.teletalk.com.bd/ncad"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "Start 25sep End 23oct",
+    "url": "https://dcd.teletalk.com.bd/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Temporary",
+    "horizontal_stack": false,
+    "name": "Start 28sep End 12oct",
+    "url": "https://caab.teletalk.com.bd/caab092025/"
+  },
+  {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "list-item",
@@ -1313,13 +1362,13 @@
     "url": "https://www.youtube.com/@MyClassroombd"
   },
   {
-    "name": "Turning Point Job Aid ",
-    "group": "EDU",
-    "url": "https://www.facebook.com/turningpointjobaid",
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/475469693_602805549383269_6189720639875721339_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGWFlxSdit_Il7-jUzvuFKfDp8_j9etQAMOnz-P161AA_ZJL514LCTwCPxo9HoOS8u3zRe1txM7yQkhp6UXP-AV&_nc_ohc=iET1y4qVXBsQ7kNvwHnJy4D&_nc_oc=AdmPOEcjlQAJGGD487wL3kTVe31axRKmt4kFuFLl5oVB4jnuCiV8qKkHYG-O2CQCgec&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=YvBFa-78NQm5XM3OMyArhg&oh=00_AfbEnDqyLvXo-2C3DvPj2mp90Y3zjLtz8RTWtHdINqNXLA&oe=68D34CFA",
     "default_type": "img",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/475469693_602805549383269_6189720639875721339_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGWFlxSdit_Il7-jUzvuFKfDp8_j9etQAMOnz-P161AA_ZJL514LCTwCPxo9HoOS8u3zRe1txM7yQkhp6UXP-AV&_nc_ohc=iET1y4qVXBsQ7kNvwHnJy4D&_nc_oc=AdmPOEcjlQAJGGD487wL3kTVe31axRKmt4kFuFLl5oVB4jnuCiV8qKkHYG-O2CQCgec&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=YvBFa-78NQm5XM3OMyArhg&oh=00_AfbEnDqyLvXo-2C3DvPj2mp90Y3zjLtz8RTWtHdINqNXLA&oe=68D34CFA",
     "li_bg_color": "#2176ff",
-    "horizontal_stack": false
+    "name": "Turning Point Job Aid ",
+    "url": "https://www.facebook.com/turningpointjobaid"
   },
   {
     "default_type": "nerd-font",
@@ -1405,12 +1454,12 @@
     "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
   },
   {
-    "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
-    "group": "Deadline",
-    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule",
-    "default_type": "nerd-font",
     "background_color": "#c00000",
-    "horizontal_stack": false
+    "default_type": "nerd-font",
+    "group": "Deadline",
+    "horizontal_stack": false,
+    "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
+    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule"
   },
   {
     "default_type": "text",
@@ -1532,6 +1581,42 @@
     "url": "https://github.com/rsxdalv/TTS-WebUI?tab=readme-ov-file#installation"
   },
   {
+    "default_type": "img",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "img_src": "https://aider.chat/assets/logo.svg",
+    "name": "aider",
+    "url": "https://aider.chat/"
+  },
+  {
+    "default_type": "text",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "pythagora",
+    "url": "https://www.pythagora.ai/?utm_source=openalternative.co"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "tabbyml",
+    "url": "https://www.tabbyml.com/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "voideditor",
+    "url": "https://voideditor.com/"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Chat-BOTE",
+    "horizontal_stack": false,
+    "name": "plandex",
+    "url": "https://docs.plandex.ai/models/ollama/"
+  },
+  {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
@@ -1547,19 +1632,19 @@
     "url": "https://scoop.sh/#/"
   },
   {
-    "name": "Fitgirl",
-    "group": "Download PKG",
-    "url": "https://fitgirl-repacks.site/",
-    "img_src": "http://fitgirl-repacks.site/wp-content/uploads/2016/08/cropped-icon-192x192.jpg",
-    "default_type": "img",
     "collapsible": false,
+    "default_type": "img",
     "display_style": "flex",
+    "group": "Download PKG",
     "horizontal_stack": true,
+    "img_src": "http://fitgirl-repacks.site/wp-content/uploads/2016/08/cropped-icon-192x192.jpg",
+    "name": "Fitgirl",
     "password_protect": false,
     "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a"
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://fitgirl-repacks.site/"
   },
   {
     "background_color": "black",
@@ -2007,26 +2092,26 @@
     "url": ""
   },
   {
-    "name": "\u09b8\u09c1\u09aa\u09be\u09b0 \u09ac\u09cd\u09b2\u09be\u09a1 \u09ae\u09c1\u09a8 <br> 7 Sep",
-    "group": "info / News",
-    "url": "",
-    "default_type": "text",
     "collapsible": true,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "info / News",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "\u09b8\u09c1\u09aa\u09be\u09b0 \u09ac\u09cd\u09b2\u09be\u09a1 \u09ae\u09c1\u09a8 <br> 7 Sep",
     "password_protect": false,
-    "top_bg_color": "white",
-    "top_text_color": "black",
-    "top_border_color": "#444444",
-    "top_hover_color": "white",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "white",
+    "top_border_color": "#444444",
+    "top_hover_color": "white",
+    "top_text_color": "black",
+    "url": ""
   },
   {
     "collapsible": true,
@@ -2048,6 +2133,13 @@
     "top_border_color": "#444444",
     "top_hover_color": "white",
     "top_text_color": "black",
+    "url": ""
+  },
+  {
+    "default_type": "text",
+    "group": "info / News",
+    "horizontal_stack": false,
+    "name": "Pakistan-Saudi Defence Pact -- 17 September 2025 by Saudi Crown Prince Mohammed Bin Salman and Pakistan Prime Minister Shehbaz Sharif in Riyadh",
     "url": ""
   },
   {
@@ -3032,6 +3124,14 @@
     "url": "https://mantine.dev/"
   },
   {
+    "default_type": "img",
+    "group": "Powerful Website",
+    "horizontal_stack": false,
+    "img_src": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgBCgkLARYDDQwMARsIFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclFSU3Nzc3Nzc3Nys3Nzc3Nys3Nzc3Nzc3Nzc3Nzc3Kzc3Nzc3Nzc3NzcrNzc3KysrNys3K//AABEIABAAEAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAGBQH/xAAlEAACAQIFAwUAAAAAAAAAAAABAgQDIQUGBxESABMxCBRRgpH/xAAVAQEBAAAAAAAAAAAAAAAAAAAFA//EABYRAQEBAAAAAAAAAAAAAAAAABEAAv/aAAwDAQACEQMRAD8AORINcRmiwsv+nepMXSwY2xr5DWW3Hirb3tZeRIHyvUyrIer2HfBtDgraHHFmaLoII3JeRHIAWI8dKMZEPEoSyY9fLj93SOjhkiM2aRQJ2UblW+q/nW1jEjw6RVtLo1NPSe2UqFCnmb3HAMOTEnySSdr2sb32CBpaTf/Z",
+    "name": "Marco Pontello's Home Page\t",
+    "url": "https://mark0.net/soft-tridnet-e.html"
+  },
+  {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
@@ -3396,110 +3496,10 @@
     "top_text_color": "black"
   },
   {
-    "name": "Pakistan-Saudi Defence Pact -- 17 September 2025 by Saudi Crown Prince Mohammed Bin Salman and Pakistan Prime Minister Shehbaz Sharif in Riyadh",
-    "group": "info / News",
-    "url": "",
     "default_type": "text",
-    "horizontal_stack": false
-  },
-  {
-    "name": "7 Oct",
-    "group": "Temporary",
-    "url": "https://npo.teletalk.com.bd/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "19 oct",
-    "group": "Temporary",
-    "url": "https://dcd.teletalk.com.bd/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Starts 5oct ends 5 nov",
-    "group": "Temporary",
-    "url": "https://rdarajshahi.teletalk.com.bd/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "15 oct",
-    "group": "Temporary",
-    "url": "https://hotjobs.bdjobs.com/jobs/abconsumerpl/abconsumerpl1.htm",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Start 24sep END 20oct",
-    "group": "Temporary",
-    "url": "http://bpsc.teletalk.com.bd/ncad",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Start 25sep End 23oct",
-    "group": "Temporary",
-    "url": "https://dcd.teletalk.com.bd/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "NAHID AHMED,  \u098f\u09b0 \u09ae\u09be\u09a7\u09cd\u09af\u09ae\u09c7 IDRA \u098f\u09b0 Assistant Director  \u098f\u09b0 \u099c\u09a8\u09cd\u09af \u09aa\u09c7\u09ae\u09c7\u09a8\u09cd\u099f \u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u09b9\u09af\u09bc\u09c7\u099b\u09c7\u0964 \u0987\u0989\u099c\u09be\u09b0: 2WYUZKMC \u098f\u09ac\u0982 \u09aa\u09be\u09b8\u0993\u09af\u09bc\u09be\u09b0\u09cd\u09a1: I285695L. Powered by Teletalk.",
     "group": "Note",
-    "url": "",
-    "default_type": "text",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Marco Pontello's Home Page\t",
-    "group": "Powerful Website",
-    "url": "https://mark0.net/soft-tridnet-e.html",
-    "img_src": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgBCgkLARYDDQwMARsIFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclFSU3Nzc3Nzc3Nys3Nzc3Nys3Nzc3Nzc3Nzc3Nzc3Kzc3Nzc3Nzc3NzcrNzc3KysrNys3K//AABEIABAAEAMBIgACEQEDEQH/xAAWAAEBAQAAAAAAAAAAAAAAAAAGBQH/xAAlEAACAQIFAwUAAAAAAAAAAAABAgQDIQUGBxESABMxCBRRgpH/xAAVAQEBAAAAAAAAAAAAAAAAAAAFA//EABYRAQEBAAAAAAAAAAAAAAAAABEAAv/aAAwDAQACEQMRAD8AORINcRmiwsv+nepMXSwY2xr5DWW3Hirb3tZeRIHyvUyrIer2HfBtDgraHHFmaLoII3JeRHIAWI8dKMZEPEoSyY9fLj93SOjhkiM2aRQJ2UblW+q/nW1jEjw6RVtLo1NPSe2UqFCnmb3HAMOTEnySSdr2sb32CBpaTf/Z",
-    "default_type": "img",
-    "horizontal_stack": false
-  },
-  {
-    "name": "aider",
-    "group": "Chat-BOTE",
-    "url": "https://aider.chat/",
-    "img_src": "https://aider.chat/assets/logo.svg",
-    "default_type": "img",
-    "horizontal_stack": false
-  },
-  {
-    "name": "pythagora",
-    "group": "Chat-BOTE",
-    "url": "https://www.pythagora.ai/?utm_source=openalternative.co",
-    "default_type": "text",
-    "horizontal_stack": false
-  },
-  {
-    "name": "tabbyml",
-    "group": "Chat-BOTE",
-    "url": "https://www.tabbyml.com/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "voideditor",
-    "group": "Chat-BOTE",
-    "url": "https://voideditor.com/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "plandex",
-    "group": "Chat-BOTE",
-    "url": "https://docs.plandex.ai/models/ollama/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
-  },
-  {
-    "name": "Start 28sep End 12oct",
-    "group": "Temporary",
-    "url": "https://caab.teletalk.com.bd/caab092025/",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "name": "NAHID AHMED,  \u098f\u09b0 \u09ae\u09be\u09a7\u09cd\u09af\u09ae\u09c7 IDRA \u098f\u09b0 Assistant Director  \u098f\u09b0 \u099c\u09a8\u09cd\u09af \u09aa\u09c7\u09ae\u09c7\u09a8\u09cd\u099f \u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u09b9\u09af\u09bc\u09c7\u099b\u09c7\u0964 \u0987\u0989\u099c\u09be\u09b0: 2WYUZKMC \u098f\u09ac\u0982 \u09aa\u09be\u09b8\u0993\u09af\u09bc\u09be\u09b0\u09cd\u09a1: I285695L. Powered by Teletalk.",
+    "url": ""
   }
 ]
