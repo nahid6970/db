@@ -2348,7 +2348,7 @@
                 "title": "The Walking Dead - Daryl Dixon - S03E04 - La Justicia Fronteriza WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-09-28T16:55:53.569050",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
@@ -2418,7 +2418,7 @@
         "id": 33,
         "title": "Alice in Borderland (2020)",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/376472/posters/68d6b6fd02d08.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Alice in Borderland (2020)",
         "rating": null,
         "status": "Continuing",
@@ -2465,13 +2465,14 @@
                 "added_date": "2025-09-26T19:11:35.070638",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 34,
         "title": "Marvel Zombies",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/412428/posters/68cd9e6f1070a.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Marvel Zombies",
         "rating": null,
         "status": "Continuing",
@@ -2481,29 +2482,30 @@
                 "title": "Marvel Zombies - S01E04 - Episode 4 WEBRip-1080p",
                 "watched": false,
                 "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Marvel Zombies - S01E03 - Episode 3 WEBRip-1080p",
                 "watched": false,
                 "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Marvel Zombies - S01E02 - Episode 2 WEBRip-1080p",
                 "watched": false,
                 "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Marvel Zombies - S01E01 - Episode 1 WEBRip-1080p",
                 "watched": false,
                 "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
