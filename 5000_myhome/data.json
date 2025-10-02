@@ -3538,5 +3538,13 @@
     "url": "https://www.jagojobs.com/company-jobs/6971",
     "default_type": "nerd-font",
     "horizontal_stack": false
+  },
+  {
+    "name": "HowToMen",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@howtomen",
+    "img_src": "https://yt3.ggpht.com/sYd3DP2-jvCYlKBFafTU6yGSE_g-16NxTuglyzT7YbYWuL1KR4QCn4o8cIumDGY7NzcBynkRvQ=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
