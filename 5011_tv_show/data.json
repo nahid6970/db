@@ -2030,6 +2030,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 9,
+                "title": "WWE SmackDown - 2025-10-03 - SmackDown 1363 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-10-04T20:01:39.864456",
+                "notify": "unseen"
+            },
+            {
                 "id": 8,
                 "title": "WWE SmackDown - 2025-09-26 - SmackDown 1362 HDTV-1080p",
                 "watched": true,
@@ -2535,5 +2542,41 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 35,
+        "title": "My Hero Academia",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\My Hero Academia",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "My Hero Academia - s08e01 - [160] - Toshinori Yagi - Rising Origin WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-10-04T23:05:12.822429",
+                "notify": "unseen"
+            }
+        ]
+    },
+    {
+        "id": 36,
+        "title": "SPY x FAMILY",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\SPY x FAMILY",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "SPY x FAMILY - s03e01 - [38] - BERLINT PANIC + THE INFORMANT AND NIGHTFALL WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-10-04T23:05:12.822429",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
