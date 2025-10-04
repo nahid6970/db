@@ -1893,7 +1893,7 @@
             {
                 "id": 9,
                 "title": "WWE Raw - 2025-09-29 - RAW 1688 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-09-30T17:25:53.683618",
                 "notify": "seen"
             },
@@ -2032,9 +2032,9 @@
             {
                 "id": 9,
                 "title": "WWE SmackDown - 2025-10-03 - SmackDown 1363 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-10-04T20:01:39.864456",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 8,
@@ -2298,7 +2298,7 @@
                 "title": "Peacemaker - S02E07 - Like a Keith in the Night WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-10-03T12:35:25.488997",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 6,
@@ -2546,8 +2546,8 @@
     {
         "id": 35,
         "title": "My Hero Academia",
-        "year": "",
-        "cover_image": "",
+        "year": "2016",
+        "cover_image": "https://artworks.thetvdb.com/banners/posters/305074-5.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\My Hero Academia",
         "rating": null,
         "status": "Continuing",
@@ -2557,15 +2557,16 @@
                 "title": "My Hero Academia - s08e01 - [160] - Toshinori Yagi - Rising Origin WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-10-04T23:05:12.822429",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 36,
         "title": "SPY x FAMILY",
-        "year": "",
-        "cover_image": "",
+        "year": "2022",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/405920/posters/622527d8f031d.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\SPY x FAMILY",
         "rating": null,
         "status": "Continuing",
@@ -2575,8 +2576,9 @@
                 "title": "SPY x FAMILY - s03e01 - [38] - BERLINT PANIC + THE INFORMANT AND NIGHTFALL WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-10-04T23:05:12.822429",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
