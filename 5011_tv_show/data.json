@@ -2376,7 +2376,7 @@
                 "title": "The Walking Dead - Daryl Dixon - S03E05 - Limbo HDTV-720p",
                 "watched": false,
                 "added_date": "2025-10-05T14:55:15.394352",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
@@ -2591,8 +2591,8 @@
     {
         "id": 37,
         "title": "To Your Eternity",
-        "year": "",
-        "cover_image": "",
+        "year": "2021",
+        "cover_image": "https://artworks.thetvdb.com/banners/series/375271/posters/602a0fefa42e0.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\To Your Eternity",
         "rating": null,
         "status": "Continuing",
@@ -2602,8 +2602,9 @@
                 "title": "To Your Eternity - s03e01 - [41] - Peaceful World HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2025-10-05T10:55:15.390882",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
