@@ -2372,6 +2372,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "The Walking Dead - Daryl Dixon - S03E05 - Limbo HDTV-720p",
+                "watched": false,
+                "added_date": "2025-10-05T14:55:15.394352",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "The Walking Dead - Daryl Dixon - S03E04 - La Justicia Fronteriza WEBDL-1080p",
                 "watched": false,
