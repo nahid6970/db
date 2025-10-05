@@ -2580,5 +2580,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 37,
+        "title": "To Your Eternity",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\To Your Eternity",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "To Your Eternity - s03e01 - [41] - Peaceful World HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-10-05T10:55:15.390882",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
