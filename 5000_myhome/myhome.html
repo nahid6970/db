@@ -1185,6 +1185,16 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   color: white;
 }
 
+.context-menu-item.context-menu-new-tab {
+  color: #ff9800;
+  /* Orange */
+}
+
+.context-menu-item.context-menu-new-tab:hover {
+  background-color: #ff9800;
+  color: white;
+}
+
 .group_type_top-content .link-item.add-link-item {
   width: 50px;
   height: 50px;
@@ -1766,6 +1776,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             // Add context menu
             simpleListItem.addEventListener('contextmenu', (event) => {
                 const items = [
+                    { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
                     { label: 'Edit', action: () => openEditLinkPopup(link, index) },
                     { label: 'Copy', action: () => copyLink(link, index) },
                     { label: 'Delete', action: () => deleteLink(index) }
@@ -1832,6 +1843,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
             listItem.addEventListener('contextmenu', (event) => {
                 const items = [
+                    {
+                        label: 'New-Tab',
+                        action: () => window.open(link.url, '_blank')
+                    },
                     {
                         label: 'Edit',
                         action: () => openEditLinkPopup(link, index)
@@ -2005,6 +2020,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       const linkInfo = links[index];
       clonedElement.addEventListener('contextmenu', (event) => {
         const items = [
+            {
+                label: 'New-Tab',
+                action: () => window.open(linkInfo.link.url, '_blank')
+            },
             {
                 label: 'Edit',
                 action: () => openEditLinkPopup(linkInfo.link, linkInfo.index)
@@ -2316,6 +2335,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                 if (linkData) {
                     clonedElement.addEventListener('contextmenu', (event) => {
                         const items = [
+                            { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                             { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                             { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
                             { label: 'Delete', action: () => deleteLink(linkIndex) }
@@ -2350,6 +2370,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                 if (linkData) {
                     clonedElement.addEventListener('contextmenu', (event) => {
                         const items = [
+                            { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                             { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                             { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
                             { label: 'Delete', action: () => deleteLink(linkIndex) }
@@ -2469,6 +2490,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           if (linkData) {
             clonedElement.addEventListener('contextmenu', (event) => {
                 const items = [
+                    {
+                        label: 'New-Tab',
+                        action: () => window.open(linkData.link.url, '_blank')
+                    },
                     {
                         label: 'Edit',
                         action: () => openEditLinkPopup(linkData.link, linkData.index)
@@ -4448,6 +4473,30 @@ async function triggerScans() {
     }, 2000);
   }
 }</script>
+    
+    <script>
+    // Handle file:// URLs by intercepting clicks
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link && link.href && link.href.startsWith('file:///')) {
+            e.preventDefault();
+            const filePath = link.href.replace('file:///', '');
+            
+            fetch(`/open-file?path=${encodeURIComponent(filePath)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success) {
+                        console.error('Failed to open file:', data.error);
+                        alert('Failed to open file: ' + data.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error opening file:', error);
+                    alert('Error opening file: ' + error);
+                });
+        }
+    });
+    </script>
 
 
 
@@ -7960,54 +8009,84 @@ async function triggerScans() {
     "url": ""
   },
   {
-    "name": "kilObit",
+    "default_type": "img",
     "group": "Youtube Channel",
-    "url": "https://www.youtube.com/@kilObit",
+    "horizontal_stack": false,
     "img_src": "https://yt3.ggpht.com/25c8GUa-CAXSL3mwIntoyWmYHVPG4-r587zHX2uvZwMiphFO_ocLHTc50tW5yIi56dje4Hzl1Q=s48-c-k-c0x00ffffff-no-rj",
-    "default_type": "img",
-    "horizontal_stack": false
+    "name": "kilObit",
+    "url": "https://www.youtube.com/@kilObit"
   },
   {
-    "name": "n8n",
+    "default_type": "img",
     "group": "Local (Apps)",
-    "url": "http://localhost:5678/home/workflows",
+    "horizontal_stack": false,
     "img_src": "https://avatars.githubusercontent.com/u/45487711?s=48&v=4",
-    "default_type": "img",
-    "horizontal_stack": false
-  },
-  {
     "name": "n8n",
-    "group": "Git-Projects",
-    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "http://localhost:5678/home/workflows"
   },
   {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
+    "name": "n8n",
+    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
     "name": "Character-Map-UWP",
-    "group": "Git-Projects",
-    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file"
   },
   {
-    "name": "End 7oct",
+    "default_type": "nerd-font",
     "group": "Temporary",
-    "url": "https://www.jagojobs.com/company-jobs/6971",
+    "horizontal_stack": false,
+    "name": "End 7oct",
+    "url": "https://www.jagojobs.com/company-jobs/6971"
+  },
+  {
+    "default_type": "img",
+    "group": "Youtube Channel",
+    "horizontal_stack": false,
+    "img_src": "https://yt3.ggpht.com/sYd3DP2-jvCYlKBFafTU6yGSE_g-16NxTuglyzT7YbYWuL1KR4QCn4o8cIumDGY7NzcBynkRvQ=s48-c-k-c0x00ffffff-no-rj",
+    "name": "HowToMen",
+    "url": "https://www.youtube.com/@howtomen"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
+    "name": "claude-code-router",
+    "url": "https://github.com/musistudio/claude-code-router"
+  },
+  {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
+    "name": "PRINCIPLES OF MANAGERIAL FINAN\u0421\u0415",
+    "url": "file:///D:/MEGA/academic/@Book/[Lawrence_J._Gitman,_Chad_J._Zutter]_Principles_of(b-ok.xyz).pdf"
+  },
+  {
+    "name": "The Economics of Money, Banking, and Financial Markets",
+    "url": "file:///D:/MEGA/academic/@Book/Frederic%20Mishkin%20-%20The%20Economics%20of%20Money,%20Banking%20and%20Financial%20Markets[11thED][GlobalED]_Real.pdf",
     "default_type": "nerd-font",
     "horizontal_stack": false
   },
   {
-    "name": "HowToMen",
-    "group": "Youtube Channel",
-    "url": "https://www.youtube.com/@howtomen",
-    "img_src": "https://yt3.ggpht.com/sYd3DP2-jvCYlKBFafTU6yGSE_g-16NxTuglyzT7YbYWuL1KR4QCn4o8cIumDGY7NzcBynkRvQ=s48-c-k-c0x00ffffff-no-rj",
-    "default_type": "img",
+    "name": "Corporate Finance",
+    "url": "file:///D:/MEGA/academic/@Book/Corporate%20Finance%2010%20edition.pdf",
+    "default_type": "nerd-font",
     "horizontal_stack": false
   },
   {
-    "name": "claude-code-router",
-    "group": "Git-Projects",
-    "url": "https://github.com/musistudio/claude-code-router",
+    "name": "Intermediate Accounting, IFRS 2nd edition (Kieso, Weygandt)",
+    "url": "file:///D:/MEGA/academic/@Book/F-201-Intermediate%20Accounting,%20IFRS%202nd%20edition%20(Kieso,%20Weygandt).pdf",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "FUNDAMENTALS OF CORPORATE FINANCE",
+    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf",
     "default_type": "nerd-font",
     "horizontal_stack": false
   }

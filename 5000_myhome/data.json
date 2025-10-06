@@ -3503,54 +3503,84 @@
     "url": ""
   },
   {
-    "name": "kilObit",
+    "default_type": "img",
     "group": "Youtube Channel",
-    "url": "https://www.youtube.com/@kilObit",
+    "horizontal_stack": false,
     "img_src": "https://yt3.ggpht.com/25c8GUa-CAXSL3mwIntoyWmYHVPG4-r587zHX2uvZwMiphFO_ocLHTc50tW5yIi56dje4Hzl1Q=s48-c-k-c0x00ffffff-no-rj",
-    "default_type": "img",
-    "horizontal_stack": false
+    "name": "kilObit",
+    "url": "https://www.youtube.com/@kilObit"
   },
   {
-    "name": "n8n",
+    "default_type": "img",
     "group": "Local (Apps)",
-    "url": "http://localhost:5678/home/workflows",
+    "horizontal_stack": false,
     "img_src": "https://avatars.githubusercontent.com/u/45487711?s=48&v=4",
-    "default_type": "img",
-    "horizontal_stack": false
-  },
-  {
     "name": "n8n",
-    "group": "Git-Projects",
-    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "http://localhost:5678/home/workflows"
   },
   {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
+    "name": "n8n",
+    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
     "name": "Character-Map-UWP",
-    "group": "Git-Projects",
-    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file"
   },
   {
-    "name": "End 7oct",
+    "default_type": "nerd-font",
     "group": "Temporary",
-    "url": "https://www.jagojobs.com/company-jobs/6971",
+    "horizontal_stack": false,
+    "name": "End 7oct",
+    "url": "https://www.jagojobs.com/company-jobs/6971"
+  },
+  {
+    "default_type": "img",
+    "group": "Youtube Channel",
+    "horizontal_stack": false,
+    "img_src": "https://yt3.ggpht.com/sYd3DP2-jvCYlKBFafTU6yGSE_g-16NxTuglyzT7YbYWuL1KR4QCn4o8cIumDGY7NzcBynkRvQ=s48-c-k-c0x00ffffff-no-rj",
+    "name": "HowToMen",
+    "url": "https://www.youtube.com/@howtomen"
+  },
+  {
+    "default_type": "nerd-font",
+    "group": "Git-Projects",
+    "horizontal_stack": false,
+    "name": "claude-code-router",
+    "url": "https://github.com/musistudio/claude-code-router"
+  },
+  {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
+    "name": "PRINCIPLES OF MANAGERIAL FINAN\u0421\u0415",
+    "url": "file:///D:/MEGA/academic/@Book/[Lawrence_J._Gitman,_Chad_J._Zutter]_Principles_of(b-ok.xyz).pdf"
+  },
+  {
+    "name": "The Economics of Money, Banking, and Financial Markets",
+    "url": "file:///D:/MEGA/academic/@Book/Frederic%20Mishkin%20-%20The%20Economics%20of%20Money,%20Banking%20and%20Financial%20Markets[11thED][GlobalED]_Real.pdf",
     "default_type": "nerd-font",
     "horizontal_stack": false
   },
   {
-    "name": "HowToMen",
-    "group": "Youtube Channel",
-    "url": "https://www.youtube.com/@howtomen",
-    "img_src": "https://yt3.ggpht.com/sYd3DP2-jvCYlKBFafTU6yGSE_g-16NxTuglyzT7YbYWuL1KR4QCn4o8cIumDGY7NzcBynkRvQ=s48-c-k-c0x00ffffff-no-rj",
-    "default_type": "img",
+    "name": "Corporate Finance",
+    "url": "file:///D:/MEGA/academic/@Book/Corporate%20Finance%2010%20edition.pdf",
+    "default_type": "nerd-font",
     "horizontal_stack": false
   },
   {
-    "name": "claude-code-router",
-    "group": "Git-Projects",
-    "url": "https://github.com/musistudio/claude-code-router",
+    "name": "Intermediate Accounting, IFRS 2nd edition (Kieso, Weygandt)",
+    "url": "file:///D:/MEGA/academic/@Book/F-201-Intermediate%20Accounting,%20IFRS%202nd%20edition%20(Kieso,%20Weygandt).pdf",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
+  },
+  {
+    "name": "FUNDAMENTALS OF CORPORATE FINANCE",
+    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf",
     "default_type": "nerd-font",
     "horizontal_stack": false
   }
