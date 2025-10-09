@@ -1612,22 +1612,23 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         <form id="add-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
           <input type="text" id="sidebar-button-name" placeholder="Button Name" required>
           <input type="url" id="sidebar-button-url" placeholder="URL" required>
-          
+
           <label for="sidebar-button-display-type">Display Type:</label>
           <select id="sidebar-button-display-type">
             <option value="icon">Icon (Nerd Font)</option>
             <option value="image">Image</option>
           </select>
-          
+
           <div id="icon-settings">
             <input type="text" id="sidebar-button-icon" placeholder="Icon Class (e.g., nf nf-fa-home)">
           </div>
-          
+
           <div id="image-settings" style="display: none;">
             <input type="url" id="sidebar-button-img-src" placeholder="Image URL">
           </div>
-          
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors & Styling</h4>
+
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors &
+            Styling</h4>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
             <input type="text" id="sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
@@ -1640,7 +1641,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="sidebar-button-border-radius" placeholder="Border Radius (e.g., 4px, 50%)">
             <input type="text" id="sidebar-button-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
           </div>
-          
+
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="sidebar-button-notification">
               <input type="checkbox" id="sidebar-button-notification">
@@ -1664,22 +1665,23 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <input type="hidden" id="edit-sidebar-button-index">
           <input type="text" id="edit-sidebar-button-name" placeholder="Button Name" required>
           <input type="url" id="edit-sidebar-button-url" placeholder="URL" required>
-          
+
           <label for="edit-sidebar-button-display-type">Display Type:</label>
           <select id="edit-sidebar-button-display-type">
             <option value="icon">Icon (Nerd Font)</option>
             <option value="image">Image</option>
           </select>
-          
+
           <div id="edit-icon-settings">
             <input type="text" id="edit-sidebar-button-icon" placeholder="Icon Class (e.g., nf nf-fa-home)">
           </div>
-          
+
           <div id="edit-image-settings" style="display: none;">
             <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL">
           </div>
-          
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors & Styling</h4>
+
+          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors &
+            Styling</h4>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-sidebar-button-text-color" placeholder="Text/Icon Color (e.g., #000000)">
             <input type="text" id="edit-sidebar-button-bg-color" placeholder="Background Color (e.g., #ffffff)">
@@ -1692,7 +1694,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="edit-sidebar-button-border-radius" placeholder="Border Radius (e.g., 4px, 50%)">
             <input type="text" id="edit-sidebar-button-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
           </div>>
-          
+
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="edit-sidebar-button-notification">
               <input type="checkbox" id="edit-sidebar-button-notification">
@@ -4473,29 +4475,227 @@ async function triggerScans() {
     }, 2000);
   }
 }</script>
-    
+
     <script>
-    // Handle file:// URLs by intercepting clicks
-    document.addEventListener('click', function(e) {
+      // Handle file:// URLs by intercepting clicks
+      document.addEventListener('click', function (e) {
         const link = e.target.closest('a');
         if (link && link.href && link.href.startsWith('file:///')) {
-            e.preventDefault();
-            const filePath = link.href.replace('file:///', '');
-            
-            fetch(`/open-file?path=${encodeURIComponent(filePath)}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.success) {
-                        console.error('Failed to open file:', data.error);
-                        alert('Failed to open file: ' + data.error);
-                    }
-                })
-                .catch(error => {
-                    console.error('Error opening file:', error);
-                    alert('Error opening file: ' + error);
-                });
+          e.preventDefault();
+          const filePath = link.href.replace('file:///', '');
+
+          fetch(`/open-file?path=${encodeURIComponent(filePath)}`)
+            .then(response => response.json())
+            .then(data => {
+              if (!data.success) {
+                console.error('Failed to open file:', data.error);
+                alert('Failed to open file: ' + data.error);
+              }
+            })
+            .catch(error => {
+              console.error('Error opening file:', error);
+              alert('Error opening file: ' + error);
+            });
         }
-    });
+      });
+
+      // Function to apply color preview to input fields
+      function applyColorPreview(input) {
+        const value = input.value.trim();
+        if (value) {
+          // Check if it's a valid color (hex, rgb, named color, etc.)
+          const tempDiv = document.createElement('div');
+          tempDiv.style.color = value;
+          if (tempDiv.style.color || value.match(/^#[0-9A-Fa-f]{3,6}$/)) {
+            input.style.backgroundColor = value;
+            // Determine text color based on background brightness
+            const brightness = getBrightness(value);
+            input.style.color = brightness > 128 ? '#000000' : '#ffffff';
+          } else {
+            // Reset if invalid color
+            input.style.backgroundColor = '';
+            input.style.color = '';
+          }
+        } else {
+          // Reset if empty
+          input.style.backgroundColor = '';
+          input.style.color = '';
+        }
+      }
+
+      // Function to calculate brightness of a color
+      function getBrightness(color) {
+        let r, g, b;
+
+        if (color.startsWith('#')) {
+          // Hex color
+          const hex = color.slice(1);
+          if (hex.length === 3) {
+            r = parseInt(hex[0] + hex[0], 16);
+            g = parseInt(hex[1] + hex[1], 16);
+            b = parseInt(hex[2] + hex[2], 16);
+          } else {
+            r = parseInt(hex.slice(0, 2), 16);
+            g = parseInt(hex.slice(2, 4), 16);
+            b = parseInt(hex.slice(4, 6), 16);
+          }
+        } else {
+          // For other color formats, use a temporary element
+          const tempDiv = document.createElement('div');
+          tempDiv.style.color = color;
+          document.body.appendChild(tempDiv);
+          const computedColor = window.getComputedStyle(tempDiv).color;
+          document.body.removeChild(tempDiv);
+
+          const match = computedColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+          if (match) {
+            r = parseInt(match[1]);
+            g = parseInt(match[2]);
+            b = parseInt(match[3]);
+          } else {
+            return 128; // Default to medium brightness
+          }
+        }
+
+        // Calculate brightness using luminance formula
+        return (r * 299 + g * 587 + b * 114) / 1000;
+      }
+
+      // Function to check if an input field is color-related
+      function isColorField(input) {
+        return input.type === 'text' && (
+          input.placeholder.toLowerCase().includes('color') ||
+          input.id.toLowerCase().includes('color') ||
+          input.name && input.name.toLowerCase().includes('color')
+        );
+      }
+
+      // Function to apply color preview to all color fields in a container
+      function applyColorPreviewToContainer(container) {
+        const inputs = container.querySelectorAll('input[type="text"]');
+        inputs.forEach(input => {
+          if (isColorField(input)) {
+            applyColorPreview(input);
+
+            // Add event listeners if not already added
+            if (!input.hasAttribute('data-color-preview-enabled')) {
+              input.setAttribute('data-color-preview-enabled', 'true');
+
+              input.addEventListener('input', function () {
+                applyColorPreview(this);
+              });
+
+              input.addEventListener('change', function () {
+                applyColorPreview(this);
+              });
+
+              input.addEventListener('blur', function () {
+                applyColorPreview(this);
+              });
+            }
+          }
+        });
+      }
+
+      // Apply color preview on page load
+      document.addEventListener('DOMContentLoaded', function () {
+        applyColorPreviewToContainer(document);
+
+        // Use MutationObserver to detect when popups are opened and fields are populated
+        const observer = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
+            // Check for added nodes (popups opening)
+            mutation.addedNodes.forEach(function (node) {
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                applyColorPreviewToContainer(node);
+              }
+            });
+
+            // Check for attribute changes (value changes)
+            if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+              const target = mutation.target;
+              if (isColorField(target)) {
+                applyColorPreview(target);
+              }
+            }
+          });
+        });
+
+        // Start observing
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['value']
+        });
+
+        // Override the value setter to detect programmatic changes
+        const originalValueSetter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+        Object.defineProperty(HTMLInputElement.prototype, 'value', {
+          set: function (newValue) {
+            originalValueSetter.call(this, newValue);
+            // Apply color preview if this is a color field
+            if (isColorField(this)) {
+              setTimeout(() => applyColorPreview(this), 0);
+            }
+          },
+          get: Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').get
+        });
+
+        // Also check periodically for dynamically populated fields as backup
+        setInterval(function () {
+          const colorInputs = document.querySelectorAll('input[type="text"]');
+          colorInputs.forEach(input => {
+            if (isColorField(input)) {
+              const currentValue = input.value.trim();
+              const hasPreview = input.style.backgroundColor;
+
+              // If field has a value but no background color preview
+              if (currentValue && !hasPreview) {
+                applyColorPreview(input);
+              } else if (!currentValue && hasPreview) {
+                // Clear preview if field is empty
+                input.style.backgroundColor = '';
+                input.style.color = '';
+              }
+            }
+          });
+        }, 200);
+      });
+
+      // Global event listener for immediate updates
+      document.addEventListener('input', function (e) {
+        if (isColorField(e.target)) {
+          applyColorPreview(e.target);
+        }
+      });
+
+      // Listen for popup visibility changes
+      const popupObserver = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            const target = mutation.target;
+            if (target.classList.contains('popup-container') && !target.classList.contains('hidden')) {
+              // Popup just opened, apply color previews after a short delay
+              setTimeout(() => {
+                applyColorPreviewToContainer(target);
+              }, 100);
+            }
+          }
+        });
+      });
+
+      // Observe all popup containers
+      document.querySelectorAll('.popup-container').forEach(popup => {
+        popupObserver.observe(popup, { attributes: true, attributeFilter: ['class'] });
+      });
+
+      // Also listen for focus events on color fields to ensure they get updated
+      document.addEventListener('focus', function (e) {
+        if (isColorField(e.target)) {
+          setTimeout(() => applyColorPreview(e.target), 0);
+        }
+      }, true);
     </script>
 
 
