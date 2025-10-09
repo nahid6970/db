@@ -1066,7 +1066,7 @@
     "display_style": "flex",
     "group": "FB Groups",
     "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
+    "horizontal_border_color": "red",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -1089,7 +1089,7 @@
     "display_style": "flex",
     "group": "FB Groups",
     "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
+    "horizontal_border_color": "red",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -1112,7 +1112,7 @@
     "display_style": "flex",
     "group": "FB Groups",
     "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
+    "horizontal_border_color": "red",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -1135,7 +1135,7 @@
     "display_style": "flex",
     "group": "FB Groups",
     "horizontal_bg_color": "#2176ff",
-    "horizontal_border_color": "#0056b3",
+    "horizontal_border_color": "red",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -1362,28 +1362,28 @@
     "url": "https://www.youtube.com/@MyClassroombd"
   },
   {
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "li_bg_color": "#2176ff",
     "name": "Turning Point Job Aid ",
-    "group": "EDU",
-    "url": "https://www.facebook.com/turningpointjobaid",
-    "default_type": "text",
-    "li_bg_color": "#2176ff",
-    "horizontal_stack": false
+    "url": "https://www.facebook.com/turningpointjobaid"
   },
   {
-    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
-    "group": "EDU",
-    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw",
     "default_type": "nerd-font",
+    "group": "EDU",
+    "horizontal_stack": false,
     "li_bg_color": "red",
-    "horizontal_stack": false
+    "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
   },
   {
-    "name": "Right Form Verb",
-    "group": "EDU",
-    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/",
     "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
     "li_bg_color": "#2176ff",
-    "horizontal_stack": false
+    "name": "Right Form Verb",
+    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
   },
   {
     "collapsible": false,
@@ -3117,13 +3117,13 @@
     "url": "https://tv.garden"
   },
   {
-    "name": "mantine",
-    "group": "Powerful Website",
-    "url": "https://mantine.dev/",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
     "default_type": "img",
+    "group": "Powerful Website",
+    "horizontal_stack": false,
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
     "li_bg_color": "white",
-    "horizontal_stack": false
+    "name": "mantine",
+    "url": "https://mantine.dev/"
   },
   {
     "default_type": "img",
@@ -3563,74 +3563,74 @@
     "url": "file:///D:/MEGA/academic/@Book/[Lawrence_J._Gitman,_Chad_J._Zutter]_Principles_of(b-ok.xyz).pdf"
   },
   {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
     "name": "The Economics of Money, Banking, and Financial Markets",
-    "url": "file:///D:/MEGA/academic/@Book/Frederic%20Mishkin%20-%20The%20Economics%20of%20Money,%20Banking%20and%20Financial%20Markets[11thED][GlobalED]_Real.pdf",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "file:///D:/MEGA/academic/@Book/Frederic%20Mishkin%20-%20The%20Economics%20of%20Money,%20Banking%20and%20Financial%20Markets[11thED][GlobalED]_Real.pdf"
   },
   {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
     "name": "Corporate Finance",
-    "url": "file:///D:/MEGA/academic/@Book/Corporate%20Finance%2010%20edition.pdf",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "file:///D:/MEGA/academic/@Book/Corporate%20Finance%2010%20edition.pdf"
   },
   {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
     "name": "Intermediate Accounting, IFRS 2nd edition (Kieso, Weygandt)",
-    "url": "file:///D:/MEGA/academic/@Book/F-201-Intermediate%20Accounting,%20IFRS%202nd%20edition%20(Kieso,%20Weygandt).pdf",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "file:///D:/MEGA/academic/@Book/F-201-Intermediate%20Accounting,%20IFRS%202nd%20edition%20(Kieso,%20Weygandt).pdf"
   },
   {
+    "default_type": "nerd-font",
+    "horizontal_stack": false,
     "name": "FUNDAMENTALS OF CORPORATE FINANCE",
-    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf"
   },
   {
-    "name": "Honkai Impact 3rd",
+    "default_type": "nerd-font",
     "group": "Sussy",
-    "url": "https://www.youtube.com/@HonkaiImpact3rd/posts",
-    "default_type": "nerd-font",
-    "horizontal_stack": false
+    "horizontal_stack": false,
+    "name": "Honkai Impact 3rd",
+    "url": "https://www.youtube.com/@HonkaiImpact3rd/posts"
   },
   {
+    "background_color": "#2176ff",
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
     "name": "\uf082 BCS Prostuti - ( \u09ac\u09bf\u09b8\u09bf\u098f\u09b8 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf )",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/bcsprostuti",
-    "default_type": "text",
-    "background_color": "#2176ff",
-    "horizontal_stack": false
+    "url": "https://www.facebook.com/groups/bcsprostuti"
   },
   {
+    "background_color": "#2176ff",
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
     "name": "\uf082 \u09a6\u09c1\u09b0\u09cd\u09a8\u09c0\u09a4\u09bf \u09a6\u09ae\u09a8 \u0995\u09ae\u09bf\u09b6\u09a8 (acc) \u09a6\u09c1\u09a6\u0995 \u09a8\u09bf\u09af\u09bc\u09cb\u0997 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf \ud83d\udcdd",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/721416621929448",
-    "default_type": "text",
-    "background_color": "#2176ff",
-    "horizontal_stack": false
+    "url": "https://www.facebook.com/groups/721416621929448"
   },
   {
+    "background_color": "#2176ff",
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
     "name": "\uf082 Job Preparation with Business Digest: Accounts, Finance, HR & Admin Posts",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/666483453748526",
-    "default_type": "text",
-    "background_color": "#2176ff",
-    "horizontal_stack": false
+    "url": "https://www.facebook.com/groups/666483453748526"
   },
   {
+    "background_color": "#2176ff",
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
     "name": "\uf082 BCS (Finance)Subjective Written Exam Preparation",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/842950822891667",
-    "default_type": "text",
-    "background_color": "#2176ff",
-    "horizontal_stack": false
+    "url": "https://www.facebook.com/groups/842950822891667"
   },
   {
-    "name": "\uf082 \u09ac\u09bf\u09b8\u09bf\u098f\u09b8 (\u09aa\u09cd\u09b0\u09b6\u09be\u09b8\u09a8/\u09aa\u09b0\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0/\u09aa\u09c1\u09b2\u09bf\u09b6) \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/bcsp4afp",
-    "default_type": "text",
     "background_color": "#2176ff",
-    "horizontal_stack": false
+    "default_type": "text",
+    "group": "EDU",
+    "horizontal_stack": false,
+    "name": "\uf082 \u09ac\u09bf\u09b8\u09bf\u098f\u09b8 (\u09aa\u09cd\u09b0\u09b6\u09be\u09b8\u09a8/\u09aa\u09b0\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0/\u09aa\u09c1\u09b2\u09bf\u09b6) \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf",
+    "url": "https://www.facebook.com/groups/bcsp4afp"
   }
 ]
