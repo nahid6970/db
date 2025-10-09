@@ -1362,27 +1362,28 @@
     "url": "https://www.youtube.com/@MyClassroombd"
   },
   {
-    "default_type": "img",
-    "group": "EDU",
-    "horizontal_stack": false,
-    "img_src": "https://scontent.fdac41-1.fna.fbcdn.net/v/t39.30808-6/475469693_602805549383269_6189720639875721339_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeGWFlxSdit_Il7-jUzvuFKfDp8_j9etQAMOnz-P161AA_ZJL514LCTwCPxo9HoOS8u3zRe1txM7yQkhp6UXP-AV&_nc_ohc=iET1y4qVXBsQ7kNvwHnJy4D&_nc_oc=AdmPOEcjlQAJGGD487wL3kTVe31axRKmt4kFuFLl5oVB4jnuCiV8qKkHYG-O2CQCgec&_nc_zt=23&_nc_ht=scontent.fdac41-1.fna&_nc_gid=YvBFa-78NQm5XM3OMyArhg&oh=00_AfbEnDqyLvXo-2C3DvPj2mp90Y3zjLtz8RTWtHdINqNXLA&oe=68D34CFA",
-    "li_bg_color": "#2176ff",
     "name": "Turning Point Job Aid ",
-    "url": "https://www.facebook.com/turningpointjobaid"
+    "group": "EDU",
+    "url": "https://www.facebook.com/turningpointjobaid",
+    "default_type": "text",
+    "li_bg_color": "#2176ff",
+    "horizontal_stack": false
   },
   {
-    "default_type": "nerd-font",
-    "group": "EDU",
-    "horizontal_stack": false,
     "name": "\u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac",
-    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw"
+    "group": "EDU",
+    "url": "https://www.youtube.com/shorts/oFV6E8R6Bdw",
+    "default_type": "nerd-font",
+    "li_bg_color": "red",
+    "horizontal_stack": false
   },
   {
-    "default_type": "nerd-font",
-    "group": "EDU",
-    "horizontal_stack": false,
     "name": "Right Form Verb",
-    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
+    "group": "EDU",
+    "url": "https://www.facebook.com/share/p/14Fggwr6HbG/",
+    "default_type": "text",
+    "li_bg_color": "#2176ff",
+    "horizontal_stack": false
   },
   {
     "collapsible": false,
@@ -3116,12 +3117,13 @@
     "url": "https://tv.garden"
   },
   {
-    "default_type": "img",
-    "group": "Powerful Website",
-    "horizontal_stack": false,
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
     "name": "mantine",
-    "url": "https://mantine.dev/"
+    "group": "Powerful Website",
+    "url": "https://mantine.dev/",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAVFBMVEX////P4/qdyPZxsvNPpPEzmvD0+f6RwvUZk+8clO8mlu8tmPChyvcNke8ymvDu9f3b6vvJ4Pp9uPTo8f1JofHC3PkAi+6y0/jw9v262PmKvvVqr/NrLSs8AAABGElEQVR4AYWTBRLDMAwEL4lJUqyU8f/vLNeVp4EdMogBhqbtnPeuaxuMEGIiFvFehIliQA36zOoLyrmv1R2pr1ByxsjA4v8QHoq+qB9B5WvDiR9F3Cc+Ki9Uh0KvSEP+Poqs1iT6k9EcAEQuBjbAdvegmOQIwFil9aekVJJ9XYzJt8Q2FZUGLdvMUkDoNirFR4tOfLmlTBFwpmzSwVnp4ASVTXHQcskA9gfgyN5gBNIJ6A+hFlBb5925TQT0lQsbpGfmDaoX6eo0fV4hHBJ5E7gtlE8RT/ZkClWV+oIXp2RKbZt1fV5jbHemWbbd6gBHzGzbXQ2MMsn/wNiR09GRQ2D1IwiHMvYyNvYyLC/O8uoZQqTR5V1c/zu9URUVRTPTLgAAAABJRU5ErkJggg==",
+    "default_type": "img",
+    "li_bg_color": "white",
+    "horizontal_stack": false
   },
   {
     "default_type": "img",
