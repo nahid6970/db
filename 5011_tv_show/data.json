@@ -2037,6 +2037,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 10,
+                "title": "WWE SmackDown - 2025-10-10 - SmackDown 1364 HDTV-1080p",
+                "watched": false,
+                "added_date": "2025-10-11T13:07:17.730795",
+                "notify": "unseen"
+            },
+            {
                 "id": 9,
                 "title": "WWE SmackDown - 2025-10-03 - SmackDown 1363 WEBDL-1080p",
                 "watched": true,
@@ -2580,6 +2587,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 2,
+                "title": "My Hero Academia - s08e02 - [161] - The End of An Era, And\u2015 WEBDL-1080p - [VARYG]",
+                "watched": false,
+                "added_date": "2025-10-11T16:07:17.385985",
+                "notify": "unseen"
+            },
             {
                 "id": 1,
                 "title": "My Hero Academia - s08e01 - [160] - Toshinori Yagi - Rising Origin WEBDL-1080p - [ToonsHub]",
