@@ -2662,5 +2662,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 38,
+        "title": "One-Punch Man",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\One-Punch Man",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "One-Punch Man - S03E01 - Strategy Meeting WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-10-13T00:06:25.494865",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
