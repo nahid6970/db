@@ -1175,6 +1175,17 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   color: white;
 }
 
+.context-menu-item.context-menu-copy-note {
+  color: #9C27B0;
+  /* Purple */
+  font-style: italic;
+}
+
+.context-menu-item.context-menu-copy-note:hover {
+  background-color: #9C27B0;
+  color: white;
+}
+
 .context-menu-item.context-menu-delete {
   color: #f44336;
   /* Red */
@@ -1414,6 +1425,70 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       .notification-badge.zero {
         display: none !important;
       }
+
+      /* Copy notification styles */
+      .copy-notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        color: white;
+        font-weight: 500;
+        font-size: 14px;
+        z-index: 10000;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        max-width: 300px;
+        word-wrap: break-word;
+      }
+
+      .copy-notification.show {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .copy-notification.success {
+        background-color: #4CAF50;
+        border-left: 4px solid #45a049;
+      }
+
+      .copy-notification.error {
+        background-color: #f44336;
+        border-left: 4px solid #da190b;
+      }
+
+      .copy-notification.info {
+        background-color: #2196F3;
+        border-left: 4px solid #0b7dda;
+      }
+
+      /* Add animation for better visual feedback */
+      @keyframes slideInRight {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideOutRight {
+        from {
+          transform: translateX(0);
+          opacity: 1;
+        }
+
+        to {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+      }
     </style>
 
     <div id="links-container"
@@ -1540,6 +1615,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           </div>
           <input type="text" id="link-border-radius" placeholder="Border Radius">
           <input type="text" id="link-title" placeholder="Title (for tooltip)">
+          <textarea id="link-note" placeholder="Note (optional)" rows="3"
+            style="resize: vertical; font-family: inherit;"></textarea>
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="link-hidden">
               <input type="checkbox" id="link-hidden">
@@ -1586,6 +1663,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           </div>
           <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
           <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
+          <textarea id="edit-link-note" placeholder="Note (optional)" rows="3"
+            style="resize: vertical; font-family: inherit;"></textarea>
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="edit-link-hidden">
               <input type="checkbox" id="edit-link-hidden">
@@ -1781,6 +1860,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                     { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
                     { label: 'Edit', action: () => openEditLinkPopup(link, index) },
                     { label: 'Copy', action: () => copyLink(link, index) },
+                    { label: 'Copy Note', action: () => copyNote(link) },
                     { label: 'Delete', action: () => deleteLink(index) }
                 ];
                 showContextMenu(event, items);
@@ -1856,6 +1936,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                     {
                         label: 'Copy',
                         action: () => copyLink(link, index)
+                    },
+                    {
+                        label: 'Copy Note',
+                        action: () => copyNote(link)
                     },
                     {
                         label: 'Delete',
@@ -2033,6 +2117,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             {
                 label: 'Copy',
                 action: () => copyLink(linkInfo.link, linkInfo.index)
+            },
+            {
+                label: 'Copy Note',
+                action: () => copyNote(linkInfo.link)
             },
             {
                 label: 'Delete',
@@ -2340,6 +2428,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                             { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                             { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                             { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
+                            { label: 'Copy Note', action: () => copyNote(linkData) },
                             { label: 'Delete', action: () => deleteLink(linkIndex) }
                         ];
                         showContextMenu(event, items);
@@ -2375,6 +2464,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                             { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                             { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                             { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
+                            { label: 'Copy Note', action: () => copyNote(linkData) },
                             { label: 'Delete', action: () => deleteLink(linkIndex) }
                         ];
                         showContextMenu(event, items);
@@ -2503,6 +2593,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                     {
                         label: 'Copy',
                         action: () => copyLink(linkData.link, linkData.index)
+                    },
+                    {
+                        label: 'Copy Note',
+                        action: () => copyNote(linkData.link)
                     },
                     {
                         label: 'Delete',
@@ -2956,6 +3050,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         border_radius: document.getElementById('link-border-radius').value || undefined,
         font_size: document.getElementById('link-font-size').value || undefined,
         title: document.getElementById('link-title').value || undefined,
+        note: document.getElementById('link-note').value || undefined,
         li_bg_color: document.getElementById('link-li-bg-color').value || undefined,
         li_hover_color: document.getElementById('link-li-hover-color').value || undefined,
         hidden: document.getElementById('link-hidden').checked || undefined,
@@ -3030,6 +3125,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     document.getElementById('edit-link-background-color').value = link.background_color || '';
     document.getElementById('edit-link-border-radius').value = link.border_radius || '';
     document.getElementById('edit-link-title').value = link.title || '';
+    document.getElementById('edit-link-note').value = link.note || '';
     document.getElementById('edit-link-font-size').value = link.font_size || '';
     document.getElementById('edit-link-li-bg-color').value = link.li_bg_color || '';
     document.getElementById('edit-link-li-hover-color').value = link.li_hover_color || '';
@@ -3061,6 +3157,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           background_color: document.getElementById('edit-link-background-color').value || undefined,
           border_radius: document.getElementById('edit-link-border-radius').value || undefined,
           title: document.getElementById('edit-link-title').value || undefined,
+          note: document.getElementById('edit-link-note').value || undefined,
           font_size: document.getElementById('edit-link-font-size').value || undefined,
           li_bg_color: document.getElementById('edit-link-li-bg-color').value || undefined,
           li_hover_color: document.getElementById('edit-link-li-hover-color').value || undefined,
@@ -3175,6 +3272,84 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
       });
       editGroupForm.setAttribute('data-listener-attached', 'true');
     }
+  }
+
+  // Copy Note functionality
+  function copyNote(link) {
+    if (!link.note || !link.note.trim()) {
+      showNotification('No note to copy', 'error');
+      return;
+    }
+
+    // Try modern clipboard API first
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(link.note).then(() => {
+        showNotification('Note copied to clipboard!', 'success');
+      }).catch(() => {
+        // Fallback to older method
+        fallbackCopyTextToClipboard(link.note);
+      });
+    } else {
+      // Fallback to older method
+      fallbackCopyTextToClipboard(link.note);
+    }
+  }
+
+  // Fallback copy method for older browsers or non-secure contexts
+  function fallbackCopyTextToClipboard(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    
+    try {
+      const successful = document.execCommand('copy');
+      if (successful) {
+        showNotification('Note copied to clipboard!', 'success');
+      } else {
+        showNotification('Failed to copy note', 'error');
+      }
+    } catch (err) {
+      showNotification('Failed to copy note', 'error');
+    }
+    
+    document.body.removeChild(textArea);
+  }
+
+  // Show notification function
+  function showNotification(message, type = 'info') {
+    // Remove any existing notifications
+    const existingNotification = document.querySelector('.copy-notification');
+    if (existingNotification) {
+      existingNotification.remove();
+    }
+
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `copy-notification ${type}`;
+    notification.textContent = message;
+    
+    // Add to page
+    document.body.appendChild(notification);
+    
+    // Show notification
+    setTimeout(() => {
+      notification.classList.add('show');
+    }, 10);
+    
+    // Hide and remove notification after 3 seconds
+    setTimeout(() => {
+      notification.classList.remove('show');
+      setTimeout(() => {
+        if (notification.parentNode) {
+          notification.parentNode.removeChild(notification);
+        }
+      }, 300);
+    }, 3000);
   }
 
   // Copy Link functionality
@@ -8287,10 +8462,10 @@ async function triggerScans() {
     "url": "file:///D:/MEGA/academic/@Book/F-201-Intermediate%20Accounting,%20IFRS%202nd%20edition%20(Kieso,%20Weygandt).pdf"
   },
   {
-    "default_type": "nerd-font",
-    "horizontal_stack": false,
     "name": "FUNDAMENTALS OF CORPORATE FINANCE",
-    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf"
+    "url": "file:///D:/MEGA/academic/@Book/F-303-%20Fundamentals%20of%20Corporate%20Finance,%2010th%20edition%20(Ross,Westerfield,%20Jordan).pdf",
+    "default_type": "nerd-font",
+    "horizontal_stack": false
   },
   {
     "default_type": "nerd-font",
