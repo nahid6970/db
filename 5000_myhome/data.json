@@ -1455,12 +1455,13 @@
     "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
   },
   {
-    "background_color": "#c00000",
-    "default_type": "nerd-font",
+    "name": "WWE Survivor Series: WarGames 2025 <br>November 29, 2025",
     "group": "Deadline",
-    "horizontal_stack": false,
-    "name": "WWE Crown Jewel 2025 <br> October 11, 2025",
-    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule"
+    "url": "https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule",
+    "default_type": "nerd-font",
+    "background_color": "#c00000",
+    "note": "WWE Survivor Series: WarGames 2025",
+    "horizontal_stack": false
   },
   {
     "default_type": "text",
