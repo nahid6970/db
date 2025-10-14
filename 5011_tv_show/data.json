@@ -1893,9 +1893,9 @@
             {
                 "id": 11,
                 "title": "WWE Raw - 2025-10-13 - RAW 1690 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-10-14T13:54:33.035246",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 10,
@@ -2404,7 +2404,7 @@
                 "title": "The Walking Dead - Daryl Dixon - S03E06 - Contrabando WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-10-12T20:06:25.480834",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 5,
@@ -2673,8 +2673,8 @@
     {
         "id": 38,
         "title": "One-Punch Man",
-        "year": "",
-        "cover_image": "",
+        "year": "2015",
+        "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd0nKk7VsJBQfXEtw1Qz8IONmr5hIBxZB-XGJTsr0fpJKEDSDl&s",
         "directory_path": "D:\\Downloads\\@Sonarr\\One-Punch Man",
         "rating": null,
         "status": "Continuing",
@@ -2684,15 +2684,16 @@
                 "title": "One-Punch Man - S03E01 - Strategy Meeting WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-10-13T00:06:25.494865",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 39,
         "title": "Solo Leveling",
-        "year": "",
-        "cover_image": "",
+        "year": "2024",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/389597/posters/677a3a1d750ef.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Solo Leveling",
         "rating": null,
         "status": "Continuing",
@@ -2702,8 +2703,9 @@
                 "title": "Solo Leveling - S00E01 - How to Get Stronger WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-10-14T17:01:48.163403",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
