@@ -1891,6 +1891,13 @@
         "rating": null,
         "episodes": [
             {
+                "id": 11,
+                "title": "WWE Raw - 2025-10-13 - RAW 1690 HDTV-1080p",
+                "watched": false,
+                "added_date": "2025-10-14T13:54:33.035246",
+                "notify": "unseen"
+            },
+            {
                 "id": 10,
                 "title": "WWE Raw - 2025-10-06 - RAW 1689 HDTV-1080p",
                 "watched": true,
