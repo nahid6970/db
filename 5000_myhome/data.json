@@ -4064,5 +4064,13 @@
     "name": "Open With Editor",
     "note": "#t:: {\n\n    function_name()\n\n    function_name(){\n\nmain script\n\n}",
     "url": ""
+  },
+  {
+    "name": "iFLOW CLI",
+    "group": "Chat-BOTE",
+    "url": "https://cli.iflow.cn/",
+    "img_src": "https://img.alicdn.com/imgextra/i1/O1CN01nulwex1q7Eq1TVqUh_!!6000000005448-55-tps-32-32.svg",
+    "default_type": "img",
+    "horizontal_stack": false
   }
 ]
