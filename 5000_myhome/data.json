@@ -146,7 +146,6 @@
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red, green",
     "horizontal_stack": false
   },
   {
@@ -157,7 +156,7 @@
     "default_type": "img",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red, blue, green, yellow",
+    "li_border_color": "red, skyblue, green, yellow",
     "li_border_radius": "0px",
     "horizontal_stack": false
   },
@@ -167,7 +166,6 @@
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "default_type": "img",
     "click_action": "url",
-    "li_border_color": "red, blue",
     "horizontal_stack": false
   },
   {
@@ -198,11 +196,12 @@
     "name": "YouTube",
     "url": "https://www.youtube.com/",
     "icon_class": "nf-fa-youtube",
-    "color": "#ff0000",
+    "color": "red",
     "default_type": "img",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red",
+    "li_bg_color": "red, blue, green, yellow",
+    "li_border_color": "brown, black",
     "li_border_radius": "50%",
     "horizontal_stack": false
   },

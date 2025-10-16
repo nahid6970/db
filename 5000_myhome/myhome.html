@@ -2117,6 +2117,13 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               const heightValue = link.li_height.includes('px') || link.li_height.includes('%') || link.li_height === 'auto' ? link.li_height : link.li_height + 'px';
               listItem.style.minHeight = heightValue;
             }
+            // Apply border radius first
+            let borderRadiusValue = '5px';
+            if (link.li_border_radius) {
+              borderRadiusValue = link.li_border_radius.includes('px') || link.li_border_radius.includes('%') ? link.li_border_radius : link.li_border_radius + 'px';
+              listItem.style.borderRadius = borderRadiusValue;
+            }
+
             if (link.li_border_color) {
               // Check if it's a gradient (contains comma-separated colors)
               const colors = link.li_border_color.split(',').map(c => c.trim());
@@ -2133,32 +2140,33 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                 listItem.dataset.gradientId = uniqueId;
                 listItem.classList.add('animated-gradient-border');
                 
-                const bgColor = link.li_bg_color || '#474747';
+                // Set position relative
+                listItem.style.position = 'relative';
+                listItem.style.border = 'none';
+                
+                // Get background color for the inner area
+                const bgColor = link.li_bg_color ? (link.li_bg_color.includes(',') ? 'transparent' : link.li_bg_color) : '#474747';
                 
                 style.textContent = `
                   .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] {
                     position: relative;
-                    border: ${borderWidth} solid;
-                    border-image: linear-gradient(45deg, ${gradientColors}) 1;
-                    animation: ${animName} 3s linear infinite;
+                    background: linear-gradient(45deg, ${gradientColors});
+                    background-size: 400% 400%;
+                    padding: ${borderWidth};
+                    animation: ${animName} 3s ease infinite;
                     animation-delay: -${randomDelay}s;
                   }
+                  .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] > a {
+                    display: flex;
+                    width: 100%;
+                    height: 100%;
+                    background: ${bgColor};
+                    border-radius: calc(${borderRadiusValue} - ${borderWidth});
+                  }
                   @keyframes ${animName} {
-                    0% { 
-                      border-image: linear-gradient(0deg, ${gradientColors}) 1;
-                    }
-                    25% { 
-                      border-image: linear-gradient(90deg, ${gradientColors}) 1;
-                    }
-                    50% { 
-                      border-image: linear-gradient(180deg, ${gradientColors}) 1;
-                    }
-                    75% { 
-                      border-image: linear-gradient(270deg, ${gradientColors}) 1;
-                    }
-                    100% { 
-                      border-image: linear-gradient(360deg, ${gradientColors}) 1;
-                    }
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
                   }
                 `;
                 document.head.appendChild(style);
@@ -2166,10 +2174,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                 // Single color - normal border
                 listItem.style.border = `2px solid ${link.li_border_color}`;
               }
-            }
-            if (link.li_border_radius) {
-              const radiusValue = link.li_border_radius.includes('px') || link.li_border_radius.includes('%') ? link.li_border_radius : link.li_border_radius + 'px';
-              listItem.style.borderRadius = radiusValue;
             }
 
             let linkContent;
@@ -5469,7 +5473,6 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red, green",
     "horizontal_stack": false
   },
   {
@@ -5480,7 +5483,7 @@ async function triggerScans() {
     "default_type": "img",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red, blue, green, yellow",
+    "li_border_color": "red, skyblue, green, yellow",
     "li_border_radius": "0px",
     "horizontal_stack": false
   },
@@ -5490,7 +5493,6 @@ async function triggerScans() {
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "default_type": "img",
     "click_action": "url",
-    "li_border_color": "red, blue",
     "horizontal_stack": false
   },
   {
@@ -5521,11 +5523,12 @@ async function triggerScans() {
     "name": "YouTube",
     "url": "https://www.youtube.com/",
     "icon_class": "nf-fa-youtube",
-    "color": "#ff0000",
+    "color": "red",
     "default_type": "img",
     "click_action": "url",
     "font_size": "35px",
-    "li_border_color": "red",
+    "li_bg_color": "red, blue, green, yellow",
+    "li_border_color": "brown, black",
     "li_border_radius": "50%",
     "horizontal_stack": false
   },
