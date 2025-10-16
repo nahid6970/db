@@ -1489,6 +1489,42 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           opacity: 0;
         }
       }
+
+      /* Preview note button styles */
+      .preview-note-button {
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        cursor: pointer;
+        font-size: 16px;
+        height: fit-content;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .preview-note-button:hover {
+        background: #1976D2;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+
+      .preview-note-button:active {
+        transform: translateY(0);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .preview-note-button:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
     </style>
 
     <div id="links-container"
@@ -1593,12 +1629,34 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <input type="text" id="link-name" placeholder="Name">
           <input type="text" id="link-group" placeholder="Group (optional)">
           <input type="url" id="link-url" placeholder="URL">
-          <label for="link-default-type">Default Type:</label>
-          <select id="link-default-type">
-            <option value="nerd-font">nerd-font</option>
-            <option value="img">img</option>
-            <option value="text">text</option>
-          </select>
+
+          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+            <label style="font-weight: 500;">Click Action:</label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
+              Open URL
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="link-click-action" id="link-action-note" value="note">
+              Open Note
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+            <label style="font-weight: 500;">Default Type:</label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="link-default-type" id="link-type-nerd-font" value="nerd-font" checked>
+              Nerd Font
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="link-default-type" id="link-type-img" value="img">
+              Image
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="link-default-type" id="link-type-text" value="text">
+              Text
+            </label>
+          </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-text" placeholder="Text (if no icon/image)">
             <input type="url" id="link-img-src" placeholder="Image URL (if no icon)">
@@ -1615,8 +1673,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           </div>
           <input type="text" id="link-border-radius" placeholder="Border Radius">
           <input type="text" id="link-title" placeholder="Title (for tooltip)">
-          <textarea id="link-note" placeholder="Note (optional)" rows="3"
-            style="resize: vertical; font-family: inherit;"></textarea>
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <textarea id="link-note"
+              placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="3"
+              style="resize: vertical; font-family: inherit; flex: 1;"></textarea>
+            <button type="button" id="preview-note-btn" class="preview-note-button" title="Preview Note as Markdown">
+              <i class="nf nf-md-eye"></i>
+            </button>
+          </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="link-hidden">
               <input type="checkbox" id="link-hidden">
@@ -1637,12 +1701,34 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <input type="text" id="edit-link-name" placeholder="Name">
           <input type="text" id="edit-link-group" placeholder="Group (optional)">
           <input type="url" id="edit-link-url" placeholder="URL">
-          <label for="edit-link-default-type">Default Type:</label>
-          <select id="edit-link-default-type">
-            <option value="nerd-font">nerd-font</option>
-            <option value="img">img</option>
-            <option value="text">text</option>
-          </select>
+
+          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+            <label style="font-weight: 500;">Click Action:</label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
+              Open URL
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-link-click-action" id="edit-link-action-note" value="note">
+              Open Note
+            </label>
+          </div>
+
+          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+            <label style="font-weight: 500;">Default Type:</label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-link-default-type" id="edit-link-type-nerd-font" value="nerd-font" checked>
+              Nerd Font
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-link-default-type" id="edit-link-type-img" value="img">
+              Image
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-link-default-type" id="edit-link-type-text" value="text">
+              Text
+            </label>
+          </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-text" placeholder="Text (if no icon/image)">
             <input type="url" id="edit-link-img-src" placeholder="Image URL (if no icon)">
@@ -1663,8 +1749,15 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           </div>
           <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
           <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
-          <textarea id="edit-link-note" placeholder="Note (optional)" rows="3"
-            style="resize: vertical; font-family: inherit;"></textarea>
+          <div style="display: flex; gap: 10px; align-items: flex-start;">
+            <textarea id="edit-link-note"
+              placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="3"
+              style="resize: vertical; font-family: inherit; flex: 1;"></textarea>
+            <button type="button" id="edit-preview-note-btn" class="preview-note-button"
+              title="Preview Note as Markdown">
+              <i class="nf nf-md-eye"></i>
+            </button>
+          </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="edit-link-hidden">
               <input type="checkbox" id="edit-link-hidden">
@@ -1840,8 +1933,18 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             simpleListItem.className = 'simple-link-item';
 
             const simpleLink = document.createElement('a');
-            simpleLink.href = link.url;
-            simpleLink.target = '_blank';
+            const clickAction = link.click_action || 'url';
+            
+            if (clickAction === 'note') {
+              simpleLink.href = '#';
+              simpleLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                openNotePreview(encodeURIComponent(link.note || ''));
+              });
+            } else {
+              simpleLink.href = link.url;
+              simpleLink.target = '_blank';
+            }
 
             if (link.name && link.name.trim() !== '') {
                 const truncatedName = link.name.length > 25 ? link.name.substring(0, 25) + '...' : link.name;
@@ -1900,24 +2003,30 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
             let linkContent;
 
+            // Determine what to do on click based on click_action
+            const clickAction = link.click_action || 'url';
+            const linkUrl = clickAction === 'note' ? '#' : link.url;
+            const clickHandler = clickAction === 'note' ? `onclick="openNotePreview('${encodeURIComponent(link.note || '')}'); return false;"` : '';
+            const targetAttr = clickAction === 'url' ? 'target="_blank"' : '';
+
             if (link.default_type === 'nerd-font' && link.icon_class) {
-              linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
             } else if (link.default_type === 'img' && link.img_src) {
               const width = link.width || '50';
               const height = link.height || '50';
-              linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
             } else if (link.default_type === 'text' && link.text) {
-              linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
             } else {
               // Fallback if default_type is not set or doesn't match available content
               if (link.icon_class) {
-                linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
               } else if (link.img_src) {
                 const width = link.width || '50';
                 const height = link.height || '50';
-                linkContent = `<a href="${link.url}" title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
               } else {
-                linkContent = `<a href="${link.url}" style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
               }
             }
 
@@ -3045,12 +3154,13 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         color: document.getElementById('link-color').value || undefined,
         img_src: document.getElementById('link-img-src').value || undefined,
         text: document.getElementById('link-text').value || undefined,
-        default_type: document.getElementById('link-default-type').value || undefined,
+        default_type: document.querySelector('input[name="link-default-type"]:checked').value || 'nerd-font',
         background_color: document.getElementById('link-background-color').value || undefined,
         border_radius: document.getElementById('link-border-radius').value || undefined,
         font_size: document.getElementById('link-font-size').value || undefined,
         title: document.getElementById('link-title').value || undefined,
         note: document.getElementById('link-note').value || undefined,
+        click_action: document.querySelector('input[name="link-click-action"]:checked').value || 'url',
         li_bg_color: document.getElementById('link-li-bg-color').value || undefined,
         li_hover_color: document.getElementById('link-li-hover-color').value || undefined,
         hidden: document.getElementById('link-hidden').checked || undefined,
@@ -3121,11 +3231,24 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     document.getElementById('edit-link-width').value = link.width || '';
     document.getElementById('edit-link-height').value = link.height || '';
     document.getElementById('edit-link-text').value = link.text || '';
-    document.getElementById('edit-link-default-type').value = link.default_type || 'nerd-font';
+    
+    // Set default type radio buttons
+    const defaultType = link.default_type || 'nerd-font';
+    document.querySelector(`input[name="edit-link-default-type"][value="${defaultType}"]`).checked = true;
+    
     document.getElementById('edit-link-background-color').value = link.background_color || '';
     document.getElementById('edit-link-border-radius').value = link.border_radius || '';
     document.getElementById('edit-link-title').value = link.title || '';
     document.getElementById('edit-link-note').value = link.note || '';
+    
+    // Set click action radio buttons
+    const clickAction = link.click_action || 'url';
+    if (clickAction === 'note') {
+      document.getElementById('edit-link-action-note').checked = true;
+    } else {
+      document.getElementById('edit-link-action-url').checked = true;
+    }
+    
     document.getElementById('edit-link-font-size').value = link.font_size || '';
     document.getElementById('edit-link-li-bg-color').value = link.li_bg_color || '';
     document.getElementById('edit-link-li-hover-color').value = link.li_hover_color || '';
@@ -3153,11 +3276,12 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           width: document.getElementById('edit-link-width').value || undefined,
           height: document.getElementById('edit-link-height').value || undefined,
           text: document.getElementById('edit-link-text').value || undefined,
-          default_type: document.getElementById('edit-link-default-type').value || undefined,
+          default_type: document.querySelector('input[name="edit-link-default-type"]:checked').value || 'nerd-font',
           background_color: document.getElementById('edit-link-background-color').value || undefined,
           border_radius: document.getElementById('edit-link-border-radius').value || undefined,
           title: document.getElementById('edit-link-title').value || undefined,
           note: document.getElementById('edit-link-note').value || undefined,
+          click_action: document.querySelector('input[name="edit-link-click-action"]:checked').value || 'url',
           font_size: document.getElementById('edit-link-font-size').value || undefined,
           li_bg_color: document.getElementById('edit-link-li-bg-color').value || undefined,
           li_hover_color: document.getElementById('edit-link-li-hover-color').value || undefined,
@@ -3319,6 +3443,29 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     
     document.body.removeChild(textArea);
   }
+
+  // Function to open note preview
+  window.openNotePreview = function(noteContent) {
+    const decodedContent = decodeURIComponent(noteContent);
+    if (!decodedContent || !decodedContent.trim()) {
+      alert('No note content to preview');
+      return;
+    }
+
+    const encodedContent = encodeURIComponent(decodedContent);
+    const previewUrl = `/preview-note?content=${encodedContent}`;
+    
+    // Open in new window
+    const previewWindow = window.open(
+      previewUrl,
+      'notePreview',
+      'width=900,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,status=no'
+    );
+
+    if (!previewWindow) {
+      alert('Please allow popups to preview notes');
+    }
+  };
 
   // Show notification function
   function showNotification(message, type = 'info') {
@@ -4871,6 +5018,41 @@ async function triggerScans() {
           setTimeout(() => applyColorPreview(e.target), 0);
         }
       }, true);
+
+      // Handle note preview button clicks
+      document.addEventListener('click', function (e) {
+        if (e.target.id === 'preview-note-btn' || e.target.closest('#preview-note-btn')) {
+          e.preventDefault();
+          const noteContent = document.getElementById('link-note').value;
+          previewNote(noteContent);
+        } else if (e.target.id === 'edit-preview-note-btn' || e.target.closest('#edit-preview-note-btn')) {
+          e.preventDefault();
+          const noteContent = document.getElementById('edit-link-note').value;
+          previewNote(noteContent);
+        }
+      });
+
+      // Function to preview note in new window
+      function previewNote(content) {
+        if (!content || !content.trim()) {
+          alert('No note content to preview');
+          return;
+        }
+
+        const encodedContent = encodeURIComponent(content);
+        const previewUrl = `/preview-note?content=${encodedContent}`;
+
+        // Open in new window
+        const previewWindow = window.open(
+          previewUrl,
+          'notePreview',
+          'width=900,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,status=no'
+        );
+
+        if (!previewWindow) {
+          alert('Please allow popups to preview notes');
+        }
+      }
     </script>
 
 
@@ -5144,6 +5326,14 @@ async function triggerScans() {
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAArlBMVEULFCkKEiYKDyMNGjILFSsHABUZRGkQJkEGABAOHTYWOFo9tf8zlt46rPw8sv8gW4k1nec7r/8la58bTHUjY5UXPWAUNFMSLUosgL0xkdU5qPUuhsYAAAAbTXUFAAcodK0thMQOIzwIABgAEScACx8AABYAEygAQmcyGy+jNkdPIjQIFCmYNEZ9LT9BHjKHMEKwPE4ZFytpKTvKQ1V0LD+SNEY9HjFbJTi7P1JmKDsTo9rXAAABSElEQVR4AWKAgVEAIFoqECQGYWDQraVLqAN1+/8Pj55tPCMsRlycxxnrpyP0c8YQUgjJldavRAgGPJXAhRAcQIrHmOUFlu+XoYJsVdZJk9dJViLVibJ5y4F1/eB8Y3Cwjir0wTofahxcUQVLUQAsDC6M5MOk0cdzKJz0+EjUjwCmiFoaOQRjamrdjJUZarTU1x9BTW/FlDMt9ZSZBW3kFhx+BIkfkozMmsxlHxy64JF0TY10vckegZo1TH1v5tl2cfvQzDNo1JvcXgxi7N0BsCXntp37dXC+H+fGzntl4ouDsTACGABhILvkLhWsLvsvVigufwH6z3GaqTQnI8Yg0mbSJyjMm8CChK4G5bbHUeyEPqqu53lR+lVV9hvcjmWj/MDj1HV/foU0g8qzFTDbC6G1QhaQtmoTLE5BEbKrQHrUb2AxYsEoAADq+ShZjJHthQAAAABJRU5ErkJggg==",
     "name": "Local Bus",
     "url": "https://dhakatc.com/info/localbus/all"
+  },
+  {
+    "name": "md",
+    "url": "",
+    "default_type": "img",
+    "note": "# h1\n## hi how are u\n### asdasdasdasd\n- asdasdasdasdasd\n** h2\n*** h3\n",
+    "click_action": "note",
+    "horizontal_stack": false
   },
   {
     "default_type": "text",
@@ -6901,27 +7091,28 @@ async function triggerScans() {
     "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file"
   },
   {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Git-Projects",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "claude-code-router",
-    "note": "{\n  \"LOG\": true,\n  \"LOG_LEVEL\": \"debug\",\n  \"CLAUDE_PATH\": \"\",\n  \"HOST\": \"127.0.0.1\",\n  \"PORT\": 3456,\n  \"APIKEY\": \"your-secret-key\",\n  \"API_TIMEOUT_MS\": \"600000\",\n  \"PROXY_URL\": \"\",\n  \"transformers\": [],\n  \"Providers\": [\n    {\n      \"name\": \"openrouter\",\n      \"api_base_url\": \"https://openrouter.ai/api/v1/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"google/gemini-2.5-pro-preview\",\n        \"anthropic/claude-sonnet-4\",\n        \"anthropic/claude-3.5-sonnet\",\n        \"anthropic/claude-3.7-sonnet:thinking\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"openrouter\"\n        ]\n      }\n    },\n    {\n      \"name\": \"deepseek\",\n      \"api_base_url\": \"https://api.deepseek.com/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"deepseek-chat\",\n        \"deepseek-reasoner\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"deepseek\"\n        ],\n        \"deepseek-chat\": {\n          \"use\": [\n            \"tooluse\"\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"ollama\",\n      \"api_base_url\": \"http://localhost:11434/v1/chat/completions\",\n      \"api_key\": \"ollama\",\n      \"models\": [\n        \"qwen3:8b\",\n        \"gemma3:1b\"\n      ]\n    },\n    {\n      \"name\": \"gemini\",\n      \"api_base_url\": \"https://generativelanguage.googleapis.com/v1beta/models/\",\n      \"api_key\": \"AIzaSyCeRcViE6SNXaxc_W6ak5irL2MPOLgs2Bo\",\n      \"models\": [\n        \"gemini-2.5-flash\",\n        \"gemini-2.5-pro\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"gemini\"\n        ]\n      }\n    },\n    {\n      \"name\": \"volcengine\",\n      \"api_base_url\": \"https://ark.cn-beijing.volces.com/api/v3/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"deepseek-v3-250324\",\n        \"deepseek-r1-250528\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"deepseek\"\n        ]\n      }\n    },\n    {\n      \"name\": \"modelscope\",\n      \"api_base_url\": \"https://api-inference.modelscope.cn/v1/chat/completions\",\n      \"api_key\": \"\",\n      \"models\": [\n        \"Qwen/Qwen3-Coder-480B-A35B-Instruct\",\n        \"Qwen/Qwen3-235B-A22B-Thinking-2507\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          [\n            \"maxtoken\",\n            {\n              \"max_tokens\": 65536\n            }\n          ],\n          \"enhancetool\"\n        ],\n        \"Qwen/Qwen3-235B-A22B-Thinking-2507\": {\n          \"use\": [\n            \"reasoning\"\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"dashscope\",\n      \"api_base_url\": \"https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions\",\n      \"api_key\": \"\",\n      \"models\": [\n        \"qwen3-coder-plus\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          [\n            \"maxtoken\",\n            {\n              \"max_tokens\": 65536\n            }\n          ],\n          \"enhancetool\"\n        ]\n      }\n    },\n    {\n      \"name\": \"aihubmix\",\n      \"api_base_url\": \"https://aihubmix.com/v1/chat/completions\",\n      \"api_key\": \"sk-\",\n      \"models\": [\n        \"Z/glm-4.5\",\n        \"claude-opus-4-20250514\",\n        \"gemini-2.5-pro\"\n      ]\n    }\n  ],\n  \"StatusLine\": {\n    \"enabled\": false,\n    \"currentStyle\": \"default\",\n    \"default\": {\n      \"modules\": []\n    },\n    \"powerline\": {\n      \"modules\": []\n    }\n  },\n  \"Router\": {\n    \"default\": \"gemini,gemini-2.5-flash\",\n    \"background\": \"gemini,gemini-2.5-flash\",\n    \"think\": \"gemini,gemini-2.5-flash\",\n    \"longContext\": \"openrouter,google/gemini-2.5-pro-preview\",\n    \"longContextThreshold\": 60000,\n    \"webSearch\": \"\",\n    \"image\": \"\"\n  },\n  \"CUSTOM_ROUTER_PATH\": \"\"\n}",
+    "group": "Git-Projects",
+    "url": "https://github.com/musistudio/claude-code-router",
+    "default_type": "nerd-font",
+    "note": "```\n{\n  \"LOG\": true,\n  \"LOG_LEVEL\": \"debug\",\n  \"CLAUDE_PATH\": \"\",\n  \"HOST\": \"127.0.0.1\",\n  \"PORT\": 3456,\n  \"APIKEY\": \"your-secret-key\",\n  \"API_TIMEOUT_MS\": \"600000\",\n  \"PROXY_URL\": \"\",\n  \"transformers\": [],\n  \"Providers\": [\n    {\n      \"name\": \"openrouter\",\n      \"api_base_url\": \"https://openrouter.ai/api/v1/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"google/gemini-2.5-pro-preview\",\n        \"anthropic/claude-sonnet-4\",\n        \"anthropic/claude-3.5-sonnet\",\n        \"anthropic/claude-3.7-sonnet:thinking\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"openrouter\"\n        ]\n      }\n    },\n    {\n      \"name\": \"deepseek\",\n      \"api_base_url\": \"https://api.deepseek.com/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"deepseek-chat\",\n        \"deepseek-reasoner\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"deepseek\"\n        ],\n        \"deepseek-chat\": {\n          \"use\": [\n            \"tooluse\"\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"ollama\",\n      \"api_base_url\": \"http://localhost:11434/v1/chat/completions\",\n      \"api_key\": \"ollama\",\n      \"models\": [\n        \"qwen3:8b\",\n        \"gemma3:1b\"\n      ]\n    },\n    {\n      \"name\": \"gemini\",\n      \"api_base_url\": \"https://generativelanguage.googleapis.com/v1beta/models/\",\n      \"api_key\": \"AIzaSyCeRcViE6SNXaxc_W6ak5irL2MPOLgs2Bo\",\n      \"models\": [\n        \"gemini-2.5-flash\",\n        \"gemini-2.5-pro\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"gemini\"\n        ]\n      }\n    },\n    {\n      \"name\": \"volcengine\",\n      \"api_base_url\": \"https://ark.cn-beijing.volces.com/api/v3/chat/completions\",\n      \"api_key\": \"sk-xxx\",\n      \"models\": [\n        \"deepseek-v3-250324\",\n        \"deepseek-r1-250528\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          \"deepseek\"\n        ]\n      }\n    },\n    {\n      \"name\": \"modelscope\",\n      \"api_base_url\": \"https://api-inference.modelscope.cn/v1/chat/completions\",\n      \"api_key\": \"\",\n      \"models\": [\n        \"Qwen/Qwen3-Coder-480B-A35B-Instruct\",\n        \"Qwen/Qwen3-235B-A22B-Thinking-2507\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          [\n            \"maxtoken\",\n            {\n              \"max_tokens\": 65536\n            }\n          ],\n          \"enhancetool\"\n        ],\n        \"Qwen/Qwen3-235B-A22B-Thinking-2507\": {\n          \"use\": [\n            \"reasoning\"\n          ]\n        }\n      }\n    },\n    {\n      \"name\": \"dashscope\",\n      \"api_base_url\": \"https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions\",\n      \"api_key\": \"\",\n      \"models\": [\n        \"qwen3-coder-plus\"\n      ],\n      \"transformer\": {\n        \"use\": [\n          [\n            \"maxtoken\",\n            {\n              \"max_tokens\": 65536\n            }\n          ],\n          \"enhancetool\"\n        ]\n      }\n    },\n    {\n      \"name\": \"aihubmix\",\n      \"api_base_url\": \"https://aihubmix.com/v1/chat/completions\",\n      \"api_key\": \"sk-\",\n      \"models\": [\n        \"Z/glm-4.5\",\n        \"claude-opus-4-20250514\",\n        \"gemini-2.5-pro\"\n      ]\n    }\n  ],\n  \"StatusLine\": {\n    \"enabled\": false,\n    \"currentStyle\": \"default\",\n    \"default\": {\n      \"modules\": []\n    },\n    \"powerline\": {\n      \"modules\": []\n    }\n  },\n  \"Router\": {\n    \"default\": \"gemini,gemini-2.5-flash\",\n    \"background\": \"gemini,gemini-2.5-flash\",\n    \"think\": \"gemini,gemini-2.5-flash\",\n    \"longContext\": \"openrouter,google/gemini-2.5-pro-preview\",\n    \"longContextThreshold\": 60000,\n    \"webSearch\": \"\",\n    \"image\": \"\"\n  },\n  \"CUSTOM_ROUTER_PATH\": \"\"\n}\n```",
+    "click_action": "url",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://github.com/musistudio/claude-code-router"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -8502,27 +8693,27 @@ async function triggerScans() {
     "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
-    "name": "a2-anime",
-    "group": "Sussy",
-    "url": "https://www.facebook.com/a2anime",
-    "text": "a2-anime",
-    "default_type": "nerd-font",
     "collapsible": false,
+    "default_type": "nerd-font",
     "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "name": "a2-anime",
     "password_protect": true,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "text": "a2-anime",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/a2anime"
   },
   {
     "collapsible": false,
