@@ -265,14 +265,6 @@
     "url": "https://dhakatc.com/info/localbus/all"
   },
   {
-    "name": "md",
-    "url": "",
-    "default_type": "img",
-    "note": "# h1\n## hi how are u\n### asdasdasdasd\n- asdasdasdasdasd\n** h2\n*** h3\n",
-    "click_action": "note",
-    "horizontal_stack": false
-  },
-  {
     "default_type": "text",
     "horizontal_stack": false,
     "name": "DU MBA Result",
