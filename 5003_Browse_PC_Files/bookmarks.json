@@ -30,5 +30,9 @@
   {
     "name": "debugScreenShot",
     "path": "C:/Users/nahid//ms/test/path_to_photo/app/build/outputs/apk/debug"
+  },
+  {
+    "name": "Pictures",
+    "path": "C:/Users/nahid//Pictures"
   }
 ]
