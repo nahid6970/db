@@ -1034,12 +1034,36 @@ div.toggle-container {
   cursor: pointer !important;
 }
 
+/* Better text handling for text links in box popup */
+#group_type_box-popup .popup-content-inner .link-item.link-type-text a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.3;
+  font-size: 14px;
+}
+
 /* Text links in box popup should be rectangular */
 #group_type_box-popup .popup-content-inner .link-item.link-type-text {
-  width: 120px;
-  height: 60px;
   min-width: 120px;
+  max-width: none;
+  flex: 1;
+  height: auto;
   min-height: 60px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 #group_type_box-popup .popup-content-inner .link-item::before {
@@ -6818,26 +6842,27 @@ async function triggerScans() {
     "url": "https://github.com/gorhill/ublock/releases"
   },
   {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Git-Projects",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "glance",
+    "group": "Git-Projects",
+    "url": "https://github.com/glanceapp/glance",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://github.com/glanceapp/glance"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -7595,29 +7620,6 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://github.com/Vysp3r/ProtonPlus"
-  },
-  {
-    "click_action": "url",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "Linux",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
-    "name": "Wayland-Protocol addoption info",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://absurdlysuspicious.github.io/wayland-protocols-table/"
   },
   {
     "click_action": "url",
@@ -8406,33 +8408,35 @@ async function triggerScans() {
     "url": ""
   },
   {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Linux Distro",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "omarchy",
+    "group": "Linux Distro",
+    "url": "https://omarchy.org/",
+    "default_type": "text",
+    "click_action": "url",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://omarchy.org/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "default_type": "nerd-font",
-    "group": "Linux Distro",
-    "horizontal_stack": false,
     "name": "omakub",
-    "url": "https://omakub.org/"
+    "group": "Linux Distro",
+    "url": "https://omakub.org/",
+    "default_type": "text",
+    "click_action": "url",
+    "horizontal_stack": false
   },
   {
     "collapsible": false,
@@ -9355,6 +9359,29 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://github.com/DreamMaoMao/mangowc"
+  },
+  {
+    "click_action": "url",
+    "collapsible": false,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "Linux",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "name": "Wayland-Protocol addoption info",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://absurdlysuspicious.github.io/wayland-protocols-table/"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
