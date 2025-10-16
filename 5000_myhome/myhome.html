@@ -939,6 +939,7 @@ div.toggle-container {
 
 .link-group {
   background-color: #2d2d2d;
+  border: 1px solid #444444;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
@@ -955,8 +956,8 @@ div.toggle-container {
 
 /* Box stacking for groups */
 .group_type_box {
-  flex: 0 0 auto;
-  /* Allow to sit side-by-side, fixed width */
+  flex: 1 1 auto;
+  /* Allow to grow and shrink dynamically */
   margin-right: 10px;
   /* Add some space between horizontally stacked groups */
   vertical-align: top;
@@ -1563,11 +1564,17 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <input type="hidden" id="edit-group-original-name">
           <label for="edit-group-name">Group Name:</label>
           <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required>
-          <label for="edit-group-display">Display Style:</label>
-          <select id="edit-group-display">
-            <option value="flex">Flex</option>
-            <option value="list-item">List Item</option>
-          </select>
+          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+            <label style="font-weight: 500;">Display Style:</label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-group-display" id="edit-group-display-flex" value="flex" checked>
+              Flex
+            </label>
+            <label style="display: flex; align-items: center; gap: 5px;">
+              <input type="radio" name="edit-group-display" id="edit-group-display-list" value="list-item">
+              List Item
+            </label>
+          </div>
           <div style="display: flex; align-items: center; gap: 10px;">
             <label for="edit-group-collapsible">
               <input type="checkbox" id="edit-group-collapsible">
@@ -2894,7 +2901,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     const editGroupPopup = document.getElementById('edit-group-popup');
     const editGroupNameInput = document.getElementById('edit-group-name');
     const editGroupOriginalName = document.getElementById('edit-group-original-name');
-    const editGroupDisplaySelect = document.getElementById('edit-group-display');
+    // Radio buttons for display style (no longer a select)
     const editGroupCollapsibleCheckbox = document.getElementById('edit-group-collapsible');
     const editGroupHorizontalStackCheckbox = document.getElementById('edit-group-horizontal-stack');
     const editGroupPasswordProtectCheckbox = document.getElementById('edit-group-password-protect');
@@ -2919,7 +2926,9 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     // Find a link in the current group to get its display_style, collapsible setting, and styling options
     const linksInGroup = links.filter(link => (link.group || 'Ungrouped') === currentGroupName);
     if (linksInGroup.length > 0) {
-      editGroupDisplaySelect.value = linksInGroup[0].display_style || 'flex';
+      // Set display style radio buttons
+      const displayStyle = linksInGroup[0].display_style || 'flex';
+      document.querySelector(`input[name="edit-group-display"][value="${displayStyle}"]`).checked = true;
       editGroupCollapsibleCheckbox.checked = linksInGroup[0].collapsible || false;
       editGroupHorizontalStackCheckbox.checked = linksInGroup[0].horizontal_stack || false;
       editGroupPasswordProtectCheckbox.checked = linksInGroup[0].password_protect || false;
@@ -3387,7 +3396,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
         const originalGroupName = document.getElementById('edit-group-original-name').value;
         const newGroupName = document.getElementById('edit-group-name').value;
-        const newDisplayStyle = document.getElementById('edit-group-display').value;
+        const newDisplayStyle = document.querySelector('input[name="edit-group-display"]:checked').value;
         const isCollapsible = document.getElementById('edit-group-collapsible').checked;
         const isHorizontalStack = document.getElementById('edit-group-horizontal-stack').checked;
         const isPasswordProtected = document.getElementById('edit-group-password-protect').checked;
@@ -5360,10 +5369,11 @@ async function triggerScans() {
     "url": "https://result.du.ac.bd/"
   },
   {
-    "default_type": "text",
-    "horizontal_stack": false,
     "name": "service.du.ac",
-    "url": "https://service.du.ac.bd/login"
+    "url": "https://service.du.ac.bd/login",
+    "default_type": "text",
+    "click_action": "url",
+    "horizontal_stack": false
   },
   {
     "collapsible": false,
@@ -8681,29 +8691,29 @@ async function triggerScans() {
     "url": "https://www.youtube.com/shorts/yqtxMQdRZ7w"
   },
   {
-    "name": "wutheringwavescafe",
-    "group": "Sussy",
-    "url": "https://www.facebook.com/groups/wutheringwavescafe/media",
-    "color": "blue",
-    "default_type": "nerd-font",
     "background_color": "white",
     "click_action": "url",
     "collapsible": false,
+    "color": "blue",
+    "default_type": "nerd-font",
     "display_style": "flex",
+    "group": "Sussy",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "name": "wutheringwavescafe",
     "password_protect": true,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/wutheringwavescafe/media"
   },
   {
     "collapsible": false,
@@ -8803,28 +8813,6 @@ async function triggerScans() {
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
     "horizontal_text_color": "#ffffff",
-    "name": "12 Oct 2025",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "http://dcnaogaon.teletalk.com.bd/"
-  },
-  {
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "list-item",
-    "group": "Temporary",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
     "name": "25 Sep",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -8838,72 +8826,16 @@ async function triggerScans() {
     "url": "https://www.burobd.org/career"
   },
   {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "7 Oct",
-    "url": "https://npo.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "19 oct",
-    "url": "https://dcd.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "Starts 5oct ends 5 nov",
-    "url": "https://rdarajshahi.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "15 oct",
-    "url": "https://hotjobs.bdjobs.com/jobs/abconsumerpl/abconsumerpl1.htm"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "Start 24sep END 20oct",
-    "url": "http://bpsc.teletalk.com.bd/ncad"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "Start 25sep End 23oct",
-    "url": "https://dcd.teletalk.com.bd/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "Start 28sep End 12oct",
-    "url": "https://caab.teletalk.com.bd/caab092025/"
-  },
-  {
-    "default_type": "nerd-font",
-    "group": "Temporary",
-    "horizontal_stack": false,
-    "name": "End 7oct",
-    "url": "https://www.jagojobs.com/company-jobs/6971"
-  },
-  {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "list-item",
-    "group": "Exam Date",
+    "group": "Temporary",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
     "horizontal_text_color": "#ffffff",
-    "name": "47 BCS Exam 19 Sep",
+    "name": "7 Oct",
     "password_protect": false,
     "popup_bg_color": "#31343a",
     "popup_border_color": "transparent",
@@ -8913,14 +8845,161 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": ""
+    "url": "https://npo.teletalk.com.bd/"
   },
   {
+    "collapsible": false,
     "default_type": "nerd-font",
-    "group": "Exam Date",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
-    "name": "49 bcs 10/10/2025",
-    "url": ""
+    "horizontal_text_color": "#ffffff",
+    "name": "19 oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://dcd.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Starts 5oct ends 5 nov",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://rdarajshahi.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "15 oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://hotjobs.bdjobs.com/jobs/abconsumerpl/abconsumerpl1.htm"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Start 24sep END 20oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://bpsc.teletalk.com.bd/ncad"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Start 25sep End 23oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://dcd.teletalk.com.bd/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "Start 28sep End 12oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://caab.teletalk.com.bd/caab092025/"
+  },
+  {
+    "collapsible": false,
+    "default_type": "nerd-font",
+    "display_style": "list-item",
+    "group": "Temporary",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "End 7oct",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.jagojobs.com/company-jobs/6971"
   },
   {
     "background_color": "#c00000",
@@ -8941,76 +9020,76 @@ async function triggerScans() {
     "url": "https://my.noip.com/dynamic-dns"
   },
   {
-    "name": "Google Translate",
-    "group": "EDU",
-    "url": "https://translate.google.com/?hl=en&tab=TT&sl=bn&tl=en&op=translate",
-    "icon_class": "nf nf-md-google_translate",
+    "click_action": "url",
+    "collapsible": false,
     "color": "#ffffff",
     "default_type": "nerd-font",
-    "click_action": "url",
+    "display_style": "flex",
     "font_size": "35px",
-    "collapsible": false,
-    "display_style": "flex",
+    "group": "EDU",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "icon_class": "nf nf-md-google_translate",
+    "name": "Google Translate",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://translate.google.com/?hl=en&tab=TT&sl=bn&tl=en&op=translate"
   },
   {
+    "click_action": "url",
+    "collapsible": false,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "EDU",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "speechtyping",
-    "group": "EDU",
-    "url": "https://speechtyping.com/voice-typing/speech-to-text-bengali",
-    "default_type": "text",
-    "click_action": "url",
-    "collapsible": false,
-    "display_style": "flex",
-    "horizontal_stack": false,
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://speechtyping.com/voice-typing/speech-to-text-bengali"
   },
   {
-    "name": "banglaconverter",
-    "group": "EDU",
-    "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text",
-    "default_type": "text",
     "click_action": "url",
     "collapsible": false,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "EDU",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "banglaconverter",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
   },
   {
     "color": "red",
