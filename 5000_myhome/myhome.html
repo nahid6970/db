@@ -939,7 +939,7 @@ div.toggle-container {
 
 .link-group {
   background-color: #2d2d2d;
-  border: 1px solid #444444;
+  border: 1px solid #b3d9ff;
   border-radius: 8px;
   padding: 10px;
   margin-bottom: 10px;
@@ -1694,10 +1694,18 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="url" id="link-img-src" placeholder="Image URL (if no text/icon)">
           </div>
           <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-width" placeholder="Width (e.g., 50px or auto)">
+            <input type="text" id="link-height" placeholder="Height (e.g., 50px or auto)">
+          </div>
+          <div style="display: flex; gap: 10px;">
             <input type="text" id="link-color" placeholder="Color (e.g., #f46613 or red)">
             <input type="text" id="link-background-color" placeholder="Background Color">
           </div>
           <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-li-width" placeholder="Item Width (e.g., 120px, auto)">
+            <input type="text" id="link-li-height" placeholder="Item Height (e.g., 60px, auto)">
+          </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-li-bg-color" placeholder="List Item BG Color">
             <input type="text" id="link-li-hover-color" placeholder="List Item Hover Color">
@@ -1774,6 +1782,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="edit-link-background-color" placeholder="Background Color">
           </div>
           <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-li-width" placeholder="Item Width (e.g., 120px, auto)">
+            <input type="text" id="edit-link-li-height" placeholder="Item Height (e.g., 60px, auto)">
+          </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-li-bg-color" placeholder="List Item BG Color">
             <input type="text" id="edit-link-li-hover-color" placeholder="List Item Hover Color">
@@ -2032,6 +2044,16 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               });
             }
 
+            // Apply minimum width and height constraints
+            if (link.li_width) {
+              const widthValue = link.li_width.includes('px') || link.li_width.includes('%') || link.li_width === 'auto' ? link.li_width : link.li_width + 'px';
+              listItem.style.minWidth = widthValue;
+            }
+            if (link.li_height) {
+              const heightValue = link.li_height.includes('px') || link.li_height.includes('%') || link.li_height === 'auto' ? link.li_height : link.li_height + 'px';
+              listItem.style.minHeight = heightValue;
+            }
+
             let linkContent;
 
             // Determine what to do on click based on click_action
@@ -2039,25 +2061,31 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             const linkUrl = clickAction === 'note' ? '#' : link.url;
             const clickHandler = clickAction === 'note' ? `onclick="openNotePreview('${encodeURIComponent(link.note || '')}'); return false;"` : '';
             const targetAttr = clickAction === 'url' ? 'target="_blank"' : '';
+            
+            // Build width and height styles for non-image elements
+            const dimensionStyles = [];
+            if (link.width) dimensionStyles.push(`width: ${link.width.includes('px') || link.width.includes('%') || link.width === 'auto' ? link.width : link.width + 'px'}`);
+            if (link.height) dimensionStyles.push(`height: ${link.height.includes('px') || link.height.includes('%') || link.height === 'auto' ? link.height : link.height + 'px'}`);
+            const dimensionStyle = dimensionStyles.length > 0 ? dimensionStyles.join('; ') + '; ' : '';
 
             if (link.default_type === 'nerd-font' && link.icon_class) {
-              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
             } else if (link.default_type === 'img' && link.img_src) {
               const width = link.width || '50';
               const height = link.height || '50';
               linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
             } else if (link.default_type === 'text' && link.text) {
-              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.text}</a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.text}</a>`;
             } else {
               // Fallback if default_type is not set or doesn't match available content
               if (link.icon_class) {
-                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
               } else if (link.img_src) {
                 const width = link.width || '50';
                 const height = link.height || '50';
                 linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
               } else {
-                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''}" title="${link.title || link.name}">${link.name}</a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.name}</a>`;
               }
             }
 
@@ -3187,6 +3215,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         color: document.getElementById('link-color').value || undefined,
         img_src: document.getElementById('link-img-src').value || undefined,
         text: document.getElementById('link-text').value || undefined,
+        width: document.getElementById('link-width').value || undefined,
+        height: document.getElementById('link-height').value || undefined,
         default_type: document.querySelector('input[name="link-default-type"]:checked').value || 'text',
         background_color: document.getElementById('link-background-color').value || undefined,
         border_radius: document.getElementById('link-border-radius').value || undefined,
@@ -3194,6 +3224,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         title: document.getElementById('link-title').value || undefined,
         note: document.getElementById('link-note').value || undefined,
         click_action: document.querySelector('input[name="link-click-action"]:checked').value || 'url',
+        li_width: document.getElementById('link-li-width').value || undefined,
+        li_height: document.getElementById('link-li-height').value || undefined,
         li_bg_color: document.getElementById('link-li-bg-color').value || undefined,
         li_hover_color: document.getElementById('link-li-hover-color').value || undefined,
         hidden: document.getElementById('link-hidden').checked || undefined,
@@ -3283,6 +3315,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     }
     
     document.getElementById('edit-link-font-size').value = link.font_size || '';
+    document.getElementById('edit-link-li-width').value = link.li_width || '';
+    document.getElementById('edit-link-li-height').value = link.li_height || '';
     document.getElementById('edit-link-li-bg-color').value = link.li_bg_color || '';
     document.getElementById('edit-link-li-hover-color').value = link.li_hover_color || '';
     document.getElementById('edit-link-hidden').checked = link.hidden || false;
@@ -3316,6 +3350,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           note: document.getElementById('edit-link-note').value || undefined,
           click_action: document.querySelector('input[name="edit-link-click-action"]:checked').value || 'url',
           font_size: document.getElementById('edit-link-font-size').value || undefined,
+          li_width: document.getElementById('edit-link-li-width').value || undefined,
+          li_height: document.getElementById('edit-link-li-height').value || undefined,
           li_bg_color: document.getElementById('edit-link-li-bg-color').value || undefined,
           li_hover_color: document.getElementById('edit-link-li-hover-color').value || undefined,
           hidden: document.getElementById('edit-link-hidden').checked || undefined,
@@ -5282,13 +5318,14 @@ async function triggerScans() {
     "url": "https://www.messenger.com/"
   },
   {
+    "name": "YouTube",
+    "url": "https://www.youtube.com/",
+    "icon_class": "nf-fa-youtube",
     "color": "#ff0000",
     "default_type": "img",
+    "click_action": "url",
     "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-youtube",
-    "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "horizontal_stack": false
   },
   {
     "color": "#5765f2",
@@ -5335,14 +5372,15 @@ async function triggerScans() {
     "url": "https://keep.google.com/"
   },
   {
-    "color": "#69e8ff",
-    "default_type": "img",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-seti-font",
-    "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
     "name": "nerdfonts",
-    "url": "https://www.nerdfonts.com/cheat-sheet"
+    "url": "https://www.nerdfonts.com/cheat-sheet",
+    "icon_class": "nf nf-seti-font",
+    "color": "#69e8ff",
+    "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "color": "#ff2e2e",
@@ -5363,10 +5401,11 @@ async function triggerScans() {
     "url": "https://dhakatc.com/info/localbus/all"
   },
   {
-    "default_type": "text",
-    "horizontal_stack": false,
     "name": "DU MBA Result",
-    "url": "https://result.du.ac.bd/"
+    "url": "https://result.du.ac.bd/",
+    "default_type": "text",
+    "click_action": "url",
+    "horizontal_stack": false
   },
   {
     "name": "service.du.ac",
@@ -5611,28 +5650,29 @@ async function triggerScans() {
     "url": "https://www.youtube.com/@mathbanglagk"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
-    "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
-    "li_bg_color": "#ff0033",
     "name": "My Classroom",
+    "group": "EDU",
+    "url": "https://www.youtube.com/@MyClassroombd",
+    "img_src": "https://yt3.googleusercontent.com/ytc/AIdro_k9yk3C75fsp_rAEzm5hBlYyjBTJ148-R0HrC6x6t-AEVc=s48-c-k-c0x00ffffff-no-rj-mo",
+    "default_type": "img",
+    "click_action": "url",
+    "li_bg_color": "#ff0033",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@MyClassroombd"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -5704,96 +5744,105 @@ async function triggerScans() {
     "url": "https://www.facebook.com/share/p/14Fggwr6HbG/"
   },
   {
-    "background_color": "#2176ff",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "\uf082 BCS Prostuti - ( \u09ac\u09bf\u09b8\u09bf\u098f\u09b8 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf )",
+    "group": "EDU",
+    "url": "https://www.facebook.com/groups/bcsprostuti",
+    "text": "\uf082 BCS Prostuti - ( \u09ac\u09bf\u09b8\u09bf\u098f\u09b8 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf )",
+    "default_type": "text",
+    "background_color": "#2176ff",
+    "click_action": "url",
+    "li_width": "180px",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/bcsprostuti"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "background_color": "#2176ff",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "\uf082 \u09a6\u09c1\u09b0\u09cd\u09a8\u09c0\u09a4\u09bf \u09a6\u09ae\u09a8 \u0995\u09ae\u09bf\u09b6\u09a8 (acc) \u09a6\u09c1\u09a6\u0995 \u09a8\u09bf\u09af\u09bc\u09cb\u0997 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4\u09bf \ud83d\udcdd",
+    "group": "EDU",
+    "url": "https://www.facebook.com/groups/721416621929448",
+    "default_type": "text",
+    "background_color": "#2176ff",
+    "click_action": "url",
+    "li_width": "150px",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/721416621929448"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "background_color": "#2176ff",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "\uf082 Job Preparation with Business Digest: Accounts, Finance, HR & Admin Posts",
+    "group": "EDU",
+    "url": "https://www.facebook.com/groups/666483453748526",
+    "default_type": "text",
+    "background_color": "#2176ff",
+    "click_action": "url",
+    "li_width": "350px",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/666483453748526"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "background_color": "#2176ff",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "\uf082 BCS (Finance)Subjective Written Exam Preparation",
+    "group": "EDU",
+    "url": "https://www.facebook.com/groups/842950822891667",
+    "default_type": "text",
+    "background_color": "#2176ff",
+    "click_action": "url",
+    "li_width": "200px",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/groups/842950822891667"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "background_color": "#2176ff",
@@ -6025,30 +6074,31 @@ async function triggerScans() {
     "url": "http://192.168.0.101:5013"
   },
   {
+    "name": "JOB Search",
+    "group": "Local (Flask)",
+    "url": "http://192.168.0.101:5015",
+    "default_type": "nerd-font",
     "background_color": "green",
     "border_radius": "100px",
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "group": "Local (Flask)",
-    "horizontal_bg_color": "white",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "black",
+    "click_action": "url",
     "li_bg_color": "#31343a",
     "li_hover_color": "#31343a",
-    "name": "JOB Search",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "http://192.168.0.101:5015"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "white",
+    "horizontal_text_color": "black",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
@@ -9069,27 +9119,27 @@ async function triggerScans() {
     "url": "https://speechtyping.com/voice-typing/speech-to-text-bengali"
   },
   {
+    "name": "banglaconverter",
+    "group": "EDU",
+    "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text",
+    "default_type": "text",
     "click_action": "url",
     "collapsible": false,
-    "default_type": "text",
     "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "name": "banglaconverter",
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.banglaconverter.org/tools.php?f=Bangla-Voice-To-Text"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "color": "red",
