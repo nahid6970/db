@@ -1939,7 +1939,38 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 
     <script src="../static/context-menu.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', function () {
+    <script>// Helper function to parse colors intelligently (handles rgb, rgba, hex, and named colors)
+function parseColors(colorString) {
+  if (!colorString) return [];
+  
+  // Match rgb/rgba patterns and other colors
+  const rgbPattern = /rgba?\([^)]+\)/g;
+  const matches = colorString.match(rgbPattern);
+  
+  if (matches) {
+    // Has RGB/RGBA colors - extract them and the rest
+    let remaining = colorString;
+    const colors = [];
+    
+    matches.forEach(match => {
+      colors.push(match.trim());
+      remaining = remaining.replace(match, '|||SPLIT|||');
+    });
+    
+    // Split remaining by comma and filter out empty/split markers
+    const otherColors = remaining.split(',')
+      .map(c => c.trim())
+      .filter(c => c && c !== '|||SPLIT|||');
+    
+    // Combine all colors
+    return [...colors, ...otherColors].filter(c => c);
+  } else {
+    // No RGB - simple comma split
+    return colorString.split(',').map(c => c.trim()).filter(c => c);
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
   const linksContainer = document.getElementById('links-container');
   const addLinkForm = document.getElementById('add-link-form');
   let links = []; // Declare links here so it's accessible globally
@@ -2043,7 +2074,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             }
 
             if (link.li_bg_color) {
-              const bgColors = link.li_bg_color.split(',').map(c => c.trim());
+              const bgColors = parseColors(link.li_bg_color);
               if (bgColors.length > 1) {
                 // Multiple colors - create animated gradient background
                 const gradientColors = bgColors.join(', ');
@@ -2073,7 +2104,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               }
             }
             if (link.li_hover_color) {
-              const hoverColors = link.li_hover_color.split(',').map(c => c.trim());
+              const hoverColors = parseColors(link.li_hover_color);
               if (hoverColors.length > 1) {
                 // Multiple colors - create animated gradient hover
                 const gradientColors = hoverColors.join(', ');
@@ -2126,7 +2157,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
             if (link.li_border_color) {
               // Check if it's a gradient (contains comma-separated colors)
-              const colors = link.li_border_color.split(',').map(c => c.trim());
+              const colors = parseColors(link.li_border_color);
               if (colors.length > 1) {
                 // Multiple colors - create animated gradient border
                 const gradientColors = colors.join(', ');
@@ -2215,7 +2246,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
             // Apply gradient to inner link element if background_color has multiple colors
             if (link.background_color) {
-              const bgColors = link.background_color.split(',').map(c => c.trim());
+              const bgColors = parseColors(link.background_color);
               if (bgColors.length > 1) {
                 const linkElement = listItem.querySelector('a');
                 if (linkElement) {
@@ -2247,7 +2278,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
             // Apply gradient to text color if color has multiple colors
             if (link.color) {
-              const textColors = link.color.split(',').map(c => c.trim());
+              const textColors = parseColors(link.color);
               if (textColors.length > 1) {
                 const linkElement = listItem.querySelector('a');
                 if (linkElement) {
@@ -5497,17 +5528,17 @@ async function triggerScans() {
     "url": "https://outlook.live.com"
   },
   {
-    "click_action": "url",
-    "color": "red, blue,  yellow, red",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-dev-facebook",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
-    "li_bg_color": "red, blue,  yellow, red",
     "name": "Facebook",
+    "url": "https://www.facebook.com/",
+    "icon_class": "nf nf-dev-facebook",
+    "color": "black, white",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
     "text": "Facebook",
-    "url": "https://www.facebook.com/"
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_bg_color": "red, blue,  yellow, red",
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
@@ -5564,12 +5595,14 @@ async function triggerScans() {
     "url": "https://www.onenote.com/"
   },
   {
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-github_square",
     "name": "github",
-    "url": "https://github.com/nahid6970"
+    "url": "https://github.com/nahid6970",
+    "icon_class": "nf nf-fa-github_square",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_bg_color": "#6781e8, #45ee65",
+    "horizontal_stack": false
   },
   {
     "color": "#fbbc04",
@@ -6665,27 +6698,29 @@ async function triggerScans() {
     "url": "https://www.facebook.com/BDCareerGuide"
   },
   {
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "VLR",
-    "horizontal_bg_color": "#ff5461",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
-    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
     "name": "VLR.gg",
+    "group": "VLR",
+    "url": "https://www.vlr.gg/",
+    "img_src": "https://www.vlr.gg/img/vlr/logo_tw.png",
+    "default_type": "img",
+    "click_action": "url",
+    "li_bg_color": "green, blue, yellow",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.vlr.gg/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#ff5461",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "collapsible": false,
