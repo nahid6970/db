@@ -254,15 +254,14 @@
     "url": "https://keep.google.com/"
   },
   {
-    "click_action": "url",
-    "color": "#69e8ff",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
+    "name": "nerdfonts",
+    "url": "https://www.nerdfonts.com/cheat-sheet",
     "icon_class": "nf nf-seti-font",
     "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
-    "name": "nerdfonts",
-    "url": "https://www.nerdfonts.com/cheat-sheet"
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "color": "#ff2e2e",
