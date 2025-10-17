@@ -1707,8 +1707,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="link-li-height" placeholder="Item Height (e.g., 60px, auto)">
           </div>
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-li-bg-color" placeholder="Item BG (supports gradients)">
-            <input type="text" id="link-li-hover-color" placeholder="Item Hover (supports gradients)">
+            <input type="text" id="link-li-bg-color" placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
+            <input type="text" id="link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
           </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-li-border-color"
@@ -1792,8 +1792,9 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="edit-link-li-height" placeholder="Item Height (e.g., 60px, auto)">
           </div>
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-li-bg-color" placeholder="Item BG (supports gradients)">
-            <input type="text" id="edit-link-li-hover-color" placeholder="Item Hover (supports gradients)">
+            <input type="text" id="edit-link-li-bg-color"
+              placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
+            <input type="text" id="edit-link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
           </div>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-li-border-color"
@@ -1939,17 +1940,74 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 
     <script src="../static/context-menu.js"></script>
-    <script>// Helper function to parse colors intelligently (handles rgb, rgba, hex, and named colors)
+    <script>// Helper function to generate gradient animation CSS
+function generateGradientAnimation(parsed, animName, randomDelay, property = 'background') {
+  if (parsed.animationType === 'rotate') {
+    // Rotate animation - solid colors fade in/out one at a time
+    const numColors = parsed.colors.length;
+    let keyframes = '';
+    for (let i = 0; i < numColors; i++) {
+      const startPercent = (i / numColors * 100).toFixed(2);
+      const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+      keyframes += `${startPercent}% { ${property}: ${parsed.colors[i]}; }\n`;
+      if (i < numColors - 1) {
+        keyframes += `${endPercent}% { ${property}: ${parsed.colors[i]}; }\n`;
+      }
+    }
+    keyframes += `100% { ${property}: ${parsed.colors[0]}; }\n`;
+    
+    return {
+      animation: `${animName} ${numColors * 2}s ease-in-out infinite; animation-delay: -${randomDelay}s;`,
+      keyframes: keyframes
+    };
+  } else {
+    // Slide animation - gradient position moves
+    const angle = parsed.angle || '45deg';
+    const gradientColors = parsed.colors.join(', ');
+    return {
+      baseStyle: `${property}: linear-gradient(${angle}, ${gradientColors}); background-size: 400% 400%;`,
+      animation: `${animName} 3s ease infinite; animation-delay: -${randomDelay}s;`,
+      keyframes: `
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      `
+    };
+  }
+}
+
+// Helper function to parse colors intelligently (handles rgb, rgba, hex, and named colors)
+// Returns: { colors: [...], animationType: 'slide' or 'rotate', angle: '45deg' }
 function parseColors(colorString) {
-  if (!colorString) return [];
+  if (!colorString) return { colors: [], animationType: 'slide', angle: '45deg' };
+  
+  // Check for animation type prefix and angle
+  let animationType = 'slide'; // default
+  let angle = '45deg'; // default
+  let workingString = colorString;
+  
+  if (colorString.toLowerCase().startsWith('rotate:')) {
+    animationType = 'rotate';
+    workingString = colorString.substring(7).trim(); // Remove 'rotate:' prefix
+  } else if (colorString.toLowerCase().startsWith('slide:')) {
+    animationType = 'slide';
+    workingString = colorString.substring(6).trim(); // Remove 'slide:' prefix
+  }
+  
+  // Check for angle specification (e.g., "90deg:" or "180:" at the start)
+  const angleMatch = workingString.match(/^(\d+)(deg)?:\s*/);
+  if (angleMatch) {
+    angle = angleMatch[1] + 'deg';
+    workingString = workingString.substring(angleMatch[0].length).trim();
+  }
   
   // Match rgb/rgba patterns and other colors
   const rgbPattern = /rgba?\([^)]+\)/g;
-  const matches = colorString.match(rgbPattern);
+  const matches = workingString.match(rgbPattern);
   
   if (matches) {
     // Has RGB/RGBA colors - extract them and the rest
-    let remaining = colorString;
+    let remaining = workingString;
     const colors = [];
     
     matches.forEach(match => {
@@ -1963,10 +2021,10 @@ function parseColors(colorString) {
       .filter(c => c && c !== '|||SPLIT|||');
     
     // Combine all colors
-    return [...colors, ...otherColors].filter(c => c);
+    return { colors: [...colors, ...otherColors].filter(c => c), animationType, angle };
   } else {
     // No RGB - simple comma split
-    return colorString.split(',').map(c => c.trim()).filter(c => c);
+    return { colors: workingString.split(',').map(c => c.trim()).filter(c => c), animationType, angle };
   }
 }
 
@@ -2074,10 +2132,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             if (link.li_bg_color) {
-              const bgColors = parseColors(link.li_bg_color);
-              if (bgColors.length > 1) {
-                // Multiple colors - create animated gradient background
-                const gradientColors = bgColors.join(', ');
+              const parsed = parseColors(link.li_bg_color);
+              if (parsed.colors.length > 1) {
                 const style = document.createElement('style');
                 const uniqueId = 'bg-gradient-' + Math.random().toString(36).substr(2, 9);
                 const animName = 'bgGradientShift-' + uniqueId;
@@ -2085,17 +2141,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 listItem.dataset.bgGradientId = uniqueId;
                 listItem.classList.add('animated-gradient-bg');
                 
+                const anim = generateGradientAnimation(parsed, animName, randomDelay);
                 style.textContent = `
                   .link-item.animated-gradient-bg[data-bg-gradient-id="${uniqueId}"] {
-                    background: linear-gradient(45deg, ${gradientColors});
-                    background-size: 400% 400%;
-                    animation: ${animName} 3s ease infinite;
-                    animation-delay: -${randomDelay}s;
+                    ${anim.baseStyle || ''}
+                    animation: ${anim.animation}
                   }
                   @keyframes ${animName} {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
+                    ${anim.keyframes}
                   }
                 `;
                 document.head.appendChild(style);
@@ -2104,10 +2157,8 @@ document.addEventListener('DOMContentLoaded', function () {
               }
             }
             if (link.li_hover_color) {
-              const hoverColors = parseColors(link.li_hover_color);
-              if (hoverColors.length > 1) {
-                // Multiple colors - create animated gradient hover
-                const gradientColors = hoverColors.join(', ');
+              const parsed = parseColors(link.li_hover_color);
+              if (parsed.colors.length > 1) {
                 const style = document.createElement('style');
                 const uniqueId = 'hover-gradient-' + Math.random().toString(36).substr(2, 9);
                 const animName = 'hoverGradientShift-' + uniqueId;
@@ -2115,17 +2166,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 listItem.dataset.hoverGradientId = uniqueId;
                 listItem.classList.add('animated-gradient-hover');
                 
+                const anim = generateGradientAnimation(parsed, animName, randomDelay);
                 style.textContent = `
                   .link-item.animated-gradient-hover[data-hover-gradient-id="${uniqueId}"]:hover {
-                    background: linear-gradient(45deg, ${gradientColors}) !important;
-                    background-size: 400% 400% !important;
-                    animation: ${animName} 3s ease infinite !important;
-                    animation-delay: -${randomDelay}s !important;
+                    ${anim.baseStyle || ''}
+                    animation: ${anim.animation} !important;
                   }
                   @keyframes ${animName} {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
+                    ${anim.keyframes}
                   }
                 `;
                 document.head.appendChild(style);
@@ -5605,22 +5653,26 @@ async function triggerScans() {
     "horizontal_stack": false
   },
   {
-    "color": "#fbbc04",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-md-google_keep",
     "name": "Keep",
-    "url": "https://keep.google.com/"
+    "url": "https://keep.google.com/",
+    "icon_class": "nf nf-md-google_keep",
+    "color": "black",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_bg_color": "rotate: #6781e8, #45ee65",
+    "horizontal_stack": false
   },
   {
     "name": "nerdfonts",
     "url": "https://www.nerdfonts.com/cheat-sheet",
     "icon_class": "nf nf-seti-font",
+    "color": "black",
     "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_bg_color": "rotate: #fdd7f0,#84a222,#18d3f4",
     "horizontal_stack": false
   },
   {

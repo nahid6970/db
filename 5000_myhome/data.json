@@ -247,22 +247,26 @@
     "horizontal_stack": false
   },
   {
-    "color": "#fbbc04",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-md-google_keep",
     "name": "Keep",
-    "url": "https://keep.google.com/"
+    "url": "https://keep.google.com/",
+    "icon_class": "nf nf-md-google_keep",
+    "color": "black",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_bg_color": "rotate: #6781e8, #45ee65",
+    "horizontal_stack": false
   },
   {
     "name": "nerdfonts",
     "url": "https://www.nerdfonts.com/cheat-sheet",
     "icon_class": "nf nf-seti-font",
+    "color": "black",
     "img_src": "https://emojiisland.com/cdn/shop/products/Hugging_Face_Emoji_2028ce8b-c213-4d45-94aa-21e1a0842b4d_grande.png?v=1571606036",
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_bg_color": "rotate: #fdd7f0,#84a222,#18d3f4",
     "horizontal_stack": false
   },
   {
