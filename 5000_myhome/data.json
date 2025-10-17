@@ -194,18 +194,18 @@
     "url": "https://www.messenger.com/"
   },
   {
-    "click_action": "url",
-    "color": "red",
-    "default_type": "img",
-    "font_size": "35px",
-    "horizontal_stack": false,
+    "name": "YouTube",
+    "url": "https://www.youtube.com/",
     "icon_class": "nf nf-fa-youtube",
+    "color": "red",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
-    "li_bg_color": "red, blue, green, yellow",
+    "default_type": "img",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_bg_color": "rotate: #e5e0e8, #325582, green, yellow",
     "li_border_color": "brown, green",
     "li_border_radius": "50%",
-    "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
