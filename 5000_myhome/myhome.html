@@ -5460,6 +5460,7 @@ async function triggerScans() {
     "url": "http://192.168.0.101:5000/"
   },
   {
+    "click_action": "url",
     "default_type": "img",
     "horizontal_stack": false,
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
@@ -5467,13 +5468,13 @@ async function triggerScans() {
     "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
   },
   {
-    "click_action": "url",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-dev-google",
     "name": "Google",
-    "url": "https://www.google.com/"
+    "url": "https://www.google.com/",
+    "icon_class": "nf nf-dev-google",
+    "default_type": "nerd-font",
+    "click_action": "note",
+    "font_size": "35px",
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
@@ -5528,7 +5529,7 @@ async function triggerScans() {
     "icon_class": "nf nf-fa-youtube",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
     "li_bg_color": "red, blue, green, yellow",
-    "li_border_color": "brown, black",
+    "li_border_color": "brown, green",
     "li_border_radius": "50%",
     "name": "YouTube",
     "url": "https://www.youtube.com/"
@@ -6076,28 +6077,28 @@ async function triggerScans() {
     "url": "https://www.facebook.com/groups/bcsp4afp"
   },
   {
-    "name": "ShareTXT",
-    "group": "Local (Flask)",
-    "url": "http://192.168.0.101:5001/",
-    "img_src": "https://cdn-icons-png.flaticon.com/512/4400/4400968.png",
-    "default_type": "img",
     "click_action": "url",
     "collapsible": false,
+    "default_type": "img",
     "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_bg_color": "white",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "black",
+    "img_src": "https://cdn-icons-png.flaticon.com/512/4400/4400968.png",
+    "name": "ShareTXT",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "white",
-    "horizontal_text_color": "black",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5001/"
   },
   {
     "collapsible": false,
@@ -7316,7 +7317,7 @@ async function triggerScans() {
     "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file"
   },
   {
-    "click_action": "url",
+    "click_action": "note",
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
@@ -9939,6 +9940,30 @@ async function triggerScans() {
     "name": "Open With Editor",
     "note": "#t:: {\n\n    function_name()\n\n    function_name(){\n\nmain script\n\n}",
     "url": ""
+  },
+  {
+    "name": "json",
+    "group": "code",
+    "url": "",
+    "default_type": "text",
+    "note": "\"Create a script that outputs the results in JSON format. The JSON should contain relevant key-value pairs that\nrepresent the data being processed, with clear and descriptive key names. The structure should be flat (not\nnested) unless nesting is specifically needed for the data organization. Use appropriate data types (strings,\nnumbers, booleans) for the values. For example, if processing time data, include keys like 'hours', 'minutes',\n'seconds'; if processing counts, include keys like 'count', 'total', etc.\"\n\n\"Create a script that outputs structured data in JSON format. Include all relevant information as key-value pairs\nwith descriptive names. Use appropriate data types and keep the structure flat unless nesting is needed.\"",
+    "click_action": "note",
+    "collapsible": true,
+    "display_style": "flex",
+    "horizontal_stack": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
