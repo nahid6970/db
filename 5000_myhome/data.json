@@ -150,16 +150,16 @@
     "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "default_type": "img",
-    "font_size": "35px",
-    "horizontal_stack": false,
+    "name": "Google Mail",
+    "url": "https://mail.google.com/",
     "icon_class": "nf nf-cod-mail",
     "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
-    "li_border_color": "red, skyblue, green, yellow",
+    "default_type": "img",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_border_color": "red, green, yellow",
     "li_border_radius": "0px",
-    "name": "Google Mail",
-    "url": "https://mail.google.com/"
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
@@ -204,7 +204,7 @@
     "click_action": "url",
     "font_size": "35px",
     "li_bg_color": "rotate: #e5e0e8, #325582, green, yellow",
-    "li_border_color": "brown, green",
+    "li_border_color": "green",
     "li_border_radius": "50%",
     "horizontal_stack": false
   },
@@ -220,13 +220,15 @@
     "url": "https://discord.com/channels/@me"
   },
   {
+    "name": "Tailscale",
+    "url": "https://login.tailscale.com/admin/machines",
+    "icon_class": "nf nf-md-dots_hexagon",
     "color": "#4b70cc",
     "default_type": "nerd-font",
+    "click_action": "url",
     "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-md-dots_hexagon",
-    "name": "Tailscale",
-    "url": "https://login.tailscale.com/admin/machines"
+    "li_border_color": "rotate: brown, green",
+    "horizontal_stack": false
   },
   {
     "color": "#b259e6",

@@ -2205,13 +2205,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (link.li_border_color) {
               // Check if it's a gradient (contains comma-separated colors)
-              const colors = parseColors(link.li_border_color);
-              if (colors.length > 1) {
+              const parsed = parseColors(link.li_border_color);
+              if (parsed.colors.length > 1) {
                 // Multiple colors - create animated gradient border
-                const gradientColors = colors.join(', ');
                 const borderWidth = '4px';
-                
-                // Apply the gradient animation
                 const style = document.createElement('style');
                 const uniqueId = 'gradient-' + Math.random().toString(36).substr(2, 9);
                 const animName = 'gradientBorderShift-' + uniqueId;
@@ -2226,28 +2223,65 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Get background color for the inner area
                 const bgColor = link.li_bg_color ? (link.li_bg_color.includes(',') ? 'transparent' : link.li_bg_color) : '#474747';
                 
-                style.textContent = `
-                  .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] {
-                    position: relative;
-                    background: linear-gradient(45deg, ${gradientColors});
-                    background-size: 400% 400%;
-                    padding: ${borderWidth};
-                    animation: ${animName} 3s ease infinite;
-                    animation-delay: -${randomDelay}s;
+                if (parsed.animationType === 'rotate') {
+                  // Rotate mode - solid border colors fade in/out
+                  const numColors = parsed.colors.length;
+                  let keyframes = '';
+                  for (let i = 0; i < numColors; i++) {
+                    const startPercent = (i / numColors * 100).toFixed(2);
+                    const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+                    keyframes += `${startPercent}% { background: ${parsed.colors[i]}; }\n`;
+                    if (i < numColors - 1) {
+                      keyframes += `${endPercent}% { background: ${parsed.colors[i]}; }\n`;
+                    }
                   }
-                  .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] > a {
-                    display: flex;
-                    width: 100%;
-                    height: 100%;
-                    background: ${bgColor};
-                    border-radius: calc(${borderRadiusValue} - ${borderWidth});
-                  }
-                  @keyframes ${animName} {
-                    0% { background-position: 0% 50%; }
-                    50% { background-position: 100% 50%; }
-                    100% { background-position: 0% 50%; }
-                  }
-                `;
+                  keyframes += `100% { background: ${parsed.colors[0]}; }\n`;
+                  
+                  style.textContent = `
+                    .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] {
+                      position: relative;
+                      padding: ${borderWidth};
+                      animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                      animation-delay: -${randomDelay}s;
+                    }
+                    .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] > a {
+                      display: flex;
+                      width: 100%;
+                      height: 100%;
+                      background: ${bgColor};
+                      border-radius: calc(${borderRadiusValue} - ${borderWidth});
+                    }
+                    @keyframes ${animName} {
+                      ${keyframes}
+                    }
+                  `;
+                } else {
+                  // Slide mode - gradient slides
+                  const angle = parsed.angle || '45deg';
+                  const gradientColors = parsed.colors.join(', ');
+                  style.textContent = `
+                    .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] {
+                      position: relative;
+                      background: linear-gradient(${angle}, ${gradientColors});
+                      background-size: 400% 400%;
+                      padding: ${borderWidth};
+                      animation: ${animName} 3s ease infinite;
+                      animation-delay: -${randomDelay}s;
+                    }
+                    .link-item.animated-gradient-border[data-gradient-id="${uniqueId}"] > a {
+                      display: flex;
+                      width: 100%;
+                      height: 100%;
+                      background: ${bgColor};
+                      border-radius: calc(${borderRadiusValue} - ${borderWidth});
+                    }
+                    @keyframes ${animName} {
+                      0% { background-position: 0% 50%; }
+                      50% { background-position: 100% 50%; }
+                      100% { background-position: 0% 50%; }
+                    }
+                  `;
+                }
                 document.head.appendChild(style);
               } else {
                 // Single color - normal border
@@ -2294,11 +2328,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Apply gradient to inner link element if background_color has multiple colors
             if (link.background_color) {
-              const bgColors = parseColors(link.background_color);
-              if (bgColors.length > 1) {
+              const parsed = parseColors(link.background_color);
+              if (parsed.colors.length > 1) {
                 const linkElement = listItem.querySelector('a');
                 if (linkElement) {
-                  const gradientColors = bgColors.join(', ');
                   const style = document.createElement('style');
                   const uniqueId = 'link-bg-gradient-' + Math.random().toString(36).substr(2, 9);
                   const animName = 'linkBgGradientShift-' + uniqueId;
@@ -2306,17 +2339,14 @@ document.addEventListener('DOMContentLoaded', function () {
                   linkElement.dataset.linkBgGradientId = uniqueId;
                   linkElement.classList.add('animated-link-gradient-bg');
                   
+                  const anim = generateGradientAnimation(parsed, animName, randomDelay);
                   style.textContent = `
                     a.animated-link-gradient-bg[data-link-bg-gradient-id="${uniqueId}"] {
-                      background: linear-gradient(45deg, ${gradientColors}) !important;
-                      background-size: 400% 400% !important;
-                      animation: ${animName} 3s ease infinite !important;
-                      animation-delay: -${randomDelay}s !important;
+                      ${anim.baseStyle || ''}
+                      animation: ${anim.animation} !important;
                     }
                     @keyframes ${animName} {
-                      0% { background-position: 0% 50%; }
-                      50% { background-position: 100% 50%; }
-                      100% { background-position: 0% 50%; }
+                      ${anim.keyframes}
                     }
                   `;
                   document.head.appendChild(style);
@@ -2326,11 +2356,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Apply gradient to text color if color has multiple colors
             if (link.color) {
-              const textColors = parseColors(link.color);
-              if (textColors.length > 1) {
+              const parsed = parseColors(link.color);
+              if (parsed.colors.length > 1) {
                 const linkElement = listItem.querySelector('a');
                 if (linkElement) {
-                  const gradientColors = textColors.join(', ');
                   const style = document.createElement('style');
                   const uniqueId = 'link-text-gradient-' + Math.random().toString(36).substr(2, 9);
                   const animName = 'linkTextGradientShift-' + uniqueId;
@@ -2338,22 +2367,50 @@ document.addEventListener('DOMContentLoaded', function () {
                   linkElement.dataset.linkTextGradientId = uniqueId;
                   linkElement.classList.add('animated-link-gradient-text');
                   
-                  style.textContent = `
-                    a.animated-link-gradient-text[data-link-text-gradient-id="${uniqueId}"] {
-                      background: linear-gradient(45deg, ${gradientColors});
-                      background-size: 400% 400%;
-                      -webkit-background-clip: text;
-                      -webkit-text-fill-color: transparent;
-                      background-clip: text;
-                      animation: ${animName} 3s ease infinite;
-                      animation-delay: -${randomDelay}s;
+                  if (parsed.animationType === 'rotate') {
+                    // For text, rotate mode cycles text color
+                    const numColors = parsed.colors.length;
+                    let keyframes = '';
+                    for (let i = 0; i < numColors; i++) {
+                      const startPercent = (i / numColors * 100).toFixed(2);
+                      const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+                      keyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
+                      if (i < numColors - 1) {
+                        keyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
+                      }
                     }
-                    @keyframes ${animName} {
-                      0% { background-position: 0% 50%; }
-                      50% { background-position: 100% 50%; }
-                      100% { background-position: 0% 50%; }
-                    }
-                  `;
+                    keyframes += `100% { color: ${parsed.colors[0]}; }\n`;
+                    
+                    style.textContent = `
+                      a.animated-link-gradient-text[data-link-text-gradient-id="${uniqueId}"] {
+                        animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                        animation-delay: -${randomDelay}s;
+                      }
+                      @keyframes ${animName} {
+                        ${keyframes}
+                      }
+                    `;
+                  } else {
+                    // Slide mode - gradient text
+                    const angle = parsed.angle || '45deg';
+                    const gradientColors = parsed.colors.join(', ');
+                    style.textContent = `
+                      a.animated-link-gradient-text[data-link-text-gradient-id="${uniqueId}"] {
+                        background: linear-gradient(${angle}, ${gradientColors});
+                        background-size: 400% 400%;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;
+                        background-clip: text;
+                        animation: ${animName} 3s ease infinite;
+                        animation-delay: -${randomDelay}s;
+                      }
+                      @keyframes ${animName} {
+                        0% { background-position: 0% 50%; }
+                        50% { background-position: 100% 50%; }
+                        100% { background-position: 0% 50%; }
+                      }
+                    `;
+                  }
                   document.head.appendChild(style);
                 }
               }
@@ -5556,16 +5613,16 @@ async function triggerScans() {
     "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "default_type": "img",
-    "font_size": "35px",
-    "horizontal_stack": false,
+    "name": "Google Mail",
+    "url": "https://mail.google.com/",
     "icon_class": "nf nf-cod-mail",
     "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
-    "li_border_color": "red, skyblue, green, yellow",
+    "default_type": "img",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_border_color": "red, green, yellow",
     "li_border_radius": "0px",
-    "name": "Google Mail",
-    "url": "https://mail.google.com/"
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
@@ -5610,7 +5667,7 @@ async function triggerScans() {
     "click_action": "url",
     "font_size": "35px",
     "li_bg_color": "rotate: #e5e0e8, #325582, green, yellow",
-    "li_border_color": "brown, green",
+    "li_border_color": "green",
     "li_border_radius": "50%",
     "horizontal_stack": false
   },
@@ -5626,13 +5683,15 @@ async function triggerScans() {
     "url": "https://discord.com/channels/@me"
   },
   {
+    "name": "Tailscale",
+    "url": "https://login.tailscale.com/admin/machines",
+    "icon_class": "nf nf-md-dots_hexagon",
     "color": "#4b70cc",
     "default_type": "nerd-font",
+    "click_action": "url",
     "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-md-dots_hexagon",
-    "name": "Tailscale",
-    "url": "https://login.tailscale.com/admin/machines"
+    "li_border_color": "rotate: brown, green",
+    "horizontal_stack": false
   },
   {
     "color": "#b259e6",
