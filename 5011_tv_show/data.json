@@ -1073,7 +1073,9 @@
                 "notify": "seen"
             }
         ],
-        "rating": "3"
+        "rating": "2",
+        "status": "Continuing",
+        "sonarr_url": ""
     },
     {
         "id": 12,
@@ -1360,7 +1362,9 @@
                 "notify": "seen"
             }
         ],
-        "rating": "4"
+        "rating": "4",
+        "status": "Continuing",
+        "sonarr_url": ""
     },
     {
         "id": 16,
@@ -2388,7 +2392,7 @@
         "year": "2018",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5c494a49ae264.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Scissor Seven",
-        "rating": null,
+        "rating": "5",
         "status": "Continuing",
         "episodes": [
             {
@@ -2398,7 +2402,8 @@
                 "added_date": "2025-08-24T16:30:15.466395",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 31,
@@ -2406,7 +2411,7 @@
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/427464/posters/66e308a4e2c1b.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\The Walking Dead - Daryl Dixon",
-        "rating": null,
+        "rating": "4",
         "status": "Continuing",
         "episodes": [
             {
@@ -2521,7 +2526,7 @@
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/376472/posters/68d6b6fd02d08.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Alice in Borderland (2020)",
-        "rating": null,
+        "rating": "3",
         "status": "Continuing",
         "episodes": [
             {
@@ -2731,15 +2736,5 @@
             }
         ],
         "sonarr_url": ""
-    },
-    {
-        "id": 40,
-        "title": "asdasd",
-        "year": "",
-        "cover_image": "https://www.adobe.com/express/feature/image/remove-background/png/media_16ad2258cac6171d66942b13b8cd4839f0b6be6f3.png?width=750&format=png&optimize=medium",
-        "directory_path": "",
-        "rating": null,
-        "status": "Continuing",
-        "episodes": []
     }
 ]
