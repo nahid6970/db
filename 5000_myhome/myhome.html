@@ -536,12 +536,11 @@ input:checked+.slider:before {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: fit-content;
+  width: auto;
+  max-width: 90vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-  /* max-width: 90vw; */
-  /* max-height: 90vh; */
+  max-height: 90vh;
+  overflow-y: auto;
 }
 
 #group_type_box-popup .popup-content-inner {
@@ -1266,24 +1265,69 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   color: yellow;
 }
 
+/* Mobile styles */
+@media (max-width: 768px) {
+  /* Popup container adjustments for mobile */
+  .popup-container .Menu {
+    flex-direction: column;
+    width: 95vw;
+    max-width: 95vw;
+    max-height: 95vh;
+    padding: 15px;
+  }
 
+  /* Make form fields full width on mobile */
+  .popup-container input[type="text"],
+  .popup-container input[type="url"],
+  .popup-container textarea {
+    width: 100%;
+    min-width: auto;
+  }
 
+  /* Stack name and group fields on mobile */
+  #add-link-form > div[style*="flex"]:first-child,
+  #edit-link-form > div[style*="flex"]:first-child {
+    flex-direction: column;
+    gap: 10px;
+  }
 
+  /* Stack font family and font size fields on mobile */
+  #add-link-form > div[style*="flex"] input[id*="font"],
+  #edit-link-form > div[style*="flex"] input[id*="font"] {
+    width: 100%;
+  }
 
+  /* Adjust note panel for mobile */
+  #add-link-note-panel,
+  #edit-link-note-panel {
+    width: 100%;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #555;
+  }
 
+  /* Center preview buttons on mobile */
+  .preview-note-button {
+    align-self: center;
+    width: 100%;
+    justify-content: center;
+  }
 
+  /* Two-column layout becomes single column on mobile */
+  .form-panel,
+  .note-panel {
+    width: 100% !important;
+    margin-right: 0 !important;
+    margin-bottom: 20px;
+  }
 
-
-
-
-
-
-@media (max-width: 600px) {
-
+  /* Adjust popup positioning for mobile */
   .Menu,
   .group_type_box.expanded {
-    max-width: 90vw;
-    max-height: 90vh;
+    width: 95vw;
+    max-width: 95vw;
+    max-height: 95vh;
+    padding: 15px;
   }
 
   html,
@@ -1302,7 +1346,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   .link-item a {
-    /* Styles for the link itself within the container */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1318,9 +1361,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
   .group_type_normal {
     list-style: none;
-    /* Remove default list bullets */
     padding: 0px;
-    /* Remove default padding */
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
@@ -1330,7 +1371,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   ul.group_type_normal {
-    /* margin-top: 0; */
     margin: -4px;
   }
 
@@ -1354,6 +1394,12 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     max-width: 50px;
     max-height: 30px;
     flex-shrink: 0;
+  }
+  
+  /* Ensure popup doesn't go beyond screen */
+  .popup-container {
+    align-items: flex-start !important;
+    padding-top: 20px;
   }
 }</style>
 </head>
@@ -1531,6 +1577,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         justify-content: center;
         transition: all 0.3s ease;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        gap: 5px;
       }
 
       .preview-note-button:hover {
@@ -1653,175 +1700,188 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     </div>
 
     <div id="add-link-popup" class="popup-container hidden">
-      <div class="Menu">
-        <span class="close-button">&times;</span>
-        <h3>Add New Link</h3>
-        <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-          <input type="text" id="link-name" placeholder="Name">
-          <input type="text" id="link-group" placeholder="Group (optional)">
-          <input type="url" id="link-url" placeholder="URL">
+      <div class="Menu" style="display: flex; width: fit-content; max-width: 90vw;">
+        <div style="width: 400px; margin-right: 20px;" class="form-panel">
+          <span class="close-button">&times;</span>
+          <h3>Add New Link</h3>
+          <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-name" placeholder="Name" style="flex: 1;">
+              <input type="text" id="link-group" placeholder="Group (optional)" style="flex: 1;">
+            </div>
+            <input type="url" id="link-url" placeholder="URL">
 
-          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-            <label style="font-weight: 500;">Click Action:</label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
-              Open URL
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="link-click-action" id="link-action-note" value="note">
-              Open Note
-            </label>
-          </div>
+            <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+              <label style="font-weight: 500;">Click Action:</label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
+                Open URL
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="link-click-action" id="link-action-note" value="note">
+                Open Note
+              </label>
+            </div>
 
-          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-            <label style="font-weight: 500;">Default Type:</label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="link-default-type" id="link-type-text" value="text" checked>
-              Text
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="link-default-type" id="link-type-nerd-font" value="nerd-font">
-              Nerd Font
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="link-default-type" id="link-type-img" value="img">
-              Image
-            </label>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-text" placeholder="Text (primary option)">
-            <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
-            <input type="url" id="link-img-src" placeholder="Image URL (if no text/icon)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-width" placeholder="Width (e.g., 50px or auto)">
-            <input type="text" id="link-height" placeholder="Height (e.g., 50px or auto)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-color" placeholder="Text Color (red or red, blue, green for gradient)">
-            <input type="text" id="link-background-color" placeholder="BG Color (supports gradients)">
-          </div>
-          <input type="text" id="link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
-          <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-li-width" placeholder="Item Width (e.g., 120px, auto)">
-            <input type="text" id="link-li-height" placeholder="Item Height (e.g., 60px, auto)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-li-bg-color" placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
-            <input type="text" id="link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-li-border-color"
-              placeholder="Border Color (red or red, blue, green for animated gradient)">
-            <input type="text" id="link-li-border-radius" placeholder="Border Radius (e.g., 5px, 10px)">
-          </div>
-          <input type="text" id="link-border-radius" placeholder="Border Radius">
-          <input type="text" id="link-title" placeholder="Title (for tooltip)">
-          <div style="display: flex; gap: 10px; align-items: flex-start;">
-            <textarea id="link-note"
-              placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="3"
-              style="resize: vertical; font-family: inherit; flex: 1;"></textarea>
-            <button type="button" id="preview-note-btn" class="preview-note-button" title="Preview Note as Markdown">
-              <i class="nf nf-md-eye"></i>
-            </button>
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <label for="link-hidden">
-              <input type="checkbox" id="link-hidden">
-              Hide this item
-            </label>
-          </div>
-          <button type="submit">Add Link</button>
-        </form>
+            <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+              <label style="font-weight: 500;">Default Type:</label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="link-default-type" id="link-type-text" value="text" checked>
+                Text
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="link-default-type" id="link-type-nerd-font" value="nerd-font">
+                Nerd Font
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="link-default-type" id="link-type-img" value="img">
+                Image
+              </label>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-text" placeholder="Text (primary option)">
+              <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+              <input type="url" id="link-img-src" placeholder="Image URL (if no text/icon)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-width" placeholder="Width (e.g., 50px or auto)">
+              <input type="text" id="link-height" placeholder="Height (e.g., 50px or auto)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-color" placeholder="Text Color (red or red, blue, green for gradient)">
+              <input type="text" id="link-background-color" placeholder="BG Color (supports gradients)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)" style="flex: 1;">
+              <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)" style="flex: 1;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-li-width" placeholder="Item Width (e.g., 120px, auto)">
+              <input type="text" id="link-li-height" placeholder="Item Height (e.g., 60px, auto)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-li-bg-color" placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
+              <input type="text" id="link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="link-li-border-color"
+                placeholder="Border Color (red or red, blue, green for animated gradient)">
+              <input type="text" id="link-li-border-radius" placeholder="Border Radius (e.g., 5px, 10px)">
+            </div>
+            <input type="text" id="link-border-radius" placeholder="Border Radius">
+            <input type="text" id="link-title" placeholder="Title (for tooltip)">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="link-hidden">
+                <input type="checkbox" id="link-hidden">
+                Hide this item
+              </label>
+            </div>
+            <button type="submit">Add Link</button>
+          </form>
+        </div>
+        <div id="add-link-note-panel" style="width: 400px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+          <h3>Note</h3>
+          <textarea id="link-note"
+            placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
+            style="resize: vertical; font-family: inherit; flex: 1; width: 100%;"></textarea>
+          <button type="button" id="preview-note-btn" class="preview-note-button" title="Preview Note as Markdown" style="align-self: center;">
+            <i class="nf nf-md-eye"></i> Preview Note
+          </button>
+        </div>
       </div>
     </div>
 
     <div id="edit-link-popup" class="popup-container hidden">
-      <div class="Menu">
-        <span class="close-button">&times;</span>
-        <h3>Edit Link</h3>
-        <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
-          <input type="hidden" id="edit-link-index">
-          <input type="text" id="edit-link-name" placeholder="Name">
-          <input type="text" id="edit-link-group" placeholder="Group (optional)">
-          <input type="url" id="edit-link-url" placeholder="URL">
+      <div class="Menu" style="display: flex; width: fit-content; max-width: 90vw;">
+        <div style="width: 400px; margin-right: 20px;" class="form-panel">
+          <span class="close-button">&times;</span>
+          <h3>Edit Link</h3>
+          <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px;">
+            <input type="hidden" id="edit-link-index">
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
+              <input type="text" id="edit-link-group" placeholder="Group (optional)" style="flex: 1;">
+            </div>
+            <input type="url" id="edit-link-url" placeholder="URL">
 
-          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-            <label style="font-weight: 500;">Click Action:</label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
-              Open URL
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="edit-link-click-action" id="edit-link-action-note" value="note">
-              Open Note
-            </label>
-          </div>
+            <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+              <label style="font-weight: 500;">Click Action:</label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
+                Open URL
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="edit-link-click-action" id="edit-link-action-note" value="note">
+                Open Note
+              </label>
+            </div>
 
-          <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-            <label style="font-weight: 500;">Default Type:</label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="edit-link-default-type" id="edit-link-type-text" value="text" checked>
-              Text
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="edit-link-default-type" id="edit-link-type-nerd-font" value="nerd-font">
-              Nerd Font
-            </label>
-            <label style="display: flex; align-items: center; gap: 5px;">
-              <input type="radio" name="edit-link-default-type" id="edit-link-type-img" value="img">
-              Image
-            </label>
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-text" placeholder="Text (primary option)">
-            <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
-            <input type="url" id="edit-link-img-src" placeholder="Image URL (if no text/icon)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
-            <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-color" placeholder="Text Color (red or red, blue, green for gradient)">
-            <input type="text" id="edit-link-background-color" placeholder="BG Color (supports gradients)">
-          </div>
-          <input type="text" id="edit-link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
-          <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-li-width" placeholder="Item Width (e.g., 120px, auto)">
-            <input type="text" id="edit-link-li-height" placeholder="Item Height (e.g., 60px, auto)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-li-bg-color"
-              placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
-            <input type="text" id="edit-link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
-          </div>
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-link-li-border-color"
-              placeholder="Border Color (red or red, blue, green for animated gradient)">
-            <input type="text" id="edit-link-li-border-radius" placeholder="Border Radius (e.g., 5px, 10px)">
-          </div>
-          <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
-          <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
-          <div style="display: flex; gap: 10px; align-items: flex-start;">
-            <textarea id="edit-link-note"
-              placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="3"
-              style="resize: vertical; font-family: inherit; flex: 1;"></textarea>
-            <button type="button" id="edit-preview-note-btn" class="preview-note-button"
-              title="Preview Note as Markdown">
-              <i class="nf nf-md-eye"></i>
-            </button>
-          </div>
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <label for="edit-link-hidden">
-              <input type="checkbox" id="edit-link-hidden">
-              Hide this item
-            </label>
-          </div>
-          <button type="submit">Save Changes</button>
-        </form>
+            <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
+              <label style="font-weight: 500;">Default Type:</label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="edit-link-default-type" id="edit-link-type-text" value="text" checked>
+                Text
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="edit-link-default-type" id="edit-link-type-nerd-font" value="nerd-font">
+                Nerd Font
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px;">
+                <input type="radio" name="edit-link-default-type" id="edit-link-type-img" value="img">
+                Image
+              </label>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-text" placeholder="Text (primary option)">
+              <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
+              <input type="url" id="edit-link-img-src" placeholder="Image URL (if no text/icon)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
+              <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-color" placeholder="Text Color (red or red, blue, green for gradient)">
+              <input type="text" id="edit-link-background-color" placeholder="BG Color (supports gradients)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)" style="flex: 1;">
+              <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)" style="flex: 1;">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-li-width" placeholder="Item Width (e.g., 120px, auto)">
+              <input type="text" id="edit-link-li-height" placeholder="Item Height (e.g., 60px, auto)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-li-bg-color"
+                placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
+              <input type="text" id="edit-link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-link-li-border-color"
+                placeholder="Border Color (red or red, blue, green for animated gradient)">
+              <input type="text" id="edit-link-li-border-radius" placeholder="Border Radius (e.g., 5px, 10px)">
+            </div>
+            <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
+            <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="edit-link-hidden">
+                <input type="checkbox" id="edit-link-hidden">
+                Hide this item
+              </label>
+            </div>
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+        <div id="edit-link-note-panel" style="width: 400px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+          <h3>Note</h3>
+          <textarea id="edit-link-note"
+            placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
+            style="resize: vertical; font-family: inherit; flex: 1; width: 100%;"></textarea>
+          <button type="button" id="edit-preview-note-btn" class="preview-note-button" title="Preview Note as Markdown" style="align-self: center;">
+            <i class="nf nf-md-eye"></i> Preview Note
+          </button>
+        </div>
       </div>
     </div>
 
@@ -5677,89 +5737,106 @@ async function triggerScans() {
     "url": "http://idra.teletalk.com.bd/index.php"
   },
   {
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "li_bg_color": "white",
     "name": "Home (copy)",
-    "url": "http://192.168.0.101:5000/"
-  },
-  {
-    "click_action": "url",
-    "default_type": "img",
-    "horizontal_stack": false,
+    "url": "http://192.168.0.101:5000/",
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "name": "Home",
-    "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
-  },
-  {
-    "click_action": "note",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-dev-google",
-    "name": "Google",
-    "url": "https://www.google.com/"
-  },
-  {
-    "click_action": "url",
     "default_type": "img",
+    "click_action": "url",
+    "li_width": "1%",
+    "li_height": "1%",
+    "li_bg_color": "white",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Home",
+    "url": "https://nahid6970.github.io/db/5000_myhome/myhome",
+    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
+    "default_type": "img",
+    "click_action": "url",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Google",
+    "url": "https://www.google.com/",
+    "icon_class": "nf nf-dev-google",
+    "default_type": "nerd-font",
+    "click_action": "note",
     "font_size": "35px",
-    "horizontal_stack": false,
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
+  },
+  {
+    "name": "Google Mail",
+    "url": "https://mail.google.com/",
     "icon_class": "nf nf-cod-mail",
     "img_src": "https://static.vecteezy.com/system/resources/previews/022/613/021/non_2x/google-mail-gmail-icon-logo-symbol-free-png.png",
+    "default_type": "img",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_border_color": "rotate: red, green, yellow",
     "li_border_radius": "0px",
-    "name": "Google Mail",
-    "url": "https://mail.google.com/"
+    "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
     "name": "Outlook",
-    "url": "https://outlook.live.com"
+    "url": "https://outlook.live.com",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAz1BMVEX////Y4e06c7RBd7ZnjsGTrM8ASqAAU6QAUaMATqIAOZv4+fuTstgAYbsCaL0Yf8cfiMomm9MNlNCZvOQAcNAAd9MAdNIoqOomqus1uPJS3f/4+/xfrekQhdoAhd4QftcnoOVQ2f881v8tmOQLjuFNm+HV5ffg7PmBseYchsNJz/txpOADZrQAnuiPuegAac7I2fHm6u48c6BZjtdPvPE8g9UHXccBU5seleBMsuoXdLEAYLUYhdIDVL0AYYccbI4gfKM8p+IooNqQvd/z7uoze/D7AAABAElEQVR4AczQBYKDMBBAUeouSDJTCQx1d/f2/ofaYQU7wX6ch0b7tyWSKb9kOoaZbC6Xy3sVCoViKYrlSrVarXF1XdeNGJqWEBIQsdHkWv75tlK2rXjlEAA0XNftBHd2ez3leAkDGZuMrRCq/mA4kkKOiQgnXHBnz1batK9NLTmTUioAmLcCdBaDpWWultZMCKH40bQOUCyGyyXj8g9h46MSjjaaatsAcefjXlr71Wp7WC6PVU6cEM8+Opa1PBwOvFyu1+uNCCDA7eG3u46302lORAF6rR/P5/OlYwNPpxPRO4JDg8f7g17AN8cQMIhOFMHS1xxRgDNqlLmggIFLkQDP2ivwBjDtwwAAAABJRU5ErkJggg==",
+    "default_type": "img",
+    "click_action": "url",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "color": "black, white",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-dev-facebook",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
-    "li_bg_color": "red, blue,  yellow, red",
     "name": "Facebook",
+    "url": "https://www.facebook.com/",
+    "icon_class": "nf nf-dev-facebook",
+    "color": "black, white",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
     "text": "Facebook",
-    "url": "https://www.facebook.com/"
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
+    "li_bg_color": "red, blue,  yellow, red",
+    "horizontal_stack": false
   },
   {
-    "click_action": "url",
+    "name": "Messenger",
+    "url": "https://www.messenger.com/",
+    "icon_class": "nf nf-fa-facebook_messenger",
     "color": "#3675ff",
     "default_type": "nerd-font",
+    "click_action": "url",
     "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-facebook_messenger",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "rotate: black, white",
     "li_border_color": "#3675ff",
     "li_border_radius": "0px",
-    "name": "Messenger",
-    "url": "https://www.messenger.com/"
+    "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "color": "red",
-    "default_type": "img",
-    "font_size": "35px",
-    "horizontal_stack": false,
+    "name": "YouTube",
+    "url": "https://www.youtube.com/",
     "icon_class": "nf nf-fa-youtube",
+    "color": "red",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
+    "default_type": "img",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "rotate: #e5e0e8, #325582, green, yellow",
     "li_border_color": "green",
     "li_border_radius": "50%",
-    "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "horizontal_stack": false
   },
   {
     "name": "Discord",
@@ -5769,6 +5846,8 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_border_radius": "1px solid red",
     "horizontal_stack": false
   },
@@ -5780,28 +5859,35 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_border_color": "rotate: brown, green",
     "li_border_radius": "0px",
     "horizontal_stack": false
   },
   {
+    "name": "OneNote",
+    "url": "https://www.onenote.com/",
+    "icon_class": "nf nf-md-microsoft_onenote",
     "color": "#b259e6",
     "default_type": "nerd-font",
+    "click_action": "url",
     "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-md-microsoft_onenote",
-    "name": "OneNote",
-    "url": "https://www.onenote.com/"
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   },
   {
-    "click_action": "url",
-    "default_type": "nerd-font",
-    "font_size": "35px",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-github_square",
-    "li_bg_color": "#6781e8, #45ee65",
     "name": "github",
-    "url": "https://github.com/nahid6970"
+    "url": "https://github.com/nahid6970",
+    "icon_class": "nf nf-fa-github_square",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
+    "li_bg_color": "#6781e8, #45ee65",
+    "horizontal_stack": false
   },
   {
     "name": "Keep",
@@ -5811,6 +5897,8 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "rotate: #6781e8, #45ee65",
     "horizontal_stack": false
   },
@@ -5823,6 +5911,8 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "click_action": "url",
     "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "rotate: #fdd7f0,#84a222,#18d3f4",
     "horizontal_stack": false
   },
@@ -5838,11 +5928,14 @@ async function triggerScans() {
     "url": "http://mi9t:5002"
   },
   {
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAArlBMVEULFCkKEiYKDyMNGjILFSsHABUZRGkQJkEGABAOHTYWOFo9tf8zlt46rPw8sv8gW4k1nec7r/8la58bTHUjY5UXPWAUNFMSLUosgL0xkdU5qPUuhsYAAAAbTXUFAAcodK0thMQOIzwIABgAEScACx8AABYAEygAQmcyGy+jNkdPIjQIFCmYNEZ9LT9BHjKHMEKwPE4ZFytpKTvKQ1V0LD+SNEY9HjFbJTi7P1JmKDsTo9rXAAABSElEQVR4AWKAgVEAIFoqECQGYWDQraVLqAN1+/8Pj55tPCMsRlycxxnrpyP0c8YQUgjJldavRAgGPJXAhRAcQIrHmOUFlu+XoYJsVdZJk9dJViLVibJ5y4F1/eB8Y3Cwjir0wTofahxcUQVLUQAsDC6M5MOk0cdzKJz0+EjUjwCmiFoaOQRjamrdjJUZarTU1x9BTW/FlDMt9ZSZBW3kFhx+BIkfkozMmsxlHxy64JF0TY10vckegZo1TH1v5tl2cfvQzDNo1JvcXgxi7N0BsCXntp37dXC+H+fGzntl4ouDsTACGABhILvkLhWsLvsvVigufwH6z3GaqTQnI8Yg0mbSJyjMm8CChK4G5bbHUeyEPqqu53lR+lVV9hvcjmWj/MDj1HV/foU0g8qzFTDbC6G1QhaQtmoTLE5BEbKrQHrUb2AxYsEoAADq+ShZjJHthQAAAABJRU5ErkJggg==",
     "name": "Local Bus",
-    "url": "https://dhakatc.com/info/localbus/all"
+    "url": "https://dhakatc.com/info/localbus/all",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAArlBMVEULFCkKEiYKDyMNGjILFSsHABUZRGkQJkEGABAOHTYWOFo9tf8zlt46rPw8sv8gW4k1nec7r/8la58bTHUjY5UXPWAUNFMSLUosgL0xkdU5qPUuhsYAAAAbTXUFAAcodK0thMQOIzwIABgAEScACx8AABYAEygAQmcyGy+jNkdPIjQIFCmYNEZ9LT9BHjKHMEKwPE4ZFytpKTvKQ1V0LD+SNEY9HjFbJTi7P1JmKDsTo9rXAAABSElEQVR4AWKAgVEAIFoqECQGYWDQraVLqAN1+/8Pj55tPCMsRlycxxnrpyP0c8YQUgjJldavRAgGPJXAhRAcQIrHmOUFlu+XoYJsVdZJk9dJViLVibJ5y4F1/eB8Y3Cwjir0wTofahxcUQVLUQAsDC6M5MOk0cdzKJz0+EjUjwCmiFoaOQRjamrdjJUZarTU1x9BTW/FlDMt9ZSZBW3kFhx+BIkfkozMmsxlHxy64JF0TY10vckegZo1TH1v5tl2cfvQzDNo1JvcXgxi7N0BsCXntp37dXC+H+fGzntl4ouDsTACGABhILvkLhWsLvsvVigufwH6z3GaqTQnI8Yg0mbSJyjMm8CChK4G5bbHUeyEPqqu53lR+lVV9hvcjmWj/MDj1HV/foU0g8qzFTDbC6G1QhaQtmoTLE5BEbKrQHrUb2AxYsEoAADq+ShZjJHthQAAAABJRU5ErkJggg==",
+    "default_type": "img",
+    "click_action": "url",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   },
   {
     "name": "DU MBA Result",
@@ -10339,33 +10432,33 @@ async function triggerScans() {
     "url": ""
   },
   {
-    "name": "Prompt for Math",
-    "group": "Math",
-    "url": "",
+    "background_color": "white",
+    "click_action": "note",
+    "collapsible": true,
     "color": "black",
     "default_type": "text",
-    "background_color": "white",
-    "note": "Prompt:\nGive the answer in Markdown format wrapped inside triple backticks (markdown ... ).\nInclude explanation in Bengali, step-by-step calculation, and the final answer bolded at the end.\nDo not show LaTeX syntax like ( or \\dfrac \u2014 write equations in normal text form.",
-    "click_action": "note",
+    "display_style": "flex",
     "font_family": "agency fb",
     "font_size": "35px",
-    "li_border_color": "red",
-    "collapsible": true,
-    "display_style": "flex",
+    "group": "Math",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "li_border_color": "red",
+    "name": "Prompt for Math",
+    "note": "Prompt:\nGive the answer in Markdown format wrapped inside triple backticks (markdown ... ).\nInclude explanation in Bengali, step-by-step calculation, and the final answer bolded at the end.\nDo not show LaTeX syntax like ( or \\dfrac \u2014 write equations in normal text form.",
     "password_protect": false,
-    "top_bg_color": "#4ea3e0",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#4ea3e0",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#4ea3e0",
+    "top_border_color": "#444444",
+    "top_hover_color": "#4ea3e0",
+    "top_text_color": "#000",
+    "url": ""
   },
   {
     "click_action": "note",
@@ -10659,74 +10752,74 @@ async function triggerScans() {
     "top_text_color": "#000"
   },
   {
+    "click_action": "note",
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "English",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "verb",
-    "group": "English",
-    "url": "",
-    "default_type": "text",
-    "click_action": "note",
-    "collapsible": true,
-    "display_style": "flex",
-    "horizontal_stack": false,
     "password_protect": false,
-    "top_bg_color": "#f46173",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#f46173",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#f46173",
+    "top_border_color": "#444444",
+    "top_hover_color": "#f46173",
+    "top_text_color": "#000",
+    "url": ""
   },
   {
+    "click_action": "note",
+    "collapsible": true,
+    "default_type": "text",
+    "display_style": "flex",
+    "group": "English",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "adjective / adverb",
-    "group": "English",
-    "url": "",
-    "default_type": "text",
     "note": "- Very\n- ",
-    "click_action": "note",
-    "collapsible": true,
-    "display_style": "flex",
-    "horizontal_stack": false,
     "password_protect": false,
-    "top_bg_color": "#f46173",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#f46173",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#f46173",
+    "top_border_color": "#444444",
+    "top_hover_color": "#f46173",
+    "top_text_color": "#000",
+    "url": ""
   },
   {
-    "name": "conjunction",
-    "group": "English",
-    "url": "",
-    "default_type": "text",
     "click_action": "note",
     "collapsible": true,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "English",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "name": "conjunction",
     "password_protect": false,
-    "top_bg_color": "#f46173",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#f46173",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#f46173",
+    "top_border_color": "#444444",
+    "top_hover_color": "#f46173",
+    "top_text_color": "#000",
+    "url": ""
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
