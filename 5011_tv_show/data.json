@@ -1888,7 +1888,7 @@
         "year": "1993",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5d99d81b72d97.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\WWE Raw",
-        "rating": null,
+        "rating": "3",
         "episodes": [
             {
                 "id": 11,
@@ -1967,7 +1967,9 @@
                 "added_date": "2025-08-05T17:11:40.597364",
                 "notify": "seen"
             }
-        ]
+        ],
+        "status": "Continuing",
+        "sonarr_url": ""
     },
     {
         "id": 25,
@@ -2046,14 +2048,14 @@
             {
                 "id": 11,
                 "title": "WWE SmackDown - 2025-10-17 - SmackDown 1365 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-10-18T12:27:59.301910",
                 "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "WWE SmackDown - 2025-10-10 - SmackDown 1364 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-10-11T13:07:17.730795",
                 "notify": "seen"
             },
@@ -2457,7 +2459,7 @@
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/417909/posters/687fcb3525d62.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Gen V",
-        "rating": null,
+        "rating": "3",
         "status": "Continuing",
         "episodes": [
             {
@@ -2616,6 +2618,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 3,
+                "title": "My Hero Academia - s08e03 - [162] - The Final Boss WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-10-18T15:50:04.573801",
+                "notify": "unseen"
+            },
+            {
                 "id": 2,
                 "title": "My Hero Academia - s08e02 - [161] - The End of An Era, And\u2015 WEBDL-1080p - [VARYG]",
                 "watched": false,
@@ -2721,5 +2730,15 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 40,
+        "title": "asdasd",
+        "year": "",
+        "cover_image": "https://www.adobe.com/express/feature/image/remove-background/png/media_16ad2258cac6171d66942b13b8cd4839f0b6be6f3.png?width=750&format=png&optimize=medium",
+        "directory_path": "",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": []
     }
 ]
