@@ -1701,6 +1701,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="link-color" placeholder="Text Color (red or red, blue, green for gradient)">
             <input type="text" id="link-background-color" placeholder="BG Color (supports gradients)">
           </div>
+          <input type="text" id="link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
           <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)">
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-li-width" placeholder="Item Width (e.g., 120px, auto)">
@@ -1786,6 +1787,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <input type="text" id="edit-link-color" placeholder="Text Color (red or red, blue, green for gradient)">
             <input type="text" id="edit-link-background-color" placeholder="BG Color (supports gradients)">
           </div>
+          <input type="text" id="edit-link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
           <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)">
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-li-width" placeholder="Item Width (e.g., 120px, auto)">
@@ -2304,23 +2306,23 @@ document.addEventListener('DOMContentLoaded', function () {
             const dimensionStyle = dimensionStyles.length > 0 ? dimensionStyles.join('; ') + '; ' : '';
 
             if (link.default_type === 'nerd-font' && link.icon_class) {
-              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_family ? `font-family: ${link.font_family};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
             } else if (link.default_type === 'img' && link.img_src) {
               const width = link.width || '50';
               const height = link.height || '50';
               linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
             } else if (link.default_type === 'text' && link.text) {
-              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.text}</a>`;
+              linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_family ? `font-family: ${link.font_family};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.text}</a>`;
             } else {
               // Fallback if default_type is not set or doesn't match available content
               if (link.icon_class) {
-                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_family ? `font-family: ${link.font_family};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
               } else if (link.img_src) {
                 const width = link.width || '50';
                 const height = link.height || '50';
                 linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} title="${link.title || link.name}"><img src="${link.img_src}" width="${width}" height="${height}"></a>`;
               } else {
-                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.name}</a>`;
+                linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_family ? `font-family: ${link.font_family};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;" title="${link.title || link.name}">${link.name}</a>`;
               }
             }
 
@@ -3587,6 +3589,7 @@ document.addEventListener('DOMContentLoaded', function () {
         default_type: document.querySelector('input[name="link-default-type"]:checked').value || 'text',
         background_color: document.getElementById('link-background-color').value || undefined,
         border_radius: document.getElementById('link-border-radius').value || undefined,
+        font_family: document.getElementById('link-font-family').value || undefined,
         font_size: document.getElementById('link-font-size').value || undefined,
         title: document.getElementById('link-title').value || undefined,
         note: document.getElementById('link-note').value || undefined,
@@ -3683,6 +3686,7 @@ document.addEventListener('DOMContentLoaded', function () {
       document.getElementById('edit-link-action-url').checked = true;
     }
     
+    document.getElementById('edit-link-font-family').value = link.font_family || '';
     document.getElementById('edit-link-font-size').value = link.font_size || '';
     document.getElementById('edit-link-li-width').value = link.li_width || '';
     document.getElementById('edit-link-li-height').value = link.li_height || '';
@@ -3720,6 +3724,7 @@ document.addEventListener('DOMContentLoaded', function () {
           title: document.getElementById('edit-link-title').value || undefined,
           note: document.getElementById('edit-link-note').value || undefined,
           click_action: document.querySelector('input[name="edit-link-click-action"]:checked').value || 'url',
+          font_family: document.getElementById('edit-link-font-family').value || undefined,
           font_size: document.getElementById('edit-link-font-size').value || undefined,
           li_width: document.getElementById('edit-link-li-width').value || undefined,
           li_height: document.getElementById('edit-link-li-height').value || undefined,
@@ -10340,6 +10345,7 @@ async function triggerScans() {
     "background_color": "white",
     "note": "Prompt:\nGive the answer in Markdown format wrapped inside triple backticks (markdown ... ).\nInclude explanation in Bengali, step-by-step calculation, and the final answer bolded at the end.\nDo not show LaTeX syntax like ( or \\dfrac \u2014 write equations in normal text form.",
     "click_action": "note",
+    "font_family": "agency fb",
     "font_size": "35px",
     "li_border_color": "red",
     "collapsible": true,
@@ -10673,28 +10679,28 @@ async function triggerScans() {
     "top_text_color": "#000"
   },
   {
+    "name": "adjective / adverb",
+    "group": "English",
+    "url": "",
+    "default_type": "text",
+    "note": "- Very\n- ",
     "click_action": "note",
     "collapsible": true,
-    "default_type": "text",
     "display_style": "flex",
-    "group": "English",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "name": "adjective / adverb",
-    "note": "- Very\n- ",
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#f46173",
+    "top_text_color": "#000",
     "top_border_color": "#444444",
     "top_hover_color": "#f46173",
-    "top_text_color": "#000",
-    "url": ""
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
