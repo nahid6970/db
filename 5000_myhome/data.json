@@ -4801,7 +4801,7 @@
     "url": ""
   },
   {
-    "name": "Prompt for math in ai",
+    "name": "Prompt for Math",
     "group": "Math",
     "url": "",
     "color": "black",
@@ -4809,6 +4809,7 @@
     "background_color": "white",
     "note": "Prompt:\nGive the answer in Markdown format wrapped inside triple backticks (markdown ... ).\nInclude explanation in Bengali, step-by-step calculation, and the final answer bolded at the end.\nDo not show LaTeX syntax like ( or \\dfrac \u2014 write equations in normal text form.",
     "click_action": "note",
+    "font_size": "35px",
     "li_border_color": "red",
     "collapsible": true,
     "display_style": "flex",
