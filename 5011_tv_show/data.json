@@ -2320,7 +2320,7 @@
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/391153/posters/6883da0cd5deb.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Peacemaker",
-        "rating": null,
+        "rating": "3",
         "status": "Continuing",
         "episodes": [
             {
@@ -2379,7 +2379,8 @@
                 "added_date": "2025-08-23T00:21:15.135304",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 30,
@@ -2614,7 +2615,7 @@
         "year": "2016",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/305074-5.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\My Hero Academia",
-        "rating": null,
+        "rating": "4",
         "status": "Continuing",
         "episodes": [
             {
@@ -2622,7 +2623,7 @@
                 "title": "My Hero Academia - s08e03 - [162] - The Final Boss WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-10-18T15:50:04.573801",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
@@ -2647,7 +2648,7 @@
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/405920/posters/622527d8f031d.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\SPY x FAMILY",
-        "rating": null,
+        "rating": "4",
         "status": "Continuing",
         "episodes": [
             {
@@ -2673,7 +2674,7 @@
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/series/375271/posters/602a0fefa42e0.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\To Your Eternity",
-        "rating": null,
+        "rating": "5",
         "status": "Continuing",
         "episodes": [
             {
@@ -2699,7 +2700,7 @@
         "year": "2015",
         "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd0nKk7VsJBQfXEtw1Qz8IONmr5hIBxZB-XGJTsr0fpJKEDSDl&s",
         "directory_path": "D:\\Downloads\\@Sonarr\\One-Punch Man",
-        "rating": null,
+        "rating": "5",
         "status": "Continuing",
         "episodes": [
             {
@@ -2718,7 +2719,7 @@
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/389597/posters/677a3a1d750ef.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Solo Leveling",
-        "rating": null,
+        "rating": "4",
         "status": "Continuing",
         "episodes": [
             {
