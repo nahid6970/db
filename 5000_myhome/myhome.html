@@ -2448,7 +2448,8 @@ document.addEventListener('DOMContentLoaded', function () {
           const dimensionStyle = dimensionStyles.length > 0 ? dimensionStyles.join('; ') + '; ' : '';
 
           if (link.default_type === 'svg' && link.svg_code) {
-            linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}">${link.svg_code}</a>`;
+            const svgColorClass = link.color ? `svg-colored-${Math.random().toString(36).substr(2, 9)}` : '';
+            linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} class="${svgColorClass}" style="text-decoration: none; ${dimensionStyle}display: inline-flex; align-items: center; justify-content: center; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''}" title="${link.title || link.name}">${link.svg_code}</a>`;
           } else if (link.default_type === 'nerd-font' && link.icon_class) {
             linkContent = `<a href="${linkUrl}" ${clickHandler} ${targetAttr} style="text-decoration: none; ${dimensionStyle}color: ${link.color || 'inherit'}; ${link.background_color ? `background-color: ${link.background_color};` : ''} ${link.border_radius ? `border-radius: ${link.border_radius};` : ''} ${link.font_family ? `font-family: ${link.font_family};` : ''} ${link.font_size ? `font-size: ${link.font_size};` : ''} display: inline-flex; align-items: center; justify-content: center;" title="${link.title || link.name}"><i class="${link.icon_class}"></i></a>`;
           } else if (link.default_type === 'img' && link.img_src) {
@@ -2471,6 +2472,84 @@ document.addEventListener('DOMContentLoaded', function () {
           }
 
           listItem.innerHTML = linkContent;
+
+          // Apply color to SVG elements
+          if (link.default_type === 'svg' && link.color) {
+            const linkElement = listItem.querySelector('a');
+            if (linkElement) {
+              const svgElements = linkElement.querySelectorAll('svg, svg *');
+              const parsed = parseColors(link.color);
+
+              if (parsed.colors.length > 1) {
+                // Multiple colors - create animated gradient
+                const style = document.createElement('style');
+                const uniqueId = 'svg-gradient-' + Math.random().toString(36).substr(2, 9);
+                const animName = 'svgGradientShift-' + uniqueId;
+                const randomDelay = (Math.random() * 3).toFixed(2);
+                linkElement.dataset.svgGradientId = uniqueId;
+                linkElement.classList.add('animated-svg-gradient');
+
+                if (parsed.animationType === 'rotate') {
+                  const numColors = parsed.colors.length;
+                  let keyframes = '';
+                  for (let i = 0; i < numColors; i++) {
+                    const startPercent = (i / numColors * 100).toFixed(2);
+                    const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+                    keyframes += `${startPercent}% { fill: ${parsed.colors[i]}; stroke: ${parsed.colors[i]}; }\n`;
+                    if (i < numColors - 1) {
+                      keyframes += `${endPercent}% { fill: ${parsed.colors[i]}; stroke: ${parsed.colors[i]}; }\n`;
+                    }
+                  }
+                  keyframes += `100% { fill: ${parsed.colors[0]}; stroke: ${parsed.colors[0]}; }\n`;
+
+                  style.textContent = `
+                    a.animated-svg-gradient[data-svg-gradient-id="${uniqueId}"] svg,
+                    a.animated-svg-gradient[data-svg-gradient-id="${uniqueId}"] svg * {
+                      animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                      animation-delay: -${randomDelay}s;
+                    }
+                    @keyframes ${animName} {
+                      ${keyframes}
+                    }
+                  `;
+                } else {
+                  // For slide mode with SVG, we'll use rotate mode behavior since gradients don't work well with fill
+                  const numColors = parsed.colors.length;
+                  let keyframes = '';
+                  for (let i = 0; i < numColors; i++) {
+                    const startPercent = (i / numColors * 100).toFixed(2);
+                    keyframes += `${startPercent}% { fill: ${parsed.colors[i]}; stroke: ${parsed.colors[i]}; }\n`;
+                  }
+                  keyframes += `100% { fill: ${parsed.colors[0]}; stroke: ${parsed.colors[0]}; }\n`;
+
+                  style.textContent = `
+                    a.animated-svg-gradient[data-svg-gradient-id="${uniqueId}"] svg,
+                    a.animated-svg-gradient[data-svg-gradient-id="${uniqueId}"] svg * {
+                      animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                      animation-delay: -${randomDelay}s;
+                    }
+                    @keyframes ${animName} {
+                      ${keyframes}
+                    }
+                  `;
+                }
+                document.head.appendChild(style);
+              } else {
+                // Single color - apply directly
+                const style = document.createElement('style');
+                const uniqueId = 'svg-color-' + Math.random().toString(36).substr(2, 9);
+                linkElement.dataset.svgColorId = uniqueId;
+                style.textContent = `
+                  a[data-svg-color-id="${uniqueId}"] svg,
+                  a[data-svg-color-id="${uniqueId}"] svg * {
+                    fill: ${link.color} !important;
+                    stroke: ${link.color} !important;
+                  }
+                `;
+                document.head.appendChild(style);
+              }
+            }
+          }
 
           // Apply gradient to inner link element if background_color has multiple colors
           if (link.background_color) {
@@ -2500,8 +2579,8 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           }
 
-          // Apply gradient to text color if color has multiple colors
-          if (link.color) {
+          // Apply gradient to text color if color has multiple colors (for non-SVG elements)
+          if (link.color && link.default_type !== 'svg') {
             const parsed = parseColors(link.color);
             if (parsed.colors.length > 1) {
               const linkElement = listItem.querySelector('a');
@@ -6380,17 +6459,17 @@ async function triggerScans() {
     "url": "D:/Downloads/Selected-Job-Circular-1-October-2025.pdf"
   },
   {
-    "click_action": "url",
-    "color": "red, green, yellow",
-    "default_type": "svg",
-    "font_size": "50px",
-    "height": "50px",
-    "horizontal_stack": false,
-    "li_bg_color": "rotate: white, yellow",
     "name": "\ua66e",
-    "svg_code": "<?xml version=\"1.0\" ?>\n\n<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->\n<svg fill=\"#000000\" width=\"800px\" height=\"800px\" viewBox=\"0 0 64 64\" id=\"Layer_1_1_\" version=\"1.1\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n<g>\n\n<path d=\"M63,26c0-3.433-2.007-6.561-5.05-8.06C57.982,17.631,58,17.318,58,17c0-4.963-4.038-9-9-9   c-0.076,0-0.151,0.013-0.228,0.015C47.865,4.005,44.28,1,40,1c-3.483,0-6.505,1.993-8,4.896C30.505,2.993,27.483,1,24,1   c-4.248,0-7.862,2.955-8.775,7.011C15.15,8.01,15.076,8,15,8c-4.962,0-9,4.037-9,9c0,0.305,0.016,0.613,0.049,0.922   C2.999,19.42,1,22.57,1,26c0,2.303,0.877,4.4,2.305,5.993C1.832,33.635,1,35.771,1,38c0,3.432,2.007,6.561,5.05,8.06   C6.018,46.369,6,46.682,6,47c0,4.963,4.038,9,9,9c0.076,0,0.15-0.01,0.225-0.011C16.138,60.045,19.752,63,24,63   c3.483,0,6.505-1.993,8-4.896C33.495,61.007,36.517,63,40,63c4.28,0,7.865-3.005,8.772-7.015C48.849,55.987,48.924,56,49,56   c4.962,0,9-4.037,9-9c0-0.305-0.017-0.612-0.049-0.922C61.001,44.581,63,41.43,63,38c0-2.303-0.877-4.4-2.305-5.993   C62.168,30.365,63,28.229,63,26z M56.493,44.533l-0.785,0.3l0.16,0.825C55.956,46.11,56,46.562,56,47c0,3.859-3.14,7-7,7   c0-4.963-4.038-9-9-9v2c3.86,0,7,3.141,7,7s-3.14,7-7,7s-7-3.141-7-7V16h-2v38c0,3.859-3.14,7-7,7   c-3.247,0-6.013-2.219-6.783-5.288C21.109,54.721,24,51.196,24,47h-2c0,3.859-3.14,7-7,7s-7-3.141-7-7s3.14-7,7-7v-2   c-3.932,0-7.275,2.539-8.497,6.06C4.372,42.824,3,40.51,3,38c0-1.734,0.647-3.395,1.793-4.673C6.265,34.376,8.059,35,10,35v-2   c-3.86,0-7-3.141-7-7c0-2.878,1.812-5.504,4.507-6.533l0.786-0.301l-0.161-0.825C8.044,17.892,8,17.44,8,17c0-3.859,3.14-7,7-7   s7,3.141,7,7h2c0-4.196-2.891-7.721-6.783-8.712C17.987,5.219,20.753,3,24,3c3.86,0,7,3.141,7,7v4h2v-4c0-3.859,3.14-7,7-7   s7,3.141,7,7s-3.14,7-7,7v2c4.962,0,9-4.037,9-9c3.86,0,7,3.141,7,7s-3.14,7-7,7v2c3.932,0,7.275-2.539,8.497-6.061   C59.628,21.175,61,23.49,61,26c0,1.734-0.647,3.395-1.793,4.673C57.735,29.624,55.941,29,54,29c-4.962,0-9,4.037-9,9h2   c0-3.859,3.14-7,7-7s7,3.141,7,7C61,40.878,59.188,43.504,56.493,44.533z\"/>\n\n<path d=\"M43,10h2c0-2.757-2.243-5-5-5v2C41.654,7,43,8.346,43,10z\"/>\n\n<path d=\"M37,54h-2c0,2.757,2.243,5,5,5v-2C38.346,57,37,55.654,37,54z\"/>\n\n<path d=\"M54,41v2c2.757,0,5-2.243,5-5h-2C57,39.654,55.654,41,54,41z\"/>\n\n<path d=\"M39,37h-2c0,3.309,2.691,6,6,6v-2C40.794,41,39,39.206,39,37z\"/>\n\n<path d=\"M41,23v-2c-3.309,0-6,2.691-6,6h2C37,24.794,38.794,23,41,23z\"/>\n\n<path d=\"M25,37h-2c0,3.309,2.691,6,6,6v-2C26.794,41,25,39.206,25,37z\"/>\n\n<path d=\"M40,28h-2c0,3.309,2.691,6,6,6v-2C41.794,32,40,30.206,40,28z\"/>\n\n<path d=\"M27,23v-2c-3.309,0-6,2.691-6,6h2C23,24.794,24.794,23,27,23z\"/>\n\n<path d=\"M14,36h2c0-2.206,1.794-4,4-4v-2C16.691,30,14,32.691,14,36z\"/>\n\n<path d=\"M15,50v2c2.757,0,5-2.243,5-5h-2C18,48.654,16.654,50,15,50z\"/>\n\n<path d=\"M5,26h2c0-1.654,1.346-3,3-3v-2C7.243,21,5,23.243,5,26z\"/>\n\n<path d=\"M15,12v2c1.654,0,3,1.346,3,3h2C20,14.243,17.757,12,15,12z\"/>\n\n<path d=\"M24,5v2c1.654,0,3,1.346,3,3h2C29,7.243,26.757,5,24,5z\"/>\n\n</g>\n\n</svg>",
     "url": "D:/Downloads/Selected-Job-Circular-1-October-2025.pdf",
-    "width": "50px"
+    "color": "red, green",
+    "width": "50px",
+    "height": "50px",
+    "svg_code": "<?xml version=\"1.0\" ?>\n\n<!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->\n<svg fill=\"#000000\" width=\"800px\" height=\"800px\" viewBox=\"0 0 64 64\" id=\"Layer_1_1_\" version=\"1.1\" xml:space=\"preserve\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n\n<g>\n\n<path d=\"M63,26c0-3.433-2.007-6.561-5.05-8.06C57.982,17.631,58,17.318,58,17c0-4.963-4.038-9-9-9   c-0.076,0-0.151,0.013-0.228,0.015C47.865,4.005,44.28,1,40,1c-3.483,0-6.505,1.993-8,4.896C30.505,2.993,27.483,1,24,1   c-4.248,0-7.862,2.955-8.775,7.011C15.15,8.01,15.076,8,15,8c-4.962,0-9,4.037-9,9c0,0.305,0.016,0.613,0.049,0.922   C2.999,19.42,1,22.57,1,26c0,2.303,0.877,4.4,2.305,5.993C1.832,33.635,1,35.771,1,38c0,3.432,2.007,6.561,5.05,8.06   C6.018,46.369,6,46.682,6,47c0,4.963,4.038,9,9,9c0.076,0,0.15-0.01,0.225-0.011C16.138,60.045,19.752,63,24,63   c3.483,0,6.505-1.993,8-4.896C33.495,61.007,36.517,63,40,63c4.28,0,7.865-3.005,8.772-7.015C48.849,55.987,48.924,56,49,56   c4.962,0,9-4.037,9-9c0-0.305-0.017-0.612-0.049-0.922C61.001,44.581,63,41.43,63,38c0-2.303-0.877-4.4-2.305-5.993   C62.168,30.365,63,28.229,63,26z M56.493,44.533l-0.785,0.3l0.16,0.825C55.956,46.11,56,46.562,56,47c0,3.859-3.14,7-7,7   c0-4.963-4.038-9-9-9v2c3.86,0,7,3.141,7,7s-3.14,7-7,7s-7-3.141-7-7V16h-2v38c0,3.859-3.14,7-7,7   c-3.247,0-6.013-2.219-6.783-5.288C21.109,54.721,24,51.196,24,47h-2c0,3.859-3.14,7-7,7s-7-3.141-7-7s3.14-7,7-7v-2   c-3.932,0-7.275,2.539-8.497,6.06C4.372,42.824,3,40.51,3,38c0-1.734,0.647-3.395,1.793-4.673C6.265,34.376,8.059,35,10,35v-2   c-3.86,0-7-3.141-7-7c0-2.878,1.812-5.504,4.507-6.533l0.786-0.301l-0.161-0.825C8.044,17.892,8,17.44,8,17c0-3.859,3.14-7,7-7   s7,3.141,7,7h2c0-4.196-2.891-7.721-6.783-8.712C17.987,5.219,20.753,3,24,3c3.86,0,7,3.141,7,7v4h2v-4c0-3.859,3.14-7,7-7   s7,3.141,7,7s-3.14,7-7,7v2c4.962,0,9-4.037,9-9c3.86,0,7,3.141,7,7s-3.14,7-7,7v2c3.932,0,7.275-2.539,8.497-6.061   C59.628,21.175,61,23.49,61,26c0,1.734-0.647,3.395-1.793,4.673C57.735,29.624,55.941,29,54,29c-4.962,0-9,4.037-9,9h2   c0-3.859,3.14-7,7-7s7,3.141,7,7C61,40.878,59.188,43.504,56.493,44.533z\"/>\n\n<path d=\"M43,10h2c0-2.757-2.243-5-5-5v2C41.654,7,43,8.346,43,10z\"/>\n\n<path d=\"M37,54h-2c0,2.757,2.243,5,5,5v-2C38.346,57,37,55.654,37,54z\"/>\n\n<path d=\"M54,41v2c2.757,0,5-2.243,5-5h-2C57,39.654,55.654,41,54,41z\"/>\n\n<path d=\"M39,37h-2c0,3.309,2.691,6,6,6v-2C40.794,41,39,39.206,39,37z\"/>\n\n<path d=\"M41,23v-2c-3.309,0-6,2.691-6,6h2C37,24.794,38.794,23,41,23z\"/>\n\n<path d=\"M25,37h-2c0,3.309,2.691,6,6,6v-2C26.794,41,25,39.206,25,37z\"/>\n\n<path d=\"M40,28h-2c0,3.309,2.691,6,6,6v-2C41.794,32,40,30.206,40,28z\"/>\n\n<path d=\"M27,23v-2c-3.309,0-6,2.691-6,6h2C23,24.794,24.794,23,27,23z\"/>\n\n<path d=\"M14,36h2c0-2.206,1.794-4,4-4v-2C16.691,30,14,32.691,14,36z\"/>\n\n<path d=\"M15,50v2c2.757,0,5-2.243,5-5h-2C18,48.654,16.654,50,15,50z\"/>\n\n<path d=\"M5,26h2c0-1.654,1.346-3,3-3v-2C7.243,21,5,23.243,5,26z\"/>\n\n<path d=\"M15,12v2c1.654,0,3,1.346,3,3h2C20,14.243,17.757,12,15,12z\"/>\n\n<path d=\"M24,5v2c1.654,0,3,1.346,3,3h2C29,7.243,26.757,5,24,5z\"/>\n\n</g>\n\n</svg>",
+    "default_type": "svg",
+    "click_action": "url",
+    "font_size": "50px",
+    "li_bg_color": "rotate: white, yellow",
+    "horizontal_stack": false
   },
   {
     "background_color": "white",
@@ -6540,66 +6619,72 @@ async function triggerScans() {
     "url": "https://outlook.live.com"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "color": "black, white",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-dev-facebook",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
-    "li_bg_color": "red, blue,  yellow, red",
-    "li_height": "1%",
-    "li_width": "1%",
     "name": "Facebook",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
+    "group": "Default",
+    "url": "https://www.facebook.com/",
+    "icon_class": "nf nf-dev-facebook",
+    "color": "black, white",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAM1BMVEVHcEwHaf8MZP8HZv8IZ/8JZv8IZ/8MY/8AYf8AVv9Wjf+QtP/d6//////0+v/K2/8acv91gUzzAAAACHRSTlMAKoP/gyb4g+WSDyEAAACzSURBVHgBvdMJCoUwDEXRxtb+17n7X+0PkYJojIxeEKQ5CBbiONq8WiAn7dE/FHeZeyMWFC0QyQVv9nOXAyAledbBBSCX2riaoYJUejsqKkBpzQLI3QbrA32MkTWQhsx5CB5roAqYMjVA8jboDwApLcDdbxK5nesZN9DPoE5vg4EXUBQwam1S5fIVcHN6EZ3fpnoPWL8J4P2iPgWbDYKjaIFIvHoWOJYz6kCWV6Kgg414+Af2oxZ+AO2wzgAAAABJRU5ErkJggg==",
+    "width": "50px",
+    "height": "50px",
     "text": "Facebook",
+    "svg_code": "<svg viewBox=\"-2.4 -2.4 28.80 28.80\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" transform=\"matrix(1, 0, 0, 1, 0, 0)\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke=\"#CCCCCC\" stroke-width=\"0.4800000000000001\"></g><g id=\"SVGRepo_iconCarrier\"> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M20 1C21.6569 1 23 2.34315 23 4V20C23 21.6569 21.6569 23 20 23H4C2.34315 23 1 21.6569 1 20V4C1 2.34315 2.34315 1 4 1H20ZM20 3C20.5523 3 21 3.44772 21 4V20C21 20.5523 20.5523 21 20 21H15V13.9999H17.0762C17.5066 13.9999 17.8887 13.7245 18.0249 13.3161L18.4679 11.9871C18.6298 11.5014 18.2683 10.9999 17.7564 10.9999H15V8.99992C15 8.49992 15.5 7.99992 16 7.99992H18C18.5523 7.99992 19 7.5522 19 6.99992V6.31393C19 5.99091 18.7937 5.7013 18.4813 5.61887C17.1705 5.27295 16 5.27295 16 5.27295C13.5 5.27295 12 6.99992 12 8.49992V10.9999H10C9.44772 10.9999 9 11.4476 9 11.9999V12.9999C9 13.5522 9.44771 13.9999 10 13.9999H12V21H4C3.44772 21 3 20.5523 3 20V4C3 3.44772 3.44772 3 4 3H20Z\" fill=\"#0F0F0F\"></path> </g></svg>",
+    "default_type": "svg",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
+    "li_bg_color": "red, blue,  yellow, red",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
+    "password_protect": false,
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "color": "#3675ff",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
+    "name": "Messenger",
     "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
+    "url": "https://www.messenger.com/",
     "icon_class": "nf nf-fa-facebook_messenger",
+    "color": "#3675ff",
+    "width": "50px",
+    "height": "50px",
+    "svg_code": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M17.3 9.6C17.6314 9.15817 17.5418 8.53137 17.1 8.2C16.6582 7.86863 16.0314 7.95817 15.7 8.4L13.3918 11.4776L11.2071 9.29289C11.0021 9.08791 10.7183 8.98197 10.4291 9.00252C10.1399 9.02307 9.87393 9.16809 9.7 9.4L6.7 13.4C6.36863 13.8418 6.45817 14.4686 6.9 14.8C7.34183 15.1314 7.96863 15.0418 8.3 14.6L10.6082 11.5224L12.7929 13.7071C12.9979 13.9121 13.2817 14.018 13.5709 13.9975C13.8601 13.9769 14.1261 13.8319 14.3 13.6L17.3 9.6Z\" fill=\"#0F0F0F\"></path> <path fill-rule=\"evenodd\" clip-rule=\"evenodd\" d=\"M12 23C10.7764 23 10.0994 22.8687 9 22.5L6.89443 23.5528C5.56462 24.2177 4 23.2507 4 21.7639V19.5C1.84655 17.492 1 15.1767 1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23ZM6 18.6303L5.36395 18.0372C3.69087 16.4772 3 14.7331 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C11.0143 21 10.552 20.911 9.63595 20.6038L8.84847 20.3397L6 21.7639V18.6303Z\" fill=\"#0F0F0F\"></path> </g></svg>",
+    "default_type": "svg",
+    "click_action": "url",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "rotate: black, white",
     "li_border_color": "#3675ff",
     "li_border_radius": "0px",
-    "li_height": "1%",
-    "li_width": "1%",
-    "name": "Messenger",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.messenger.com/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "click_action": "url",
