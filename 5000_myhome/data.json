@@ -5482,11 +5482,11 @@
     "url": ""
   },
   {
-    "click_action": "url",
-    "default_type": "text",
-    "horizontal_stack": false,
     "name": "\ue67d Selected-Job-Circular-1-October-2025.pdf",
-    "url": "D:/Downloads/Selected-Job-Circular-1-October-2025.pdf"
+    "url": "D:/Downloads/Selected-Job-Circular-1-October-2025.pdf",
+    "default_type": "text",
+    "click_action": "url",
+    "horizontal_stack": false
   },
   {
     "name": "\ua66e",
@@ -5507,6 +5507,29 @@
     "collapsible": true,
     "display_style": "flex",
     "horizontal_stack": false,
+    "password_protect": false,
+    "top_bg_color": "#4ea3e0",
+    "top_text_color": "#000",
+    "top_border_color": "#444444",
+    "top_hover_color": "#4ea3e0",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
+  },
+  {
+    "name": "120\u099f\u09bf \u09aa\u0981\u099a\u09bf\u09b6 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be \u0993 \u09a6\u09b6 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be \u098f\u0995\u09a4\u09cd\u09b0\u09c7 27 \u099f\u09be\u0995\u09be \u09b9\u09b2\u09c7 10 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \u0995\u09df\u099f\u09bf?",
+    "group": "Math",
+    "default_type": "text",
+    "note": "```\n\u09aa\u09cd\u09b0\u09b6\u09cd\u09a8:  \n\u09ae\u09cb\u099f \u09ae\u09c1\u09a6\u09cd\u09b0\u09be = 120\u099f\u09bf (\u09e8\u09eb \u09aa\u09df\u09b8\u09be \u0993 \u09e7\u09e6 \u09aa\u09df\u09b8\u09be \u09ae\u09bf\u09b2\u09bf\u09df\u09c7)  \n\u09ae\u09cb\u099f \u099f\u09be\u0995\u09be = 27 \u099f\u09be\u0995\u09be = 2700 \u09aa\u09df\u09b8\u09be  \n\u09e7\u09e6 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be = ?  \n\n\u09a7\u09b0\u09bf, \u09e7\u09e6 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be = x \u099f\u09bf  \n\u09a4\u09be\u09b9\u09b2\u09c7, \u09e8\u09eb \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be = 120 - x \u099f\u09bf  \n\n\u09b8\u09ae\u09c0\u0995\u09b0\u09a3:  \n10x + 25(120 - x) = 2700\n\n\u21d2 10x + 3000 - 25x = 2700  \n\u21d2 -15x + 3000 = 2700  \n\u21d2 15x = 300  \n\u21d2 x = 20\n\n**\u0989\u09a4\u09cd\u09a4\u09b0: \u09e7\u09e6 \u09aa\u09df\u09b8\u09be\u09b0 \u09ae\u09c1\u09a6\u09cd\u09b0\u09be = 20 \u099f\u09bf**\n```",
+    "click_action": "note",
+    "horizontal_stack": false,
+    "collapsible": true,
+    "display_style": "flex",
     "password_protect": false,
     "top_bg_color": "#4ea3e0",
     "top_text_color": "#000",
