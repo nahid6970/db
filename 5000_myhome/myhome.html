@@ -592,6 +592,57 @@ input:checked+.slider:before {
   flex-direction: column;
 }
 
+/* Desktop only: Move submit buttons to left sidebar */
+@media (min-width: 769px) {
+  /* Add padding to make room for left button */
+  #add-link-popup .Menu,
+  #edit-link-popup .Menu,
+  #edit-group-popup .Menu {
+    padding-left: 70px;
+  }
+
+  /* Position submit buttons vertically on the left */
+  #add-link-form button[type="submit"],
+  #edit-link-form button[type="submit"],
+  #edit-group-form button[type="submit"] {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 30px 12px;
+    width: 45px;
+    height: auto;
+    min-height: 150px;
+    border-radius: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  #add-link-form button[type="submit"]:hover,
+  #edit-link-form button[type="submit"]:hover,
+  #edit-group-form button[type="submit"]:hover {
+    background-color: #45a049;
+    transform: translateY(-50%) rotate(180deg) scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+
+  #add-link-form button[type="submit"]:active,
+  #edit-link-form button[type="submit"]:active,
+  #edit-group-form button[type="submit"]:active {
+    transform: translateY(-50%) rotate(180deg) scale(0.98);
+  }
+}
+
 /* Note textarea should grow to fill available space */
 #add-link-note-panel textarea,
 #edit-link-note-panel textarea {
@@ -8339,6 +8390,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8353,8 +8405,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/musistudio/claude-code-router",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/musistudio/claude-code-router"
   },
   {
     "collapsible": false,
@@ -8363,6 +8414,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8377,8 +8429,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/massgravel/Microsoft-Activation-Scripts"
   },
   {
     "collapsible": false,
@@ -8387,6 +8438,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8401,8 +8453,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://massgrave.dev/",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://massgrave.dev/"
   },
   {
     "collapsible": false,
@@ -8411,6 +8462,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8424,8 +8476,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/character-map-uwp/Character-Map-UWP?tab=readme-ov-file"
   },
   {
     "click_action": "url",
@@ -8435,6 +8486,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8450,8 +8502,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/9001/copyparty/?tab=readme-ov-file#quickstart",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/9001/copyparty/?tab=readme-ov-file#quickstart"
   },
   {
     "click_action": "url",
@@ -8461,6 +8512,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8476,8 +8528,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/gorhill/ublock/releases",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/gorhill/ublock/releases"
   },
   {
     "click_action": "url",
@@ -8487,6 +8538,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8500,8 +8552,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/glanceapp/glance",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/glanceapp/glance"
   },
   {
     "collapsible": false,
@@ -8510,6 +8561,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8523,8 +8575,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://console.corsproxy.io/",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://console.corsproxy.io/"
   },
   {
     "collapsible": false,
@@ -8533,6 +8584,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8546,8 +8598,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/builtbybel/CrapFixer/releases",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/builtbybel/CrapFixer/releases"
   },
   {
     "collapsible": false,
@@ -8556,6 +8607,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8569,8 +8621,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/ThioJoe/Windows-Sandbox-Tools",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/ThioJoe/Windows-Sandbox-Tools"
   },
   {
     "collapsible": false,
@@ -8579,6 +8630,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8592,8 +8644,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/QL-Win/QuickLook",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/QL-Win/QuickLook"
   },
   {
     "collapsible": false,
@@ -8602,6 +8653,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8616,8 +8668,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/ErrorGone-YT/VentoyThemer",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/ErrorGone-YT/VentoyThemer"
   },
   {
     "collapsible": false,
@@ -8626,6 +8677,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8639,8 +8691,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://www.gnome-look.org/browse?cat=109",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://www.gnome-look.org/browse?cat=109"
   },
   {
     "collapsible": false,
@@ -8649,6 +8700,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8662,8 +8714,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/ClassicOldSong/Apollo",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/ClassicOldSong/Apollo"
   },
   {
     "collapsible": false,
@@ -8672,6 +8723,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8685,8 +8737,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/n8n-io/n8n?tab=readme-ov-file"
   },
   {
     "collapsible": false,
@@ -8695,6 +8746,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8709,8 +8761,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/bytebot-ai/bytebot",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/bytebot-ai/bytebot"
   },
   {
     "collapsible": false,
@@ -8719,6 +8770,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8733,8 +8785,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/surajverma/homehub",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/surajverma/homehub"
   },
   {
     "collapsible": false,
@@ -8743,6 +8794,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8757,8 +8809,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/proj-airi/awesome-ai-vtubers",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/proj-airi/awesome-ai-vtubers"
   },
   {
     "collapsible": false,
@@ -8767,6 +8818,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8781,8 +8833,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/nikunjsingh93/react-glass-keep",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/nikunjsingh93/react-glass-keep"
   },
   {
     "collapsible": false,
@@ -8791,6 +8842,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8805,8 +8857,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/dockpeek/dockpeek",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/dockpeek/dockpeek"
   },
   {
     "collapsible": false,
@@ -8815,6 +8866,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8830,8 +8882,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/Dispatcharr/Dispatcharr",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/Dispatcharr/Dispatcharr"
   },
   {
     "collapsible": false,
@@ -8840,6 +8891,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8855,8 +8907,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/MODSetter/SurfSense",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/MODSetter/SurfSense"
   },
   {
     "collapsible": false,
@@ -8865,6 +8916,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8880,8 +8932,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/komari-monitor/komari",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/komari-monitor/komari"
   },
   {
     "collapsible": false,
@@ -8890,6 +8941,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8905,8 +8957,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/iib0011/omni-tools",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/iib0011/omni-tools"
   },
   {
     "collapsible": false,
@@ -8915,6 +8966,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8930,8 +8982,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/SinTan1729/chhoto-url",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/SinTan1729/chhoto-url"
   },
   {
     "collapsible": false,
@@ -8940,6 +8991,7 @@ async function triggerScans() {
     "group": "Git-Projects",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
@@ -8953,8 +9005,7 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/iflow-ai/iflow-cli",
-    "horizontal_font_family": "Comic Sans MS"
+    "url": "https://github.com/iflow-ai/iflow-cli"
   },
   {
     "collapsible": true,
