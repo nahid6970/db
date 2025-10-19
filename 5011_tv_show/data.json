@@ -2415,6 +2415,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "The Walking Dead - Daryl Dixon - S03E07 - Solaz del Mar WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2025-10-19T23:28:36.298629",
+                "notify": "unseen"
+            },
+            {
                 "id": 7,
                 "title": "The Walking Dead - Daryl Dixon - S03E07 - Solaz del Mar WEBDL-1080p",
                 "watched": false,
@@ -2729,6 +2736,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 2,
+                "title": "One-Punch Man - S03E02 - Monster Traits WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-10-19T23:28:36.302339",
+                "notify": "unseen"
+            },
             {
                 "id": 1,
                 "title": "One-Punch Man - S03E01 - Strategy Meeting WEBDL-1080p",
