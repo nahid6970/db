@@ -550,6 +550,7 @@ input:checked+.slider:before {
 }
 
 
+/* Base popup styling */
 .Menu,
 .group_type_box.expanded {
   background-color: var(--popup-bg-color, #31343a);
@@ -565,8 +566,72 @@ input:checked+.slider:before {
   max-width: 90vw;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   max-height: 90vh;
-  overflow: hidden;
   display: flex;
+}
+
+/* Single column popups (edit group, sidebar buttons) */
+#edit-group-popup .Menu,
+#add-sidebar-button-popup .Menu,
+#edit-sidebar-button-popup .Menu {
+  flex-direction: column;
+}
+
+/* Two column popups (add/edit link with note panel) */
+#add-link-popup .Menu,
+#edit-link-popup .Menu {
+  flex-direction: row;
+  align-items: stretch;
+}
+
+/* Form and note panels should stretch to same height */
+#add-link-popup .form-panel,
+#edit-link-popup .form-panel,
+#add-link-note-panel,
+#edit-link-note-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Note textarea should grow to fill available space */
+#add-link-note-panel textarea,
+#edit-link-note-panel textarea {
+  flex: 1;
+  min-height: 400px;
+}
+
+/* Close button positioning for two-column layouts - absolute so it doesn't take space */
+#add-link-popup .close-button,
+#edit-link-popup .close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  margin: 20px;
+}
+
+/* Form popups need scrollbar */
+.Menu {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ff0000 #000000;
+}
+
+.Menu::-webkit-scrollbar {
+  width: 4px;
+}
+
+.Menu::-webkit-scrollbar-thumb {
+  background-color: #ff000f;
+  border-radius: 2px;
+}
+
+.Menu::-webkit-scrollbar-track {
+  background-color: #000000;
+}
+
+/* Box popup doesn't need outer scrollbar */
+.group_type_box.expanded {
+  overflow: hidden;
   flex-direction: column;
 }
 
@@ -1230,12 +1295,23 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 /* Mobile styles */
 @media (max-width: 768px) {
   /* Popup container adjustments for mobile */
-  .popup-container .Menu {
-    flex-direction: column;
+  .popup-container .Menu,
+  #add-link-popup .Menu,
+  #edit-link-popup .Menu {
+    flex-direction: column !important;
     width: 95vw;
     max-width: 95vw;
     max-height: 95vh;
     padding: 15px;
+  }
+
+  /* Close button stays absolute positioned on mobile too */
+  #add-link-popup .close-button,
+  #edit-link-popup .close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
   }
 
   /* Make form fields full width on mobile */
@@ -1567,8 +1643,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
     <div id="edit-group-popup" class="popup-container hidden">
       <div class="Menu">
-        <span class="close-button">&times;</span>
-        <h3>Group Settings</h3>
+        <div class="popup-header">
+          <h3>Group Settings</h3>
+          <span class="close-button">&times;</span>
+        </div>
         <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
           <input type="hidden" id="edit-group-original-name">
           <label for="edit-group-name">Group Name:</label>
@@ -1664,7 +1742,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     <div id="add-link-popup" class="popup-container hidden">
       <div class="Menu" style="display: flex; width: fit-content; max-width: 90vw;">
         <div style="width: 400px; margin-right: 20px;" class="form-panel">
-          <span class="close-button">&times;</span>
           <h3>Add New Link</h3>
           <form id="add-link-form" style="display: flex; flex-direction: column; gap: 10px;">
             <div style="display: flex; gap: 10px;">
@@ -1741,7 +1818,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <button type="submit">Add Link</button>
           </form>
         </div>
-        <div id="add-link-note-panel" style="width: 400px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+        <div id="add-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
           <h3>Note</h3>
           <textarea id="link-note"
             placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
@@ -1750,13 +1827,13 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <i class="nf nf-md-eye"></i> Preview Note
           </button>
         </div>
+        <span class="close-button">&times;</span>
       </div>
     </div>
 
     <div id="edit-link-popup" class="popup-container hidden">
       <div class="Menu" style="display: flex; width: fit-content; max-width: 90vw;">
         <div style="width: 400px; margin-right: 20px;" class="form-panel">
-          <span class="close-button">&times;</span>
           <h3>Edit Link</h3>
           <form id="edit-link-form" style="display: flex; flex-direction: column; gap: 10px;">
             <input type="hidden" id="edit-link-index">
@@ -1835,7 +1912,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <button type="submit">Save Changes</button>
           </form>
         </div>
-        <div id="edit-link-note-panel" style="width: 400px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+        <div id="edit-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
           <h3>Note</h3>
           <textarea id="edit-link-note"
             placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
@@ -1844,6 +1921,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <i class="nf nf-md-eye"></i> Preview Note
           </button>
         </div>
+        <span class="close-button">&times;</span>
       </div>
     </div>
 
@@ -1859,8 +1937,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
     <div id="add-sidebar-button-popup" class="popup-container hidden">
       <div class="Menu">
-        <span class="close-button">&times;</span>
-        <h3>Add Sidebar Button</h3>
+        <div class="popup-header">
+          <h3>Add Sidebar Button</h3>
+          <span class="close-button">&times;</span>
+        </div>
         <form id="add-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
           <input type="text" id="sidebar-button-name" placeholder="Button Name" required>
           <input type="url" id="sidebar-button-url" placeholder="URL" required>
@@ -1911,8 +1991,10 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
     <div id="edit-sidebar-button-popup" class="popup-container hidden">
       <div class="Menu">
-        <span class="close-button">&times;</span>
-        <h3>Edit Sidebar Button</h3>
+        <div class="popup-header">
+          <h3>Edit Sidebar Button</h3>
+          <span class="close-button">&times;</span>
+        </div>
         <form id="edit-sidebar-button-form" style="display: flex; flex-direction: column; gap: 10px; width: 450px;">
           <input type="hidden" id="edit-sidebar-button-index">
           <input type="text" id="edit-sidebar-button-name" placeholder="Button Name" required>
@@ -7791,54 +7873,54 @@ async function triggerScans() {
     "url": "https://massgrave.dev/"
   },
   {
-    "name": "copyparty",
-    "group": "Git-Projects",
-    "url": "https://github.com/9001/copyparty/?tab=readme-ov-file#quickstart",
-    "img_src": "https://avatars.githubusercontent.com/u/241032?s=48&v=4",
-    "text": "copyparty",
-    "default_type": "text",
     "click_action": "url",
     "collapsible": false,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "img_src": "https://avatars.githubusercontent.com/u/241032?s=48&v=4",
+    "name": "copyparty",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "text": "copyparty",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/9001/copyparty/?tab=readme-ov-file#quickstart"
   },
   {
-    "name": "ublock Origin",
-    "group": "Git-Projects",
-    "url": "https://github.com/gorhill/ublock/releases",
-    "img_src": "https://avatars.githubusercontent.com/u/585534?s=48&v=4",
-    "text": "ublock Origin",
-    "default_type": "text",
     "click_action": "url",
     "collapsible": false,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "Git-Projects",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "img_src": "https://avatars.githubusercontent.com/u/585534?s=48&v=4",
+    "name": "ublock Origin",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "text": "ublock Origin",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://github.com/gorhill/ublock/releases"
   },
   {
     "click_action": "url",
