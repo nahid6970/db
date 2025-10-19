@@ -3720,9 +3720,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Prevent body scroll when popup is open
         document.body.style.overflow = 'hidden';
       };
-    } else {
-      // Add context menu for regular (non-box) groups
-      groupDiv.addEventListener('contextmenu', (event) => {
+    }
+
+    const groupHeaderContainer = document.createElement('div');
+    groupHeaderContainer.className = 'group-header-container';
+
+    const groupTitle = document.createElement('h3');
+    groupTitle.textContent = groupName;
+    groupTitle.className = 'group-title';
+    groupHeaderContainer.appendChild(groupTitle);
+
+    // Add context menu to header only for regular (non-box) groups
+    if (!firstLinkInGroup || !firstLinkInGroup.link.horizontal_stack) {
+      groupHeaderContainer.addEventListener('contextmenu', (event) => {
         event.preventDefault();
         event.stopPropagation();
         const items = [
@@ -3738,14 +3748,6 @@ document.addEventListener('DOMContentLoaded', function () {
         showContextMenu(event, items);
       });
     }
-
-    const groupHeaderContainer = document.createElement('div');
-    groupHeaderContainer.className = 'group-header-container';
-
-    const groupTitle = document.createElement('h3');
-    groupTitle.textContent = groupName;
-    groupTitle.className = 'group-title';
-    groupHeaderContainer.appendChild(groupTitle);
 
     const isPasswordProtected = firstLinkInGroup.link.password_protect;
 
@@ -4208,6 +4210,45 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (error) {
       console.error('Error updating group name:', error);
       return false;
+    }
+  }
+
+  // Function to delete a group (removes all links in that group)
+  async function deleteGroup(groupName) {
+    const confirmDelete = confirm(`Are you sure you want to delete the group "${groupName}" and all its links?`);
+    if (!confirmDelete) {
+      return;
+    }
+
+    try {
+      const response = await fetch('/api/links');
+      const links = await response.json();
+
+      // Filter out all links that belong to this group
+      const remainingLinks = links.filter(link => {
+        const linkGroupName = link.group || 'Ungrouped';
+        return linkGroupName !== groupName;
+      });
+
+      // Update the entire list on the server
+      const updateResponse = await fetch('/api/links', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(remainingLinks),
+      });
+
+      if (!updateResponse.ok) {
+        throw new Error('Failed to delete group on the server.');
+      }
+
+      // Refresh the display
+      await fetchAndDisplayLinks();
+      alert(`Group "${groupName}" has been deleted.`);
+    } catch (error) {
+      console.error('Error deleting group:', error);
+      alert('Failed to delete group.');
     }
   }
 
