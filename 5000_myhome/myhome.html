@@ -1700,6 +1700,19 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="edit-group-top-border-color" placeholder="Border Color (e.g., #444444 or gray)">
               <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color (e.g., #3a3a3a or darkgray)">
             </div>
+
+            <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top
+              Group Size & Font Settings</h4>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-top-width" placeholder="Width (e.g., 200px, auto)">
+              <input type="text" id="edit-group-top-height" placeholder="Height (e.g., 80px, auto)">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-top-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
+              <input type="text" id="edit-group-top-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
+            </div>
           </div>
 
           <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Popup
@@ -1731,6 +1744,19 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
                 placeholder="Horizontal Stack Border Color (e.g., #0056b3)">
               <input type="text" id="edit-group-horizontal-hover-color"
                 placeholder="Horizontal Stack Hover Color (e.g., #3a3a3a)">
+            </div>
+
+            <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">
+              Horizontal Stack Size & Font Settings</h4>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-horizontal-width" placeholder="Width (e.g., 200px, auto)">
+              <input type="text" id="edit-group-horizontal-height" placeholder="Height (e.g., 80px, auto)">
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+              <input type="text" id="edit-group-horizontal-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
+              <input type="text" id="edit-group-horizontal-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
             </div>
           </div>
 
@@ -2643,22 +2669,163 @@ document.addEventListener('DOMContentLoaded', function () {
     if (firstLink && firstLink.link) {
       const linkData = firstLink.link;
 
-      // Apply background color
+      // Apply background color (with gradient support)
       if (linkData.top_bg_color) {
-        collapsibleGroup.style.setProperty('--top-bg-color', linkData.top_bg_color);
-        collapsibleGroup.style.backgroundColor = linkData.top_bg_color;
+        const parsed = parseColors(linkData.top_bg_color);
+        if (parsed.colors.length > 1) {
+          const style = document.createElement('style');
+          const uniqueId = 'top-bg-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'topBgGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          collapsibleGroup.dataset.topBgGradientId = uniqueId;
+          collapsibleGroup.classList.add('animated-top-gradient-bg');
+
+          const anim = generateGradientAnimation(parsed, animName, randomDelay);
+          style.textContent = `
+            .group_type_top.animated-top-gradient-bg[data-top-bg-gradient-id="${uniqueId}"] {
+              ${anim.baseStyle || ''}
+              animation: ${anim.animation}
+            }
+            @keyframes ${animName} {
+              ${anim.keyframes}
+            }
+          `;
+          document.head.appendChild(style);
+        } else {
+          collapsibleGroup.style.setProperty('--top-bg-color', linkData.top_bg_color);
+          collapsibleGroup.style.backgroundColor = linkData.top_bg_color;
+        }
       }
 
-      // Apply text color
+      // Apply text color (with gradient support)
       if (linkData.top_text_color) {
-        collapsibleGroup.style.setProperty('--top-text-color', linkData.top_text_color);
-        title.style.color = linkData.top_text_color;
+        const parsed = parseColors(linkData.top_text_color);
+        if (parsed.colors.length > 1) {
+          const style = document.createElement('style');
+          const uniqueId = 'top-text-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'topTextGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          title.dataset.topTextGradientId = uniqueId;
+          title.classList.add('animated-top-gradient-text');
+
+          if (parsed.animationType === 'rotate') {
+            const numColors = parsed.colors.length;
+            let keyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const startPercent = (i / numColors * 100).toFixed(2);
+              const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+              keyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
+              if (i < numColors - 1) {
+                keyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
+              }
+            }
+            keyframes += `100% { color: ${parsed.colors[0]}; }\n`;
+
+            style.textContent = `
+              .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] {
+                animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              @keyframes ${animName} {
+                ${keyframes}
+              }
+            `;
+          } else {
+            const angle = parsed.angle || '45deg';
+            const gradientColors = parsed.colors.join(', ');
+            style.textContent = `
+              .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] {
+                background: linear-gradient(${angle}, ${gradientColors});
+                background-size: 400% 400%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: ${animName} 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              @keyframes ${animName} {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `;
+          }
+          document.head.appendChild(style);
+        } else {
+          collapsibleGroup.style.setProperty('--top-text-color', linkData.top_text_color);
+          title.style.color = linkData.top_text_color;
+        }
       }
 
-      // Apply border color
+      // Apply border color (with gradient support)
       if (linkData.top_border_color) {
-        collapsibleGroup.style.setProperty('--top-border-color', linkData.top_border_color);
-        collapsibleGroup.style.border = `1px solid ${linkData.top_border_color}`;
+        const parsed = parseColors(linkData.top_border_color);
+        if (parsed.colors.length > 1) {
+          const borderWidth = '2px';
+          const style = document.createElement('style');
+          const uniqueId = 'top-border-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'topBorderGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          collapsibleGroup.dataset.topBorderGradientId = uniqueId;
+          collapsibleGroup.classList.add('animated-top-gradient-border');
+
+          collapsibleGroup.style.position = 'relative';
+          collapsibleGroup.style.border = 'none';
+
+          const bgColor = linkData.top_bg_color && !linkData.top_bg_color.includes(',') ? linkData.top_bg_color : '#2d2d2d';
+
+          if (parsed.animationType === 'rotate') {
+            const numColors = parsed.colors.length;
+            let keyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const startPercent = (i / numColors * 100).toFixed(2);
+              const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+              keyframes += `${startPercent}% { background: ${parsed.colors[i]}; }\n`;
+              if (i < numColors - 1) {
+                keyframes += `${endPercent}% { background: ${parsed.colors[i]}; }\n`;
+              }
+            }
+            keyframes += `100% { background: ${parsed.colors[0]}; }\n`;
+
+            style.textContent = `
+              .group_type_top.animated-top-gradient-border[data-top-border-gradient-id="${uniqueId}"] {
+                padding: ${borderWidth};
+                animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              .group_type_top.animated-top-gradient-border[data-top-border-gradient-id="${uniqueId}"] > * {
+                background: ${bgColor};
+              }
+              @keyframes ${animName} {
+                ${keyframes}
+              }
+            `;
+          } else {
+            const angle = parsed.angle || '45deg';
+            const gradientColors = parsed.colors.join(', ');
+            style.textContent = `
+              .group_type_top.animated-top-gradient-border[data-top-border-gradient-id="${uniqueId}"] {
+                background: linear-gradient(${angle}, ${gradientColors});
+                background-size: 400% 400%;
+                padding: ${borderWidth};
+                animation: ${animName} 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              .group_type_top.animated-top-gradient-border[data-top-border-gradient-id="${uniqueId}"] > * {
+                background: ${bgColor};
+              }
+              @keyframes ${animName} {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `;
+          }
+          document.head.appendChild(style);
+        } else {
+          collapsibleGroup.style.setProperty('--top-border-color', linkData.top_border_color);
+          collapsibleGroup.style.border = `1px solid ${linkData.top_border_color}`;
+        }
       }
 
       // Apply hover color
@@ -2688,6 +2855,22 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       if (linkData.popup_border_radius) {
         collapsibleGroup.style.setProperty('--popup-border-radius', linkData.popup_border_radius);
+      }
+
+      // Apply size and font styling
+      if (linkData.top_width) {
+        collapsibleGroup.style.width = linkData.top_width;
+        collapsibleGroup.style.minWidth = linkData.top_width;
+      }
+      if (linkData.top_height) {
+        collapsibleGroup.style.height = linkData.top_height;
+        collapsibleGroup.style.minHeight = linkData.top_height;
+      }
+      if (linkData.top_font_family) {
+        title.style.fontFamily = linkData.top_font_family;
+      }
+      if (linkData.top_font_size) {
+        title.style.fontSize = linkData.top_font_size;
       }
     }
 
@@ -3061,17 +3244,187 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Apply custom horizontal stack styling
       const linkData = firstLinkInGroup.link;
+
+      // Apply background color (with gradient support)
       if (linkData.horizontal_bg_color) {
-        groupDiv.style.setProperty('--horizontal-bg-color', linkData.horizontal_bg_color);
+        const parsed = parseColors(linkData.horizontal_bg_color);
+        if (parsed.colors.length > 1) {
+          const style = document.createElement('style');
+          const uniqueId = 'horiz-bg-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'horizBgGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          groupDiv.dataset.horizBgGradientId = uniqueId;
+          groupDiv.classList.add('animated-horiz-gradient-bg');
+
+          const anim = generateGradientAnimation(parsed, animName, randomDelay);
+          style.textContent = `
+            .group_type_box.animated-horiz-gradient-bg[data-horiz-bg-gradient-id="${uniqueId}"] {
+              ${anim.baseStyle || ''}
+              animation: ${anim.animation}
+            }
+            @keyframes ${animName} {
+              ${anim.keyframes}
+            }
+          `;
+          document.head.appendChild(style);
+        } else {
+          groupDiv.style.setProperty('--horizontal-bg-color', linkData.horizontal_bg_color);
+          groupDiv.style.backgroundColor = linkData.horizontal_bg_color;
+        }
       }
+
+      // Apply text color (with gradient support)
       if (linkData.horizontal_text_color) {
-        groupDiv.style.setProperty('--horizontal-text-color', linkData.horizontal_text_color);
+        const parsed = parseColors(linkData.horizontal_text_color);
+        if (parsed.colors.length > 1) {
+          const style = document.createElement('style');
+          const uniqueId = 'horiz-text-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'horizTextGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          groupDiv.dataset.horizTextGradientId = uniqueId;
+          groupDiv.classList.add('animated-horiz-gradient-text');
+
+          if (parsed.animationType === 'rotate') {
+            const numColors = parsed.colors.length;
+            let keyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const startPercent = (i / numColors * 100).toFixed(2);
+              const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+              keyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
+              if (i < numColors - 1) {
+                keyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
+              }
+            }
+            keyframes += `100% { color: ${parsed.colors[0]}; }\n`;
+
+            style.textContent = `
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"],
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title {
+                animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              @keyframes ${animName} {
+                ${keyframes}
+              }
+            `;
+          } else {
+            const angle = parsed.angle || '45deg';
+            const gradientColors = parsed.colors.join(', ');
+            style.textContent = `
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"],
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title {
+                background: linear-gradient(${angle}, ${gradientColors});
+                background-size: 400% 400%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-clip: text;
+                animation: ${animName} 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              @keyframes ${animName} {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `;
+          }
+          document.head.appendChild(style);
+        } else {
+          groupDiv.style.setProperty('--horizontal-text-color', linkData.horizontal_text_color);
+          groupDiv.style.color = linkData.horizontal_text_color;
+        }
       }
+
+      // Apply border color (with gradient support)
       if (linkData.horizontal_border_color) {
-        groupDiv.style.setProperty('--horizontal-border-color', linkData.horizontal_border_color);
+        const parsed = parseColors(linkData.horizontal_border_color);
+        if (parsed.colors.length > 1) {
+          const borderWidth = '2px';
+          const style = document.createElement('style');
+          const uniqueId = 'horiz-border-gradient-' + Math.random().toString(36).substr(2, 9);
+          const animName = 'horizBorderGradientShift-' + uniqueId;
+          const randomDelay = (Math.random() * 3).toFixed(2);
+          groupDiv.dataset.horizBorderGradientId = uniqueId;
+          groupDiv.classList.add('animated-horiz-gradient-border');
+
+          groupDiv.style.position = 'relative';
+          groupDiv.style.border = 'none';
+
+          const bgColor = linkData.horizontal_bg_color && !linkData.horizontal_bg_color.includes(',') ? linkData.horizontal_bg_color : '#2d2d2d';
+
+          if (parsed.animationType === 'rotate') {
+            const numColors = parsed.colors.length;
+            let keyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const startPercent = (i / numColors * 100).toFixed(2);
+              const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+              keyframes += `${startPercent}% { background: ${parsed.colors[i]}; }\n`;
+              if (i < numColors - 1) {
+                keyframes += `${endPercent}% { background: ${parsed.colors[i]}; }\n`;
+              }
+            }
+            keyframes += `100% { background: ${parsed.colors[0]}; }\n`;
+
+            style.textContent = `
+              .group_type_box.animated-horiz-gradient-border[data-horiz-border-gradient-id="${uniqueId}"] {
+                padding: ${borderWidth};
+                animation: ${animName} ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              .group_type_box.animated-horiz-gradient-border[data-horiz-border-gradient-id="${uniqueId}"] > * {
+                background: ${bgColor};
+              }
+              @keyframes ${animName} {
+                ${keyframes}
+              }
+            `;
+          } else {
+            const angle = parsed.angle || '45deg';
+            const gradientColors = parsed.colors.join(', ');
+            style.textContent = `
+              .group_type_box.animated-horiz-gradient-border[data-horiz-border-gradient-id="${uniqueId}"] {
+                background: linear-gradient(${angle}, ${gradientColors});
+                background-size: 400% 400%;
+                padding: ${borderWidth};
+                animation: ${animName} 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
+              .group_type_box.animated-horiz-gradient-border[data-horiz-border-gradient-id="${uniqueId}"] > * {
+                background: ${bgColor};
+              }
+              @keyframes ${animName} {
+                0% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+                100% { background-position: 0% 50%; }
+              }
+            `;
+          }
+          document.head.appendChild(style);
+        } else {
+          groupDiv.style.setProperty('--horizontal-border-color', linkData.horizontal_border_color);
+          groupDiv.style.border = `1px solid ${linkData.horizontal_border_color}`;
+        }
       }
+
+      // Apply hover color
       if (linkData.horizontal_hover_color) {
         groupDiv.style.setProperty('--horizontal-hover-color', linkData.horizontal_hover_color);
+      }
+
+      // Apply size and font styling for horizontal stack
+      if (linkData.horizontal_width) {
+        groupDiv.style.width = linkData.horizontal_width;
+        groupDiv.style.minWidth = linkData.horizontal_width;
+      }
+      if (linkData.horizontal_height) {
+        groupDiv.style.height = linkData.horizontal_height;
+        groupDiv.style.minHeight = linkData.horizontal_height;
+      }
+      if (linkData.horizontal_font_family) {
+        groupDiv.style.fontFamily = linkData.horizontal_font_family;
+      }
+      if (linkData.horizontal_font_size) {
+        groupDiv.style.fontSize = linkData.horizontal_font_size;
       }
 
       groupDiv.onclick = () => {
@@ -3305,6 +3658,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const editGroupHorizontalTextColorInput = document.getElementById('edit-group-horizontal-text-color');
     const editGroupHorizontalBorderColorInput = document.getElementById('edit-group-horizontal-border-color');
     const editGroupHorizontalHoverColorInput = document.getElementById('edit-group-horizontal-hover-color');
+    const editGroupTopWidthInput = document.getElementById('edit-group-top-width');
+    const editGroupTopHeightInput = document.getElementById('edit-group-top-height');
+    const editGroupTopFontFamilyInput = document.getElementById('edit-group-top-font-family');
+    const editGroupTopFontSizeInput = document.getElementById('edit-group-top-font-size');
+    const editGroupHorizontalWidthInput = document.getElementById('edit-group-horizontal-width');
+    const editGroupHorizontalHeightInput = document.getElementById('edit-group-horizontal-height');
+    const editGroupHorizontalFontFamilyInput = document.getElementById('edit-group-horizontal-font-family');
+    const editGroupHorizontalFontSizeInput = document.getElementById('edit-group-horizontal-font-size');
     const collapsibleRenameSection = document.getElementById('collapsible-rename-section');
 
     editGroupNameInput.value = currentGroupName === 'Ungrouped' ? '' : currentGroupName;
@@ -3332,6 +3693,14 @@ document.addEventListener('DOMContentLoaded', function () {
       editGroupHorizontalTextColorInput.value = linksInGroup[0].horizontal_text_color || '#ffffff';
       editGroupHorizontalBorderColorInput.value = linksInGroup[0].horizontal_border_color || '#0056b3';
       editGroupHorizontalHoverColorInput.value = linksInGroup[0].horizontal_hover_color || '#3a3a3a';
+      editGroupTopWidthInput.value = linksInGroup[0].top_width || '';
+      editGroupTopHeightInput.value = linksInGroup[0].top_height || '';
+      editGroupTopFontFamilyInput.value = linksInGroup[0].top_font_family || '';
+      editGroupTopFontSizeInput.value = linksInGroup[0].top_font_size || '';
+      editGroupHorizontalWidthInput.value = linksInGroup[0].horizontal_width || '';
+      editGroupHorizontalHeightInput.value = linksInGroup[0].horizontal_height || '';
+      editGroupHorizontalFontFamilyInput.value = linksInGroup[0].horizontal_font_family || '';
+      editGroupHorizontalFontSizeInput.value = linksInGroup[0].horizontal_font_size || '';
     } else {
       editGroupDisplaySelect.value = 'flex'; // Default if no links in group
       editGroupCollapsibleCheckbox.checked = false;
@@ -3527,7 +3896,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Function to update group name for all links in that group
-  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor) {
+  async function updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor, topWidth, topHeight, topFontFamily, topFontSize, horizontalWidth, horizontalHeight, horizontalFontFamily, horizontalFontSize) {
     try {
       const response = await fetch('/api/links');
       const links = await response.json();
@@ -3570,6 +3939,50 @@ document.addEventListener('DOMContentLoaded', function () {
           updatedLink.horizontal_text_color = horizontalTextColor || '#ffffff';
           updatedLink.horizontal_border_color = horizontalBorderColor || '#0056b3';
           updatedLink.horizontal_hover_color = horizontalHoverColor || '#3a3a3a';
+
+          // Handle top group size and font options
+          if (topWidth && topWidth.trim() !== '') {
+            updatedLink.top_width = topWidth;
+          } else {
+            delete updatedLink.top_width;
+          }
+          if (topHeight && topHeight.trim() !== '') {
+            updatedLink.top_height = topHeight;
+          } else {
+            delete updatedLink.top_height;
+          }
+          if (topFontFamily && topFontFamily.trim() !== '') {
+            updatedLink.top_font_family = topFontFamily;
+          } else {
+            delete updatedLink.top_font_family;
+          }
+          if (topFontSize && topFontSize.trim() !== '') {
+            updatedLink.top_font_size = topFontSize;
+          } else {
+            delete updatedLink.top_font_size;
+          }
+
+          // Handle horizontal stack size and font options
+          if (horizontalWidth && horizontalWidth.trim() !== '') {
+            updatedLink.horizontal_width = horizontalWidth;
+          } else {
+            delete updatedLink.horizontal_width;
+          }
+          if (horizontalHeight && horizontalHeight.trim() !== '') {
+            updatedLink.horizontal_height = horizontalHeight;
+          } else {
+            delete updatedLink.horizontal_height;
+          }
+          if (horizontalFontFamily && horizontalFontFamily.trim() !== '') {
+            updatedLink.horizontal_font_family = horizontalFontFamily;
+          } else {
+            delete updatedLink.horizontal_font_family;
+          }
+          if (horizontalFontSize && horizontalFontSize.trim() !== '') {
+            updatedLink.horizontal_font_size = horizontalFontSize;
+          } else {
+            delete updatedLink.horizontal_font_size;
+          }
 
           return updatedLink;
         }
@@ -3885,9 +4298,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const horizontalTextColor = document.getElementById('edit-group-horizontal-text-color').value;
         const horizontalBorderColor = document.getElementById('edit-group-horizontal-border-color').value;
         const horizontalHoverColor = document.getElementById('edit-group-horizontal-hover-color').value;
+        const topWidth = document.getElementById('edit-group-top-width').value;
+        const topHeight = document.getElementById('edit-group-top-height').value;
+        const topFontFamily = document.getElementById('edit-group-top-font-family').value;
+        const topFontSize = document.getElementById('edit-group-top-font-size').value;
+        const horizontalWidth = document.getElementById('edit-group-horizontal-width').value;
+        const horizontalHeight = document.getElementById('edit-group-horizontal-height').value;
+        const horizontalFontFamily = document.getElementById('edit-group-horizontal-font-family').value;
+        const horizontalFontSize = document.getElementById('edit-group-horizontal-font-size').value;
 
         try {
-          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor);
+          const success = await updateGroupName(originalGroupName, newGroupName, newDisplayStyle, isCollapsible, isHorizontalStack, isPasswordProtected, topName, topBgColor, topTextColor, topBorderColor, topHoverColor, popupBgColor, popupTextColor, popupBorderColor, popupBorderRadius, horizontalBgColor, horizontalTextColor, horizontalBorderColor, horizontalHoverColor, topWidth, topHeight, topFontFamily, topFontSize, horizontalWidth, horizontalHeight, horizontalFontFamily, horizontalFontSize);
           if (success) {
             document.getElementById('edit-group-popup').classList.add('hidden');
             fetchAndDisplayLinks();
@@ -6311,7 +6732,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6334,7 +6755,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6357,7 +6778,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6381,7 +6802,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6404,7 +6825,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6430,7 +6851,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6453,7 +6874,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6476,7 +6897,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6499,7 +6920,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "\ud83e\udde0",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "red, green",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6522,7 +6943,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6547,7 +6968,7 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6571,7 +6992,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6594,7 +7015,7 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6617,7 +7038,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6642,7 +7063,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6668,7 +7089,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6693,7 +7114,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6718,7 +7139,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6742,7 +7163,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6767,7 +7188,7 @@ async function triggerScans() {
     "display_style": "flex",
     "font_size": "35px",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6791,7 +7212,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
@@ -6814,7 +7235,7 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "EDU",
-    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_bg_color": "rotate: red, black, blue",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
