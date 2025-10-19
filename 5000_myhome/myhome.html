@@ -1840,14 +1840,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-              <label style="font-weight: 500;">Default Type:</label>
+              <label style="font-weight: 500;">Type:</label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="link-default-type" id="link-type-text" value="text" checked>
                 Text
               </label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="link-default-type" id="link-type-nerd-font" value="nerd-font">
-                Nerd Font
+                NerdF
               </label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="link-default-type" id="link-type-img" value="img">
@@ -1938,14 +1938,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
-              <label style="font-weight: 500;">Default Type:</label>
+              <label style="font-weight: 500;">Type:</label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="edit-link-default-type" id="edit-link-type-text" value="text" checked>
                 Text
               </label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="edit-link-default-type" id="edit-link-type-nerd-font" value="nerd-font">
-                Nerd Font
+                NerdF
               </label>
               <label style="display: flex; align-items: center; gap: 5px;">
                 <input type="radio" name="edit-link-default-type" id="edit-link-type-img" value="img">
@@ -2034,7 +2034,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
           <label for="sidebar-button-display-type">Display Type:</label>
           <select id="sidebar-button-display-type">
-            <option value="icon">Icon (Nerd Font)</option>
+            <option value="icon">Icon (NerdF)</option>
             <option value="image">Image</option>
           </select>
 
@@ -2089,7 +2089,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
           <label for="edit-sidebar-button-display-type">Display Type:</label>
           <select id="edit-sidebar-button-display-type">
-            <option value="icon">Icon (Nerd Font)</option>
+            <option value="icon">Icon (NerdF)</option>
             <option value="image">Image</option>
           </select>
 
@@ -3118,6 +3118,23 @@ document.addEventListener('DOMContentLoaded', function () {
     addLinkItem.appendChild(addLinkSpan);
     content.appendChild(addLinkItem);
 
+    // Add context menu for group
+    collapsibleGroup.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const items = [
+        {
+          label: 'Edit',
+          action: () => openEditGroupPopup(groupName)
+        },
+        {
+          label: 'Delete',
+          action: () => deleteGroup(groupName)
+        }
+      ];
+      showContextMenu(event, items);
+    });
+
     // Click handler - works like box group (opens popup)
     collapsibleGroup.onclick = (e) => {
       // Don't trigger if clicking on edit button
@@ -3572,6 +3589,23 @@ document.addEventListener('DOMContentLoaded', function () {
         groupDiv.style.fontSize = linkData.horizontal_font_size;
       }
 
+      // Add context menu for box group
+      groupDiv.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const items = [
+          {
+            label: 'Edit',
+            action: () => openEditGroupPopup(groupName)
+          },
+          {
+            label: 'Delete',
+            action: () => deleteGroup(groupName)
+          }
+        ];
+        showContextMenu(event, items);
+      });
+
       groupDiv.onclick = () => {
         const isPasswordProtected = firstLinkInGroup.link.password_protect;
         if (isPasswordProtected) {
@@ -3686,6 +3720,23 @@ document.addEventListener('DOMContentLoaded', function () {
         // Prevent body scroll when popup is open
         document.body.style.overflow = 'hidden';
       };
+    } else {
+      // Add context menu for regular (non-box) groups
+      groupDiv.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const items = [
+          {
+            label: 'Edit',
+            action: () => openEditGroupPopup(groupName)
+          },
+          {
+            label: 'Delete',
+            action: () => deleteGroup(groupName)
+          }
+        ];
+        showContextMenu(event, items);
+      });
     }
 
     const groupHeaderContainer = document.createElement('div');
@@ -8387,7 +8438,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8411,7 +8462,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8435,7 +8486,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8459,7 +8510,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8483,7 +8534,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8509,7 +8560,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8535,7 +8586,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8558,7 +8609,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8581,7 +8632,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8604,7 +8655,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8627,7 +8678,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8650,7 +8701,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8674,7 +8725,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8697,7 +8748,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8720,7 +8771,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "nerd-font",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8743,7 +8794,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8767,7 +8818,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8791,7 +8842,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8815,7 +8866,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8839,7 +8890,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8863,7 +8914,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8888,7 +8939,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8913,7 +8964,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8938,7 +8989,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8963,7 +9014,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
@@ -8988,7 +9039,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "text",
     "display_style": "flex",
-    "group": "Git-Projects",
+    "group": "Git-Project",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Comic Sans MS",
