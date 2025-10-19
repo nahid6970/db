@@ -5496,5 +5496,29 @@
     "click_action": "url",
     "font_size": "50px",
     "horizontal_stack": false
+  },
+  {
+    "name": " log_x(1728) = 6 \u09b9\u09b2\u09c7, x \u098f\u09b0 \u09ae\u09be\u09a8 \u0995\u09a4?",
+    "group": "Math",
+    "url": "",
+    "default_type": "text",
+    "note": "```\n\u09b8\u09ae\u09c0\u0995\u09b0\u09a3\u099f\u09bf \u09a6\u09c7\u0993\u09df\u09be \u0986\u099b\u09c7:  \nlog\u2093(1728) = 6\n\n\u098f\u09b0 \u09ae\u09be\u09a8\u09c7 \u09b9\u09b2\u09cb,  \nx\u2076 = 1728\n\n\u098f\u0996\u09a8 1728 \u098f\u09b0 \u09ae\u09be\u09a8 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3 \u0995\u09b0\u09b2\u09c7 \u09aa\u09be\u0987:  \n1728 = 12\u00b3 = (2\u00b2 \u00d7 3)\u00b3 = 2\u2076 \u00d7 3\u00b3\n\n\u09b8\u09c1\u09a4\u09b0\u09be\u0982,  \nx\u2076 = 2\u2076 \u00d7 3\u00b3\n\n\u09a6\u09c1\u0987 \u09aa\u09be\u09b6\u09c7 \u09ec\u09b7\u09cd\u09a0 \u09ae\u09c2\u09b2 \u09a8\u09bf\u09b2\u09c7:  \nx = (2\u2076 \u00d7 3\u00b3)^(1/6)  \nx = 2^(6/6) \u00d7 3^(3/6)  \nx = 2 \u00d7 3^(1/2)  \nx = 2\u221a3\n\n**\u0989\u09a4\u09cd\u09a4\u09b0: 2\u221a3**\n```\n",
+    "click_action": "note",
+    "collapsible": true,
+    "display_style": "flex",
+    "horizontal_stack": false,
+    "password_protect": false,
+    "top_bg_color": "#4ea3e0",
+    "top_text_color": "#000",
+    "top_border_color": "#444444",
+    "top_hover_color": "#4ea3e0",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   }
 ]
