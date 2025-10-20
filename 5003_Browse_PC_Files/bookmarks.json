@@ -34,5 +34,9 @@
   {
     "name": "debugScreenShot",
     "path": "C:/Users/nahid//ms/test/path_to_photo/app/build/outputs/apk/debug"
+  },
+  {
+    "name": "contro_debug",
+    "path": "C:/Users/nahid//ms/test/control_button/app/build/outputs/apk/debug"
   }
 ]
