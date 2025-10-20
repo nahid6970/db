@@ -1708,8 +1708,16 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         </div>
         <form id="edit-group-form" style="display: flex; flex-direction: column; gap: 10px; width: 400px;">
           <input type="hidden" id="edit-group-original-name">
-          <label for="edit-group-name">Group Name:</label>
-          <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required>
+          <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label for="edit-group-name">Group Name:</label>
+              <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required style="width: 100%;">
+            </div>
+            <div style="flex: 1;">
+              <label for="edit-group-top-name">Display Name (optional):</label>
+              <input type="text" id="edit-group-top-name" placeholder="Custom name for display" style="width: 100%;">
+            </div>
+          </div>
           <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
             <label style="font-weight: 500;">Display Style:</label>
             <label style="display: flex; align-items: center; gap: 5px;">
@@ -1742,10 +1750,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <div id="collapsible-rename-section" style="display: none;">
             <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top
               Group Display Settings</h4>
-
-            <label for="edit-group-top-name">Display Name (optional):</label>
-            <input type="text" id="edit-group-top-name"
-              placeholder="Custom name for top display (leave empty to use group name)">
 
             <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Top
               Group Color Settings</h4>
@@ -1801,23 +1805,29 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             </div>
 
             <div style="display: flex; gap: 10px;">
-              <input type="text" id="edit-group-horizontal-font-family" placeholder="Font Family (e.g., Arial, sans-serif)">
+              <input type="text" id="edit-group-horizontal-font-family"
+                placeholder="Font Family (e.g., Arial, sans-serif)">
               <input type="text" id="edit-group-horizontal-font-size" placeholder="Font Size (e.g., 16px, 1.2em)">
             </div>
           </div>
 
-          <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Popup
-            Content Styling</h4>
+          <details style="margin: 15px 0;">
+            <summary
+              style="color: white; cursor: pointer; font-weight: bold; padding: 10px; background-color: #2d2d2d; border-radius: 4px; border-bottom: 1px solid #555;">
+              Popup Content Styling
+            </summary>
+            <div style="padding: 10px 0;">
+              <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                <input type="text" id="edit-group-popup-bg-color" placeholder="Popup Background Color (e.g., #31343a)">
+                <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text Color (e.g., #ffffff)">
+              </div>
 
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-group-popup-bg-color" placeholder="Popup Background Color (e.g., #31343a)">
-            <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text Color (e.g., #ffffff)">
-          </div>
-
-          <div style="display: flex; gap: 10px;">
-            <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border Color (e.g., #555555)">
-            <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Border Radius (e.g., 8px)">
-          </div>
+              <div style="display: flex; gap: 10px;">
+                <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border Color (e.g., #555555)">
+                <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Border Radius (e.g., 8px)">
+              </div>
+            </div>
+          </details>
 
           <button type="submit">Save Group Settings</button>
         </form>
@@ -1871,7 +1881,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
               <input type="url" id="link-img-src" placeholder="Image URL (if no text/icon)">
             </div>
-            <textarea id="link-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)" rows="3" style="resize: vertical; font-family: monospace; display: none;"></textarea>
+            <textarea id="link-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)" rows="3"
+              style="resize: vertical; font-family: monospace; display: none;"></textarea>
             <div style="display: flex; gap: 10px;">
               <input type="text" id="link-width" placeholder="Width (e.g., 50px or auto)">
               <input type="text" id="link-height" placeholder="Height (e.g., 50px or auto)">
@@ -1881,7 +1892,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="link-background-color" placeholder="BG Color (supports gradients)">
             </div>
             <div style="display: flex; gap: 10px;">
-              <input type="text" id="link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)" style="flex: 1;">
+              <input type="text" id="link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)"
+                style="flex: 1;">
               <input type="text" id="link-font-size" placeholder="Font Size (e.g., 16px)" style="flex: 1;">
             </div>
             <div style="display: flex; gap: 10px;">
@@ -1889,7 +1901,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="link-li-height" placeholder="Item Height (e.g., 60px, auto)">
             </div>
             <div style="display: flex; gap: 10px;">
-              <input type="text" id="link-li-bg-color" placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
+              <input type="text" id="link-li-bg-color"
+                placeholder="Item BG (rotate: red, blue OR slide: 90: red, blue)">
               <input type="text" id="link-li-hover-color" placeholder="Item Hover (rotate: or slide: 180: prefix)">
             </div>
             <div style="display: flex; gap: 10px;">
@@ -1908,12 +1921,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <button type="submit">Add Link</button>
           </form>
         </div>
-        <div id="add-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+        <div id="add-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;"
+          class="note-panel">
           <h3>Note</h3>
           <textarea id="link-note"
             placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
             style="resize: vertical; font-family: inherit; flex: 1; width: 100%;"></textarea>
-          <button type="button" id="preview-note-btn" class="preview-note-button" title="Preview Note as Markdown" style="align-self: center;">
+          <button type="button" id="preview-note-btn" class="preview-note-button" title="Preview Note as Markdown"
+            style="align-self: center;">
             <i class="nf nf-md-eye"></i> Preview Note
           </button>
         </div>
@@ -1969,7 +1984,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="edit-link-icon-class" placeholder="Icon Class (e.g., nf nf-cod-mail)">
               <input type="url" id="edit-link-img-src" placeholder="Image URL (if no text/icon)">
             </div>
-            <textarea id="edit-link-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)" rows="3" style="resize: vertical; font-family: monospace; display: none;"></textarea>
+            <textarea id="edit-link-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)" rows="3"
+              style="resize: vertical; font-family: monospace; display: none;"></textarea>
             <div style="display: flex; gap: 10px;">
               <input type="text" id="edit-link-width" placeholder="Width (e.g., 50)">
               <input type="text" id="edit-link-height" placeholder="Height (e.g., 50)">
@@ -1979,7 +1995,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="edit-link-background-color" placeholder="BG Color (supports gradients)">
             </div>
             <div style="display: flex; gap: 10px;">
-              <input type="text" id="edit-link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)" style="flex: 1;">
+              <input type="text" id="edit-link-font-family" placeholder="Font Family (e.g., Arial, sans-serif)"
+                style="flex: 1;">
               <input type="text" id="edit-link-font-size" placeholder="Font Size (e.g., 16px)" style="flex: 1;">
             </div>
             <div style="display: flex; gap: 10px;">
@@ -2007,12 +2024,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <button type="submit">Save Changes</button>
           </form>
         </div>
-        <div id="edit-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;" class="note-panel">
+        <div id="edit-link-note-panel" style="width: 450px; display: flex; flex-direction: column; gap: 10px;"
+          class="note-panel">
           <h3>Note</h3>
           <textarea id="edit-link-note"
             placeholder="Note (optional) - Supports Markdown: **bold**, *italic*, `code`, # Header" rows="15"
             style="resize: vertical; font-family: inherit; flex: 1; width: 100%;"></textarea>
-          <button type="button" id="edit-preview-note-btn" class="preview-note-button" title="Preview Note as Markdown" style="align-self: center;">
+          <button type="button" id="edit-preview-note-btn" class="preview-note-button" title="Preview Note as Markdown"
+            style="align-self: center;">
             <i class="nf nf-md-eye"></i> Preview Note
           </button>
         </div>
@@ -7884,32 +7903,33 @@ async function triggerScans() {
     "url": "http://192.168.0.101:5013"
   },
   {
-    "name": "JOB Search",
-    "group": "Local (Flask)",
-    "url": "http://192.168.0.101:5015",
-    "default_type": "nerd-font",
     "background_color": "red",
     "border_radius": "100px",
     "click_action": "url",
-    "li_bg_color": "transparent",
-    "li_hover_color": "transparent",
-    "li_border_radius": "100px",
     "collapsible": false,
+    "default_type": "nerd-font",
     "display_style": "flex",
+    "group": "Local (Flask)",
+    "horizontal_bg_color": "white",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "Comic Sans MS",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "black",
+    "li_bg_color": "transparent",
+    "li_border_radius": "100px",
+    "li_hover_color": "transparent",
+    "name": "JOB Search",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "white",
-    "horizontal_text_color": "black",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "http://192.168.0.101:5015"
   },
   {
     "click_action": "url",
