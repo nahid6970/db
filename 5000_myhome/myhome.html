@@ -341,26 +341,10 @@ img {
   min-height: 80px;
 }
 
-.link-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
 .link-item:hover {
   transform: translateY(-5px) scale(1.02);
   background-color: #000000;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   z-index: 10;
-}
-
-.link-item:hover::before {
-  left: 100%;
 }
 
 .link-item a {
@@ -1152,24 +1136,8 @@ div.toggle-container {
   hyphens: auto;
 }
 
-#group_type_box-popup .popup-content-inner .link-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-  transition: left 0.5s;
-}
-
 #group_type_box-popup .popup-content-inner .link-item:hover {
   transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-}
-
-#group_type_box-popup .popup-content-inner .link-item:hover::before {
-  left: 100%;
 }
 
 /* Sidebar edit buttons */
@@ -6898,22 +6866,22 @@ async function triggerScans() {
     "url": "https://insforge.dev/dashboard/organizations"
   },
   {
+    "name": "YouTube",
+    "group": "Most Used",
+    "url": "https://www.youtube.com/",
+    "icon_class": "nf nf-fa-youtube",
+    "color": "red, #69b2e1",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
+    "default_type": "nerd-font",
     "border_radius": "50",
     "click_action": "url",
-    "color": "red, #69b2e1",
-    "default_type": "nerd-font",
     "font_size": "100px",
-    "group": "Most Used",
-    "horizontal_stack": false,
-    "icon_class": "nf nf-fa-youtube",
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
-    "li_bg_color": "transparent",
-    "li_border_radius": "50%",
-    "li_height": "5%",
-    "li_hover_color": "transparent",
     "li_width": "5%",
-    "name": "YouTube",
-    "url": "https://www.youtube.com/"
+    "li_height": "5%",
+    "li_bg_color": "transparent",
+    "li_hover_color": "transparent",
+    "li_border_radius": "50%",
+    "horizontal_stack": false
   },
   {
     "background_color": "white",
@@ -7083,33 +7051,35 @@ async function triggerScans() {
     "url": "https://discord.com/channels/@me"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
+    "name": "Tailscale",
+    "group": "Default",
+    "url": "https://login.tailscale.com/admin/machines",
+    "icon_class": "nf nf-md-dots_hexagon",
     "color": "rotate: #4b70cc,#a0fd95,#ffc88c",
     "default_type": "nerd-font",
-    "display_style": "flex",
+    "click_action": "url",
     "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-md-dots_hexagon",
-    "li_border_radius": "0px",
-    "li_height": "1%",
     "li_width": "1%",
-    "name": "Tailscale",
+    "li_height": "1%",
+    "li_bg_color": "transparent",
+    "li_hover_color": "transparent",
+    "li_border_radius": "0px",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://login.tailscale.com/admin/machines"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "click_action": "url",
@@ -7387,32 +7357,34 @@ async function triggerScans() {
     "url": "https://www.svgrepo.com/"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
+    "name": "Local Bus",
     "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
+    "url": "https://dhakatc.com/info/localbus/all",
     "icon_class": "nf nf-md-bus_alert",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAArlBMVEULFCkKEiYKDyMNGjILFSsHABUZRGkQJkEGABAOHTYWOFo9tf8zlt46rPw8sv8gW4k1nec7r/8la58bTHUjY5UXPWAUNFMSLUosgL0xkdU5qPUuhsYAAAAbTXUFAAcodK0thMQOIzwIABgAEScACx8AABYAEygAQmcyGy+jNkdPIjQIFCmYNEZ9LT9BHjKHMEKwPE4ZFytpKTvKQ1V0LD+SNEY9HjFbJTi7P1JmKDsTo9rXAAABSElEQVR4AWKAgVEAIFoqECQGYWDQraVLqAN1+/8Pj55tPCMsRlycxxnrpyP0c8YQUgjJldavRAgGPJXAhRAcQIrHmOUFlu+XoYJsVdZJk9dJViLVibJ5y4F1/eB8Y3Cwjir0wTofahxcUQVLUQAsDC6M5MOk0cdzKJz0+EjUjwCmiFoaOQRjamrdjJUZarTU1x9BTW/FlDMt9ZSZBW3kFhx+BIkfkozMmsxlHxy64JF0TY10vckegZo1TH1v5tl2cfvQzDNo1JvcXgxi7N0BsCXntp37dXC+H+fGzntl4ouDsTACGABhILvkLhWsLvsvVigufwH6z3GaqTQnI8Yg0mbSJyjMm8CChK4G5bbHUeyEPqqu53lR+lVV9hvcjmWj/MDj1HV/foU0g8qzFTDbC6G1QhaQtmoTLE5BEbKrQHrUb2AxYsEoAADq+ShZjJHthQAAAABJRU5ErkJggg==",
-    "li_height": "1%",
+    "default_type": "nerd-font",
+    "click_action": "url",
+    "font_size": "35px",
     "li_width": "1%",
-    "name": "Local Bus",
+    "li_height": "1%",
+    "li_bg_color": "transparent",
+    "li_hover_color": "transparent",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://dhakatc.com/info/localbus/all"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "click_action": "url",
