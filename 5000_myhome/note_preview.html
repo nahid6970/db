@@ -371,123 +371,31 @@
         });
     </script>
 
-
   <script>
-
     // Get note content from URL parameter
-
     const urlParams = new URLSearchParams(window.location.search);
-
     const encodedContent = urlParams.get('content');
-
     
-
     if (encodedContent) {
-
       try {
-
-        // Handle potential decoding issues with % characters
-
-        let decodedContent = encodedContent;
-
-        try {
-
-          decodedContent = decodeURIComponent(encodedContent);
-
-        } catch (decodeError) {
-
-          // If decoding fails, use the content as-is
-
-          console.warn('Failed to decode content, using as-is:', decodeError);
-
-        }
-
+        const decodedContent = decodeURIComponent(encodedContent);
+        // Simple markdown-like conversion
+        let html = decodedContent
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+          .replace(/`(.+?)`/g, '<code>$1</code>')
+          .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+          .replace(/^## (.+)$/gm, '<h2>$2</h2>')
+          .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+          .replace(/\n/g, '<br>');
         
-
-        // Process markdown-like syntax with better handling
-
-        function processMarkdown(text) {
-
-          // Process code blocks first (``` ... ```)
-
-          text = text.replace(/```([\s\S]*?)```/g, function(match, code) {
-
-            // Escape HTML in code blocks
-
-            const escapedCode = code
-
-              .replace(/&/g, '&amp;')
-
-              .replace(/</g, '&lt;')
-
-              .replace(/>/g, '&gt;');
-
-            return '<pre><code>' + escapedCode.trim() + '</code></pre>';
-
-          });
-
-          
-
-          // Process inline code (`...`)
-
-          text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-          
-
-          // Process bold (**...**)
-
-          text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-
-          
-
-          // Process italic (*...*)
-
-          text = text.replace(/\*(.+?)\*/g, '<em>$1</em>');
-
-          
-
-          // Process headers
-
-          text = text.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-
-          text = text.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-
-          text = text.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-
-          
-
-          // Convert line breaks
-
-          text = text.replace(/
-/g, '<br>');
-
-          
-
-          return text;
-
-        }
-
-        
-
-        const html = processMarkdown(decodedContent);
-
         document.querySelector('.content').innerHTML = html;
-
       } catch (e) {
-
-        console.error('Error processing note content:', e);
-
         document.querySelector('.content').innerHTML = '<p>Error loading note content</p>';
-
       }
-
     } else {
-
       document.querySelector('.content').innerHTML = '<p>No note content provided</p>';
-
     }
-
   </script>
-
 </body>
 </html>

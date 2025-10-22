@@ -9,77 +9,42 @@
   <style>/* Import the JetBrains Mono font */
 @import url("https://www.nerdfonts.com/assets/css/webfont.css");
 
-/* Sidebar container */
+/* Sidebar container - always expanded */
+
 .sidebar-container {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  position: relative;
+  width: 100%;
   z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 10px;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+
+
+
+/* Always show sidebar content */
+
+.sidebar-container .top-center-controls {
   display: flex;
+  flex-direction: row;
+  justify-content: center; /* Center the content */
   align-items: center;
-  width: auto;
-}
-
-/* Sidebar toggle button - transparent with white arrow */
-.sidebar-toggle {
-  position: fixed;
-  left: 5px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  padding: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 1001;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.sidebar-toggle:hover {
-  transform: translateY(-50%) scale(1.1);
-}
-
-.sidebar-toggle i {
-  font-size: 16px;
-  color: #ffffff;
-  text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-}
-
-/* Sidebar content - transparent background */
-.top-center-controls {
-  position: fixed;
-  left: 0;
-  top: 50%;
-  transform: translate(-100%, -50%);
-  background: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   gap: 8px;
-  padding: 15px 8px;
-  transition: transform 0.3s ease;
-  width: auto;
-  z-index: 1000;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-top:5px;
 }
 
-/* Sidebar expanded state */
-.sidebar-container.expanded .top-center-controls {
-  transform: translate(0, -50%);
-}
 
-/* Move toggle button to right side when expanded - position set by JavaScript */
-.sidebar-container.expanded .sidebar-toggle {
-  /* Position will be set dynamically by JavaScript */
-}
 
-/* Icon changes are handled by JavaScript, no rotation needed */
+/* Adjust main content to make space for sidebar */
+
+.flex-container2 {
+  margin-top: 0px; /* Space for the sidebar */
+  padding-top: 20px; /* Additional padding */
+}
 
 /* Adjust button styling for sidebar - keep original styling */
 .top-center-controls .add-button {
@@ -92,11 +57,7 @@
   background-color: #e0e0e0 !important;
 }
 
-/* Make sure the toggle button is always visible */
-.sidebar-toggle {
-  opacity: 1 !important;
-  visibility: visible !important;
-}
+
 
 .add-button {
   color: #000000 !important;
@@ -230,6 +191,7 @@ body::-webkit-scrollbar-track {
   font-size: auto;
   color: rgb(255, 255, 255);
   padding: 1cm;
+  padding-top: 15px;
   border-radius: 1cm;
   position: relative;
   /* Added for positioning context */
@@ -389,103 +351,7 @@ img {
   /* Green color on hover */
 }
 
-.toggle-container span {
-  /* Reset properties for the toggle label span */
-  display: inline;
-  padding: 0;
-  background-color: transparent;
-  border-radius: 0;
-  box-shadow: none;
-  transition: none;
-  margin: 0;
-  width: auto;
-  height: auto;
-  font-family: Calibri;
-  /* Or your preferred default font */
-  font-size: 16px;
-  /* Or your preferred default font size */
-  align-content: center;
-}
-
-.toggle-container span:hover {
-  transform: none;
-  background-color: transparent;
-}
-
-.toggle-container {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  transform: none;
-  display: flex;
-  align-items: center;
-  z-index: 1000;
-}
-
-/* The switch - the box around the slider */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-/* Hide default HTML checkbox */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
-
-input:checked+.slider {
-  background-color: #2196F3;
-}
-
-input:focus+.slider {
-  box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked+.slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
-
-.slider.round:before {
-  border-radius: 50%;
-}
-
-.edit-button,
+  .edit-button,
 .delete-button {
   display: none;
   /* Hidden by default */
@@ -497,6 +363,7 @@ input:checked+.slider:before {
   display: inline-block;
   /* Show when edit mode is active */
 }
+
 
 /* Popup styles - Enhanced centering */
 .popup-container {
@@ -890,14 +757,13 @@ div.group-header-container {
 }
 
 html body {
-  margin-top: 20px;
-  margin-left: 20px;
-  /* Reduced margin since sidebar is now collapsible */
+  margin: 0;
+  padding: 0;
 }
 
 div.toggle-container {
-  margin-top: -16px;
-  margin-left: -15px;
+  margin-top: 10px;
+  margin-left: 10px;
   /* Adjust toggle position for new sidebar */
 }
 
@@ -1187,6 +1053,11 @@ div.toggle-container {
   border-radius: var(--custom-border-radius, 4px) !important;
   font-size: var(--custom-font-size, 16px) !important;
   transition: background-color 0.2s ease, transform 0.2s ease !important;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .top-center-controls .notification-button-container .custom-sidebar-button.add-button:hover {
@@ -1205,6 +1076,11 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   background-color: #000000 !important;
   color: #ffffff !important;
   border: 1px solid #333333 !important;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .top-center-controls .add-button.sidebar-add-button:hover {
@@ -1397,13 +1273,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
   html,
   body {
-    margin: 5px;
-    margin-left: -3%;
+    margin: 0;
+    padding: 0;
   }
 
   .flex-container2 {
     padding: 0px;
     border-radius: 15px;
+    margin-top: 60px; /* Height of the sidebar */
   }
 
   .toggle-container span {
@@ -1466,28 +1343,57 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     align-items: flex-start !important;
     padding-top: 20px;
   }
-}</style>
+  
+  /* Mobile adjustments for sidebar */
+  .sidebar-container {
+    height: auto;
+    min-height: 50px;
+    padding: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  
+  /* Ensure sidebar buttons are visible on mobile */
+  .top-center-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    padding: 5px 0 !important;
+  }
+  
+  .top-center-controls .notification-button-container {
+    flex-shrink: 0;
+    margin: 2px;
+  }
+  
+  .flex-container2 {
+    margin-top: 60px; /* Height of the mobile sidebar */
+  }
+}
+</style>
 </head>
 
 <body>
+
   <div class="sidebar-container" id="sidebar-container">
+
     <div class="top-center-controls" id="sidebar-buttons-container">
+
       <!-- Sidebar buttons will be dynamically loaded here -->
+
     </div>
-    <button class="sidebar-toggle" id="sidebar-toggle" title="Toggle Sidebar">
-      <i class="nf nf-fa-chevron_right"></i>
-    </button>
+
   </div>
 
-  <div class="flex-container2">
 
-    <div class="toggle-container" style="margin-left: 25px;">
-      <label class="switch">
-        <input type="checkbox" id="edit-mode-toggle">
-        <span class="slider round"></span>
-      </label>
-      <span style="color: white; margin-left: 10px;">Modify</span>
-    </div>
+
+  <div class="flex-container2">
 
     <!-- Updated styling for better edit mode control -->
     <style>
@@ -4835,44 +4741,21 @@ document.addEventListener('DOMContentLoaded', function () {
   // Initial fetch and display of links
   fetchAndDisplayLinks();
 
-  // Edit Mode Toggle functionality
-  const editModeToggle = document.getElementById('edit-mode-toggle');
+  // Edit Mode Toggle functionality (now handled by F1 key in main.js)
+
   const flexContainer2 = document.querySelector('.flex-container2');
 
-  if (editModeToggle && flexContainer2) {
-    editModeToggle.addEventListener('change', async function () {
-      const expandedGroups = [];
-      // Capture currently expanded groups before re-rendering
-      document.querySelectorAll('.group_type_top.expanded').forEach(group => {
-        expandedGroups.push(group.dataset.groupName);
-      });
 
-      if (this.checked) {
-        flexContainer2.classList.add('edit-mode');
-      } else {
-        flexContainer2.classList.remove('edit-mode');
-      }
 
-      // Refresh the display when edit mode is toggled to show/hide items
-      await fetchAndDisplayLinks();
+  // Listen for edit mode changes from main.js
 
-      // Re-expand previously expanded groups
-      expandedGroups.forEach(groupName => {
-        const groupElement = document.querySelector(`.group_type_top[data-group-name="${groupName}"]`);
-        if (groupElement) {
-          const content = groupElement.querySelector('.group_type_top-content');
-          const toggleBtn = groupElement.querySelector('.group_type_top-toggle-btn');
-          if (content && toggleBtn) {
-            content.classList.add('expanded');
-            toggleBtn.textContent = '▲';
-            groupElement.classList.add('expanded');
-            // Move to expanded row if it's a top group
-            moveToExpandedRow(groupElement);
-          }
-        }
-      });
-    });
-  }
+  document.addEventListener('editModeChanged', async (event) => {
+
+    // Refresh the display when edit mode is toggled to show/hide items
+
+    await fetchAndDisplayLinks();
+
+  });
 
   // Drag and Drop functionality for links
   let draggedElement = null;
@@ -5261,6 +5144,7 @@ updateDateTime();
 // Update the time every second
 setInterval(updateDateTime, 1000);</script>
     <script>// Sidebar buttons management
+
 let sidebarButtons = [];
 let sidebarEditMode = false;
 
@@ -5279,16 +5163,24 @@ function loadSidebarButtons() {
             sidebarButtons = buttons;
             renderSidebarButtons();
             setupNotificationUpdates();
-            // Update toggle position after buttons are rendered
-            setTimeout(() => {
-                if (typeof updateTogglePosition === 'function') {
-                    updateTogglePosition();
-                }
-            }, 100);
         })
         .catch(error => {
             console.error('Error loading sidebar buttons:', error);
         });
+}
+
+// Setup sidebar - always expanded, no toggle functionality
+function setupSidebarToggle() {
+    const sidebarContainer = document.getElementById('sidebar-container');
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    
+    // Always keep sidebar expanded
+    sidebarContainer.classList.add('expanded');
+    
+    // Hide the toggle button since we don't need it
+    if (sidebarToggle) {
+        sidebarToggle.style.display = 'none';
+    }
 }
 
 // Render sidebar buttons in the container
@@ -5313,13 +5205,6 @@ function renderSidebarButtons() {
 
     // Show/hide edit buttons based on edit mode
     updateSidebarEditMode();
-    
-    // Update toggle position after rendering buttons
-    setTimeout(() => {
-        if (typeof updateTogglePosition === 'function') {
-            updateTogglePosition();
-        }
-    }, 100);
 }
 
 // Create a sidebar button element
@@ -5818,83 +5703,6 @@ function handleNotificationButtonClick(button) {
         // Just open the URL without marking as seen
         window.open(button.url, '_blank');
     }
-}
-
-// Setup sidebar toggle functionality
-function setupSidebarToggle() {
-    const sidebarContainer = document.getElementById('sidebar-container');
-    const sidebarToggle = document.getElementById('sidebar-toggle');
-    const toggleIcon = sidebarToggle.querySelector('i');
-    let isExpanded = false;
-    
-    // Load saved state from localStorage (per-window basis)
-    const windowId = Date.now() + Math.random(); // Unique ID for this window
-    const savedState = sessionStorage.getItem('sidebar-expanded'); // Use sessionStorage instead of localStorage
-    if (savedState === 'true') {
-        isExpanded = true;
-        sidebarContainer.classList.add('expanded');
-    }
-    
-    // Update toggle icon based on state
-    function updateToggleIcon() {
-        if (isExpanded) {
-            toggleIcon.className = 'nf nf-fa-chevron_left';
-            sidebarToggle.title = 'Close Sidebar';
-        } else {
-            toggleIcon.className = 'nf nf-fa-chevron_right';
-            sidebarToggle.title = 'Open Sidebar';
-        }
-    }
-    
-    // Calculate dynamic toggle button position
-    function updateTogglePosition() {
-        setTimeout(() => {
-            if (isExpanded) {
-                const sidebarContent = document.getElementById('sidebar-buttons-container');
-                if (sidebarContent) {
-                    const sidebarWidth = sidebarContent.offsetWidth;
-                    sidebarToggle.style.left = (sidebarWidth + 10) + 'px';
-                }
-            } else {
-                sidebarToggle.style.left = '5px';
-            }
-        }, 50); // Small delay to ensure DOM is updated
-    }
-    
-    // Toggle sidebar on button click only
-    sidebarToggle.addEventListener('click', function(e) {
-        e.stopPropagation();
-        isExpanded = !isExpanded;
-        
-        if (isExpanded) {
-            sidebarContainer.classList.add('expanded');
-        } else {
-            sidebarContainer.classList.remove('expanded');
-        }
-        
-        updateToggleIcon();
-        updateTogglePosition();
-        
-        // Save state to sessionStorage (per-window)
-        sessionStorage.setItem('sidebar-expanded', isExpanded.toString());
-    });
-    
-    // Close sidebar when clicking outside
-    document.addEventListener('click', function(e) {
-        if (isExpanded && !sidebarContainer.contains(e.target) && !sidebarToggle.contains(e.target)) {
-            isExpanded = false;
-            sidebarContainer.classList.remove('expanded');
-            updateToggleIcon();
-            updateTogglePosition();
-            sessionStorage.setItem('sidebar-expanded', 'false');
-        }
-    });
-    
-    // Initialize icon and position after a delay to ensure buttons are rendered
-    setTimeout(() => {
-        updateToggleIcon();
-        updateTogglePosition();
-    }, 200);
 }</script>
     <script>/* For Showing Markdown Table in HTML properly but lines also show */
 function parseMarkdownTable(markdown) {
@@ -6085,27 +5893,48 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // F1 key listener
-  document.addEventListener('keydown', (event) => {
-    if (event.key === 'F1') {
-      event.preventDefault();
-      const toggle = document.getElementById('edit-mode-toggle');
-      if (toggle) {
-        toggle.checked = !toggle.checked;
-        const changeEvent = new Event('change');
-        toggle.dispatchEvent(changeEvent);
-      }
-    }
-  });
 
-  // Edit mode toggle listener
-  const editModeToggle = document.getElementById('edit-mode-toggle');
-  if (editModeToggle) {
-    editModeToggle.addEventListener('change', function() {
+document.addEventListener('keydown', (event) => {
+
+  if (event.key === 'F1') {
+
+    event.preventDefault();
+
+    // Toggle edit mode class on flex-container2 directly
+
+    const flexContainer2 = document.querySelector('.flex-container2');
+
+    if (flexContainer2) {
+
+      flexContainer2.classList.toggle('edit-mode');
+
+      // Also toggle edit mode in sidebar if the function exists
+
       if (typeof toggleSidebarEditMode === 'function') {
-        toggleSidebarEditMode(this.checked);
+
+        toggleSidebarEditMode(flexContainer2.classList.contains('edit-mode'));
+
       }
-    });
+
+      // Dispatch custom event for other modules to listen to
+
+      const editModeEvent = new CustomEvent('editModeChanged', {
+
+        detail: { isEditMode: flexContainer2.classList.contains('edit-mode') }
+
+      });
+
+      document.dispatchEvent(editModeEvent);
+
+    }
+
   }
+
+});
+
+
+
+// Removed arrow key listener for sidebar toggle to simplify mobile experience
 
   // Add title attribute to inputs with placeholders for tooltips
   const inputs = document.querySelectorAll('input[placeholder]');
@@ -9508,10 +9337,19 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://www.techspot.com/images2/downloads/topdownload/2025/07/2025-07-14-ts3_thumbs-d25.png",
     "li_bg_color": "white",
     "name": "KIRO",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9523,10 +9361,19 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://ollama.com/public/ollama.png",
     "li_bg_color": "white",
     "name": "ollama-chat",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9539,8 +9386,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "mcp",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9552,8 +9408,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "mcp-host",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9565,8 +9430,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "AgentOS",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9578,8 +9452,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "openrouter",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9591,9 +9474,18 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "li_hover_color": "red",
     "name": "SuperDesign Dev",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9605,8 +9497,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "TTS-WebUI",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9618,9 +9519,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://aider.chat/assets/logo.svg",
     "name": "aider",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9632,8 +9542,17 @@ async function triggerScans() {
     "default_type": "text",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "pythagora",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9645,8 +9564,17 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "tabbyml",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9658,8 +9586,17 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "voideditor",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9671,8 +9608,17 @@ async function triggerScans() {
     "default_type": "nerd-font",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "name": "plandex",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -9684,9 +9630,18 @@ async function triggerScans() {
     "default_type": "img",
     "display_style": "flex",
     "group": "Chat-BOTE",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
     "img_src": "https://img.alicdn.com/imgextra/i1/O1CN01nulwex1q7Eq1TVqUh_!!6000000005448-55-tps-32-32.svg",
     "name": "iFLOW CLI",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
@@ -10445,7 +10400,8 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
+    "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr",
+    "horizontal_font_family": "Jetbrainsmono nfp"
   },
   {
     "click_action": "url",
@@ -10473,7 +10429,8 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=com.kin.athena"
+    "url": "https://play.google.com/store/apps/details?id=com.kin.athena",
+    "horizontal_font_family": "Jetbrainsmono nfp"
   },
   {
     "click_action": "url",
@@ -10501,7 +10458,8 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://github.com/PranavPurwar/AppLock"
+    "url": "https://github.com/PranavPurwar/AppLock",
+    "horizontal_font_family": "Jetbrainsmono nfp"
   },
   {
     "click_action": "url",
@@ -10529,7 +10487,8 @@ async function triggerScans() {
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
-    "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl"
+    "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl",
+    "horizontal_font_family": "Jetbrainsmono nfp"
   },
   {
     "collapsible": false,
