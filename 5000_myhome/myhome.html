@@ -4344,6 +4344,43 @@ document.addEventListener('DOMContentLoaded', function () {
       });
 
       try {
+        // If adding to an existing group, inherit group styling properties
+        if (groupName !== 'Ungrouped') {
+          const response = await fetch('/api/links');
+          const allLinks = await response.json();
+          
+          // Look for an existing link in the same group to copy properties from
+          const existingGroupLink = allLinks.find(link => (link.group || 'Ungrouped') === groupName);
+          if (existingGroupLink) {
+            // Copy group-level properties from existing group link
+            newLink.collapsible = existingGroupLink.collapsible;
+            newLink.display_style = existingGroupLink.display_style;
+            newLink.horizontal_stack = existingGroupLink.horizontal_stack;
+            newLink.password_protect = existingGroupLink.password_protect;
+            newLink.top_name = existingGroupLink.top_name;
+            newLink.top_bg_color = existingGroupLink.top_bg_color;
+            newLink.top_text_color = existingGroupLink.top_text_color;
+            newLink.top_border_color = existingGroupLink.top_border_color;
+            newLink.top_hover_color = existingGroupLink.top_hover_color;
+            newLink.popup_bg_color = existingGroupLink.popup_bg_color;
+            newLink.popup_text_color = existingGroupLink.popup_text_color;
+            newLink.popup_border_color = existingGroupLink.popup_border_color;
+            newLink.popup_border_radius = existingGroupLink.popup_border_radius;
+            newLink.horizontal_bg_color = existingGroupLink.horizontal_bg_color;
+            newLink.horizontal_text_color = existingGroupLink.horizontal_text_color;
+            newLink.horizontal_border_color = existingGroupLink.horizontal_border_color;
+            newLink.horizontal_hover_color = existingGroupLink.horizontal_hover_color;
+            newLink.top_width = existingGroupLink.top_width;
+            newLink.top_height = existingGroupLink.top_height;
+            newLink.top_font_family = existingGroupLink.top_font_family;
+            newLink.top_font_size = existingGroupLink.top_font_size;
+            newLink.horizontal_width = existingGroupLink.horizontal_width;
+            newLink.horizontal_height = existingGroupLink.horizontal_height;
+            newLink.horizontal_font_family = existingGroupLink.horizontal_font_family;
+            newLink.horizontal_font_size = existingGroupLink.horizontal_font_size;
+          }
+        }
+
         const response = await fetch('/api/add_link', {
           method: 'POST',
           headers: {
@@ -4485,9 +4522,9 @@ document.addEventListener('DOMContentLoaded', function () {
           hidden: document.getElementById('edit-link-hidden').checked || undefined,
         };
 
-        // Only preserve group-level properties if the link stays in the same group
-        // If moving to a different group, don't copy group-level properties
-        if (originalLink && originalGroupName === newGroupName) {
+        // Always preserve group-level properties to prevent them from being reset
+        // This ensures that editing any link in a group doesn't affect group styling
+        if (originalLink) {
           updatedLink.collapsible = originalLink.collapsible;
           updatedLink.display_style = originalLink.display_style;
           updatedLink.horizontal_stack = originalLink.horizontal_stack;
@@ -4505,38 +4542,14 @@ document.addEventListener('DOMContentLoaded', function () {
           updatedLink.horizontal_text_color = originalLink.horizontal_text_color;
           updatedLink.horizontal_border_color = originalLink.horizontal_border_color;
           updatedLink.horizontal_hover_color = originalLink.horizontal_hover_color;
-        } else if (originalLink) {
-          // When moving to a different group, inherit properties from the new group
-          // First, we need to get the current links to find an existing link in the new group
-          try {
-            const response = await fetch('/api/links');
-            const allLinks = await response.json();
-
-            // Look for an existing link in the new group to copy properties from
-            const newGroupLink = allLinks.find(link => (link.group || 'Ungrouped') === newGroupName);
-            if (newGroupLink) {
-              // Copy group-level properties from the new group
-              updatedLink.collapsible = newGroupLink.collapsible;
-              updatedLink.display_style = newGroupLink.display_style;
-              updatedLink.horizontal_stack = newGroupLink.horizontal_stack;
-              updatedLink.password_protect = newGroupLink.password_protect;
-              updatedLink.top_name = newGroupLink.top_name;
-              updatedLink.top_bg_color = newGroupLink.top_bg_color;
-              updatedLink.top_text_color = newGroupLink.top_text_color;
-              updatedLink.top_border_color = newGroupLink.top_border_color;
-              updatedLink.top_hover_color = newGroupLink.top_hover_color;
-              updatedLink.popup_bg_color = newGroupLink.popup_bg_color;
-              updatedLink.popup_text_color = newGroupLink.popup_text_color;
-              updatedLink.popup_border_color = newGroupLink.popup_border_color;
-              updatedLink.popup_border_radius = newGroupLink.popup_border_radius;
-              updatedLink.horizontal_bg_color = newGroupLink.horizontal_bg_color;
-              updatedLink.horizontal_text_color = newGroupLink.horizontal_text_color;
-              updatedLink.horizontal_border_color = newGroupLink.horizontal_border_color;
-              updatedLink.horizontal_hover_color = newGroupLink.horizontal_hover_color;
-            }
-          } catch (error) {
-            console.error('Error fetching links for group properties:', error);
-          }
+          updatedLink.top_width = originalLink.top_width;
+          updatedLink.top_height = originalLink.top_height;
+          updatedLink.top_font_family = originalLink.top_font_family;
+          updatedLink.top_font_size = originalLink.top_font_size;
+          updatedLink.horizontal_width = originalLink.horizontal_width;
+          updatedLink.horizontal_height = originalLink.horizontal_height;
+          updatedLink.horizontal_font_family = originalLink.horizontal_font_family;
+          updatedLink.horizontal_font_size = originalLink.horizontal_font_size;
         }
 
         try {
@@ -4753,6 +4766,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const response = await fetch('/api/links');
       const links = await response.json();
+
+      // Preserve group styling properties when copying
+      if (linkToCopy) {
+        newLink.collapsible = linkToCopy.collapsible;
+        newLink.display_style = linkToCopy.display_style;
+        newLink.horizontal_stack = linkToCopy.horizontal_stack;
+        newLink.password_protect = linkToCopy.password_protect;
+        newLink.top_name = linkToCopy.top_name;
+        newLink.top_bg_color = linkToCopy.top_bg_color;
+        newLink.top_text_color = linkToCopy.top_text_color;
+        newLink.top_border_color = linkToCopy.top_border_color;
+        newLink.top_hover_color = linkToCopy.top_hover_color;
+        newLink.popup_bg_color = linkToCopy.popup_bg_color;
+        newLink.popup_text_color = linkToCopy.popup_text_color;
+        newLink.popup_border_color = linkToCopy.popup_border_color;
+        newLink.popup_border_radius = linkToCopy.popup_border_radius;
+        newLink.horizontal_bg_color = linkToCopy.horizontal_bg_color;
+        newLink.horizontal_text_color = linkToCopy.horizontal_text_color;
+        newLink.horizontal_border_color = linkToCopy.horizontal_border_color;
+        newLink.horizontal_hover_color = linkToCopy.horizontal_hover_color;
+        newLink.top_width = linkToCopy.top_width;
+        newLink.top_height = linkToCopy.top_height;
+        newLink.top_font_family = linkToCopy.top_font_family;
+        newLink.top_font_size = linkToCopy.top_font_size;
+        newLink.horizontal_width = linkToCopy.horizontal_width;
+        newLink.horizontal_height = linkToCopy.horizontal_height;
+        newLink.horizontal_font_family = linkToCopy.horizontal_font_family;
+        newLink.horizontal_font_size = linkToCopy.horizontal_font_size;
+      }
 
       links.splice(index + 1, 0, newLink);
 
@@ -7377,13 +7419,17 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_size": "35px",
+    "horizontal_height": "80px",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "https://static.vecteezy.com/system/resources/previews/024/558/807/non_2x/openai-chatgpt-logo-icon-free-png.png",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "ChatGPT",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7393,24 +7439,25 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
-    "url": "https://chatgpt.com/",
-    "horizontal_height": "80px",
-    "horizontal_font_size": "35px"
+    "url": "https://chatgpt.com/"
   },
   {
     "click_action": "url",
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
+    "horizontal_font_size": "35px",
+    "horizontal_height": "80px",
     "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAaVBMVEVHcEwdHR0AAAEFBQYCAgIDAwQJCQkBAQJaWlojJScLOGwXhf0TExQQWq8QEBE8PDxLS0swMDH09PT///+FhYVaW1qam5oaGxvd3d27u7tvcG8sLixCQ0NSUlF0dXVvcHB7fHw/QEBNTk0iDk46AAAAI3RSTlMAN4O42en//yb///+F//////////7////////LuoK35YLWhTozBjoAAAGBSURBVHgBfZMFlsMwDAUdkqqCoYmqxst7/0Put1PK0pQ7E9N7cZWm7fqB+AYNfdc27sqm41/pNpfLB/6DoanX/+mJhzJGx//QYYI/lAgXGtf+7re73ZbB/q8ZDrvdgYl953pe8CEKV1KMEcEBP8n37rqHdBwnLuhxHE9w9SoaHK2Dq68QhnC8Dq6ersU6uHoCsP5HcPUVBObXgY6L50tgtl7DGdef4a94T+ugcg5LUqQQyzqYz+N4nFDA4+FNwiqYWeaSGbP3CCSl9BDAg1OZZhICCAKC344aX30pQgo/jprqNBNZRYIbeElkPmcGHj91zgICnsn1VIMrtPQpWNJgQZ9c50uxithblBRDTBqf3V7MY1g8ES5p2Z4FSRJVX1zjBXu2uvFlEkkgpCQJwca5J5MURPBuaMjgTOBDjFFfy42jQSMIQeCyxmCGVoKqvmEAFG85K4gxT3hoEjOTePWleM2T5pynE8iao4kE9M8XD5r31zfoGcE05USUPl4/m6q+ALq7K1Ui7+ebAAAAAElFTkSuQmCC",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "KIMI-K2",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7420,11 +7467,8 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
-    "url": "https://www.kimi.com/",
-    "horizontal_height": "80px",
-    "horizontal_font_size": "35px"
+    "url": "https://www.kimi.com/"
   },
   {
     "background_color": "black",
@@ -7434,8 +7478,8 @@ async function triggerScans() {
     "color": "red",
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7443,6 +7487,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAgVBMVEVHcExNOe5hVu5ua/FiTe2AbO3HxPhhUetpYu5va/BaS/FDCubc2fr///9jWO2Hf/Dl4/xaQ+pdVu94ffRZQuvv7f13e/Kll/GZivBeQer5+P9NC+RXOOhcS+vCvPbUz/i5svVlXe5YTO5WHeVSLOetpPNiMuZiPuhiSephU+xfI+XgKL3tAAAAK3RSTlMALsbAa/3/////Fnz///////+Ifqv//v//1P/////////dWP////////XBmCbmPwAAAWxJREFUeAFtkQViwzAMAMMqGLO6dZgTb/9/4CRv5V4xOZGV4EYYxXGcBJ9JM9jt94eP7sj4Xux28UcpOVcabf71x6M7Gc65Fmix9v58lg/dwws6qwFIe3v+E4cwDAtVclXVWjdN8x/w5d0+a9tLZnjXejJ8I50kGWlFJVnJn1A5dROwx/9Zb56l7zkIoTNK7Tv2QD+SzIWAhspU0zTPc13X89Ijp4BAqRdKXdcNcdqWxphyCUmOAmDGhuVE1m31/2RDQAwAWuJVP1Fq3eNfWkmXkAwB3MzwcvOp+IfNLX7Lv72C24Biq3WdOvyzczSiyX1XcM7Hpuua4k9buya11vqu3yi3mWKrilZRO+doxzRvDoAzThYHlpamIQkAkT8oTmuX5cJLZUtMnzbn7SHwmU5wwrR/jbetwMdIDoGakSuZpZEnPCx1+2dMjULYcj3sKXggOf7R05pQBp/4KTm6NfkoD/ZCMvhM8oPcp/kFeWsqRiVRXjsAAAAASUVORK5CYII=",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "qwen",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7452,7 +7498,6 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://chat.qwen.ai/"
   },
@@ -7461,8 +7506,8 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7470,6 +7515,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/deepseek-color.png",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "DeepSeek",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7479,7 +7526,6 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://chat.deepseek.com/"
   },
@@ -7488,8 +7534,8 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7497,7 +7543,9 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "https://img.icons8.com/fluent/512/claude-ai.png",
+    "li_height": "1%",
     "li_hover_color": "white",
+    "li_width": "1%",
     "name": "Claude",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7507,16 +7555,16 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://claude.ai/new"
   },
   {
+    "click_action": "url",
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7524,6 +7572,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Google_Bard_logo.svg",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "Google Bard",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7533,16 +7583,16 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://bard.google.com/"
   },
   {
+    "click_action": "url",
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7550,6 +7600,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAIAAAD8GO2jAAAEP0lEQVRIiYVWv0szTRCe/XGXu0D0lVRiETAWogExpbEU0c7/wkotU8VGRLEUtEon2IgIFlqli6AoVgaFaGERBJs0Jhc3t7tfMTo5L9FvimNvZ2d25tlnZpclEgkA0FoLIWhgrQUAay1jDACMMZzz6IAx1m9C2uhKwRiz1oZhGBtYa7XWf2jDMMQg+rXGGLQ1xkiMAgD6B4wxikgIgdngwFr779+/TqejlJKy54Rzjlq05WSPxvglYT+FZggiKaXneVHDmAdrLcd8jTH2W1CB3+hvdAAAzWYTN0CsYoIrjTGCTg8311pzzklN4NJ5UtLW2larZa1Np9NKKcQdtXh+6Idj1ogdYwwhRvSEEDiQUsZmOOfGmGKx2G63gyBA9NE25gdc13VdV0qZSCQSiQRmjcj2i+u6yWQymUwCwOLiYr1ex3nf9z3PcxwHbdEPemaUu5QSAMIwlFKGYTg8PFwqlbLZLLkul8tnZ2eu62qttdaVSiWTyZyenhaLRdd1AUAp5TgOcRfZJaSU0aQYY2EYFgqFi4uLbDb79vYWhqHWutPpbG9vO47T7XattUdHR1NTU5+fnzMzM0qpm5sbrbXruuSEKMpwT2MMpmKt7Xa79/f37+/vS0tLUXx83w+CYGVlZWNjY2xsTClF89VqdW9vr1arJRIJ9KOU+qKDEAKnMBsAWF5ebjQauVwOAIaGhtLpNEIEAOvr67Va7eXl5SEitVrt9fW1Wq0WCgUASKVSIyMjACCllFL2yINEAoDR0VFr7cPDgxBCKdVqtRzHEUL4vr+/vz89PV0ul4kFnHOl1Orq6vz8/NXVled53W43CALHcb4Y2E8VY8xACmEeQoidnZ3n5+fd3V1sFXNzc0EQ+L5PhtgqsIZ4rGhjMrCGfd8/OTm5vLxMpVKbm5vofaA5APxoFbHY9bd0u10sVK21MQaXlUqlRqNxfn7uum4QBL+FyGMcjerEtyCgyAJENplMNpvNtbU1AFBKZTIZOsVoX+DUOn4DHaW/ywKA53l3d3cAUCgUKpVKu92O+iETiR0NL6CYI7w0qDNDpOAxLM/zOp3O5OSk7/s0GQtOYhKU1A/4OKddqYlGuyldqOg36oG0vdW/4RNT/Y0nBdSDiGhKVwLpkDAIIAVLNyLtRFrcgBL6mon2JlzXaDQYY/l8nlAiofsgeo+Oj49/fHzgYq01VdnXDkhEZCrd3be3t5VK5Q8oSGZnZ+v1+uHhIQAkBwmLvgMIq3w+f3x8zDl/fHz8o3P4vp/L5Z6enhYWFqiPxoTFXlQ4QKdbW1sTExMxavUsGVNKXV9fHxwcYI+CvooBAEbXAGWAOw18KwwUz/OIu79mQJvHjqjXFL9rnp6OFNPAwElElH8QISIMaqVRpwMLon+nr7qPVixlQFykwOFnucYGg7spjaLq2PuuX/u/5U0z8f5D6tgxwM/3a/93ID4A8B/H2e1fdzFR3QAAAABJRU5ErkJggg==",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "Google AI Studio",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7559,16 +7611,16 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://aistudio.google.com/"
   },
   {
+    "click_action": "url",
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7576,6 +7628,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAaVBMVEVHcEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///9jY2P5+fnW1tZZWVny8vJQUFC+vr6np6dxcXGBgYE4ODiMjIy3t7fGxsbo6OgTExMoKCi/T8vOAAAAEHRSTlMApeC+lRtnVDRECyl9+IPuvtK9QwAAAQxJREFUKJF9ku2igiAMhv1Gj1kM0PxM6/4v8owNE816fw0eYO/GgmBTLrJMpMGJRCydwvKA8pv0FP/5LJEHFRuLj0xKsbLwk0mZMyvW9bOfBvWmDN2iNkB6rKYtyzjuALr69epngJp3rOWIoge07sbYOHoNgpSCHq/Ny2Imu9BAexF2hoJGY0ZjNOi7lHfonKULmUEjgw2UBqRGE0y5OehmVAOl0ggmGLnUhO0stgqNWMGEDhRDerbFhGocyKc2eEDxs4LhzL4aTNis0JXSwpPggHbeMHJNaLkyLKLf4GVr36fox6tzluy/bKfq25BYlT9GwRui65Hlu9GMfBQeh7pYR7BKToe+FJkofPIPgecmYav2MX4AAAAASUVORK5CYII=",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "notebooklm",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7585,16 +7639,16 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://notebooklm.google.com/"
   },
   {
+    "click_action": "url",
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\ud83e\udd16",
-    "horizontal_bg_color": "rotate: white,grey",
+    "group": "AI",
+    "horizontal_bg_color": "black",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_size": "35px",
     "horizontal_height": "80px",
@@ -7602,6 +7656,8 @@ async function triggerScans() {
     "horizontal_stack": true,
     "horizontal_text_color": "#ffffff",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAACr0lEQVRYhcWXzUuiURTGf4q4KGMYKYJQgimiRbgbDFq00wQRadOmZfuBon8jIoj+gRZuM1wMbYR20yICITEMBSGVwiiRJOrMQh3ez+v7ZkMP3MX1fD33eLw+14M7pIA48BP4AXzvf94CboEL4DeQdZlXiSBwDIjLddyPHQn7HyhsXPsfKfwNaH5C8cFq9nM6wqw2uFqtSqPRkEKhIKlUalQis05Orgt6fX0VLSYnJ0cloeuE10Dgxsjo/f1dt9/Z2Rl2iGHQ1dAS2AemhkWPj4+PSmAKzWAOCASBX06iRWRUAvRrBQF8/Q8OPpIlGo2STCbx+/1UKhWOjo7chB8Am4ON7dB0u13dEO7t7Qkg19fXYoV8Pi+BQMDpQOKld706xtjYGJ1Oh8XFRUv76uoqz8/PJBIJJ+lSAIduOuAGCwsLwzpw6AH+0PtzsUS328Xv91vaTk9PqdfrhMNh4vE4Ho9HZy+Xy8zPz6s6cAFw77YDj4+Plr53d3cm3/X1dVUH7gHe3BKIRqOWvsvLyybfXC6nIvDmmkCxWFR+r81mU+dfq9WUBLz0xIRjXF5eKu03N/rbfHp6WuXe8tJTMo7RbreV9lZLfx6fz2fjCcCtl/4k2kEMV+/ExISSgBEvLy8q84WXnoazxcPDg24/NzenLBgKhXT7Wq2mcv9X23ZQzs7OTJOt8jcik8kor+IBbEXn1taWKWk2m7X0zeVyJt+VlRW74sdaAkHVqYw/LRGR8/NzWVtbE0AikYhlp66urlSnNylmWwUci8VMyZ1gZmbGrritUrZVwru7u66KKwRs0644WIhS7Uqn0/L09KQsXKlUZGlpSdX6ofJ8VkUCkO3tbcnn81KtVqVer0upVJKTkxPZ2NhQxuFAlms78WUPEy2+7GmmxX99nHqGORjw6c/zvyyyzPcWQIWtAAAAAElFTkSuQmCC",
+    "li_height": "1%",
+    "li_width": "1%",
     "name": "bytez",
     "password_protect": false,
     "popup_bg_color": "#31343a",
@@ -7611,7 +7667,6 @@ async function triggerScans() {
     "top_bg_color": "#",
     "top_border_color": "#ec2222",
     "top_hover_color": "#3a3a3a",
-    "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://bytez.com/"
   },
