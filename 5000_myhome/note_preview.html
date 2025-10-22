@@ -376,55 +376,22 @@
     const urlParams = new URLSearchParams(window.location.search);
     const encodedContent = urlParams.get('content');
     
-    if (encodedContent) {{
-      try {{
-        // Handle % symbols safely in URL decoding
-        let decodedContent;
-        try {{
-          decodedContent = decodeURIComponent(encodedContent);
-        }} catch (decodeError) {{
-          // If decoding fails due to % symbols, try alternative approach
-          console.warn('URL decode failed, using alternative method:', decodeError);
-          decodedContent = encodedContent.replace(/\+/g, ' ');
-        }}
-        // Safer markdown-like conversion that handles special characters like %
-        let html = decodedContent;
+    if (encodedContent) {
+      try {
+        let decodedContent = decodeURIComponent(encodedContent);
         
-        // Process in order to avoid conflicts
-        try {{
-          // Handle code blocks first (preserve content exactly)
-          html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
-          
-          // Handle inline code (preserve % and other special chars)
-          html = html.replace(/`([^`]+?)`/g, '<code>$1</code>');
-          
-          // Handle bold and italic with safer patterns
-          html = html.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>');
-          html = html.replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
-          
-          // Handle headers
-          html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
-          html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
-          html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
-          
-          // Handle line breaks
-          html = html.replace(/\n\n+/g, '</p><p>');
-          html = html.replace(/\n/g, '<br>');
-          
-          // Wrap in paragraphs if needed
-          if (!html.startsWith('<h') && !html.startsWith('<pre') && !html.startsWith('<p>')) {{
-            html = '<p>' + html + '</p>';
-          }}
-          
-          // Clean up empty paragraphs
-          html = html.replace(/<p>\s*<\/p>/g, '');
-          
-        }} catch (error) {{
-          console.error('Markdown processing error:', error);
-          // Fallback: just convert line breaks
-          html = decodedContent.replace(/\n/g, '<br>');
-          html = '<p>' + html + '</p>';
-        }}
+        // Replace % with similar-looking character to avoid URL encoding issues
+        decodedContent = decodedContent.replace(/%/g, '℅');
+        
+        // Simple markdown-like conversion
+        let html = decodedContent
+          .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+          .replace(/\*(.+?)\*/g, '<em>$1</em>')
+          .replace(/`(.+?)`/g, '<code>$1</code>')
+          .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+          .replace(/^## (.+)$/gm, '<h2>$2</h2>')
+          .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+          .replace(/\\n/g, '<br>');
         
         document.querySelector('.content').innerHTML = html;
       } catch (e) {

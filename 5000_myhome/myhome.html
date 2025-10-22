@@ -4575,24 +4575,18 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.removeChild(textArea);
   }
 
-  // Function to open note preview in external window (original method)
+  // Function to open note preview
   window.openNotePreview = function (noteContent) {
-    const decodedContent = decodeURIComponent(noteContent);
+    let decodedContent = decodeURIComponent(noteContent);
     if (!decodedContent || !decodedContent.trim()) {
       alert('No note content to preview');
       return;
     }
 
-    // Safely encode content to handle % symbols
-    let encodedContent;
-    try {
-      encodedContent = encodeURIComponent(decodedContent);
-    } catch (encodeError) {
-      console.warn('Encoding failed, using alternative method:', encodeError);
-      // Alternative encoding that handles % symbols
-      encodedContent = decodedContent.replace(/ /g, '+').replace(/\n/g, '%0A');
-    }
-    
+    // Replace % with similar-looking character to avoid URL encoding issues
+    decodedContent = decodedContent.replace(/%/g, '℅');
+
+    const encodedContent = encodeURIComponent(decodedContent);
     const previewUrl = `/preview-note?content=${encodedContent}`;
 
     // Open in new window
@@ -4606,8 +4600,6 @@ document.addEventListener('DOMContentLoaded', function () {
       alert('Please allow popups to preview notes');
     }
   };
-
-
 
   // Show notification function
   function showNotification(message, type = 'info') {
@@ -13229,32 +13221,15 @@ async function triggerScans() {
         editToggle.style.display = 'none';
       }
       
-      // Override note preview to use static file with safe % handling
+      // Override note preview to use static file
       if (window.openNotePreview) {
         window.openNotePreview = function(noteContent) {
-          // Safely decode content
-          let decodedContent;
-          try {
-            decodedContent = decodeURIComponent(noteContent);
-          } catch (decodeError) {
-            console.warn('Decode failed, using content as-is:', decodeError);
-            decodedContent = noteContent;
-          }
+          let decodedContent = decodeURIComponent(noteContent);
           
-          if (!decodedContent || !decodedContent.trim()) {
-            alert('No note content to preview');
-            return;
-          }
-
-          // Safely encode content for URL
-          let encodedContent;
-          try {
-            encodedContent = encodeURIComponent(decodedContent);
-          } catch (encodeError) {
-            console.warn('Encode failed, using alternative method:', encodeError);
-            encodedContent = decodedContent.replace(/ /g, '+').replace(/\n/g, '%0A');
-          }
+          // Replace % with similar-looking character to avoid URL encoding issues
+          decodedContent = decodedContent.replace(/%/g, '℅');
           
+          const encodedContent = encodeURIComponent(decodedContent);
           const previewUrl = `note_preview.html?content=${encodedContent}`;
           
           const previewWindow = window.open(
