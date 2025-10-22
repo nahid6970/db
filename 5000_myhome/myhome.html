@@ -1569,121 +1569,200 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         box-shadow: none;
       }
 
-      /* Note Preview Popup Styles */
+      /* Note Preview Popup Styles - Exact copy from note_preview.html with isolation */
       .note-preview-content {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-        line-height: 1.7;
-        color: #2c3e50;
+        /* Reset all inherited styles */
+        all: initial;
+        /* Apply the exact styles from note_preview.html */
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
+        line-height: 1.8 !important;
+        color: #2c3e50 !important;
+        font-size: 16px !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        word-break: break-word !important;
+        background: #ffffff !important;
+        padding: 40px !important;
+        border-radius: 12px !important;
+        /* Ensure it displays as a block */
+        display: block !important;
+        box-sizing: border-box !important;
       }
 
-      .note-preview-content h1, .note-preview-content h2, .note-preview-content h3, .note-preview-content h4, .note-preview-content h5, .note-preview-content h6 {
-        color: #2c3e50;
-        margin: 1.5em 0 1em 0;
-        font-weight: 600;
-        line-height: 1.3;
+      /* Paragraph spacing */
+      .note-preview-content p {
+        margin: 1em 0 !important;
+        white-space: pre-wrap !important;
+        font-size: 16px !important;
+        line-height: 1.8 !important;
+        color: #2c3e50 !important;
+        font-family: inherit !important;
+      }
+
+      .note-preview-content p:first-child {
+        margin-top: 0 !important;
+      }
+
+      .note-preview-content p:last-child {
+        margin-bottom: 0 !important;
+      }
+
+      /* Org mode specific styles */
+      .note-preview-content h1,
+      .note-preview-content h2,
+      .note-preview-content h3,
+      .note-preview-content h4,
+      .note-preview-content h5,
+      .note-preview-content h6 {
+        color: #2c3e50 !important;
+        margin: 2em 0 1em 0 !important;
+        font-weight: 600 !important;
+        line-height: 1.3 !important;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif !important;
       }
 
       .note-preview-content h1 {
-        font-size: 2em;
-        border-bottom: 3px solid #3498db;
-        padding-bottom: 0.5em;
-        color: #2980b9;
+        font-size: 2.2em !important;
+        border-bottom: 3px solid #3498db !important;
+        padding-bottom: 0.5em !important;
+        color: #2980b9 !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
       }
 
       .note-preview-content h2 {
-        font-size: 1.6em;
-        border-bottom: 2px solid #e74c3c;
-        padding-bottom: 0.3em;
-        color: #c0392b;
+        font-size: 1.8em !important;
+        border-bottom: 2px solid #e74c3c !important;
+        padding-bottom: 0.3em !important;
+        color: #c0392b !important;
+        border-top: none !important;
+        border-left: none !important;
+        border-right: none !important;
       }
 
       .note-preview-content h3 {
-        font-size: 1.3em;
-        color: #27ae60;
-        border-left: 4px solid #27ae60;
-        padding-left: 15px;
+        font-size: 1.5em !important;
+        color: #27ae60 !important;
+        border-left: 4px solid #27ae60 !important;
+        padding-left: 15px !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
       }
 
       .note-preview-content h4 {
-        font-size: 1.1em;
-        color: #f39c12;
+        font-size: 1.3em !important;
+        color: #f39c12 !important;
+        border: none !important;
+        padding: 0 !important;
       }
 
-      .note-preview-content p {
-        margin: 1em 0;
-        white-space: pre-wrap;
+      /* First heading has no top margin */
+      .note-preview-content h1:first-child,
+      .note-preview-content h2:first-child,
+      .note-preview-content h3:first-child,
+      .note-preview-content h4:first-child {
+        margin-top: 0 !important;
       }
 
+      /* Text formatting */
       .note-preview-content strong {
-        color: #e74c3c;
-        font-weight: 700;
+        color: #e74c3c !important;
+        font-weight: 700 !important;
       }
 
       .note-preview-content em {
-        color: #8e44ad;
-        font-style: italic;
+        color: #8e44ad !important;
+        font-style: italic !important;
       }
 
       .note-preview-content u {
-        color: #f39c12;
-        text-decoration: underline;
-        text-decoration-color: #f39c12;
+        color: #f39c12 !important;
+        text-decoration: underline !important;
+        text-decoration-color: #f39c12 !important;
       }
 
       .note-preview-content del {
-        color: #95a5a6;
-        text-decoration: line-through;
+        color: #95a5a6 !important;
+        text-decoration: line-through !important;
       }
 
       .note-preview-content code {
-        background: #f8f9fa;
-        color: #e83e8c;
-        padding: 3px 6px;
-        border-radius: 4px;
-        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-        font-size: 0.9em;
-        border: 1px solid #e9ecef;
+        background: #f8f9fa !important;
+        color: #e83e8c !important;
+        padding: 3px 6px !important;
+        border-radius: 4px !important;
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace !important;
+        font-size: 0.9em !important;
+        border: 1px solid #e9ecef !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
       }
 
       .note-preview-content pre {
-        background: #2d3748;
-        color: #e2e8f0;
-        padding: 20px;
-        border-radius: 8px;
-        overflow-x: auto;
-        margin: 1.5em 0;
-        border-left: 4px solid #4299e1;
-        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-        font-size: 0.9em;
-        line-height: 1.5;
+        background: #2d3748 !important;
+        color: #e2e8f0 !important;
+        padding: 20px !important;
+        border-radius: 8px !important;
+        overflow-x: auto !important;
+        margin: 1.5em 0 !important;
+        border-left: 4px solid #4299e1 !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
+        font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace !important;
+        font-size: 0.9em !important;
+        line-height: 1.5 !important;
+        white-space: pre-wrap !important;
+        word-wrap: break-word !important;
       }
 
       .note-preview-content pre code {
-        background: none;
-        color: inherit;
-        padding: 0;
-        border: none;
-        font-size: inherit;
+        background: none !important;
+        color: inherit !important;
+        padding: 0 !important;
+        border: none !important;
+        font-size: inherit !important;
       }
 
-      .note-preview-content ul, .note-preview-content ol {
-        margin: 1em 0;
-        padding-left: 2em;
+      /* Lists */
+      .note-preview-content ul,
+      .note-preview-content ol {
+        margin: 1em 0 !important;
+        padding-left: 2em !important;
       }
 
       .note-preview-content li {
-        margin: 0.5em 0;
-        line-height: 1.6;
-      }
-
-      .note-preview-content ul li {
-        list-style-type: disc;
+        margin: 0.5em 0 !important;
+        line-height: 1.6 !important;
+        list-style-type: disc !important;
+        color: #2c3e50 !important;
+        font-size: 16px !important;
       }
 
       .note-preview-content ol li {
-        list-style-type: decimal;
+        list-style-type: decimal !important;
       }
 
+      .note-preview-content ul li::marker {
+        color: #3498db !important;
+      }
+
+      .note-preview-content ol li::marker {
+        color: #e74c3c !important;
+        font-weight: 600 !important;
+      }
+
+      /* Nested lists */
+      .note-preview-content ul ul,
+      .note-preview-content ol ol,
+      .note-preview-content ul ol,
+      .note-preview-content ol ul {
+        margin: 0.5em 0;
+      }
+
+      /* Links */
       .note-preview-content a {
         color: #3498db;
         text-decoration: none;
@@ -1696,16 +1775,31 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         border-bottom-color: #2980b9;
       }
 
+      /* Blockquotes */
       .note-preview-content blockquote {
-        border-left: 4px solid #bdc3c7;
-        margin: 1.5em 0;
-        padding: 1em 1.5em;
-        background: #f8f9fa;
-        color: #6c757d;
-        font-style: italic;
-        border-radius: 0 6px 6px 0;
+        border-left: 4px solid #bdc3c7 !important;
+        border-top: none !important;
+        border-bottom: none !important;
+        border-right: none !important;
+        margin: 1.5em 0 !important;
+        padding: 1em 1.5em !important;
+        background: #f8f9fa !important;
+        color: #6c757d !important;
+        font-style: italic !important;
+        border-radius: 0 6px 6px 0 !important;
+        position: relative !important;
       }
 
+      .note-preview-content blockquote::before {
+        content: '"' !important;
+        font-size: 3em !important;
+        color: #bdc3c7 !important;
+        position: absolute !important;
+        left: -0.5em !important;
+        top: -0.2em !important;
+      }
+
+      /* TODO keywords */
       .note-preview-content .todo-keyword {
         padding: 4px 8px;
         border-radius: 4px;
@@ -1713,7 +1807,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         font-size: 0.85em;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        margin-right: 8px;
       }
 
       .note-preview-content .todo-todo {
@@ -1752,6 +1845,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         border: 1px solid #bee5eb;
       }
 
+      /* Tags */
       .note-preview-content .org-tag {
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         color: white;
@@ -1766,6 +1860,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
+      /* Priorities */
       .note-preview-content .priority {
         padding: 3px 8px;
         border-radius: 4px;
@@ -1792,6 +1887,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         border: 1px solid #bbf7d0;
       }
 
+      /* Timestamps */
       .note-preview-content .timestamp {
         background: #f1f5f9;
         color: #475569;
@@ -1802,6 +1898,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         border: 1px solid #e2e8f0;
       }
 
+      /* Properties drawer */
       .note-preview-content .properties {
         background: #f8fafc;
         border: 1px solid #e2e8f0;
@@ -1813,10 +1910,58 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
         font-size: 0.9em;
       }
 
+      .note-preview-content .properties small {
+        color: #64748b;
+      }
+
+      /* Horizontal rules */
       .note-preview-content hr {
         border: none;
         border-top: 2px solid #bdc3c7;
         margin: 2em 0;
+      }
+
+      /* Better spacing for mixed content */
+      .note-preview-content h1+p,
+      .note-preview-content h2+p,
+      .note-preview-content h3+p,
+      .note-preview-content h4+p {
+        margin-top: 0.5em;
+      }
+
+      .note-preview-content p+h1,
+      .note-preview-content p+h2,
+      .note-preview-content p+h3,
+      .note-preview-content p+h4 {
+        margin-top: 1.5em;
+      }
+
+      /* Responsive design for note preview */
+      @media (max-width: 768px) {
+        .note-preview-content {
+          font-size: 15px;
+        }
+
+        .note-preview-content h1 {
+          font-size: 1.8em;
+        }
+
+        .note-preview-content h2 {
+          font-size: 1.5em;
+        }
+
+        .note-preview-content h3 {
+          font-size: 1.3em;
+        }
+      }
+
+      /* Ensure note preview popup appears above everything */
+      #note-preview-popup {
+        z-index: 99999 !important;
+      }
+
+      #note-preview-popup .Menu {
+        z-index: 100000 !important;
       }
     </style>
 
@@ -13266,33 +13411,7 @@ async function triggerScans() {
     "group": "Math",
     "url": "",
     "default_type": "text",
-    "note": "```\n## \u09e7\u09e6\u099f\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09c7 \u09ea% \u0995\u09cd\u09b7\u09a4\u09bf \u09b9\u09df\u0964 \u09e8\u09e6% \u09b2\u09be\u09ad \u0995\u09b0\u09a4\u09c7 \u09b9\u09b2\u09c7 \u0995\u09a4 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7?\n\u09a7\u09b0\u09bf:  \n- \u09ae\u09c2\u09b2\u09a4 \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u2192 \u0995\u09cd\u09b7\u09a4\u09bf/\u09b2\u09be\u09ad % \u099c\u09be\u09a8\u09be  \n- \u09a8\u09a4\u09c1\u09a8 \u09b2\u09be\u09ad % \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09ac\u09c7\u09b0 \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7\n\n**\u09a7\u09be\u09aa \u09e7:** \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u09a8\u09bf\u09b0\u09cd\u09a3\u09df  \n\u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1 \u0987\u0989\u09a8\u09bf\u099f \u09a7\u09b0\u09c7 \u09a8\u09be\u0993  \n\u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af (\u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8) = \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 (1 \u2212 \u0995\u09cd\u09b7\u09a4\u09bf % / 100) \u0985\u09a5\u09ac\u09be \u00d7 (1 + \u09b2\u09be\u09ad % / 100)\n\n**\u09a7\u09be\u09aa \u09e8:** \u09a8\u09a4\u09c1\u09a8 \u09aa\u09b0\u09bf\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09a4\u09c7 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be  \n\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 \u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be) \u00f7 (\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af)\n\n**\u0989\u09a6\u09be\u09b9\u09b0\u09a3:**  \n- \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u2192 \u09ea% \u0995\u09cd\u09b7\u09a4\u09bf \u2192 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 0.96/unit  \n- \u09e8\u09e6% \u09b2\u09be\u09ad \u099a\u09be\u0987 \u2192 \u09a8\u09a4\u09c1\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1.2/unit  \n- **\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (10 \u00d7 0.96) \u00f7 1.2 = 8 \u09b2\u09c7\u09ac\u09c1 \u2705**\n\n**\u09ab\u09b2\u09be\u09ab\u09b2:** \u098f\u0987 \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf\u09a4\u09c7 \u09b8\u09b9\u099c\u09c7\u0987 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09a8\u09bf\u09b0\u09cd\u09a3\u09df \u0995\u09b0\u09be \u09af\u09be\u09df\u0964\n```",
-    "click_action": "note",
-    "li_width": "200px",
-    "li_border_color": "white",
-    "collapsible": true,
-    "display_style": "flex",
-    "horizontal_stack": false,
-    "password_protect": false,
-    "top_bg_color": "#4ea3e0",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#1882d4",
-    "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
-  },
-  {
-    "name": "\u09e7\u09e6\u099f\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09c7 \u09ea \u0995\u09cd\u09b7\u09a4\u09bf \u09b9\u09df\u0964 \u09e8\u09e6 \u09b2\u09be\u09ad \u0995\u09b0\u09a4\u09c7 \u09b9\u09b2\u09c7 \u0995\u09a4 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7? (copy)",
-    "group": "Math",
-    "url": "",
-    "default_type": "text",
-    "note": "## \u09e7\u09e6\u099f\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09c7 \u09ea \u0995\u09cd\u09b7\u09a4\u09bf \u09b9\u09df\u0964 \u09e8\u09e6 \u09b2\u09be\u09ad \u0995\u09b0\u09a4\u09c7 \u09b9\u09b2\u09c7 \u0995\u09a4 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7?\n```\n\u09a7\u09b0\u09bf:  \n- \u09ae\u09c2\u09b2\u09a4 \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u2192 \u0995\u09cd\u09b7\u09a4\u09bf/\u09b2\u09be\u09ad  \u099c\u09be\u09a8\u09be  \n- \u09a8\u09a4\u09c1\u09a8 \u09b2\u09be\u09ad  \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09ac\u09c7\u09b0 \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7\n\n**\u09a7\u09be\u09aa \u09e7:** \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u09a8\u09bf\u09b0\u09cd\u09a3\u09df  \n\u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1 \u0987\u0989\u09a8\u09bf\u099f \u09a7\u09b0\u09c7 \u09a8\u09be\u0993  \n\u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af (\u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8) = \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 (1 \u2212 \u0995\u09cd\u09b7\u09a4\u09bf  / 100) \u0985\u09a5\u09ac\u09be \u00d7 (1 + \u09b2\u09be\u09ad  / 100)\n\n**\u09a7\u09be\u09aa \u09e8:** \u09a8\u09a4\u09c1\u09a8 \u09aa\u09b0\u09bf\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09a4\u09c7 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be  \n\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 \u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be) \u00f7 (\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af)\n\n**\u0989\u09a6\u09be\u09b9\u09b0\u09a3:**  \n- \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u2192 \u09ea \u0995\u09cd\u09b7\u09a4\u09bf \u2192 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 0.96/unit  \n- \u09e8\u09e6 \u09b2\u09be\u09ad \u099a\u09be\u0987 \u2192 \u09a8\u09a4\u09c1\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1.2/unit  \n- **\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (10 \u00d7 0.96) \u00f7 1.2 = 8 \u09b2\u09c7\u09ac\u09c1 \u2705**\n\n**\u09ab\u09b2\u09be\u09ab\u09b2:** \u098f\u0987 \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf\u09a4\u09c7 \u09b8\u09b9\u099c\u09c7\u0987 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09a8\u09bf\u09b0\u09cd\u09a3\u09df \u0995\u09b0\u09be \u09af\u09be\u09df\u0964\n```",
+    "note": "```\n\u09a7\u09b0\u09bf:  \n- \u09ae\u09c2\u09b2\u09a4 \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u2192 \u0995\u09cd\u09b7\u09a4\u09bf/\u09b2\u09be\u09ad % \u099c\u09be\u09a8\u09be  \n- \u09a8\u09a4\u09c1\u09a8 \u09b2\u09be\u09ad % \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09ac\u09c7\u09b0 \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7\n\n**\u09a7\u09be\u09aa \u09e7:** \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u09a8\u09bf\u09b0\u09cd\u09a3\u09df  \n\u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1 \u0987\u0989\u09a8\u09bf\u099f \u09a7\u09b0\u09c7 \u09a8\u09be\u0993  \n\u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af (\u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8) = \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 (1 \u2212 \u0995\u09cd\u09b7\u09a4\u09bf % / 100) \u0985\u09a5\u09ac\u09be \u00d7 (1 + \u09b2\u09be\u09ad % / 100)\n\n**\u09a7\u09be\u09aa \u09e8:** \u09a8\u09a4\u09c1\u09a8 \u09aa\u09b0\u09bf\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09a4\u09c7 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be  \n\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af \u00d7 \u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be) \u00f7 (\u09a8\u09a4\u09c1\u09a8 \u09aa\u09cd\u09b0\u09a4\u09bf \u09b2\u09c7\u09ac\u09c1 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af)\n\n**\u0989\u09a6\u09be\u09b9\u09b0\u09a3:**  \n- \u09e7\u09e6 \u09b2\u09c7\u09ac\u09c1 \u2192 \u09ea% \u0995\u09cd\u09b7\u09a4\u09bf \u2192 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 0.96/unit  \n- \u09e8\u09e6% \u09b2\u09be\u09ad \u099a\u09be\u0987 \u2192 \u09a8\u09a4\u09c1\u09a8 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 1.2/unit  \n- **\u09a8\u09a4\u09c1\u09a8 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be = (10 \u00d7 0.96) \u00f7 1.2 = 8 \u09b2\u09c7\u09ac\u09c1 \u2705**\n\n**\u09ab\u09b2\u09be\u09ab\u09b2:** \u098f\u0987 \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf\u09a4\u09c7 \u09b8\u09b9\u099c\u09c7\u0987 \u09b2\u09c7\u09ac\u09c1 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09a8\u09bf\u09b0\u09cd\u09a3\u09df \u0995\u09b0\u09be \u09af\u09be\u09df\u0964\n```",
     "click_action": "note",
     "li_width": "200px",
     "li_border_color": "white",
