@@ -383,15 +383,37 @@
         // Replace % with similar-looking character to avoid URL encoding issues
         decodedContent = decodedContent.replace(/%/g, '℅');
         
-        // Simple markdown-like conversion
-        let html = decodedContent
+        // Enhanced markdown conversion with code block support
+        let html = decodedContent;
+        
+        // Handle code blocks first (```...```)
+        html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+        
+        // Then handle other markdown formatting
+        html = html
           .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-          .replace(/\*(.+?)\*/g, '<em>$1</em>')
-          .replace(/`(.+?)`/g, '<code>$1</code>')
+          .replace(/\*([^*]+)\*/g, '<em>$1</em>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>')
           .replace(/^# (.+)$/gm, '<h1>$1</h1>')
-          .replace(/^## (.+)$/gm, '<h2>$2</h2>')
+          .replace(/^## (.+)$/gm, '<h2>$1</h2>')
           .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-          .replace(/\\n/g, '<br>');
+          .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
+          .replace(/^- (.+)$/gm, '<li>$1</li>')
+          .replace(/^\* (.+)$/gm, '<li>$1</li>')
+          .replace(/^\+ (.+)$/gm, '<li>$1</li>')
+          .replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
+        
+        // Convert line breaks to HTML
+        html = html.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>');
+        
+        // Wrap content in paragraphs if needed
+        if (!html.startsWith('<h') && !html.startsWith('<pre') && !html.startsWith('<ul') && !html.startsWith('<blockquote')) {{
+          html = '<p>' + html + '</p>';
+        }}
+        
+        // Clean up list formatting
+        html = html.replace(/(<li>.*?<\/li>)/gs, '<ul>$1</ul>');
+        html = html.replace(/<\/ul>\s*<ul>/g, '');
         
         document.querySelector('.content').innerHTML = html;
       } catch (e) {
