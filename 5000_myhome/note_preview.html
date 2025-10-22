@@ -401,7 +401,7 @@
 <body>
     <div class="container">
         <div class="content">
-            {% if content %}{{ content|safe }}{% else %}<!-- Content will be populated by JavaScript in static mode -->{% endif %}
+            <!-- Content will be populated by JavaScript in static mode -->
         </div>
     </div>
 
@@ -441,10 +441,10 @@
           // First handle code blocks (before other processing)
           .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
           // Handle properties drawer
-          .replace(/:PROPERTIES:[\s\S]*?:END:/g, function(match) {
+          .replace(/:PROPERTIES:[\s\S]*?:END:/g, function(match) {{
             const content = match.replace(/:PROPERTIES:|:END:/g, '').trim();
             return '<div class="properties"><small>Properties:</small><br>' + content.replace(/\n/g, '<br>') + '</div>';
-          })
+          }})
           // Handle inline code
           .replace(/`([^`]+)`/g, '<code>$1</code>')
           // Handle bold and italic (simplified patterns that work in all browsers)
@@ -462,16 +462,16 @@
           .replace(/^## (.+)$/gm, '<h2>$1</h2>')
           .replace(/^# (.+)$/gm, '<h1>$1</h1>')
           // Handle TODO keywords with better regex
-          .replace(/^(TODO|NEXT|DONE|WAITING|CANCELLED|STARTED)\s+(.+)$/gm, function(match, keyword, text) {
+          .replace(/^(TODO|NEXT|DONE|WAITING|CANCELLED|STARTED)\s+(.+)$/gm, function(match, keyword, text) {{
             const className = 'todo-' + keyword.toLowerCase();
             return '<p><span class="todo-keyword ' + className + '">' + keyword + '</span> ' + text + '</p>';
-          })
+          }})
           // Handle priorities
           .replace(/\[#([ABC])\]/g, '<span class="priority priority-$1">[$1]</span>')
           // Handle tags (improved pattern)
           .replace(/:([a-zA-Z0-9_@]+):/g, '<span class="org-tag">$1</span>')
           // Handle timestamps (improved pattern)
-          .replace(/<([0-9]{4}-[0-9]{2}-[0-9]{2}[^>]*)>/g, '<span class="timestamp">&lt;$1&gt;</span>')
+          .replace(/<([0-9]{{4}}-[0-9]{{2}}-[0-9]{{2}}[^>]*)>/g, '<span class="timestamp">&lt;$1&gt;</span>')
           // Handle org-mode links
           .replace(/\[\[([^\]]+)\]\[([^\]]+)\]\]/g, '<a href="$1" target="_blank">$2</a>')
           .replace(/\[\[([^\]]+)\]\]/g, '<a href="$1" target="_blank">$1</a>')
@@ -497,38 +497,38 @@
         let inOrderedList = false;
         let inUnorderedList = false;
         
-        for (let i = 0; i < lines.length; i++) {
+        for (let i = 0; i < lines.length; i++) {{
           const line = lines[i].trim();
           
-          if (line.includes('<li class="ordered">')) {
-            if (!inOrderedList) {
+          if (line.includes('<li class="ordered">')) {{
+            if (!inOrderedList) {{
               processedLines.push('<ol>');
               inOrderedList = true;
               inUnorderedList = false;
-            }
+            }}
             processedLines.push(line.replace(' class="ordered"', ''));
-          } else if (line.includes('<li>')) {
-            if (!inUnorderedList) {
-              if (inOrderedList) {
+          }} else if (line.includes('<li>')) {{
+            if (!inUnorderedList) {{
+              if (inOrderedList) {{
                 processedLines.push('</ol>');
                 inOrderedList = false;
-              }
+              }}
               processedLines.push('<ul>');
               inUnorderedList = true;
-            }
+            }}
             processedLines.push(line);
-          } else {
-            if (inOrderedList) {
+          }} else {{
+            if (inOrderedList) {{
               processedLines.push('</ol>');
               inOrderedList = false;
-            }
-            if (inUnorderedList) {
+            }}
+            if (inUnorderedList) {{
               processedLines.push('</ul>');
               inUnorderedList = false;
-            }
+            }}
             processedLines.push(line);
-          }
-        }
+          }}
+        }}
         
         // Close any remaining lists
         if (inOrderedList) processedLines.push('</ol>');
@@ -540,12 +540,12 @@
         html = html.replace(/(<\/blockquote>)\s*(<blockquote>)/g, '<br>');
         
         // Wrap content in paragraphs if needed
-        const lines = html.split('</p><p>');
-        if (lines.length === 1 && !html.match(/^\s*<[h1-6]|<ul|<ol|<blockquote|<pre|<div|<hr/)) {
+        const finalLines = html.split('</p><p>');
+        if (finalLines.length === 1 && !html.match(/^\s*<[h1-6]|<ul|<ol|<blockquote|<pre|<div|<hr/)) {{
           html = '<p>' + html + '</p>';
-        } else if (lines.length > 1) {
-          html = '<p>' + lines.join('</p><p>') + '</p>';
-        }
+        }} else if (finalLines.length > 1) {{
+          html = '<p>' + finalLines.join('</p><p>') + '</p>';
+        }}
         
         // Clean up empty paragraphs and extra whitespace
         html = html.replace(/<p>\s*<\/p>/g, '');
