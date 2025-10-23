@@ -71,7 +71,8 @@
     {
       "cellStyles": {
         "1-0": {
-          "center": true
+          "center": true,
+          "bold": false
         },
         "0-0": {
           "bold": true,
