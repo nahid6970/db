@@ -379,10 +379,8 @@
     if (encodedContent) {
       try {
         const decodedContent = decodeURIComponent(encodedContent);
-        // Convert % to ℅ first
-        const convertedContent = decodedContent.replace(/%/g, '℅');
         // Simple markdown-like conversion
-        let html = convertedContent
+        let html = decodedContent
           .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
           .replace(/\*(.+?)\*/g, '<em>$1</em>')
           .replace(/`(.+?)`/g, '<code>$1</code>')
