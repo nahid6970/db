@@ -64,8 +64,8 @@
           "\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u09a3\u09be"
         ],
         [
-          "",
-          ""
+          "Fallow Land",
+          "\u09aa\u09a4\u09bf\u09a4 \u099c\u09ae\u09bf"
         ]
       ]
     },
@@ -143,17 +143,17 @@
       },
       "columns": [
         {
-          "name": "English",
-          "type": "text",
-          "width": "50",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "English",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
           "color": "#ffffff",
@@ -172,11 +172,11 @@
       "mergedCells": {
         "1-0": {
           "colspan": 1,
-          "rowspan": 6
+          "rowspan": 7
         },
         "1-1": {
           "colspan": 1,
-          "rowspan": 2
+          "rowspan": 3
         },
         "10-0": {
           "hidden": true,
@@ -198,6 +198,11 @@
           "mainCol": 0,
           "mainRow": 1
         },
+        "3-1": {
+          "hidden": true,
+          "mainCol": 1,
+          "mainRow": 1
+        },
         "4-0": {
           "hidden": true,
           "mainCol": 0,
@@ -209,6 +214,11 @@
           "mainRow": 1
         },
         "6-0": {
+          "hidden": true,
+          "mainCol": 0,
+          "mainRow": 1
+        },
+        "7-0": {
           "hidden": true,
           "mainCol": 0,
           "mainRow": 1
