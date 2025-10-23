@@ -94,17 +94,17 @@
       },
       "columns": [
         {
+          "name": "English",
+          "type": "text",
+          "width": "70",
           "color": "#ffffff",
+          "textColor": "#000000",
           "font": "",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "English",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
