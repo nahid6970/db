@@ -1194,6 +1194,30 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   color: yellow;
 }
 
+/* Mobile touch improvements */
+.link-item, .group_type_top, .group_type_box {
+  -webkit-touch-callout: none; /* Disable iOS callout */
+  -webkit-user-select: none; /* Disable text selection */
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+}
+
+/* Long press visual feedback */
+.long-press-active {
+  transform: scale(0.95) !important;
+  opacity: 0.8 !important;
+  transition: transform 0.1s ease, opacity 0.1s ease !important;
+}
+
+/* Context menu should always be clickable */
+.context-menu,
+.context-menu * {
+  pointer-events: auto !important;
+  touch-action: auto !important;
+}
+
 /* Mobile styles */
 @media (max-width: 768px) {
   /* Popup container adjustments for mobile */
@@ -1584,11 +1608,71 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
           <div style="display: flex; gap: 10px;">
             <div style="flex: 1;">
               <label for="edit-group-name">Group Name:</label>
-              <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')" required style="width: 100%;">
+              <input type="text" id="edit-group-name" placeholder="Enter group name (leave empty for 'Ungrouped')"
+                required style="width: 100%;">
             </div>
             <div style="flex: 1;">
               <label for="edit-group-top-name">Display Name (optional):</label>
-              <input type="text" id="edit-group-top-name" placeholder="Custom name for display" style="width: 100%;">
+              <div style="position: relative;">
+                <input type="text" id="edit-group-top-name" placeholder="Custom name for display" style="width: 100%;"
+                  list="display-name-options">
+                <datalist id="display-name-options">
+                  <option value="">Custom text</option>
+                  <option value="nf nf-fa-home">🏠 Home (nf nf-fa-home)</option>
+                  <option value="nf nf-fa-folder">📁 Folder (nf nf-fa-folder)</option>
+                  <option value="nf nf-fa-file">📄 File (nf nf-fa-file)</option>
+                  <option value="nf nf-fa-star">⭐ Star (nf nf-fa-star)</option>
+                  <option value="nf nf-fa-heart">❤️ Heart (nf nf-fa-heart)</option>
+                  <option value="nf nf-fa-user">👤 User (nf nf-fa-user)</option>
+                  <option value="nf nf-fa-cog">⚙️ Settings (nf nf-fa-cog)</option>
+                  <option value="nf nf-fa-search">🔍 Search (nf nf-fa-search)</option>
+                  <option value="nf nf-fa-plus">➕ Plus (nf nf-fa-plus)</option>
+                  <option value="nf nf-fa-minus">➖ Minus (nf nf-fa-minus)</option>
+                  <option value="nf nf-fa-edit">✏️ Edit (nf nf-fa-edit)</option>
+                  <option value="nf nf-fa-trash">🗑️ Trash (nf nf-fa-trash)</option>
+                  <option value="nf nf-fa-download">⬇️ Download (nf nf-fa-download)</option>
+                  <option value="nf nf-fa-upload">⬆️ Upload (nf nf-fa-upload)</option>
+                  <option value="nf nf-fa-link">🔗 Link (nf nf-fa-link)</option>
+                  <option value="nf nf-fa-mail">📧 Mail (nf nf-fa-mail)</option>
+                  <option value="nf nf-fa-phone">📞 Phone (nf nf-fa-phone)</option>
+                  <option value="nf nf-fa-calendar">📅 Calendar (nf nf-fa-calendar)</option>
+                  <option value="nf nf-fa-clock">🕐 Clock (nf nf-fa-clock)</option>
+                  <option value="nf nf-fa-bookmark">🔖 Bookmark (nf nf-fa-bookmark)</option>
+                  <option value="nf nf-fa-tag">🏷️ Tag (nf nf-fa-tag)</option>
+                  <option value="nf nf-fa-flag">🚩 Flag (nf nf-fa-flag)</option>
+                  <option value="nf nf-fa-bell">🔔 Bell (nf nf-fa-bell)</option>
+                  <option value="nf nf-fa-lock">🔒 Lock (nf nf-fa-lock)</option>
+                  <option value="nf nf-fa-unlock">🔓 Unlock (nf nf-fa-unlock)</option>
+                  <option value="nf nf-fa-key">🔑 Key (nf nf-fa-key)</option>
+                  <option value="nf nf-fa-shield">🛡️ Shield (nf nf-fa-shield)</option>
+                  <option value="nf nf-fa-eye">👁️ Eye (nf nf-fa-eye)</option>
+                  <option value="nf nf-fa-eye_slash">🙈 Eye Slash (nf nf-fa-eye_slash)</option>
+                  <option value="nf nf-fa-thumbs_up">👍 Thumbs Up (nf nf-fa-thumbs_up)</option>
+                  <option value="nf nf-fa-thumbs_down">👎 Thumbs Down (nf nf-fa-thumbs_down)</option>
+                  <option value="nf nf-fa-check">✅ Check (nf nf-fa-check)</option>
+                  <option value="nf nf-fa-times">❌ Times (nf nf-fa-times)</option>
+                  <option value="nf nf-fa-question">❓ Question (nf nf-fa-question)</option>
+                  <option value="nf nf-fa-info">ℹ️ Info (nf nf-fa-info)</option>
+                  <option value="nf nf-fa-warning">⚠️ Warning (nf nf-fa-warning)</option>
+                  <option value="nf nf-fa-exclamation">❗ Exclamation (nf nf-fa-exclamation)</option>
+                  <option value="nf nf-dev-terminal">💻 Terminal (nf nf-dev-terminal)</option>
+                  <option value="nf nf-dev-code">💾 Code (nf nf-dev-code)</option>
+                  <option value="nf nf-dev-git">🌿 Git (nf nf-dev-git)</option>
+                  <option value="nf nf-dev-github">🐙 GitHub (nf nf-dev-github)</option>
+                  <option value="nf nf-dev-database">🗄️ Database (nf nf-dev-database)</option>
+                  <option value="nf nf-dev-server">🖥️ Server (nf nf-dev-server)</option>
+                  <option value="nf nf-md-television_classic">📺 TV (nf nf-md-television_classic)</option>
+                  <option value="nf nf-md-movie_roll">🎬 Movie (nf nf-md-movie_roll)</option>
+                  <option value="nf nf-md-book_education">📚 Education (nf nf-md-book_education)</option>
+                  <option value="nf nf-fa-rocket">🚀 Rocket (nf nf-fa-rocket)</option>
+                  <option value="nf nf-oct-apps">📱 Apps (nf nf-oct-apps)</option>
+                  <option value="nf nf-fa-hard_drive">💽 Hard Drive (nf nf-fa-hard_drive)</option>
+                </datalist>
+                <small style="color: #888; font-size: 11px; margin-top: 2px; display: block;">
+                  💡 Tip: Use NF icons (e.g., "nf nf-fa-home") or paste SVG code directly (e.g.,
+                  "&lt;svg&gt;...&lt;/svg&gt;")
+                </small>
+              </div>
             </div>
           </div>
           <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
@@ -2035,7 +2119,60 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 
     <script src="../static/context-menu.js"></script>
-    <script>// Helper function to generate gradient animation CSS
+    <script>
+// Helper function to render display name (handles text, NF icons, and SVG)
+function renderDisplayName(element, displayName) {
+  // Clear existing content
+  element.innerHTML = '';
+  
+  // Handle different display types
+  if (displayName.startsWith('nf nf-')) {
+    // NerdFont icon
+    const icon = document.createElement('i');
+    icon.className = displayName;
+    element.appendChild(icon);
+  } else if (displayName.startsWith('<svg') && displayName.includes('</svg>')) {
+    // SVG code - parse and insert directly
+    try {
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = displayName;
+      const svgElement = tempDiv.querySelector('svg');
+      if (svgElement) {
+        // Make SVG responsive to font size
+        if (!svgElement.style.width && !svgElement.getAttribute('width')) {
+          svgElement.style.width = '1em';
+        }
+        if (!svgElement.style.height && !svgElement.getAttribute('height')) {
+          svgElement.style.height = '1em';
+        }
+        svgElement.style.display = 'inline-block';
+        svgElement.style.verticalAlign = 'middle';
+        
+        // Remove any existing fill attributes to allow CSS styling
+        svgElement.removeAttribute('fill');
+        const paths = svgElement.querySelectorAll('path, circle, rect, polygon, ellipse');
+        paths.forEach(path => {
+          path.removeAttribute('fill');
+        });
+        
+        // Set fill to currentColor so it inherits from CSS
+        svgElement.style.fill = 'currentColor';
+        
+        element.appendChild(svgElement);
+      } else {
+        element.textContent = displayName;
+      }
+    } catch (error) {
+      console.warn('Invalid SVG code:', error);
+      element.textContent = displayName;
+    }
+  } else {
+    // Regular text
+    element.textContent = displayName;
+  }
+}
+
+// Helper function to generate gradient animation CSS
 function generateGradientAnimation(parsed, animName, randomDelay, property = 'background') {
   if (parsed.animationType === 'rotate') {
     // Rotate animation - solid colors fade in/out one at a time
@@ -2194,17 +2331,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
           simpleListItem.appendChild(simpleLink);
 
-          // Add context menu
-          simpleListItem.addEventListener('contextmenu', (event) => {
-            const items = [
-              { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
-              { label: 'Edit', action: () => openEditLinkPopup(link, index) },
-              { label: 'Copy', action: () => copyLink(link, index) },
-              { label: 'Copy Note', action: () => copyNote(link) },
-              { label: 'Delete', action: () => deleteLink(index) }
-            ];
-            showContextMenu(event, items);
-          });
+          // Add mobile-friendly context menu
+          const items = [
+            { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
+            { label: 'Edit', action: () => openEditLinkPopup(link, index) },
+            { label: 'Copy', action: () => copyLink(link, index) },
+            { label: 'Copy Note', action: () => copyNote(link) },
+            { label: 'Delete', action: () => deleteLink(index) }
+          ];
+          addMobileContextMenu(simpleListItem, items);
 
           elementToAdd = simpleListItem;
         } else {
@@ -2592,31 +2727,30 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           }
 
-          listItem.addEventListener('contextmenu', (event) => {
-            const items = [
-              {
-                label: 'New-Tab',
-                action: () => window.open(link.url, '_blank')
-              },
-              {
-                label: 'Edit',
-                action: () => openEditLinkPopup(link, index)
-              },
-              {
-                label: 'Copy',
-                action: () => copyLink(link, index)
-              },
-              {
-                label: 'Copy Note',
-                action: () => copyNote(link)
-              },
-              {
-                label: 'Delete',
-                action: () => deleteLink(index)
-              }
-            ];
-            showContextMenu(event, items);
-          });
+          // Add mobile-friendly context menu
+          const items = [
+            {
+              label: 'New-Tab',
+              action: () => window.open(link.url, '_blank')
+            },
+            {
+              label: 'Edit',
+              action: () => openEditLinkPopup(link, index)
+            },
+            {
+              label: 'Copy',
+              action: () => copyLink(link, index)
+            },
+            {
+              label: 'Copy Note',
+              action: () => copyNote(link)
+            },
+            {
+              label: 'Delete',
+              action: () => deleteLink(index)
+            }
+          ];
+          addMobileContextMenu(listItem, items);
           elementToAdd = listItem;
         }
 
@@ -2705,7 +2839,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // Use custom top name if available, otherwise use group name
     const firstLink = links[0];
     const displayName = (firstLink && firstLink.link.top_name) ? firstLink.link.top_name : groupName;
-    title.textContent = displayName;
+    
+    // Render the display name (handles text, NF icons, and SVG)
+    renderDisplayName(title, displayName);
 
     // Apply custom styling if available
     if (firstLink && firstLink.link) {
@@ -2753,28 +2889,48 @@ document.addEventListener('DOMContentLoaded', function () {
           if (parsed.animationType === 'rotate') {
             const numColors = parsed.colors.length;
             let keyframes = '';
+            let svgKeyframes = '';
             for (let i = 0; i < numColors; i++) {
               const startPercent = (i / numColors * 100).toFixed(2);
               const endPercent = ((i + 1) / numColors * 100).toFixed(2);
               keyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
+              svgKeyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
               if (i < numColors - 1) {
                 keyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
+                svgKeyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
               }
             }
             keyframes += `100% { color: ${parsed.colors[0]}; }\n`;
+            svgKeyframes += `100% { color: ${parsed.colors[0]}; }\n`;
 
             style.textContent = `
               .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] {
                 animation: ${animName} ${numColors * 2}s ease-in-out infinite;
                 animation-delay: -${randomDelay}s;
               }
+              .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] svg {
+                animation: ${animName}-svg ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
               @keyframes ${animName} {
                 ${keyframes}
+              }
+              @keyframes ${animName}-svg {
+                ${svgKeyframes}
               }
             `;
           } else {
             const angle = parsed.angle || '45deg';
             const gradientColors = parsed.colors.join(', ');
+            
+            // For slide gradients, we'll use a rotating color animation for SVG since SVG gradients are complex
+            const numColors = parsed.colors.length;
+            let svgSlideKeyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const percent = (i / (numColors - 1) * 100).toFixed(2);
+              svgSlideKeyframes += `${percent}% { color: ${parsed.colors[i]}; }\n`;
+            }
+            
             style.textContent = `
               .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] {
                 background: linear-gradient(${angle}, ${gradientColors});
@@ -2785,17 +2941,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 animation: ${animName} 3s ease infinite;
                 animation-delay: -${randomDelay}s;
               }
+              .animated-top-gradient-text[data-top-text-gradient-id="${uniqueId}"] svg {
+                animation: ${animName}-svg 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
               @keyframes ${animName} {
                 0% { background-position: 0% 50%; }
                 50% { background-position: 100% 50%; }
                 100% { background-position: 0% 50%; }
               }
+              @keyframes ${animName}-svg {
+                ${svgSlideKeyframes}
+                100% { color: ${parsed.colors[0]}; }
+              }
             `;
           }
           document.head.appendChild(style);
+          
+          // For multi-color animations, ensure SVG elements are properly styled
+          // The CSS animations will handle the color changes via currentColor
         } else {
           collapsibleGroup.style.setProperty('--top-text-color', linkData.top_text_color);
           title.style.color = linkData.top_text_color;
+          // SVG elements will inherit color via currentColor, no need to set fill directly
         }
       }
 
@@ -2913,6 +3081,16 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       if (linkData.top_font_size) {
         title.style.fontSize = linkData.top_font_size;
+        // Also update any SVG elements inside the title to scale with font size
+        const svgElements = title.querySelectorAll('svg');
+        svgElements.forEach(svg => {
+          if (!svg.getAttribute('width') && !svg.style.width) {
+            svg.style.width = '1em';
+          }
+          if (!svg.getAttribute('height') && !svg.style.height) {
+            svg.style.height = '1em';
+          }
+        });
       }
     }
 
@@ -3048,10 +3226,10 @@ document.addEventListener('DOMContentLoaded', function () {
       const popupContent = popup.querySelector('.popup-content-inner');
       popupContent.innerHTML = '';
 
-      // Update popup title
+      // Update popup title with proper display name rendering
       const popupTitle = popupBox.querySelector('h3');
       if (popupTitle) {
-        popupTitle.textContent = displayName;
+        renderDisplayName(popupTitle, displayName);
       }
 
       // Clone all elements into the popup
@@ -3320,15 +3498,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
           const anim = generateGradientAnimation(parsed, animName, randomDelay);
           style.textContent = `
-            .group_type_box.animated-horiz-gradient-bg[data-horiz-bg-gradient-id="${uniqueId}"] {
+            .link-group.group_type_box.animated-horiz-gradient-bg[data-horiz-bg-gradient-id="${uniqueId}"] {
               ${anim.baseStyle || ''}
-              animation: ${anim.animation}
+              animation: ${anim.animation} !important;
             }
             @keyframes ${animName} {
               ${anim.keyframes}
             }
           `;
           document.head.appendChild(style);
+          
         } else {
           groupDiv.style.setProperty('--horizontal-bg-color', linkData.horizontal_bg_color);
           groupDiv.style.backgroundColor = linkData.horizontal_bg_color;
@@ -3359,19 +3538,47 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             keyframes += `100% { color: ${parsed.colors[0]}; }\n`;
 
+            // Create SVG keyframes for rotate animation
+            let svgKeyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const startPercent = (i / numColors * 100).toFixed(2);
+              const endPercent = ((i + 1) / numColors * 100).toFixed(2);
+              svgKeyframes += `${startPercent}% { color: ${parsed.colors[i]}; }\n`;
+              if (i < numColors - 1) {
+                svgKeyframes += `${endPercent}% { color: ${parsed.colors[i]}; }\n`;
+              }
+            }
+            svgKeyframes += `100% { color: ${parsed.colors[0]}; }\n`;
+
             style.textContent = `
               .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"],
               .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title {
                 animation: ${animName} ${numColors * 2}s ease-in-out infinite;
                 animation-delay: -${randomDelay}s;
               }
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title svg {
+                animation: ${animName}-svg ${numColors * 2}s ease-in-out infinite;
+                animation-delay: -${randomDelay}s;
+              }
               @keyframes ${animName} {
                 ${keyframes}
+              }
+              @keyframes ${animName}-svg {
+                ${svgKeyframes}
               }
             `;
           } else {
             const angle = parsed.angle || '45deg';
             const gradientColors = parsed.colors.join(', ');
+            
+            // For slide gradients, create color cycling animation for SVG
+            const numColors = parsed.colors.length;
+            let svgSlideKeyframes = '';
+            for (let i = 0; i < numColors; i++) {
+              const percent = (i / (numColors - 1) * 100).toFixed(2);
+              svgSlideKeyframes += `${percent}% { color: ${parsed.colors[i]}; }\n`;
+            }
+            
             style.textContent = `
               .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"],
               .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title {
@@ -3383,10 +3590,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 animation: ${animName} 3s ease infinite;
                 animation-delay: -${randomDelay}s;
               }
+              .group_type_box.animated-horiz-gradient-text[data-horiz-text-gradient-id="${uniqueId}"] .group-title svg {
+                animation: ${animName}-svg 3s ease infinite;
+                animation-delay: -${randomDelay}s;
+              }
               @keyframes ${animName} {
                 0% { background-position: 0% 50%; }
                 50% { background-position: 100% 50%; }
                 100% { background-position: 0% 50%; }
+              }
+              @keyframes ${animName}-svg {
+                ${svgSlideKeyframes}
+                100% { color: ${parsed.colors[0]}; }
               }
             `;
           }
@@ -3394,6 +3609,9 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
           groupDiv.style.setProperty('--horizontal-text-color', linkData.horizontal_text_color);
           groupDiv.style.color = linkData.horizontal_text_color;
+          
+          // For multi-color animations, ensure SVG elements are properly styled
+          // The CSS animations will handle the color changes via currentColor
         }
       }
 
@@ -3530,10 +3748,13 @@ document.addEventListener('DOMContentLoaded', function () {
         const popupContent = popup.querySelector('.popup-content-inner');
         popupContent.innerHTML = '';
 
-        // Update popup title
+        // Update popup title with proper display name rendering
         const popupTitle = popupBox.querySelector('h3');
         if (popupTitle) {
-          popupTitle.textContent = groupName;
+          // Get the display name from the first link in the group
+          const firstLink = linksInGroup[0];
+          const displayName = (firstLink && firstLink.top_name) ? firstLink.top_name : groupName;
+          renderDisplayName(popupTitle, displayName);
         }
 
         elements.forEach(element => {
@@ -3635,8 +3856,25 @@ document.addEventListener('DOMContentLoaded', function () {
     groupHeaderContainer.className = 'group-header-container';
 
     const groupTitle = document.createElement('h3');
-    groupTitle.textContent = groupName;
     groupTitle.className = 'group-title';
+    
+    // Use custom display name if available, otherwise use group name
+    const displayName = (firstLinkInGroup && firstLinkInGroup.link.top_name) ? firstLinkInGroup.link.top_name : groupName;
+    renderDisplayName(groupTitle, displayName);
+    
+    // Apply color styling to SVG elements in the title if this is a box group
+    if (firstLinkInGroup && firstLinkInGroup.link.horizontal_stack && firstLinkInGroup.link.horizontal_text_color) {
+      const parsed = parseColors(firstLinkInGroup.link.horizontal_text_color);
+      if (parsed.colors.length === 1) {
+        // Single color - ensure SVG elements inherit the color
+        const svgElements = groupTitle.querySelectorAll('svg');
+        svgElements.forEach(svg => {
+          // SVG elements will inherit color via currentColor, which is already set on the groupDiv
+        });
+      }
+      // Multi-color animations are handled by the CSS classes applied to the groupDiv
+    }
+    
     groupHeaderContainer.appendChild(groupTitle);
 
     // Add context menu to header only for regular (non-box) groups
@@ -7120,6 +7358,34 @@ async function triggerScans() {
   {
     "click_action": "url",
     "collapsible": false,
+    "color": "#b259e6",
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Default",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "icon_class": "nf nf-md-microsoft_onenote",
+    "li_height": "1%",
+    "li_width": "1%",
+    "name": "OneNote",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.onenote.com/"
+  },
+  {
+    "click_action": "url",
+    "collapsible": false,
     "color": "black",
     "default_type": "nerd-font",
     "display_style": "flex",
@@ -7146,34 +7412,6 @@ async function triggerScans() {
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.nerdfonts.com/cheat-sheet"
-  },
-  {
-    "click_action": "url",
-    "collapsible": false,
-    "color": "#b259e6",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-md-microsoft_onenote",
-    "li_height": "1%",
-    "li_width": "1%",
-    "name": "OneNote",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.onenote.com/"
   },
   {
     "click_action": "url",
@@ -7680,32 +7918,32 @@ async function triggerScans() {
     "url": "https://www.facebook.com/groups/721416621929448"
   },
   {
-    "name": "\uf082 Job Preparation with Business Digest: Accounts, Finance, HR & Admin Posts",
-    "group": "EDU",
-    "url": "https://www.facebook.com/groups/666483453748526",
-    "default_type": "text",
     "background_color": "#2176ff",
     "click_action": "url",
-    "li_width": "300px",
     "collapsible": false,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "EDU",
+    "horizontal_bg_color": "red, green",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_font_family": "agency fb",
+    "horizontal_font_size": "35px",
+    "horizontal_height": "80px",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": true,
+    "horizontal_text_color": "#ffffff",
+    "li_width": "300px",
+    "name": "\uf082 Job Preparation with Business Digest: Accounts, Finance, HR & Admin Posts",
     "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "red, green",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_height": "80px",
-    "horizontal_font_family": "agency fb",
-    "horizontal_font_size": "35px"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.facebook.com/groups/666483453748526"
   },
   {
     "background_color": "#2176ff",
@@ -10390,7 +10628,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\uf17b",
+    "group": "Android",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Jetbrainsmono nfp",
@@ -10411,6 +10649,7 @@ async function triggerScans() {
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
+    "top_name": "nf nf-fa-android",
     "top_text_color": "#ffffff",
     "url": "https://play.google.com/store/apps/details?id=com.neximolabs.blackr"
   },
@@ -10419,7 +10658,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\uf17b",
+    "group": "Android",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Jetbrainsmono nfp",
@@ -10440,6 +10679,7 @@ async function triggerScans() {
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
+    "top_name": "nf nf-fa-android",
     "top_text_color": "#ffffff",
     "url": "https://play.google.com/store/apps/details?id=com.kin.athena"
   },
@@ -10448,7 +10688,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\uf17b",
+    "group": "Android",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Jetbrainsmono nfp",
@@ -10469,6 +10709,7 @@ async function triggerScans() {
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
+    "top_name": "nf nf-fa-android",
     "top_text_color": "#ffffff",
     "url": "https://github.com/PranavPurwar/AppLock"
   },
@@ -10477,7 +10718,7 @@ async function triggerScans() {
     "collapsible": false,
     "default_type": "img",
     "display_style": "flex",
-    "group": "\uf17b",
+    "group": "Android",
     "horizontal_bg_color": "#2d2d2d",
     "horizontal_border_color": "#0056b3",
     "horizontal_font_family": "Jetbrainsmono nfp",
@@ -10498,6 +10739,7 @@ async function triggerScans() {
     "top_bg_color": "#2d2d2d",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
+    "top_name": "nf nf-fa-android",
     "top_text_color": "#ffffff",
     "url": "https://play.google.com/store/apps/details?id=de.dlyt.yanndroid.notinotes&hl"
   },
