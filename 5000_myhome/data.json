@@ -490,7 +490,8 @@
     "urls": [
       "http://192.168.0.101:5018",
       "https://nahid6970.github.io/db/5000_myhome/mycell",
-      "C:\\Users\\nahid\\ms\\db\\5000_myhome\\mycell.html"
+      "C:\\Users\\nahid\\ms\\db\\5000_myhome\\mycell.html",
+      "https://docs.google.com/spreadsheets/d/1HrV1Ep2-J6gbhJeMrUhD9pYDFDzi81IZpMl1y_0l8q4/edit?usp=sharing"
     ],
     "selected_url_index": 0,
     "color": "black",
@@ -6839,33 +6840,5 @@
     "group": "Deadline",
     "horizontal_stack": false,
     "name": "save l\u00e1z // \"iquo iz  \u09a6\u09c1\u09b0\u09c1\u09a6 -\u09e9\u09e7 \u09ac\u09be\u09ac  \u098f\u09b6\u09be\u09b0 -  \u09ac\u09c3\u09b9\u09a8\u09cd\u09a8\u09a4\u09bf\u09ac\u09be\u09b0"
-  },
-  {
-    "name": "Test",
-    "group": "Default",
-    "url": "http://x.com",
-    "urls": [
-      "http://x.com",
-      "http://google.com"
-    ],
-    "selected_url_index": 0,
-    "default_type": "text",
-    "click_action": "url-1",
-    "collapsible": false,
-    "display_style": "flex",
-    "horizontal_stack": false,
-    "password_protect": false,
-    "top_bg_color": "#2d2d2d",
-    "top_text_color": "#ffffff",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
   }
 ]
