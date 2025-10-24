@@ -710,7 +710,22 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "1-1": {
+          "italic": false,
+          "bold": true,
+          "center": true
+        },
+        "2-1": {
+          "bold": true
+        },
+        "1-0": {
+          "bold": false
+        },
+        "3-0": {
+          "bold": false
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
@@ -748,7 +763,7 @@
         ],
         [
           "- Every Man in His Humor",
-          "Ben Jonson"
+          "Ben Jonson\n- Regarded as the second most important\nEnglish dramatist, after William Shakespeare, during the\nreign of James I."
         ],
         [
           "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man",
