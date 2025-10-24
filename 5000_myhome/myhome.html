@@ -1328,18 +1328,16 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     box-sizing: border-box;
   }
 
-  /* Align radio buttons properly on mobile */
+  /* Align radio buttons properly on mobile - radio on left */
   #click-action-options label,
   #edit-click-action-options label {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
     gap: 10px !important;
   }
 
   #click-action-options label span,
   #edit-click-action-options label span {
-    flex: 1;
     text-align: left;
   }
 
@@ -1349,19 +1347,17 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     margin: 0;
   }
 
-  /* Align Type radio buttons - more specific selectors */
+  /* Align Type radio buttons - more specific selectors - radio on left */
   #add-link-form > div[style*="gap: 20px"] label,
   #edit-link-form > div[style*="gap: 20px"] label {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
     gap: 10px !important;
     width: 100% !important;
   }
 
   #add-link-form > div[style*="gap: 20px"] label span,
   #edit-link-form > div[style*="gap: 20px"] label span {
-    flex: 1 !important;
     text-align: left !important;
     min-width: 0 !important;
   }
@@ -1379,7 +1375,6 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   #edit-link-form > div[style*="gap: 20px"] > div[style*="flex: 1"] label {
     display: flex !important;
     align-items: center !important;
-    justify-content: space-between !important;
   }
 
   /* Adjust popup positioning for mobile */
@@ -1917,35 +1912,34 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <div style="flex: 1;">
                 <h4 style="color: white; margin: 0 0 10px 0; font-weight: 500;">Click Action:</h4>
                 <div id="click-action-options" style="display: flex; flex-direction: column; gap: 8px;">
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Open URL</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
+                    <span>Open URL</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;"
-                    data-type="note">
-                    <span>Open Note</span>
+                  <label style="display: flex; align-items: center; gap: 5px;" data-type="note">
                     <input type="radio" name="link-click-action" id="link-action-note" value="note">
+                    <span>Open Note</span>
                   </label>
                 </div>
               </div>
               <div style="flex: 1;">
                 <h4 style="color: white; margin: 0 0 10px 0; font-weight: 500;">Type:</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Text</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="link-default-type" id="link-type-text" value="text" checked>
+                    <span>Text</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>NerdF</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="link-default-type" id="link-type-nerd-font" value="nerd-font">
+                    <span>NerdF</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Image</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="link-default-type" id="link-type-img" value="img">
+                    <span>Image</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>SVG</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="link-default-type" id="link-type-svg" value="svg">
+                    <span>SVG</span>
                   </label>
                 </div>
               </div>
@@ -2033,35 +2027,34 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <div style="flex: 1;">
                 <h4 style="color: white; margin: 0 0 10px 0; font-weight: 500;">Click Action:</h4>
                 <div id="edit-click-action-options" style="display: flex; flex-direction: column; gap: 8px;">
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Open URL</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
+                    <span>Open URL</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;"
-                    data-type="note">
-                    <span>Open Note</span>
+                  <label style="display: flex; align-items: center; gap: 5px;" data-type="note">
                     <input type="radio" name="edit-link-click-action" id="edit-link-action-note" value="note">
+                    <span>Open Note</span>
                   </label>
                 </div>
               </div>
               <div style="flex: 1;">
                 <h4 style="color: white; margin: 0 0 10px 0; font-weight: 500;">Type:</h4>
                 <div style="display: flex; flex-direction: column; gap: 8px;">
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Text</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="edit-link-default-type" id="edit-link-type-text" value="text" checked>
+                    <span>Text</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>NerdF</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="edit-link-default-type" id="edit-link-type-nerd-font" value="nerd-font">
+                    <span>NerdF</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>Image</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="edit-link-default-type" id="edit-link-type-img" value="img">
+                    <span>Image</span>
                   </label>
-                  <label style="display: flex; align-items: center; gap: 5px; justify-content: space-between;">
-                    <span>SVG</span>
+                  <label style="display: flex; align-items: center; gap: 5px;">
                     <input type="radio" name="edit-link-default-type" id="edit-link-type-svg" value="svg">
+                    <span>SVG</span>
                   </label>
                 </div>
               </div>
@@ -4968,10 +4961,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add URL options for each URL field
     urlGroups.forEach((group, index) => {
       const label = document.createElement('label');
-      label.style.cssText = 'display: flex; align-items: center; gap: 5px; justify-content: space-between;';
+      label.style.cssText = 'display: flex; align-items: center; gap: 5px;';
       label.innerHTML = `
-        <span>Open URL${index + 1}</span>
         <input type="radio" name="link-click-action" id="link-action-url-${index + 1}" value="url-${index + 1}" ${index === 0 ? 'checked' : ''}>
+        <span>Open URL${index + 1}</span>
       `;
       
       // Insert before the note option
@@ -4992,10 +4985,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add URL options for each URL field
     urlGroups.forEach((group, index) => {
       const label = document.createElement('label');
-      label.style.cssText = 'display: flex; align-items: center; gap: 5px; justify-content: space-between;';
+      label.style.cssText = 'display: flex; align-items: center; gap: 5px;';
       label.innerHTML = `
-        <span>Open URL${index + 1}</span>
         <input type="radio" name="edit-link-click-action" id="edit-link-action-url-${index + 1}" value="url-${index + 1}" ${index === 0 ? 'checked' : ''}>
+        <span>Open URL${index + 1}</span>
       `;
       
       // Insert before the note option
@@ -7587,36 +7580,41 @@ async function triggerScans() {
     "url": "https://insforge.dev/dashboard/organizations"
   },
   {
-    "background_color": "white",
-    "click_action": "url-1",
-    "collapsible": false,
-    "color": "black",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-fa-home",
-    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "li_bg_color": "white",
-    "li_height": "1%",
-    "li_width": "1%",
     "name": "Home (copy)",
+    "group": "Default",
+    "url": "http://192.168.0.101:5000/",
+    "urls": [
+      "http://192.168.0.101:5000/",
+      "https://nahid6970.github.io/db/5000_myhome/myhome"
+    ],
+    "selected_url_index": 0,
+    "icon_class": "nf nf-fa-home",
+    "color": "black",
+    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
+    "default_type": "nerd-font",
+    "background_color": "white",
     "note": "gg",
+    "click_action": "url-1",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
+    "li_bg_color": "white",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "http://192.168.0.101:5000/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "name": "Home",
@@ -7626,12 +7624,12 @@ async function triggerScans() {
       "https://nahid6970.github.io/db/5000_myhome/myhome",
       "C:\\Users\\nahid\\ms\\db\\5000_myhome\\myhome.html"
     ],
-    "selected_url_index": 1,
+    "selected_url_index": 0,
     "icon_class": "nf nf-fa-home",
     "color": "white",
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
     "default_type": "nerd-font",
-    "click_action": "url-2",
+    "click_action": "url-1",
     "font_size": "35px",
     "li_width": "1%",
     "li_height": "1%",
@@ -14010,6 +14008,34 @@ async function triggerScans() {
     "group": "Deadline",
     "horizontal_stack": false,
     "name": "save l\u00e1z // \"iquo iz  \u09a6\u09c1\u09b0\u09c1\u09a6 -\u09e9\u09e7 \u09ac\u09be\u09ac  \u098f\u09b6\u09be\u09b0 -  \u09ac\u09c3\u09b9\u09a8\u09cd\u09a8\u09a4\u09bf\u09ac\u09be\u09b0"
+  },
+  {
+    "name": "Test",
+    "group": "Default",
+    "url": "http://x.com",
+    "urls": [
+      "http://x.com",
+      "http://google.com"
+    ],
+    "selected_url_index": 0,
+    "default_type": "text",
+    "click_action": "url-1",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   }
 ];
     const STATIC_SIDEBAR_BUTTONS_DATA = [
