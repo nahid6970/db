@@ -711,18 +711,13 @@
     },
     {
       "cellStyles": {
-        "1-1": {
-          "italic": false,
-          "bold": true,
-          "center": true
-        },
-        "2-1": {
-          "bold": true
-        },
-        "1-0": {
+        "0-0": {
           "bold": false
         },
-        "3-0": {
+        "1-1": {
+          "bold": false
+        },
+        "2-0": {
           "bold": false
         }
       },
@@ -758,12 +753,8 @@
       "name": "English Literature",
       "rows": [
         [
-          "- Love's Labour's Lost (play)",
-          "William Shakespeare"
-        ],
-        [
-          "- Every Man in His Humor",
-          "Ben Jonson\n- Regarded as the second most important\nEnglish dramatist, after William Shakespeare, during the\nreign of James I."
+          "- Every Man in His Humor,\n- Every Man Out of His Humour.\n- Volpone (1605),\n- Epicoene; or, The Silent Woman (1609),\n- The Alchemist (1610),\n- Bartholomew Fair (1614),\n- The Magnetic Lady,\n- The Devil is an Ass",
+          "Ben Jonson\n- Regarded as the second most important\nEnglish dramatist, after William Shakespeare, during the\nreign of James I.\n- His comedies are known as 'Comedy of Humors'."
         ],
         [
           "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man",
@@ -820,6 +811,10 @@
         [
           "The Haunted House is a novel written by",
           "Virginia Woolf"
+        ],
+        [
+          "- Love's Labour's Lost (play)",
+          "William Shakespeare"
         ]
       ]
     }
