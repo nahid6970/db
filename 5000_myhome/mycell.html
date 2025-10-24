@@ -846,7 +846,15 @@
                     
                     // Handle markdown formatting and newlines
                     const cellValue = row[colIndex] || '';
-                    const hasMarkdown = cellValue.includes('**') || cellValue.includes('\n- ') || cellValue.trim().startsWith('- ');
+                    const hasMarkdown = cellValue.includes('**') || 
+                        cellValue.includes('__') || 
+                        cellValue.includes('##') || 
+                        cellValue.includes('```') || 
+                        cellValue.includes('`') || 
+                        cellValue.includes('~~') || 
+                        cellValue.includes('==') || 
+                        cellValue.includes('\n- ') || 
+                        cellValue.trim().startsWith('- ');
                     
                     if (hasMarkdown) {
                         // Apply markdown formatting
@@ -862,6 +870,10 @@
 
                     if (col.font && col.font !== '') {
                         cellContent.style.fontFamily = `'${col.font}', monospace`;
+                    }
+                    
+                    if (col.fontSize && col.fontSize !== '') {
+                        cellContent.style.fontSize = col.fontSize + 'px';
                     }
 
                     // Apply cell-specific styles
@@ -1151,7 +1163,7 @@
             </label>
 
             <div class="export-info">
-                Static export - 2025-10-25 01:40:54
+                Static export - 2025-10-25 02:21:26
             </div>
         </div>
 
