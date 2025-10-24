@@ -733,7 +733,7 @@
           "name": "Details",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "300"
         },
         {
           "color": "#d1ffd6",
@@ -746,23 +746,23 @@
           "name": "Writer",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "300"
         }
       ],
       "mergedCells": {},
       "name": "English Literature",
       "rows": [
         [
-          "- Every Man in His Humor,\n- Every Man Out of His Humour.\n- Volpone (1605),\n- Epicoene; or, The Silent Woman (1609),\n- The Alchemist (1610),\n- Bartholomew Fair (1614),\n- The Magnetic Lady,\n- The Devil is an Ass",
-          "Ben Jonson\n- Regarded as the second most important\nEnglish dramatist, after William Shakespeare, during the\nreign of James I.\n- His comedies are known as 'Comedy of Humors'."
+          "",
+          ""
         ],
         [
           "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man",
-          "Alexander Pope"
+          "**Alexander Pope**\n- known for the heroic couplets in poetry"
         ],
         [
-          "Who is known for the heroic couplets in poetry?",
-          "Alexander Pope"
+          "- Every Man in His Humor,\n- Every Man Out of His Humour.\n- Volpone (1605),\n- Epicoene; or, The Silent Woman (1609),\n- The Alchemist (1610),\n- Bartholomew Fair (1614),\n- The Magnetic Lady,\n- The Devil is an Ass",
+          "**Ben Jonson**\n- Regarded as the second most important\nEnglish dramatist, after William Shakespeare, during the\nreign of James I.\n- His comedies are known as 'Comedy of Humors'."
         ],
         [
           "- To Helen",
