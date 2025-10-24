@@ -714,7 +714,7 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "",
+          "font": "JetBrains Mono",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -727,7 +727,7 @@
         },
         {
           "color": "#d1ffd6",
-          "font": "",
+          "font": "JetBrains Mono",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -739,97 +739,48 @@
           "width": "150"
         }
       ],
-      "mergedCells": {
-        "10-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "10-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        },
-        "11-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "11-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        },
-        "12-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "12-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        },
-        "6-0": {
-          "colspan": 1,
-          "rowspan": 7
-        },
-        "6-1": {
-          "colspan": 1,
-          "rowspan": 7
-        },
-        "7-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "7-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        },
-        "8-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "8-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        },
-        "9-0": {
-          "hidden": true,
-          "mainCol": 0,
-          "mainRow": 6
-        },
-        "9-1": {
-          "hidden": true,
-          "mainCol": 1,
-          "mainRow": 6
-        }
-      },
+      "mergedCells": {},
       "name": "English Literature",
       "rows": [
         [
-          "Who wrote \"The Importance of Being Earnest\"",
-          "Oscar Wilde"
+          "- The Spanish Tragedy, ( The famous play 'The Spanish Tragedy' belongs to The Elizabethan period )\n\n\u2022 Important Character of The Spanish Tragedy:\n- Hieronimo (The protagonist of the story),\n- Bel-Imperia (The main female character of the story),\n- Lorenzo,\n- Balthazar,\n- Horatio,\n- Ghost of Don Andrea, etc.\n\n",
+          "Thomas Kyd"
         ],
         [
-          "Who is credited for developing the essay as a literary form in English?",
-          "Francis Bacon"
+          "",
+          ""
         ],
         [
-          "The Haunted House is a novel written by",
-          "Virginia Woolf"
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "The Rape of the Lock,\nThe Dunciad,\nAn Essay on Man",
+          "Alexander Pope"
         ],
         [
           "Who is known for the heroic couplets in poetry?",
           "Alexander Pope"
         ],
         [
+          "To Helen",
+          "Edgar Allan"
+        ],
+        [
           "Which ofthe following authors wrote \"The Faerie Queene\"?",
           "Edmund Spenser"
+        ],
+        [
+          "Who is credited for developing the essay as a literary form in English?",
+          "Francis Bacon"
+        ],
+        [
+          "The Sun Rising\nThe Good Morrow\nThe Flea",
+          "John Donne"
         ],
         [
           "Who is considered the leading poet of the Victorian era?",
@@ -840,36 +791,20 @@
           "Matthew Arnold"
         ],
         [
-          "",
-          ""
+          "Who wrote \"The Importance of Being Earnest\"",
+          "Oscar Wilde"
         ],
         [
-          "",
-          ""
+          "New Arabian Nights",
+          "R. L. Stevenson"
         ],
         [
-          "",
-          ""
+          "Sherlock Holmes",
+          "Sir Arthur Conan Doyle"
         ],
         [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "Who wrote \"Dover Beach\"? \n\u2022Best works: \n- Dover Beach: (Poem), \n- The Scholar Gypsy, \n- Essays in Criticism, \n- Culture and Anarchy, \n- Rugby Chapel. (Elegy, written in memoriam of his father), \n- Sohrab and Rustum (Inspired by and retold from the epic Shahnama, written By Ferdousi), etc.",
-          ""
-        ],
-        [
-          "The Sun Rising\nThe Good Morrow\nThe Flea",
-          "John Donne"
+          "The Haunted House is a novel written by",
+          "Virginia Woolf"
         ]
       ]
     }
