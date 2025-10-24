@@ -1,13 +1,12 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 0,
   "categories": [
     "Bangla",
     "English"
   ],
   "sheetCategories": {
     "0": "Bangla",
-    "2": "English",
-    "4": "Bangla",
+    "2": "Bangla",
     "7": "Bangla",
     "8": "English",
     "9": "Bangla"
@@ -91,19 +90,6 @@
           "textColor": "#000000",
           "type": "text",
           "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "tdiddy",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
         }
       ],
       "mergedCells": {},
@@ -131,13 +117,15 @@
         ],
         [
           "Cogent",
-          "\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b8\u0999\u09cd\u0997\u09a4, \u09b8\u09cd\u09aa\u09b7\u09cd\u099f",
-          ""
+          "\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b8\u0999\u09cd\u0997\u09a4, \u09b8\u09cd\u09aa\u09b7\u09cd\u099f"
         ],
         [
           "Coup",
-          "\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8",
-          ""
+          "\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8"
+        ],
+        [
+          "Agitation",
+          "\u0986\u09a8\u09cd\u09a6\u09cb\u09b2\u09a8"
         ]
       ]
     },
@@ -702,39 +690,15 @@
           "center": true
         }
       },
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "asdasdasd",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        }
-      ],
+      "columns": [],
       "mergedCells": {},
       "name": "\u09b8\u09ae\u09be\u09b8",
       "rows": [
-        [
-          ""
-        ],
-        [
-          ""
-        ],
-        [
-          ""
-        ],
-        [
-          ""
-        ],
-        [
-          ""
-        ]
+        [],
+        [],
+        [],
+        [],
+        []
       ]
     },
     {
