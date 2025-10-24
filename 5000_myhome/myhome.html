@@ -1798,18 +1798,27 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="link-name" placeholder="Name" style="flex: 1;">
               <input type="text" id="link-group" placeholder="Group (optional)" style="flex: 1;">
             </div>
-            <input type="url" id="link-url" placeholder="URL">
+            <div id="urls-container">
+              <div class="url-input-group" style="display: flex; gap: 5px; align-items: center; margin-bottom: 5px;">
+                <input type="url" id="link-url" placeholder="URL" style="flex: 1;">
+                <button type="button" class="add-url-btn" onclick="addUrlField()"
+                  style="background: #4CAF50; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 16px;"
+                  title="Add another URL">+</button>
+              </div>
+            </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
               <label style="font-weight: 500;">Click Action:</label>
-              <label style="display: flex; align-items: center; gap: 5px;">
-                <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
-                Open URL
-              </label>
-              <label style="display: flex; align-items: center; gap: 5px;">
+              <div id="click-action-options">
+                <label style="display: flex; align-items: center; gap: 5px;">
+                  <input type="radio" name="link-click-action" id="link-action-url" value="url" checked>
+                  Open URL1
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px;" data-type="note"></label>
                 <input type="radio" name="link-click-action" id="link-action-note" value="note">
                 Open Note
-              </label>
+                </label>
+              </div>
             </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
@@ -1901,18 +1910,27 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
               <input type="text" id="edit-link-group" placeholder="Group (optional)" style="flex: 1;">
             </div>
-            <input type="url" id="edit-link-url" placeholder="URL">
+            <div id="edit-urls-container">
+              <div class="url-input-group" style="display: flex; gap: 5px; align-items: center; margin-bottom: 5px;">
+                <input type="url" id="edit-link-url" placeholder="URL" style="flex: 1;">
+                <button type="button" class="add-url-btn" onclick="addEditUrlField()"
+                  style="background: #4CAF50; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 16px;"
+                  title="Add another URL">+</button>
+              </div>
+            </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
               <label style="font-weight: 500;">Click Action:</label>
-              <label style="display: flex; align-items: center; gap: 5px;">
-                <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
-                Open URL
-              </label>
-              <label style="display: flex; align-items: center; gap: 5px;">
+              <div id="edit-click-action-options">
+                <label style="display: flex; align-items: center; gap: 5px;">
+                  <input type="radio" name="edit-link-click-action" id="edit-link-action-url" value="url" checked>
+                  Open URL1
+                </label>
+                <label style="display: flex; align-items: center; gap: 5px;" data-type="note"></label>
                 <input type="radio" name="edit-link-click-action" id="edit-link-action-note" value="note">
                 Open Note
-              </label>
+                </label>
+              </div>
             </div>
 
             <div style="display: flex; gap: 20px; align-items: center; margin: 10px 0;">
@@ -2530,8 +2548,12 @@ document.addEventListener('DOMContentLoaded', function () {
               openNotePreview(encodeURIComponent(link.note || ''));
             });
           } else {
-            simpleLink.href = link.url;
-            simpleLink.target = '_blank';
+            // Handle multiple URLs
+            simpleLink.href = '#';
+            simpleLink.addEventListener('click', (e) => {
+              e.preventDefault();
+              handleLinkClick(e, link);
+            });
           }
 
           if (link.name && link.name.trim() !== '') {
@@ -4633,10 +4655,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
       const groupName = document.getElementById('link-group').value || 'Ungrouped';
 
+      // Get all URLs and selected URL index
+      const allUrls = getAllUrls(false);
+      const selectedUrlIndex = getSelectedUrlIndex(false);
+      const selectedClickAction = document.querySelector('input[name="link-click-action"]:checked').value;
+
       const newLink = {
         name: document.getElementById('link-name').value,
         group: document.getElementById('link-group').value || undefined,
-        url: document.getElementById('link-url').value,
+        url: allUrls.length > 0 ? allUrls[0] : document.getElementById('link-url').value, // Primary URL for backward compatibility
+        urls: allUrls.length > 1 ? allUrls : undefined, // Store all URLs if multiple
+        selected_url_index: allUrls.length > 1 ? selectedUrlIndex : undefined,
         icon_class: document.getElementById('link-icon-class').value || undefined,
         color: document.getElementById('link-color').value || undefined,
         img_src: document.getElementById('link-img-src').value || undefined,
@@ -4651,7 +4680,7 @@ document.addEventListener('DOMContentLoaded', function () {
         font_size: document.getElementById('link-font-size').value || undefined,
         title: document.getElementById('link-title').value || undefined,
         note: document.getElementById('link-note').value || undefined,
-        click_action: document.querySelector('input[name="link-click-action"]:checked').value || 'url',
+        click_action: selectedClickAction,
         li_width: document.getElementById('link-li-width').value || undefined,
         li_height: document.getElementById('link-li-height').value || undefined,
         li_bg_color: document.getElementById('link-li-bg-color').value || undefined,
@@ -4759,11 +4788,280 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Multiple URL functionality
+  function addUrlField() {
+    const container = document.getElementById('urls-container');
+    const urlCount = container.querySelectorAll('.url-input-group').length;
+    const newIndex = urlCount + 1;
+    
+    const urlGroup = document.createElement('div');
+    urlGroup.className = 'url-input-group';
+    urlGroup.style.cssText = 'display: flex; gap: 5px; align-items: center; margin-bottom: 5px;';
+    
+    urlGroup.innerHTML = `
+      <input type="url" id="link-url-${newIndex}" placeholder="URL ${newIndex}" style="flex: 1;">
+      <button type="button" onclick="removeUrlField(this)" style="background: #f44336; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 14px;" title="Remove URL">−</button>
+    `;
+    
+    container.appendChild(urlGroup);
+    updateClickActionOptions();
+  }
+
+  function addEditUrlField() {
+    const container = document.getElementById('edit-urls-container');
+    const urlCount = container.querySelectorAll('.url-input-group').length;
+    const newIndex = urlCount + 1;
+    
+    const urlGroup = document.createElement('div');
+    urlGroup.className = 'url-input-group';
+    urlGroup.style.cssText = 'display: flex; gap: 5px; align-items: center; margin-bottom: 5px;';
+    
+    urlGroup.innerHTML = `
+      <input type="url" id="edit-link-url-${newIndex}" placeholder="URL ${newIndex}" style="flex: 1;">
+      <button type="button" onclick="removeUrlField(this)" style="background: #f44336; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 14px;" title="Remove URL">−</button>
+    `;
+    
+    container.appendChild(urlGroup);
+    updateEditClickActionOptions();
+  }
+
+  function removeUrlField(button) {
+    const urlGroup = button.parentElement;
+    const container = urlGroup.parentElement;
+    
+    // Don't remove if it's the only URL field
+    if (container.querySelectorAll('.url-input-group').length > 1) {
+      urlGroup.remove();
+      
+      // Update click action options
+      if (container.id === 'urls-container') {
+        updateClickActionOptions();
+      } else {
+        updateEditClickActionOptions();
+      }
+    }
+  }
+
+  function updateClickActionOptions() {
+    const container = document.getElementById('urls-container');
+    const urlGroups = container.querySelectorAll('.url-input-group');
+    const optionsContainer = document.getElementById('click-action-options');
+    
+    // Clear existing URL options
+    const existingUrlOptions = optionsContainer.querySelectorAll('label:not([data-type="note"])');
+    existingUrlOptions.forEach(option => option.remove());
+    
+    // Add URL options for each URL field
+    urlGroups.forEach((group, index) => {
+      const label = document.createElement('label');
+      label.style.cssText = 'display: flex; align-items: center; gap: 5px;';
+      label.innerHTML = `
+        <input type="radio" name="link-click-action" id="link-action-url-${index + 1}" value="url-${index + 1}" ${index === 0 ? 'checked' : ''}>
+        Open URL${index + 1}
+      `;
+      
+      // Insert before the note option
+      const noteOption = optionsContainer.querySelector('[data-type="note"]') || optionsContainer.lastElementChild;
+      optionsContainer.insertBefore(label, noteOption);
+    });
+  }
+
+  function updateEditClickActionOptions() {
+    const container = document.getElementById('edit-urls-container');
+    const urlGroups = container.querySelectorAll('.url-input-group');
+    const optionsContainer = document.getElementById('edit-click-action-options');
+    
+    // Clear existing URL options
+    const existingUrlOptions = optionsContainer.querySelectorAll('label:not([data-type="note"])');
+    existingUrlOptions.forEach(option => option.remove());
+    
+    // Add URL options for each URL field
+    urlGroups.forEach((group, index) => {
+      const label = document.createElement('label');
+      label.style.cssText = 'display: flex; align-items: center; gap: 5px;';
+      label.innerHTML = `
+        <input type="radio" name="edit-link-click-action" id="edit-link-action-url-${index + 1}" value="url-${index + 1}" ${index === 0 ? 'checked' : ''}>
+        Open URL${index + 1}
+      `;
+      
+      // Insert before the note option
+      const noteOption = optionsContainer.querySelector('[data-type="note"]') || optionsContainer.lastElementChild;
+      optionsContainer.insertBefore(label, noteOption);
+    });
+  }
+
+  function getAllUrls(isEdit = false) {
+    const prefix = isEdit ? 'edit-' : '';
+    const container = document.getElementById(`${prefix}urls-container`);
+    const urlInputs = container.querySelectorAll('input[type="url"]');
+    const urls = [];
+    
+    urlInputs.forEach(input => {
+      if (input.value.trim()) {
+        urls.push(input.value.trim());
+      }
+    });
+    
+    return urls;
+  }
+
+  function getSelectedUrlIndex(isEdit = false) {
+    const prefix = isEdit ? 'edit-' : '';
+    const actionName = `${prefix}link-click-action`;
+    const selectedAction = document.querySelector(`input[name="${actionName}"]:checked`);
+    
+    if (selectedAction && selectedAction.value.startsWith('url')) {
+      const match = selectedAction.value.match(/url-?(\d+)?/);
+      return match ? (parseInt(match[1]) || 1) - 1 : 0;
+    }
+    
+    return 0;
+  }
+
+  function populateEditUrlFields(link) {
+    const container = document.getElementById('edit-urls-container');
+    
+    if (!container) {
+      console.error('edit-urls-container not found');
+      return;
+    }
+    
+    // Clear existing URL fields
+    container.innerHTML = '';
+    
+    // Get URLs (either from urls array or single url)
+    const urls = link.urls || [link.url || ''];
+    const selectedIndex = link.selected_url_index || 0;
+    
+    // Create URL fields
+    urls.forEach((url, index) => {
+      const urlGroup = document.createElement('div');
+      urlGroup.className = 'url-input-group';
+      urlGroup.style.cssText = 'display: flex; gap: 5px; align-items: center; margin-bottom: 5px;';
+      
+      if (index === 0) {
+        // First URL field (main one)
+        urlGroup.innerHTML = `
+          <input type="url" id="edit-link-url" placeholder="URL" style="flex: 1;" value="${url}">
+          <button type="button" class="add-url-btn" onclick="addEditUrlField()" style="background: #4CAF50; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 16px;" title="Add another URL">+</button>
+        `;
+      } else {
+        // Additional URL fields
+        urlGroup.innerHTML = `
+          <input type="url" id="edit-link-url-${index + 1}" placeholder="URL ${index + 1}" style="flex: 1;" value="${url}">
+          <button type="button" onclick="removeUrlField(this)" style="background: #f44336; color: white; border: none; border-radius: 3px; padding: 5px 8px; cursor: pointer; font-size: 14px;" title="Remove URL">−</button>
+        `;
+      }
+      
+      container.appendChild(urlGroup);
+    });
+    
+    // Update click action options
+    updateEditClickActionOptions();
+    
+    // Set the selected click action
+    if (link.click_action && link.click_action.startsWith('url')) {
+      const actionElement = document.querySelector(`input[name="edit-link-click-action"][value="${link.click_action}"]`);
+      if (actionElement) {
+        actionElement.checked = true;
+      }
+    } else if (link.click_action === 'note') {
+      document.getElementById('edit-link-action-note').checked = true;
+    }
+  }
+
+  // Helper function to convert local file paths to file:// URLs
+  function normalizeUrl(url) {
+    if (!url) return url;
+    
+    // Check if it's a Windows file path first (before checking for protocols)
+    // Windows: C:\path\to\file or C:/path/to/file
+    const isWindowsPath = /^[a-zA-Z]:[\\\/]/.test(url);
+    
+    if (isWindowsPath) {
+      // Convert backslashes to forward slashes
+      let filePath = url.replace(/\\/g, '/');
+      // For Windows paths, ensure proper format: file:///C:/path
+      return 'file:///' + filePath;
+    }
+    
+    // Check for Unix file paths
+    const isUnixPath = /^\/[^\/]/.test(url);
+    if (isUnixPath) {
+      // For Unix paths: file:///path
+      return 'file://' + url;
+    }
+    
+    // If already a proper URL (http, https, file, etc.), return as-is
+    if (/^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(url)) {
+      return url;
+    }
+    
+    // Return as-is if we can't determine the type
+    return url;
+  }
+
+  // Handle link clicks with multiple URLs
+  function handleLinkClick(event, link) {
+    event.preventDefault();
+    
+    if (link.click_action === 'note' && link.note) {
+      // Open note
+      openNotePreview(link.note);
+      return;
+    }
+    
+    // Handle URL clicks
+    let urlToOpen = link.url; // Default to primary URL
+    
+    if (link.urls && link.urls.length > 1) {
+      // Multiple URLs - determine which one to open based on click_action
+      let selectedIndex = 0;
+      
+      if (link.click_action && link.click_action.startsWith('url-')) {
+        // Extract the URL index from click_action (e.g., "url-2" -> index 1)
+        const match = link.click_action.match(/url-(\d+)/);
+        if (match) {
+          selectedIndex = parseInt(match[1]) - 1; // Convert to 0-based index
+        }
+      }
+      
+      urlToOpen = link.urls[selectedIndex] || link.urls[0];
+    }
+    
+    if (urlToOpen) {
+      // Normalize the URL (convert file paths to file:// URLs)
+      urlToOpen = normalizeUrl(urlToOpen);
+      
+      // Try to open the URL - use different methods for file:// URLs
+      if (urlToOpen.startsWith('file://')) {
+        // For file:// URLs, create a temporary link and click it
+        // This sometimes bypasses browser security restrictions
+        const tempLink = document.createElement('a');
+        tempLink.href = urlToOpen;
+        tempLink.target = '_blank';
+        tempLink.style.display = 'none';
+        document.body.appendChild(tempLink);
+        tempLink.click();
+        document.body.removeChild(tempLink);
+      } else {
+        // For regular URLs, use window.open
+        window.open(urlToOpen, '_blank');
+      }
+    }
+  }
+
+  // Make functions globally available
+  window.addUrlField = addUrlField;
+  window.addEditUrlField = addEditUrlField;
+  window.removeUrlField = removeUrlField;
+
   function openEditLinkPopup(link, index) {
     editLinkIndexInput.value = index;
     document.getElementById('edit-link-name').value = link.name || '';
     document.getElementById('edit-link-group').value = link.group || '';
-    document.getElementById('edit-link-url').value = link.url || '';
+    // Handle multiple URLs
+    populateEditUrlFields(link);
     document.getElementById('edit-link-icon-class').value = link.icon_class || '';
     document.getElementById('edit-link-color').value = link.color || '';
     document.getElementById('edit-link-img-src').value = link.img_src || '';
@@ -4788,13 +5086,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('edit-link-title').value = link.title || '';
     document.getElementById('edit-link-note').value = link.note || '';
 
-    // Set click action radio buttons
-    const clickAction = link.click_action || 'url';
-    if (clickAction === 'note') {
-      document.getElementById('edit-link-action-note').checked = true;
-    } else {
-      document.getElementById('edit-link-action-url').checked = true;
-    }
+    // Click action is already set by populateEditUrlFields, no need to set it again here
 
     document.getElementById('edit-link-font-family').value = link.font_family || '';
     document.getElementById('edit-link-font-size').value = link.font_size || '';
@@ -4819,10 +5111,17 @@ document.addEventListener('DOMContentLoaded', function () {
         const originalGroupName = originalLink.group || 'Ungrouped';
         const newGroupName = document.getElementById('edit-link-group').value || 'Ungrouped';
 
+        // Get all URLs and selected URL index for edit form
+        const allUrls = getAllUrls(true);
+        const selectedUrlIndex = getSelectedUrlIndex(true);
+        const selectedClickAction = document.querySelector('input[name="edit-link-click-action"]:checked').value;
+
         const updatedLink = {
           name: document.getElementById('edit-link-name').value,
           group: document.getElementById('edit-link-group').value || undefined,
-          url: document.getElementById('edit-link-url').value,
+          url: allUrls.length > 0 ? allUrls[0] : document.getElementById('edit-link-url').value, // Primary URL for backward compatibility
+          urls: allUrls.length > 1 ? allUrls : undefined, // Store all URLs if multiple
+          selected_url_index: allUrls.length > 1 ? selectedUrlIndex : undefined,
           icon_class: document.getElementById('edit-link-icon-class').value || undefined,
           color: document.getElementById('edit-link-color').value || undefined,
           img_src: document.getElementById('edit-link-img-src').value || undefined,
@@ -4835,7 +5134,7 @@ document.addEventListener('DOMContentLoaded', function () {
           border_radius: document.getElementById('edit-link-border-radius').value || undefined,
           title: document.getElementById('edit-link-title').value || undefined,
           note: document.getElementById('edit-link-note').value || undefined,
-          click_action: document.querySelector('input[name="edit-link-click-action"]:checked').value || 'url',
+          click_action: selectedClickAction,
           font_family: document.getElementById('edit-link-font-family').value || undefined,
           font_size: document.getElementById('edit-link-font-size').value || undefined,
           li_width: document.getElementById('edit-link-li-width').value || undefined,
@@ -5188,6 +5487,24 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
   }
+
+  // Add global click handler for all link items to handle multiple URLs
+  document.addEventListener('click', function(event) {
+    // Check if the clicked element is a link item or inside a link item
+    const linkItem = event.target.closest('.link-item:not(.add-link-item)');
+    
+    if (linkItem && linkItem.dataset.linkIndex !== undefined) {
+      const linkIndex = parseInt(linkItem.dataset.linkIndex);
+      const link = links[linkIndex];
+      
+      if (link && link.urls && link.urls.length > 1) {
+        // This link has multiple URLs, intercept the click
+        event.preventDefault();
+        event.stopPropagation();
+        handleLinkClick(event, link);
+      }
+    }
+  });
 
   // Initial fetch and display of links
   fetchAndDisplayLinks();
@@ -5585,8 +5902,16 @@ function updateDateTime() {
   const now = new Date();
   const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
   const optionsTime = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
-  document.getElementById('currentDate').innerText = now.toLocaleDateString('en-US', optionsDate);
-  document.getElementById('currentTime').innerText = now.toLocaleTimeString('en-US', optionsTime);
+  
+  const dateElement = document.getElementById('currentDate');
+  const timeElement = document.getElementById('currentTime');
+  
+  if (dateElement) {
+    dateElement.innerText = now.toLocaleDateString('en-US', optionsDate);
+  }
+  if (timeElement) {
+    timeElement.innerText = now.toLocaleTimeString('en-US', optionsTime);
+  }
 }
 
 // Update the date and time on page load
@@ -6468,7 +6793,9 @@ async function triggerScans() {
       scanButton.style.opacity = '1';
     }, 2000);
   }
-}</script>
+}
+
+</script>
 
     <script>
       // Handle file:// URLs by intercepting clicks
@@ -7146,97 +7473,72 @@ async function triggerScans() {
     "url": "https://insforge.dev/dashboard/organizations"
   },
   {
-    "background_color": "white",
-    "click_action": "url",
-    "collapsible": false,
+    "name": "Home (copy)",
+    "group": "Default",
+    "url": "http://192.168.0.101:5000/",
+    "icon_class": "nf nf-fa-home",
     "color": "black",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-fa-home",
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
+    "default_type": "nerd-font",
+    "background_color": "white",
+    "note": "gg",
+    "click_action": "url-1",
+    "font_size": "35px",
+    "li_width": "1%",
+    "li_height": "1%",
     "li_bg_color": "white",
-    "li_height": "1%",
-    "li_width": "1%",
-    "name": "Home (copy)",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "http://192.168.0.101:5000/"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "color": "white",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
-    "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
-    "icon_class": "nf nf-fa-home",
-    "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "li_bg_color": "transparent",
-    "li_height": "1%",
-    "li_hover_color": "transparent",
-    "li_width": "1%",
     "name": "Home",
-    "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
-    "top_bg_color": "#2d2d2d",
-    "top_border_color": "#444444",
-    "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://nahid6970.github.io/db/5000_myhome/myhome"
-  },
-  {
-    "click_action": "url",
-    "collapsible": false,
-    "color": "yellow",
-    "default_type": "nerd-font",
-    "display_style": "flex",
-    "font_size": "35px",
     "group": "Default",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "#ffffff",
+    "url": "https://nahid6970.github.io/db/5000_myhome/myhome",
+    "urls": [
+      "https://nahid6970.github.io/db/5000_myhome/myhome",
+      "C:\\Users\\nahid\\ms\\db\\5000_myhome\\myhome.html"
+    ],
+    "selected_url_index": 0,
     "icon_class": "nf nf-fa-home",
+    "color": "white",
     "img_src": "https://e7.pngegg.com/pngimages/310/332/png-clipart-computer-icons-home-house-desktop-service-home-blue-logo-thumbnail.png",
-    "li_bg_color": "transparent",
-    "li_height": "1%",
-    "li_hover_color": "transparent",
+    "default_type": "nerd-font",
+    "click_action": "url-1",
+    "font_size": "35px",
     "li_width": "1%",
-    "name": "Home (copy)",
+    "li_height": "1%",
+    "li_bg_color": "transparent",
+    "li_hover_color": "transparent",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "C:\\Users\\nahid\\ms\\db\\5000_myhome\\myhome.html"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "background_color": "white",
@@ -13334,30 +13636,30 @@ async function triggerScans() {
     "url": ""
   },
   {
-    "name": "\u098f\u0995\u099f\u09bf \u09ac\u09b9\u09c1\u09ad\u09c1\u099c\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u099f\u09bf \u0985\u09a8\u09cd\u09a4:\u0995\u09cb\u09a3\u09c7\u09b0 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u09e7\u09ea\u09ea\u00b0 \u09b9\u09b2\u09c7, \u09ac\u09b9\u09c1\u09ad\u09c1\u099c\u09c7\u09b0 \u09ae\u09cb\u099f \u09ac\u09be\u09b9\u09c1\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \u0995\u09a4?",
-    "group": "Math",
-    "url": "",
-    "default_type": "text",
-    "note": "180-144 = 36\n360/36 = 10\n**Ans: 10**",
     "click_action": "note",
-    "li_width": "200px",
-    "li_border_color": "white",
     "collapsible": true,
+    "default_type": "text",
     "display_style": "flex",
+    "group": "Math",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
     "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "li_border_color": "white",
+    "li_width": "200px",
+    "name": "\u098f\u0995\u099f\u09bf \u09ac\u09b9\u09c1\u09ad\u09c1\u099c\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u099f\u09bf \u0985\u09a8\u09cd\u09a4:\u0995\u09cb\u09a3\u09c7\u09b0 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u09e7\u09ea\u09ea\u00b0 \u09b9\u09b2\u09c7, \u09ac\u09b9\u09c1\u09ad\u09c1\u099c\u09c7\u09b0 \u09ae\u09cb\u099f \u09ac\u09be\u09b9\u09c1\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \u0995\u09a4?",
+    "note": "180-144 = 36\n360/36 = 10\n**Ans: 10**",
     "password_protect": false,
-    "top_bg_color": "#4ea3e0",
-    "top_text_color": "#000",
-    "top_border_color": "#444444",
-    "top_hover_color": "#1882d4",
     "popup_bg_color": "#31343a",
-    "popup_text_color": "#ffffff",
     "popup_border_color": "transparent",
     "popup_border_radius": "8px",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_text_color": "#ffffff",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a"
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#4ea3e0",
+    "top_border_color": "#444444",
+    "top_hover_color": "#1882d4",
+    "top_text_color": "#000",
+    "url": ""
   },
   {
     "click_action": "note",
@@ -13598,6 +13900,39 @@ async function triggerScans() {
     "li_hover_color": "transparent",
     "li_width": "1%",
     "name": "YouTube",
+    "password_protect": false,
+    "popup_bg_color": "#31343a",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "popup_text_color": "#ffffff",
+    "top_bg_color": "#2d2d2d",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "top_text_color": "#ffffff",
+    "url": "https://www.youtube.com/"
+  },
+  {
+    "background_color": "white",
+    "border_radius": "50",
+    "click_action": "url",
+    "collapsible": false,
+    "color": "red",
+    "default_type": "nerd-font",
+    "display_style": "flex",
+    "font_size": "35px",
+    "group": "Default",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_stack": false,
+    "horizontal_text_color": "#ffffff",
+    "icon_class": "nf nf-fa-youtube",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABJklEQVR4Ae2WpVaFQRSFcaeS4QVwIjTiLbgk7D1w9xeg4FQcOu6acHeXtNnDmsFd7in/WetLI+f7dbYDAFEsAUvgoeAQ5k5iSQFpIH1kkMyQFXJMTsgpwTuc6jlHes2M3qNP71mge7g76DLNg8gygZ1QckGmuSdZJ7Azq8RDCSQTCJGgBCoFBWqVQLegQJcSmPnWIr9oICMXcIr4C4FJJbD9rUX+NtzX+CIQlfVbgS0lcP4jAVNt/UCA7acCZ0oAPxfQdXMLFNUBvpHflvgbAVM7h0B6zrfeD3kB+Ucg/xLKf4biPyLJX3GH9GFUogRSBQUSTSBZEwskQpFs1USyl6E0gRSRJtJPhsnci1B69oVQeqzXzOo9+kmj3juBeDw2BkSxBCyBO+9s03HRLVCoAAAAAElFTkSuQmCC",
+    "li_bg_color": "transparent",
+    "li_height": "1%",
+    "li_hover_color": "transparent",
+    "li_width": "1%",
+    "name": "YouTube (copy)",
     "password_protect": false,
     "popup_bg_color": "#31343a",
     "popup_border_color": "transparent",
