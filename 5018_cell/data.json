@@ -1427,42 +1427,26 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "20",
+          "font": "Comic Sans MS",
+          "fontSize": "16",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "Phrase / Idioms",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Meaning",
+          "name": "Rule",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
         }
       ],
-      "name": "Phrase & Idoms",
+      "name": "Right Verb",
       "rows": [
         [
-          "Burn the midnight oil",
-          "to stay up late working or studying"
+          "All of the **furniture** ==have== been sold out' \n- \u098f\u0996\u09be\u09a8\u09c7 furniture  \u098f\u0995\u099f\u09bf uncountable noun, \u09a4\u09be\u0987 plural verb \"have\" \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09be \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964 \nhas"
         ],
         [
-          "",
-          ""
+          "**Either** of the answers ==are== acceptable in this context'-\n\u098f\u0996\u09be\u09a8\u09c7 \"either\" \u098f\u0995\u09ac\u099a\u09a8 subject, \u09a4\u09be\u0987 verb \u09b9\u0993\u09df\u09be \u0989\u099a\u09bf\u09a4 \"is\"."
         ]
       ]
     },
@@ -1505,8 +1489,52 @@
           "- The singer and songwriter **is** here.\n- The singer and the songwriter **are** here."
         ],
         [
-          "- Insist that \u098f\u09b0 \u09aa\u09b0\u09c7 verb \u098f\u09b0 base form\n\u098f\u09ae\u09a8 \u0995\u09bf\u099b\u09c1 \u0986\u09b0\u0993 verbs \u09af\u09c7\u0997\u09c1\u09b2\u09cb\u09b0 \u09aa\u09b0 subjunctive mood-\u098f verb \u098f\u09b0 base form \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u09b9\u09df-\n- __demand, suggestion, insist, recommendation, request \u0987\u09a4\u09cd\u09af\u09be\u09a6\u09bf__",
+          "- Insist that \u098f\u09b0 \u09aa\u09b0\u09c7 verb \u098f\u09b0 base form\n\u098f\u09ae\u09a8 \u0995\u09bf\u099b\u09c1 \u0986\u09b0\u0993 verbs \u09af\u09c7\u0997\u09c1\u09b2\u09cb\u09b0 \u09aa\u09b0 subjunctive mood-\u098f verb \u098f\u09b0 base form \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u09b9\u09df-\n- demand, suggestion, insist, recommendation, request \u0987\u09a4\u09cd\u09af\u09be\u09a6\u09bf",
           "- He insisted that she arrive early."
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Phrase / Idioms",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Meaning",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "Phrase & Idoms",
+      "rows": [
+        [
+          "Burn the midnight oil",
+          "to stay up late working or studying"
+        ],
+        [
+          "",
+          ""
         ]
       ]
     },
@@ -1555,34 +1583,6 @@
         [
           "",
           ""
-        ]
-      ]
-    },
-    {
-      "cellStyles": {},
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "Comic Sans MS",
-          "fontSize": "16",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Rule",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        }
-      ],
-      "name": "Right Verb",
-      "rows": [
-        [
-          "All of the **furniture** ==have== been sold out' \n- \u098f\u0996\u09be\u09a8\u09c7 furniture  \u098f\u0995\u099f\u09bf uncountable noun, \u09a4\u09be\u0987 plural verb \"have\" \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09be \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964 \nhas"
-        ],
-        [
-          "**Either** of the answers ==are== acceptable in this context'-\n\u098f\u0996\u09be\u09a8\u09c7 \"either\" \u098f\u0995\u09ac\u099a\u09a8 subject, \u09a4\u09be\u0987 verb \u09b9\u0993\u09df\u09be \u0989\u099a\u09bf\u09a4 \"is\"."
         ]
       ]
     }
