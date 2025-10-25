@@ -1487,7 +1487,7 @@
         {
           "color": "#ffffff",
           "font": "Comic Sans MS",
-          "fontSize": "20",
+          "fontSize": "14",
           "headerBgColor": "#000000",
           "headerBold": true,
           "headerCenter": true,
@@ -1530,39 +1530,49 @@
       "name": "Active - Passive",
       "rows": [
         [
-          "Future Perfect",
-          "- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject",
+          "##Present Simple##\n**Rules**\n- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3\n**Example**\n- Active: They write letters.\n- Passive: Letters are written by them.\n\n##Present Continuous##\n**Rule**\n- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3\n**Example**\n- @@She is reading a book. \u2192 A book is being read by her.@@\n\n##Present Perfect##\n**Rule**\n- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3\n**Example**\n- @@He has done the work. \u2192 The work has been done by him.@@\n\n##Present Perfect Continuous##\n\u274c No passive form.\n\n##Past Simple##\n**Rule**\n- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3\n\n\n\nXXX",
+          "",
           ""
         ],
         [
-          "Present Simple",
-          "- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3",
-          "- Active: They write letters.\n- Passive: Letters are written by them."
+          "",
+          "",
+          "- @@They built a house. \u2192 A house was built by them.@@"
         ],
         [
-          "Present Continuous",
-          "- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3",
-          "- @@She is reading a book. \u2192 A book is being read by her.@@"
+          "6. Past Continuous",
+          "- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3",
+          "- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@"
         ],
         [
-          "Present Perfect",
-          "- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3",
-          "- @@He has done the work. \u2192 The work has been done by him.@@"
+          "7. Past Perfect",
+          "- Active: Subject + had + V3 + Object\n- Passive: Object + had + been + V3",
+          "- @@He had finished the task. \u2192 The task had been finished by him.@@"
         ],
         [
-          "Present Perfect Continuous",
+          "8. Past Perfect Continuous",
           "\u274c No passive form.",
           ""
         ],
         [
-          "Past Simple",
-          "- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3",
-          "- @@They built a house. \u2192 A house was built by them.@@"
+          "9. Future Simple",
+          "- Active: Subject + will + V1 + Object\n- Passive: Object + will + be + V3",
+          "- @@She will write a report. \u2192 A report will be written by her.@@"
         ],
         [
-          "Past Continuous",
-          "- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3",
-          "- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@"
+          "Future (Going to)",
+          "- Active: Subject + is/am/are + going to + V1 + Object\n- Passive: Object + is/am/are + going to + be + V3",
+          "- @@They are going to start the show. \u2192 The show is going to be started by them.@@"
+        ],
+        [
+          "Future Perfect",
+          "- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject",
+          "- @@He will have completed the work. \u2192 The work will have been completed by him.@@"
+        ],
+        [
+          "Future Perfect Continuous",
+          "",
+          ""
         ]
       ]
     }
