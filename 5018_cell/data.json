@@ -1,5 +1,5 @@
 {
-  "activeSheet": 21,
+  "activeSheet": 8,
   "categories": [
     "Bangla",
     "English"
@@ -20,7 +20,8 @@
     "18": "English",
     "19": "English",
     "20": "English",
-    "21": "English"
+    "21": "English",
+    "22": "English"
   },
   "sheets": [
     {
@@ -427,8 +428,28 @@
           ""
         ],
         [
-          "",
-          "",
+          "Archaism",
+          "\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09be \u098f\u0996\u09a8 \u0986\u09b0 \u09aa\u09cd\u09b0\u099a\u09b2\u09bf\u09a4 \u09a8\u09df",
+          ""
+        ],
+        [
+          "Neologism",
+          "\u09a8\u09a4\u09c1\u09a8 \u09b6\u09ac\u09cd\u09a6",
+          ""
+        ],
+        [
+          "Barbarism",
+          "==\u09ad\u09be\u09b7\u09be\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09df\u09cb\u0997==",
+          ""
+        ],
+        [
+          "Solecism",
+          "\u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3\u0997\u09a4 \u09ad\u09c1\u09b2",
+          ""
+        ],
+        [
+          "Convalesce",
+          "\u09b8\u09c1\u09b8\u09cd\u09a5 \u09b9\u0993\u09df\u09be",
           ""
         ]
       ]
@@ -833,7 +854,7 @@
         ],
         [
           "**\u0988\u09b6\u09cd\u09ac\u09b0\u099a\u09a8\u09cd\u09a6\u09cd\u09b0 \u0997\u09c1\u09aa\u09cd\u09a4**",
-          "- \u09a8\u09c0\u09b2\u0995\u09b0\n__`\u09a8\u09c0\u09b2\u0995\u09b0\u09a6\u09c7\u09b0 \u0985\u09a4\u09cd\u09af\u09be\u099a\u09be\u09b0 \u09a5\u09c7\u0995\u09c7 \u09b0\u09c7\u09b9\u09be\u0987 \u09aa\u09be\u0993\u09df\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u09ae\u09b9\u09be\u09b0\u09be\u09a3\u09c0 \u09ad\u09bf\u0995\u09cd\u099f\u09cb\u09b0\u09bf\u09df\u09be\u09b0 \u0989\u09a6\u09cd\u09a6\u09c7\u09b6\u09cd\u09af\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u099c\u09be\u09a8\u09bf\u09df\u09c7 '\u09a8\u09c0\u09b2\u0995\u09b0' \u0995\u09ac\u09bf\u09a4\u09be \u09b0\u099a\u09a8\u09be \u0995\u09b0\u09c7\u099b\u09bf\u09b2\u09c7\u09a8`__"
+          "- \u09a8\u09c0\u09b2\u0995\u09b0\n`\u09a8\u09c0\u09b2\u0995\u09b0\u09a6\u09c7\u09b0 \u0985\u09a4\u09cd\u09af\u09be\u099a\u09be\u09b0 \u09a5\u09c7\u0995\u09c7 \u09b0\u09c7\u09b9\u09be\u0987 \u09aa\u09be\u0993\u09df\u09be\u09b0 \u099c\u09a8\u09cd\u09af \u09ae\u09b9\u09be\u09b0\u09be\u09a3\u09c0 \u09ad\u09bf\u0995\u09cd\u099f\u09cb\u09b0\u09bf\u09df\u09be\u09b0 \u0989\u09a6\u09cd\u09a6\u09c7\u09b6\u09cd\u09af\u09c7 \u0986\u09ac\u09c7\u09a6\u09a8 \u099c\u09be\u09a8\u09bf\u09df\u09c7 '\u09a8\u09c0\u09b2\u0995\u09b0' \u0995\u09ac\u09bf\u09a4\u09be \u09b0\u099a\u09a8\u09be \u0995\u09b0\u09c7\u099b\u09bf\u09b2\u09c7\u09a8`"
         ],
         [
           "**\u099c\u09b8\u09c0\u09ae\u0989\u09a6\u09cd\u09a6\u09c0\u09a8**",
@@ -855,33 +876,20 @@
     },
     {
       "cellStyles": {
-        "0-0": {
-          "bold": false
-        },
-        "0-1": {
+        "2-0": {
           "center": false
         },
-        "1-1": {
+        "2-1": {
           "bold": false
         },
-        "2-0": {
+        "3-0": {
+          "bold": false
+        },
+        "4-1": {
           "bold": false
         }
       },
       "columns": [
-        {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Details",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "300"
-        },
         {
           "color": "#d1ffd6",
           "font": "JetBrains Mono",
@@ -894,70 +902,91 @@
           "textColor": "#000000",
           "type": "text",
           "width": "300"
+        },
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Details",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "300"
         }
       ],
       "mergedCells": {},
       "name": "English Literature",
       "rows": [
         [
-          "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man",
-          "**Alexander Pope**\n- known for the heroic couplets in poetry"
+          "1.1 **Ages of Literary**",
+          "- The Anglo-Saxon Age (450-1066).\n- The Renaissance Age (1500-1660).\n- The Romantic Age (1798-1832).\n- The Victorian Period (1832-1901)."
         ],
         [
-          "- Every Man in His Humor,\n- Every Man Out of His Humour.\n- Volpone (1605),\n- Epicoene; or, The Silent Woman (1609),\n- The Alchemist (1610),\n- Bartholomew Fair (1614),\n- The Magnetic Lady,\n- The Devil is an Ass",
-          "**Ben Jonson**\n- Regarded as the second most important English dramatist, after William Shakespeare, during the reign of James I.\n- His comedies are known as 'Comedy of Humors'."
+          "**Alexander Pope**\n- known for the heroic couplets in poetry",
+          "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man"
         ],
         [
-          "- To Helen",
-          "Edgar Allan"
+          "**Ben Jonson**\n- Regarded as the second most important English dramatist, after William Shakespeare, during the reign of James I.\n- His comedies are known as 'Comedy of Humors'.",
+          "- Every Man in His Humor,\n- Every Man Out of His Humour.\n- Volpone (1605),\n- Epicoene; or, The Silent Woman (1609),\n- The Alchemist (1610),\n- Bartholomew Fair (1614),\n- The Magnetic Lady,\n- The Devil is an Ass"
         ],
         [
-          "Which of the following authors wrote \"The Faerie Queene\"?",
-          "Edmund Spenser"
+          "Edgar Allan",
+          "- To Helen"
         ],
         [
-          "Who is credited for developing the essay as a literary form in English?",
-          "Francis Bacon"
+          "Edmund Spenser",
+          "Which of the following authors wrote \"The Faerie Queene\"?"
         ],
         [
-          "- The Sun Rising\n- The Good Morrow\n- The Flea",
-          "John Donne"
+          "Francis Bacon",
+          "Who is credited for developing the essay as a literary form in English?"
         ],
         [
-          "- Lycidas",
-          "John Milton"
+          "John Donne",
+          "- The Sun Rising\n- The Good Morrow\n- The Flea"
         ],
         [
-          "Who is considered the leading poet of the Victorian era?",
-          "Lord Alfred Tennyson"
+          "John Milton",
+          "- Lycidas\n- Paradise Lost\n- Paradise Regained\n- Samson Agonistes\n- On His Blindness\n- On the Morning of Christ's Nativity"
         ],
         [
-          "Who wrote \"Dover Beach\"?\n**Best works:**\n- Dover Beach: (Poem),\n- The Scholar Gypsy,\n- Essays in Criticism,\n- Culture and Anarchy,\n- Rugby Chapel. (Elegy, written in memoriam of his father),\n- Sohrab and Rustum (Inspired by and retold from the epic Shahnama, written By Ferdousi), etc.",
-          "Matthew Arnold"
+          "Lord Alfred Tennyson",
+          "Who is considered the leading poet of the Victorian era?"
         ],
         [
-          "Who wrote \"The Importance of Being Earnest\"",
-          "Oscar Wilde"
+          "Matthew Arnold",
+          "Who wrote \"Dover Beach\"?\n**Best works:**\n- Dover Beach: (Poem),\n- The Scholar Gypsy,\n- Essays in Criticism,\n- Culture and Anarchy,\n- Rugby Chapel. (Elegy, written in memoriam of his father),\n- Sohrab and Rustum (Inspired by and retold from the epic Shahnama, written By Ferdousi), etc."
         ],
         [
-          "New Arabian Nights",
-          "R. L. Stevenson"
+          "Oscar Wilde",
+          "Who wrote \"The Importance of Being Earnest\""
         ],
         [
-          "Sherlock Holmes",
-          "Sir Arthur Conan Doyle"
+          "R. L. Stevenson",
+          "New Arabian Nights"
         ],
         [
-          "- The Spanish Tragedy, ( The famous play 'The Spanish Tragedy' belongs to The Elizabethan period )\n**Famous quotation:**\n\"The less I speak, the more I meditate.\"\n\n**Important Character of The Spanish Tragedy:**\n- Hieronimo (The protagonist of the story),\n- Bel-Imperia (The main female character of the story),\n- Lorenzo,\n- Balthazar,\n- Horatio,\n- Ghost of Don Andrea, etc.\n\n**His notable work:**\n- The Spanish Tragedy (1585).\n- Cornelia (1590)\n",
-          "Thomas Kyd"
+          "Sir Arthur Conan Doyle",
+          "Sherlock Holmes"
         ],
         [
-          "The Haunted House is a novel written by",
-          "Virginia Woolf"
+          "Thomas Kyd",
+          "- The Spanish Tragedy, ( The famous play 'The Spanish Tragedy' belongs to The Elizabethan period )\n**Famous quotation:**\n\"The less I speak, the more I meditate.\"\n\n**Important Character of The Spanish Tragedy:**\n- Hieronimo (The protagonist of the story),\n- Bel-Imperia (The main female character of the story),\n- Lorenzo,\n- Balthazar,\n- Horatio,\n- Ghost of Don Andrea, etc.\n\n**His notable work:**\n- The Spanish Tragedy (1585).\n- Cornelia (1590)\n"
         ],
         [
-          "- Love's Labour's Lost (play)",
-          "William Shakespeare"
+          "Virginia Woolf",
+          "The Haunted House is a novel written by"
+        ],
+        [
+          "William Shakespeare",
+          "- Love's Labour's Lost (play)"
+        ],
+        [
+          "William Somerset Maugham",
+          "- The Moon and Sixpence (novel)\n- Of Human Bondage\n- Cakes and Ale\n- The Painted Veil\n- The Magician"
         ]
       ]
     },
@@ -1526,6 +1555,34 @@
         [
           "",
           ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "Comic Sans MS",
+          "fontSize": "16",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Rule",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "Right Verb",
+      "rows": [
+        [
+          "All of the **furniture** ==have== been sold out' \n- \u098f\u0996\u09be\u09a8\u09c7 furniture  \u098f\u0995\u099f\u09bf uncountable noun, \u09a4\u09be\u0987 plural verb \"have\" \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09be \u09af\u09be\u09ac\u09c7 \u09a8\u09be\u0964 \nhas"
+        ],
+        [
+          "**Either** of the answers ==are== acceptable in this context'-\n\u098f\u0996\u09be\u09a8\u09c7 \"either\" \u098f\u0995\u09ac\u099a\u09a8 subject, \u09a4\u09be\u0987 verb \u09b9\u0993\u09df\u09be \u0989\u099a\u09bf\u09a4 \"is\"."
         ]
       ]
     }
