@@ -1485,43 +1485,84 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "Active to Passive",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
-          "font": "",
+          "font": "Comic Sans MS",
           "fontSize": "20",
           "headerBgColor": "#000000",
-          "headerTextColor": "#ffffff",
           "headerBold": true,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerCenter": true
+          "headerTextColor": "#ffffff",
+          "name": "Active to Passive",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "Structure",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "Comic Sans MS",
           "fontSize": "14",
           "headerBgColor": "#000000",
-          "headerTextColor": "#ffffff",
           "headerBold": true,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerCenter": true
+          "headerTextColor": "#ffffff",
+          "name": "Structure",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "14",
+          "headerBgColor": "#000000",
+          "headerBold": true,
+          "headerCenter": true,
+          "headerItalic": false,
+          "headerTextColor": "#ffffff",
+          "name": "Example",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "Active - Passive",
       "rows": [
         [
-          "**Future perfect**",
-          "- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject"
+          "Future Perfect",
+          "- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject",
+          ""
         ],
         [
           "Present Simple",
+          "- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3",
+          "- Active: They write letters.\n- Passive: Letters are written by them."
+        ],
+        [
+          "Present Continuous",
+          "- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3",
+          "- @@She is reading a book. \u2192 A book is being read by her.@@"
+        ],
+        [
+          "Present Perfect",
+          "- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3",
+          "- @@He has done the work. \u2192 The work has been done by him.@@"
+        ],
+        [
+          "Present Perfect Continuous",
+          "\u274c No passive form.",
           ""
+        ],
+        [
+          "Past Simple",
+          "- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3",
+          "- @@They built a house. \u2192 A house was built by them.@@"
+        ],
+        [
+          "Past Continuous",
+          "- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3",
+          "- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@"
         ]
       ]
     }
