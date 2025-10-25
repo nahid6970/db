@@ -1,5 +1,5 @@
 {
-  "activeSheet": 18,
+  "activeSheet": 19,
   "categories": [
     "Bangla",
     "English"
@@ -17,7 +17,8 @@
     "15": "Bangla",
     "16": "Bangla",
     "17": "Bangla",
-    "18": "English"
+    "18": "English",
+    "19": "English"
   },
   "sheets": [
     {
@@ -1383,6 +1384,50 @@
         [
           "",
           ""
+        ],
+        [
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "name": "Phrase / Idioms",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "Meaning",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "name": "Phrase & Idoms",
+      "rows": [
+        [
+          "Burn the midnight oil",
+          "to stay up late working or studying"
         ],
         [
           "",
