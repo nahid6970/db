@@ -1,5 +1,5 @@
 {
-  "activeSheet": 19,
+  "activeSheet": 20,
   "categories": [
     "Bangla",
     "English"
@@ -18,7 +18,8 @@
     "16": "Bangla",
     "17": "Bangla",
     "18": "English",
-    "19": "English"
+    "19": "English",
+    "20": "English"
   },
   "sheets": [
     {
@@ -1358,7 +1359,7 @@
           "{bg:#9beb90}Wrong:{/}  She is one of the {best student in the class.\nCorrect: She is one of the best ==students== in the class."
         ],
         [
-          "",
+          "gave (indirect object) + direct object",
           ""
         ],
         [
@@ -1395,32 +1396,32 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "Phrase / Idioms",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Phrase / Idioms",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "Meaning",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Meaning",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "Phrase & Idoms",
@@ -1432,6 +1433,50 @@
         [
           "",
           ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Article",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "500"
+        },
+        {
+          "name": "Example",
+          "type": "text",
+          "width": "200",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "Comic Sans MS",
+          "fontSize": "14",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "name": "Article Rule",
+      "rows": [
+        [
+          "- \u09af\u09a6\u09bf \u09a6\u09c1\u099f\u09cb noun \u09a6\u09bf\u09df\u09c7 **\u098f\u0995\u099c\u09a8 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u0995\u09c7\u0987** \u09ac\u09cb\u099d\u09be\u09a8\u09cb \u09b9\u09df (\u0985\u09b0\u09cd\u09a5\u09be\u09ce, \u098f\u0995\u0987 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf \u09a6\u09c1\u099f\u09bf \u09aa\u09a6 \u09ac\u09be \u0989\u09aa\u09be\u09a7\u09bf \u09a7\u09be\u09b0\u09a3 \u0995\u09b0\u09c7\u09a8), \u09a4\u09be\u09b9\u09b2\u09c7 \u09b6\u09c1\u09a7\u09c1 \u09aa\u09cd\u09b0\u09a5\u09ae noun \u098f\u09b0 \u0986\u0997\u09c7 article \u09ac\u09b8\u09c7 \u098f\u09ac\u0982 verb singular \u09b9\u09df\u0964\n- \u09af\u09a6\u09bf **\u09a6\u09c1\u099f\u09cb \u0986\u09b2\u09be\u09a6\u09be \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf** \u09ac\u09be \u099c\u09bf\u09a8\u09bf\u09b8 \u09ac\u09cb\u099d\u09be\u09a8\u09cb \u09b9\u09af\u09bc, \u09a4\u09be\u09b9\u09b2\u09c7 \u0989\u09ad\u09df noun \u098f\u09b0 \u0986\u0997\u09c7 article (the, a, an) \u09ac\u09b8\u09c7 \u098f\u09ac\u0982 verb plural) \u09b9\u09df",
+          "- The singer and songwriter **is** here.\n- The singer and the songwriter **are** here."
+        ],
+        [
+          "- Insist that \u098f\u09b0 \u09aa\u09b0\u09c7 verb \u098f\u09b0 base form\n\u098f\u09ae\u09a8 \u0995\u09bf\u099b\u09c1 \u0986\u09b0\u0993 verbs \u09af\u09c7\u0997\u09c1\u09b2\u09cb\u09b0 \u09aa\u09b0 subjunctive mood-\u098f verb \u098f\u09b0 base form \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u09b9\u09df-\n- __demand, suggestion, insist, recommendation, request \u0987\u09a4\u09cd\u09af\u09be\u09a6\u09bf__",
+          "- He insisted that she arrive early."
         ]
       ]
     }
