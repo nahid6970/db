@@ -1,5 +1,5 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 17,
   "categories": [
     "Bangla",
     "English"
@@ -14,7 +14,9 @@
     "12": "Bangla",
     "13": "Bangla",
     "14": "Bangla",
-    "15": "Bangla"
+    "15": "Bangla",
+    "16": "Bangla",
+    "17": "Bangla"
   },
   "sheets": [
     {
@@ -23,47 +25,41 @@
         {
           "color": "#ffffff",
           "font": "",
+          "fontSize": "20",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "\u09aa\u09cd\u09b0\u09a6\u09a4\u09cd\u09a4 \u09ac\u09be\u0995\u09cd\u09af",
+          "name": "A",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "300"
         },
         {
           "color": "#ffffff",
           "font": "",
+          "fontSize": "14",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "\u098f\u0995 \u0995\u09a5\u09be\u09df \u09aa\u09cd\u09b0\u0995\u09be\u09b6",
+          "name": "X",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "50"
         }
       ],
-      "name": "\u098f\u0995 \u0995\u09a5\u09be\u09df \u09aa\u09cd\u09b0\u0995\u09be\u09b6",
+      "name": "Tables",
       "rows": [
         [
-          "\u09ac\u09b2\u09a4\u09c7 \u0987\u099a\u09cd\u099b\u09c1\u0995",
-          "\u09ac\u09bf\u09ac\u0995\u09cd\u09b7\u09c1"
+          "**\u09ac\u0987\u09df\u09c7\u09b0 \u09a8\u09be\u09ae - \u09b2\u09c7\u0996\u0995 - \u09ac\u09cd\u09af\u09be\u0996\u09cd\u09af\u09be**\n- **Vocabulario em Idioma Bengalla e Portuguez** - \u09ae\u09a8\u09cb\u098f\u09b2\u09a6\u09cd\u09af \u0986\u09b8\u09b8\u09c1\u09ae\u09cd\u09aa\u09b8\u09be\u0981\u0993 - ==\u09ac\u09be\u0982\u09b2\u09be \u09ad\u09be\u09b7\u09be\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3 (\u0997\u09cd\u09b0\u09a8\u09cd\u09a5 \u09a8\u09df)==\n- **A Grammar of the Bengal Language** - \u09a8\u09be\u09a5\u09be\u09a8\u09bf\u09df\u09c7\u09b2 \u09ac\u09cd\u09b0\u09be\u09b8\u09bf \u09b9\u09cd\u09af\u09be\u09b2\u09b9\u09c7\u09a1 - \u09ac\u09be\u0982\u09b2\u09be \u09ad\u09be\u09b7\u09be\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09aa\u09c2\u09b0\u09cd\u09a3\u09be\u0999\u09cd\u0997\n- **A Grammar of the Bengalee Language** - \u0989\u0987\u09b2\u09bf\u09df\u09be\u09ae \u0995\u09c7\u09b0\u09bf - \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u0982\u09b2\u09be \u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3 \u09af\u09be \u09ac\u09be\u0982\u09b2\u09be \u0997\u09a6\u09cd\u09af\u09b0\u09c0\u09a4\u09bf\u0995\u09c7 \u098f\u0995\u099f\u09bf \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09a7\u09be\u09b0\u09be\u09df \u09b0\u09c2\u09aa \u09a6\u09c7\u09df\u0964\n- **\u0997\u09cc\u09dc\u09c0\u09df \u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3** - \u09b0\u09be\u099c\u09be \u09b0\u09be\u09ae\u09ae\u09cb\u09b9\u09a8 \u09b0\u09be\u09df - \u09ac\u09be\u0999\u09be\u09b2\u09bf \u0995\u09b0\u09cd\u09a4\u09c3\u0995 \u09ac\u09be\u0982\u09b2\u09be \u09ad\u09be\u09b7\u09be\u09df \u09b0\u099a\u09bf\u09a4 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u0982\u09b2\u09be \u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3 \u0997\u09cd\u09b0\u09a8\u09cd\u09a5",
+          ""
         ],
         [
-          "\u09aa\u09cd\u09b0\u09ac\u09c7\u09b6 \u0995\u09b0\u09be\u09b0 \u0987\u099a\u09cd\u099b\u09be",
-          "\u09ac\u09bf\u09ac\u09bf\u0995\u09cd\u09b7\u09be"
-        ],
-        [
-          "\u09ac\u09b2\u09be\u09b0 \u0987\u099a\u09cd\u099b",
-          "\u09ac\u09bf\u09ac\u0995\u09cd\u09b7\u09be"
-        ],
-        [
-          "\u09ad\u09cb\u099c\u09a8 \u0995\u09b0\u09be\u09b0 \u0987\u099a\u09cd\u099b\u09be",
-          "\u09ac\u09c1\u09ad\u09c1\u0995\u09cd\u09b7\u09be"
+          "",
+          ""
         ]
       ]
     },
@@ -260,29 +256,53 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "0-0": {
+          "italic": false
+        },
+        "0-1": {
+          "italic": false
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
           "font": "",
+          "fontSize": "20",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "\u09ac\u09be\u0997\u09a7\u09be\u09b0\u09be",
+          "name": "\u09b2\u09c7\u0996\u0995",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "120"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "\u09a4\u09be\u09b0 \u09b0\u099a\u09a8\u09be",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
         }
       ],
-      "name": "\u09ac\u09be\u0997\u09a7\u09be\u09b0\u09be",
+      "name": "\u09ac\u09be\u0982\u09b2\u09be \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af",
       "rows": [
         [
-          "**\u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0985\u09b2\u09b8**\n- \u0995\u09c1\u0981\u09dc\u09c7\u09b0 \u09ac\u09be\u09a6\u09b6\u09be\n- \u0996\u09dc\u09c7\u09b0 \u09a6\u09c7\u09ac\u09a4\u09be\n- \u0985\u099c\u0997\u09b0 \u09ac\u09c3\u09a4\u09cd\u09a4\u09bf\n- \u0997\u09df\u0982\u0997\u099a\u09cd\u099b"
+          "**\u09b9\u09c7\u09b2\u09be\u09b2 \u09b9\u09be\u09ab\u09bf\u099c**\n- \u09aa\u09cd\u09b0\u09c7\u09ae \u0993 \u09a6\u09cd\u09b0\u09cb\u09b9\u09c7\u09b0 \u0995\u09ac\u09bf \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09aa\u09b0\u09bf\u099a\u09bf\u09a4",
+          "**\u0995\u09be\u09ac\u09cd\u09af\u0997\u09cd\u09b0\u09a8\u09cd\u09a5 (2)**\n- \u09af\u09c7 \u099c\u09b2\u09c7 \u0986\u0997\u09c1\u09a8 \u099c\u09cd\u09ac\u09b2\u09c7'\n- \u0995\u09ac\u09bf\u09a4\u09be \u098f\u0995\u09be\u09a4\u09cd\u09a4\u09b0\n\n**\u0995\u09ac\u09bf\u09a4\u09be\u0982\u09b6**\n\u098f\u0996\u09a8 \u09af\u09cc\u09ac\u09a8 \u09af\u09be\u09b0 \u09af\u09c1\u09a6\u09cd\u09a7\u09c7 \u09af\u09be\u09ac\u09be\u09b0 \u09a4\u09be\u09b0 \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09b8\u09ae\u09df"
         ],
         [
-          "**\u09ab\u09a4\u09cb \u09a8\u09ac\u09be\u09ac**\n\u09b8\u09ae\u09cd\u09ac\u09b2\u09b9\u09c0\u09a8\u09c7\u09b0 \u09ac\u09dc\u09b2\u09cb\u0995\u09bf\u09ad\u09be\u09ac"
+          "",
+          ""
         ]
       ]
     },
@@ -703,25 +723,7 @@
       ]
     },
     {
-      "cellStyles": {
-        "0-0": {
-          "fontSize": "20px"
-        },
-        "1-0": {
-          "bold": false,
-          "center": false,
-          "fontSize": "20px"
-        },
-        "2-0": {
-          "fontSize": "20px"
-        },
-        "3-0": {
-          "fontSize": "20px"
-        },
-        "4-0": {
-          "fontSize": "20px"
-        }
-      },
+      "cellStyles": {},
       "columns": [
         {
           "color": "#ffffff",
@@ -731,29 +733,42 @@
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
+          "name": "\u09aa\u09cd\u09b0\u09a6\u09a4\u09cd\u09a4 \u09ac\u09be\u0995\u09cd\u09af",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "\u098f\u0995 \u0995\u09a5\u09be\u09df \u09aa\u09cd\u09b0\u0995\u09be\u09b6",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
         }
       ],
-      "mergedCells": {},
-      "name": "\u09b8\u09ae\u09be\u09b8",
+      "name": "\u098f\u0995 \u0995\u09a5\u09be\u09df \u09aa\u09cd\u09b0\u0995\u09be\u09b6",
       "rows": [
         [
-          "**\u0985\u09b2\u09c1\u0995 \u09ac\u09b9\u09c1\u09ac\u09cd\u09b0\u09c0\u09b9\u09bf \u09b8\u09ae\u09be\u09b8:** \u09af\u09c7 \u09ac\u09b9\u09c1\u09ac\u09cd\u09b0\u09c0\u09b9\u09bf \u09b8\u09ae\u09be\u09b8\u09c7\u09b0 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf \u09b2\u09cb\u09aa \u09aa\u09be\u09df\u09a8\u09be\n- \u0997\u09b2\u09be\u09df \u0997\u09be\u09ae\u099b\u09be \u09af\u09be\u09b0 = \u0997\u09b2\u09be\u09df\u0997\u09be\u09ae\u099b\u09be\n- \u09ae\u09be\u09a5\u09be\u09df \u09aa\u09be\u0997\u09dc\u09bf \u09af\u09be\u09b0 = \u09ae\u09be\u09a5\u09be\u09df \u09aa\u09be\u0997\u09dc\u09bf\n- \u09b9\u09be\u09a4\u09c7 \u09ac\u09c7\u09dc\u09bf \u09af\u09be\u09b0 = \u09b9\u09be\u09a4\u09c7-\u09ac\u09c7\u09dc\u09bf"
+          "\u09ac\u09b2\u09a4\u09c7 \u0987\u099a\u09cd\u099b\u09c1\u0995",
+          "\u09ac\u09bf\u09ac\u0995\u09cd\u09b7\u09c1"
         ],
         [
-          "**\u0985\u09b2\u09c1\u0995 \u09a4\u09ce\u09aa\u09c1\u09b0\u09c1\u09b7 \u09b8\u09ae\u09be\u09b8:**  \u09af\u09c7 \u09a4\u09ce\u09aa\u09c1\u09b0\u09c1\u09b7 \u09b8\u09ae\u09be\u09b8\u09c7 \u09aa\u09c2\u09b0\u09cd\u09ac\u09aa\u09a6\u09c7\u09b0 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf \u09b2\u09cb\u09aa \u09aa\u09be\u09df \u09a8\u09be\n- \u09a4\u09c7\u09b2\u09c7 \u09ad\u09be\u099c\u09be = \u09a4\u09c7\u09b2\u09c7\u09ad\u09be\u099c\u09be\n- \u0997\u09b0\u09c1\u09b0 \u0997\u09be\u09dc\u09bf = \u0997\u09b0\u09c1\u09b0\u0997\u09be\u09dc\u09bf\n- \u09ae\u09be\u099f\u09bf\u09b0 \u09ae\u09be\u09a8\u09c1\u09b7 = \u09ae\u09be\u099f\u09bf\u09b0 \u09ae\u09be\u09a8\u09c1\u09b7"
+          "\u09aa\u09cd\u09b0\u09ac\u09c7\u09b6 \u0995\u09b0\u09be\u09b0 \u0987\u099a\u09cd\u099b\u09be",
+          "\u09ac\u09bf\u09ac\u09bf\u0995\u09cd\u09b7\u09be"
         ],
         [
-          ""
+          "\u09ac\u09b2\u09be\u09b0 \u0987\u099a\u09cd\u099b",
+          "\u09ac\u09bf\u09ac\u0995\u09cd\u09b7\u09be"
         ],
         [
-          ""
-        ],
-        [
-          ""
+          "\u09ad\u09cb\u099c\u09a8 \u0995\u09b0\u09be\u09b0 \u0987\u099a\u09cd\u099b\u09be",
+          "\u09ac\u09c1\u09ad\u09c1\u0995\u09cd\u09b7\u09be"
         ]
       ]
     },
@@ -876,42 +891,19 @@
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "\u09ae\u09c2\u09b2 \u09b6\u09ac\u09cd\u09a6",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
+          "name": "\u09ac\u09be\u0997\u09a7\u09be\u09b0\u09be",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
         }
       ],
-      "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
+      "name": "\u09ac\u09be\u0997\u09a7\u09be\u09b0\u09be",
       "rows": [
         [
-          "\u09b8\u09cc\u09ad\u09be\u0997\u09cd\u09af",
-          "\u09a6\u09c1\u09b0\u09cd\u09a6\u09c8\u09ac"
+          "**\u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0985\u09b2\u09b8**\n- \u0995\u09c1\u0981\u09dc\u09c7\u09b0 \u09ac\u09be\u09a6\u09b6\u09be\n- \u0996\u09dc\u09c7\u09b0 \u09a6\u09c7\u09ac\u09a4\u09be\n- \u0985\u099c\u0997\u09b0 \u09ac\u09c3\u09a4\u09cd\u09a4\u09bf\n- \u0997\u09df\u0982\u0997\u099a\u09cd\u099b"
         ],
         [
-          "\u0995\u09c3\u09a4\u09cd\u09b0\u09bf\u09ae",
-          "\u09a8\u09c8\u09b8\u09b0\u09cd\u0997\u09bf\u0995"
-        ],
-        [
-          "\u0995\u09be\u09b0\u09cd\u09aa\u09a3\u09cd\u09af",
-          "\u0994\u09a6\u09be\u09b0\u09cd\u09af"
-        ],
-        [
-          "\u09b8\u0982\u0995\u09c0\u09b0\u09cd\u09a3",
-          "\u09a6\u09b0\u09be\u099c"
+          "**\u09ab\u09a4\u09cb \u09a8\u09ac\u09be\u09ac**\n\u09b8\u09ae\u09cd\u09ac\u09b2\u09b9\u09c0\u09a8\u09c7\u09b0 \u09ac\u09dc\u09b2\u09cb\u0995\u09bf\u09ad\u09be\u09ac"
         ]
       ]
     },
@@ -978,6 +970,111 @@
         [
           "",
           ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {
+        "0-0": {
+          "fontSize": "20px"
+        },
+        "1-0": {
+          "bold": false,
+          "center": false,
+          "fontSize": "20px"
+        },
+        "2-0": {
+          "fontSize": "20px"
+        },
+        "3-0": {
+          "fontSize": "20px"
+        },
+        "4-0": {
+          "fontSize": "20px"
+        }
+      },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "mergedCells": {},
+      "name": "\u09b8\u09ae\u09be\u09b8",
+      "rows": [
+        [
+          "**\u0985\u09b2\u09c1\u0995 \u09ac\u09b9\u09c1\u09ac\u09cd\u09b0\u09c0\u09b9\u09bf \u09b8\u09ae\u09be\u09b8:** \u09af\u09c7 \u09ac\u09b9\u09c1\u09ac\u09cd\u09b0\u09c0\u09b9\u09bf \u09b8\u09ae\u09be\u09b8\u09c7\u09b0 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf \u09b2\u09cb\u09aa \u09aa\u09be\u09df\u09a8\u09be\n- \u0997\u09b2\u09be\u09df \u0997\u09be\u09ae\u099b\u09be \u09af\u09be\u09b0 = \u0997\u09b2\u09be\u09df\u0997\u09be\u09ae\u099b\u09be\n- \u09ae\u09be\u09a5\u09be\u09df \u09aa\u09be\u0997\u09dc\u09bf \u09af\u09be\u09b0 = \u09ae\u09be\u09a5\u09be\u09df \u09aa\u09be\u0997\u09dc\u09bf\n- \u09b9\u09be\u09a4\u09c7 \u09ac\u09c7\u09dc\u09bf \u09af\u09be\u09b0 = \u09b9\u09be\u09a4\u09c7-\u09ac\u09c7\u09dc\u09bf"
+        ],
+        [
+          "**\u0985\u09b2\u09c1\u0995 \u09a4\u09ce\u09aa\u09c1\u09b0\u09c1\u09b7 \u09b8\u09ae\u09be\u09b8:**  \u09af\u09c7 \u09a4\u09ce\u09aa\u09c1\u09b0\u09c1\u09b7 \u09b8\u09ae\u09be\u09b8\u09c7 \u09aa\u09c2\u09b0\u09cd\u09ac\u09aa\u09a6\u09c7\u09b0 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf \u09b2\u09cb\u09aa \u09aa\u09be\u09df \u09a8\u09be\n- \u09a4\u09c7\u09b2\u09c7 \u09ad\u09be\u099c\u09be = \u09a4\u09c7\u09b2\u09c7\u09ad\u09be\u099c\u09be\n- \u0997\u09b0\u09c1\u09b0 \u0997\u09be\u09dc\u09bf = \u0997\u09b0\u09c1\u09b0\u0997\u09be\u09dc\u09bf\n- \u09ae\u09be\u099f\u09bf\u09b0 \u09ae\u09be\u09a8\u09c1\u09b7 = \u09ae\u09be\u099f\u09bf\u09b0 \u09ae\u09be\u09a8\u09c1\u09b7"
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ],
+        [
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "\u09ae\u09c2\u09b2 \u09b6\u09ac\u09cd\u09a6",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
+      "rows": [
+        [
+          "\u09b8\u09cc\u09ad\u09be\u0997\u09cd\u09af",
+          "\u09a6\u09c1\u09b0\u09cd\u09a6\u09c8\u09ac"
+        ],
+        [
+          "\u0995\u09c3\u09a4\u09cd\u09b0\u09bf\u09ae",
+          "\u09a8\u09c8\u09b8\u09b0\u09cd\u0997\u09bf\u0995"
+        ],
+        [
+          "\u0995\u09be\u09b0\u09cd\u09aa\u09a3\u09cd\u09af",
+          "\u0994\u09a6\u09be\u09b0\u09cd\u09af"
+        ],
+        [
+          "\u09b8\u0982\u0995\u09c0\u09b0\u09cd\u09a3",
+          "\u09a6\u09b0\u09be\u099c"
         ]
       ]
     },
@@ -1094,14 +1191,7 @@
       ]
     },
     {
-      "cellStyles": {
-        "0-0": {
-          "italic": false
-        },
-        "0-1": {
-          "italic": false
-        }
-      },
+      "cellStyles": {},
       "columns": [
         {
           "color": "#ffffff",
@@ -1112,31 +1202,16 @@
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "\u09b2\u09c7\u0996\u0995",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "120"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "\u09a4\u09be\u09b0 \u09b0\u099a\u09a8\u09be",
+          "name": "Q",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
         }
       ],
-      "name": "\u09ac\u09be\u0982\u09b2\u09be \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af",
+      "name": "MCQ",
       "rows": [
         [
-          "**\u09b9\u09c7\u09b2\u09be\u09b2 \u09b9\u09be\u09ab\u09bf\u099c**\n- \u09aa\u09cd\u09b0\u09c7\u09ae \u0993 \u09a6\u09cd\u09b0\u09cb\u09b9\u09c7\u09b0 \u0995\u09ac\u09bf \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09aa\u09b0\u09bf\u099a\u09bf\u09a4",
-          "**\u0995\u09be\u09ac\u09cd\u09af\u0997\u09cd\u09b0\u09a8\u09cd\u09a5 (2)**\n- \u09af\u09c7 \u099c\u09b2\u09c7 \u0986\u0997\u09c1\u09a8 \u099c\u09cd\u09ac\u09b2\u09c7'\n- \u0995\u09ac\u09bf\u09a4\u09be \u098f\u0995\u09be\u09a4\u09cd\u09a4\u09b0\n\n**\u0995\u09ac\u09bf\u09a4\u09be\u0982\u09b6**\n\u098f\u0996\u09a8 \u09af\u09cc\u09ac\u09a8 \u09af\u09be\u09b0 \u09af\u09c1\u09a6\u09cd\u09a7\u09c7 \u09af\u09be\u09ac\u09be\u09b0 \u09a4\u09be\u09b0 \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09b8\u09ae\u09df"
+          "\u0995\u09cb\u09a8 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u099f\u09ad\u09c2\u09ae\u09bf \u0987\u0982\u09b0\u09c7\u099c \u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be \u098f\u09ac\u0982 \u09ae\u09c0\u09b0 \u0995\u09be\u09b8\u09bf\u09ae\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u0987\u0982\u09b0\u09c7\u099c\u09a6\u09c7\u09b0 \u09b8\u0982\u0997\u09cd\u09b0\u09be\u09ae? \u099a\u09a8\u09cd\u09a6\u09cd\u09b0\u09b6\u09c7\u0996\u09b0 \u0995\u09cb\u09a8 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u099f\u09ad\u09c2\u09ae\u09bf \u0987\u0982\u09b0\u09c7\u099c \u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be \u098f\u09ac\u0982 \u09ae\u09c0\u09b0 \u0995\u09be\u09b8\u09bf\u09ae\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u0987\u0982\u09b0\u09c7\u099c\u09a6\u09c7\u09b0 \u09b8\u0982\u0997\u09cd\u09b0\u09be\u09ae? \u099a\u09a8\u09cd\u09a6\u09cd\u09b0\u09b6\u09c7\u0996\u09b0 \u0995\u09cb\u09a8 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u099f\u09ad\u09c2\u09ae\u09bf \u0987\u0982\u09b0\u09c7\u099c \u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be \u098f\u09ac\u0982 \u09ae\u09c0\u09b0 \u0995\u09be\u09b8\u09bf\u09ae\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u0987\u0982\u09b0\u09c7\u099c\u09a6\u09c7\u09b0 \u09b8\u0982\u0997\u09cd\u09b0\u09be\u09ae? \u099a\u09a8\u09cd\u09a6\u09cd\u09b0\u09b6\u09c7\u0996\u09b0 \u0995\u09cb\u09a8 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u099f\u09ad\u09c2\u09ae\u09bf \u0987\u0982\u09b0\u09c7\u099c \u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be \u098f\u09ac\u0982 \u09ae\u09c0\u09b0 \u0995\u09be\u09b8\u09bf\u09ae\u09c7\u09b0 \u09b8\u09be\u09a5\u09c7 \u0987\u0982\u09b0\u09c7\u099c\u09a6\u09c7\u09b0 \u09b8\u0982\u0997\u09cd\u09b0\u09be\u09ae? \u099a\u09a8\u09cd\u09a6\u09cd\u09b0\u09b6\u09c7\u0996\u09b0"
         ]
       ]
     }
