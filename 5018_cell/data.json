@@ -1,8 +1,9 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 27,
   "categories": [
     "Bangla",
-    "English"
+    "English",
+    "\u09b8\u09c1\u09b6\u09be\u09b8\u09a8 // \u09a8\u09c8\u09a4\u09bf\u0995\u09a4\u09be"
   ],
   "sheetCategories": {
     "0": "Bangla",
@@ -25,7 +26,8 @@
     "23": "Bangla",
     "24": "Bangla",
     "25": "Bangla",
-    "26": "Bangla"
+    "26": "Bangla",
+    "27": "\u09b8\u09c1\u09b6\u09be\u09b8\u09a8 // \u09a8\u09c8\u09a4\u09bf\u0995\u09a4\u09be"
   },
   "sheets": [
     {
@@ -261,6 +263,10 @@
         [
           "**Power tends to corrupt, and absolute power corrupts absolutely** \u0989\u0995\u09cd\u09a4\u09bf\u099f\u09bf \u0995\u09c7 \u0995\u09b0\u09c7\u099b\u09c7\u09a8?",
           "\u09b2\u09b0\u09cd\u09a1 \u0985\u09cd\u09af\u09be\u0995\u099f\u09a8"
+        ],
+        [
+          "\u0989\u09aa\u09af\u09cb\u0997\u09ac\u09be\u09a6 // Utilitarianism \u09a4\u09a4\u09cd\u09a4\u09cd\u09ac\u09c7\u09b0 \u099c\u09a8\u0995 \u0995\u09c7?",
+          "\u099c\u09c7\u09b0\u09c7\u09ae\u09bf \u09ac\u09c7\u09a8\u09cd\u09a5\u09be\u09ae"
         ]
       ]
     },
@@ -1833,6 +1839,46 @@
           "\u09b6\u09cd\u09b0\u09be\u09ac\u09a3 \u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9\n- \u09aa\u09b0\u09bf\u099a\u09be\u09b2\u0995 **\u0986\u09b0\u09bf\u09ab\u09c1\u09b0 \u09b0\u09b9\u09ae\u09be\u09a8**"
         ]
       ]
+    },
+    {
+      "name": "Questions",
+      "columns": [
+        {
+          "name": "Q",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "\u09b8\u09c1\u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09b6\u09b0\u09cd\u09a4 \u0995\u09c0?",
+          "\u09ae\u09a4 \u09aa\u09cd\u09b0\u0995\u09be\u09b6\u09c7\u09b0 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8\u09a4\u09be"
+        ]
+      ],
+      "cellStyles": {}
     }
   ]
 }
