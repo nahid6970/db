@@ -1841,44 +1841,56 @@
       ]
     },
     {
-      "name": "Questions",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "Q",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Q",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
+      "name": "Questions",
       "rows": [
         [
           "\u09b8\u09c1\u09b6\u09be\u09b8\u09a8\u09c7\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09b6\u09b0\u09cd\u09a4 \u0995\u09c0?",
           "\u09ae\u09a4 \u09aa\u09cd\u09b0\u0995\u09be\u09b6\u09c7\u09b0 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8\u09a4\u09be"
+        ],
+        [
+          "**Principles of political Economy** \u0997\u09cd\u09b0\u09a8\u09cd\u09a5\u09c7\u09b0 \u09b0\u099a\u09df\u09bf\u09a4\u09be \u0995\u09c7?\n**\u0985\u09a8\u09cd\u09af\u09be\u09a8\u09cd\u09af \u0997\u09cd\u09b0\u09a8\u09cd\u09a5**\n- On Liberty\n- Utilitarianism\n- Principle of political Economy\n- The logic of the moral sciences\n",
+          "\u099c\u09a8 \u09b8\u09cd\u099f\u09c1\u09df\u09be\u09b0\u09cd\u099f \u09ae\u09bf\u09b2"
+        ],
+        [
+          "**\u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u0995\u09bf\u099b\u09c1 \u09ac\u0987\u09df\u09c7\u09b0 \u09a8\u09be\u09ae:**\n- Groundwork of the Metaphysics of Morals\n- Critique of Judgment\n- Critique of Practical Reason\n- Critique of Pure Reason",
+          "\u0987\u09ae\u09be\u09a8\u09c1\u09df\u09c7\u09b2 \u0995\u09be\u09a8\u09cd\u099f"
+        ],
+        [
+          "**\u09ac\u0987**\n- The Problems of Philosophy",
+          "\u09ac\u09be\u09b0\u09cd\u099f\u09cd\u09b0\u09be\u09a8\u09cd\u09a1 \u09b0\u09be\u09b8\u09c7\u09b2\u09c7\u09b0"
         ]
-      ],
-      "cellStyles": {}
+      ]
     }
   ]
 }
