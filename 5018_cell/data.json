@@ -142,7 +142,7 @@
           ""
         ],
         [
-          "\u0986\u0987\u09b8\u09bf\u09b8\u09bf-\u09e8\u09e6\u09e8\u09ea \u098f\u09b0 \u09ac\u09b0\u09cd\u09b7\u09b8\u09c7\u09b0\u09be \u0989\u09a6\u09c0\u09df\u09ae\u09be\u09a8 \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc \u0995\u09c7?",
+          "\u0995\u09cb\u09a8 \u09ae\u09c7\u09ae\u09cb\u09b0\u09bf \u0985\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09b6\u09c0\u09b2 \u0993 \u09ae\u09be\u09a4\u09cd\u09b0 \u098f\u0995\u09ac\u09be\u09b0 \u09b2\u09c7\u0996\u09be \u09af\u09be\u09df?\n\n**PROM vs EPROM vs EEPROM (Super Short)**\n- PROM \u2192 Write once, cannot erase\n- EPROM \u2192 Can erase with UV light, whole chip at once\n- EEPROM \u2192 Erase & rewrite electrically, even byte by byte",
           "\u0995\u09be\u09ae\u09bf\u09a8\u09cd\u09a6\u09c1 \u09ae\u09c7\u09a8\u09cd\u09a1\u09bf\u09b8"
         ],
         [
@@ -396,14 +396,6 @@
         [
           "\u09b0\u0995\u09cd\u09a4\u09c7\u09b0 \u09b9\u09bf\u09ae\u09cb\u0997\u09cd\u09b2\u09cb\u09ac\u09bf\u09a8\u09c7 \u0985\u0995\u09cd\u09b8\u09bf\u099c\u09c7\u09a8 \u09aa\u09b0\u09bf\u09ac\u09b9\u09a8 \u0995\u09cd\u09b7\u09ae\u09a4\u09be \u09b9\u09cd\u09b0\u09be\u09b8 \u0995\u09b0\u09c7 \u0995\u09cb\u09a8\u099f\u09bf?",
           "CO (\u0995\u09be\u09b0\u09cd\u09ac\u09a8 \u09ae\u09a8\u09cb-\u0985\u0995\u09cd\u09b8\u09be\u0987\u09a1)"
-        ],
-        [
-          "\u0995\u09cb\u09a8 \u09ae\u09c7\u09ae\u09cb\u09b0\u09bf \u0985\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09b6\u09c0\u09b2 \u0993 \u09ae\u09be\u09a4\u09cd\u09b0 \u098f\u0995\u09ac\u09be\u09b0 \u09b2\u09c7\u0996\u09be \u09af\u09be\u09df?\n\n**PROM vs EPROM vs EEPROM (Super Short)**\n- PROM \u2192 Write once, cannot erase\n- EPROM \u2192 Can erase with UV light, whole chip at once\n- EEPROM \u2192 Erase & rewrite electrically, even byte by byte",
-          "PROM (Programmable ROM)"
-        ],
-        [
-          "\u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u0995\u09ae \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u09b2\u099c\u09bf\u0995 \u0993 \u09ae\u09c7\u09ae\u09cb\u09b0\u09bf \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7 \u09b2\u09bf\u0996\u09bf\u09a4 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u0995\u09cb\u09a8\u099f\u09bf?",
-          "**\u0985\u09ac\u099c\u09c7\u0995\u09cd\u099f \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae**\n- \u09ae\u09c7\u09b6\u09bf\u09a8 \u09ad\u09be\u09b7\u09be\u09df \u09b0\u099a\u09bf\u09a4 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae\u0995\u09c7 \u0985\u09ac\u099c\u09c7\u0995\u09cd\u099f \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u09ac\u09b2\u09c7"
         ]
       ]
     },
@@ -1325,6 +1317,7 @@
         {
           "color": "#ffffff",
           "font": "",
+          "fontSize": "20",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -1333,12 +1326,13 @@
           "name": "A",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "300"
         },
         {
-          "color": "#ffffff",
+          "color": "#a8ffca",
           "font": "",
-          "headerBgColor": "#f8f9fa",
+          "fontSize": "20",
+          "headerBgColor": "#ffffff",
           "headerBold": true,
           "headerCenter": false,
           "headerItalic": false,
@@ -1352,36 +1346,16 @@
       "name": "ICT",
       "rows": [
         [
-          "",
+          "IP Class A (1 to 126)\nIP Class B (128 to 191)\nIP Class C (192 to 223)\nIP Class D (224 to 239)",
           ""
         ],
         [
-          "IP Class A",
-          "1 to 126"
+          "\u0995\u09cb\u09a8 \u09ae\u09c7\u09ae\u09cb\u09b0\u09bf \u0985\u09b8\u09cd\u09a5\u09bf\u09a4\u09bf\u09b6\u09c0\u09b2 \u0993 \u09ae\u09be\u09a4\u09cd\u09b0 \u098f\u0995\u09ac\u09be\u09b0 \u09b2\u09c7\u0996\u09be \u09af\u09be\u09df?\n\n**PROM vs EPROM vs EEPROM (Super Short)**\n- PROM \u2192 Write once, cannot erase\n- EPROM \u2192 Can erase with UV light, whole chip at once\n- EEPROM \u2192 Erase & rewrite electrically, even byte by byte",
+          "PROM (Programmable ROM)"
         ],
         [
-          "IP Class B",
-          "128 to 191"
-        ],
-        [
-          "IP Class C ",
-          "192 to 223"
-        ],
-        [
-          "IP Class D",
-          "224 to 239"
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
+          "\u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u0995\u09ae \u09aa\u09b0\u09bf\u09ae\u09be\u09a3 \u09b2\u099c\u09bf\u0995 \u0993 \u09ae\u09c7\u09ae\u09cb\u09b0\u09bf \u09aa\u09b0\u09bf\u09b8\u09b0\u09c7 \u09b2\u09bf\u0996\u09bf\u09a4 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u0995\u09cb\u09a8\u099f\u09bf?",
+          "**\u0985\u09ac\u099c\u09c7\u0995\u09cd\u099f \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae**\n- \u09ae\u09c7\u09b6\u09bf\u09a8 \u09ad\u09be\u09b7\u09be\u09df \u09b0\u099a\u09bf\u09a4 \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae\u0995\u09c7 \u0985\u09ac\u099c\u09c7\u0995\u09cd\u099f \u09aa\u09cd\u09b0\u09cb\u0997\u09cd\u09b0\u09be\u09ae \u09ac\u09b2\u09c7"
         ]
       ]
     },
