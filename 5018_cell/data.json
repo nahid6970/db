@@ -1,5 +1,5 @@
 {
-  "activeSheet": 2,
+  "activeSheet": 6,
   "categories": [
     "Bangla",
     "English"
@@ -371,8 +371,16 @@
           "\u09ac\u09bf\u099a\u09be\u09b0 \u09ac\u09bf\u09ad\u09be\u0997"
         ],
         [
+          "\u09a6\u09c7\u09b6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae '\u099c\u09b2\u09be\u09ad\u09c2\u09ae\u09bf \u09a8\u09bf\u09b0\u09cd\u09ad\u09b0 \u09aa\u09cd\u09b0\u09be\u09a3\u09c0 \u0985\u09ad\u09df\u09be\u09b0\u09a3\u09cd\u09af' \u0995\u09cb\u09a8 \u099c\u09c7\u09b2\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4?",
+          "\u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0"
+        ],
+        [
           "",
           ""
+        ],
+        [
+          "Fifth Column \u09ac\u09b2\u09a4\u09c7 \u0995\u09c0 \u09ac\u09c1\u099d\u09be\u09df?",
+          "\u09a6\u09c7\u09b6\u09c7\u09b0 \u09ad\u09bf\u09a4\u09b0\u09c7 \u0997\u09cb\u09aa\u09a8\u09c7 \u09b6\u09a4\u09cd\u09b0\u09c1\u09b0 \u09b8\u09b9\u09be\u09df\u0995 \u0997\u09cd\u09b0\u09c1\u09aa"
         ]
       ]
     },
@@ -807,7 +815,7 @@
     {
       "cellStyles": {
         "0-0": {
-          "center": true
+          "center": false
         },
         "0-1": {
           "center": false
@@ -854,17 +862,18 @@
           "width": "150"
         },
         {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "\u0995\u09be\u099c\u09c7\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0:",
-          "textColor": "#000000",
+          "name": "\u0995\u09be\u099c\u09c7\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0: // Others",
           "type": "text",
-          "width": "300"
+          "width": "300",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "14",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "ORG",
@@ -874,6 +883,12 @@
           "1982",
           "\u0993\u09df\u09be\u09b6\u09bf\u0982\u099f\u09a8 \u09a1\u09bf\u09b8\u09bf, \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0",
           "\ud83c\udfaf\u099c\u09b2\u09ac\u09be\u09af\u09bc\u09c1 (Climate)\n\ud83c\udfaf\u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09bf \u098f\u09ac\u0982 \u09aa\u09cd\u09b0\u09be\u0995\u09c3\u09a4\u09bf\u0995 \u09b8\u09ae\u09cd\u09aa\u09a6 \u09b8\u0982\u09b0\u0995\u09cd\u09b7\u09a3\u09c7\u09b0 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u0997\u09cb\u09b7\u09cd\u09a0\u09c0\n"
+        ],
+        [
+          "BIDA - Bangladesh Investment Development Authority",
+          "",
+          "",
+          "- \u099a\u09c7\u09df\u09be\u09b0\u09ae\u09cd\u09af\u09be\u09a8: \u09aa\u09cd\u09b0\u09a7\u09be\u09a8\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0/\u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u0989\u09aa\u09a6\u09c7\u09b7\u09cd\u099f\u09be\n- \u09ad\u09be\u0987\u09b8 \u099a\u09c7\u09df\u09be\u09b0\u09ae\u09cd\u09af\u09be\u09a8: \u0985\u09b0\u09cd\u09a5\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0/\u0985\u09b0\u09cd\u09a5 \u0989\u09aa\u09a6\u09c7\u09b7\u09cd\u099f\u09be"
         ]
       ]
     },
