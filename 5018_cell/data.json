@@ -1,5 +1,5 @@
 {
-  "activeSheet": 9,
+  "activeSheet": 3,
   "categories": [
     "Bangla",
     "English",
@@ -504,6 +504,16 @@
           ""
         ],
         [
+          "Archaism",
+          "\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09be \u098f\u0996\u09a8 \u0986\u09b0 \u09aa\u09cd\u09b0\u099a\u09b2\u09bf\u09a4 \u09a8\u09df",
+          ""
+        ],
+        [
+          "Barbarism",
+          "==\u09ad\u09be\u09b7\u09be\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09df\u09cb\u0997==",
+          ""
+        ],
+        [
           "Brochure",
           "\u09aa\u09c1\u09b8\u09cd\u09a4\u09bf\u0995\u09be",
           ""
@@ -511,6 +521,11 @@
         [
           "Cogent",
           "\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b8\u0999\u09cd\u0997\u09a4, \u09b8\u09cd\u09aa\u09b7\u09cd\u099f",
+          ""
+        ],
+        [
+          "Convalesce",
+          "\u09b8\u09c1\u09b8\u09cd\u09a5 \u09b9\u0993\u09df\u09be",
           ""
         ],
         [
@@ -524,8 +539,18 @@
           ""
         ],
         [
+          "Emancipate",
+          " \u0995\u09be\u0989\u0995\u09c7 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8 \u0995\u09b0\u09c7 \u09a6\u09c7\u0993\u09df\u09be \u09ac\u09be \u09ae\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09be",
+          ""
+        ],
+        [
           "Fallow Land",
           "\u09aa\u09a4\u09bf\u09a4 \u099c\u09ae\u09bf",
+          ""
+        ],
+        [
+          "French Leave",
+          "Leave without permission",
           ""
         ],
         [
@@ -534,43 +559,8 @@
           ""
         ],
         [
-          "Propaganda",
-          "\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u09a3\u09be",
-          ""
-        ],
-        [
-          "Serenity",
-          "\u09b6\u09be\u09a8\u09cd\u09a4\u09bf \u09ac\u09be \u09b8\u09cd\u09a5\u09bf\u09b0\u09a4\u09be",
-          ""
-        ],
-        [
-          "Quartz",
-          "\u09b8\u09cd\u09ab\u099f\u09bf\u0995 (hard, crystalline mineral composed of silicon and oxygen)",
-          ""
-        ],
-        [
-          "Orchestra",
-          "\u09af\u09a8\u09cd\u09a4\u09cd\u09b0\u09b8\u0982\u0997\u09c0\u09a4\u09b6\u09bf\u09b2\u09cd\u09aa\u09c0\u09a6\u09c7\u09b0 \u098f\u0995\u099f\u09bf \u09a6\u09b2",
-          ""
-        ],
-        [
           "Inveterate, Habitual, Chronic",
           "\u098f\u09ae\u09a8 \u0995\u09bf\u099b\u09c1 \u09af\u09be \u09a6\u09c0\u09b0\u09cd\u0998\u09a6\u09bf\u09a8 \u09a7\u09b0\u09c7 \u099a\u09b2\u099b\u09c7 \u09ac\u09be \u0997\u09ad\u09c0\u09b0\u09ad\u09be\u09ac\u09c7 \u0985\u09ad\u09cd\u09af\u09b8\u09cd\u09a4",
-          ""
-        ],
-        [
-          "Emancipate",
-          " \u0995\u09be\u0989\u0995\u09c7 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8 \u0995\u09b0\u09c7 \u09a6\u09c7\u0993\u09df\u09be \u09ac\u09be \u09ae\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09be",
-          ""
-        ],
-        [
-          "Subjugate",
-          "\u0995\u09be\u0989\u0995\u09c7 \u09a6\u09ae\u09a8 \u0995\u09b0\u09be \u09ac\u09be \u0985\u09a7\u09c0\u09a8 \u0995\u09b0\u09be",
-          ""
-        ],
-        [
-          "Archaism",
-          "\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09be \u098f\u0996\u09a8 \u0986\u09b0 \u09aa\u09cd\u09b0\u099a\u09b2\u09bf\u09a4 \u09a8\u09df",
           ""
         ],
         [
@@ -579,8 +569,23 @@
           ""
         ],
         [
-          "Barbarism",
-          "==\u09ad\u09be\u09b7\u09be\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09df\u09cb\u0997==",
+          "Orchestra",
+          "\u09af\u09a8\u09cd\u09a4\u09cd\u09b0\u09b8\u0982\u0997\u09c0\u09a4\u09b6\u09bf\u09b2\u09cd\u09aa\u09c0\u09a6\u09c7\u09b0 \u098f\u0995\u099f\u09bf \u09a6\u09b2",
+          ""
+        ],
+        [
+          "Propaganda",
+          "\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u09a3\u09be",
+          ""
+        ],
+        [
+          "Quartz",
+          "\u09b8\u09cd\u09ab\u099f\u09bf\u0995 (hard, crystalline mineral composed of silicon and oxygen)",
+          ""
+        ],
+        [
+          "Serenity",
+          "\u09b6\u09be\u09a8\u09cd\u09a4\u09bf \u09ac\u09be \u09b8\u09cd\u09a5\u09bf\u09b0\u09a4\u09be",
           ""
         ],
         [
@@ -589,8 +594,8 @@
           ""
         ],
         [
-          "Convalesce",
-          "\u09b8\u09c1\u09b8\u09cd\u09a5 \u09b9\u0993\u09df\u09be",
+          "Subjugate",
+          "\u0995\u09be\u0989\u0995\u09c7 \u09a6\u09ae\u09a8 \u0995\u09b0\u09be \u09ac\u09be \u0985\u09a7\u09c0\u09a8 \u0995\u09b0\u09be",
           ""
         ]
       ]
@@ -1213,7 +1218,7 @@
         ],
         [
           "**\u09b8\u09c8\u09df\u09a6 \u0987\u09b8\u09ae\u09be\u0987\u09b2 \u09b9\u09cb\u09b8\u09c7\u09a8 ==\u09b8\u09bf\u09b0\u09be\u099c\u09c0==**\n- \u09a4\u09be\u09b0 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u0997\u09c1\u09b2\u09cb \u09ac\u0999\u09cd\u0995\u09bf\u09ae\u099a\u09a8\u09cd\u09a6\u09cd\u09b0\u09c7\u09b0 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u0995\u09cd\u09b0\u09bf\u09df\u09be\u09df \u09b0\u099a\u09bf\u09a4",
-          "- \u09a4\u09be\u09b0\u09be\u09ac\u09be\u0988\n- \u09ab\u09bf\u09b0\u09cb\u099c\u09be \u09ac\u09c7\u0997\u09ae\n- \u09b0\u09be\u09df\u09a8\u09a8\u09cd\u09a6\u09bf\u09a8\u09c0"
+          "- \u09a4\u09be\u09b0\u09be\u09ac\u09be\u0988\n- \u09ab\u09bf\u09b0\u09cb\u099c\u09be \u09ac\u09c7\u0997\u09ae\n- \u09b0\u09be\u09df\u09a8\u09a8\u09cd\u09a6\u09bf\u09a8\u09c0\n- \u0985\u09a8\u09b2 \u09aa\u09cd\u09b0\u09ac\u09be\u09b9 **(\u0995\u09be\u09ac\u09cd\u09af\u099f\u09bf \u09ac\u09be\u099c\u09c7\u09df\u09be\u09aa\u09cd\u09a4 \u09b9\u09df)**"
         ],
         [
           "**\u09b8\u09c8\u09df\u09a6 \u09ae\u09c1\u099c\u09a4\u09ac\u09be \u0986\u09b2\u09c0**",
@@ -1226,6 +1231,10 @@
         [
           "**\u099c\u09c7.\u098f\u09ab.\u0986\u09b0 \u099c\u09cd\u09af\u09be\u0995\u09ac**",
           "**Book**\n- Surrender at Dacca: Birth of a nation"
+        ],
+        [
+          "**\u09ac\u09dc \u099a\u09a3\u09cd\u09a1\u09c0\u09a6\u09be\u09b8**",
+          "- **\u09b6\u09cd\u09b0\u09c0\u0995\u09c3\u09b7\u09cd\u09a3\u0995\u09c0\u09b0\u09cd\u09a4\u09a8**\n--  **\u09ae\u09a7\u09cd\u09af\u09af\u09c1\u0997\u09c7\u09b0 \u0986\u09a6\u09bf \u09ac\u09be \u09aa\u09cd\u09b0\u09a5\u09ae \u0995\u09ac\u09bf** \u09ac\u09dc \u099a\u09a3\u09cd\u09a1\u09c0\u09a6\u09be\u09b8 \u09b0\u099a\u09bf\u09a4 **\u0996\u09be\u0981\u099f\u09bf \u09ac\u09be\u0982\u09b2\u09be \u09ad\u09be\u09b7\u09be\u09df \u09b0\u099a\u09bf\u09a4 \u09ae\u09a7\u09cd\u09af\u09af\u09c1\u0997\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u0995\u09be\u09ac\u09cd\u09af '\u09b6\u09cd\u09b0\u09c0\u0995\u09c3\u09b7\u09cd\u09a3\u0995\u09c0\u09b0\u09cd\u09a4\u09a8**\n-- **\u0995\u09be\u09ac\u09cd\u09af\u09c7\u09b0 \u09ac\u09bf\u09b7\u09df\u09ac\u09b8\u09cd\u09a4\u09c1:** \u09b0\u09be\u09a7\u09be\u0995\u09c3\u09b7\u09cd\u09a3\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a3\u09df\u09b2\u09c0\u09b2\u09be\n-- \u098f \u0995\u09be\u09ac\u09cd\u09af\u09c7 \u09ae\u09cb\u099f **\u09ea\u09e7\u09ee\u099f\u09bf \u09aa\u09a6** \u098f\u09ac\u0982 **\u09e7\u09e9\u099f\u09bf \u0996\u09a3\u09cd\u09a1** \u09b0\u09df\u09c7\u099b\u09c7\n-- **\u0996\u09a3\u09cd\u09a1\u0997\u09c1\u09b2\u09cb \u09b9\u09b2\u09cb:-** **\u09e7.** \u099c\u09a8\u09cd\u09ae\u0996\u09a3\u09cd\u09a1 **\u09e8.** \u09a4\u09be\u09ae\u09cd\u09ac\u09c1\u09b2 \u0996\u09a3\u09cd\u09a1 **\u09e9.** \u09a6\u09be\u09a8\u0996\u09a3\u09cd\u09a1 **\u09ea.** \u09a8\u09cc\u0995\u09be\u0996\u09a3\u09cd\u09a1 **\u09eb.** \u09ad\u09be\u09b0 \u0996\u09a3\u09cd\u09a1 **\u09ec.** \u099b\u09a4\u09cd\u09b0 \u0996\u09a3\u09cd\u09a1 **\u09ed.** \u09ac\u09c3\u09a8\u09cd\u09a6\u09be\u09ac\u09a8 \u0996\u09a3\u09cd\u09a1 **\u09ee.** \u0995\u09be\u09b2\u09bf\u09df\u09a6\u09ae\u09a8 \u0996\u09a3\u09cd\u09a1 **\u09ef.** \u09af\u09ae\u09c1\u09a8\u09be \u0996\u09a3\u09cd\u09a1 **\u09e7\u09e6.** \u09b9\u09be\u09b0 \u0996\u09a3\u09cd\u09a1 **\u09e7\u09e7.** \u09ac\u09be\u09a8 \u0996\u09a3\u09cd\u09a1 **\u09e7\u09e8.** \u09ac\u0982\u09b6\u09c0 \u0996\u09a3\u09cd\u09a1 **\u09e7\u09e9.** \u09b0\u09be\u09a7\u09be-\u09ac\u09bf\u09b0\u09b9 \u0996\u09a3\u09cd\u09a1"
         ]
       ]
     },
@@ -1595,8 +1604,8 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "",
-          "fontSize": "20",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -1609,7 +1618,7 @@
         },
         {
           "color": "#ffffff",
-          "font": "",
+          "font": "JetBrains Mono",
           "fontSize": "15",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
@@ -1626,15 +1635,15 @@
       "rows": [
         [
           "S + V + \u201cone of the + superlative adjective + **plural noun** + prepositional phrase\u201d",
-          "{bg:#9beb90}Wrong:{/}  She is one of the {best student in the class.\nCorrect: She is one of the best ==students== in the class."
+          "{bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n{bg:#9beb90}Correct:{/} She is one of the best ==students== in the class."
         ],
         [
           "gave (indirect object) + direct object",
           ""
         ],
         [
-          "",
-          ""
+          "**Enter, resemble, discuss, approach, marry, reach, order** \u09aa\u09cd\u09b0\u09ad\u09c3\u09a4\u09bf verb \u098f\u09b0 \u09aa\u09b0\u09c7 \u0995\u09cb\u09a8\u09cb preposition \u09ac\u09b8\u09c7 \u09a8\u09be",
+          "- He resembles his father. \n- He entered the room.\n"
         ],
         [
           "",
@@ -1821,7 +1830,7 @@
           ""
         ],
         [
-          "",
+          "**Interrogative sentence \u099f\u09bf who \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09c7 passive voice \u0995\u09b0\u09be\u09b0 \u09a8\u09bf\u09df\u09ae: ==By whom + auxiliary verb (tense \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0)== + object + verb \u098f\u09b0 past participle (V3) + by + subject \u098f\u09b0 objective form (\u09af\u09a6\u09bf \u09a5\u09be\u0995\u09c7) + \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u09ac\u09cb\u09a7\u0995 \u099a\u09bf\u09b9\u09cd\u09a8 (?)**\n- Who did the work?\n- By whom was the work done?",
           ""
         ],
         [
