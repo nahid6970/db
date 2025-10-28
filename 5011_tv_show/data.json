@@ -658,7 +658,8 @@
             }
         ],
         "rating": "3",
-        "status": "Ended"
+        "status": "Ended",
+        "sonarr_url": ""
     },
     {
         "id": 7,
