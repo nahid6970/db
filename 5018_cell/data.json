@@ -1,5 +1,5 @@
 {
-  "activeSheet": 29,
+  "activeSheet": 36,
   "categories": [
     "Literature",
     "Bangla Grammar",
@@ -37,7 +37,8 @@
     "32": "Math",
     "33": "Bangla Grammar",
     "34": "Bangla Grammar",
-    "35": "English Grammar"
+    "35": "English Grammar",
+    "36": "Math"
   },
   "sheets": [
     {
@@ -2575,6 +2576,46 @@
       "rows": [
         [
           "solution to - \u09b8\u09ae\u09be\u09a7\u09be\u09a8",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "Question",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "E",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "Math Note // QNA",
+      "rows": [
+        [
+          "\u09ab\u09be\u0981\u0995\u09be \u09b8\u09c7\u099f\u0995\u09c7 \u09b8\u0995\u09b2 \u09b8\u09c7\u099f\u09c7\u09b0 \u0989\u09aa\u09b8\u09c7\u099f \u09ac\u09b2\u09be \u09b9\u09df\u0964 \u09ab\u09be\u0981\u0995\u09be \u09b8\u09c7\u099f\u0995\u09c7 \u09b8\u09be\u09a7\u09be\u09b0\u09a3\u09a4 \u09a6\u09c1\u0987\u09ad\u09be\u09ac\u09c7 \u09aa\u09cd\u09b0\u0995\u09be\u09b6 \u0995\u09b0\u09be \u09b9\u09df,  @@\u0278@@ \u098f\u09ac\u0982 { }",
           ""
         ]
       ]
