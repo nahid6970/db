@@ -2622,44 +2622,43 @@
       ]
     },
     {
-      "name": "\u09a4\u09cd\u09b0\u09bf\u0995\u09cb\u09a3\u09ae\u09bf\u09a4\u09bf (Trigonometry)",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "14",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "E",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
-          "fontSize": "14",
+          "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "\u09a4\u09cd\u09b0\u09bf\u0995\u09cb\u09a3\u09ae\u09bf\u09a4\u09bf (Trigonometry)",
       "rows": [
         [
-          "",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     }
   ]
 }
