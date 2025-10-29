@@ -1,5 +1,5 @@
 {
-  "activeSheet": 19,
+  "activeSheet": 43,
   "categories": [
     "Literature",
     "Bangla Grammar",
@@ -44,7 +44,9 @@
     "38": "Math",
     "39": "Job Circular",
     "40": "Job Circular",
-    "41": "English Grammar"
+    "41": "English Grammar",
+    "42": "Math",
+    "43": "Math"
   },
   "sheets": [
     {
@@ -2091,34 +2093,35 @@
       ]
     },
     {
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
       "name": "Parts of Speech",
@@ -2135,8 +2138,7 @@
           "**Conjuction examples:**\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     },
     {
       "cellStyles": {},
@@ -2678,6 +2680,10 @@
         [
           "\u09b8\u09b0\u09b2\u09b0\u09c7\u0996\u09be\u09b0 \u09a2\u09be\u09b2 \u0986\u0995\u09be\u09b0\u09c7 \u09b8\u09ae\u09c0\u0995\u09b0\u09a3 **y = mx + c**. \u098f\u0996\u09be\u09a8\u09c7 **m = \u09a2\u09be\u09b2**",
           ""
+        ],
+        [
+          "\u0995\u09cd\u09b7\u09c1\u09a6\u09cd\u09b0\u09a4\u09ae \u09ae\u09cc\u09b2\u09bf\u0995 \u09b8\u0982\u0996\u09cd\u09af\u09be \u0995\u09cb\u09a8\u099f\u09bf? **2**",
+          ""
         ]
       ]
     },
@@ -3085,6 +3091,101 @@
       "rows": [
         [
           "solution to - \u09b8\u09ae\u09be\u09a7\u09be\u09a8",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "C",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "\u0995\u09cd\u09b0\u09df-\u09ac\u09bf\u0995\u09cd\u09b0\u09df",
+      "rows": [
+        [
+          "**\u09aa\u09cd\u09b0\u09b6\u09cd\u09a8:**  \n\u098f\u0995 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf 3084 \u099f\u09be\u0995\u09be\u09df \u0995\u09a4\u0997\u09c1\u09b2\u09bf \u0986\u09ae \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09c7 \u09a4\u09be \u09b9\u09a4\u09c7 2712 \u099f\u09be\u0995\u09be\u09b0 \u09ae\u09c2\u09b2\u09cd\u09af\u09c7 \u0995\u09a4\u0997\u09c1\u09b2\u09bf \u0986\u09ae \u09ac\u09bf\u0995\u09cd\u09b0\u09df \u0995\u09b0\u09b2\u0964  \u098f\u09a4\u09c7 \u09af\u09a6\u09bf \u09a4\u09be\u09b0 \u09b2\u09be\u09ad \u09ac\u09be \u0995\u09cd\u09b7\u09a4\u09bf \u09a8\u09be \u09b9\u09df\u09c7 \u09a5\u09be\u0995\u09c7, \u09a4\u09be \u09b9\u09b2\u09c7 \u098f\u0996\u09a8\u0993 \u09a4\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09cd\u09af\u09c2\u09a8\u09aa\u0995\u09cd\u09b7\u09c7 \u0995\u09df\u099f\u09bf \u0986\u09ae \u0986\u099b\u09c7?\n\n**\u09b8\u09ae\u09be\u09a7\u09be\u09a8:**  \n\u09a7\u09b0\u09bf,  \n\u09ae\u09cb\u099f \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09be \u0986\u09ae\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be = x  \n\u09ae\u09cb\u099f \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 3084 \u099f\u09be\u0995\u09be  \n\u0985\u09a4\u098f\u09ac, \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 3084 \u00f7 x\n\n\u09a4\u09bf\u09a8\u09bf 2712 \u099f\u09be\u0995\u09be\u09b0 \u0986\u09ae \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09c7\u099b\u09c7\u09a8\u0964  \n\u09a7\u09b0\u09bf, \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be \u0986\u09ae\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be = y  \n\u0985\u09a4\u098f\u09ac, \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 2712 \u00f7 y\n\n\u09af\u09c7\u09b9\u09c7\u09a4\u09c1 \u09b2\u09be\u09ad \u09ac\u09be \u0995\u09cd\u09b7\u09a4\u09bf \u09b9\u09df\u09a8\u09bf,  \n\u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af  \n\n\u0985\u09b0\u09cd\u09a5\u09be\u09ce,  \n3084 \u00f7 x = 2712 \u00f7 y  \n\n\u098f\u0996\u09a8,  \nx : y = 3084 : 2712  \n\n\u0989\u09ad\u09df \u09b8\u0982\u0996\u09cd\u09af\u09be\u0995\u09c7 12 \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09ad\u09be\u0997 \u0995\u09b0\u09b2\u09c7,  \nx : y = 257 : 226  \n\n\u0985\u09a4\u098f\u09ac,  \n\u09a4\u09bf\u09a8\u09bf \u09ae\u09cb\u099f \u0986\u09ae \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09c7\u099b\u09c7\u09a8 257 \u0985\u0982\u09b6\u09c7,  \n\u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09c7\u099b\u09c7\u09a8 226 \u0985\u0982\u09b6\u09c7,  \n\u09ac\u09be\u0995\u09bf \u0986\u099b\u09c7 = 257 - 226 = 31 \u0985\u0982\u09b6\u0964\n\n**\u0989\u09a4\u09cd\u09a4\u09b0:** \u2705  \n\u09a4\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09cd\u09af\u09c2\u09a8\u09aa\u0995\u09cd\u09b7\u09c7 **31 \u099f\u09bf \u0986\u09ae** \u0986\u099b\u09c7\u0964\n",
+          "",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "\u09b2.\u09b8\u09be.\u0997\u09c1-\u0997.\u09b8\u09be.\u0997\u09c1 (LCM-GCD / HCF)",
+      "rows": [
+        [
+          "**\u09aa\u09cd\u09b0\u09b6\u09cd\u09a8:**  \n6\u099f\u09bf \u0998\u09a3\u09cd\u099f\u09be \u09af\u09a5\u09be\u0995\u09cd\u09b0\u09ae\u09c7 2, 4, 6, 8, 10, 12 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1 \u0985\u09a8\u09cd\u09a4\u09b0 \u09ac\u09be\u099c\u09c7\u0964  \u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u09a4\u09be\u09b0\u09be \u0995\u09a4\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7?\n\n**\u09b8\u09ae\u09be\u09a7\u09be\u09a8:**  \n\n\u0998\u09a3\u09cd\u099f\u09be\u0997\u09c1\u09b2\u09cb \u09aa\u09cd\u09b0\u09a5\u09ae\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09c7 \u09b8\u09ae\u09df = 0 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7\u0964  \n\u098f\u09b0\u09aa\u09b0 \u09a4\u09be\u09b0\u09be \u0986\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 \u09a4\u09be\u09a6\u09c7\u09b0 \u09b8\u09ae\u09df\u09c7\u09b0 **LCM (\u09b2.\u09b8\u09be.\u0997\u09c1)** \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0\u0964\n\n\u0985\u09a4\u098f\u09ac,  \nLCM (2, 4, 6, 8, 10, 12) = 120 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u0964\n\n\u0985\u09b0\u09cd\u09a5\u09be\u09ce, \u09a4\u09be\u09b0\u09be \u09aa\u09cd\u09b0\u09a4\u09bf 120 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1 (2 \u09ae\u09bf\u09a8\u09bf\u099f) \u0985\u09a8\u09cd\u09a4\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7\u0964\n\n\u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u09ae\u09cb\u099f \u09b8\u09ae\u09df = 30 \u00d7 60 = 1800 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u0964  \n\n\u098f\u0996\u09a8,  \n1800 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u09a4\u09be\u09b0\u09be \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 = (1800 \u00f7 120) + 1  \n= 15 + 1  \n= 16 \u09ac\u09be\u09b0\u0964\n\n**\u0989\u09a4\u09cd\u09a4\u09b0:** \u2705  \n\u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u0998\u09a3\u09cd\u099f\u09be\u0997\u09c1\u09b2\u09cb \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 **\u09e7\u09ec \u09ac\u09be\u09b0**\u0964",
           ""
         ]
       ]
