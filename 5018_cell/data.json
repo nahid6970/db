@@ -2091,9 +2091,52 @@
       ]
     },
     {
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "B",
+          "type": "text",
+          "width": "1",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
       "name": "Parts of Speech",
-      "columns": [],
-      "rows": []
+      "rows": [
+        [
+          "**Adverbs examples:**\n- ago, again, almost, always, already, ever, here, there, now, then, once, soon, sometimes, yesterday, tomorrow, twice, thrice, never, only, quite, seldom, today, thus, enough, rather, often, very, rarely, hardly",
+          ""
+        ],
+        [
+          "**Preposition examples:**\n- at, above, about, across, against, among, after, before, besides, below, behind, beyond, between, by, down, for, from, in, into, like, near, of, on, over, outside, out of, since to, towards, through, up, upon, with, within, without, except etc ",
+          ""
+        ],
+        [
+          "**Conjuction examples:**\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when",
+          ""
+        ]
+      ],
+      "cellStyles": {}
     },
     {
       "cellStyles": {},
