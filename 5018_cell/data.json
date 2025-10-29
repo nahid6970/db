@@ -1,5 +1,5 @@
 {
-  "activeSheet": 44,
+  "activeSheet": 45,
   "categories": [
     "Literature",
     "Bangla Grammar",
@@ -47,7 +47,8 @@
     "41": "English Grammar",
     "42": "Math",
     "43": "Math",
-    "44": "Bangla Grammar"
+    "44": "Bangla Grammar",
+    "45": "Bangla Grammar"
   },
   "sheets": [
     {
@@ -2007,18 +2008,18 @@
           "width": "150"
         },
         {
-          "name": "E",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "E",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "\u09b6\u09c1\u09a6\u09cd\u09a7 \u09ac\u09be\u09a8\u09be\u09a8 // correct-word",
@@ -3264,7 +3265,46 @@
       ]
     },
     {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
       "name": "\u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09ac\u09cd\u09a6 (Protisobdo)",
+      "rows": [
+        [
+          "\u09b9\u09b0\u09bf\u09a3 - **==\u09ae\u09c3\u0997==**\n\u09b8\u09bf\u0982\u09b9 - \u09aa\u09b6\u09c1\u09b0\u09be\u099c, **==\u09ae\u09c3\u0997\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0==**, **\u0995\u09c7\u09b6\u09b0\u09c0**\n\u09ae\u09c3\u0997\u09df\u09be - \u09b6\u09bf\u0995\u09be\u09b0\n\u09ae\u09bf\u09a5\u09cd\u09af\u09be = \u0985\u09b2\u09c0\u0995\n\u09a8\u09a6\u09c0 = \u099c\u09b2\u09a7\u09bf, \u09aa\u09df\u09cb\u09a7\u09bf, \u099c\u09b2\u09a7\u09b0",
+          ""
+        ]
+      ]
+    },
+    {
       "columns": [
         {
           "name": "A",
@@ -3295,9 +3335,10 @@
           "headerCenter": false
         }
       ],
+      "name": "\u09b8\u09a8\u09cd\u09a7\u09bf \u09ac\u09bf\u099a\u09cd\u099b\u09c7\u09a6 (Sondi / Sondhi / Shondi)",
       "rows": [
         [
-          "\u09b9\u09b0\u09bf\u09a3- **==\u09ae\u09c3\u0997==**\n\u09b8\u09bf\u0982\u09b9- \u09aa\u09b6\u09c1\u09b0\u09be\u099c, **==\u09ae\u09c3\u0997\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0==**, **\u0995\u09c7\u09b6\u09b0\u09c0**\n\u09ae\u09c3\u0997\u09df\u09be - \u09b6\u09bf\u0995\u09be\u09b0",
+          "\u09a3\u09bf\u099a\u09cd + \u0985\u09a8\u09cd\u09a4 = \u09a3\u09bf\u099c\u09a8\u09cd\u09a4\n\u09b8\u09c1\u09aa + \u0985\u09a8\u09cd\u09a4 = \u09b8\u09c1\u09ac\u09a8\u09cd\u09a4\n\u09a6\u09bf\u0995\u09cd + \u0985\u09a8\u09cd\u09a4 = \u09a6\u09bf\u0997\u09a8\u09cd\u09a4\n\u09b7\u099f\u09cd + \u0986\u09a8\u09a8 = \u09b7\u09a1\u09bc\u09be\u09a8\u09a8",
           ""
         ]
       ],
