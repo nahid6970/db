@@ -1,5 +1,5 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 19,
   "categories": [
     "Literature",
     "Bangla Grammar",
@@ -43,7 +43,8 @@
     "37": "Math",
     "38": "Math",
     "39": "Job Circular",
-    "40": "Job Circular"
+    "40": "Job Circular",
+    "41": "English Grammar"
   },
   "sheets": [
     {
@@ -2090,6 +2091,11 @@
       ]
     },
     {
+      "name": "Parts of Speech",
+      "columns": [],
+      "rows": []
+    },
+    {
       "cellStyles": {},
       "columns": [
         {
@@ -2206,54 +2212,6 @@
         [
           "take someone to task",
           "- To rebuke someone\n- \u0995\u09cb\u09a8\u09cb \u0995\u09bf\u099b\u09c1\u09b0 \u099c\u09a8\u09cd\u09af \u0995\u09be\u0989\u0995\u09c7 \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be"
-        ],
-        [
-          "",
-          ""
-        ]
-      ]
-    },
-    {
-      "cellStyles": {},
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "Arial",
-          "fontSize": "18",
-          "headerBgColor": "#000000",
-          "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": false,
-          "headerTextColor": "#ffffff",
-          "name": "Active to Passive",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "14",
-          "headerBgColor": "#000000",
-          "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": false,
-          "headerTextColor": "#ffffff",
-          "name": "Example",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
-        }
-      ],
-      "name": "Active - Passive",
-      "rows": [
-        [
-          "##Present Simple##\n**Rules**\n- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3\n**Example**\n- Active: They write letters.\n- Passive: Letters are written by them.\n\n##Present Continuous##\n**Rule**\n- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3\n**Example**\n- @@She is reading a book. \u2192 A book is being read by her.@@\n\n##Present Perfect##\n**Rule**\n- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3\n**Example**\n- @@He has done the work. \u2192 The work has been done by him.@@\n\n##Present Perfect Continuous##\n\u274c No passive form.\n\n##Past Simple##\n**Rule**\n- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3\n**Example**\n- @@They built a house. \u2192 A house was built by them.@@\n\nPast Continuous\n**Rule**\n- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3\n**Example**\n- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@\n\n##Past Perfect##\n**Rule**\n- Active: Subject + had + V3 + Object\n- Passive: Object + had + been + V3\n**Example**\n- @@He had finished the task. \u2192 The task had been finished by him.@@\n\n##Past Perfect Continuous##\n\u274c No passive form.\n\n##Future Simple##\n**Rule**\n- Active: Subject + will + V1 + Object\n- Passive: Object + will + be + V3\n**Example**\n- @@She will write a report. \u2192 A report will be written by her.@@\n\nFuture (Going to)\n- Active: Subject + is/am/are + going to + V1 + Object\n- Passive: Object + is/am/are + going to + be + V3\n- @@They are going to start the show. \u2192 The show is going to be started by them.@@\n\n##Future Perfect##\n- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject\n- @@He will have completed the work. \u2192 The work will have been completed by him.@@\n\n##Future Perfect Continuous##\n\u274c No passive form.\n`XXX`",
-          ""
-        ],
-        [
-          "**Interrogative sentence \u099f\u09bf who \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09c7 passive voice \u0995\u09b0\u09be\u09b0 \u09a8\u09bf\u09df\u09ae: ==By whom + auxiliary verb (tense \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0)== + object + verb \u098f\u09b0 past participle (V3) + by + subject \u098f\u09b0 objective form (\u09af\u09a6\u09bf \u09a5\u09be\u0995\u09c7) + \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u09ac\u09cb\u09a7\u0995 \u099a\u09bf\u09b9\u09cd\u09a8 (?)**\n- Who did the work?\n- By whom was the work done?",
-          ""
         ],
         [
           "",
@@ -2808,14 +2766,14 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "JetBrains Mono",
+          "font": "Arial",
           "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
+          "headerBgColor": "#000000",
           "headerBold": true,
-          "headerCenter": false,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "A",
+          "headerTextColor": "#ffffff",
+          "name": "Active to Passive",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
@@ -2823,22 +2781,30 @@
         {
           "color": "#ffffff",
           "font": "",
-          "fontSize": "8",
-          "headerBgColor": "#f8f9fa",
+          "fontSize": "14",
+          "headerBgColor": "#000000",
           "headerBold": true,
-          "headerCenter": false,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "E",
+          "headerTextColor": "#ffffff",
+          "name": "Example",
           "textColor": "#000000",
           "type": "text",
           "width": "1"
         }
       ],
-      "name": "Appropriate preposition",
+      "name": "Active - Passive",
       "rows": [
         [
-          "solution to - \u09b8\u09ae\u09be\u09a7\u09be\u09a8",
+          "##Present Simple##\n**Rules**\n- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3\n**Example**\n- Active: They write letters.\n- Passive: Letters are written by them.\n\n##Present Continuous##\n**Rule**\n- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3\n**Example**\n- @@She is reading a book. \u2192 A book is being read by her.@@\n\n##Present Perfect##\n**Rule**\n- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3\n**Example**\n- @@He has done the work. \u2192 The work has been done by him.@@\n\n##Present Perfect Continuous##\n\u274c No passive form.\n\n##Past Simple##\n**Rule**\n- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3\n**Example**\n- @@They built a house. \u2192 A house was built by them.@@\n\nPast Continuous\n**Rule**\n- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3\n**Example**\n- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@\n\n##Past Perfect##\n**Rule**\n- Active: Subject + had + V3 + Object\n- Passive: Object + had + been + V3\n**Example**\n- @@He had finished the task. \u2192 The task had been finished by him.@@\n\n##Past Perfect Continuous##\n\u274c No passive form.\n\n##Future Simple##\n**Rule**\n- Active: Subject + will + V1 + Object\n- Passive: Object + will + be + V3\n**Example**\n- @@She will write a report. \u2192 A report will be written by her.@@\n\nFuture (Going to)\n- Active: Subject + is/am/are + going to + V1 + Object\n- Passive: Object + is/am/are + going to + be + V3\n- @@They are going to start the show. \u2192 The show is going to be started by them.@@\n\n##Future Perfect##\n- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject\n- @@He will have completed the work. \u2192 The work will have been completed by him.@@\n\n##Future Perfect Continuous##\n\u274c No passive form.\n`XXX`",
+          ""
+        ],
+        [
+          "**Interrogative sentence \u099f\u09bf who \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09c7 passive voice \u0995\u09b0\u09be\u09b0 \u09a8\u09bf\u09df\u09ae: ==By whom + auxiliary verb (tense \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0)== + object + verb \u098f\u09b0 past participle (V3) + by + subject \u098f\u09b0 objective form (\u09af\u09a6\u09bf \u09a5\u09be\u0995\u09c7) + \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u09ac\u09cb\u09a7\u0995 \u099a\u09bf\u09b9\u09cd\u09a8 (?)**\n- Who did the work?\n- By whom was the work done?",
+          ""
+        ],
+        [
+          "",
           ""
         ]
       ]
@@ -3036,6 +3002,46 @@
       "rows": [
         [
           "@@{link:https://mpajobsbd.com/}\u09ae\u09cb\u0982\u09b2\u09be \u09ac\u09a8\u09cd\u09a6\u09b0 \u0995\u09b0\u09cd\u09a4\u09c3\u09aa\u0995\u09cd\u09b7 (mpa){/}@@",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "8",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "E",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "Appropriate preposition",
+      "rows": [
+        [
+          "solution to - \u09b8\u09ae\u09be\u09a7\u09be\u09a8",
           ""
         ]
       ]
