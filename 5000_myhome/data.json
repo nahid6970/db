@@ -6937,5 +6937,12 @@
     "top_hover_color": "#3a3a3a",
     "top_text_color": "#ffffff",
     "url": "https://www.facebook.com/profile.php?id=61555728203903"
+  },
+  {
+    "name": "Reference for job",
+    "default_type": "text",
+    "note": "Md. Imran Hossain\n(Associate Professor), Department of Finance\naddress: Department of Finance, University of Dhaka, MBA Building\n+8801675550775\nimran@du.ac.bd\nProfessor\n\n\n\nRashik Amin, CFA\n(Assistant Professor)\namin.rashik@gmail.com\n880-2-9661900",
+    "click_action": "note",
+    "horizontal_stack": false
   }
 ]
