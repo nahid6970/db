@@ -1,5 +1,5 @@
 {
-  "activeSheet": 22,
+  "activeSheet": 42,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "Literature",
@@ -60,7 +60,8 @@
     "49": "Math",
     "50": "Math",
     "51": "Math",
-    "52": "Math"
+    "52": "Math",
+    "53": "Math"
   },
   "sheets": [
     {
@@ -796,6 +797,14 @@
         [
           "Cancun is a famous city of which economy? Mexico",
           ""
+        ],
+        [
+          "Which country is called \"Land of Protease? South Africa",
+          ""
+        ],
+        [
+          "Suez Canal is between - Mediterranean Sea and Red Sea\n- \u09b8\u09c1\u09df\u09c7\u099c\u0996\u09be\u09b2 **\u09b2\u09cb\u09b9\u09bf\u09a4\u09b8\u09be\u0997\u09b0 \u0993 \u09ad\u09c2-\u09ae\u09a7\u09cd\u09af\u09b8\u09be\u0997\u09b0 \u09a6\u09c1\u0987\u099f\u09bf \u09b8\u09be\u0997\u09b0\u0995\u09c7 \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09c7\u099b\u09c7**\u0964 \u09b8\u09c1\u09df\u09c7\u099c \u0996\u09be\u09b2 \u0996\u09a8\u09a8 \u0995\u09b0\u09c7\u09a8 \u09ab\u09b0\u09be\u09b8\u09bf \u0987\u099e\u09cd\u099c\u09bf\u09a8\u09bf\u09df\u09be\u09b0 \u09ab\u09be\u09b0\u09cd\u09a1\u09bf\u09a8\u09be\u09a8\u09cd\u09a6 \u09a6\u09cd\u09af \u09b2\u09bf\u09b8\u09c7\u09aa\u09b8\u0964 \u09e8\u09eb \u098f\u09aa\u09cd\u09b0\u09bf\u09b2 **\u09e7\u09ee\u09eb\u09ef \u09b8\u09be\u09b2\u09c7 \u098f\u099f\u09bf\u09b0 \u0996\u09a8\u09a8 \u0995\u09be\u099c \u09b6\u09c1\u09b0\u09c1 \u09b9\u09df \u098f\u09ac\u0982 \u09e8\u09eb \u098f\u09aa\u09cd\u09b0\u09bf\u09b2 \u09e7\u09ee\u09ec\u09ef \u09b8\u09be\u09b2\u09c7 \u098f\u099f\u09bf \u0989\u09a6\u09cd\u09ac\u09cb\u09a7\u09a8 \u0995\u09b0\u09c7**\u0964 \u09ae\u09bf\u09b8\u09b0 \u09b8\u09c1\u09df\u09c7\u099c \u0996\u09be\u09b2 \u099c\u09be\u09a4\u09c0\u09df\u0995\u09b0\u09a3 \u0995\u09b0\u09c7\u099b\u09bf\u09b2 \u09e8\u09ec \u099c\u09c1\u09b2\u09be\u0987 \u09e7\u09ef\u09eb\u09ec \u09b8\u09be\u09b2\u09c7\u0964",
+          ""
         ]
       ]
     },
@@ -1051,6 +1060,26 @@
           "Embezzle, Misappropriate",
           "\u0985\u09b0\u09cd\u09a5 \u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be",
           ""
+        ],
+        [
+          "Ductile",
+          "\u09a8\u09ae\u09a8\u09c0\u09df",
+          ""
+        ],
+        [
+          "Stiff",
+          "\u0995\u09a0\u09bf\u09a8",
+          ""
+        ],
+        [
+          "Pliable",
+          " \u09b8\u09b9\u099c\u09c7 \u09ac\u09be\u0981\u0995\u09be\u09a8\u09cb, \u09aa\u09c7\u0981\u099a\u09be\u09a8\u09cb \u09ac\u09be \u0986\u0995\u09be\u09b0\u09aa\u09cd\u09b0\u09a6\u09be\u09a8 \u0995\u09b0\u09be \u09af\u09be\u09df\u0964",
+          ""
+        ],
+        [
+          "Supple",
+          "\u09a8\u09ae\u09a8\u09c0\u09df",
+          ""
         ]
       ]
     },
@@ -1186,11 +1215,11 @@
           ""
         ],
         [
-          "",
+          "Enmity",
           ""
         ],
         [
-          "",
+          "Abate",
           ""
         ],
         [
@@ -3296,39 +3325,28 @@
           "width": "150"
         },
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "C",
-          "textColor": "#000000",
           "type": "text",
-          "width": "1"
+          "width": "1",
+          "color": "#000000",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "\u0995\u09cd\u09b0\u09df-\u09ac\u09bf\u0995\u09cd\u09b0\u09df",
       "rows": [
         [
           "**\u09aa\u09cd\u09b0\u09b6\u09cd\u09a8:**  \n\u098f\u0995 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf 3084 \u099f\u09be\u0995\u09be\u09df \u0995\u09a4\u0997\u09c1\u09b2\u09bf \u0986\u09ae \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09c7 \u09a4\u09be \u09b9\u09a4\u09c7 2712 \u099f\u09be\u0995\u09be\u09b0 \u09ae\u09c2\u09b2\u09cd\u09af\u09c7 \u0995\u09a4\u0997\u09c1\u09b2\u09bf \u0986\u09ae \u09ac\u09bf\u0995\u09cd\u09b0\u09df \u0995\u09b0\u09b2\u0964  \u098f\u09a4\u09c7 \u09af\u09a6\u09bf \u09a4\u09be\u09b0 \u09b2\u09be\u09ad \u09ac\u09be \u0995\u09cd\u09b7\u09a4\u09bf \u09a8\u09be \u09b9\u09df\u09c7 \u09a5\u09be\u0995\u09c7, \u09a4\u09be \u09b9\u09b2\u09c7 \u098f\u0996\u09a8\u0993 \u09a4\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09cd\u09af\u09c2\u09a8\u09aa\u0995\u09cd\u09b7\u09c7 \u0995\u09df\u099f\u09bf \u0986\u09ae \u0986\u099b\u09c7?\n\n**\u09b8\u09ae\u09be\u09a7\u09be\u09a8:**  \n\u09a7\u09b0\u09bf,  \n\u09ae\u09cb\u099f \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09be \u0986\u09ae\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be = x  \n\u09ae\u09cb\u099f \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 3084 \u099f\u09be\u0995\u09be  \n\u0985\u09a4\u098f\u09ac, \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 3084 \u00f7 x\n\n\u09a4\u09bf\u09a8\u09bf 2712 \u099f\u09be\u0995\u09be\u09b0 \u0986\u09ae \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09c7\u099b\u09c7\u09a8\u0964  \n\u09a7\u09b0\u09bf, \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be \u0986\u09ae\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be = y  \n\u0985\u09a4\u098f\u09ac, \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = 2712 \u00f7 y\n\n\u09af\u09c7\u09b9\u09c7\u09a4\u09c1 \u09b2\u09be\u09ad \u09ac\u09be \u0995\u09cd\u09b7\u09a4\u09bf \u09b9\u09df\u09a8\u09bf,  \n\u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af = \u09aa\u09cd\u09b0\u09a4\u09bf \u0986\u09ae\u09c7\u09b0 \u09ac\u09bf\u0995\u09cd\u09b0\u09df\u09ae\u09c2\u09b2\u09cd\u09af  \n\n\u0985\u09b0\u09cd\u09a5\u09be\u09ce,  \n3084 \u00f7 x = 2712 \u00f7 y  \n\n\u098f\u0996\u09a8,  \nx : y = 3084 : 2712  \n\n\u0989\u09ad\u09df \u09b8\u0982\u0996\u09cd\u09af\u09be\u0995\u09c7 12 \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09ad\u09be\u0997 \u0995\u09b0\u09b2\u09c7,  \nx : y = 257 : 226  \n\n\u0985\u09a4\u098f\u09ac,  \n\u09a4\u09bf\u09a8\u09bf \u09ae\u09cb\u099f \u0986\u09ae \u0995\u09cd\u09b0\u09df \u0995\u09b0\u09c7\u099b\u09c7\u09a8 257 \u0985\u0982\u09b6\u09c7,  \n\u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09c7\u099b\u09c7\u09a8 226 \u0985\u0982\u09b6\u09c7,  \n\u09ac\u09be\u0995\u09bf \u0986\u099b\u09c7 = 257 - 226 = 31 \u0985\u0982\u09b6\u0964\n\n**\u0989\u09a4\u09cd\u09a4\u09b0:** \u2705  \n\u09a4\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09cd\u09af\u09c2\u09a8\u09aa\u0995\u09cd\u09b7\u09c7 **31 \u099f\u09bf \u0986\u09ae** \u0986\u099b\u09c7\u0964\n",
-          "",
+          ""
+        ],
+        [
+          "**The cost of two watches taken together is Tk. 840. If, by selling one at a profit of 16% and the other at a loss of 12%, there is no loss or gain in the whole transaction, find the cost of each of the two watches.**\n\nLet the cost of the first watch = x  \nThen, the cost of the second watch = 840 \u2212 x  \n\n**Given:**  \nProfit on first = 16% \u2192 Selling price = x \u00d7 1.16  \nLoss on second = 12% \u2192 Selling price = (840 \u2212 x) \u00d7 0.88  \n\nSince there is **no loss or gain**, total selling price = total cost price.\n\nSo,  \n1.16x + 0.88(840 \u2212 x) = 840  \n\n\u21d2 1.16x + 739.2 \u2212 0.88x = 840  \n\u21d2 0.28x = 840 \u2212 739.2  \n\u21d2 0.28x = 100.8  \n\u21d2 x = 100.8 \u00f7 0.28 = 360  \n\nSo,  \nFirst watch (16% profit) cost = 360 Tk  \nSecond watch (12% loss) cost = 840 \u2212 360 = 480 Tk  \n\n**Answer:**  \nFirst watch = Tk 360  \nSecond watch = Tk 480\n",
           ""
         ]
       ]
@@ -3596,124 +3614,171 @@
       ]
     },
     {
-      "name": "Set Theory \u2014 Inclusion\u2013Exclusion Principle",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "Set Theory \u2014 Inclusion\u2013Exclusion Principle",
       "rows": [
         [
           "**In a class of 120 students numbered 1 to 120. all even numbered students opt for Physics, those whose numbers are divisible by 5 opt for Chemistry and those whose numbers are divisible by 7 opt for Math. How many opt for none of the three subjects?**\n\nTotal students = 120\n\nLet A = divisible by 2 \u2192 |A| = \u230a120/2\u230b = 60  \nB = divisible by 5 \u2192 |B| = \u230a120/5\u230b = 24  \nC = divisible by 7 \u2192 |C| = \u230a120/7\u230b = 17\n\nIntersections:  \nA\u2229B (lcm 10) \u2192 \u230a120/10\u230b = 12  \nA\u2229C (lcm 14) \u2192 \u230a120/14\u230b = 8  \nB\u2229C (lcm 35) \u2192 \u230a120/35\u230b = 3\n\nTriple intersection A\u2229B\u2229C (lcm 70) \u2192 \u230a120/70\u230b = 1\n\nBy inclusion\u2013exclusion, number opting for at least one =  \n60 + 24 + 17 \u2212 (12 + 8 + 3) + 1 = 79\n\nTherefore those who opt for **none** = 120 \u2212 79 = **41**\n\n**Answer: 41**\n",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     },
     {
-      "name": "% Increase & Decrease",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "% Increase & Decrease",
       "rows": [
         [
           "**If the price of gasoline increases by 25% and Ron intends to spend only 15% more on gasoline, by how much % should he reduce the quantity of gasoline that he buys?**\n\n**Shortcut Method (Without LaTeX):**  \n\nPrice increase = 25%  \nExpenditure increase = 15%  \n\n**==Required % decrease in quantity== = (Price increase \u2212 Expenditure increase) \u00f7 (1 + Price increase/100) \u00d7 100  **\nor = 100 - (100+Expenditure increase)*100==##/##==(100+Price increase)\n\nSubstitute values:  \n(25 \u2212 15) \u00f7 (1 + 25/100) \u00d7 100 = 10 \u00f7 1.25 = 8%\n\n**Answer: 8%**\n",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     },
     {
-      "name": "Work Related Math",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "Work Related Math",
       "rows": [
         [
           "**A, B and C each working alone can complete a job in 6, 8 and 12 days respectively. If all three of them work together to complete the job and earn $2340, what will be Cs share of the earnings?**\n\nGiven:  \n- A can complete the job in 6 days \u2192 A's 1 day work = 1/6  \n- B can complete the job in 8 days \u2192 B's 1 day work = 1/8  \n- C can complete the job in 12 days \u2192 C's 1 day work = 1/12  \n\n**Step 1: Work done together in 1 day**  \n= 1/6 + 1/8 + 1/12  \nLCM of 6, 8, 12 = 24  \n= 4/24 + 3/24 + 2/24 = 9/24 = 3/8\n\n**Step 2: Share of C in total work**  \nC's 1 day work / total 1 day work = (1/12) \u00f7 (3/8) = (1/12) \u00d7 (8/3) = 2/9\n\n**Step 3: C's share of earnings**  \nTotal earnings = $2340  \nC's share = 2/9 \u00d7 2340 = $520\n\n**Answer: $520**\n",
           ""
         ]
+      ]
+    },
+    {
+      "cellStyles": {
+        "0-0": {
+          "border": true,
+          "borderColor": "#000000",
+          "borderStyle": "solid",
+          "borderWidth": "1px"
+        }
+      },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
       ],
-      "cellStyles": {}
+      "name": "Combinations and Permutations",
+      "rows": [
+        [
+          "**In how many different ways can 3 identical green shirts and 3 identical red shirts be distributed among 6 children such that each child receives a shirt?**\n\nWe have:  \n- 3 identical green shirts (G)  \n- 3 identical red shirts (R)  \n- 6 children, each receives 1 shirt  \n\n**Step 1: Choose children to receive green shirts**  \nNumber of ways = 6C3 = 20  \n\n**Step 2: The remaining 3 children automatically get red shirts**  \n\n**Step 3: Total ways** = 20\n\n**Answer: 20**",
+          ""
+        ]
+      ]
     }
   ]
 }
