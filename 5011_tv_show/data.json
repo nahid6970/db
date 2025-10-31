@@ -2847,7 +2847,7 @@
         "id": 40,
         "title": "The Witcher",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/362696/posters/6447fd2e14bd2.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\The Witcher",
         "rating": null,
         "status": "Continuing",
@@ -2859,6 +2859,7 @@
                 "added_date": "2025-10-31T11:41:48.653353",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
