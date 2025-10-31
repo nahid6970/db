@@ -2842,5 +2842,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 40,
+        "title": "The Witcher",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\The Witcher",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "The Witcher - S04E01 - What Doesn't Kill You Makes You Stronger HDTV-720p",
+                "watched": false,
+                "added_date": "2025-10-31T11:41:48.653353",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
