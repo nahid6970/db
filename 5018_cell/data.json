@@ -1,5 +1,5 @@
 {
-  "activeSheet": 44,
+  "activeSheet": 61,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "Literature",
@@ -64,7 +64,12 @@
     "53": "Math",
     "54": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "55": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
-    "56": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)"
+    "56": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
+    "57": "Bangla Grammar",
+    "58": "English Grammar",
+    "59": "Math",
+    "60": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
+    "61": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)"
   },
   "sheets": [
     {
@@ -102,7 +107,7 @@
       "name": "Bangla Grammar Basics",
       "rows": [
         [
-          "\u09ac\u09be\u0982\u09b2\u09be \u09ac\u09b0\u09cd\u09a8\u09ae\u09be\u09b2\u09be\u09df \u09a6\u09c1\u099f\u09bf __**\u09a6\u09cd\u09ac\u09bf\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf\u09b0**__ \u099c\u09a8\u09cd\u09af \u0986\u09b2\u09be\u09a6\u09be \u09ac\u09b0\u09cd\u09a3 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09bf\u09a4 \u0986\u099b\u09c7:-\n- \u0990 (\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf **\u0993** \u098f\u09ac\u0982 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf ==**\u0987**==)\n- \u0994 (\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf **\u0993** \u098f\u09ac\u0982 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf ==**\u0989**==)",
+          "\u09ac\u09be\u0982\u09b2\u09be \u09ac\u09b0\u09cd\u09a8\u09ae\u09be\u09b2\u09be\u09df \u09a6\u09c1\u099f\u09bf __**\u09a6\u09cd\u09ac\u09bf\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf\u09b0**__ \u099c\u09a8\u09cd\u09af \u0986\u09b2\u09be\u09a6\u09be \u09ac\u09b0\u09cd\u09a3 \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09bf\u09a4 \u0986\u099b\u09c7:-\n- \u0990 (\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf **\u0993** \u098f\u09ac\u0982 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf ==**\u0987**==)\n- \u0994 (\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf **\u0993** \u098f\u09ac\u0982 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf ==**\u0989**==)\n\n- \u09aa\u09c2\u09b0\u09cd\u09a3 \u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf \u0993 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf \u098f\u0995\u09a4\u09cd\u09b0\u09c7 \u0989\u099a\u09cd\u099a\u09be\u09b0\u09bf\u09a4 \u09b9\u09b2\u09c7 **\u09a6\u09cd\u09ac\u09bf\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf** \u09b9\u09df\u0964 \u09af\u09c7\u09ae\u09a8\u0983 \u09af\u09c7\u09ae\u09a8\u0983 \u0986 + \u0987= \u0986\u0987 (\u09ac\u0987); \u0985 + \u0989 = \u0985\u0989 (\u09ac\u0989); \u0985+ \u098f = \u0985\u09df (\u09ac\u09df); \u0985+ \u0993 = \u0985\u0993 (\u09b9\u0993, \u09b2\u0993) \u0987\u09a4\u09cd\u09af\u09be\u09a6\u09bf\u0964 \u0989\u09b2\u09cd\u09b2\u09c7\u0996\u09cd\u09af, \u09aa\u09c2\u09b0\u09cd\u09a3 \u098f\u09ac\u0982 \u0985\u09b0\u09cd\u09a7\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf\u0997\u09c1\u09b2\u09bf \u098f\u0995\u09a4\u09cd\u09b0\u09bf\u09a4 \u09b9\u09df\u09c7 **\u09ac\u09be\u0982\u09b2\u09be\u09df \u09e7\u09ed\u099f\u09bf\u09b0 \u09ae\u09a4 \u09a6\u09cd\u09ac\u09bf\u09b8\u09cd\u09ac\u09b0\u09a7\u09cd\u09ac\u09a8\u09bf \u0989\u099a\u09cd\u099a\u09be\u09b0\u09bf\u09a4 \u09b9\u09df**\u0964 \u098f\u0997\u09c1\u09b2\u09cb \u09b9\u09b2\u09cb\u0983 \u0985\u09df, \u0985 , \u0985\u09cd\u09af\u09be\u09df, \u0985\u09cd\u09af\u09be\u0999\u09cd, \u0986\u0987, \u0986\u099f\u09cd, \u0986\u09df, \u0986 , \u0987\u0987, \u0987\u0989, \u0989\u0987, \u0993\u0987, \u0993\u099f\u09cd\u099f, \u0993\u09df, \u0993\u0993, \u098f\u0987 \u098f\u09ac\u0982 \u098f\u0989\u0964",
           ""
         ],
         [
@@ -808,6 +813,46 @@
         [
           "Suez Canal is between - Mediterranean Sea and Red Sea\n- \u09b8\u09c1\u09df\u09c7\u099c\u0996\u09be\u09b2 **\u09b2\u09cb\u09b9\u09bf\u09a4\u09b8\u09be\u0997\u09b0 \u0993 \u09ad\u09c2-\u09ae\u09a7\u09cd\u09af\u09b8\u09be\u0997\u09b0 \u09a6\u09c1\u0987\u099f\u09bf \u09b8\u09be\u0997\u09b0\u0995\u09c7 \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09c7\u099b\u09c7**\u0964 \u09b8\u09c1\u09df\u09c7\u099c \u0996\u09be\u09b2 \u0996\u09a8\u09a8 \u0995\u09b0\u09c7\u09a8 \u09ab\u09b0\u09be\u09b8\u09bf \u0987\u099e\u09cd\u099c\u09bf\u09a8\u09bf\u09df\u09be\u09b0 \u09ab\u09be\u09b0\u09cd\u09a1\u09bf\u09a8\u09be\u09a8\u09cd\u09a6 \u09a6\u09cd\u09af \u09b2\u09bf\u09b8\u09c7\u09aa\u09b8\u0964 \u09e8\u09eb \u098f\u09aa\u09cd\u09b0\u09bf\u09b2 **\u09e7\u09ee\u09eb\u09ef \u09b8\u09be\u09b2\u09c7 \u098f\u099f\u09bf\u09b0 \u0996\u09a8\u09a8 \u0995\u09be\u099c \u09b6\u09c1\u09b0\u09c1 \u09b9\u09df \u098f\u09ac\u0982 \u09e8\u09eb \u098f\u09aa\u09cd\u09b0\u09bf\u09b2 \u09e7\u09ee\u09ec\u09ef \u09b8\u09be\u09b2\u09c7 \u098f\u099f\u09bf \u0989\u09a6\u09cd\u09ac\u09cb\u09a7\u09a8 \u0995\u09b0\u09c7**\u0964 \u09ae\u09bf\u09b8\u09b0 \u09b8\u09c1\u09df\u09c7\u099c \u0996\u09be\u09b2 \u099c\u09be\u09a4\u09c0\u09df\u0995\u09b0\u09a3 \u0995\u09b0\u09c7\u099b\u09bf\u09b2 \u09e8\u09ec \u099c\u09c1\u09b2\u09be\u0987 \u09e7\u09ef\u09eb\u09ec \u09b8\u09be\u09b2\u09c7\u0964",
           ""
+        ],
+        [
+          "Dead sea is a - Lake",
+          ""
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0995\u09cb\u09a8 \u099c\u09c7\u09b2\u09be\u09df \u09b8\u09be\u0995\u09cd\u09b7\u09b0\u09a4\u09be\u09b0 \u09b9\u09be\u09b0 \u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u09ac\u09c7\u09b6\u09bf - \u09aa\u09bf\u09b0\u09cb\u099c\u09aa\u09c1\u09b0",
+          ""
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b8\u09b0\u0995\u09be\u09b0\u09c0 \u09a8\u09cb\u099f\u09c7 \u0995\u09be\u09b0 \u09b8\u09cd\u09ac\u09be\u0995\u09cd\u09b7\u09b0 \u09a5\u09be\u0995\u09c7? \u0985\u09b0\u09cd\u09a5\u09b8\u099a\u09bf\u09ac\u09c7\u09b0",
+          ""
+        ],
+        [
+          "What is the name of the grasslands found in the African continent? Savannah",
+          ""
+        ],
+        [
+          " Great Barrier Reef is in - **Australia**",
+          ""
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09aa\u09a4\u09be\u0995\u09be \u09aa\u09cd\u09b0\u09a5\u09ae \u0989\u09a4\u09cd\u09a4\u09cb\u09b2\u09bf\u09a4 \u09b9\u09df - \u09e8 \u09ae\u09be\u09b0\u09cd\u099a, \u09e7\u09ef\u09ed\u09e7",
+          ""
+        ],
+        [
+          "\u09a2\u09be\u0995\u09be \u09b6\u09b9\u09b0\u09c7\u09b0 \u0997\u09cb\u09dc\u09be\u09aa\u09a4\u09cd\u09a4\u09a8 \u09b9\u09df - \u09ae\u09c1\u0998\u09b2 \u0986\u09ae\u09b2\u09c7",
+          ""
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u0985\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09b8\u09b0\u0995\u09be\u09b0 \u0997\u09a0\u09bf\u09a4 \u09b9\u09df - \u09e7\u09e6 \u098f\u09aa\u09cd\u09b0\u09bf\u09b2, \u09e7\u09ef\u09ed\u09e7",
+          ""
+        ],
+        [
+          "\u09ac\u09be\u09b0 \u09ad\u09c2\u0987\u09df\u09be\u09a6\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ad\u09c2\u0987\u09df\u09be \u0995\u09c7 \u099b\u09bf\u09b2\u09c7\u09a8? \u0988\u09b8\u09be\u0996\u09be\u0981",
+          ""
+        ],
+        [
+          "",
+          ""
         ]
       ]
     },
@@ -950,6 +995,11 @@
           ""
         ],
         [
+          "Dictation",
+          "\u09b6\u09cd\u09b0\u09c1\u09a4\u09b2\u09bf\u09aa\u09bf",
+          ""
+        ],
+        [
           "Diplomacy",
           "\u0995\u09c1\u099f\u09a8\u09c0\u09a4\u09bf",
           ""
@@ -965,13 +1015,43 @@
           ""
         ],
         [
+          "Ductile",
+          "\u09a8\u09ae\u09a8\u09c0\u09df",
+          ""
+        ],
+        [
           "Duty",
           "\u09b6\u09c1\u09b2\u09cd\u0995",
           ""
         ],
         [
+          "electorate, voters",
+          "",
+          ""
+        ],
+        [
+          "Elucidate",
+          "",
+          ""
+        ],
+        [
           "Emancipate",
           " \u0995\u09be\u0989\u0995\u09c7 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8 \u0995\u09b0\u09c7 \u09a6\u09c7\u0993\u09df\u09be \u09ac\u09be \u09ae\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09be",
+          ""
+        ],
+        [
+          "Embezzle, Misappropriate",
+          "\u0985\u09b0\u09cd\u09a5 \u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be",
+          ""
+        ],
+        [
+          "**ephemeral**, Transitory, Fleeting",
+          "\u09b8\u09cd\u09ac\u09b2\u09cd\u09aa\u099c\u09c0\u09ac\u09c0, \u09b8\u09cd\u09ac\u09b2\u09cd\u09aa\u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0",
+          ""
+        ],
+        [
+          "exacerbate",
+          "make **(a problem, bad situation, or negative feeling)** worse",
           ""
         ],
         [
@@ -987,6 +1067,11 @@
         [
           "Gazette",
           "\u0998\u09cb\u09b7\u09a3\u09be\u09aa\u09a4\u09cd\u09b0",
+          ""
+        ],
+        [
+          "Illuminate",
+          "",
           ""
         ],
         [
@@ -1007,6 +1092,16 @@
         [
           "Orchestra",
           "\u09af\u09a8\u09cd\u09a4\u09cd\u09b0\u09b8\u0982\u0997\u09c0\u09a4\u09b6\u09bf\u09b2\u09cd\u09aa\u09c0\u09a6\u09c7\u09b0 \u098f\u0995\u099f\u09bf \u09a6\u09b2",
+          ""
+        ],
+        [
+          "Pervasive",
+          "\u09aa\u09b0\u09bf\u09ac\u09cd\u09af\u09be\u09aa\u0995",
+          ""
+        ],
+        [
+          "Pliable",
+          " \u09b8\u09b9\u099c\u09c7 \u09ac\u09be\u0981\u0995\u09be\u09a8\u09cb, \u09aa\u09c7\u0981\u099a\u09be\u09a8\u09cb \u09ac\u09be \u0986\u0995\u09be\u09b0\u09aa\u09cd\u09b0\u09a6\u09be\u09a8 \u0995\u09b0\u09be \u09af\u09be\u09df\u0964",
           ""
         ],
         [
@@ -1045,8 +1140,18 @@
           ""
         ],
         [
+          "Stiff",
+          "\u0995\u09a0\u09bf\u09a8",
+          ""
+        ],
+        [
           "Subjugate",
           "\u0995\u09be\u0989\u0995\u09c7 \u09a6\u09ae\u09a8 \u0995\u09b0\u09be \u09ac\u09be \u0985\u09a7\u09c0\u09a8 \u0995\u09b0\u09be",
+          ""
+        ],
+        [
+          "Supple",
+          "\u09a8\u09ae\u09a8\u09c0\u09df",
           ""
         ],
         [
@@ -1055,33 +1160,13 @@
           ""
         ],
         [
-          "Dictation",
-          "\u09b6\u09cd\u09b0\u09c1\u09a4\u09b2\u09bf\u09aa\u09bf",
+          "ubiquitous, Widespread",
+          "",
           ""
         ],
         [
-          "Embezzle, Misappropriate",
-          "\u0985\u09b0\u09cd\u09a5 \u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be",
-          ""
-        ],
-        [
-          "Ductile",
-          "\u09a8\u09ae\u09a8\u09c0\u09df",
-          ""
-        ],
-        [
-          "Stiff",
-          "\u0995\u09a0\u09bf\u09a8",
-          ""
-        ],
-        [
-          "Pliable",
-          " \u09b8\u09b9\u099c\u09c7 \u09ac\u09be\u0981\u0995\u09be\u09a8\u09cb, \u09aa\u09c7\u0981\u099a\u09be\u09a8\u09cb \u09ac\u09be \u0986\u0995\u09be\u09b0\u09aa\u09cd\u09b0\u09a6\u09be\u09a8 \u0995\u09b0\u09be \u09af\u09be\u09df\u0964",
-          ""
-        ],
-        [
-          "Supple",
-          "\u09a8\u09ae\u09a8\u09c0\u09df",
+          "tenacious, Resilient",
+          " \u09b6\u0995\u09cd\u09a4 \u0995\u09b0\u09c7 \u0986\u0995\u09dc\u09c7 \u09b0\u09be\u0996\u09c7 \u098f\u09ae\u09a8, \u09a8\u09be\u099b\u09cb\u09dc\u09ac\u09be\u09a8\u09cd\u09a6\u09be",
           ""
         ]
       ]
@@ -1445,6 +1530,12 @@
           "\u09e7\u09ef\u09ec\u09ef",
           "",
           "- \u0986\u09b2 \u0986\u0995\u09b8\u09be \u09ae\u09b8\u099c\u09bf\u09a6\u09c7 \u0987\u09b8\u09b0\u09be\u0987\u09b2\u09c7\u09b0 \u0986\u0997\u09c1\u09a8 \u09a6\u09c7\u0993\u09df\u09be\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09ac\u09be\u09a6\u09c7 \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09a6\u09c7\u09b6\u0997\u09c1\u09b2\u09cb \u09e8\u09eb \u09b8\u09c7\u09aa\u09cd\u099f\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e7\u09ef\u09ec\u09ef \u09b8\u09be\u09b2\u09c7 Organization of Islamic Conference (OIC) \u09ac\u09be \u0987\u09b8\u09b2\u09be\u09ae\u09c0 \u09b8\u09be\u09b9\u09be\u09af\u09cd\u09af \u09b8\u0982\u09b8\u09cd\u09a5\u09be \u0997\u09a0\u09a8 \u0995\u09b0\u09c7\u0964 \u098f\u09b0 **\u09aa\u09c2\u09b0\u09cd\u09ac \u09a8\u09be\u09ae '\u0987\u09b8\u09b2\u09be\u09ae\u09c0 \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8 \u09b8\u0982\u09b8\u09cd\u09a5\u09be' \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8 \u0995\u09b0\u09c7 \u09e8\u09ee \u099c\u09c1\u09a8 \u09e8\u09e6\u09e7\u09e7 \u09b8\u09be\u09b2\u09c7 \u09a8\u09be\u09ae \u0995\u09b0\u09a8 \u0995\u09b0\u09be \u09b9\u09df '\u0987\u09b8\u09b2\u09be\u09ae\u09c0 \u09b8\u09b9\u09af\u09cb\u0997\u09c0\u09a4\u09be \u09b8\u0982\u09b8\u09cd\u09a5\u09be'**\u0964 OIC \u098f\u09b0 \u09ae\u09b9\u09be\u09b8\u099a\u09bf\u09ac\u09c7\u09b0 \u09ae\u09c7\u09df\u09be\u09a6 \u0995\u09be\u09b2 \u09aa\u09be\u0981\u099a \u09ac\u099b\u09b0 (\u09aa\u09c2\u09b0\u09cd\u09ac\u09c7 \u099b\u09bf\u09b2\u09cb \u099a\u09be\u09b0 \u09ac\u099b\u09b0)\u0964 \u098f\u09b0 **\u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u09b8\u09a6\u09b8\u09cd\u09af \u09eb\u09ed \u098f\u09ac\u0982 \u09b8\u09a6\u09b0\u09a6\u09aa\u09cd\u09a4\u09b0 \u099c\u09c7\u09a6\u09cd\u09a6\u09be, \u09b8\u09cc\u09a6\u09bf \u0986\u09b0\u09ac**\u0964 \u098f\u09b0 \u09ae\u09c2\u09b2 \u09b2\u0995\u09cd\u09b7\u09cd\u09af \u09b9\u09b2\u09cb \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09a6\u09c7\u09b6\u09b8\u09ae\u09c2\u09b9\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af\u0995\u09be\u09b0 \u09b8\u09ae\u09b8\u09cd\u09af\u09be \u09ae\u09cb\u0995\u09be\u09ac\u09bf\u09b2\u09be \u0995\u09b0\u09be\u09b8\u09b9 \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09a7\u09b0\u09cd\u09ae\u09c0\u09df \u09b8\u09cd\u09a5\u09be\u09a8\u09b8\u09ae\u09c2\u09b9 \u09b6\u09a4\u09cd\u09b0\u09c1\u09ae\u09c1\u0995\u09cd\u09a4 \u0993 \u09a8\u09bf\u09b0\u09be\u09aa\u09a6 \u0995\u09b0\u09be \u098f\u09ac\u0982 \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09ad\u09cd\u09b0\u09be\u09a4\u09c3\u09a4\u09cd\u09ac\u0995\u09c7 \u099c\u09cb\u09b0\u09a6\u09be\u09b0 \u0995\u09b0\u09be\u0964"
+        ],
+        [
+          "G-20 - G20",
+          "",
+          "",
+          " - G-20 consists of 19 Countries + European Union"
         ]
       ]
     },
@@ -1711,6 +1802,10 @@
         [
           "**Tahmima Anam**",
           "- A Golden Age\n- The Good Muslim\n- The Bones of Greece"
+        ],
+        [
+          "Robert Frost",
+          "\n- `\"But I have Promises to Keep And miles to go before sleep\"`----- was written by----"
         ]
       ]
     },
@@ -2038,7 +2133,7 @@
           ""
         ],
         [
-          "**\u0995\u09b0\u09cd\u09ae\u09a7\u09be\u09b0\u09df**\n- \u09ae\u09b9\u09be\u099c\u09a8 = \u09ae\u09b9\u09ce \u09af\u09c7 \u099c\u09a8\n- \u09a8\u09c0\u09b2\u09cb\u09ce\u09aa\u09b2 = \u09a8\u09c0\u09b2 \u09af\u09c7 \u0989\u09ce\u09aa\u09b2\n- \u09ae\u09b9\u09be\u09b0\u09be\u099c = \u09ae\u09b9\u09be\u09a8 \u09af\u09c7 \u09b0\u09be\u099c\u09be\n- \u09a8\u09b0\u09be\u09a7\u09ae = \u0985\u09a7\u09ae \u09af\u09c7 \u09a8\u09b0;\n- \u09ae\u09b9\u09be\u09ac\u09c0\u09b0 = \u09ae\u09b9\u09be\u09a8 \u09af\u09c7 \u09ac\u09c0\u09b0",
+          "**\u0995\u09b0\u09cd\u09ae\u09a7\u09be\u09b0\u09df**\n**\u09aa\u09b0\u09aa\u09a6 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u09b8\u09ae\u09be\u09b8**\n- \u09ae\u09b9\u09be\u099c\u09a8 = \u09ae\u09b9\u09ce \u09af\u09c7 \u099c\u09a8\n- \u09a8\u09c0\u09b2\u09cb\u09ce\u09aa\u09b2 = \u09a8\u09c0\u09b2 \u09af\u09c7 \u0989\u09ce\u09aa\u09b2\n- \u09ae\u09b9\u09be\u09b0\u09be\u099c = \u09ae\u09b9\u09be\u09a8 \u09af\u09c7 \u09b0\u09be\u099c\u09be\n- \u09a8\u09b0\u09be\u09a7\u09ae = \u0985\u09a7\u09ae \u09af\u09c7 \u09a8\u09b0;\n- \u09ae\u09b9\u09be\u09ac\u09c0\u09b0 = \u09ae\u09b9\u09be\u09a8 \u09af\u09c7 \u09ac\u09c0\u09b0",
           ""
         ]
       ]
@@ -2136,6 +2231,12 @@
         ],
         [
           "**\u09ab\u09a4\u09cb \u09a8\u09ac\u09be\u09ac**\n\u09b8\u09ae\u09cd\u09ac\u09b2\u09b9\u09c0\u09a8\u09c7\u09b0 \u09ac\u09dc\u09b2\u09cb\u0995\u09bf\u09ad\u09be\u09ac"
+        ],
+        [
+          "\u09ad\u09c1\u09b6\u09a3\u09cd\u09a1\u09bf\u09b0 \u0995\u09be\u0995 - \u09a6\u09c0\u09b0\u09cd\u0998\u099c\u09c0\u09ac\u09c0"
+        ],
+        [
+          "\u09ad\u09bf\u099c\u09c7 \u09ac\u09bf\u09dc\u09be\u09b2 - \u0995\u09aa\u099f\u099a\u09be\u09b0\u09c0"
         ]
       ]
     },
@@ -2487,7 +2588,7 @@
           "**\u09b8\u09be\u09a7\u09c1 \u0993 \u099a\u09b2\u09bf\u09a4 \u09ad\u09be\u09b7\u09be\u09b0\u09c0\u09a4\u09bf\u09b0 \u09ae\u09bf\u09b6\u09cd\u09b0\u09a3\u0995\u09c7 \u0997\u09c1\u09b0\u09c1\u099a\u09a3\u09cd\u09a1\u09be\u09b2\u09c0 \u09a6\u09cb\u09b7**\n\u0985\u09b6\u09c1\u09a6\u09cd\u09a7- **\u0997\u09b0\u09c1\u09b0 \u09b6\u0995\u099f** (\u09a6\u09c7\u09b6\u09bf+ \u09a4\u09ce\u09b8\u09ae) - \u09b6\u09c1\u09a6\u09cd\u09a7- **\u0997\u09b0\u09c1\u09b0 \u0997\u09be\u09dc\u09bf** (\u09a6\u09c7\u09b6\u09bf+ \u09a6\u09c7\u09b6\u09bf)\n\u0985\u09b6\u09c1\u09a6\u09cd\u09a7- **\u09ae\u09dc\u09be\u09a6\u09be\u09b9** (\u09a6\u09c7\u09b6\u09bf+ \u09a4\u09ce\u09b8\u09ae) - \u09b6\u09c1\u09a6\u09cd\u09a7- **\u09b6\u09ac\u09a6\u09be\u09b9** (\u09a4\u09ce\u09b8\u09ae+ \u09a4\u09ce\u09b8\u09ae)\n\u09b6\u09c1\u09a6\u09cd\u09a7- **\u09ae\u09dc\u09be\u09aa\u09cb\u09dc\u09be**(\u09a6\u09c7\u09b6\u09bf+ \u09a6\u09c7\u09b6\u09bf)\n"
         ],
         [
-          "**__\u09b6\u09c1\u09a6\u09cd\u09a7__**\n- \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0\u09a4\u09be\n- \u09ac\u09be\u09b2\u09cd\u09ae\u09c0\u0995\u09bf\n- \u09b6\u09b6\u09bf\u09ad\u09c2\u09b7\u09a3\n- \u0986\u09ad\u09be\u09a8\u09cd\u09a4\u09b0\n- \u099c\u09a8\u09cd\u09ae\u09ac\u09be\u09b0\u09cd\u09b7\u09bf\u0995\n- \u09b8\u09ae\u09c0\u099a\u09c0\u09a8",
+          "**__\u09b6\u09c1\u09a6\u09cd\u09a7__**\n- \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0\u09a4\u09be\n- \u09ac\u09be\u09b2\u09cd\u09ae\u09c0\u0995\u09bf\n- \u09b6\u09b6\u09bf\u09ad\u09c2\u09b7\u09a3\n- \u0986\u09ad\u09be\u09a8\u09cd\u09a4\u09b0\n- \u099c\u09a8\u09cd\u09ae\u09ac\u09be\u09b0\u09cd\u09b7\u09bf\u0995\n- \u09b8\u09ae\u09c0\u099a\u09c0\u09a8\n- \u0995\u09cd\u09b7\u09bf\u09a4\u09c0\u09b6\n- \u099c\u09bf\u0997\u09c0\u09b7\u09be",
           ""
         ]
       ]
@@ -2570,7 +2671,7 @@
       "name": "\u09af\u09cc\u0997\u09bf\u0995, \u09b0\u09c1\u09a2\u09bc/\u09b0\u09c1\u09a2\u09bc\u09bf \u0993 \u09af\u09cb\u0997\u09b0\u09c2\u09a2\u09bc \u09b6\u09ac\u09cd\u09a6",
       "rows": [
         [
-          "**\u09af\u09cc\u0997\u09bf\u0995 \u09b6\u09ac\u09cd\u09a6**\n**\u09b8\u0982\u099c\u09cd\u099e\u09be:** \u09af\u09c7 \u09b8\u0995\u09b2 \u09b6\u09ac\u09cd\u09a6\u09c7\u09b0 \u09ac\u09cd\u09af\u09c1\u09ce\u09aa\u09a4\u09cd\u09a4\u09bf\u0997\u09a4 \u0985\u09b0\u09cd\u09a5 \u0993 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0\u09bf\u0995 \u0985\u09b0\u09cd\u09a5 \u098f\u0995\u0987 \u09b0\u0995\u09ae, \u09b8\u09c7\u0997\u09c1\u09b2\u09cb\u0995\u09c7 \u09af\u09cc\u0997\u09bf\u0995 \u09b6\u09ac\u09cd\u09a6 \u09ac\u09b2\u09c7\u0964\n**\u0989\u09a6\u09be\u09b9\u09b0\u09a3:**\n- \u0997\u09be\u09af\u09bc\u0995: '\u0997\u09c8' + '\u0985\u0995' \u2013 \u0985\u09b0\u09cd\u09a5: \u0997\u09be\u09a8 \u0995\u09b0\u09c7 \u09af\u09c7\u0964\n- \u0995\u09b0\u09cd\u09a4\u09ac\u09cd\u09af: '\u0995\u09c3' + '\u09a4\u09ac\u09cd\u09af' \u2013 \u0985\u09b0\u09cd\u09a5: \u09af\u09be \u0995\u09b0\u09be \u0989\u099a\u09bf\u09a4\u0964\n- \u09ac\u09be\u09ac\u09c1\u09af\u09bc\u09be\u09a8\u09be: '\u09ac\u09be\u09ac\u09c1' + '\u0986\u09a8\u09be' \u2013 \u0985\u09b0\u09cd\u09a5: \u09ac\u09be\u09ac\u09c1\u09b0 \u09ad\u09be\u09ac\u0964 ",
+          "**\u09af\u09cc\u0997\u09bf\u0995 \u09b6\u09ac\u09cd\u09a6**\n**\u09b8\u0982\u099c\u09cd\u099e\u09be:** \u09af\u09c7 \u09b8\u0995\u09b2 \u09b6\u09ac\u09cd\u09a6\u09c7\u09b0 \u09ac\u09cd\u09af\u09c1\u09ce\u09aa\u09a4\u09cd\u09a4\u09bf\u0997\u09a4 \u0985\u09b0\u09cd\u09a5 \u0993 \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0\u09bf\u0995 \u0985\u09b0\u09cd\u09a5 \u098f\u0995\u0987 \u09b0\u0995\u09ae, \u09b8\u09c7\u0997\u09c1\u09b2\u09cb\u0995\u09c7 \u09af\u09cc\u0997\u09bf\u0995 \u09b6\u09ac\u09cd\u09a6 \u09ac\u09b2\u09c7\u0964\n**\u0989\u09a6\u09be\u09b9\u09b0\u09a3:**\n- \u0997\u09be\u09af\u09bc\u0995: '\u0997\u09c8' + '\u0985\u0995' \u2013 \u0985\u09b0\u09cd\u09a5: \u0997\u09be\u09a8 \u0995\u09b0\u09c7 \u09af\u09c7\n- \u0995\u09b0\u09cd\u09a4\u09ac\u09cd\u09af: '\u0995\u09c3' + '\u09a4\u09ac\u09cd\u09af' \u2013 \u0985\u09b0\u09cd\u09a5: \u09af\u09be \u0995\u09b0\u09be \u0989\u099a\u09bf\u09a4\n- \u09ac\u09be\u09ac\u09c1\u09af\u09bc\u09be\u09a8\u09be: '\u09ac\u09be\u09ac\u09c1' + '\u0986\u09a8\u09be' \u2013 \u0985\u09b0\u09cd\u09a5: \u09ac\u09be\u09ac\u09c1\u09b0 \u09ad\u09be\u09ac\n- \u09b2\u09be\u099c\u09c1\u0995",
           ""
         ],
         [
@@ -3431,6 +3532,18 @@
         [
           "\u099c\u09c1\u09b2\u09be\u0987 \u0997\u09a3\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8 \u09a8\u09bf\u09df\u09c7 \u09a8\u09bf\u09b0\u09cd\u09ae\u09bf\u09a4 \u09a4\u09a5\u09cd\u09af\u099a\u09bf\u09a4\u09cd\u09b0",
           "\u09b6\u09cd\u09b0\u09be\u09ac\u09a3 \u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9\n- \u09aa\u09b0\u09bf\u099a\u09be\u09b2\u0995 **\u0986\u09b0\u09bf\u09ab\u09c1\u09b0 \u09b0\u09b9\u09ae\u09be\u09a8**"
+        ],
+        [
+          " \u09ac\u09c8\u09b7\u09ae\u09cd\u09af \u09ac\u09bf\u09b0\u09cb\u09a7\u09c0 \u099b\u09be\u09a4\u09cd\u09b0 \u0986\u09a8\u09cd\u09a6\u09cb\u09b2\u09a8\u09c7\u09b0 \u09ae\u09c7\u09df\u09be\u09a6\u0995\u09be\u09b2 \u0995\u09a4\u09a6\u09bf\u09a8? **\u09e9\u09ec \u09a6\u09bf\u09a8**",
+          ""
+        ],
+        [
+          "\u09eb \u0986\u0997\u09b7\u09cd\u099f\u0995\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09b8\u09b0\u0995\u09be\u09b0 \u0995\u09cb\u09a8 \u09a6\u09bf\u09ac\u09b8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u0998\u09cb\u09b7\u09a3\u09be \u0995\u09b0\u09c7\u099b\u09c7? **\u099c\u09c1\u09b2\u09be\u0987 \u0997\u09a3\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8 \u09a6\u09bf\u09ac\u09b8**",
+          ""
+        ],
+        [
+          " \u099c\u09c1\u09b2\u09be\u0987 \u09ac\u09bf\u09aa\u09cd\u09b2\u09ac\u09c7\u09b0 \u09b8\u09b0\u09cd\u09ac\u0995\u09a8\u09bf\u09b7\u09cd\u09a0 \u09b6\u09b9\u09bf\u09a6 \u0995\u09c7? \u0986\u09ac\u09cd\u09a6\u09c1\u09b2 \u0986\u09b9\u09be\u09a6",
+          ""
         ]
       ]
     },
@@ -3519,6 +3632,7 @@
       ]
     },
     {
+      "cellStyles": {},
       "columns": [
         {
           "color": "#ffffff",
@@ -3533,10 +3647,29 @@
           "textColor": "#000000",
           "type": "text",
           "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
       "name": "\u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8 (Science)",
-      "rows": []
+      "rows": [
+        [
+          "AI \u09aa\u09cd\u09b0\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b0 \u0986\u09ac\u09bf\u09b7\u09cd\u0995\u09be\u09b0\u0995 \u0995\u09c7? \u099c\u09a8 \u09ae\u09cd\u09af\u09be\u0995\u09b0\u09cd\u09a5\u09bf ",
+          ""
+        ]
+      ]
     },
     {
       "columns": [
@@ -3900,8 +4033,227 @@
         [
           "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09ac\u09cd\u09af\u09be\u0982\u0995\u09c7\u09b0 \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u0997\u09ad\u09b0\u09cd\u09a8\u09b0\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09c0? \u0986\u09b9\u09b8\u09be\u09a8 \u098f\u0987\u099a \u09ae\u09a8\u09b8\u09c1\u09b0 (2025)",
           ""
+        ],
+        [
+          "\u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf \u0987\u09b0\u09be\u09a8 \u0995\u09b0\u09cd\u09a4\u09c3\u0995 \u0987\u09b8\u09b0\u09be\u0987\u09b2\u09c7 \u09b9\u09be\u09ae\u09b2\u09be\u09b0 \u09a8\u09be\u09ae \u0995\u09bf? \u0985\u09aa\u09be\u09b0\u09c7\u09b6\u09a8 \u099f\u09cd\u09b0\u09b0\u09c1 \u09aa\u09cd\u09b0\u09ae\u09bf\u099c",
+          ""
         ]
       ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "Games",
+      "rows": [
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09be\u09b0\u09c0 \u09ab\u09c1\u099f\u09ac\u09b2 \u09a6\u09b2\u09c7\u09b0 \u0985\u09a7\u09bf\u09a8\u09be\u09df\u0995\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09bf? \u0986\u09ab\u09bf\u09a6\u09be \u0996\u09a8\u09cd\u09a6\u0995\u09be\u09b0",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "appropriate preposition",
+      "rows": [
+        [
+          "skilled **at**",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "Time - Speed - Length",
+      "rows": [
+        [
+          "Q. A train takes 10 seconds to cross a pole and 20 seconds to cross a platform of length 200m. What is the length of the train?\n\n**Ans:**\nLet the length of the train = L meters\n\n**Given:**\n- Time to cross a pole = 10 seconds\n- Time to cross a platform = 20 seconds\n- Length of platform = 200m\n\n**Understanding:**\n- When crossing a pole, the train only travels its own length\n- When crossing a platform, the train travels (its length + platform length)\n\n**Solution:**\n\nSpeed of train = Distance \u00f7 Time\n\nWhen crossing the pole:  \nSpeed = L \u00f7 10\n\nWhen crossing the platform:  \nSpeed = (L + 200) \u00f7 20\n\nSince the speed is constant:  \nL \u00f7 10 = (L + 200) \u00f7 20\n\nCross-multiplying:  \n20L = 10(L + 200)  \n\u21d2 20L = 10L + 2000  \n\u21d2 20L \u2212 10L = 2000  \n\u21d2 10L = 2000  \n\u21d2 L = 200\n\n**Answer:**  \nLength of the train = 200 meters\n",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "name": "Currency",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "Capital",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "name": "Currency - Capital",
+      "rows": [
+        [
+          "Vietnam",
+          "Dong",
+          "\u09b9\u09cd\u09af\u09be\u09a8\u09df"
+        ]
+      ]
+    },
+    {
+      "name": "\u09aa\u09cd\u09b0\u0995\u09b2\u09cd\u09aa (Prokolpo)",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "B",
+          "type": "text",
+          "width": "1",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "**\u09aa\u09a6\u09cd\u09ae\u09be \u09b8\u09c7\u09a4\u09c1 (Padma Bridge)**\n- \u09a6\u09c8\u09b0\u09cd\u0998\u09cd\u09af - \u09ec.\u09e7\u09eb \u0995\u09bf:\u09ae\u09bf: \n- \u09aa\u09cd\u09b0\u09a8\u09cd\u09a5 \u09e7\u09ee.\u09e7\u09e6 \u09ae\u09bf\n- \u09aa\u09a6\u09cd\u09ae\u09be \u09ac\u09b9\u09c1\u09ae\u09c1\u0996\u09c0 \u09b8\u09c7\u09a4\u09c1\u09b0 **\u09a6\u09c8\u09b0\u09cd\u0998\u09cd\u09af \u09ec.\u09e7\u09eb \u0995\u09bf\u09ae\u09bf** \u098f\u09ac\u0982 **\u09aa\u09cd\u09b0\u09a8\u09cd\u09a5 \u09e7\u09ee.\u09e7\u09e6\u09ae\u09bf**\u0964 \u0989\u09b2\u09cd\u09b2\u09c7\u0996\u09cd\u09af, **\u0989\u09ad\u09df \u09aa\u09cd\u09b0\u09be\u09a8\u09cd\u09a4\u09c7\u09b0 \u09b8\u0982\u09af\u09cb\u0997 \u09b8\u09dc\u0995\u09c7\u09b0 \u09a6\u09c8\u09b0\u09cd\u0998\u09cd\u09af \u09e7\u09e8.\u09e7\u09ec \u0995\u09bf\u09ae\u09bf (\u098f\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 \u09e7\u09e7.\u09ef\u09eb \u0995\u09bf\u09ae\u09bf \u099c\u09be\u099c\u09bf\u09b0\u09be \u09aa\u09cd\u09b0\u09be\u09a8\u09cd\u09a4\u09c7)**\u0964 \u098f\u09b0 \u09a8\u09bf\u09b0\u09cd\u09ae\u09be\u09a4\u09be \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be\u09a8 \u09b9\u09b2\u09cb \u099a\u09be\u09df\u09a8\u09be \u09ae\u09c7\u099c\u09b0 \u09ac\u09cd\u09b0\u09bf\u099c \u0987\u099e\u09cd\u099c\u09bf\u09a8\u09bf\u09df\u09be\u09b0\u09bf\u0982 \u0995\u09cb\u09ae\u09cd\u09aa\u09be\u09a8\u09bf \u09b2\u09bf\u09ae\u09bf\u099f\u09c7\u09a1\u0964 \u09a8\u09a6\u09c0 \u09b6\u09be\u09b8\u0995 \u09b8\u0982\u09b8\u09cd\u09a5\u09be \u09b9\u09b2\u09cb \u09b8\u09bf\u09a8\u09cb\u09b9\u09be\u0987\u09a1\u09cd\u09b0\u09cb \u0995\u09b0\u09aa\u09cb\u09b0\u09c7\u09b6\u09a8 \u098f\u09ac\u0982 \u09a4\u09a6\u09be\u09b0\u0995\u09bf \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6\u0995 \u09b9\u09b2\u09cb \u0995\u09cb\u09b0\u09bf\u09df\u09be\u09a8 \u098f\u0995\u09cd\u09b8\u09aa\u09cd\u09b0\u09c7\u09b8\u0993\u09df\u09c7 \u0995\u09b0\u09aa\u09cb\u09b0\u09c7\u09b6\u09a8\u0964",
+          ""
+        ]
+      ],
+      "cellStyles": {}
     }
   ]
 }
