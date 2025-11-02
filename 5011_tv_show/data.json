@@ -2881,6 +2881,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 3,
+                "title": "The Witcher - S04E06 - Twilight of the Wolf WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-02T20:42:18.725532",
+                "notify": "unseen"
+            },
+            {
                 "id": 2,
                 "title": "The Witcher - S04E02 - Dream of a Wish Fulfilled WEBDL-1080p",
                 "watched": false,
