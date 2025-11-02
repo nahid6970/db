@@ -1,5 +1,5 @@
 {
-  "activeSheet": 46,
+  "activeSheet": 47,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -3793,7 +3793,7 @@
           "name": "A",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "1"
         }
       ],
       "name": "\u099c\u09c1\u09b2\u09be\u0987 \u0997\u09a3\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8 // July Uprising // Movement",
@@ -3836,18 +3836,18 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
