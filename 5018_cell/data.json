@@ -1,5 +1,5 @@
 {
-  "activeSheet": 17,
+  "activeSheet": 26,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "Literature",
@@ -34,7 +34,7 @@
     "23": "Bangla Grammar",
     "24": "Bangla Grammar",
     "25": "Bangla Grammar",
-    "26": "Bangla Grammar",
+    "26": "\u09b8\u09c1\u09b6\u09be\u09b8\u09a8 // \u09a8\u09c8\u09a4\u09bf\u0995\u09a4\u09be",
     "27": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "28": "History",
     "29": "History",
@@ -66,8 +66,8 @@
     "55": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "56": "Bangla Grammar",
     "57": "Bangla Grammar",
-    "58": "Math",
-    "59": "Math",
+    "58": "History",
+    "59": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "60": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "61": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
     "62": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8 (General Knowledge GK)",
@@ -3459,6 +3459,10 @@
         [
           "solution to - \u09b8\u09ae\u09be\u09a7\u09be\u09a8",
           ""
+        ],
+        [
+          "skilled **at**",
+          ""
         ]
       ]
     },
@@ -4159,46 +4163,6 @@
       "rows": [
         [
           "\u09b9\u09b0\u09bf\u09a3 - **==\u09ae\u09c3\u0997==**\n\u09b8\u09bf\u0982\u09b9 - \u09aa\u09b6\u09c1\u09b0\u09be\u099c, **==\u09ae\u09c3\u0997\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0==**, **\u0995\u09c7\u09b6\u09b0\u09c0**\n\u09ae\u09c3\u0997\u09df\u09be - \u09b6\u09bf\u0995\u09be\u09b0\n\u09ae\u09bf\u09a5\u09cd\u09af\u09be = \u0985\u09b2\u09c0\u0995\n\u09a8\u09a6\u09c0 = \u099c\u09b2\u09a7\u09bf, \u09aa\u09df\u09cb\u09a7\u09bf, \u099c\u09b2\u09a7\u09b0",
-          ""
-        ]
-      ]
-    },
-    {
-      "cellStyles": {},
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
-        }
-      ],
-      "name": "appropriate preposition",
-      "rows": [
-        [
-          "skilled **at**",
           ""
         ]
       ]
