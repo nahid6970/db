@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 20,
+                "title": "One Piece - s22e63 - [1148] - The Lost History - Joyboy, the First Pirate WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2025-11-02T22:42:18.646175",
+                "notify": "unseen"
+            },
+            {
                 "id": 19,
                 "title": "One Piece - s22e62 - [1147] - A Stunning Conclusion - Vegapunk's Great Prediction WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
@@ -2821,6 +2828,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 5,
+                "title": "One-Punch Man - S03E04 - Counterattack Signal WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-02T22:42:18.664582",
+                "notify": "unseen"
+            },
             {
                 "id": 4,
                 "title": "One-Punch Man - S03E03 - Organism Limits HDTV-1080p",
