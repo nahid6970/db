@@ -2072,6 +2072,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 13,
+                "title": "WWE SmackDown - 2025-10-31 - SmackDown 1367 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-02T16:33:56.438467",
+                "notify": "unseen"
+            },
+            {
                 "id": 12,
                 "title": "WWE SmackDown - 2025-10-24 - SmackDown 1366 HDTV-1080p",
                 "watched": true,
@@ -2674,6 +2681,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "My Hero Academia - s08e05 - [164] - History's Greatest Villain HDTV-1080p v2 - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-11-02T17:33:56.449250",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "My Hero Academia - s08e04 - [163] - Quirk - Explosion!! WEBDL-1080p - [VARYG]",
                 "watched": false,
@@ -2714,6 +2728,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "SPY x FAMILY - s03e05 - [42] - THE MOMMY-FRIENDS SCHEME WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-11-02T17:33:56.449250",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "SPY x FAMILY - s03e04 - [41] - BEHIND THE SCANDAL + THE PATH TO AN IMPERIAL SCHOLAR WEBDL-1080p - [VARYG]",
                 "watched": false,
@@ -2753,6 +2774,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 5,
+                "title": "To Your Eternity - s03e05 - [45] - Unheard Words HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-11-02T18:33:56.443328",
+                "notify": "unseen"
+            },
             {
                 "id": 4,
                 "title": "To Your Eternity - s03e04 - [44] - The One Who Vanished HDTV-1080p - [SubsPlease]",

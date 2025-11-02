@@ -2021,6 +2021,18 @@
           "borderColor": "#000000",
           "borderStyle": "solid",
           "borderWidth": "3px"
+        },
+        "0-0": {
+          "border": true,
+          "borderWidth": "3px",
+          "borderStyle": "solid",
+          "borderColor": "#000000"
+        },
+        "1-0": {
+          "border": true,
+          "borderWidth": "3px",
+          "borderStyle": "solid",
+          "borderColor": "#000000"
         }
       },
       "columns": [
