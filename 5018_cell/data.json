@@ -3831,7 +3831,14 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "1-0": {
+          "border": true,
+          "borderWidth": "3px",
+          "borderStyle": "solid",
+          "borderColor": "#000000"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
