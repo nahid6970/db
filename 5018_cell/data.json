@@ -2029,7 +2029,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}Tahmima Anam{/}",
-          "- A Golden Age\n- The Good Muslim\n- The Bones of Greece"
+          "- **A Golden Age** {fg:#ffffff;bg:#000000}novel{/}\n- The Good Muslim\n- The Bones of Greece"
         ],
         [
           "{fg:#ffffff;bg:#000000}Thomas Kyd{/}",
@@ -2122,6 +2122,10 @@
         [
           "{fg:#ffffff;bg:#000000}Maxim Gorky{/}\n- russian",
           "- My childhood {fg:#ffffff;bg:#000000}book{/} Autobiographies of Maxim Gorky\n- The Lower Depths {fg:#ffffff;bg:#000000}play{/}\n{fg:#ffffff;bg:#000000}Novel{/}\n- The Mother\n- The Artamonov Business"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}James Joyce{/}",
+          "- A man of genius makes no mistakes"
         ]
       ]
     },
