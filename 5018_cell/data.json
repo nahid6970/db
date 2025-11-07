@@ -1865,16 +1865,16 @@
     },
     {
       "cellStyles": {
-        "3-0": {
+        "4-0": {
           "center": false
         },
-        "3-1": {
+        "4-1": {
           "bold": false
         },
-        "6-0": {
+        "7-0": {
           "bold": false
         },
-        "7-1": {
+        "8-1": {
           "bold": false
         }
       },
@@ -1912,12 +1912,16 @@
       "name": "English Literature",
       "rows": [
         [
-          "{fg:#ffffff;bg:#000000}1.1 Ages of Literary{/}",
+          "{fg:#ffffff;bg:#000000}1.1{/} Ages of Literary",
           "- The Anglo-Saxon Age (450-1066).\n- The Renaissance Age (1500-1660).\n- The Romantic Age (1798-1832).\n- The Victorian Period (1832-1901).\n\n**Renaissance** = Rebirth // The revival of learning"
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.2 Generals{/}\nMachiavellian -- cunning person\nEpic (\u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af) -- long narrative poem \nOde -- \u0997\u09c0\u09a4\u09bf \u0995\u09ac\u09bf\u09a4\u09be\nElegy (\u09b6\u09cb\u0995\u0997\u09be\u09a5\u09be / \u09b6\u09cb\u0995 \u0995\u09ac\u09bf\u09a4\u09be) -- poem of lamentation (\u09ac\u09bf\u09b2\u09be\u09aa\u09c7\u09b0 \u0995\u09ac\u09bf\u09a4\u09be)\nBallad \u2013 \u0997\u09b2\u09cd\u09aa/\u0995\u09be\u09b9\u09bf\u09a8\u09c0 \u09a8\u09bf\u09b0\u09cd\u09ad\u09b0 \u0997\u09be\u09a8/\u0995\u09ac\u09bf\u09a4\u09be (\u09b2\u09c7\u09be\u0995\u0997\u09be\u09a5\u09be) (\u09ac\u09be\u09b8\u09cd\u09a4\u09ac \u0995\u09be\u09b9\u09bf\u09a8\u09c0)\nNovella \u2013 short novel\npoem by lines\n\u2022\tepigram 6 lines\n\u2022\tSonnet 14 lines\nHyperbole (\u0985\u09a4\u09bf\u09b0\u099e\u09cd\u099c\u09a8) -- overstatement of something\nMetonymy \u2013 \u09b0\u09c2\u09aa\u0995\nSoliloquy \u2013 \u09b8\u09cd\u09ac\u0997\u09a4\u09cb\u0995\u09cd\u09a4\u09bf -- a long speech expressing the thought of a character\nProse \u2013 \u0997\u09a6\u09cd\u09af\nSimile \u2013 \u0989\u09aa\u09ae\u09be \u2013 as/like word \u2013 \u0985\u09a8\u09c1\u09b0\u09c2\u09aa\nPersonification \u2013 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u09a4\u09cd\u09ac -- \u09aa\u09cd\u09b0\u09be\u0995\u09c3\u09a4\u09bf\u0995 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7 \u09b0\u09c2\u09aa\u09be\u09a8\u09cd\u09a4\u09b0\nMetaphor (\u09b0\u09c2\u09aa\u0995)-- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ac\u09b8\u09cd\u09a4\u09c1\u09a4\u09c7 \u09aa\u09cd\u09b0\u0995\u09be\u09b6  \n?? season politicia -- pun pun -- play with words\nPun \u2013 \u09b6\u09cd\u09b2\u09c7\u09b7 \u2013 epigram\nEtiquette \u2013 \u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0\nEuphemism (\u0989\u099a\u09cd\u099a\u09be\u09b0\u09a3)-- \u09b6\u09cd\u09b0\u09c1\u09a4\u09bf\u0995\u099f\u09c1 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09c7 \u0995\u09cb\u09ae\u09b2\u09a4\u09b0 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09df\u09cb\u0997\nSatire \u2013 \u09ac\u09cd\u09af\u0999\u09cd\u0997\nAllegory \u2013 \u09b0\u09c2\u09aa\u0995 \u2013 double meaning\ngraphic novel - comic strip\n",
-          ""
+          "{fg:#ffffff;bg:#000000}1.2{/} Writers & Age",
+          "{fg:#ffffff;bg:#000000}Novelist{/}\n- Thomas Hardy\n- Charles Dickens\n- Emily Bronte\n- William Blake (poet, painter, print maker)\n{fg:#ffffff;bg:#000000}Jacobean Age{/}\n- John Donne\n{fg:#ffffff;bg:#000000}Romantic Age{/}\n- William Blake (\u09b0\u09cb\u09ae\u09be\u09a8\u09cd\u099f\u09bf\u0995 \u09af\u09c1\u0997\u09c7\u09b0 \u0985\u0997\u09cd\u09b0\u09a6\u09c2\u09a4) (poet \u0993 painter)\n- John Keats (\u09b8\u09ac\u099a\u09c7\u09df\u09c7 young poet)\n- Percy Bysshe Shelley (P.B. Shelley)\n- S.T. Coleridge\n- William Wordsworth\n{fg:#ffffff;bg:#000000}Victorian Age{/}\n- Alfred Tennyson (poet)\n{fg:#ffffff;bg:#000000}Modern Age{/}\n- T.S. Eliot (1888-1965)\n- W.B. Yeats (1865-1939)\n- W.H. Auden (1907-1973)\n{fg:#ffffff;bg:#000000}science fiction writers{/}\n- H.G Wells\n- Hugo Gernsback\n- Jules Verne"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}1.3{/} Generals",
+          "Machiavellian -- cunning person\nEpic (\u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af) -- long narrative poem \nOde -- \u0997\u09c0\u09a4\u09bf \u0995\u09ac\u09bf\u09a4\u09be\nElegy (\u09b6\u09cb\u0995\u0997\u09be\u09a5\u09be / \u09b6\u09cb\u0995 \u0995\u09ac\u09bf\u09a4\u09be) -- poem of lamentation (\u09ac\u09bf\u09b2\u09be\u09aa\u09c7\u09b0 \u0995\u09ac\u09bf\u09a4\u09be)\nBallad \u2013 \u0997\u09b2\u09cd\u09aa/\u0995\u09be\u09b9\u09bf\u09a8\u09c0 \u09a8\u09bf\u09b0\u09cd\u09ad\u09b0 \u0997\u09be\u09a8/\u0995\u09ac\u09bf\u09a4\u09be (\u09b2\u09c7\u09be\u0995\u0997\u09be\u09a5\u09be) (\u09ac\u09be\u09b8\u09cd\u09a4\u09ac \u0995\u09be\u09b9\u09bf\u09a8\u09c0)\nNovella \u2013 short novel\npoem by lines\n- epigram 6 lines\n- Sonnet 14 lines\nHyperbole (\u0985\u09a4\u09bf\u09b0\u099e\u09cd\u099c\u09a8) -- overstatement of something\nMetonymy \u2013 \u09b0\u09c2\u09aa\u0995\nSoliloquy \u2013 \u09b8\u09cd\u09ac\u0997\u09a4\u09cb\u0995\u09cd\u09a4\u09bf -- a long speech expressing the thought of a character\nProse \u2013 \u0997\u09a6\u09cd\u09af\nSimile \u2013 \u0989\u09aa\u09ae\u09be \u2013 as/like word \u2013 \u0985\u09a8\u09c1\u09b0\u09c2\u09aa\nPersonification \u2013 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u09a4\u09cd\u09ac -- \u09aa\u09cd\u09b0\u09be\u0995\u09c3\u09a4\u09bf\u0995 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7 \u09b0\u09c2\u09aa\u09be\u09a8\u09cd\u09a4\u09b0\nMetaphor (\u09b0\u09c2\u09aa\u0995)-- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ac\u09b8\u09cd\u09a4\u09c1\u09a4\u09c7 \u09aa\u09cd\u09b0\u0995\u09be\u09b6  \n?? season politicia -- pun pun -- play with words\nPun \u2013 \u09b6\u09cd\u09b2\u09c7\u09b7 \u2013 epigram\nEtiquette \u2013 \u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0\nEuphemism (\u0989\u099a\u09cd\u099a\u09be\u09b0\u09a3)-- \u09b6\u09cd\u09b0\u09c1\u09a4\u09bf\u0995\u099f\u09c1 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09c7 \u0995\u09cb\u09ae\u09b2\u09a4\u09b0 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09df\u09cb\u0997\nSatire \u2013 \u09ac\u09cd\u09af\u0999\u09cd\u0997\nAllegory \u2013 \u09b0\u09c2\u09aa\u0995 \u2013 double meaning\ngraphic novel - comic strip"
         ],
         [
           "**Alexander Pope**\n- known for the heroic couplets in poetry",
