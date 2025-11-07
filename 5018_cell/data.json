@@ -1865,16 +1865,16 @@
     },
     {
       "cellStyles": {
-        "5-0": {
-          "center": false
-        },
-        "5-1": {
-          "bold": false
-        },
         "10-0": {
           "bold": false
         },
         "11-1": {
+          "bold": false
+        },
+        "5-0": {
+          "center": false
+        },
+        "5-1": {
           "bold": false
         }
       },
@@ -2058,6 +2058,10 @@
         [
           "{fg:#ffffff;bg:#000000}William Somerset Maugham{/}",
           "{fg:#ffffff;bg:#000000}novel{/}\n- The Moon and Sixpence\n- Of Human Bondage\n- Cakes and Ale\n- The Painted Veil\n- The Magician"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Ernest Hemingway{/}\n- American",
+          "- **A Farewell to Arms**\n- **The old man and the Sea**\n- The Sun also Rises\n- **For Whom the Bell Tolls**\n- In Our Times \n-- to have and have not"
         ]
       ]
     },
