@@ -2020,7 +2020,7 @@
           "- Lord of the Flies\n-- \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7 \u09a6\u09c7\u0996\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7, \u09aa\u09be\u09b0\u09ae\u09be\u09a3\u09ac\u09bf\u0995 \u09af\u09c1\u09a6\u09cd\u09a7\u09c7\u09b0 \u09ad\u09df \u09a5\u09c7\u0995\u09c7 \u0995\u09bf\u099b\u09c1 \u09ac\u09cd\u09b0\u09bf\u099f\u09bf\u09b6 \u0995\u09bf\u09b6\u09cb\u09b0\u0995\u09c7 \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09ac\u09c0\u09aa\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09df, \u09af\u09c7\u0996\u09be\u09a8\u09c7 \u098f\u0995 \u09a6\u09c1\u09b0\u09cd\u0998\u099f\u09a8\u09be\u09df \u09aa\u09cd\u09b0\u09be\u09aa\u09cd\u09a4\u09ac\u09df\u09b8\u09cd\u0995\u09b0\u09be \u09ae\u09be\u09b0\u09be \u0997\u09c7\u09b2\u09c7 \u0993\u0987 \u09b6\u09bf\u09b6\u09c1\u09b0\u09be\u0987 \u09a8\u09bf\u099c\u09c7\u09a6\u09c7\u09b0 \u09ae\u09a4\u09cb \u0995\u09b0\u09c7 \u09ac\u09c7\u0981\u099a\u09c7 \u09a5\u09be\u0995\u09be\u09b0 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09c7\u0964 \u09a7\u09c0\u09b0\u09c7 \u09a7\u09c0\u09b0\u09c7 \u09a4\u09be\u09b0\u09be \u09a8\u09c0\u09a4\u09bf-\u09a8\u09c8\u09a4\u09bf\u0995\u09a4\u09be \u09ad\u09c1\u09b2\u09c7 \u09a8\u09bf\u09b7\u09cd\u09a0\u09c1\u09b0 \u0993 \u09b9\u09bf\u0982\u09b8\u09cd\u09b0 \u09b9\u09df\u09c7 \u0993\u09a0\u09c7\u0964 \u098f\u0987 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u099f\u09bf \u09ae\u09be\u09a8\u09ac \u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09bf\u09b0 \u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0 \u09a6\u09bf\u0995, \u09b8\u09ae\u09be\u099c\u09c7\u09b0 \u09a8\u09bf\u09df\u09ae \u099b\u09be\u09dc\u09be \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09ac\u09b0\u09cd\u09ac\u09b0\u09a4\u09be \u098f\u09ac\u0982 \u09ad\u09be\u09b2 \u0993 \u09ae\u09a8\u09cd\u09a6\u09c7\u09b0 \u09a6\u09cd\u09ac\u09a8\u09cd\u09a6\u09cd\u09ac\u0995\u09c7 \u09a4\u09c1\u09b2\u09c7 \u09a7\u09b0\u09c7\u099b\u09c7\u0964 \u09b0\u200d\u09cd\u09af\u09be\u09b2\u09ab (Ralph), \u099c\u09cd\u09af\u09be\u0995 (Jack), \u09aa\u09bf\u0997\u09bf (Piggy), \u09b8\u09be\u09df\u09ae\u09a8 (Simon) \u0993 \u09b0\u099c\u09be\u09b0 (Roger) \u09aa\u09cd\u09b0\u09ae\u09c2\u0996 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u099a\u09b0\u09bf\u09a4\u09cd\u09b0\u0964\n- The Spire, \n- Pincher Martin,\n- Darkness Visible"
         ],
         [
-          "William Shakespeare",
+          "{fg:#ffffff;bg:#000000}William Shakespeare{/}",
           "- Love's Labour's Lost (play)\n- King Lear\n-- `\"How sharper than a serpent's tooth it is to have a thankless child!\"`\n-- `\"Nothing will come of nothing.\"`\n-- `\"I am a man more sinned against than sinning.\"`\n-- `\"When we are born, we cry that we are come to this great stage of fools.\"`\n-- `\"Thou shouldst not have been old till thou hadst been wise.\"`\n- Antonio and Cleopatra (play)\n- Othello (play)"
         ],
         [
@@ -2033,7 +2033,15 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}Arundhati Roy{/}",
-          "The God of Small Things {fg:#ffffff;bg:#000000}novel{/}"
+          "- The God of Small Things {fg:#ffffff;bg:#000000}novel{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}E.M. Forster{/}",
+          "- A Passage to India {fg:#ffffff;bg:#000000}Novel{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}D.H. Lawrence{/}",
+          "{fg:#ffffff;bg:#000000}Novel{/}\n- Sons and Lovers\n- The White Peacock\n- Women in Love\n- {fg:#ff0000}**Lady Chatterley's Lover**{/}"
         ]
       ]
     },
