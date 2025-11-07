@@ -2065,7 +2065,23 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}S.T. Coleridge{/}",
-          "- **The Rime of the Ancient Mariner** (ballad -- poem)\n- Kubla Khan\n- **Lyrical Ballad**\n- Biographia of Literaria"
+          "- **{fg:#ff0000}The Rime of the Ancient Mariner{/}** (ballad -- poem)\n- Kubla Khan\n- **Lyrical Ballad**\n- Biographia of Literaria"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Emily Bronte{/}",
+          "- Wuthering Heights\n- Jane Eyre"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}John Dryden{/}",
+          "- All for Love {fg:#ffffff;bg:#000000}drama{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Leo Tolstoy{/}",
+          "- War and Peace {fg:#ffffff;bg:#000000}fiction{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}William Wordsworth{/}\n- poet of nature",
+          "{fg:#ffffff;bg:#000000}Poem{/}\n- The Solitary Reaper\n- The World is too Much with Us\n- To Daffodils"
         ]
       ]
     },
