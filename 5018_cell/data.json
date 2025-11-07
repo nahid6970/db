@@ -2020,8 +2020,8 @@
           "New Arabian Nights"
         ],
         [
-          "{fg:#ffffff;bg:#000000}Robert Frost{/}",
-          "\n- `\"But I have Promises to Keep And miles to go before sleep\"`----- was written by----"
+          "{fg:#ffffff;bg:#000000}Robert Frost{/}\n- American poet",
+          "{fg:#ffffff;bg:#000000}Poem{/}\n- Mending Wall\n- The Road Not Taken\n- Stopping By Woods on a Snowy Evening\n- Out, Out\n{fg:#ffffff;bg:#000000}Lines{/}\n- But I have Promises to Keep And miles to go before sleep\n- Good fences make good neighbors (XXX)"
         ],
         [
           "{fg:#ffffff;bg:#000000}Sir Arthur Conan Doyle{/}",
@@ -2094,6 +2094,22 @@
         [
           "{fg:#ffffff;bg:#000000}Benjamin Disraeli{/}",
           "- JUSTICE IS TRUTH IN ACTION. {fg:#ffffff;bg:#000000}QUOTES{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Bowen L.J.{/}",
+          "- judges like Caesar's wife should be above suspicion"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Samuel Johnson{/}\n- first **__English dictionary__** was compiled by him",
+          "- The Vanity of Human Wishes {fg:#ffffff;bg:#000000}poem{/}\n{fg:#ffffff;bg:#000000}book{/}\n- London: Poem\n- **A voyage to Abyssinia**\n- Preface to Shakespeare\n- The false alarm\n- The Patriot (pamphlet)"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Jack London{/}",
+          "- {fg:#ff0000}**Call Of the Wild**{/} {fg:#ffffff;bg:#000000}Novel{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Franz Kafka{/}",
+          "{fg:#ffffff;bg:#000000}Novel{/}\n- The Metamorphosis\n- The Trial\n- The Castle\n- The Judgement {fg:#ffffff;bg:#000000}short story{/}"
         ]
       ]
     },
