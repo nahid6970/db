@@ -2081,7 +2081,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}William Wordsworth{/}\n- poet of nature",
-          "{fg:#ffffff;bg:#000000}Poem{/}\n- The Solitary Reaper\n- The World is too Much with Us\n- To Daffodils"
+          "{fg:#ffffff;bg:#000000}Poem{/}\n- The Solitary Reaper\n- The World is too Much with Us\n- {fg:#ff0000}**To Daffodils**{/}"
         ]
       ]
     },
