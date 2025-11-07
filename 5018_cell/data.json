@@ -1996,12 +1996,12 @@
           "- The Garden Party (short story)"
         ],
         [
-          "{fg:#ffffff;bg:#000000}Lord Alfred Tennyson{/}",
-          "Who is considered the leading poet of the Victorian era?"
+          "{fg:#ffffff;bg:#000000}Lord Alfred Tennyson{/}\n- considered the **leading poet of the Victorian era**",
+          "- The Charge of the Light Brigade {fg:#ffffff;bg:#000000}narrative poem{/}"
         ],
         [
           "{fg:#ffffff;bg:#000000}Matthew Arnold{/}",
-          "Who wrote \"Dover Beach\"?\n**Best works:**\n- Dover Beach: (Poem),\n- The Scholar Gypsy,\n- Essays in Criticism,\n- Culture and Anarchy,\n- Rugby Chapel. (Elegy, written in memoriam of his father),\n- Sohrab and Rustum (Inspired by and retold from the epic Shahnama, written By Ferdousi)"
+          "{fg:#ffffff;bg:#000000}Best works:{/}\n- Dover Beach: (Poem),\n- The Scholar Gypsy,\n- Essays in Criticism,\n- Culture and Anarchy,\n- Rugby Chapel. (Elegy, written in memoriam of his father),\n- Sohrab and Rustum (Inspired by and retold from the epic Shahnama, written By Ferdousi)\n- **Thyrsis**"
         ],
         [
           "{fg:#ffffff;bg:#000000}O' Henry{/}\n- \u0986\u09ae\u09c7\u09b0\u09bf\u0995\u09be\u09b0 \u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 short story writer\n- \u0986\u09b8\u09b2 \u09a8\u09be\u09ae **William Sydney Porter**",
@@ -2056,7 +2056,7 @@
           "{fg:#ffffff;bg:#000000}\u09a8\u09be\u099f\u0995 / Play{/}\n- {fg:#ff0000}**Hamlet**{/}-(\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf) (setting \u099b\u09bf\u09b2\u09cb Helsingor (Denmark)) (\u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u09ac\u09dc \u09a8\u09be\u099f\u0995) (Prince Hamlet \u09a4\u09be\u09b0 \u09ac\u09be\u09ac\u09be\u09b0 \u09b9\u09a4\u09cd\u09af\u09be\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09cb\u09a7 \u0997\u09cd\u09b0\u09b9\u09a3\u0995\u09c7 \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u0995\u09b0\u09c7 \u09a8\u09be\u099f\u0995\u099f\u09bf\u09b0 \u09aa\u09c1\u09b0\u09cb plot)\n- {fg:#ff0000}**Julius Caesar**{/} (\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf/Historical)\n- **Romeo and Juliet**\n- {fg:#ff0000}**Macbeth**{/}\n- Love's Labour's Lost\n- {fg:#ff0000}**King Lear**{/}\n- Antonio and Cleopatra\n- {fg:#ff0000}**Othello**{/}\n- As You Like It (play/drama)\n{fg:#ffffff;bg:#000000}Lines:{/}\n- Neither a borrower nor a lender be, For loan oft loses both itself and friend. - **Hamlet**\n- \"How sharper than a serpent's tooth it is to have a thankless child!\" -**King Lear**\n- \"Nothing will come of nothing.\"\n- \"I am a man more sinned against than sinning.\" -**King Lear**\n- \"When we are born, we cry that we are come to this great stage of fools.\"-**King Lear**\n- \"Thou shouldst not have been old till thou hadst been wise.\"-**King Lear**\n- blow blow thou winter wind though are not so on kind (**As You Like It**)\n- life is a tale told by an Idiot full of sound and Fury signifying nothing (**Macbeth**)\n- Cowards die many times before their deaths: The valiant never taste of death but once (Ju**lius Caesar**)\n- I am one who loved not wisely but too well' is a quotation (swam song -- \u09b6\u09c7\u09b7 \u0995\u09b0\u09cd\u09ae -- **Othello**)"
         ],
         [
-          "{fg:#ffffff;bg:#000000}William Somerset Maugham{/}",
+          "{fg:#ffffff;bg:#000000}William Somerset Maugham{/}\n- English play right",
           "{fg:#ffffff;bg:#000000}novel{/}\n- The Moon and Sixpence\n- Of Human Bondage\n- Cakes and Ale\n- The Painted Veil\n- The Magician"
         ],
         [
@@ -2077,7 +2077,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}Leo Tolstoy{/}",
-          "- War and Peace {fg:#ffffff;bg:#000000}fiction{/}"
+          "- War and Peace {fg:#ffffff;bg:#000000}fiction book{/}\n- Locksley Hall {fg:#ffffff;bg:#000000}poem{/}\n-- {}@@__Knowledge comes, but wisdom lingers__@@{/} (Locksley Hall)\n"
         ],
         [
           "{fg:#ffffff;bg:#000000}William Wordsworth{/}\n- poet of nature",
@@ -2154,6 +2154,26 @@
         [
           "{fg:#ffffff;bg:#000000}Emily Dickinson{/}\n- American poet",
           "- I died for Beauty {fg:#ffffff;bg:#000000}poem{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Dylan Thomas{/}",
+          "- A Poem in October {fg:#ffffff;bg:#000000}poem{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Anton Chekhov{/}",
+          "The Cherry Orchard {fg:#ffffff;bg:#000000}play{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}George Orwell{/}",
+          "- Nineteen Eighty-Four {fg:#ffffff;bg:#000000}Novel{/}\n- Shooting an Elephant {fg:#ffffff;bg:#000000}essay{/}"
+        ],
+        [
+          "?? Orpheus\n- Calliope\n- Apollo",
+          ""
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Lord Byron{/}\n- Rebel poet",
+          "- She Walks in Beauty {fg:#ffffff;bg:#000000}poem{/}\n{fg:#ffffff;bg:#000000}Lines:{/}\n- @@__the smiles that win the tints that glow__@@ (**She Walks in Beauty**)\n- @@__It's strange but true; for truth is always strange; Stranger than fiction.__@@ (XXX)"
         ]
       ]
     },
