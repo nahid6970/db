@@ -1925,7 +1925,7 @@
         ],
         [
           "**Alexander Pope**\n- known for the heroic couplets in poetry",
-          "- The Rape of the Lock,\n- The Dunciad,\n- An Essay on Man"
+          "- {fg:#ff0000}**The Rape of the Lock**{/} (poem) (mock heroic poem)\n- The Dunciad,\n- An Essay on Man"
         ],
         [
           "{fg:#ffffff;bg:#000000}Arundhati Roy{/}",
@@ -2142,6 +2142,14 @@
         [
           "{fg:#ffffff;bg:#000000}Walt Whitman{/}",
           "- Captain! My Captain! {fg:#ffffff;bg:#000000}poem{/}\n-- Be curious, not judgmental"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}J.J. Rousseau{/}\n- \u09ab\u09b0\u09be\u09b8\u09bf \u09a6\u09be\u09b0\u09cd\u09b6\u09a8\u09bf\u0995",
+          "@@__Patience is bitter, but its fruit is sweet__@@ {fg:#ffffff;bg:#000000}quota{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Martin Luther King Jr.{/}",
+          "I Have a Dream {fg:#ffffff;bg:#000000}speech{/}"
         ]
       ]
     },
