@@ -1,5 +1,5 @@
 {
-  "activeSheet": 40,
+  "activeSheet": 34,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -3551,14 +3551,14 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
+          "font": "Arial",
+          "fontSize": "18",
+          "headerBgColor": "#000000",
           "headerBold": true,
-          "headerCenter": false,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Phrase / Idioms",
+          "headerTextColor": "#ffffff",
+          "name": "Active to Passive",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
@@ -3566,42 +3566,30 @@
         {
           "color": "#ffffff",
           "font": "",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
+          "fontSize": "14",
+          "headerBgColor": "#000000",
           "headerBold": true,
-          "headerCenter": false,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Meaning",
+          "headerTextColor": "#ffffff",
+          "name": "Example",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "1"
         }
       ],
-      "name": "Phrase & Idoms",
+      "name": "Active - Passive",
       "rows": [
         [
-          "Burn the midnight oil",
-          "to stay up late working or studying"
+          "##Present Simple##\n**Rules**\n- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3\n**Example**\n- Active: They write letters.\n- Passive: Letters are written by them.\n\n##Present Continuous##\n**Rule**\n- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3\n**Example**\n- @@She is reading a book. \u2192 A book is being read by her.@@\n\n##Present Perfect##\n**Rule**\n- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3\n**Example**\n- @@He has done the work. \u2192 The work has been done by him.@@\n\n##Present Perfect Continuous##\n\u274c No passive form.\n\n##Past Simple##\n**Rule**\n- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3\n**Example**\n- @@They built a house. \u2192 A house was built by them.@@\n\nPast Continuous\n**Rule**\n- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3\n**Example**\n- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@\n\n##Past Perfect##\n**Rule**\n- Active: Subject + had + V3 + Object\n- Passive: Object + had + been + V3\n**Example**\n- @@He had finished the task. \u2192 The task had been finished by him.@@\n\n##Past Perfect Continuous##\n\u274c No passive form.\n\n##Future Simple##\n**Rule**\n- Active: Subject + will + V1 + Object\n- Passive: Object + will + be + V3\n**Example**\n- @@She will write a report. \u2192 A report will be written by her.@@\n\nFuture (Going to)\n- Active: Subject + is/am/are + going to + V1 + Object\n- Passive: Object + is/am/are + going to + be + V3\n- @@They are going to start the show. \u2192 The show is going to be started by them.@@\n\n##Future Perfect##\n- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject\n- @@He will have completed the work. \u2192 The work will have been completed by him.@@\n\n##Future Perfect Continuous##\n\u274c No passive form.\n`XXX`",
+          ""
         ],
         [
-          "As is the evil, so is the **remedy**",
-          "- \u09af\u09c7\u09ae\u09a8\u09bf \u09ac\u09c1\u09a8\u09cb \u0993\u09b2, \u09a4\u09c7\u09ae\u09a8\u09bf \u09ac\u09be\u0998\u09be \u09a4\u09c7\u0981\u09a4\u09c1\u09b2\n- \u09af\u09c7\u09ae\u09a8 \u0995\u09c1\u0995\u09c1\u09b0, \u09a4\u09c7\u09ae\u09a8 \u09ae\u09c1\u0997\u09c1\u09b0\u0964"
+          "**Interrogative sentence \u099f\u09bf who \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09c7 passive voice \u0995\u09b0\u09be\u09b0 \u09a8\u09bf\u09df\u09ae: ==By whom + auxiliary verb (tense \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0)== + object + verb \u098f\u09b0 past participle (V3) + by + subject \u098f\u09b0 objective form (\u09af\u09a6\u09bf \u09a5\u09be\u0995\u09c7) + \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u09ac\u09cb\u09a7\u0995 \u099a\u09bf\u09b9\u09cd\u09a8 (?)**\n- Who did the work?\n- By whom was the work done?",
+          ""
         ],
         [
-          "take someone to task",
-          "- To rebuke someone\n- \u0995\u09cb\u09a8\u09cb \u0995\u09bf\u099b\u09c1\u09b0 \u099c\u09a8\u09cd\u09af \u0995\u09be\u0989\u0995\u09c7 \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be"
-        ],
-        [
-          "Pull your socks up",
-          "To improve"
-        ],
-        [
-          "Cap it all",
-          "To finish"
-        ],
-        [
-          "Maiden speech - First Speech",
+          "",
           ""
         ]
       ]
@@ -4340,14 +4328,14 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "Arial",
-          "fontSize": "18",
-          "headerBgColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
           "headerBold": true,
-          "headerCenter": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerTextColor": "#ffffff",
-          "name": "Active to Passive",
+          "headerTextColor": "#333333",
+          "name": "Phrase / Idioms",
           "textColor": "#000000",
           "type": "text",
           "width": "150"
@@ -4355,31 +4343,55 @@
         {
           "color": "#ffffff",
           "font": "",
-          "fontSize": "14",
-          "headerBgColor": "#000000",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
           "headerBold": true,
-          "headerCenter": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerTextColor": "#ffffff",
-          "name": "Example",
+          "headerTextColor": "#333333",
+          "name": "Meaning",
           "textColor": "#000000",
           "type": "text",
-          "width": "1"
+          "width": "150"
         }
       ],
-      "name": "Active - Passive",
+      "name": "Phrase & Idoms",
       "rows": [
         [
-          "##Present Simple##\n**Rules**\n- Active: Subject + V1 + Object\n- Passive: Object + am/is/are + V3\n**Example**\n- Active: They write letters.\n- Passive: Letters are written by them.\n\n##Present Continuous##\n**Rule**\n- **Active:** Subject + am/is/are + V1+ing + Object\n- **Passive:** Object + am/is/are + being + V3\n**Example**\n- @@She is reading a book. \u2192 A book is being read by her.@@\n\n##Present Perfect##\n**Rule**\n- Active: Subject + has/have + V3 + Object\n- Passive: Object + has/have + been + V3\n**Example**\n- @@He has done the work. \u2192 The work has been done by him.@@\n\n##Present Perfect Continuous##\n\u274c No passive form.\n\n##Past Simple##\n**Rule**\n- Active: Subject + V2 + Object\n- Passive: Object + was/were + V3\n**Example**\n- @@They built a house. \u2192 A house was built by them.@@\n\nPast Continuous\n**Rule**\n- Active: Subject + was/were + V1+ing + Object\n- Passive: Object + was/were + being + V3\n**Example**\n- @@She was cooking dinner. \u2192 Dinner was being cooked by her.@@\n\n##Past Perfect##\n**Rule**\n- Active: Subject + had + V3 + Object\n- Passive: Object + had + been + V3\n**Example**\n- @@He had finished the task. \u2192 The task had been finished by him.@@\n\n##Past Perfect Continuous##\n\u274c No passive form.\n\n##Future Simple##\n**Rule**\n- Active: Subject + will + V1 + Object\n- Passive: Object + will + be + V3\n**Example**\n- @@She will write a report. \u2192 A report will be written by her.@@\n\nFuture (Going to)\n- Active: Subject + is/am/are + going to + V1 + Object\n- Passive: Object + is/am/are + going to + be + V3\n- @@They are going to start the show. \u2192 The show is going to be started by them.@@\n\n##Future Perfect##\n- Active: Subject + will have + past participle + object\n- Passive: Object + will have been + past participle + by + subject\n- @@He will have completed the work. \u2192 The work will have been completed by him.@@\n\n##Future Perfect Continuous##\n\u274c No passive form.\n`XXX`",
+          "As is the evil, so is the **remedy**",
+          "- \u09af\u09c7\u09ae\u09a8\u09bf \u09ac\u09c1\u09a8\u09cb \u0993\u09b2, \u09a4\u09c7\u09ae\u09a8\u09bf \u09ac\u09be\u0998\u09be \u09a4\u09c7\u0981\u09a4\u09c1\u09b2\n- \u09af\u09c7\u09ae\u09a8 \u0995\u09c1\u0995\u09c1\u09b0, \u09a4\u09c7\u09ae\u09a8 \u09ae\u09c1\u0997\u09c1\u09b0\u0964"
+        ],
+        [
+          "Burn the midnight oil",
+          "to stay up late working or studying"
+        ],
+        [
+          "Cap it all",
+          "To finish"
+        ],
+        [
+          "Maiden speech - First Speech",
           ""
         ],
         [
-          "**Interrogative sentence \u099f\u09bf who \u09a6\u09cd\u09ac\u09be\u09b0\u09be \u09b6\u09c1\u09b0\u09c1 \u09b9\u09b2\u09c7 passive voice \u0995\u09b0\u09be\u09b0 \u09a8\u09bf\u09df\u09ae: ==By whom + auxiliary verb (tense \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0)== + object + verb \u098f\u09b0 past participle (V3) + by + subject \u098f\u09b0 objective form (\u09af\u09a6\u09bf \u09a5\u09be\u0995\u09c7) + \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u09ac\u09cb\u09a7\u0995 \u099a\u09bf\u09b9\u09cd\u09a8 (?)**\n- Who did the work?\n- By whom was the work done?",
-          ""
+          "Pull your socks up",
+          "To improve"
         ],
         [
-          "",
-          ""
+          "rank and file",
+          "**ordinary members**; \u09b8\u09b0\u0995\u09be\u09b0\u09c7\u09b0 \u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u0995\u09b0\u09cd\u09ae\u099a\u09be\u09b0\u09c0; \u098f\u09ae\u09a8 \u09b8\u09c8\u09a8\u09bf\u0995 \u09af\u09be\u09b0\u09be \u0985\u09ab\u09bf\u09b8\u09be\u09b0 \u09a8\u09a8"
+        ],
+        [
+          "take someone to task",
+          "- To rebuke someone\n- \u0995\u09cb\u09a8\u09cb \u0995\u09bf\u099b\u09c1\u09b0 \u099c\u09a8\u09cd\u09af \u0995\u09be\u0989\u0995\u09c7 \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be"
+        ],
+        [
+          "take after",
+          "**resemble**; \u09a6\u09c7\u0996\u09a4\u09c7 \u098f\u0995\u0987 \u09b0\u0995\u09ae; \u09b8\u09be\u09a6\u09c3\u09b6\u09cd\u09af"
+        ],
+        [
+          "It is want of peace and security",
+          "\u09b6\u09be\u09a8\u09cd\u09a4\u09bf \u0993 \u09a8\u09bf\u09b0\u09be\u09aa\u09a4\u09cd\u09a4\u09be\u09b0 \u0985\u09ad\u09be\u09ac\u0995\u09c7 \u09ac\u09c1\u099d\u09be\u09a8\u09cb \u09b9\u099a\u09cd\u099b\u09c7"
         ]
       ]
     },
@@ -4626,7 +4638,7 @@
           ""
         ],
         [
-          "off and on {fg:#ffffff;bg:#000000}={/} Occasionally",
+          "off and on {fg:#ffffff;bg:#000000}={/} Occasionally {fg:#ffffff;bg:#000000}={/} \u09ae\u09be\u099d\u09c7 \u09ae\u09be\u099d\u09c7",
           ""
         ]
       ]
