@@ -1,5 +1,5 @@
 {
-  "activeSheet": 3,
+  "activeSheet": 40,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1157,12 +1157,28 @@
           "\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09be \u098f\u0996\u09a8 \u0986\u09b0 \u09aa\u09cd\u09b0\u099a\u09b2\u09bf\u09a4 \u09a8\u09df"
         ],
         [
+          "arduous",
+          "\u09a6\u09c1\u0983\u09b8\u09be\u09a7\u09cd\u09af; \u0995\u09b7\u09cd\u099f\u0995\u09b0"
+        ],
+        [
           "Barbarism",
           "==\u09ad\u09be\u09b7\u09be\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09df\u09cb\u0997=="
         ],
         [
           "Brochure",
           "\u09aa\u09c1\u09b8\u09cd\u09a4\u09bf\u0995\u09be"
+        ],
+        [
+          "Brusque",
+          "\u09b0\u09c2\u09dd; \u0985\u09ad\u09ac\u09cd\u09af"
+        ],
+        [
+          "Bungle",
+          "\u0995\u09cb\u09a8\u09cb \u0995\u09be\u099c \u0986\u09a8\u09be\u09dc\u09bf\u09b0 \u09ae\u09a4\u09cb \u0995\u09b0\u09be; \u09ad\u09a3\u09cd\u09a1\u09c1\u09b2 \u0995\u09b0\u09be; **\u0985\u0995\u09be\u09b0\u09cd\u09af\u0995\u09b0 \u09ac\u09be \u0985\u09b8\u09ab\u09b2**"
+        ],
+        [
+          "Clique",
+          "A group of people"
         ],
         [
           "Cogent",
@@ -1177,12 +1193,28 @@
           "\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8"
         ],
         [
+          "Culpability",
+          "\u09b6\u09be\u09b8\u09cd\u09a4\u09bf \u09aa\u09be\u0993\u09df\u09be\u09b0 \u09af\u09cb\u0997\u09cd\u09af \u098f\u09ae\u09a8"
+        ],
+        [
+          "curtail",
+          "\u09ac\u09cd\u09af\u09df \u0995\u09ae\u09be\u09a4\u09c7 \u09b9\u09ac\u09c7"
+        ],
+        [
           "Custom",
           "\u09aa\u09cd\u09b0\u09a5\u09be, \u0985\u09ad\u09cd\u09af\u09be\u09b8"
         ],
         [
           "Customs",
           "\u09b6\u09c1\u09b2\u09cd\u0995 \u09ac\u09bf\u09ad\u09be\u0997"
+        ],
+        [
+          "De Jure, By law",
+          "\u09a8\u09cd\u09af\u09be\u09df\u09b8\u09ae\u09cd\u09ae\u09a4\u09ad\u09be\u09ac\u09c7; \u0986\u0987\u09a8\u09a4"
+        ],
+        [
+          "deference",
+          "\u0985\u09a8\u09cd\u09af\u09c7\u09b0 \u0987\u099a\u09cd\u099b\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09a4\u09bf \u09b8\u09cd\u09ac\u09c0\u0995\u09be\u09b0; \u09ae\u09be\u09a8\u09cd\u09af\u09a4\u09cd\u09ac; \u09ac\u09b6\u09ac\u09b0\u09cd\u09a4\u09bf\u09a4"
         ],
         [
           "Dictation",
@@ -1197,12 +1229,20 @@
           "\u0995\u09c1\u099f\u09a8\u09c0\u09a4\u09bf\u0995"
         ],
         [
+          "Dogged",
+          "\u09a8\u09be\u099b\u09cb\u09dc\u09ac\u09be\u09a8\u09cd\u09a6\u09be; \u098f\u0995\u0997\u09c1\u0981\u09df\u09c7"
+        ],
+        [
           "Domicile",
           "\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09a8\u09bf\u09ac\u09be\u09b8"
         ],
         [
           "Ductile",
           "\u09a8\u09ae\u09a8\u09c0\u09df"
+        ],
+        [
+          "Ductile, Docile, Supple",
+          "\u09a8\u09ae\u09a8\u09c0\u09df, \u09b8\u09b9\u099c\u09c7 \u09ac\u09b6 \u09ae\u09be\u09a8\u09c7 \u098f\u09ae\u09a8, \u09b8\u09c1\u09a8\u09ae\u09cd\u09af; \u0995\u09cb\u09ae\u09b2"
         ],
         [
           "Duty",
@@ -1249,16 +1289,40 @@
           "\u0998\u09cb\u09b7\u09a3\u09be\u09aa\u09a4\u09cd\u09b0"
         ],
         [
+          "Guile",
+          "\u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be; \u099b\u09b2\u09a8\u09be"
+        ],
+        [
+          "Haughty",
+          "\u0989\u09a6\u09cd\u09a7\u09a4; \u0985\u09b9\u0999\u09cd\u0995\u09be\u09b0\u09c0"
+        ],
+        [
+          "Huff",
+          "\u0995\u09cd\u09b0\u09cb\u09a7\u09be\u09ac\u09c7\u09b6; \u09b0\u09cb\u09b7\u09be\u09ac\u09c7\u09b6"
+        ],
+        [
           "Illuminate",
           ""
+        ],
+        [
+          "Intrigue",
+          "\u09b7\u09dc\u09af\u09a8\u09cd\u09a4\u09cd\u09b0 \u0995\u09b0\u09be, \u0989\u09a6\u09cd\u09a6\u09c0\u09aa\u09cd\u09a4 \u0995\u09b0\u09be"
         ],
         [
           "Inveterate, Habitual, Chronic",
           "\u098f\u09ae\u09a8 \u0995\u09bf\u099b\u09c1 \u09af\u09be \u09a6\u09c0\u09b0\u09cd\u0998\u09a6\u09bf\u09a8 \u09a7\u09b0\u09c7 \u099a\u09b2\u099b\u09c7 \u09ac\u09be \u0997\u09ad\u09c0\u09b0\u09ad\u09be\u09ac\u09c7 \u0985\u09ad\u09cd\u09af\u09b8\u09cd\u09a4"
         ],
         [
+          "Irk",
+          "\u09ac\u09bf\u09b0\u0995\u09cd\u09a4/ \u0989\u09a4\u09cd\u09af\u0995\u09cd\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
           "Lexicon",
           "\u09b6\u09ac\u09cd\u09a6\u09ad\u09be\u09a8\u09cd\u09a1\u09be\u09b0"
+        ],
+        [
+          "Loquacity",
+          "\u09ac\u09be\u0995\u09aa\u099f\u09c1\u09a4\u09be; \u09ac\u09be\u099a\u09be\u09b2-\u09b8\u09cd\u09ac\u09ad\u09be\u09ac"
         ],
         [
           "Neologism",
@@ -1273,16 +1337,32 @@
           "\u0985\u09a4\u09bf\u09ae\u09be\u09b0\u09c0"
         ],
         [
+          "Penurious",
+          "\u099a\u09b0\u09ae \u09ae\u09be\u09a4\u09cd\u09b0\u09be\u09df \u09ae\u09bf\u09a4\u09ac\u09cd\u09af\u09df\u09c0"
+        ],
+        [
           "Pervasive",
           "\u09aa\u09b0\u09bf\u09ac\u09cd\u09af\u09be\u09aa\u0995"
+        ],
+        [
+          "Pique",
+          "\u0997\u09b0\u09cd\u09ac; \u0985\u09b9\u0982\u0995\u09be\u09b0; \u0998\u09c3\u09a3\u09be \u0995\u09b0\u09be"
         ],
         [
           "Pliable",
           " \u09b8\u09b9\u099c\u09c7 \u09ac\u09be\u0981\u0995\u09be\u09a8\u09cb, \u09aa\u09c7\u0981\u099a\u09be\u09a8\u09cb \u09ac\u09be \u0986\u0995\u09be\u09b0\u09aa\u09cd\u09b0\u09a6\u09be\u09a8 \u0995\u09b0\u09be \u09af\u09be\u09df\u0964"
         ],
         [
+          "Probity",
+          "\u09b8\u09a4\u09a4\u09be"
+        ],
+        [
           "Propaganda",
           "\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u09a3\u09be"
+        ],
+        [
+          "Provident",
+          "\u09b8\u099e\u09cd\u099a\u09df \u0995\u09b0\u09c7"
         ],
         [
           "Quartz",
@@ -1291,6 +1371,18 @@
         [
           "Quotation",
           "\u09ae\u09c2\u09b2\u09cd\u09af\u099c\u09cd\u099e\u09be\u09aa\u09a8"
+        ],
+        [
+          "Ravenous",
+          "\u0995\u09cd\u09b7\u09c1\u09a7\u09be\u09b0\u09cd\u09a4; \u09b2\u09cb\u09ad\u09c0"
+        ],
+        [
+          "Relinquish, Abdicate",
+          "\u099b\u09c7\u09dc\u09c7 \u09a6\u09c7\u0993\u09df\u09be; \u09a4\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09be"
+        ],
+        [
+          "Reproof",
+          "\u09a8\u09bf\u09a8\u09cd\u09a6\u09be \u09ac\u09be \u09ad\u09b0\u09cd\u09ce\u09b8\u09a8\u09be \u0995\u09b0\u09be"
         ],
         [
           "Serenity",
@@ -1313,6 +1405,10 @@
           "\u0995\u09a0\u09bf\u09a8"
         ],
         [
+          "Stiff",
+          "\u0995\u09a0\u09bf\u09a8; \u09b6\u0995\u09cd\u09a4; \u0985\u09a8\u09ae\u09a8\u09c0\u09df"
+        ],
+        [
           "Subjugate",
           "\u0995\u09be\u0989\u0995\u09c7 \u09a6\u09ae\u09a8 \u0995\u09b0\u09be \u09ac\u09be \u0985\u09a7\u09c0\u09a8 \u0995\u09b0\u09be"
         ],
@@ -1333,96 +1429,16 @@
           ""
         ],
         [
-          "Ductile, Docile, Supple",
-          "\u09a8\u09ae\u09a8\u09c0\u09df, \u09b8\u09b9\u099c\u09c7 \u09ac\u09b6 \u09ae\u09be\u09a8\u09c7 \u098f\u09ae\u09a8, \u09b8\u09c1\u09a8\u09ae\u09cd\u09af; \u0995\u09cb\u09ae\u09b2"
-        ],
-        [
-          "Stiff",
-          "\u0995\u09a0\u09bf\u09a8; \u09b6\u0995\u09cd\u09a4; \u0985\u09a8\u09ae\u09a8\u09c0\u09df"
-        ],
-        [
-          "Culpability",
-          "\u09b6\u09be\u09b8\u09cd\u09a4\u09bf \u09aa\u09be\u0993\u09df\u09be\u09b0 \u09af\u09cb\u0997\u09cd\u09af \u098f\u09ae\u09a8"
-        ],
-        [
-          "Intrigue",
-          "\u09b7\u09dc\u09af\u09a8\u09cd\u09a4\u09cd\u09b0 \u0995\u09b0\u09be, \u0989\u09a6\u09cd\u09a6\u09c0\u09aa\u09cd\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "Probity",
-          "\u09b8\u09a4\u09a4\u09be"
-        ],
-        [
-          "Guile",
-          "\u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be; \u099b\u09b2\u09a8\u09be"
-        ],
-        [
-          "Loquacity",
-          "\u09ac\u09be\u0995\u09aa\u099f\u09c1\u09a4\u09be; \u09ac\u09be\u099a\u09be\u09b2-\u09b8\u09cd\u09ac\u09ad\u09be\u09ac"
-        ],
-        [
-          "Reproof",
-          "\u09a8\u09bf\u09a8\u09cd\u09a6\u09be \u09ac\u09be \u09ad\u09b0\u09cd\u09ce\u09b8\u09a8\u09be \u0995\u09b0\u09be"
-        ],
-        [
-          "Haughty",
-          "\u0989\u09a6\u09cd\u09a7\u09a4; \u0985\u09b9\u0999\u09cd\u0995\u09be\u09b0\u09c0"
-        ],
-        [
-          "Provident",
-          "\u09b8\u099e\u09cd\u099a\u09df \u0995\u09b0\u09c7"
-        ],
-        [
-          "Brusque",
-          "\u09b0\u09c2\u09dd; \u0985\u09ad\u09ac\u09cd\u09af"
-        ],
-        [
-          "Penurious",
-          "\u099a\u09b0\u09ae \u09ae\u09be\u09a4\u09cd\u09b0\u09be\u09df \u09ae\u09bf\u09a4\u09ac\u09cd\u09af\u09df\u09c0"
-        ],
-        [
-          "deference",
-          "\u0985\u09a8\u09cd\u09af\u09c7\u09b0 \u0987\u099a\u09cd\u099b\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09a4\u09bf \u09b8\u09cd\u09ac\u09c0\u0995\u09be\u09b0; \u09ae\u09be\u09a8\u09cd\u09af\u09a4\u09cd\u09ac; \u09ac\u09b6\u09ac\u09b0\u09cd\u09a4\u09bf\u09a4"
-        ],
-        [
-          "De Jure, By law",
-          "\u09a8\u09cd\u09af\u09be\u09df\u09b8\u09ae\u09cd\u09ae\u09a4\u09ad\u09be\u09ac\u09c7; \u0986\u0987\u09a8\u09a4"
-        ],
-        [
-          "Bungle",
-          "\u0995\u09cb\u09a8\u09cb \u0995\u09be\u099c \u0986\u09a8\u09be\u09dc\u09bf\u09b0 \u09ae\u09a4\u09cb \u0995\u09b0\u09be; \u09ad\u09a3\u09cd\u09a1\u09c1\u09b2 \u0995\u09b0\u09be; **\u0985\u0995\u09be\u09b0\u09cd\u09af\u0995\u09b0 \u09ac\u09be \u0985\u09b8\u09ab\u09b2**"
-        ],
-        [
           "Unprecedented",
           "\u09a8\u099c\u09c0\u09b0\u09ac\u09bf\u09b9\u09c0\u09a8"
         ],
         [
-          "curtail",
-          "\u09ac\u09cd\u09af\u09df \u0995\u09ae\u09be\u09a4\u09c7 \u09b9\u09ac\u09c7"
+          "Gloomy",
+          "\u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0; \u0985\u09a8\u09be\u09b2\u09cb\u0995\u09bf\u09a4"
         ],
         [
-          "Pique",
-          "\u0997\u09b0\u09cd\u09ac; \u0985\u09b9\u0982\u0995\u09be\u09b0; \u0998\u09c3\u09a3\u09be \u0995\u09b0\u09be"
-        ],
-        [
-          "Irk",
-          "\u09ac\u09bf\u09b0\u0995\u09cd\u09a4/ \u0989\u09a4\u09cd\u09af\u0995\u09cd\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "Huff",
-          "\u0995\u09cd\u09b0\u09cb\u09a7\u09be\u09ac\u09c7\u09b6; \u09b0\u09cb\u09b7\u09be\u09ac\u09c7\u09b6"
-        ],
-        [
-          "Clique",
-          "A group of people"
-        ],
-        [
-          "arduous",
-          "\u09a6\u09c1\u0983\u09b8\u09be\u09a7\u09cd\u09af; \u0995\u09b7\u09cd\u099f\u0995\u09b0"
-        ],
-        [
-          "Dogged",
-          "\u09a8\u09be\u099b\u09cb\u09dc\u09ac\u09be\u09a8\u09cd\u09a6\u09be; \u098f\u0995\u0997\u09c1\u0981\u09df\u09c7"
+          "Adjudicate",
+          "\u09b8\u09bf\u09a6\u09cd\u09a7\u09be\u09a8\u09cd\u09a4 \u09a6\u09c7\u0993\u09df\u09be"
         ]
       ]
     },
@@ -4607,6 +4623,10 @@
         ],
         [
           "skilled **at**",
+          ""
+        ],
+        [
+          "off and on {fg:#ffffff;bg:#000000}={/} Occasionally",
           ""
         ]
       ]
