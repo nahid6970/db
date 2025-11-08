@@ -1,5 +1,5 @@
 {
-  "activeSheet": 5,
+  "activeSheet": 54,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1588,44 +1588,44 @@
       ]
     },
     {
-      "name": "Bangladesh",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "Bangladesh",
       "rows": [
         [
-          "Who was the **first Governor of Bangladesh Bank**? A.N.M. Hamidullah",
+          "Who was the **{fg:#ffffff;bg:#000000}first{/} Governor of Bangladesh Bank**? A.N.M. Hamidullah\n- Who is the current Governor of Bangladesh Bank? Ahsan H. Mansur (**2025**)",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     },
     {
       "cellStyles": {},
@@ -5197,13 +5197,18 @@
           "width": "1"
         }
       ],
-      "name": "\u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8 (Science)",
+      "name": "Inventor",
       "rows": [
         [
           "AI \u09aa\u09cd\u09b0\u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09b0 \u0986\u09ac\u09bf\u09b7\u09cd\u0995\u09be\u09b0\u0995 \u0995\u09c7? \u099c\u09a8 \u09ae\u09cd\u09af\u09be\u0995\u09b0\u09cd\u09a5\u09bf ",
           ""
+        ],
+        [
+          "Who is the founder of Gmail? Paul Buchheit",
+          ""
         ]
-      ]
+      ],
+      "nickname": ""
     },
     {
       "cellStyles": {},
