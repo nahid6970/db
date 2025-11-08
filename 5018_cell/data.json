@@ -1,5 +1,5 @@
 {
-  "activeSheet": 60,
+  "activeSheet": 1,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1020,6 +1020,14 @@
         ],
         [
           "Queen Elizabeth decided to residepermanently at - Windsor Castle",
+          ""
+        ],
+        [
+          "who is the foreign minister of Russia? Sergey Lavrov",
+          ""
+        ],
+        [
+          "Who killed Che Guevara? Mario Teran Salazar",
           ""
         ]
       ]
@@ -5362,6 +5370,7 @@
         }
       ],
       "name": "Sports",
+      "nickname": "",
       "rows": [
         [
           "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09be\u09b0\u09c0 \u09ab\u09c1\u099f\u09ac\u09b2 \u09a6\u09b2\u09c7\u09b0 \u0985\u09a7\u09bf\u09a8\u09be\u09df\u0995\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09bf? \u0986\u09ab\u09bf\u09a6\u09be \u0996\u09a8\u09cd\u09a6\u0995\u09be\u09b0",
@@ -5379,8 +5388,7 @@
           "Ash Borty, the world number one tennis player announced her retirement at the age of: 25",
           ""
         ]
-      ],
-      "nickname": ""
+      ]
     },
     {
       "cellStyles": {},
@@ -5460,60 +5468,39 @@
           "headerCenter": false,
           "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "Currency",
+          "name": "B",
           "textColor": "#000000",
           "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "Capital",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "width": "1"
         }
       ],
       "name": "Currency - Capital",
       "rows": [
         [
-          "Country | Capital | Currency  \nVietnam | Hanoi | Dong  \nJapan | Tokyo | {fg:#ffffff;bg:#000000}Yen{/}  \nChina | Beijing | {fg:#ffffff;bg:#000000}Yuan{/} (Renminbi)  \nMorocco | Rabat | Dirham  \nEgypt | Cairo | Egyptian Pound  \nIran | Tehran | Rial",
-          "",
+          "Country | Capital | Currency  \nVietnam | Hanoi | Dong  \nJapan | Tokyo | {fg:#ffffff;bg:#000000}Yen{/}  \nChina | Beijing | {fg:#ffffff;bg:#000000}Yuan{/} (Renminbi)  \nMorocco | Rabat | Dirham  \nEgypt | Cairo | Egyptian Pound  \nIran | Tehran | Rial\nUkrain |\u0995\u09bf\u09df\u09c7\u09ad|Hryvnia\n\n\n\n",
           ""
         ],
         [
           "\u09b8\u09cc\u09a6\u09bf \u0986\u09b0\u09ac\u09c7\u09b0 \u09a6\u09cd\u09ac\u09bf\u09a4\u09c0\u09df \u09ac\u09c3\u09b9\u09a4\u09cd\u09a4\u09ae \u09b6\u09b9\u09b0 \u09b9\u09b2\u09cb \u099c\u09c7\u09a6\u09cd\u09a6\u09be",
+          ""
+        ],
+        [
           "",
           ""
         ],
         [
           "",
+          ""
+        ],
+        [
           "",
           ""
         ],
         [
           "",
-          "",
           ""
         ],
         [
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
-          "",
-          ""
-        ],
-        [
-          "",
           "",
           ""
         ]
