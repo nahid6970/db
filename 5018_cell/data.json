@@ -1,5 +1,5 @@
 {
-  "activeSheet": 5,
+  "activeSheet": 10,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -2768,6 +2768,10 @@
         ],
         [
           "The first computer network is called - ARPANET",
+          ""
+        ],
+        [
+          "Which technology is used in compact disks? Laser",
           ""
         ]
       ]
@@ -5631,7 +5635,7 @@
       "name": "Currency - Capital",
       "rows": [
         [
-          "Country | Capital | Currency  \nVietnam | Hanoi | Dong  \nJapan | Tokyo | {fg:#ffffff;bg:#000000}Yen{/}  \nChina | Beijing | {fg:#ffffff;bg:#000000}Yuan{/} (Renminbi)  \nMorocco | Rabat | Dirham  \nEgypt | Cairo | Egyptian Pound  \nIran | Tehran | Rial\nUkrain |\u0995\u09bf\u09df\u09c7\u09ad|Hryvnia\n\n\n\n",
+          ":Country: | :Capital: | :Currency:  \nVietnam | Hanoi | Dong  \nJapan | Tokyo | {fg:#ffffff;bg:#000000}Yen{/}  \nChina | Beijing | {fg:#ffffff;bg:#000000}Yuan{/} (Renminbi)  \nMorocco | Rabat | Dirham  \nEgypt | Cairo | Egyptian Pound  \nIran | Tehran | Rial\nUkrain |\u0995\u09bf\u09df\u09c7\u09ad|Hryvnia\nSierra Leone|Freetown|:-:\n\n\n",
           ""
         ],
         [
