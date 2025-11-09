@@ -1,5 +1,5 @@
 {
-  "activeSheet": 3,
+  "activeSheet": 71,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -78,7 +78,8 @@
     "67": "Bangla Grammar",
     "68": "English Grammar",
     "69": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "70": "English Grammar"
+    "70": "English Grammar",
+    "71": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheets": [
     {
@@ -1076,8 +1077,12 @@
           ""
         ],
         [
-          "",
+          "The total number of **independent countries** in the world is - 195\n- \u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8\u09c7 \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998\u09c7\u09b0 (United Nations - UN) \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4 \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8 \u09a6\u09c7\u09b6\u0997\u09c1\u09b2\u09cb\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \u09e7\u09ef\u09e9\u0964 \u098f\u09b0 \u09aa\u09be\u09b6\u09be\u09aa\u09be\u09b6\u09bf \u09a6\u09c1\u099f\u09bf \u09a6\u09c7\u09b6 \u09ad\u09cd\u09af\u09be\u099f\u09bf\u0995\u09be\u09a8 \u09b8\u09bf\u099f\u09bf (Vatican City) \u098f\u09ac\u0982 \u09aa\u09cd\u09af\u09be\u09b2\u09c7\u09b8\u09cd\u099f\u09be\u0987\u09a8 (Palestine) \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af \u09a8\u09be \u09b9\u09b2\u09c7\u0993 \u09aa\u09b0\u09cd\u09af\u09ac\u09c7\u0995\u09cd\u09b7\u0995 \u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0 (Observer State) \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u0964 \u0985\u09b0\u09cd\u09a5\u09be\u09ce, {fg:#ffffff;bg:#000000}\u09e7\u09ef\u09e9\u099f\u09bf \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4 \u09a6\u09c7\u09b6 \u098f\u09ac\u0982 \u09e8\u099f\u09bf \u09aa\u09b0\u09cd\u09af\u09ac\u09c7\u0995\u09cd\u09b7\u0995 \u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0 (\u09ad\u09cd\u09af\u09be\u099f\u09bf\u0995\u09be\u09a8 \u09b8\u09bf\u099f\u09bf \u0993 \u09aa\u09cd\u09af\u09be\u09b2\u09c7\u09b8\u09cd\u099f\u09be\u0987\u09a8){/}\u0964 \u09ae\u09cb\u099f \u09e7\u09ef\u09eb\u099f\u09bf \u09b8\u09cd\u09ac\u09be\u09a7\u09c0\u09a8 \u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0 \u09b0\u09df\u09c7\u099b\u09c7",
           ""
+        ],
+        [
+          "The melody of Bangladesh's national anthem, \"Amar Sonar Bangla\" was derived from the song \"Ami Kothay Pabo Tare\". It was sung by whom?\na) Rabindranath Thakur\nb) Gagan Harkara\nc) Samar Das\nd) Dinendra Chowdhury\n",
+          "Ans. B"
         ]
       ]
     },
@@ -1129,18 +1134,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "Word",
-          "type": "text",
-          "width": "250",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#ffffff",
-          "headerTextColor": "#000000",
           "headerBold": true,
+          "headerCenter": true,
           "headerItalic": true,
-          "headerCenter": true
+          "headerTextColor": "#000000",
+          "name": "Word",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "250"
         },
         {
           "color": "#bdffbe",
@@ -1711,6 +1716,10 @@
         ],
         [
           "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 {fg:#ffffff;bg:#000000}\u09aa\u09cd\u09b0\u09a5\u09ae \u0985\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09b8\u09b0\u0995\u09be\u09b0{/} \u0997\u09a0\u09bf\u09a4 \u09b9\u09df - \u09e7\u09e6 \u098f\u09aa\u09cd\u09b0\u09bf\u09b2, \u09e7\u09ef\u09ed\u09e7\n- \u098f \u09b8\u09b0\u0995\u09be\u09b0 **\u09b6\u09aa\u09a5 \u0997\u09cd\u09b0\u09b9\u09a3** \u0995\u09b0\u09c7 \u09e7\u09ed \u098f\u09aa\u09cd\u09b0\u09bf\u09b2 \u09ae\u09c7\u09b9\u09c7\u09b0\u09aa\u09c1\u09b0 \u099c\u09c7\u09b2\u09be\u09b0 \u09ac\u09c8\u09a6\u09cd\u09af\u09a8\u09be\u09a5 \u09a4\u09b2\u09be\u09df",
+          ""
+        ],
+        [
+          "",
           ""
         ]
       ]
@@ -4021,7 +4030,7 @@
           "**UNESCO** - United Nations Educational, Scientific and Cultural Organization",
           "",
           "",
-          "- \u09e7\u09ef\u09ef\u09ef \u09b8\u09be\u09b2\u09c7\u09b0 \u09e7\u09ed \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf\u0995\u09c7 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u09bf \u09a6\u09c7\u09df\n- \u09e8\u09e6\u09e6\u09e6 \u09b8\u09be\u09b2\u09c7\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf \u09e7\u09ee\u09ee\u099f\u09bf \u09a6\u09c7\u09b6 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u09b0\u09c7\u09b0 \u09ae\u09a4 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995\u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09c7\u0964"
+          "- \u09e7\u09ef\u09ef\u09ef \u09b8\u09be\u09b2\u09c7\u09b0 \u09e7\u09ed \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf\u0995\u09c7 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u09bf \u09a6\u09c7\u09df\n- \u09e8\u09e6\u09e6\u09e6 \u09b8\u09be\u09b2\u09c7\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf \u09e7\u09ee\u09ee\u099f\u09bf \u09a6\u09c7\u09b6 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u09b0\u09c7\u09b0 \u09ae\u09a4 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995\u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09c7\u0964\n- UNESCO declare the Sundarbans of Bangladesh as a world heritage site in 1997\n- \u09b7\u09be\u099f \u0997\u09ae\u09cd\u09ac\u09c1\u099c \u09ae\u09b8\u099c\u09bf\u09a6 \u09ac\u09be\u0997\u09c7\u09b0\u09b9\u09be\u099f world heritage site in \u09e7\u09ef\u09ee\u09eb \u09b8\u09be\u09b2\u09c7\n- \u09aa\u09be\u09b9\u09be\u09dc\u09aa\u09c1\u09b0 \u09ac\u09cc\u09a6\u09cd\u09a7 \u09ac\u09bf\u09b9\u09be\u09b0 \u09a8\u0993\u0997\u09be\u0981 world heritage site in \u09e7\u09ef\u09ee\u09eb \u09b8\u09be\u09b2\u09c7"
         ],
         [
           "**UNHCR** - United Nations High Commissioner for Refugees",
@@ -6132,6 +6141,46 @@
           ""
         ]
       ]
+    },
+    {
+      "name": "Full Form",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        },
+        {
+          "name": "B",
+          "type": "text",
+          "width": "1",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "UTC = Universal Time Coordinated",
+          ""
+        ]
+      ],
+      "cellStyles": {}
     }
   ]
 }
