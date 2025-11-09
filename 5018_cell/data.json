@@ -1,5 +1,5 @@
 {
-  "activeSheet": 71,
+  "activeSheet": 40,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1083,6 +1083,14 @@
         [
           "The melody of Bangladesh's national anthem, \"Amar Sonar Bangla\" was derived from the song \"Ami Kothay Pabo Tare\". It was sung by whom?\na) Rabindranath Thakur\nb) Gagan Harkara\nc) Samar Das\nd) Dinendra Chowdhury\n",
           "Ans. B"
+        ],
+        [
+          "The deepest sea of the world is - Caribbean Sea",
+          ""
+        ],
+        [
+          "which is the most harmful ray for animal planet? Gamma ray",
+          ""
         ]
       ]
     },
@@ -4754,6 +4762,14 @@
         [
           "{fg:#ffffff;bg:#000000}Boast of{/} // {fg:#ffffff;bg:#000000}Boast about{/} = \u0985\u09b9\u0999\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be \u09ac\u09be \u09a6\u09ae\u09cd\u09ad \u0995\u09b0\u09be",
           ""
+        ],
+        [
+          "craves for",
+          ""
+        ],
+        [
+          "Option        | Meaning\nbeat **off**  | drive away / repel attackers\nbeat **out**  | extinguish / surpass\nbeat **up**   | physically assault someone badly\nbeat **down** | force to lower price / heat beating down from sun",
+          ""
         ]
       ]
     },
@@ -6143,44 +6159,48 @@
       ]
     },
     {
-      "name": "Full Form",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "Full Form",
       "rows": [
         [
           "UTC = Universal Time Coordinated",
           ""
+        ],
+        [
+          "SARS-Co V-2 = Severe Acute Respiratory Syndrome\nCoronavirus 2",
+          ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     }
   ]
 }
