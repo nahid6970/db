@@ -1,5 +1,5 @@
 {
-  "activeSheet": 40,
+  "activeSheet": 54,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -79,7 +79,8 @@
     "68": "English Grammar",
     "69": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "70": "English Grammar",
-    "71": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
+    "71": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "72": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheets": [
     {
@@ -1089,7 +1090,7 @@
           ""
         ],
         [
-          "which is the most harmful ray for animal planet? Gamma ray",
+          "",
           ""
         ]
       ]
@@ -5388,18 +5389,18 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -5420,6 +5421,10 @@
       "rows": [
         [
           "SPARRSO \u09a4\u09c7 \u0995\u09cb\u09a8 \u09ac\u09bf\u09b7\u09df\u09c7 \u0997\u09ac\u09c7\u09b7\u09a3\u09be \u0995\u09b0\u09be \u09b9\u09df? \u09ae\u09b9\u09be\u0995\u09be\u09b6 \u0997\u09ac\u09c7\u09b7\u09a3\u09be",
+          ""
+        ],
+        [
+          "which is the most harmful ray for animal planet? Gamma ray",
           ""
         ]
       ]
@@ -6198,6 +6203,46 @@
         ],
         [
           "SARS-Co V-2 = Severe Acute Respiratory Syndrome\nCoronavirus 2",
+          ""
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "Nobel Prize",
+      "rows": [
+        [
+          "{fg:#ffffff;bg:#000000}2024{/}\nWho received the Nobel **Peace** Prize in 2024? Nihon Hidankyo",
           ""
         ]
       ]
