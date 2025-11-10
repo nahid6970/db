@@ -1,5 +1,5 @@
 {
-  "activeSheet": 47,
+  "activeSheet": 27,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -3992,21 +3992,23 @@
           "width": "250"
         },
         {
-          "color": "#ffffff",
-          "font": "",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "Established",
-          "textColor": "#000000",
           "type": "text",
-          "width": "100"
+          "width": "100",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
-          "font": "",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -4073,7 +4075,7 @@
         [
           "**UNESCO** - United Nations Educational, Scientific and Cultural Organization",
           "",
-          "",
+          "\u09aa\u09cd\u09af\u09be\u09b0\u09bf\u09b8, \u09ab\u09cd\u09b0\u09be\u09a8\u09cd\u09b8",
           "- \u09e7\u09ef\u09ef\u09ef \u09b8\u09be\u09b2\u09c7\u09b0 \u09e7\u09ed \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf\u0995\u09c7 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u09bf \u09a6\u09c7\u09df\n- \u09e8\u09e6\u09e6\u09e6 \u09b8\u09be\u09b2\u09c7\u09b0 \u09e8\u09e7 \u09ab\u09c7\u09ac\u09cd\u09b0\u09c1\u09df\u09be\u09b0\u09bf \u09e7\u09ee\u09ee\u099f\u09bf \u09a6\u09c7\u09b6 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u09b0\u09c7\u09b0 \u09ae\u09a4 \u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995\u09ae\u09be\u09a4\u09c3\u09ad\u09be\u09b7\u09be \u09a6\u09bf\u09ac\u09b8 \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09c7\u0964\n- UNESCO declare the Sundarbans of Bangladesh as a world heritage site in 1997\n- \u09b7\u09be\u099f \u0997\u09ae\u09cd\u09ac\u09c1\u099c \u09ae\u09b8\u099c\u09bf\u09a6 \u09ac\u09be\u0997\u09c7\u09b0\u09b9\u09be\u099f world heritage site in \u09e7\u09ef\u09ee\u09eb \u09b8\u09be\u09b2\u09c7\n- \u09aa\u09be\u09b9\u09be\u09dc\u09aa\u09c1\u09b0 \u09ac\u09cc\u09a6\u09cd\u09a7 \u09ac\u09bf\u09b9\u09be\u09b0 \u09a8\u0993\u0997\u09be\u0981 world heritage site in \u09e7\u09ef\u09ee\u09eb \u09b8\u09be\u09b2\u09c7"
         ],
         [
@@ -6276,6 +6278,10 @@
         ],
         [
           "SARS-Co V-2 = Severe Acute Respiratory Syndrome\nCoronavirus 2",
+          ""
+        ],
+        [
+          "ECNEC = Executive Committee of the National Economic Council",
           ""
         ]
       ]
