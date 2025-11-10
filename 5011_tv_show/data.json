@@ -2081,7 +2081,7 @@
             {
                 "id": 13,
                 "title": "WWE SmackDown - 2025-10-31 - SmackDown 1367 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-11-02T16:33:56.438467",
                 "notify": "seen"
             },
@@ -2796,6 +2796,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "To Your Eternity - s03e06 - [46] - Proof of Peace HDTV-720p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-11-10T01:09:07.240458",
+                "notify": "seen"
+            },
+            {
                 "id": 5,
                 "title": "To Your Eternity - s03e05 - [45] - Unheard Words HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -2842,6 +2849,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 6,
+                "title": "One-Punch Man - S03E05 - Monster King WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-11-10T01:09:07.240458",
+                "notify": "seen"
+            },
             {
                 "id": 5,
                 "title": "One-Punch Man - S03E04 - Counterattack Signal WEBDL-1080p",
