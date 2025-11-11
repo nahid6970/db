@@ -1,5 +1,5 @@
 {
-  "activeSheet": 54,
+  "activeSheet": 29,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -2155,8 +2155,8 @@
           "- Crime and Punishment {fg:#ffffff;bg:#000000}Novel{/}"
         ],
         [
-          "G.B. Shaw",
-          "- Caesar and Cleopatra (play)\n- Man and Superman\n- Major Barbara\n- The Doctor's Dilemma\n- Getting Married\n- Misalliance\n- Arms and the Man\n- Candida\n- Pygmalion"
+          "{fg:#ffffff;bg:#000000}G.B. Shaw{/}",
+          "- Arms and the Man\n- Caesar and Cleopatra (play)\n- Candida\n- Getting Married\n- Major Barbara\n- Man and Superman\n- Misalliance\n- Pygmalion\n- The Doctor's Dilemma"
         ],
         [
           "{fg:#ffffff;bg:#000000}Gabriel Garcia Marquez {/}\n- \u09af\u09bf\u09a8\u09bf \u09b2\u09cd\u09af\u09be\u099f\u09bf\u09a8 \u0986\u09ae\u09c7\u09b0\u09bf\u0995\u09be\u09b0 \u09a6\u09c7\u09b6 \u0995\u09b2\u09ae\u09cd\u09ac\u09bf\u09df\u09be\u09df \u099c\u09a8\u09cd\u09ae\u0997\u09cd\u09b0\u09b9\u09a3 \u0995\u09b0\u09c7\u09a8\u0964",
@@ -2188,7 +2188,7 @@
         ],
         [
           "John Donne",
-          "- The Sun Rising\n- The Good Morrow\n- The Flea\n- {fg:#ff0000}**The Canonization**{/}\n-- @@__For God's sake hold your tongue, and let me love__@@"
+          "- {fg:#ff0000}**The Canonization**{/}\n- The Flea\n- The Good Morrow\n- The Sun Rising\n-- @@__For God's sake hold your tongue, and let me love__@@"
         ],
         [
           "{fg:#ffffff;bg:#000000}John Dryden{/}",
@@ -2979,6 +2979,10 @@
         ],
         [
           "DOS = Disk Operating System\nDCR = Duplicate Carbon Receipt\na2i = Aspire to Innovate",
+          ""
+        ],
+        [
+          "Serial port-\u098f \u0995\u09df\u099f\u09bf \u09aa\u09bf\u09a8 \u09a5\u09be\u0995\u09c7? \u09ef\u099f\u09bf",
           ""
         ]
       ]
@@ -4025,44 +4029,44 @@
       ]
     },
     {
-      "name": "Future Events",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
+      "name": "Future Events",
       "rows": [
         [
           "\u09e8\u09ea\u09a4\u09ae \u09ac\u09bf\u09b6\u09cd\u09ac\u0995\u09be\u09aa \u09ab\u09c1\u099f\u09ac\u09b2 \u0995\u09a4 \u09b8\u09be\u09b2\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09ac\u09c7? \u09ae\u09b0\u0995\u09cd\u0995\u09cb, \u09aa\u09b0\u09cd\u09a4\u09c1\u0997\u09be\u09b2 \u0993 \u09b8\u09cd\u09aa\u09c7\u09a8 \u09e8\u09e6\u09e9\u09e6 \u09b8\u09be\u09b2\u09c7",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     },
     {
       "cellStyles": {},
@@ -4320,6 +4324,12 @@
           "",
           "\u09b0\u09cb\u09ae, \u0987\u09a4\u09be\u09b2\u09bf",
           ""
+        ],
+        [
+          "EU - European Union {fg:#ffffff;bg:#000000}27{/}",
+          "",
+          "",
+          "- \u09ac\u09cd\u09b0\u09bf\u099f\u09c7\u09a8 \u0987\u0989\u09b0\u09cb\u09aa\u09c0\u09df \u0987\u0989\u09a8\u09bf\u09df\u09a8 \u09a4\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09c7 \u0995\u09ac\u09c7? \u09e9\u09e7 \u099c\u09be\u09a8\u09c1\u09df\u09be\u09b0\u09bf \u09e8\u09e6\u09e8\u09e6 - United Kingdom left the EU (a process known as {fg:#ffffff;bg:#000000}Brexit{/})\n- The latest country to join the EU is Croatia - 2013"
         ]
       ]
     },
@@ -5556,7 +5566,7 @@
           ""
         ],
         [
-          "\u09ac\u09c8\u09b7\u09ae\u09cd\u09af\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0 \u099b\u09be\u09a4\u09cd\u09b0 \u0986\u09a8\u09cd\u09a6\u09cb\u09b2\u09a8 \u09ae\u09be\u09b0\u09cd\u099a \u09ab\u09b0 \u099c\u09be\u09b8\u09cd\u099f\u09bf\u09b8 \u0995\u09b0\u09cd\u09ae\u09b8\u09c2\u099a\u09bf \u0998\u09cb\u09b7\u09a3\u09be \u0995\u09b0\u09c7 \u0995\u09a4 \u09a4\u09be\u09b0\u09bf\u0996\u09c7? \u0998\u09cb\u09b7\u09a8\u09be \u0995\u09b0\u09c7 \u09e9\u09e6\u099c\u09c1\u09b2\u09be\u0987 \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09c7 \u09e9\u09e7 \u099c\u09c1\u09b2\u09be\u0987 \u09e8\u09e6\u09e8\u09ea",
+          "\u09ac\u09c8\u09b7\u09ae\u09cd\u09af\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0 \u099b\u09be\u09a4\u09cd\u09b0 \u0986\u09a8\u09cd\u09a6\u09cb\u09b2\u09a8 **\u09ae\u09be\u09b0\u09cd\u099a \u09ab\u09b0 \u099c\u09be\u09b8\u09cd\u099f\u09bf\u09b8** \u0995\u09b0\u09cd\u09ae\u09b8\u09c2\u099a\u09bf \u0998\u09cb\u09b7\u09a3\u09be \u0995\u09b0\u09c7 \u0995\u09a4 \u09a4\u09be\u09b0\u09bf\u0996\u09c7? \u0998\u09cb\u09b7\u09a8\u09be \u0995\u09b0\u09c7 \u09e9\u09e6\u099c\u09c1\u09b2\u09be\u0987 \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09c7 \u09e9\u09e7 \u099c\u09c1\u09b2\u09be\u0987 \u09e8\u09e6\u09e8\u09ea",
           ""
         ]
       ]
@@ -5601,6 +5611,10 @@
         ],
         [
           "which is the most harmful ray for animal planet? Gamma ray",
+          ""
+        ],
+        [
+          "\u099c\u09c7\u09a8\u0995\u09be\u09b8\u09cd\u099f \u0995\u09c0? \u098f\u0986\u0987 \u09ad\u09bf\u09a4\u09cd\u09a4\u09bf\u0995 \u0986\u09ac\u09b9\u09be\u0993\u09df\u09be\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09be\u09ad\u09be\u09b8 \u09ae\u09a1\u09c7\u09b2",
           ""
         ]
       ]
