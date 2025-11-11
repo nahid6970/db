@@ -3502,10 +3502,6 @@
       "name": "Grammer Rules",
       "rows": [
         [
-          "one of the + **plural noun**",
-          "{bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n{bg:#9beb90}Correct:{/} She is one of the best __**students**__ in the class."
-        ],
-        [
           "gave (indirect object) + direct object",
           ""
         ],
@@ -3593,7 +3589,7 @@
           ""
         ],
         [
-          "**Adverb vs Adjective:**\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**",
+          "{fg:#ffffff;bg:#000000}**Adverb vs Adjective:**{/}\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**",
           ""
         ],
         [
@@ -3601,7 +3597,7 @@
           ""
         ],
         [
-          "**Noun:**\n**Examples:** brevity, flute, mention, practice, wisdom, frailty (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2\u09a4\u09be), attention, man, popularity, humor\n**Rules:**\n- verb + ing = noun/subject (gerund)/(noun)\n- suffix ity = noun\n- article r por abong preposition r ag porgonto jodi ekti word thake ta noun\n- the + **__verb + ing__** + of = verbal noun `(A verbal noun is a noun that is derived from a verb, but it functions strictly as a noun rather than a verb)`\n- have no + **noun**\n- to + verb (baseform) = noun\n- (determiner) all + __**noun**__ + (preposition) of\n- the + **__noun**__ + preposition",
+          "{fg:#ffffff;bg:#000000}**Noun:**{/}\n**Examples:** brevity, flute, mention, practice, wisdom, frailty (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2\u09a4\u09be), attention, man, popularity, humor\n**Rules:**\n- verb + ing = noun/subject (gerund)/(noun)\n- suffix ity = noun\n- article r por abong preposition r ag porgonto jodi ekti word thake ta noun\n- the + **__verb + ing__** + of = verbal noun `(A verbal noun is a noun that is derived from a verb, but it functions strictly as a noun rather than a verb)`\n- have no + **noun**\n- to + verb (baseform) = noun\n- (determiner) all + __**noun**__ + (preposition) of\n- the + **__noun**__ + preposition\n- one of the + **plural noun**\n-- {bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n-- {bg:#9beb90}Correct:{/} She is one of the best __**students**__ in the class.",
           ""
         ],
         [
