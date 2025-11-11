@@ -1,5 +1,5 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 70,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -67,16 +67,16 @@
     "56": "Math",
     "57": "Math",
     "58": "History",
-    "59": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "60": "Bangla Grammar",
+    "59": "Bangla Grammar",
+    "60": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "61": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "62": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "63": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "64": "Bangla Grammar",
+    "63": "Bangla Grammar",
+    "64": "English Grammar",
     "65": "English Grammar",
-    "66": "English Grammar",
-    "67": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "68": "Bangla Grammar",
+    "66": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "67": "Bangla Grammar",
+    "68": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "69": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "70": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "71": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
@@ -5748,79 +5748,6 @@
           "width": "1"
         }
       ],
-      "name": "Sports",
-      "nickname": "",
-      "rows": [
-        [
-          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09be\u09b0\u09c0 \u09ab\u09c1\u099f\u09ac\u09b2 \u09a6\u09b2\u09c7\u09b0 \u0985\u09a7\u09bf\u09a8\u09be\u09df\u0995\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09bf? \u0986\u09ab\u09bf\u09a6\u09be \u0996\u09a8\u09cd\u09a6\u0995\u09be\u09b0",
-          ""
-        ],
-        [
-          "In which sport slam dunk is performed? Basketball",
-          ""
-        ],
-        [
-          "Who holds the record for the highest individual score in a One Day International(ODI) cricket match? Rohit Sharma",
-          ""
-        ],
-        [
-          "Ash Borty, the world number one tennis player announced her retirement at the age of: 25",
-          ""
-        ],
-        [
-          "Italy failed to qualify for the 2022 FIFA World Cup after loss to which country? North Macedonia",
-          ""
-        ],
-        [
-          "Who is the current coach of Bangladesh National Football Team? Javier Cabrera (2025)",
-          ""
-        ],
-        [
-          "Which country has Cricket as its national sport? Jamaic\u0430",
-          ""
-        ],
-        [
-          "\u0986\u0987\u09b8\u09bf\u09b8\u09bf \u099a\u09cd\u09af\u09be\u09ae\u09cd\u09aa\u09bf\u09df\u09a8\u09b8 \u099f\u09cd\u09b0\u09ab\u09bf, {fg:#ffffff;bg:#000000}\u09e8\u09e6\u09e8\u09eb{/} \u098f\u09b0 \u09b8\u09b0\u09cd\u09ac\u09cb\u099a\u09cd\u099a \u09b0\u09be\u09a8 \u09b8\u0982\u0997\u09cd\u09b0\u09b9\u0995\u09be\u09b0\u09c0 \u0995\u09c7? \u09b0\u09be\u099a\u09bf\u09a8 \u09b0\u09ac\u09c0\u09a8\u09cd\u09a6\u09cd\u09b0 (\u09a8\u09bf\u0989\u099c\u09bf\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1)",
-          ""
-        ],
-        [
-          "\u09ab\u09c1\u099f\u09ac\u09b2\u09be\u09b0 \u09b9\u09be\u09ae\u099c\u09be \u099a\u09cc\u09a7\u09c1\u09b0\u09c0 \u0987\u0982\u09b2\u09bf\u09b6 \u09aa\u09cd\u09b0\u09bf\u09ae\u09bf\u09df\u09be\u09b0 \u09b2\u09c0\u0997\u09c7\u09b0 \u0995\u09cb\u09a8 \u0995\u09cd\u09b2\u09be\u09ac\u09c7\u09b0 \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc? \u09b2\u09c7\u09b8\u09cd\u099f\u09be\u09b0 \u09b8\u09bf\u099f\u09bf",
-          ""
-        ]
-      ]
-    },
-    {
-      "cellStyles": {},
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
-        }
-      ],
       "name": "\u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09ac\u09cd\u09a6",
       "nickname": "Protisobdo",
       "rows": [
@@ -6197,6 +6124,47 @@
       ]
     },
     {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        },
+        {
+          "color": "#ffffff",
+          "font": "",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
+        }
+      ],
+      "name": "\u0986\u09ae\u09a6\u09be\u09a8\u09bf-\u09b0\u09aa\u09cd\u09a4\u09be\u09a8\u09bf",
+      "nickname": "import-export",
+      "rows": [
+        [
+          "\u09a8\u09bf\u099a\u09c7\u09b0 \u0995\u09cb\u09a8 \u09a6\u09c7\u09b6 \u09a5\u09c7\u0995\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09b8\u09b0\u09cd\u09ac\u09be\u09a7\u09bf\u0995 LNG \u0986\u09ae\u09a6\u09be\u09a8\u09bf \u0995\u09b0\u09c7? \u0993\u09ae\u09be\u09a8 / \u0995\u09be\u09a4\u09be\u09b0",
+          ""
+        ]
+      ]
+    },
+    {
       "columns": [
         {
           "color": "#ffffff",
@@ -6236,7 +6204,7 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "JetBrains Mono",
+          "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
@@ -6263,11 +6231,47 @@
           "width": "1"
         }
       ],
-      "name": "\u0986\u09ae\u09a6\u09be\u09a8\u09bf-\u09b0\u09aa\u09cd\u09a4\u09be\u09a8\u09bf",
-      "nickname": "import-export",
+      "name": "Sports",
+      "nickname": "",
       "rows": [
         [
-          "\u09a8\u09bf\u099a\u09c7\u09b0 \u0995\u09cb\u09a8 \u09a6\u09c7\u09b6 \u09a5\u09c7\u0995\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09b8\u09b0\u09cd\u09ac\u09be\u09a7\u09bf\u0995 LNG \u0986\u09ae\u09a6\u09be\u09a8\u09bf \u0995\u09b0\u09c7? \u0993\u09ae\u09be\u09a8 / \u0995\u09be\u09a4\u09be\u09b0",
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09be\u09b0\u09c0 \u09ab\u09c1\u099f\u09ac\u09b2 \u09a6\u09b2\u09c7\u09b0 \u0985\u09a7\u09bf\u09a8\u09be\u09df\u0995\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09bf? \u0986\u09ab\u09bf\u09a6\u09be \u0996\u09a8\u09cd\u09a6\u0995\u09be\u09b0",
+          ""
+        ],
+        [
+          "In which sport slam dunk is performed? Basketball",
+          ""
+        ],
+        [
+          "Who holds the record for the highest individual score in a One Day International(ODI) cricket match? Rohit Sharma",
+          ""
+        ],
+        [
+          "Ash Borty, the world number one tennis player announced her retirement at the age of: 25",
+          ""
+        ],
+        [
+          "Italy failed to qualify for the 2022 FIFA World Cup after loss to which country? North Macedonia",
+          ""
+        ],
+        [
+          "Who is the current coach of Bangladesh National Football Team? Javier Cabrera (2025)",
+          ""
+        ],
+        [
+          "Which country has Cricket as its national sport? Jamaic\u0430",
+          ""
+        ],
+        [
+          "\u0986\u0987\u09b8\u09bf\u09b8\u09bf \u099a\u09cd\u09af\u09be\u09ae\u09cd\u09aa\u09bf\u09df\u09a8\u09b8 \u099f\u09cd\u09b0\u09ab\u09bf, {fg:#ffffff;bg:#000000}\u09e8\u09e6\u09e8\u09eb{/} \u098f\u09b0 \u09b8\u09b0\u09cd\u09ac\u09cb\u099a\u09cd\u099a \u09b0\u09be\u09a8 \u09b8\u0982\u0997\u09cd\u09b0\u09b9\u0995\u09be\u09b0\u09c0 \u0995\u09c7? \u09b0\u09be\u099a\u09bf\u09a8 \u09b0\u09ac\u09c0\u09a8\u09cd\u09a6\u09cd\u09b0 (\u09a8\u09bf\u0989\u099c\u09bf\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1)",
+          ""
+        ],
+        [
+          "\u09ab\u09c1\u099f\u09ac\u09b2\u09be\u09b0 \u09b9\u09be\u09ae\u099c\u09be \u099a\u09cc\u09a7\u09c1\u09b0\u09c0 \u0987\u0982\u09b2\u09bf\u09b6 \u09aa\u09cd\u09b0\u09bf\u09ae\u09bf\u09df\u09be\u09b0 \u09b2\u09c0\u0997\u09c7\u09b0 \u0995\u09cb\u09a8 \u0995\u09cd\u09b2\u09be\u09ac\u09c7\u09b0 \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc? \u09b2\u09c7\u09b8\u09cd\u099f\u09be\u09b0 \u09b8\u09bf\u099f\u09bf",
+          ""
+        ],
+        [
+          "\u09ae\u09cd\u09af\u09be\u09b0\u09be\u09a5\u09a8 \u09b0\u09c7\u09b8\u09c7\u09b0 \u09a6\u09c1\u09b0\u09a4\u09cd\u09ac \u0995\u09a4? \u09e8\u09ec \u09ae\u09be\u0987\u09b2",
           ""
         ]
       ]
