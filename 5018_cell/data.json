@@ -6667,6 +6667,7 @@
       ]
     },
     {
+      "cellStyles": {},
       "columns": [
         {
           "color": "#ffffff",
@@ -6700,11 +6701,22 @@
       "name": "Bio",
       "rows": [
         [
-          "",
+          "{fg:#ffffff;bg:#000000}Dhaka University{/}\nApplication ID\t605B6E7F\nStudent Registration No\t2016912207\nName\tNahid Ahmed\nDepartment\tDepartment of Finance\nProgram\tBachelor of Business Administration\nHall Name\tBijoy Ekattar Hall\nDate of Birth\t01 Jan, 1999\nEmail\tnahid-2016912207@fin.du.ac.bd\nMobile\t1779787186\nHall Resident Type\tNon-Residents (\u0985\u09a8\u09be\u09ac\u09be\u09b8\u09bf\u0995)\nHave a National ID Card\tYes\nNational ID Type\tDigital NID Card\nNational ID Card Number\t1505190676\ntudent Reg. ID\t2016912207\nName\tNahid Ahmed\nMobile\t1779787186\nEmail\tnahid-2016912207@fin.du.ac.bd\nDepartment\tDepartment of Finance\nSession\t2016-2017\nProgram Name\tBachelor of Business Administration\nHall Name\tBijoy Ekattar Hall",
+          ""
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}NID{/}\nNID No\t1505190676\nPlace of Birth: \tLAKSHMIPUR\n\u09a0\u09bf\u0995\u09be\u09a8\u09be: \u09ac\u09be\u09b8\u09be/\u09b9\u09be\u09c7\u09b2\u09cd\u09a1\u09bf\u0982: \u09e8\u09eb/\u09e7, \u0997\u09cd\u09b0\u09be\u09ae/\u09b0\u09be\u09b8\u09cd\u09a4\u09be \u09ae\u0997\u09ac\u09be\u099c\u09be\u09b0 \u098f\u09cd\u09af\u09be\u09b2\u09bf\u09ab\u09cd\u09af\u09be\u09a8\u09cd\u099f \u09b0\u09be\u09c7\u09a1, -, \u09a1\u09be\u0995\u0998\u09b0:\u09b6\u09be\u09a8\u09cd\u09a4\u09bf\u09a8\u0997\u09b0 \u099f\u09bf \u098f\u09b8 \u0993 - \u09e7\u09e8\u09e7\u09ed, \u09b0\u09ae\u09a8\u09be, \u09a2\u09be\u0995\u09be \u09a6\u0995\u09cd\u09b7\u09bf\u09a3 \u09b8\u09bf\u099f\u09bf \u0995\u09b0\u09cd\u09aa\u09cb\u09b0\u09c7\u09b6\u09a8, \u09a2\u09be\u0995\u09be",
+          ""
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Birth Certificate{/}\nDate of Registration: 10-04-2011\nDate of Issue: 10-04-2011\nWard No: 53\nBirth Registration No: 19993090553223722\nName: Nahid Ahmed\nDate of Birth: 01-01-1999\nPlace of Birth: Vill:Munshibari, P.O-Radhapur, 9 No Ward,Dist-Lakshmipur.\nFather's Name: Nurul Amin\nMother's Name:Nazma Begum\nPermanent Address: Vill:Munshibari, P.O-Radhapur, 9 No Ward, Dist-Lakshmipur.",
+          ""
+        ],
+        [
+          "\u0986\u09ae \u099f\u09be\u0993\u09af\u09bc\u09be\u09b0, \u09ab\u09cd\u09b2\u09cd\u09af\u09be\u099f: A-\u09ee, \u0997\u09bf\u09b0\u09bf\u09a7\u09be\u09b0\u09be \u0986\u09ac\u09be\u09b8\u09bf\u0995 \u098f\u09b2\u09be\u0995\u09be, \u09b8\u09be\u09a6\u09cd\u09a6\u09be\u09ae \u09ae\u09be\u09b0\u09cd\u0995\u09c7\u099f, \u09ae\u09be\u09a4\u09c1\u09af\u09bc\u09be\u0987\u09b2, \u09a2\u09be\u0995\u09be\nAAM Tower, Flat: A-8, Giridhara Residential Area, Saddam Market, Matuail, Dhaka\ndistrict narayangonj\npost/upozilla: other: Fatullah \npost office: Matuail SO\npost code: 1362\nblood group: AB+",
           ""
         ]
-      ],
-      "cellStyles": {}
+      ]
     }
   ]
 }
