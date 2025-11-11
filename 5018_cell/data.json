@@ -1,5 +1,5 @@
 {
-  "activeSheet": 45,
+  "activeSheet": 17,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1519,6 +1519,14 @@
         [
           "College",
           "\u09ae\u09b9\u09be\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df"
+        ],
+        [
+          "Quell",
+          ""
+        ],
+        [
+          "foment",
+          ""
         ]
       ]
     },
@@ -3494,7 +3502,7 @@
       "name": "Grammer Rules",
       "rows": [
         [
-          "S + V + \u201cone of the + superlative adjective + **plural noun** + prepositional phrase\u201d",
+          "one of the + **plural noun**",
           "{bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n{bg:#9beb90}Correct:{/} She is one of the best __**students**__ in the class."
         ],
         [
