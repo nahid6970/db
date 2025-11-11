@@ -1,5 +1,5 @@
 {
-  "activeSheet": 24,
+  "activeSheet": 3,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1549,6 +1549,10 @@
         [
           "taciturn",
           "A person habitually silent or talking little"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Zealous{/}",
+          "\u0989\u09ce\u09b8\u09be\u09b9\u09c0; \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0986\u0997\u09cd\u09b0\u09b9\u09b6\u09c0\u09b2"
         ]
       ]
     },
@@ -3901,7 +3905,7 @@
         ],
         [
           "**__\u09b6\u09c1\u09a6\u09cd\u09a7__**\n- \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0\u09a4\u09be\n- \u09ac\u09be\u09b2\u09cd\u09ae\u09c0\u0995\u09bf\n- \u09b6\u09b6\u09bf\u09ad\u09c2\u09b7\u09a3\n- \u0986\u09ad\u09be\u09a8\u09cd\u09a4\u09b0\n- \u099c\u09a8\u09cd\u09ae\u09ac\u09be\u09b0\u09cd\u09b7\u09bf\u0995\n- \u09b8\u09ae\u09c0\u099a\u09c0\u09a8\n- \u0995\u09cd\u09b7\u09bf\u09a4\u09c0\u09b6\n- \u099c\u09bf\u0997\u09c0\u09b7\u09be\n- \u09a8\u09bf\u09b7\u09c1\u09a4\u09bf\n- \u09a6\u09c2\u09b7\u09a3\u09c0\u09df",
-          "{fg:#ff0000}I am seeing a bird{/}\n{fg:#51c431}I see a bird{/}\n\n{fg:#ff0000}The house is made of bricks.{/}\n{fg:#51c431}The house is made from bricks.{/}\n\n{fg:#ff0000}He will go home yesterday.{/}\n{fg:#51c431}He went home yesterday.{/}"
+          "{fg:#ff0000}I am seeing a bird{/}\n{fg:#51c431}I see a bird{/}\n\n{fg:#ff0000}The house is made of bricks.{/}\n{fg:#51c431}The house is made from bricks.{/}\n\n{fg:#ff0000}He will go home yesterday.{/}\n{fg:#51c431}He went home yesterday.{/}\n\n{fg:#ff0000}He said that he will go to school tomorrow.{/}\n{fg:#51c431}He said that he would go to school the following day.{/}"
         ]
       ]
     },
