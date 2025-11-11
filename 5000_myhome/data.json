@@ -1387,30 +1387,31 @@
     "url": "https://www.youtube.com/@MyClassroombd"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "default_type": "text",
-    "display_style": "flex",
-    "group": "EDU",
-    "horizontal_bg_color": "red, green",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_font_family": "agency fb",
-    "horizontal_font_size": "35px",
-    "horizontal_height": "80px",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": true,
-    "horizontal_text_color": "#ffffff",
     "name": "GK World BD",
+    "group": "EDU",
+    "url": "https://www.facebook.com/gkworldbd1",
+    "default_type": "text",
+    "click_action": "url-1",
+    "li_bg_color": "#2176ff",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.facebook.com/search/top?q=gk%20world%20bd"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "red, green",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_height": "80px",
+    "horizontal_font_family": "agency fb",
+    "horizontal_font_size": "35px"
   },
   {
     "collapsible": false,
@@ -6968,10 +6969,10 @@
     "url": "https://brebhr.teletalk.com.bd/"
   },
   {
-    "click_action": "url-1",
+    "name": "Page 30",
+    "url": "http://192.168.0.101:5003/view/C:/Users/nahid//ms/msBackups/@JOB/From_dnplayer/Month%20Job%20Solution%20-%20March%20April%202025.pdf",
     "default_type": "text",
-    "horizontal_stack": false,
-    "name": "Page 28",
-    "url": "http://192.168.0.101:5003/view/C:/Users/nahid//ms/msBackups/@JOB/From_dnplayer/Month%20Job%20Solution%20-%20March%20April%202025.pdf"
+    "click_action": "url-1",
+    "horizontal_stack": false
   }
 ]
