@@ -1,5 +1,5 @@
 {
-  "activeSheet": 70,
+  "activeSheet": 77,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -192,9 +192,6 @@
     },
     {
       "cellStyles": {
-        "22-0": {
-          "italic": false
-        },
         "128-0": {
           "border": true,
           "borderColor": "#000000",
@@ -206,6 +203,9 @@
           "borderColor": "#ff525a",
           "borderStyle": "solid",
           "borderWidth": "3px"
+        },
+        "22-0": {
+          "italic": false
         }
       },
       "columns": [
@@ -6602,18 +6602,18 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -6642,6 +6642,14 @@
         ],
         [
           "\u09b8\u09be\u09ae\u09c1\u09a6\u09cd\u09b0\u09bf\u0995 \u09ae\u09be\u099b\u09c7\u09b0 \u099a\u09b0\u09cd\u09ac\u09bf\u09a4\u09c7 \u0995\u09bf \u09a5\u09be\u0995\u09c7? \u0993\u09ae\u09c7\u0997\u09be-\u09e9",
+          ""
+        ],
+        [
+          "\u0995\u09cb\u09a8 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09aa\u09be\u09a8\u09bf\u09a4\u09c7 \u09a6\u09cd\u09b0\u09ac\u09a3\u09c0\u09af\u09bc? **\u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09b8\u09bf** \u098f\u09ac\u0982 **\u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09ac\u09bf \u0995\u09ae\u09aa\u09cd\u09b2\u09c7\u0995\u09cd\u09b8\u09c7\u09b0** \u09b8\u09ae\u09b8\u09cd\u09a4 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09aa\u09be\u09a8\u09bf\u09a4\u09c7 \u09a6\u09cd\u09b0\u09ac\u09a3\u09c0\u09af\u09bc (BC)",
+          ""
+        ],
+        [
+          "\u099b\u09cb\u099f \u0993 \u09ae\u09b2\u09be \u09ae\u09be\u099b\u09c7 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u098f \u098f\u09ac\u0982 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09a1\u09bf-\u098f\u09b0 \u09ae\u09a4\u09cb \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09aa\u09cd\u09b0\u099a\u09c1\u09b0 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3\u09c7 \u09a5\u09be\u0995\u09c7",
           ""
         ]
       ]
