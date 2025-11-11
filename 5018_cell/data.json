@@ -6667,38 +6667,44 @@
       ]
     },
     {
-      "name": "Bio",
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "1",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "1"
         }
       ],
-      "rows": []
+      "name": "Bio",
+      "rows": [
+        [
+          "",
+          ""
+        ]
+      ],
+      "cellStyles": {}
     }
   ]
 }
