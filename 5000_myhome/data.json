@@ -6975,5 +6975,31 @@
     "click_action": "url-1",
     "font_size": "25px",
     "horizontal_stack": false
+  },
+  {
+    "name": "ragie",
+    "group": "AI",
+    "url": "https://secure.ragie.ai/home",
+    "default_type": "text",
+    "click_action": "url",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
+    "password_protect": false,
+    "top_name": "\ud83e\udd16",
+    "top_bg_color": "#",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#ec2222",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "black",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a",
+    "horizontal_height": "80px",
+    "horizontal_font_size": "35px"
   }
 ]
