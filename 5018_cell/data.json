@@ -1,5 +1,5 @@
 {
-  "activeSheet": 5,
+  "activeSheet": 77,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1797,18 +1797,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
           "color": "#ffffff",
@@ -6734,18 +6734,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "A",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -6783,6 +6783,10 @@
         ],
         [
           "Mobile phone founder: Martin Cooper\nInternet founder: Vinton Gray Cerf\nE-mail founder: Samuel Tomlinson\nMicrosoft founder: Bill Gates\nGoogle founder: Sergey Brin\nSearch engine founder: Allan Emtage\nDigital camera founder: Steven J. Sasson\nTwitter founder: Jack Dorsey\nFacebook founder: Mark Zuckerberg\nYouTube founder: Jawed Karim, Steve Chen, and Chad Hurley",
+          ""
+        ],
+        [
+          "\u09aa\u09be\u099f\u09c7\u09b0 \u0986\u0981\u09b6 \u09a5\u09c7\u0995\u09c7 \u09aa\u099a\u09a8\u09b6\u09c0\u09b2 \u09aa\u09b2\u09bf\u09ae\u09be\u09b0 \u09ac\u09cd\u09af\u09be\u0997 \u09a4\u09c8\u09b0\u09bf\u09b0 \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf\u09b0 \u0989\u09a6\u09cd\u09ad\u09be\u09ac\u0995 \u0995\u09c7? \u09ae\u09cb\u09ac\u09be\u09b0\u0995 \u0986\u09b9\u09ae\u09c7\u09a6 \u0996\u09be\u09a8",
           ""
         ]
       ]
