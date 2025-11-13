@@ -1,5 +1,5 @@
 {
-  "activeSheet": 9,
+  "activeSheet": 4,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1615,6 +1615,14 @@
         [
           "Pseudonym",
           "\u099b\u09a6\u09cd\u09ae\u09a8\u09be\u09ae; \u09ac\u09c7\u09a8\u09be\u09ae"
+        ],
+        [
+          "Concord",
+          "agreement or harmony between people or groups"
+        ],
+        [
+          "scanty",
+          "small or insufficient in quantity or amount"
         ]
       ]
     },
@@ -1767,7 +1775,7 @@
           ""
         ],
         [
-          "",
+          "Perseverance",
           ""
         ],
         [
@@ -2322,7 +2330,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}P.B. Shelley{/} (Percy Bysshe Shelley) (1792-1822)\n- \u09b9\u09b2\u09c7\u09a8 \u098f\u0995\u099c\u09a8 \u09b0\u09cb\u09ae\u09be\u09a8\u09cd\u099f\u09bf\u0995 \u09af\u09c1\u0997\u09c7\u09b0 **\u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9\u09c0 \u0995\u09ac\u09bf**\u0964 \u09a4\u09be\u09b0 \u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u0995\u09ac\u09bf\u09a4\u09be\u0997\u09c1\u09b2\u09cb\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 \u09b0\u09df\u09c7\u099b\u09c7 ",
-          "- Ode to Skylark,\n- Ode to the West Wind, (lines: If Winter comes, can Spring be far behind)\n- Ozymandias\n- Queen Mab\n- The Revolt of Islam\n{fg:#ffffff;bg:#000000}Line:{/}\n- @@OUR SWEETEST SONGS ARE THOSE THAT TELL OF SADDEST THOUGHT@@ (To a Skylark - poem)"
+          "- Ode to Skylark,\n- Ode to the West Wind, (lines: If Winter comes, can Spring be far behind)\n- Ozymandias\n-- \u2018Visage\u2019 in Shelley's Ozymandias' refers to - Face\n- Queen Mab\n- The Revolt of Islam\n{fg:#ffffff;bg:#000000}Line:{/}\n- @@OUR SWEETEST SONGS ARE THOSE THAT TELL OF SADDEST THOUGHT@@ (To a Skylark - poem)"
         ],
         [
           "{fg:#ffffff;bg:#000000}R.L. Stevenson{/}",
@@ -6716,7 +6724,7 @@
         {
           "color": "#ffffff",
           "font": "",
-          "fontSize": "18",
+          "fontSize": "25",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -6770,6 +6778,10 @@
         ],
         [
           "\u09ae\u09be\u09a8\u09ac\u09a6\u09c7\u09b9\u09c7\u09b0 \u09b8\u09cd\u09ac\u09be\u09ad\u09be\u09ac\u09bf\u0995 \u09a4\u09be\u09aa\u09ae\u09be\u09a4\u09cd\u09b0\u09be \u09aa\u09cd\u09b0\u09be\u09af\u09bc \u09ef\u09ee.\u09ea\u00b0 \u09ab\u09be\u09b0\u09c7\u09a8\u09b9\u09be\u0987\u099f \u09ac\u09be \u09e9\u09ed\u00b0 \u09b8\u09c7\u09b2\u09b8\u09bf\u09af\u09bc\u09be\u09b8",
+          ""
+        ],
+        [
+          "\u09ae\u09be\u09a8\u09ac\u09a6\u09c7\u09b9\u09c7\u09b0 \u09b0\u0995\u09cd\u09a4\u09c7 \u09b6\u09cd\u09ac\u09c7\u09a4 \u0995\u09a3\u09bf\u0995\u09be \u0993 \u09b2\u09cb\u09b9\u09bf\u09a4 \u0995\u09a3\u09bf\u0995\u09be\u09b0 \u0985\u09a8\u09c1\u09aa\u09be\u09a4? **\u09e7: \u09ed\u09e6\u09e6**",
           ""
         ]
       ]
@@ -6830,6 +6842,10 @@
         ],
         [
           "\u09aa\u09cd\u09b0\u09cb\u099f\u09bf\u09a8\u09c7\u09b0 \u09ae\u09c2\u09b2 \u0989\u09aa\u09be\u09a6\u09be\u09a8 \u09b9\u09b2\u09cb - **\u09a8\u09be\u0987\u099f\u09cd\u09b0\u09cb\u099c\u09c7\u09a8**",
+          ""
+        ],
+        [
+          "\u0989\u09a6\u09cd\u09ad\u09bf\u09a6\u09c7\u09b0 \u09aa\u09be\u09a4\u09be \u09b9\u09b2\u09a6\u09c7 \u09b9\u09df\u09c7 \u09af\u09be\u09df \u0995\u09bf\u09b8\u09c7\u09b0 \u0985\u09ad\u09be\u09ac\u09c7? Answer: \u09a8\u09be\u0987\u099f\u09cd\u09b0\u09cb\u099c\u09c7\u09a8",
           ""
         ]
       ]
