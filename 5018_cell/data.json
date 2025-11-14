@@ -1,5 +1,5 @@
 {
-  "activeSheet": 8,
+  "activeSheet": 21,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -2151,32 +2151,32 @@
       },
       "columns": [
         {
-          "name": "Writer",
-          "type": "text",
-          "width": "300",
           "color": "#d1ffd6",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Writer",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "300"
         },
         {
-          "name": "Details",
-          "type": "text",
-          "width": "300",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Details",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "300"
         }
       ],
       "mergedCells": {},
@@ -3796,18 +3796,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "Rules",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -3843,7 +3843,7 @@
           ""
         ],
         [
-          "",
+          "\u09af\u09c7 Sentence \u098f \u09ae\u09a8\u09c7\u09b0 \u0987\u099a\u09cd\u099b\u09be \u09ac\u09be \u09aa\u09cd\u09b0\u09be\u09b0\u09cd\u09a5\u09a8\u09be \u09aa\u09cd\u09b0\u0995\u09be\u09b6 \u09aa\u09be\u09df \u09a4\u09be\u0995\u09c7 Optative \u09ac\u09be\u0995\u09cd\u09af \u09ac\u09b2\u09c7",
           ""
         ],
         [
@@ -5088,18 +5088,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
           "color": "#ffffff",
