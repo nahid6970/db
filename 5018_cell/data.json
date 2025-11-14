@@ -3236,18 +3236,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "A",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -3280,7 +3280,7 @@
           ""
         ],
         [
-          "{fg:#ffffff;bg:#000000}Rules:{/}\n(\u0983)+\u0995 = \u09b8\u09cd+\u0995\n- \u09a8\u09ae\u0983 + \u0995\u09be\u09b0 = \u09a8\u09ae\u09b8\u09cd\u0995\u09be\u09b0\n\n'\u0987' \u098f\u09b0 \u09aa\u09b0\u09c7 \u09ac\u09bf\u09b8\u09b0\u09cd\u0997\n- \u09a8\u09bf\u0983 + \u0995\u09b0 = \u09a8\u09bf\u09b7\u09cd\u0995\u09b0\n'\u0989' \u098f\u09b0 \u09aa\u09b0\u09c7 \u09ac\u09bf\u09b8\u09b0\u09cd\u0997\n- \u09a6\u09c1\u0983 + \u0995\u09b0 = \u09a6\u09c1\u09b7\u09cd\u0995\u09b0\u0964\n",
+          "{fg:#ffffff;bg:#000000}Rules:{/}\n(\u0983)+\u0995 = \u09b8\u09cd+\u0995\n- \u09a8\u09ae\u0983 + \u0995\u09be\u09b0 = \u09a8\u09ae\u09b8\u09cd\u0995\u09be\u09b0\n\n'\u0987' \u098f\u09b0 \u09aa\u09b0\u09c7 \u09ac\u09bf\u09b8\u09b0\u09cd\u0997\n- \u09a8\u09bf\u0983 + \u0995\u09b0 = \u09a8\u09bf\u09b7\u09cd\u0995\u09b0\n'\u0989' \u098f\u09b0 \u09aa\u09b0\u09c7 \u09ac\u09bf\u09b8\u09b0\u09cd\u0997\n- \u09a6\u09c1\u0983 + \u0995\u09b0 = \u09a6\u09c1\u09b7\u09cd\u0995\u09b0\u0964",
           ""
         ],
         [
