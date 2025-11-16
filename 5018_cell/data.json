@@ -1,5 +1,5 @@
 {
-  "activeSheet": 78,
+  "activeSheet": 70,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -6551,7 +6551,7 @@
         {
           "color": "#ffffff",
           "font": "JetBrains Mono",
-          "fontSize": "18",
+          "fontSize": "25",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -6580,7 +6580,7 @@
       "name": "Nobel Prize",
       "rows": [
         [
-          "{fg:#ffffff;bg:#000000}2024{/}\nWho received the Nobel **Peace** Prize in 2024? Nihon Hidankyo",
+          "{fg:#ffffff;bg:#000000}2024{/}\nWho received the Nobel **Peace** Prize in 2024? Nihon Hidankyo\n\u09e8\u09e6\u09e8\u09ea \u09b8\u09be\u09b2\u09c7 \u099a\u09bf\u0995\u09bf\u09ce\u09b8\u09be \u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u09aa\u09be\u09a8 \u0995\u09c7? \u09ad\u09bf\u0995\u09cd\u099f\u09b0 \u0985\u09cd\u09af\u09be\u09ae\u09ac\u09cd\u09b0\u09cb\u09b8 \u0993 \u0997\u09cd\u09af\u09be\u09b0\u09bf \u09b0\u09be\u09ad\u0995\u09c1\u09a8",
           ""
         ],
         [
