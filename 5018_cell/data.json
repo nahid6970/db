@@ -1,5 +1,5 @@
 {
-  "activeSheet": 5,
+  "activeSheet": 15,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -3489,18 +3489,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "A",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -3526,6 +3526,10 @@
         ],
         [
           "\u09b8\u09c7 \u09ac\u0987 \u09aa\u09dc\u09c7 = \u0995\u09b0\u09cd\u09ae\u09c7 \u09b6\u09c2\u09a8\u09cd\u09af\n\u09a6\u09c0\u09a8\u09c7 \u09a6\u09df\u09be \u0995\u09b0 = \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09a6\u09be\u09a8\u09c7 \u09b8\u09aa\u09cd\u09a4\u09ae\u09c0\n\u09b8\u09c7 \u0985\u0982\u0995\u09c7 \u09ad\u09be\u09b2\u09cb = \u0985\u09a7\u09bf\u0995\u09b0\u09a3\u09c7 \u09b8\u09aa\u09cd\u09a4\u09ae\u09c0\n\u099f\u09cd\u09b0\u09c7\u09a8 \u09b8\u09cd\u099f\u09c7\u09b6\u09a8 \u099b\u09be\u09dc\u09b2 = \u0995\u09b0\u09cd\u09a4\u09be \u0995\u09be\u09b0\u0995\u09c7 \u09b6\u09c2\u09a8\u09cd\u09af",
+          ""
+        ],
+        [
+          "\u0986\u09b2\u09cb\u09df \u0986\u0981\u09a7\u09be\u09b0 \u0995\u09be\u099f\u09c7 = \u0995\u09b0\u09a3\u09c7 \u09ed\u09ae\u09c0\n\u09b6\u09c1\u0995\u09cd\u09b0\u09ac\u09be\u09b0 \u09b8\u09cd\u0995\u09c1\u09b2 \u09ac\u09a8\u09cd\u09a7 = \u0985\u09a7\u09bf\u0995\u09b0\u09a3\u09c7 \u09b6\u09c2\u09a8\u09cd\u09af\n\u0995\u09be\u09a8\u09a8\u09c7 \u0995\u09c1\u09b8\u09c1\u09ae\u0995\u09b2\u09bf \u09b8\u0995\u09b2\u09bf \u09ab\u09c1\u099f\u09bf\u09b2 = \u0985\u09a7\u09bf\u0995\u09b0\u09a3\u09c7 \u09ed\u09ae\u09c0\n\u0986\u09ae\u09be\u09b0 \u09af\u09be\u0993\u09df\u09be \u09b9\u09df\u09a8\u09bf = \u0995\u09b0\u09cd\u09a4\u09c3\u0995\u09be\u09b0\u0995\u09c7 \u09ec\u09b7\u09cd\u09a0\u09c0",
           ""
         ]
       ]
