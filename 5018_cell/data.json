@@ -1,5 +1,5 @@
 {
-  "activeSheet": 79,
+  "activeSheet": 81,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1681,6 +1681,34 @@
         [
           "Harbinger",
           "a forerunner of something."
+        ],
+        [
+          "Effrontery = \u09a8\u09bf\u09b0\u09cd\u09b2\u099c\u09cd\u099c\u09a4\u09be, \u0994\u09a6\u09cd\u09a7\u09a4\u09cd\u09af; {fg:#ffffff;bg:#0000ff}Antonym:{/} Simplicity",
+          ""
+        ],
+        [
+          "complaisant",
+          "\u09ac\u09bf\u09a8\u09df\u09c0; \u0985\u09a8\u09c1\u09ac\u09b0\u09cd\u09a4\u09c0"
+        ],
+        [
+          "Aver (\u099c\u09cb\u09b0 \u09a6\u09bf\u09df\u09c7 \u09ac\u09b2\u09be; \u0985\u09a8\u09c1\u09ae\u09cb\u09a6\u09a8 \u0995\u09b0\u09be)",
+          ""
+        ],
+        [
+          "Supine (\u0985\u09b2\u09b8; \u0985\u09a8\u09cd\u09af\u09c7\u09b0 \u09a8\u09bf\u09df\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3 \u0997\u09cd\u09b0\u09b9\u09a3 \u0995\u09b0\u09c7 \u098f\u09ae\u09a8)",
+          ""
+        ],
+        [
+          "EULOGY (\u0989\u099a\u09cd\u099a \u09aa\u09cd\u09b0\u09b6\u0982\u09b8\u09be)",
+          ""
+        ],
+        [
+          "Elegy (\u09b6\u09cb\u0995\u0997\u09be\u09a5\u09be) \u09b9\u09b2\u09cb lament (\u09aa\u09b0\u09bf\u09a4\u09be\u09aa) \u09aa\u09c2\u09b0\u09cd\u09a3 \u0995\u09a5\u09be",
+          ""
+        ],
+        [
+          "SERVILE (\u0995\u09cd\u09b0\u09c0\u09a4\u09a6\u09be\u09b8\u09b8\u09c1\u09b2\u09ad)",
+          ""
         ]
       ]
     },
@@ -7352,7 +7380,7 @@
           ""
         ],
         [
-          "\u09ae\u09cd\u09af\u09be\u09b2\u09c7\u09b0\u09bf\u09df\u09be \u09b0\u09cb\u0997 \u0995\u09cb\u09a8 \u09ae\u09b6\u09be \u09a6\u09bf\u09df\u09c7 \u099b\u09dc\u09be\u09df? \u098f\u09a8\u09cb\u09ab\u09bf\u09b2\u09bf\u09b8\n\n- Dengue, Chikungunya, Zika \u2192 Aedes mosquito\n-- \u09ac\u09bf\u09b6\u09c7\u09b7 \u0995\u09b0\u09c7 Aedes aegypti (\u099f\u09be\u0987\u0997\u09be\u09b0 \u09ae\u09b6\u09be)\n-- \u09a6\u09bf\u09a8\u09c7\u09b0 \u09ac\u09c7\u09b2\u09be\u09df \u0995\u09be\u09ae\u09dc\u09be\u09df\n- Filariasis (Elephantiasis) \u2192 Culex mosquito\n-- \u09b8\u09be\u09a7\u09be\u09b0\u09a3\u09a4 Culex quinquefasciatus\n-- \u09b0\u09be\u09a4\u09c7 \u0995\u09be\u09ae\u09dc\u09be\u09df\n- Yellow Fever \u2192 Aedes mosquito\n- Japanese Encephalitis \u2192 Culex mosquito\n\n{fg:#ffffff;bg:#000000}So summary:{/}\nMalaria \u2192 Anopheles\nDengue/Chikungunya/Zika \u2192 Aedes\nFilariasis \u2192 Culex",
+          "\u09ae\u09cd\u09af\u09be\u09b2\u09c7\u09b0\u09bf\u09df\u09be \u09b0\u09cb\u0997 \u0995\u09cb\u09a8 \u09ae\u09b6\u09be \u09a6\u09bf\u09df\u09c7 \u099b\u09dc\u09be\u09df? \u098f\u09a8\u09cb\u09ab\u09bf\u09b2\u09bf\u09b8\n- \u09aa\u09be\u09a8\u09bf\u09ac\u09be\u09b9\u09bf\u09a4 \u09b0\u09cb\u0997\n\n- Dengue, Chikungunya, Zika \u2192 Aedes mosquito\n-- \u09ac\u09bf\u09b6\u09c7\u09b7 \u0995\u09b0\u09c7 Aedes aegypti (\u099f\u09be\u0987\u0997\u09be\u09b0 \u09ae\u09b6\u09be)\n-- \u09a6\u09bf\u09a8\u09c7\u09b0 \u09ac\u09c7\u09b2\u09be\u09df \u0995\u09be\u09ae\u09dc\u09be\u09df\n- Filariasis (Elephantiasis) \u2192 Culex mosquito\n-- \u09b8\u09be\u09a7\u09be\u09b0\u09a3\u09a4 Culex quinquefasciatus\n-- \u09b0\u09be\u09a4\u09c7 \u0995\u09be\u09ae\u09dc\u09be\u09df\n- Yellow Fever \u2192 Aedes mosquito\n- Japanese Encephalitis \u2192 Culex mosquito\n\n{fg:#ffffff;bg:#000000}So summary:{/}\nMalaria \u2192 Anopheles\nDengue/Chikungunya/Zika \u2192 Aedes\nFilariasis \u2192 Culex",
           ""
         ],
         [
