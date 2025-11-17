@@ -4478,18 +4478,18 @@
           "width": "150"
         },
         {
+          "name": "E",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "E",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "\u09b6\u09c1\u09a6\u09cd\u09a7 \u09ac\u09be\u09a8\u09be\u09a8",
