@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 22,
+                "title": "One Piece - s22e65 - [1150] - Get the Ship Moving! The Iron Giant Activates HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-11-19T15:48:49.120770",
+                "notify": "unseen"
+            },
+            {
                 "id": 21,
                 "title": "One Piece - s22e64 - [1149] - The Void Century - A Revelation About a Sinking World WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
@@ -2502,21 +2509,21 @@
             {
                 "id": 3,
                 "title": "The Walking Dead - Daryl Dixon - S03E03 - El Sacrificio WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-09-21T20:00:34.913616",
                 "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "The Walking Dead - Daryl Dixon - S03E02 - La Ofrenda WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-09-14T17:41:08.112633",
                 "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Walking Dead - Daryl Dixon - S03E01 - Costa Da Morte WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-09-08T00:51:20.424008",
                 "notify": "seen"
             }
@@ -2816,6 +2823,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 7,
+                "title": "To Your Eternity - s03e07 - [47] - The Attack HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2025-11-19T14:48:49.124478",
+                "notify": "unseen"
+            },
             {
                 "id": 6,
                 "title": "To Your Eternity - s03e06 - [46] - Proof of Peace HDTV-720p - [SubsPlease]",
