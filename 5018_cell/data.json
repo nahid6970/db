@@ -1,5 +1,5 @@
 {
-  "activeSheet": 33,
+  "activeSheet": 8,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1846,6 +1846,10 @@
         [
           "Hedge = a line of bushes or small trees planted very close together",
           ""
+        ],
+        [
+          "Callous",
+          "insensitive and cruel disregard for others."
         ]
       ]
     },
@@ -2649,7 +2653,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}Charles Dickens{/}\n- Novelist\n- \u09ad\u09bf\u0995\u09cd\u099f\u09cb\u09b0\u09bf\u09df\u09be\u09a8 \u09af\u09c1\u0997\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09bf\u0995 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09ac\u09bf\u09ac\u09c7\u099a\u09bf\u09a4\n- \u09a4\u09be\u0981\u09b0 \u09aa\u09c1\u09b0\u09cb\u09a8\u09be\u09ae \u099b\u09bf\u09b2 Charles John Huffam Dickens\n- Dickens \u09b6\u09c1\u09a7\u09c1 \u098f\u0995\u099c\u09a8 \u0994\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09bf\u0995\u0987 \u09a8\u09a8, \u09a4\u09bf\u09a8\u09bf \u099b\u09bf\u09b2\u09c7\u09a8 \u09b8\u09be\u0982\u09ac\u09be\u09a6\u09bf\u0995, \u09b8\u09ae\u09cd\u09aa\u09be\u09a6\u0995 \u0993 \u09b8\u09ae\u09be\u099c\u09ac\u09bf\u09b7\u09df\u0995 \u09ad\u09be\u09b7\u09cd\u09af\u0995\u09be\u09b0\u0993\n- London town is found as a living being in the works of his",
-          "{fg:#ffffff;bg:#000000}Novels{/}\n- A Christmas Carol\n- **{fg:#ff0000}David Copperfield{/}**\n- **A Tale of Two Cities**\n- **{fg:#ff0000}Great Expectations{/}**\n- Bleak House\n- Our Mutual Friend"
+          "{fg:#ffffff;bg:#000000}Novels{/}\n- A Christmas Carol\n- **{fg:#ff0000}David Copperfield{/}**\n- **A Tale of Two Cities**\n-- London & Paris\n- **{fg:#ff0000}Great Expectations{/}**\n- Bleak House\n- Our Mutual Friend"
         ],
         [
           "**Christopher Marlowe**",
@@ -4399,7 +4403,7 @@
           ""
         ],
         [
-          "**Adjective:**\n**Def:**\n**Examples:** apparent, populous, diplomatic\n**Rules:**\n- be verb er por direct adjective hobe\n- looks \u098f\u09b0 \u09aa\u09b0 adjective / looks + rather + adjective\n- \u098f\u0995\u099f\u09bf noun \u0986\u09b0\u09c7\u0995\u099f\u09be noun \u0995\u09c7 modify \u0995\u09b0\u09b2\u09c7 adjective\n- noun + ly = adjective",
+          "**Adjective:**\n**Def:**\n**Examples:** apparent, populous, diplomatic, vital\n**Rules:**\n- be verb er por direct adjective hobe\n- looks \u098f\u09b0 \u09aa\u09b0 adjective / looks + rather + adjective\n- \u098f\u0995\u099f\u09bf noun \u0986\u09b0\u09c7\u0995\u099f\u09be noun \u0995\u09c7 modify \u0995\u09b0\u09b2\u09c7 adjective\n- noun + ly = adjective",
           ""
         ],
         [
@@ -5187,7 +5191,11 @@
           ""
         ],
         [
-          "Table*5 _black _2px\nasdasdas, asdasdadas, asdasdas, asdas da s, **asdasdasd**, asdasda, asasdsds asdadad sdasdasdasdasdasd asd, asdasdad, asdad",
+          "Table*5 _#159365 _5px\nasdasdas, ^asdasdadas^, ~asdasdas~, asdas da s, **asdasdasd**, asdasda, asasdsds asdadad sdasdasdasdasdasd asd, asdasdad, asdad",
+          ""
+        ],
+        [
+          "\u09ec \u099c\u09a8 \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc\u0995\u09c7 \u09b8\u09ae\u09be\u09a8 \u09b8\u0982\u0996\u09cd\u09af\u0995 \u09a6\u09c1\u0987\u099f\u09bf \u09a6\u09b2\u09c7 \u0995\u09a4\u09ad\u09be\u09ac\u09c7 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf \u0995\u09b0\u09be \u09af\u09be\u09df?\n**__Step 1: \u09ae\u09cb\u099f \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \u098f\u09ac\u0982 \u09aa\u09cd\u09b0\u09a4\u09bf\u099f\u09bf \u09a6\u09b2\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af \u09b8\u0982\u0996\u09cd\u09af\u09be \u09a8\u09bf\u09b0\u09cd\u09a3\u09af\u09bc__**\n\u09ae\u09cb\u099f \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be \\(n=6\\) \u099c\u09a8\u0964 \u09b8\u09ae\u09be\u09a8 \u09b8\u0982\u0996\u09cd\u09af\u0995 \u09a6\u09c1\u0987\u099f\u09bf \u09a6\u09b2 \u0997\u09a0\u09a8 \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7, \u09a4\u09be\u0987 \u09aa\u09cd\u09b0\u09a4\u09bf\u099f\u09bf \u09a6\u09b2\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af \u09b8\u0982\u0996\u09cd\u09af\u09be \u09b9\u09ac\u09c7 \\(r=\\frac{6}{2}=3\\) \u099c\u09a8\u0964\n\\({}^{n}C_{r}=\\frac{n!}{r!(n-r)!}\\)\n\\({}^{6}C_{3}=\\frac{6!}{3!(6-3)!}=\\frac{6!}{3!3!}=\\frac{6\\times 5\\times 4\\times 3\\times 2\\times 1}{(3\\times 2\\times 1)(3\\times 2\\times 1)}=\\frac{720}{6\\times 6}=\\frac{720}{36}=20\\)\n**__Step 3: \u09a6\u09cd\u09ac\u09bf\u09a4\u09c0\u09af\u09bc \u09a6\u09b2 \u0997\u09a0\u09a8\u09c7\u09b0 \u0989\u09aa\u09be\u09af\u09bc__**\n\u09aa\u09cd\u09b0\u09a5\u09ae \u09a6\u09b2 \u0997\u09a0\u09a8\u09c7\u09b0 \u09aa\u09b0 \u09ac\u09be\u0995\u09bf \u09a5\u09be\u0995\u09c7 \u09e9 \u099c\u09a8 \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc\u0964 \u098f\u0987 \u09e9 \u099c\u09a8 \u09a5\u09c7\u0995\u09c7 \u09e9 \u099c\u09a8 \u09b8\u09a6\u09b8\u09cd\u09af \u09a8\u09bf\u09df\u09c7 \u09a6\u09cd\u09ac\u09bf\u09a4\u09c0\u09df \u09a6\u09b2 \u0997\u09a0\u09a8\u09c7\u09b0 \u0989\u09aa\u09be\u09df:\n\\({}^{3}C_{3}=\\frac{3!}{3!(3-3)!}=\\frac{3!}{3!0!}=1\\)\n**__Step 5: \u09a6\u09b2\u09c7\u09b0 \u0995\u09cd\u09b0\u09ae \u09ac\u09bf\u09ac\u09c7\u099a\u09a8\u09be__**\n\u09af\u09c7\u09b9\u09c7\u09a4\u09c1 \u09aa\u09cd\u09b0\u09b6\u09cd\u09a8\u099f\u09bf\u09a4\u09c7 \u09a6\u09b2 \u09a6\u09c1\u099f\u09bf\u0995\u09c7 A \u0993 B \u098f\u09b0 \u09ae\u09a4\u09cb \u0986\u09b2\u09be\u09a6\u09be\u09ad\u09be\u09ac\u09c7 \u099a\u09bf\u09b9\u09cd\u09a8\u09bf\u09a4 \u0995\u09b0\u09be \u09b9\u09df\u09a8\u09bf, \u09a4\u09be\u0987 \u09a6\u09b2 \u0997\u09a0\u09a8\u09c7\u09b0 \u0995\u09cd\u09b0\u09ae \u09ac\u09bf\u09ac\u09c7\u099a\u09cd\u09af \u09a8\u09df\u0964 \u0985\u09b0\u09cd\u09a5\u09be\u09ce, (\u09a6\u09b2 A, \u09a6\u09b2 B) \u098f\u09ac\u0982 (\u09a6\u09b2 B, \u09a6\u09b2 A) \u098f\u0995\u0987 \u09ac\u09bf\u09ad\u09be\u099c\u09a8\u0995\u09c7 \u09a8\u09bf\u09b0\u09cd\u09a6\u09c7\u09b6 \u0995\u09b0\u09c7\u0964 \u09a4\u09be\u0987 \u09ae\u09cb\u099f \u09ac\u09bf\u09ad\u09be\u099c\u09a8\u09c7\u09b0 \u09b8\u0982\u0996\u09cd\u09af\u09be\u0995\u09c7 \u09a6\u09b2\u09c7\u09b0 \u0995\u09cd\u09b0\u09ae (\u09e8!) \u09a6\u09bf\u09df\u09c7 \u09ad\u09be\u0997 \u0995\u09b0\u09a4\u09c7 \u09b9\u09ac\u09c7\u0964\u00a0\n\\(\\text{\\ \\ }=\\frac{20}{2!}=\\frac{20}{2\\times 1}=10\\)",
           ""
         ]
       ]
@@ -5468,6 +5476,10 @@
         ],
         [
           "Point blank (\u0996\u09cb\u09b2\u09be\u0996\u09c1\u09b2\u09bf)",
+          ""
+        ],
+        [
+          "Fight shy of = avoid",
           ""
         ]
       ]
