@@ -4471,7 +4471,7 @@
     },
     {
       "cellStyles": {
-        "8-0": {
+        "9-0": {
           "border": true,
           "borderColor": "#000000",
           "borderStyle": "solid",
@@ -4531,11 +4531,15 @@
           ""
         ],
         [
-          "{fg:#ffffff;bg:#800080}**Adverb vs Adjective:**{/}\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**",
+          "{fg:#ffffff;bg:#000000}1.7 Conjuction:{/}\nexamples:\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when",
           ""
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.7 Conjuction:{/}\nexamples:\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when",
+          "{fg:#ffffff;bg:#800080}2.1 Adverb vs Adjective:{/}\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**",
+          ""
+        ],
+        [
+          "{fg:#ffffff;bg:#800080}2.2 Preposition vs Conjuction:{/}\nBefore/after/since/for\n- He stood before me **(Prepo)**\n- It has been raining since morning **(Prepo)**\n- The patient had that before the doctor came **(Conj)**",
           ""
         ],
         [
@@ -4548,10 +4552,6 @@
         ],
         [
           "##Others:##\n- to + verb er simple form = here **__to__** is infinitive maker\n- sub+ob eki bektike nirdesh korle ar majkhane **linking verb** (became etc) thakle tara eke areker **complement**\n- **preposition and adverb pray similar**\n",
-          ""
-        ],
-        [
-          "{fg:#ffffff;bg:#800080}**Preposition vs Conjuction:**{/}\nBefore/after/since/for\n- He stood before me **(Prepo)**\n- It has been raining since morning **(Prepo)**\n- The patient had that before the doctor came **(Conj)**",
           ""
         ]
       ]
