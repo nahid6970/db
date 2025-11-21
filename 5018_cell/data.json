@@ -1,5 +1,5 @@
 {
-  "activeSheet": 52,
+  "activeSheet": 40,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -5781,36 +5781,42 @@
     {
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "Job",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "E",
-          "textColor": "#000000",
+          "name": "Status",
           "type": "text",
-          "width": "1"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "Public",
-      "rows": []
+      "rows": [
+        [
+          "Local Government Division (LGD)\n{link:https://lgd.teletalk.com.bd/lgd2025/}@@Link@@{/}",
+          ""
+        ]
+      ],
+      "cellStyles": {}
     },
     {
       "cellStyles": {},
