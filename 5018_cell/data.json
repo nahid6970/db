@@ -2637,18 +2637,18 @@
           "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "50",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "50"
         }
       ],
       "name": "Recent Info",
@@ -2752,6 +2752,14 @@
         [
           "\u09a1\u09b2\u09be\u09b0\u09c7\u09b0 \u09a6\u09be\u09ae \u09a8\u09bf\u09b0\u09cd\u09a7\u09be\u09b0\u09a3\u09c7 \u0995\u09cb\u09a8 \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0 \u0995\u09b0\u09be \u09b9\u09df?\na. \u09a8\u09c0\u09a4\u09bf \u09b8\u09c1\u09a6\u09b9\u09be\u09b0\nb. \u09aa\u09c7 \u09b8\u09cd\u0995\u09c7\u09b2\nc. \u0995\u09cd\u09b0\u09b2\u09bf\u0982 \u09aa\u09c7\u0997\nd. \u09a1\u09b2\u09be\u09b0 \u09aa\u09c7\u0997",
           "\u0995\u09cd\u09b0\u09b2\u09bf\u0982 \u09aa\u09c7\u0997"
+        ],
+        [
+          "**\u09ac\u09be\u099c\u09c7\u099f \u09e8\u09e6\u09e8\u09eb, \u09ae\u09c1\u09a6\u09cd\u09b0\u09be\u09b8\u09cd\u09ab\u09c0\u09a4\u09bf \u09b9\u09be\u09b0\u09c7\u09b0 \u09b2\u0995\u09cd\u09b7\u09cd\u09af\u09ae\u09be\u09a4\u09cd\u09b0\u09be-**\na. \u09ec.\u09eb%\n\u09ee. \u09ed.\u09ec%\nC. \u09eb.\u09eb%\nd. \u09ee.\u09e8%",
+          "\u09ec.\u09eb%"
+        ],
+        [
+          "\u09b8\u09b0\u09cd\u09ac\u09be\u09a7\u09bf\u0995 \u09b8\u09be\u0982\u09ac\u09bf\u09a7\u09be\u09a8\u09bf\u0995 \u09ad\u09be\u09b7\u09be\u09b0 \u09a6\u09c7\u09b6 \u0995\u09cb\u09a8\u099f\u09bf?\na. \u09b8\u09bf\u09b0\u09bf\u09df\u09be\nb. \u09a4\u09c1\u09b0\u09b8\u09cd\u0995\nc. \u09ac\u09b2\u09bf\u09ad\u09bf\u09df\u09be\nd. \u09a8\u09be\u0987\u099c\u09be\u09b0",
+          "\u09ac\u09b2\u09bf\u09ad\u09bf\u09df\u09be"
         ]
       ]
     },
