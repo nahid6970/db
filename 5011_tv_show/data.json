@@ -2093,6 +2093,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 14,
+                "title": "WWE SmackDown - 2025-11-21 - SmackDown 1370 HDTV-1080p",
+                "watched": true,
+                "added_date": "2025-11-22T14:46:28.045108",
+                "notify": "seen"
+            },
+            {
                 "id": 13,
                 "title": "WWE SmackDown - 2025-10-31 - SmackDown 1367 WEBDL-1080p",
                 "watched": true,
@@ -2702,6 +2709,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "My Hero Academia - s08e08 - [167] - Izuku Midoriya - Rising WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2025-11-22T15:46:28.055491",
+                "notify": "seen"
+            },
+            {
                 "id": 7,
                 "title": "My Hero Academia - s08e07 - [166] - From Aizawa WEBDL-1080p - [VARYG]",
                 "watched": false,
@@ -2889,7 +2903,7 @@
                 "title": "One-Punch Man - S03E06 - Motley Heroes HDTV-1080p",
                 "watched": false,
                 "added_date": "2025-11-22T02:31:21.018186",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 6,
