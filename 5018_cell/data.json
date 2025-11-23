@@ -1267,7 +1267,7 @@
     },
     {
       "cellStyles": {
-        "150-0": {
+        "187-0": {
           "center": false
         }
       },
@@ -1305,6 +1305,18 @@
       "name": "Word-Meaning",
       "rows": [
         [
+          "**abridge**, shorten",
+          "\u09b8\u0982\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4  \u0995\u09b0\u09be, \u0995\u09ae\u09be\u09a8\u09cb"
+        ],
+        [
+          "abscond, flee",
+          "\u0997\u09cb\u09aa\u09a8\u09c7 \u09aa\u09be\u09b2\u09be\u09a8\u09cb"
+        ],
+        [
+          "achillesheel (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2 \u09b8\u09cd\u09a5\u09be\u09a8), Achilles \u098f\u09b0 \u0997\u09cb\u09a1\u09bc\u09be\u09b2\u09bf, weakness",
+          ""
+        ],
+        [
           "Acquittal",
           "\u0996\u09be\u09b2\u09be\u09b8"
         ],
@@ -1315,6 +1327,10 @@
         [
           "Adept - \u09a6\u0995\u09cd\u09b7\nAdapt -",
           ""
+        ],
+        [
+          "adhere, stick",
+          "\u09b2\u09c7\u0997\u09c7 \u09a5\u09be\u0995\u09be, \u0986\u09a8\u09c1\u0997\u09a4\u09cd\u09af \u0995\u09b0\u09be"
         ],
         [
           "Adjudicate",
@@ -1335,6 +1351,10 @@
         [
           "Aloofness (\u0989\u09a6\u09be\u09b8\u09c0\u09a8\u09a4\u09be/\u09a8\u09bf\u09b0\u09cd\u09b2\u09bf\u09aa\u09cd\u09a4\u09a4\u09be)",
           ""
+        ],
+        [
+          "amass, accumulate",
+          "\u09b8\u099e\u09cd\u099a\u09af\u09bc \u0995\u09b0\u09be, \u099c\u09ae\u09be \u0995\u09b0\u09be, \u098f\u0995\u09a4\u09cd\u09b0\u09bf\u0995\u09b0\u09a3"
         ],
         [
           "Amnesty",
@@ -1369,6 +1389,10 @@
           "having or showing an ability to accurately assess situations or people and turn this to one's advantage."
         ],
         [
+          "augment",
+          "\u09ac\u09c3\u09a6\u09cd\u09a7\u09bf \u0995\u09b0\u09be, \u0989\u09a8\u09cd\u09a8\u09c0\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
           "Auspicious",
           "favourable"
         ],
@@ -1401,6 +1425,10 @@
           "\u09aa\u09c1\u09b8\u09cd\u09a4\u09bf\u0995\u09be"
         ],
         [
+          "{fg:#ffffff;bg:#000000}broth{/}, soup",
+          "\u09b8\u09cd\u09af\u09c1\u09aa, \u09ae\u09be\u0982\u09b8 \u09ac\u09be \u09b6\u09be\u0995\u09b8\u09ac\u099c\u09bf\u09b0 \u09a6\u09c1\u09a7\u099c\u09be\u09a4 \u09a4\u09b0\u09b2"
+        ],
+        [
           "Brusque",
           "\u09b0\u09c2\u09dd; \u0985\u09ad\u09ac\u09cd\u09af"
         ],
@@ -1417,8 +1445,16 @@
           "insensitive and cruel disregard for others."
         ],
         [
+          "cater, provide",
+          "\u09b8\u09c7\u09ac\u09be \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u099c\u09a8 \u09ae\u09c7\u099f\u09be\u09a8\u09cb, \u0996\u09be\u09a6\u09cd\u09af \u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u0995\u09b0\u09be"
+        ],
+        [
           "Clique",
           "A group of people"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}coercive{/}, forceful",
+          "\u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995"
         ],
         [
           "Cogent",
@@ -1443,6 +1479,10 @@
         [
           "Concatenate \u09b6\u09cd\u09b0\u09c7\u09a3\u09c0\u09ac\u09a6\u09cd\u09a7 \u0995\u09b0\u09be \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09be",
           "link (things) together in a chain or series"
+        ],
+        [
+          "concord, harmony",
+          "\u0990\u0995\u09cd\u09af, \u09b8\u0999\u09cd\u0997\u09a4\u09bf, \u09ae\u09a4\u09c8\u0995\u09cd\u09af, \u09ae\u09bf\u09b2"
         ],
         [
           "{fg:#ffffff;bg:#000000}condone{/} (\u0995\u09cd\u09b7\u09ae\u09be \u0995\u09b0\u09be), accept",
@@ -1473,6 +1513,10 @@
           "\u09ac\u09cd\u09af\u09df \u0995\u09ae\u09be\u09a4\u09c7 \u09b9\u09ac\u09c7"
         ],
         [
+          "{fg:#ffffff;bg:#000000}curtail{/}",
+          "\u09b8\u0982\u0995\u09cd\u09b7\u09c7\u09aa \u0995\u09b0\u09be, \u09b9\u09cd\u09b0\u09be\u09b8 \u0995\u09b0\u09be"
+        ],
+        [
           "Custom",
           "\u09aa\u09cd\u09b0\u09a5\u09be, \u0985\u09ad\u09cd\u09af\u09be\u09b8"
         ],
@@ -1493,6 +1537,10 @@
           "\u0985\u09a8\u09cd\u09af\u09c7\u09b0 \u0987\u099a\u09cd\u099b\u09be\u09b0 \u0995\u09be\u099b\u09c7 \u09a8\u09a4\u09bf \u09b8\u09cd\u09ac\u09c0\u0995\u09be\u09b0; \u09ae\u09be\u09a8\u09cd\u09af\u09a4\u09cd\u09ac; \u09ac\u09b6\u09ac\u09b0\u09cd\u09a4\u09bf\u09a4"
         ],
         [
+          "depotism, tyranny",
+          "\u09b8\u09cd\u09ac\u09c8\u09b0\u09be\u099a\u09be\u09b0"
+        ],
+        [
           "Destitute: \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0 \u09ac\u09be \u0985\u09ad\u09be\u09ac\u09c0",
           ""
         ],
@@ -1507,6 +1555,10 @@
         [
           "dilapidated; Decrepit",
           "worn out or ruined because of age or neglect."
+        ],
+        [
+          "diligent",
+          "\u09aa\u09b0\u09bf\u09b6\u09cd\u09b0\u09ae\u09c0, \u09af\u09a4\u09cd\u09a8\u09b6\u09c0\u09b2"
         ],
         [
           "Diplomacy",
@@ -1531,6 +1583,14 @@
         [
           "Domicile",
           "\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09a8\u09bf\u09ac\u09be\u09b8"
+        ],
+        [
+          "draw up, prepare",
+          "\u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4 \u0995\u09b0\u09be, \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09be"
+        ],
+        [
+          "dread, fear",
+          "\u09ad\u09af\u09bc, \u0986\u09a4\u0999\u09cd\u0995"
         ],
         [
           "drizzle",
@@ -1561,12 +1621,24 @@
           ""
         ],
         [
+          "egalitarian, equalitarian",
+          "\u09b8\u09ae\u09be\u09a8 \u0985\u09a7\u09bf\u0995\u09be\u09b0, \u09b8\u09ae\u09a4\u09be\u09b0\u09aa\u09a8\u09cd\u09a5\u09c0, \u09b8\u09ae\u09ac\u09c7\u09a4"
+        ],
+        [
+          "elatter",
+          "\u0986\u09a8\u09a8\u09cd\u09a6\u09bf\u09a4, \u0989\u09b2\u09cd\u09b2\u09b8\u09bf\u09a4"
+        ],
+        [
           "electorate, voters",
           ""
         ],
         [
           "Elegy (\u09b6\u09cb\u0995\u0997\u09be\u09a5\u09be) \u09b9\u09b2\u09cb lament (\u09aa\u09b0\u09bf\u09a4\u09be\u09aa) \u09aa\u09c2\u09b0\u09cd\u09a3 \u0995\u09a5\u09be",
           ""
+        ],
+        [
+          "elitist",
+          "\u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0\u09a4\u09be\u09ac\u09be\u09a6\u09c0, \u09a8\u09bf\u099c\u09c7\u0995\u09c7 \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ad\u09be\u09ac\u09be"
         ],
         [
           "Elucidate",
@@ -1585,6 +1657,14 @@
           ""
         ],
         [
+          "endemic",
+          "\u09b8\u09cd\u09a5\u09be\u09a8\u09c0\u09af\u09bc \u09b0\u09cb\u0997"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}engulf{/}, overwhelm",
+          "\u099a\u09be\u09b0\u09a6\u09bf\u0995 \u09a5\u09c7\u0995\u09c7 \u0998\u09bf\u09b0\u09c7 \u09ab\u09c7\u09b2\u09be, \u0997\u09cd\u09b0\u09be\u09b8 \u0995\u09b0\u09be, \u09a2\u09c7\u0995\u09c7 \u09ab\u09c7\u09b2\u09be"
+        ],
+        [
           "{fg:#ffffff;bg:#000000}enigma{/}, {fg:#ffffff;bg:#000000}Enigmatic{/} (\u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af, \u09aa\u09cd\u09b0\u09b9\u09c7\u09b2\u09bf\u0995\u09be\u09ae\u09df), mystery, puzzle\noccult, mysterious (\u0997\u09c1\u09aa\u09cd\u09a4, \u0985\u09b2\u09cc\u0995\u09bf\u0995)",
           "\u09b0\u09b9\u09b8\u09cd\u09af / \u09a7\u09be\u0981\u09a7\u09be"
         ],
@@ -1597,12 +1677,20 @@
           "\u0985\u09b8\u09cd\u09aa\u09b7\u09cd\u099f\u09a4\u09be, \u09a6\u09cd\u09ac\u09cd\u09af\u09b0\u09cd\u09a5\u09ac\u09cb\u09a7\u0995\u09a4\u09be"
         ],
         [
+          "err, error, mistake",
+          "\u09ad\u09c1\u09b2 \u0995\u09b0\u09be, \u09ad\u09c1\u09b2\u09a7\u09be\u09b0\u09be"
+        ],
+        [
           "EULOGY (\u0989\u099a\u09cd\u099a \u09aa\u09cd\u09b0\u09b6\u0982\u09b8\u09be)",
           ""
         ],
         [
           "Exacerbate",
           "make **(a problem, bad situation, or negative feeling)** worse; \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
+          "exacerbate",
+          "\u09a4\u09c0\u09ac\u09cd\u09b0 \u0995\u09b0\u09be, \u0996\u09be\u09b0\u09be\u09aa \u0995\u09b0\u09be, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be"
         ],
         [
           "{fg:#ffffff;bg:#000000}Extempore{/}",
@@ -1621,12 +1709,20 @@
           "\u09aa\u09a4\u09bf\u09a4 \u099c\u09ae\u09bf"
         ],
         [
+          "farcical, absurd",
+          "\u09b9\u09be\u09b8\u09cd\u09af\u0995\u09b0, \u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995"
+        ],
+        [
           "feeble, {fg:#ffffff;bg:#000000}emaciate{/} (\u09aa\u09be\u09a4\u09b2\u09be, \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u09a6\u09c1\u09b0\u09cd\u09ac\u09b2 \u0995\u09b0\u09be, \u0995\u09cd\u09b7\u09c0\u09a3 \u0995\u09b0\u09be)",
           "\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2"
         ],
         [
           "feverish",
           ""
+        ],
+        [
+          "flout, defy",
+          "\u09ac\u09bf\u09b0\u09cb\u09a7\u09bf\u09a4\u09be \u0995\u09b0\u09be, \u0985\u09ac\u099c\u09cd\u099e\u09be \u0995\u09b0\u09be, \u0985\u09ae\u09be\u09a8\u09cd\u09af \u0995\u09b0\u09be"
         ],
         [
           "foment",
@@ -1665,6 +1761,10 @@
           "\u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0; \u0985\u09a8\u09be\u09b2\u09cb\u0995\u09bf\u09a4"
         ],
         [
+          "gluttoning, overeating",
+          "\u0985\u09a4\u09bf\u09ad\u09cb\u099c\u09a8 \u0995\u09b0\u09be, \u09b2\u09cb\u09ad\u09c0\u09ad\u09be\u09ac\u09c7 \u0996\u09be\u0993\u09af\u09bc\u09be"
+        ],
+        [
           "graphic; pictorial",
           ""
         ],
@@ -1693,12 +1793,20 @@
           "\u0989\u09a6\u09cd\u09a7\u09a4; \u0985\u09b9\u0999\u09cd\u0995\u09be\u09b0\u09c0"
         ],
         [
+          "heckle, hassle, interrupt",
+          "\u0989\u09a4\u09cd\u09af\u0995\u09cd\u09a4 \u0995\u09b0\u09be, \u09ac\u09bf\u09b0\u0995\u09cd\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
           "Hedge = a line of bushes or small trees planted very close together",
           ""
         ],
         [
           "hereditary, genetic, inherited",
           ""
+        ],
+        [
+          "hermetic, airtight",
+          "\u09ac\u09be\u09af\u09bc\u09c1\u09b0\u09cb\u09a7\u09c0, \u0997\u09c1\u09aa\u09cd\u09a4"
         ],
         [
           "Huff",
@@ -1725,12 +1833,20 @@
           ""
         ],
         [
+          "incredulous, skeptical",
+          "\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8"
+        ],
+        [
           "infancy",
           "\u09b6\u09c8\u09b6\u09ac"
         ],
         [
           "inquisitive; curious",
           ""
+        ],
+        [
+          "intricate, complex",
+          "\u099c\u099f\u09bf\u09b2, \u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af"
         ],
         [
           "Intrigue",
@@ -1747,6 +1863,10 @@
         [
           "{fg:#ffffff;bg:#000000}jovial{/}, {fg:#ffffff;bg:#000000}jolly{/}, {fg:#ffffff;bg:#000000}jubilation{/} (\u0986\u09a8\u09a8\u09cd\u09a6 / \u0989\u09b2\u09cd\u09b2\u09be\u09b8), {fg:#ffffff;bg:#000000}merry{/}, rejoicing",
           "\u09b9\u09be\u09b8\u09bf\u0996\u09c1\u09b6\u09bf, \u0986\u09a8\u09a8\u09cd\u09a6\u09ae\u09af\u09bc"
+        ],
+        [
+          "labyrinth, maze",
+          "\u099c\u099f\u09bf\u09b2 \u09aa\u09a5"
         ],
         [
           "LACONIC; brief",
@@ -1777,6 +1897,10 @@
           ""
         ],
         [
+          "meek",
+          "\u09a8\u09ae\u09cd\u09b0, \u09ad\u09a6\u09cd\u09b0, \u09a7\u09c8\u09b0\u09cd\u09af\u09b6\u09c0\u09b2"
+        ],
+        [
           "meticulous",
           "showing great attention to detail; very careful and precise"
         ],
@@ -1789,8 +1913,16 @@
           "\u0989\u09a6\u09be\u09b8, \u09ac\u09bf\u09b7\u09a3\u09cd\u09a3, \u09ae\u09c7\u099c\u09be\u099c \u0996\u09bf\u099f\u0996\u09bf\u099f\u09c7"
         ],
         [
+          "{fg:#ffffff;bg:#000000}mundane{/}, ordinary",
+          "\u099c\u09be\u0997\u09a4\u09bf\u0995, \u09aa\u09be\u09b0\u09cd\u09a5\u09bf\u09ac "
+        ],
+        [
           "Mutiny",
           "revolt against authority"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}myriad{/}, countless",
+          "\u0985\u09b8\u0982\u0996\u09cd\u09af, \u09ac\u09bf\u09aa\u09c1\u09b2, \u09ac\u09b9\u09c1\u09ac\u09bf\u09a7"
         ],
         [
           "NAUTICALl naval",
@@ -1805,8 +1937,16 @@
           "\u09a8\u09a4\u09c1\u09a8 \u09b6\u09ac\u09cd\u09a6"
         ],
         [
+          "nero, Roman emperor",
+          "\u09a8\u09c7\u09b0\u09cb (\u09aa\u09cd\u09b0\u09be\u099a\u09c0\u09a8 \u09b0\u09cb\u09ae\u09c7\u09b0 \u09b8\u09ae\u09cd\u09b0\u09be\u099f)"
+        ],
+        [
           "nonplussed",
           "so surprised and confused that one is unsure how to react."
+        ],
+        [
+          "nouveau riche",
+          "\u09a8\u09ac\u09a7\u09a8\u09c0, \u09a8\u09a4\u09c1\u09a8 \u0985\u09b0\u09cd\u09a5\u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf"
         ],
         [
           "Noxious; deleterious",
@@ -1849,6 +1989,10 @@
           "\u09b6\u09bf\u0995\u09cd\u09b7\u09be\u09a4\u09a4\u09cd\u09a4\u09cd\u09ac"
         ],
         [
+          "{fg:#ffffff;bg:#000000}pedantic{/}, precise",
+          "\u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7, \u0985\u09a4\u09bf\u09ac\u09bf\u09b8\u09cd\u09a4\u09be\u09b0\u09bf\u09a4 \u099c\u09cd\u099e\u09be\u09a8\u09aa\u09cd\u09b0\u09a6\u09b0\u09cd\u09b6\u09a8\u0995\u09be\u09b0\u09c0"
+        ],
+        [
           "{fg:#ffffff;bg:#000000}Penchant{/}, Like",
           "**\u09aa\u09cd\u09b0\u09ac\u09b2 \u0986\u0997\u09cd\u09b0\u09b9**; \u0995\u09cb\u09a8\u09cb \u0995\u09bf\u099b\u09c1\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf \u09ac\u09bf\u09b6\u09c7\u09b7 \u099d\u09cb\u0981\u0995"
         ],
@@ -1887,6 +2031,10 @@
         [
           "Probity",
           "\u09b8\u09a4\u09a4\u09be"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}procrastinate{/}, delay",
+          "\u09a6\u09c7\u09b0\u09bf \u0995\u09b0\u09be, \u0986\u09b2\u09b8\u09cd\u09af \u0995\u09b0\u09be, \u0995\u09be\u099c \u099f\u09be\u09b2\u09ae\u09be\u099f\u09be\u09b2 \u0995\u09b0\u09be"
         ],
         [
           "Prodigal",
@@ -1929,6 +2077,10 @@
           "\u0995\u09cd\u09b7\u09c1\u09a7\u09be\u09b0\u09cd\u09a4; \u09b2\u09cb\u09ad\u09c0"
         ],
         [
+          "recondite, obscure",
+          "\u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af"
+        ],
+        [
           "refined (\u09ad\u09a6\u09cd\u09b0; \u09b6\u09bf\u0995\u09cd\u09b7\u09bf\u09a4)",
           ""
         ],
@@ -1945,8 +2097,16 @@
           "not revealing one's thoughts or feelings readily"
         ],
         [
+          "sapling",
+          "a young tree"
+        ],
+        [
           "scanty",
           "small or insufficient in quantity or amount"
+        ],
+        [
+          "scoof, jeer, fleer, deride, sneer, ridicule, taunt, mock",
+          "\u0989\u09aa\u09b9\u09be\u09b8 \u0995\u09b0\u09be, \u09a0\u09be\u099f\u09cd\u099f\u09be \u0995\u09b0\u09be, \u0985\u09ac\u09b9\u09c7\u09b2\u09be \u0995\u09b0\u09be "
         ],
         [
           "Serenity",
@@ -1965,8 +2125,16 @@
           "quickly get the main idea of a text by reading the headings, subheadings, and the first and last sentences of paragraphs"
         ],
         [
+          "{fg:#ffffff;bg:#000000}sojourn{/}, stay",
+          "\u09b8\u09be\u09ae\u09af\u09bc\u09bf\u0995 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8, \u09ad\u09cd\u09b0\u09ae\u09a3\u0995\u09be\u09b2\u09c7 \u09a5\u09be\u0995\u09be"
+        ],
+        [
           "Solecism",
           "\u09ac\u09cd\u09af\u09be\u0995\u09b0\u09a3\u0997\u09a4 \u09ad\u09c1\u09b2"
+        ],
+        [
+          "somnambulist, sleepwalker",
+          "\u09a8\u09bf\u09a6\u09cd\u09b0\u09be\u09b8\u09ae\u09cd\u09ac\u09a8\u09cd\u09a7\u09c0, \u0998\u09c1\u09ae\u09a8\u09cd\u09a4 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09af\u09bc \u09b9\u09be\u0981\u099f\u09be \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf"
         ],
         [
           "spacious",
@@ -1993,8 +2161,20 @@
           "\u0995\u09a0\u09bf\u09a8; \u09b6\u0995\u09cd\u09a4; \u0985\u09a8\u09ae\u09a8\u09c0\u09df"
         ],
         [
+          "stipend, allowance",
+          "\u09ad\u09be\u09a4\u09be, \u09ac\u09c3\u09a4\u09cd\u09a4\u09bf"
+        ],
+        [
+          "strained, tense",
+          "\u099a\u09be\u09aa\u09aa\u09cd\u09b0\u09a6\u09a4\u09cd\u09a4, \u099c\u09cb\u09b0\u09aa\u09c2\u09b0\u09cd\u09ac\u0995 \u0995\u09b0\u09be"
+        ],
+        [
           "sturdy",
           "strong; \u09ae\u099c\u09ac\u09c1\u09a4"
+        ],
+        [
+          "suave, charming",
+          "\u09ae\u09c3\u09a6\u09c1\u09ad\u09be\u09b7\u09c0, \u0986\u0995\u09b0\u09cd\u09b7\u09a3\u09c0\u09af\u09bc"
         ],
         [
           "Subjugate",
@@ -2025,6 +2205,10 @@
           "\u09b6\u0995\u09cd\u09a4 \u0995\u09b0\u09c7 \u0986\u0995\u09dc\u09c7 \u09b0\u09be\u0996\u09c7 \u098f\u09ae\u09a8, \u09a8\u09be\u099b\u09cb\u09dc\u09ac\u09be\u09a8\u09cd\u09a6\u09be"
         ],
         [
+          "tout, promote, canvass (\u09aa\u09cd\u09b0\u099a\u09be\u09b0 \u0995\u09b0\u09be, \u09ad\u09cb\u099f \u09aa\u09cd\u09b0\u09be\u09b0\u09cd\u09a5\u09a8\u09be \u0995\u09b0\u09be)",
+          "\u09a6\u09be\u09b2\u09be\u09b2, \u09aa\u09cd\u09b0\u099a\u09be\u09b0 \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09b6\u0982\u09b8\u09be \u0995\u09b0\u09c7 \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be"
+        ],
+        [
           "Township",
           "\u0989\u09aa\u09b6\u09b9\u09b0"
         ],
@@ -2035,6 +2219,10 @@
         [
           "Unprecedented",
           "\u09a8\u099c\u09c0\u09b0\u09ac\u09bf\u09b9\u09c0\u09a8"
+        ],
+        [
+          "unwitting, unaware",
+          "\u0985\u09a8\u09bf\u099a\u09cd\u099b\u09be\u0995\u09c3\u09a4, \u0985\u099c\u09be\u09a8\u09cd\u09a4\u09c7"
         ],
         [
           "vexed",
@@ -2049,188 +2237,24 @@
           ""
         ],
         [
-          "yearling",
-          "\u098f\u0995 \u09a6\u09c1\u0987 \u09ac\u099b\u09b0\u09c7\u09b0 \u09ac\u09be\u099a\u09cd\u099b\u09be "
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}Zealous{/}",
-          "\u0989\u09ce\u09b8\u09be\u09b9\u09c0; \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0986\u0997\u09cd\u09b0\u09b9\u09b6\u09c0\u09b2"
-        ],
-        [
-          "sapling",
-          "a young tree"
-        ],
-        [
           "wit",
           "\u09ac\u09c1\u09a6\u09cd\u09a7\u09bf, \u09a4\u09c0\u0995\u09cd\u09b7\u09cd\u09a3 \u09ac\u09c1\u09a6\u09cd\u09a7\u09bf\u09ae\u09a4\u09cd\u09a4\u09be"
-        ],
-        [
-          "dread, fear",
-          "\u09ad\u09af\u09bc, \u0986\u09a4\u0999\u09cd\u0995"
-        ],
-        [
-          "err, error, mistake",
-          "\u09ad\u09c1\u09b2 \u0995\u09b0\u09be, \u09ad\u09c1\u09b2\u09a7\u09be\u09b0\u09be"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}broth{/}, soup",
-          "\u09b8\u09cd\u09af\u09c1\u09aa, \u09ae\u09be\u0982\u09b8 \u09ac\u09be \u09b6\u09be\u0995\u09b8\u09ac\u099c\u09bf\u09b0 \u09a6\u09c1\u09a7\u099c\u09be\u09a4 \u09a4\u09b0\u09b2"
-        ],
-        [
-          "nero, Roman emperor",
-          "\u09a8\u09c7\u09b0\u09cb (\u09aa\u09cd\u09b0\u09be\u099a\u09c0\u09a8 \u09b0\u09cb\u09ae\u09c7\u09b0 \u09b8\u09ae\u09cd\u09b0\u09be\u099f)"
-        ],
-        [
-          "nouveau riche",
-          "\u09a8\u09ac\u09a7\u09a8\u09c0, \u09a8\u09a4\u09c1\u09a8 \u0985\u09b0\u09cd\u09a5\u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf"
-        ],
-        [
-          "achillesheel (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2 \u09b8\u09cd\u09a5\u09be\u09a8), Achilles \u098f\u09b0 \u0997\u09cb\u09a1\u09bc\u09be\u09b2\u09bf, weakness",
-          ""
-        ],
-        [
-          "diligent",
-          "\u09aa\u09b0\u09bf\u09b6\u09cd\u09b0\u09ae\u09c0, \u09af\u09a4\u09cd\u09a8\u09b6\u09c0\u09b2"
-        ],
-        [
-          "concord, harmony",
-          "\u0990\u0995\u09cd\u09af, \u09b8\u0999\u09cd\u0997\u09a4\u09bf, \u09ae\u09a4\u09c8\u0995\u09cd\u09af, \u09ae\u09bf\u09b2"
-        ],
-        [
-          "heckle, hassle, interrupt",
-          "\u0989\u09a4\u09cd\u09af\u0995\u09cd\u09a4 \u0995\u09b0\u09be, \u09ac\u09bf\u09b0\u0995\u09cd\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "stipend, allowance",
-          "\u09ad\u09be\u09a4\u09be, \u09ac\u09c3\u09a4\u09cd\u09a4\u09bf"
-        ],
-        [
-          "gluttoning, overeating",
-          "\u0985\u09a4\u09bf\u09ad\u09cb\u099c\u09a8 \u0995\u09b0\u09be, \u09b2\u09cb\u09ad\u09c0\u09ad\u09be\u09ac\u09c7 \u0996\u09be\u0993\u09af\u09bc\u09be"
         ],
         [
           "witting",
           "\u0987\u099a\u09cd\u099b\u09be\u0995\u09c3\u09a4, \u09b8\u099a\u09c7\u09a4\u09a8"
         ],
         [
-          "unwitting, unaware",
-          "\u0985\u09a8\u09bf\u099a\u09cd\u099b\u09be\u0995\u09c3\u09a4, \u0985\u099c\u09be\u09a8\u09cd\u09a4\u09c7"
-        ],
-        [
-          "abscond, flee",
-          "\u0997\u09cb\u09aa\u09a8\u09c7 \u09aa\u09be\u09b2\u09be\u09a8\u09cb"
-        ],
-        [
-          "exacerbate",
-          "\u09a4\u09c0\u09ac\u09cd\u09b0 \u0995\u09b0\u09be, \u0996\u09be\u09b0\u09be\u09aa \u0995\u09b0\u09be, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "suave, charming",
-          "\u09ae\u09c3\u09a6\u09c1\u09ad\u09be\u09b7\u09c0, \u0986\u0995\u09b0\u09cd\u09b7\u09a3\u09c0\u09af\u09bc"
-        ],
-        [
-          "scoof, jeer, fleer, deride, sneer, ridicule, taunt, mock",
-          "\u0989\u09aa\u09b9\u09be\u09b8 \u0995\u09b0\u09be, \u09a0\u09be\u099f\u09cd\u099f\u09be \u0995\u09b0\u09be, \u0985\u09ac\u09b9\u09c7\u09b2\u09be \u0995\u09b0\u09be "
-        ],
-        [
-          "labyrinth, maze",
-          "\u099c\u099f\u09bf\u09b2 \u09aa\u09a5"
+          "yearling",
+          "\u098f\u0995 \u09a6\u09c1\u0987 \u09ac\u099b\u09b0\u09c7\u09b0 \u09ac\u09be\u099a\u09cd\u099b\u09be "
         ],
         [
           "yearn, long",
           "\u09a4\u09c0\u09ac\u09cd\u09b0 \u0986\u0995\u09be\u0999\u09cd\u0995\u09cd\u09b7\u09be \u0995\u09b0\u09be, \u09ac\u09be\u09b8\u09a8\u09be \u0995\u09b0\u09be"
         ],
         [
-          "meek",
-          "\u09a8\u09ae\u09cd\u09b0, \u09ad\u09a6\u09cd\u09b0, \u09a7\u09c8\u09b0\u09cd\u09af\u09b6\u09c0\u09b2"
-        ],
-        [
-          "amass, accumulate",
-          "\u09b8\u099e\u09cd\u099a\u09af\u09bc \u0995\u09b0\u09be, \u099c\u09ae\u09be \u0995\u09b0\u09be, \u098f\u0995\u09a4\u09cd\u09b0\u09bf\u0995\u09b0\u09a3"
-        ],
-        [
-          "cater, provide",
-          "\u09b8\u09c7\u09ac\u09be \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u099c\u09a8 \u09ae\u09c7\u099f\u09be\u09a8\u09cb, \u0996\u09be\u09a6\u09cd\u09af \u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u0995\u09b0\u09be"
-        ],
-        [
-          "strained, tense",
-          "\u099a\u09be\u09aa\u09aa\u09cd\u09b0\u09a6\u09a4\u09cd\u09a4, \u099c\u09cb\u09b0\u09aa\u09c2\u09b0\u09cd\u09ac\u0995 \u0995\u09b0\u09be"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}pedantic{/}, precise",
-          "\u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7, \u0985\u09a4\u09bf\u09ac\u09bf\u09b8\u09cd\u09a4\u09be\u09b0\u09bf\u09a4 \u099c\u09cd\u099e\u09be\u09a8\u09aa\u09cd\u09b0\u09a6\u09b0\u09cd\u09b6\u09a8\u0995\u09be\u09b0\u09c0"
-        ],
-        [
-          "hermetic, airtight",
-          "\u09ac\u09be\u09af\u09bc\u09c1\u09b0\u09cb\u09a7\u09c0, \u0997\u09c1\u09aa\u09cd\u09a4"
-        ],
-        [
-          "recondite, obscure",
-          "\u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af"
-        ],
-        [
-          "endemic",
-          "\u09b8\u09cd\u09a5\u09be\u09a8\u09c0\u09af\u09bc \u09b0\u09cb\u0997"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}curtail{/}",
-          "\u09b8\u0982\u0995\u09cd\u09b7\u09c7\u09aa \u0995\u09b0\u09be, \u09b9\u09cd\u09b0\u09be\u09b8 \u0995\u09b0\u09be"
-        ],
-        [
-          "intricate, complex",
-          "\u099c\u099f\u09bf\u09b2, \u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af"
-        ],
-        [
-          "depotism, tyranny",
-          "\u09b8\u09cd\u09ac\u09c8\u09b0\u09be\u099a\u09be\u09b0"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}myriad{/}, countless",
-          "\u0985\u09b8\u0982\u0996\u09cd\u09af, \u09ac\u09bf\u09aa\u09c1\u09b2, \u09ac\u09b9\u09c1\u09ac\u09bf\u09a7"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}coercive{/}, forceful",
-          "\u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995"
-        ],
-        [
-          "tout, promote, canvass (\u09aa\u09cd\u09b0\u099a\u09be\u09b0 \u0995\u09b0\u09be, \u09ad\u09cb\u099f \u09aa\u09cd\u09b0\u09be\u09b0\u09cd\u09a5\u09a8\u09be \u0995\u09b0\u09be)",
-          "\u09a6\u09be\u09b2\u09be\u09b2, \u09aa\u09cd\u09b0\u099a\u09be\u09b0 \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09b6\u0982\u09b8\u09be \u0995\u09b0\u09c7 \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}procrastinate{/}, delay",
-          "\u09a6\u09c7\u09b0\u09bf \u0995\u09b0\u09be, \u0986\u09b2\u09b8\u09cd\u09af \u0995\u09b0\u09be, \u0995\u09be\u099c \u099f\u09be\u09b2\u09ae\u09be\u099f\u09be\u09b2 \u0995\u09b0\u09be"
-        ],
-        [
-          "flout, defy",
-          "\u09ac\u09bf\u09b0\u09cb\u09a7\u09bf\u09a4\u09be \u0995\u09b0\u09be, \u0985\u09ac\u099c\u09cd\u099e\u09be \u0995\u09b0\u09be, \u0985\u09ae\u09be\u09a8\u09cd\u09af \u0995\u09b0\u09be"
-        ],
-        [
-          "incredulous, skeptical",
-          "\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8"
-        ],
-        [
-          "elatter",
-          "\u0986\u09a8\u09a8\u09cd\u09a6\u09bf\u09a4, \u0989\u09b2\u09cd\u09b2\u09b8\u09bf\u09a4"
-        ],
-        [
-          "elitist",
-          "\u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0\u09a4\u09be\u09ac\u09be\u09a6\u09c0, \u09a8\u09bf\u099c\u09c7\u0995\u09c7 \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ad\u09be\u09ac\u09be"
-        ],
-        [
-          "farcical, absurd",
-          "\u09b9\u09be\u09b8\u09cd\u09af\u0995\u09b0, \u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995"
-        ],
-        [
-          "somnambulist, sleepwalker",
-          "\u09a8\u09bf\u09a6\u09cd\u09b0\u09be\u09b8\u09ae\u09cd\u09ac\u09a8\u09cd\u09a7\u09c0, \u0998\u09c1\u09ae\u09a8\u09cd\u09a4 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09af\u09bc \u09b9\u09be\u0981\u099f\u09be \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf"
-        ],
-        [
-          "draw up, prepare",
-          "\u09aa\u09cd\u09b0\u09b8\u09cd\u09a4\u09c1\u09a4 \u0995\u09b0\u09be, \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09be"
-        ],
-        [
-          "sojourn, stay",
-          "\u09b8\u09be\u09ae\u09af\u09bc\u09bf\u0995 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8, \u09ad\u09cd\u09b0\u09ae\u09a3\u0995\u09be\u09b2\u09c7 \u09a5\u09be\u0995\u09be"
+          "{fg:#ffffff;bg:#000000}Zealous{/}",
+          "\u0989\u09ce\u09b8\u09be\u09b9\u09c0; \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0986\u0997\u09cd\u09b0\u09b9\u09b6\u09c0\u09b2"
         ]
       ]
     },
