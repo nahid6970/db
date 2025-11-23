@@ -1274,7 +1274,7 @@
       "columns": [
         {
           "color": "#ffffff",
-          "font": "JetBrains Mono",
+          "font": "Comic Sans MS",
           "fontSize": "25",
           "headerBgColor": "#000000",
           "headerBold": true,
@@ -1817,8 +1817,8 @@
           ""
         ],
         [
-          "imbibe",
-          "to drink"
+          "==imbibe==; to drink",
+          "\u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be / \u09aa\u09be\u09a8 \u0995\u09b0\u09be"
         ],
         [
           "Impoverish ",
@@ -1998,7 +1998,7 @@
         ],
         [
           "Pique",
-          "\u0997\u09b0\u09cd\u09ac; \u0985\u09b9\u0982\u0995\u09be\u09b0; \u0998\u09c3\u09a3\u09be \u0995\u09b0\u09be"
+          "~~\u0997\u09b0\u09cd\u09ac, \u0985\u09b9\u0982\u0995\u09be\u09b0, \u0998\u09c3\u09a3\u09be \u0995\u09b0\u09be~~\n\u0985\u09b8\u09a8\u09cd\u09a4\u09cb\u09b7, \u0985\u09ad\u09bf\u09ae\u09be\u09a8, \u09ac\u09bf\u09b0\u0995\u09cd\u09a4\u09bf \u09b8\u09c3\u09b7\u09cd\u099f\u09bf \u0995\u09b0\u09be, \u0986\u0997\u09cd\u09b0\u09b9 \u099c\u09be\u0997\u09be\u09a8\u09cb"
         ],
         [
           "placid",
@@ -2343,6 +2343,14 @@
         [
           "tint, to tinge",
           "\u098f\u0995\u099f\u09c1 \u09b0\u0999 \u09a6\u09c7\u0993\u09df\u09be, \u099b\u09be\u09aa \u09a6\u09c7\u0993\u09df\u09be"
+        ],
+        [
+          "conduit, tube, pipe, channel",
+          "\u09a8\u09be\u09b2\u09c0, \u09a8\u09b2, \u09aa\u09b0\u09bf\u09ac\u09be\u09b9\u09c0 \u09aa\u09a5"
+        ],
+        [
+          "repulsion",
+          "\u0998\u09c3\u09a3\u09be, \u09ac\u09bf\u0995\u09b0\u09cd\u09b7\u09a3"
         ]
       ]
     },
