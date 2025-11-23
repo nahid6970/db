@@ -1267,16 +1267,16 @@
     },
     {
       "cellStyles": {
-        "191-0": {
+        "190-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "223-0": {
+        "202-0": {
+          "bgColor": "#D9FFB3",
+          "textColor": "rgb(0, 0, 0)"
+        },
+        "236-0": {
           "center": false
-        },
-        "292-0": {
-          "bgColor": "#D9FFB3",
-          "textColor": "rgb(0, 0, 0)"
         }
       },
       "columns": [
@@ -1317,7 +1317,7 @@
           "\u09b9\u09cd\u09b0\u09be\u09b8, \u0995\u09ae\u09be\u09a8\u09cb"
         ],
         [
-          "**abridge**, shorten",
+          "**abridge**\nshorten",
           "\u09b8\u0982\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4  \u0995\u09b0\u09be, \u0995\u09ae\u09be\u09a8\u09cb"
         ],
         [
@@ -1441,6 +1441,10 @@
           ""
         ],
         [
+          "belittle\ndenigrate\ndisparage\n==rebuke==\nreprimand\ntake one to task",
+          "**\u0985\u09b8\u09ae\u09cd\u09ae\u09be\u09a8 \u0995\u09b0\u09be**, **\u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be**, \u09b9\u09c7\u09df \u0995\u09b0\u09be, \u0985\u09ac\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09df\u09a8 \u0995\u09b0\u09be, \u099b\u09cb\u099f \u0995\u09b0\u09c7 \u09a6\u09c7\u0996\u09be"
+        ],
+        [
           "**bibulous**, sober",
           "\u09a8\u09c7\u09b6\u09be\u0997\u09cd\u09b0\u09b8\u09cd\u09a4, \u09ae\u09a6\u09cd\u09af\u09aa\u09be\u09a8\u09aa\u09cd\u09b0\u09ac\u09a3, \u09b6\u09cb\u09b7\u09a3\u0995\u09cd\u09b7\u09ae"
         ],
@@ -1529,6 +1533,10 @@
           "\u0985\u09a8\u09c1\u09a4\u09aa\u09cd\u09a4, \u0985\u09a8\u09c1\u09b6\u09cb\u099a\u09a8\u09be"
         ],
         [
+          "contrive (\u09aa\u09b0\u09bf\u0995\u09b2\u09cd\u09aa\u09a8\u09be \u0995\u09b0\u09be, \u0989\u09a6\u09cd\u09ad\u09be\u09ac\u09a8 \u0995\u09b0\u09be)\nconnive (\u09b7\u09a1\u09bc\u09af\u09a8\u09cd\u09a4\u09cd\u09b0 \u0995\u09b0\u09be)",
+          ""
+        ],
+        [
           "Convalesce",
           "\u09b8\u09c1\u09b8\u09cd\u09a5 \u09b9\u0993\u09df\u09be"
         ],
@@ -1591,10 +1599,6 @@
         [
           "depotism, tyranny",
           "\u09b8\u09cd\u09ac\u09c8\u09b0\u09be\u099a\u09be\u09b0"
-        ],
-        [
-          "==profane== (\u0985\u09aa\u09ac\u09bf\u09a4\u09cd\u09b0, \u09a7\u09b0\u09cd\u09ae\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0, \u0985\u09b6\u09cd\u09b2\u09c0\u09b2)\nprofanation, desecration (\u0985\u09ac\u09ae\u09be\u09a8\u09a8\u09be, \u0985\u09aa\u09ac\u09bf\u09a4\u09cd\u09b0\u0995\u09b0\u09a3)",
-          ""
         ],
         [
           "Destitute: \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0 \u09ac\u09be \u0985\u09ad\u09be\u09ac\u09c0",
@@ -1793,6 +1797,10 @@
           "\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2"
         ],
         [
+          "felicitation",
+          "\u0985\u09ad\u09bf\u09a8\u09a8\u09cd\u09a6\u09a8, \u09b6\u09c1\u09ad\u09c7\u099a\u09cd\u099b\u09be, \u09b8\u09ae\u09cd\u09ac\u09b0\u09cd\u09a7\u09a8\u09be"
+        ],
+        [
           "feverish",
           ""
         ],
@@ -1823,6 +1831,10 @@
         [
           "Frenetic (\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4)",
           ""
+        ],
+        [
+          "==frivolity==",
+          "\u0985\u09b2\u09b8\u09a4\u09be, \u09a4\u09c1\u099a\u09cd\u099b\u09a4\u09be, \u0985\u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3\u09a4\u09be, \u09b9\u09be\u09b2\u0995\u09be\u09ab\u09bf\u09b2\u09bf"
         ],
         [
           "Garrulous; Talkative; {fg:#ffffff;bg:#000000}Loquacious{/} \n{fg:#ffffff;bg:#0000ff}Antonym:{/} Laconic; Taciturn; Reticent; Reserved; Quiet",
@@ -1901,6 +1913,10 @@
           "\u09ac\u09be\u09af\u09bc\u09c1\u09b0\u09cb\u09a7\u09c0, \u0997\u09c1\u09aa\u09cd\u09a4"
         ],
         [
+          "hollow, niche (\u0997\u09b0\u09cd\u09a4)\nniche (\u09ac\u09bf\u09b6\u09c7\u09b7 \u09b8\u09cd\u09a5\u09be\u09a8, \u0989\u09aa\u09af\u09c1\u0995\u09cd\u09a4 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8)",
+          ""
+        ],
+        [
           "==hue and cry==, uproar (\u09b9\u09c8\u099a\u09c8)",
           "**\u09b9\u09c8\u099a\u09c8**, \u09b0\u0999, \u099b\u09be\u09af\u09bc\u09be"
         ],
@@ -1917,6 +1933,10 @@
           "\u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be / \u09aa\u09be\u09a8 \u0995\u09b0\u09be"
         ],
         [
+          "immaculate",
+          "\u09a8\u09bf\u0996\u09c1\u0981\u09a4, \u0995\u09b2\u0999\u09cd\u0995\u09b9\u09c0\u09a8, \u09a8\u09bf\u09b0\u09cd\u09ae\u09b2"
+        ],
+        [
           "==impede==, hinder",
           "\u09ac\u09be\u09a7\u09be \u09a6\u09c7\u0993\u09df\u09be, \u09ac\u09cd\u09af\u09be\u09b9\u09a4 \u0995\u09b0\u09be"
         ],
@@ -1929,12 +1949,20 @@
           ""
         ],
         [
+          "==incite==\ninstigate",
+          "\u0996\u09c7\u09aa\u09be\u09a8\u09cb, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be, \u0989\u09b8\u09cd\u0995\u09be\u09a8\u09bf \u09a6\u09c7\u0993\u09af\u09bc\u09be, \u09aa\u09cd\u09b0\u09b0\u09cb\u099a\u09a8\u09be \u0995\u09b0\u09be"
+        ],
+        [
           "incredulous, skeptical",
           "\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8"
         ],
         [
           "infancy",
           "\u09b6\u09c8\u09b6\u09ac"
+        ],
+        [
+          "innocuous",
+          "\u09a8\u09bf\u09b0\u09cd\u09a6\u09cb\u09b7, \u0995\u09cd\u09b7\u09a4\u09bf\u09b9\u09c0\u09a8"
         ],
         [
           "inquisitive; curious",
@@ -1983,6 +2011,14 @@
         [
           "LACONIC; brief",
           ""
+        ],
+        [
+          "==levity==",
+          "\u09ae\u09b0\u09cd\u09af\u09be\u09a6\u09be \u099c\u09cd\u099e\u09be\u09a8\u09b9\u09c0\u09a8 \u0986\u099a\u09b0\u09a3,\u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995 \u09ae\u09a8\u09cb\u09ad\u09be\u09ac"
+        ],
+        [
+          "==lewdness==",
+          "\u0985\u09b6\u09cd\u09b2\u09c0\u09b2\u09a4\u09be, \u0985\u09b6\u09cd\u09b2\u09c0\u09b2 \u0986\u099a\u09b0\u09a3, \u09af\u09cc\u09a8\u0995\u09cd\u09b2\u09bf\u09b7\u09cd\u099f\u09a4\u09be"
         ],
         [
           "Lexicon",
@@ -2037,6 +2073,10 @@
           "\u0985\u09b8\u0982\u0996\u09cd\u09af, \u09ac\u09bf\u09aa\u09c1\u09b2, \u09ac\u09b9\u09c1\u09ac\u09bf\u09a7"
         ],
         [
+          "myth",
+          "\u0995\u09b2\u09cd\u09aa\u0995\u09be\u09b9\u09bf\u09a8\u09c0, \u09aa\u09cc\u09b0\u09be\u09a3\u09bf\u0995 \u0997\u09b2\u09cd\u09aa"
+        ],
+        [
           "NAUTICALl naval",
           "\u09a8\u09cc-\u09b8\u0982\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4"
         ],
@@ -2055,6 +2095,10 @@
         [
           "nonplussed",
           "so surprised and confused that one is unsure how to react."
+        ],
+        [
+          "nota bene (N.B), mark well, note well",
+          "\u09a6\u09cd\u09b0\u09b7\u09cd\u099f\u09ac\u09cd\u09af, \u09ac\u09bf\u09b6\u09c7\u09b7\u09ad\u09be\u09ac\u09c7 \u09b2\u0995\u09cd\u09b7\u09cd\u09af \u0995\u09b0\u09c1\u09a8"
         ],
         [
           "nouveau riche",
@@ -2137,6 +2181,10 @@
           "\u099a\u09b0\u09ae \u09ae\u09be\u09a4\u09cd\u09b0\u09be\u09df \u09ae\u09bf\u09a4\u09ac\u09cd\u09af\u09df\u09c0"
         ],
         [
+          "==pernicious==",
+          "\u0995\u09cd\u09b7\u09a4\u09bf\u0995\u09b0, \u09ae\u09be\u09b0\u09be\u09a4\u09cd\u09ae\u0995, \u09a7\u09cd\u09ac\u0982\u09b8\u09be\u09a4\u09cd\u09ae\u0995"
+        ],
+        [
           "Pervasive",
           "\u09aa\u09b0\u09bf\u09ac\u09cd\u09af\u09be\u09aa\u0995"
         ],
@@ -2179,6 +2227,10 @@
         [
           "Prodigal",
           "\u0985\u09aa\u09ac\u09cd\u09af\u09df\u09c0"
+        ],
+        [
+          "==profane== (\u0985\u09aa\u09ac\u09bf\u09a4\u09cd\u09b0, \u09a7\u09b0\u09cd\u09ae\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0, \u0985\u09b6\u09cd\u09b2\u09c0\u09b2)\nprofanation, desecration (\u0985\u09ac\u09ae\u09be\u09a8\u09a8\u09be, \u0985\u09aa\u09ac\u09bf\u09a4\u09cd\u09b0\u0995\u09b0\u09a3)",
+          ""
         ],
         [
           "{fg:#ffffff;bg:#000000}prolific{/}, proliferous",
@@ -2361,6 +2413,10 @@
           "\u09b8\u0982\u09ac\u09c7\u09a6\u09a8\u09b6\u09c0\u09b2\u09a4\u09be, \u09aa\u09cd\u09b0\u09ad\u09be\u09ac\u09aa\u09cd\u09b0\u09ac\u09a3\u09a4\u09be, \u099d\u09c1\u0981\u0995\u09bf\u09aa\u09cd\u09b0\u09ac\u09a3\u09a4\u09be, \u0995\u09cd\u09b7\u09a4\u09bf\u0997\u09cd\u09b0\u09b8\u09cd\u09a4 \u09b9\u0993\u09af\u09bc\u09be\u09b0 \u09b8\u09ae\u09cd\u09ad\u09be\u09ac\u09a8\u09be"
         ],
         [
+          "syntax",
+          "\u09ac\u09be\u0995\u09cd\u09af\u09b0\u099a\u09a8\u09be\u09b0 \u09a8\u09bf\u09af\u09bc\u09ae"
+        ],
+        [
           "tacit",
           "understood or implied without being stated."
         ],
@@ -2443,50 +2499,6 @@
         [
           "==Zealous==",
           "\u0989\u09ce\u09b8\u09be\u09b9\u09c0; \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0986\u0997\u09cd\u09b0\u09b9\u09b6\u09c0\u09b2"
-        ],
-        [
-          "==frivolity==",
-          "\u0985\u09b2\u09b8\u09a4\u09be, \u09a4\u09c1\u099a\u09cd\u099b\u09a4\u09be, \u0985\u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3\u09a4\u09be, \u09b9\u09be\u09b2\u0995\u09be\u09ab\u09bf\u09b2\u09bf"
-        ],
-        [
-          "==lewdness==",
-          "\u0985\u09b6\u09cd\u09b2\u09c0\u09b2\u09a4\u09be, \u0985\u09b6\u09cd\u09b2\u09c0\u09b2 \u0986\u099a\u09b0\u09a3, \u09af\u09cc\u09a8\u0995\u09cd\u09b2\u09bf\u09b7\u09cd\u099f\u09a4\u09be"
-        ],
-        [
-          "==levity==",
-          "\u09ae\u09b0\u09cd\u09af\u09be\u09a6\u09be \u099c\u09cd\u099e\u09be\u09a8\u09b9\u09c0\u09a8 \u0986\u099a\u09b0\u09a3,\u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995 \u09ae\u09a8\u09cb\u09ad\u09be\u09ac"
-        ],
-        [
-          "nota bene (N.B), mark well, note well",
-          "\u09a6\u09cd\u09b0\u09b7\u09cd\u099f\u09ac\u09cd\u09af, \u09ac\u09bf\u09b6\u09c7\u09b7\u09ad\u09be\u09ac\u09c7 \u09b2\u0995\u09cd\u09b7\u09cd\u09af \u0995\u09b0\u09c1\u09a8"
-        ],
-        [
-          "hollow, niche (\u0997\u09b0\u09cd\u09a4)\nniche (\u09ac\u09bf\u09b6\u09c7\u09b7 \u09b8\u09cd\u09a5\u09be\u09a8, \u0989\u09aa\u09af\u09c1\u0995\u09cd\u09a4 \u0985\u09ac\u09b8\u09cd\u09a5\u09be\u09a8)",
-          ""
-        ],
-        [
-          "contrive (\u09aa\u09b0\u09bf\u0995\u09b2\u09cd\u09aa\u09a8\u09be \u0995\u09b0\u09be, \u0989\u09a6\u09cd\u09ad\u09be\u09ac\u09a8 \u0995\u09b0\u09be)\nconnive (\u09b7\u09a1\u09bc\u09af\u09a8\u09cd\u09a4\u09cd\u09b0 \u0995\u09b0\u09be)",
-          ""
-        ],
-        [
-          "belittle\ndenigrate\ndisparage\n==rebuke==\nreprimand\ntake one to task",
-          "**\u0985\u09b8\u09ae\u09cd\u09ae\u09be\u09a8 \u0995\u09b0\u09be**, **\u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be**, \u09b9\u09c7\u09df \u0995\u09b0\u09be, \u0985\u09ac\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09df\u09a8 \u0995\u09b0\u09be, \u099b\u09cb\u099f \u0995\u09b0\u09c7 \u09a6\u09c7\u0996\u09be"
-        ],
-        [
-          "syntax",
-          "\u09ac\u09be\u0995\u09cd\u09af\u09b0\u099a\u09a8\u09be\u09b0 \u09a8\u09bf\u09af\u09bc\u09ae"
-        ],
-        [
-          "felicitation",
-          "\u0985\u09ad\u09bf\u09a8\u09a8\u09cd\u09a6\u09a8, \u09b6\u09c1\u09ad\u09c7\u099a\u09cd\u099b\u09be, \u09b8\u09ae\u09cd\u09ac\u09b0\u09cd\u09a7\u09a8\u09be"
-        ],
-        [
-          "myth",
-          "\u0995\u09b2\u09cd\u09aa\u0995\u09be\u09b9\u09bf\u09a8\u09c0, \u09aa\u09cc\u09b0\u09be\u09a3\u09bf\u0995 \u0997\u09b2\u09cd\u09aa"
-        ],
-        [
-          "==incite==\ninstigate",
-          "\u0996\u09c7\u09aa\u09be\u09a8\u09cb, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be, \u0989\u09b8\u09cd\u0995\u09be\u09a8\u09bf \u09a6\u09c7\u0993\u09af\u09bc\u09be, \u09aa\u09cd\u09b0\u09b0\u09cb\u099a\u09a8\u09be \u0995\u09b0\u09be"
         ]
       ]
     },
