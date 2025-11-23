@@ -1269,32 +1269,32 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "Word",
+          "type": "text",
+          "width": "250",
           "color": "#ffffff",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
-          "headerBgColor": "#ffffff",
+          "headerBgColor": "#000000",
+          "headerTextColor": "#ffffff",
           "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": true,
-          "headerTextColor": "#000000",
-          "name": "Word",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "250"
+          "headerItalic": false,
+          "headerCenter": true
         },
         {
+          "name": "Meaning",
+          "type": "text",
+          "width": "150",
           "color": "#bdffbe",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
-          "headerBgColor": "#ffffff",
+          "headerBgColor": "#0f0f0f",
+          "headerTextColor": "#ffffff",
           "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": true,
-          "headerTextColor": "#333333",
-          "name": "Meaning",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerItalic": false,
+          "headerCenter": true
         }
       ],
       "mergedCells": {},
