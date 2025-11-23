@@ -1975,6 +1975,10 @@
         [
           "{fg:#ffffff;bg:#000000}enigma{/}, {fg:#ffffff;bg:#000000}Enigmatic{/} (\u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af/\u09aa\u09cd\u09b0\u09b9\u09c7\u09b2\u09bf\u0995\u09be\u09ae\u09df), mystery, puzzle",
           "\u09b0\u09b9\u09b8\u09cd\u09af / \u09a7\u09be\u0981\u09a7\u09be"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}spurious{/}, {fg:#ffffff;bg:#000000}bogus{/}, synthetic, {fg:#ffffff;bg:#000000}sham{/}",
+          "\u099c\u09be\u09b2 /\u0995\u09c3\u09a4\u09cd\u09b0\u09bf\u09ae/\u09ad\u09c1\u09af\u09bc\u09be / \u09ae\u09bf\u09a5\u09cd\u09af\u09be"
         ]
       ]
     },
