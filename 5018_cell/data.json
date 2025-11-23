@@ -1,5 +1,5 @@
 {
-  "activeSheet": 75,
+  "activeSheet": 3,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1271,7 +1271,7 @@
         {
           "color": "#ffffff",
           "font": "JetBrains Mono",
-          "fontSize": "20",
+          "fontSize": "25",
           "headerBgColor": "#ffffff",
           "headerBold": true,
           "headerCenter": true,
@@ -1284,8 +1284,8 @@
         },
         {
           "color": "#bdffbe",
-          "font": "",
-          "fontSize": "20",
+          "font": "JetBrains Mono",
+          "fontSize": "25",
           "headerBgColor": "#ffffff",
           "headerBold": true,
           "headerCenter": true,
@@ -1294,7 +1294,7 @@
           "name": "Meaning",
           "textColor": "#000000",
           "type": "text",
-          "width": "600"
+          "width": "150"
         }
       ],
       "mergedCells": {},
@@ -1469,11 +1469,11 @@
           "\u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be; \u099b\u09b2\u09a8\u09be"
         ],
         [
-          "Haggle",
+          "Haggle; Bargain",
           "\u09a6\u09be\u09ae \u09a8\u09bf\u09df\u09c7 \u09a6\u09b0 \u0995\u09b7\u09be\u0995\u09b7\u09bf \u0995\u09b0\u09be"
         ],
         [
-          "Haughty",
+          "Haughty, Contemptuous",
           "\u0989\u09a6\u09cd\u09a7\u09a4; \u0985\u09b9\u0999\u09cd\u0995\u09be\u09b0\u09c0"
         ],
         [
@@ -1521,7 +1521,7 @@
           "\u0985\u09a4\u09bf\u09ae\u09be\u09b0\u09c0"
         ],
         [
-          "Penchant, Like",
+          "{fg:#ffffff;bg:#000000}Penchant{/}, Like",
           "**\u09aa\u09cd\u09b0\u09ac\u09b2 \u0986\u0997\u09cd\u09b0\u09b9**; \u0995\u09cb\u09a8\u09cb \u0995\u09bf\u099b\u09c1\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf \u09ac\u09bf\u09b6\u09c7\u09b7 \u099d\u09cb\u0981\u0995"
         ],
         [
@@ -1553,8 +1553,8 @@
           "\u0985\u09aa\u09ac\u09cd\u09af\u09df\u09c0"
         ],
         [
-          "{fg:#ffffff;bg:#000000}Prolific{/}",
-          "\u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 **\u0989\u09ce\u09aa\u09be\u09a6\u09a8\u09b6\u09c0\u09b2 **\u09ac\u09be \u09aa\u09cd\u09b0\u099a\u09c1\u09b0 \u09aa\u09b0\u09bf\u09ae\u09be\u09a3\u09c7 \u0995\u09bf\u099b\u09c1 \u0989\u09ce\u09aa\u09be\u09a6\u09a8 \u0995\u09b0\u09be"
+          "{fg:#ffffff;bg:#000000}prolific{/}, proliferous",
+          "**\u0989\u09ce\u09aa\u09be\u09a6\u09a8\u09b6\u09c0\u09b2**, \u0989\u09b0\u09cd\u09ac\u09b0, \u09ab\u09b2\u09aa\u09cd\u09b0\u09b8\u09c2, \u09aa\u09cd\u09b0\u099a\u09c1\u09b0\u09aa\u09b0\u09bf\u09ae\u09be\u09a3\u09c7 \u0989\u09a4\u09cd\u09aa\u09be\u09a6\u09a8\u09b6\u09c0\u09b2"
         ],
         [
           "Propaganda",
@@ -1625,7 +1625,7 @@
           "\u0989\u09aa\u09b6\u09b9\u09b0"
         ],
         [
-          "ubiquitous, Widespread",
+          "ubiquitous, Widespread; far and wide",
           ""
         ],
         [
@@ -1891,6 +1891,74 @@
         [
           "Callous",
           "insensitive and cruel disregard for others."
+        ],
+        [
+          "tantamount; equal",
+          "equivalent in seriousness to; virtually the same as"
+        ],
+        [
+          "INADVERTENT; inintentional",
+          ""
+        ],
+        [
+          "LACONIC; brief",
+          ""
+        ],
+        [
+          "Noxious; deleterious",
+          ""
+        ],
+        [
+          "Adept - \u09a6\u0995\u09cd\u09b7\nAdapt -",
+          ""
+        ],
+        [
+          "extravagant (\u0985\u09aa\u09ac\u09cd\u09af\u09af\u09bc\u09c0), prodigal (\u0985\u09aa\u09ac\u09cd\u09af\u09af\u09bc\u09c0), spendthrift (\u0985\u09aa\u099a\u09af\u09bc), lavish, squander, sumptuous, profligate",
+          "\u09ac\u09bf\u09b2\u09be\u09b8\u09c0 / \u0985\u09aa\u09ac\u09cd\u09af\u09af\u09bc\u09c0 / \u0985\u09aa\u099a\u09af\u09bc \u0995\u09b0\u09be"
+        ],
+        [
+          "affable, cordial, friendly, amicable, amiable, bonhomie, genial, amity",
+          "\u09ac\u09a8\u09cd\u09a7\u09c1\u09b8\u09c1\u09b2\u09ad, \u09b8\u09cc\u099c\u09a8\u09cd\u09af\u09aa\u09c2\u09b0\u09cd\u09a3, \u0986\u09a8\u09cd\u09a4\u09b0\u09bf\u0995"
+        ],
+        [
+          "dastard; coward",
+          ""
+        ],
+        [
+          "inquisitive; curious",
+          ""
+        ],
+        [
+          "prominent; notable",
+          ""
+        ],
+        [
+          "genesis",
+          "\u09b8\u09c2\u099a\u09a8\u09be, \u0989\u09ce\u09aa\u09a4\u09cd\u09a4\u09bf, \u09b8\u09c3\u09b7\u09cd\u099f\u09bf\u09b0 \u09b6\u09c1\u09b0\u09c1"
+        ],
+        [
+          "magnificent; splendid",
+          ""
+        ],
+        [
+          "grumble; complain",
+          "make a low rumbling sound, complain about something in a bad-tempered way.\n"
+        ],
+        [
+          "morose, gloomy, murky, glum (\u09ae\u09a8\u09ae\u09b0\u09be)",
+          "\u0989\u09a6\u09be\u09b8, \u09ac\u09bf\u09b7\u09a3\u09cd\u09a3, \u09ae\u09c7\u099c\u09be\u099c \u0996\u09bf\u099f\u0996\u09bf\u099f\u09c7"
+        ],
+        [
+          "crude; unrefined",
+          ""
+        ],
+        [
+          "obfuscate; confuse",
+          ""
+        ],
+        [
+          "NAUTICALl naval",
+          "\u09a8\u09cc-\u09b8\u0982\u0995\u09cd\u09b0\u09be\u09a8\u09cd\u09a4"
         ]
       ]
     },
