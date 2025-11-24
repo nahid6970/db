@@ -1282,7 +1282,7 @@
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "400-0": {
+        "399-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         }
@@ -2919,6 +2919,10 @@
         [
           "idealistic",
           "\u0986\u09a6\u09b0\u09cd\u09b6\u09ac\u09be\u09a6\u09c0"
+        ],
+        [
+          "",
+          ""
         ]
       ]
     },
