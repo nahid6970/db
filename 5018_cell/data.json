@@ -1949,10 +1949,6 @@
           "\u0985\u099c\u09be\u09a8\u09be"
         ],
         [
-          "grimy",
-          "\u09a8\u09cb\u0982\u09b0\u09be, \u09ae\u09af\u09bc\u09b2\u09be\u09af\u09c1\u0995\u09cd\u09a4"
-        ],
-        [
           "grumble; complain",
           "make a low rumbling sound, complain about something in a bad-tempered way.\n"
         ],
@@ -2337,8 +2333,8 @@
           "\u099b\u09a6\u09cd\u09ae\u09a8\u09be\u09ae; \u09ac\u09c7\u09a8\u09be\u09ae"
         ],
         [
-          "{fg:#ffffff;bg:#000000}putrid{/}, rotten",
-          "\u09aa\u099a\u09be, \u09a8\u09bf\u0995\u09c3\u09b7\u09cd\u099f, \u0997\u09a8\u09cd\u09a7\u09af\u09c1\u0995\u09cd\u09a4"
+          "- ==putrid==, rotten [\u09aa\u099a\u09be, \u09a8\u09bf\u0995\u09c3\u09b7\u09cd\u099f, \u0997\u09a8\u09cd\u09a7\u09af\u09c1\u0995\u09cd\u09a4]\n- ==sordid== [\u09a8\u09bf\u0995\u09c3\u09b7\u09cd\u099f, \u09a8\u09cb\u0982\u09b0\u09be]\n- ==grimy== [\u09a8\u09cb\u0982\u09b0\u09be, \u09ae\u09af\u09bc\u09b2\u09be\u09af\u09c1\u0995\u09cd\u09a4]",
+          ""
         ],
         [
           "quaint",
@@ -2807,6 +2803,10 @@
         [
           "- stationary, stagnant",
           "\u09b8\u09cd\u09a5\u09bf\u09b0, \u0985\u099a\u09b2, \u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0"
+        ],
+        [
+          "==snug==, cozy, compact, comfortable",
+          "\u0986\u09b0\u09be\u09ae\u09a6\u09be\u09af\u09bc\u0995, \u09b8\u09a0\u09bf\u0995\u09ad\u09be\u09ac\u09c7 \u09ab\u09bf\u099f \u09b9\u0993\u09af\u09bc\u09be"
         ]
       ]
     },
