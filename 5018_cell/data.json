@@ -1277,18 +1277,18 @@
       },
       "columns": [
         {
+          "name": "Word",
+          "type": "text",
+          "width": "250",
           "color": "#ffffff",
-          "font": "Comic Sans MS",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "25",
           "headerBgColor": "#000000",
-          "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": false,
           "headerTextColor": "#ffffff",
-          "name": "Word",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "250"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": true
         },
         {
           "color": "#d6f5d7",
@@ -2921,12 +2921,16 @@
           "\u09b8\u09b0\u09cd\u09ac\u09ac\u09cd\u09af\u09be\u09aa\u09c0, \u09aa\u09cd\u09b0\u09ac\u09be\u09b9\u09ae\u09be\u09a8, \u09ac\u09cd\u09af\u09be\u09aa\u0995, \u09aa\u09b0\u09bf\u09ac\u09cd\u09af\u09be\u09aa\u0995"
         ],
         [
-          "==allay==, alleviate, ==ameliorate==, ==appease==, ==mollify==, ==placate==, ==placid==, tranquil gg",
+          "==allay==, alleviate, ==ameliorate==, ==appease==, ==mollify==, ==placate==, ==placid==, tranquil",
           "\u09b6\u09be\u09a8\u09cd\u09a4 \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09b6\u09ae\u09bf\u09a4 \u0995\u09b0\u09be, \u09b9\u09cd\u09b0\u09be\u09b8 \u0995\u09b0\u09be, \u0989\u09a8\u09cd\u09a8\u09a4 \u0995\u09b0\u09be"
         ],
         [
           "==perturb==, agitate, ==muddle==",
           "\u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4, \u0989\u09a6\u09cd\u09ac\u09bf\u0997\u09cd\u09a8 \u0995\u09b0\u09be, \u09ac\u09bf\u0998\u09cd\u09a8\u09bf\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
+          "==periphery==, enclosure, edge, margin",
+          "\u09aa\u09b0\u09bf\u09a7\u09bf, \u09aa\u09cd\u09b0\u09be\u09a8\u09cd\u09a4, **\u09b8\u09c0\u09ae\u09be\u09a8\u09be**"
         ]
       ]
     },
