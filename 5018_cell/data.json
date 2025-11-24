@@ -1267,15 +1267,15 @@
     },
     {
       "cellStyles": {
-        "190-0": {
+        "205-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "202-0": {
+        "217-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "236-0": {
+        "252-0": {
           "center": false
         }
       },
@@ -1313,7 +1313,7 @@
       "name": "Word-Meaning",
       "rows": [
         [
-          "{fg:#ffffff;bg:#000000}abate{/}, diminish, {fg:#ffffff;bg:#000000}dwindle{/}",
+          "==abate==, diminish, ==dwindle==",
           "\u09b9\u09cd\u09b0\u09be\u09b8, \u0995\u09ae\u09be\u09a8\u09cb"
         ],
         [
@@ -1409,6 +1409,10 @@
           "\u09aa\u09c1\u09b0\u09be\u09a8\u09cb \u09ac\u09be \u098f\u0996\u09a8 \u0986\u09b0 \u09aa\u09cd\u09b0\u099a\u09b2\u09bf\u09a4 \u09a8\u09df"
         ],
         [
+          "ardour",
+          "- \u0986\u0997\u09cd\u09b0\u09b9, \u0989\u09ce\u09b8\u09be\u09b9, \u09ac\u09cd\u09af\u09be\u0995\u09c1\u09b2\u09a4\u09be"
+        ],
+        [
           "arduous",
           "\u09a6\u09c1\u0983\u09b8\u09be\u09a7\u09cd\u09af; \u0995\u09b7\u09cd\u099f\u0995\u09b0"
         ],
@@ -1437,8 +1441,16 @@
           "\u098f\u0995\u099f\u09bf \u09aa\u09a3\u09cd\u09af \u09ac\u09be \u09b8\u09c7\u09ac\u09be \u09ac\u09bf\u09a8\u09bf\u09ae\u09df\u09c7 \u0985\u09a8\u09cd\u09af \u098f\u0995\u099f\u09bf \u09aa\u09a3\u09cd\u09af \u09ac\u09be \u09b8\u09c7\u09ac\u09be \u0997\u09cd\u09b0\u09b9\u09a3 \u0995\u09b0\u09be"
         ],
         [
+          "Belated = delayed beyond the usual time",
+          "\u09ac\u09bf\u09b2\u09ae\u09cd\u09ac\u09bf\u09a4, \u09a6\u09c7\u09b0\u09bf\u09a4\u09c7 \u0986\u09b8\u09be"
+        ],
+        [
           "belittle\ndenigrate\ndisparage\n==rebuke==\nreprimand\ntake one to task",
           "**\u0985\u09b8\u09ae\u09cd\u09ae\u09be\u09a8 \u0995\u09b0\u09be**, **\u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be**, \u09b9\u09c7\u09df \u0995\u09b0\u09be, \u0985\u09ac\u09ae\u09c2\u09b2\u09cd\u09af\u09be\u09df\u09a8 \u0995\u09b0\u09be, \u099b\u09cb\u099f \u0995\u09b0\u09c7 \u09a6\u09c7\u0996\u09be"
+        ],
+        [
+          "==belligerent==",
+          "- \u09af\u09c1\u09a6\u09cd\u09a7\u09b0\u09a4"
         ],
         [
           "**bibulous**, sober",
@@ -1453,8 +1465,16 @@
           ""
         ],
         [
+          "bootleg",
+          "- \u099a\u09c1\u09b0\u09bf \u0995\u09b0\u09be, \u099a\u09cb\u09b0\u09be\u0987\n- \u09a8\u09bf\u09b7\u09bf\u09a6\u09cd\u09a7\u09ad\u09be\u09ac\u09c7 \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09be \u09ac\u09be \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be"
+        ],
+        [
           "Brochure",
           "\u09aa\u09c1\u09b8\u09cd\u09a4\u09bf\u0995\u09be"
+        ],
+        [
+          "brochure, ==pamphlet==",
+          "\u09aa\u09c1\u09b8\u09cd\u09a4\u09bf\u0995\u09be, \u09b8\u0982\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4 \u09a4\u09a5\u09cd\u09af\u09aa\u09a4\u09cd\u09b0"
         ],
         [
           "{fg:#ffffff;bg:#000000}broth{/}, soup",
@@ -1481,11 +1501,15 @@
           "\u09b8\u09c7\u09ac\u09be \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u099c\u09a8 \u09ae\u09c7\u099f\u09be\u09a8\u09cb, \u0996\u09be\u09a6\u09cd\u09af \u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u0995\u09b0\u09be"
         ],
         [
+          "censor",
+          "\u09a8\u09bf\u09af\u09bc\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u0995\u09be\u09b0\u09c0, \u09aa\u09b0\u09cd\u09af\u09be\u09b2\u09cb\u099a\u0995, \u09aa\u09b0\u09c0\u0995\u09cd\u09b7\u09be \u0995\u09b0\u09be"
+        ],
+        [
           "Clique",
           "A group of people"
         ],
         [
-          "{fg:#ffffff;bg:#000000}coercive{/}, forceful",
+          "==coercive==, forceful",
           "\u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995"
         ],
         [
@@ -1517,8 +1541,8 @@
           "\u0990\u0995\u09cd\u09af, \u09b8\u0999\u09cd\u0997\u09a4\u09bf, \u09ae\u09a4\u09c8\u0995\u09cd\u09af, \u09ae\u09bf\u09b2"
         ],
         [
-          "{fg:#ffffff;bg:#000000}condone{/} (\u0995\u09cd\u09b7\u09ae\u09be \u0995\u09b0\u09be), accept",
-          ""
+          "==condone==, accept",
+          "\u0995\u09cd\u09b7\u09ae\u09be \u0995\u09b0\u09be"
         ],
         [
           "conduit, tube, pipe, channel",
@@ -1637,6 +1661,10 @@
           ""
         ],
         [
+          "==disdain==",
+          "- \u0998\u09c3\u09a3\u09be, \u0985\u09ac\u09ae\u09be\u09a8\u09a8\u09be, \u09a4\u09c1\u099a\u09cd\u099b\u09a4\u09be"
+        ],
+        [
           "disinter; unearth",
           "dig up (something that has been buried, especially a corpse)"
         ],
@@ -1675,6 +1703,10 @@
         [
           "Duty",
           "\u09b6\u09c1\u09b2\u09cd\u0995"
+        ],
+        [
+          "==efface==, ==expunge==",
+          "- \u09ae\u09c1\u099b\u09c7 \u09ab\u09c7\u09b2\u09be, \u09b2\u09cb\u09aa \u0995\u09b0\u09be, \u09ac\u09bf\u09b2\u09c1\u09aa\u09cd\u09a4 \u0995\u09b0\u09be"
         ],
         [
           "Effeminacy (\u09b8\u09cd\u09a4\u09cd\u09b0\u09c0\u09b8\u09c1\u09b2\u09ad \u0986\u099a\u09b0\u09a3; \u09ae\u09c7\u09df\u09c7\u09b2\u09bf \u09ad\u09be\u09ac)",
@@ -1757,6 +1789,10 @@
           ""
         ],
         [
+          "euphemism",
+          "\u09b8\u09c1\u09a8\u09cd\u09a6\u09b0 \u09ad\u09be\u09b7\u09be \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0"
+        ],
+        [
           "Exacerbate",
           "make **(a problem, bad situation, or negative feeling)** worse; \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4 \u0995\u09b0\u09be"
         ],
@@ -1831,6 +1867,10 @@
         [
           "==frivolity==",
           "\u0985\u09b2\u09b8\u09a4\u09be, \u09a4\u09c1\u099a\u09cd\u099b\u09a4\u09be, \u0985\u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3\u09a4\u09be, \u09b9\u09be\u09b2\u0995\u09be\u09ab\u09bf\u09b2\u09bf"
+        ],
+        [
+          "==gallant==\n==intrepid==",
+          "- \u09b8\u09be\u09b9\u09b8\u09c0, \u09a6\u09c1\u0983\u09b8\u09be\u09b9\u09b8\u09c0"
         ],
         [
           "Garrulous; Talkative; {fg:#ffffff;bg:#000000}Loquacious{/} \n{fg:#ffffff;bg:#0000ff}Antonym:{/} Laconic; Taciturn; Reticent; Reserved; Quiet",
@@ -1925,6 +1965,10 @@
           ""
         ],
         [
+          "illusive",
+          "- \u09ae\u09be\u09af\u09bc\u09be\u09ae\u09af\u09bc, \u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be\u09ae\u09c2\u09b2\u0995"
+        ],
+        [
           "==imbibe==; to drink",
           "\u0986\u09a4\u09cd\u09ae\u09b8\u09be\u09ce \u0995\u09b0\u09be / \u09aa\u09be\u09a8 \u0995\u09b0\u09be"
         ],
@@ -1957,6 +2001,10 @@
           "\u09b6\u09c8\u09b6\u09ac"
         ],
         [
+          "==inimical==",
+          "- \u09aa\u09cd\u09b0\u09a4\u09bf\u0995\u09c2\u09b2, \u09b6\u09a4\u09cd\u09b0\u09c1\u09a4\u09be\u09aa\u09c2\u09b0\u09cd\u09a3, \u0995\u09cd\u09b7\u09a4\u09bf\u0995\u09b0"
+        ],
+        [
           "innocuous",
           "\u09a8\u09bf\u09b0\u09cd\u09a6\u09cb\u09b7, \u0995\u09cd\u09b7\u09a4\u09bf\u09b9\u09c0\u09a8"
         ],
@@ -1965,12 +2013,16 @@
           ""
         ],
         [
+          "**insouciance**",
+          "- \u0989\u09a6\u09be\u09b8\u09c0\u09a8\u09a4\u09be, \u09a8\u09bf\u09b6\u09cd\u099a\u09bf\u09a8\u09cd\u09a4\u09a4\u09be, \u09b2\u09be\u0998\u09ac\u09ad\u09be\u09ac"
+        ],
+        [
           "==intercede==",
           "\u09ae\u09a7\u09cd\u09af\u09b8\u09cd\u09a5\u09a4\u09be \u0995\u09b0\u09be, \u0995\u09be\u09b0\u09cb \u09aa\u0995\u09cd\u09b7 \u09a8\u09bf\u09af\u09bc\u09c7 \u0985\u09a8\u09cd\u09af\u0995\u09c7 \u09ac\u09cb\u099d\u09be\u09a8\u09cb"
         ],
         [
-          "intertwined, entangled",
-          "\u099c\u09a1\u09bc\u09bf\u09af\u09bc\u09c7 \u09a5\u09be\u0995\u09be, \u09ae\u09bf\u09b2\u09bf\u09a4, \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4"
+          "- intertwined, entangled (\u099c\u09a1\u09bc\u09bf\u09af\u09bc\u09c7 \u09a5\u09be\u0995\u09be, \u09ae\u09bf\u09b2\u09bf\u09a4, \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4)\n- cohesive (\u098f\u0995\u09a4\u09cd\u09b0\u09bf\u09a4, \u09ae\u09bf\u09b2\u09bf\u09a4)",
+          ""
         ],
         [
           "intricate, complex",
@@ -1987,6 +2039,10 @@
         [
           "{fg:#ffffff;bg:#000000}invidious{/}, unpleasant",
           "\u0988\u09b0\u09cd\u09b7\u09be\u09a8\u09cd\u09ac\u09bf\u09a4, \u0995\u099f\u09c1\u09aa\u09cd\u09b0\u09af\u09bc\u09be\u09b8\u09aa\u09c2\u09b0\u09cd\u09a3"
+        ],
+        [
+          "irately",
+          "- \u09b0\u09c1\u09b7\u09cd\u099f\u09ad\u09be\u09ac\u09c7, \u0995\u09cd\u09b0\u09c1\u09a6\u09cd\u09a7\u09ad\u09be\u09ac\u09c7"
         ],
         [
           "Irk",
@@ -2253,6 +2309,10 @@
           "\u09aa\u099a\u09be, \u09a8\u09bf\u0995\u09c3\u09b7\u09cd\u099f, \u0997\u09a8\u09cd\u09a7\u09af\u09c1\u0995\u09cd\u09a4"
         ],
         [
+          "quaint",
+          "- **\u09ac\u09bf\u09b8\u09cd\u09ae\u09af\u09bc\u0995\u09b0**, **\u0985\u09a6\u09cd\u09ad\u09c1\u09a4**, \u0985\u09a8\u09ac\u09a6\u09cd\u09af"
+        ],
+        [
           "Quartz",
           "\u09b8\u09cd\u09ab\u099f\u09bf\u0995 (hard, crystalline mineral composed of silicon and oxygen)"
         ],
@@ -2317,6 +2377,10 @@
           "\u0989\u09aa\u09b9\u09be\u09b8 \u0995\u09b0\u09be, \u09a0\u09be\u099f\u09cd\u099f\u09be \u0995\u09b0\u09be, \u0985\u09ac\u09b9\u09c7\u09b2\u09be \u0995\u09b0\u09be "
         ],
         [
+          "scuttle",
+          "- \u09aa\u09be\u09b2\u09be\u09a8\u09cb\n- \u09aa\u09b0\u09bf\u09a4\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09be, \u09a7\u09cd\u09ac\u0982\u09b8 \u0995\u09b0\u09be, \u09ac\u09be\u09a4\u09bf\u09b2 \u0995\u09b0\u09be"
+        ],
+        [
           "{fg:#ffffff;bg:#000000}segregate{/}, separate",
           "\u09aa\u09c3\u09a5\u0995 \u0995\u09b0\u09be, \u0986\u09b2\u09be\u09a6\u09be \u0995\u09b0\u09be"
         ],
@@ -2369,6 +2433,10 @@
           "\u0989\u09a4\u09cd\u09a5\u09be\u09a8, \u09b9\u09a0\u09be\u09ce \u09ac\u09c7\u0997, \u09a6\u09cc\u09a1\u09bc \u09ae\u09be\u09b0\u09be"
         ],
         [
+          "stanch",
+          "- \u09b0\u0995\u09cd\u09a4\u09aa\u09be\u09a4 \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09be\n- \u09a5\u09be\u09ae\u09be\u09a8\u09cb, \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09be\n- \u09aa\u09cd\u09b0\u09a4\u09bf\u09b0\u09cb\u09a7 \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09a4\u09bf\u09b9\u09a4 \u0995\u09b0\u09be"
+        ],
+        [
           "starling",
           "\u098f\u0995 \u099c\u09be\u09a4\u09c0\u09df \u09aa\u09be\u0996\u09bf "
         ],
@@ -2405,7 +2473,7 @@
           "\u09a8\u09ae\u09a8\u09c0\u09df"
         ],
         [
-          "==susceptibility== (means the state of being likely to be influenced, affected, or harmed by something.)",
+          "==susceptibility== (means the state of being **__likely to be influenced__**, affected, or harmed by something.)",
           "\u09b8\u0982\u09ac\u09c7\u09a6\u09a8\u09b6\u09c0\u09b2\u09a4\u09be, \u09aa\u09cd\u09b0\u09ad\u09be\u09ac\u09aa\u09cd\u09b0\u09ac\u09a3\u09a4\u09be, \u099d\u09c1\u0981\u0995\u09bf\u09aa\u09cd\u09b0\u09ac\u09a3\u09a4\u09be, \u0995\u09cd\u09b7\u09a4\u09bf\u0997\u09cd\u09b0\u09b8\u09cd\u09a4 \u09b9\u0993\u09af\u09bc\u09be\u09b0 \u09b8\u09ae\u09cd\u09ad\u09be\u09ac\u09a8\u09be"
         ],
         [
@@ -2495,38 +2563,6 @@
         [
           "==Zealous==",
           "\u0989\u09ce\u09b8\u09be\u09b9\u09c0; \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0986\u0997\u09cd\u09b0\u09b9\u09b6\u09c0\u09b2"
-        ],
-        [
-          "euphemism",
-          "\u09b8\u09c1\u09a8\u09cd\u09a6\u09b0 \u09ad\u09be\u09b7\u09be \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0"
-        ],
-        [
-          "Belated = delayed beyond the usual time",
-          "\u09ac\u09bf\u09b2\u09ae\u09cd\u09ac\u09bf\u09a4, \u09a6\u09c7\u09b0\u09bf\u09a4\u09c7 \u0986\u09b8\u09be"
-        ],
-        [
-          "stanch",
-          "- \u09b0\u0995\u09cd\u09a4\u09aa\u09be\u09a4 \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09be\n- \u09a5\u09be\u09ae\u09be\u09a8\u09cb, \u09ac\u09a8\u09cd\u09a7 \u0995\u09b0\u09be\n- \u09aa\u09cd\u09b0\u09a4\u09bf\u09b0\u09cb\u09a7 \u0995\u09b0\u09be, \u09aa\u09cd\u09b0\u09a4\u09bf\u09b9\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "scuttle",
-          "- \u09aa\u09be\u09b2\u09be\u09a8\u09cb\n- \u09aa\u09b0\u09bf\u09a4\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09be, \u09a7\u09cd\u09ac\u0982\u09b8 \u0995\u09b0\u09be, \u09ac\u09be\u09a4\u09bf\u09b2 \u0995\u09b0\u09be"
-        ],
-        [
-          "bootleg",
-          "- \u099a\u09c1\u09b0\u09bf \u0995\u09b0\u09be, \u099a\u09cb\u09b0\u09be\u0987\n- \u09a8\u09bf\u09b7\u09bf\u09a6\u09cd\u09a7\u09ad\u09be\u09ac\u09c7 \u09a4\u09c8\u09b0\u09bf \u0995\u09b0\u09be \u09ac\u09be \u09ac\u09bf\u0995\u09cd\u09b0\u09bf \u0995\u09b0\u09be"
-        ],
-        [
-          "==belligerent==",
-          "- \u09af\u09c1\u09a6\u09cd\u09a7\u09b0\u09a4"
-        ],
-        [
-          "gallant\nintrepid",
-          "- \u09b8\u09be\u09b9\u09b8\u09c0, \u09a6\u09c1\u0983\u09b8\u09be\u09b9\u09b8\u09c0"
-        ],
-        [
-          "ardour",
-          "- \u0986\u0997\u09cd\u09b0\u09b9, \u0989\u09a4\u09cd\u09b8\u09be\u09b9, \u09ac\u09cd\u09af\u09be\u0995\u09c1\u09b2\u09a4\u09be"
         ]
       ]
     },
