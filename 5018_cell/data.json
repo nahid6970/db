@@ -1267,11 +1267,11 @@
     },
     {
       "cellStyles": {
-        "252-0": {
+        "251-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "327-0": {
+        "326-0": {
           "center": false
         }
       },
@@ -3169,7 +3169,11 @@
           "\u09b6\u09be\u09a8\u09cd\u09a4\u09bf\u09aa\u09cd\u09b0\u09bf\u09af\u09bc \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf, \u09af\u09c1\u09a6\u09cd\u09a7\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0"
         ],
         [
-          "- ambiguous, indistinct [\u0985\u09b8\u09cd\u09aa\u09b7\u09cd\u099f, \u0985\u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f]\n- murky, opaque, nebulous, hazy, haze, cloudy, oblique [\u0985\u09b8\u09cd\u09aa\u09b7\u09cd\u099f, \u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0\u09ae\u09af\u09bc, \u09a7\u09c2\u09b8\u09b0]\n- ==dubious== (\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u099c\u09a8\u0995, \u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09cd\u09af)",
+          "- ambiguous, indistinct [\u0985\u09b8\u09cd\u09aa\u09b7\u09cd\u099f, \u0985\u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f]\n- murky, ==opaque==, nebulous, hazy, haze, cloudy, ==oblique== [\u0985\u09b8\u09cd\u09aa\u09b7\u09cd\u099f, \u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0\u09ae\u09af\u09bc, \u09a7\u09c2\u09b8\u09b0]\n- ==dubious== (\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u099c\u09a8\u0995, \u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09cd\u09af)",
+          ""
+        ],
+        [
+          "- ==pragmatic== [\u09ac\u09be\u09b8\u09cd\u09a4\u09ac\u09ac\u09be\u09a6\u09c0, \u09ac\u09cd\u09af\u09ac\u09b9\u09be\u09b0\u09bf\u0995, \u0995\u09be\u09b0\u09cd\u09af\u09a8\u09bf\u09b7\u09cd\u09a0]\n- ??ant:?? idealistic\t",
           ""
         ]
       ]
