@@ -1267,11 +1267,11 @@
     },
     {
       "cellStyles": {
-        "254-0": {
+        "253-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "329-0": {
+        "328-0": {
           "center": false
         }
       },
@@ -1915,10 +1915,6 @@
         [
           "Fallow Land",
           "\u09aa\u09a4\u09bf\u09a4 \u099c\u09ae\u09bf"
-        ],
-        [
-          "farcical, absurd",
-          "\u09b9\u09be\u09b8\u09cd\u09af\u0995\u09b0, \u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995"
         ],
         [
           "==fathom==",
@@ -2605,8 +2601,8 @@
           "\u09b8\u09c1\u09b8\u09cd\u09ac\u09be\u09a6\u09c1, \u09ae\u09a8\u09cb\u0997\u09cd\u09b0\u09be\u09b9\u09c0"
         ],
         [
-          "scoof, jeer, fleer, deride, sneer, ridicule, taunt, mock",
-          "\u0989\u09aa\u09b9\u09be\u09b8 \u0995\u09b0\u09be, \u09a0\u09be\u099f\u09cd\u099f\u09be \u0995\u09b0\u09be, \u0985\u09ac\u09b9\u09c7\u09b2\u09be \u0995\u09b0\u09be "
+          "- scoof, jeer, fleer, deride, sneer, ridicule, taunt, mock [\u0989\u09aa\u09b9\u09be\u09b8 \u0995\u09b0\u09be, \u09a0\u09be\u099f\u09cd\u099f\u09be \u0995\u09b0\u09be, \u0985\u09ac\u09b9\u09c7\u09b2\u09be \u0995\u09b0\u09be ]\n- satir [\u09ac\u09cd\u09af\u0999\u09cd\u0997, \u0989\u09aa\u09b9\u09be\u09b8, \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0]\n- vituperate (\u09b9\u09c7\u09df \u0995\u09b0\u09be; \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be)\n- farcical, absurd [\u09b9\u09be\u09b8\u09cd\u09af\u0995\u09b0, \u09ac\u09cd\u09af\u0999\u09cd\u0997\u09be\u09a4\u09cd\u09ae\u0995]",
+          ""
         ],
         [
           "scuttle",
@@ -2897,10 +2893,6 @@
           "\u09b8\u09ce, \u09b8\u09a6\u0997\u09c1\u09a3\u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8, \u09a7\u09be\u09b0\u09cd\u09ae\u09bf\u0995"
         ],
         [
-          "vituperate (\u09b9\u09c7\u09df \u0995\u09b0\u09be; \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0995\u09b0\u09be)",
-          ""
-        ],
-        [
           "vivid, luminous (\u0989\u099c\u09cd\u099c\u09cd\u09ac\u09b2)",
           "\u099c\u09c0\u09ac\u09a8\u09cd\u09a4, \u09b8\u09cd\u09aa\u09b7\u09cd\u099f, \u0989\u099c\u09cd\u099c\u09cd\u09ac\u09b2"
         ],
@@ -3081,8 +3073,8 @@
           ""
         ],
         [
-          "satir",
-          "\u09ac\u09cd\u09af\u0999\u09cd\u0997, \u0989\u09aa\u09b9\u09be\u09b8, \u09a4\u09bf\u09b0\u09b8\u09cd\u0995\u09be\u09b0"
+          "- unruly, mutinous [\u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9\u09c0]\n- recalcitrant [\u0985\u09ac\u09be\u09a7\u09cd\u09af, \u09a8\u09bf\u09af\u09bc\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u09b9\u09c0\u09a8, \u09a6\u09ae\u09a8\u09b6\u09c0\u09b2 \u09a8\u09af\u09bc \u098f\u09ae\u09a8]",
+          ""
         ]
       ]
     },
