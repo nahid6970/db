@@ -1267,11 +1267,11 @@
     },
     {
       "cellStyles": {
-        "247-0": {
+        "246-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "321-0": {
+        "320-0": {
           "center": false
         }
       },
@@ -2067,10 +2067,6 @@
         [
           "illusive",
           "- \u09ae\u09be\u09af\u09bc\u09be\u09ae\u09af\u09bc, \u09aa\u09cd\u09b0\u09a4\u09be\u09b0\u09a3\u09be\u09ae\u09c2\u09b2\u0995"
-        ],
-        [
-          "",
-          ""
         ],
         [
           "immaculate",
@@ -3262,6 +3258,14 @@
         ],
         [
           "Symphony [\u09b8\u09c1\u09b0]\ncomposer [\u09b8\u09c1\u09b0\u0995\u09be\u09b0]",
+          ""
+        ],
+        [
+          "==##plagiarism##==",
+          "\u099a\u09c1\u09b0\u09bf, \u09b2\u09c7\u0996\u09be\u099a\u09c1\u09b0\u09bf"
+        ],
+        [
+          "- jinx [**\u09a6\u09c1\u09b0\u09cd\u09ad\u09be\u0997\u09cd\u09af, \u09ae\u09a8\u09cd\u09a6 \u0995\u09aa\u09be\u09b2**, \u09a6\u09c1\u09b0\u09cd\u09ad\u09be\u0997\u09cd\u09af\u09a6\u09be\u09af\u09bc\u0995 \u09ac\u09b8\u09cd\u09a4\u09c1, \u0985\u09aa\u09df\u09be \u09b2\u09cb\u0995]\n- hex [**\u09a6\u09c1\u09b0\u09cd\u09ad\u09be\u0997\u09cd\u09af\u09c7\u09b0 \u0995\u09be\u09b0\u09a3**, \u09af\u09be\u09a6\u09c1\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0]",
           ""
         ]
       ]
