@@ -1321,7 +1321,7 @@
           "\u09b8\u0982\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4  \u0995\u09b0\u09be, \u0995\u09ae\u09be\u09a8\u09cb"
         ],
         [
-          "abscond, flee",
+          "==abscond==, flee",
           "\u0997\u09cb\u09aa\u09a8\u09c7 \u09aa\u09be\u09b2\u09be\u09a8\u09cb"
         ],
         [
@@ -3097,7 +3097,7 @@
           "\u09ac\u09b0\u09cd\u09a4\u09ae\u09be\u09a8 \u0995\u09b0\u09cd\u09ae\u0995\u09b0\u09cd\u09a4\u09be, \u0995\u09b0\u09cd\u09a4\u09ac\u09cd\u09af\u09aa\u09cd\u09b0\u09be\u09aa\u09cd\u09a4, \u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995"
         ],
         [
-          "- lumberjack [\u0995\u09be\u09a0\u09c1\u09b0\u09c7, \u0995\u09be\u09a0\u09c1\u09b0\u09c7 \u09b6\u09cd\u09b0\u09ae\u09bf\u0995]\n-- ..A person who cuts down trees and prepares timber..\n- carpenter [\u0995\u09be\u09a0\u09ae\u09bf\u09b8\u09cd\u09a4\u09cd\u09b0\u09bf]\n-- ..Someone who builds or repairs wooden structures..",
+          "- carpenter [\u0995\u09be\u09a0\u09ae\u09bf\u09b8\u09cd\u09a4\u09cd\u09b0\u09bf]\n-- ..Someone who builds or repairs wooden structures..\n- lumberjack [\u0995\u09be\u09a0\u09c1\u09b0\u09c7, \u0995\u09be\u09a0\u09c1\u09b0\u09c7 \u09b6\u09cd\u09b0\u09ae\u09bf\u0995]\n-- ..A person who cuts down trees and prepares timber..",
           ""
         ],
         [
@@ -3295,6 +3295,14 @@
         [
           "mare",
           "\u0998\u09cb\u09a1\u09bc\u09be, \u0998\u09c1\u09a1\u09bc\u09c0, \u0998\u09c7\u09be\u099f\u0995\u09c0"
+        ],
+        [
+          "gulp",
+          "\u0997\u09bf\u09b2\u09c7 \u09ab\u09c7\u09b2\u09be"
+        ],
+        [
+          "observe",
+          "\u09aa\u09b0\u09cd\u09af\u09ac\u09c7\u0995\u09cd\u09b7\u09a3 \u0995\u09b0\u09be, \u09aa\u09be\u09b2\u09a8 \u0995\u09b0\u09be, \u09ae\u09be\u09a8\u09cd\u09af \u0995\u09b0\u09be"
         ]
       ]
     },
