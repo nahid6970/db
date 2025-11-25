@@ -7359,5 +7359,29 @@
     "top_name": "\ud83e\udd16",
     "top_text_color": "#ffffff",
     "url": "https://github.com/musistudio/claude-code-router"
+  },
+  {
+    "name": "QuickForm - Autofill Forms Quickly",
+    "group": "chrome_ext",
+    "url": "https://chromewebstore.google.com/detail/quickform-autofill-forms/hmbnbbbknglecphfogchkhpdjiodfclh",
+    "img_src": "https://lh3.googleusercontent.com/k0EXYLuUWWqu-aoFF0n4EeR2KKLS2bUR6X2HIdietGZu47BdJjvZpa1sgs8M0DDxuCoIcUfUoZgTeJpYP2OjI_WD=s60",
+    "default_type": "img",
+    "click_action": "url-1",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "red"
   }
 ]
