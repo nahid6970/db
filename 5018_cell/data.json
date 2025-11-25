@@ -1273,6 +1273,9 @@
         },
         "320-0": {
           "center": false
+        },
+        "502-0": {
+          "bold": false
         }
       },
       "columns": [
@@ -3319,6 +3322,10 @@
         [
           "dissent",
           "\u0986\u09aa\u09a4\u09cd\u09a4\u09bf, \u09ad\u09bf\u09a8\u09cd\u09a8\u09ae\u09a4 \u09aa\u09cb\u09b7\u09a3 \u0995\u09b0\u09be"
+        ],
+        [
+          "assert",
+          "**\u099c\u09cb\u09b0 \u09a6\u09bf\u09af\u09bc\u09c7 \u09ac\u09b2\u09be, \u09a6\u09be\u09ac\u09bf \u0995\u09b0\u09be**, \u09a6\u09c3\u09a2\u09bc\u09b0\u09c2\u09aa\u09c7 \u0998\u09c7\u09be\u09b7\u09a3\u09be \u0995\u09b0\u09be"
         ]
       ]
     },
