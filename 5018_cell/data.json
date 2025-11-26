@@ -1,5 +1,5 @@
 {
-  "activeSheet": 3,
+  "activeSheet": 36,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -7280,18 +7280,18 @@
           "width": "150"
         },
         {
+          "name": "Meaning",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "Meaning",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "Phrase & Idoms",
