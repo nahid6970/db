@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "146-0": {
+        "145-0": {
           "bold": false
         },
-        "335-0": {
+        "334-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "431-0": {
+        "430-0": {
           "center": false
         }
       },
@@ -1334,10 +1334,6 @@
         [
           "accommodating, ==benign==",
           "**\u09a6\u09af\u09bc\u09be\u09b2\u09c1**, \u09b8\u09b9\u09be\u09a8\u09c1\u09ad\u09c2\u09a4\u09bf\u09b6\u09c0\u09b2, \u0985\u09ae\u09be\u09af\u09bc\u09bf\u0995, \u09b8\u09a6\u09af\u09bc"
-        ],
-        [
-          "achillesheel (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2 \u09b8\u09cd\u09a5\u09be\u09a8), Achilles \u098f\u09b0 \u0997\u09cb\u09a1\u09bc\u09be\u09b2\u09bf, weakness",
-          ""
         ],
         [
           "acme, zenith, pinnacle, ==summit==",
@@ -7297,8 +7293,8 @@
       "name": "Phrase & Idoms",
       "rows": [
         [
-          "Achilles heel",
-          "a weak point"
+          "Achilles heel [a weak point]\n- achillesheel (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2 \u09b8\u09cd\u09a5\u09be\u09a8)\n- Achilles \u098f\u09b0 \u0997\u09cb\u09a1\u09bc\u09be\u09b2\u09bf, weakness",
+          ""
         ],
         [
           "As is the evil, so is the **remedy**",
