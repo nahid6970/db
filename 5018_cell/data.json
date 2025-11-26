@@ -1280,32 +1280,32 @@
       },
       "columns": [
         {
-          "name": "Word",
-          "type": "text",
-          "width": "250",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#000000",
-          "headerTextColor": "#ffffff",
           "headerBold": true,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerCenter": true
+          "headerTextColor": "#ffffff",
+          "name": "Word",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "250"
         },
         {
-          "name": "Meaning",
-          "type": "text",
-          "width": "150",
           "color": "#d6f5d7",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#0f0f0f",
-          "headerTextColor": "#ffffff",
           "headerBold": true,
+          "headerCenter": true,
           "headerItalic": false,
-          "headerCenter": true
+          "headerTextColor": "#ffffff",
+          "name": "Meaning",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "mergedCells": {},
@@ -3496,7 +3496,7 @@
           "\u09aa\u09b0\u09ae \u0986\u09a8\u09a8\u09cd\u09a6\u09a6\u09be\u09df\u0995"
         ],
         [
-          "==candid==, frank",
+          "==candid==, candor, frank, frankness",
           "\u09b8\u09b0\u09b2"
         ],
         [
@@ -3561,6 +3561,46 @@
         ],
         [
           "Cut and Dry, Already decided",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
           ""
         ]
       ]
