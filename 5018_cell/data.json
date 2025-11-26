@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "173-0": {
+        "159-0": {
           "bold": false
         },
-        "373-0": {
+        "361-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "474-0": {
+        "462-0": {
           "center": false
         }
       },
@@ -1312,67 +1312,19 @@
       "name": "Word-Meaning",
       "rows": [
         [
-          "Magnanimous, Generous",
-          ""
+          "RABBLE, Mob",
+          "\u099c\u09a8\u09a4\u09be\u09b0 \u09ad\u09bf\u09a1\u09bc"
         ],
         [
-          "==foray==, ==Maraud==",
-          "\u0986\u0995\u09cd\u09b0\u09ae\u09a3 \u0995\u09b0\u09be"
+          "==FURORE==, Excitement",
+          "\u0989\u09a8\u09cd\u09ae\u09be\u09a6\u09a8\u09be, \u0989\u09ce\u09b8\u09be\u09b9"
         ],
         [
-          "",
-          ""
+          "GRATIFY, Pacify",
+          "\u09a4\u09c1\u09b7\u09cd\u099f \u0995\u09b0\u09be, \u09b6\u09be\u09a8\u09cd\u09a4 \u0995\u09b0\u09be"
         ],
         [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
+          "SCINTILLATING, Glittering",
           ""
         ],
         [
@@ -1438,10 +1390,6 @@
         [
           "Adjudicate",
           "\u09b8\u09bf\u09a6\u09cd\u09a7\u09be\u09a8\u09cd\u09a4 \u09a6\u09c7\u0993\u09df\u09be"
-        ],
-        [
-          "",
-          ""
         ],
         [
           "adore",
@@ -1569,10 +1517,6 @@
         ],
         [
           "assorted [\u09ac\u09c8\u099a\u09bf\u09a4\u09cd\u09b0\u09cd\u09af\u09ae\u09af\u09bc]\n??syn:?? sparkling\n!!ant:!! dull, dismal",
-          ""
-        ],
-        [
-          "",
           ""
         ],
         [
@@ -1936,7 +1880,7 @@
           "\u09a8\u09cd\u09af\u09be\u09df\u09b8\u09ae\u09cd\u09ae\u09a4\u09ad\u09be\u09ac\u09c7; \u0986\u0987\u09a8\u09a4"
         ],
         [
-          "==dearth==, deprivation, ==impecunious==, ==indigent==, ==pauperism==, ==penury==, poverty, ==privation==, ==Destitute==",
+          "==dearth==, deprivation, ==impecunious==, ==indigent==, ==pauperism==, ==penury==, poverty, ==privation==, ==Destitute==\n- Wretched, Poor [\u09b9\u09a4\u09ad\u09be\u0997\u09cd\u09af, \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0]",
           "\u09a6\u09be\u09b0\u09bf\u09a6\u09cd\u09b0\u09cd\u09af, \u09a6\u09b0\u09bf\u09a6\u09cd\u09b0, \u0985\u09ad\u09be\u09ac\u0997\u09cd\u09b0\u09b8\u09cd\u09a5, \u0998\u09be\u099f\u09a4\u09bf, \u09b8\u0982\u0995\u099f"
         ],
         [
@@ -2246,6 +2190,10 @@
         [
           "foment",
           ""
+        ],
+        [
+          "==foray==, ==Maraud==",
+          "\u0986\u0995\u09cd\u09b0\u09ae\u09a3 \u0995\u09b0\u09be"
         ],
         [
           "Foreigner\nAlien",
@@ -2610,6 +2558,10 @@
         [
           "Loquacity",
           "\u09ac\u09be\u0995\u09aa\u099f\u09c1\u09a4\u09be; \u09ac\u09be\u099a\u09be\u09b2-\u09b8\u09cd\u09ac\u09ad\u09be\u09ac"
+        ],
+        [
+          "Magnanimous, Generous",
+          ""
         ],
         [
           "magnificent; splendid",
