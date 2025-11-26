@@ -7262,32 +7262,32 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "Phrase / Idioms",
-          "type": "text",
-          "width": "150",
           "color": "#85ffb4",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Phrase / Idioms",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "Meaning",
-          "type": "text",
-          "width": "150",
           "color": "#f6ffb3",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "Meaning",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "Phrase & Idoms",
@@ -7787,6 +7787,10 @@
         [
           "no use crying over spilt milk, bygones be bygones, ==Let the dead past bury its dead==",
           "\u0985\u09a4\u09c0\u09a4 \u09a8\u09bf\u09af\u09bc\u09c7 \u09a6\u09c1\u0983\u0996 \u0995\u09b0\u09c7 \u09b2\u09be\u09ad \u09a8\u09c7\u0987, \u0985\u09a4\u09c0\u09a4\u0995\u09c7 \u09ad\u09c1\u09b2\u09c7 \u098f\u0997\u09bf\u09af\u09bc\u09c7 \u099a\u09b2\u09be"
+        ],
+        [
+          "==Many a little makes a mickle==, ==Many a penny makes a pound==, Drops of water make an ocean",
+          "\u099b\u09cb\u099f \u099b\u09cb\u099f \u099c\u09bf\u09a8\u09bf\u09b8 \u098f\u0995\u09a4\u09cd\u09b0 \u0995\u09b0\u09b2\u09c7 \u09ac\u09a1\u09bc \u09b9\u09af\u09bc, \u09a6\u09b6\u09c7\u09b0 \u09b2\u09be\u09a0\u09bf \u098f\u0995\u09c7\u09b0 \u09ac\u09cb\u099d\u09be"
         ]
       ]
     },
