@@ -7455,5 +7455,16 @@
     "horizontal_text_color": "#ffffff",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "red"
+  },
+  {
+    "name": "pngegg",
+    "group": "Powerful Website",
+    "url": "https://www.pngegg.com/",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAt0lEQVR4AZTRAQaGQBCG4YWO8P8EOk13CUh0lQ7QdVIAdYVWEFDANOWTNT6txSPamZdaJyKPsWhCf9WrDXq8c/DusUCuvBLD4ywaWLDAzLFAxRaN6iuwxQKYoYGSLnAlC3Rk8AQxOhYYzFCtflCbs4EFvFl2IRPxLHAowdMx4QwL7AmBnQWmhE+YWKBN+IktC2RqjV0jZjIWuF1TBeLHuBIQVE6VUGbiAeJGaJi8A2Eouwkkh56ZAPWfPRdt6B1NAAAAAElFTkSuQmCC",
+    "default_type": "img",
+    "click_action": "url-1",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   }
 ]
