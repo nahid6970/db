@@ -1280,32 +1280,32 @@
       },
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "25",
-          "headerBgColor": "#000000",
-          "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": false,
-          "headerTextColor": "#ffffff",
           "name": "Word",
-          "textColor": "#000000",
           "type": "text",
-          "width": "250"
+          "width": "250",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#000000",
+          "headerTextColor": "#ffffff",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": true
         },
         {
-          "color": "#d6f5d7",
-          "font": "JetBrains Mono",
-          "fontSize": "25",
-          "headerBgColor": "#0f0f0f",
-          "headerBold": true,
-          "headerCenter": true,
-          "headerItalic": false,
-          "headerTextColor": "#ffffff",
           "name": "Meaning",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#d6f5d7",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#0f0f0f",
+          "headerTextColor": "#ffffff",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": true
         }
       ],
       "mergedCells": {},
@@ -3554,6 +3554,10 @@
         [
           "COMMENSURATE, ~~Proportionate~~/appropriate ??",
           ""
+        ],
+        [
+          "Accolade, Honor",
+          "\u09aa\u09c1\u09b0\u09b8\u09cd\u0995\u09be\u09b0"
         ]
       ]
     },
