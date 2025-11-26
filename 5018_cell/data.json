@@ -1267,10 +1267,10 @@
     },
     {
       "cellStyles": {
-        "159-0": {
+        "155-0": {
           "bold": false
         },
-        "361-0": {
+        "359-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
@@ -1311,22 +1311,6 @@
       "mergedCells": {},
       "name": "Word-Meaning",
       "rows": [
-        [
-          "RABBLE, Mob",
-          "\u099c\u09a8\u09a4\u09be\u09b0 \u09ad\u09bf\u09a1\u09bc"
-        ],
-        [
-          "==FURORE==, Excitement",
-          "\u0989\u09a8\u09cd\u09ae\u09be\u09a6\u09a8\u09be, \u0989\u09ce\u09b8\u09be\u09b9"
-        ],
-        [
-          "GRATIFY, Pacify",
-          "\u09a4\u09c1\u09b7\u09cd\u099f \u0995\u09b0\u09be, \u09b6\u09be\u09a8\u09cd\u09a4 \u0995\u09b0\u09be"
-        ],
-        [
-          "==SCINTILLATING==, Glittering",
-          ""
-        ],
         [
           "==abate==, diminish, ==dwindle==",
           "\u09b9\u09cd\u09b0\u09be\u09b8, \u0995\u09ae\u09be\u09a8\u09cb"
@@ -2232,6 +2216,10 @@
           "\u09b8\u09be\u099c\u09b8\u099c\u09cd\u099c\u09be \u0995\u09b0\u09be, \u09b8\u09b0\u09ac\u09b0\u09be\u09b9 \u0995\u09b0\u09be"
         ],
         [
+          "==FURORE==, Excitement",
+          "\u0989\u09a8\u09cd\u09ae\u09be\u09a6\u09a8\u09be, \u0989\u09ce\u09b8\u09be\u09b9"
+        ],
+        [
           "==gallant==\n==intrepid==",
           "- \u09b8\u09be\u09b9\u09b8\u09c0, \u09a6\u09c1\u0983\u09b8\u09be\u09b9\u09b8\u09c0"
         ],
@@ -2270,6 +2258,10 @@
         [
           "graphic; pictorial",
           ""
+        ],
+        [
+          "GRATIFY, Pacify",
+          "\u09a4\u09c1\u09b7\u09cd\u099f \u0995\u09b0\u09be, \u09b6\u09be\u09a8\u09cd\u09a4 \u0995\u09b0\u09be"
         ],
         [
           "Greek to",
@@ -3040,6 +3032,10 @@
           "\u09ae\u09c2\u09b2\u09cd\u09af\u099c\u09cd\u099e\u09be\u09aa\u09a8"
         ],
         [
+          "RABBLE, Mob",
+          "\u099c\u09a8\u09a4\u09be\u09b0 \u09ad\u09bf\u09a1\u09bc"
+        ],
+        [
           "ransack, rummage",
           "**\u09b2\u09c1\u099f\u09aa\u09be\u099f \u0995\u09b0\u09be**, **\u09a4\u099b\u09a8\u099b \u0995\u09b0\u09be**, \u0996\u09c1\u0981\u099f\u09bf\u09af\u09bc\u09c7 \u0996\u09c1\u0981\u099c\u09c7 \u09a6\u09c7\u0996\u09be, \u0996\u09c1\u0981\u09a1\u09bc\u0996\u09c1\u0981\u09a1\u09bc\u09c7 \u09a6\u09c7\u0996\u09be"
         ],
@@ -3142,6 +3138,10 @@
         [
           "savory",
           "\u09b8\u09c1\u09b8\u09cd\u09ac\u09be\u09a6\u09c1, \u09ae\u09a8\u09cb\u0997\u09cd\u09b0\u09be\u09b9\u09c0"
+        ],
+        [
+          "==SCINTILLATING==, Glittering",
+          ""
         ],
         [
           "scuttle",
