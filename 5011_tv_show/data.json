@@ -3064,5 +3064,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 41,
+        "title": "Stranger Things",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Stranger Things",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Stranger Things - S05E01 - Chapter One - The Crawl WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-27T10:10:08.482740",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
