@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "168-0": {
+        "159-0": {
           "bold": false
         },
-        "383-0": {
+        "377-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "489-0": {
+        "483-0": {
           "center": false
         }
       },
@@ -1311,22 +1311,6 @@
       "mergedCells": {},
       "name": "Word-Meaning",
       "rows": [
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
         [
           "ABERRATION",
           "\u09ac\u09bf\u09aa\u09a5\u09c7 \u099a\u09b2\u09c7 \u09af\u09be\u0993\u09df\u09be"
@@ -1758,6 +1742,10 @@
         [
           "Concatenate \u09b6\u09cd\u09b0\u09c7\u09a3\u09c0\u09ac\u09a6\u09cd\u09a7 \u0995\u09b0\u09be \u09b8\u0982\u09af\u09c1\u0995\u09cd\u09a4 \u0995\u09b0\u09be",
           "link (things) together in a chain or series"
+        ],
+        [
+          "- ==concede== [\u09b8\u09cd\u09ac\u09c0\u0995\u09be\u09b0 \u0995\u09b0\u09be, \u09ae\u09c7\u09a8\u09c7 \u09a8\u09c7\u0993\u09df\u09be]\n!!ant!!\n- refuse",
+          ""
         ],
         [
           "concord, harmony",
@@ -2208,6 +2196,10 @@
           ""
         ],
         [
+          "- fickle [\u099a\u099e\u09cd\u099a\u09b2, **\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8\u09b6\u09c0\u09b2**, **\u09a6\u09be\u09af\u09bc\u09bf\u09a4\u09cd\u09ac\u09b9\u09c0\u09a8**, \u0996\u09be\u09ae\u0996\u09c7\u09af\u09bc\u09be\u09b2\u09c0]\n!!ant!!\n- steadfast [\u0985\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8\u09b6\u09c0\u09b2]",
+          ""
+        ],
+        [
           "fidelity, loyalty",
           "\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09af\u09cb\u0997\u09cd\u09af\u09a4\u09be, \u09ac\u09bf\u09b6\u09cd\u09ac\u09b8\u09cd\u09a4\u09a4\u09be, \u0986\u09a8\u09c1\u0997\u09a4\u09cd\u09af"
         ],
@@ -2448,6 +2440,10 @@
           "\u09a8\u09bf\u0996\u09c1\u0981\u09a4, \u0995\u09b2\u0999\u09cd\u0995\u09b9\u09c0\u09a8, \u09a8\u09bf\u09b0\u09cd\u09ae\u09b2"
         ],
         [
+          "- ==impasse== [\u0985\u099a\u09b2\u09be\u09ac\u09b8\u09cd\u09a5\u09be]\n!!ant!!\n- Breakthrough",
+          ""
+        ],
+        [
           "==impede==, hinder",
           "\u09ac\u09be\u09a7\u09be \u09a6\u09c7\u0993\u09df\u09be, \u09ac\u09cd\u09af\u09be\u09b9\u09a4 \u0995\u09b0\u09be"
         ],
@@ -2481,6 +2477,10 @@
         ],
         [
           "- ==indorse==, ==ratify==, sanction, ==corroborate==, certify, validate [\u09b8\u09ae\u09b0\u09cd\u09a5\u09a8 \u0995\u09b0\u09be, \u0985\u09a8\u09c1\u09ae\u09cb\u09a6\u09a8 \u0995\u09b0\u09be]\n-----\n- sanction [\u0985\u09a8\u09c1\u09ae\u09cb\u09a6\u09a8, \u0985\u09a8\u09c1\u09ae\u09a4\u09bf \u09ac\u09be \u09b6\u09be\u09b8\u09cd\u09a4\u09bf (\u09aa\u09cd\u09b0\u09b8\u0999\u09cd\u0997 \u0985\u09a8\u09c1\u09af\u09be\u09af\u09bc\u09c0)]",
+          ""
+        ],
+        [
+          "- industrious [\u09aa\u09b0\u09bf\u09b6\u09cd\u09b0\u09ae\u09c0]\n!!ant!!\n- indolent",
           ""
         ],
         [
