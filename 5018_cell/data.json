@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "170-0": {
+        "171-0": {
           "bold": false
         },
-        "379-0": {
+        "386-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "483-0": {
+        "491-0": {
           "center": false
         }
       },
@@ -1312,43 +1312,43 @@
       "name": "Word-Meaning",
       "rows": [
         [
-          "- ==exodus== [\u098f\u0995\u09b8\u09be\u09a5\u09c7 \u0985\u09a8\u09c7\u0995 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 **__\u09ac\u09b9\u09bf\u09b0\u09cd\u0997\u09ae\u09a8__**]\n!!ant:!!\n- ==influx==",
+          "Flippant [\u09ac\u09be\u099a\u09be\u09b2, \u09ab\u09be\u099c\u09bf\u09b2]",
           ""
         ],
         [
-          "congest [\u09af\u09be\u09a8\u099c\u099f, \u09ad\u09bf\u09a1\u09bc \u0995\u09b0\u09be\u09a8]",
+          "==EQUANIMITY== [\u09ae\u09a8\u09c7\u09b0 \u09b6\u09be\u09a8\u09cd\u09a4\u09bf, \u09b8\u09ae\u09a4\u09be, \u09ae\u09a8\u09c7\u09b0 \u09b8\u09cd\u09a5\u09bf\u09b0\u09a4\u09be]",
           ""
         ],
         [
-          "- ==flagitious== [**\u0997\u09b0\u09cd\u09b9\u09bf\u09a4** \u0995\u09be\u099c, \u0995\u09b2\u09c1\u09b7\u09bf\u09a4, \u0998\u09cb\u09b0, **\u09aa\u09be\u09b7\u09a3\u09cd\u09a1**]\n!!ant:!!\n- Innocent",
+          "",
           ""
         ],
         [
-          "==Exaggerate== [\u09ac\u09be\u09a1\u09bc\u09be\u09ac\u09be\u09a1\u09bc\u09bf \u0995\u09b0\u09be]",
+          "",
           ""
         ],
         [
-          "Exaggerate [\u09ac\u09be\u09a1\u09bc\u09be\u09ac\u09be\u09a1\u09bc\u09bf \u0995\u09b0\u09be]\n-----\naggravate [\u09a4\u09c0\u09ac\u09cd\u09b0, \u09aa\u09cd\u09b0\u09ac\u09b2, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4, \u09ac\u09be\u09a1\u09bc\u09be\u09a8\u09cb]\n-----\nextravagant [\u0985\u09aa\u09ac\u09cd\u09af\u09af\u09bc\u09c0]",
+          "",
           ""
         ],
         [
-          "- ==GREGARIOUS==, extrovert [==\u09ae\u09bf\u09b6\u09c1\u0995==, \u09ac\u09a8\u09cd\u09a7\u09c1\u09b8\u09c1\u09b2\u09ad]\n!!ant:!!\n- Antisocial",
+          "",
           ""
         ],
         [
-          "urbane [\u09ae\u09be\u09b0\u09cd\u099c\u09bf\u09a4]",
+          "",
           ""
         ],
         [
-          "==vanity== [\u0986\u09a4\u09cd\u09ae\u0997\u09b0\u09cd\u09ac, **\u0985\u09b9\u0982\u0995\u09be\u09b0**]",
+          "",
           ""
         ],
         [
-          "- epilogue [\u0989\u09aa\u09b8\u0982\u09b9\u09be\u09b0]\n!!ant!!\n- prelude, preamble",
+          "",
           ""
         ],
         [
-          "- SACROSANCT [\u0985\u09a4\u09bf \u09aa\u09ac\u09bf\u09a4\u09cd\u09b0]\n!!ant:!!\n- Unholy\n- sanctimonious [\u09ad\u09a3\u09cd\u09a1\u09be\u09ae\u09bf\u09aa\u09c2\u09b0\u09cd\u09a3, \u09a7\u09b0\u09cd\u09ae\u09a7\u09cd\u09ac\u099c\u09c0]",
+          "",
           ""
         ],
         [
@@ -1816,6 +1816,10 @@
           "\u09ae\u09c7\u09a8\u09c7 \u099a\u09b2\u09be"
         ],
         [
+          "congest [\u09af\u09be\u09a8\u099c\u099f, \u09ad\u09bf\u09a1\u09bc \u0995\u09b0\u09be\u09a8]",
+          ""
+        ],
+        [
           "Congruous ..[in agreement or harmony]..",
           ""
         ],
@@ -2140,6 +2144,10 @@
           "\u0995\u09cd\u09b7\u09a3\u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0, \u0985\u09b8\u09cd\u09a5\u09be\u09af\u09bc\u09c0"
         ],
         [
+          "- epilogue [\u0989\u09aa\u09b8\u0982\u09b9\u09be\u09b0]\n!!ant!!\n- prelude, preamble",
+          ""
+        ],
+        [
           "equity",
           "**\u09a8\u09cd\u09af\u09be\u09af\u09cd\u09af\u09a4\u09be**, **\u09b8\u09be\u09ae\u09cd\u09af**, \u09a8\u09cd\u09af\u09be\u09af\u09bc\u09aa\u09b0\u09be\u09af\u09bc\u09a3\u09a4\u09be"
         ],
@@ -2168,8 +2176,20 @@
           "\u09a4\u09c0\u09ac\u09cd\u09b0 \u0995\u09b0\u09be, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4, \u0996\u09be\u09b0\u09be\u09aa \u0995\u09b0\u09be, \u0995\u09b0\u09be"
         ],
         [
+          "==Exaggerate== [\u09ac\u09be\u09a1\u09bc\u09be\u09ac\u09be\u09a1\u09bc\u09bf \u0995\u09b0\u09be]",
+          ""
+        ],
+        [
+          "Exaggerate [\u09ac\u09be\u09a1\u09bc\u09be\u09ac\u09be\u09a1\u09bc\u09bf \u0995\u09b0\u09be]\n-----\naggravate [\u09a4\u09c0\u09ac\u09cd\u09b0, \u09aa\u09cd\u09b0\u09ac\u09b2, \u0989\u09a4\u09cd\u09a4\u09c7\u099c\u09bf\u09a4, \u09ac\u09be\u09a1\u09bc\u09be\u09a8\u09cb]\n-----\nextravagant [\u0985\u09aa\u09ac\u09cd\u09af\u09af\u09bc\u09c0]",
+          ""
+        ],
+        [
           "==excerpt==",
           "\u0989\u09a6\u09cd\u09a7\u09c3\u09a4\u09bf, \u0985\u0982\u09b6\u09ac\u09bf\u09b6\u09c7\u09b7"
+        ],
+        [
+          "- ==exodus== [\u098f\u0995\u09b8\u09be\u09a5\u09c7 \u0985\u09a8\u09c7\u0995 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 **__\u09ac\u09b9\u09bf\u09b0\u09cd\u0997\u09ae\u09a8__**]\n!!ant:!!\n- ==influx==",
+          ""
         ],
         [
           "exonerate, absolve, Acquit, Acquittal",
@@ -2218,6 +2238,10 @@
         [
           "fidelity, loyalty",
           "\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09af\u09cb\u0997\u09cd\u09af\u09a4\u09be, \u09ac\u09bf\u09b6\u09cd\u09ac\u09b8\u09cd\u09a4\u09a4\u09be, \u0986\u09a8\u09c1\u0997\u09a4\u09cd\u09af"
+        ],
+        [
+          "- ==flagitious== [**\u0997\u09b0\u09cd\u09b9\u09bf\u09a4** \u0995\u09be\u099c, \u0995\u09b2\u09c1\u09b7\u09bf\u09a4, \u0998\u09cb\u09b0, **\u09aa\u09be\u09b7\u09a3\u09cd\u09a1**]\n!!ant:!!\n- Innocent",
+          ""
         ],
         [
           "==florid==",
@@ -2330,6 +2354,10 @@
         [
           "Greek to",
           "\u0985\u099c\u09be\u09a8\u09be"
+        ],
+        [
+          "- ==GREGARIOUS==, extrovert [==\u09ae\u09bf\u09b6\u09c1\u0995==, \u09ac\u09a8\u09cd\u09a7\u09c1\u09b8\u09c1\u09b2\u09ad]\n!!ant:!!\n- Antisocial",
+          ""
         ],
         [
           "- grotesque [ugly or distorted]\n!!ant:!!\n- Decent",
@@ -3204,6 +3232,10 @@
           "- \u09ac\u09cd\u09af\u09be\u0997, \u09ac\u09b8\u09cd\u09a4\u09be\n- \u099a\u09be\u0995\u09b0\u09bf \u09a5\u09c7\u0995\u09c7 \u09ac\u09b0\u0996\u09be\u09b8\u09cd\u09a4 \u0995\u09b0\u09be\n- \u09a7\u09cd\u09ac\u0982\u09b8 \u0995\u09b0\u09be, \u09b2\u09c1\u099f\u09aa\u09be\u099f \u0995\u09b0\u09be\n- finish or defeat someone/thing"
         ],
         [
+          "- SACROSANCT [\u0985\u09a4\u09bf \u09aa\u09ac\u09bf\u09a4\u09cd\u09b0]\n!!ant:!!\n- Unholy\n- sanctimonious [\u09ad\u09a3\u09cd\u09a1\u09be\u09ae\u09bf\u09aa\u09c2\u09b0\u09cd\u09a3, \u09a7\u09b0\u09cd\u09ae\u09a7\u09cd\u09ac\u099c\u09c0]",
+          ""
+        ],
+        [
           "==SALACITY==, Indecency",
           "\u0985\u09b6\u09cd\u09b2\u09c0\u09b2\u09a4\u09be"
         ],
@@ -3558,6 +3590,14 @@
         [
           "**upraided**, lifted",
           "\u0989\u09aa\u09a1\u09bc\u09be\u09a8\u09cb, \u099a\u09c2\u09a1\u09bc\u09be\u09a8\u09cd\u09a4\u09ad\u09be\u09ac\u09c7 \u09a4\u09cb\u09b2\u09be"
+        ],
+        [
+          "urbane [\u09ae\u09be\u09b0\u09cd\u099c\u09bf\u09a4]",
+          ""
+        ],
+        [
+          "==vanity== [\u0986\u09a4\u09cd\u09ae\u0997\u09b0\u09cd\u09ac, **\u0985\u09b9\u0982\u0995\u09be\u09b0**]",
+          ""
         ],
         [
           "vassal",
