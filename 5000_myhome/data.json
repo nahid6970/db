@@ -1094,7 +1094,7 @@
     "default_type": "nerd-font",
     "background_color": "white",
     "border_radius": "50",
-    "note": "youtube.com/account_features,",
+    "note": "https://www.youtube.com/account_features",
     "click_action": "url-1",
     "font_size": "35px",
     "li_width": "1%",
