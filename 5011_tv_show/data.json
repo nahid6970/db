@@ -3075,11 +3075,25 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 3,
+                "title": "Stranger Things - S05E03 - Chapter Three - The Turnbow Trap WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-27T13:10:08.478681",
+                "notify": "seen"
+            },
+            {
+                "id": 2,
+                "title": "Stranger Things - S05E02 - Chapter Two - The Vanishing of \u2026 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-11-27T11:56:16.968337",
+                "notify": "seen"
+            },
+            {
                 "id": 1,
                 "title": "Stranger Things - S05E01 - Chapter One - The Crawl WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-11-27T10:10:08.482740",
-                "notify": "unseen"
+                "notify": "seen"
             }
         ]
     }
