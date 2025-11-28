@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "170-0": {
+        "172-0": {
           "bold": false
         },
-        "392-0": {
+        "393-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "498-0": {
+        "499-0": {
           "center": false
         }
       },
@@ -1312,10 +1312,6 @@
       "name": "Word-Meaning",
       "rows": [
         [
-          "Litigation, Proceedings",
-          "\u09ae\u09be\u09ae\u09b2\u09be"
-        ],
-        [
           "",
           ""
         ],
@@ -1349,6 +1345,18 @@
         ],
         [
           "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "Resolution [\u09b8\u0999\u09cd\u0995\u09b2\u09cd\u09aa\u0997\u09cd\u09b0\u09b9\u09a3, \u09b8\u09ae\u09be\u09a7\u09be\u09a8]",
+          ""
+        ],
+        [
+          "##==00 Confusing/Similar==##\n\n==supercilious== [\u0985\u09b9\u0982\u0995\u09be\u09b0\u09c0, \u0985\u09ad\u09a6\u09cd\u09b0, \u0985\u09ac\u09bf\u09a8\u09af\u09bc\u09c0]\n-----\n==superficial== [\u09ac\u09be\u09b9\u09cd\u09af\u09bf\u0995, \u09b8\u09be\u09ae\u09be\u09a8\u09cd\u09af, \u09a4\u09c1\u099a\u09cd\u099b, \u09aa\u09c3\u09b7\u09cd\u09a0\u09a4\u09b2\u09be]\n-----\n==Surreptitious== [\u0997\u09c1\u09aa\u09cd\u09a4, \u0997\u09cb\u09aa\u09a8\u09c0\u09af\u09bc]",
           ""
         ],
         [
@@ -2052,10 +2060,6 @@
           "\u09b6\u09c1\u09b2\u09cd\u0995"
         ],
         [
-          "- ==Jovial==, ==Jolly==, ==Jubilation==, ==Merry==, Rejoicing [\u09b9\u09be\u09b8\u09bf\u0996\u09c1\u09b6\u09bf, \u0986\u09a8\u09a8\u09cd\u09a6\u09ae\u09af\u09bc, \u0986\u09a8\u09a8\u09cd\u09a6, \u0989\u09b2\u09cd\u09b2\u09be\u09b8]\n- ==Ecstatic==, ==Enraptured== [\u09aa\u09b0\u09ae \u0986\u09a8\u09a8\u09cd\u09a6\u09a6\u09be\u09df\u0995]\n- ==Euphoria== [\u09b0\u09ae\u09b0\u09ae\u09be, \u0986\u09a8\u09a8\u09cd\u09a6, \u0989\u09b2\u09cd\u09b2\u09be\u09b8]\n- ==Elatter== [\u0986\u09a8\u09a8\u09cd\u09a6\u09bf\u09a4, \u0989\u09b2\u09cd\u09b2\u09b8\u09bf\u09a4]",
-          ""
-        ],
-        [
           "==efface==, ==expunge==",
           "- \u09ae\u09c1\u099b\u09c7 \u09ab\u09c7\u09b2\u09be, \u09b2\u09cb\u09aa \u0995\u09b0\u09be, \u09ac\u09bf\u09b2\u09c1\u09aa\u09cd\u09a4 \u0995\u09b0\u09be"
         ],
@@ -2069,10 +2073,6 @@
         ],
         [
           "- egalitarian, equalitarian [\u09b8\u09ae\u09be\u09a8 \u0985\u09a7\u09bf\u0995\u09be\u09b0, \u09b8\u09ae\u09a4\u09be\u09b0\u09aa\u09a8\u09cd\u09a5\u09c0, \u09b8\u09ae\u09ac\u09c7\u09a4]",
-          ""
-        ],
-        [
-          "",
           ""
         ],
         [
@@ -2636,7 +2636,7 @@
           ""
         ],
         [
-          "",
+          "- ==Jovial==, ==Jolly==, ==Jubilation==, ==Merry==, Rejoicing [\u09b9\u09be\u09b8\u09bf\u0996\u09c1\u09b6\u09bf, \u0986\u09a8\u09a8\u09cd\u09a6\u09ae\u09af\u09bc, \u0986\u09a8\u09a8\u09cd\u09a6, \u0989\u09b2\u09cd\u09b2\u09be\u09b8]\n- ==Ecstatic==, ==Enraptured== [\u09aa\u09b0\u09ae \u0986\u09a8\u09a8\u09cd\u09a6\u09a6\u09be\u09df\u0995]\n- ==Euphoria== [\u09b0\u09ae\u09b0\u09ae\u09be, \u0986\u09a8\u09a8\u09cd\u09a6, \u0989\u09b2\u09cd\u09b2\u09be\u09b8]\n- ==Elatter== [\u0986\u09a8\u09a8\u09cd\u09a6\u09bf\u09a4, \u0989\u09b2\u09cd\u09b2\u09b8\u09bf\u09a4]",
           ""
         ],
         [
@@ -2686,6 +2686,10 @@
         [
           "Lionize (\u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf \u09b0\u09c2\u09aa\u09c7 \u0997\u09a3\u09cd\u09af \u0995\u09b0\u09be)",
           ""
+        ],
+        [
+          "Litigation, Proceedings",
+          "\u09ae\u09be\u09ae\u09b2\u09be"
         ],
         [
           "Loquacity",
@@ -3458,10 +3462,6 @@
         [
           "sullen",
           "\u09b0\u09c1\u09b7\u09cd\u099f, \u09ac\u09bf\u09ae\u09b0\u09cd\u09b7, \u09ae\u09c1\u0996\u09ad\u09be\u09b0 \u0995\u09b0\u09be, \u09ae\u09a8\u09ae\u09b0\u09be"
-        ],
-        [
-          "##==00 Confusing/Similar==##\n\n==supercilious== [\u0985\u09b9\u0982\u0995\u09be\u09b0\u09c0, \u0985\u09ad\u09a6\u09cd\u09b0, \u0985\u09ac\u09bf\u09a8\u09af\u09bc\u09c0]\n-----\n==superficial== [\u09ac\u09be\u09b9\u09cd\u09af\u09bf\u0995, \u09b8\u09be\u09ae\u09be\u09a8\u09cd\u09af, \u09a4\u09c1\u099a\u09cd\u099b, \u09aa\u09c3\u09b7\u09cd\u09a0\u09a4\u09b2\u09be]\n-----\n==Surreptitious== [\u0997\u09c1\u09aa\u09cd\u09a4, \u0997\u09cb\u09aa\u09a8\u09c0\u09af\u09bc]",
-          ""
         ],
         [
           "==supercilious==, ==insolent==, proud",
