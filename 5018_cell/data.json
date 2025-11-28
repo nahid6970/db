@@ -1267,14 +1267,14 @@
     },
     {
       "cellStyles": {
-        "168-0": {
+        "176-0": {
           "bold": false
         },
-        "391-0": {
+        "401-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
-        "497-0": {
+        "507-0": {
           "center": false
         }
       },
@@ -1312,7 +1312,39 @@
       "name": "Word-Meaning",
       "rows": [
         [
-          "==Flux== [\u0985\u09ac\u09bf\u09b0\u09a4 **\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8**, \u09ac\u09be \u0997\u09a4\u09bf, \u09aa\u09cd\u09b0\u09ac\u09be\u09b9]",
+          "==Desiccated== [\u09b6\u09c1\u0995\u09a8\u09cb]",
+          ""
+        ],
+        [
+          "==Lassitude==, Sluggishness [\u0985\u09b2\u09b8, \u09a8\u09bf\u09b7\u09cd\u0995\u09cd\u09b0\u09bf\u09df, \u0995\u09cd\u09b2\u09be\u09a8\u09cd\u09a4\u09bf]",
+          ""
+        ],
+        [
+          "==Inundated== [**\u09aa\u09cd\u09b2\u09be\u09ac\u09bf\u09a4**, \u09a8\u09bf\u09ae\u099c\u09cd\u099c\u09bf\u09a4]",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
+          ""
+        ],
+        [
+          "",
           ""
         ],
         [
@@ -2184,6 +2216,10 @@
           ""
         ],
         [
+          "==Exigency== [\u099c\u09b0\u09c1\u09b0\u09c0]",
+          ""
+        ],
+        [
           "- ==exodus== [\u098f\u0995\u09b8\u09be\u09a5\u09c7 \u0985\u09a8\u09c7\u0995 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 **__\u09ac\u09b9\u09bf\u09b0\u09cd\u0997\u09ae\u09a8__**]\n!!ant:!!\n- ==influx==",
           ""
         ],
@@ -2266,6 +2302,10 @@
         [
           "flout, defy",
           "\u09ac\u09bf\u09b0\u09cb\u09a7\u09bf\u09a4\u09be \u0995\u09b0\u09be, \u0985\u09ac\u099c\u09cd\u099e\u09be \u0995\u09b0\u09be, \u0985\u09ae\u09be\u09a8\u09cd\u09af \u0995\u09b0\u09be"
+        ],
+        [
+          "==Flux== [\u0985\u09ac\u09bf\u09b0\u09a4 **\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8**, \u09ac\u09be \u0997\u09a4\u09bf, \u09aa\u09cd\u09b0\u09ac\u09be\u09b9]",
+          ""
         ],
         [
           "folly",
@@ -2728,7 +2768,7 @@
           ""
         ],
         [
-          "microscopic; minute",
+          "Microscopic; Minute",
           ""
         ],
         [
