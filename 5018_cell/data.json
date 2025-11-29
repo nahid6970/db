@@ -7640,35 +7640,45 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "0-0": {
+          "rank": 1
+        },
+        "1-0": {
+          "rank": 2
+        },
+        "2-0": {
+          "rank": 3
+        }
+      },
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
-          "name": "B",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "B",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "\u09b8\u09ad\u09cd\u09af\u09a4\u09be",
@@ -7681,6 +7691,10 @@
         [
           "\u0997\u09cd\u09b0\u09c0\u0995 \u09b8\u09ad\u09cd\u09af\u09a4\u09be",
           ""
+        ],
+        [
+          "\u09ac\u09c1\u09ac\u09c7\u09b0\u09c0\u09df",
+          " **'\u099a\u09be\u0995\u09be'** \u0995\u09cb\u09a8 \u09b8\u09ad\u09cd\u09af\u09a4\u09be\u09b0 \u0986\u09ac\u09bf\u09b7\u09cd\u0995\u09be\u09b0?"
         ],
         [
           "\u0997\u09be\u09b0\u09cb\u09a6\u09c7\u09b0 '\u09a8\u09ac\u09be\u09a8\u09cd\u09a8 \u0989\u09ce\u09b8\u09ac' \u0995\u09c0 \u09a8\u09be\u09ae\u09c7 \u09aa\u09b0\u09bf\u099a\u09bf\u09a4? \u0993\u09df\u09be\u09a8\u0997\u09be\u09b2\u09be / \u2018\u0993\u09df\u09be\u0982\u0997\u09be\u09b2\u09be\u2019\n'\u09ae\u09cd\u09b0\u09cb' \u099c\u09a8\u0997\u09cb\u09b7\u09cd\u09a0\u09c0\u09a6\u09c7\u09b0 \u09ac\u09be\u09b8 \u0995\u09cb\u09a5\u09be\u09df? \u09ac\u09be\u09a8\u09cd\u09a6\u09b0\u09ac\u09be\u09a8\u09c7",
