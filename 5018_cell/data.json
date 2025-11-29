@@ -1,5 +1,5 @@
 {
-  "activeSheet": 33,
+  "activeSheet": 102,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -104,7 +104,8 @@
     "98": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "99": "Bangla Grammar",
     "100": "English Grammar",
-    "101": "History"
+    "101": "History",
+    "102": "Math"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -12629,6 +12630,32 @@
           ""
         ]
       ]
+    },
+    {
+      "name": "MCQ",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "\u09e7\u09ea\u09ea \u09b8\u0982\u0996\u09cd\u09af\u09be\u099f\u09bf\u09b0 \u0995\u09cb\u09a8 \u09b8\u0982\u0996\u09cd\u09af\u09be\u09b0 \u09ea\u09e6%?\n\u0995. \u09e9\u09ee\u09e6\n\u0996. [[\u09e9\u09ec\u09e6]]\n\u0997. \u09e8\u09ec\u09e6\n\u0998. \u09e8\u09ef\u09e6"
+        ]
+      ],
+      "parentSheet": 33,
+      "cellStyles": {}
     }
   ]
 }
