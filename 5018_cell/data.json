@@ -1,5 +1,5 @@
 {
-  "activeSheet": 36,
+  "activeSheet": 8,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -5057,7 +5057,7 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}Leo Tolstoy{/}\n- Leo Tolstoy was a Russian Novelist",
-          "- War and Peace {fg:#ffffff;bg:#000000}fiction book{/}\n- Locksley Hall {fg:#ffffff;bg:#000000}poem{/}\n-- {}@@__Knowledge comes, but wisdom lingers__@@{/} (Locksley Hall)\n"
+          "- War and Peace ==Novel==\n- Locksley Hall ==Poem==\n-- {}@@__Knowledge comes, but wisdom lingers__@@{/} (Locksley Hall)\n"
         ],
         [
           "{fg:#ffffff;bg:#000000}Lord Alfred Tennyson{/}\n- considered the **leading poet of the Victorian era**",
@@ -6625,6 +6625,10 @@
         ],
         [
           "Which sentence is correct?\n\u0995. He needs not go\n\u0996. [[He need not go]]\n\u0997. He do not need to go\n\u0998. He does not need go",
+          ""
+        ],
+        [
+          "___ your shoes before entering the room.\n\u0995.put out\n\u0996.[[put off]]\n\u0997.put away\n\u0998.put on",
           ""
         ]
       ]
