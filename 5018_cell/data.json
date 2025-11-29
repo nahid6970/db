@@ -1,5 +1,5 @@
 {
-  "activeSheet": 31,
+  "activeSheet": 35,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -7643,32 +7643,32 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
+          "name": "B",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "\u09b8\u09ad\u09cd\u09af\u09a4\u09be",
@@ -12007,7 +12007,7 @@
           ""
         ],
         [
-          "\u0995\u09cb\u09a8 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09b0\u0995\u09cd\u09a4 \u099c\u09ae\u09be\u099f \u09ac\u09be\u0981\u09a7\u09a4\u09c7 \u09b8\u09be\u09b9\u09be\u09af\u09cd\u09af \u0995\u09b0\u09c7? \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u0995\u09c7",
+          "\u0995\u09cb\u09a8 \u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u09b0\u0995\u09cd\u09a4 \u099c\u09ae\u09be\u099f \u09ac\u09be\u0981\u09a7\u09a4\u09c7 \u09b8\u09be\u09b9\u09be\u09af\u09cd\u09af \u0995\u09b0\u09c7? **\u09ad\u09bf\u099f\u09be\u09ae\u09bf\u09a8 \u0995\u09c7**",
           ""
         ]
       ]
