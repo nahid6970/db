@@ -1,5 +1,5 @@
 {
-  "activeSheet": 0,
+  "activeSheet": 61,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -9458,18 +9458,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "25",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "A",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -9494,7 +9494,7 @@
           ""
         ],
         [
-          "{fg:#ffffff;bg:#000000}\u09b6\u09ac\u09cd\u09a6\u09be\u09b0\u09cd\u09a5{/}\n\u0985\u09ad\u09bf\u09a8\u09bf\u09ac\u09c7\u09b6 = \u09ae\u09a8\u09cb\u09af\u09cb\u0997\n\u0995\u09bf\u0982\u09ac\u09a6\u09a8\u09cd\u09a4\u09bf = \u099c\u09a8\u09b6\u09cd\u09b0\u09c1\u09a4\u09bf\n\u0987\u09a4\u09cd\u09a4\u09c7\u09ab\u09be\u0995 = \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09c0\u09a4\u09bf",
+          "{fg:#ffffff;bg:#000000}\u09b6\u09ac\u09cd\u09a6\u09be\u09b0\u09cd\u09a5{/}\n\u0985\u09ad\u09bf\u09a8\u09bf\u09ac\u09c7\u09b6 = \u09ae\u09a8\u09cb\u09af\u09cb\u0997\n\u0995\u09bf\u0982\u09ac\u09a6\u09a8\u09cd\u09a4\u09bf = \u099c\u09a8\u09b6\u09cd\u09b0\u09c1\u09a4\u09bf\n\u0987\u09a4\u09cd\u09a4\u09c7\u09ab\u09be\u0995 = \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09c0\u09a4\u09bf\n\u09ac\u09cd\u09b0\u09be\u09a4\u09cd\u09af = \u09aa\u09a4\u09bf\u09a4",
           ""
         ]
       ]
