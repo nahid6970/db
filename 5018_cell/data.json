@@ -1,5 +1,5 @@
 {
-  "activeSheet": 12,
+  "activeSheet": 94,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -96,7 +96,8 @@
     "90": "Bangla Grammar",
     "91": "Bangla Grammar",
     "92": "English Grammar",
-    "93": "Bangla Grammar"
+    "93": "Bangla Grammar",
+    "94": "English Grammar"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -12389,6 +12390,32 @@
         ]
       ],
       "parentSheet": 12,
+      "cellStyles": {}
+    },
+    {
+      "name": "MCQ",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "**A rolling stone gathers no moss. The complex form of this sentence is-**\n\u0995. Since a stone rolling, it gathers no moss.\n\u0996. [[A stone that rolls gathers no moss.]]\n\u0997. A stone what rolls gathers no moss.\n\u0998. When a stone rolls, it gathers no moss."
+        ]
+      ],
+      "parentSheet": 21,
       "cellStyles": {}
     }
   ]
