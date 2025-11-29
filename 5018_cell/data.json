@@ -1,5 +1,5 @@
 {
-  "activeSheet": 6,
+  "activeSheet": 91,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -93,7 +93,8 @@
     "81": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "82": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "85": "Bangla Grammar",
-    "90": "Bangla Grammar"
+    "90": "Bangla Grammar",
+    "91": "Bangla Grammar"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -12306,6 +12307,32 @@
           "ASDS"
         ]
       ]
+    },
+    {
+      "name": "MCQ",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "\u09ab\u09c1\u09b2\u09c7 \u09ab\u09c1\u09b2\u09c7 \u09b8\u09be\u099c\u09bf\u09df\u09c7\u099b\u09c7 \u0998\u09b0 - \u098f\u0996\u09be\u09a8\u09c7 '\u09ab\u09c1\u09b2\u09c7 \u09ab\u09c1\u09b2\u09c7' \u0995\u09cb\u09a8 \u0995\u09be\u09b0\u0995\u09c7 \u0995\u09cb\u09a8 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf?\n\u0995. \u0985\u09a7\u09bf\u0995\u09b0\u09a3\u09c7 \u09ed\u09ae\u09c0\n\u0996. \u0995\u09b0\u09cd\u09ae\u09c7 \u09ed\u09ae\u09c0\n\u0997. \u0985\u09aa\u09be\u09a6\u09be\u09a8\u09c7 \u09ed\u09ae\u09c0\n\u0998. [[\u0995\u09b0\u09a3\u09c7 \u09ed\u09ae\u09c0]]"
+        ]
+      ],
+      "parentSheet": 15,
+      "cellStyles": {}
     }
   ]
 }
