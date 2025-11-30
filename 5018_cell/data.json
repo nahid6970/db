@@ -5938,16 +5938,16 @@
     },
     {
       "cellStyles": {
-        "16-0": {
-          "bold": false
-        },
-        "17-1": {
-          "bold": false
-        },
-        "8-0": {
+        "5-0": {
           "center": false
         },
-        "8-1": {
+        "5-1": {
+          "bold": false
+        },
+        "13-0": {
+          "bold": false
+        },
+        "14-1": {
           "bold": false
         }
       },
@@ -5985,20 +5985,8 @@
       "name": "English Literature",
       "rows": [
         [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "",
-          ""
-        ],
-        [
-          "?? Orpheus\n- Calliope\n- Apollo",
-          ""
+          "{fg:#ffffff;bg:#000000}Adam Smith{/}",
+          "- The Wealth of Nations"
         ],
         [
           "{fg:#ffffff;bg:#000000}Aldous Leonard Huxley{/}",
@@ -6091,6 +6079,10 @@
         [
           "{fg:#ffffff;bg:#000000}Gabriel Garcia Marquez {/}\n- \u09af\u09bf\u09a8\u09bf \u09b2\u09cd\u09af\u09be\u099f\u09bf\u09a8 \u0986\u09ae\u09c7\u09b0\u09bf\u0995\u09be\u09b0 \u09a6\u09c7\u09b6 \u0995\u09b2\u09ae\u09cd\u09ac\u09bf\u09df\u09be\u09df \u099c\u09a8\u09cd\u09ae\u0997\u09cd\u09b0\u09b9\u09a3 \u0995\u09b0\u09c7\u09a8\u0964",
           "- One Hundred Years of Solitude {fg:#ffffff;bg:#000000}Novel{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Geoffrey Chaucer{/}",
+          "- The House of Fame"
         ],
         [
           "{fg:#ffffff;bg:#000000}George Orwell{/}",
@@ -6263,14 +6255,6 @@
         [
           "{fg:#ffffff;bg:#000000}Zadie Smith{/}",
           "- White Teeth {fg:#ffffff;bg:#000000}Novel{/}"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}Adam Smith{/}",
-          "- The Wealth of Nations"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}Geoffrey Chaucer{/}",
-          "- The House of Fame"
         ]
       ]
     },
@@ -13365,6 +13349,9 @@
         ],
         [
           "__##Generals##__\nMachiavellian -- cunning person\nEpic (\u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af) -- long narrative poem \nOde -- \u0997\u09c0\u09a4\u09bf \u0995\u09ac\u09bf\u09a4\u09be\nElegy (\u09b6\u09cb\u0995\u0997\u09be\u09a5\u09be / \u09b6\u09cb\u0995 \u0995\u09ac\u09bf\u09a4\u09be) -- poem of lamentation (\u09ac\u09bf\u09b2\u09be\u09aa\u09c7\u09b0 \u0995\u09ac\u09bf\u09a4\u09be)\nBallad \u2013 \u0997\u09b2\u09cd\u09aa/\u0995\u09be\u09b9\u09bf\u09a8\u09c0 \u09a8\u09bf\u09b0\u09cd\u09ad\u09b0 \u0997\u09be\u09a8/\u0995\u09ac\u09bf\u09a4\u09be (\u09b2\u09c7\u09be\u0995\u0997\u09be\u09a5\u09be) (\u09ac\u09be\u09b8\u09cd\u09a4\u09ac \u0995\u09be\u09b9\u09bf\u09a8\u09c0)\nNovella \u2013 short novel\npoem by lines\n- epigram 6 lines\n- Sonnet 14 lines\nHyperbole (\u0985\u09a4\u09bf\u09b0\u099e\u09cd\u099c\u09a8) -- overstatement of something\nMetonymy \u2013 \u09b0\u09c2\u09aa\u0995\nSoliloquy \u2013 \u09b8\u09cd\u09ac\u0997\u09a4\u09cb\u0995\u09cd\u09a4\u09bf -- a long speech expressing the thought of a character\nProse \u2013 \u0997\u09a6\u09cd\u09af\nSimile \u2013 \u0989\u09aa\u09ae\u09be \u2013 as/like word \u2013 \u0985\u09a8\u09c1\u09b0\u09c2\u09aa\nPersonification \u2013 \u09ac\u09cd\u09af\u0995\u09cd\u09a4\u09bf\u09a4\u09cd\u09ac -- \u09aa\u09cd\u09b0\u09be\u0995\u09c3\u09a4\u09bf\u0995 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7 \u09b0\u09c2\u09aa\u09be\u09a8\u09cd\u09a4\u09b0\nMetaphor (\u09b0\u09c2\u09aa\u0995)-- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09ac\u09c8\u09b6\u09bf\u09b7\u09cd\u099f\u09cd\u09af\u0995\u09c7 \u09ac\u09b8\u09cd\u09a4\u09c1\u09a4\u09c7 \u09aa\u09cd\u09b0\u0995\u09be\u09b6  \n?? season politicia -- pun pun -- play with words\nPun \u2013 \u09b6\u09cd\u09b2\u09c7\u09b7 \u2013 epigram\nEtiquette \u2013 \u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0\nEuphemism (\u0989\u099a\u09cd\u099a\u09be\u09b0\u09a3)-- \u09b6\u09cd\u09b0\u09c1\u09a4\u09bf\u0995\u099f\u09c1 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09c7 \u0995\u09cb\u09ae\u09b2\u09a4\u09b0 \u09aa\u09a6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09df\u09cb\u0997\nSatire \u2013 \u09ac\u09cd\u09af\u0999\u09cd\u0997\nAllegory \u2013 \u09b0\u09c2\u09aa\u0995 \u2013 double meaning\ngraphic novel - comic strip"
+        ],
+        [
+          "?? Orpheus\n- Calliope\n- Apollo"
         ]
       ],
       "parentSheet": 13,
