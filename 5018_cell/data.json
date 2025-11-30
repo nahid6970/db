@@ -1,5 +1,5 @@
 {
-  "activeSheet": 111,
+  "activeSheet": 53,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -9305,13 +9305,14 @@
           "width": "1"
         }
       ],
-      "name": "\u09b2.\u09b8\u09be.\u0997\u09c1-\u0997.\u09b8\u09be.\u0997\u09c1 (LCM-GCD / HCF)",
+      "name": "\u09b2.\u09b8\u09be.\u0997\u09c1 / \u0997.\u09b8\u09be.\u0997\u09c1",
       "rows": [
         [
           "**\u09aa\u09cd\u09b0\u09b6\u09cd\u09a8:**  \n6\u099f\u09bf \u0998\u09a3\u09cd\u099f\u09be \u09af\u09a5\u09be\u0995\u09cd\u09b0\u09ae\u09c7 2, 4, 6, 8, 10, 12 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1 \u0985\u09a8\u09cd\u09a4\u09b0 \u09ac\u09be\u099c\u09c7\u0964  \u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u09a4\u09be\u09b0\u09be \u0995\u09a4\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7?\n\n**\u09b8\u09ae\u09be\u09a7\u09be\u09a8:**  \n\n\u0998\u09a3\u09cd\u099f\u09be\u0997\u09c1\u09b2\u09cb \u09aa\u09cd\u09b0\u09a5\u09ae\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09c7 \u09b8\u09ae\u09df = 0 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7\u0964  \n\u098f\u09b0\u09aa\u09b0 \u09a4\u09be\u09b0\u09be \u0986\u09ac\u09be\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 \u09a4\u09be\u09a6\u09c7\u09b0 \u09b8\u09ae\u09df\u09c7\u09b0 **LCM (\u09b2.\u09b8\u09be.\u0997\u09c1)** \u0985\u09a8\u09c1\u09af\u09be\u09df\u09c0\u0964\n\n\u0985\u09a4\u098f\u09ac,  \nLCM (2, 4, 6, 8, 10, 12) = 120 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u0964\n\n\u0985\u09b0\u09cd\u09a5\u09be\u09ce, \u09a4\u09be\u09b0\u09be \u09aa\u09cd\u09b0\u09a4\u09bf 120 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1 (2 \u09ae\u09bf\u09a8\u09bf\u099f) \u0985\u09a8\u09cd\u09a4\u09b0 \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7\u0964\n\n\u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u09ae\u09cb\u099f \u09b8\u09ae\u09df = 30 \u00d7 60 = 1800 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u0964  \n\n\u098f\u0996\u09a8,  \n1800 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u09a4\u09be\u09b0\u09be \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 = (1800 \u00f7 120) + 1  \n= 15 + 1  \n= 16 \u09ac\u09be\u09b0\u0964\n\n**\u0989\u09a4\u09cd\u09a4\u09b0:** \u2705  \n\u09e9\u09e6 \u09ae\u09bf\u09a8\u09bf\u099f\u09c7 \u0998\u09a3\u09cd\u099f\u09be\u0997\u09c1\u09b2\u09cb \u098f\u0995\u09b8\u09be\u09a5\u09c7 \u09ac\u09be\u099c\u09ac\u09c7 **\u09e7\u09ec \u09ac\u09be\u09b0**\u0964",
           ""
         ]
-      ]
+      ],
+      "nickname": "LCM / GCD / HCF"
     },
     {
       "cellStyles": {},
@@ -9389,7 +9390,8 @@
           "width": "1"
         }
       ],
-      "name": "Set Theory \u2014 Inclusion\u2013Exclusion Principle",
+      "name": "Set Theory",
+      "nickname": "Inclusion / Exclusion / Unio / Intersection",
       "rows": [
         [
           "**In a class of 120 students numbered 1 to 120. all even numbered students opt for Physics, those whose numbers are divisible by 5 opt for Chemistry and those whose numbers are divisible by 7 opt for Math. How many opt for none of the three subjects?**\n\nTotal students = 120\n\nLet A = divisible by 2 \u2192 |A| = \u230a120/2\u230b = 60  \nB = divisible by 5 \u2192 |B| = \u230a120/5\u230b = 24  \nC = divisible by 7 \u2192 |C| = \u230a120/7\u230b = 17\n\nIntersections:  \nA\u2229B (lcm 10) \u2192 \u230a120/10\u230b = 12  \nA\u2229C (lcm 14) \u2192 \u230a120/14\u230b = 8  \nB\u2229C (lcm 35) \u2192 \u230a120/35\u230b = 3\n\nTriple intersection A\u2229B\u2229C (lcm 70) \u2192 \u230a120/70\u230b = 1\n\nBy inclusion\u2013exclusion, number opting for at least one =  \n60 + 24 + 17 \u2212 (12 + 8 + 3) + 1 = 79\n\nTherefore those who opt for **none** = 120 \u2212 79 = **41**\n\n**Answer: 41**\n",
