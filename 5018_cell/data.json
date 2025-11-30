@@ -7420,18 +7420,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "25",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "\u09ac\u09bf\u09aa\u09b0\u09c0\u09a4 \u09b6\u09ac\u09cd\u09a6",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         },
         {
           "color": "#ffffff",
@@ -12574,6 +12574,9 @@
         ],
         [
           "**'\u09aa\u09a5\u09c7\u09b0 \u09aa\u09cd\u09af\u09be\u0981\u099a\u09be\u09b2\u09c0' \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09b0\u099a\u09df\u09bf\u09a4\u09be \u0995\u09c7?**\n\u0995. [[\u09ac\u09bf\u09ad\u09c2\u09a4\u09bf\u09ad\u09c2\u09b7\u09a3 \u09ac\u09a8\u09cd\u09a6\u09cd\u09af\u09cb\u09aa\u09be\u09a7\u09cd\u09af\u09be\u09df]]\n\u0996. \u09aa\u09cd\u09af\u09be\u09b0\u09be\u099a\u09be\u09a6 \u09ae\u09bf\u09a4\u09cd\u09b0\n\u0997. \u09ae\u09be\u0987\u0995\u09c7\u09b2 \u09ae\u09a7\u09c1\u09b8\u09c2\u09a6\u09a8 \u09a6\u09a4\u09cd\u09a4\n\u0998. \u0986\u09b2\u09be\u0993\u09b2"
+        ],
+        [
+          "**\u09ac\u09bf\u09b6\u09cd\u09ac\u0995\u09ac\u09bf \u09b0\u09ac\u09c0\u09a8\u09cd\u09a6\u09cd\u09b0\u09a8\u09be\u09a5 \u09a0\u09be\u0995\u09c1\u09b0\u09c7\u09b0 \u09b8\u09cd\u09ae\u09c3\u09a4\u09bf\u09ac\u09bf\u099c\u09dc\u09bf\u09a4 \u09b6\u09bf\u09b2\u09be\u0987\u09a6\u09b9 \u0995\u09cb\u09a8 \u099c\u09c7\u09b2\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4?**\n\u0995. \u09b0\u09be\u099c\u09b6\u09be\u09b9\u09c0\n\u0996. \u09af\u09b6\u09cb\u09b0\n\u0997. \u0995\u09c1\u09ae\u09bf\u09b2\u09cd\u09b2\u09be\n\u0998. [[\u0995\u09c1\u09b7\u09cd\u099f\u09bf\u09df\u09be]]"
         ]
       ]
     },
