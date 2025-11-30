@@ -1,5 +1,5 @@
 {
-  "activeSheet": 58,
+  "activeSheet": 51,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -122,7 +122,8 @@
     "Bangla Grammar_24": true,
     "English Grammar_35": true,
     "English Grammar_36": true,
-    "English Grammar_37": true
+    "English Grammar_37": true,
+    "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8_76": true
   },
   "sheets": [
     {
@@ -9521,13 +9522,13 @@
         }
       ],
       "name": "C & P",
+      "nickname": "Combinations and Permutations",
       "rows": [
         [
-          "**In how many different ways can 3 identical green shirts and 3 identical red shirts be distributed among 6 children such that each child receives a shirt?**\n\nWe have:  \n- 3 identical green shirts (G)  \n- 3 identical red shirts (R)  \n- 6 children, each receives 1 shirt  \n\n**Step 1: Choose children to receive green shirts**  \nNumber of ways = 6C3 = 20  \n\n**Step 2: The remaining 3 children automatically get red shirts**  \n\n**Step 3: Total ways** = 20\n\n**Answer: 20**",
+          "**In how many different ways can 3 identical green shirts and 3 identical red shirts be distributed among 6 children such that each child receives a shirt?**\n\nWe have:  \n- 3 identical green shirts (G)  \n- 3 identical red shirts (R)  \n- 6 children, each receives 1 shirt  \n\n**Step 1: Choose children to receive green shirts**  \nNumber of ways = 6C3 = 20  \n\n**Step 2: The remaining 3 children automatically get red shirts**  \n\n**Step 3: Total ways** = 20\n**Answer: 20**",
           ""
         ]
-      ],
-      "nickname": "Combinations and Permutations"
+      ]
     },
     {
       "cellStyles": {},
