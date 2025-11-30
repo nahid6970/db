@@ -1,5 +1,5 @@
 {
-  "activeSheet": 109,
+  "activeSheet": 114,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -116,7 +116,8 @@
     "110": "Bangla Grammar",
     "111": "Bangla Grammar",
     "112": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "113": "Bangla Grammar"
+    "113": "Bangla Grammar",
+    "114": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -13128,6 +13129,32 @@
           "'\u09b8\u09cd\u09a5\u09bf\u09b0\u09aa\u09cd\u09b0\u09a4\u09bf\u099c\u09cd\u099e' \u098f\u09b0 \u09b8\u09a0\u09bf\u0995 \u09ac\u09cd\u09af\u09be\u09b8\u09ac\u09be\u0995\u09cd\u09af \u0995\u09cb\u09a8\u099f\u09bf?\n\u0995. \u09b8\u09cd\u09a5\u09bf\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u099c\u09cd\u099e\u09be\n\u0996. \u09b8\u09cd\u09a5\u09bf\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u099c\u09cd\u099e\u09be \u0995\u09b0\u09be\n\u0997. [[\u09b8\u09cd\u09a5\u09bf\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u099c\u09cd\u099e\u09be \u09af\u09be\u09b0]]\n\u0998. \u098f\u0995\u099f\u09bf\u0993 \u09a8\u09df"
         ]
       ]
+    },
+    {
+      "name": "MCQ",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "\u09a8\u09bf\u099a\u09c7\u09b0 \u0995\u09cb\u09a8 \u09b8\u0982\u09b8\u09cd\u09a5\u09be\u099f\u09bf \u09ad\u09bf\u09a8\u09cd\u09a8?\n\u0995. \u09b0\u09df\u099f\u09be\u09b0\u09cd\u09b8\n\u0996. \u09a4\u09be\u09b8\n\u0997. [[\u09b9\u09bf\u0989\u09ae\u09cd\u09af\u09be\u09a8 \u09b0\u09be\u0987\u099f\u09b8 \u0993\u09df\u09be\u099a]]\n\u0998. \u09b8\u09bf\u098f\u09a8\u098f\u09a8"
+        ]
+      ],
+      "parentSheet": 1,
+      "cellStyles": {}
     }
   ]
 }
