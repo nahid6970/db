@@ -1,5 +1,5 @@
 {
-  "activeSheet": 93,
+  "activeSheet": 111,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -12412,6 +12412,7 @@
         }
       ],
       "name": "Mcq",
+      "nickname": "",
       "parentSheet": 26,
       "rows": [
         [
@@ -12472,10 +12473,9 @@
           "\u09a8\u09c0\u099a\u09c7\u09b0 \u0995\u09cb\u09a8\u099f\u09bf Noun?\n\u0995. good\n\u0996. slowly\n\u0997. to\n\u0998. [[honesty]]"
         ],
         [
-          "The Adjective form of 'cow' is:\n\u0995. Oxen\n\u0996. [[Bovine]]\n\u0997. Equine\n\u0998. Cowish"
+          "The Adjective form of 'cow' is:\n\u0995. Oxen\n\u0996. [[Bovine]]\n\u0997. Equine\n\u0998. Cowish\n- Equine \u09b9\u09b2\u09cb 'horse' \u09ac\u09be \u0998\u09cb\u09dc\u09be\u09b0 \u09ac\u09bf\u09b6\u09c7\u09b7\u09a3"
         ]
-      ],
-      "nickname": ""
+      ]
     },
     {
       "cellStyles": {},
@@ -13217,6 +13217,9 @@
         ],
         [
           "**\u0987\u09b6\u09a4\u09c7\u09b9\u09be\u09b0**\n\u0995. [[Manifesto]]\n\u0996. Advertisement\n\u0997. Prospectus\n\u0998. Update"
+        ],
+        [
+          "\u09b6\u09c1\u09a6\u09cd\u09a7 \u09ac\u09be\u09a8\u09be\u09a8 \u0995\u09cb\u09a8\u099f\u09bf?\n\u0995. \u09b8\u09ae\u09bf\u099a\u09c0\u09a8\n\u0996. [[\u09b8\u09ae\u09c0\u099a\u09c0\u09a8]]\n\u0997. \u09b8\u09ae\u09c0\u099a\u09bf\u09a8\n\u0998. \u09b8\u09ae\u09bf\u099a\u09bf\u09a8"
         ]
       ]
     },
