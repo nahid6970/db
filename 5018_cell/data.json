@@ -8378,7 +8378,12 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "2-0": {
+          "bgColor": "#FF4D4D",
+          "textColor": "#212529"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
@@ -8421,7 +8426,7 @@
           ""
         ],
         [
-          "!!##__Pythagoreas__##!!\nBase^2^+Height^2^=hypotenuse^2^\n3 :  4  : 5\n5 : 12 : 13\n7 : 24 : 25\n8 : 15 : 17\n9 : 40 : 41\n{link:https://youtu.be/G9VPYQNG88I?t=1648}@@Fantastic Method@@{/}\n\n!!##__Opposite Line from the Cone to find another line__##!!\n30\u00b0|60\u00b0|90\u00b0\n\\(x\\)|\\(x\\sqrt{3}\\)|\\(2x\\)\n**45\u00b0**|**45\u00b0**|**90\u00b0**\n\\(x\\)|\\(x\\)|\\(x\\sqrt{2}\\)\n{link:https://youtu.be/G9VPYQNG88I?t=2673}@@Link@@{/}",
+          "##__==Pythagoreas==__##\nBase^2^+Height^2^=hypotenuse^2^\n3 :  4  : 5\n5 : 12 : 13\n7 : 24 : 25\n8 : 15 : 17\n9 : 40 : 41\n=={link:https://youtu.be/G9VPYQNG88I?t=1648}@@Fantastic Method@@{/}==\n\n!!##__Opposite Line from the Corner to find another line or trikoniti related math__##!!\n30\u00b0|60\u00b0|90\u00b0\n\\(x\\)|\\(x\\sqrt{3}\\)|\\(2x\\)\n**45\u00b0**|**45\u00b0**|**90\u00b0**\n\\(x\\)|\\(x\\)|\\(x\\sqrt{2}\\)\n{link:https://youtu.be/G9VPYQNG88I?t=2673}@@Link@@{/}",
           ""
         ]
       ]
