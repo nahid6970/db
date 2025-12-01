@@ -6401,7 +6401,9 @@
           "rank": 1
         },
         "2-0": {
-          "rank": 2
+          "rank": 2,
+          "bgColor": "#D9FFB3",
+          "textColor": "rgb(0, 0, 0)"
         },
         "3-0": {
           "bold": false,
