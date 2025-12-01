@@ -1,5 +1,5 @@
 {
-  "activeSheet": 38,
+  "activeSheet": 93,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -12411,7 +12411,7 @@
           "width": "150"
         }
       ],
-      "name": "MCQ",
+      "name": "Mcq",
       "parentSheet": 26,
       "rows": [
         [
@@ -12458,8 +12458,15 @@
         ],
         [
           "'\u09b8\u09c7 \u098f\u09ae\u09a8\u09ad\u09be\u09ac\u09c7 \u0995\u09a5\u09be \u09ac\u09b2\u09c7 \u09ae\u09a8\u09c7 \u09b9\u09df \u09b8\u09ac \u099c\u09be\u09a8\u09c7\u0964' Which one is correctly translated into English?\n\u0995. He talks like he knew everything.\n\u0996. [[He talks as if he knew everything.]]\n\u0997. He talks after knowing everything.\n\u0998. He talks like he knows everything."
+        ],
+        [
+          "\"Syntax\" means -\n\u0995. [[Sentence building]]\n\u0996. Text building\n\u0997. Suplimentary text\n\u0998. Manner of speech"
+        ],
+        [
+          "\u09a8\u09c0\u099a\u09c7\u09b0 \u0995\u09cb\u09a8\u099f\u09bf Noun?\n\u0995. good\n\u0996. slowly\n\u0997. to\n\u0998. [[honesty]]"
         ]
-      ]
+      ],
+      "nickname": ""
     },
     {
       "cellStyles": {},
