@@ -8398,36 +8398,19 @@
           "textColor": "#000000",
           "type": "text",
           "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "14",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "E",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
         }
       ],
       "name": "\u099c\u09cd\u09af\u09be\u09ae\u09bf\u09a4\u09bf",
       "nickname": "Geometry",
       "rows": [
         [
-          "__**\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0 (Square)**__\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09ab\u09b2 = a^2^\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u09aa\u09b0\u09bf\u09b8\u09c0\u09ae\u09be = 4a\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u0995\u09b0\u09cd\u09a3 = a*\u221a2\n**Note**\n- \u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u09aa\u09b0\u09bf\u09b2\u09bf\u0996\u09bf\u09a4 \u09ac\u09c3\u09a4\u09cd\u09a4\u09c7\u09b0 \u09ac\u09cd\u09af\u09be\u09b8 = \u09ac\u09b0\u09cd\u0997\u09c7\u09b0 \u0995\u09b0\u09cd\u09a3",
-          ""
+          "__**\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0 (Square)**__\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09ab\u09b2 = a^2^\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u09aa\u09b0\u09bf\u09b8\u09c0\u09ae\u09be = 4a\n\u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u0995\u09b0\u09cd\u09a3 = a*\u221a2\n**Note**\n- \u09ac\u09b0\u09cd\u0997\u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7\u09b0 \u09aa\u09b0\u09bf\u09b2\u09bf\u0996\u09bf\u09a4 \u09ac\u09c3\u09a4\u09cd\u09a4\u09c7\u09b0 \u09ac\u09cd\u09af\u09be\u09b8 = \u09ac\u09b0\u09cd\u0997\u09c7\u09b0 \u0995\u09b0\u09cd\u09a3"
         ],
         [
-          "- \u099a\u09cc\u09ac\u09be\u099a\u09cd\u099a\u09be\u09b0 \u0986\u09df\u09a4\u09a8 = \u09a6\u09c8\u09b0\u09cd\u0998\u09cd\u09af \u00d7 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a5 \u00d7 \u0989\u099a\u09cd\u099a\u09a4\u09be\n- \u09a6\u09c1\u0987\u099f\u09bf \u099a\u09b2\u0995 \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09b8\u09b0\u09b2 \u09b8\u09ae\u09c0\u0995\u09b0\u09a8 \u099c\u09cb\u099f\u09c7 \u0995\u09df\u099f\u09bf \u09b8\u09b0\u09b2 \u09b8\u09ae\u09c0\u0995\u09b0\u09a8 \u09a5\u09be\u0995\u09c7? \u09e8\u099f\u09bf",
-          ""
+          "- \u099a\u09cc\u09ac\u09be\u099a\u09cd\u099a\u09be\u09b0 \u0986\u09df\u09a4\u09a8 = \u09a6\u09c8\u09b0\u09cd\u0998\u09cd\u09af \u00d7 \u09aa\u09cd\u09b0\u09b8\u09cd\u09a5 \u00d7 \u0989\u099a\u09cd\u099a\u09a4\u09be\n- \u09a6\u09c1\u0987\u099f\u09bf \u099a\u09b2\u0995 \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09b8\u09b0\u09b2 \u09b8\u09ae\u09c0\u0995\u09b0\u09a8 \u099c\u09cb\u099f\u09c7 \u0995\u09df\u099f\u09bf \u09b8\u09b0\u09b2 \u09b8\u09ae\u09c0\u0995\u09b0\u09a8 \u09a5\u09be\u0995\u09c7? \u09e8\u099f\u09bf"
         ],
         [
-          "##__==Pythagoreas==__##\nBase^2^+Height^2^=hypotenuse^2^\n3 :  4  : 5\n5 : 12 : 13\n7 : 24 : 25\n8 : 15 : 17\n9 : 40 : 41\n=={link:https://youtu.be/G9VPYQNG88I?t=1648}@@Fantastic Method@@{/}==\n\n!!##__Opposite Line from the Corner to find another line or trikoniti related math__##!!\n30\u00b0|60\u00b0|90\u00b0\n\\(x\\)|\\(x\\sqrt{3}\\)|\\(2x\\)\n**45\u00b0**|**45\u00b0**|**90\u00b0**\n\\(x\\)|\\(x\\)|\\(x\\sqrt{2}\\)\n{link:https://youtu.be/G9VPYQNG88I?t=2673}@@Link@@{/}",
-          ""
+          "##__==Pythagoreas==__##\nBase^2^+Height^2^=hypotenuse^2^\n3 :  4  : 5\n5 : 12 : 13\n7 : 24 : 25\n8 : 15 : 17\n9 : 40 : 41\n=={link:https://youtu.be/G9VPYQNG88I?t=1648}@@Fantastic Method@@{/}==\n\n!!##__Opposite Line from the Corner to find another line or trikoniti related math__##!!\n30\u00b0|60\u00b0|90\u00b0\n\\(x\\)|\\(x\\sqrt{3}\\)|\\(2x\\)\n**45\u00b0**|**45\u00b0**|**90\u00b0**\n\\(x\\)|\\(x\\)|\\(x\\sqrt{2}\\)\n=={link:https://youtu.be/G9VPYQNG88I?t=2673}@@Link@@{/}=="
         ]
       ]
     },
