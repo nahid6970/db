@@ -7059,12 +7059,19 @@
     },
     {
       "cellStyles": {
+        "0-0": {
+          "bgColor": "#006A80",
+          "rank": 1,
+          "textColor": "#FFFFFF"
+        },
         "1-0": {
-          "border": true,
+          "border": false,
           "borderColor": "#000000",
           "borderStyle": "solid",
           "borderWidth": "3px",
-          "rank": 2
+          "rank": 2,
+          "bgColor": "#00804D",
+          "textColor": "#FFFFFF"
         },
         "2-0": {
           "border": true,
@@ -7082,11 +7089,6 @@
         },
         "4-0": {
           "rank": 5
-        },
-        "0-0": {
-          "bgColor": "#006A80",
-          "textColor": "#FFFFFF",
-          "rank": 1
         }
       },
       "columns": [
