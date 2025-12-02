@@ -1,5 +1,5 @@
 {
-  "activeSheet": 1,
+  "activeSheet": 25,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -7671,6 +7671,11 @@
         "3-1": {
           "bgColor": "#343A40",
           "textColor": "#FFFFFF"
+        },
+        "0-0": {
+          "rank": 1,
+          "bgColor": "#448000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -7707,7 +7712,7 @@
       "nickname": "correct-word",
       "rows": [
         [
-          "==00 Doridro Correct==\n\u09a6\u09be\u09b0\u09bf\u09a6\u09cd\u09b0\u09cd\u09af\n\u09a6\u09b0\u09bf\u09a6\u09cd\u09b0\u09a4\u09be",
+          "\u09a6\u09be\u09b0\u09bf\u09a6\u09cd\u09b0\u09cd\u09af\n\u09a6\u09b0\u09bf\u09a6\u09cd\u09b0\u09a4\u09be",
           ""
         ],
         [
