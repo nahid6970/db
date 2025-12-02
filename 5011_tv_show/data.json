@@ -1938,6 +1938,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 14,
+                "title": "WWE Raw - 2025-12-01 - RAW 1697 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-12-02T16:15:32.760297",
+                "notify": "unseen"
+            },
+            {
                 "id": 13,
                 "title": "WWE Raw - 2025-11-24 - RAW 1696 HDTV-1080p",
                 "watched": true,

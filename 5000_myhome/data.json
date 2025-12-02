@@ -7517,5 +7517,29 @@
     "horizontal_text_color": "#ffffff",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a"
+  },
+  {
+    "name": "Get cookies.txt LOCALLY",
+    "group": "chrome_ext",
+    "url": "https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc",
+    "img_src": "https://lh3.googleusercontent.com/Cb-E_Q7BvT3KL7Zhwae-ZOvXq7gYmMb47t2NI8CPVNN6wxP9xPMy-l1pdrdfYg-VwLneBC97JJLXG3YkZH-vwd0WUw=s120",
+    "default_type": "img",
+    "click_action": "url",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": true,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "red"
   }
 ]
