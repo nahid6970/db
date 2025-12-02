@@ -13618,7 +13618,7 @@
       ],
       "rows": [
         [
-          "\u09aa\u09cd\u09b0\u09a5\u09ae \u09af\u09c7 \u0995\u09be\u099c \u0995\u09b0\u09ac\u09cb Underlined Sentence \u0995\u09c7 it \u09a6\u09bf\u09af\u09bc\u09c7 \u09b0\u09bf\u09aa\u09cd\u09b2\u09c7\u09b8 \u0995\u09b0\u09ac\u09cb.  \u09af\u09a6\u09bf it add \u0995\u09b0\u09be\u09b0 \u09ab\u09b2\u09c7 meaningful \u09a4\u09be\u09b9\u09b2\u09c7 Noun Clause\n- I know __**where he lives**__. -> I know it\n- I know the place **__where he lives__**. -> I know the place it\n- I will go **__where he lives__**. -> I will go it"
+          "\u09aa\u09cd\u09b0\u09a5\u09ae \u09af\u09c7 \u0995\u09be\u099c \u0995\u09b0\u09ac\u09cb Underlined Sentence \u0995\u09c7 it \u09a6\u09bf\u09af\u09bc\u09c7 \u09b0\u09bf\u09aa\u09cd\u09b2\u09c7\u09b8 \u0995\u09b0\u09ac\u09cb.  \u09af\u09a6\u09bf it add \u0995\u09b0\u09be\u09b0 \u09ab\u09b2\u09c7 meaningful \u09a4\u09be\u09b9\u09b2\u09c7 Noun Clause\n- I know __**where he lives**__. -> I know it -> Noun Clause\n- I know ==the place== **__where he lives__**. -> I know the place it -> not meaningful but there is \"the place\" which is ==noun/pronoun== before \"it\" which is noun so its -> adjective clause\n- I will go **__where he lives__**. -> I will go it -> not meaningful & no noun/pronoun -> adverbial clause"
         ]
       ],
       "cellStyles": {},
