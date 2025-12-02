@@ -13457,18 +13457,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#fff0d6",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "2",
