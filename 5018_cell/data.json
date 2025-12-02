@@ -1,5 +1,5 @@
 {
-  "activeSheet": 118,
+  "activeSheet": 68,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -9874,39 +9874,27 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#cef9cd",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
           "headerBold": true,
-          "headerCenter": false,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
+          "headerCenter": false
         }
       ],
       "name": "Full Form",
       "rows": [
         [
-          "4IR = Fourth Industrial Revolution\nAD = Anno Domini\nBBC = British Broadcasting Corporation\nBCSIR = Bangladesh Council of Scientific and Industrial Research\nBGMEA = Bangladesh Garment Manufacturers and Exports Association\nBIMSTEC = Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation\nBRRI = Bangladesh Rice Research Institute\nBSTI = Bangladesh Standards and Testing Institution\nBTRC = Bangladesh Telecommunication Regulatory Commission\nCIRDAP = Centre on Integrated Rural Development for Asia and the Pacific\nECNEC = Executive Committee of the National Economic Council\nECNEC = Executive Committee of the National Economic Council\nFAO = Food and Agriculture Organization of the United Nations\nHDMI = High-Definition Multimedia Interface\nINTERPOL = International Criminal Police Organization\nISESCO = Islamic Educational, Scientific and Cultural Organization\nNASA = National Aeronautics and Space Administration\nNIPORT = National Institute of Population Research and Training\nNSSS =  National Social Security Strategy\nOAPEC = Organization of Arab Petroleum Exporting Countries\nRDA = Rural Development Academy\nSARS-Co V-2 = Severe Acute Respiratory Syndrome Coronavirus 2\nSMTP = Simple Mail Transfer Protocol\nTIN = Tax Identification Number {fg:#ffffff;bg:#000000}or{/} Taxpayer Identification Number\nUNFCCC = United Nations Framework Convention on Climate Change\nUNGA = United Nation General Assembly\nUTC = Universal Time Coordinated\nVIRUS = Vital Information Resources Under Siege/Seize\nWIPO = World Intellectual Property Organization",
-          ""
+          "4IR = Fourth Industrial Revolution\nAD = Anno Domini\nBBC = British Broadcasting Corporation\nBCSIR = Bangladesh Council of Scientific and Industrial Research\nBGMEA = Bangladesh Garment Manufacturers and Exports Association\nBIMSTEC = Bay of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation\nBRRI = Bangladesh Rice Research Institute\nBSTI = Bangladesh Standards and Testing Institution\nBTRC = Bangladesh Telecommunication Regulatory Commission\nCIRDAP = Centre on Integrated Rural Development for Asia and the Pacific\nECNEC = Executive Committee of the National Economic Council\nECNEC = Executive Committee of the National Economic Council\nFAO = Food and Agriculture Organization of the United Nations\nHDMI = High-Definition Multimedia Interface\nINTERPOL = International Criminal Police Organization\nISESCO = Islamic Educational, Scientific and Cultural Organization\nNASA = National Aeronautics and Space Administration\nNIPORT = National Institute of Population Research and Training\nNSSS =  National Social Security Strategy\nOAPEC = Organization of Arab Petroleum Exporting Countries\nRDA = Rural Development Academy\nSARS-Co V-2 = Severe Acute Respiratory Syndrome Coronavirus 2\nSMTP = Simple Mail Transfer Protocol\nTIN = Tax Identification Number {fg:#ffffff;bg:#000000}or{/} Taxpayer Identification Number\nUNFCCC = United Nations Framework Convention on Climate Change\nUNGA = United Nation General Assembly\nUTC = Universal Time Coordinated\nVIRUS = Vital Information Resources Under Siege/Seize\nWIPO = World Intellectual Property Organization"
+        ],
+        [
+          "ADB = Asian Development Bank\nATM = Automated Teller Machine\nBARD = Bangladesh Academy for Rural Organization\nBBC = British Broadcasting Corporation\nBEPZA = Bangladesh Export Processing Zone Authority\nBGB = Border Guard Bangladesh\nBIMSTEC = Buy of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation\nBPS = bit per second\nBRAC = Bangladesh Rural Advancement Committee\nBRRI = Bangladesh Rice Research Institute\nBTCL = Bangladesh Telecommunications Company Limited\nBTRC = Bangladesh Telecommunication Regulatory Commission\nc-GP = E-Government Procurement\nCC = CarboCopy\nCFC = Chlorofluorocarbon\nCIRDAP = Center on Integrated Rural Development of Asia and Pacific\nCNG = Compressed Natural Gas\nCNN = Cable News Network\nCOVID-19 = Corona virus disease - 19\nCPU = Central Processing Unit\nDHCP = Dynamic Host Configuration Protocol\nDNA = Deoxyribo Nucleic Acid\nDVD = Digital Video Disk\nE-mail = Electronic Mail\ne-TIN = Tax Identification Number\nECNEC = Executive Committee of the National Economic Council\nEFT = Electronic Funds Transfer\nEMS = Electronic Manufacturing Service\nEPI = Expanded Program on Immunization\nEPZ = Export Processing Zone\nFAO = Food and Agricultural Organization\nFIFA = Federation of International Football Association\nGDP = Gross Domestic Product\nGNP = Gross National Product\nHTML = Hyper Text Markup Language\nHTTP = Hyper Text Transfer Protocol\nICT = Information and Communication Technology\nII.O = International Labour Organization\nIMF = International Monetary Fund\nINTERPOL = International Criminal Police Organization\nIRD = Intenal Resources Division\nITU = Information Telecommunication\nJRC = Joint River Commission\nLAN = Local Area Network\nLDC = Least Developed Country\nLPG = Liquefied Petroleum Gas\nMDG = Millennium Development Goals\nMICR = Magnetic Ink Character Recognition\nNAM = Non Aligned Movement\nNASA = National Aeronautics and Space Administration\nNATO = North Atlantic Treaty Organization\nNIPORT = National Institute of Population Research and Training\nOIC = Organization of Islamic Cooperation\nOMR = Optical Mark Recognition\nOPEC = Organization of the Petroleum Exporting Countries\nOPEC = The Organization of the Petroleum Exporting Countries\nPDF = Portable Document Format\nPLO = Palestine Libreation Organization\nRAB = Rapid Action Battilion\nRAM = Random Access Memory\nROM = Read Only Memory\nSAARC = South Asian Association for Regional Cooperation\nSAFTA = South Asian Free Trade Area\nSAPTA = SAARC Perferential Trading Arrangement\nSDG = Sustainable Development Goals\nSIM = Subscriber Identity Module\nSMTP = Simple Mail Transfer Protocol\nUNDP = United National Development Programme\nUNESCO = United Nations Education Scientific and Cultural Organization\nUNHCR = United Nations High Commissioner for Refugees\nURL = Uniform Resource Locator\nVAT = Value Added Tax\nVIROUS = Vital Information Resources Under Seize\nVoIP = Voice over Internet Protocol\nWAN = Wide Area Network\nWHO = World Health Organization\nWiMAX = Worldwide Interoperability for the Microwave Access\nWiMax = Worldwite Interoperability for Microwave access\nWTO = World Health Organization\nWWW = World Wide Web"
         ]
       ]
     },
