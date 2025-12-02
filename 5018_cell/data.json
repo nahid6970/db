@@ -288,7 +288,9 @@
           "textColor": "#FFFFFF"
         },
         "1-0": {
-          "rank": 2
+          "rank": 2,
+          "bgColor": "#804D00",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
