@@ -1940,9 +1940,9 @@
             {
                 "id": 14,
                 "title": "WWE Raw - 2025-12-01 - RAW 1697 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-12-02T16:15:32.760297",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 13,
@@ -2959,7 +2959,7 @@
                 "title": "One-Punch Man - S03E08 - Ninja Tale WEBDL-1080p Proper",
                 "watched": false,
                 "added_date": "2025-12-02T09:40:07.377598",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
