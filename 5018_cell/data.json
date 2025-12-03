@@ -1,5 +1,5 @@
 {
-  "activeSheet": 111,
+  "activeSheet": 70,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -10830,7 +10830,9 @@
     {
       "cellStyles": {
         "0-0": {
-          "rank": 1
+          "bgColor": "#C2FF80",
+          "rank": 1,
+          "textColor": "rgb(0, 0, 0)"
         }
       },
       "columns": [
@@ -10866,7 +10868,7 @@
       "name": "Nobel Prize",
       "rows": [
         [
-          "##__2025 Nobel Prize [14 People]__##\n**__Physics__**\n- John Clarke\n- Michel H. Devoret\n- John M. Martinis\n**__Chemistry__**\n- Susumu Kitagawa\n- Richard Robson\n- Omar M. Yaghi\n**__Physiology or Medicine__**\n- Mary E. Brunkow\n- Fred Ramsdell\n- Shimon Sakaguchi\n**__Literature__**\n- L\u00e1szl\u00f3 Krasznahorkai [\u09b9\u09be\u0999\u09cd\u0997\u09c7\u09b0\u09bf]\n**__Peace Prize__**\n- Maria Corina Machado\n**__Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2025__**\n- Joel Mokyr\n- Philippe Aghion & Peter Howitt\n",
+          "##__2025 Nobel Prize [14 People]__##\n**__Physics__**\n- John Clarke\n- Michel H. Devoret\n- John M. Martinis\n**__Chemistry__**\n- Susumu Kitagawa\n- Richard Robson\n- Omar M. Yaghi\n**__Physiology or Medicine__**\n- Mary E. Brunkow\n- Fred Ramsdell\n- Shimon Sakaguchi\n**__Literature__**\n- L\u00e1szl\u00f3 Krasznahorkai [==\u09b9\u09be\u0999\u09cd\u0997\u09c7\u09b0\u09bf==]\n**__Peace Prize__**\n- Maria Corina Machado [==\u09ad\u09c7\u09a8\u09bf\u099c\u09c1\u09af\u09bc\u09c7\u09b2\u09be==]\n**__Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2025__**\n- Joel Mokyr\n- Philippe Aghion & Peter Howitt\n",
           ""
         ],
         [
@@ -13249,7 +13251,7 @@
           "\u0985\u09a8\u09c1\u09b8\u09a8\u09cd\u09a7\u09be\u09a8\u09ae\u09c2\u09b2\u0995 \u09a4\u09a5\u09cd\u09af\u099a\u09bf\u09a4\u09cd\u09b0 **'\u09aa\u09cd\u09af\u09be\u09a8\u09cb\u09b0\u09cb\u09ae\u09be'** \u09aa\u09cd\u09b0\u099a\u09be\u09b0 \u0995\u09b0\u09c7 \u0995\u09cb\u09a8 \u09b8\u0982\u09ac\u09be\u09a6 \u09ae\u09be\u09a7\u09cd\u09af\u09ae?\n\u0995) [[\u09ac\u09bf\u09ac\u09bf\u09b8\u09bf]]\n\u0996) \u09b0\u09df\u099f\u09be\u09b0\u09cd\u09b8\n\u0997) \u098f\u098f\u09ab\u09aa\u09bf\n\u0998) \u098f\u09aa\u09bf\n- \u09b0\u09df\u099f\u09be\u09b0\u09cd\u09b8 - \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09b0 \u09ac\u09c3\u09b9\u09a4\u09cd\u09a4\u09ae (\u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u099c\u09cd\u09af)\n- ==\u098f\u098f\u09ab\u09aa\u09bf - \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09b0 \u09aa\u09cd\u09b0\u09be\u099a\u09c0\u09a8 (\u09ab\u09cd\u09b0\u09be\u09a8\u09cd\u09b8)=="
         ],
         [
-          "**\u09e7\u09e9 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb \u09ad\u09c7\u09a8\u09bf\u099c\u09c1\u09af\u09bc\u09c7\u09b2\u09be\u09b0 \u0989\u09aa\u09b0 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0 \u09af\u09c7 \u09b8\u09be\u09ae\u09b0\u09bf\u0995 \u0985\u09ad\u09bf\u09af\u09be\u09a8\u09c7\u09b0 \u0995\u09a5\u09be \u09ac\u09b2\u09c7 \u09a4\u09be\u09b0 \u09a8\u09be\u09ae \u0995\u09c0?**\n\u0995) Operation Enduring Freedom\n\u0996) [[Operation Midnight Hammer]]\n\u0997) Operation Southern Spear\n\u0998) Operation Peace Venezuela"
+          "**\u09e7\u09e9 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb ==\u09ad\u09c7\u09a8\u09bf\u099c\u09c1\u09af\u09bc\u09c7\u09b2\u09be\u09b0== \u0989\u09aa\u09b0 \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0 \u09af\u09c7 \u09b8\u09be\u09ae\u09b0\u09bf\u0995 \u0985\u09ad\u09bf\u09af\u09be\u09a8\u09c7\u09b0 \u0995\u09a5\u09be \u09ac\u09b2\u09c7 \u09a4\u09be\u09b0 \u09a8\u09be\u09ae \u0995\u09c0?**\n\u0995) Operation Enduring Freedom\n\u0996) [[Operation Midnight Hammer]]\n\u0997) Operation Southern Spear\n\u0998) Operation Peace Venezuela"
         ]
       ]
     },
