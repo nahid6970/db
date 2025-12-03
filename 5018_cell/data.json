@@ -1,5 +1,5 @@
 {
-  "activeSheet": 10,
+  "activeSheet": 1,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -240,14 +240,43 @@
     },
     {
       "cellStyles": {},
-      "columns": [],
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
       "mergedCells": {},
       "name": "mcq-BD",
-      "rows": []
+      "rows": [
+        [
+          "\u099c\u09c1\u09b2\u09be\u0987 \u0997\u09a3-\u0985\u09ad\u09cd\u09af\u09c1\u09a4\u09cd\u09a5\u09be\u09a8\u09c7\u09b0 \u0997\u09cd\u09b0\u09be\u09ab\u09bf\u09a4\u09bf \u09b0\u09df\u09c7\u099b\u09c7 \u0995\u09cb\u09a8 \u099f\u09be\u0995\u09be\u09b0 \u09a8\u09cb\u099f\u09c7?\n\u0995) \u09eb \u099f\u09be\u0995\u09be\n\u0996) \u09e7\u09e6 \u099f\u09be\u0995\u09be\n\u0997) \u09e8\u09e6\u09e6 \u099f\u09be\u0995\u09be\n\u0998) [[\u09b8\u09ac\u0997\u09c1\u09b2\u09cb]]"
+        ],
+        [
+          "\u099f\u09c7\u09b8\u09cd\u099f \u0995\u09cd\u09b0\u09bf\u0995\u09c7\u099f\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b8\u09b0\u09cd\u09ac\u09cb\u099a\u09cd\u099a \u0989\u0987\u0995\u09c7\u099f \u09b6\u09bf\u0995\u09be\u09b0\u09c0 \u0995\u09c7?\n\u0995) \u09b8\u09be\u0995\u09bf\u09ac \u0986\u09b2 \u09b9\u09be\u09b8\u09be\u09a8\n\u0996) \u09ae\u09be\u09b6\u09b0\u09be\u09ab\u09bf \u09ac\u09bf\u09a8 \u09ae\u09b0\u09cd\u09a4\u09c1\u099c\u09be\n\u0997) \u09a4\u09be\u09b8\u0995\u09bf\u09a8 \u0986\u09b9\u09ae\u09c7\u09a6\n\u0998) [[\u09a4\u09be\u0987\u099c\u09c1\u09b2 \u0987\u09b8\u09b2\u09be\u09ae]]"
+        ],
+        [
+          "\u0995\u0995\u09cd\u09b8\u09ac\u09be\u099c\u09be\u09b0 \u0987\u09a8\u09be\u09a8\u09bf \u09b8\u09ae\u09c1\u09a6\u09cd\u09b0\u09b8\u09c8\u0995\u09a4 \u09a5\u09c7\u0995\u09c7 \u09aa\u09be\u09df\u09c7 \u09b9\u09c7\u0981\u099f\u09c7 \u098f\u09ad\u09be\u09b0\u09c7\u09b8\u09cd\u099f\u09c7\u09b0 \u099a\u09c2\u09dc\u09be\u09df \u09aa\u09cc\u0981\u099b\u09be\u09a8\u09cb\u09b0 '\u09b8\u09bf \u099f\u09c1 \u09b8\u09be\u09ae\u09bf\u099f' \u0985\u09ad\u09bf\u09af\u09be\u09a8 \u09b8\u09ae\u09cd\u09aa\u09a8\u09cd\u09a8 \u0995\u09b0\u09c7\u099b\u09c7\u09a8 \u0995\u09c7?\n\u0995) \u09ac\u09be\u09ac\u09b0 \u0986\u09b2\u09c0\n\u0996) [[\u0987\u0995\u09b0\u09be\u09ae\u09c1\u09b2 \u09b9\u09be\u09b8\u09be\u09a8 \u09b6\u09be\u0995\u09bf\u09b2]] [7th BD]\n\u0997) \u09a4\u09be\u0987\u099c\u09c1\u09b2 \u09b9\u0995 \u09ae\u09bf\u09b2\u09a8\n\u0998) \u09a8\u09bf\u09b6\u09be\u09a4 \u09ae\u099c\u09c1\u09ae\u09a6\u09be\u09b0 [Prothom BD Women Averst Winner]"
+        ]
+      ]
     },
     {
       "cellStyles": {
         "1-0": {
+          "bgColor": "#C2FF80",
+          "textColor": "rgb(0, 0, 0)"
+        },
+        "5-0": {
           "bgColor": "#C2FF80",
           "textColor": "rgb(0, 0, 0)"
         }
@@ -285,6 +314,12 @@
         ],
         [
           "ASEAN'\u09b0 \u0995\u09a4\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8\u09c7 \u09a4\u09bf\u09ae\u09c1\u09b0 \u09b2\u09c7\u09b8\u09cd\u09a4\u09c7 \u09e7\u09e7\u09a4\u09ae [Last] \u09b8\u09a6\u09b8\u09cd\u09af\u09aa\u09a6 \u09b2\u09be\u09ad \u0995\u09b0\u09c7?\n\u0995) \u09ea\u09ea\u09a4\u09ae\n\u0996) \u09ea\u09eb\u09a4\u09ae\n\u0997) \u09ea\u09ec\u09a4\u09ae\n\u0998) [[\u09ea\u09ed\u09a4\u09ae]]"
+        ],
+        [
+          "G20'\u09b0 \u09e8\u09e6\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8 \u0995\u09a4 \u09a4\u09be\u09b0\u09bf\u0996\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09af\u09bc?\n\u0995) [[\u09e8\u09e8-\u09e8\u09e9 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb]]\n\u0996) \u09e7\u09ec-\u09e8\u09ed \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\n\u0997) \u09e8\u09e6-\u09e8\u09e8 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\n\u0998) \u09e7-\u09e8 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb"
+        ],
+        [
+          "\u09e7\u09ea-\u09e7\u09eb \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09ec G20'\u09b0 \u09e8\u09e7\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8 \u0995\u09cb\u09a5\u09be\u09df \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09ac\u09c7?\n\u0995) \u09ac\u09cd\u09b0\u09be\u09b8\u09bf\u09b2\u09bf\u09df\u09be, \u09ac\u09cd\u09b0\u09be\u099c\u09bf\u09b2\n\u0996) \u099c\u09cb\u09b9\u09be\u09a8\u09c7\u09b8\u09ac\u09be\u09b0\u09cd\u0997, \u09a6. \u0986\u09ab\u09cd\u09b0\u09bf\u0995\u09be\n\u0997) \u09a1\u09cb\u09b0\u09be\u09b2, \u09af\u09c1\u0995\u09cd\u09a4\u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\n\u0998) [[\u09ac\u09be\u09b2\u09bf, \u0987\u09a8\u09cd\u09a6\u09cb\u09a8\u09c7\u09b6\u09bf\u09af\u09bc\u09be]]"
         ]
       ]
     },
@@ -2948,10 +2983,10 @@
           "- \u09ac\u09cd\u09b0\u09bf\u099f\u09c7\u09a8 \u0987\u0989\u09b0\u09cb\u09aa\u09c0\u09df \u0987\u0989\u09a8\u09bf\u09df\u09a8 \u09a4\u09cd\u09af\u09be\u0997 \u0995\u09b0\u09c7 \u0995\u09ac\u09c7? \u09e9\u09e7 \u099c\u09be\u09a8\u09c1\u09df\u09be\u09b0\u09bf \u09e8\u09e6\u09e8\u09e6 - United Kingdom left the EU (a process known as {fg:#ffffff;bg:#000000}Brexit{/})\n- The latest country to join the EU is Croatia - 2013\n- \u0995\u09cb\u09a8 \u09a6\u09c7\u09b6\u099f\u09bf \u0987\u0989\u09b0\u09cb\u09aa\u09c0\u09df \u0987\u0989\u09a8\u09bf\u09df\u09a8\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af \u09a8\u09df? \u0986\u09b2\u099c\u09c7\u09b0\u09bf\u09df\u09be"
         ],
         [
-          "G-20 - G20",
+          "**G20** [G-20] ==19==",
           "",
           "",
-          " - G-20 consists of 19 Countries + European Union"
+          "- G-20 consists of ==19== Countries + European Union\n- G20'\u09b0 ==\u09e8\u09e6\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8== \u0995\u09a4 \u09a4\u09be\u09b0\u09bf\u0996\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09af\u09bc? \u09e8\u09e8-\u09e8\u09e9 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\n- G20 ==Johannesburg== summit 2025) \u09a6\u0995\u09cd\u09b7\u09bf\u09a3 \u0986\u09ab\u09cd\u09b0\u09bf\u0995\u09be\u09b0 \u099c\u09cb\u09b9\u09be\u09a8\u09c7\u09b8\u09ac\u09be\u09b0\u09cd\u0997\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09ac\u09c7\n- \u09e7\u09ea-\u09e7\u09eb \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 ==\u09e8\u09e6\u09e8\u09ec== ==G20'\u09b0 \u09e8\u09e7\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8== \u0995\u09cb\u09a5\u09be\u09df \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4 \u09b9\u09ac\u09c7? **\u09ac\u09be\u09b2\u09bf, \u0987\u09a8\u09cd\u09a6\u09cb\u09a8\u09c7\u09b6\u09bf\u09af\u09bc\u09be**\n- Last Country Joined is ==African Union (AU)=="
         ],
         [
           "G7 [G-7] ==7==",
@@ -3040,8 +3075,8 @@
         [
           "ASEAN",
           "",
-          "",
-          "- ASEAN'\u09b0 \u0995\u09a4\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8\u09c7 ==\u09a4\u09bf\u09ae\u09c1\u09b0 \u09b2\u09c7\u09b8\u09cd\u09a4\u09c7== **\u09e7\u09e7\u09a4\u09ae [Last] \u09b8\u09a6\u09b8\u09cd\u09af\u09aa\u09a6** \u09b2\u09be\u09ad \u0995\u09b0\u09c7? **\u09ea\u09ed\u09a4\u09ae**\n- Brunei, Cambodia, Indonesia, Laos, Malaysia, Myanmar, the Philippines, Singapore, Thailand, Vietnam & **Timor-Leste**\n- ==Timor-Leste== is the most recent member, having been admitted in 2022 and scheduled to join fully in 2025\n- 11 Country Easy to Remember [**MTV** \u09a4\u09c7 **FILM** \u09a6\u09c7\u0996\u09c7 **\u09aa\u09c1\u09a4\u09cd\u09b0\u09c7\u09b0** **BCS** \u09b9\u09b2\u09cb\u09a8\u09be]"
+          "Jakarta, Indonesia",
+          "- ASEAN'\u09b0 \u0995\u09a4\u09a4\u09ae \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8\u09c7 ==\u09a4\u09bf\u09ae\u09c1\u09b0 \u09b2\u09c7\u09b8\u09cd\u09a4\u09c7== **\u09e7\u09e7\u09a4\u09ae [Last] \u09b8\u09a6\u09b8\u09cd\u09af\u09aa\u09a6** \u09b2\u09be\u09ad \u0995\u09b0\u09c7? **==\u09ea\u09ed\u09a4\u09ae==**\n- **__Brunei__**, Cambodia, Indonesia, **Laos**, Malaysia, Myanmar, ==the Philippines==, Singapore, Thailand, Vietnam & **Timor-Leste**\n- ==Timor-Leste== is the most recent member, having been admitted in 2022 and scheduled to join fully in 2025\n- 11 Country Easy to Remember [**MTV** \u09a4\u09c7 **FILM** \u09a6\u09c7\u0996\u09c7 **\u09aa\u09c1\u09a4\u09cd\u09b0\u09c7\u09b0** **BCS** \u09b9\u09b2\u09cb\u09a8\u09be]"
         ]
       ]
     },
@@ -10503,18 +10538,18 @@
       "cellStyles": {},
       "columns": [
         {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": "25",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
           "name": "A",
-          "textColor": "#000000",
           "type": "text",
-          "width": "150"
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         },
         {
           "color": "#ffffff",
@@ -10624,6 +10659,10 @@
         ],
         [
           "Japan",
+          ""
+        ],
+        [
+          "Brunei Darussalam: Capital: Bandar Seri Begawan\nCambodia: Capital: Phnom Penh\nIndonesia: Capital: Jakarta (also the location of the ASEAN Secretariat)\nLaos: Capital: Vientiane\nMalaysia: Capital: Kuala Lumpur\nMyanmar: Capital: Naypyidaw\nPhilippines: Capital: Manila\nSingapore: Capital: Singapore\nThailand: Capital: Bangkok\nVietnam: Capital: Hanoi\nTimor-Leste: Capital: Dili ",
           ""
         ]
       ]
