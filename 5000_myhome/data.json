@@ -7541,5 +7541,28 @@
     "horizontal_text_color": "#ffffff",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "red"
+  },
+  {
+    "name": "Prompt - Session Timeout",
+    "group": "Chat-BOTE",
+    "default_type": "text",
+    "note": "also we maybe unning out of session token so if i start this in this session we may break it in midway so give me a promt so i can create a new session so it can understand and implement",
+    "click_action": "note",
+    "collapsible": true,
+    "display_style": "flex",
+    "horizontal_stack": false,
+    "password_protect": false,
+    "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
+    "top_border_color": "#444444",
+    "top_hover_color": "#3a3a3a",
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "#ffffff",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   }
 ]
