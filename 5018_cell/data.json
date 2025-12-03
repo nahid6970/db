@@ -316,6 +316,10 @@
           "bgColor": "#807600",
           "rank": 4,
           "textColor": "#FFFFFF"
+        },
+        "140-0": {
+          "bgColor": "#212529",
+          "textColor": "#F8F9FA"
         }
       },
       "columns": [
