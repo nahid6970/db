@@ -1,5 +1,5 @@
 {
-  "activeSheet": 78,
+  "activeSheet": 53,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -315,6 +315,9 @@
         ],
         [
           "\u09b0\u09b8\u09be\u09df\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b8\u09c1\u09b8\u09c1\u09ae\u09c1 \u0995\u09bf\u09a4\u09be\u0997\u09be\u0993\u09df\u09be\nb. \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u09a1 \u09b0\u09ac\u09b8\u09a8\nC. \u0993\u09ae\u09b0, \u0987. \u0987\u09df\u09be\u0998\u09bf\n**d. \u0989\u09aa\u09b0\u09c7\u09b0 \u09b8\u0995\u09b2**"
+        ],
+        [
+          "\u09ac\u09bf\u09a4\u09b0\u09cd\u0995\u09bf\u09a4 '\u09b8\u09cd\u09af\u09be\u09b0 \u0995\u09cd\u09b0\u09bf\u0995 \u0985\u099e\u09cd\u099a\u09b2' \u0995\u09cb\u09a8 \u09a6\u09c1\u099f\u09bf \u09a6\u09c7\u09b6\u09c7\u09b0 \u09b8\u09c0\u09ae\u09be\u09a8\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4?\n[[\u09ad\u09be\u09b0\u09a4-\u09aa\u09be\u0995\u09bf\u09b8\u09cd\u09a4\u09be\u09a8]]\n\u09aa\u09be\u0995\u09bf\u09b8\u09cd\u09a4\u09be\u09a8-\u0986\u09ab\u0997\u09be\u09a8\u09bf\u09b8\u09cd\u09a4\u09be\u09a8\n\u0987\u0989\u0995\u09cd\u09b0\u09c7\u09a8-\u09b0\u09be\u09b6\u09bf\u09df\u09be\n\u0986\u09b0\u09cd\u09ae\u09c7\u09a8\u09bf\u09df\u09be-\u0986\u099c\u09be\u09b0\u09ac\u09be\u0987\u099c\u09be\u09a8"
         ]
       ]
     },
@@ -375,6 +378,9 @@
         ],
         [
           "**\u09e9\u09e6 \u09a4\u09ae \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998 \u099c\u09b2\u09ac\u09be\u09af\u09bc\u09c1 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8 \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8** \u0995\u09ac\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4?\n\u09e7. [[\u09e7\u09e6-\u09e8\u09e7 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb]]\nb. \u09e7\u09ef-\u09e9\u09e6 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\n\u09eb. \u09e7\u09e6-\u09e8\u09e7 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\nd. \u09e8\u09e6-\u09e9\u09e7 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb"
+        ],
+        [
+          ""
         ]
       ]
     },
@@ -10014,7 +10020,12 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "10-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
@@ -10086,6 +10097,10 @@
         ],
         [
           "{fg:#ffffff;bg:#000000}**To**{/}\ninferior to\njunior to\nprefer to\npreferable to\nsenior to\nsuperior to",
+          ""
+        ],
+        [
+          "This Ring is made **__of__** gold\nThis Book is made **__from__** wood\n- when we can see a thing that is made with it then it will be ==of== for example the ring is made of gold and we can see it its made of gold\n- when its made of something that we cant see then it will be ==from== for example we dont know if its made of wood by just looking at the book",
           ""
         ]
       ]
