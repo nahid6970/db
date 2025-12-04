@@ -1,5 +1,5 @@
 {
-  "activeSheet": 53,
+  "activeSheet": 5,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -141,10 +141,6 @@
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
-    "English Grammar_35": true,
-    "English Grammar_36": true,
-    "English Grammar_37": true,
-    "English Grammar_39": true,
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8_9": true
   },
   "sheets": [
@@ -516,18 +512,18 @@
       },
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "JetBrains Mono",
+          "textColor": "#000000",
+          "font": "Comic Sans MS",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "mergedCells": {},
@@ -640,6 +636,9 @@
         ],
         [
           "Choose the correct sentence. [DU (A) 12-13]\nA. [[The jury are arguing among themselves.]]\nB. The jury is arguing among themselves.\nC. The jury has arguing among themselves.\nD. The jury has been arguing among themselves.\n- !!When the team is together then singular but when fighting then plural!!"
+        ],
+        [
+          "'This ring is made of gold.' gold \u09b6\u09ac\u09cd\u09a6\u099f\u09bf \u0995\u09cb\u09a8 \u09aa\u09cd\u09b0\u0995\u09be\u09b0\u09c7\u09b0 Noun?\nA. Collective\nB. Common\nC. [[Material noun]]\nD. Abstract\n- ring = common"
         ]
       ]
     },
