@@ -508,6 +508,14 @@
         "30-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
+        },
+        "38-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        },
+        "39-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -642,6 +650,12 @@
         ],
         [
           "Which one is correct?\nA. [[Kazi Nazrul Islam is the Shelly of Bangladesh]]\nB. Kazi Nazrul Islam is the Shelly of the Bangladesh\nC. Kazi Nazrul Islam is a Shelly of Bangladesh\nD. Kazi Nazrul Islam is a Shelly of the Bangladesh"
+        ],
+        [
+          "Nazrul is the Byron of Bangladesh. 'Byron' is used as Noun.\nA. Proper\nB. [[Common]]\nC. Material\nD. Abstract"
+        ],
+        [
+          "The charity of Hatem Tai is known to all. 'Charity' is used as_ Noun.\nA. material\nB. [[Common]]\nC. abstract\nD. collective\n- its abstract but since the is used before charity then its common"
         ]
       ]
     },
