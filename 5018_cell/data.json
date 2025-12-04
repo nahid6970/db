@@ -1,5 +1,5 @@
 {
-  "activeSheet": 3,
+  "activeSheet": 78,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -287,11 +287,36 @@
       ]
     },
     {
-      "name": "mcq-\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995",
-      "columns": [],
-      "rows": [],
       "cellStyles": {},
-      "mergedCells": {}
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "mergedCells": {},
+      "name": "mcq-\u09b8\u09be\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf\u0995",
+      "rows": [
+        [
+          "\u09b0\u09b8\u09be\u09df\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7? 2025\na. \u09b8\u09c1\u09b8\u09c1\u09ae\u09c1 \u0995\u09bf\u09a4\u09be\u0997\u09be\u0993\u09df\u09be\nb. \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u09a1 \u09b0\u09ac\u09b8\u09a8\nC. \u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf\nd. [[\u0989\u09aa\u09b0\u09c7\u09b0 \u09b8\u0995\u09b2]]"
+        ],
+        [
+          "==\u09e7\u09ec\u09a4\u09ae \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae== \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b9\u09c1\u09b8\u09b8\u09be\u09ae \u0986\u09ac\u09c1 \u09b8\u09be\u09ab\u09bf\u09af\u09bc\u09be\nb. [[\u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf [Palestine]]]\nC. \u09ae\u09cb\u09a4\u09be\u099c \u0986\u099c\u09be\u0987\u099c\u09be\nd. \u0993\u09df\u09be\u09df\u09c7\u09b2 \u0986\u09b0-\u09a6\u09be\u09b9\u09a6\u09cc\u09b9"
+        ],
+        [
+          "\u09b0\u09b8\u09be\u09df\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b8\u09c1\u09b8\u09c1\u09ae\u09c1 \u0995\u09bf\u09a4\u09be\u0997\u09be\u0993\u09df\u09be\nb. \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u09a1 \u09b0\u09ac\u09b8\u09a8\nC. \u0993\u09ae\u09b0, \u0987. \u0987\u09df\u09be\u0998\u09bf\n**d. \u0989\u09aa\u09b0\u09c7\u09b0 \u09b8\u0995\u09b2**"
+        ]
+      ]
     },
     {
       "cellStyles": {
@@ -322,6 +347,7 @@
       ],
       "mergedCells": {},
       "name": "mcq-Generals [GK]",
+      "nickname": "",
       "rows": [
         [
           "**\u09e7\u09ed \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb** \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998 \u09a8\u09bf\u09b0\u09be\u09aa\u09a4\u09cd\u09a4\u09be \u09aa\u09b0\u09bf\u09b7\u09a6 \u0997\u09be\u099c\u09be\u09df \u0985\u09b8\u09cd\u09a5\u09be\u09df\u09c0\u09ad\u09be\u09ac\u09c7 \u0995\u09cb\u09a8 \u09ac\u09be\u09b9\u09bf\u09a8\u09c0 \u0997\u09a0\u09a8\u09c7\u09b0 \u0985\u09a8\u09c1\u09ae\u09cb\u09a6\u09a8 \u09a6\u09c7\u09af\u09bc?\n\u0995) [[International Stabilization Force (ISF)]]\n\u0996) Gaza Stabilization Force (GSF)\n\u0997) Palestine Liberation Force (PSLF)\n\u0998) Hamas Liberation Front (HLF)"
@@ -350,8 +376,7 @@
         [
           "**\u09e9\u09e6 \u09a4\u09ae \u099c\u09be\u09a4\u09bf\u09b8\u0982\u0998 \u099c\u09b2\u09ac\u09be\u09af\u09bc\u09c1 \u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8 \u09b8\u09ae\u09cd\u09ae\u09c7\u09b2\u09a8** \u0995\u09ac\u09c7 \u0985\u09a8\u09c1\u09b7\u09cd\u09a0\u09bf\u09a4?\n\u09e7. [[\u09e7\u09e6-\u09e8\u09e7 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb]]\nb. \u09e7\u09ef-\u09e9\u09e6 \u09a8\u09ad\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\n\u09eb. \u09e7\u09e6-\u09e8\u09e7 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb\nd. \u09e8\u09e6-\u09e9\u09e7 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0 \u09e8\u09e6\u09e8\u09eb"
         ]
-      ],
-      "nickname": ""
+      ]
     },
     {
       "cellStyles": {
@@ -613,11 +638,11 @@
       ]
     },
     {
-      "name": "mcq-BANGLA",
-      "columns": [],
-      "rows": [],
       "cellStyles": {},
-      "mergedCells": {}
+      "columns": [],
+      "mergedCells": {},
+      "name": "mcq-BANGLA",
+      "rows": []
     },
     {
       "cellStyles": {},
@@ -2855,7 +2880,7 @@
           ""
         ],
         [
-          "\u09b0\u09b8\u09be\u09df\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b8\u09c1\u09b8\u09c1\u09ae\u09c1 \u0995\u09bf\u09a4\u09be\u0997\u09be\u0993\u09df\u09be\nb. \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u09a1 \u09b0\u09ac\u09b8\u09a8\nC. \u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf\nd. [[\u0989\u09aa\u09b0\u09c7\u09b0 \u09b8\u0995\u09b2]]",
+          "",
           ""
         ],
         [
@@ -6574,7 +6599,7 @@
           ""
         ],
         [
-          "\u09e7\u09ec\u09a4\u09ae \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b9\u09c1\u09b8\u09b8\u09be\u09ae \u0986\u09ac\u09c1 \u09b8\u09be\u09ab\u09bf\u09af\u09bc\u09be\nb. [[\u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf [Palestine]]]\nC. \u09ae\u09cb\u09a4\u09be\u099c \u0986\u099c\u09be\u0987\u099c\u09be\nd. \u0993\u09df\u09be\u09df\u09c7\u09b2 \u0986\u09b0-\u09a6\u09be\u09b9\u09a6\u09cc\u09b9",
+          "",
           ""
         ],
         [
@@ -11336,7 +11361,7 @@
       "name": "Nobel Prize",
       "rows": [
         [
-          "##__2025 Nobel Prize [14 People]__##\n**__Physics__**\n- John Clarke\n- Michel H. Devoret\n- John M. Martinis\n**__Chemistry__**\n- Susumu Kitagawa\n- Richard Robson\n- Omar M. Yaghi\n**__Physiology or Medicine__**\n- Mary E. Brunkow\n- Fred Ramsdell\n- Shimon Sakaguchi\n**__Literature__**\n- L\u00e1szl\u00f3 Krasznahorkai [==\u09b9\u09be\u0999\u09cd\u0997\u09c7\u09b0\u09bf==]\n**__Peace Prize__**\n- Maria Corina Machado [==\u09ad\u09c7\u09a8\u09bf\u099c\u09c1\u09af\u09bc\u09c7\u09b2\u09be==]\n**__Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2025__**\n- Joel Mokyr\n- Philippe Aghion & Peter Howitt\n",
+          "##__2025 Nobel Prize [==14== People]__##\n**__Physics__**\n- John Clarke\n- Michel H. Devoret\n- John M. Martinis\n**__Chemistry__**\n- Susumu Kitagawa\n- Richard Robson\n- Omar M. Yaghi [Palestine]\n**__Physiology or Medicine__**\n- Mary E. Brunkow\n- Fred Ramsdell\n- Shimon Sakaguchi\n**__Literature__**\n- L\u00e1szl\u00f3 Krasznahorkai [==\u09b9\u09be\u0999\u09cd\u0997\u09c7\u09b0\u09bf==]\n**__Peace Prize__**\n- Maria Corina Machado [==\u09ad\u09c7\u09a8\u09bf\u099c\u09c1\u09af\u09bc\u09c7\u09b2\u09be==]\n**__Sveriges Riksbank Prize in Economic Sciences in Memory of Alfred Nobel 2025__**\n- Joel Mokyr\n- Philippe Aghion & Peter Howitt\n\n\u09e7\u09ec\u09a4\u09ae \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7? \u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf",
           ""
         ],
         [
@@ -11360,10 +11385,6 @@
           ""
         ],
         [
-          "",
-          ""
-        ],
-        [
           "\u09aa\u09cd\u09b0\u09a4\u09bf \u09ac\u099b\u09b0 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b8\u09cd\u0995\u09be\u09b0 \u0986\u09a8\u09c1\u09b7\u09cd\u09a0\u09be\u09a8\u09bf\u0995\u09ad\u09be\u09ac\u09c7 \u0995\u09cb\u09a8 \u09a4\u09be\u09b0\u09bf\u0996\u09c7 \u09aa\u09cd\u09b0\u09a6\u09be\u09a8 \u0995\u09b0\u09be \u09b9\u09df? \u09e7\u09e6\u0987 \u09a1\u09bf\u09b8\u09c7\u09ae\u09cd\u09ac\u09b0",
           ""
         ],
@@ -11376,15 +11397,7 @@
           ""
         ],
         [
-          "\u09b0\u09b8\u09be\u09df\u09a8\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7?\na. \u09b8\u09c1\u09b8\u09c1\u09ae\u09c1 \u0995\u09bf\u09a4\u09be\u0997\u09be\u0993\u09df\u09be\nb. \u09b0\u09bf\u099a\u09be\u09b0\u09cd\u09a1 \u09b0\u09ac\u09b8\u09a8\nC. \u0993\u09ae\u09b0, \u0987. \u0987\u09df\u09be\u0998\u09bf\n**d. \u0989\u09aa\u09b0\u09c7\u09b0 \u09b8\u0995\u09b2**",
-          ""
-        ],
-        [
           "\u09b8\u09b0\u0995\u09be\u09b0\u09ac\u09bf\u09b0\u09cb\u09a7\u09c0 \u09ac\u09bf\u0995\u09cd\u09b7\u09cb\u09ad\u09c7 \u0989\u09a4\u09cd\u09a4\u09be\u09b2 **'\u09ae\u09be\u09a6\u09be\u0997\u09be\u09b8\u09cd\u0995\u09be\u09b0'** \u0995\u09cb\u09a8 \u09ae\u09b9\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09a6\u09c7\u09b6?\n\u0995. \u0987\u0989\u09b0\u09cb\u09aa\n\u0996. \u098f\u09b6\u09bf\u09df\u09be\n\u0997. [[\u0986\u09ab\u09cd\u09b0\u09bf\u0995\u09be]]\n\u0998. \u09a6\u0995\u09cd\u09b7\u09bf\u09a3 \u0986\u09ae\u09c7\u09b0\u09bf\u0995\u09be",
-          ""
-        ],
-        [
-          "\u09e7\u09ec\u09a4\u09ae \u09ae\u09c1\u09b8\u09b2\u09bf\u09ae \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a8\u09cb\u09ac\u09c7\u09b2 \u09aa\u09c1\u09b0\u09b7\u09cd\u0995\u09be\u09b0 \u09b2\u09be\u09ad \u0995\u09b0\u09c7\u09a8 \u0995\u09c7? \u0993\u09ae\u09b0. \u0987. \u0987\u09df\u09be\u0998\u09bf",
           ""
         ],
         [
