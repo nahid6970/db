@@ -1,5 +1,5 @@
 {
-  "activeSheet": 71,
+  "activeSheet": 4,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -415,33 +415,39 @@
       "rows": []
     },
     {
-      "name": "mcq-ENG",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
+      "mergedCells": {},
+      "name": "mcq-ENG",
       "rows": [
         [
           "25. An object through which light passes but people cannot see across clearly\n(a) heavy\n(b) cloudy\n(c) opaque\n(d) [[translucent]]"
         ],
         [
           "26. That which can be drunk\n(a) jeopardize\n(b) [[potable]]\n(c) risk\n(d) peril"
+        ],
+        [
+          "28. A truce or cessation from arms before a formal treaty is signed\n(a) dispute\n(b) [[armistice]]\n(c) commencement\n(d) disagreement"
+        ],
+        [
+          "29. A state of complete continence [sex]\n(a) [[celibacy]]\n(b) conceit\n(c) courage\n(d) arrogance"
         ]
-      ],
-      "cellStyles": {},
-      "mergedCells": {}
+      ]
     },
     {
       "cellStyles": {},
@@ -3390,8 +3396,8 @@
     {
       "cellStyles": {
         "0-0": {
-          "rank": 1,
           "bgColor": "#E60000",
+          "rank": 1,
           "textColor": "#FFFFFF"
         },
         "0-1": {
@@ -10994,7 +11000,7 @@
           "| ##Sentence##                                      | ##Substitution##   |\n| \u09ad\u09be\u09b7\u09be\u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8\u09c0 (\u09af\u09bf\u09a8\u09bf \u09ad\u09be\u09b7\u09be\u09b0 \u09ac\u09c8\u099c\u09cd\u099e\u09be\u09a8\u09bf\u0995 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3 \u0995\u09b0\u09c7\u09a8) | ==Linguist==       |\n| Speaks 2 languages fluently                       | ==bilingual==      |\n| A man who deals with language                     | ==Philologist==    |\n| speaks or understands many languages              | ==Polyglot==       |\n| Study of religion                                 | Theology           |\n| One who give up religious faith                   | ==Renegade==       |\n| A disbeliever in religion                         | Infidel            |\n| Narrow Religious Views                            | Bigotry/Fanaticism |\n| Breaking of religious or social images            | Iconoclasm         |\n| who undertakes a journey to a holy place          | Pilgrim            |"
         ],
         [
-          "| :K-A: Talking disrespectfully of sacred things           | blasphemy       |\n| Allowance paid by a husband to wife after separation     | alimony         |\n| The policy of extending a country's empire and influence | imperialism     |\n| A person who studies the formation of the earth          | geologist       |\n| One who feels at home in every country                   | cosmopolitian   |\n| A statement that is absolutely clear                     | unequivocal     |\n| Incapable of being explained                             | inexplicable    |\n| Handwriting that cannot be read                          | ==illegible==   |\n| Stage of growth between boyhood and youth                | ==adolescence== |\n| Animals that can live on land and water                  | ==amphibians==      |\nEasy to shape in desired form| malleable\nAn object through which light passes but people cannot see across clearly| translucent\nThat which can be drunk| potable"
+          "| :K-A: Talking disrespectfully of sacred things                            | blasphemy       |\n| Allowance paid by a husband to wife after separation                      | alimony         |\n| The policy of extending a country's empire and influence                  | imperialism     |\n| A person who studies the formation of the earth                           | geologist       |\n| One who feels at home in every country                                    | cosmopolitian   |\n| A statement that is absolutely clear                                      | unequivocal     |\n| Incapable of being explained                                              | inexplicable    |\n| Handwriting that cannot be read                                           | ==illegible==   |\n| Stage of growth between boyhood and youth                                 | ==adolescence== |\n| Animals that can live on land and water                                   | ==amphibians==  |\n| Easy to shape in desired form                                             | malleable       |\n| An object through which light passes but people cannot see across clearly | translucent     |\n| That which can be drunk                                                   | potable         |\n| A truce or cessation from arms before a formal treaty is signed           | ==armistice==       |"
         ]
       ]
     },
