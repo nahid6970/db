@@ -1,5 +1,5 @@
 {
-  "activeSheet": 5,
+  "activeSheet": 36,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -655,7 +655,19 @@
           "Nazrul is the Byron of Bangladesh. 'Byron' is used as Noun.\nA. Proper\nB. [[Common]]\nC. Material\nD. Abstract"
         ],
         [
-          "The charity of Hatem Tai is known to all. 'Charity' is used as_ Noun.\nA. material\nB. [[Common]]\nC. abstract\nD. collective\n- its abstract but since the is used before charity then its common"
+          "The charity of Hatem Tai is known to all. 'Charity' is used as_ Noun.\nA. material\nB. [[~~Common~~]]\nC. [[abstract]]\nD. collective\n\n??Charity \u2013 Abstract vs Common (Brief Note)??\nAbstract noun: When charity means generosity (a quality).\nThe charity of Hatem Tai is known to all. \u2192 charity = generosity\nCommon noun: When charity means a charitable organization.\nI donated money to a charity. \u2192 charity = an organization"
+        ],
+        [
+          "\"Let's play another round\", functions as\nA. [[a noun]] \nB. a pronoun\nC. a preposition\nD. an adverb"
+        ],
+        [
+          "He sleeps a sound sleep. The underlined word is-\nA. [[a noun]]\nB. a verb\nC. an adjective\nD. an adverb"
+        ],
+        [
+          "This is the go of life. Here 'go' is - [RU17-18]\nA. verb\nB. Adjective\nC. [[Noun]]\nD. Adverb"
+        ],
+        [
+          "I didn't lose, but yours was a better buy. In this sentence 'buy' is used as - [SUST]\nA. a verb\nB. [[a noun]]\nC. an adjective\nD. an object"
         ]
       ]
     },
@@ -8591,6 +8603,10 @@
         ],
         [
           "##Gerund[Verbal Noun] vs Participle##\nMethod1:\n**\u09af\u09a6\u09bf It \u09a6\u09bf\u09df\u09c7 Replace \u0995\u09b0\u09be \u09af\u09be\u09df \u09a4\u09be\u09b9\u09b2\u09c7 & meaningful then ==Gerund==**\n1. She enjoys _.swimming._.\u2705\n2. Rahim after infected with cancer gave up _.smoking._.\u2705\n3. _.Smoking._ causes cancer.\u2705\n4. _.Reading._ is an excellent habit.\u2705\n\n##Article +v.ing+ preposition## -> ==Gerund==\nThe _.writing._ of Shakespeare is really impressive.\nThe _.batting._ of Sakib Al Hasan is always eye soothing.\n-----\nMethod2:\nIf the -ing verb and its Bangla meaning stay in the same position as an adjective (describing a noun) -> ==Participle==\n- Rolling Stone [\u0998\u09c1\u09b0\u09a8\u09cd\u09a4 \u09aa\u09be\u09a5\u09b0]\n- Sleeping cat [\u0998\u09c1\u09ae\u09a8\u09cd\u09a4 \u09ac\u09bf\u09dc\u09be\u09b2]\n- Running Bus [\u099a\u09b2\u09a8\u09cd\u09a4 \u0997\u09be\u09dc\u09bf]\n\nIf the -ing verb and its Bangla meaning change position (Bangla verb comes later, usually as a noun-like activity), -> ==Gerund==\n- Catching fish [\u09ae\u09be\u099b \u09a7\u09b0\u09be]\n- Driving Bus [\u09ac\u09be\u09b8 \u099a\u09be\u09b2\u09be\u09a8\u09cb]\n- Telling lie [\u09ae\u09bf\u09a5\u09cd\u09af\u09be \u09ac\u09b2\u09be]\n\n##__Examples__##\n1. __Playing__ the piano relaxes her after a long day. [Crossed] -> Gerund\n2. __Eating__ fast food should be avoided. [Crossed] -> Gerund\n3. A crying baby is very difficult to manage. [Nope] -> Participle\n4. Everyone is gazing at the flying bird. [Nope] -> Participle\n-----\nMethod3:\n##Subject + verb + (person) + __ving__## -> ==Participle==\n- I saw him __playing__ cricket. -> Participle\n- I found him __cheating__ in the exam. -> Participle\n- The drill master found the boys __running__ in the field. -> [P]\n-----\nMethod4:\n##V.ing + Phrase, ==sub== + verb .......## -> Participle\n- __Finishing__ the task, ==He== will definitely come. -> Participle\n-- [It started with v.ing and there is a phrase and comman and sub]\n-----\n__##Some Examples on All Methods##__\n- __Walking__ is a good exercise. [it-method][G]\n- Look at the __flying bird__. [NotCrossed-MD][P]\n- He is fond of __playing cricket__. [Crossed-MD][G]\n- A rolling stone gathers no moss. [NotCrossed-MD][P]\n- __Reading__ is an excellent habit. [it-MD][G]\n- __Hearing__ the noise, the boy woke up. [M-4][P]",
+          ""
+        ],
+        [
+          "-> The acronyms PAD and PAVC refer to a grammar technique used to identify a noun or noun phrase within a sentence based on the words that precede it, often called \"noun signals\". The core idea is that certain parts of speech act as clear signals for the presence of a noun.\nHere is a breakdown of the rules for each acronym:\n==The PAD Method==\nThe PAD method is a basic rule focusing on the words immediately preceding a noun. \nP = Preposition, Possessive Adjective\nA = Article, Adjective\nD = Determiner \nRules for PAD:\nIf one word follows PAD: That single word is a noun.\nExample: \"He lives in Sylhet.\" (\"in\" is a preposition; \"Sylhet\" is a noun).\nIf two words follow PAD: The first word is an adjective, and the second word is a noun.\nExample: \"He lives in Sylhet city.\" (\"in\" is a preposition; \"Sylhet\" is an adjective modifying \"city\", which is the noun).\nIf three words follow PAD: The first word is an adverb, the second is an adjective, and the third is a noun.\nExample: \"It was a very beautiful day.\" (\"a\" is an article/determiner; \"very\" is an adverb; \"beautiful\" is an adjective; \"day\" is the noun). \n==The PAVC Method==\nThe acronym PAVC is a less common variation and seems to be a mnemonic that adds verbs and conjunctions to a list of word types, but it is not a standard, widely used grammar rule in the same way PAD is. The PAD method is the primary and more recognized technique for identifying nouns using \"signal\" words. \nOther Ways to Identify Nouns\nBeyond these acronyms, you can also identify nouns by looking for common suffixes and by checking if the word makes sense in common noun positions: \nCommon Suffixes: Many nouns end with suffixes such as -tion (population), -ness (happiness), -hood (childhood), -ity (validity), -ment (agreement), or -ship (friendship).\nArticles: Nouns often appear after articles like \"a,\" \"an,\" or \"the\".\nRole in a Sentence: Nouns are naming words that represent a person, place, thing, or idea, and they typically act as the subject or object of a verb. \n",
           ""
         ]
       ]
