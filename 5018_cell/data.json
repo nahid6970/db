@@ -3474,7 +3474,12 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "0-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
