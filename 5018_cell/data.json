@@ -1,5 +1,5 @@
 {
-  "activeSheet": 8,
+  "activeSheet": 5,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -466,7 +466,16 @@
       "rows": []
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "28-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        },
+        "29-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
@@ -569,6 +578,12 @@
         ],
         [
           "60. Specialist of diseases of infants\n(a) [[pediatrician]]\n(b) preterition\n(c) penetration\n(d) protrusion"
+        ],
+        [
+          "I recognized your voice at once. [RU (Law) 06-07]\nA. [[Common]]\nB. Proper\nC. Collective\nD. Abstract"
+        ],
+        [
+          "The poor are always unhappy. 'The poor' poor' is- noun. [IU 02-03]\nA. Plural common\nB. [[Plural proper]]\nC. Collective\nD. Material"
         ]
       ]
     },
@@ -653,6 +668,9 @@
           "rank": 2,
           "textColor": "#FFFFFF"
         },
+        "147-0": {
+          "rank": 8
+        },
         "2-0": {
           "bgColor": "#E6D400",
           "rank": 3,
@@ -675,9 +693,6 @@
           "bgColor": "#804D00",
           "rank": 7,
           "textColor": "#FFFFFF"
-        },
-        "147-0": {
-          "rank": 8
         }
       },
       "columns": [
@@ -14298,35 +14313,35 @@
       ]
     },
     {
-      "name": "\u0986\u0987\u09a8\u09b8\u09ad\u09be",
-      "columns": [
-        {
-          "name": "A",
-          "type": "text",
-          "width": "150",
-          "color": "#ffffff",
-          "textColor": "#000000",
-          "font": "JetBrains Mono",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
-          "headerBold": true,
-          "headerItalic": false,
-          "headerCenter": false
-        }
-      ],
-      "rows": [
-        [
-          "##__\u09b6\u09b0\u09cd\u099f\u0995\u09be\u099f\u09c7 \u09e6\u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u0986\u0987\u09a8\u09b8\u09ad\u09be \u09ae\u09c1\u0996\u09b8\u09cd\u09a5__##\n- \u099c\u09be\u09aa\u09be\u09a8 - Diet -> \u099c\u09be\u09a4\u09c0\u09af\u09bc \u0996\u09be\u09a6\u09cd\u09af -> \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09ac\u09bf\u0995\u0995\u09cd\u09b7 \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09b8\u0982\u09b8\u09a6\n\n- \u0987\u09b8\u09b0\u09be\u09df\u09c7\u09b2 - \u09a8\u09c7\u09b8\u09c7\u099f (Knesset) - [Nasty-Cancer]\n\n- \u09a4\u09be\u0987\u0993\u09af\u09bc\u09be\u09a8 - \u0987\u0989\u09af\u09bc\u09be\u09a8 (Legislative Yuan)\n- \u099c\u09b0\u09cd\u09a1\u09be\u09a8 - Majlis Al-Umma [\u0986\u09ae\u09cd\u09ae\u09be]\n- \u099a\u09c0\u09a8 - \u0997\u09a3\u0995\u0982\u0997\u09cd\u09b0\u09c7\u09b8\u09cd / National People's Congress \u09ac\u09be ==NPC==) - [Chinese are NPC Bots]\n- \u0986\u099c\u09be\u09b0\u09ac\u09be\u0987\u099c\u09be\u09a8 - \u09ae\u09bf\u09b2\u09bf \u09ae\u09c7\u099c\u09b2\u09bf\u09b8 [\u0986\u099c\u09be\u0987\u09b0\u09be \u09ac\u09be\u0987\u099c\u09be\u09a8 ==\u09ae\u09bf\u09b2\u09bf== \u09ae\u099c\u09b2\u09bf\u09b8 \u098f \u0997\u09be\u09a8 \u09b6\u09cb\u09a8\u09c7]\n- \u09ad\u09c2\u099f\u09be\u09a8 - \u099f\u09b6\u09cb\u0997\u09a6\u09c1/Tshogdu [So Good Smoke Free]\n- \u09ae\u09be\u09b2\u09a6\u09cd\u09ac\u09c0\u09aa - \u09aa\u09bf\u09aa\u09b2\u09b8 \u09ae\u099c\u09b2\u09bf\u09b8 [Peples Dis. abt gettinging Under Sea Issue]\n- \u09a1\u09c7\u09a8\u09ae\u09be\u09b0\u09cd\u0995 - \u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982 / Folketing [\u09a1\u09c7\u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982]\n- \u09a8\u09b0\u0993\u09df\u09c7 - \u09b8\u09cd\u099f\u09b0\u09cd\u099f\u09bf\u0982 / Stortinget [\u09a8\u09b8\u09cd\u099f]\n- \u09b8\u09c1\u0987\u09a1\u09c7\u09a8 - \u09b0\u09bf\u0995\u09cd\u09b8\u09a1\u09cd\u09af\u09be\u0997 (Riksdag) [\u09b8\u09c1\u0987\u09a1\u09cd\u09af\u09be\u0997]\n- \u0995\u09cd\u09b0\u09cb\u09df\u09c7\u09b6\u09bf\u09df\u09be - \u0995\u09cd\u09b0\u09cb\u09af\u09bc\u09c7\u09b6\u09bf\u09af\u09bc\u09be\u09a8 \u09b8\u0982\u09b8\u09a6 (Hrvatski sabor) [==\u0995\u09be\u0995== \u09b8\u09ac \u0996\u09c7\u09df\u09c7 \u09b8\u09be\u09ac\u09b0 \u0995\u09b0\u09c7 \u09ab\u09c7\u09b2\u09b2\u09cb]\n- \u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1 - \u09b8\u09c7\u099c\u09ae / Sejm [\u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7\u09b0 \u09b8\u09bf\u09ae \u0986\u09ae\u09be\u09b0 \u09ab\u09c7\u09ad\u09be\u09b0\u09bf\u099f]\n- \u09ae\u0999\u09cd\u0997\u09cb\u09b2\u09bf\u09df\u09be - \u09a5\u09c1\u09b0\u09be\u09b2 / \u09b8\u09cd\u099f\u09c7\u099f \u0997\u09cd\u09b0\u09c7\u099f \u0996\u09c1\u09b0\u09be\u09b2 (State Great Khural) [Mongolians Attack w Thural / Kural]"
-        ]
-      ],
-      "parentSheet": 68,
       "cellStyles": {
         "0-0": {
           "bgColor": "#004480",
           "textColor": "#FFFFFF"
         }
-      }
+      },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "\u0986\u0987\u09a8\u09b8\u09ad\u09be",
+      "parentSheet": 68,
+      "rows": [
+        [
+          "##__\u09b6\u09b0\u09cd\u099f\u0995\u09be\u099f\u09c7 \u09e6\u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u0986\u0987\u09a8\u09b8\u09ad\u09be \u09ae\u09c1\u0996\u09b8\u09cd\u09a5__##\n- \u099c\u09be\u09aa\u09be\u09a8 - Diet -> \u099c\u09be\u09a4\u09c0\u09af\u09bc \u0996\u09be\u09a6\u09cd\u09af -> \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09ac\u09bf\u0995\u0995\u09cd\u09b7 \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09b8\u0982\u09b8\u09a6\n\n- \u0987\u09b8\u09b0\u09be\u09df\u09c7\u09b2 - \u09a8\u09c7\u09b8\u09c7\u099f (Knesset) - [Nasty-Cancer]\n\n- \u09a4\u09be\u0987\u0993\u09af\u09bc\u09be\u09a8 - \u0987\u0989\u09af\u09bc\u09be\u09a8 (Legislative Yuan)\n- \u099c\u09b0\u09cd\u09a1\u09be\u09a8 - Majlis Al-Umma [\u0986\u09ae\u09cd\u09ae\u09be]\n- \u099a\u09c0\u09a8 - \u0997\u09a3\u0995\u0982\u0997\u09cd\u09b0\u09c7\u09b8\u09cd / National People's Congress \u09ac\u09be ==NPC==) - [Chinese are NPC Bots]\n- \u0986\u099c\u09be\u09b0\u09ac\u09be\u0987\u099c\u09be\u09a8 - \u09ae\u09bf\u09b2\u09bf \u09ae\u09c7\u099c\u09b2\u09bf\u09b8 [\u0986\u099c\u09be\u0987\u09b0\u09be \u09ac\u09be\u0987\u099c\u09be\u09a8 ==\u09ae\u09bf\u09b2\u09bf== \u09ae\u099c\u09b2\u09bf\u09b8 \u098f \u0997\u09be\u09a8 \u09b6\u09cb\u09a8\u09c7]\n- \u09ad\u09c2\u099f\u09be\u09a8 - \u099f\u09b6\u09cb\u0997\u09a6\u09c1/Tshogdu [So Good Smoke Free]\n- \u09ae\u09be\u09b2\u09a6\u09cd\u09ac\u09c0\u09aa - \u09aa\u09bf\u09aa\u09b2\u09b8 \u09ae\u099c\u09b2\u09bf\u09b8 [Peples Dis. abt gettinging Under Sea Issue]\n- \u09a1\u09c7\u09a8\u09ae\u09be\u09b0\u09cd\u0995 - \u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982 / Folketing [\u09a1\u09c7\u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982]\n- \u09a8\u09b0\u0993\u09df\u09c7 - \u09b8\u09cd\u099f\u09b0\u09cd\u099f\u09bf\u0982 / Stortinget [\u09a8\u09b8\u09cd\u099f]\n- \u09b8\u09c1\u0987\u09a1\u09c7\u09a8 - \u09b0\u09bf\u0995\u09cd\u09b8\u09a1\u09cd\u09af\u09be\u0997 (Riksdag) [\u09b8\u09c1\u0987\u09a1\u09cd\u09af\u09be\u0997]\n- \u0995\u09cd\u09b0\u09cb\u09df\u09c7\u09b6\u09bf\u09df\u09be - \u0995\u09cd\u09b0\u09cb\u09af\u09bc\u09c7\u09b6\u09bf\u09af\u09bc\u09be\u09a8 \u09b8\u0982\u09b8\u09a6 (Hrvatski sabor) [==\u0995\u09be\u0995== \u09b8\u09ac \u0996\u09c7\u09df\u09c7 \u09b8\u09be\u09ac\u09b0 \u0995\u09b0\u09c7 \u09ab\u09c7\u09b2\u09b2\u09cb]\n- \u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1 - \u09b8\u09c7\u099c\u09ae / Sejm [\u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7\u09b0 \u09b8\u09bf\u09ae \u0986\u09ae\u09be\u09b0 \u09ab\u09c7\u09ad\u09be\u09b0\u09bf\u099f]\n- \u09ae\u0999\u09cd\u0997\u09cb\u09b2\u09bf\u09df\u09be - \u09a5\u09c1\u09b0\u09be\u09b2 / \u09b8\u09cd\u099f\u09c7\u099f \u0997\u09cd\u09b0\u09c7\u099f \u0996\u09c1\u09b0\u09be\u09b2 (State Great Khural) [Mongolians Attack w Thural / Kural]"
+        ]
+      ]
     }
   ]
 }
