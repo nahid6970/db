@@ -1,5 +1,5 @@
 {
-  "activeSheet": 52,
+  "activeSheet": 70,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -10911,39 +10911,24 @@
       "cellStyles": {},
       "columns": [
         {
+          "name": "One word Substitution",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
+          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "18",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
           "headerBold": true,
-          "headerCenter": false,
           "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
+          "headerCenter": false
         }
       ],
       "name": "Substitute Word",
       "rows": [
         [
-          "Sentence | One word Substitution\n\u09ad\u09be\u09b7\u09be\u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8\u09c0 (\u09af\u09bf\u09a8\u09bf \u09ad\u09be\u09b7\u09be\u09b0 \u09ac\u09c8\u099c\u09cd\u099e\u09be\u09a8\u09bf\u0995 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3 \u0995\u09b0\u09c7\u09a8) | ==Linguist==\nspeaking two languages fluently|==bilingual==\nA man who deals with language | ==Philologist==\nspeaks or understands many languages | ==Polyglot==\nOne who give up religious faith | ==Renegade==\nA disbeliever in religion | Infidel\nReligious intolerance/narrow religious views | Bigotry/Fanaticism\nBreaking of religious or social images | Iconoclasm\nOne who undertakes a journey to a holy place | Pilgrim\nStudy of religion|Theology",
-          ""
+          "##Sentence## | ##Substitution##\n\u09ad\u09be\u09b7\u09be\u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8\u09c0 (\u09af\u09bf\u09a8\u09bf \u09ad\u09be\u09b7\u09be\u09b0 \u09ac\u09c8\u099c\u09cd\u099e\u09be\u09a8\u09bf\u0995 \u09ac\u09bf\u09b6\u09cd\u09b2\u09c7\u09b7\u09a3 \u0995\u09b0\u09c7\u09a8) | ==Linguist==\nspeaking two languages fluently|==bilingual==\nA man who deals with language | ==Philologist==\nspeaks or understands many languages | ==Polyglot==\nOne who give up religious faith | ==Renegade==\nA disbeliever in religion | Infidel\nReligious intolerance/narrow religious views | Bigotry/Fanaticism\nBreaking of religious or social images | Iconoclasm\nOne who undertakes a journey to a holy place | Pilgrim\nStudy of religion|Theology"
         ]
       ]
     },
