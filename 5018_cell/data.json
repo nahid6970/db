@@ -855,10 +855,25 @@
           "A sum of money doubles itself in 8 years at a certain rate of simple interest. In how many years will it become four times itself at the same rate of interest?\nA. [[24]]\nB. 32\nC. 28\nD. 30"
         ],
         [
-          "If 12 workers can complete a project in 15 days, how many days will it take for 9 workers to complete the same project, assuming they all work at the same rate?\nA. 18\nB. 20\nC. 24\nD. 25"
+          "If 12 workers can complete a project in 15 days, how many days will it take for 9 workers to complete the same project, assuming they all work at the same rate?\nA. 18\nB. [[20]]\nC. 24\nD. 25"
         ],
         [
-          "If x and y are positive integers such that 3^(x + y)^ = 94 and 2^ (x - y)^ = 16 what is the value of x\u00b2 - y\u00b2 ?\nA. 12\nB. 16\nC. 24\nD. 32"
+          "If x and y are positive integers such that 3^(x + y)^ = 94 and 2^ (x - y)^ = 16 what is the value of x\u00b2 - y\u00b2 ?\nA. 12\nB. 16\nC. 24\nD. [[32]]"
+        ],
+        [
+          "If a and b are positive real numbers, then (a\u00b0-3b\u00b0)5=?\n0\n1\n[[-32]]\n32"
+        ],
+        [
+          "Solve for x: log(2) * (x + 3) = 4\n1\n19\n[[13]]\n32"
+        ],
+        [
+          "Solve the inequality: 4(x - 6) + 4 < 8(x - 4)\nA. x < 3\nB. [[x > 3]]\nC. x > 4\nD. x < 4"
+        ],
+        [
+          "Two similar triangles have areas in the ratio 4:9. If the perimeter of the smaller triangle is 20, what is the perimeter of the larger triangle?\n\u0391. 25\nB. 30\nC. 35\nD. 45"
+        ],
+        [
+          "In a trapezoid, the lengths of the two parallel bases are 10 and 16. if the height of the trapezoid is 4, find the area of the trapezoid.\nA. 48\nB. 52\nC. 56\nD. 104"
         ]
       ]
     },
