@@ -1,5 +1,5 @@
 {
-  "activeSheet": 9,
+  "activeSheet": 6,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -779,10 +779,29 @@
     },
     {
       "cellStyles": {},
-      "columns": [],
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
       "mergedCells": {},
       "name": "mcq-BANGLA",
-      "rows": []
+      "rows": [
+        [
+          "\u09e7. \u09b6\u09ac\u09cd\u09a6 \u09af\u0996\u09a8 \u09ac\u09be\u0995\u09cd\u09af\u09c7 \u09ac\u09cd\u09af\u09ac\u09b9\u09c3\u09a4 \u09b9\u09df \u09a4\u0996\u09a8 \u09a4\u09be\u0995\u09c7 \u0995\u09bf \u09ac\u09b2\u09c7?\n\u09aa\u09cd\u09b0\u09a4\u09cd\u09af\u09df\n[[\u09aa\u09a6]]\n\u09ac\u09bf\u09ad\u0995\u09cd\u09a4\u09bf\n\u09b6\u09ac\u09cd\u09a6\n\u09e8. \u0989\u09aa\u09ae\u09be\u09a8 \u0995\u09b0\u09cd\u09ae\u09a7\u09be\u09b0\u09df \u09b8\u09ae\u09be\u09b8 \u098f\u09b0 \u09b8\u09a0\u09bf\u0995 \u0989\u09a6\u09be\u09b9\u09b0\u09a3 \u0995\u09cb\u09a8\u099f\u09bf?\n(\u0995) \u099a\u09be\u0981\u09a6\u09ae\u09c1\u0996\n(\u0996) [[\u09a4\u09c1\u09b7\u09be\u09b0\u09b6\u09c1\u09ad\u09cd\u09b0]]\n(\u0997) \u09b8\u09bf\u0982\u09b9\u09aa\u09c1\u09b0\u09c1\u09b7\n(\u0998) \u09ae\u09c1\u0996\u099a\u09a8\u09cd\u09a6\u09cd\u09b0\n\u09e9. \u09ac\u09bf\u09b6\u09c7\u09b7\u09a3 \u09aa\u09a6 \u098f\u09b0 \u09b8\u0999\u09cd\u0997\u09c7 \u0995\u09c3\u09ce-\u09aa\u09cd\u09b0\u09a4\u09cd\u09af\u09df\u09af\u09cb\u0997\u09c7 \u0997\u09a0\u09bf\u09a4 \u09b6\u09ac\u09cd\u09a6 \u0995\u09cb\u09a8\u099f\u09bf?\n(\u0995) [[\u099a\u09b2\u09a8\u09cd\u09a4]]\n(\u0996) \u0996\u09c7\u09b2\u09cb\u09df\u09be\u09dc\n(\u0997) \u09aa\u09be\u09a8\u09b8\u09c7\n(\u0998) \u09b2\u09bf\u0996\u09bf\u09a4"
+        ]
+      ]
     },
     {
       "cellStyles": {},
@@ -804,18 +823,6 @@
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
         },
-        "3-0": {
-          "bgColor": "#6C757D",
-          "textColor": "#FFFFFF"
-        },
-        "4-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "5-0": {
-          "bgColor": "#B30000",
-          "textColor": "#FFFFFF"
-        },
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -828,15 +835,27 @@
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
         },
-        "17-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
         "16-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
+        "17-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "18-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        },
+        "3-0": {
+          "bgColor": "#6C757D",
+          "textColor": "#FFFFFF"
+        },
+        "4-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
         }
@@ -5243,7 +5262,7 @@
           "\u0985\u09aa\u09b0\u09bf\u09ac\u09b0\u09cd\u09a4\u09a8\u09c0\u09af\u09bc"
         ],
         [
-          "invective, Diabolical",
+          "==invective==, ==Diatribe==",
           "\u0986\u0995\u09cd\u09b0\u09ae\u09a3\u09be\u09a4\u09cd\u09ae\u0995, \u09aa\u09cd\u09b0\u09a4\u09bf\u09b9\u09bf\u0982\u09b8\u09be \u09aa\u09b0\u09be\u09af\u09bc\u09a3"
         ],
         [
@@ -14731,6 +14750,32 @@
       "rows": [
         [
           "- @@to be or not to be@@ [**==Hamlet==**][William Shakespeare]\n- @@to have and have not@@ [**==In Our Times==**][Ernest Hemingway]"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "1",
+      "parentSheet": 18,
+      "rows": [
+        [
+          ""
         ]
       ]
     }
