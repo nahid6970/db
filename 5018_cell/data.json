@@ -137,7 +137,8 @@
     "132": "Literature",
     "133": "Literature",
     "134": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "135": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
+    "135": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "136": "Literature"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -7388,16 +7389,37 @@
     },
     {
       "cellStyles": {
-        "13-0": {
-          "bold": false
+        "0-0": {
+          "rank": 1
         },
-        "14-1": {
-          "bold": false
+        "1-0": {
+          "rank": 2
+        },
+        "2-0": {
+          "rank": 3
+        },
+        "3-0": {
+          "rank": 4
+        },
+        "4-0": {
+          "rank": 5
         },
         "5-0": {
+          "rank": 6
+        },
+        "6-0": {
+          "rank": 7
+        },
+        "12-0": {
           "center": false
         },
-        "5-1": {
+        "12-1": {
+          "bold": false
+        },
+        "19-0": {
+          "bold": false
+        },
+        "20-1": {
           "bold": false
         }
       },
@@ -7435,6 +7457,34 @@
       "name": "English Literature",
       "rows": [
         [
+          "{fg:#ffffff;bg:#000000}William Shakespeare{/}",
+          "{fg:#ffffff;bg:#000000}\u09a8\u09be\u099f\u0995 / Play{/}\n- {fg:#ff0000}**Hamlet**{/}-(\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf) (setting \u099b\u09bf\u09b2\u09cb Helsingor (Denmark)) (\u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u09ac\u09dc \u09a8\u09be\u099f\u0995) (Prince Hamlet \u09a4\u09be\u09b0 \u09ac\u09be\u09ac\u09be\u09b0 \u09b9\u09a4\u09cd\u09af\u09be\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09cb\u09a7 \u0997\u09cd\u09b0\u09b9\u09a3\u0995\u09c7 \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u0995\u09b0\u09c7 \u09a8\u09be\u099f\u0995\u099f\u09bf\u09b0 \u09aa\u09c1\u09b0\u09cb plot)\n- {fg:#ff0000}**Julius Caesar**{/} (\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf/Historical)\n- **Romeo and Juliet**\n- {fg:#ff0000}**Macbeth**{/}\n- Love's Labour's Lost\n- {fg:#ff0000}**King Lear**{/}\n- Antonio and Cleopatra\n- {fg:#ff0000}**Othello**{/}\n- As You Like It (play/drama)\n- The Merchant of Venice\n{fg:#ffffff;bg:#000000}Lines:{/}\n- Neither a borrower nor a lender be, For loan oft loses both itself and friend. - **Hamlet**\n- \"How sharper than a serpent's tooth it is to have a thankless child!\" -**King Lear**\n- \"Nothing will come of nothing.\"\n- \"I am a man more sinned against than sinning.\" -**King Lear**\n- \"When we are born, we cry that we are come to this great stage of fools.\"-**King Lear**\n- \"Thou shouldst not have been old till thou hadst been wise.\"-**King Lear**\n- blow blow thou winter wind though are not so on kind (**As You Like It**)\n- life is a tale told by an Idiot full of sound and Fury signifying nothing (**Macbeth**)\n- Cowards die many times before their deaths: The valiant never taste of death but once (Ju**lius Caesar**)\n- I am one who loved not wisely but too well' is a quotation (swam song -- \u09b6\u09c7\u09b7 \u0995\u09b0\u09cd\u09ae -- **Othello**)\n- the famous line **\"to be or not to be\"** appears - Hamlet"
+        ],
+        [
+          "T.S. Eliot",
+          "- **Murder in Cathedral** [==Play==]\n- Tradition and the Individual Talent ==Essay==\n- The Waste Land [!!Poem!!]"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}John Milton{/}\n- John Milton \u099b\u09bf\u09b2\u09c7\u09a8 \u098f\u0995\u099c\u09a8 **\u09ae\u09b9\u09be\u0995\u09ac\u09bf, \u09aa\u09cd\u09b0\u09be\u09ac\u09a8\u09cd\u09a7\u09bf\u0995 \u0993 \u0987\u09a4\u09bf\u09b9\u09be\u09b8\u09ac\u09bf\u09a6** \u09af\u09bf\u09a8\u09bf Shakespeare-\u098f\u09b0 \u09aa\u09b0 \u0987\u0982\u09b0\u09c7\u099c\u09bf \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09c7\u09b0 \u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b2\u09c7\u0996\u0995 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u0964 \u09a4\u09be\u0981\u0995\u09c7 **'The Epic Poet' \u0993 'Master of Blank Verse'** \u09ac\u09b2\u09be \u09b9\u09df\u0964",
+          "- Lycidas (Elegy)\n- Paradise Lost (Epic)\n-- Paradise Lost \u0987\u0982\u09b0\u09c7\u099c\u09bf \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af. \u09ae\u09cb\u099f **\u09e7\u09e8\u099f\u09bf \u0996\u09a3\u09cd\u09a1\u09c7 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4** \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af\u099f\u09bf **Blank Verse \u09ac\u09be \u0985\u09ae\u09bf\u09a4\u09cd\u09b0\u09be\u0995\u09cd\u09b7\u09b0 \u099b\u09a8\u09cd\u09a6\u09c7 \u09b0\u099a\u09bf\u09a4** \u098f\u09b0 __\u09ae\u09c2\u09b2 \u09ac\u09bf\u09b7\u09df\u09ac\u09b8\u09cd\u09a4\u09c1 \u09b9\u09b2\u09cb- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09aa\u09a4\u09a8 \u0993 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09a8\u09cd\u09af\u09be\u09df\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u0995\u09be\u099b\u09c7 \u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09af\u09c1\u0995\u09cd\u09a4\u09ad\u09be\u09ac\u09c7 \u0989\u09aa\u09b8\u09cd\u09a5\u09be\u09aa\u09a8 \u0995\u09b0\u09be (Justify the ways of God to men)__\u0964 \u098f \u0995\u09be\u09ac\u09cd\u09af\u09c7 \u09a6\u09c7\u0996\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7, \u09b6\u09df\u09a4\u09be\u09a8 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997\u09c7 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09ac\u09bf\u09b0\u09c1\u09a6\u09cd\u09a7\u09c7 \u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9 \u0995\u09b0\u09c7 \u098f\u09ac\u0982 \u09ab\u09b2\u09b8\u09cd\u09ac\u09b0\u09c2\u09aa \u09a4\u09be\u0995\u09c7 \u0993 \u09a4\u09be\u09b0 \u0985\u09a8\u09c1\u09b8\u09be\u09b0\u09c0\u09a6\u09c7\u09b0 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u0995\u09b0\u09be \u09b9\u09df\u0964  \u098f\u09b0\u09aa\u09b0 \u09b6\u09df\u09a4\u09be\u09a8 \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09a4\u09c7 \u098f\u09b8\u09c7 \u0986\u09a6\u09bf \u09ae\u09be\u09a8\u09ac\u09c0 \u0987\u09ad\u0995\u09c7 \u09a8\u09bf\u09b7\u09bf\u09a6\u09cd\u09a7 \u0997\u09be\u099b\u09c7\u09b0 \u09ab\u09b2 \u0996\u09c7\u09a4\u09c7 \u09aa\u09cd\u09b0\u09b0\u09cb\u099a\u09bf\u09a4 \u0995\u09b0\u09c7, \u09af\u09be\u09b0 \u09ab\u09b2\u09c7 \u0986\u09a6\u09ae \u0993 \u0987\u09ad \u0989\u09ad\u09df\u09c7\u0987 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u09b9\u09a8\u0964\n- Paradise Regained (Epic)\n- Samson Agonistes {fg:#ffffff;bg:#000000}tragedy{/}\n- On His Blindness\n- On the Morning of Christ's Nativity\n- Of Education (Prose)"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}John Keats{/}\n- John Keats-\u0995\u09c7 **'Poet of Beauty'** \u09ac\u09b2\u09be \u09b9\u09df \u0995\u09be\u09b0\u09a3 \u09a4\u09bf\u09a8\u09bf \u09b8\u09cc\u09a8\u09cd\u09a6\u09b0\u09cd\u09af\u0995\u09c7 \u099c\u09c0\u09ac\u09a8 \u0993 \u0995\u09ac\u09bf\u09a4\u09be\u09b0 \u09ae\u09c2\u09b2 \u0989\u09aa\u09be\u09a6\u09be\u09a8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a6\u09c7\u0996\u09a4\u09c7\u09a8\u0964 ",
+          "{fg:#ffffff;bg:#000000}Poem{/}\n- Ode to Psyche\n- Ode to a Nightingale\n- Ode on Melancholy\n- Ode to Autumn\n- Ode on a Grecian Urn \n-- \u098f\u099f\u09bf \u098f\u0995\u099f\u09bf \u09aa\u09cd\u09b0\u09be\u099a\u09c0\u09a8 \u0997\u09cd\u09b0\u09bf\u0995 \u09ab\u09c1\u09b2\u09a6\u09be\u09a8\u09bf \u09ac\u09be 'urn'-\u098f\u09b0 \u0989\u09aa\u09b0\u09c7 \u0996\u09cb\u09a6\u09be\u0987 \u0995\u09b0\u09be \u09a6\u09c3\u09b6\u09cd\u09af \u09a6\u09c7\u0996\u09c7 \u0985\u09a8\u09c1\u09aa\u09cd\u09b0\u09be\u09a3\u09bf\u09a4 \u09b9\u09df\u09c7 \u09b2\u09c7\u0996\u09be \u0995\u09ac\u09bf\u09a4\u09be, \u09af\u09c7\u0996\u09be\u09a8\u09c7 \u099a\u09bf\u09b0\u09a8\u09cd\u09a4\u09a8 \u09aa\u09cd\u09b0\u09c7\u09ae, \u0989\u09ce\u09b8\u09ac \u098f\u09ac\u0982 \u09b8\u0999\u09cd\u0997\u09c0\u09a4\u09c7\u09b0 \u099a\u09bf\u09a4\u09cd\u09b0 \u09ab\u09c1\u099f\u09c7 \u0989\u09a0\u09c7\u099b\u09c7\u0964 \u0995\u09ac\u09bf \u098f\u0987 \u09b6\u09bf\u09b2\u09cd\u09aa\u0995\u09b0\u09cd\u09ae\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af \u09a6\u09bf\u09df\u09c7 \u09ae\u09be\u09a8\u09ac\u099c\u09c0\u09ac\u09a8\u09c7\u09b0 \u0995\u09cd\u09b7\u09a3\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09bf \u0993 \u09b6\u09bf\u09b2\u09cd\u09aa\u09c7\u09b0 \u099a\u09bf\u09b0\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09b8\u09cc\u09a8\u09cd\u09a6\u09b0\u09cd\u09af\u09c7\u09b0 \u09a4\u09c1\u09b2\u09a8\u09be \u0995\u09b0\u09c7\u09a8\u0964 \u09a4\u09bf\u09a8\u09bf \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8 \u0995\u09b0\u09c7\u09a8, \u09b6\u09bf\u09b2\u09cd\u09aa \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u098f\u09ae\u09a8 \u098f\u0995\u099f\u09bf \u09b8\u09a4\u09cd\u09af \u0989\u09aa\u09b9\u09be\u09b0 \u09a6\u09c7\u09df \u09af\u09be \u09b8\u09ae\u09df\u09c7\u09b0 \u098a\u09b0\u09cd\u09a7\u09cd\u09ac\u09c7- \u098f\u0987 \u09ad\u09be\u09ac\u09a8\u09be\u099f\u09bf \u0995\u09ac\u09bf\u09a4\u09be\u09b0 \u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u09b6\u09c7\u09b7 \u09aa\u0999\u0995\u09cd\u09a4\u09bf\u09a4\u09c7 \u0989\u09a0\u09c7 \u098f\u09b8\u09c7\u099b\u09c7: `\"Beauty is truth, truth beauty, that is all/Ye know on earth, and all ye need to know.\"` \n- Endymion\n- To Autumn\n- La Belle Dame Sans Merci\n- Hyperion\n- Sleep and Poetry\n- On First Looking into Chapman's Homer\n{fg:#ffffff;bg:#000000}Lines{/}\n- A THING OF BEAUTY IS A JOY FOREVE -- FAMOUS FIRST LINE\n- HEARD MELODIES ARE SWEET, BUT THOSE UNHEARD ARE SWEETER \u2013 (ODE ON A GRECIAN URN)\n"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}Charles Dickens{/}\n- Novelist\n- \u09ad\u09bf\u0995\u09cd\u099f\u09cb\u09b0\u09bf\u09df\u09be\u09a8 \u09af\u09c1\u0997\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09bf\u0995 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09ac\u09bf\u09ac\u09c7\u099a\u09bf\u09a4\n- \u09a4\u09be\u0981\u09b0 \u09aa\u09c1\u09b0\u09cb\u09a8\u09be\u09ae \u099b\u09bf\u09b2 Charles John Huffam Dickens\n- Dickens \u09b6\u09c1\u09a7\u09c1 \u098f\u0995\u099c\u09a8 \u0994\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09bf\u0995\u0987 \u09a8\u09a8, \u09a4\u09bf\u09a8\u09bf \u099b\u09bf\u09b2\u09c7\u09a8 \u09b8\u09be\u0982\u09ac\u09be\u09a6\u09bf\u0995, \u09b8\u09ae\u09cd\u09aa\u09be\u09a6\u0995 \u0993 \u09b8\u09ae\u09be\u099c\u09ac\u09bf\u09b7\u09df\u0995 \u09ad\u09be\u09b7\u09cd\u09af\u0995\u09be\u09b0\u0993\n- London town is found as a living being in the works of his",
+          "{fg:#ffffff;bg:#000000}Novels{/}\n- A Christmas Carol\n- **{fg:#ff0000}David Copperfield{/}**\n- **A Tale of Two Cities**\n-- London & Paris\n- **{fg:#ff0000}Great Expectations{/}**\n- Bleak House\n- Our Mutual Friend"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}William Wordsworth{/}\n- poet of nature",
+          "{fg:#ffffff;bg:#000000}Poem{/}\n- The Solitary Reaper\n- The World is too Much with Us\n- {fg:#ff0000}**To Daffodils**{/}"
+        ],
+        [
+          "{fg:#ffffff;bg:#000000}W.B. Yeats{/} (William Butler Yeats) (1865-1939)\n- was not a novelist",
+          "{fg:#ffffff;bg:#000000}\u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u0995\u09ac\u09bf\u09a4\u09be{/}\n- No Second Troy\n- The Second Coming\n- Sailing to Byzantium\n- A Prayer for My Daughter\n- The Lake Isle of Innisfree"
+        ],
+        [
           "{fg:#ffffff;bg:#000000}Adam Smith{/}",
           "- The Wealth of Nations"
         ],
@@ -7465,10 +7515,6 @@
         [
           "{fg:#ffffff;bg:#000000}Bowen L.J.{/}",
           "- judges like Caesar's wife should be above suspicion"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}Charles Dickens{/}\n- Novelist\n- \u09ad\u09bf\u0995\u09cd\u099f\u09cb\u09b0\u09bf\u09df\u09be\u09a8 \u09af\u09c1\u0997\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09bf\u0995 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09ac\u09bf\u09ac\u09c7\u099a\u09bf\u09a4\n- \u09a4\u09be\u0981\u09b0 \u09aa\u09c1\u09b0\u09cb\u09a8\u09be\u09ae \u099b\u09bf\u09b2 Charles John Huffam Dickens\n- Dickens \u09b6\u09c1\u09a7\u09c1 \u098f\u0995\u099c\u09a8 \u0994\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09bf\u0995\u0987 \u09a8\u09a8, \u09a4\u09bf\u09a8\u09bf \u099b\u09bf\u09b2\u09c7\u09a8 \u09b8\u09be\u0982\u09ac\u09be\u09a6\u09bf\u0995, \u09b8\u09ae\u09cd\u09aa\u09be\u09a6\u0995 \u0993 \u09b8\u09ae\u09be\u099c\u09ac\u09bf\u09b7\u09df\u0995 \u09ad\u09be\u09b7\u09cd\u09af\u0995\u09be\u09b0\u0993\n- London town is found as a living being in the works of his",
-          "{fg:#ffffff;bg:#000000}Novels{/}\n- A Christmas Carol\n- **{fg:#ff0000}David Copperfield{/}**\n- **A Tale of Two Cities**\n-- London & Paris\n- **{fg:#ff0000}Great Expectations{/}**\n- Bleak House\n- Our Mutual Friend"
         ],
         [
           "**Christopher Marlowe**",
@@ -7567,14 +7613,6 @@
           "- All for Love {fg:#ffffff;bg:#000000}drama{/}"
         ],
         [
-          "{fg:#ffffff;bg:#000000}John Keats{/}\n- John Keats-\u0995\u09c7 **'Poet of Beauty'** \u09ac\u09b2\u09be \u09b9\u09df \u0995\u09be\u09b0\u09a3 \u09a4\u09bf\u09a8\u09bf \u09b8\u09cc\u09a8\u09cd\u09a6\u09b0\u09cd\u09af\u0995\u09c7 \u099c\u09c0\u09ac\u09a8 \u0993 \u0995\u09ac\u09bf\u09a4\u09be\u09b0 \u09ae\u09c2\u09b2 \u0989\u09aa\u09be\u09a6\u09be\u09a8 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09a6\u09c7\u0996\u09a4\u09c7\u09a8\u0964 ",
-          "{fg:#ffffff;bg:#000000}Poem{/}\n- Ode to Psyche\n- Ode to a Nightingale\n- Ode on Melancholy\n- Ode to Autumn\n- Ode on a Grecian Urn \n-- \u098f\u099f\u09bf \u098f\u0995\u099f\u09bf \u09aa\u09cd\u09b0\u09be\u099a\u09c0\u09a8 \u0997\u09cd\u09b0\u09bf\u0995 \u09ab\u09c1\u09b2\u09a6\u09be\u09a8\u09bf \u09ac\u09be 'urn'-\u098f\u09b0 \u0989\u09aa\u09b0\u09c7 \u0996\u09cb\u09a6\u09be\u0987 \u0995\u09b0\u09be \u09a6\u09c3\u09b6\u09cd\u09af \u09a6\u09c7\u0996\u09c7 \u0985\u09a8\u09c1\u09aa\u09cd\u09b0\u09be\u09a3\u09bf\u09a4 \u09b9\u09df\u09c7 \u09b2\u09c7\u0996\u09be \u0995\u09ac\u09bf\u09a4\u09be, \u09af\u09c7\u0996\u09be\u09a8\u09c7 \u099a\u09bf\u09b0\u09a8\u09cd\u09a4\u09a8 \u09aa\u09cd\u09b0\u09c7\u09ae, \u0989\u09ce\u09b8\u09ac \u098f\u09ac\u0982 \u09b8\u0999\u09cd\u0997\u09c0\u09a4\u09c7\u09b0 \u099a\u09bf\u09a4\u09cd\u09b0 \u09ab\u09c1\u099f\u09c7 \u0989\u09a0\u09c7\u099b\u09c7\u0964 \u0995\u09ac\u09bf \u098f\u0987 \u09b6\u09bf\u09b2\u09cd\u09aa\u0995\u09b0\u09cd\u09ae\u09c7\u09b0 \u09ae\u09a7\u09cd\u09af \u09a6\u09bf\u09df\u09c7 \u09ae\u09be\u09a8\u09ac\u099c\u09c0\u09ac\u09a8\u09c7\u09b0 \u0995\u09cd\u09b7\u09a3\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09bf \u0993 \u09b6\u09bf\u09b2\u09cd\u09aa\u09c7\u09b0 \u099a\u09bf\u09b0\u09b8\u09cd\u09a5\u09be\u09df\u09c0 \u09b8\u09cc\u09a8\u09cd\u09a6\u09b0\u09cd\u09af\u09c7\u09b0 \u09a4\u09c1\u09b2\u09a8\u09be \u0995\u09b0\u09c7\u09a8\u0964 \u09a4\u09bf\u09a8\u09bf \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8 \u0995\u09b0\u09c7\u09a8, \u09b6\u09bf\u09b2\u09cd\u09aa \u0986\u09ae\u09be\u09a6\u09c7\u09b0 \u098f\u09ae\u09a8 \u098f\u0995\u099f\u09bf \u09b8\u09a4\u09cd\u09af \u0989\u09aa\u09b9\u09be\u09b0 \u09a6\u09c7\u09df \u09af\u09be \u09b8\u09ae\u09df\u09c7\u09b0 \u098a\u09b0\u09cd\u09a7\u09cd\u09ac\u09c7- \u098f\u0987 \u09ad\u09be\u09ac\u09a8\u09be\u099f\u09bf \u0995\u09ac\u09bf\u09a4\u09be\u09b0 \u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u09b6\u09c7\u09b7 \u09aa\u0999\u0995\u09cd\u09a4\u09bf\u09a4\u09c7 \u0989\u09a0\u09c7 \u098f\u09b8\u09c7\u099b\u09c7: `\"Beauty is truth, truth beauty, that is all/Ye know on earth, and all ye need to know.\"` \n- Endymion\n- To Autumn\n- La Belle Dame Sans Merci\n- Hyperion\n- Sleep and Poetry\n- On First Looking into Chapman's Homer\n{fg:#ffffff;bg:#000000}Lines{/}\n- A THING OF BEAUTY IS A JOY FOREVE -- FAMOUS FIRST LINE\n- HEARD MELODIES ARE SWEET, BUT THOSE UNHEARD ARE SWEETER \u2013 (ODE ON A GRECIAN URN)\n"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}John Milton{/}\n- John Milton \u099b\u09bf\u09b2\u09c7\u09a8 \u098f\u0995\u099c\u09a8 **\u09ae\u09b9\u09be\u0995\u09ac\u09bf, \u09aa\u09cd\u09b0\u09be\u09ac\u09a8\u09cd\u09a7\u09bf\u0995 \u0993 \u0987\u09a4\u09bf\u09b9\u09be\u09b8\u09ac\u09bf\u09a6** \u09af\u09bf\u09a8\u09bf Shakespeare-\u098f\u09b0 \u09aa\u09b0 \u0987\u0982\u09b0\u09c7\u099c\u09bf \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09c7\u09b0 \u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u0997\u09c1\u09b0\u09c1\u09a4\u09cd\u09ac\u09aa\u09c2\u09b0\u09cd\u09a3 \u09b2\u09c7\u0996\u0995 \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09b8\u09cd\u09ac\u09c0\u0995\u09c3\u09a4\u0964 \u09a4\u09be\u0981\u0995\u09c7 **'The Epic Poet' \u0993 'Master of Blank Verse'** \u09ac\u09b2\u09be \u09b9\u09df\u0964",
-          "- Lycidas (Elegy)\n- Paradise Lost (Epic)\n-- Paradise Lost \u0987\u0982\u09b0\u09c7\u099c\u09bf \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af. \u09ae\u09cb\u099f **\u09e7\u09e8\u099f\u09bf \u0996\u09a3\u09cd\u09a1\u09c7 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4** \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af\u099f\u09bf **Blank Verse \u09ac\u09be \u0985\u09ae\u09bf\u09a4\u09cd\u09b0\u09be\u0995\u09cd\u09b7\u09b0 \u099b\u09a8\u09cd\u09a6\u09c7 \u09b0\u099a\u09bf\u09a4** \u098f\u09b0 __\u09ae\u09c2\u09b2 \u09ac\u09bf\u09b7\u09df\u09ac\u09b8\u09cd\u09a4\u09c1 \u09b9\u09b2\u09cb- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09aa\u09a4\u09a8 \u0993 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09a8\u09cd\u09af\u09be\u09df\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u0995\u09be\u099b\u09c7 \u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09af\u09c1\u0995\u09cd\u09a4\u09ad\u09be\u09ac\u09c7 \u0989\u09aa\u09b8\u09cd\u09a5\u09be\u09aa\u09a8 \u0995\u09b0\u09be (Justify the ways of God to men)__\u0964 \u098f \u0995\u09be\u09ac\u09cd\u09af\u09c7 \u09a6\u09c7\u0996\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7, \u09b6\u09df\u09a4\u09be\u09a8 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997\u09c7 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09ac\u09bf\u09b0\u09c1\u09a6\u09cd\u09a7\u09c7 \u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9 \u0995\u09b0\u09c7 \u098f\u09ac\u0982 \u09ab\u09b2\u09b8\u09cd\u09ac\u09b0\u09c2\u09aa \u09a4\u09be\u0995\u09c7 \u0993 \u09a4\u09be\u09b0 \u0985\u09a8\u09c1\u09b8\u09be\u09b0\u09c0\u09a6\u09c7\u09b0 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u0995\u09b0\u09be \u09b9\u09df\u0964  \u098f\u09b0\u09aa\u09b0 \u09b6\u09df\u09a4\u09be\u09a8 \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09a4\u09c7 \u098f\u09b8\u09c7 \u0986\u09a6\u09bf \u09ae\u09be\u09a8\u09ac\u09c0 \u0987\u09ad\u0995\u09c7 \u09a8\u09bf\u09b7\u09bf\u09a6\u09cd\u09a7 \u0997\u09be\u099b\u09c7\u09b0 \u09ab\u09b2 \u0996\u09c7\u09a4\u09c7 \u09aa\u09cd\u09b0\u09b0\u09cb\u099a\u09bf\u09a4 \u0995\u09b0\u09c7, \u09af\u09be\u09b0 \u09ab\u09b2\u09c7 \u0986\u09a6\u09ae \u0993 \u0987\u09ad \u0989\u09ad\u09df\u09c7\u0987 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u09b9\u09a8\u0964\n- Paradise Regained (Epic)\n- Samson Agonistes {fg:#ffffff;bg:#000000}tragedy{/}\n- On His Blindness\n- On the Morning of Christ's Nativity\n- Of Education (Prose)"
-        ],
-        [
           "{fg:#ffffff;bg:#000000}Jonathan Swift{/}\n- Irish\n- **most famous ==satirist== in English literature**\n",
           "- A Voyage to Lilliput\n- Gulliver's Travels (Political Satire(\u09ac\u09cd\u09af\u0999\u09cd\u0997)) (novel)\n- A Modest Proposal (essay)\n- A Tale of a Tub (book) (? essay)\n- The Battle of the Books (book - satire)"
         ],
@@ -7659,10 +7697,6 @@
           "Sherlock Holmes"
         ],
         [
-          "T.S. Eliot",
-          "- **Murder in Cathedral** [==Play==]\n- Tradition and the Individual Talent ==Essay==\n- The Waste Land [!!Poem!!]"
-        ],
-        [
           "{fg:#ffffff;bg:#000000}Tahmima Anam{/}",
           "- **A Golden Age** {fg:#ffffff;bg:#000000}novel{/}\n- The Good Muslim\n- The Bones of Greece"
         ],
@@ -7673,10 +7707,6 @@
         [
           "{fg:#ffffff;bg:#000000}Virginia Woolf{/}",
           "The Haunted House is a novel written by"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}W.B. Yeats{/} (William Butler Yeats) (1865-1939)\n- was not a novelist",
-          "{fg:#ffffff;bg:#000000}\u09ac\u09bf\u0996\u09cd\u09af\u09be\u09a4 \u0995\u09ac\u09bf\u09a4\u09be{/}\n- No Second Troy\n- The Second Coming\n- Sailing to Byzantium\n- A Prayer for My Daughter\n- The Lake Isle of Innisfree"
         ],
         [
           "{fg:#ffffff;bg:#000000}Walt Whitman{/}",
@@ -7691,16 +7721,8 @@
           "- Lord of the Flies {fg:#ffffff;bg:#000000}Novel{/}\n-- \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7 \u09a6\u09c7\u0996\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7, \u09aa\u09be\u09b0\u09ae\u09be\u09a3\u09ac\u09bf\u0995 \u09af\u09c1\u09a6\u09cd\u09a7\u09c7\u09b0 \u09ad\u09df \u09a5\u09c7\u0995\u09c7 \u0995\u09bf\u099b\u09c1 \u09ac\u09cd\u09b0\u09bf\u099f\u09bf\u09b6 \u0995\u09bf\u09b6\u09cb\u09b0\u0995\u09c7 \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09ac\u09c0\u09aa\u09c7 \u09aa\u09be\u09a0\u09be\u09a8\u09cb \u09b9\u09df, \u09af\u09c7\u0996\u09be\u09a8\u09c7 \u098f\u0995 \u09a6\u09c1\u09b0\u09cd\u0998\u099f\u09a8\u09be\u09df \u09aa\u09cd\u09b0\u09be\u09aa\u09cd\u09a4\u09ac\u09df\u09b8\u09cd\u0995\u09b0\u09be \u09ae\u09be\u09b0\u09be \u0997\u09c7\u09b2\u09c7 \u0993\u0987 \u09b6\u09bf\u09b6\u09c1\u09b0\u09be\u0987 \u09a8\u09bf\u099c\u09c7\u09a6\u09c7\u09b0 \u09ae\u09a4\u09cb \u0995\u09b0\u09c7 \u09ac\u09c7\u0981\u099a\u09c7 \u09a5\u09be\u0995\u09be\u09b0 \u099a\u09c7\u09b7\u09cd\u099f\u09be \u0995\u09b0\u09c7\u0964 \u09a7\u09c0\u09b0\u09c7 \u09a7\u09c0\u09b0\u09c7 \u09a4\u09be\u09b0\u09be \u09a8\u09c0\u09a4\u09bf-\u09a8\u09c8\u09a4\u09bf\u0995\u09a4\u09be \u09ad\u09c1\u09b2\u09c7 \u09a8\u09bf\u09b7\u09cd\u09a0\u09c1\u09b0 \u0993 \u09b9\u09bf\u0982\u09b8\u09cd\u09b0 \u09b9\u09df\u09c7 \u0993\u09a0\u09c7\u0964 \u098f\u0987 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u099f\u09bf \u09ae\u09be\u09a8\u09ac \u09aa\u09cd\u09b0\u0995\u09c3\u09a4\u09bf\u09b0 \u0985\u09a8\u09cd\u09a7\u0995\u09be\u09b0 \u09a6\u09bf\u0995, \u09b8\u09ae\u09be\u099c\u09c7\u09b0 \u09a8\u09bf\u09df\u09ae \u099b\u09be\u09dc\u09be \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09ac\u09b0\u09cd\u09ac\u09b0\u09a4\u09be \u098f\u09ac\u0982 \u09ad\u09be\u09b2 \u0993 \u09ae\u09a8\u09cd\u09a6\u09c7\u09b0 \u09a6\u09cd\u09ac\u09a8\u09cd\u09a6\u09cd\u09ac\u0995\u09c7 \u09a4\u09c1\u09b2\u09c7 \u09a7\u09b0\u09c7\u099b\u09c7\u0964 \u09b0\u200d\u09cd\u09af\u09be\u09b2\u09ab (Ralph), \u099c\u09cd\u09af\u09be\u0995 (Jack), \u09aa\u09bf\u0997\u09bf (Piggy), \u09b8\u09be\u09df\u09ae\u09a8 (Simon) \u0993 \u09b0\u099c\u09be\u09b0 (Roger) \u09aa\u09cd\u09b0\u09ae\u09c2\u0996 \u0989\u09aa\u09a8\u09cd\u09af\u09be\u09b8\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a7\u09be\u09a8 \u099a\u09b0\u09bf\u09a4\u09cd\u09b0\u0964\n- The Spire, \n- Pincher Martin,\n- Darkness Visible"
         ],
         [
-          "{fg:#ffffff;bg:#000000}William Shakespeare{/}",
-          "{fg:#ffffff;bg:#000000}\u09a8\u09be\u099f\u0995 / Play{/}\n- {fg:#ff0000}**Hamlet**{/}-(\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf) (setting \u099b\u09bf\u09b2\u09cb Helsingor (Denmark)) (\u09b8\u09ac\u099a\u09c7\u09df\u09c7 \u09ac\u09dc \u09a8\u09be\u099f\u0995) (Prince Hamlet \u09a4\u09be\u09b0 \u09ac\u09be\u09ac\u09be\u09b0 \u09b9\u09a4\u09cd\u09af\u09be\u09b0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b6\u09cb\u09a7 \u0997\u09cd\u09b0\u09b9\u09a3\u0995\u09c7 \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 \u0995\u09b0\u09c7 \u09a8\u09be\u099f\u0995\u099f\u09bf\u09b0 \u09aa\u09c1\u09b0\u09cb plot)\n- {fg:#ff0000}**Julius Caesar**{/} (\u099f\u09cd\u09b0\u09be\u099c\u09c7\u09a1\u09bf/Historical)\n- **Romeo and Juliet**\n- {fg:#ff0000}**Macbeth**{/}\n- Love's Labour's Lost\n- {fg:#ff0000}**King Lear**{/}\n- Antonio and Cleopatra\n- {fg:#ff0000}**Othello**{/}\n- As You Like It (play/drama)\n- The Merchant of Venice\n{fg:#ffffff;bg:#000000}Lines:{/}\n- Neither a borrower nor a lender be, For loan oft loses both itself and friend. - **Hamlet**\n- \"How sharper than a serpent's tooth it is to have a thankless child!\" -**King Lear**\n- \"Nothing will come of nothing.\"\n- \"I am a man more sinned against than sinning.\" -**King Lear**\n- \"When we are born, we cry that we are come to this great stage of fools.\"-**King Lear**\n- \"Thou shouldst not have been old till thou hadst been wise.\"-**King Lear**\n- blow blow thou winter wind though are not so on kind (**As You Like It**)\n- life is a tale told by an Idiot full of sound and Fury signifying nothing (**Macbeth**)\n- Cowards die many times before their deaths: The valiant never taste of death but once (Ju**lius Caesar**)\n- I am one who loved not wisely but too well' is a quotation (swam song -- \u09b6\u09c7\u09b7 \u0995\u09b0\u09cd\u09ae -- **Othello**)\n- the famous line **\"to be or not to be\"** appears - Hamlet"
-        ],
-        [
           "{fg:#ffffff;bg:#000000}William Somerset Maugham{/}\n- English play right",
           "{fg:#ffffff;bg:#000000}novel{/}\n- The Moon and Sixpence\n- Of Human Bondage\n- Cakes and Ale\n- The Painted Veil\n- The Magician"
-        ],
-        [
-          "{fg:#ffffff;bg:#000000}William Wordsworth{/}\n- poet of nature",
-          "{fg:#ffffff;bg:#000000}Poem{/}\n- The Solitary Reaper\n- The World is too Much with Us\n- {fg:#ff0000}**To Daffodils**{/}"
         ],
         [
           "{fg:#ffffff;bg:#000000}Zadie Smith{/}",
@@ -14548,6 +14570,32 @@
       "rows": [
         [
           "##__\u09b6\u09b0\u09cd\u099f\u0995\u09be\u099f\u09c7 \u09e6\u09e7 \u09b8\u09c7\u0995\u09c7\u09a8\u09cd\u09a1\u09c7 \u0986\u0987\u09a8\u09b8\u09ad\u09be \u09ae\u09c1\u0996\u09b8\u09cd\u09a5__##\n- \u099c\u09be\u09aa\u09be\u09a8 - Diet -> \u099c\u09be\u09a4\u09c0\u09af\u09bc \u0996\u09be\u09a6\u09cd\u09af -> \u098f\u0995\u099f\u09bf \u09a6\u09cd\u09ac\u09bf\u0995\u0995\u09cd\u09b7 \u09ac\u09bf\u09b6\u09bf\u09b7\u09cd\u099f \u09b8\u0982\u09b8\u09a6\n\n- \u0987\u09b8\u09b0\u09be\u09df\u09c7\u09b2 - \u09a8\u09c7\u09b8\u09c7\u099f (Knesset) - [Nasty-Cancer]\n\n- \u09a4\u09be\u0987\u0993\u09af\u09bc\u09be\u09a8 - \u0987\u0989\u09af\u09bc\u09be\u09a8 (Legislative Yuan)\n- \u099c\u09b0\u09cd\u09a1\u09be\u09a8 - Majlis Al-Umma [\u0986\u09ae\u09cd\u09ae\u09be]\n- \u099a\u09c0\u09a8 - \u0997\u09a3\u0995\u0982\u0997\u09cd\u09b0\u09c7\u09b8\u09cd / National People's Congress \u09ac\u09be ==NPC==) - [Chinese are NPC Bots]\n- \u0986\u099c\u09be\u09b0\u09ac\u09be\u0987\u099c\u09be\u09a8 - \u09ae\u09bf\u09b2\u09bf \u09ae\u09c7\u099c\u09b2\u09bf\u09b8 [\u0986\u099c\u09be\u0987\u09b0\u09be \u09ac\u09be\u0987\u099c\u09be\u09a8 ==\u09ae\u09bf\u09b2\u09bf== \u09ae\u099c\u09b2\u09bf\u09b8 \u098f \u0997\u09be\u09a8 \u09b6\u09cb\u09a8\u09c7]\n- \u09ad\u09c2\u099f\u09be\u09a8 - \u099f\u09b6\u09cb\u0997\u09a6\u09c1/Tshogdu [So Good Smoke Free]\n- \u09ae\u09be\u09b2\u09a6\u09cd\u09ac\u09c0\u09aa - \u09aa\u09bf\u09aa\u09b2\u09b8 \u09ae\u099c\u09b2\u09bf\u09b8 [Peples Dis. abt gettinging Under Sea Issue]\n- \u09a1\u09c7\u09a8\u09ae\u09be\u09b0\u09cd\u0995 - \u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982 / Folketing [\u09a1\u09c7\u09ab\u09cb\u0995\u09c7\u099f\u09bf\u0982]\n- \u09a8\u09b0\u0993\u09df\u09c7 - \u09b8\u09cd\u099f\u09b0\u09cd\u099f\u09bf\u0982 / Stortinget [\u09a8\u09b8\u09cd\u099f]\n- \u09b8\u09c1\u0987\u09a1\u09c7\u09a8 - \u09b0\u09bf\u0995\u09cd\u09b8\u09a1\u09cd\u09af\u09be\u0997 (Riksdag) [\u09b8\u09c1\u0987\u09a1\u09cd\u09af\u09be\u0997]\n- \u0995\u09cd\u09b0\u09cb\u09df\u09c7\u09b6\u09bf\u09df\u09be - \u0995\u09cd\u09b0\u09cb\u09af\u09bc\u09c7\u09b6\u09bf\u09af\u09bc\u09be\u09a8 \u09b8\u0982\u09b8\u09a6 (Hrvatski sabor) [==\u0995\u09be\u0995== \u09b8\u09ac \u0996\u09c7\u09df\u09c7 \u09b8\u09be\u09ac\u09b0 \u0995\u09b0\u09c7 \u09ab\u09c7\u09b2\u09b2\u09cb]\n- \u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1 - \u09b8\u09c7\u099c\u09ae / Sejm [\u09aa\u09cb\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09c7\u09b0 \u09b8\u09bf\u09ae \u0986\u09ae\u09be\u09b0 \u09ab\u09c7\u09ad\u09be\u09b0\u09bf\u099f]\n- \u09ae\u0999\u09cd\u0997\u09cb\u09b2\u09bf\u09df\u09be - \u09a5\u09c1\u09b0\u09be\u09b2 / \u09b8\u09cd\u099f\u09c7\u099f \u0997\u09cd\u09b0\u09c7\u099f \u0996\u09c1\u09b0\u09be\u09b2 (State Great Khural) [Mongolians Attack w Thural / Kural]"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "Confusing",
+      "parentSheet": 22,
+      "rows": [
+        [
+          "- the famous line **\"to be or not to be\"** appears - Hamlet"
         ]
       ]
     }
