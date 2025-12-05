@@ -827,6 +827,14 @@
         "13-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
+        },
+        "17-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "16-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -892,6 +900,18 @@
         ],
         [
           "In a rectangle, the diagonal length is 13 and the width is 5. What is the perimeter of the rectangle?\nA. 30\nB. 34\nC. 36\nD. 48\n{link:https://youtu.be/P6cajmvQux0?t=4506}@@==Link==@@{/}"
+        ],
+        [
+          "A cube has a total surface area of 150 square units.\nWhat is the volume of the cube?\n\u0391. 25\nB. 64\nC. 100\nD. [[125]]\n{link:https://youtu.be/P6cajmvQux0?t=4561}@@Link@@{/}"
+        ],
+        [
+          "Find slope of the line **==perpendicular==** to the line y = (1/3)x -7.\nA.-3\nB. 4\nC. 1/3\nD. -1/3\nm = slope\n= y = mx+c\n= -1/m\n= -1/1/3 = -3\n{link:https://youtu.be/P6cajmvQux0?t=4561}@@==Link==@@{/}"
+        ],
+        [
+          "Write an equation of the line with slope 2 and x,y -intercept (-4,0).\n\u0391. y = 2x + 8\nB. y = - 2x + 4\nC. y-1/2x+8\nD. - 1/2 * x + 8\n{link:https://youtu.be/P6cajmvQux0?t=4561}@@==Link==@@{/}\nm = slope\ny=mx+c\n0=2*(-4)+c\nc=8"
+        ],
+        [
+          "A box contains 3 blue, 2 white, and 4 red marbles. If one marble is drawn at random, what is the probability that it will not be a white marble?\n\u0391. 2/9\nB.7/9\nC. 1/3\nD. 2/3"
         ]
       ]
     },
