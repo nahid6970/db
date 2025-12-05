@@ -532,6 +532,14 @@
         "52-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
+        },
+        "55-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "63-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -713,7 +721,40 @@
           "The proposal along with its attachment, reviewed throughly.\na) [[Was]]\nb) are\nb) have been\nc) to\n- along with, together with, accompanied by, as well as \u098f\u09b0 \u0986\u0997\u09c7 \u09a6\u09c7\u0996\u09a4\u09c7 \u09b9\u09ac\u09c7 \u0995\u09c0 \u0986\u099b\u09c7"
         ],
         [
-          "Sorry, but I have not fixing the tap yet.\na) got up to\nb) got on\nb) got round to\nc) got across"
+          "Sorry, but I have not fixing the tap yet.\na) got up to\nb) got on\nb) [[got round to]]\nc) got across"
+        ],
+        [
+          "The scientist's explanation was so struggled to understand it. that even experts\na) coherent\nb) [[esoteric]]\nc) prescient\nd) simple\n- esoteric \u09a6\u09c1\u09b0\u09cd\u09ac\u09cb\u09a7\u09cd\u09af "
+        ],
+        [
+          "The number of applicants compared to last year.\na) A. have risen\nb) [[has risen]]\nc) have raised\nd) has raised\n- a number of = noun/verb= plural\n- the number of = noun = plural, verb=singular\nconfusing verb = rise,sit, lie\n-- egular maje i ase tar mane intransative, jehetu object nai tain risen nibo raised bull"
+        ],
+        [
+          "The scientist's theory, **though **brilliant, still remains by concrete evidence.\na) [[unsubstantiated]]\nb) incontrovertible\nc) Validated\nd. fortified"
+        ],
+        [
+          "40.The committee was divided, but his proposal was accepted __ its controversial nature.\na) A. in light of\nb) [[notwithstanding]]\nc) due to\nd) because\n- notwithstanding - \u09b8\u09a4\u09cd\u09a4\u09c7\u0993"
+        ],
+        [
+          "She delivered a __ impressed the entire panel. presentation that\na) [[compelling]]\nb) confusing\nc) Libelous\nd) pedantic"
+        ],
+        [
+          "The most famous satirist in English literature is:\na) [[Jonathan Swift]]\nb) Joseph Addison\nc) Alexander Pope\nd) Richard Steel"
+        ],
+        [
+          "\"To throw in the towel\" means:\na) to start a fight\nb) to delay a task\nc) to get angry\nd) [[to give up]]"
+        ],
+        [
+          "If something is in a state of flux, it means:\na) [[constantly changing]]\nb) very risky\nc) always stable\nd) old"
+        ],
+        [
+          "\"Raise the bar\" means:\na) delimiting\nb) [[set higher standards]]\nc) ignore performance\nd) appeasement"
+        ],
+        [
+          "\"Cutting corners\" means:\na) ahead of schedule\nb) managing efficiently\nc) [[doing incompletely]]\nd) avoiding expenses"
+        ],
+        [
+          "In which play, the famous line \"to be or not to be\" appears?\na) [[Othelo]]\nb) Macbeth\nc) Hamlet\nd) King Lear"
         ]
       ]
     },
@@ -3693,15 +3734,15 @@
         "173-0": {
           "bold": false
         },
+        "262-0": {
+          "rank": 3
+        },
         "406-0": {
           "bgColor": "#D9FFB3",
           "textColor": "rgb(0, 0, 0)"
         },
         "516-0": {
           "center": false
-        },
-        "262-0": {
-          "rank": 3
         }
       },
       "columns": [
@@ -7530,7 +7571,7 @@
           "- Lycidas (Elegy)\n- Paradise Lost (Epic)\n-- Paradise Lost \u0987\u0982\u09b0\u09c7\u099c\u09bf \u09b8\u09be\u09b9\u09bf\u09a4\u09cd\u09af\u09c7\u09b0 \u0985\u09a8\u09cd\u09af\u09a4\u09ae \u09b6\u09cd\u09b0\u09c7\u09b7\u09cd\u09a0 \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af. \u09ae\u09cb\u099f **\u09e7\u09e8\u099f\u09bf \u0996\u09a3\u09cd\u09a1\u09c7 \u09ac\u09bf\u09ad\u0995\u09cd\u09a4** \u09ae\u09b9\u09be\u0995\u09be\u09ac\u09cd\u09af\u099f\u09bf **Blank Verse \u09ac\u09be \u0985\u09ae\u09bf\u09a4\u09cd\u09b0\u09be\u0995\u09cd\u09b7\u09b0 \u099b\u09a8\u09cd\u09a6\u09c7 \u09b0\u099a\u09bf\u09a4** \u098f\u09b0 __\u09ae\u09c2\u09b2 \u09ac\u09bf\u09b7\u09df\u09ac\u09b8\u09cd\u09a4\u09c1 \u09b9\u09b2\u09cb- \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u09aa\u09a4\u09a8 \u0993 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09a8\u09cd\u09af\u09be\u09df\u0995\u09c7 \u09ae\u09be\u09a8\u09c1\u09b7\u09c7\u09b0 \u0995\u09be\u099b\u09c7 \u09af\u09c1\u0995\u09cd\u09a4\u09bf\u09af\u09c1\u0995\u09cd\u09a4\u09ad\u09be\u09ac\u09c7 \u0989\u09aa\u09b8\u09cd\u09a5\u09be\u09aa\u09a8 \u0995\u09b0\u09be (Justify the ways of God to men)__\u0964 \u098f \u0995\u09be\u09ac\u09cd\u09af\u09c7 \u09a6\u09c7\u0996\u09be\u09a8\u09cb \u09b9\u09df\u09c7\u099b\u09c7, \u09b6\u09df\u09a4\u09be\u09a8 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997\u09c7 \u0988\u09b6\u09cd\u09ac\u09b0\u09c7\u09b0 \u09ac\u09bf\u09b0\u09c1\u09a6\u09cd\u09a7\u09c7 \u09ac\u09bf\u09a6\u09cd\u09b0\u09cb\u09b9 \u0995\u09b0\u09c7 \u098f\u09ac\u0982 \u09ab\u09b2\u09b8\u09cd\u09ac\u09b0\u09c2\u09aa \u09a4\u09be\u0995\u09c7 \u0993 \u09a4\u09be\u09b0 \u0985\u09a8\u09c1\u09b8\u09be\u09b0\u09c0\u09a6\u09c7\u09b0 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u0995\u09b0\u09be \u09b9\u09df\u0964  \u098f\u09b0\u09aa\u09b0 \u09b6\u09df\u09a4\u09be\u09a8 \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09a4\u09c7 \u098f\u09b8\u09c7 \u0986\u09a6\u09bf \u09ae\u09be\u09a8\u09ac\u09c0 \u0987\u09ad\u0995\u09c7 \u09a8\u09bf\u09b7\u09bf\u09a6\u09cd\u09a7 \u0997\u09be\u099b\u09c7\u09b0 \u09ab\u09b2 \u0996\u09c7\u09a4\u09c7 \u09aa\u09cd\u09b0\u09b0\u09cb\u099a\u09bf\u09a4 \u0995\u09b0\u09c7, \u09af\u09be\u09b0 \u09ab\u09b2\u09c7 \u0986\u09a6\u09ae \u0993 \u0987\u09ad \u0989\u09ad\u09df\u09c7\u0987 \u09b8\u09cd\u09ac\u09b0\u09cd\u0997 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09a4\u09be\u09dc\u09bf\u09a4 \u09b9\u09a8\u0964\n- Paradise Regained (Epic)\n- Samson Agonistes {fg:#ffffff;bg:#000000}tragedy{/}\n- On His Blindness\n- On the Morning of Christ's Nativity\n- Of Education (Prose)"
         ],
         [
-          "{fg:#ffffff;bg:#000000}Jonathan Swift{/}\n- Irish\n",
+          "{fg:#ffffff;bg:#000000}Jonathan Swift{/}\n- Irish\n- **most famous ==satirist== in English literature**\n",
           "- A Voyage to Lilliput\n- Gulliver's Travels (Political Satire(\u09ac\u09cd\u09af\u0999\u09cd\u0997)) (novel)\n- A Modest Proposal (essay)\n- A Tale of a Tub (book) (? essay)\n- The Battle of the Books (book - satire)"
         ],
         [
@@ -9918,8 +9959,8 @@
           "a very courageous man"
         ],
         [
-          "",
-          ""
+          "To throw in the towel",
+          "to give up"
         ]
       ]
     },
