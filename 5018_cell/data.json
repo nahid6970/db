@@ -819,6 +819,10 @@
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "12-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -877,7 +881,7 @@
           "Two similar triangles have !!areas!! in the ratio 4:9. If the perimeter of the smaller triangle is 20, what is the perimeter of the larger triangle?\n\u0391. 25\nB. 30\nC. 35\nD. 45\n{link:https://youtu.be/P6cajmvQux0?t=4349}@@==Link==@@{/}"
         ],
         [
-          "In a trapezoid, the lengths of the two parallel bases are 10 and 16. if the height of the trapezoid is 4, find the area of the trapezoid.\nA. 48\nB. 52\nC. 56\nD. 104"
+          "In a trapezoid, the lengths of the two parallel bases are 10 and 16. if the height of the trapezoid is 4, find the area of the trapezoid.\nA. 48\nB. 52\nC. 56\nD. 104\n\n- \\(\\frac{1}{2}(10+16)*{4}\\).\n\n{link:https://youtu.be/P6cajmvQux0?t=4349}@@==Link==@@{/}"
         ]
       ]
     },
