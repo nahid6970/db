@@ -799,7 +799,12 @@
       "rows": []
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "1-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
           "name": "A",
@@ -821,6 +826,9 @@
       "rows": [
         [
           "A technician charges a Tk. 50 service fee plus Tk. 30 per hour for labor. If a customer's total cost is Tk. 200, what is the maximum number of full hours the technician can work?\nA. 6\nB. 4\nC. 3\nD. 5"
+        ],
+        [
+          "- The price of a stock increased by 20% in January and then decreased by 10% in February. If the price of the stock was Tk. 108 at the end of February, what was the price at the beginning of January?\nTk. 90\nTk. 96\nTk. [[100]]\nTk. 102"
         ]
       ]
     },
