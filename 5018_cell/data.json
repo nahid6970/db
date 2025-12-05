@@ -524,6 +524,10 @@
         "50-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "51-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -697,6 +701,9 @@
         ],
         [
           "Neither the students ==nor== **the teacher**  __  continue the discussion. to\na) [[was willing]]\nb) were willing\nc) was will\nd) be willing\n- neither nor // either or \u098f\u09b0 \u09aa\u09b0\u09c7\u09b0 nor/or \u098f\u09b0 \u09aa\u09b0\u09c7\u09b0 subject \u0985\u09a8\u09c1\u099c\u09be\u0987 verb hobe"
+        ],
+        [
+          "The manager insisted that every employee on time\na) [[Arrive]]\nb) is arriving\nc) Arrives\nd) arrived"
         ]
       ]
     },
