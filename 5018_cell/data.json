@@ -803,22 +803,26 @@
         "1-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
+        },
+        "3-0": {
+          "bgColor": "#6C757D",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "mergedCells": {},
@@ -829,6 +833,12 @@
         ],
         [
           "- The price of a stock increased by 20% in January and then decreased by 10% in February. If the price of the stock was Tk. 108 at the end of February, what was the price at the beginning of January?\nTk. 90\nTk. 96\nTk. [[100]]\nTk. 102"
+        ],
+        [
+          "In a class of 40 students, 18 study French, 15 study Spanish, and 7 study both languages. How many students study neither language?\nA. 0\nB. 7\nC. 10\nD. [[14]]"
+        ],
+        [
+          "The ratio of A:B is 2:3, and the ratio of B:C is 4:5. If A-16, what is the value of C?\nA.15\nB. 20\nC. 24\nD. 30"
         ]
       ]
     },
