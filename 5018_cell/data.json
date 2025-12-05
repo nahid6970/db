@@ -1,5 +1,5 @@
 {
-  "activeSheet": 136,
+  "activeSheet": 5,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -545,6 +545,10 @@
         "64-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "66-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -760,6 +764,12 @@
         ],
         [
           "In which play, the famous line \"to be or not to be\" appears?\na) Othelo\nb) Macbeth\nc) [[Hamlet]]\nd) King Lear"
+        ],
+        [
+          "The warning of the authority falls on deaf ears. Here \"warning\" does the function of:\n[[noun]]\nadverb\nadjective\nverb"
+        ],
+        [
+          "One who talks while asleep is called:\nSomnambulist\n[[Somniloquist]]\nSomniferous\nSleeptalker\n- loquacious - \u09ac\u09be\u099a\u09be\u09b2"
         ]
       ]
     },
