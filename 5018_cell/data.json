@@ -1,5 +1,5 @@
 {
-  "activeSheet": 87,
+  "activeSheet": 6,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -660,6 +660,14 @@
         "69-0": {
           "bgColor": "#6C757D",
           "textColor": "#FFFFFF"
+        },
+        "74-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "75-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -902,6 +910,12 @@
         ],
         [
           "A noun referring to things that our five senses can't detect is called noun.\nA. Proper\nB. common\nC. material\nD. [[abstract]]"
+        ],
+        [
+          "Where there is a will, there is way. Here 'will' is- [\u09b8\u09b9:\u09aa\u09b0\u09bf\u099a\u09be\u09b2\u0995 (\u09ae\u09be\u09a6\u0995 \u09a8\u09bf\u09df\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3)-\u09e7\u09e9]\nA. [[a noun]]\nB. a verb\nC. an adjective\nD. an adverb\n- after article so noun"
+        ],
+        [
+          "I walked for a while. [RU (D- \u0985\u09ac\u09be\u09a3\u09bf\u099c) 12-13]\nA. verb\nB. adverb\nC. conjunction\nD. [[noun]]\n- while normally conjuction but since after article - noun"
         ]
       ]
     },
