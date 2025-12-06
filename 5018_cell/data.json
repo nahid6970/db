@@ -1,5 +1,5 @@
 {
-  "activeSheet": 142,
+  "activeSheet": 138,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15248,7 +15248,7 @@
       "parentSheet": 22,
       "rows": [
         [
-          "!!Incorrigible!! [\u0985\u09b8\u0982\u09b6\u09cb\u09a7\u09a8\u09af\u09cb\u0997\u09cd\u09af]"
+          "!!Incorrigible!! [\u09a0\u09bf\u0995 \u0995\u09b0\u09be \u09af\u09be\u09af\u09bc \u09a8\u09be, \u0985\u09b8\u0982\u09b6\u09cb\u09a7\u09a8\u09af\u09cb\u0997\u09cd\u09af]"
         ],
         [
           "==misnomer== [\u09a8\u09be\u09ae\u09c7\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u0997]"
@@ -15282,6 +15282,9 @@
         ],
         [
           "Teetotaler [\u09ae\u09a6\u09aa\u09be\u09a8 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09b0\u09a4]"
+        ],
+        [
+          "Bellicose [\u09af\u09c1\u09a6\u09cd\u09a7\u09b0\u09a4]"
         ]
       ]
     },
@@ -15448,6 +15451,14 @@
         "20-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "22-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "23-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15533,7 +15544,19 @@
           "One who is not easily pleased by anything\na. Maiden\nb. Mediaeval\nc. Precarious\nd. [[Fastidious]]"
         ],
         [
-          "A remedy for all diseases\na. Stoic\nb. Marvel\nc. Panacea\nd. Recompense"
+          "A remedy for all diseases\na. Stoic\nb. Marvel\nc. [[Panacea]]\nd. Recompense"
+        ],
+        [
+          "One who is fond of fighting\na. [[Bellicose]]\nb. Aggressive\nc. Belligerent\nd. Militant\n- Bellicose [\u09af\u09c1\u09a6\u09cd\u09a7\u09b0\u09a4]"
+        ],
+        [
+          "A small shop that sells fashionable clothes, cosmetics, etc.\na. Store\nb. Stall\nc. [[Boutique]]\nd. Booth"
+        ],
+        [
+          "In a state of tension or anxiety or suspense\na. Off balance\nb. Depressed\nc. Diffused\nd. Tenterhooks"
+        ],
+        [
+          "That which cannot be read\na. Negligible\nb. [[Illegible]]\nc. Ineligible\nd. Incorrigible"
         ]
       ]
     }
