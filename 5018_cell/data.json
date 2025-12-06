@@ -707,6 +707,14 @@
         "95-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "96-0": {
+          "bgColor": "#ADB5BD",
+          "textColor": "rgb(0, 0, 0)"
+        },
+        "97-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -1018,6 +1026,15 @@
         ],
         [
           "A public declaration, making announcement or explanation [BCBL (TO)-2024]\na. Pamphlet\nb. Memorandum\nc. [[Manifesto]]\nd. Brochure"
+        ],
+        [
+          "One whose attitude is 'eat, drink and be merry' is\na. [[materialistic or epicurean]]\nb. profane\nc. cynic\nd. agnostic"
+        ],
+        [
+          "A war of religions\na. Calligraphy\nb. Contraband\nc. Cavalry\nd. Crusade"
+        ],
+        [
+          "An ordinance is - [Karnaphuli Gas Distribution Company Ltd-2024]\na. a book\nc. a law\nb. an arms factory\nd. a newspaper journal"
         ]
       ]
     },
