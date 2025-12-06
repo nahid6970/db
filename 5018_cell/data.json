@@ -668,6 +668,10 @@
         "75-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "76-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -912,10 +916,16 @@
           "A noun referring to things that our five senses can't detect is called noun.\nA. Proper\nB. common\nC. material\nD. [[abstract]]"
         ],
         [
-          "Where there is a will, there is way. Here 'will' is- [\u09b8\u09b9:\u09aa\u09b0\u09bf\u099a\u09be\u09b2\u0995 (\u09ae\u09be\u09a6\u0995 \u09a8\u09bf\u09df\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3)-\u09e7\u09e9]\nA. [[a noun]]\nB. a verb\nC. an adjective\nD. an adverb\n- after article so noun"
+          "Where there is a will, there is way. Here 'will' is- [\u09b8\u09b9:\u09aa\u09b0\u09bf\u099a\u09be\u09b2\u0995 (\u09ae\u09be\u09a6\u0995 \u09a8\u09bf\u09df\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3)-\u09e7\u09e9]\nA. [[a noun]]\nB. a verb\nC. an adjective\nD. an adverb\n- __after article so noun__"
         ],
         [
-          "I walked for a while. [RU (D- \u0985\u09ac\u09be\u09a3\u09bf\u099c) 12-13]\nA. verb\nB. adverb\nC. conjunction\nD. [[noun]]\n- while normally conjuction but since after article - noun"
+          "I walked for a while. [RU (D- \u0985\u09ac\u09be\u09a3\u09bf\u099c) 12-13]\nA. verb\nB. adverb\nC. conjunction\nD. [[noun]]\n- __while normally conjuction but since after article - noun__"
+        ],
+        [
+          "Educating girls contributes to an **__increase__** of wealth through its impact on economic development. [KU 10-11, BRUR (B) 14-15]\nA. a verb\nB. an adjective\nC. [[a noun]]\nD. an adverb\n- article and preposition er maje - noun"
+        ],
+        [
+          "The doctor took the round in the hospital. Here 'round' is a/an-[Dental 17-18]\nA. adjective\nB. [[noun]]\nC. verb\nD. adverb"
         ]
       ]
     },
