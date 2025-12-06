@@ -1,5 +1,5 @@
 {
-  "activeSheet": 138,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15432,6 +15432,18 @@
         "17-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "18-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "12-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "19-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15508,7 +15520,16 @@
           "==Teetotaler== means\na. One who abstains from theft\nb. One who abstains from meat\nc. [[One who abstains from taking wine]]\nd. One who abstains from malice\n- Teetotaler [\u09ae\u09a6\u09aa\u09be\u09a8 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09b0\u09a4]"
         ],
         [
-          "A person interested in collecting, studying and selling of old things\na. Antiquarian\nb. Junk-dealer\nc Crank\nd Archeologist"
+          "A person interested in collecting, studying and selling of old things\na. [[Antiquarian]]\nb. Junk-dealer\nc. Crank\nd. Archeologist"
+        ],
+        [
+          "A drawing on transparent paper\na. Red print\nb. Blue print\nc. Negative\nd. [[Transparency]]"
+        ],
+        [
+          "One who is not easily pleased by anything\na. Maiden\nb. Mediaeval\nc. Precarious\nd. Fastidious"
+        ],
+        [
+          "A remedy for all diseases\na. Stoic\nb. Marvel\nc. Panacea\nd. Recompense"
         ]
       ]
     }
