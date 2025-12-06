@@ -1,5 +1,5 @@
 {
-  "activeSheet": 12,
+  "activeSheet": 3,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -338,6 +338,10 @@
           "bgColor": "#C2FF80",
           "textColor": "rgb(0, 0, 0)"
         },
+        "13-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
         "5-0": {
           "bgColor": "#C2FF80",
           "textColor": "rgb(0, 0, 0)"
@@ -394,7 +398,7 @@
           "**\u09a8\u09c8\u09b0\u09be\u099c\u09cd\u09af \u09af\u09c7 \u09a4\u09a4\u09cd\u09a4\u09cd\u09ac\u09c7\u09b0 \u09ae\u09c2\u09b2 \u0989\u09aa\u09be\u09a6\u09be\u09a8 \u09b8\u09c7\u099f\u09bf \u09b9\u099a\u09cd\u099b\u09c7:**\n\u0995. \u09a8\u09df\u09be \u0989\u09a6\u09be\u09b0\u09a4\u09be\u09ac\u09be\u09a6\n\u0996. \u0997\u09a0\u09a8\u09ac\u09be\u09a6\n\u0997. [[\u09ac\u09be\u09b8\u09cd\u09a4\u09ac\u09ac\u09be\u09a6]]\n\u0998. \u09a8\u09ac\u09cd\u09af \u09ae\u09be\u09b0\u09cd\u0995\u09b8\u09ac\u09be\u09a6"
         ],
         [
-          "Gradual decrease in price level of goods and services is called:\nA. Inflation\nB. [[Deflation]]\nC. Devaluation\nD. Stagflation\n"
+          "Gradual decrease in price level of goods and services is called:\nA. Inflation\nB. [[Deflation]]\nC. Devaluation\nD. Stagflation"
         ],
         [
           "Which of the following is not an Arab country?\nA. Iraq\nB. Egypt\nC. [[Iran]]\nD. Syria"
@@ -1017,15 +1021,15 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
-        "8-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
         "10-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
         "11-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "8-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
@@ -1329,36 +1333,36 @@
       ]
     },
     {
-      "name": "mcq-\u09ae\u09be\u09a8\u09b8\u09bf\u0995-\u09a6\u0995\u09cd\u09b7\u09a4\u09be",
-      "columns": [
-        {
-          "name": "A",
-          "type": "text",
-          "width": "150",
-          "color": "#ffffff",
-          "textColor": "#000000",
-          "font": "JetBrains Mono",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
-          "headerBold": true,
-          "headerItalic": false,
-          "headerCenter": false
-        }
-      ],
-      "rows": [
-        [
-          "What is a word, phrase, number, or other sequence of characters that reads the same backward as forward?\nA. Syntax\nB. [[Palindrome]]\nC. Sibrail\nD. Dictoverse"
-        ]
-      ],
       "cellStyles": {
         "0-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
       },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
       "mergedCells": {},
-      "nickname": ""
+      "name": "mcq-\u09ae\u09be\u09a8\u09b8\u09bf\u0995-\u09a6\u0995\u09cd\u09b7\u09a4\u09be",
+      "nickname": "",
+      "rows": [
+        [
+          "What is a word, phrase, number, or other sequence of characters that reads the same backward as forward?\nA. Syntax\nB. [[Palindrome]]\nC. Sibrail\nD. Dictoverse"
+        ]
+      ]
     },
     {
       "cellStyles": {},
