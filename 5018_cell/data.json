@@ -688,6 +688,10 @@
         "83-0": {
           "bgColor": "#4D0000",
           "textColor": "#FFFFFF"
+        },
+        "86-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -968,10 +972,10 @@
           "I left my bag in this **__morning__**. [BU (C) 14-15]\nA. Adjective\nB. adverb\nC. [[Noun]]\nD. Preposition\n- demonstrative er por word ekta thakle seta noun hoy, this ,that those etc demonstrative"
         ],
         [
-          "Find out this text in your text book. The underlined words are respectively_ [KU 08-09]\nA. noun and noun\nB. noun and adverb\nC. adjective and noun\nD. noun and adjective"
+          "Find out this **__text__** in your **__text__** book. The underlined words are respectively [KU 08-09]\nA. noun and noun\nB. noun and adverb\nC. adjective and noun\nD. [[noun and adjective]]\n- prothom text r age demostrative this and pore preposition on and porer tai your possessive and pore 2 ta noun so 1 ta adjective"
         ],
         [
-          "Meaningful separation of judiciary is needed for the country. [RU (B-Law) 15-16]\nA. an adjective\nB. a noun\nC. an adverb\nD. a verb"
+          "Meaningful separation of **__judiciary__** is needed for the country. [RU (B-Law) 15-16]\nA. an adjective\nB. [[a noun]]\nC. an adverb\nD. a verb\n- ??ok pad diya suru pavc diya thamaiya dibo??"
         ]
       ]
     },
