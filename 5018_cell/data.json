@@ -676,6 +676,10 @@
         "77-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "79-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -935,7 +939,7 @@
           "What is the (deep) of the canal? [RU (\u09b8\u09ae\u09be\u099c\u09bf\u0995 \u09ac\u09bf\u099c\u09cd\u099e\u09be\u09a8) 09-10]\nA. deepest\nB. deeper\nC. [[deepts]]\nD. depth\n- depth = noun"
         ],
         [
-          "Unless protected areas are established the Royal Bangal Tigers will face __ of extinction. [DU (C) 04-05]\nA. possibleB. the possibility\nC. possibility\nD. to be possible"
+          "Unless protected areas are established, the Royal Bangal Tigers will face __ of extinction. [DU (C) 04-05]\nA. possible\nB. the possibility\nC. possibility\nD. to be possible\n- sudu possibility lekha jabe na coz age ekta pad the lagbe and pore ekta pavc of ase"
         ]
       ]
     },
