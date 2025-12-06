@@ -15279,6 +15279,9 @@
         ],
         [
           "- Polyandry [\u09b8\u09b0\u09cd\u09ac \u099c\u09cd\u099e\u09be\u09a8\u09c0 \u098f\u0995\u0987 \u09b8\u09be\u09a5\u09c7 \u09ac\u09b9\u09c1 \u09b8\u09cd\u09ac\u09be\u09ae\u09c0 \u09ac\u09b9\u09a8 \u0995\u09b0\u09be]\n- Polygyny [\u09af\u09c7 \u09aa\u09c1\u09b0\u09c1\u09b7\u09c7\u09b0 \u0985\u09a8\u09c7\u0995\u0997\u09c1\u09b2\u09cb \u09b8\u09cd\u09a4\u09cd\u09b0\u09c0 \u0986\u099b\u09c7]\n- Polygamy [\u09ac\u09b9\u09c1\u09ac\u09bf\u09ac\u09be\u09b9]"
+        ],
+        [
+          "Teetotaler [\u09ae\u09a6\u09aa\u09be\u09a8 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09b0\u09a4]"
         ]
       ]
     },
@@ -15390,6 +15393,10 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
+        "13-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
         "14-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15402,6 +15409,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "3-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "5-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15412,6 +15423,14 @@
         },
         "9-0": {
           "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "16-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "17-0": {
+          "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
       },
@@ -15481,6 +15500,15 @@
         ],
         [
           "Words inscribed on tomb\na. Epitome\nb. Epistle\nc. Epilogue\nd. [[Epitaph]]"
+        ],
+        [
+          "Tending to move away from the centre or axis\na. [[Centrifugal]]\nb. Centripetal\nc. Axiomatic\nd. Awry"
+        ],
+        [
+          "==Teetotaler== means\na. One who abstains from theft\nb. One who abstains from meat\nc. [[One who abstains from taking wine]]\nd. One who abstains from malice\n- Teetotaler [\u09ae\u09a6\u09aa\u09be\u09a8 \u09a5\u09c7\u0995\u09c7 \u09ac\u09bf\u09b0\u09a4]"
+        ],
+        [
+          "A person interested in collecting, studying and selling of old things\na. Antiquarian\nb. Junk-dealer\nc Crank\nd Archeologist"
         ]
       ]
     }
