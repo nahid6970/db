@@ -699,6 +699,10 @@
         "88-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "94-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -1001,6 +1005,9 @@
         ],
         [
           "The up train is last. Here 'up' is-\nA. Noun\nB. Pronoun\nC. Adverb\nD. [[Adjective]]"
+        ],
+        [
+          "Persistent high inflation combined with high unemployment and saturated demand in an economy. [NRBC Bank (ATO)-2024]\na. Recession\nb. Depression\nc. [[Stagflation]]\nd. Stagnation\n+inflation = +employment\nstagflation = +inflation = +unemployment [positive]\n\nRecession\nOutput (GDP): \u2013\nInflation: \u2013 or \u2193\nUnemployment: +\n\nDepression (a severe & long recession)\nOutput (GDP): \u2013 \u2013\nInflation: \u2013 \u2013 or deflation\nUnemployment: ++ (very high)\n\nStagflation (not stagnation \u2014 the real economic term)\nOutput (GDP): 0 or \u2013\nInflation: +\nUnemployment: +\nIf you actually meant economic stagnation, here it is too:\n\nStagnation\nOutput (GDP): 0 or very low growth\nInflation: neutral (can be low/normal)\nUnemployment: mildly + or stable"
         ]
       ]
     },
