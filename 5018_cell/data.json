@@ -1,5 +1,5 @@
 {
-  "activeSheet": 2,
+  "activeSheet": 6,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -648,6 +648,14 @@
         "66-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "43-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        },
+        "68-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -872,6 +880,12 @@
         ],
         [
           "In which literacy group, Virginia Woolf was a key figure?\nBeat Generation\nX-Generation\nBloomsbury Group\nPre-Raphaelite"
+        ],
+        [
+          "Frailty thy name is woman. Here 'Frailty' is \u2013\nA. [[a noun]]\nB. An adjective\nC. An adverb\nD. A verb\n- thy = you\n- sese ty thakle = noun"
+        ],
+        [
+          "Hearing of the case will be next week. The underlined word is - [RU (B-Law) 15-16]\nA. a noun\nB. an adjective\nC. an adverb\nD. a verb"
         ]
       ]
     },
