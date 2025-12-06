@@ -15291,6 +15291,9 @@
         ],
         [
           "Swat [\u09a5\u09be\u09aa\u09cd\u09aa\u09b0 \u09ae\u09be\u09b0\u09be]"
+        ],
+        [
+          "Agnostic [not sure of the existence of god]"
         ]
       ]
     },
@@ -15473,6 +15476,14 @@
         "27-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "28-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "31-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15579,7 +15590,19 @@
           "Habitually silent or talking little\na. Servile\nb. Unequivocal\nc. [[Taciturn]]\nd. Synoptic"
         ],
         [
-          "Be the embodiment or perfect example of\na. Characterise\nb. Idol\nc. Personify\nd. Signify"
+          "Be the embodiment or perfect example of\na. Characterise\nb. Idol\nc. [[Personify]]\nd. Signify"
+        ],
+        [
+          "A person not sure of the existence of god\na. Cynic\nb. [[Agnostic]]\nc. Atheist\nd. Theist"
+        ],
+        [
+          "One who does not believe in existence of god\na. Egoist\nb. [[Atheist]]\nc. Stoic\nd. Na\u00efve"
+        ],
+        [
+          "A paper written by hand\na. Handicraft\nb. [[Manuscript]]\nc. Handiwork\nd. Thesis"
+        ],
+        [
+          "Something that can be heard\na. Auditory\nb. Audio-visual\nc. [[Audible]]\nd. Audition"
         ]
       ]
     }
