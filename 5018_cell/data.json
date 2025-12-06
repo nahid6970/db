@@ -656,6 +656,10 @@
         "68-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "69-0": {
+          "bgColor": "#6C757D",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -885,7 +889,7 @@
           "Frailty thy name is woman. Here 'Frailty' is \u2013\nA. [[a noun]]\nB. An adjective\nC. An adverb\nD. A verb\n- thy = you\n- sese ty thakle = noun"
         ],
         [
-          "Hearing of the case will be next week. The underlined word is - [RU (B-Law) 15-16]\nA. a noun\nB. an adjective\nC. an adverb\nD. a verb"
+          "**__Hearing__** of the case will be next week. The underlined word is - [RU (B-Law) 15-16]\nA. [[a noun]]\nB. an adjective\nC. an adverb\nD. a verb"
         ]
       ]
     },
