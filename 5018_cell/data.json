@@ -285,37 +285,6 @@
       ]
     },
     {
-      "name": "mcq-All",
-      "columns": [
-        {
-          "name": "A",
-          "type": "text",
-          "width": "150",
-          "color": "#ffffff",
-          "textColor": "#000000",
-          "font": "JetBrains Mono",
-          "fontSize": "20",
-          "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
-          "headerBold": true,
-          "headerItalic": false,
-          "headerCenter": false
-        }
-      ],
-      "rows": [
-        [
-          "Which country is the largest producer of cocoa beans globally?\nA. Ghana\nB. [[Ivory Cost]]\nC. Chad\nD. Cameron"
-        ],
-        [
-          "Who wrote the book \"World Order\"?\nA. Hillary Clinton\nB. [[Henry Kissinger]]\nC. Ronald Regan\nD. John Kennedy"
-        ],
-        [
-          "Which country was the first to launch a fully functional Central Bank Digital Currency?\nA. Sweden\nB. China\nC. [[Bahamas]]\nD. Nigeria"
-        ],
-        [
-          "What is the position of Bangla among the most spoken languages of the world?\nA. 3th\nB. 5th\nC. [[7th]]\nD. 9th\n- Bangla (Bengali) is the second most spoken language in Asia (after Mandarin Chinese)"
-        ]
-      ],
       "cellStyles": {
         "0-0": {
           "bgColor": "#495057",
@@ -334,7 +303,38 @@
           "textColor": "#FFFFFF"
         }
       },
-      "mergedCells": {}
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "mergedCells": {},
+      "name": "mcq-All",
+      "rows": [
+        [
+          "Which country is the largest producer of cocoa beans globally?\nA. Ghana\nB. [[Ivory Cost]]\nC. Chad\nD. Cameron"
+        ],
+        [
+          "Who wrote the book \"World Order\"?\nA. Hillary Clinton\nB. [[Henry Kissinger]]\nC. Ronald Regan\nD. John Kennedy"
+        ],
+        [
+          "Which country was the first to launch a fully functional Central Bank Digital Currency?\nA. Sweden\nB. China\nC. [[Bahamas]]\nD. Nigeria"
+        ],
+        [
+          "What is the position of Bangla among the most spoken languages of the world?\nA. 3th\nB. 5th\nC. [[7th]]\nD. 9th\n- Bangla (Bengali) is the second most spoken language in Asia (after Mandarin Chinese)"
+        ]
+      ]
     },
     {
       "cellStyles": {
@@ -617,6 +617,10 @@
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
         },
+        "43-0": {
+          "bgColor": "#B30000",
+          "textColor": "#FFFFFF"
+        },
         "49-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
@@ -649,10 +653,6 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
-        "43-0": {
-          "bgColor": "#B30000",
-          "textColor": "#FFFFFF"
-        },
         "68-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -678,6 +678,10 @@
           "textColor": "#FFFFFF"
         },
         "79-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "82-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
@@ -946,6 +950,12 @@
         ],
         [
           "Her success was shattered by her later [[commentary]]. [BU (B) 13-14]\nA. Verb\nB. Adjective\nC. [[Noun]]\nD. Adverb\n{link:https://youtu.be/q2mkep5YPt8?t=1989}@@Link@@{/}"
+        ],
+        [
+          "Try your **__best__**. [SUST 09-10]\nA. Verb\nB. Adverb\nC. Adjective\nD. [[Noun]]\n- you = possessive er por ekta word so its noun"
+        ],
+        [
+          "We shall not see his look again. Here 'look' is a/an- [\u09ee\u09ae \u09ac\u09c7\u09b8\u09b0\u0995\u09be\u09b0\u09bf \u09b6\u09bf\u0995\u09cd\u09b7\u0995 \u09a8\u09bf\u09ac\u09a8\u09cd\u09a7\u09a8-\u09e7\u09e8]\nA. Adverb\nB. Noun\nC. Preposition\nD. Adjective"
         ]
       ]
     },
@@ -12464,13 +12474,13 @@
     {
       "cellStyles": {
         "0-0": {
-          "rank": 1,
           "bgColor": "#804D00",
+          "rank": 1,
           "textColor": "#FFFFFF"
         },
         "1-0": {
-          "rank": 2,
           "bgColor": "#294D00",
+          "rank": 2,
           "textColor": "#FFFFFF"
         }
       },
