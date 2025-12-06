@@ -1,5 +1,5 @@
 {
-  "activeSheet": 138,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15285,6 +15285,12 @@
         ],
         [
           "Bellicose [\u09af\u09c1\u09a6\u09cd\u09a7\u09b0\u09a4]"
+        ],
+        [
+          "Tenterhooks [\u0985\u09b8\u09cd\u09a5\u09bf\u09b0\u09a4\u09be, \u0985\u09b8\u09cd\u09a5\u09bf\u09b0 \u0985\u09ac\u09b8\u09cd\u09a5\u09be]"
+        ],
+        [
+          "Swat [\u09a5\u09be\u09aa\u09cd\u09aa\u09b0 \u09ae\u09be\u09b0\u09be]"
         ]
       ]
     },
@@ -15459,6 +15465,14 @@
         "23-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "24-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "27-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15553,10 +15567,19 @@
           "A small shop that sells fashionable clothes, cosmetics, etc.\na. Store\nb. Stall\nc. [[Boutique]]\nd. Booth"
         ],
         [
-          "In a state of tension or anxiety or suspense\na. Off balance\nb. Depressed\nc. Diffused\nd. Tenterhooks"
+          "In a state of tension or anxiety or suspense\na. Off balance\nb. Depressed\nc. Diffused\nd. [[Tenterhooks]]\n- Tenterhooks [\u0985\u09b8\u09cd\u09a5\u09bf\u09b0\u09a4\u09be \u0985\u09b8\u09cd\u09a5\u09bf\u09b0 \u0985\u09ac\u09b8\u09cd\u09a5\u09be]"
         ],
         [
           "That which cannot be read\na. Negligible\nb. [[Illegible]]\nc. Ineligible\nd. Incorrigible"
+        ],
+        [
+          "To slap with a flat object\na. Chop\nb. Hew\nc. Gnaw\nd. [[Swat]]"
+        ],
+        [
+          "Habitually silent or talking little\na. Servile\nb. Unequivocal\nc. [[Taciturn]]\nd. Synoptic"
+        ],
+        [
+          "Be the embodiment or perfect example of\na. Characterise\nb. Idol\nc. Personify\nd. Signify"
         ]
       ]
     }
