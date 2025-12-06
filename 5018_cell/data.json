@@ -308,6 +308,12 @@
         ],
         [
           "Who wrote the book \"World Order\"?\nA. Hillary Clinton\nB. Henry Kissinger\nC. Ronald Regan\nD. John Kennedy"
+        ],
+        [
+          "Which country was the first to launch a fully functional Central Bank Digital Currency?\nA. Sweden\nB. China\nC. [[Bahamas]]\nD. Nigeria"
+        ],
+        [
+          "What is the position of Bangla among the most spoken languages of the world?\nA. 3th\nB. 5th\nC. [[7th]]\nD. 9th"
         ]
       ],
       "cellStyles": {
@@ -317,6 +323,14 @@
         },
         "1-0": {
           "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "2-0": {
+          "bgColor": "#448000",
+          "textColor": "#FFFFFF"
+        },
+        "3-0": {
+          "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
       },
@@ -8359,6 +8373,10 @@
         [
           "{fg:#ffffff;bg:#000000}Zadie Smith{/}",
           "- White Teeth {fg:#ffffff;bg:#000000}Novel{/}"
+        ],
+        [
+          "==Henry Kissinger==",
+          "- World Order\n* list other books of him as they came always in bd also e always insulted bangladesh"
         ]
       ]
     },
