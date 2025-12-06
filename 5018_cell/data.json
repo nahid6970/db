@@ -1,5 +1,5 @@
 {
-  "activeSheet": 6,
+  "activeSheet": 8,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -932,11 +932,66 @@
       "rows": []
     },
     {
-      "cellStyles": {},
-      "columns": [],
+      "cellStyles": {
+        "0-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "8-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        }
+      },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
       "mergedCells": {},
       "name": "mcq-ICT",
-      "rows": []
+      "rows": [
+        [
+          "Which of the following is a logical operator?\nA. +\nB. [[&&]]\nC. *\nD. ="
+        ],
+        [
+          "What is the use of \"CAPTCHA\" in online banking applications?\nA. Encryption\nB. Authentication\nC. [[Blocking bots]]\nD. Improving speed"
+        ],
+        [
+          "Wi-Fi is based on-\nA. IEEE 208.11\nB. IEEE 802.11\nC. IEEE 802.15\nD. IEEE 208.15"
+        ],
+        [
+          "Which is not an IT certification?\nA. CCNA\nB. ComTIA A+\nC. GISF\nD. [[DigiSec]]"
+        ],
+        [
+          "Which of the following is not one of the three Vs' used to characterize Big Data?\nA. Variety\nB. [[Visibility]]\nC. Volume\nD. Velocity"
+        ],
+        [
+          "Which one is not a leading Al startup?\nA. OpenAl\n\u0392. \u03a7\u0391\u0399\nC. Cohere\nD. [[nVidia]]"
+        ],
+        [
+          "What is the time complexity of searching for an element in a balanced binary search tree?\nA. O(1)\nB. O(n log n)\nC. [[O(log n)]]\nD. O(n)"
+        ],
+        [
+          "Which of the following is not a guided media?\nA. Optical fiber\nB. Coaxial cable\nC. [[Radio waves]]\nD. Twisted pair"
+        ],
+        [
+          "Which type of DNS record maps a domain name to an IPv4 address?\nA. AAA Record\nB. CNAME Record\nC. MX Record\nD. [[A Record]]\n- ==For ipv6 AAAA=="
+        ],
+        [
+          "A chatbot like ChatGPT is an example of:\nA. Symbolic Al\nB. [[Generative Al]]\nC. Embedded Al\nD. Reactive Al"
+        ]
+      ]
     },
     {
       "cellStyles": {
