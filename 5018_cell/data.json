@@ -5213,7 +5213,7 @@
           ""
         ],
         [
-          "- ==cynical== (\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09ac\u09be\u09a6\u09c0)\n- ==incredulous==, skeptical (\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8, **\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09aa\u09cd\u09b0\u09ac\u09a3**, **\u09b8\u0982\u09b6\u09af\u09bc\u09c0**)",
+          "- ==cynical== (\u09b9\u09a4\u09be\u09b6\u09ac\u09be\u09a6\u09c0, \u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09ac\u09be\u09a6\u09c0)\n- ==incredulous==, skeptical (\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8, **\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09aa\u09cd\u09b0\u09ac\u09a3**, **\u09b8\u0982\u09b6\u09af\u09bc\u09c0**)",
           ""
         ],
         [
@@ -15383,6 +15383,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "11-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "2-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15394,6 +15398,10 @@
         "4-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "7-0": {
+          "bgColor": "#ADB5BD",
+          "textColor": "#000000"
         }
       },
       "columns": [
@@ -15435,6 +15443,24 @@
         ],
         [
           "A style in which a writer makes a display of his knowledge\na. [[Pedantic]]\nb. Verbose\nc. Pompous\nd. Ornate"
+        ],
+        [
+          "List of the business or subjects to be considered at a meeting\na. Schedule\nb. Timetable\nc. [[Agenda]]\nd. Plan"
+        ],
+        [
+          "Leave or remove from a place considered dangerous\na. Evade\nb. [[Evacuate]]\nc. Avoid\nd. Exterminate"
+        ],
+        [
+          "A person pretending to be somebody he is not\na. Magician\nb. Rogue\nc. Liar\nd. [[Imposter]]"
+        ],
+        [
+          "A person who knows many foreign languages\na. Linguist\nb. Grammarian\nc. [[Polyglot]]\nd. Bilingual"
+        ],
+        [
+          "One who has little faith in human sincerity and goodness\na. Egoist\nb. Fatalist\nc. Stoic\nd. [[Cynic]]"
+        ],
+        [
+          "One who possesses many talents\na. Versatile\nb. Nubile\nc. Exceptional\nd. Gifted"
         ]
       ]
     }
