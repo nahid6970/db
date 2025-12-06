@@ -15503,6 +15503,10 @@
         "37-0": {
           "bgColor": "#004D2E",
           "textColor": "#FFFFFF"
+        },
+        "38-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15639,7 +15643,7 @@
           "A place where bees are kept is called\na. [[An apiary]]\nb. A mole\nc. A hive\nd. A sanctuary"
         ],
         [
-          "A religious discourse\na. Preach\nb. Stanza\nc. Sanctorum\nd. Sermon"
+          "A religious discourse\na. Preach\nb. Stanza\nc. Sanctorum\nd. [[Sermon]]"
         ]
       ]
     }
