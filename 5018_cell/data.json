@@ -1,5 +1,5 @@
 {
-  "activeSheet": 142,
+  "activeSheet": 138,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15275,7 +15275,10 @@
           "Oligarchy -> govern by small group\nmonarchy -> \u09b0\u09be\u099c\u09a4\u09a8\u09cd\u09a4\u09cd\u09b0\nplutocracy -> \u09a7\u09a8\u09bf \u09ac\u09c7\u0995\u09cd\u09a4\u09bf, affluent"
         ],
         [
-          ""
+          "Omniscient, knowing everything [\u09b8\u09b0\u09cd\u09ac \u099c\u09cd\u099e\u09be\u09a8\u09c0]"
+        ],
+        [
+          "- Polyandry [\u09b8\u09b0\u09cd\u09ac \u099c\u09cd\u099e\u09be\u09a8\u09c0 \u098f\u0995\u0987 \u09b8\u09be\u09a5\u09c7 \u09ac\u09b9\u09c1 \u09b8\u09cd\u09ac\u09be\u09ae\u09c0 \u09ac\u09b9\u09a8 \u0995\u09b0\u09be]\n- Polygyny [\u09af\u09c7 \u09aa\u09c1\u09b0\u09c1\u09b7\u09c7\u09b0 \u0985\u09a8\u09c7\u0995\u0997\u09c1\u09b2\u09cb \u09b8\u09cd\u09a4\u09cd\u09b0\u09c0 \u0986\u099b\u09c7]\n- Polygamy [\u09ac\u09b9\u09c1\u09ac\u09bf\u09ac\u09be\u09b9]"
         ]
       ]
     },
@@ -15379,7 +15382,7 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
-        "1-0": {
+        "10-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
@@ -15387,15 +15390,19 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
+        "14-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "15-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
         "2-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
-        "3-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "4-0": {
+        "5-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
@@ -15403,7 +15410,7 @@
           "bgColor": "#ADB5BD",
           "textColor": "#000000"
         },
-        "12-0": {
+        "9-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
@@ -15428,43 +15435,52 @@
       "parentSheet": 6,
       "rows": [
         [
-          "One who is not easily pleased by anything. [Premier Bank (MTO), Date: 18.11.23]\na. Maiden\nb. Mediaeval\nc. Precarious\nd. [[Fastidious]]\n- Fastidious [\u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7, \u09b8\u09b9\u099c\u09c7 \u09b8\u09a8\u09cd\u09a4\u09c1\u09b7\u09cd\u099f \u0995\u09b0\u09be \u09af\u09be\u09af\u09bc \u09a8\u09be]"
-        ],
-        [
-          "Extreme old age when a man behaves like a fool\na. Imbecility\nb. Senility\nc. [[Dotage]]\nd. Superannuation\n- Dotage  [\u09ac\u09c3\u09a6\u09cd\u09a7 \u09ac\u09af\u09bc\u09b8\u09c7 \u09aa\u09be\u0997\u09b2\u09be\u09ae\u09bf]"
-        ],
-        [
-          "The study of ancient societies\na. Anthropology\nb. [[Archaeology]]\nc. History\nd. Ethnology\n- Anthropology - science realted to human"
-        ],
-        [
           "A person of good understanding knowledge and reasoning power\na. Expert\nb. [[Intellectual]]"
-        ],
-        [
-          "A person who insists on something\na. Disciplinarian\nb. [[Stickler]]\nc. Instantaneous\nd. Boaster\n- Stickler [\u09a8\u09bf\u09af\u09bc\u09ae, \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf \u09ac\u09be \u09a8\u09c0\u09a4\u09bf\u09b0 \u09ac\u09cd\u09af\u09be\u09aa\u09be\u09b0\u09c7 \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7 \u098f\u09ac\u0982 \u0995\u09a0\u09cb\u09b0\u09ad\u09be\u09ac\u09c7 \u09a4\u09be \u09ae\u09c7\u09a8\u09c7 \u099a\u09b2\u09c7\u09a8 \u09ac\u09be \u0985\u09a8\u09cd\u09af\u09a6\u09c7\u09b0 \u09ae\u09be\u09a8\u09a4\u09c7 \u09ac\u09be\u09a7\u09cd\u09af \u0995\u09b0\u09c7\u09a8]"
-        ],
-        [
-          "State in which the few govern the many\na. Monarchy\nb. [[Oligarchy]]\nc. Plutocracy\nd. Autocracy"
-        ],
-        [
-          "A style in which a writer makes a display of his knowledge\na. [[Pedantic]]\nb. Verbose\nc. Pompous\nd. Ornate"
-        ],
-        [
-          "List of the business or subjects to be considered at a meeting\na. Schedule\nb. Timetable\nc. [[Agenda]]\nd. Plan"
-        ],
-        [
-          "Leave or remove from a place considered dangerous\na. Evade\nb. [[Evacuate]]\nc. Avoid\nd. Exterminate"
         ],
         [
           "A person pretending to be somebody he is not\na. Magician\nb. Rogue\nc. Liar\nd. [[Imposter]]"
         ],
         [
+          "A person who insists on something\na. Disciplinarian\nb. [[Stickler]]\nc. Instantaneous\nd. Boaster\n- Stickler [\u09a8\u09bf\u09af\u09bc\u09ae, \u09aa\u09a6\u09cd\u09a7\u09a4\u09bf \u09ac\u09be \u09a8\u09c0\u09a4\u09bf\u09b0 \u09ac\u09cd\u09af\u09be\u09aa\u09be\u09b0\u09c7 \u0985\u09a4\u09cd\u09af\u09a8\u09cd\u09a4 \u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7 \u098f\u09ac\u0982 \u0995\u09a0\u09cb\u09b0\u09ad\u09be\u09ac\u09c7 \u09a4\u09be \u09ae\u09c7\u09a8\u09c7 \u099a\u09b2\u09c7\u09a8 \u09ac\u09be \u0985\u09a8\u09cd\u09af\u09a6\u09c7\u09b0 \u09ae\u09be\u09a8\u09a4\u09c7 \u09ac\u09be\u09a7\u09cd\u09af \u0995\u09b0\u09c7\u09a8]"
+        ],
+        [
           "A person who knows many foreign languages\na. Linguist\nb. Grammarian\nc. [[Polyglot]]\nd. Bilingual"
+        ],
+        [
+          "A style in which a writer makes a display of his knowledge\na. [[Pedantic]]\nb. Verbose\nc. Pompous\nd. Ornate"
+        ],
+        [
+          "Extreme old age when a man behaves like a fool\na. Imbecility\nb. Senility\nc. [[Dotage]]\nd. Superannuation\n- Dotage  [\u09ac\u09c3\u09a6\u09cd\u09a7 \u09ac\u09af\u09bc\u09b8\u09c7 \u09aa\u09be\u0997\u09b2\u09be\u09ae\u09bf]"
+        ],
+        [
+          "Leave or remove from a place considered dangerous\na. Evade\nb. [[Evacuate]]\nc. Avoid\nd. Exterminate"
+        ],
+        [
+          "List of the business or subjects to be considered at a meeting\na. Schedule\nb. Timetable\nc. [[Agenda]]\nd. Plan"
+        ],
+        [
+          "One who eats everything\na. [[Omnivorous]]\nb. Omniscient\nc. Irrestible\nd. Insolvent\n- Omniscient, knowing everything [\u09b8\u09b0\u09cd\u09ac \u099c\u09cd\u099e\u09be\u09a8\u09c0]"
         ],
         [
           "One who has little faith in human sincerity and goodness\na. Egoist\nb. Fatalist\nc. Stoic\nd. [[Cynic]]"
         ],
         [
+          "One who is not easily pleased by anything. [Premier Bank (MTO), Date: 18.11.23]\na. Maiden\nb. Mediaeval\nc. Precarious\nd. [[Fastidious]]\n- Fastidious [\u0996\u09c1\u0981\u09a4\u0996\u09c1\u0981\u09a4\u09c7, \u09b8\u09b9\u099c\u09c7 \u09b8\u09a8\u09cd\u09a4\u09c1\u09b7\u09cd\u099f \u0995\u09b0\u09be \u09af\u09be\u09af\u09bc \u09a8\u09be]"
+        ],
+        [
           "One who possesses many talents\na. [[Versatile]]\nb. Nubile\nc. Exceptional\nd. Gifted"
+        ],
+        [
+          "State in which the few govern the many\na. Monarchy\nb. [[Oligarchy]]\nc. Plutocracy\nd. Autocracy"
+        ],
+        [
+          "The custom or practice of having more than one husband at same time\na. Polygyny\nb. Polyphony\nc. [[Polyandry]]\nd. Polychromy\n- Polyandry [\u09b8\u09b0\u09cd\u09ac \u099c\u09cd\u099e\u09be\u09a8\u09c0 \u098f\u0995\u0987 \u09b8\u09be\u09a5\u09c7 \u09ac\u09b9\u09c1 \u09b8\u09cd\u09ac\u09be\u09ae\u09c0 \u09ac\u09b9\u09a8 \u0995\u09b0\u09be]\n- Polygyny [\u09af\u09c7 \u09aa\u09c1\u09b0\u09c1\u09b7\u09c7\u09b0 \u0985\u09a8\u09c7\u0995\u0997\u09c1\u09b2\u09cb \u09b8\u09cd\u09a4\u09cd\u09b0\u09c0 \u0986\u099b\u09c7]\n- Polygamy [\u09ac\u09b9\u09c1\u09ac\u09bf\u09ac\u09be\u09b9]"
+        ],
+        [
+          "The study of ancient societies\na. Anthropology\nb. [[Archaeology]]\nc. History\nd. Ethnology\n- Anthropology - science realted to human"
+        ],
+        [
+          "Words inscribed on tomb\na. Epitome\nb. Epistle\nc. Epilogue\nd. [[Epitaph]]"
         ]
       ]
     }
