@@ -1,5 +1,5 @@
 {
-  "activeSheet": 79,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15373,6 +15373,10 @@
         "1-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "2-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15402,6 +15406,9 @@
         ],
         [
           "The study of ancient societies\na. Anthropology\nb. [[Archaeology]]\nc. History\nd. Ethnology\n- Anthropology - science realted to human"
+        ],
+        [
+          "A person of good understanding knowledge and reasoning power\na. Expert\nb. [[Intellectual]]"
         ]
       ]
     }
