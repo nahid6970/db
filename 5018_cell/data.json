@@ -1,5 +1,5 @@
 {
-  "activeSheet": 6,
+  "activeSheet": 41,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -9514,6 +9514,10 @@
         ],
         [
           "-> The acronyms PAD and PAVC refer to a grammar technique used to identify a noun or noun phrase within a sentence based on the words that precede it, often called \"noun signals\". The core idea is that certain parts of speech act as clear signals for the presence of a noun.\nHere is a breakdown of the rules for each acronym:\n==The PAD Method==\nThe PAD method is a basic rule focusing on the words immediately preceding a noun. \nP = Preposition, Possessive Adjective\nA = Article, Adjective\nD = Determiner \nRules for PAD:\nIf one word follows PAD: That single word is a noun.\nExample: \"He lives in Sylhet.\" (\"in\" is a preposition; \"Sylhet\" is a noun).\nIf two words follow PAD: The first word is an adjective, and the second word is a noun.\nExample: \"He lives in Sylhet city.\" (\"in\" is a preposition; \"Sylhet\" is an adjective modifying \"city\", which is the noun).\nIf three words follow PAD: The first word is an adverb, the second is an adjective, and the third is a noun.\nExample: \"It was a very beautiful day.\" (\"a\" is an article/determiner; \"very\" is an adverb; \"beautiful\" is an adjective; \"day\" is the noun). \n==The PAVC Method==\nThe acronym PAVC is a less common variation and seems to be a mnemonic that adds verbs and conjunctions to a list of word types, but it is not a standard, widely used grammar rule in the same way PAD is. The PAD method is the primary and more recognized technique for identifying nouns using \"signal\" words. \nOther Ways to Identify Nouns\nBeyond these acronyms, you can also identify nouns by looking for common suffixes and by checking if the word makes sense in common noun positions: \nCommon Suffixes: Many nouns end with suffixes such as -tion (population), -ness (happiness), -hood (childhood), -ity (validity), -ment (agreement), or -ship (friendship).\nArticles: Nouns often appear after articles like \"a,\" \"an,\" or \"the\".\nRole in a Sentence: Nouns are naming words that represent a person, place, thing, or idea, and they typically act as the subject or object of a verb. \n",
+          ""
+        ],
+        [
+          "PAD + W4 + W3 + W2 + W1 + PAVC\nHere,\n##__PAD__##\nP = Preposition / Possessive Pronoun\nA = Article / Adjective\nD = Determiner\n##__PAVC__##\nP = Punctuation / Preposition\nA = Adverb\nV = Verb\nC = Conjunction\n\nW1 = Noun\nW2 = Adj\nW3 = Adv\nW4 = Adv\n",
           ""
         ]
       ]
