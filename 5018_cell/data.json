@@ -9517,7 +9517,7 @@
           ""
         ],
         [
-          "PAD + W4 + W3 + W2 + W1 + PAVC\nHere,\n##__PAD__##\nP = Preposition / Possessive Pronoun\nA = Article / Adjective\nD = Determiner\n##__PAVC__##\nP = Punctuation / Preposition\nA = Adverb\nV = Verb\nC = Conjunction\n\nW1 = Noun\nW2 = Adj\nW3 = Adv\nW4 = Adv\n",
+          "PAD + W4 + W3 + W2 + W1 + PAVC\nHere,\n##__PAD__##\nP = Preposition / Possessive Pronoun\nA = Article / Adjective\nD = Determiner\n##__PAVC__##\nP = Punctuation[,.] / Preposition\nA = Adverb\nV = Verb\nC = Conjunction\n\nW1 = Noun\nW2 = Adj\nW3 = Adv\nW4 = Adv\n\n- PAD sentence e last r ta nite hobe r PAVC prothomta ",
           ""
         ]
       ]
