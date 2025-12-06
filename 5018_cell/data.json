@@ -1,5 +1,5 @@
 {
-  "activeSheet": 6,
+  "activeSheet": 138,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -142,7 +142,8 @@
     "137": "Literature",
     "139": "Bangla Grammar",
     "140": "Bangla Grammar",
-    "141": "Bangla Grammar"
+    "141": "Bangla Grammar",
+    "142": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -731,6 +732,14 @@
         "98-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "105-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "104-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -1062,13 +1071,13 @@
           "Boundary of an area\na. Porch\nb. [[Periphery]]\nc. Balcony\nd. Verandah"
         ],
         [
-          "A name, wrongly or unsuitably applied to a person or an object. [IBB (PO), Date: 31.03.2017]\na. misreferring\nb. incorrigible\nc. misnaming\nd. [[misnomer]]\n- misnomer = \u09a8\u09be\u09ae\u09c7\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u0997"
+          "A name, wrongly or unsuitably applied to a person or an object. [IBB (PO), Date: 31.03.2017]\na. misreferring\nb. incorrigible\nc. misnaming\nd. [[misnomer]]\n- ==misnomer = \u09a8\u09be\u09ae\u09c7\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u0997=="
         ],
         [
-          "Lacking social grace, sensitivity or acuteness. [IBB (PO), Date: 31.03.2017]\na. feign\nb. gauche\nc. contiguous\nd. verbose"
+          "Lacking social grace, sensitivity or acuteness. [IBB (PO), Date: 31.03.2017]\na. feign\nb. [[gauche]]\nc. contiguous\nd. verbose"
         ],
         [
-          "A person of informed and discriminating taste. [IBB (PO), Date: 31.03.2017]\na. illusionist\nb. pariah\nc. connoisseur\nd. vernacular"
+          "A person of informed and discriminating taste. [IBB (PO), Date: 31.03.2017]\na. illusionist\nb. pariah\nc. [[connoisseur]]\nd. vernacular"
         ]
       ]
     },
@@ -15251,7 +15260,13 @@
       "parentSheet": 22,
       "rows": [
         [
-          "Incorrigible [\u0985\u09b8\u0982\u09b6\u09cb\u09a7\u09a8\u09af\u09cb\u0997\u09cd\u09af]"
+          "!!Incorrigible!! [\u0985\u09b8\u0982\u09b6\u09cb\u09a7\u09a8\u09af\u09cb\u0997\u09cd\u09af]"
+        ],
+        [
+          "==misnomer== [\u09a8\u09be\u09ae\u09c7\u09b0 \u09ad\u09c1\u09b2 \u09aa\u09cd\u09b0\u09af\u09bc\u09cb\u0997]"
+        ],
+        [
+          "==gauche== [ \u0985\u09ae\u09be\u09b0\u09cd\u099c\u09bf\u09a4 \u0985\u09b8\u09be\u09ae\u09be\u099c\u09bf\u0995]"
         ]
       ]
     },
@@ -15346,6 +15361,32 @@
       "rows": [
         [
           "{fg:#ff0000}I am seeing a bird{/}\n{fg:#51c431}I see a bird{/}\n\n{fg:#ff0000}The house is made of bricks.{/}\n{fg:#51c431}The house is made from bricks.{/}\n\n{fg:#ff0000}He will go home yesterday.{/}\n{fg:#51c431}He went home yesterday.{/}\n\n{fg:#ff0000}He said that he will go to school tomorrow.{/}\n{fg:#51c431}He said that he would go to school the following day.{/}"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "1",
+      "parentSheet": 6,
+      "rows": [
+        [
+          ""
         ]
       ]
     }
