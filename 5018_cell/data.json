@@ -15294,6 +15294,9 @@
         ],
         [
           "Agnostic [not sure of the existence of god]"
+        ],
+        [
+          "Sanatorium [\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u09a8\u09bf\u09ac\u09be\u09b8]"
         ]
       ]
     },
@@ -15492,6 +15495,10 @@
         "35-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "36-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15619,10 +15626,10 @@
           "Study of birds\na. Orology\nb. Optology\nc. Ophthalmology\nd. [[Ornithology]]"
         ],
         [
-          "A place that provides refuge\na. [[Asylum]]\nb. Sanatorium\nc. Shelter\nd. Orphanage\n- Sanatorium [#0.8#when keeping for long period to cure from illness#/#]"
+          "A place that provides refuge\na. [[Asylum]]\nb. Sanatorium\nc. Shelter\nd. Orphanage\n- Sanatorium [\u09b8\u09cd\u09ac\u09be\u09b8\u09cd\u09a5\u09cd\u09af \u09a8\u09bf\u09ac\u09be\u09b8][#0.8#when keeping for long period to cure from illness#/#]"
         ],
         [
-          "A child born after death of his father\na. Posthumous\nb. Orphan\nc. Bastard\nd. Progenitor"
+          "A child born after death of his father\na. [[Posthumous]]\nb. Orphan\nc. Bastard\nd. Progenitor"
         ]
       ]
     }
