@@ -600,6 +600,14 @@
     },
     {
       "cellStyles": {
+        "100-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "101-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "28-0": {
           "bgColor": "#B30000",
           "textColor": "#FFFFFF"
@@ -718,14 +726,6 @@
         },
         "98-0": {
           "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "100-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "101-0": {
-          "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
       },
@@ -1056,6 +1056,15 @@
         ],
         [
           "Boundary of an area\na. Porch\nb. [[Periphery]]\nc. Balcony\nd. Verandah"
+        ],
+        [
+          "A name, wrongly or unsuitably applied to a person\nor an object. [IBB (PO), Date: 31.03.2017]\na. misreferring\nb. incorrigible\nc. misnaming\nd. misnomer"
+        ],
+        [
+          "Lacking social grace, sensitivity or acuteness. [IBB (PO), Date: 31.03.2017]\na. feign\nb. gauche\nc. contiguous\nd. verbose"
+        ],
+        [
+          "A person of informed and discriminating taste. [IBB (PO), Date: 31.03.2017]\na. illusionist\nb. pariah\nc. connoisseur\nd. vernacular"
         ]
       ]
     },
