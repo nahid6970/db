@@ -15499,6 +15499,10 @@
         "36-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "37-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15630,6 +15634,12 @@
         ],
         [
           "A child born after death of his father\na. [[Posthumous]]\nb. Orphan\nc. Bastard\nd. Progenitor"
+        ],
+        [
+          "A place where bees are kept is called\na. [[An apiary]]\nb. A mole\nc. A hive\nd. A sanctuary"
+        ],
+        [
+          "A religious discourse\na. Preach\nb. Stanza\nc. Sanctorum\nd. Sermon"
         ]
       ]
     }
