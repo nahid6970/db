@@ -1,5 +1,5 @@
 {
-  "activeSheet": 142,
+  "activeSheet": 22,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -5213,7 +5213,7 @@
           ""
         ],
         [
-          "- ==cynical== (\u09b9\u09a4\u09be\u09b6\u09ac\u09be\u09a6\u09c0, \u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09ac\u09be\u09a6\u09c0)\n- ==incredulous==, skeptical (\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8, **\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09aa\u09cd\u09b0\u09ac\u09a3**, **\u09b8\u0982\u09b6\u09af\u09bc\u09c0**)\n-----\n- Fatalist [\u0985\u09a6\u09c3\u09b6\u09cd\u09af\u09ac\u09be\u09a6\u09c0 \u09ad\u09be\u0997\u09cd\u09af\u09c7\u09b0 \u0989\u09aa\u09b0 \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0]",
+          "- ==cynical== (**\u09b9\u09a4\u09be\u09b6\u09ac\u09be\u09a6\u09c0**, \u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09ac\u09be\u09a6\u09c0)\n- ==incredulous==, skeptical (\u0985\u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u09b8\u09a8\u09cd\u09a6\u09bf\u09b9\u09be\u09a8, **\u09b8\u09a8\u09cd\u09a6\u09c7\u09b9\u09aa\u09cd\u09b0\u09ac\u09a3**, **\u09b8\u0982\u09b6\u09af\u09bc\u09c0**)\nR-----\n==Credulous== [\u09b8\u09b0\u09b2 \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0, \u0985\u09a4\u09bf \u09b8\u09b9\u099c\u09c7 \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8 \u0995\u09b0\u09be]\n-----\n- Fatalist [\u0985\u09a6\u09c3\u09b6\u09cd\u09af\u09ac\u09be\u09a6\u09c0 \u09ad\u09be\u0997\u09cd\u09af\u09c7\u09b0 \u0989\u09aa\u09b0 \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u09c0]",
           ""
         ],
         [
@@ -15580,6 +15580,10 @@
         "59-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "60-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15782,7 +15786,16 @@
           "One who dabbles in fine arts for the love of it and not for monetary gains\na. Connoisseur\nb. [[Amateur]]\nc. Professional\nd. Dilettante\n- Connoisseur [an expert judge in matters of taste]"
         ],
         [
-          "A school boy who cuts classes frequently is a\na. Defeatist\nb. Sycophant\nc. Truant\nd. Martinet"
+          "A school boy who cuts classes frequently is a\na. Defeatist\nb. Sycophant\nc. [[Truant]]\nd. Martinet\n- Truant [\u09b8\u09cd\u0995\u09c1\u09b2 \u09aa\u09be\u09b2\u09be\u09a8 \u09ac\u09be\u09b2\u0995]"
+        ],
+        [
+          "Ready to believe\na. [[Credulous]]\nb. Credible\nc. Creditable\nd. Incredible"
+        ],
+        [
+          "Medical study of skin and its diseases\na. Dermatology\nb. Endocrinology\nc. Genealogy\nd. Orthopedics"
+        ],
+        [
+          "A person who tries to deceive people by claiming to be able to do wonderful things\na. Trickster\nb. Imposter\nc. Magician\nd. Mountebank"
         ]
       ]
     }
