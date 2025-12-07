@@ -15309,6 +15309,9 @@
         ],
         [
           "==Itinerary== [\u09ad\u09cd\u09b0\u09ae\u09a3 \u09aa\u09b0\u09bf\u0995\u09b2\u09cd\u09aa\u09a8\u09be]"
+        ],
+        [
+          "==Misologist== [\u099c\u09cd\u099e\u09be\u09a8\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisogynist [\u09a8\u09be\u09b0\u09c0\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisanthropist [\u09ae\u09be\u09a8\u09c1\u09b7\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nbibliophile -> \u0997\u09cd\u09b0\u09a8\u09cd\u09a5\u09aa\u09cd\u09b0\u09c7\u09ae\u09c0"
         ]
       ]
     },
@@ -15539,6 +15542,14 @@
         "48-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "50-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "53-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15709,6 +15720,18 @@
         ],
         [
           "Giving undue favors to one's own kith and kin\na. [[Nepotism]]\nb. Favoritism\nc. Worldliness\nd. Corruption"
+        ],
+        [
+          "Hater of learning and knowledge\na. Misologist\nb. Bibliophile\nc. Misogynist\nd. Misanthropist\nMisologist [\u099c\u09cd\u099e\u09be\u09a8\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisogynist [\u09a8\u09be\u09b0\u09c0\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisanthropist [\u09ae\u09be\u09a8\u09c1\u09b7\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nbibliophile -> \u0997\u09cd\u09b0\u09a8\u09cd\u09a5\u09aa\u09cd\u09b0\u09c7\u09ae\u09c0"
+        ],
+        [
+          "A hater of women\na. [[misogynist]]\nb. misproportion\nc. carper\nd. misreckon"
+        ],
+        [
+          "One who hates mankind\na. philanthropist\nb. [[misanthrope]]\nc. humanitarian\nd. optimist"
+        ],
+        [
+          "A person interested in reading books and nothing else\na. Book-keepr\nb. Scholar\nc. [[Bookworm]]"
         ]
       ]
     }
