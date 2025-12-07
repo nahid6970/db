@@ -1,5 +1,5 @@
 {
-  "activeSheet": 142,
+  "activeSheet": 143,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -143,7 +143,8 @@
     "139": "Bangla Grammar",
     "140": "Bangla Grammar",
     "141": "Bangla Grammar",
-    "142": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
+    "142": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "143": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -15346,6 +15347,9 @@
         ],
         [
           "Charlatan [\u09b9\u09be\u09a4\u09c1\u09a1\u09bc\u09c7 \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0]"
+        ],
+        [
+          "- Arbitrator [\u09ae\u09c0\u09ae\u09be\u0982\u09b8\u0995\u09be\u09b0\u09c0]\n- Mediator [\u09ae\u09a7\u09cd\u09af\u09b8\u09cd\u09a5\u09a4\u09be\u0995\u09be\u09b0\u09c0]"
         ]
       ]
     },
@@ -16065,9 +16069,49 @@
           "One who able to use the right and left hands equally well:\na. Sinister\nb. [[Ambidextrous]]\nc. Ambivalent\nd. Amateur"
         ],
         [
-          "An independent person or body officially appointed to settle a dispute\na. Arbiter\nb. Mediator\nc. Agent provocateur\nd. [[Arbitrator]]"
+          "An independent person or body officially appointed to settle a dispute\na. Arbiter\nb. Mediator\nc. Agent provocateur\nd. [[Arbitrator]]\n- Arbitrator [\u09ae\u09c0\u09ae\u09be\u0982\u09b8\u0995\u09be\u09b0\u09c0]\n- Mediator [\u09ae\u09a7\u09cd\u09af\u09b8\u09cd\u09a5\u09a4\u09be\u0995\u09be\u09b0\u09c0]"
         ]
       ]
+    },
+    {
+      "name": "2",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "Use of force or threats to get someone to agree to something\na. [[Coercion]]\nb. Conviction\nc. Confession\nd. Cajolement"
+        ],
+        [
+          "Animal that feeds on plants\na. Carnivorous\nb. [[Herbivorous]]\nc. Insectivorous\nd. Graminivorous"
+        ],
+        [
+          "Group of stars\na. Orbit\nb. Constellation\nc. Solar system\nd. Comet"
+        ],
+        [
+          "Lasting only for a very short time\na. Transparent\nb. Temporal\nc. Temporarv\nd Temperate"
+        ]
+      ],
+      "parentSheet": 6,
+      "cellStyles": {
+        "1-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        }
+      }
     }
   ]
 }
