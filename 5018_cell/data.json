@@ -7305,6 +7305,10 @@
         [
           "Recipient\nsynergy\ncatastrophe\ncamouflage\n\nAcquiescence\n==Reconnaissance==",
           ""
+        ],
+        [
+          "Alliteration",
+          ""
         ]
       ]
     },
@@ -15650,6 +15654,14 @@
         "85-0": {
           "bgColor": "#004D2E",
           "textColor": "#FFFFFF"
+        },
+        "86-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "89-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15928,6 +15940,27 @@
         ],
         [
           "One who abandons his religious faith:\na. [[Apostate]]\nb. Prostate\nc. Profane\nd. Agnostic"
+        ],
+        [
+          "Commencement of words with the same letter:\na. Pun\nb. [[Alliteration]]\nc. Transferred epithet\nc. Oxymoron"
+        ],
+        [
+          "- A lady's umbrella is:\na. [[Parasol]]\nb. Granary\nc. Epitaph\nd. Aviary"
+        ],
+        [
+          "Story of old-time gods or heroes is:\na. Lyric\nb. Epic\nc. [[Legend]]\nd. Romance"
+        ],
+        [
+          "A sad song:\na. Ditty\nb. Knell\nc. [[Dirge]]\nd. Lay"
+        ],
+        [
+          "A person who loves everybody:\na. Cosmopolitan\nb. Fratricide\nc. [[Altruistic]]\nd. Aristocrat"
+        ],
+        [
+          "One who cannot easily pleased:\na. Cosmopolitan\nb. Frightening\nc. [[Fastidious]]\nd. Feminist"
+        ],
+        [
+          "A person who is indifferent to pains and pleasure of life:\na. [[Stoic]]\nb. Sadist\nc. Psychiatrist\nd. Aristocrat"
         ]
       ]
     }
