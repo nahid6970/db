@@ -15604,6 +15604,30 @@
         "69-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "71-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "75-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "76-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "77-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "78-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "79-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15833,7 +15857,43 @@
           "One who believes that all things and events in life are predetermined is a\na. [[Fatalist]]\nb. Puritan\nc. Egoist\nd. Tyrant"
         ],
         [
-          "Something that relates to everyone in the world\na. General\nb. Common\nc. Usual\nd. [[Universal]]"
+          "Something that relates to everyone in the world\na. General\nb. Common\nc. Usual\nd. [[Universal / cosmopolitan]]"
+        ],
+        [
+          "A style full of words\na. [[Verbose]]\nb. Pedantic\nc. Rhetorical\nd. Abundant"
+        ],
+        [
+          "Having superior or intellectual interests and tastes\na. Elite\nc. Sophisticated\nb. [[Highbrow]]\nd. Fastidious"
+        ],
+        [
+          "To cause troops, etc. to spread out in readiness for\nbattle\na. Disperse\nb. [[Deploy]]\nc. Collocate\nd. Align"
+        ],
+        [
+          "A voice loud enough to be heard\na. [[Audible]]\nb. Applaudable\nc Laudable\nd Oral"
+        ],
+        [
+          "A light sailing boat built specially for racing\na. Canoe\nb. [[Yacht]]\nc. Frigate\nd. Dinghy"
+        ],
+        [
+          "One who is in charge of museum\na. [[Curator]]\nb. Supervisor\nc. Caretaker\nd. Warden"
+        ],
+        [
+          "A government by the nobles\na. [[Aristocracy]]\nb. Democracy\nc. Autocracy\nd. Bureaucracy"
+        ],
+        [
+          "One who is honourably discharged from service\na. Retired\nb. [[Emeritus]]\nc. Relieved\nd. Emancipated"
+        ],
+        [
+          "Present opposing arguments or evidence\na. Criticise\nb. Rebuff\nc. Reprimand\nd. [[Rebut]]"
+        ],
+        [
+          "The policy of extending a country's empire and influence\na. Communism\nb. Internationalism\nc. Capitalism\nd. [[Imperialism]]"
+        ],
+        [
+          "Of outstanding significance\na. Monumental\nb. Rational\nc. Ominous\nd. Evident"
+        ],
+        [
+          ". Code of diplomatic etiquette and precedence\na. Statesmanship\nb. Formalism\nc. Hierarchv\nd. Protocol"
         ]
       ]
     }
