@@ -1,5 +1,5 @@
 {
-  "activeSheet": 22,
+  "activeSheet": 138,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -964,7 +964,7 @@
           "The warning of the authority falls on deaf ears. Here \"warning\" does the function of:\n[[noun]]\nadverb\nadjective\nverb"
         ],
         [
-          "One who talks while asleep is called:\nSomnambulist\n[[Somni__loquist__]]\nSomniferous\nSleeptalker\n- loquacious - \u09ac\u09be\u099a\u09be\u09b2\n- Somnambulist - who walks on sleepmode"
+          "One who talks while asleep is called:\nSomnambulist\n[[Somni__loquist__]]\nSomniferous\nSleeptalker\n- loquacious - \u09ac\u09be\u099a\u09be\u09b2\n- Somnambulist - who walks on sleepmode\n- Somniloquist - \u0998\u09c1\u09ae\u09c7 \u0995\u09cd\u09b7\u09bf\u09a4\u0995\u09cd\u09b7\u09bf\u09a4 \u09ac\u09be \u0995\u09a5\u09be \u09ac\u09b2\u09be "
         ],
         [
           "In which literacy group, Virginia Woolf was a key figure?\nBeat Generation\nX-Generation\nBloomsbury Group\nPre-Raphaelite"
@@ -15227,7 +15227,12 @@
       ]
     },
     {
-      "cellStyles": {},
+      "cellStyles": {
+        "22-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
           "color": "#ffffff",
@@ -15312,6 +15317,9 @@
         ],
         [
           "==Misologist== [\u099c\u09cd\u099e\u09be\u09a8\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisogynist [\u09a8\u09be\u09b0\u09c0\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nMisanthropist [\u09ae\u09be\u09a8\u09c1\u09b7\u09ac\u09bf\u09a6\u09cd\u09ac\u09c7\u09b7\u09c0]\nbibliophile -> \u0997\u09cd\u09b0\u09a8\u09cd\u09a5\u09aa\u09cd\u09b0\u09c7\u09ae\u09c0"
+        ],
+        [
+          "- Somnambulist - who walks on sleepmode\n- Somniloquist - who talks on sleepmode"
         ]
       ]
     },
@@ -15550,6 +15558,10 @@
         "53-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "54-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15734,13 +15746,13 @@
           "A person interested in reading books and nothing else\na. Book-keepr\nb. Scholar\nc. [[Bookworm]]"
         ],
         [
-          "A large sleeping-room with many beds\na. Bedroom\nb. Dormitory\nc. Hostel\nd. Basement"
+          "A large sleeping-room with many beds\na. Bedroom\nb. [[Dormitory]]\nc. Hostel\nd. Basement"
         ],
         [
-          "A building for storing threshed grain\na. Hangar\nb. Dockyard\nc. Store\nd. Granary"
+          "A building for storing threshed grain\na. Hangar\nb. Dockyard\nc. Store\nd. [[Granary or hoard]]"
         ],
         [
-          "Policeman riding on motorcycles as guards to a VIP\na. Outriders\nb. Servants\nc. Commandos\nd. Attendants"
+          "Policeman riding on motorcycles as guards to a VIP\na. [[Outriders]]\nb. Servants\nc. Commandos\nd. Attendants"
         ],
         [
           "One who is determined to exact full vengeance for wrongs done to him\na. Virulent\nb. Vindictive"
