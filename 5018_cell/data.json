@@ -15642,6 +15642,14 @@
         "83-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "84-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "85-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15919,7 +15927,7 @@
           "A person who renounces the world and practices self-discipline in order to attain salvation:\na. Sceptic\nb. [[Ascetic]]\nc. Devotee\nd. Antiquarian"
         ],
         [
-          "5. One who abandons his religious faith:\na. Apostate\nb. Prostate\nc. Profane\nd. Agnostic"
+          "One who abandons his religious faith:\na. [[Apostate]]\nb. Prostate\nc. Profane\nd. Agnostic"
         ]
       ]
     }
