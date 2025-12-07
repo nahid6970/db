@@ -15350,6 +15350,9 @@
         ],
         [
           "- Arbitrator [\u09ae\u09c0\u09ae\u09be\u0982\u09b8\u0995\u09be\u09b0\u09c0]\n- Mediator [\u09ae\u09a7\u09cd\u09af\u09b8\u09cd\u09a5\u09a4\u09be\u0995\u09be\u09b0\u09c0]"
+        ],
+        [
+          "Introspection [\u0985\u09a8\u09cd\u09a4\u09a6\u09c3\u09b7\u09cd\u099f\u09bf, \u0985\u09a8\u09cd\u09a4\u09a6\u09b0\u09cd\u09b6\u09a8]\nRetrospection [\u0985\u09a4\u09c0\u09a4 \u09a6\u09b0\u09cd\u09b6\u09a8]"
         ]
       ]
     },
@@ -16099,16 +16102,36 @@
           "Animal that feeds on plants\na. Carnivorous\nb. [[Herbivorous]]\nc. Insectivorous\nd. Graminivorous"
         ],
         [
-          "Group of stars\na. Orbit\nb. Constellation\nc. Solar system\nd. Comet"
+          "Group of stars\na. Orbit\nb. [[Constellation]]\nc. Solar system\nd. Comet"
         ],
         [
-          "Lasting only for a very short time\na. Transparent\nb. Temporal\nc. Temporarv\nd Temperate"
+          "Lasting only for a very short time\na. Transparent\nb. Temporal\nc. [[Temporary]]\nd. Temperate"
+        ],
+        [
+          "To examine one's own thoughts and feelings:\na. Meditation\nb. Retrospection\nc. Reflection\nd. [[Introspection]]\n- Introspection [\u0985\u09a8\u09cd\u09a4\u09a6\u09c3\u09b7\u09cd\u099f\u09bf, \u0985\u09a8\u09cd\u09a4\u09a6\u09b0\u09cd\u09b6\u09a8]\n- Retrospection [\u0985\u09a4\u09c0\u09a4 \u09a6\u09b0\u09cd\u09b6\u09a8]"
+        ],
+        [
+          "One indifferent to art and literature is\na. Aromatic\nb. Critic\nc. [[Philistine]]\nd. Scholar"
+        ],
+        [
+          "Open to injury or Criticism\na. Invincible\nb. Vulnerable\nc. Naive\nd. Sensitive"
+        ],
+        [
+          "A narrow piece of land connecting two large masses of land\na. Peninsula\nb. Isthmus\nc. Continent\nd. Gulf"
         ]
       ],
       "parentSheet": 6,
       "cellStyles": {
         "1-0": {
           "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "4-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
+          "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
       }
