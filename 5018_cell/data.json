@@ -1,5 +1,5 @@
 {
-  "activeSheet": 138,
+  "activeSheet": 79,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -12189,7 +12189,7 @@
           "| :K-A: Talking disrespectfully of sacred things                              | blasphemy       |\n| Allowance paid by a husband to wife after separation                        | alimony         |\n| The policy of extending a country's empire and influence                    | imperialism     |\n| A person who studies the formation of the earth                             | geologist       |\n| One who feels at home in every country                                      | cosmopolitian   |\n| A statement that is absolutely clear                                        | unequivocal     |\n| Incapable of being explained                                                | inexplicable    |\n| Handwriting that cannot be read                                             | ==illegible==   |\n| Stage of growth between boyhood and youth                                   | ==adolescence== |\n| Animals that can live on land and water                                     | ==amphibians==  |\n| Easy to shape in desired form                                               | malleable       |\n| An object through which light passes but people cannot see across clearly   | translucent     |\n| That which can be drunk                                                     | potable         |\n| A truce or cessation from arms before a formal treaty is signed             | ==armistice==   |\n| Illicit partner of a married man or woman                                   | paramour        |\n| A person who is very-fond of sensuous enjoyment                             | hedonist        |\n| A person with refined taste in food and wine                                | epicure         |\n| The state of being married                                                  | matrimony       |\n| Practice of having only one wife or husband at a time                       | monologue       |\n| Account of a person's life written by another                               | biography       |\n| Account of a person's life written by Himself                               | Auto-biography  |\n| Person leading a life of strict self-discipline                             | ascetic         |\n| A physician/surgeon dealing with diseases of the female reproductive system | gynecologist    |\n| A physician/surgeon dealing with diseases of the female reproductive system | gynecologist    |\n| Specialist in bone or skeleton disorders                                    | orthopaedician  |\n| A specialist in skin is called                                              | dermatologist   |\n| Specialist of eye diseases                                                  | ophthalmologist |\n| Specialist of diseases of infants                                           | pediatrician    |"
         ],
         [
-          "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology=="
+          "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology==\n- One who studies insect life -> Entomologist"
         ]
       ]
     },
@@ -15343,6 +15343,9 @@
         ],
         [
           "Apostle \u2192 \u09aa\u09cd\u09b0\u09c7\u09b0\u09bf\u09a4 / \u09a7\u09b0\u09cd\u09ae\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u0995\nApothecary \u2192 \u0994\u09b7\u09a7 \u09ac\u09bf\u0995\u09cd\u09b0\u09c7\u09a4\u09be / \u09b9\u09be\u0995\u09bf\u09ae\nApotheosis \u2192 \u09a6\u09c7\u09ac\u09a4\u09cd\u09ac \u09aa\u09cd\u09b0\u09a6\u09be\u09a8 / \u09ae\u09b9\u09bf\u09ae\u09be\u09a8\u09cd\u09ac\u09bf\u09a4\u0995\u09b0\u09a3\nRenegade \u2192 \u09a7\u09b0\u09cd\u09ae\u09a4\u09cd\u09af\u09be\u0997\u09c0 / \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u0998\u09be\u09a4\u0995"
+        ],
+        [
+          "Charlatan [\u09b9\u09be\u09a4\u09c1\u09a1\u09bc\u09c7 \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0]"
         ]
       ]
     },
@@ -15685,6 +15688,14 @@
         "98-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "100-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "101-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -16004,7 +16015,19 @@
           "A pioneer of a reform movement:\na. [[Apostle]]\nb. Apothecary\nc. Apotheosis\nd. Renegade"
         ],
         [
-          "A person who pretends to have more knowledge or skill than he really has:\na. Crook\nb. Apotheosis\nc. Renegade\nd. [[Charlatan]]"
+          "A person who pretends to have more knowledge or skill than he really has:\na. Crook\nb. Apotheosis\nc. Renegade\nd. [[Charlatan/imposter]]\n- Charlatan/imposter [\u09b9\u09be\u09a4\u09c1\u09a1\u09bc\u09c7 \u09a1\u09be\u0995\u09cd\u09a4\u09be\u09b0]"
+        ],
+        [
+          "A person who forsakes religion:\na. Apostle\nb. Apotheosis\nc. [[Renegade]]\nd. Charlatan"
+        ],
+        [
+          "One who studies insect life:\na. Geologist\nb. Zoologist\nc. Entomologist\nd. Botanist"
+        ],
+        [
+          "A lady who remains unmarried:\na. Spinster\nb. Artist\nc. Bachelor\nd. Misanthrope"
+        ],
+        [
+          "- One who has good taste for food:\na. Gourmet\nb. Curator\nc. Parasite\nd. Stoic"
         ]
       ]
     }
