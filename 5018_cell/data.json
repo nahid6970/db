@@ -15513,6 +15513,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "46-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
         "5-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15528,18 +15532,18 @@
       },
       "columns": [
         {
+          "name": "A",
+          "type": "text",
+          "width": "150",
           "color": "#ffffff",
-          "font": "JetBrains Mono",
+          "textColor": "#000000",
+          "font": "Comic Sans MS",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
           "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "150"
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
         }
       ],
       "name": "1",
@@ -15684,7 +15688,7 @@
           "To take secretly in small quantities\na. Robbery\nb. [[Pilferage]]"
         ],
         [
-          "To accustom oneself to a foreign climate\na. Adapt\nb. Adopt\nc. Accustom\nd. Acclimatize"
+          "To accustom oneself to a foreign climate\na. Adapt\nb. Adopt\nc. Accustom\nd. [[Acclimatize]]"
         ],
         [
           "One who knows everything\na. Literate\nb. Scholar\nc. Omnipotent\nd. Omniscient"
