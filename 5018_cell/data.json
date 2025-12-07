@@ -1,5 +1,5 @@
 {
-  "activeSheet": 23,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15596,6 +15596,14 @@
         "65-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "66-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "69-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15816,7 +15824,16 @@
           "That which is perceptible by touch is\na. Contagious\nb. Contingent\nc. Tenacious\nd. [[Tangible]]"
         ],
         [
-          "Very pleasing to eat\na. Appetising\nb. Palatable\nc. Tantalising\nd. Sumptuous"
+          "Very pleasing to eat\na. Appetising\nb. [[Palatable]]\nc. Tantalising\nd. Sumptuous"
+        ],
+        [
+          "The part of government which is concerned with making of rules\na. Court\nb. Tribunal\nc. Bar\nd. [[Legislature]]"
+        ],
+        [
+          "One who believes that all things and events in life are predetermined is a\na. [[Fatalist]]\nb. Puritan\nc. Egoist\nd. Tyrant"
+        ],
+        [
+          "Something that relates to everyone in the world\na. General\nb. Common\nc. Usual\nd. [[Universal]]"
         ]
       ]
     }
