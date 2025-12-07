@@ -15650,7 +15650,7 @@
           "textColor": "#FFFFFF"
         },
         "76-0": {
-          "bgColor": "#495057",
+          "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
         "77-0": {
@@ -15707,6 +15707,14 @@
         },
         "98-0": {
           "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "108-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "109-0": {
+          "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
       },
@@ -15958,7 +15966,7 @@
           "One who is in charge of museum\na. [[Curator]]\nb. Supervisor\nc. Caretaker\nd. Warden"
         ],
         [
-          "A government by the nobles\na. [[Aristocracy]]\nb. Democracy\nc. Autocracy\nd. Bureaucracy"
+          "A government by the nobles\na. [[Aristocracy]]\nb. Democracy\nc. Autocracy\nd. Bureaucracy\n\nGovernment by rich\na. Oligarchy\nb. Aristocracy\nc. [[Pantisocracy]]\nd. Plutocracy"
         ],
         [
           "One who is honourably discharged from service\na. Retired\nb. [[Emeritus]]\nc. Relieved\nd. Emancipated"
@@ -16051,16 +16059,13 @@
           "That which can never be believed:\na. Irrevocable\nb. Inevitable\nc. [[Incredible]]\nd. Irritable"
         ],
         [
-          "That which cannot be avoided:\na. Inevitable\nb. Irreparable\nc. Incomparable\nd. Indisputable"
+          "That which cannot be avoided:\na. [[Inevitable]]\nb. Irreparable\nc. Incomparable\nd. Indisputable"
         ],
         [
-          "One who able to use the right and left hands equally well:\na. Sinister\nb. Ambidextrous\nc. Ambivalent\nd. Amateur"
+          "One who able to use the right and left hands equally well:\na. Sinister\nb. [[Ambidextrous]]\nc. Ambivalent\nd. Amateur"
         ],
         [
-          "Government by rich\na. Oligarchy\nb. Aristocracy\nc. Pantisocracy\nd. Plutocracy"
-        ],
-        [
-          "An independent person or body officially appointed to settle a dispute\na. Arbiter\nb. Mediator\nc. Agent provocateur\nd Arbitrator"
+          "An independent person or body officially appointed to settle a dispute\na. Arbiter\nb. Mediator\nc. Agent provocateur\nd. [[Arbitrator]]"
         ]
       ]
     }
