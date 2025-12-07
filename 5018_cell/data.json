@@ -1,5 +1,5 @@
 {
-  "activeSheet": 79,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15453,6 +15453,26 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "100-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "101-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "102-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "103-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "106-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -15557,23 +15577,15 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
-        "5-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "7-0": {
-          "bgColor": "#ADB5BD",
-          "textColor": "#000000"
-        },
-        "9-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
         "47-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
         "48-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
@@ -15625,6 +15637,10 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
+        "7-0": {
+          "bgColor": "#ADB5BD",
+          "textColor": "#000000"
+        },
         "71-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15673,6 +15689,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "9-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "93-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
@@ -15688,30 +15708,22 @@
         "98-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
-        },
-        "100-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "101-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
         }
       },
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "Comic Sans MS",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "1",
@@ -16024,10 +16036,31 @@
           "One who studies insect life:\na. Geologist\nb. Zoologist\nc. Entomologist\nd. Botanist"
         ],
         [
-          "A lady who remains unmarried:\na. Spinster\nb. Artist\nc. Bachelor\nd. Misanthrope"
+          "A lady who remains unmarried:\na. [[Spinster]]\nb. Artist\nc. Bachelor\nd. Misanthrope"
         ],
         [
-          "- One who has good taste for food:\na. Gourmet\nb. Curator\nc. Parasite\nd. Stoic"
+          "One who has good taste for food:\na. [[Gourmet]]\nb. Curator\nc. Parasite\nd. Stoic"
+        ],
+        [
+          "Government by the representatives of the people:\na. Autocracy\nb. [[Democracy]]\nc. Socialism\nd. Anarchy"
+        ],
+        [
+          "A disease that spreads over a large area:\na. Academic\nb. [[Epidemic]]\nc. Incorrigible\nd. Invincible"
+        ],
+        [
+          "That which can never be believed:\na. Irrevocable\nb. Inevitable\nc. [[Incredible]]\nd. Irritable"
+        ],
+        [
+          "That which cannot be avoided:\na. Inevitable\nb. Irreparable\nc. Incomparable\nd. Indisputable"
+        ],
+        [
+          "One who able to use the right and left hands equally well:\na. Sinister\nb. Ambidextrous\nc. Ambivalent\nd. Amateur"
+        ],
+        [
+          "Government by rich\na. Oligarchy\nb. Aristocracy\nc. Pantisocracy\nd. Plutocracy"
+        ],
+        [
+          "An independent person or body officially appointed to settle a dispute\na. Arbiter\nb. Mediator\nc. Agent provocateur\nd Arbitrator"
         ]
       ]
     }
