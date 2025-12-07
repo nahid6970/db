@@ -15306,6 +15306,9 @@
         ],
         [
           "==Pilferage== [\u099b\u09cb\u099f \u099a\u09cb\u09b0, \u099a\u09bf\u09b8\u0995\u09be \u099a\u09cb\u09b0]"
+        ],
+        [
+          "==Itinerary== [\u09ad\u09cd\u09b0\u09ae\u09a3 \u09aa\u09b0\u09bf\u0995\u09b2\u09cd\u09aa\u09a8\u09be]"
         ]
       ]
     },
@@ -15528,6 +15531,14 @@
         "9-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "47-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "48-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15691,13 +15702,13 @@
           "To accustom oneself to a foreign climate\na. Adapt\nb. Adopt\nc. Accustom\nd. [[Acclimatize]]"
         ],
         [
-          "One who knows everything\na. Literate\nb. Scholar\nc. Omnipotent\nd. Omniscient"
+          "One who knows everything\na. Literate\nb. Scholar\nc. Omnipotent\nd. [[Omniscient]]"
         ],
         [
-          "Detailed plan of journey\na. Travelogue\nb. Travelkit\nc. Schedule\nd. Itinerary"
+          "Detailed plan of journey\na. Travelogue\nb. Travelkit\nc. Schedule\nd. [[Itinerary]]\n- Itinerary [\u09ad\u09cd\u09b0\u09ae\u09a3 \u09aa\u09b0\u09bf\u0995\u09b2\u09cd\u09aa\u09a8\u09be]"
         ],
         [
-          "Giving undue favors to one's own kith and kin\na. Nepotism\nb. Favoritism\nc. Worldliness\nd. Corruption"
+          "Giving undue favors to one's own kith and kin\na. [[Nepotism]]\nb. Favoritism\nc. Worldliness\nd. Corruption"
         ]
       ]
     }
