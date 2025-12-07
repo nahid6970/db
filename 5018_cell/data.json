@@ -1,5 +1,5 @@
 {
-  "activeSheet": 142,
+  "activeSheet": 138,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -15235,6 +15235,10 @@
         "22-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "27-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15336,6 +15340,9 @@
         ],
         [
           "etiquette [\u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0]"
+        ],
+        [
+          "Apostle \u2192 \u09aa\u09cd\u09b0\u09c7\u09b0\u09bf\u09a4 / \u09a7\u09b0\u09cd\u09ae\u09aa\u09cd\u09b0\u099a\u09be\u09b0\u0995\nApothecary \u2192 \u0994\u09b7\u09a7 \u09ac\u09bf\u0995\u09cd\u09b0\u09c7\u09a4\u09be / \u09b9\u09be\u0995\u09bf\u09ae\nApotheosis \u2192 \u09a6\u09c7\u09ac\u09a4\u09cd\u09ac \u09aa\u09cd\u09b0\u09a6\u09be\u09a8 / \u09ae\u09b9\u09bf\u09ae\u09be\u09a8\u09cd\u09ac\u09bf\u09a4\u0995\u09b0\u09a3\nRenegade \u2192 \u09a7\u09b0\u09cd\u09ae\u09a4\u09cd\u09af\u09be\u0997\u09c0 / \u09ac\u09bf\u09b6\u09cd\u09ac\u09be\u09b8\u0998\u09be\u09a4\u0995"
         ]
       ]
     },
@@ -15670,6 +15677,14 @@
         "95-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "96-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "98-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15978,6 +15993,18 @@
         ],
         [
           "Disease that spreads by means of germs carried in the atmosphere\na. hygienic\nb. limited\nc. harmless\nd. [[infectious]]"
+        ],
+        [
+          "A man who rarely speaks the truth:\na. Crook\nb. [[Liar]]\nc. Scoundrel\nd. Hypocrite"
+        ],
+        [
+          "Custom of having many wives:\na. Misogamy\nb. Bigamy\nc. [[Polygamy]]\nd. Monogamy"
+        ],
+        [
+          "A pioneer of a reform movement:\na. [[Apostle]]\nb. Apothecary\nc. Apotheosis\nd. Renegade"
+        ],
+        [
+          "A person who pretends to have more knowledge or skill than he really has:\na. Crook\nb. Apotheosis\nc. Renegade\nd. [[Charlatan]]"
         ]
       ]
     }
