@@ -346,6 +346,10 @@
         "5-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "6-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -386,7 +390,7 @@
           "Which is the largest volcano of the world according to their elevation?\nA. [[Ojos del Salado]]\nB. Incahuasi\nC. Llullaillaco\nD. Tupungato"
         ],
         [
-          ""
+          "\u0985\u09a8\u09cd\u09a4\u09b0\u09cd\u09ac\u09b0\u09cd\u09a4\u09c0\u0995\u09be\u09b2\u09c0\u09a8 \u09b8\u09b0\u0995\u09be\u09b0 \u09b8\u09ae\u09cd\u09aa\u09cd\u09b0\u09a4\u09bf \u0995\u09cb\u09a8 \u09a8\u09a6\u09c0\u0995\u09c7 '\u09ae\u09ce\u09b8\u09cd\u09af \u09b9\u09c7\u09b0\u09bf\u099f\u09c7\u099c' \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u0998\u09cb\u09b7\u09a3\u09be \u0995\u09b0\u09c7\u099b\u09c7?\n\u0995. \u0995\u09b0\u09cd\u09a3\u09ab\u09c1\u09b2\u09c0 \u09a8\u09a6\u09c0\n\u0996. \u09ae\u09c7\u0998\u09a8\u09be \u09a8\u09a6\u09c0\n\u0997. \u09b6\u09c0\u09a4\u09b2\u0995\u09cd\u09b7\u09cd\u09af\u09be \u09a8\u09a6\u09c0\n\u0998. [[\u09b9\u09be\u09b2\u09a6\u09be \u09a8\u09a6\u09c0]]"
         ]
       ]
     },
@@ -9450,22 +9454,22 @@
           "bgColor": "#004D2E",
           "textColor": "#FFFFFF"
         },
+        "14-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "9-0": {
           "border": true,
           "borderColor": "#000000",
           "borderStyle": "solid",
           "borderWidth": "3px"
-        },
-        "14-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
         }
       },
       "columns": [
         {
           "color": "#ffffff",
           "font": "JetBrains Mono",
-          "fontSize": "18",
+          "fontSize": "20",
           "headerBgColor": "#f8f9fa",
           "headerBold": true,
           "headerCenter": false,
@@ -9475,83 +9479,54 @@
           "textColor": "#000000",
           "type": "text",
           "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
         }
       ],
       "name": "Parts of Speech",
       "rows": [
         [
-          "{fg:#ffffff;bg:#000000}**1.1 Noun:**{/}\n**Examples:** brevity, flute, mention, practice, wisdom, frailty (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2\u09a4\u09be), attention, man, popularity, humor\n**Rules:**\n- verb + ing = noun/subject (gerund)/(noun)\n- suffix ity = noun\n- article r por abong preposition r ag porgonto jodi ekti word thake ta noun\n- the + **__verb + ing__** + of = verbal noun `(A verbal noun is a noun that is derived from a verb, but it functions strictly as a noun rather than a verb)`\n- have no + **noun**\n- to + verb (baseform) = noun\n- (determiner) all + __**noun**__ + (preposition) of\n- the + **__noun**__ + preposition\n- one of the + **plural noun**\n-- {bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n-- {bg:#9beb90}Correct:{/} She is one of the best __**students**__ in the class.\n- neither, either, each -> singular form\n- the wise/the stupid/the intelligent/the rich/the poor/the sick/the injured/the wounded/the young or youth/the old = \u098f\u0997\u09c1\u09b2\u09cb {fg:#ffffff;bg:#000000}plural{/} \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09ac\u09cd\u09af\u09ac\u09b9\u09c3\u09a4 \u09b9\u09df",
-          ""
+          "{fg:#ffffff;bg:#000000}**1.1 Noun:**{/}\n**Examples:** brevity, flute, mention, practice, wisdom, frailty (\u09a6\u09c1\u09b0\u09cd\u09ac\u09b2\u09a4\u09be), attention, man, popularity, humor\n**Rules:**\n- verb + ing = noun/subject (gerund)/(noun)\n- suffix ity = noun\n- article r por abong preposition r ag porgonto jodi ekti word thake ta noun\n- the + **__verb + ing__** + of = verbal noun `(A verbal noun is a noun that is derived from a verb, but it functions strictly as a noun rather than a verb)`\n- have no + **noun**\n- to + verb (baseform) = noun\n- (determiner) all + __**noun**__ + (preposition) of\n- the + **__noun**__ + preposition\n- one of the + **plural noun**\n-- {bg:#fda757}Wrong:{/}  She is one of the best student in the class.\n-- {bg:#9beb90}Correct:{/} She is one of the best __**students**__ in the class.\n- neither, either, each -> singular form\n- the wise/the stupid/the intelligent/the rich/the poor/the sick/the injured/the wounded/the young or youth/the old = \u098f\u0997\u09c1\u09b2\u09cb {fg:#ffffff;bg:#000000}plural{/} \u09b9\u09bf\u09b8\u09c7\u09ac\u09c7 \u09ac\u09cd\u09af\u09ac\u09b9\u09c3\u09a4 \u09b9\u09df"
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.3 Adjective:{/}\n**Def:**\n**Examples:** apparent, populous, diplomatic, vital, hereditary\n**Rules:**\n- be verb er por direct adjective hobe\n- looks \u098f\u09b0 \u09aa\u09b0 adjective / looks + rather + adjective\n- \u098f\u0995\u099f\u09bf noun \u0986\u09b0\u09c7\u0995\u099f\u09be noun \u0995\u09c7 modify \u0995\u09b0\u09b2\u09c7 adjective\n- noun + ly = adjective",
-          ""
+          "{fg:#ffffff;bg:#000000}1.3 Adjective:{/}\n**Def:**\n**Examples:** apparent, populous, diplomatic, vital, hereditary\n**Rules:**\n- be verb er por direct adjective hobe\n- looks \u098f\u09b0 \u09aa\u09b0 adjective / looks + rather + adjective\n- \u098f\u0995\u099f\u09bf noun \u0986\u09b0\u09c7\u0995\u099f\u09be noun \u0995\u09c7 modify \u0995\u09b0\u09b2\u09c7 adjective\n- noun + ly = adjective"
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.4 Verb:{/}\nman, green\nRules:\n**IF Related**\n\u2705 Correct Forms (depends on your intended meaning):\n\ud83d\udd39 1. Present / Future possibility \u2192 First Conditional\n\nIf he comes, I will go. \u2705\n(= There\u2019s a real chance he might come, and I\u2019ll go when he does.)\n\n\ud83d\udd39 2. Unreal / Imaginary present \u2192 Second Conditional\n\nIf he came, I would go. \u2705\n(= He probably won\u2019t come, but if he did, I would go.)\n\n\ud83d\udd39 3. Unreal / Imaginary past \u2192 Third Conditional\n\nIf he had come, I would have gone. \u2705\n(= He didn\u2019t come, and I didn\u2019t go \u2014 purely past and unreal.)\n- **{fg:#ffffff;bg:#000000}By the time:{/}** \u0995\u09cb\u09a8\u09cb \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df\u09c7 \u09b6\u09b0\u09cd\u09a4\u09be\u09a7\u09c0\u09a8 \u0995\u09cb\u09a8 \u09ac\u09bf\u09b7\u09df\u09c7\u09b0 \u0989\u09aa\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae\u09c7 By the time \u098f\u0987 Phrase \u099f\u09bf \u09a5\u09be\u0995\u09b2\u09c7 \u09aa\u09b0\u09ac\u09b0\u09cd\u09a4\u09c0 \u0985\u0982\u09b6\u09c7 **{fg:#ffffff;bg:#000000}Future Perfect Tense{/}** \u09ac\u09b8\u09c7\u0964 \u09af\u09c7\u09ae\u09a8\u0983\n-- I will have finished by the time you get back.\n-- By the time we arrive, the movie Will have started.",
-          ""
+          "{fg:#ffffff;bg:#000000}1.4 Verb:{/}\nman, green\nRules:\n**IF Related**\n\u2705 Correct Forms (depends on your intended meaning):\n\ud83d\udd39 1. Present / Future possibility \u2192 First Conditional\n\nIf he comes, I will go. \u2705\n(= There\u2019s a real chance he might come, and I\u2019ll go when he does.)\n\n\ud83d\udd39 2. Unreal / Imaginary present \u2192 Second Conditional\n\nIf he came, I would go. \u2705\n(= He probably won\u2019t come, but if he did, I would go.)\n\n\ud83d\udd39 3. Unreal / Imaginary past \u2192 Third Conditional\n\nIf he had come, I would have gone. \u2705\n(= He didn\u2019t come, and I didn\u2019t go \u2014 purely past and unreal.)\n- **{fg:#ffffff;bg:#000000}By the time:{/}** \u0995\u09cb\u09a8\u09cb \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df\u09c7 \u09b6\u09b0\u09cd\u09a4\u09be\u09a7\u09c0\u09a8 \u0995\u09cb\u09a8 \u09ac\u09bf\u09b7\u09df\u09c7\u09b0 \u0989\u09aa\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae\u09c7 By the time \u098f\u0987 Phrase \u099f\u09bf \u09a5\u09be\u0995\u09b2\u09c7 \u09aa\u09b0\u09ac\u09b0\u09cd\u09a4\u09c0 \u0985\u0982\u09b6\u09c7 **{fg:#ffffff;bg:#000000}Future Perfect Tense{/}** \u09ac\u09b8\u09c7\u0964 \u09af\u09c7\u09ae\u09a8\u0983\n-- I will have finished by the time you get back.\n-- By the time we arrive, the movie Will have started."
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.5 Adverb:{/}\n**Def:** That modifies verb/adjective/adverb is called adverb\n**Examples:** ago, again, almost, always, already, ever, here, there, now, then, once, soon, sometimes, yesterday, tomorrow, twice, thrice, never, only, quite, seldom, today, thus, enough, rather, often, very, rarely, hardly, special\n**Rules:**\n- Adjective + ly = adverb **(not always true but mostly)**\n- adjective + modify = adverb\n- go verb (intransitive) er por home thakle home = **adverb**\n- Preposition-\u098f\u09b0 \u09aa\u09b0 \u0995\u09cb\u09a8\u09cb noun/pronoun \u09a8\u09be \u09ac\u09b8\u09c7 \u09a4\u09be \u09af\u09a6\u09bf verb-\u0995\u09c7 modify \u0995\u09b0\u09c7 \u098f\u09ac\u0982 \u09b8\u09cd\u09a5\u09be\u09a8, \u09b8\u09ae\u09df \u09a8\u09bf\u09b0\u09cd\u09a6\u09c7\u09b6 \u0995\u09b0\u09c7, \u09a4\u09ac\u09c7 \u09a4\u09be preposition \u09a8\u09df, \u09ac\u09b0\u0982 adverb\u0964\n-- The sun has gone down",
-          ""
+          "{fg:#ffffff;bg:#000000}1.5 Adverb:{/}\n**Def:** That modifies verb/adjective/adverb is called adverb\n**Examples:** ago, again, almost, always, already, ever, here, there, now, then, once, soon, sometimes, yesterday, tomorrow, twice, thrice, never, only, quite, seldom, today, thus, enough, rather, often, very, rarely, hardly, special\n**Rules:**\n- Adjective + ly = adverb **(not always true but mostly)**\n- adjective + modify = adverb\n- go verb (intransitive) er por home thakle home = **adverb**\n- Preposition-\u098f\u09b0 \u09aa\u09b0 \u0995\u09cb\u09a8\u09cb noun/pronoun \u09a8\u09be \u09ac\u09b8\u09c7 \u09a4\u09be \u09af\u09a6\u09bf verb-\u0995\u09c7 modify \u0995\u09b0\u09c7 \u098f\u09ac\u0982 \u09b8\u09cd\u09a5\u09be\u09a8, \u09b8\u09ae\u09df \u09a8\u09bf\u09b0\u09cd\u09a6\u09c7\u09b6 \u0995\u09b0\u09c7, \u09a4\u09ac\u09c7 \u09a4\u09be preposition \u09a8\u09df, \u09ac\u09b0\u0982 adverb\u0964\n-- The sun has gone down"
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.6 Preposition:{/}\n**Def:** Nonu/Pronoun er purbe boshe tar sathe bakker onnanno sobder somporko dekhiye dey\n**Examples:** at, above, about, across, against, among, after, before, besides, below, behind, beyond, between, by, down, for, from, in, into, like, near, of, on, over, outside, out of, since to, towards, through, up, upon, with, within, without, except etc\n**Rules:**\n- Present Perfect Continuous Tense \u098f\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7 \u09b8\u09ae\u09df \u0989\u09b2\u09cd\u09b2\u09c7\u0996 \u09a5\u09be\u0995\u09b2\u09c7 \u09ac\u09cd\u09af\u09be\u09aa\u0995 \u09b8\u09ae\u09df (Period of time) \u098f\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09c7 'for' \u098f\u09ac\u0982 \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df (Point of time) \u098f\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09c7 'since' \u09ac\u09b8\u09c7",
-          ""
+          "{fg:#ffffff;bg:#000000}1.6 Preposition:{/}\n**Def:** Nonu/Pronoun er purbe boshe tar sathe bakker onnanno sobder somporko dekhiye dey\n**Examples:** at, above, about, across, against, among, after, before, besides, below, behind, beyond, between, by, down, for, from, in, into, like, near, of, on, over, outside, out of, since to, towards, through, up, upon, with, within, without, except etc\n**Rules:**\n- Present Perfect Continuous Tense \u098f\u09b0 \u0995\u09cd\u09b7\u09c7\u09a4\u09cd\u09b0\u09c7 \u09b8\u09ae\u09df \u0989\u09b2\u09cd\u09b2\u09c7\u0996 \u09a5\u09be\u0995\u09b2\u09c7 \u09ac\u09cd\u09af\u09be\u09aa\u0995 \u09b8\u09ae\u09df (Period of time) \u098f\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09c7 'for' \u098f\u09ac\u0982 \u09a8\u09bf\u09b0\u09cd\u09a6\u09bf\u09b7\u09cd\u099f \u09b8\u09ae\u09df (Point of time) \u098f\u09b0 \u09aa\u09c2\u09b0\u09cd\u09ac\u09c7 'since' \u09ac\u09b8\u09c7"
         ],
         [
-          "{fg:#ffffff;bg:#000000}1.7 Conjuction:{/}\nexamples:\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when",
-          ""
+          "{fg:#ffffff;bg:#000000}1.7 Conjuction:{/}\nexamples:\n- and, as, if, but, or, both, because, else, lest, before, after, however, Still, till, until, so, either or, neither nor, then, than, though/although, unless, In order that, when"
         ],
         [
-          "{fg:#ffffff;bg:#800080}2.1 Adverb vs Adjective:{/}\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**",
-          ""
+          "{fg:#ffffff;bg:#800080}2.1 Adverb vs Adjective:{/}\n- The work is hard **(adj)**\n- You are late **(adj)**\n- He works hard **(adv)**\n- You came late **(adv)**"
         ],
         [
-          "{fg:#ffffff;bg:#800080}2.2 Preposition vs Conjuction:{/}\nBefore/after/since/for\n- He stood before me **(Prepo)**\n- It has been raining since morning **(Prepo)**\n- The patient had that before the doctor came **(Conj)**",
-          ""
+          "{fg:#ffffff;bg:#800080}2.2 Preposition vs Conjuction:{/}\nBefore/after/since/for\n- He stood before me **(Prepo)**\n- It has been raining since morning **(Prepo)**\n- The patient had that before the doctor came **(Conj)**"
         ],
         [
-          "##Multi Word Parts:##\n- massacre (noun/verb)\n- befool = verb",
-          ""
+          "##Multi Word Parts:##\n- massacre (noun/verb)\n- befool = verb"
         ],
         [
-          "Noun | Verb | Adjective | Adverb  \nBeauty | Beautify | Beautiful | Beautifully  \nBrevity | Abbreviate | Brief | Briefly  \nNumber | Enumerate | Numeral | \u2014  \nAbility | Enable | Able | Ably  \nCircle | Encircle | Circular | \u2014  \nDanger | Endanger | Dangerous | Dangerously  \nEconomy | Economize | Economic | Economically\n|yield|yield|yielding|:-:|",
-          ""
+          "Noun | Verb | Adjective | Adverb  \nBeauty | Beautify | Beautiful | Beautifully  \nBrevity | Abbreviate | Brief | Briefly  \nNumber | Enumerate | Numeral | \u2014  \nAbility | Enable | Able | Ably  \nCircle | Encircle | Circular | \u2014  \nDanger | Endanger | Dangerous | Dangerously  \nEconomy | Economize | Economic | Economically\n|yield|yield|yielding|:-:|"
         ],
         [
-          "##Others:##\n- to + verb er simple form = here **__to__** is infinitive maker\n- sub+ob eki bektike nirdesh korle ar majkhane **linking verb** (became etc) thakle tara eke areker **complement**\n- **preposition and adverb pray similar**\n",
-          ""
+          "##Others:##\n- to + verb er simple form = here **__to__** is infinitive maker\n- sub+ob eki bektike nirdesh korle ar majkhane **linking verb** (became etc) thakle tara eke areker **complement**\n- **preposition and adverb pray similar**\n"
         ],
         [
-          "##Gerund[Verbal Noun] vs Participle##\nMethod1:\n**\u09af\u09a6\u09bf It \u09a6\u09bf\u09df\u09c7 Replace \u0995\u09b0\u09be \u09af\u09be\u09df \u09a4\u09be\u09b9\u09b2\u09c7 & meaningful then ==Gerund==**\n1. She enjoys _.swimming._.\u2705\n2. Rahim after infected with cancer gave up _.smoking._.\u2705\n3. _.Smoking._ causes cancer.\u2705\n4. _.Reading._ is an excellent habit.\u2705\n\n##Article +v.ing+ preposition## -> ==Gerund==\nThe _.writing._ of Shakespeare is really impressive.\nThe _.batting._ of Sakib Al Hasan is always eye soothing.\n-----\nMethod2:\nIf the -ing verb and its Bangla meaning stay in the same position as an adjective (describing a noun) -> ==Participle==\n- Rolling Stone [\u0998\u09c1\u09b0\u09a8\u09cd\u09a4 \u09aa\u09be\u09a5\u09b0]\n- Sleeping cat [\u0998\u09c1\u09ae\u09a8\u09cd\u09a4 \u09ac\u09bf\u09dc\u09be\u09b2]\n- Running Bus [\u099a\u09b2\u09a8\u09cd\u09a4 \u0997\u09be\u09dc\u09bf]\n\nIf the -ing verb and its Bangla meaning change position (Bangla verb comes later, usually as a noun-like activity), -> ==Gerund==\n- Catching fish [\u09ae\u09be\u099b \u09a7\u09b0\u09be]\n- Driving Bus [\u09ac\u09be\u09b8 \u099a\u09be\u09b2\u09be\u09a8\u09cb]\n- Telling lie [\u09ae\u09bf\u09a5\u09cd\u09af\u09be \u09ac\u09b2\u09be]\n\n##__Examples__##\n1. __Playing__ the piano relaxes her after a long day. [Crossed] -> Gerund\n2. __Eating__ fast food should be avoided. [Crossed] -> Gerund\n3. A crying baby is very difficult to manage. [Nope] -> Participle\n4. Everyone is gazing at the flying bird. [Nope] -> Participle\n-----\nMethod3:\n##Subject + verb + (person) + __ving__## -> ==Participle==\n- I saw him __playing__ cricket. -> Participle\n- I found him __cheating__ in the exam. -> Participle\n- The drill master found the boys __running__ in the field. -> [P]\n-----\nMethod4:\n##V.ing + Phrase, ==sub== + verb .......## -> Participle\n- __Finishing__ the task, ==He== will definitely come. -> Participle\n-- [It started with v.ing and there is a phrase and comman and sub]\n-----\n__##Some Examples on All Methods##__\n- __Walking__ is a good exercise. [it-method][G]\n- Look at the __flying bird__. [NotCrossed-MD][P]\n- He is fond of __playing cricket__. [Crossed-MD][G]\n- A rolling stone gathers no moss. [NotCrossed-MD][P]\n- __Reading__ is an excellent habit. [it-MD][G]\n- __Hearing__ the noise, the boy woke up. [M-4][P]",
-          ""
+          "##Gerund[Verbal Noun] vs Participle##\nMethod1:\n**\u09af\u09a6\u09bf It \u09a6\u09bf\u09df\u09c7 Replace \u0995\u09b0\u09be \u09af\u09be\u09df \u09a4\u09be\u09b9\u09b2\u09c7 & meaningful then ==Gerund==**\n1. She enjoys _.swimming._.\u2705\n2. Rahim after infected with cancer gave up _.smoking._.\u2705\n3. _.Smoking._ causes cancer.\u2705\n4. _.Reading._ is an excellent habit.\u2705\n\n##Article +v.ing+ preposition## -> ==Gerund==\nThe _.writing._ of Shakespeare is really impressive.\nThe _.batting._ of Sakib Al Hasan is always eye soothing.\n-----\nMethod2:\nIf the -ing verb and its Bangla meaning stay in the same position as an adjective (describing a noun) -> ==Participle==\n- Rolling Stone [\u0998\u09c1\u09b0\u09a8\u09cd\u09a4 \u09aa\u09be\u09a5\u09b0]\n- Sleeping cat [\u0998\u09c1\u09ae\u09a8\u09cd\u09a4 \u09ac\u09bf\u09dc\u09be\u09b2]\n- Running Bus [\u099a\u09b2\u09a8\u09cd\u09a4 \u0997\u09be\u09dc\u09bf]\n\nIf the -ing verb and its Bangla meaning change position (Bangla verb comes later, usually as a noun-like activity), -> ==Gerund==\n- Catching fish [\u09ae\u09be\u099b \u09a7\u09b0\u09be]\n- Driving Bus [\u09ac\u09be\u09b8 \u099a\u09be\u09b2\u09be\u09a8\u09cb]\n- Telling lie [\u09ae\u09bf\u09a5\u09cd\u09af\u09be \u09ac\u09b2\u09be]\n\n##__Examples__##\n1. __Playing__ the piano relaxes her after a long day. [Crossed] -> Gerund\n2. __Eating__ fast food should be avoided. [Crossed] -> Gerund\n3. A crying baby is very difficult to manage. [Nope] -> Participle\n4. Everyone is gazing at the flying bird. [Nope] -> Participle\n-----\nMethod3:\n##Subject + verb + (person) + __ving__## -> ==Participle==\n- I saw him __playing__ cricket. -> Participle\n- I found him __cheating__ in the exam. -> Participle\n- The drill master found the boys __running__ in the field. -> [P]\n-----\nMethod4:\n##V.ing + Phrase, ==sub== + verb .......## -> Participle\n- __Finishing__ the task, ==He== will definitely come. -> Participle\n-- [It started with v.ing and there is a phrase and comman and sub]\n-----\n__##Some Examples on All Methods##__\n- __Walking__ is a good exercise. [it-method][G]\n- Look at the __flying bird__. [NotCrossed-MD][P]\n- He is fond of __playing cricket__. [Crossed-MD][G]\n- A rolling stone gathers no moss. [NotCrossed-MD][P]\n- __Reading__ is an excellent habit. [it-MD][G]\n- __Hearing__ the noise, the boy woke up. [M-4][P]"
         ],
         [
-          "-> The acronyms PAD and PAVC refer to a grammar technique used to identify a noun or noun phrase within a sentence based on the words that precede it, often called \"noun signals\". The core idea is that certain parts of speech act as clear signals for the presence of a noun.\nHere is a breakdown of the rules for each acronym:\n==The PAD Method==\nThe PAD method is a basic rule focusing on the words immediately preceding a noun. \nP = Preposition, Possessive Adjective\nA = Article, Adjective\nD = Determiner \nRules for PAD:\nIf one word follows PAD: That single word is a noun.\nExample: \"He lives in Sylhet.\" (\"in\" is a preposition; \"Sylhet\" is a noun).\nIf two words follow PAD: The first word is an adjective, and the second word is a noun.\nExample: \"He lives in Sylhet city.\" (\"in\" is a preposition; \"Sylhet\" is an adjective modifying \"city\", which is the noun).\nIf three words follow PAD: The first word is an adverb, the second is an adjective, and the third is a noun.\nExample: \"It was a very beautiful day.\" (\"a\" is an article/determiner; \"very\" is an adverb; \"beautiful\" is an adjective; \"day\" is the noun). \n==The PAVC Method==\nThe acronym PAVC is a less common variation and seems to be a mnemonic that adds verbs and conjunctions to a list of word types, but it is not a standard, widely used grammar rule in the same way PAD is. The PAD method is the primary and more recognized technique for identifying nouns using \"signal\" words. \nOther Ways to Identify Nouns\nBeyond these acronyms, you can also identify nouns by looking for common suffixes and by checking if the word makes sense in common noun positions: \nCommon Suffixes: Many nouns end with suffixes such as -tion (population), -ness (happiness), -hood (childhood), -ity (validity), -ment (agreement), or -ship (friendship).\nArticles: Nouns often appear after articles like \"a,\" \"an,\" or \"the\".\nRole in a Sentence: Nouns are naming words that represent a person, place, thing, or idea, and they typically act as the subject or object of a verb. \n",
-          ""
+          "-> The acronyms PAD and PAVC refer to a grammar technique used to identify a noun or noun phrase within a sentence based on the words that precede it, often called \"noun signals\". The core idea is that certain parts of speech act as clear signals for the presence of a noun.\nHere is a breakdown of the rules for each acronym:\n==The PAD Method==\nThe PAD method is a basic rule focusing on the words immediately preceding a noun. \nP = Preposition, Possessive Adjective\nA = Article, Adjective\nD = Determiner \nRules for PAD:\nIf one word follows PAD: That single word is a noun.\nExample: \"He lives in Sylhet.\" (\"in\" is a preposition; \"Sylhet\" is a noun).\nIf two words follow PAD: The first word is an adjective, and the second word is a noun.\nExample: \"He lives in Sylhet city.\" (\"in\" is a preposition; \"Sylhet\" is an adjective modifying \"city\", which is the noun).\nIf three words follow PAD: The first word is an adverb, the second is an adjective, and the third is a noun.\nExample: \"It was a very beautiful day.\" (\"a\" is an article/determiner; \"very\" is an adverb; \"beautiful\" is an adjective; \"day\" is the noun). \n==The PAVC Method==\nThe acronym PAVC is a less common variation and seems to be a mnemonic that adds verbs and conjunctions to a list of word types, but it is not a standard, widely used grammar rule in the same way PAD is. The PAD method is the primary and more recognized technique for identifying nouns using \"signal\" words. \nOther Ways to Identify Nouns\nBeyond these acronyms, you can also identify nouns by looking for common suffixes and by checking if the word makes sense in common noun positions: \nCommon Suffixes: Many nouns end with suffixes such as -tion (population), -ness (happiness), -hood (childhood), -ity (validity), -ment (agreement), or -ship (friendship).\nArticles: Nouns often appear after articles like \"a,\" \"an,\" or \"the\".\nRole in a Sentence: Nouns are naming words that represent a person, place, thing, or idea, and they typically act as the subject or object of a verb. \n"
         ],
         [
-          "##__PAD + W4 + W3 + W2 + W1 + PAVC__##\n- PAD sentence e last r ta nite hobe r PAVC prothomta\n\nHere,\n##__PAD__##\nP = Preposition / Possessive Pronoun\nA = Article / Adjective\nD = Determiner\n##__PAVC__##\nP = Punctuation[,.] / Preposition\nA = Adverb\nV = Verb\nC = Conjunction\n\nW1 = Noun\nW2 = Adj\nW3 = Adv\nW4 = Adv\n\n==An Important list of determinel==\n- Articles: a, an, the\n- Demonstratives: this, these, that, those\n- Possessives: my, our, your, their, his, her, its,\n- Interrogatives: what, which, whose\n- Cardinal Numbers: one, two, three, four, five, six, seven, eight, nine\n- Ordinal Numbers: first, second, third, fourth, fifth, sixth, seventh, ei\n- General Ordinals: last, next, other, the other etc.\n- Quantifiers include:\n-- all, another, both, any, no, some, each, every,\n-- either, neither, enough, several,\n-- (a) little, much, many, (a) few, more, less, most,\n-- a good/great deal of, a great amount of,\n-- a number of, numbers of, a lot of, lots of, plenty of",
-          ""
+          "##__PAD + W4 + W3 + W2 + W1 + PAVC__##\n- PAD sentence e last r ta nite hobe r PAVC prothomta\n\nHere,\n##__PAD__##\nP = Preposition / Possessive Pronoun\nA = Article / Adjective\nD = Determiner\n##__PAVC__##\nP = Punctuation[,.] / Preposition\nA = Adverb\nV = Verb\nC = Conjunction\n\nW1 = Noun\nW2 = Adj\nW3 = Adv\nW4 = Adv\n\n==An Important list of determinel==\n- Articles: a, an, the\n- Demonstratives: this, these, that, those\n- Possessives: my, our, your, their, his, her, its,\n- Interrogatives: what, which, whose\n- Cardinal Numbers: one, two, three, four, five, six, seven, eight, nine\n- Ordinal Numbers: first, second, third, fourth, fifth, sixth, seventh, ei\n- General Ordinals: last, next, other, the other etc.\n- Quantifiers include:\n-- all, another, both, any, no, some, each, every,\n-- either, neither, enough, several,\n-- (a) little, much, many, (a) few, more, less, most,\n-- a good/great deal of, a great amount of,\n-- a number of, numbers of, a lot of, lots of, plenty of"
         ],
         [
-          "{link:https://youtu.be/pKyFmT2mjko}@@==Link==@@{/}\n##__Subject[\u09a8\u09c7\u09a4\u09be] // Verb[\u0995\u09b0\u09cd\u09ae\u09c0] // Agreement[\u099a\u09c1\u0995\u09cd\u09a4\u09bf]__##\n\u09a8\u09c7\u09a4\u09be \u09af\u09be \u09ac\u09b2\u09ac\u09c7 \u0995\u09b0\u09cd\u09ae\u09c0 \u09a4\u09be\u0987 \u09b6\u09c1\u09a8\u09ac\u09c7\n- Noun [Singular] -> Verb [Singular]\n- Noun [Plural] -> Verb [Plural]\n\n##__Rule to identify Subject & their Verb__##\n- The students of the college **==__is/are__==** playing football.",
-          ""
+          "{link:https://youtu.be/pKyFmT2mjko}@@==Link==@@{/}\n##__Subject[\u09a8\u09c7\u09a4\u09be] // Verb[\u0995\u09b0\u09cd\u09ae\u09c0] // Agreement[\u099a\u09c1\u0995\u09cd\u09a4\u09bf]__##\n\u09a8\u09c7\u09a4\u09be \u09af\u09be \u09ac\u09b2\u09ac\u09c7 \u0995\u09b0\u09cd\u09ae\u09c0 \u09a4\u09be\u0987 \u09b6\u09c1\u09a8\u09ac\u09c7\n- Noun [Singular] -> Verb [Singular]\n- Noun [Plural] -> Verb [Plural]\n\n##__Rule to identify Subject & their Verb__##\n- The students of the college **==__is/are__==** playing football.\n-- ==Which one is subject?==\n-- The students of the college is/are playing football.\n--- of -> starting preposition\n--- the college -> college is noun -> article er por ekti noun -> last noun\n--- of the college -> this part is qualifying phrase\n"
         ]
       ]
     },
@@ -15488,6 +15463,14 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
+        "108-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "109-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -15722,14 +15705,6 @@
         },
         "98-0": {
           "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "108-0": {
-          "bgColor": "#004D2E",
-          "textColor": "#FFFFFF"
-        },
-        "109-0": {
-          "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
       },
@@ -16085,23 +16060,38 @@
       ]
     },
     {
-      "name": "2",
+      "cellStyles": {
+        "1-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "4-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        }
+      },
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
+      "name": "2",
+      "parentSheet": 6,
       "rows": [
         [
           "Use of force or threats to get someone to agree to something\na. [[Coercion]]\nb. Conviction\nc. Confession\nd. Cajolement"
@@ -16127,22 +16117,7 @@
         [
           "A narrow piece of land connecting two large masses of land\na. Peninsula\nb. Isthmus\nc. Continent\nd. Gulf"
         ]
-      ],
-      "parentSheet": 6,
-      "cellStyles": {
-        "1-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "4-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "5-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        }
-      }
+      ]
     }
   ]
 }
