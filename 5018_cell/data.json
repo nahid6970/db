@@ -1,5 +1,5 @@
 {
-  "activeSheet": 138,
+  "activeSheet": 142,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -7057,7 +7057,7 @@
           ""
         ],
         [
-          "==vindictive== [\u09aa\u09cd\u09b0\u09a4\u09bf\u09b9\u09bf\u0982\u09b8\u09be\u09aa\u09b0\u09be\u09af\u09bc\u09a3, \u0995\u09cd\u09b7\u09ae\u09be\u09b9\u09c0\u09a8, \u0995\u09cd\u09b7\u09a4\u09bf\u0995\u09b0]",
+          "==vindictive==, vengeance \n-- [\u09aa\u09cd\u09b0\u09a4\u09bf\u09b9\u09bf\u0982\u09b8\u09be\u09aa\u09b0\u09be\u09af\u09bc\u09a3, \u0995\u09cd\u09b7\u09ae\u09be\u09b9\u09c0\u09a8, \u0995\u09cd\u09b7\u09a4\u09bf\u0995\u09b0]",
           ""
         ],
         [
@@ -15320,6 +15320,12 @@
         ],
         [
           "- Somnambulist - who walks on sleepmode\n- Somniloquist - who talks on sleepmode"
+        ],
+        [
+          "reculse [a person who lives a solitary life and tends to avoid other people]"
+        ],
+        [
+          "Connoisseur [an expert judge in matters of taste]"
         ]
       ]
     },
@@ -15562,6 +15568,18 @@
         "54-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "57-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "58-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "59-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15755,7 +15773,16 @@
           "Policeman riding on motorcycles as guards to a VIP\na. [[Outriders]]\nb. Servants\nc. Commandos\nd. Attendants"
         ],
         [
-          "One who is determined to exact full vengeance for wrongs done to him\na. Virulent\nb. Vindictive"
+          "One who is determined to exact full vengeance for wrongs done to him\na. Virulent\nb. [[Vindictive]]"
+        ],
+        [
+          "One absorbed in his own thoughts and feelings rather than in things outside\na. Scholar\nb. Recluse\nc. [[Introvert]]\nd. Intellectual\n- reculse [a person who lives a solitary life and tends to avoid other people]"
+        ],
+        [
+          "One who dabbles in fine arts for the love of it and not for monetary gains\na. Connoisseur\nb. [[Amateur]]\nc. Professional\nd. Dilettante\n- Connoisseur [an expert judge in matters of taste]"
+        ],
+        [
+          "A school boy who cuts classes frequently is a\na. Defeatist\nb. Sycophant\nc. Truant\nd. Martinet"
         ]
       ]
     }
