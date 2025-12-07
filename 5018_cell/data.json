@@ -15326,6 +15326,12 @@
         ],
         [
           "Connoisseur [an expert judge in matters of taste]"
+        ],
+        [
+          "Ominous [\u0985\u09b8\u09c1\u09ac]"
+        ],
+        [
+          "etiquette [\u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0]"
         ]
       ]
     },
@@ -15628,6 +15634,14 @@
         "79-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "82-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "83-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -15890,10 +15904,22 @@
           "The policy of extending a country's empire and influence\na. Communism\nb. Internationalism\nc. Capitalism\nd. [[Imperialism]]"
         ],
         [
-          "Of outstanding significance\na. Monumental\nb. Rational\nc. Ominous\nd. Evident"
+          "Of outstanding significance\na. [[Monumental]]\nb. Rational\nc. Ominous\nd. Evident\n- Ominous [\u0985\u09b8\u09c1\u09ac]"
         ],
         [
-          ". Code of diplomatic etiquette and precedence\na. Statesmanship\nb. Formalism\nc. Hierarchv\nd. Protocol"
+          "Code of diplomatic etiquette and precedence\na. Statesmanship\nb. Formalism\nc. Hierarchv\nd. [[Protocol]]\n- etiquette [\u09b6\u09bf\u09b7\u09cd\u099f\u09be\u099a\u09be\u09b0]"
+        ],
+        [
+          "A fixed orbit in space in relation to earth\na. Geological\nb. Geo-synchronous\nc. Geo-centric\nd. [[Geo-stationary]]"
+        ],
+        [
+          "That which cannot be believed\na. [[Incredible]]\nb. Incredulous\nc. Implausible\nd. Unreliable"
+        ],
+        [
+          "A person who renounces the world and practices self-discipline in order to attain salvation:\na. Sceptic\nb. Ascetic\nc. Devotee\nd. Antiquarian"
+        ],
+        [
+          "5. One who abandons his religious faith:\na. Apostate\nb. Prostate\nc. Profane\nd. Agnostic"
         ]
       ]
     }
