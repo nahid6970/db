@@ -11712,6 +11712,9 @@
         ],
         [
           "What is the probability that a two digit number selected at random will be a multiple of '3' and not a multiple of '5'?\n{link:https://youtu.be/HrptPZ16RDQ?t=3112}@@==Link==@@{/}\n- Two digit numbers -> 90 [10....99]\n- Multiple of 3 ->[#30] (12,15,18,21,....,99)\n- Mutiple of 3 and 5 {LCM} -> 15 -> [#6] -> (15,30,45,60,75,90)\n- Mutiple of 3 but not 5 = 30-6 = %%24%% = \\(\\frac{24}{90}\\) = \\(\\frac{4}{15}\\)"
+        ],
+        [
+          "__##GROUP 2: PERMUTATIONS##__\nIn how many different ways can the letters of the word 'CORPORATION' be arranged?"
         ]
       ]
     },
