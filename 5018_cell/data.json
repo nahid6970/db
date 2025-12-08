@@ -11670,7 +11670,7 @@
           "R-----\n- ==Spade = 13==\n- !!Hearts = 13!!\n- ==Clubs = 13==\n- !!Diamond = 13!!\n- King = 4\n- Queens = 4\n- Ace = 4\n- Black (26): 13 Spades + 13 Clubs.\n- Red (26): 13 Hearts + 13 Diamonds\nR-----\nIf a card is picked up at random from a pack of 52 cards. Find the probability that it is\n- (a) A spade. ==Ans: 13/52 = 1/4==\n- (b) A king or queen. ==Ans: (4+4)/52 = 2/13==\n- (c) 'A spade' or 'A king' or 'A queen' -> ==(13+4+4-1-1)/52== or (13+3+3)/52\n-- bcz doube count\n- (d) From a pack of cards the king of spade is taken out. A card is then drawn; find the probability that the card drawn would be a king of hearts. -> 1/51"
         ],
         [
-          "Three coins are tossed. What is the probability of getting\nCoin Toss OutCome = ==2^n^==\n- (i)  2 Tails and 1 Head -> 3/8\n- (ii) 1 Tail and 2 Heads -> 3/8\n- (iii) Neither 3 Heads nor 3 Tails // At least one head and one tail -> 1-\\(\\frac{2}{8}\\) = 3/4\n- (iv) Three heads -> 1/8\n- ==At least one head -> 7/8== Except TTT All"
+          "Three coins are tossed. What is the probability of getting\nCoin Toss OutCome = ==2^n^==\n- (i)  2 Tails and 1 Head -> 3/8\n- (ii) 1 Tail and 2 Heads -> 3/8\n- (iii) Neither 3 Heads nor 3 Tails // At least one head and one tail -> 1-\\(\\frac{2}{8}\\) = 3/4\n- (iv) Three heads -> 1/8\n- (v) ==At least one head -> 7/8== Except TTT All"
         ]
       ]
     },
