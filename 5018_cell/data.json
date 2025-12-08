@@ -11652,6 +11652,10 @@
         "8-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "9-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -11700,7 +11704,7 @@
           "How many ways can 4 prizes be given away to 3 boys, if each boy is eligible for all the prizes? -> %%3^4^ = 81%%\n- Here Always Base = Candidate/People\n- Formula = (Candidate)^Power = Prizr,Vote,Gift^"
         ],
         [
-          "The probability that a student will graduate with honors and get a good job is 0.09. Whereas the probability that a student will graduate with honors is 0.1. What is the probability that a student will get a good job if she graduates with honors?"
+          "The probability that a student will **__graduate with honors__** and get a good job is 0.09. Whereas the probability that a student will graduate with honors is 0.1. What is the probability that a student will get a good job if she graduates with honors? -> 9/10\n{link:https://youtu.be/HrptPZ16RDQ?t=2938}@@==Bit Confusing==@@{/}"
         ]
       ]
     },
