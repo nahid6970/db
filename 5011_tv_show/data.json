@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 24,
+                "title": "One Piece - s22e67 - [1152] - Her Father and Mother's Legacy! Bonney's Nika Punch WEBDL-1080p - [Erai-raws]",
+                "watched": true,
+                "added_date": "2025-12-07T23:18:52.546447",
+                "notify": "seen"
+            },
+            {
                 "id": 23,
                 "title": "One Piece - s22e66 - [1151] - Her and Her Father's Dream! Bonney's Free Future HDTV-1080p - [SubsPlease]",
                 "watched": true,
@@ -2734,7 +2741,7 @@
                 "title": "My Hero Academia - s08e10 - [169] - The Girl Who Loves Smiles WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-12-07T13:36:30.301348",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
@@ -2816,14 +2823,14 @@
                 "title": "SPY x FAMILY - s03e10 - [47] - AUSTIN'S TROUBLES + A NORMAL MIXER + MOON LANDING WEBDL-1080p v2 - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-12-07T17:31:20.663724",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "SPY x FAMILY - s03e10 - [47] - AUSTIN'S TROUBLES + A NORMAL MIXER WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-12-06T21:10:46.396336",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
@@ -2905,7 +2912,7 @@
                 "title": "To Your Eternity - s03e10 - [50] - Become as People HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2025-12-06T23:43:37.976535",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
@@ -2982,6 +2989,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 11,
+                "title": "One-Punch Man - S03E09 - Brave Child WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-12-08T10:02:46.423042",
+                "notify": "unseen"
+            },
             {
                 "id": 10,
                 "title": "One-Punch Man - S03E08 - Ninja Tale WEBDL-1080p Proper",
