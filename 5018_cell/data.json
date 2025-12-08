@@ -11648,6 +11648,10 @@
         "4-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "8-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -11688,6 +11692,12 @@
         ],
         [
           "The probability of having a girl is identical to the probability of having a boy. In a family with three children, what is the probability that all the children are of the same gender? -> 2/8 = 1/4\n- B,B,B\n- G,G,G"
+        ],
+        [
+          "There are 12 yes or no questions. How many ways can these be answered? -> 2^12^ = 4096"
+        ],
+        [
+          "How many ways can 4 prizes be given away to 3 boys, if each boy is eligible for all the prizes?\n- Here Always Base = Candidate/People\n- Formula = (Candidate)^Power = Prizr,Vote,Gift^"
         ]
       ]
     },
