@@ -11640,6 +11640,14 @@
         "3-0": {
           "bgColor": "#807600",
           "textColor": "#FFFFFF"
+        },
+        "5-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "4-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -11676,7 +11684,7 @@
           "When tossed, a certain coin has equal probability of landing on either side. If the coin is tossed 3 times, what is the probability that it will land on the same side each time ==[TTT+HHH]==? -> %%2/8%% = 1/4 [TTT, HHH]\n-- if it said only hhh or ttt then it would be 1/8 exactly like - (iv) Three heads -> 1/8"
         ],
         [
-          "When 4 dice are thrown, what is the probability that the same number appears on each of them?\n- ==6^n^== = 6^dice^"
+          "When 4 dice are thrown, what is the probability that the same number appears on each of them?\n- ==6^n^== = 6^dice^\nHere we need\n- 1,1,1,1\n- 2,2,2,2\n- 3,3,3,3\n- 4,4,4,4\n- 5,5,5,5\n- 6,6,6,6"
         ]
       ]
     },
