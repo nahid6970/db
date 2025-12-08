@@ -11656,6 +11656,10 @@
         "9-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "10-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -11705,6 +11709,9 @@
         ],
         [
           "The probability that a student will **__graduate with honors__** and get a good job is 0.09. Whereas the probability that a student will graduate with honors is 0.1. What is the probability that a student will get a good job if she graduates with honors? -> 9/10\n{link:https://youtu.be/HrptPZ16RDQ?t=2938}@@==Bit Confusing==@@{/}"
+        ],
+        [
+          "What is the probability that a two digit number selected at random will be a multiple of '3' and not a multiple of '5'?\n{link:https://youtu.be/HrptPZ16RDQ?t=3112}@@==Link==@@{/}\n- Two digit numbers -> 90 [10....99]"
         ]
       ]
     },
