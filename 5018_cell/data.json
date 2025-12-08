@@ -11684,7 +11684,10 @@
           "When tossed, a certain coin has equal probability of landing on either side. If the coin is tossed 3 times, what is the probability that it will land on the same side each time ==[TTT+HHH]==? -> %%2/8%% = 1/4 [TTT, HHH]\n-- if it said only hhh or ttt then it would be 1/8 exactly like - (iv) Three heads -> 1/8"
         ],
         [
-          "When 4 dice are thrown, what is the probability that the same number appears on each of them? -> 6/1296 = 1/216\n- ==6^n^== = 6^dice^\nHere we need\n- 1,1,1,1\n- 2,2,2,2\n- 3,3,3,3\n- 4,4,4,4\n- 5,5,5,5\n- 6,6,6,6"
+          "When 4 dice are thrown, what is the probability that the same number appears on each of them? -> 6/1296 = 1/216\n- ==6^n^== = 6^dice^\nHere we need\n- 1,1,1,1\n- 2,2,2,2 \n- 3,3,3,3\n- 4,4,4,4\n- 5,5,5,5\n- 6,6,6,6"
+        ],
+        [
+          "The probability of having a girl is identical to the probability of having a boy. In a family with three children, what is the probability that all the children are of the same gender? -> 2/8 = 1/4\n- B,B,B\n- G,G,G"
         ]
       ]
     },
