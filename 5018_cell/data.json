@@ -11698,6 +11698,9 @@
         ],
         [
           "How many ways can 4 prizes be given away to 3 boys, if each boy is eligible for all the prizes? -> %%3^4^ = 81%%\n- Here Always Base = Candidate/People\n- Formula = (Candidate)^Power = Prizr,Vote,Gift^"
+        ],
+        [
+          "The probability that a student will graduate with honors and get a good job is 0.09. Whereas the probability that a student will graduate with honors is 0.1. What is the probability that a student will get a good job if she graduates with honors?"
         ]
       ]
     },
