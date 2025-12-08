@@ -11656,6 +11656,9 @@
         ],
         [
           "==What is the probability that the product of two integers (not necessarily different integers) randomly selected from the numbers 1 through 20, inclusive, is odd?==\n- [\u09e7 \u09a5\u09c7\u0995\u09c7 \u09e8\u09e6 \u09aa\u09b0\u09cd\u09af\u09a8\u09cd\u09a4 \u09b8\u0982\u0996\u09cd\u09af\u09be\u09b0 \u09ae\u09a7\u09cd\u09af\u09c7 \u098f\u09b2\u09cb\u09ae\u09c7\u09b2\u09cb\u09ad\u09be\u09ac\u09c7 \u09a8\u09bf\u09b0\u09cd\u09ac\u09be\u099a\u09bf\u09a4 \u09a6\u09c1\u099f\u09bf \u09aa\u09c2\u09b0\u09cd\u09a3\u09b8\u0982\u0996\u09cd\u09af\u09be\u09b0 \u0997\u09c1\u09a3\u09ab\u09b2 \u09ac\u09bf\u099c\u09cb\u09a1\u09bc \u09b9\u0993\u09af\u09bc\u09be\u09b0 \u09b8\u09ae\u09cd\u09ad\u09be\u09ac\u09a8\u09be \u0995\u09a4?]\n(A) .33\n(B) .25\n(C) .50\n(D) .75\n(E) None of them\n-----\nTotal Outcome = 20*20 = 400\nRule for odd number = odd*odd\nTotal odd = 10\nTotal outcome after multiplying 2 odd and is odd = 10*10 = 100\n= \\(\\frac{100}{400}\\) = \\(.25\\)"
+        ],
+        [
+          "If a card is picked up at random from a pack of 52 cards. Find the probability that it is\n(a) A spade.\nR-----\nSpade = 13\nHearts = 13\nClubs = 13\nDiamond = 13\nKing = 4\nQueens = 4\nAce = 4\nColorRed = 26 [Spade, Clubs]\nColorBlack = 26 [Hearts, Diamonds]\nR-----"
         ]
       ]
     },
