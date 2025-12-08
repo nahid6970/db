@@ -11673,7 +11673,7 @@
           "Three coins are tossed. What is the probability of getting\nCoin Toss OutCome = ==2^n^==\n- (i)  2 Tails and 1 Head -> 3/8\n- (ii) 1 Tail and 2 Heads -> 3/8\n- (iii) Neither 3 Heads nor 3 Tails // At least one head and one tail -> 1-\\(\\frac{2}{8}\\) = 3/4\n- (iv) Three heads -> 1/8\n- (v) ==At least one head -> 7/8== Except TTT All"
         ],
         [
-          "When tossed, a certain coin has equal probability of landing on either side. If the coin is tossed 3 times, what is the probability that it will land on the same side each time? -> %%2/8%% = 1/4 [TTT, HHH]\n-- if it said only hhh or ttt then it would be 1/8 exactly like - (iv) Three heads -> 1/8"
+          "When tossed, a certain coin has equal probability of landing on either side. If the coin is tossed 3 times, what is the probability that it will land on the same side each time ==[TTT+HHH]==? -> %%2/8%% = 1/4 [TTT, HHH]\n-- if it said only hhh or ttt then it would be 1/8 exactly like - (iv) Three heads -> 1/8"
         ]
       ]
     },
