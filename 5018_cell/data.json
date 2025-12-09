@@ -11641,6 +11641,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "12-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "2-0": {
           "bgColor": "#5F00B3",
           "textColor": "#FFFFFF"
@@ -11662,10 +11666,6 @@
           "textColor": "#FFFFFF"
         },
         "9-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "12-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         }
@@ -11729,6 +11729,9 @@
         ],
         [
           "Chosen = Combination\nArrange = Permutation\n\\(\\sqrt{3}\\)"
+        ],
+        [
+          "##__GROUP 4: MISCELLANEOUS__##\nFive political leaders are to be ranked, ==in order==. How many possible ranking lists are there? -> %%1%%\n- ekta class e roll onujai darate bolle line 1-tai hobe\n- merit onujai list 1 tai hobe\nK-----\nThere are three different roads from Shahbag to Farmgate and 4 different roads from Farm Gate to Banani. How many different routes are there from Shahbag to Banani via Farm Gate?\n=> 3*4 = 12\nK-----\nThere are 8 job applicants sitting in a waiting room - 4 women and 4 men. Two of the applicants are selected one after another at random. What is the probability that both will be women?\nTotal = ^8^c~2~\nTarget = ^4^c~2~\nP = \\(\\frac{4c2}{8c2}\\) = 3/14"
         ]
       ]
     },
