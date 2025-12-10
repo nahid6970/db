@@ -7640,5 +7640,15 @@
     "horizontal_text_color": "#ffffff",
     "horizontal_border_color": "#0056b3",
     "horizontal_hover_color": "#3a3a3a"
+  },
+  {
+    "name": "Daily-Star",
+    "url": "https://www.thedailystar.net/",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAVFBMVEUAAAD////n5+d/f39gYGCPj4/v7+8YGBi3t7enp6cgICAAAAA4ODhAQEDg4OAwMDCwsLAQEBDAwMCgoKDQ0NCQkJCAgID39/fw8PC/v7+Hh4dwcHBX1KkYAAAAAXRSTlMAQObYZgAAAHlJREFUeAFNzkECQEAMQ1EBaAAA7n9PkwH+qnmrBgFUGMVxkgIILkizvDCyfKGqATQtuhvqmL2cuMFA0gbDAyQGyh4YSU4wIz0oo2vGA2o0J/YDAnXFG2a6Bv+OYGEPdI6aER5KuC1a4aHYgEa3EuwLOu0XlvgAPjgByWkFiiwlxk4AAAAASUVORK5CYII=",
+    "default_type": "img",
+    "click_action": "url-1",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   }
 ]
