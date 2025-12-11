@@ -809,6 +809,12 @@
             opacity: 0.6;
         }
 
+        /* Rowspan borders - add thin black line above and below cells with rowspan */
+        .md-cell[rowspan] {
+            border-top: 1px solid #000000;
+            border-bottom: 1px solid #000000;
+        }
+
         /* Let coloured text / background css shine through */
         .md-grid strong {
             font-weight: bold;
@@ -1604,10 +1610,15 @@
             grid.forEach((row, rowIndex) => {
                 row.forEach((cell, colIndex) => {
                     if (cell.content.trim() === '^^') {
-                        // Find cell above and increment its rowspan
-                        const aboveRow = rowIndex - 1;
-                        const aboveKey = `${aboveRow}-${colIndex}`;
-                        rowspans[aboveKey] = (rowspans[aboveKey] || 1) + 1;
+                        // Find the first non-^^ cell above this one
+                        let targetRow = rowIndex - 1;
+                        while (targetRow >= 0 && grid[targetRow][colIndex].content.trim() === '^^') {
+                            targetRow--;
+                        }
+                        if (targetRow >= 0) {
+                            const targetKey = `${targetRow}-${colIndex}`;
+                            rowspans[targetKey] = (rowspans[targetKey] || 1) + 1;
+                        }
                     }
                 });
             });
