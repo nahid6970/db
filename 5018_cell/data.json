@@ -1,5 +1,5 @@
 {
-  "activeSheet": 120,
+  "activeSheet": 15,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -913,6 +913,14 @@
         "32-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "41-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "45-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -1050,6 +1058,30 @@
         ],
         [
           "\u0995\u09cb\u09a8 \u0989\u09aa\u099c\u09be\u09a4\u09bf\u099f\u09bf \u09ae\u09be\u09a4\u09c3\u09a4\u09be\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u0995?\n\u0995. \u09b8\u09be\u0981\u0993\u09a4\u09be\u09b2\n\u0996. \u099a\u09be\u0995\u09ae\u09be\n\u0997. \u09b9\u09be\u099c\u0982\n\u0998. [[\u0997\u09be\u09b0\u09cb]]"
+        ],
+        [
+          "'\u09ac\u09bf\u099c\u09c1' \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u0995\u09cb\u09a8 \u09a8\u09c3-\u0997\u09cb\u09b7\u09cd\u09a0\u09c0\u09b0 \u0989\u09ce\u09b8\u09ac?\n\u0995. \u0997\u09be\u09b0\u09cb\n\u0996. [[\u099a\u09be\u0995\u09ae\u09be]]\n\u0997. \u09b8\u09be\u0981\u0993\u09a4\u09be\u09b2\n\u0998. \u09ae\u09be\u09b0\u09ae\u09be"
+        ],
+        [
+          "\u0989\u09aa\u099c\u09be\u09a4\u09bf \u09b8\u09be\u0982\u09b8\u09cd\u0995\u09c3\u09a4\u09bf\u0995 \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 '\u09ac\u09bf\u09b0\u09bf\u09b6\u09bf\u09b0\u09bf \u0995\u09cb\u09a5\u09be\u09af\u09bc \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4?\n\u0995. \u09ac\u09be\u09a8\u09cd\u09a6\u09b0\u09ac\u09be\u09a8\n\u0996. \u0996\u09be\u0997\u09dc\u09be\u099b\u09dc\u09bf\n\u0997. [[\u09a8\u09c7\u09a4\u09cd\u09b0\u0995\u09cb\u09a8\u09be]]\n\u0998. \u09b0\u09be\u0999\u09be\u09ae\u09be\u099f\u09bf"
+        ],
+        [
+          "\u09b6\u09bf\u0995\u09cd\u09b7\u09be \u09ac\u09bf\u09ad\u09be\u0997\u09c7\u09b0 \u099f\u09cd\u09b0\u09c7\u09a8\u09bf\u0982 \u098f\u09b0 \u09b6\u09c0\u09b0\u09cd\u09b7 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be\u09a8 \u0995\u09cb\u09a8\u099f\u09bf?\n\u0995. \u09ac\u09bf\u09df\u09be\u09ae\n\u0996. [[\u09a8\u09be\u09df\u09c7\u09ae]]\n\u0997. \u099f\u09bf\u099f\u09bf\u09b8\u09bf\n\u0998. \u0987\u0989\u099c\u09bf\u09b8\u09bf"
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09c0?\n\u0995. \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u0995\u09ae\u09bf\u09b6\u09a8 \u09b0\u09bf\u09aa\u09cb\u09b0\u09cd\u099f\n\u0996. \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8 \u09b0\u09bf\u09aa\u09cb\u09b0\u09cd\u099f\n\u0997. \u099c\u09be\u09a4\u09c0\u09df \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8 \u09b0\u09bf\u09aa\u09cb\u09b0\u09cd\u099f\n\u0998. [[\u0995\u09c1\u09a6\u09b0\u09a4-\u0987-\u0996\u09c1\u09a6\u09be \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8 \u09b0\u09bf\u09aa\u09cb\u09b0\u09cd\u099f]]"
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df \u09ae\u099e\u09cd\u099c\u09c1\u09b0\u09bf \u0995\u09ae\u09bf\u09b6\u09a8\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af\u09a6\u09c7\u09b0 \u09a8\u09bf\u09df\u09cb\u0997\u0995\u09be\u09b0\u09c0 \u0995\u09c7?\n\u0995. [[\u09b6\u09bf\u0995\u09cd\u09b7\u09be\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0]]\n\u0996. \u09b8\u09cd\u09aa\u09c0\u0995\u09be\u09b0\n\u0997. \u09aa\u09cd\u09b0\u09a7\u09be\u09a8\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0\n\u0998. \u09b0\u09be\u09b7\u09cd\u099f\u09cd\u09b0\u09aa\u09a4\u09bf"
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7 \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df\u09b8\u09ae\u09c2\u09b9\u09c7\u09b0 \u09a8\u09bf\u09af\u09bc\u09a8\u09cd\u09a4\u09cd\u09b0\u09a3\u0995\u09be\u09b0\u09c0 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be\u09a8\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09c0?\n\u0995. UCG\n\u0996. [[UGC]]\n\u0997. CGU\n\u0998. CUG"
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7 \u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995 \u09aa\u09cd\u09b0\u09be\u09a5\u09ae\u09bf\u0995 \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0986\u0987\u09a8 \u09aa\u09be\u09b6 \u09b9\u09df-\n\u0995. \u09e7\u09ef\u09ee\u09eb \u09b8\u09be\u09b2\u09c7\n\u0996. [[\u09e7\u09ef\u09ef\u09e6 \u09b8\u09be\u09b2\u09c7]]\n\u0997. \u09e7\u09ef\u09ef\u09e7 \u09b8\u09be\u09b2\u09c7\n\u0998. \u09e7\u09ef\u09ee\u09ee \u09b8\u09be\u09b2\u09c7"
+        ],
+        [
+          "\u09a2\u09be\u0995\u09be \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u0999\u09be\u09b2\u09bf \u0989\u09aa\u09be\u099a\u09be\u09b0\u09cd\u09af \u0995\u09c7 \u099b\u09bf\u09b2\u09c7\u09a8?\n\u0995. [[\u09b8\u09cd\u09af\u09be\u09b0 \u098f\u09ab \u09b0\u09b9\u09ae\u09be\u09a8]]\n\u0996. \u09a1. \u09b0\u09ae\u09c7\u09b6\u099a\u09a8\u09cd\u09a6\u09cd\u09b0 \u09ae\u099c\u09c1\u09ae\u09a6\u09be\u09b0\n\u0997. \u09ac\u09bf\u099a\u09be\u09b0\u09aa\u09a4\u09bf \u09ae\u09c1\u09b9\u09be\u09ae\u09cd\u09ae\u09a6 \u0987\u09ac\u09cd\u09b0\u09be\u09b9\u09c0\u09ae\n\u0998. \u09a1. \u09ae\u09be\u09b9\u09ae\u09c1\u09a6 \u09b9\u09be\u09b8\u09be\u09a8"
         ]
       ]
     },
@@ -2212,6 +2244,10 @@
         "153-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "159-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -2708,6 +2744,21 @@
         ],
         [
           "\u0986\u09af\u09bc\u09a4\u09a8\u09c7\u09b0 \u09a6\u09bf\u0995 \u09a5\u09c7\u0995\u09c7 \u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09b8\u09ac\u099a\u09c7\u09af\u09bc\u09c7 \u099b\u09cb\u099f \u099c\u09c7\u09b2\u09be \u09b9\u09b2\u09cb \u09a8\u09be\u09b0\u09be\u09af\u09bc\u09a3\u0997\u099e\u09cd\u099c"
+        ],
+        [
+          "\u09b6\u09bf\u0995\u09cd\u09b7\u09be \u09ac\u09bf\u09ad\u09be\u0997\u09c7\u09b0 \u099f\u09cd\u09b0\u09c7\u09a8\u09bf\u0982 \u098f\u09b0 \u09b6\u09c0\u09b0\u09cd\u09b7 \u09aa\u09cd\u09b0\u09a4\u09bf\u09b7\u09cd\u09a0\u09be\u09a8 \u0995\u09cb\u09a8\u099f\u09bf? -> \u09a8\u09be\u09df\u09c7\u09ae"
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8\u09c7\u09b0 \u09a8\u09be\u09ae \u0995\u09c0? -> \u0995\u09c1\u09a6\u09b0\u09a4-\u0987-\u0996\u09c1\u09a6\u09be \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0995\u09ae\u09bf\u09b6\u09a8 \u09b0\u09bf\u09aa\u09cb\u09b0\u09cd\u099f\n\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df \u09ae\u099e\u09cd\u099c\u09c1\u09b0\u09bf \u0995\u09ae\u09bf\u09b6\u09a8\u09c7\u09b0 \u09b8\u09a6\u09b8\u09cd\u09af\u09a6\u09c7\u09b0 \u09a8\u09bf\u09df\u09cb\u0997\u0995\u09be\u09b0\u09c0 \u0995\u09c7? -> \u09b6\u09bf\u0995\u09cd\u09b7\u09be\u09ae\u09a8\u09cd\u09a4\u09cd\u09b0\u09c0"
+        ],
+        [
+          ""
+        ],
+        [
+          "\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6\u09c7 \u09ac\u09be\u09a7\u09cd\u09af\u09a4\u09be\u09ae\u09c2\u09b2\u0995 \u09aa\u09cd\u09b0\u09be\u09a5\u09ae\u09bf\u0995 \u09b6\u09bf\u0995\u09cd\u09b7\u09be \u0986\u0987\u09a8 \u09aa\u09be\u09b6 \u09b9\u09df- -> \u09e7\u09ef\u09ef\u09e6 \u09b8\u09be\u09b2\u09c7"
+        ],
+        [
+          "\u09a2\u09be\u0995\u09be \u09ac\u09bf\u09b6\u09cd\u09ac\u09ac\u09bf\u09a6\u09cd\u09af\u09be\u09b2\u09df\u09c7\u09b0 \u09aa\u09cd\u09b0\u09a5\u09ae \u09ac\u09be\u0999\u09be\u09b2\u09bf \u0989\u09aa\u09be\u099a\u09be\u09b0\u09cd\u09af \u0995\u09c7 \u099b\u09bf\u09b2\u09c7\u09a8? -> \u09b8\u09cd\u09af\u09be\u09b0 \u098f\u09ab \u09b0\u09b9\u09ae\u09be\u09a8"
         ]
       ]
     },
@@ -12862,7 +12913,7 @@
           "ADB = Asian Development Bank\nATM = Automated Teller Machine\nBARD = Bangladesh Academy for Rural Organization\nBBC = British Broadcasting Corporation\nBEPZA = Bangladesh Export Processing Zone Authority\nBGB = Border Guard Bangladesh\nBIMSTEC = Buy of Bengal Initiative for Multi-Sectoral Technical and Economic Cooperation\nBPS = bit per second\nBRAC = Bangladesh Rural Advancement Committee\nBRRI = Bangladesh Rice Research Institute\nBTCL = Bangladesh Telecommunications Company Limited\nBTRC = Bangladesh Telecommunication Regulatory Commission\nc-GP = E-Government Procurement\nCC = CarboCopy\nCFC = Chlorofluorocarbon\nCIRDAP = Center on Integrated Rural Development of Asia and Pacific\nCNG = Compressed Natural Gas\nCNN = Cable News Network\nCOVID-19 = Corona virus disease - 19\nCPU = Central Processing Unit\nDHCP = Dynamic Host Configuration Protocol\nDNA = Deoxyribo Nucleic Acid\nDVD = Digital Video Disk\nE-mail = Electronic Mail\ne-TIN = Tax Identification Number\nECNEC = Executive Committee of the National Economic Council\nEFT = Electronic Funds Transfer\nEMS = Electronic Manufacturing Service\nEPI = Expanded Program on Immunization\nEPZ = Export Processing Zone\nFAO = Food and Agricultural Organization\nFIFA = Federation of International Football Association\nGDP = Gross Domestic Product\nGNP = Gross National Product\nHTML = Hyper Text Markup Language\nHTTP = Hyper Text Transfer Protocol\nICT = Information and Communication Technology\nII.O = International Labour Organization\nIMF = International Monetary Fund\nINTERPOL = International Criminal Police Organization\nIRD = Intenal Resources Division\nITU = Information Telecommunication\nJRC = Joint River Commission\nLAN = Local Area Network\nLDC = Least Developed Country\nLPG = Liquefied Petroleum Gas\nMDG = Millennium Development Goals\nMICR = Magnetic Ink Character Recognition\nNAM = Non Aligned Movement\nNASA = National Aeronautics and Space Administration\nNATO = North Atlantic Treaty Organization\nNIPORT = National Institute of Population Research and Training\nOIC = Organization of Islamic Cooperation\nOMR = Optical Mark Recognition\nOPEC = Organization of the Petroleum Exporting Countries\nOPEC = The Organization of the Petroleum Exporting Countries\nPDF = Portable Document Format\nPLO = Palestine Libreation Organization\nRAB = Rapid Action Battilion\nRAM = Random Access Memory\nROM = Read Only Memory\nSAARC = South Asian Association for Regional Cooperation\nSAFTA = South Asian Free Trade Area\nSAPTA = SAARC Perferential Trading Arrangement\nSDG = Sustainable Development Goals\nSIM = Subscriber Identity Module\nSMTP = Simple Mail Transfer Protocol\nUNDP = United National Development Programme\nUNESCO = United Nations Education Scientific and Cultural Organization\nUNHCR = United Nations High Commissioner for Refugees\nURL = Uniform Resource Locator\nVAT = Value Added Tax\nVIROUS = Vital Information Resources Under Seize\nVoIP = Voice over Internet Protocol\nWAN = Wide Area Network\nWHO = World Health Organization\nWiMAX = Worldwide Interoperability for the Microwave Access\nWiMax = Worldwite Interoperability for Microwave access\nWTO = World Health Organization\nWWW = World Wide Web"
         ],
         [
-          "The Bay of Bengal Industrial Growth Belt (BIG-B)\n!!NEIR -> National Equipment Identity Register!!"
+          "The Bay of Bengal Industrial Growth Belt (BIG-B)\n!!NEIR -> National Equipment Identity Register!!\nUGC = University Grant Commission"
         ]
       ]
     },
@@ -15029,6 +15080,9 @@
         ],
         [
           "\u0995\u09cb\u09a8 \u0989\u09aa\u099c\u09be\u09a4\u09bf\u099f\u09bf \u09ae\u09be\u09a4\u09c3\u09a4\u09be\u09a8\u09cd\u09a4\u09cd\u09b0\u09bf\u0995? -> \u0997\u09be\u09b0\u09cb + \u0996\u09be\u09b8\u09bf\u09df\u09be"
+        ],
+        [
+          "\u0989\u09aa\u099c\u09be\u09a4\u09bf \u09b8\u09be\u0982\u09b8\u09cd\u0995\u09c3\u09a4\u09bf\u0995 \u0995\u09c7\u09a8\u09cd\u09a6\u09cd\u09b0 '\u09ac\u09bf\u09b0\u09bf\u09b6\u09bf\u09b0\u09bf \u0995\u09cb\u09a5\u09be\u09af\u09bc \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4? -> \u09a8\u09c7\u09a4\u09cd\u09b0\u0995\u09cb\u09a8\u09be"
         ]
       ]
     },
