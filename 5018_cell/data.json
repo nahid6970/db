@@ -12932,7 +12932,7 @@
           "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology==\n- One who studies insect life -> Entomologist"
         ],
         [
-          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous\nOne who is residing in a country of which he or she is not yet a full-fledged citizen -> alien\nEasy to carry over long distance -> portable\nA state of complete continence -> celibacy"
+          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous\nOne who is residing in a country of which he or she is not yet a full-fledged citizen -> alien\nEasy to carry over long distance -> portable\nA state of complete continence -> celibacy\nA speech without any previous preparation -> extempore\nState of complete continence on the part of a woman -> virginity\nIn a state of apparent inactivity but capable of being easily called into action -> dormant\nOne who can be easily duped or fooled by any swindler -> gullible"
         ]
       ]
     },
@@ -16985,6 +16985,26 @@
         "32-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "35-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "36-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "39-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "40-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "41-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -17110,6 +17130,39 @@
         ],
         [
           "164. A state of perfect balance\na. [[equilibrium]]\nb. equilibrium\nc. imbalance\nd. equilibrium"
+        ],
+        [
+          "165. A speech without any previous preparation\na. [[extempore]]\nb. deliberately\nc. rehearsed\nd. premeditated"
+        ],
+        [
+          "166. Illicit partner of a married man or woman\na. foe\nb. abscond\nc. hate\nd. [[paramour]]"
+        ],
+        [
+          "167. Beyond all powers of destruction of time\na. [[imperishable]]\nb. destructible\nc. intermittent\nd. transient"
+        ],
+        [
+          "168. Which can be destroyed quickly\na. endurance\nb. continuation\nc. permanent\nd. [[perishable]]"
+        ],
+        [
+          "169. State of complete continence on the part of a woman\na. honor\nb. restraint\nc. [[virginity]]\nd. virtue"
+        ],
+        [
+          "170. A person who is very-fond of sensuous enjoyment\na. flat\nb. [[hedonist]]\nc. underdeveloped\nd. acetic"
+        ],
+        [
+          "171. A person with refined taste in food and wine\na. puritan\nb. ascetic\nc. novice\nd. [[epicure]]"
+        ],
+        [
+          "172. In a state of apparent inactivity but capable of being easily called into action\na. active\nb. involved\nc. animated\nd. [[dormant]]"
+        ],
+        [
+          "173. A period of inactivity in which some living organisms pass the winter (like frogs)\na. [[hibernation]]\nb. hustle\nc. diligence\nd. ambitious"
+        ],
+        [
+          "174. One who can be easily ==duped== or fooled by any swindler\na. smart\nb. [[gullible]]\nc. astute\nd. perceptive"
+        ],
+        [
+          "175. Free from external incitement or happening without external cause\na. deliberate\nb. spontaneous\nc. premeditated\nd. painstaking"
         ]
       ]
     },
