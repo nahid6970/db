@@ -16945,6 +16945,22 @@
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "14-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "15-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "16-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "18-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -17009,7 +17025,19 @@
           "143. Talking disrespectfully of sacred things is called\na. [[blasphemy]]\nb. heresy\nc. atheism\nd. apostasy"
         ],
         [
-          "144. A person who studies the formation of the earth\na. meteorologist\nb. anthropologist\nc. geologist\nd. seismologist"
+          "144. A person who studies the formation of the earth\na. meteorologist\nb. anthropologist\nc. [[geologist]]\nd. seismologist"
+        ],
+        [
+          "145. One who feels at home in every country\na. metropolitian\nb. [[cosmopolitian]]\nc. citizen\nd. denizen"
+        ],
+        [
+          "146. A statement that is absolutely clear\na. clean\nb. confused\nc. ambiguous\nd. [[unequivocal]]"
+        ],
+        [
+          "147. Incapable of being explained\na. nondescript\nb. untold\nc. unexplained\nd. [[inexplicable]]"
+        ],
+        [
+          "148. Handwriting that cannot be read,\na. [[illegible]]\nb. unreadable\nc. dim\nd. dull"
         ]
       ]
     },
