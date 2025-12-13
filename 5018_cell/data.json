@@ -1,5 +1,5 @@
 {
-  "activeSheet": 79,
+  "activeSheet": 143,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -12932,7 +12932,10 @@
           "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology==\n- One who studies insect life -> Entomologist"
         ],
         [
-          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous\nOne who is residing in a country of which he or she is not yet a full-fledged citizen -> alien\nEasy to carry over long distance -> portable\nA state of complete continence -> celibacy\nA speech without any previous preparation -> extempore\nState of complete continence on the part of a woman -> virginity\nIn a state of apparent inactivity but capable of being easily called into action -> dormant\nOne who can be easily duped or fooled by any swindler -> gullible\nFree from external incitement or happening without external cause -> spontaneous [\u09b8\u09cd\u09ac\u09a4\u0983\u09b8\u09cd\u09ab\u09c2\u09b0\u09cd\u09a4]"
+          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous\nOne who is residing in a country of which he or she is not yet a full-fledged citizen -> alien\nEasy to carry over long distance -> portable\nA state of complete continence -> celibacy\nA speech without any previous preparation -> extempore\nState of complete continence on the part of a woman -> virginity\nIn a state of apparent inactivity but capable of being easily called into action -> dormant\nOne who can be easily duped or fooled by any swindler -> gullible\nFree from external incitement or happening without external cause -> spontaneous [\u09b8\u09cd\u09ac\u09a4\u0983\u09b8\u09cd\u09ab\u09c2\u09b0\u09cd\u09a4]\nPerson who loves mankind -> philanthropist\nPerson more like a woman than a man -> effeminate\nPerson of strong conviction or prejudice, especially in matters of religion -> bigot"
+        ],
+        [
+          "mono => \u098f\u0995 \npoly => \u09ac\u09b9\u09c1 "
         ]
       ]
     },
@@ -16954,22 +16957,6 @@
           "bgColor": "#004D2E",
           "textColor": "#FFFFFF"
         },
-        "4-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "5-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "7-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "8-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
         "28-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -16998,6 +16985,10 @@
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         },
+        "4-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
         "40-0": {
           "bgColor": "#004D2E",
           "textColor": "#FFFFFF"
@@ -17007,6 +16998,29 @@
           "textColor": "#FFFFFF"
         },
         "45-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "50-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "7-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "8-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "56-0": {
+          "italic": false
+        },
+        "57-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
@@ -17167,6 +17181,45 @@
         ],
         [
           "175. Free from external incitement or happening without external cause\na. deliberate\nb. [[spontaneous - \u09b8\u09cd\u09ac\u09a4\u0983\u09b8\u09cd\u09ab\u09c2\u09b0\u09cd\u09a4]]\nc. premeditated\nd. painstaking"
+        ],
+        [
+          "176. Organism that grows, feeds and sheltered on or in a different organism while contributing nothing to the survival of its host\na. leader\nb. workaholic\nc. overachiever.\nd. [[parasite]]"
+        ],
+        [
+          "177. Person who loves mankind\na. detractor\nb. egoist\nc. [[philanthropist]]\nd. stingy"
+        ],
+        [
+          "178. To root out an evil\na. establish\nb. [[eradicate]]\nc. institute\nd. secure"
+        ],
+        [
+          "179. The state of being married\na. [[matrimony]]\nb. divorce\nc. observance\nd. neglect"
+        ],
+        [
+          "180. Practice of having only one wife or husband at a time\na. slenderness\nb. fornication\nc. tidiness\nd. [[monologue]]"
+        ],
+        [
+          "181. Short speech or poem given at the end of a play or book\na. [[epilogue]]\nb. preface\nc. debut\nd. climax"
+        ],
+        [
+          "182. Introductory part or lines to a discourse or play\na. finish\nb. [[prologue]]\nc. postscript\nd. addendum"
+        ],
+        [
+          "183. Account of a person's life written by another\na. speech\nb. adventure\nc. notification\nd. [[biography]]"
+        ],
+        [
+          "184. Unfit for human consumption\na. [[inedible]]\nb. comestible\nc. appetizing\nd. delicious"
+        ],
+        [
+          "185. Person leading a life of strict self-discipline\na, elaborate\nb. encouraging\nc. [[ascetic]]\nd. indulgent"
+        ],
+        [
+          "186. Person more like a woman than a man\na. masculinity\nb. extroverted\nc. [[effeminate]]\nd. unpretentious"
+        ],
+        [
+          "187. Person of strong conviction or prejudice, especially in matters of religion\na. tolerator\nb. liberal\nc. humanitarian\nd. [[bigot]]"
+        ],
+        [
+          "188. Composed of elements highly diverse in character\na. heterogeneity\nb. synonyms\nc. antonyms\nd. homogenous"
         ]
       ]
     },
