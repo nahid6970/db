@@ -12932,7 +12932,7 @@
           "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology==\n- One who studies insect life -> Entomologist"
         ],
         [
-          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous"
+          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\nA funny imitation of a poem -> parody\nAn organ of body cut off by surgery -> amputation\nAnimal that eats flesh of other animals -> carnivorous\nOne who is residing in a country of which he or she is not yet a full-fledged citizen -> alien\nEasy to carry over long distance -> portable\nA state of complete continence -> celibacy"
         ]
       ]
     },
@@ -16926,22 +16926,6 @@
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
         },
-        "4-0": {
-          "bgColor": "#800000",
-          "textColor": "#FFFFFF"
-        },
-        "5-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "7-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
-        "8-0": {
-          "bgColor": "#495057",
-          "textColor": "#FFFFFF"
-        },
         "11-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
@@ -16964,6 +16948,42 @@
         },
         "24-0": {
           "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "26-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "4-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "5-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "7-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "8-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "28-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "29-0": {
+          "bgColor": "#004D2E",
+          "textColor": "#FFFFFF"
+        },
+        "31-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
+        },
+        "32-0": {
+          "bgColor": "#495057",
           "textColor": "#FFFFFF"
         }
       },
@@ -17062,10 +17082,34 @@
           "154. Animals that can live on land and water\na. insectivorous\nb. dinosaurs\nc. [[amphibians]]\nd. reptile"
         ],
         [
-          "155. One who is residing in a country of which he or she is not yet a full-fledged citizen\na. lain\nb. lease\nc. enemy\nd. alien"
+          "155. One who is residing in a country of which he or she is not yet a full-fledged citizen\na. lain\nb. lease\nc. enemy\nd. [[alien]]"
         ],
         [
-          "156. Easy to shape in desired form\na. malleable\nb. stiff\nc. rigid\nd. brittle"
+          "156. Easy to shape in desired form\na. [[malleable]]\nb. stiff\nc. rigid\nd. brittle"
+        ],
+        [
+          "157. Easy to carry over long distance\na. fixed\nb. manageable\nc. [[portable]]\nd. convenient"
+        ],
+        [
+          "158. An object through which light passes but people cannot see across clearly\na. heavy\nb. cloudy\nc. opaque\nd. [[translucent]]"
+        ],
+        [
+          "159. That which can be drunk\na. jeopardize\nb. [[potable]]\nc. risk\nd. peril"
+        ],
+        [
+          "160. Belonging to one's ancestors\na. fresh\nb. acquired\nc. [[ancestral]]\nd. unusual"
+        ],
+        [
+          "161. A truce or cessation from arms before a formal treaty is signed\na. dispute\nb. [[armistice]]\nc. commencement\nd. disagreement"
+        ],
+        [
+          "162. A state of complete continence\na. celibacy\nb. conceit\nc. courage\nd. arrogance"
+        ],
+        [
+          "163. Deserving blame for an offence or crime\na. innocent\nb. exalted\nc. [[culpable]]\nd. thorough"
+        ],
+        [
+          "164. A state of perfect balance\na. [[equilibrium]]\nb. equilibrium\nc. imbalance\nd. equilibrium"
         ]
       ]
     },
