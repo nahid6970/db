@@ -1,5 +1,5 @@
 {
-  "activeSheet": 145,
+  "activeSheet": 143,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -12930,6 +12930,9 @@
         ],
         [
           "- The study of ancient societies -> Archaeology\n- Study of the evolution of man as an animal -> Anthropology\n- Study of birds -> Ornithology\n- Medical study of skin and its diseases -> ==Dermatology==\n- One who studies insect life -> Entomologist"
+        ],
+        [
+          "A narrow piece of land connecting two large masses of land -> Isthmus\nOne who collects coins as hobby -> Numismatist\nThe policy of extending a country's empire and influence -> imperialism\nAllowance paid by a husband to his wife on legal separation is -> alimony\n"
         ]
       ]
     },
@@ -16930,6 +16933,18 @@
         "5-0": {
           "bgColor": "#495057",
           "textColor": "#FFFFFF"
+        },
+        "7-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "8-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
+        },
+        "11-0": {
+          "bgColor": "#800000",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -16970,10 +16985,31 @@
           "One indifferent to art and literature is\na. Aromatic\nb. Critic\nc. [[Philistine]]\nd. Scholar"
         ],
         [
-          "Open to injury or Criticism\na. Invincible\nb. Vulnerable\nc. Naive\nd. Sensitive"
+          "Open to injury or Criticism\na. Invincible\nb. [[Vulnerable]]\nc. Naive\nd. Sensitive"
         ],
         [
-          "A narrow piece of land connecting two large masses of land\na. Peninsula\nb. Isthmus\nc. Continent\nd. Gulf"
+          "A narrow piece of land connecting two large masses of land\na. Peninsula\nb. [[Isthmus]]\nc. Continent\nd. Gulf"
+        ],
+        [
+          "138. One who collects coins as hobby\na. Philatelist\nb. Ornithologist\nc. Statistician\nd. [[Numismatist]]"
+        ],
+        [
+          "139. Yearly celebration of a date or an event\na. birthday\nb. [[anniversary]]\nc. jubilee\nd. centenary"
+        ],
+        [
+          "140. The policy of extending a country's empire and influence\na. communism\nb. capitalism\nc. internationalism\nd. [[imperialism]]"
+        ],
+        [
+          "141. Allowance paid by a husband to his wife on legal separation is\na. compensation\nb. alimony\nc. substance\nd. maintenance"
+        ],
+        [
+          "142. A tank in which fish are kept is called an\na. [[aquarium]]\nb. aquacade\nc. aquatint\nd. aquatone"
+        ],
+        [
+          "143. Talking disrespectfully of sacred things is called\na. [[blasphemy]]\nb. heresy\nc. atheism\nd. apostasy"
+        ],
+        [
+          "144. A person who studies the formation of the earth\na. meteorologist\nb. anthropologist\nc. geologist\nd. seismologist"
         ]
       ]
     },
