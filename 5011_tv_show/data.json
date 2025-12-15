@@ -2830,7 +2830,7 @@
                 "title": "SPY x FAMILY - s03e11 - [48] - EXTREME LEVEL 3 SITUATION WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-12-13T21:30:25.941783",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 11,
@@ -2926,7 +2926,7 @@
                 "title": "To Your Eternity - s03e11 - [51] - Their Home HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2025-12-13T22:55:19.528255",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 10,
@@ -3011,11 +3011,18 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 14,
+                "title": "One-Punch Man - S03E10 - Immortal Bloodbath WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2025-12-15T10:13:33.959907",
+                "notify": "unseen"
+            },
+            {
                 "id": 13,
                 "title": "One-Punch Man - S03E10 - Immortal Bloodbath WEBDL-1080p",
                 "watched": false,
                 "added_date": "2025-12-14T22:47:04.275794",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 12,
