@@ -1,5 +1,5 @@
 {
-  "activeSheet": 20,
+  "activeSheet": 89,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -1926,6 +1926,10 @@
         "8-0": {
           "bgColor": "#800000",
           "textColor": "#FFFFFF"
+        },
+        "13-0": {
+          "bgColor": "#495057",
+          "textColor": "#FFFFFF"
         }
       },
       "columns": [
@@ -1982,6 +1986,18 @@
         ],
         [
           "What does QR stand for?\nA. [[Quick Response]]\nB. Qualified Restraint\nC. Quartz Repeat\nD. Quick Resonance"
+        ],
+        [
+          "11. Which of the following is used for close a tab on a browser?\nA. Ctrl+Y\nB. Ctrl +A\nC. [[Ctrl +W]]\nD. Ctrl + T"
+        ],
+        [
+          "12. All of the following are examples of real security and privacy risks EXCEPT?\nA. Viruses\nB. [[Spam]]\nC. Hackers\nD. None of these"
+        ],
+        [
+          "13. A numbers of letters that appears little below the normal text is called-\nA. [[Subscript]]\nB. Superscript\nC. Supertext\nD. Toptest"
+        ],
+        [
+          "15. What is the shortcut key to open the Open dialog box?\nA. F12\nB. Alt + F12\nC. shft +F12\nD. [[Ctrl + F12]]"
         ]
       ]
     },
@@ -13592,11 +13608,15 @@
           ""
         ],
         [
-          "**\u0995\u09bf\u099b\u09c1 \u099c\u09a8\u09aa\u09cd\u09b0\u09bf\u09df \u09ac\u09be\u0982\u09b2\u09be \u09b2\u09c7\u0996\u09be\u09b0 \u09ab\u09a8\u09cd\u099f\u0983**\nTable*3 _black _2px\nAdarshaLipi, Anandapatra, Basundhara, Chandrabati, Ekush, Ekushey, Lipi, Lekhan, Falgun, Modhumati, Karnaphuli, Rinkiy, Sulekha, Saroda, Susrhree, Sutonny MJ\nTable*end\n\n**Some Shortcuts**\nTable*2 _black _2px\nCtrl+F = search, ctrl+s = save\nTable*end",
+          "**\u0995\u09bf\u099b\u09c1 \u099c\u09a8\u09aa\u09cd\u09b0\u09bf\u09df \u09ac\u09be\u0982\u09b2\u09be \u09b2\u09c7\u0996\u09be\u09b0 \u09ab\u09a8\u09cd\u099f\u0983**\nTable*3 _black _2px\nAdarshaLipi, Anandapatra, Basundhara, Chandrabati, Ekush, Ekushey, Lipi, Lekhan, Falgun, Modhumati, Karnaphuli, Rinkiy, Sulekha, Saroda, Susrhree, Sutonny MJ\nTable*end\n\n**Some Shortcuts**\nTable*2 _black _2px\nCtrl+F = search, ctrl+s = save\nTable*end\n\n- Which of the following is used for close a tab on a browser? Ctrl +W\n- What is the shortcut key to open the Open dialog box? -> Ctrl + F12",
           ""
         ],
         [
           "A4 \u09b8\u09be\u0987\u099c\u09c7\u09b0 \u0995\u09be\u0997\u099c\u09c7\u09b0 \u09ae\u09be\u09aa \u0995\u09a4? \u09ee.\u09e8\u09ed \u00d7 \u09e7\u09e7.\u09ec\u09ef\n\u0995\u09be\u0997\u099c\u09c7\u09b0 \u09a8\u09be\u09ae\nLetter = 8.5*11\nLegal = 8.5*14",
+          ""
+        ],
+        [
+          "All of the following are examples of real security and privacy risks EXCEPT? -> Spam",
           ""
         ]
       ]
