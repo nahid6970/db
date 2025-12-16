@@ -7752,8 +7752,9 @@
   {
     "name": "my markdown",
     "group": "code",
+    "url": "",
     "default_type": "text",
-    "note": "##text##  = big text\n**text** = bold text\n@@text@@ = italic text\n__text__ = underline\n- text = list 1\n-- text = list 2\n--- text = list 3\n----- = adds a separator horizontal line between different contents",
+    "note": "make a study note for this\nmd syntex formet is a bit different here is how i use them\n\n##text##  = big text\n**text** = bold text\n@@text@@ = italic text\n__text__ = underline\n- text = list 1\n-- text = list 2\n--- text = list 3\n----- = adds a separator horizontal line between different contents",
     "click_action": "note",
     "collapsible": true,
     "display_style": "flex",
