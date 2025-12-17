@@ -3243,5 +3243,23 @@
                 "notify": "seen"
             }
         ]
+    },
+    {
+        "id": 42,
+        "title": "Fallout",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Fallout",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Fallout - S02E01 - The Innovator WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-12-17T17:53:44.279846",
+                "notify": "seen"
+            }
+        ]
     }
 ]
