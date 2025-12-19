@@ -1,5 +1,5 @@
 {
-  "activeSheet": 78,
+  "activeSheet": 161,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -159,7 +159,8 @@
     "157": "Bangla Grammar",
     "158": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "159": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
-    "160": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
+    "160": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "161": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
   },
   "sheetSeparators": {
     "Bangla Grammar_10": true,
@@ -13768,13 +13769,13 @@
       "nickname": "where located",
       "rows": [
         [
-          ":K-A:Main Local Place |:K-A:Sub Place\nNarayangonj|Sonakanda\n\u0995\u0995\u09cd\u09b8\u09ac\u09be\u099c\u09be\u09b0|\u0995\u09c1\u09a4\u09c1\u09ac\u09a6\u09bf\u09df\u09be\n\u0996\u09be\u0997\u09dc\u09be\u099b\u09dc\u09bf|\u09b9\u09be\u09b2\u09a6\u09be \u09ad\u09cd\u09af\u09be\u09b2\u09bf\n\u099a\u099f\u09cd\u099f\u0997\u09cd\u09b0\u09be\u09ae|\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09c7\u09ad\u09be\u09b2 \u098f\u0995\u09be\u09a1\u09c7\u09ae\u09c0\n\u099a\u09be\u0981\u09aa\u09be\u0987\u09a8\u09ac\u09be\u09ac\u0997\u099e\u09cd\u099c|\u09b8\u09cb\u09a8\u09be \u09ae\u09b8\u099c\u09bf\u09a6 \u09b8\u09cd\u09a5\u09b2\u09ac\u09a8\u09cd\u09a6\u09b0\n\u09a8\u09b0\u09b8\u09bf\u0982\u09a6\u09c0 | \u0989\u09df\u09be\u09b0\u09bf \u09ac\u099f\u09c7\u09b6\u09cd\u09ac\u09b0\n\u09a8\u09cb\u09df\u09be\u0996\u09be\u09b2\u09c0|\u09ad\u09be\u09b8\u09be\u09a8 \u099a\u09b0\n\u09aa\u099f\u09c1\u09df\u09be\u0996\u09be\u09b2\u09c0 | \u0995\u09c1\u09df\u09be\u0995\u09be\u099f\u09be\n\u09ad\u09cb\u09b2\u09be|\u09ae\u09a8\u09aa\u09c1\u09b0\u09be, \u099a\u09b0 \u099c\u09b9\u09bf\u09b0\u0989\u09a6\u09cd\u09a6\u09bf\u09a8, \u099a\u09b0 \u0995\u09c1\u0995\u09b0\u09bf\u09ae\u09c1\u0995\u09b0\u09bf\n\u09b2\u09be\u09b2\u09ae\u09a8\u09bf\u09b0\u09b9\u09be\u099f | \u09a6\u09b9\u0997\u09cd\u09b0\u09be\u09ae, \u0986\u0999\u09cd\u0997\u09b0\u09aa\u09cb\u09a4\u09be\n\u09b8\u09a6\u09b0\u0998\u09be\u099f|\u09ac\u09be\u0995\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1 \u09ac\u09be\u0981\u09a7\n\u09b8\u09c1\u09a8\u09be\u09ae\u0997\u099e\u09cd\u099c|\u099f\u09be\u0999\u09cd\u0997\u09c1\u09df\u09be\u09b0 \u09b9\u09be\u0993\u09dc\n\u09b9\u09be\u09a4\u09bf\u09df\u09be|\u09a8\u09bf\u099d\u09c1\u09ae \u09a6\u09cd\u09ac\u09c0\u09aa"
+          ""
         ],
         [
-          ":K-A:Main IntPlace |:K-A:Sub Place\n\u09a4\u09c1\u09b0\u09b8\u09cd\u0995|\u099f\u09cd\u09b0\u09df \u09a8\u0997\u09b0\u09c0\n\u09a8\u09c7\u09a6\u09be\u09b0\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09b8\u09c7\u09b0 '\u09a6\u09bf \u09b9\u09c7\u0997'|\u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u0985\u09aa\u09b0\u09be\u09a7 \u09ac\u09bf\u09b7\u09df\u0995 \u0986\u09a6\u09be\u09b2\u09a4 (ICJ)\n\u09ae\u09be\u09b2\u09df\u09c7\u09b6\u09bf\u09df\u09be|\"\u09aa\u09c7\u09a8\u09be\u0982\" \u09b8\u09ae\u09c1\u09a6\u09cd\u09b0 \u09ac\u09a8\u09cd\u09a6\u09b0\n\u099c\u09be\u09aa\u09be\u09a8|\u09b8\u09be\u09aa\u09cd\u09aa\u09c7\u09b0\u09cb \u09b6\u09b9\u09b0"
+          ""
         ],
         [
-          "**\u0997\u09cd\u09b0\u09c7\u099f \u09ac\u09c7\u09b0\u09bf\u09df\u09be\u09b0 \u09b0\u09bf\u09ab \u0995\u09cb\u09a5\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4? \u0985\u09b8\u09cd\u099f\u09cd\u09b0\u09c7\u09b2\u09bf\u09df\u09be/\u09aa\u09cd\u09b0\u09b6\u09be\u09a8\u09cd\u09a4 \u09ae\u09b9\u09be\u09b8\u09be\u0997\u09b0**"
+          ""
         ]
       ]
     },
@@ -18837,32 +18838,6 @@
       ]
     },
     {
-      "name": "Country Quality",
-      "columns": [
-        {
-          "name": "A",
-          "type": "text",
-          "width": "150",
-          "color": "#ffffff",
-          "textColor": "#000000",
-          "font": "JetBrains Mono",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
-          "headerBold": true,
-          "headerItalic": false,
-          "headerCenter": false
-        }
-      ],
-      "rows": [
-        [
-          "**Countries:**\n- **Largest Country (Area):** Russia (1/8th of Earth's landmass).\n- **Largest Country in Asia:** China.\n- **Largest Country (Population):** India.\n- **Highest Population Density:** Monaco.\n- **Smallest Country (Area & Population):** Vatican City (Pope-ruled)."
-        ],
-        [
-          "**Geographical Nicknames & Facts:**\n- **Land of Thousand Islands:** Indonesia.\n- **Land of Thousand Lakes:** Finland.\n- **City of Seven Hills:** Rome.\n- **Largest Delta:** Bangladesh (Sundarbans).\n- **Queen of Islands (BD):** Bhola.\n- **Roof of the World:** Pamir Plateau.\n- **Playground of Europe (Cockpit):** Belgium.\n- **Land of Midnight Sun:** Norway.\n- **Land of Rising Sun:** Japan.\n- **Land of Sunset:** Norway.\n- **Land of Fire & Ice:** Iceland.\n- **Dark Continent:** Africa.\n- **Horn of Africa:** Somalia, Ethiopia, Eritrea, Djibouti.\n\n\u09a8\u09bf\u0989\u0987\u09df\u09b0\u09cd\u0995\n- \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09b0 \u09b0\u09be\u099c\u09a7\u09be\u09a8\u09c0 \n- \u09ac\u09bf\u0997 \u0986\u09aa\u09c7\u09b2\n\nUganda -> Pearl of Africa -> Winston Charchil\nDead Heart of Africa -> Shad/Chad"
-        ]
-      ],
-      "parentSheet": 19,
       "cellStyles": {
         "0-0": {
           "rank": 1
@@ -18871,33 +18846,105 @@
           "bgColor": "#80FFCC",
           "textColor": "#212529"
         }
-      }
-    },
-    {
-      "name": "Index",
+      },
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "18",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
           "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
+      ],
+      "name": "Country Quality",
+      "parentSheet": 19,
+      "rows": [
+        [
+          "**Countries:**\n- **Largest Country (Area):** Russia (1/8th of Earth's landmass).\n- **Largest Country in Asia:** China.\n- **Largest Country (Population):** India.\n- **Highest Population Density:** Monaco.\n- **Smallest Country (Area & Population):** Vatican City (Pope-ruled)."
+        ],
+        [
+          "**Geographical Nicknames & Facts:**\n- **Land of Thousand Islands:** Indonesia.\n- **Land of Thousand Lakes:** Finland.\n- **City of Seven Hills:** Rome.\n- **Largest Delta:** Bangladesh (Sundarbans).\n- **Queen of Islands (BD):** Bhola.\n- **Roof of the World:** Pamir Plateau.\n- **Playground of Europe (Cockpit):** Belgium.\n- **Land of Midnight Sun:** Norway.\n- **Land of Rising Sun:** Japan.\n- **Land of Sunset:** Norway.\n- **Land of Fire & Ice:** Iceland.\n- **Dark Continent:** Africa.\n- **Horn of Africa:** Somalia, Ethiopia, Eritrea, Djibouti.\n\n\u09a8\u09bf\u0989\u0987\u09df\u09b0\u09cd\u0995\n- \u09aa\u09c3\u09a5\u09bf\u09ac\u09c0\u09b0 \u09b0\u09be\u099c\u09a7\u09be\u09a8\u09c0 \n- \u09ac\u09bf\u0997 \u0986\u09aa\u09c7\u09b2\n\nUganda -> Pearl of Africa -> Winston Charchil\nDead Heart of Africa -> Shad/Chad"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
+      "name": "Index",
+      "parentSheet": 19,
       "rows": [
         [
           ""
         ]
+      ]
+    },
+    {
+      "cellStyles": {
+        "0-0": {
+          "bgColor": "#D9FFB3",
+          "textColor": "rgb(0, 0, 0)"
+        },
+        "1-0": {
+          "bgColor": "#E5F9FF",
+          "textColor": "rgb(0, 0, 0)"
+        },
+        "2-0": {
+          "bgColor": "#FFE5E5",
+          "textColor": "rgb(0, 0, 0)"
+        }
+      },
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
+        }
       ],
+      "name": "Where?",
+      "nickname": "\u0995\u09cb\u09a5\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4",
       "parentSheet": 19,
-      "cellStyles": {}
+      "rows": [
+        [
+          ":K-A:Main Local Place |:K-A:Sub Place\nNarayangonj|Sonakanda\n\u0995\u0995\u09cd\u09b8\u09ac\u09be\u099c\u09be\u09b0|\u0995\u09c1\u09a4\u09c1\u09ac\u09a6\u09bf\u09df\u09be\n\u0996\u09be\u0997\u09dc\u09be\u099b\u09dc\u09bf|\u09b9\u09be\u09b2\u09a6\u09be \u09ad\u09cd\u09af\u09be\u09b2\u09bf\n\u099a\u099f\u09cd\u099f\u0997\u09cd\u09b0\u09be\u09ae|\u09ac\u09be\u0982\u09b2\u09be\u09a6\u09c7\u09b6 \u09a8\u09c7\u09ad\u09be\u09b2 \u098f\u0995\u09be\u09a1\u09c7\u09ae\u09c0\n\u099a\u09be\u0981\u09aa\u09be\u0987\u09a8\u09ac\u09be\u09ac\u0997\u099e\u09cd\u099c|\u09b8\u09cb\u09a8\u09be \u09ae\u09b8\u099c\u09bf\u09a6 \u09b8\u09cd\u09a5\u09b2\u09ac\u09a8\u09cd\u09a6\u09b0\n\u09a8\u09b0\u09b8\u09bf\u0982\u09a6\u09c0 | \u0989\u09df\u09be\u09b0\u09bf \u09ac\u099f\u09c7\u09b6\u09cd\u09ac\u09b0\n\u09a8\u09cb\u09df\u09be\u0996\u09be\u09b2\u09c0|\u09ad\u09be\u09b8\u09be\u09a8 \u099a\u09b0\n\u09aa\u099f\u09c1\u09df\u09be\u0996\u09be\u09b2\u09c0 | \u0995\u09c1\u09df\u09be\u0995\u09be\u099f\u09be\n\u09ad\u09cb\u09b2\u09be|\u09ae\u09a8\u09aa\u09c1\u09b0\u09be, \u099a\u09b0 \u099c\u09b9\u09bf\u09b0\u0989\u09a6\u09cd\u09a6\u09bf\u09a8, \u099a\u09b0 \u0995\u09c1\u0995\u09b0\u09bf\u09ae\u09c1\u0995\u09b0\u09bf\n\u09b2\u09be\u09b2\u09ae\u09a8\u09bf\u09b0\u09b9\u09be\u099f | \u09a6\u09b9\u0997\u09cd\u09b0\u09be\u09ae, \u0986\u0999\u09cd\u0997\u09b0\u09aa\u09cb\u09a4\u09be\n\u09b8\u09a6\u09b0\u0998\u09be\u099f|\u09ac\u09be\u0995\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1 \u09ac\u09be\u0981\u09a7\n\u09b8\u09c1\u09a8\u09be\u09ae\u0997\u099e\u09cd\u099c|\u099f\u09be\u0999\u09cd\u0997\u09c1\u09df\u09be\u09b0 \u09b9\u09be\u0993\u09dc\n\u09b9\u09be\u09a4\u09bf\u09df\u09be|\u09a8\u09bf\u099d\u09c1\u09ae \u09a6\u09cd\u09ac\u09c0\u09aa"
+        ],
+        [
+          ":K-A:Main IntPlace |:K-A:Sub Place\n\u09a4\u09c1\u09b0\u09b8\u09cd\u0995|\u099f\u09cd\u09b0\u09df \u09a8\u0997\u09b0\u09c0\n\u09a8\u09c7\u09a6\u09be\u09b0\u09b2\u09cd\u09af\u09be\u09a8\u09cd\u09a1\u09b8\u09c7\u09b0 '\u09a6\u09bf \u09b9\u09c7\u0997'|\u0986\u09a8\u09cd\u09a4\u09b0\u09cd\u099c\u09be\u09a4\u09bf\u0995 \u0985\u09aa\u09b0\u09be\u09a7 \u09ac\u09bf\u09b7\u09df\u0995 \u0986\u09a6\u09be\u09b2\u09a4 (ICJ)\n\u09ae\u09be\u09b2\u09df\u09c7\u09b6\u09bf\u09df\u09be|\"\u09aa\u09c7\u09a8\u09be\u0982\" \u09b8\u09ae\u09c1\u09a6\u09cd\u09b0 \u09ac\u09a8\u09cd\u09a6\u09b0\n\u099c\u09be\u09aa\u09be\u09a8|\u09b8\u09be\u09aa\u09cd\u09aa\u09c7\u09b0\u09cb \u09b6\u09b9\u09b0"
+        ],
+        [
+          "**\u0997\u09cd\u09b0\u09c7\u099f \u09ac\u09c7\u09b0\u09bf\u09df\u09be\u09b0 \u09b0\u09bf\u09ab \u0995\u09cb\u09a5\u09be\u09df \u0985\u09ac\u09b8\u09cd\u09a5\u09bf\u09a4? \u0985\u09b8\u09cd\u099f\u09cd\u09b0\u09c7\u09b2\u09bf\u09df\u09be/\u09aa\u09cd\u09b0\u09b6\u09be\u09a8\u09cd\u09a4 \u09ae\u09b9\u09be\u09b8\u09be\u0997\u09b0**"
+        ]
+      ]
     }
   ]
 }
