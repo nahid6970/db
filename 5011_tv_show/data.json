@@ -2128,6 +2128,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 15,
+                "title": "WWE SmackDown - 2025-12-19 - SmackDown 1374 WEBRip-1080p",
+                "watched": false,
+                "added_date": "2025-12-20T21:31:56.272915",
+                "notify": "unseen"
+            },
+            {
                 "id": 14,
                 "title": "WWE SmackDown - 2025-11-21 - SmackDown 1370 HDTV-1080p",
                 "watched": true,
