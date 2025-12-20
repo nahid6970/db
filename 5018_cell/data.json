@@ -3659,13 +3659,13 @@
     },
     {
       "cellStyles": {
-        "2-0": {
-          "bgColor": "#1AFFA3",
-          "textColor": "rgb(0, 0, 0)"
-        },
         "0-0": {
           "bgColor": "#8b1313",
           "textColor": "#FFFFFF"
+        },
+        "2-0": {
+          "bgColor": "#1AFFA3",
+          "textColor": "rgb(0, 0, 0)"
         }
       },
       "columns": [
