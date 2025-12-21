@@ -18866,7 +18866,9 @@
     {
       "cellStyles": {
         "0-0": {
-          "rank": 1
+          "rank": 1,
+          "bgColor": "#005FB3",
+          "textColor": "#FFFFFF"
         },
         "1-0": {
           "bgColor": "#80FFCC",
