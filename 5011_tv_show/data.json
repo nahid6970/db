@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 26,
+                "title": "One Piece - s22e69 - [1154] - The Truth Behind the Secret Plan - Vegapunk Claims Victory WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2025-12-21T23:23:51.692382",
+                "notify": "unseen"
+            },
+            {
                 "id": 25,
                 "title": "One Piece - s22e68 - [1153] - The Upheaval of an Era! The Color of the Supreme King That Leads Luffy WEBDL-1080p - [Erai-raws]",
                 "watched": true,
@@ -3039,6 +3046,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 15,
+                "title": "One-Punch Man - S03E11 - Top Dragons WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-12-21T23:23:51.702564",
+                "notify": "unseen"
+            },
             {
                 "id": 14,
                 "title": "One-Punch Man - S03E10 - Immortal Bloodbath WEBDL-1080p Proper",
