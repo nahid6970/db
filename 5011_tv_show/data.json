@@ -1806,7 +1806,7 @@
         "id": 21,
         "title": "The Wheel of Time",
         "year": "2021",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/355730/posters/67ab7aec64d05.jpg",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/355730/posters/68fe875b99a06.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\The Wheel of Time",
         "episodes": [
             {
@@ -1859,7 +1859,8 @@
             }
         ],
         "rating": null,
-        "status": "Ended"
+        "status": "Ended",
+        "sonarr_url": ""
     },
     {
         "id": 22,
@@ -2130,9 +2131,9 @@
             {
                 "id": 15,
                 "title": "WWE SmackDown - 2025-12-19 - SmackDown 1374 WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-12-20T21:31:56.272915",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 14,
@@ -2844,7 +2845,7 @@
                 "title": "SPY x FAMILY - s03e12 - [49] - BATTLE TO THE DEATH IN THE SEWERS WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2025-12-21T00:44:36.704590",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 12,
@@ -3223,7 +3224,7 @@
         "id": 41,
         "title": "Stranger Things",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/posters/305288-4.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Stranger Things",
         "rating": null,
         "status": "Continuing",
@@ -3256,13 +3257,14 @@
                 "added_date": "2025-11-27T10:10:08.482740",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 42,
         "title": "Fallout",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/416744/posters/656c96bea0c11.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Fallout",
         "rating": null,
         "status": "Continuing",
@@ -3270,10 +3272,11 @@
             {
                 "id": 1,
                 "title": "Fallout - S02E01 - The Innovator WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2025-12-17T17:53:44.279846",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
