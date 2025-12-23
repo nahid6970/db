@@ -19079,16 +19079,28 @@
       "cellStyles": {
         "0-0": {
           "bgColor": "#D9FFB3",
+          "border": true,
+          "borderColor": "#000000",
+          "borderStyle": "solid",
+          "borderWidth": "5px",
           "rank": 1,
           "textColor": "#212529"
         },
         "1-0": {
           "bgColor": "#C2FF80",
+          "border": true,
+          "borderColor": "#000000",
+          "borderStyle": "solid",
+          "borderWidth": "5px",
           "rank": 2,
           "textColor": "rgb(0, 0, 0)"
         },
         "2-0": {
           "bgColor": "#ABFF4D",
+          "border": true,
+          "borderColor": "#000000",
+          "borderStyle": "solid",
+          "borderWidth": "5px",
           "rank": 3,
           "textColor": "rgb(0, 0, 0)"
         },
