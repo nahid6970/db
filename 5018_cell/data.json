@@ -12348,31 +12348,31 @@
       ]
     },
     {
-      "name": "\u09ac\u09c0\u099c\u0997\u09a3\u09bf\u09a4 (Algebra)",
+      "cellStyles": {},
       "columns": [
         {
-          "name": "A",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#f8f9fa",
-          "headerTextColor": "#333333",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
+      "mergedCells": {},
+      "name": "\u09ac\u09c0\u099c\u0997\u09a3\u09bf\u09a4 (Algebra)",
+      "nickname": "",
       "rows": [
         [
-          "\\(x^{2}-8x+16+y^{2}-8y\\) \u098f\u09b0 \u09b8\u0999\u09cd\u0997\u09c7 \u0995\u09a4 \u09af\u09cb\u0997 \u0995\u09b0\u09b2\u09c7 \u09af\u09cb\u0997\u09ab\u09b2 \u098f\u0995\u099f\u09bf * \u0995\u09a4 \u09af\u09cb\u0997 \u0995\u09b0\u09b2\u09c7 \u09aa\u09c2\u09b0\u09cd\u09a3\u09ac\u09b0\u09cd\u0997 \u09b9\u09ac\u09c7?"
+          "\\(x^{2}-8x+16+y^{2}-8y\\) \u098f\u09b0 \u09b8\u0999\u09cd\u0997\u09c7 \u0995\u09a4 \u09af\u09cb\u0997 \u0995\u09b0\u09b2\u09c7 \u09af\u09cb\u0997\u09ab\u09b2 \u098f\u0995\u099f\u09bf * \u0995\u09a4 \u09af\u09cb\u0997 \u0995\u09b0\u09b2\u09c7 \u09aa\u09c2\u09b0\u09cd\u09a3\u09ac\u09b0\u09cd\u0997 \u09b9\u09ac\u09c7?\n{link:https://youtu.be/I-E12L_jau0?t=348}@@Link@@{/}\n\np-\u098f\u09b0 \u09ae\u09be\u09a8 \u0995\u09a4 \u09b9\u09b2\u09c7 4x\u00b2 - px + 9 \u098f\u0995\u099f\u09bf \u09aa\u09c2\u09b0\u09cd\u09a3 \u09ac\u09b0\u09cd\u0997 \u09b9\u09ac\u09c7?\n{link:https://youtu.be/I-E12L_jau0?t=520}@@Link@@{/}"
         ]
-      ],
-      "cellStyles": {},
-      "mergedCells": {},
-      "nickname": ""
+      ]
     },
     {
       "cellStyles": {
