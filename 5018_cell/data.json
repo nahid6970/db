@@ -11601,18 +11601,18 @@
       },
       "columns": [
         {
-          "name": "Math",
-          "type": "text",
-          "width": "150",
           "color": "#ffffff",
-          "textColor": "#000000",
           "font": "JetBrains Mono",
           "fontSize": "20",
           "headerBgColor": "#000000",
-          "headerTextColor": "#ffffff",
           "headerBold": true,
+          "headerCenter": false,
           "headerItalic": false,
-          "headerCenter": false
+          "headerTextColor": "#ffffff",
+          "name": "Math",
+          "textColor": "#000000",
+          "type": "text",
+          "width": "150"
         }
       ],
       "name": "Math Note + QNA",
