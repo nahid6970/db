@@ -3265,6 +3265,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "Stranger Things - S05E05 - Chapter Five - Shock Jock WEBDL-1080p",
+                "watched": false,
+                "added_date": "2025-12-26T13:16:03.241483",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "Stranger Things - S05E04 - Chapter Four - Sorcerer WEBDL-1080p",
                 "watched": false,
