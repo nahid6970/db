@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 18,
+                "title": "The Rookie - S08E01 - Czech Mate HDTV-720p",
+                "watched": false,
+                "added_date": "2026-01-07T18:36:43.835206",
+                "notify": "unseen"
+            },
+            {
                 "id": 17,
                 "title": "The Rookie - S07E18 - The Good, the Bad, and the Oscar HDTV-720p",
                 "watched": false,
@@ -3299,6 +3306,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 8,
+                "title": "Stranger Things - S05E08 - Chapter Eight - The Rightside Up WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-01-07T18:36:43.990233",
+                "notify": "unseen"
+            },
             {
                 "id": 7,
                 "title": "Stranger Things - S05E07 - Chapter Seven - The Bridge WEBDL-1080p",
