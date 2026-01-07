@@ -1,5 +1,5 @@
 {
-  "activeSheet": 175,
+  "activeSheet": 181,
   "categories": [
     "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
     "Literature",
@@ -179,7 +179,8 @@
     "177": "Bangla Grammar",
     "178": "English Grammar",
     "179": "English Grammar",
-    "180": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8"
+    "180": "\u09b8\u09be\u09a7\u09be\u09b0\u09a3 \u099c\u09cd\u099e\u09be\u09a8",
+    "181": "Bangla Grammar"
   },
   "sheetSeparators": {
     "Bangla Grammar_11": true,
@@ -10709,31 +10710,12 @@
           "textColor": "#000000",
           "type": "text",
           "width": "150"
-        },
-        {
-          "color": "#ffffff",
-          "font": "",
-          "fontSize": "18",
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "B",
-          "textColor": "#000000",
-          "type": "text",
-          "width": "1"
         }
       ],
       "name": "\u0989\u09aa\u09b8\u09b0\u09cd\u0997",
       "nickname": "uposorgo",
       "rows": [
         [
-          "\u0996\u09be\u0981\u099f\u09bf \u09ac\u09be\u0982\u09b2\u09be \u0989\u09aa\u09b8\u09b0\u09cd\u0997 - \u09e8\u09e7\u099f\u09bf\n\u0995\u09cb\u09a8 \u0989\u09aa\u09b8\u09b0\u09cd\u0997\u0997\u09c1\u09b2\u09cb \u0996\u09be\u0981\u099f\u09bf \u09ac\u09be\u0982\u09b2\u09be \u0993 \u09a4\u09ce\u09b8\u09ae \u0989\u09ad\u09df \u09ad\u09be\u09b7\u09be\u09df \u0986\u099b\u09c7? **\u0986, \u09b8\u09c1, \u09ac\u09bf, \u09a8\u09bf**",
-          ""
-        ],
-        [
-          "\u09b8\u0982\u09b8\u09cd\u0995\u09c3\u09a4: \u09aa\u09cd\u09b0\u09a4\u09bf",
           ""
         ]
       ]
@@ -19486,6 +19468,33 @@
           "K-----\n##SDGs and Bangladesh##\nK-----\n__**Key Achievements of Bangladesh:**__\n- **Poverty Reduction (SDG 1):** Significant progress has been made, with the extreme poverty rate falling from 12.9% in 2016 to approximately 5.6% by 2022. parity in primary and secondary education. Enrollment rates remain high,\n- **Quality Education (SDG 4):** Bangladesh has successfully achieved gender exceeding 97%.\n- **Affordable and Clean Energy (SDG 7):** Massive expansion of the electricity grid has resulted in 96% of the population having access to power.\n- **Climate Action (SDG 13):** Bangladesh is often cited as a global leader in climate adaptation and disaster preparedness, being one of the few goals where progress is considered \"on track.\"\n\n\n__**Major Challenges for Bangladesh:**__\n- **Economic Inequality (SDG 10):** While the economy has grown, income inequality is rising, and regional disparities persist between urban and rural areas.\n- **Institutional Strength (SDG 16):** Progress in \"Peace, Justice, and Strong Institutions\" is currently regressing. Challenges include corruption, lack of transparency, and weaknesses in the banking sector.\n- **Gender Equality (SDG 5):** Despite parity in schools, issues like child marriage and low female labor force participation remain significant hurdles.\n- **Data Gaps:** A major obstacle to monitoring progress is the \"paucity of data.\" Official trackers often lack up-to-date information for nearly half of the required indicators.\n\nBangladesh's performance in achieving the SDGs is marked by significant early progress in poverty reduction (SDG 1), quality education (SDG 4), and near-universal electricity access (SDG 7). The country has earned international recognition as a leader in climate adaptation (SDG 13) and for achieving gender parity in primary and secondary school enrollment. However, recent global reports indicate a slip in rankings, with Bangladesh now placing 114th globally as progress stagnates in areas like reduced inequalities and decent work. Major challenges persist in strengthening institutional transparency (SDG 16) and addressing rising income disparities that threaten the \"Leave No One Behind\" principle. As the 2030 deadline approaches, the government is prioritizing 39+1 National Priority Targets to navigate the economic shifts associated with its upcoming LDC graduation."
         ]
       ]
+    },
+    {
+      "name": "\u0989\u09aa\u09b8\u09b0\u09cd\u0997",
+      "columns": [
+        {
+          "name": "A",
+          "type": "text",
+          "width": "150",
+          "color": "#ffffff",
+          "textColor": "#000000",
+          "font": "JetBrains Mono",
+          "fontSize": "20",
+          "headerBgColor": "#f8f9fa",
+          "headerTextColor": "#333333",
+          "headerBold": true,
+          "headerItalic": false,
+          "headerCenter": false
+        }
+      ],
+      "rows": [
+        [
+          "\u0996\u09be\u0981\u099f\u09bf \u09ac\u09be\u0982\u09b2\u09be \u0989\u09aa\u09b8\u09b0\u09cd\u0997 - \u09e8\u09e7\u099f\u09bf\n\n\u0995\u09cb\u09a8 \u0989\u09aa\u09b8\u09b0\u09cd\u0997\u0997\u09c1\u09b2\u09cb \u0996\u09be\u0981\u099f\u09bf \u09ac\u09be\u0982\u09b2\u09be \u0993 \u09a4\u09ce\u09b8\u09ae \u0989\u09ad\u09df \u09ad\u09be\u09b7\u09be\u09df \u0986\u099b\u09c7? **\u0986, \u09b8\u09c1, \u09ac\u09bf, \u09a8\u09bf**\n\n@@\u09ab\u09be\u09b0\u09b8\u09bf \u0989\u09aa\u09b8\u09b0\u09cd\u0997 \u09ae\u09a8\u09c7 \u09b0\u09be\u0996\u09be\u09b0 \u099f\u09c7\u0995\u09a8\u09bf\u0995:@@ \"\u09ac\u09ac\u09c7 \u09ac\u09b0\u09ab\u09bf \u09a8\u09be\u0996\u09cb\u09b8 \u09ac\u09a6\u09a8\u09bf\u09ae \u09a6\u09b0\u0995\u09be\u09b0 \u0995\u09ae\"\n\n\u09b8\u0982\u09b8\u09cd\u0995\u09c3\u09a4: \u09aa\u09cd\u09b0\u09a4\u09bf"
+        ]
+      ],
+      "parentSheet": 33,
+      "cellStyles": {},
+      "nickname": ""
     }
   ]
 }
