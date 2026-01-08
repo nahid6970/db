@@ -3397,5 +3397,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 43,
+        "title": "Fate+strange Fake",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Fate+strange Fake",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Fate+strange Fake - S01E01 - The Heroic Spirit Incident WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-01-08T10:02:41.306469",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
