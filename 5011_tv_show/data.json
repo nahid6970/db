@@ -3379,7 +3379,7 @@
                 "title": "Fallout - S02E04 - The Demon in the Snow WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-01-08T16:07:07.428470",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
@@ -3409,7 +3409,7 @@
         "id": 43,
         "title": "Fate+strange Fake",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/436779/posters/6774f2c56ff96.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Fate+strange Fake",
         "rating": null,
         "status": "Continuing",
@@ -3419,26 +3419,35 @@
                 "title": "Fate+strange Fake - S01E01 - The Heroic Spirit Incident WEBRip-1080p",
                 "watched": false,
                 "added_date": "2026-01-08T10:02:41.306469",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": "http://192.168.0.101:8989/series/fatestrange-fake"
     },
     {
         "id": 44,
         "title": "Jujutsu Kaisen",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/series/377543/posters/5ecb7bcccc897.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Jujutsu Kaisen",
         "rating": null,
         "status": "Continuing",
         "episodes": [
             {
+                "id": 2,
+                "title": "JUJUTSU KAISEN - s03e01 - [48] - Execution WEBDL-1080p - [ToonsHub]",
+                "watched": true,
+                "added_date": "2026-01-09T18:35:55.617459",
+                "notify": "unseen"
+            },
+            {
                 "id": 1,
                 "title": "JUJUTSU KAISEN - s03e02 - [49] - One More Time WEBDL-1080p - [ToonsHub]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-09T10:05:35.643576",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
