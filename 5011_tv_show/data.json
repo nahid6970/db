@@ -3422,5 +3422,23 @@
                 "notify": "unseen"
             }
         ]
+    },
+    {
+        "id": 44,
+        "title": "Jujutsu Kaisen",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Jujutsu Kaisen",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "JUJUTSU KAISEN - s03e02 - [49] - One More Time WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-01-09T10:05:35.643576",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
