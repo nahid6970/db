@@ -10797,8 +10797,8 @@
     {
       "cellStyles": {
         "0-0": {
-          "rank": 1,
-          "bold": false
+          "bold": false,
+          "rank": 1
         },
         "1-0": {
           "rank": 2
