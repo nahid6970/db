@@ -2986,6 +2986,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 14,
+                "title": "To Your Eternity - s03e14 - [54] - Where One Belongs HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-01-10T23:14:10.916000",
+                "notify": "seen"
+            },
+            {
                 "id": 13,
                 "title": "To Your Eternity - s03e13 - [53] - Number One HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -3414,6 +3421,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 2,
+                "title": "Fate+strange Fake - S01E02 - Ensemble VS Pretense WEBDL-720p",
+                "watched": false,
+                "added_date": "2026-01-11T04:14:10.910029",
+                "notify": "seen"
+            },
             {
                 "id": 1,
                 "title": "Fate+strange Fake - S01E01 - The Heroic Spirit Incident WEBRip-1080p",
