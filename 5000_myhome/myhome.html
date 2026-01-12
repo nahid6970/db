@@ -11,50 +11,82 @@
 
 /* Sidebar container - always expanded */
 
-.sidebar-container {
-  position: relative;
-  width: 100%;
+/* Topbar - Cyberpunk styling */
+.topbar {
+  position: fixed;
+  /* Keeps it strictly visible on screen */
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Robust centering for fixed element */
+  width: fit-content;
+  max-width: 95%;
+  /* Prevent overflowing on small screens */
+  margin: 0 auto;
+  /* Reset auto margin in favor of transform centering */
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.8);
-  padding: 10px;
+  background-color: #0a0a0f;
+  /* Dark cyberpunk background */
+  padding: 10px 20px;
+  /* Adjusted padding */
   box-sizing: border-box;
-  margin-top: 0;
+  border: 2px solid #00ff41;
+  /* Full Neon Green border */
+  border-radius: 0px;
+  /* Sharp corners for cyberpunk look */
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+  /* Neon glow */
 }
 
 
 
 /* Always show sidebar content */
 
-.sidebar-container .top-center-controls {
+/* Always show topbar content */
+/* Always show topbar content */
+.topbar .top-center-controls {
   display: flex;
   flex-direction: row;
-  justify-content: center; /* Center the content */
+  justify-content: center;
+  /* Center the content */
   align-items: center;
-  gap: 8px;
+  gap: 15px;
+  /* Increased gap */
   width: 100%;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding-top:5px;
+  overflow: visible;
+  /* Allow content to extend without scrollbars */
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 
 
 /* Adjust main content to make space for sidebar */
 
+/* Adjust main content to make space for sidebar */
 .flex-container2 {
-  margin-top: 0px; /* Space for the sidebar */
-  padding-top: 20px; /* Additional padding */
+  margin-top: 80px;
+  /* Space for the floating fixed topbar */
+  padding-top: 20px;
+  /* Additional padding */
 }
 
 /* Adjust button styling for sidebar - keep original styling */
+/* Adjust button styling for topbar - Cyberpunk style */
+/* Adjust button styling for topbar - Cyberpunk style */
 .top-center-controls .add-button {
-  background-color: #ffffff !important;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #1a1a20 !important;
+  color: #00ff41 !important;
+  /* Neon Green text */
+  border: 1px solid #00ff41;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
+  transition: all 0.3s ease;
 }
 
 .top-center-controls .add-button:hover {
-  background-color: #e0e0e0 !important;
+  background-color: #00ff41 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
 }
 
 
@@ -349,7 +381,7 @@ img {
   /* Green color on hover */
 }
 
-  .edit-button,
+.edit-button,
 .delete-button {
   display: none;
   /* Hidden by default */
@@ -451,6 +483,7 @@ button[type="submit"] {
 
 /* Desktop only: Move submit buttons to left sidebar */
 @media (min-width: 769px) {
+
   /* Add padding to make room for left button */
   #add-link-popup .Menu,
   #edit-link-popup .Menu,
@@ -1063,16 +1096,12 @@ div.toggle-container {
   transform: scale(1.05) !important;
 }
 
-/* Force override for custom buttons */
-a.add-button.custom-sidebar-button[style*="background-color"] {
-  /* This will be overridden by inline styles */
-}
-
-/* Sidebar add button styling - black background with higher specificity */
+/* Sidebar add button styling - Cyberpunk style */
 .top-center-controls .add-button.sidebar-add-button {
-  background-color: #000000 !important;
-  color: #ffffff !important;
-  border: 1px solid #333333 !important;
+  background-color: #1a1a20 !important;
+  color: #00ff41 !important;
+  border: 1px solid #00ff41 !important;
+  box-shadow: 0 0 5px rgba(0, 255, 65, 0.2);
   min-width: 40px;
   min-height: 40px;
   display: flex;
@@ -1193,13 +1222,18 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 }
 
 /* Mobile touch improvements */
-.link-item, .group_type_top, .group_type_box {
-  -webkit-touch-callout: none; /* Disable iOS callout */
-  -webkit-user-select: none; /* Disable text selection */
+.link-item,
+.group_type_top,
+.group_type_box {
+  -webkit-touch-callout: none;
+  /* Disable iOS callout */
+  -webkit-user-select: none;
+  /* Disable text selection */
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: transparent; /* Remove tap highlight */
+  -webkit-tap-highlight-color: transparent;
+  /* Remove tap highlight */
 }
 
 /* Long press visual feedback */
@@ -1218,6 +1252,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
 /* Mobile styles */
 @media (max-width: 768px) {
+
   /* Popup container adjustments for mobile */
   .popup-container .Menu,
   #add-link-popup .Menu,
@@ -1253,15 +1288,15 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   /* Stack name and group fields on mobile */
-  #add-link-form > div[style*="flex"]:first-child,
-  #edit-link-form > div[style*="flex"]:first-child {
+  #add-link-form>div[style*="flex"]:first-child,
+  #edit-link-form>div[style*="flex"]:first-child {
     flex-direction: column;
     gap: 10px;
   }
 
   /* Stack font family and font size fields on mobile */
-  #add-link-form > div[style*="flex"] input[id*="font"],
-  #edit-link-form > div[style*="flex"] input[id*="font"] {
+  #add-link-form>div[style*="flex"] input[id*="font"],
+  #edit-link-form>div[style*="flex"] input[id*="font"] {
     width: 100%;
   }
 
@@ -1300,30 +1335,30 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   /* Keep Click Action and Type sections side by side on mobile */
-  #add-link-form > div[style*="gap: 20px"],
-  #edit-link-form > div[style*="gap: 20px"] {
+  #add-link-form>div[style*="gap: 20px"],
+  #edit-link-form>div[style*="gap: 20px"] {
     flex-direction: row !important;
     gap: 10px !important;
   }
 
   /* Make radio button sections full width on mobile */
-  #add-link-form > div[style*="gap: 20px"] > div,
-  #edit-link-form > div[style*="gap: 20px"] > div {
+  #add-link-form>div[style*="gap: 20px"]>div,
+  #edit-link-form>div[style*="gap: 20px"]>div {
     width: 100% !important;
     max-width: 100% !important;
   }
 
   /* Ensure the inner flex containers for radio buttons are full width */
-  #add-link-form > div[style*="gap: 20px"] > div > div,
-  #edit-link-form > div[style*="gap: 20px"] > div > div {
+  #add-link-form>div[style*="gap: 20px"]>div>div,
+  #edit-link-form>div[style*="gap: 20px"]>div>div {
     width: 100% !important;
     display: flex !important;
     flex-direction: column !important;
   }
 
   /* Ensure all form divs with flex are full width */
-  #add-link-form > div[style*="display: flex"],
-  #edit-link-form > div[style*="display: flex"] {
+  #add-link-form>div[style*="display: flex"],
+  #edit-link-form>div[style*="display: flex"] {
     width: 100% !important;
     box-sizing: border-box;
   }
@@ -1348,22 +1383,22 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   /* Align Type radio buttons - more specific selectors - radio on left */
-  #add-link-form > div[style*="gap: 20px"] label,
-  #edit-link-form > div[style*="gap: 20px"] label {
+  #add-link-form>div[style*="gap: 20px"] label,
+  #edit-link-form>div[style*="gap: 20px"] label {
     display: flex !important;
     align-items: center !important;
     gap: 10px !important;
     width: 100% !important;
   }
 
-  #add-link-form > div[style*="gap: 20px"] label span,
-  #edit-link-form > div[style*="gap: 20px"] label span {
+  #add-link-form>div[style*="gap: 20px"] label span,
+  #edit-link-form>div[style*="gap: 20px"] label span {
     text-align: left !important;
     min-width: 0 !important;
   }
 
-  #add-link-form > div[style*="gap: 20px"] label input[type="radio"],
-  #edit-link-form > div[style*="gap: 20px"] label input[type="radio"] {
+  #add-link-form>div[style*="gap: 20px"] label input[type="radio"],
+  #edit-link-form>div[style*="gap: 20px"] label input[type="radio"] {
     flex-shrink: 0 !important;
     margin: 0 !important;
     width: auto !important;
@@ -1371,8 +1406,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   }
 
   /* Target the Type section specifically */
-  #add-link-form > div[style*="gap: 20px"] > div[style*="flex: 1"] label,
-  #edit-link-form > div[style*="gap: 20px"] > div[style*="flex: 1"] label {
+  #add-link-form>div[style*="gap: 20px"]>div[style*="flex: 1"] label,
+  #edit-link-form>div[style*="gap: 20px"]>div[style*="flex: 1"] label {
     display: flex !important;
     align-items: center !important;
   }
@@ -1400,7 +1435,8 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
   .flex-container2 {
     padding: 0px;
     border-radius: 15px;
-    margin-top: 60px; /* Height of the sidebar */
+    margin-top: 60px;
+    /* Height of the sidebar */
   }
 
   .toggle-container span {
@@ -1457,7 +1493,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     max-height: 30px;
     flex-shrink: 0;
   }
-  
+
   /* Ensure popup doesn't go beyond screen */
   .popup-container {
     align-items: center !important;
@@ -1465,7 +1501,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     padding: 15px !important;
     box-sizing: border-box;
   }
-  
+
   /* Mobile adjustments for sidebar */
   .sidebar-container {
     height: auto;
@@ -1474,7 +1510,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     max-height: 200px;
     overflow-y: auto;
   }
-  
+
   /* Ensure sidebar buttons are visible on mobile */
   .top-center-controls {
     display: flex !important;
@@ -1488,22 +1524,23 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
     overflow-y: hidden !important;
     padding: 5px 0 !important;
   }
-  
+
   .top-center-controls .notification-button-container {
     flex-shrink: 0;
     margin: 2px;
   }
-  
+
   .flex-container2 {
-    margin-top: 60px; /* Height of the mobile sidebar */
+    margin-top: 60px;
+    /* Height of the mobile sidebar */
   }
-}
-</style>
+}</style>
+  <link rel="stylesheet" href="../static/cyberpunk-popup.css">
 </head>
 
 <body>
 
-  <div class="sidebar-container" id="sidebar-container">
+  <div class="topbar" id="topbar">
 
     <div class="top-center-controls" id="sidebar-buttons-container">
 
@@ -1572,13 +1609,14 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
 
       .notification-badge {
         position: absolute;
-        top: -8px;
-        right: -8px;
-        background-color: #ff4444;
+        top: -2px;
+        right: -2px;
+        background-color: #ff0055;
+        /* Neon pink */
         color: white;
         border-radius: 50%;
-        padding: 2px 6px;
-        font-size: 12px;
+        padding: 2px 5px;
+        font-size: 10px;
         font-weight: bold;
         min-width: 18px;
         text-align: center;
@@ -1899,6 +1937,12 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
               <input type="text" id="link-name" placeholder="Name" style="flex: 1;">
               <input type="text" id="link-group" placeholder="Group (optional)" style="flex: 1;">
             </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="link-hidden">
+                <input type="checkbox" id="link-hidden">
+                Hide this item
+              </label>
+            </div>
             <div id="urls-container">
               <div class="url-input-group" style="display: flex; gap: 5px; align-items: center; margin-bottom: 5px;">
                 <input type="url" id="link-url" placeholder="URL" style="flex: 1;">
@@ -1980,12 +2024,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             </div>
             <input type="text" id="link-border-radius" placeholder="Border Radius">
             <input type="text" id="link-title" placeholder="Title (for tooltip)">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <label for="link-hidden">
-                <input type="checkbox" id="link-hidden">
-                Hide this item
-              </label>
-            </div>
+
             <button type="submit">Add Link</button>
           </form>
         </div>
@@ -2013,6 +2052,12 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             <div style="display: flex; gap: 10px;">
               <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
               <input type="text" id="edit-link-group" placeholder="Group (optional)" style="flex: 1;">
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <label for="edit-link-hidden">
+                <input type="checkbox" id="edit-link-hidden">
+                Hide this item
+              </label>
             </div>
             <div id="edit-urls-container">
               <div class="url-input-group" style="display: flex; gap: 5px; align-items: center; margin-bottom: 5px;">
@@ -2095,12 +2140,7 @@ a.add-button.custom-sidebar-button[style*="background-color"] {
             </div>
             <input type="text" id="edit-link-border-radius" placeholder="Border Radius">
             <input type="text" id="edit-link-title" placeholder="Title (for tooltip)">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <label for="edit-link-hidden">
-                <input type="checkbox" id="edit-link-hidden">
-                Hide this item
-              </label>
-            </div>
+
             <button type="submit">Save Changes</button>
           </form>
         </div>
@@ -6032,7 +6072,7 @@ let sidebarButtons = [];
 let sidebarEditMode = false;
 
 // Load sidebar buttons on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     setupSidebarToggle(); // Setup toggle first
     loadSidebarButtons(); // Then load buttons
     setupSidebarEventListeners(); // Finally setup other listeners
@@ -6054,12 +6094,12 @@ function loadSidebarButtons() {
 
 // Setup sidebar - always expanded, no toggle functionality
 function setupSidebarToggle() {
-    const sidebarContainer = document.getElementById('sidebar-container');
+    const sidebarContainer = document.getElementById('topbar');
     const sidebarToggle = document.getElementById('sidebar-toggle');
-    
+
     // Always keep sidebar expanded
-    sidebarContainer.classList.add('expanded');
-    
+    if (sidebarContainer) sidebarContainer.classList.add('expanded');
+
     // Hide the toggle button since we don't need it
     if (sidebarToggle) {
         sidebarToggle.style.display = 'none';
@@ -6094,13 +6134,13 @@ function renderSidebarButtons() {
 function createSidebarButtonElement(button, index) {
     const buttonContainer = document.createElement('div');
     buttonContainer.className = 'notification-button-container';
-    
+
     // Create the button element
     const buttonElement = document.createElement('a');
     buttonElement.className = 'add-button custom-sidebar-button';
     buttonElement.title = button.name;
     buttonElement.id = button.id;
-    
+
     // Apply custom styling using both CSS custom properties and direct styles
     const textColor = button.text_color || '#000000';
     const bgColor = button.bg_color || '#ffffff';
@@ -6108,9 +6148,9 @@ function createSidebarButtonElement(button, index) {
     const borderColor = button.border_color || '#cccccc';
     const borderRadius = button.border_radius || '4px';
     const fontSize = button.font_size || '16px';
-    
+
     console.log(`Applying styles to ${button.name}: text=${textColor}, bg=${bgColor}, hover=${hoverColor}, border=${borderColor}, radius=${borderRadius}, fontSize=${fontSize}`);
-    
+
     // Set CSS custom properties
     buttonElement.style.setProperty('--custom-text-color', textColor);
     buttonElement.style.setProperty('--custom-bg-color', bgColor);
@@ -6118,23 +6158,23 @@ function createSidebarButtonElement(button, index) {
     buttonElement.style.setProperty('--custom-border-color', borderColor);
     buttonElement.style.setProperty('--custom-border-radius', borderRadius);
     buttonElement.style.setProperty('--custom-font-size', fontSize);
-    
+
     // Also set direct styles as fallback
     buttonElement.style.setProperty('color', textColor, 'important');
     buttonElement.style.setProperty('background-color', bgColor, 'important');
     buttonElement.style.setProperty('border', `2px solid ${borderColor}`, 'important');
     buttonElement.style.setProperty('border-radius', borderRadius, 'important');
     buttonElement.style.setProperty('font-size', fontSize, 'important');
-    
+
     // Add hover event listeners for guaranteed hover effect
-    buttonElement.addEventListener('mouseenter', function() {
+    buttonElement.addEventListener('mouseenter', function () {
         this.style.setProperty('background-color', hoverColor, 'important');
     });
-    
-    buttonElement.addEventListener('mouseleave', function() {
+
+    buttonElement.addEventListener('mouseleave', function () {
         this.style.setProperty('background-color', bgColor, 'important');
     });
-    
+
     // Set content based on display type
     if (button.display_type === 'image' && button.img_src) {
         const img = document.createElement('img');
@@ -6148,7 +6188,7 @@ function createSidebarButtonElement(button, index) {
         icon.className = button.icon_class || 'nf nf-fa-question';
         buttonElement.appendChild(icon);
     }
-    
+
     // Set up click behavior
     if (button.has_notification) {
         buttonElement.href = '#';
@@ -6156,9 +6196,9 @@ function createSidebarButtonElement(button, index) {
         buttonElement.href = button.url;
         buttonElement.target = '_blank';
     }
-    
+
     buttonContainer.appendChild(buttonElement);
-    
+
     // Add notification badge if needed
     if (button.has_notification) {
         const badge = document.createElement('span');
@@ -6168,7 +6208,7 @@ function createSidebarButtonElement(button, index) {
         badge.textContent = '0';
         buttonContainer.appendChild(badge);
     }
-    
+
     // Add edit and delete buttons (hidden by default)
     const editButtons = document.createElement('div');
     editButtons.className = 'sidebar-edit-buttons';
@@ -6178,14 +6218,14 @@ function createSidebarButtonElement(button, index) {
         <button class="delete-sidebar-btn" onclick="deleteSidebarButton(${index})" title="Delete">🗑️</button>
     `;
     buttonContainer.appendChild(editButtons);
-    
+
     return buttonContainer;
 }
 
 // Setup event listeners for sidebar functionality
 function setupSidebarEventListeners() {
     // Add button click handler
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target.closest('#add-sidebar-button')) {
             e.preventDefault();
             showAddSidebarButtonPopup();
@@ -6195,7 +6235,7 @@ function setupSidebarEventListeners() {
     // Add sidebar button form submission
     const addForm = document.getElementById('add-sidebar-button-form');
     if (addForm) {
-        addForm.addEventListener('submit', function(e) {
+        addForm.addEventListener('submit', function (e) {
             e.preventDefault();
             addSidebarButton();
         });
@@ -6204,7 +6244,7 @@ function setupSidebarEventListeners() {
     // Edit sidebar button form submission
     const editForm = document.getElementById('edit-sidebar-button-form');
     if (editForm) {
-        editForm.addEventListener('submit', function(e) {
+        editForm.addEventListener('submit', function (e) {
             e.preventDefault();
             saveSidebarButtonEdit();
         });
@@ -6213,7 +6253,7 @@ function setupSidebarEventListeners() {
     // Display type handlers
     const displayTypeSelect = document.getElementById('sidebar-button-display-type');
     if (displayTypeSelect) {
-        displayTypeSelect.addEventListener('change', function() {
+        displayTypeSelect.addEventListener('change', function () {
             const iconSettings = document.getElementById('icon-settings');
             const imageSettings = document.getElementById('image-settings');
             if (this.value === 'image') {
@@ -6228,7 +6268,7 @@ function setupSidebarEventListeners() {
 
     const editDisplayTypeSelect = document.getElementById('edit-sidebar-button-display-type');
     if (editDisplayTypeSelect) {
-        editDisplayTypeSelect.addEventListener('change', function() {
+        editDisplayTypeSelect.addEventListener('change', function () {
             const iconSettings = document.getElementById('edit-icon-settings');
             const imageSettings = document.getElementById('edit-image-settings');
             if (this.value === 'image') {
@@ -6244,7 +6284,7 @@ function setupSidebarEventListeners() {
     // Notification checkbox handlers
     const notificationCheckbox = document.getElementById('sidebar-button-notification');
     if (notificationCheckbox) {
-        notificationCheckbox.addEventListener('change', function() {
+        notificationCheckbox.addEventListener('change', function () {
             const settings = document.getElementById('notification-settings');
             settings.style.display = this.checked ? 'block' : 'none';
         });
@@ -6252,7 +6292,7 @@ function setupSidebarEventListeners() {
 
     const editNotificationCheckbox = document.getElementById('edit-sidebar-button-notification');
     if (editNotificationCheckbox) {
-        editNotificationCheckbox.addEventListener('change', function() {
+        editNotificationCheckbox.addEventListener('change', function () {
             const settings = document.getElementById('edit-notification-settings');
             settings.style.display = this.checked ? 'block' : 'none';
         });
@@ -6298,11 +6338,11 @@ function setupSidebarPopupCloseHandlers() {
 function showAddSidebarButtonPopup() {
     const popup = document.getElementById('add-sidebar-button-popup');
     popup.classList.remove('hidden');
-    
+
     // Reset form
     document.getElementById('add-sidebar-button-form').reset();
     document.getElementById('notification-settings').style.display = 'none';
-    
+
     // Reset display type settings
     document.getElementById('icon-settings').style.display = 'block';
     document.getElementById('image-settings').style.display = 'none';
@@ -6323,7 +6363,7 @@ function addSidebarButton() {
     const borderRadius = document.getElementById('sidebar-button-border-radius').value;
     const fontSize = document.getElementById('sidebar-button-font-size').value;
     const hasNotification = document.getElementById('sidebar-button-notification').checked;
-    
+
     const newButton = {
         id: `custom-button-${Date.now()}`,
         name: name,
@@ -6352,23 +6392,23 @@ function addSidebarButton() {
         },
         body: JSON.stringify(newButton)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Button added successfully');
-        loadSidebarButtons(); // Reload buttons
-        document.getElementById('add-sidebar-button-popup').classList.add('hidden');
-    })
-    .catch(error => {
-        console.error('Error adding button:', error);
-        alert('Error adding button');
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Button added successfully');
+            loadSidebarButtons(); // Reload buttons
+            document.getElementById('add-sidebar-button-popup').classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Error adding button:', error);
+            alert('Error adding button');
+        });
 }
 
 // Edit sidebar button
 function editSidebarButton(index) {
     const button = sidebarButtons[index];
     const popup = document.getElementById('edit-sidebar-button-popup');
-    
+
     // Fill form with current values
     document.getElementById('edit-sidebar-button-index').value = index;
     document.getElementById('edit-sidebar-button-name').value = button.name;
@@ -6383,7 +6423,7 @@ function editSidebarButton(index) {
     document.getElementById('edit-sidebar-button-border-radius').value = button.border_radius || '';
     document.getElementById('edit-sidebar-button-font-size').value = button.font_size || '';
     document.getElementById('edit-sidebar-button-notification').checked = button.has_notification || false;
-    
+
     // Show/hide settings based on display type
     const displayType = button.display_type || 'icon';
     const iconSettings = document.getElementById('edit-icon-settings');
@@ -6395,7 +6435,7 @@ function editSidebarButton(index) {
         iconSettings.style.display = 'block';
         imageSettings.style.display = 'none';
     }
-    
+
     if (button.has_notification) {
         document.getElementById('edit-notification-settings').style.display = 'block';
         document.getElementById('edit-sidebar-button-notification-api').value = button.notification_api || '';
@@ -6403,7 +6443,7 @@ function editSidebarButton(index) {
     } else {
         document.getElementById('edit-notification-settings').style.display = 'none';
     }
-    
+
     popup.classList.remove('hidden');
 }
 
@@ -6422,7 +6462,7 @@ function saveSidebarButtonEdit() {
     const borderRadius = document.getElementById('edit-sidebar-button-border-radius').value;
     const fontSize = document.getElementById('edit-sidebar-button-font-size').value;
     const hasNotification = document.getElementById('edit-sidebar-button-notification').checked;
-    
+
     const updatedButton = {
         ...sidebarButtons[index],
         name: name,
@@ -6454,16 +6494,16 @@ function saveSidebarButtonEdit() {
         },
         body: JSON.stringify(updatedButton)
     })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Button updated successfully');
-        loadSidebarButtons(); // Reload buttons
-        document.getElementById('edit-sidebar-button-popup').classList.add('hidden');
-    })
-    .catch(error => {
-        console.error('Error updating button:', error);
-        alert('Error updating button');
-    });
+        .then(response => response.json())
+        .then(data => {
+            console.log('Button updated successfully');
+            loadSidebarButtons(); // Reload buttons
+            document.getElementById('edit-sidebar-button-popup').classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Error updating button:', error);
+            alert('Error updating button');
+        });
 }
 
 // Delete sidebar button
@@ -6473,15 +6513,15 @@ function deleteSidebarButton(index) {
         fetch(`/api/sidebar-buttons/${index}`, {
             method: 'DELETE'
         })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Button deleted successfully');
-            loadSidebarButtons(); // Reload buttons
-        })
-        .catch(error => {
-            console.error('Error deleting button:', error);
-            alert('Error deleting button');
-        });
+            .then(response => response.json())
+            .then(data => {
+                console.log('Button deleted successfully');
+                loadSidebarButtons(); // Reload buttons
+            })
+            .catch(error => {
+                console.error('Error deleting button:', error);
+                alert('Error deleting button');
+            });
     }
 }
 
@@ -6512,16 +6552,16 @@ function setupNotificationUpdates() {
 function setupButtonNotifications(button) {
     // Update notifications on page load
     updateButtonNotifications(button);
-    
+
     // Update notifications every 30 seconds
     setInterval(() => {
         updateButtonNotifications(button);
     }, 30000);
-    
+
     // Setup click handler for notification buttons
     const buttonElement = document.getElementById(button.id);
     if (buttonElement) {
-        buttonElement.addEventListener('click', function(e) {
+        buttonElement.addEventListener('click', function (e) {
             e.preventDefault();
             handleNotificationButtonClick(button);
         });
@@ -6531,13 +6571,13 @@ function setupButtonNotifications(button) {
 // Update notification badge for a button
 function updateButtonNotifications(button) {
     if (!button.notification_api) return;
-    
+
     fetch(button.notification_api)
         .then(response => response.json())
         .then(data => {
             const count = data.unseen_count || 0;
             const badge = document.getElementById(`${button.id}-notification-badge`);
-            
+
             if (badge) {
                 if (count > 0) {
                     badge.textContent = count;
@@ -6558,13 +6598,13 @@ function updateButtonNotifications(button) {
 function handleNotificationButtonClick(button) {
     const badge = document.getElementById(`${button.id}-notification-badge`);
     const count = badge ? parseInt(badge.textContent) || 0 : 0;
-    
+
     if (count === 0) {
         // No notifications, just open the URL
         window.open(button.url, '_blank');
         return;
     }
-    
+
     if (button.mark_seen_api && confirm(`Mark all ${count} items as seen?`)) {
         fetch(button.mark_seen_api, { method: 'POST' })
             .then(response => response.json())
@@ -15050,14 +15090,14 @@ async function triggerScans() {
     "url": "https://store.supercell.com/clashofclans"
   },
   {
-    "click_action": "url-1",
-    "default_type": "img",
-    "horizontal_stack": false,
-    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAVFBMVEUAAAD////n5+d/f39gYGCPj4/v7+8YGBi3t7enp6cgICAAAAA4ODhAQEDg4OAwMDCwsLAQEBDAwMCgoKDQ0NCQkJCAgID39/fw8PC/v7+Hh4dwcHBX1KkYAAAAAXRSTlMAQObYZgAAAHlJREFUeAFNzkECQEAMQ1EBaAAA7n9PkwH+qnmrBgFUGMVxkgIILkizvDCyfKGqATQtuhvqmL2cuMFA0gbDAyQGyh4YSU4wIz0oo2vGA2o0J/YDAnXFG2a6Bv+OYGEPdI6aER5KuC1a4aHYgEa3EuwLOu0XlvgAPjgByWkFiiwlxk4AAAAASUVORK5CYII=",
-    "li_height": "1%",
-    "li_width": "1%",
     "name": "Daily-Star",
-    "url": "https://www.thedailystar.net/"
+    "url": "https://www.thedailystar.net/",
+    "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAVFBMVEUAAAD////n5+d/f39gYGCPj4/v7+8YGBi3t7enp6cgICAAAAA4ODhAQEDg4OAwMDCwsLAQEBDAwMCgoKDQ0NCQkJCAgID39/fw8PC/v7+Hh4dwcHBX1KkYAAAAAXRSTlMAQObYZgAAAHlJREFUeAFNzkECQEAMQ1EBaAAA7n9PkwH+qnmrBgFUGMVxkgIILkizvDCyfKGqATQtuhvqmL2cuMFA0gbDAyQGyh4YSU4wIz0oo2vGA2o0J/YDAnXFG2a6Bv+OYGEPdI6aER5KuC1a4aHYgEa3EuwLOu0XlvgAPjgByWkFiiwlxk4AAAAASUVORK5CYII=",
+    "default_type": "img",
+    "click_action": "url-1",
+    "li_width": "1%",
+    "li_height": "1%",
+    "horizontal_stack": false
   },
   {
     "click_action": "url",
@@ -15224,7 +15264,7 @@ async function triggerScans() {
     "display_type": "image",
     "font_size": "16px",
     "has_notification": true,
-    "hover_color": "red",
+    "hover_color": "white",
     "icon_class": "nf nf-md-television_classic",
     "id": "tv-button",
     "img_src": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAEpElEQVR4Aa1XA3QlWRD9a+8ejm3bto1YY3zEtm3bdsa2bdsTrpnU1ns/eUnP/N/dwTvnNqvr3qeqaonYVl5e/kN1dfUqRGJVVdVpxCPEb/V4jDiLSK2srNTA80+StmpI2AMdpiP+RoBI/IPIrqmp6d1i4hcvXnyD5EHCxIJCwt++fftds8jd3IInX7h49SZz1Eo8fvrshqtr4GxR5LKY/O3zl+jXLl5uBNdv3Go1+dOnz0HXUAFzF+rUSWPzTXjJXdyDZ0zXUdT2l/vBpOkrobUiHj9+Clr6Uuqrv8wXZmpKa108QqapXeXZuSXPJ89YBWOWbYD+Cn8m4sLFK80mv3nrDmjobCM+qK+xiwzpdWhk0kuyvj4SgNsnmHyYX7gTqIiljSKmz1kLaRkF8P79e0HiiooKKCrZDXMX6dJv+xkHwLgF+kry8ERqQxY3hxw/GlC/YoGgoGgXE9HbMgJGr9hMHSxZYQTefhGQnJoLu3YfBFyocPnyddi99xAkpeTQdyvWbKS2w3XMoJd9PIyfrxQSFpnUVOjfZHs33et5H/YkM7uYftjTIQG+OPYzjFq5ldyLwghtU/js5O/Q1yyY3geGxKkarfSGof8Rb/5UYQAOLsop6OKTD18crYFRq7YJko/UkFPy3tZR9F5Tdzu8Ly9XJeBvsu5I7w3Uzefdew/oVBBHPZxTYMh6B0Y0avV26GcSSEGumYC1MuhnGszujx0/o3a9YOdXEwHxfItqq8yW08MJc7WgfcQ+kFyERlyog44hu2DCbA2OrcLUifjgE5AswYujfEYe3mEcp+0jDxBSlegUVMax9fGLFNo1Z4iAl3xG8UlZnGFXQ85GYvSKTcw+Oi5NSMBjIuA/PqOynfuZwz6W4YSIDyx2EGTlFAsJ+E1QwL4DR5nD3tbRzRKQm18mSsB7PqPM7CLmcNxCfbLFRE9BRHSKqCm4yGcUHBbPWVjdPLLUL8KAEo6ts1ug8CLErRDCZ2Tn6MtxSrZah9A98PmJXxkxXuOz3R9tw+0Ke+FtiIdJ6gxI8lm0TJnFhulawOjljcM7ceYaGLTZlYBcs+e97OJYYJo5TxOePX/BH4gA4BO8eaHKIC9fua+Ha5vSfDBA6iMYinvZxsKXhyph5Bqp0DqgoZiTipvixs07MGehDozQUMAXR6qhr3koIxEl4nAlHYlps9bAmbMX1Scj0vBmGOKfJpVMQzGBxCGY1UKY89kLtEFLTwpSnF8n1wBw9QimIVfHUA7zF+sxO6yq2HdLV62HW7fuqk3HDaNgSsmfPCUEzAnZeuR6/WYLGhPQjndhnTx1DmQmjvSbsYsNabIi18uYCE5Bwm2Y/XY31HADZD6EnMX08vIKLhn/6qZzryxq1pOOMBFXrt64obIkI22z1G7U/CV6/w2QejPy2PiMFhelJBISEbh7yAImU1Rr7xIwTcLXpHEF6+dqbq8l5FGxLJm0WsQUXeM6Uyz5JWKab2DUBOw5y5KtRU5e6Rs/v8gFzf41w7k0Q7xrBXklwhYD2veSljbyX4dOrBEVzSCuxuZI6k1Bgub+nqNzGxLD63/RK+pxGp+lkN6S8Nqc3/P/AWxGIK9VWdyBAAAAAElFTkSuQmCC",
