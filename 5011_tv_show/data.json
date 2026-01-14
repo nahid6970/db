@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 19,
+                "title": "The Rookie - S08E02 - Fast Andy WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-01-14T18:55:08.970762",
+                "notify": "unseen"
+            },
+            {
                 "id": 18,
                 "title": "The Rookie - S08E01 - Czech Mate HDTV-720p",
                 "watched": false,
