@@ -3389,6 +3389,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 5,
+                "title": "Fallout - S02E05 - The Wrangler WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-01-14T17:55:08.975202",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "Fallout - S02E04 - The Demon in the Snow WEBDL-1080p",
                 "watched": true,
