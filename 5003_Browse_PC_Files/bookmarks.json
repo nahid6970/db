@@ -1,0 +1,42 @@
+[
+  {
+    "name": "@JOB",
+    "path": "C:/Users/nahid//ms/msBackups/@JOB"
+  },
+  {
+    "name": "msBackups",
+    "path": "C:/Users/nahid//ms/msBackups"
+  },
+  {
+    "name": "ms",
+    "path": "C:/Users/nahid//ms"
+  },
+  {
+    "name": "flask",
+    "path": "C:/Users/nahid//ms/ms1/scripts/flask"
+  },
+  {
+    "name": "Pictures",
+    "path": "C:/Users/nahid//Pictures"
+  },
+  {
+    "name": "@Sonarr",
+    "path": "D://Downloads/@Sonarr"
+  },
+  {
+    "name": "@Radarr",
+    "path": "D://Downloads/@Radarr"
+  },
+  {
+    "name": "debug",
+    "path": "C:/Users/nahid//ms/test/FolderSync/app/build/outputs/apk/debug"
+  },
+  {
+    "name": "debugScreenShot",
+    "path": "C:/Users/nahid//ms/test/path_to_photo/app/build/outputs/apk/debug"
+  },
+  {
+    "name": "contro_debug",
+    "path": "C:/Users/nahid//ms/test/control_button/app/build/outputs/apk/debug"
+  }
+]
