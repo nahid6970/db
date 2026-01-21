@@ -3398,7 +3398,7 @@
             {
                 "id": 5,
                 "title": "Fallout - S02E05 - The Wrangler WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-14T17:55:08.975202",
                 "notify": "seen"
             },
@@ -3496,7 +3496,7 @@
         "id": 45,
         "title": "Frieren - Beyond Journey's End",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/68d6d5b36aa2f.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Frieren - Beyond Journey's End",
         "rating": null,
         "status": "Continuing",
@@ -3508,6 +3508,7 @@
                 "added_date": "2026-01-17T01:39:09.663468",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end"
     }
 ]
