@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 20,
+                "title": "The Rookie - S08E03 - The Red Place HDTV-720p",
+                "watched": false,
+                "added_date": "2026-01-21T11:04:19.111421",
+                "notify": "unseen"
+            },
+            {
                 "id": 19,
                 "title": "The Rookie - S08E02 - Fast Andy WEBDL-1080p",
                 "watched": false,
