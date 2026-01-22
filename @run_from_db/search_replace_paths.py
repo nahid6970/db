@@ -33,6 +33,16 @@ class SearchReplaceWorker(QThread):
         self.replace_text = replace_text
         self.file_extensions = file_extensions
         
+    def normalize_path(self, path):
+        """Normalize path to forward slashes"""
+        # Handle double backslashes first
+        path = path.replace('\\\\', '/')
+        # Then single backslashes
+        path = path.replace('\\', '/')
+        # Then double forward slashes
+        path = path.replace('//', '/')
+        return path
+    
     def run(self):
         results = {
             'files_processed': 0,
@@ -42,6 +52,25 @@ class SearchReplaceWorker(QThread):
         }
         
         try:
+            # Normalize the search and replace paths to forward slashes as base
+            search_normalized = self.normalize_path(self.search_text)
+            replace_normalized = self.normalize_path(self.replace_text)
+            
+            # Create all 4 variations of search and replace
+            search_variants = [
+                search_normalized,  # /
+                search_normalized.replace('/', '//'),  # //
+                search_normalized.replace('/', '\\'),  # \
+                search_normalized.replace('/', '\\\\')  # \\
+            ]
+            
+            replace_variants = [
+                replace_normalized,  # /
+                replace_normalized.replace('/', '//'),  # //
+                replace_normalized.replace('/', '\\'),  # \
+                replace_normalized.replace('/', '\\\\')  # \\
+            ]
+            
             # Walk through all files in the folder
             for root, dirs, files in os.walk(self.folder_path):
                 for filename in files:
@@ -62,13 +91,9 @@ class SearchReplaceWorker(QThread):
                             new_content = content
                             replacements_in_file = 0
                             
-                            # Replace all 4 variations
-                            for search_variant, replace_variant in [
-                                (self.search_text, self.replace_text),  # /
-                                (self.search_text.replace('/', '//'), self.replace_text.replace('/', '//')),  # //
-                                (self.search_text.replace('/', '\\'), self.replace_text.replace('/', '\\')),  # \
-                                (self.search_text.replace('/', '\\\\'), self.replace_text.replace('/', '\\\\'))  # \\
-                            ]:
+                            # Replace each variant with its corresponding replacement
+                            # Important: Process in reverse order (longest first) to avoid partial replacements
+                            for search_variant, replace_variant in zip(search_variants, replace_variants):
                                 if search_variant in new_content:
                                     count = new_content.count(search_variant)
                                     new_content = new_content.replace(search_variant, replace_variant)
@@ -273,7 +298,7 @@ class SearchReplacePaths(QMainWindow):
         search_layout.addWidget(search_label)
         
         self.search_input = QLineEdit()
-        self.search_input.setPlaceholderText("Enter path to find (e.g., C:/old/path)")
+        self.search_input.setPlaceholderText("Enter path to find (any separator format)")
         search_layout.addWidget(self.search_input)
         
         search_replace_layout.addLayout(search_layout)
@@ -286,13 +311,13 @@ class SearchReplacePaths(QMainWindow):
         replace_layout.addWidget(replace_label)
         
         self.replace_input = QLineEdit()
-        self.replace_input.setPlaceholderText("Enter replacement path (e.g., D:/new/path)")
+        self.replace_input.setPlaceholderText("Enter replacement path (any separator format)")
         replace_layout.addWidget(self.replace_input)
         
         search_replace_layout.addLayout(replace_layout)
         
         # Info label
-        info_label = QLabel("NOTE: Will replace all 4 variations: / // \\ \\\\")
+        info_label = QLabel("NOTE: Searches for path in all 4 formats (/, //, \\, \\\\) and replaces with matching format")
         info_label.setObjectName("StatusLabel")
         info_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         search_replace_layout.addWidget(info_label)
@@ -398,7 +423,7 @@ class SearchReplacePaths(QMainWindow):
             f"This will search and replace in all files under:\n{folder_path}\n\n"
             f"Find: {search_text}\n"
             f"Replace: {replace_text}\n\n"
-            f"All 4 separator variations (/, //, \\, \\\\) will be replaced.\n\n"
+            f"Will search for all 4 separator variations and replace with matching format.\n\n"
             f"This operation cannot be undone. Continue?",
             QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
