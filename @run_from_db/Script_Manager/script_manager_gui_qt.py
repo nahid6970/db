@@ -125,6 +125,7 @@ class CyberButton(QPushButton):
         
         self.update_style()
         self.drag_start_pos = QPoint()
+        self.suppress_context_menu = False  # Flag to suppress context menu on Ctrl+Right
 
     def mousePressEvent(self, event):
         # Check for Ctrl+Click shortcuts
@@ -140,9 +141,16 @@ class CyberButton(QPushButton):
             elif event.button() == Qt.MouseButton.RightButton:
                 cmd = self.script.get("ctrl_right_cmd", "").strip()
                 if cmd:
+                    self.suppress_context_menu = True  # Suppress context menu
                     self.execute_ctrl_command(cmd)
                     event.accept()
                     return
+                else:
+                    # No command set, allow context menu
+                    self.suppress_context_menu = False
+        else:
+            # Normal right-click without Ctrl, allow context menu
+            self.suppress_context_menu = False
         
         # Normal behavior
         if event.button() == Qt.MouseButton.LeftButton:
@@ -2000,6 +2008,11 @@ class MainWindow(QMainWindow):
             self._run_shell("cmd.exe", f'{mode} "{tmp}"', os.getcwd(), admin=admin, hide=hide)
 
     def show_context_menu(self, btn, script, pos):
+        # Check if context menu should be suppressed (Ctrl+Right Click with command)
+        if hasattr(btn, 'suppress_context_menu') and btn.suppress_context_menu:
+            btn.suppress_context_menu = False  # Reset flag
+            return
+        
         menu = QMenu(self)
         menu.setStyleSheet(f"QMenu {{ background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_CYAN}; }} QMenu::item:selected {{ background-color: {CP_CYAN}; color: {CP_BG}; }}")
         
