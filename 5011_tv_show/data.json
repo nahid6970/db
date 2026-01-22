@@ -3403,6 +3403,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "Fallout - S02E06 - The Other Player WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-01-22T00:35:11.421956",
+                "notify": "seen"
+            },
+            {
                 "id": 5,
                 "title": "Fallout - S02E05 - The Wrangler WEBDL-1080p",
                 "watched": true,
