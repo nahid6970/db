@@ -25,13 +25,16 @@ class SearchReplaceWorker(QThread):
     """Worker thread for search and replace operations"""
     progress = pyqtSignal(str)
     finished = pyqtSignal(dict)
+    match_found = pyqtSignal(str, str, int)  # file_path, match_type, count
     
-    def __init__(self, folder_path, search_text, replace_text, file_extensions):
+    def __init__(self, folder_path, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=True):
         super().__init__()
         self.folder_path = folder_path
         self.search_text = search_text
         self.replace_text = replace_text
         self.file_extensions = file_extensions
+        self.preview_only = preview_only
+        self.search_in_paths = search_in_paths
         
     def normalize_path(self, path):
         """Normalize path to forward slashes"""
@@ -48,6 +51,8 @@ class SearchReplaceWorker(QThread):
             'files_processed': 0,
             'files_modified': 0,
             'total_replacements': 0,
+            'path_matches': 0,
+            'content_matches': 0,
             'errors': []
         }
         
@@ -73,11 +78,30 @@ class SearchReplaceWorker(QThread):
             
             # Walk through all files in the folder
             for root, dirs, files in os.walk(self.folder_path):
+                # Check if search text appears in directory path
+                if self.search_in_paths:
+                    for search_variant in search_variants:
+                        if search_variant.lower() in root.lower():
+                            results['path_matches'] += 1
+                            self.match_found.emit(root, "DIRECTORY_PATH", 1)
+                            self.progress.emit(f"📁 Found in path: {root}")
+                            break
+                
                 for filename in files:
-                    # Check if file extension matches
+                    file_path = os.path.join(root, filename)
+                    
+                    # Check if search text appears in filename
+                    if self.search_in_paths:
+                        for search_variant in search_variants:
+                            if search_variant.lower() in filename.lower():
+                                results['path_matches'] += 1
+                                self.match_found.emit(file_path, "FILENAME", 1)
+                                self.progress.emit(f"📄 Found in filename: {file_path}")
+                                break
+                    
+                    # Check if file extension matches for content search
                     if not self.file_extensions or any(filename.endswith(ext) for ext in self.file_extensions):
-                        file_path = os.path.join(root, filename)
-                        self.progress.emit(f"Processing: {file_path}")
+                        self.progress.emit(f"Scanning: {file_path}")
                         
                         try:
                             # Read file content
@@ -86,28 +110,38 @@ class SearchReplaceWorker(QThread):
                             
                             results['files_processed'] += 1
                             
-                            # Perform replacements for all 4 separator types
+                            # Check for matches in content
                             modified = False
                             new_content = content
                             replacements_in_file = 0
                             
-                            # Replace each variant with its corresponding replacement
-                            # Important: Process in reverse order (longest first) to avoid partial replacements
+                            # Search/Replace each variant
                             for search_variant, replace_variant in zip(search_variants, replace_variants):
                                 if search_variant in new_content:
                                     count = new_content.count(search_variant)
-                                    new_content = new_content.replace(search_variant, replace_variant)
                                     replacements_in_file += count
-                                    modified = True
+                                    
+                                    if self.preview_only:
+                                        # Preview mode - just report findings
+                                        self.match_found.emit(file_path, "CONTENT", count)
+                                        self.progress.emit(f"🔍 Found in content: {file_path} ({count} matches)")
+                                    else:
+                                        # Replace mode
+                                        new_content = new_content.replace(search_variant, replace_variant)
+                                        modified = True
                             
-                            # Write back if modified
-                            if modified:
+                            # Write back if modified (only in replace mode)
+                            if modified and not self.preview_only:
                                 with open(file_path, 'w', encoding='utf-8') as f:
                                     f.write(new_content)
                                 
                                 results['files_modified'] += 1
                                 results['total_replacements'] += replacements_in_file
+                                results['content_matches'] += 1
                                 self.progress.emit(f"✓ Modified: {file_path} ({replacements_in_file} replacements)")
+                            elif replacements_in_file > 0:
+                                results['content_matches'] += 1
+                                results['total_replacements'] += replacements_in_file
                         
                         except Exception as e:
                             error_msg = f"Error processing {file_path}: {str(e)}"
@@ -252,6 +286,7 @@ class SearchReplacePaths(QMainWindow):
         """)
         
         self.worker = None
+        self.matches = []  # Store preview matches
         self.setup_ui()
         
     def setup_ui(self):
@@ -339,13 +374,30 @@ class SearchReplacePaths(QMainWindow):
         
         filter_layout.addLayout(filter_info_layout)
         
+        # Search options
+        options_layout = QHBoxLayout()
+        self.search_paths_checkbox = QCheckBox("Search in file/folder names")
+        self.search_paths_checkbox.setChecked(True)
+        options_layout.addWidget(self.search_paths_checkbox)
+        options_layout.addStretch()
+        filter_layout.addLayout(options_layout)
+        
         main_layout.addWidget(filter_group)
         
-        # Execute button
+        # Execute buttons
+        button_layout = QHBoxLayout()
+        
+        self.preview_btn = QPushButton("PREVIEW_MATCHES")
+        self.preview_btn.setObjectName("AccentButton")
+        self.preview_btn.clicked.connect(self.preview_matches)
+        button_layout.addWidget(self.preview_btn)
+        
         self.execute_btn = QPushButton("EXECUTE_REPLACE")
         self.execute_btn.setObjectName("AccentButton")
         self.execute_btn.clicked.connect(self.execute_replace)
-        main_layout.addWidget(self.execute_btn)
+        button_layout.addWidget(self.execute_btn)
+        
+        main_layout.addLayout(button_layout)
         
         # Progress bar
         self.progress_bar = QProgressBar()
@@ -353,13 +405,23 @@ class SearchReplacePaths(QMainWindow):
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
         main_layout.addWidget(self.progress_bar)
         
+        # Matches list (for preview)
+        matches_group = QGroupBox("MATCHES_FOUND")
+        matches_layout = QVBoxLayout(matches_group)
+        
+        self.matches_list = QListWidget()
+        self.matches_list.setMinimumHeight(150)
+        matches_layout.addWidget(self.matches_list)
+        
+        main_layout.addWidget(matches_group)
+        
         # Log output
         log_group = QGroupBox("OPERATION_LOG")
         log_layout = QVBoxLayout(log_group)
         
         self.log_output = QTextEdit()
         self.log_output.setReadOnly(True)
-        self.log_output.setMinimumHeight(200)
+        self.log_output.setMinimumHeight(150)
         self.log_output.setStyleSheet(f"""
             QTextEdit {{
                 background-color: {CP_PANEL}; 
@@ -392,6 +454,55 @@ class SearchReplacePaths(QMainWindow):
             self.folder_input.setText(folder)
             self.status_label.setText(f"FOLDER_SELECTED >> {folder}")
             self.log_output.append(f"<span style='color: {CP_CYAN};'>Selected folder: {folder}</span>")
+    
+    def preview_matches(self):
+        """Preview what will be found without making changes"""
+        folder_path = self.folder_input.text().strip()
+        search_text = self.search_input.text().strip()
+        
+        if not folder_path:
+            QMessageBox.warning(self, "Missing Input", "Please select a folder to search.")
+            return
+        
+        if not os.path.exists(folder_path):
+            QMessageBox.warning(self, "Invalid Folder", "The selected folder does not exist.")
+            return
+        
+        if not search_text:
+            QMessageBox.warning(self, "Missing Input", "Please enter text to search for.")
+            return
+        
+        # Parse file extensions
+        extensions_text = self.extensions_input.text().strip()
+        file_extensions = []
+        if extensions_text:
+            file_extensions = [ext.strip() for ext in extensions_text.split() if ext.strip()]
+        
+        # Clear previous results
+        self.matches_list.clear()
+        self.matches = []
+        self.log_output.clear()
+        self.log_output.append(f"<span style='color: {CP_YELLOW};'>PREVIEW_MODE...</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Folder: {folder_path}</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Find: {search_text}</span>")
+        if file_extensions:
+            self.log_output.append(f"<span style='color: {CP_CYAN};'>Extensions: {', '.join(file_extensions)}</span>")
+        else:
+            self.log_output.append(f"<span style='color: {CP_CYAN};'>Extensions: All files</span>")
+        self.log_output.append("")
+        
+        self.progress_bar.setVisible(True)
+        self.preview_btn.setEnabled(False)
+        self.execute_btn.setEnabled(False)
+        self.status_label.setText("SCANNING >> Finding matches...")
+        
+        # Start worker thread in preview mode
+        search_in_paths = self.search_paths_checkbox.isChecked()
+        self.worker = SearchReplaceWorker(folder_path, search_text, "", file_extensions, preview_only=True, search_in_paths=search_in_paths)
+        self.worker.progress.connect(self.on_progress)
+        self.worker.match_found.connect(self.on_match_found)
+        self.worker.finished.connect(self.on_preview_finished)
+        self.worker.start()
     
     def execute_replace(self):
         """Execute the search and replace operation"""
@@ -438,6 +549,7 @@ class SearchReplacePaths(QMainWindow):
             file_extensions = [ext.strip() for ext in extensions_text.split() if ext.strip()]
         
         # Clear log and show progress
+        self.matches_list.clear()
         self.log_output.clear()
         self.log_output.append(f"<span style='color: {CP_YELLOW};'>STARTING_OPERATION...</span>")
         self.log_output.append(f"<span style='color: {CP_CYAN};'>Folder: {folder_path}</span>")
@@ -450,14 +562,32 @@ class SearchReplacePaths(QMainWindow):
         self.log_output.append("")
         
         self.progress_bar.setVisible(True)
+        self.preview_btn.setEnabled(False)
         self.execute_btn.setEnabled(False)
         self.status_label.setText("PROCESSING >> Searching and replacing...")
         
         # Start worker thread
-        self.worker = SearchReplaceWorker(folder_path, search_text, replace_text, file_extensions)
+        search_in_paths = self.search_paths_checkbox.isChecked()
+        self.worker = SearchReplaceWorker(folder_path, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=search_in_paths)
         self.worker.progress.connect(self.on_progress)
+        self.worker.match_found.connect(self.on_match_found)
         self.worker.finished.connect(self.on_finished)
         self.worker.start()
+    
+    def on_match_found(self, file_path, match_type, count):
+        """Handle match found signal"""
+        self.matches.append((file_path, match_type, count))
+        
+        # Add to matches list
+        if match_type == "DIRECTORY_PATH":
+            item_text = f"📁 DIR: {file_path}"
+        elif match_type == "FILENAME":
+            item_text = f"📄 FILE: {file_path}"
+        else:  # CONTENT
+            item_text = f"📝 CONTENT ({count}x): {file_path}"
+        
+        item = QListWidgetItem(item_text)
+        self.matches_list.addItem(item)
     
     def on_progress(self, message):
         """Handle progress updates from worker thread"""
@@ -465,12 +595,83 @@ class SearchReplacePaths(QMainWindow):
             self.log_output.append(f"<span style='color: {CP_GREEN};'>{message}</span>")
         elif message.startswith("✗"):
             self.log_output.append(f"<span style='color: {CP_RED};'>{message}</span>")
+        elif message.startswith("📁") or message.startswith("📄") or message.startswith("🔍"):
+            self.log_output.append(f"<span style='color: {CP_YELLOW};'>{message}</span>")
         else:
             self.log_output.append(f"<span style='color: {CP_TEXT};'>{message}</span>")
         
         # Auto-scroll to bottom
         self.log_output.verticalScrollBar().setValue(
             self.log_output.verticalScrollBar().maximum()
+        )
+    
+    def on_preview_finished(self, results):
+        """Handle completion of preview operation"""
+        self.progress_bar.setVisible(False)
+        self.preview_btn.setEnabled(True)
+        self.execute_btn.setEnabled(True)
+        
+        # Display summary
+        self.log_output.append("")
+        self.log_output.append(f"<span style='color: {CP_YELLOW};'>PREVIEW_COMPLETE</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Files scanned: {results['files_processed']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Path matches: {results['path_matches']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Content matches: {results['content_matches']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total occurrences: {results['total_replacements']}</span>")
+        
+        if results['errors']:
+            self.log_output.append(f"<span style='color: {CP_RED};'>Errors: {len(results['errors'])}</span>")
+        
+        total_matches = results['path_matches'] + results['content_matches']
+        self.status_label.setText(
+            f"PREVIEW >> Found {total_matches} matches ({results['total_replacements']} total occurrences)"
+        )
+        
+        if total_matches == 0:
+            QMessageBox.information(
+                self,
+                "No Matches Found",
+                f"No matches found for:\n{self.search_input.text()}\n\n"
+                f"Try checking:\n"
+                f"- The search path is correct\n"
+                f"- File extensions filter isn't too restrictive\n"
+                f"- The path exists in file contents or names"
+            )
+    
+    def on_finished(self, results):
+        """Handle completion of search and replace operation"""
+        self.progress_bar.setVisible(False)
+        self.preview_btn.setEnabled(True)
+        self.execute_btn.setEnabled(True)
+        
+        # Display summary
+        self.log_output.append("")
+        self.log_output.append(f"<span style='color: {CP_YELLOW};'>OPERATION_COMPLETE</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Files processed: {results['files_processed']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Files modified: {results['files_modified']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total replacements: {results['total_replacements']}</span>")
+        
+        if results['errors']:
+            self.log_output.append(f"<span style='color: {CP_RED};'>Errors: {len(results['errors'])}</span>")
+            for error in results['errors'][:10]:  # Show first 10 errors
+                self.log_output.append(f"<span style='color: {CP_RED};'>  {error}</span>")
+            if len(results['errors']) > 10:
+                self.log_output.append(f"<span style='color: {CP_RED};'>  ... and {len(results['errors']) - 10} more errors</span>")
+        
+        self.status_label.setText(
+            f"COMPLETE >> {results['files_modified']} files modified, "
+            f"{results['total_replacements']} replacements made"
+        )
+        
+        # Show completion message
+        QMessageBox.information(
+            self,
+            "Operation Complete",
+            f"Search and replace completed!\n\n"
+            f"Files processed: {results['files_processed']}\n"
+            f"Files modified: {results['files_modified']}\n"
+            f"Total replacements: {results['total_replacements']}\n"
+            f"Errors: {len(results['errors'])}"
         )
     
     def on_finished(self, results):
