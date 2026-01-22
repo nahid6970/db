@@ -115,10 +115,17 @@ class SearchReplaceWorker(QThread):
                             new_content = content
                             replacements_in_file = 0
                             
+                            # For case-insensitive search, work with lowercase version
+                            content_lower = content.lower()
+                            
                             # Search/Replace each variant
                             for search_variant, replace_variant in zip(search_variants, replace_variants):
-                                if search_variant in new_content:
-                                    count = new_content.count(search_variant)
+                                search_lower = search_variant.lower()
+                                
+                                # Case-insensitive search
+                                if search_lower in content_lower:
+                                    # Count occurrences (case-insensitive)
+                                    count = content_lower.count(search_lower)
                                     replacements_in_file += count
                                     
                                     if self.preview_only:
@@ -126,8 +133,10 @@ class SearchReplaceWorker(QThread):
                                         self.match_found.emit(file_path, "CONTENT", count)
                                         self.progress.emit(f"🔍 Found in content: {file_path} ({count} matches)")
                                     else:
-                                        # Replace mode
-                                        new_content = new_content.replace(search_variant, replace_variant)
+                                        # Replace mode - case-insensitive replace
+                                        # Use regex for case-insensitive replacement
+                                        pattern = re.escape(search_variant)
+                                        new_content = re.sub(pattern, replace_variant, new_content, flags=re.IGNORECASE)
                                         modified = True
                             
                             # Write back if modified (only in replace mode)
@@ -615,16 +624,23 @@ class SearchReplacePaths(QMainWindow):
         self.log_output.append("")
         self.log_output.append(f"<span style='color: {CP_YELLOW};'>PREVIEW_COMPLETE</span>")
         self.log_output.append(f"<span style='color: {CP_CYAN};'>Files scanned: {results['files_processed']}</span>")
-        self.log_output.append(f"<span style='color: {CP_GREEN};'>Path matches: {results['path_matches']}</span>")
+        self.log_output.append(f"<span style='color: {CP_ORANGE};'>Path/filename matches: {results['path_matches']}</span>")
         self.log_output.append(f"<span style='color: {CP_GREEN};'>Content matches: {results['content_matches']}</span>")
-        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total occurrences: {results['total_replacements']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total occurrences in content: {results['total_replacements']}</span>")
         
         if results['errors']:
             self.log_output.append(f"<span style='color: {CP_RED};'>Errors: {len(results['errors'])}</span>")
         
+        # Add helpful message
+        if results['path_matches'] > 0 and results['content_matches'] == 0:
+            self.log_output.append("")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>⚠ NOTE: Found matches in filenames/paths but NOT in file contents.</span>")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>This tool only modifies file CONTENT, not filenames or folder names.</span>")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>If you execute replace, 0 files will be modified.</span>")
+        
         total_matches = results['path_matches'] + results['content_matches']
         self.status_label.setText(
-            f"PREVIEW >> Found {total_matches} matches ({results['total_replacements']} total occurrences)"
+            f"PREVIEW >> Found {total_matches} matches ({results['content_matches']} in content, {results['path_matches']} in paths)"
         )
         
         if total_matches == 0:
@@ -637,6 +653,16 @@ class SearchReplacePaths(QMainWindow):
                 f"- File extensions filter isn't too restrictive\n"
                 f"- The path exists in file contents or names"
             )
+        elif results['path_matches'] > 0 and results['content_matches'] == 0:
+            QMessageBox.warning(
+                self,
+                "Matches in Paths Only",
+                f"Found {results['path_matches']} matches in filenames/directory paths,\n"
+                f"but 0 matches in file contents.\n\n"
+                f"⚠ This tool only modifies file CONTENT, not filenames.\n\n"
+                f"If you execute replace, 0 files will be modified.\n"
+                f"The search text appears in file paths but not inside the files themselves."
+            )
     
     def on_finished(self, results):
         """Handle completion of search and replace operation"""
@@ -647,9 +673,11 @@ class SearchReplacePaths(QMainWindow):
         # Display summary
         self.log_output.append("")
         self.log_output.append(f"<span style='color: {CP_YELLOW};'>OPERATION_COMPLETE</span>")
-        self.log_output.append(f"<span style='color: {CP_CYAN};'>Files processed: {results['files_processed']}</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Files scanned: {results['files_processed']}</span>")
+        self.log_output.append(f"<span style='color: {CP_ORANGE};'>Path/filename matches: {results['path_matches']} (not modified - filenames unchanged)</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Content matches: {results['content_matches']}</span>")
         self.log_output.append(f"<span style='color: {CP_GREEN};'>Files modified: {results['files_modified']}</span>")
-        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total replacements: {results['total_replacements']}</span>")
+        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total replacements in content: {results['total_replacements']}</span>")
         
         if results['errors']:
             self.log_output.append(f"<span style='color: {CP_RED};'>Errors: {len(results['errors'])}</span>")
@@ -658,40 +686,12 @@ class SearchReplacePaths(QMainWindow):
             if len(results['errors']) > 10:
                 self.log_output.append(f"<span style='color: {CP_RED};'>  ... and {len(results['errors']) - 10} more errors</span>")
         
-        self.status_label.setText(
-            f"COMPLETE >> {results['files_modified']} files modified, "
-            f"{results['total_replacements']} replacements made"
-        )
-        
-        # Show completion message
-        QMessageBox.information(
-            self,
-            "Operation Complete",
-            f"Search and replace completed!\n\n"
-            f"Files processed: {results['files_processed']}\n"
-            f"Files modified: {results['files_modified']}\n"
-            f"Total replacements: {results['total_replacements']}\n"
-            f"Errors: {len(results['errors'])}"
-        )
-    
-    def on_finished(self, results):
-        """Handle completion of search and replace operation"""
-        self.progress_bar.setVisible(False)
-        self.execute_btn.setEnabled(True)
-        
-        # Display summary
-        self.log_output.append("")
-        self.log_output.append(f"<span style='color: {CP_YELLOW};'>OPERATION_COMPLETE</span>")
-        self.log_output.append(f"<span style='color: {CP_CYAN};'>Files processed: {results['files_processed']}</span>")
-        self.log_output.append(f"<span style='color: {CP_GREEN};'>Files modified: {results['files_modified']}</span>")
-        self.log_output.append(f"<span style='color: {CP_GREEN};'>Total replacements: {results['total_replacements']}</span>")
-        
-        if results['errors']:
-            self.log_output.append(f"<span style='color: {CP_RED};'>Errors: {len(results['errors'])}</span>")
-            for error in results['errors'][:10]:  # Show first 10 errors
-                self.log_output.append(f"<span style='color: {CP_RED};'>  {error}</span>")
-            if len(results['errors']) > 10:
-                self.log_output.append(f"<span style='color: {CP_RED};'>  ... and {len(results['errors']) - 10} more errors</span>")
+        # Add helpful message if only path matches found
+        if results['path_matches'] > 0 and results['files_modified'] == 0:
+            self.log_output.append("")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>⚠ NOTE: Found matches in filenames/paths but NOT in file contents.</span>")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>This tool only modifies file CONTENT, not filenames or folder names.</span>")
+            self.log_output.append(f"<span style='color: {CP_ORANGE};'>The search text exists in the file paths but not inside the files themselves.</span>")
         
         self.status_label.setText(
             f"COMPLETE >> {results['files_modified']} files modified, "
@@ -699,14 +699,22 @@ class SearchReplacePaths(QMainWindow):
         )
         
         # Show completion message
+        msg = f"Search and replace completed!\n\n"
+        msg += f"Files scanned: {results['files_processed']}\n"
+        msg += f"Files modified: {results['files_modified']}\n"
+        msg += f"Content replacements: {results['total_replacements']}\n"
+        msg += f"Path/filename matches: {results['path_matches']}\n"
+        msg += f"Errors: {len(results['errors'])}\n"
+        
+        if results['path_matches'] > 0 and results['files_modified'] == 0:
+            msg += f"\n⚠ Note: Matches found in filenames/paths only.\n"
+            msg += f"This tool modifies file CONTENT, not filenames.\n"
+            msg += f"The search text appears in file paths but not inside files."
+        
         QMessageBox.information(
             self,
             "Operation Complete",
-            f"Search and replace completed!\n\n"
-            f"Files processed: {results['files_processed']}\n"
-            f"Files modified: {results['files_modified']}\n"
-            f"Total replacements: {results['total_replacements']}\n"
-            f"Errors: {len(results['errors'])}"
+            msg
         )
 
 
