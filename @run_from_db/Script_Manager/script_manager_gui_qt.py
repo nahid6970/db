@@ -127,9 +127,65 @@ class CyberButton(QPushButton):
         self.drag_start_pos = QPoint()
 
     def mousePressEvent(self, event):
+        # Check for Ctrl+Click shortcuts
+        modifiers = QApplication.keyboardModifiers()
+        
+        if modifiers == Qt.KeyboardModifier.ControlModifier:
+            if event.button() == Qt.MouseButton.LeftButton:
+                cmd = self.script.get("ctrl_left_cmd", "").strip()
+                if cmd:
+                    self.execute_ctrl_command(cmd)
+                    event.accept()
+                    return
+            elif event.button() == Qt.MouseButton.RightButton:
+                cmd = self.script.get("ctrl_right_cmd", "").strip()
+                if cmd:
+                    self.execute_ctrl_command(cmd)
+                    event.accept()
+                    return
+        
+        # Normal behavior
         if event.button() == Qt.MouseButton.LeftButton:
             self.drag_start_pos = event.pos()
         super().mousePressEvent(event)
+
+    def execute_ctrl_command(self, cmd):
+        """Execute a Ctrl+Click command"""
+        try:
+            # Expand environment variables
+            cmd = os.path.expandvars(cmd)
+            
+            # Parse command to detect special cases
+            cmd_lower = cmd.lower().strip()
+            
+            # Handle 'explorer' commands specially
+            if cmd_lower.startswith("explorer "):
+                path = cmd[9:].strip()  # Remove "explorer " prefix
+                
+                # If it's a file, use /select to highlight it in folder
+                if os.path.isfile(path):
+                    subprocess.Popen(f'explorer /select,"{path}"')
+                # If it's a directory, open it normally
+                elif os.path.isdir(path):
+                    subprocess.Popen(f'explorer "{path}"')
+                else:
+                    # Path doesn't exist, try anyway (might be a special folder)
+                    subprocess.Popen(f'explorer {path}')
+                return
+            
+            # Handle URLs (http, https, mailto, etc.)
+            if any(cmd_lower.startswith(proto) for proto in ["http://", "https://", "mailto:", "ftp://"]):
+                QDesktopServices.openUrl(QUrl(cmd))
+                return
+            
+            # For other commands, use cmd.exe
+            import ctypes
+            # SW_SHOWNORMAL = 1
+            res = ctypes.windll.shell32.ShellExecuteW(None, None, "cmd.exe", f'/c {cmd}', None, 1)
+            if res <= 32:
+                QMessageBox.warning(self, "Command Error", f"Failed to execute command (Code {res}):\n{cmd}")
+        except Exception as e:
+            QMessageBox.critical(self, "Execution Error", f"Error executing command:\n{cmd}\n\nError: {str(e)}")
 
     def mouseMoveEvent(self, event):
         super().mouseMoveEvent(event) # Allow standard behavior

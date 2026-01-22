@@ -966,7 +966,7 @@
             "kill_window": false,
             "new_terminal": true,
             "run_admin": false,
-            "ctrl_left_cmd": "C:\\@delta\\db\\@run_from_db\\locksmith.py",
+            "ctrl_left_cmd": "explorer C:\\@delta\\db\\@run_from_db\\path_converter.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
