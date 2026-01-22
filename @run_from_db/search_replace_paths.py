@@ -134,10 +134,20 @@ class SearchReplaceWorker(QThread):
                                         self.progress.emit(f"🔍 Found in content: {file_path} ({count} matches)")
                                     else:
                                         # Replace mode - case-insensitive replace
-                                        # Use regex for case-insensitive replacement
-                                        pattern = re.escape(search_variant)
-                                        new_content = re.sub(pattern, replace_variant, new_content, flags=re.IGNORECASE)
-                                        modified = True
+                                        # Simple string replacement (case-insensitive by checking both)
+                                        # Find all occurrences case-insensitively and replace
+                                        temp_content = new_content
+                                        start = 0
+                                        while True:
+                                            pos = temp_content.lower().find(search_lower, start)
+                                            if pos == -1:
+                                                break
+                                            # Replace the actual text (preserving what was there)
+                                            new_content = new_content[:pos] + replace_variant + new_content[pos + len(search_variant):]
+                                            temp_content = new_content
+                                            start = pos + len(replace_variant)
+                                        if content != new_content:
+                                            modified = True
                             
                             # Write back if modified (only in replace mode)
                             if modified and not self.preview_only:
