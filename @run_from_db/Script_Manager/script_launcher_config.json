@@ -1318,7 +1318,7 @@
             "kill_window": false,
             "new_terminal": true,
             "run_admin": false,
-            "ctrl_left_cmd": "",
+            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\@AI-Tool\\Gemini-cli\\vsc_manager.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
