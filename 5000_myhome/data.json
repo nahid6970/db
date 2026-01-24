@@ -8124,11 +8124,11 @@
   {
     "name": "75-English",
     "group": "EDU",
-    "url": "https://www.youtube.com/@EnglishMoja/videos",
+    "url": "https://www.youtube.com/@EnglishMoja/streams",
     "color": "white",
     "default_type": "text",
     "background_color": "red",
-    "click_action": "url",
+    "click_action": "url-1",
     "collapsible": false,
     "display_style": "flex",
     "horizontal_stack": true,
