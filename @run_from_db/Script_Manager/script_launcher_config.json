@@ -884,7 +884,7 @@
             "name": "mklink",
             "path": "C:/@delta/ms1/Testing/mklink/mklink.py",
             "hide_terminal": true,
-            "ctrl_left_cmd": "",
+            "ctrl_left_cmd": "explorer C:/@delta/ms1/Testing/mklink/mklink.py",
             "ctrl_right_cmd": "",
             "col_span": 1,
             "row_span": 1,
