@@ -1,0 +1,15 @@
+{
+  "excludedDomains": [
+    "http://192.168.0.101"
+  ],
+  "www.crazygames.com": [
+    {
+      "color": "#d51a1a",
+      "id": "gb2wftcbq",
+      "note": "",
+      "path": "div#gamePageMainContainer > div:nth-of-type(4) > div > div > div > div:nth-of-type(2) > div:nth-of-type(2) > h1",
+      "text": "Bank Heist"
+    }
+  ],
+  "www.youtube.com": []
+}

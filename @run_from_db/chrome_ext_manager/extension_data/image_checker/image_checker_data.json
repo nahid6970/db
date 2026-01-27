@@ -1,0 +1,25 @@
+{
+  "checkingMode_global": false,
+  "excludedDomains": [
+    "http://192.168.0.101"
+  ],
+  "imageCheckerSettings": {
+    "borderColor": "#4caf50",
+    "borderWidth": 3,
+    "checkmarkColor": "#4caf50",
+    "checkmarkSize": 50,
+    "enableBorder": false,
+    "textColor": "#ffffff"
+  },
+  "seenItems": {
+    "yt_KCVtfTFj7VA": 1769334424039,
+    "yt_NJfPzhp5zS0": 1769260969699,
+    "yt_Q9MxdbYFIN4": 1769258216077,
+    "yt_SkaBVDdY2ZE": 1769260968947,
+    "yt__Mzo7Dcl5T8": 1769260992722,
+    "yt_eJnCWvx1DVA": 1769260994143,
+    "yt_ffu4_giL1j0": 1769330493775,
+    "yt_rm_2Rsz1Uvk": 1769303503412,
+    "yt_xGkKmKc1jgk": 1769242498782
+  }
+}
