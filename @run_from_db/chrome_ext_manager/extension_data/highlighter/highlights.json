@@ -1,4 +1,5 @@
 {
+  "127.0.0.1": [],
   "customColors": [
     "#ffff00",
     "#aaffaa",
@@ -271,17 +272,28 @@
       "note": "",
       "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > ul > li:nth-of-type(18)",
       "text": "Officer (IT) (Grade-10) / Closing date: 01 Feb, 2026"
-    },
-    {
-      "color": "#1196e8",
-      "id": "lgi8dyx5z",
-      "note": "",
-      "path": "form#frmCareer > div:nth-of-type(3) > div > h1",
-      "text": "Recruitment "
     }
   ],
   "excludedDomains": [
     "http://192.168.0.101"
+  ],
+  "https://www.youtube.com/watch?v=GsoPwyStpJg": [
+    {
+      "color": "#ff3838",
+      "id": "fy3euc9j3",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "50 Animals Name and Sound | English | Animals for kids | WATRstar"
+    }
+  ],
+  "https://www.youtube.com/watch?v=IPNjfg-HsR4": [
+    {
+      "color": "#ff3838",
+      "id": "d6a9yee5e",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "Animals for Kids and Toddlers Learning | 100 Wild Animals Names and Sounds"
+    }
   ],
   "www.crazygames.com": [
     {
@@ -320,6 +332,27 @@
       "note": "",
       "path": "div#title > h1 > yt-formatted-string",
       "text": "Sounds "
+    },
+    {
+      "color": "#ff3838",
+      "id": "ajpgclphk",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "Animal Sounds for Kids - 34 amazing animals"
+    },
+    {
+      "color": "#ff3838",
+      "id": "i9efcrrdc",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "50 Animals Name and Sound | English | Animals for kids | WATRstar"
+    },
+    {
+      "color": "#ff3838",
+      "id": "xjyu8sifp",
+      "note": "",
+      "path": "yt-formatted-string#message > span",
+      "text": "Comments are turned"
     }
   ]
 }
