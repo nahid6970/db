@@ -1,4 +1,48 @@
 {
+  "erecruitment.bb.org.bd": [
+    {
+      "color": "#ffaaaa",
+      "id": "aj4x9jcl0",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(15)",
+      "text": "Schedule of Viva Voce for the post of Sub-Assistant Engineer (Civil) (base year-2022) (Job ID: 10215) of 2 Banks & 1 FIs.  details"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "4jajl9t2i",
+      "note": "",
+      "path": "form#frmCareer",
+      "text": "Schedule of Viva Voce for the post of Sub-Assistant Engineer (Civil) (base year-2022) (Job ID: 10215) of 2 Banks & 1 FIs.  details..\n"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "nqoft1j8p",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(15)",
+      "text": "Schedule of Viva Voce for the post of Sub-Assistant Engineer (Civil) (base year-2022) (Job ID: 10215)"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "y2ak4eg0z",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(14)",
+      "text": "Schedule of Viva Voce for the post of Officer (IT) (Grade-10) (Job ID-10209) (Base year 2022)"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "mqu79wu4l",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(13)",
+      "text": "Written result and Viva schedule for the post of \"Junior Technician (Mechanical)\" of SPCBL (Job ID:296)"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "fcc4wy4lh",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(12)",
+      "text": "Written result and Viva schedule for the post of \"Junior Technician (Production Control)\" of SPCBL (Job ID:293)"
+    }
+  ],
   "excludedDomains": [
     "http://192.168.0.101"
   ],
