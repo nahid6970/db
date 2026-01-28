@@ -2,7 +2,7 @@
   "customColors": [
     "#ffff00",
     "#aaffaa",
-    "#aaddff",
+    "#5cc0ff",
     "#ff3838"
   ],
   "erecruitment.bb.org.bd": [
@@ -271,6 +271,13 @@
       "note": "",
       "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(2) > div:nth-of-type(2) > ul > li:nth-of-type(18)",
       "text": "Officer (IT) (Grade-10) / Closing date: 01 Feb, 2026"
+    },
+    {
+      "color": "#1196e8",
+      "id": "lgi8dyx5z",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div > h1",
+      "text": "Recruitment "
     }
   ],
   "excludedDomains": [
@@ -299,6 +306,20 @@
       "note": "",
       "path": "div#above-the-fold",
       "text": "Are juniors screwed? (Getting a job in a post-AI world)\n"
+    },
+    {
+      "color": "#aaddff",
+      "id": "wp60xfbmy",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "Children "
+    },
+    {
+      "color": "#ff3838",
+      "id": "zj68tqfbu",
+      "note": "",
+      "path": "div#title > h1 > yt-formatted-string",
+      "text": "Sounds "
     }
   ]
 }
