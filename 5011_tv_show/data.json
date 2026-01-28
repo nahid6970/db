@@ -9,7 +9,7 @@
             {
                 "id": 27,
                 "title": "One Piece - s22e70 - [1155] - The Promised Horizon - Off to the Long-Awaited Elbaph! WEBDL-1080p - [Erai-raws]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-06T00:18:55.658576",
                 "notify": "seen"
             },
@@ -3007,6 +3007,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 15,
+                "title": "To Your Eternity - s03e15 - [55] - Leaving Alone HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-01-28T10:26:54.458859",
+                "notify": "unseen"
+            },
+            {
                 "id": 14,
                 "title": "To Your Eternity - s03e14 - [54] - Where One Belongs HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -3402,6 +3409,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 7,
+                "title": "Fallout - S02E07 - The Handoff HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-01-28T10:08:17.317828",
+                "notify": "unseen"
+            },
             {
                 "id": 6,
                 "title": "Fallout - S02E06 - The Other Player WEBDL-1080p",
