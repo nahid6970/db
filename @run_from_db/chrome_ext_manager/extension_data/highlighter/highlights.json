@@ -1,4 +1,10 @@
 {
+  "customColors": [
+    "#ffff00",
+    "#aaffaa",
+    "#aaddff",
+    "#ff3838"
+  ],
   "erecruitment.bb.org.bd": [
     {
       "color": "#ffaaaa",
@@ -41,6 +47,83 @@
       "note": "",
       "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(12)",
       "text": "Written result and Viva schedule for the post of \"Junior Technician (Production Control)\" of SPCBL (Job ID:293)"
+    },
+    {
+      "color": "#ffaaaa",
+      "id": "f7c7a57fs",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(11)",
+      "text": "Written result and Viva schedule for the post of \"Technician (Mechanical)\" of SPCBL (Job ID:289)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "2t2hjmigf",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(10)",
+      "text": "Schedule of the MCQ test and Exam Center list for the Post of Officer (Cash) (Job ID: 10222) (Grade-10)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "5r3xq9q27",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(9)",
+      "text": "Schedule of the MCQ test and Exam Center list for the Post of Officer (G) of 08 Banks/FIs (Job ID-10221)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "wx1ldnexa",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(8)",
+      "text": "Schedule of Viva Voce for the post of Data Entry/Control Supervisor (Grade-10) (Job ID-10210) (Base year 2022)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "drbl1wtb5",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(7)",
+      "text": "Re-schedule of written exam for the post of 'Junior Technician (Utility)' of SPCBL (Job ID:298) "
+    },
+    {
+      "color": "#ff3838",
+      "id": "8ocuf89i7",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(6)",
+      "text": "Reschedule of the MCQ Test for the Post of Officer (General) of 08 Banks/FIs (Job ID: 10221)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "3mbkjjv05",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(5)",
+      "text": "Written result and Viva schedule for the post of \"Junior Technician (Research and Quality control)\" of Bangladesh Bank (Job ID:295)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "il5wcuwwd",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(4)",
+      "text": "Schedule of MCQ Test and Exam Content with Mark Distribution for the Post of Officer (Cash) (Job ID: 10222) (Grade-10)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "t9ivh65f0",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(3)",
+      "text": "Schedule of the MCQ Test and the Exam Content with Mark Distribution for the Post of Officer (General) of 08 Banks/FIs (Job ID: 10221)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "0fp29x4d0",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li:nth-of-type(2)",
+      "text": "Circular regarding schedule of written exam for the post of 'Technician (Research and Quality control)' of SPCBL (Job ID:288)"
+    },
+    {
+      "color": "#ff3838",
+      "id": "lrqt52lo8",
+      "note": "",
+      "path": "form#frmCareer > div:nth-of-type(3) > div:nth-of-type(4) > div:nth-of-type(2) > ul > li",
+      "text": "Circular regarding schedule of written exam for the post of 'Junior Technician (Utility)' of SPCBL (Job ID:298)"
     }
   ],
   "excludedDomains": [
