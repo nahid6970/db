@@ -1,4 +1,5 @@
 {
+  "items_per_row": 6,
   "sidebar_links": [
     {
       "color": "#38bdf8",
@@ -14,38 +15,6 @@
       "id": "1769493403548",
       "isSolid": false,
       "title": "EM Job",
-      "url": "https://www.youtube.com/@englishmojajobs/videos"
-    },
-    {
-      "color": "#38bdf8",
-      "icon": "https://yt3.ggpht.com/7fcBaP365BtX9Ct_PCvmUiQiQF6JlxUJYQ3XV4rBWbwVee9AEOEwMTdu-1Ic8vmhNdFLIIJTGw=s48-c-k-c0x00ffffff-no-rj",
-      "id": "1769587391922",
-      "isSolid": false,
-      "title": "EM Job (Copy)",
-      "url": "https://www.youtube.com/@englishmojajobs/videos"
-    },
-    {
-      "color": "#38bdf8",
-      "icon": "https://yt3.ggpht.com/7fcBaP365BtX9Ct_PCvmUiQiQF6JlxUJYQ3XV4rBWbwVee9AEOEwMTdu-1Ic8vmhNdFLIIJTGw=s48-c-k-c0x00ffffff-no-rj",
-      "id": "1769587393858",
-      "isSolid": false,
-      "title": "EM Job (Copy) (Copy)",
-      "url": "https://www.youtube.com/@englishmojajobs/videos"
-    },
-    {
-      "color": "#38bdf8",
-      "icon": "https://yt3.ggpht.com/7fcBaP365BtX9Ct_PCvmUiQiQF6JlxUJYQ3XV4rBWbwVee9AEOEwMTdu-1Ic8vmhNdFLIIJTGw=s48-c-k-c0x00ffffff-no-rj",
-      "id": "1769587426495",
-      "isSolid": false,
-      "title": "EM Job (Copy) (Copy) (Copy)",
-      "url": "https://www.youtube.com/@englishmojajobs/videos"
-    },
-    {
-      "color": "#38bdf8",
-      "icon": "https://yt3.ggpht.com/7fcBaP365BtX9Ct_PCvmUiQiQF6JlxUJYQ3XV4rBWbwVee9AEOEwMTdu-1Ic8vmhNdFLIIJTGw=s48-c-k-c0x00ffffff-no-rj",
-      "id": "1769587428792",
-      "isSolid": false,
-      "title": "EM Job (Copy) (Copy) (Copy) (Copy)",
       "url": "https://www.youtube.com/@englishmojajobs/videos"
     }
   ]
