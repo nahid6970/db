@@ -2420,7 +2420,7 @@
         "year": "2025",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/458912/posters/6824741cf2136.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Alien - Earth",
-        "rating": null,
+        "rating": "2",
         "status": "Continuing",
         "episodes": [
             {
@@ -2479,7 +2479,8 @@
                 "added_date": "2025-08-14T22:12:37.611945",
                 "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     },
     {
         "id": 29,
