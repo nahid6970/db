@@ -3410,6 +3410,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "Fallout - S02E07 - The Handoff WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-01-29T08:11:52.652529",
+                "notify": "unseen"
+            },
+            {
                 "id": 7,
                 "title": "Fallout - S02E07 - The Handoff HDTV-1080p",
                 "watched": false,
