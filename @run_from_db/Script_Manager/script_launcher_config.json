@@ -961,7 +961,7 @@
             "hide_terminal": true,
             "keep_open": false,
             "kill_window": true,
-            "ctrl_left_cmd": "",
+            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\scripts\\ytc\\ytc_qt.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
