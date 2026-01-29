@@ -3413,15 +3413,8 @@
             {
                 "id": 8,
                 "title": "Fallout - S02E07 - The Handoff WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-29T08:11:52.652529",
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "Fallout - S02E07 - The Handoff HDTV-1080p",
-                "watched": false,
-                "added_date": "2026-01-28T10:08:17.317828",
                 "notify": "seen"
             },
             {
@@ -3504,6 +3497,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 5,
+                "title": "JUJUTSU KAISEN - s03e05 - [52] - Passion WEBDL-1080p - [ToonsHub]",
+                "watched": true,
+                "added_date": "2026-01-29T23:13:36.215858",
+                "notify": "seen"
+            },
             {
                 "id": 4,
                 "title": "JUJUTSU KAISEN - s03e04 - [51] - Perfect Preparation WEBDL-1080p - [ToonsHub]",
