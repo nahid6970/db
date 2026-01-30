@@ -1513,7 +1513,7 @@
     "default_btn_height": 100,
     "window_width": 1200,
     "window_height": 800,
-    "always_on_top": true,
+    "always_on_top": false,
     "default_font_size": 14,
     "app_bg": "#1d1d2b",
     "show_widgets": true,
