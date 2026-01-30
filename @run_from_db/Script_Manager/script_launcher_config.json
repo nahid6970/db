@@ -1158,7 +1158,7 @@
             "kill_window": true,
             "new_terminal": true,
             "run_admin": false,
-            "ctrl_left_cmd": "",
+            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\TOOLS\\Github\\git_history_restore.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
