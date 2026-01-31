@@ -398,10 +398,10 @@
                     "icon_height": 0,
                     "icon_gap": 2,
                     "icon_position": "top",
-                    "hide_terminal": false,
+                    "hide_terminal": true,
                     "keep_open": false,
-                    "kill_window": false,
-                    "new_terminal": false,
+                    "kill_window": true,
+                    "new_terminal": true,
                     "run_admin": false,
                     "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\TOOLS\\nerd-font-icon\\nerdfont_icon_converter.py",
                     "ctrl_right_cmd": "",
@@ -417,7 +417,12 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0
+                    "border_width": 0,
+                    "_runtime_height": 100,
+                    "_runtime_font_size": 14,
+                    "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+                    "_runtime_is_bold": true,
+                    "_runtime_is_italic": false
                 }
             ],
             "col_span": 1,
@@ -445,11 +450,11 @@
             "height": 0,
             "corner_radius": 0,
             "border_width": 3,
-            "color": "#63c77f",
-            "text_color": "#000000",
-            "hover_color": "#c15745",
-            "hover_text_color": "#FFFFFF",
-            "border_color": "#71a78c"
+            "color": "#4a72d3",
+            "text_color": "#FFFFFF",
+            "hover_color": "#5bef75",
+            "hover_text_color": "#000000",
+            "border_color": "#293587"
         },
         {
             "name": "Github <br> Projects",
