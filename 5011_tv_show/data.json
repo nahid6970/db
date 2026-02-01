@@ -2180,9 +2180,9 @@
             {
                 "id": 19,
                 "title": "WWE SmackDown - 2026-01-30 - SmackDown 1380 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-01T09:32:55.417822",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 18,
@@ -3033,7 +3033,7 @@
                 "title": "To Your Eternity - s03e16 - [56] - Connective HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2026-02-01T10:08:29.329442",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 15,
@@ -3595,5 +3595,16 @@
             }
         ],
         "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end"
+    },
+    {
+        "id": 46,
+        "title": "asdasdasd",
+        "year": "",
+        "cover_image": "https://img.freepik.com/free-photo/blank-white-background-design_272375-26346.jpg?semt=ais_hybrid&w=740&q=80",
+        "directory_path": "",
+        "rating": "5",
+        "status": "Continuing",
+        "episodes": [],
+        "sonarr_url": ""
     }
 ]
