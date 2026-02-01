@@ -2178,6 +2178,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 18,
+                "title": "WWE SmackDown - 2026-01-23 - SmackDown 1379 WEBDL-720p",
+                "watched": true,
+                "added_date": "2026-01-31T18:37:48.999093",
+                "notify": "seen"
+            },
+            {
                 "id": 17,
                 "title": "WWE SmackDown - 2026-01-09 - SmackDown 1377 WEBDL-720p",
                 "watched": true,
@@ -3551,6 +3558,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 3,
+                "title": "Frieren - Beyond Journey's End - s02e03 - [31] - Somewhere She'd Like HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-01-31T18:37:49.002099",
+                "notify": "seen"
+            },
             {
                 "id": 2,
                 "title": "Frieren - Beyond Journey's End - s02e02 - [30] - The Hero of the South HDTV-1080p - [SubsPlease]",
