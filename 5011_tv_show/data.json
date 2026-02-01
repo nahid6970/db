@@ -3569,7 +3569,7 @@
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/68d6d5b36aa2f.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Frieren - Beyond Journey's End",
-        "rating": null,
+        "rating": "5",
         "status": "Continuing",
         "episodes": [
             {
@@ -3595,16 +3595,5 @@
             }
         ],
         "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end"
-    },
-    {
-        "id": 46,
-        "title": "asdasdasd",
-        "year": "",
-        "cover_image": "https://img.freepik.com/free-photo/blank-white-background-design_272375-26346.jpg?semt=ais_hybrid&w=740&q=80",
-        "directory_path": "",
-        "rating": "5",
-        "status": "Continuing",
-        "episodes": [],
-        "sonarr_url": ""
     }
 ]
