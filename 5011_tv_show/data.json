@@ -2178,6 +2178,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 19,
+                "title": "WWE SmackDown - 2026-01-30 - SmackDown 1380 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-02-01T09:32:55.417822",
+                "notify": "unseen"
+            },
+            {
                 "id": 18,
                 "title": "WWE SmackDown - 2026-01-23 - SmackDown 1379 WEBDL-720p",
                 "watched": true,
@@ -3021,6 +3028,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 16,
+                "title": "To Your Eternity - s03e16 - [56] - Connective HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-02-01T10:08:29.329442",
+                "notify": "unseen"
+            },
             {
                 "id": 15,
                 "title": "To Your Eternity - s03e15 - [55] - Leaving Alone HDTV-1080p - [SubsPlease]",
