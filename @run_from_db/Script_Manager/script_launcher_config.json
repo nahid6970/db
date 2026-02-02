@@ -1456,7 +1456,11 @@
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false
+            "_runtime_is_italic": false,
+            "color": "#1c253e",
+            "text_color": "#1881fd",
+            "hover_color": "#1c253e",
+            "hover_text_color": "#e35573"
         },
         {
             "name": "Variable",
