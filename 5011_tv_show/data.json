@@ -1995,6 +1995,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 17,
+                "title": "WWE Raw - 2026-02-02 - RAW 1706 HDTV-1080p",
+                "watched": true,
+                "added_date": "2026-02-03T14:56:29.510434",
+                "notify": "seen"
+            },
+            {
                 "id": 16,
                 "title": "WWE Raw - 2026-01-26 - RAW 1705 WEBDL-720p",
                 "watched": true,
