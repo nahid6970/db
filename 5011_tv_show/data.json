@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 21,
+                "title": "The Rookie - S08E05 - The Network HDTV-720p",
+                "watched": false,
+                "added_date": "2026-02-03T08:18:42.629081",
+                "notify": "unseen"
+            },
+            {
                 "id": 20,
                 "title": "The Rookie - S08E03 - The Red Place HDTV-720p",
                 "watched": false,
