@@ -1476,7 +1476,7 @@
             "keep_open": false,
             "kill_window": true,
             "new_terminal": true,
-            "run_admin": false,
+            "run_admin": true,
             "ctrl_left_cmd": "",
             "ctrl_right_cmd": "",
             "use_inline": false,
