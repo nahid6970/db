@@ -1,5 +1,14 @@
 {
   "127.0.0.1": [],
+  "bdgovtjob.net": [
+    {
+      "color": "#ff3838",
+      "id": "zuib1e5he",
+      "note": "",
+      "path": "article#post-17733 > div > header > div > span > time:nth-of-type(2)",
+      "text": "18 January, 2026"
+    }
+  ],
   "customColors": [
     "#ffff00",
     "#aaffaa",
@@ -374,6 +383,13 @@
       "note": "",
       "path": "yt-formatted-string#message > span",
       "text": "Comments are turned"
+    },
+    {
+      "color": "#5cc0ff",
+      "id": "kr62f4hho",
+      "note": "",
+      "path": "div#main",
+      "text": "ed by @GameClips4KYTT\n@GameClips4KYTT\n3 years ago\nGod Of War Ascension All Cutscenes Movie - "
     }
   ]
 }
