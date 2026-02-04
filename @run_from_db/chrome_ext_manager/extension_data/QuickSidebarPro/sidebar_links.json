@@ -1,14 +1,8 @@
 {
+  "extraPadding": 50,
+  "itemsPerRow": 5,
   "items_per_row": 6,
   "sidebar_links": [
-    {
-      "color": "#38bdf8",
-      "icon": "https://www.google.com/s2/favicons?domain=www.youtube.com&sz=64",
-      "id": "1769330715034",
-      "isSolid": false,
-      "title": "gg",
-      "url": "https://www.youtube.com/@englishmojajobs/videos"
-    },
     {
       "color": "#38bdf8",
       "icon": "https://yt3.ggpht.com/7fcBaP365BtX9Ct_PCvmUiQiQF6JlxUJYQ3XV4rBWbwVee9AEOEwMTdu-1Ic8vmhNdFLIIJTGw=s48-c-k-c0x00ffffff-no-rj",
@@ -26,12 +20,21 @@
       "url": "https://www.youtube.com/@EnglishMoja/streams"
     },
     {
+      "channelIcon": null,
       "color": "#38bdf8",
       "icon": "https://www.vlr.gg/img/vlr/logo_lt.png",
       "id": "1770080921234",
       "isSolid": false,
       "title": "Valorant esports coverage | VLR.gg",
       "url": "https://www.vlr.gg/"
+    },
+    {
+      "color": "#38bdf8",
+      "icon": "https://yt3.ggpht.com/ioZ2TWSKx7qythilPMaVhxo7843Ts4Lc6d4TV5Dc9sflhM_hZNxvjaxg8lCfBQr21ChkmiN8VA=s48-c-k-c0x00ffffff-no-rj",
+      "id": "1770179287188",
+      "isSolid": false,
+      "title": "(423) Turning Point Job Aid - YouTube",
+      "url": "https://www.youtube.com/@turningpointjobaid/videos"
     }
   ]
 }
