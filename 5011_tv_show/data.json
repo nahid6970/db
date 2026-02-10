@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 22,
+                "title": "The Rookie - S08E06 - Burn 4 Love HDTV-720p",
+                "watched": false,
+                "added_date": "2026-02-10T10:43:52.596195",
+                "notify": "unseen"
+            },
+            {
                 "id": 21,
                 "title": "The Rookie - S08E05 - The Network HDTV-720p",
                 "watched": false,
