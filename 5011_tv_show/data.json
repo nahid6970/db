@@ -2002,6 +2002,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 18,
+                "title": "WWE Raw - 2026-02-09 - RAW 1707 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-02-10T17:59:30.103213",
+                "notify": "unseen"
+            },
+            {
                 "id": 17,
                 "title": "WWE Raw - 2026-02-02 - RAW 1706 HDTV-1080p",
                 "watched": true,
