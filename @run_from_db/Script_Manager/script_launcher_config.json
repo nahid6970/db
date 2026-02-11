@@ -1532,7 +1532,7 @@
             "new_terminal": true,
             "run_admin": false,
             "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\@Status-Bar\\RCLONE\\Rclone-Status.py",
-            "ctrl_right_cmd": "",
+            "ctrl_right_cmd": "C:\\@delta\\ms1\\@Status-Bar\\RCLONE\\Rclone-Status.py",
             "use_inline": false,
             "inline_type": "cmd",
             "inline_script": "",
