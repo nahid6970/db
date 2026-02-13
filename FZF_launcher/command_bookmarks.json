@@ -1,10 +1,10 @@
 [
   {
-    "command": "gemini --resume",
+    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
     "shell": "pwsh"
   },
   {
-    "command": "kiro-cli",
+    "command": "gemini",
     "shell": "pwsh"
   }
 ]
