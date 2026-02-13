@@ -1,7 +1,8 @@
 [
   {
     "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
-    "shell": "pwsh"
+    "shell": "cmd",
+    "dir": "C:\\@delta\\db\\FZF_launcher"
   },
   {
     "command": "gemini",

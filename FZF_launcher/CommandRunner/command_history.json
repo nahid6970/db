@@ -1,0 +1,17 @@
+[
+  {
+    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
+    "shell": "cmd",
+    "dir": "C:\\@delta\\db\\FZF_launcher"
+  },
+  {
+    "command": "gemini",
+    "shell": "cmd",
+    "dir": "C:\\Users\\nahid\\Desktop\\TEST"
+  },
+  {
+    "command": "dir",
+    "shell": "cmd",
+    "dir": "C:\\@delta\\msBackups\\@JOB"
+  }
+]
