@@ -1,0 +1,10 @@
+[
+  {
+    "command": "gemini --resume",
+    "shell": "pwsh"
+  },
+  {
+    "command": "kiro-cli",
+    "shell": "pwsh"
+  }
+]

@@ -1,6 +1,24 @@
 [
   {
-    "command": "gemini",
+    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
     "shell": "cmd"
+  },
+  {
+    "command": "wsl bash -l -c \"cd $(wslpath '{path}') && kiro-cli chat --trust-all-tools /model\"",
+    "shell": "cmd",
+    "dir": "wsl bash -l -c \"cd $(wslpath '{path}') && kiro-cli chat --trust-all-tools /model\""
+  },
+  {
+    "command": "dir",
+    "shell": "cmd",
+    "dir": "C:\\@delta\\msBackups\\@JOB"
+  },
+  {
+    "command": "kiro-cli",
+    "shell": "cmd"
+  },
+  {
+    "command": "gemini --resume",
+    "shell": "pwsh"
   }
 ]
