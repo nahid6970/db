@@ -1,0 +1,120 @@
+{
+    "directories": [
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\",
+            "category": "Flask",
+            "name": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\4998_Applist",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\4999_startup",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5000_myhome",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5003_Browse_PC_Files",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5004 paint",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5011_tv_show",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5013_movie_tracker",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5018_cell",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\@Flask\\5555_terminal",
+            "category": "Flask"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\scripts\\run",
+            "category": "script",
+            "name": "Run & Dir"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\scripts\\ytc",
+            "category": "script"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\Testing\\FileLockSmith",
+            "category": "Testing"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\Testing\\mklink",
+            "category": "Testing"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\Testing\\port finder",
+            "category": "Testing"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\Testing\\mypygui\\qt",
+            "category": "Testing",
+            "name": "Script Manager"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\test_project\\my-first-extension",
+            "category": "Chrome Extension"
+        }
+    ],
+    "commands": [
+        {
+            "name": "Gemini Resume",
+            "template": "start \"Gemini\" /D \"{path}\" cmd /k gemini --resume latest",
+            "category": "AI"
+        },
+        {
+            "name": "Gemini",
+            "template": "start \"Gemini\" /D \"{path}\" cmd /k gemini",
+            "category": "AI"
+        },
+        {
+            "name": "Antigravity",
+            "template": "antigravity \"{path}\"",
+            "category": "AI"
+        },
+        {
+            "name": "Kiro App",
+            "template": "kiro \"{path}\"",
+            "category": "AI"
+        },
+        {
+            "name": "Kiro CLI (WSL)",
+            "template": "cls && wsl bash -l -c \"cd '$(wslpath '{path}')' && kiro-cli chat --trust-all-tools\"",
+            "category": "AI"
+        },
+        {
+            "name": "Kiro CLI (Select Model)",
+            "template": "cls && wsl bash -l -c \"cd $(wslpath '{path}') && kiro-cli chat --trust-all-tools /model\"",
+            "category": "AI"
+        },
+        {
+            "name": "Explorer",
+            "template": "explorer \"{path}\"",
+            "category": "General"
+        },
+        {
+            "name": "Terminal",
+            "template": "start cmd /k cd /d \"{path}\"",
+            "category": "General"
+        }
+    ],
+    "settings": {
+        "view_mode": "name"
+    }
+}
