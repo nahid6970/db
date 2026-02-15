@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convex Counter</title>
+  <style>
+    body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f0f0f0; }
+    .container { text-align: center; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+    #counter { font-size: 48px; margin: 20px 0; color: #333; }
+    button { font-size: 18px; padding: 12px 24px; cursor: pointer; background: #0070f3; color: white; border: none; border-radius: 4px; }
+    button:hover { background: #0051cc; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Convex Counter</h1>
+    <div id="counter">0</div>
+    <button onclick="incrementCounter()">Increment</button>
+  </div>
+
+  <script type="module">
+    import { ConvexHttpClient } from "https://cdn.jsdelivr.net/npm/convex@1.16.0/+esm";
+    
+    // Replace with your deployment URL after running 'npx convex dev'
+    const client = new ConvexHttpClient("YOUR_CONVEX_URL_HERE");
+    
+    async function updateCounter() {
+      const value = await client.query("counter:get");
+      document.getElementById("counter").textContent = value;
+    }
+    
+    window.incrementCounter = async () => {
+      await client.mutation("counter:increment");
+      await updateCounter();
+    };
+    
+    updateCounter();
+    setInterval(updateCounter, 2000);
+  </script>
+</body>
+</html>
