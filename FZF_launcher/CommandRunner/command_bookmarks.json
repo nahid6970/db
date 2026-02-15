@@ -6,6 +6,7 @@
   },
   {
     "command": "gemini",
-    "shell": "pwsh"
+    "shell": "cmd",
+    "dir": "C:\\@delta\\ms1\\@Flask\\5018_cell"
   }
 ]

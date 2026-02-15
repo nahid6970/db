@@ -1,13 +1,13 @@
 [
   {
-    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
+    "command": "gemini",
     "shell": "cmd",
     "dir": "C:\\@delta\\ms1\\@Flask\\5018_cell"
   },
   {
-    "command": "gemini",
+    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
     "shell": "cmd",
-    "dir": "C:\\Users\\nahid\\Desktop\\TEST"
+    "dir": "C:\\@delta\\ms1\\@Flask\\5018_cell"
   },
   {
     "command": "dir",
