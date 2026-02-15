@@ -1195,7 +1195,7 @@
             "hide_terminal": true,
             "keep_open": false,
             "kill_window": true,
-            "ctrl_left_cmd": "",
+            "ctrl_left_cmd": "explorer C:\\@delta\\db\\@run_from_db\\locksmith.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
@@ -1597,7 +1597,12 @@
             "width": 0,
             "height": 0,
             "corner_radius": 0,
-            "border_width": 1
+            "border_width": 1,
+            "_runtime_height": 100,
+            "_runtime_font_size": 14,
+            "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+            "_runtime_is_bold": true,
+            "_runtime_is_italic": false
         }
     ],
     "github_repos": [

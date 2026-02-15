@@ -7,13 +7,24 @@ import ctypes
 import sys
 from pathlib import Path
 
+# CYBERPUNK THEME PALETTE
+CP_BG = "#050505"
+CP_PANEL = "#111111"
+CP_YELLOW = "#FCEE0A"
+CP_CYAN = "#00F0FF"
+CP_RED = "#FF003C"
+CP_GREEN = "#00ff21"
+CP_ORANGE = "#ff934b"
+CP_DIM = "#3a3a3a"
+CP_TEXT = "#E0E0E0"
+CP_SUBTEXT = "#808080"
+
 # Configuration
 ctk.set_appearance_mode("Dark")
-ctk.set_default_color_theme("blue")
 
 class ProcessItem(ctk.CTkFrame):
     def __init__(self, master, proc, file_path, kill_callback):
-        super().__init__(master, fg_color="#2b2b2b", corner_radius=10)
+        super().__init__(master, fg_color=CP_PANEL, corner_radius=0, border_width=1, border_color=CP_DIM)
         self.pack(fill="x", padx=10, pady=5)
         self.proc = proc
         self.kill_callback = kill_callback
@@ -32,15 +43,16 @@ class ProcessItem(ctk.CTkFrame):
         info_frame.pack(side="left", fill="both", expand=True, padx=10, pady=10)
 
         # Process Name
-        ctk.CTkLabel(info_frame, text=f"{name} (PID: {pid})", font=("Roboto", 16, "bold"), text_color="white").pack(anchor="w")
+        ctk.CTkLabel(info_frame, text=f"{name} (PID: {pid})", font=("Consolas", 16, "bold"), text_color=CP_CYAN).pack(anchor="w")
         
         # User & Path Info
-        ctk.CTkLabel(info_frame, text=f"User: {username}", font=("Roboto", 12), text_color="#aaaaaa").pack(anchor="w")
-        ctk.CTkLabel(info_frame, text=f"Locking: {file_path}", font=("Roboto", 12), text_color="#ffbebe", wraplength=400).pack(anchor="w")
+        ctk.CTkLabel(info_frame, text=f"User: {username}", font=("Consolas", 12), text_color=CP_SUBTEXT).pack(anchor="w")
+        ctk.CTkLabel(info_frame, text=f"Locking: {file_path}", font=("Consolas", 12), text_color=CP_RED, wraplength=400).pack(anchor="w")
 
         # Action Button
-        self.btn_kill = ctk.CTkButton(self, text="End Task", fg_color="#cf352e", hover_color="#a8201a", 
-                                      command=self.terminate_process, width=80)
+        self.btn_kill = ctk.CTkButton(self, text="KILL", font=("Consolas", 12, "bold"), 
+                                      fg_color=CP_DIM, hover_color=CP_RED, text_color="white",
+                                      command=self.terminate_process, width=80, corner_radius=0)
         self.btn_kill.pack(side="right", padx=10, pady=10)
 
     def terminate_process(self):
@@ -55,6 +67,7 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
 
         self.title("PyLocksmith - File Lock Manager")
         self.geometry("700x600")
+        self.configure(fg_color=CP_BG)
         self.grid_columnconfigure(0, weight=1)
         self.grid_rowconfigure(2, weight=1)
 
@@ -66,27 +79,44 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
         self.header_frame = ctk.CTkFrame(self, fg_color="transparent")
         self.header_frame.grid(row=0, column=0, padx=20, pady=(20, 10), sticky="ew")
         
-        ctk.CTkLabel(self.header_frame, text="File Locksmith", font=("Roboto", 24, "bold")).pack(side="left")
+        ctk.CTkLabel(self.header_frame, text="FILE LOCKSMITH", font=("Consolas", 28, "bold"), text_color=CP_YELLOW).pack(side="left")
         
+        # Buttons Frame
+        self.btn_frame = ctk.CTkFrame(self.header_frame, fg_color="transparent")
+        self.btn_frame.pack(side="right")
+
+        self.restart_btn = ctk.CTkButton(self.btn_frame, text="RESTART", font=("Consolas", 12, "bold"), 
+                                        fg_color=CP_DIM, hover_color=CP_CYAN, text_color="white", 
+                                        width=80, corner_radius=0, command=self.restart_app)
+        self.restart_btn.pack(side="right", padx=5)
+
         if not self.is_admin():
-            self.admin_btn = ctk.CTkButton(self.header_frame, text="Restart as Admin", fg_color="#E0a800", text_color="black", hover_color="#c69500", command=self.restart_admin)
-            self.admin_btn.pack(side="right")
+            self.admin_btn = ctk.CTkButton(self.btn_frame, text="ADMIN RESTART", font=("Consolas", 12, "bold"),
+                                          fg_color=CP_ORANGE, text_color="black", hover_color=CP_YELLOW, 
+                                          width=120, corner_radius=0, command=self.restart_admin)
+            self.admin_btn.pack(side="right", padx=5)
 
         # Search Area
-        self.search_frame = ctk.CTkFrame(self, fg_color="#1f1f1f", corner_radius=15)
+        self.search_frame = ctk.CTkFrame(self, fg_color=CP_PANEL, corner_radius=0, border_width=1, border_color=CP_DIM)
         self.search_frame.grid(row=1, column=0, padx=20, pady=10, sticky="ew")
 
-        self.path_entry = ctk.CTkEntry(self.search_frame, placeholder_text="Drag folder here or use Browse...", height=40, border_width=0, fg_color="#333333")
+        self.path_entry = ctk.CTkEntry(self.search_frame, placeholder_text="Drag folder here or use Browse...", 
+                                       height=40, border_width=1, border_color=CP_DIM, fg_color=CP_BG, 
+                                       text_color=CP_CYAN, font=("Consolas", 12))
         self.path_entry.pack(side="left", fill="x", expand=True, padx=(15, 10), pady=10)
         
-        self.btn_browse = ctk.CTkButton(self.search_frame, text="Browse", width=80, command=self.browse_path, fg_color="#3a7ebf", hover_color="#27629f")
+        self.btn_browse = ctk.CTkButton(self.search_frame, text="BROWSE", font=("Consolas", 12, "bold"), 
+                                        width=80, command=self.browse_path, fg_color=CP_DIM, 
+                                        hover_color=CP_CYAN, corner_radius=0)
         self.btn_browse.pack(side="left", padx=(0, 10), pady=10)
 
-        self.btn_scan = ctk.CTkButton(self.search_frame, text="Scan Locks", width=100, command=self.start_scan, fg_color="#2e8b57", hover_color="#20663d")
+        self.btn_scan = ctk.CTkButton(self.search_frame, text="SCAN LOCKS", font=("Consolas", 12, "bold"), 
+                                      width=100, command=self.start_scan, fg_color=CP_DIM, 
+                                      hover_color=CP_GREEN, corner_radius=0)
         self.btn_scan.pack(side="left", padx=(0, 15), pady=10)
 
         # status
-        self.status_label = ctk.CTkLabel(self, text="Ready", font=("Roboto", 12), text_color="gray")
+        self.status_label = ctk.CTkLabel(self, text="SYSTEM READY", font=("Consolas", 12), text_color=CP_SUBTEXT)
         self.status_label.grid(row=3, column=0, padx=20, pady=5, sticky="w")
 
         # Results Area
@@ -111,6 +141,10 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
         ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
         sys.exit()
 
+    def restart_app(self):
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+
     def browse_path(self):
         path = filedialog.askdirectory()
         if not path: # Check for file if directory not picked
@@ -123,10 +157,10 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
     def start_scan(self):
         target_path = self.path_entry.get()
         if not target_path or not os.path.exists(target_path):
-            self.status_label.configure(text="Please select a valid path.", text_color="#ff5555")
+            self.status_label.configure(text="INVALID PATH", text_color=CP_RED)
             return
 
-        self.status_label.configure(text="Scanning processes...", text_color="#3a7ebf")
+        self.status_label.configure(text="SCANNING PROCESSES...", text_color=CP_CYAN)
         for widget in self.results_scroll.winfo_children():
             widget.destroy()
 
@@ -145,7 +179,7 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
             while True:
                 msg_type, data = self.scan_queue.get_nowait()
                 if msg_type == 'progress':
-                    self.status_label.configure(text=data)
+                    self.status_label.configure(text=data.upper())
                 elif msg_type == 'done':
                     self.display_results(data)
                     return # Stop polling
@@ -226,20 +260,22 @@ class LocksmithApp(ctk.CTk, TkinterDnD.DnDWrapper):
 
     def display_results(self, locks):
         if not locks:
-            self.status_label.configure(text="No locking processes found.", text_color="#ff5555")
-            lbl = ctk.CTkLabel(self.results_scroll, text="No processes found locking this file/folder.", font=("Roboto", 16))
+            self.status_label.configure(text="NO LOCKS DETECTED", text_color=CP_RED)
+            lbl = ctk.CTkLabel(self.results_scroll, text="No processes found locking this file/folder.", 
+                               font=("Consolas", 16), text_color=CP_TEXT)
             lbl.pack(pady=20)
             return
 
-        self.status_label.configure(text=f"Found {len(locks)} blocking processes.", text_color="#2e8b57")
+        self.status_label.configure(text=f"DETECTED {len(locks)} BLOCKING PROCESSES", text_color=CP_GREEN)
         for proc, file_path in locks:
             item = ProcessItem(self.results_scroll, proc, file_path, self.confirm_kill)
 
     def confirm_kill(self, proc, item_widget):
         try:
+             name = proc.name()
              proc.kill()
              item_widget.destroy()
-             self.status_label.configure(text=f"Terminated {proc.name()}", text_color="#2e8b57")
+             self.status_label.configure(text=f"TERMINATED {name.upper()}", text_color=CP_GREEN)
         except psutil.NoSuchProcess:
             item_widget.destroy()
         except psutil.AccessDenied:
