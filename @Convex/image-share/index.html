@@ -29,31 +29,6 @@
       display: none;
     }
     
-    .file-label {
-      padding: 12px 24px;
-      background: #007bff;
-      border-radius: 0;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 15px;
-      color: white;
-      transition: all 0.2s;
-      font-weight: 500;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      min-width: 48px;
-    }
-    
-    .file-label:hover {
-      background: #0056b3;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    }
-    
-    .file-count {
-      display: none;
-    }
-    
     button { 
       padding: 12px 24px; 
       background: #007bff; 
@@ -154,8 +129,7 @@
     <div class="upload-section">
       <div class="upload-controls">
         <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
-        <label for="fileInput" class="file-label" id="fileLabel">+</label>
-        <button onclick="uploadImages()">Upload</button>
+        <button id="uploadBtn" onclick="handleUpload()">Upload</button>
         <button class="danger" onclick="clearAll()">Clear All</button>
       </div>
       <div class="progress-container" id="progressContainer">
@@ -185,7 +159,19 @@
     window.updateFileCount = function() {
       const files = document.getElementById('fileInput').files;
       const count = files.length;
-      document.getElementById('fileLabel').textContent = count || '+';
+      const btn = document.getElementById('uploadBtn');
+      if (count) {
+        btn.textContent = `Upload (${count})`;
+      }
+    };
+    
+    window.handleUpload = function() {
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) {
+        document.getElementById('fileInput').click();
+      } else {
+        uploadImages();
+      }
     };
     
     window.uploadImages = async function() {
@@ -239,7 +225,7 @@
         progressFill.style.width = '0%';
       }, 2000);
       document.getElementById('fileInput').value = '';
-      document.getElementById('fileLabel').textContent = '+';
+      document.getElementById('uploadBtn').textContent = 'Upload';
     };
     
     window.deleteImage = async function(id) {
