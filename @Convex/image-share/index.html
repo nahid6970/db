@@ -50,6 +50,13 @@
     
     button.danger:hover { background: #c82333; }
     
+    button.has-files {
+      background: #ff8c00;
+    }
+    
+    button.has-files:hover {
+      background: #e67e00;
+    }    
     #status {
       width: 100%;
       margin-top: 10px;
@@ -162,6 +169,9 @@
       const btn = document.getElementById('uploadBtn');
       if (count) {
         btn.textContent = `Upload (${count})`;
+        btn.classList.add('has-files');
+      } else {
+        btn.classList.remove('has-files');
       }
     };
     
@@ -226,6 +236,7 @@
       }, 2000);
       document.getElementById('fileInput').value = '';
       document.getElementById('uploadBtn').textContent = 'Upload';
+      document.getElementById('uploadBtn').classList.remove('has-files');
     };
     
     window.deleteImage = async function(id) {
