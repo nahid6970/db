@@ -14839,24 +14839,7 @@ async function triggerScans() {
         editToggle.style.display = 'none';
       }
       
-      // Override note preview to use static file
-      if (window.openNotePreview) {
-        window.openNotePreview = function(noteContent) {
-          const decodedContent = decodeURIComponent(noteContent);
-          const encodedContent = encodeURIComponent(decodedContent);
-          const previewUrl = `note_preview.html?content=${encodedContent}`;
-          
-          const previewWindow = window.open(
-            previewUrl,
-            'notePreview',
-            'width=900,height=700,scrollbars=yes,resizable=yes,toolbar=no,menubar=no,location=no,status=no'
-          );
-          
-          if (!previewWindow) {
-            alert('Please allow popups to preview notes');
-          }
-        };
-      }
+
       
       // Remove edit buttons and functionality
       const style = document.createElement('style');
