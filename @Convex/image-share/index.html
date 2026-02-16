@@ -22,6 +22,7 @@
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
+      justify-content: center;
     }
     
     input[type="file"] { 
@@ -29,22 +30,28 @@
     }
     
     .file-label {
-      flex: 1;
-      min-width: 200px;
       padding: 12px 24px;
-      background: #f8f9fa;
-      border: 2px solid #dee2e6;
-      border-radius: 8px;
+      background: #007bff;
+      border-radius: 0;
       cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 15px;
-      text-align: center;
+      color: white;
       transition: all 0.2s;
       font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      min-width: 48px;
     }
     
     .file-label:hover {
-      background: #e9ecef;
-      border-color: #007bff;
+      background: #0056b3;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    .file-count {
+      display: none;
     }
     
     button { 
@@ -52,7 +59,7 @@
       background: #007bff; 
       color: white; 
       border: none; 
-      border-radius: 8px; 
+      border-radius: 0; 
       cursor: pointer;
       font-size: 15px;
       font-weight: 500;
@@ -146,8 +153,8 @@
   <div class="container">
     <div class="upload-section">
       <div class="upload-controls">
-        <input type="file" id="fileInput" multiple accept="image/*">
-        <label for="fileInput" class="file-label">Choose Images</label>
+        <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
+        <label for="fileInput" class="file-label" id="fileLabel">+</label>
         <button onclick="uploadImages()">Upload</button>
         <button class="danger" onclick="clearAll()">Clear All</button>
       </div>
@@ -174,6 +181,12 @@
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
     
     const client = new ConvexHttpClient(CONVEX_URL);
+    
+    window.updateFileCount = function() {
+      const files = document.getElementById('fileInput').files;
+      const count = files.length;
+      document.getElementById('fileLabel').textContent = count || '+';
+    };
     
     window.uploadImages = async function() {
       const files = document.getElementById('fileInput').files;
@@ -226,6 +239,7 @@
         progressFill.style.width = '0%';
       }, 2000);
       document.getElementById('fileInput').value = '';
+      document.getElementById('fileLabel').textContent = '+';
     };
     
     window.deleteImage = async function(id) {
