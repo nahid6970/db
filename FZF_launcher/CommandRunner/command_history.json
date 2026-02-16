@@ -1,5 +1,9 @@
 [
   {
+    "command": "wsl ~/.local/bin/kiro-cli chat --trust-all-tools /model",
+    "shell": "cmd"
+  },
+  {
     "command": "gemini",
     "shell": "cmd",
     "dir": "C:\\@delta\\ms1\\@Flask\\5018_cell"
