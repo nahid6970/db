@@ -83,30 +83,24 @@
       status.textContent = 'Upload complete!';
       setTimeout(() => status.textContent = '', 2000);
       document.getElementById('fileInput').value = '';
-      loadImages();
     };
     
     window.deleteImage = async function(id) {
       if (!confirm('Delete this image?')) return;
       await client.mutation("images:remove", { id });
-      loadImages();
     };
     
     window.clearAll = async function() {
       if (!confirm('Delete all images?')) return;
       await client.mutation("images:clear");
-      loadImages();
     };
     
     window.openImage = function(url) {
       window.open(url, '_blank');
     };
     
-    async function loadImages() {
+    function renderImages(images) {
       const gallery = document.getElementById('gallery');
-      gallery.innerHTML = '<div class="loading">Loading...</div>';
-      
-      const images = await client.query("images:list");
       
       if (!images.length) {
         gallery.innerHTML = '<div class="loading">No images yet</div>';
@@ -125,8 +119,13 @@
       `).join('');
     }
     
+    async function loadImages() {
+      const images = await client.query("images:list");
+      renderImages(images);
+    }
+    
     loadImages();
-    setInterval(loadImages, 5000);
+    client.onUpdate("images:list", {}, renderImages);
   </script>
 </body>
 </html>
