@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4400/4400968.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Sharing</title>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 98%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .clean-btn {
+            background-color: #e74c3c;
+        }
+        .clean-btn:hover {
+            background-color: #c0392b;
+        }
+        .shared-text {
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .log-entry {
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .timestamp {
+            font-size: 12px;
+            color: #666;
+            font-weight: bold;
+        }
+        .copy-btn, .delete-btn {
+            position: absolute;
+            top: 10px;
+            color: white;
+            padding: 5px 10px;
+            font-size: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+        }
+        .copy-btn {
+            right: 80px;
+            background-color: #007BFF;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .copy-btn.success {
+            background-color: #28a745;
+        }
+        .delete-btn {
+            right: 10px;
+            background-color: #dc3545;
+        }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+        .clean-all-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Share Text Locally</h1>
+
+    <form id="shareForm">
+        <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
+        <button type="submit">Share</button>
+    </form>
+
+    <div class="logs">
+        <h2>Previous Shared Texts:</h2>
+        <div id="logsList"></div>
+    </div>
+
+    <div class="clean-all-container">
+        <button class="clean-btn" onclick="cleanAll()">Clean All</button>
+    </div>
+
+    <script type="module">
+        import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+        
+        const client = new ConvexHttpClient("https://dazzling-akita-709.convex.cloud");
+
+        async function loadLogs() {
+            const logs = await client.query("functions:list");
+            const logsList = document.getElementById('logsList');
+            logsList.innerHTML = logs.map((log, index) => {
+                const date = new Date(log.timestamp);
+                const timestamp = date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    hour12: true
+                });
+                return `
+                    <div class="log-entry">
+                        <div class="timestamp">${timestamp}</div>
+                        <div id="log-${index}" class="shared-text">${log.text}</div>
+                        <button id="copy-btn-${index}" class="copy-btn" onclick="copyText('log-${index}', 'copy-btn-${index}')">Copy</button>
+                        <button class="delete-btn" onclick="deleteEntry('${log._id}')">Delete</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        document.getElementById('shareForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const text = document.getElementById('textInput').value;
+            if (text) {
+                await client.mutation("functions:add", { text });
+                document.getElementById('textInput').value = '';
+                loadLogs();
+            }
+        });
+
+        window.deleteEntry = async (id) => {
+            if (confirm("Are you sure you want to delete this entry?")) {
+                await client.mutation("functions:remove", { id });
+                loadLogs();
+            }
+        };
+
+        window.cleanAll = async () => {
+            if (confirm("Are you sure you want to delete all entries?")) {
+                await client.mutation("functions:clean");
+                loadLogs();
+            }
+        };
+
+        window.copyText = (elementId, buttonId) => {
+            const textElement = document.getElementById(elementId);
+            const text = textElement.innerText;
+            navigator.clipboard.writeText(text);
+            const copyBtn = document.getElementById(buttonId);
+            copyBtn.innerText = '✔';
+            copyBtn.classList.add('success');
+            setTimeout(() => {
+                copyBtn.innerText = 'Copy';
+                copyBtn.classList.remove('success');
+            }, 2000);
+        };
+
+        loadLogs();
+        setInterval(loadLogs, 5000);
+    </script>
+</body>
+</html>

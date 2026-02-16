@@ -1,0 +1,10 @@
+{
+  "name": "myhome-convex",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "convex dev"
+  },
+  "devDependencies": {
+    "convex": "^1.16.0"
+  }
+}

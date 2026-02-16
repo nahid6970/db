@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Share</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui; padding: 20px; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    h1 { margin-bottom: 20px; }
+    .upload-section { background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+    input[type="file"] { margin-right: 10px; }
+    button { padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    button.danger { background: #dc3545; margin-left: 10px; }
+    button.danger:hover { background: #c82333; }
+    .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+    .image-card { background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .image-card img { width: 100%; height: 200px; object-fit: cover; cursor: pointer; }
+    .image-info { padding: 10px; }
+    .image-info p { font-size: 14px; color: #666; margin-bottom: 5px; }
+    .image-info button { padding: 5px 10px; font-size: 12px; }
+    .loading { text-align: center; padding: 20px; color: #666; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Share</h1>
+    
+    <div class="upload-section">
+      <input type="file" id="fileInput" multiple accept="image/*">
+      <button onclick="uploadImages()">Upload</button>
+      <button class="danger" onclick="clearAll()">Clear All</button>
+      <div id="status"></div>
+    </div>
+
+    <div id="gallery" class="gallery"></div>
+  </div>
+
+  <script type="module">
+    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+    
+    // REPLACE WITH YOUR CONVEX URL
+    const CONVEX_URL = "https://modest-goose-860.convex.cloud";
+    
+    // REPLACE WITH YOUR CLOUDINARY CREDENTIALS
+    const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
+    const CLOUDINARY_UPLOAD_PRESET = "myGallery";
+    
+    const client = new ConvexHttpClient(CONVEX_URL);
+    
+    window.uploadImages = async function() {
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) return;
+      
+      const status = document.getElementById('status');
+      status.textContent = 'Uploading...';
+      
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        formData.append('folder', 'myGallery');
+        
+        try {
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          
+          const data = await res.json();
+          
+          await client.mutation("images:add", { 
+            url: data.secure_url,
+            filename: file.name
+          });
+        } catch (error) {
+          console.error('Upload failed:', error);
+        }
+      }
+      
+      status.textContent = 'Upload complete!';
+      setTimeout(() => status.textContent = '', 2000);
+      document.getElementById('fileInput').value = '';
+      loadImages();
+    };
+    
+    window.deleteImage = async function(id) {
+      if (!confirm('Delete this image?')) return;
+      await client.mutation("images:remove", { id });
+      loadImages();
+    };
+    
+    window.clearAll = async function() {
+      if (!confirm('Delete all images?')) return;
+      await client.mutation("images:clear");
+      loadImages();
+    };
+    
+    window.openImage = function(url) {
+      window.open(url, '_blank');
+    };
+    
+    async function loadImages() {
+      const gallery = document.getElementById('gallery');
+      gallery.innerHTML = '<div class="loading">Loading...</div>';
+      
+      const images = await client.query("images:list");
+      
+      if (!images.length) {
+        gallery.innerHTML = '<div class="loading">No images yet</div>';
+        return;
+      }
+      
+      gallery.innerHTML = images.map(img => `
+        <div class="image-card">
+          <img src="${img.url}" alt="${img.filename}" onclick="openImage('${img.url}')">
+          <div class="image-info">
+            <p><strong>${img.filename}</strong></p>
+            <p>${new Date(img.timestamp).toLocaleString()}</p>
+            <button class="danger" onclick="deleteImage('${img._id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    loadImages();
+    setInterval(loadImages, 5000);
+  </script>
+</body>
+</html>

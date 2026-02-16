@@ -1,0 +1,10 @@
+{
+  "name": "convex-image-share",
+  "version": "1.0.0",
+  "devDependencies": {
+    "convex": "^1.16.0"
+  },
+  "dependencies": {
+    "cloudinary": "^2.9.0"
+  }
+}
