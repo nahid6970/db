@@ -25,16 +25,25 @@
     }
     
     input[type="file"] { 
-      flex: 1;
-      min-width: 200px;
-      padding: 10px;
-      border: 2px dashed #ddd;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 14px;
+      display: none;
     }
     
-    input[type="file"]:hover {
+    .file-label {
+      flex: 1;
+      min-width: 200px;
+      padding: 12px 24px;
+      background: #f8f9fa;
+      border: 2px solid #dee2e6;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 15px;
+      text-align: center;
+      transition: all 0.2s;
+      font-weight: 500;
+    }
+    
+    .file-label:hover {
+      background: #e9ecef;
       border-color: #007bff;
     }
     
@@ -62,8 +71,34 @@
     #status {
       width: 100%;
       margin-top: 10px;
-      color: #28a745;
       font-size: 14px;
+    }
+    
+    .progress-container {
+      width: 100%;
+      margin-top: 10px;
+      display: none;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: #007bff;
+      transition: width 0.3s;
+      border-radius: 4px;
+    }
+    
+    .progress-text {
+      font-size: 13px;
+      color: #666;
+      margin-top: 4px;
     }
     
     .gallery { 
@@ -102,7 +137,7 @@
       .upload-section { padding: 12px; }
       .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
       .image-card img { height: 150px; }
-      input[type="file"] { min-width: 100%; font-size: 13px; }
+      .file-label { min-width: 100%; font-size: 14px; }
       button { padding: 10px 18px; font-size: 14px; }
     }
   </style>
@@ -112,8 +147,15 @@
     <div class="upload-section">
       <div class="upload-controls">
         <input type="file" id="fileInput" multiple accept="image/*">
+        <label for="fileInput" class="file-label">Choose Images</label>
         <button onclick="uploadImages()">Upload</button>
         <button class="danger" onclick="clearAll()">Clear All</button>
+      </div>
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText"></div>
       </div>
       <div id="status"></div>
     </div>
@@ -137,8 +179,16 @@
       const files = document.getElementById('fileInput').files;
       if (!files.length) return;
       
+      const progressContainer = document.getElementById('progressContainer');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
       const status = document.getElementById('status');
-      status.textContent = 'Uploading...';
+      
+      progressContainer.style.display = 'block';
+      status.textContent = '';
+      
+      const total = files.length;
+      let completed = 0;
       
       for (const file of files) {
         const formData = new FormData();
@@ -158,13 +208,23 @@
             url: data.secure_url,
             filename: file.name
           });
+          
+          completed++;
+          const percent = Math.round((completed / total) * 100);
+          progressFill.style.width = percent + '%';
+          progressText.textContent = `${completed} of ${total} uploaded`;
         } catch (error) {
           console.error('Upload failed:', error);
         }
       }
       
       status.textContent = 'Upload complete!';
-      setTimeout(() => status.textContent = '', 2000);
+      status.style.color = '#28a745';
+      setTimeout(() => {
+        status.textContent = '';
+        progressContainer.style.display = 'none';
+        progressFill.style.width = '0%';
+      }, 2000);
       document.getElementById('fileInput').value = '';
     };
     
