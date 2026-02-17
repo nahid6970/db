@@ -86,25 +86,21 @@ class ShareActivity : ComponentActivity() {
     @Composable
     fun UploadScreen(files: List<FileInfo>) {
         val scope = rememberCoroutineScope()
-        var uploadStates by remember { mutableStateOf(files.map { UploadState.Pending }) }
+        var uploadStates by remember { mutableStateOf<List<UploadState>>(files.map { UploadState.Pending }) }
         var isUploading by remember { mutableStateOf(false) }
 
         LaunchedEffect(Unit) {
             isUploading = true
             files.forEachIndexed { index, file ->
-                uploadStates = uploadStates.toMutableList().apply { this[index] = UploadState.Uploading(0) }
+                uploadStates = uploadStates.toMutableList().also { it[index] = UploadState.Uploading(0) }
                 
                 try {
                     uploadFile(file) { progress ->
-                        uploadStates = uploadStates.toMutableList().apply { 
-                            this[index] = UploadState.Uploading(progress) 
-                        }
+                        uploadStates = uploadStates.toMutableList().also { it[index] = UploadState.Uploading(progress) }
                     }
-                    uploadStates = uploadStates.toMutableList().apply { this[index] = UploadState.Success }
+                    uploadStates = uploadStates.toMutableList().also { it[index] = UploadState.Success }
                 } catch (e: Exception) {
-                    uploadStates = uploadStates.toMutableList().apply { 
-                        this[index] = UploadState.Error(e.message ?: "Failed") 
-                    }
+                    uploadStates = uploadStates.toMutableList().also { it[index] = UploadState.Error(e.message ?: "Failed") }
                 }
             }
             isUploading = false
@@ -169,11 +165,18 @@ class ShareActivity : ComponentActivity() {
             }
         }
 
-        // Upload to Cloudinary
-        val cloudinaryUrl = uploadToCloudinary(tempFile, onProgress)
+        val url = if (fileInfo.mimeType.startsWith("image/")) {
+            // Images: Upload to Cloudinary
+            uploadToCloudinary(tempFile, onProgress)
+        } else {
+            // Other files: Convert to base64
+            val bytes = tempFile.readBytes()
+            val base64 = android.util.Base64.encodeToString(bytes, android.util.Base64.DEFAULT)
+            "data:${fileInfo.mimeType};base64,$base64"
+        }
 
         // Save to Convex
-        saveToConvex(cloudinaryUrl, fileInfo)
+        saveToConvex(url, fileInfo)
 
         tempFile.delete()
     }
@@ -187,7 +190,7 @@ class ShareActivity : ComponentActivity() {
             .build()
 
         val request = Request.Builder()
-            .url("https://api.cloudinary.com/v1_1/$CLOUDINARY_CLOUD_NAME/raw/upload")
+            .url("https://api.cloudinary.com/v1_1/$CLOUDINARY_CLOUD_NAME/image/upload")
             .post(requestBody)
             .build()
 

@@ -197,25 +197,42 @@
       let completed = 0;
       
       for (const file of files) {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        formData.append('folder', 'myFiles');
-        
         try {
-          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/raw/upload`, {
-            method: 'POST',
-            body: formData
-          });
-          
-          const data = await res.json();
-          
-          await client.mutation("files:add", { 
-            url: data.secure_url,
-            filename: file.name,
-            fileType: file.type || 'application/octet-stream',
-            fileSize: file.size
-          });
+          // For images, use Cloudinary
+          if (file.type.startsWith('image/')) {
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            formData.append('folder', 'myFiles');
+            
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+              method: 'POST',
+              body: formData
+            });
+            
+            const data = await res.json();
+            
+            await client.mutation("files:add", { 
+              url: data.secure_url,
+              filename: file.name,
+              fileType: file.type,
+              fileSize: file.size
+            });
+          } else {
+            // For other files, convert to base64 and store in Convex
+            const reader = new FileReader();
+            const base64 = await new Promise((resolve) => {
+              reader.onload = (e) => resolve(e.target.result);
+              reader.readAsDataURL(file);
+            });
+            
+            await client.mutation("files:add", { 
+              url: base64,
+              filename: file.name,
+              fileType: file.type || 'application/octet-stream',
+              fileSize: file.size
+            });
+          }
           
           completed++;
           const percent = Math.round((completed / total) * 100);
@@ -249,11 +266,18 @@
     };
     
     window.downloadFile = function(url, filename) {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = filename;
-      a.target = '_blank';
-      a.click();
+      // If it's a base64 data URL, download directly
+      if (url.startsWith('data:')) {
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      } else {
+        // For Cloudinary images, open in new tab
+        window.open(url, '_blank');
+      }
     };
     
     function renderFiles(files) {
