@@ -45,10 +45,18 @@
     button.danger:hover { background: #c82333; }
     button.has-files { background: #ff8c00; }
     button.has-files:hover { background: #e67e00; }
-    button.pin { background: #6c757d; }
-    button.pin:hover { background: #5a6268; }
-    button.pinned { background: #ffc107; color: #000; }
-    button.pinned:hover { background: #e0a800; }
+    
+    .pin-btn {
+      background: transparent;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      padding: 8px;
+      opacity: 0.4;
+      transition: all 0.2s;
+    }
+    .pin-btn:hover { opacity: 0.7; transform: scale(1.1); }
+    .pin-btn.pinned { opacity: 1; }
     button.pin { background: #6c757d; }
     button.pin:hover { background: #5a6268; }
     button.pinned { background: #ffc107; color: #000; }
@@ -319,7 +327,7 @@
             <p>${formatFileSize(file.fileSize)} • ${new Date(file.timestamp).toLocaleString()}</p>
           </div>
           <div class="file-actions">
-            <button class="${file.pinned ? 'pinned' : 'pin'}" onclick="togglePin('${file._id}')">${file.pinned ? 'Unpin' : 'Pin'}</button>
+            <button class="pin-btn ${file.pinned ? 'pinned' : ''}" onclick="togglePin('${file._id}')">📌</button>
             <button onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">Download</button>
             <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
           </div>
