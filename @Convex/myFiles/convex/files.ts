@@ -42,6 +42,10 @@ export const add = mutation({
 export const remove = mutation({
   args: { id: v.id("files") },
   handler: async (ctx, args) => {
+    const file = await ctx.db.get(args.id);
+    if (file?.storageId) {
+      await ctx.storage.delete(file.storageId);
+    }
     await ctx.db.delete(args.id);
   },
 });
@@ -51,6 +55,9 @@ export const clear = mutation({
   handler: async (ctx) => {
     const files = await ctx.db.query("files").collect();
     for (const file of files) {
+      if (file.storageId) {
+        await ctx.storage.delete(file.storageId);
+      }
       await ctx.db.delete(file._id);
     }
   },
