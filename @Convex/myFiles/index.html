@@ -47,13 +47,19 @@
     button.has-files:hover { background: #e67e00; }
     
     .pin-btn {
-      background: transparent;
-      border: none;
+      background: transparent !important;
+      border: 2px solid transparent !important;
+      border-radius: 4px;
       font-size: 20px;
       cursor: pointer;
       padding: 8px;
       opacity: 0.4;
       transition: all 0.2s;
+    }
+    
+    .pin-btn:hover {
+      border-color: #ff8c00 !important;
+      opacity: 0.7;
     }
     .pin-btn:hover { opacity: 0.7; transform: scale(1.1); }
     .pin-btn.pinned { opacity: 1; }
@@ -168,23 +174,32 @@
       padding: 8px 12px !important;
       font-size: 18px !important;
       min-width: auto;
+      background: transparent !important;
+      border: 2px solid transparent !important;
+      border-radius: 4px;
+      transition: all 0.2s;
     }
     
-    .download-btn {
-      background: #28a745;
-      border-color: #28a745;
+    .rename-btn:hover {
+      border-color: #007bff !important;
     }
+    
+    .download-btn:hover {
+      border-color: #28a745 !important;
+    }
+    
+    .icon-btn.danger:hover {
+      border-color: #dc3545 !important;
+    }
+    
+    
     
     .download-btn:hover {
       background: #218838;
       border-color: #218838;
     }
     
-    .rename-btn {
-      background: #ffc107;
-      border-color: #ffc107;
-      color: #000;
-    }
+    
     
     .rename-btn:hover {
       background: #e0a800;
