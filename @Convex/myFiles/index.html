@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Share</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 12px; }
+    
+    .upload-section { 
+      background: white; 
+      padding: 16px; 
+      border-radius: 12px; 
+      margin-bottom: 16px; 
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    
+    .upload-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    input[type="file"] { display: none; }
+    
+    button { 
+      padding: 12px 24px; 
+      background: #007bff; 
+      color: white; 
+      border: none; 
+      border-radius: 0; 
+      cursor: pointer;
+      font-size: 15px;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    
+    button:hover { background: #0056b3; }
+    button:active { transform: scale(0.98); }
+    button.danger { background: #dc3545; }
+    button.danger:hover { background: #c82333; }
+    button.has-files { background: #ff8c00; }
+    button.has-files:hover { background: #e67e00; }
+    
+    #status { width: 100%; margin-top: 10px; font-size: 14px; }
+    
+    .progress-container { width: 100%; margin-top: 10px; display: none; }
+    .progress-bar { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: #007bff; transition: width 0.3s; border-radius: 4px; }
+    .progress-text { font-size: 13px; color: #666; margin-top: 4px; }
+    
+    .file-list { display: flex; flex-direction: column; gap: 12px; }
+    
+    .file-card { 
+      background: white; 
+      border-radius: 12px; 
+      padding: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .file-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+    
+    .file-icon {
+      width: 48px;
+      height: 48px;
+      background: #007bff;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 12px;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    
+    .file-info { flex: 1; min-width: 0; }
+    .file-info h3 { 
+      font-size: 15px; 
+      margin-bottom: 4px; 
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .file-info p { font-size: 13px; color: #666; }
+    
+    .file-actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    
+    .file-actions button { padding: 8px 16px; font-size: 13px; }
+    
+    .loading { text-align: center; padding: 40px; color: #999; font-size: 15px; }
+    
+    @media (max-width: 640px) {
+      .container { padding: 8px; }
+      .upload-section { padding: 12px; }
+      .file-card { flex-direction: column; align-items: flex-start; }
+      .file-actions { width: 100%; }
+      .file-actions button { flex: 1; }
+      button { padding: 10px 18px; font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="upload-section">
+      <div class="upload-controls">
+        <input type="file" id="fileInput" multiple onchange="updateFileCount()">
+        <button id="uploadBtn" onclick="handleUpload()">Upload</button>
+        <button class="danger" onclick="clearAll()">Clear All</button>
+      </div>
+      <div class="progress-container" id="progressContainer">
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-text" id="progressText"></div>
+      </div>
+      <div id="status"></div>
+    </div>
+
+    <div id="fileList" class="file-list"></div>
+  </div>
+
+  <script type="module">
+    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+    
+    // REPLACE WITH YOUR CONVEX URL
+    const CONVEX_URL = "https://good-basilisk-52.convex.cloud";
+    
+    // REPLACE WITH YOUR CLOUDINARY CREDENTIALS
+    const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
+    const CLOUDINARY_UPLOAD_PRESET = "myFiles";
+    
+    const client = new ConvexHttpClient(CONVEX_URL);
+    
+    window.updateFileCount = function() {
+      const files = document.getElementById('fileInput').files;
+      const count = files.length;
+      const btn = document.getElementById('uploadBtn');
+      if (count) {
+        btn.textContent = `Upload (${count})`;
+        btn.classList.add('has-files');
+      } else {
+        btn.textContent = 'Upload';
+        btn.classList.remove('has-files');
+      }
+    };
+    
+    window.handleUpload = function() {
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) {
+        document.getElementById('fileInput').click();
+      } else {
+        uploadFiles();
+      }
+    };
+    
+    function formatFileSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+      return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+    }
+    
+    function getFileExtension(filename) {
+      const ext = filename.split('.').pop().toLowerCase();
+      return ext.length <= 4 ? ext : 'file';
+    }
+    
+    window.uploadFiles = async function() {
+      const files = document.getElementById('fileInput').files;
+      if (!files.length) return;
+      
+      const progressContainer = document.getElementById('progressContainer');
+      const progressFill = document.getElementById('progressFill');
+      const progressText = document.getElementById('progressText');
+      const status = document.getElementById('status');
+      
+      progressContainer.style.display = 'block';
+      status.textContent = '';
+      
+      const total = files.length;
+      let completed = 0;
+      
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+        formData.append('folder', 'myFiles');
+        
+        try {
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/raw/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          
+          const data = await res.json();
+          
+          await client.mutation("files:add", { 
+            url: data.secure_url,
+            filename: file.name,
+            fileType: file.type || 'application/octet-stream',
+            fileSize: file.size
+          });
+          
+          completed++;
+          const percent = Math.round((completed / total) * 100);
+          progressFill.style.width = percent + '%';
+          progressText.textContent = `${completed} of ${total} uploaded`;
+        } catch (error) {
+          console.error('Upload failed:', error);
+        }
+      }
+      
+      status.textContent = 'Upload complete!';
+      status.style.color = '#28a745';
+      setTimeout(() => {
+        status.textContent = '';
+        progressContainer.style.display = 'none';
+        progressFill.style.width = '0%';
+      }, 2000);
+      document.getElementById('fileInput').value = '';
+      document.getElementById('uploadBtn').textContent = 'Upload';
+      document.getElementById('uploadBtn').classList.remove('has-files');
+    };
+    
+    window.deleteFile = async function(id) {
+      if (!confirm('Delete this file?')) return;
+      await client.mutation("files:remove", { id });
+    };
+    
+    window.clearAll = async function() {
+      if (!confirm('Delete all files?')) return;
+      await client.mutation("files:clear");
+    };
+    
+    window.downloadFile = function(url, filename) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.target = '_blank';
+      a.click();
+    };
+    
+    function renderFiles(files) {
+      const fileList = document.getElementById('fileList');
+      
+      if (!files.length) {
+        fileList.innerHTML = '<div class="loading">No files yet</div>';
+        return;
+      }
+      
+      fileList.innerHTML = files.map(file => `
+        <div class="file-card">
+          <div class="file-icon">${getFileExtension(file.filename)}</div>
+          <div class="file-info">
+            <h3>${file.filename}</h3>
+            <p>${formatFileSize(file.fileSize)} • ${new Date(file.timestamp).toLocaleString()}</p>
+          </div>
+          <div class="file-actions">
+            <button onclick="downloadFile('${file.url}', '${file.filename}')">Download</button>
+            <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    async function loadFiles() {
+      const files = await client.query("files:list");
+      renderFiles(files);
+    }
+    
+    loadFiles();
+    client.onUpdate("files:list", {}, renderFiles);
+  </script>
+</body>
+</html>
