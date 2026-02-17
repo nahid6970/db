@@ -16,7 +16,10 @@ export const list = query({
   args: {},
   handler: async (ctx) => {
     const files = await ctx.db.query("files").order("desc").collect();
-    return files.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
+    return files.sort((a, b) => {
+      if (a.pinned !== b.pinned) return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0);
+      return (a.order || 0) - (b.order || 0);
+    });
   },
 });
 
@@ -70,6 +73,15 @@ export const clear = mutation({
         }
         await ctx.db.delete(file._id);
       }
+    }
+  },
+});
+
+export const reorder = mutation({
+  args: { fileIds: v.array(v.id("files")) },
+  handler: async (ctx, args) => {
+    for (let i = 0; i < args.fileIds.length; i++) {
+      await ctx.db.patch(args.fileIds[i], { order: i });
     }
   },
 });

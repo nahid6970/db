@@ -106,7 +106,8 @@
     
     .file-list { display: flex; flex-direction: column; gap: 12px; }
     
-    .file-card { 
+    .file-card {
+      cursor: move; 
       background: white; 
       border-radius: 12px; 
       padding: 16px;
@@ -115,6 +116,10 @@
       display: flex;
       align-items: center;
       gap: 16px;
+    }
+    
+    .file-card.dragging {
+      opacity: 0.5;
     }
     
     .file-card:hover {
@@ -375,8 +380,8 @@
         return;
       }
       
-      fileList.innerHTML = files.map(file => `
-        <div class="file-card">
+      fileList.innerHTML = files.map((file, index) => `
+        <div class="file-card" draggable="true" data-id="${file._id}" data-index="${index}">
           <div class="file-icon">${getFileExtension(file.filename)}</div>
           <div class="file-info">
             <h3>${file.filename}</h3>
@@ -389,6 +394,65 @@
           </div>
         </div>
       `).join('');
+      
+      // Add drag and drop listeners
+      const cards = fileList.querySelectorAll('.file-card');
+      cards.forEach(card => {
+        card.addEventListener('dragstart', handleDragStart);
+        card.addEventListener('dragover', handleDragOver);
+        card.addEventListener('drop', handleDrop);
+        card.addEventListener('dragend', handleDragEnd);
+      });
+    }
+    
+    let draggedElement = null;
+    
+    function handleDragStart(e) {
+      draggedElement = this;
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    }
+    
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      
+      const afterElement = getDragAfterElement(this.parentElement, e.clientY);
+      if (afterElement == null) {
+        this.parentElement.appendChild(draggedElement);
+      } else {
+        this.parentElement.insertBefore(draggedElement, afterElement);
+      }
+    }
+    
+    function handleDrop(e) {
+      e.preventDefault();
+    }
+    
+    function handleDragEnd(e) {
+      this.classList.remove('dragging');
+      
+      // Get new order
+      const cards = document.querySelectorAll('.file-card');
+      const fileIds = Array.from(cards).map(card => card.dataset.id);
+      
+      // Save new order
+      client.mutation("files:reorder", { fileIds });
+    }
+    
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll('.file-card:not(.dragging)')];
+      
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
     
     async function loadFiles() {

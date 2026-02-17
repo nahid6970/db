@@ -10,5 +10,6 @@ export default defineSchema({
     fileSize: v.number(),
     timestamp: v.number(),
     pinned: v.optional(v.boolean()),
+    order: v.optional(v.number()),
   }),
 });
