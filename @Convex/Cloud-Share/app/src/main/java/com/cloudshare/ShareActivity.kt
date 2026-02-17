@@ -171,14 +171,14 @@ class ShareActivity : ComponentActivity() {
             saveToConvex(cloudinaryUrl, null, fileInfo)
         } else {
             // Other files: Upload to Convex Storage
-            val storageId = uploadToConvexStorage(tempFile, fileInfo.mimeType)
+            val storageId = uploadToConvexStorage(tempFile, fileInfo.mimeType, onProgress)
             saveToConvex(null, storageId, fileInfo)
         }
 
         tempFile.delete()
     }
     
-    private fun uploadToConvexStorage(file: File, mimeType: String): String {
+    private fun uploadToConvexStorage(file: File, mimeType: String, onProgress: (Int) -> Unit): String {
         // Get upload URL from Convex
         val uploadUrlRequest = RequestBody.create(
             "application/json".toMediaType(),
@@ -199,8 +199,27 @@ class ShareActivity : ComponentActivity() {
             JSONObject(response.body!!.string()).getString("value")
         }
 
-        // Upload file to Convex Storage
-        val fileBody = file.asRequestBody(mimeType.toMediaType())
+        // Upload file to Convex Storage with progress
+        val fileBody = object : RequestBody() {
+            override fun contentType() = mimeType.toMediaType()
+            override fun contentLength() = file.length()
+            override fun writeTo(sink: okio.BufferedSink) {
+                val fileLength = file.length()
+                val buffer = ByteArray(8192)
+                var uploaded = 0L
+                
+                file.inputStream().use { input ->
+                    var read: Int
+                    while (input.read(buffer).also { read = it } != -1) {
+                        uploaded += read
+                        sink.write(buffer, 0, read)
+                        val progress = (100 * uploaded / fileLength).toInt()
+                        onProgress(progress)
+                    }
+                }
+            }
+        }
+        
         val uploadRequest = Request.Builder()
             .url(uploadUrl)
             .post(fileBody)
@@ -214,12 +233,35 @@ class ShareActivity : ComponentActivity() {
     }
 
     private fun uploadToCloudinary(file: File, onProgress: (Int) -> Unit): String {
-        val requestBody = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
-            .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaType()))
-            .addFormDataPart("upload_preset", CLOUDINARY_UPLOAD_PRESET)
-            .addFormDataPart("folder", "myFiles")
-            .build()
+        val requestBody = object : RequestBody() {
+            private val delegate = MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaType()))
+                .addFormDataPart("upload_preset", CLOUDINARY_UPLOAD_PRESET)
+                .addFormDataPart("folder", "myFiles")
+                .build()
+            
+            override fun contentType() = delegate.contentType()
+            override fun contentLength() = delegate.contentLength()
+            override fun writeTo(sink: okio.BufferedSink) {
+                val contentLength = contentLength()
+                val buffer = okio.Buffer()
+                var uploaded = 0L
+                
+                delegate.writeTo(buffer)
+                val totalBytes = buffer.size
+                
+                while (!buffer.exhausted()) {
+                    val read = buffer.read(sink.buffer, 8192)
+                    if (read != -1L) {
+                        uploaded += read
+                        sink.flush()
+                        val progress = (100 * uploaded / totalBytes).toInt()
+                        onProgress(progress)
+                    }
+                }
+            }
+        }
 
         val request = Request.Builder()
             .url("https://api.cloudinary.com/v1_1/$CLOUDINARY_CLOUD_NAME/image/upload")
