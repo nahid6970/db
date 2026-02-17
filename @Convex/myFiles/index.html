@@ -340,6 +340,15 @@
       document.getElementById('uploadBtn').classList.remove('has-files');
     };
     
+    window.renameFile = async function(btn) {
+      const id = btn.dataset.fileId;
+      const currentName = btn.dataset.filename;
+      const newName = prompt('Rename file:', currentName);
+      if (newName && newName !== currentName) {
+        await client.mutation("files:rename", { id, filename: newName });
+      }
+    };
+    
     window.deleteFile = async function(id) {
       if (!confirm('Delete this file?')) return;
       await client.mutation("files:remove", { id });
@@ -393,6 +402,7 @@
           </div>
           <div class="file-actions">
             <button class="pin-btn ${file.pinned ? 'pinned' : ''}" onclick="togglePin('${file._id}')">📌</button>
+            <button onclick="renameFile('${file._id}', '${file.filename.replace(/'/g, "\\'")}')">Rename</button>
             <button onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">Download</button>
             <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
           </div>
