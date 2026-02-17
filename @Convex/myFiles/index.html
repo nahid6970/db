@@ -62,13 +62,47 @@
     button.pinned { background: #ffc107; color: #000; }
     button.pinned:hover { background: #e0a800; }
     
-    #status { font-size: 13px; color: #999; margin: 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    #status { 
+    font-size: 14px; 
+    color: #666; 
+    margin: 10px 0 5px 0;
+  }
+  #completedFiles {
+    margin-top: 15px;
+    font-size: 13px;
+    color: #28a745;
+    line-height: 1.8;
+    display: inline-block;
+    text-align: left;
+    max-height: 150px;
+    overflow-y: auto;
+  }
     
-    .progress-container { width: 100%; margin-top: 10px; display: none; text-align: center; padding: 10px 0; }
-    .progress-percent { font-size: 48px; font-weight: bold; color: #007bff; line-height: 1; margin-bottom: 8px; }
+    .progress-container { 
+    width: 100%; 
+    margin-top: 10px; 
+    display: none; 
+    text-align: center; 
+    padding: 20px; 
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+    .progress-percent { 
+    font-size: 56px; 
+    font-weight: bold; 
+    color: #007bff; 
+    line-height: 1;
+    margin-right: 10px;
+  }
     
     
-    .progress-text { font-size: 14px; color: #666; font-weight: 600; }
+    .progress-text { 
+    font-size: 24px; 
+    color: #666; 
+    font-weight: 600;
+    vertical-align: middle;
+  }
     
     .file-list { display: flex; flex-direction: column; gap: 12px; }
     
@@ -142,9 +176,12 @@
         <button class="danger" onclick="clearAll()">Clear All</button>
       </div>
       <div class="progress-container" id="progressContainer">
-        <div class="progress-percent" id="progressPercent">0%</div>
+        <div>
+          <span class="progress-percent" id="progressPercent">0%</span>
+          <span class="progress-text" id="progressText"></span>
+        </div>
         <div id="status"></div>
-        <div class="progress-text" id="progressText"></div>
+        <div id="completedFiles"></div>
       </div>
     </div>
 
@@ -204,17 +241,19 @@
       const progressPercent = document.getElementById('progressPercent');
       const progressText = document.getElementById('progressText');
       const status = document.getElementById('status');
+      const completedFiles = document.getElementById('completedFiles');
       
       progressContainer.style.display = 'block';
       status.textContent = '';
+      completedFiles.innerHTML = '';
       
       const total = files.length;
       let completed = 0;
       
       for (const file of files) {
         progressPercent.textContent = '0%';
-        status.textContent = file.name;
         progressText.textContent = `(${completed + 1}/${total})`;
+        status.textContent = `Uploading: ${file.name}`;
         
         try {
           if (file.type.startsWith('image/')) {
@@ -274,18 +313,19 @@
           }
           
           completed++;
-          progressText.textContent = `(${completed}/${total}) Completed`;
+          completedFiles.innerHTML += `${file.name} ✔️<br>`;
+          progressText.textContent = `(${completed}/${total})`;
         } catch (error) {
           console.error('Upload failed:', error);
+          completedFiles.innerHTML += `${file.name} ❌<br>`;
         }
       }
       
-      status.textContent = 'Upload complete!';
-      status.style.color = '#28a745';
+      status.textContent = 'All uploads complete!';
+      progressPercent.textContent = '100%';
       setTimeout(() => {
-        status.textContent = '';
         progressContainer.style.display = 'none';
-      }, 2000);
+      }, 3000);
       document.getElementById('fileInput').value = '';
       document.getElementById('uploadBtn').textContent = 'Upload';
       document.getElementById('uploadBtn').classList.remove('has-files');
