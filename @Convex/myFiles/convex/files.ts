@@ -1,6 +1,17 @@
 import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
+export const getUrl = query({
+  args: { storageId: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.storage.getUrl(args.storageId);
+  },
+});
+
+export const generateUploadUrl = mutation(async (ctx) => {
+  return await ctx.storage.generateUploadUrl();
+});
+
 export const list = query({
   args: {},
   handler: async (ctx) => {
@@ -10,13 +21,15 @@ export const list = query({
 
 export const add = mutation({
   args: { 
-    url: v.string(), 
+    storageId: v.optional(v.string()),
+    url: v.optional(v.string()), 
     filename: v.string(),
     fileType: v.string(),
     fileSize: v.number(),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("files", { 
+      storageId: args.storageId,
       url: args.url,
       filename: args.filename,
       fileType: args.fileType,

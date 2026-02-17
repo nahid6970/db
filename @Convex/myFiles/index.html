@@ -198,8 +198,8 @@
       
       for (const file of files) {
         try {
-          // For images, use Cloudinary
           if (file.type.startsWith('image/')) {
+            // Images: Upload to Cloudinary
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
@@ -219,15 +219,19 @@
               fileSize: file.size
             });
           } else {
-            // For other files, convert to base64 and store in Convex
-            const reader = new FileReader();
-            const base64 = await new Promise((resolve) => {
-              reader.onload = (e) => resolve(e.target.result);
-              reader.readAsDataURL(file);
+            // Other files: Upload to Convex Storage
+            const uploadUrl = await client.mutation("files:generateUploadUrl");
+            
+            const result = await fetch(uploadUrl, {
+              method: "POST",
+              headers: { "Content-Type": file.type },
+              body: file,
             });
             
+            const { storageId } = await result.json();
+            
             await client.mutation("files:add", { 
-              url: base64,
+              storageId: storageId,
               filename: file.name,
               fileType: file.type || 'application/octet-stream',
               fileSize: file.size
@@ -265,9 +269,13 @@
       await client.mutation("files:clear");
     };
     
-    window.downloadFile = function(url, filename) {
-      // If it's a base64 data URL, download directly
-      if (url.startsWith('data:')) {
+    window.downloadFile = async function(url, filename, storageId) {
+      if (storageId) {
+        // Download from Convex Storage
+        const fileUrl = client.query("files:getUrl", { storageId });
+        window.open(await fileUrl, '_blank');
+      } else if (url.startsWith('data:')) {
+        // Base64 download (legacy)
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
@@ -275,7 +283,7 @@
         a.click();
         document.body.removeChild(a);
       } else {
-        // For Cloudinary images, open in new tab
+        // Cloudinary image
         window.open(url, '_blank');
       }
     };
@@ -296,7 +304,7 @@
             <p>${formatFileSize(file.fileSize)} • ${new Date(file.timestamp).toLocaleString()}</p>
           </div>
           <div class="file-actions">
-            <button onclick="downloadFile('${file.url}', '${file.filename}')">Download</button>
+            <button onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">Download</button>
             <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
           </div>
         </div>

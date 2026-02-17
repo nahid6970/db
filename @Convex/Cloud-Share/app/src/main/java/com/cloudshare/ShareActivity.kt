@@ -165,20 +165,52 @@ class ShareActivity : ComponentActivity() {
             }
         }
 
-        val url = if (fileInfo.mimeType.startsWith("image/")) {
+        if (fileInfo.mimeType.startsWith("image/")) {
             // Images: Upload to Cloudinary
-            uploadToCloudinary(tempFile, onProgress)
+            val cloudinaryUrl = uploadToCloudinary(tempFile, onProgress)
+            saveToConvex(cloudinaryUrl, null, fileInfo)
         } else {
-            // Other files: Convert to base64
-            val bytes = tempFile.readBytes()
-            val base64 = android.util.Base64.encodeToString(bytes, android.util.Base64.DEFAULT)
-            "data:${fileInfo.mimeType};base64,$base64"
+            // Other files: Upload to Convex Storage
+            val storageId = uploadToConvexStorage(tempFile, fileInfo.mimeType)
+            saveToConvex(null, storageId, fileInfo)
         }
 
-        // Save to Convex
-        saveToConvex(url, fileInfo)
-
         tempFile.delete()
+    }
+    
+    private fun uploadToConvexStorage(file: File, mimeType: String): String {
+        // Get upload URL from Convex
+        val uploadUrlRequest = RequestBody.create(
+            "application/json".toMediaType(),
+            JSONObject().apply {
+                put("path", "files:generateUploadUrl")
+                put("args", JSONObject())
+                put("format", "json")
+            }.toString()
+        )
+
+        val uploadUrlResponse = Request.Builder()
+            .url("$CONVEX_URL/api/mutation")
+            .post(uploadUrlRequest)
+            .build()
+
+        val uploadUrl = client.newCall(uploadUrlResponse).execute().use { response ->
+            if (!response.isSuccessful) throw Exception("Failed to get upload URL")
+            JSONObject(response.body!!.string()).getString("value")
+        }
+
+        // Upload file to Convex Storage
+        val fileBody = file.asRequestBody(mimeType.toMediaType())
+        val uploadRequest = Request.Builder()
+            .url(uploadUrl)
+            .post(fileBody)
+            .addHeader("Content-Type", mimeType)
+            .build()
+
+        return client.newCall(uploadRequest).execute().use { response ->
+            if (!response.isSuccessful) throw Exception("Convex storage upload failed")
+            JSONObject(response.body!!.string()).getString("storageId")
+        }
     }
 
     private fun uploadToCloudinary(file: File, onProgress: (Int) -> Unit): String {
@@ -202,9 +234,10 @@ class ShareActivity : ComponentActivity() {
         }
     }
 
-    private fun saveToConvex(url: String, fileInfo: FileInfo) {
-        val json = JSONObject().apply {
-            put("url", url)
+    private fun saveToConvex(url: String?, storageId: String?, fileInfo: FileInfo) {
+        val args = JSONObject().apply {
+            if (url != null) put("url", url)
+            if (storageId != null) put("storageId", storageId)
             put("filename", fileInfo.name)
             put("fileType", fileInfo.mimeType)
             put("fileSize", fileInfo.size)
@@ -214,7 +247,7 @@ class ShareActivity : ComponentActivity() {
             "application/json".toMediaType(),
             JSONObject().apply {
                 put("path", "files:add")
-                put("args", json)
+                put("args", args)
                 put("format", "json")
             }.toString()
         )
