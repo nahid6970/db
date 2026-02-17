@@ -62,12 +62,13 @@
     button.pinned { background: #ffc107; color: #000; }
     button.pinned:hover { background: #e0a800; }
     
-    #status { width: 100%; margin-top: 10px; font-size: 14px; }
+    #status { font-size: 13px; color: #999; margin: 5px 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
     
-    .progress-container { width: 100%; margin-top: 10px; display: none; }
-    .progress-bar { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
-    .progress-fill { height: 100%; background: #007bff; transition: width 0.3s; border-radius: 4px; }
-    .progress-text { font-size: 13px; color: #666; margin-top: 4px; }
+    .progress-container { width: 100%; margin-top: 10px; display: none; text-align: center; padding: 10px 0; }
+    .progress-percent { font-size: 48px; font-weight: bold; color: #007bff; line-height: 1; margin-bottom: 8px; }
+    
+    
+    .progress-text { font-size: 14px; color: #666; font-weight: 600; }
     
     .file-list { display: flex; flex-direction: column; gap: 12px; }
     
@@ -141,12 +142,10 @@
         <button class="danger" onclick="clearAll()">Clear All</button>
       </div>
       <div class="progress-container" id="progressContainer">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
-        </div>
+        <div class="progress-percent" id="progressPercent">0%</div>
+        <div id="status"></div>
         <div class="progress-text" id="progressText"></div>
       </div>
-      <div id="status"></div>
     </div>
 
     <div id="fileList" class="file-list"></div>
@@ -202,7 +201,7 @@
       if (!files.length) return;
       
       const progressContainer = document.getElementById('progressContainer');
-      const progressFill = document.getElementById('progressFill');
+      const progressPercent = document.getElementById('progressPercent');
       const progressText = document.getElementById('progressText');
       const status = document.getElementById('status');
       
@@ -213,20 +212,32 @@
       let completed = 0;
       
       for (const file of files) {
+        progressPercent.textContent = '0%';
+        status.textContent = file.name;
+        progressText.textContent = `(${completed + 1}/${total})`;
+        
         try {
           if (file.type.startsWith('image/')) {
-            // Images: Upload to Cloudinary
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
             formData.append('folder', 'myFiles');
             
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-              method: 'POST',
-              body: formData
+            const xhr = new XMLHttpRequest();
+            const uploadPromise = new Promise((resolve, reject) => {
+              xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                  const percent = Math.round((e.loaded / e.total) * 100);
+                  progressPercent.textContent = percent + '%';
+                }
+              });
+              xhr.addEventListener('load', () => resolve(JSON.parse(xhr.responseText)));
+              xhr.addEventListener('error', reject);
+              xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`);
+              xhr.send(formData);
             });
             
-            const data = await res.json();
+            const data = await uploadPromise;
             
             await client.mutation("files:add", { 
               url: data.secure_url,
@@ -235,16 +246,24 @@
               fileSize: file.size
             });
           } else {
-            // Other files: Upload to Convex Storage
             const uploadUrl = await client.mutation("files:generateUploadUrl");
             
-            const result = await fetch(uploadUrl, {
-              method: "POST",
-              headers: { "Content-Type": file.type },
-              body: file,
+            const xhr = new XMLHttpRequest();
+            const uploadPromise = new Promise((resolve, reject) => {
+              xhr.upload.addEventListener('progress', (e) => {
+                if (e.lengthComputable) {
+                  const percent = Math.round((e.loaded / e.total) * 100);
+                  progressPercent.textContent = percent + '%';
+                }
+              });
+              xhr.addEventListener('load', () => resolve(JSON.parse(xhr.responseText)));
+              xhr.addEventListener('error', reject);
+              xhr.open('POST', uploadUrl);
+              xhr.setRequestHeader('Content-Type', file.type);
+              xhr.send(file);
             });
             
-            const { storageId } = await result.json();
+            const { storageId } = await uploadPromise;
             
             await client.mutation("files:add", { 
               storageId: storageId,
@@ -255,9 +274,7 @@
           }
           
           completed++;
-          const percent = Math.round((completed / total) * 100);
-          progressFill.style.width = percent + '%';
-          progressText.textContent = `${completed} of ${total} uploaded`;
+          progressText.textContent = `(${completed}/${total}) Completed`;
         } catch (error) {
           console.error('Upload failed:', error);
         }
@@ -268,7 +285,6 @@
       setTimeout(() => {
         status.textContent = '';
         progressContainer.style.display = 'none';
-        progressFill.style.width = '0%';
       }, 2000);
       document.getElementById('fileInput').value = '';
       document.getElementById('uploadBtn').textContent = 'Upload';
