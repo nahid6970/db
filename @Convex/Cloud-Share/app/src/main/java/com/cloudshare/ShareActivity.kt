@@ -29,8 +29,8 @@ import java.io.FileOutputStream
 class ShareActivity : ComponentActivity() {
 
     // REPLACE WITH YOUR CREDENTIALS
-    private val CONVEX_URL = "YOUR_CONVEX_URL_HERE"
-    private val CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME"
+    private val CONVEX_URL = "https://good-basilisk-52.convex.cloud"
+    private val CLOUDINARY_CLOUD_NAME = "dwc7hjiub"
     private val CLOUDINARY_UPLOAD_PRESET = "myFiles"
 
     private val client = OkHttpClient()
