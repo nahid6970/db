@@ -15,7 +15,8 @@ export const generateUploadUrl = mutation(async (ctx) => {
 export const list = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("files").order("desc").collect();
+    const files = await ctx.db.query("files").order("desc").collect();
+    return files.sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0));
   },
 });
 
