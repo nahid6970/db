@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 23,
+                "title": "The Rookie - S08E07 - Baja HDTV-720p",
+                "watched": false,
+                "added_date": "2026-02-17T11:46:25.338016",
+                "notify": "unseen"
+            },
+            {
                 "id": 22,
                 "title": "The Rookie - S08E06 - Burn 4 Love HDTV-720p",
                 "watched": false,
