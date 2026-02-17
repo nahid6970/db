@@ -45,6 +45,14 @@
     button.danger:hover { background: #c82333; }
     button.has-files { background: #ff8c00; }
     button.has-files:hover { background: #e67e00; }
+    button.pin { background: #6c757d; }
+    button.pin:hover { background: #5a6268; }
+    button.pinned { background: #ffc107; color: #000; }
+    button.pinned:hover { background: #e0a800; }
+    button.pin { background: #6c757d; }
+    button.pin:hover { background: #5a6268; }
+    button.pinned { background: #ffc107; color: #000; }
+    button.pinned:hover { background: #e0a800; }
     
     #status { width: 100%; margin-top: 10px; font-size: 14px; }
     
@@ -264,6 +272,13 @@
       await client.mutation("files:remove", { id });
     };
     
+    window.togglePin = async function(id) {
+      await client.mutation("files:togglePin", { id });
+    };    
+    window.togglePin = async function(id) {
+      await client.mutation("files:togglePin", { id });
+    };
+    
     window.clearAll = async function() {
       if (!confirm('Delete all files?')) return;
       await client.mutation("files:clear");
@@ -304,6 +319,7 @@
             <p>${formatFileSize(file.fileSize)} • ${new Date(file.timestamp).toLocaleString()}</p>
           </div>
           <div class="file-actions">
+            <button class="${file.pinned ? 'pinned' : 'pin'}" onclick="togglePin('${file._id}')">${file.pinned ? 'Unpin' : 'Pin'}</button>
             <button onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">Download</button>
             <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
           </div>

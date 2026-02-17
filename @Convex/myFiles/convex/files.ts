@@ -50,15 +50,25 @@ export const remove = mutation({
   },
 });
 
+export const togglePin = mutation({
+  args: { id: v.id("files") },
+  handler: async (ctx, args) => {
+    const file = await ctx.db.get(args.id);
+    await ctx.db.patch(args.id, { pinned: !file?.pinned });
+  },
+});
+
 export const clear = mutation({
   args: {},
   handler: async (ctx) => {
     const files = await ctx.db.query("files").collect();
     for (const file of files) {
-      if (file.storageId) {
-        await ctx.storage.delete(file.storageId);
+      if (!file.pinned) {
+        if (file.storageId) {
+          await ctx.storage.delete(file.storageId);
+        }
+        await ctx.db.delete(file._id);
       }
-      await ctx.db.delete(file._id);
     }
   },
 });
