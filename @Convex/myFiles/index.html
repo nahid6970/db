@@ -107,7 +107,7 @@
     .file-list { display: flex; flex-direction: column; gap: 12px; }
     
     .file-card {
-      cursor: move; 
+      cursor: default; 
       background: white; 
       border-radius: 12px; 
       padding: 16px;
@@ -116,6 +116,10 @@
       display: flex;
       align-items: center;
       gap: 16px;
+    }
+    
+    .file-card[draggable="true"] {
+      cursor: move;
     }
     
     .file-card.dragging {
@@ -381,7 +385,7 @@
       }
       
       fileList.innerHTML = files.map((file, index) => `
-        <div class="file-card" draggable="true" data-id="${file._id}" data-index="${index}">
+        <div class="file-card" draggable="false" data-id="${file._id}" data-index="${index}">
           <div class="file-icon">${getFileExtension(file.filename)}</div>
           <div class="file-info">
             <h3>${file.filename}</h3>
@@ -407,7 +411,28 @@
     
     let draggedElement = null;
     
+    // Global Ctrl key listeners
+    document.addEventListener('keydown', (e) => {
+      if (e.ctrlKey) {
+        document.querySelectorAll('.file-card').forEach(card => {
+          card.setAttribute('draggable', 'true');
+        });
+      }
+    });
+    
+    document.addEventListener('keyup', (e) => {
+      if (!e.ctrlKey) {
+        document.querySelectorAll('.file-card').forEach(card => {
+          card.setAttribute('draggable', 'false');
+        });
+      }
+    });
+    
     function handleDragStart(e) {
+      if (!e.ctrlKey) {
+        e.preventDefault();
+        return;
+      }
       draggedElement = this;
       this.classList.add('dragging');
       e.dataTransfer.effectAllowed = 'move';
