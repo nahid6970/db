@@ -164,6 +164,33 @@
     
     .file-actions button { padding: 8px 16px; font-size: 13px; }
     
+    .icon-btn {
+      padding: 8px 12px !important;
+      font-size: 18px !important;
+      min-width: auto;
+    }
+    
+    .download-btn {
+      background: #28a745;
+      border-color: #28a745;
+    }
+    
+    .download-btn:hover {
+      background: #218838;
+      border-color: #218838;
+    }
+    
+    .rename-btn {
+      background: #ffc107;
+      border-color: #ffc107;
+      color: #000;
+    }
+    
+    .rename-btn:hover {
+      background: #e0a800;
+      border-color: #e0a800;
+    }
+    
     .loading { text-align: center; padding: 40px; color: #999; font-size: 15px; }
     
     @media (max-width: 640px) {
@@ -402,9 +429,9 @@
           </div>
           <div class="file-actions">
             <button class="pin-btn ${file.pinned ? 'pinned' : ''}" onclick="togglePin('${file._id}')">📌</button>
-            <button onclick="renameFile('${file._id}', '${file.filename.replace(/'/g, "\\'")}')">Rename</button>
-            <button onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">Download</button>
-            <button class="danger" onclick="deleteFile('${file._id}')">Delete</button>
+            <button class="icon-btn rename-btn" onclick="renameFile(this)" data-file-id="${file._id}" data-filename="${file.filename}">✏️</button>
+            <button class="icon-btn download-btn" onclick="downloadFile('${file.url || ''}', '${file.filename}', '${file.storageId || ''}')">⬇️</button>
+            <button class="icon-btn danger" onclick="deleteFile('${file._id}')">🗑️</button>
           </div>
         </div>
       `).join('');
