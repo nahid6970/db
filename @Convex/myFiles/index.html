@@ -316,6 +316,67 @@
       font-size: 18px;
     }
     
+    .input-with-icon {
+      position: relative;
+      margin-bottom: 12px;
+    }
+    
+    .input-with-icon input {
+      width: 100%;
+      padding: 10px 40px 10px 10px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+    
+    .input-with-icon .icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.6;
+    }
+    
+    .input-with-icon .icon:hover {
+      opacity: 1;
+    }
+    
+    .folder-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1000;
+      display: none;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .folder-dropdown.show {
+      display: block;
+    }
+    
+    .folder-option {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .folder-option:hover {
+      background: #f5f5f5;
+    }
+    
+    .folder-option:last-child {
+      border-bottom: none;
+    }
+    
     .modal-content input {
       width: 100%;
       padding: 10px;
@@ -377,7 +438,12 @@
     <div class="modal-content" style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 24px; border-radius: 12px; width: 90%; max-width: 400px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 10000;">
       <h3 style="margin: 0 0 16px 0; font-size: 18px;">Rename File</h3>
       <input type="text" id="renameInput" placeholder="File name" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
-      <input type="text" id="groupInput" placeholder="Group/Folder (optional)" style="width: 100%; padding: 10px; margin-bottom: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+      <div style="display: flex; gap: 8px; margin-bottom: 12px;">
+        <input type="text" id="groupInput" placeholder="Group/Folder (optional)" style="flex: 1; padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; box-sizing: border-box;">
+        <select id="folderSelect" onchange="selectFolder()" style="padding: 10px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px; cursor: pointer; background: white;">
+          <option value="">Select...</option>
+        </select>
+      </div>
       <div class="modal-buttons">
         <button class="danger" onclick="closeRenameModal()">Cancel</button>
         <button onclick="saveRename()">Save</button>
@@ -553,10 +619,17 @@
     
     let renameFileId = null;
     
-    window.renameFile = function(btn) {
+    window.renameFile = async function(btn) {
       renameFileId = btn.dataset.fileId;
       document.getElementById('renameInput').value = btn.dataset.filename;
       document.getElementById('groupInput').value = btn.dataset.group || '';
+      
+      const files = await client.query("files:list");
+      const folders = [...new Set(files.filter(f => f.group).map(f => f.group))];
+      const select = document.getElementById('folderSelect');
+      select.innerHTML = '<option value="">Select...</option>' + 
+        folders.map(f => `<option value="${f}">${f}</option>`).join('');
+      
       document.getElementById('renameModal').style.display = 'flex';
       document.getElementById('renameInput').focus();
     };
@@ -564,6 +637,14 @@
     window.closeRenameModal = function() {
       document.getElementById('renameModal').style.display = 'none';
       renameFileId = null;
+    };
+    
+    window.selectFolder = function() {
+      const selected = document.getElementById('folderSelect').value;
+      if (selected) {
+        document.getElementById('groupInput').value = selected;
+        document.getElementById('folderSelect').value = '';
+      }
     };
     
     window.saveRename = async function() {
