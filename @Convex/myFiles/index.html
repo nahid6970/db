@@ -248,6 +248,11 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
     
+    .folder-card.active {
+      background: #007bff;
+      color: white;
+    }
+    
     .folder-icon {
       font-size: 48px;
       margin-bottom: 8px;
@@ -625,20 +630,25 @@
       const foldersSection = document.getElementById('foldersSection');
       const breadcrumb = document.getElementById('breadcrumb');
       
-      if (currentFolder) {
-        breadcrumb.style.display = 'block';
-        breadcrumb.innerHTML = `<a onclick="goBack()">All Files</a> / ${currentFolder}`;
-        foldersSection.style.display = 'none';
-        files = files.filter(f => f.group === currentFolder);
-      } else {
-        breadcrumb.style.display = 'none';
-        const folders = [...new Set(files.filter(f => f.group).map(f => f.group))];
+      const folders = [...new Set(files.filter(f => f.group).map(f => f.group))];
+      
+      if (folders.length > 0) {
         foldersSection.innerHTML = folders.map(folder => `
-          <div class="folder-card" onclick="openFolder('${folder}')">
+          <div class="folder-card ${currentFolder === folder ? 'active' : ''}" onclick="openFolder('${folder}')">
             <div class="folder-icon">📁</div>
             <div class="folder-name">${folder}</div>
           </div>
         `).join('');
+      } else {
+        foldersSection.innerHTML = '';
+      }
+      
+      if (currentFolder) {
+        breadcrumb.style.display = 'block';
+        breadcrumb.innerHTML = `<a onclick="goBack()">All Files</a> / ${currentFolder}`;
+        files = files.filter(f => f.group === currentFolder);
+      } else {
+        breadcrumb.style.display = 'none';
         files = files.filter(f => !f.group);
       }
       
