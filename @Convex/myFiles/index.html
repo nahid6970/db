@@ -567,7 +567,7 @@
               filename: file.name,
               fileType: file.type,
               fileSize: file.size,
-              group: currentFolder
+              group: currentFolder || undefined
             });
           } else {
             const uploadUrl = await client.mutation("files:generateUploadUrl");
@@ -594,7 +594,7 @@
               filename: file.name,
               fileType: file.type || 'application/octet-stream',
               fileSize: file.size,
-              group: currentFolder
+              group: currentFolder || undefined
             });
           }
           
@@ -713,7 +713,7 @@
       const foldersSection = document.getElementById('foldersSection');
       const breadcrumb = document.getElementById('breadcrumb');
       
-      const folders = [...new Set(files.filter(f => f.group).map(f => f.group))];
+      const folders = [...new Set(files.filter(f => f.group).map(f => f.group))].sort();
       
       if (folders.length > 0) {
         foldersSection.innerHTML = folders.map(folder => `
