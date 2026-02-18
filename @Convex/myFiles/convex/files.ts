@@ -30,6 +30,7 @@ export const add = mutation({
     filename: v.string(),
     fileType: v.string(),
     fileSize: v.number(),
+    group: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("files", { 
@@ -38,6 +39,7 @@ export const add = mutation({
       filename: args.filename,
       fileType: args.fileType,
       fileSize: args.fileSize,
+      group: args.group,
       timestamp: Date.now(),
     });
   },

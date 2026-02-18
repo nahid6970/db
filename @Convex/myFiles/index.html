@@ -500,7 +500,8 @@
               url: data.secure_url,
               filename: file.name,
               fileType: file.type,
-              fileSize: file.size
+              fileSize: file.size,
+              group: currentFolder
             });
           } else {
             const uploadUrl = await client.mutation("files:generateUploadUrl");
@@ -526,7 +527,8 @@
               storageId: storageId,
               filename: file.name,
               fileType: file.type || 'application/octet-stream',
-              fileSize: file.size
+              fileSize: file.size,
+              group: currentFolder
             });
           }
           
