@@ -27,6 +27,21 @@
     
     input[type="file"] { display: none; }
     
+    .drop-zone {
+      padding: 12px 24px;
+      border: 2px dashed #007bff;
+      border-radius: 8px;
+      color: #007bff;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .drop-zone:hover, .drop-zone.drag-over {
+      background: #e7f3ff;
+      border-color: #0056b3;
+    }    
     button { 
       padding: 12px 24px; 
       background: #007bff; 
@@ -223,6 +238,7 @@
     <div class="upload-section">
       <div class="upload-controls">
         <input type="file" id="fileInput" multiple onchange="updateFileCount()">
+        <div class="drop-zone" id="dropZone">Drop files here</div>
         <button id="uploadBtn" onclick="handleUpload()">Upload</button>
         <button class="danger" onclick="clearAll()">Clear All</button>
       </div>
@@ -251,7 +267,28 @@
     
     const client = new ConvexHttpClient(CONVEX_URL);
     
-    window.updateFileCount = function() {
+    
+    // Drop zone functionality
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    
+    dropZone.addEventListener('click', () => fileInput.click());
+    
+    dropZone.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      dropZone.classList.add('drag-over');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+      dropZone.classList.remove('drag-over');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('drag-over');
+      fileInput.files = e.dataTransfer.files;
+      updateFileCount();
+    });    window.updateFileCount = function() {
       const files = document.getElementById('fileInput').files;
       const count = files.length;
       const btn = document.getElementById('uploadBtn');
