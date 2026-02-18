@@ -1925,8 +1925,6 @@ input[type="checkbox"]:checked::before {
           opacity: 0;
         }
       }
-
-
     </style>
 
     <div id="links-container"
@@ -2354,6 +2352,7 @@ input[type="checkbox"]:checked::before {
           <select id="sidebar-button-display-type">
             <option value="icon">Icon (NerdF)</option>
             <option value="image">Image</option>
+            <option value="svg">SVG</option>
           </select>
 
           <div id="icon-settings">
@@ -2362,6 +2361,11 @@ input[type="checkbox"]:checked::before {
 
           <div id="image-settings" style="display: none;">
             <input type="url" id="sidebar-button-img-src" placeholder="Image URL">
+          </div>
+
+          <div id="sidebar-svg-settings" style="display: none;">
+            <textarea id="sidebar-button-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)" rows="4"
+              style="resize: vertical; font-family: monospace; width: 100%;"></textarea>
           </div>
 
           <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors &
@@ -2409,6 +2413,7 @@ input[type="checkbox"]:checked::before {
           <select id="edit-sidebar-button-display-type">
             <option value="icon">Icon (NerdF)</option>
             <option value="image">Image</option>
+            <option value="svg">SVG</option>
           </select>
 
           <div id="edit-icon-settings">
@@ -2417,6 +2422,11 @@ input[type="checkbox"]:checked::before {
 
           <div id="edit-image-settings" style="display: none;">
             <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL">
+          </div>
+
+          <div id="edit-sidebar-svg-settings" style="display: none;">
+            <textarea id="edit-sidebar-button-svg-code" placeholder="SVG Code (paste full <svg>...</svg> code here)"
+              rows="4" style="resize: vertical; font-family: monospace; width: 100%;"></textarea>
           </div>
 
           <h4 style="color: white; margin: 15px 0 10px 0; border-bottom: 1px solid #555; padding-bottom: 5px;">Colors &
@@ -6304,6 +6314,20 @@ function createSidebarButtonElement(button, index) {
         img.style.height = '25px';
         img.alt = button.name;
         buttonElement.appendChild(img);
+    } else if (button.display_type === 'svg' && button.svg_code) {
+        const svgContainer = document.createElement('div');
+        svgContainer.className = 'sidebar-svg-container';
+        svgContainer.innerHTML = button.svg_code;
+
+        // Apply styling to SVG
+        const svg = svgContainer.querySelector('svg');
+        if (svg) {
+            svg.style.width = '25px';
+            svg.style.height = '25px';
+            if (!svg.getAttribute('fill')) svg.style.fill = textColor;
+            if (!svg.getAttribute('stroke')) svg.style.stroke = textColor;
+        }
+        buttonElement.appendChild(svgContainer);
     } else {
         const icon = document.createElement('i');
         icon.className = button.icon_class || 'nf nf-fa-question';
@@ -6377,13 +6401,11 @@ function setupSidebarEventListeners() {
         displayTypeSelect.addEventListener('change', function () {
             const iconSettings = document.getElementById('icon-settings');
             const imageSettings = document.getElementById('image-settings');
-            if (this.value === 'image') {
-                iconSettings.style.display = 'none';
-                imageSettings.style.display = 'block';
-            } else {
-                iconSettings.style.display = 'block';
-                imageSettings.style.display = 'none';
-            }
+            const svgSettings = document.getElementById('sidebar-svg-settings');
+
+            iconSettings.style.display = this.value === 'icon' ? 'block' : 'none';
+            imageSettings.style.display = this.value === 'image' ? 'block' : 'none';
+            svgSettings.style.display = this.value === 'svg' ? 'block' : 'none';
         });
     }
 
@@ -6392,13 +6414,11 @@ function setupSidebarEventListeners() {
         editDisplayTypeSelect.addEventListener('change', function () {
             const iconSettings = document.getElementById('edit-icon-settings');
             const imageSettings = document.getElementById('edit-image-settings');
-            if (this.value === 'image') {
-                iconSettings.style.display = 'none';
-                imageSettings.style.display = 'block';
-            } else {
-                iconSettings.style.display = 'block';
-                imageSettings.style.display = 'none';
-            }
+            const svgSettings = document.getElementById('edit-sidebar-svg-settings');
+
+            iconSettings.style.display = this.value === 'icon' ? 'block' : 'none';
+            imageSettings.style.display = this.value === 'image' ? 'block' : 'none';
+            svgSettings.style.display = this.value === 'svg' ? 'block' : 'none';
         });
     }
 
@@ -6467,6 +6487,7 @@ function showAddSidebarButtonPopup() {
     // Reset display type settings
     document.getElementById('icon-settings').style.display = 'block';
     document.getElementById('image-settings').style.display = 'none';
+    document.getElementById('sidebar-svg-settings').style.display = 'none';
     document.getElementById('sidebar-button-display-type').value = 'icon';
 }
 
@@ -6477,6 +6498,7 @@ function addSidebarButton() {
     const displayType = document.getElementById('sidebar-button-display-type').value;
     const iconClass = document.getElementById('sidebar-button-icon').value;
     const imgSrc = document.getElementById('sidebar-button-img-src').value;
+    const svgCode = document.getElementById('sidebar-button-svg-code').value;
     const textColor = document.getElementById('sidebar-button-text-color').value;
     const bgColor = document.getElementById('sidebar-button-bg-color').value;
     const hoverColor = document.getElementById('sidebar-button-hover-color').value;
@@ -6491,6 +6513,7 @@ function addSidebarButton() {
         display_type: displayType,
         icon_class: iconClass,
         img_src: imgSrc,
+        svg_code: svgCode,
         url: url,
         has_notification: hasNotification,
         text_color: textColor || '#000000',
@@ -6537,6 +6560,7 @@ function editSidebarButton(index) {
     document.getElementById('edit-sidebar-button-display-type').value = button.display_type || 'icon';
     document.getElementById('edit-sidebar-button-icon').value = button.icon_class || '';
     document.getElementById('edit-sidebar-button-img-src').value = button.img_src || '';
+    document.getElementById('edit-sidebar-button-svg-code').value = button.svg_code || '';
     document.getElementById('edit-sidebar-button-text-color').value = button.text_color || '';
     document.getElementById('edit-sidebar-button-bg-color').value = button.bg_color || '';
     document.getElementById('edit-sidebar-button-hover-color').value = button.hover_color || '';
@@ -6549,13 +6573,11 @@ function editSidebarButton(index) {
     const displayType = button.display_type || 'icon';
     const iconSettings = document.getElementById('edit-icon-settings');
     const imageSettings = document.getElementById('edit-image-settings');
-    if (displayType === 'image') {
-        iconSettings.style.display = 'none';
-        imageSettings.style.display = 'block';
-    } else {
-        iconSettings.style.display = 'block';
-        imageSettings.style.display = 'none';
-    }
+    const svgSettings = document.getElementById('edit-sidebar-svg-settings');
+
+    iconSettings.style.display = displayType === 'icon' ? 'block' : 'none';
+    imageSettings.style.display = displayType === 'image' ? 'block' : 'none';
+    svgSettings.style.display = displayType === 'svg' ? 'block' : 'none';
 
     if (button.has_notification) {
         document.getElementById('edit-notification-settings').style.display = 'block';
@@ -6576,6 +6598,7 @@ function saveSidebarButtonEdit() {
     const displayType = document.getElementById('edit-sidebar-button-display-type').value;
     const iconClass = document.getElementById('edit-sidebar-button-icon').value;
     const imgSrc = document.getElementById('edit-sidebar-button-img-src').value;
+    const svgCode = document.getElementById('edit-sidebar-button-svg-code').value;
     const textColor = document.getElementById('edit-sidebar-button-text-color').value;
     const bgColor = document.getElementById('edit-sidebar-button-bg-color').value;
     const hoverColor = document.getElementById('edit-sidebar-button-hover-color').value;
@@ -6590,6 +6613,7 @@ function saveSidebarButtonEdit() {
         display_type: displayType,
         icon_class: iconClass,
         img_src: imgSrc,
+        svg_code: svgCode,
         url: url,
         has_notification: hasNotification,
         text_color: textColor || '#000000',
