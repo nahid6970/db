@@ -109,8 +109,8 @@ def upload_file(file_path):
             progress.setLabelText(f"✓ {message} uploaded!")
             QTimer.singleShot(1500, app.quit)
         else:
-            progress.close()
-            app.quit()
+            progress.setLabelText(f"✗ Upload failed: {message}")
+            QTimer.singleShot(3000, app.quit)
     
     thread.finished.connect(on_finished)
     thread.start()
