@@ -138,6 +138,40 @@ class UploadManager(QWidget):
                 border: 1px solid {CP_DIM}; 
                 background-color: {CP_BG};
             }}
+            QScrollBar:vertical {{
+                border: none;
+                background: {CP_BG};
+                width: 10px;
+                margin: 0px 0px 0px 0px;
+            }}
+            QScrollBar::handle:vertical {{
+                background: {CP_DIM};
+                min-height: 20px;
+                border-radius: 5px;
+            }}
+            QScrollBar::handle:vertical:hover {{
+                background: {CP_CYAN};
+            }}
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+                height: 0px;
+            }}
+            QScrollBar:horizontal {{
+                border: none;
+                background: {CP_BG};
+                height: 10px;
+                margin: 0px 0px 0px 0px;
+            }}
+            QScrollBar::handle:horizontal {{
+                background: {CP_DIM};
+                min-width: 20px;
+                border-radius: 5px;
+            }}
+            QScrollBar::handle:horizontal:hover {{
+                background: {CP_CYAN};
+            }}
+            QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {{
+                width: 0px;
+            }}
             QPushButton {{ 
                 background-color: {CP_PANEL}; 
                 border: 1px solid {CP_CYAN}; 
