@@ -11,5 +11,6 @@ export default defineSchema({
     timestamp: v.number(),
     pinned: v.optional(v.boolean()),
     order: v.optional(v.number()),
+    group: v.optional(v.string()),
   }),
 });

@@ -87,8 +87,8 @@ export const reorder = mutation({
 });
 
 export const rename = mutation({
-  args: { id: v.id("files"), filename: v.string() },
+  args: { id: v.id("files"), filename: v.string(), group: v.optional(v.string()) },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, { filename: args.filename });
+    await ctx.db.patch(args.id, { filename: args.filename, group: args.group });
   },
 });
