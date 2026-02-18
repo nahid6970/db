@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameARR</title>
+  <style>
+    @import url("https://www.nerdfonts.com/assets/css/webfont.css");
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'JetBrainsMono NFP', Arial, sans-serif; background: #1a1a1a; color: #fff; padding: 20px; }
+    .container { max-width: 1400px; margin: 0 auto; }
+    h1 { text-align: center; margin-bottom: 20px; }
+    .controls { display: flex; gap: 10px; margin-bottom: 20px; justify-content: center; flex-wrap: wrap; position: fixed; top: 0; left: 0; right: 0; background: #1a1a1a; padding: 10px; z-index: 100; }
+    .games-grid { margin-top: 60px; }
+    .btn { padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+    .btn:hover { background: #0056b3; }
+    input, select { padding: 10px; border-radius: 5px; border: 1px solid #444; background: #2a2a2a; color: #fff; }
+    
+    .form-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; }
+    .form-overlay.active { display: flex; justify-content: center; align-items: center; }
+    .form-container { background: #2a2a2a; padding: 30px; border-radius: 10px; max-width: 500px; width: 90%; }
+    .form-container h2 { margin-bottom: 20px; text-align: center; }
+    .form-group { margin-bottom: 15px; }
+    .form-group input, .form-group select { width: 100%; }
+    .form-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 20px; }
+    
+    .rating-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+    .rating-group label { cursor: pointer; }
+    .rating-group input[type="radio"] { display: none; }
+    .rating-group label span { padding: 8px 15px; border: 1px solid #555; border-radius: 15px; background: #444; color: white; min-width: 40px; text-align: center; display: inline-block; }
+    .rating-group input[type="radio"]:checked + span { background: gold; border-color: gold; color: black; }
+    
+    .progression-group { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+    .progression-group label { cursor: pointer; }
+    .progression-group input[type="radio"] { display: none; }
+    .progression-group label span { padding: 8px 15px; border: 1px solid #555; border-radius: 5px; background: #444; color: white; min-width: 120px; text-align: center; display: inline-block; }
+    .progression-group input[type="radio"]:checked + span { background: #28a745; border-color: #28a745; }
+    
+    .games-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-top: 60px; }
+    .game-card { background: #2a2a2a; border-radius: 10px; overflow: hidden; border: 1px solid #444; position: relative; }
+    .game-card:hover { transform: scale(1.05); border-color: #4dfa47; transition: transform 0.2s; }
+    .game-image-wrapper { position: relative; }
+    .game-card img { width: 100%; height: 280px; object-fit: cover; cursor: pointer; display: block; }
+    .game-actions { position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 10; }
+    .game-actions button, .game-actions a { padding: 8px 10px; border: none; border-radius: 5px; cursor: pointer; font-size: 0.85em; text-decoration: none; display: inline-block; }
+    .game-info { padding: 10px; }
+    .game-name { font-weight: bold; margin-bottom: 5px; text-align: center; }
+    .game-year { color: #888; font-size: 0.9em; text-align: center; }
+    .game-rating { color: #ffd700; text-align: center; }
+    .game-progression { color: #4dfa47; font-size: 0.85em; text-align: center; }
+    .edit-btn { background: transparent; color: #fff; border: 2px solid #fff; }
+    .edit-btn:hover { background: #007bff; color: #fff; }
+    .delete-btn { background: transparent; color: rgb(255, 0, 0); border: 2px solid red; }
+    .delete-btn:hover { background: #ff0019; color: rgb(255, 254, 254); }
+    .ytreview-btn { background: transparent; color: rgb(253, 38, 38); border: 2px solid white; }
+    .ytreview-btn:hover { background: #dc3545; color: white; }
+    
+    .collection-info { margin-top: 10px; text-align: center; }
+    .collection-toggle { color: lightblue; cursor: pointer; font-size: 0.8em; display: inline-block; }
+    .collection-toggle::before { content: "▼ "; display: inline-block; margin-right: 5px; transition: transform 0.2s; }
+    .collection-toggle.collapsed::before { transform: rotate(-90deg); }
+    .collection-text { color: lightblue; font-size: 0.8em; display: none; margin-top: 5px; text-decoration: underline; }
+    .other-games { font-size: 0.75em; color: #aaa; margin-top: 5px; display: none; }
+    .other-games ul { list-style: none; padding: 0; }
+    .other-games li { margin: 3px 0; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="controls">
+      <button class="btn" onclick="toggleForm()">Add Game</button>
+      <input type="text" id="searchInput" placeholder="Search games..." style="width: 300px;">
+      <select id="collectionFilter" onchange="loadGames()">
+        <option value="">All Collections</option>
+      </select>
+      <select id="sortBy" onchange="loadGames()">
+        <option value="name">Name</option>
+        <option value="year">Year</option>
+        <option value="rating">Rating</option>
+      </select>
+    </div>
+
+    <div class="form-overlay" id="formOverlay">
+      <div class="form-container">
+        <h2 id="formTitle">Add New Game</h2>
+        <input type="hidden" id="gameId">
+        <div class="form-group">
+          <input type="text" id="gameName" placeholder="Game Name" required>
+        </div>
+        <div class="form-group">
+          <input type="text" id="gameYear" placeholder="Year">
+        </div>
+        <div class="form-group">
+          <input type="text" id="gameImage" placeholder="Image URL">
+        </div>
+        <div class="form-group">
+          <input type="text" id="gameUrl" placeholder="Game URL">
+        </div>
+        <div class="rating-group">
+          <label><input type="radio" name="rating" value="1"><span>1</span></label>
+          <label><input type="radio" name="rating" value="2"><span>2</span></label>
+          <label><input type="radio" name="rating" value="3"><span>3</span></label>
+          <label><input type="radio" name="rating" value="4"><span>4</span></label>
+          <label><input type="radio" name="rating" value="5"><span>5</span></label>
+        </div>
+        <div class="progression-group">
+          <label><input type="radio" name="progression" value="Unplayed🆕" checked><span>Unplayed🆕</span></label>
+          <label><input type="radio" name="progression" value="Unfinished🔄️"><span>Unfinished🔄️</span></label>
+          <label><input type="radio" name="progression" value="Complete✅"><span>Complete✅</span></label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="gameCollection" placeholder="Collection">
+        </div>
+        <div class="form-buttons">
+          <button class="btn" onclick="saveGame()">Save</button>
+          <button class="btn" onclick="cancelForm()" style="background: #6c757d;">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="games-grid" id="gamesGrid"></div>
+  </div>
+
+  <script type="module">
+    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+
+    const client = new ConvexHttpClient("https://hearty-bloodhound-550.convex.cloud");
+
+    window.toggleForm = () => {
+      document.getElementById('formOverlay').classList.toggle('active');
+      clearForm();
+    };
+
+    window.cancelForm = () => {
+      document.getElementById('formOverlay').classList.remove('active');
+      clearForm();
+    };
+
+    function clearForm() {
+      document.getElementById('gameId').value = '';
+      document.getElementById('gameName').value = '';
+      document.getElementById('gameYear').value = '';
+      document.getElementById('gameImage').value = '';
+      document.getElementById('gameUrl').value = '';
+      document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
+      document.querySelector('input[name="progression"][value="Unplayed🆕"]').checked = true;
+      document.getElementById('gameCollection').value = '';
+      document.getElementById('formTitle').textContent = 'Add New Game';
+    }
+
+    window.saveGame = async () => {
+      const id = document.getElementById('gameId').value;
+      const name = document.getElementById('gameName').value;
+      const year = document.getElementById('gameYear').value;
+      const image = document.getElementById('gameImage').value;
+      const url = document.getElementById('gameUrl').value;
+      const rating = parseInt(document.querySelector('input[name="rating"]:checked')?.value) || 0;
+      const progression = document.querySelector('input[name="progression"]:checked')?.value || 'Unplayed🆕';
+      const collection = document.getElementById('gameCollection').value;
+      
+      if (!name) return alert('Game name is required');
+      
+      if (id) {
+        await client.mutation("games:update", { id, name, year, image, url, rating, progression, collection });
+      } else {
+        await client.mutation("games:add", { name, year, image, url, rating, progression, collection });
+      }
+      
+      cancelForm();
+      loadGames();
+    };
+
+    window.editGame = (game) => {
+      document.getElementById('gameId').value = game._id;
+      document.getElementById('gameName').value = game.name;
+      document.getElementById('gameYear').value = game.year || '';
+      document.getElementById('gameImage').value = game.image || '';
+      document.getElementById('gameUrl').value = game.url || '';
+      
+      document.querySelectorAll('input[name="rating"]').forEach(r => r.checked = false);
+      if (game.rating) {
+        const ratingInput = document.querySelector(`input[name="rating"][value="${game.rating}"]`);
+        if (ratingInput) ratingInput.checked = true;
+      }
+      
+      const progressionInput = document.querySelector(`input[name="progression"][value="${game.progression || 'Unplayed🆕'}"]`);
+      if (progressionInput) progressionInput.checked = true;
+      
+      document.getElementById('gameCollection').value = game.collection || '';
+      document.getElementById('formTitle').textContent = 'Edit Game';
+      document.getElementById('formOverlay').classList.add('active');
+    };
+
+    window.deleteGame = async (id, name) => {
+      if (!confirm(`Delete "${name}"?`)) return;
+      await client.mutation("games:remove", { id });
+      loadGames();
+    };
+
+    let collectionCache = {};
+    let collectionStates = {};
+
+    window.toggleCollection = async (gameId, collectionName) => {
+      const toggle = document.querySelector(`#collection-${gameId}`).previousElementSibling;
+      const collectionText = document.getElementById(`collection-${gameId}`);
+      const otherGamesDiv = document.getElementById(`other-games-${gameId}`);
+      
+      toggle.classList.toggle('collapsed');
+      
+      const isExpanded = collectionStates[gameId];
+      
+      if (!isExpanded) {
+        collectionText.style.display = 'block';
+        otherGamesDiv.style.display = 'block';
+        
+        if (!collectionCache[`${collectionName}-${gameId}`]) {
+          otherGamesDiv.innerHTML = 'Loading...';
+          
+          const allGames = await client.query("games:list");
+          const collectionGames = allGames.filter(g => g.collection === collectionName);
+          
+          if (collectionGames.length > 0) {
+            otherGamesDiv.innerHTML = '<ul>' + collectionGames.map(g => {
+              let color = '#aaa';
+              let fontWeight = 'normal';
+              
+              if (g._id === gameId) {
+                color = 'white';
+                fontWeight = 'bold';
+              }
+              
+              return `<li style="color: ${color}; font-weight: ${fontWeight}">${g.name} (${g.year || 'N/A'})</li>`;
+            }).join('') + '</ul>';
+          } else {
+            otherGamesDiv.innerHTML = 'No games in this collection.';
+          }
+          
+          collectionCache[`${collectionName}-${gameId}`] = otherGamesDiv.innerHTML;
+        } else {
+          otherGamesDiv.innerHTML = collectionCache[`${collectionName}-${gameId}`];
+        }
+        
+        collectionStates[gameId] = true;
+      } else {
+        collectionText.style.display = 'none';
+        otherGamesDiv.style.display = 'none';
+        collectionStates[gameId] = false;
+      }
+    };
+
+    window.loadGames = async () => {
+      const searchQuery = document.getElementById('searchInput').value;
+      const collectionFilter = document.getElementById('collectionFilter').value;
+      const sortBy = document.getElementById('sortBy').value;
+      
+      let games = searchQuery 
+        ? await client.query("games:search", { query: searchQuery })
+        : await client.query("games:list");
+      
+      if (collectionFilter) {
+        games = games.filter(g => g.collection === collectionFilter);
+      }
+      
+      games.sort((a, b) => {
+        if (sortBy === 'name') return a.name.localeCompare(b.name);
+        if (sortBy === 'year') return (b.year || '').localeCompare(a.year || '');
+        if (sortBy === 'rating') return (b.rating || 0) - (a.rating || 0);
+        return 0;
+      });
+      
+      const collections = [...new Set(games.map(g => g.collection).filter(c => c))];
+      const collectionSelect = document.getElementById('collectionFilter');
+      const currentValue = collectionSelect.value;
+      collectionSelect.innerHTML = '<option value="">All Collections</option>' + 
+        collections.map(c => `<option value="${c}">${c}</option>`).join('');
+      collectionSelect.value = currentValue;
+      
+      document.getElementById('gamesGrid').innerHTML = games.map(game => `
+        <div class="game-card">
+          <div class="game-image-wrapper">
+            <img src="${game.image || 'https://via.placeholder.com/200x280?text=No+Image'}" alt="${game.name}" onclick="window.open('${game.url || '#'}', '_blank')">
+            <div class="game-actions">
+              <button class="edit-btn" onclick='event.stopPropagation(); editGame(${JSON.stringify(game)})'><i class="nf nf-fa-edit"></i></button>
+              <button class="delete-btn" onclick="event.stopPropagation(); deleteGame('${game._id}', '${game.name.replace(/'/g, "\\'")}')"><i class="nf nf-md-delete"></i></button>
+              <a class="ytreview-btn" href="https://www.youtube.com/results?search_query=${encodeURIComponent(game.name)}+review" target="_blank" onclick="event.stopPropagation()"><i class="nf nf-fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="game-info">
+            <div class="game-name">${game.name}</div>
+            <div class="game-year">${game.year || 'N/A'}</div>
+            <div class="game-rating">${'⭐'.repeat(game.rating || 0)}</div>
+            <div class="game-progression">${game.progression || ''}</div>
+            ${game.collection ? `
+              <div class="collection-info">
+                <div class="collection-toggle collapsed" onclick="toggleCollection('${game._id}', '${game.collection.replace(/'/g, "\\'")}')">Collection</div>
+                <div class="collection-text" id="collection-${game._id}">${game.collection}</div>
+                <div class="other-games" id="other-games-${game._id}"></div>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+      `).join('');
+    };
+
+    document.getElementById('searchInput').addEventListener('input', loadGames);
+
+    loadGames();
+  </script>
+</body>
+</html>
