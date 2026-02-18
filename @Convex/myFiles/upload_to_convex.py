@@ -2,7 +2,17 @@ import sys
 import os
 import requests
 from PyQt6.QtWidgets import QApplication, QMessageBox, QProgressDialog
-from PyQt6.QtCore import QThread, pyqtSignal, Qt
+from PyQt6.QtCore import QThread, pyqtSignal, Qt, QTimer
+
+# CYBERPUNK THEME PALETTE
+CP_BG = "#050505"
+CP_PANEL = "#111111"
+CP_YELLOW = "#FCEE0A"
+CP_CYAN = "#00F0FF"
+CP_RED = "#FF003C"
+CP_GREEN = "#00ff21"
+CP_DIM = "#3a3a3a"
+CP_TEXT = "#E0E0E0"
 
 CONVEX_URL = "https://good-basilisk-52.convex.cloud"
 
@@ -49,38 +59,63 @@ class UploadThread(QThread):
 def upload_file(file_path):
     app = QApplication(sys.argv)
     
+    # Apply Cyberpunk Theme
+    app.setStyleSheet(f"""
+        QWidget {{ 
+            color: {CP_TEXT}; 
+            font-family: 'Consolas'; 
+            font-size: 10pt; 
+            background-color: {CP_BG};
+        }}
+        QProgressDialog {{
+            background-color: {CP_PANEL};
+            border: 1px solid {CP_CYAN};
+        }}
+        QLabel {{
+            color: {CP_CYAN};
+        }}
+        QMessageBox {{
+            background-color: {CP_PANEL};
+        }}
+        QPushButton {{
+            background-color: {CP_DIM}; 
+            border: 1px solid {CP_DIM}; 
+            color: white; 
+            padding: 6px 12px; 
+            font-weight: bold;
+        }}
+        QPushButton:hover {{
+            background-color: #2a2a2a; 
+            border: 1px solid {CP_YELLOW}; 
+            color: {CP_YELLOW};
+        }}
+    """)
+    
     # Show progress dialog
     progress = QProgressDialog(f"Uploading {os.path.basename(file_path)}...", None, 0, 0)
     progress.setWindowTitle("Uploading")
     progress.setWindowModality(Qt.WindowModality.ApplicationModal)
     progress.setCancelButton(None)
     progress.setMinimumDuration(0)
+    progress.setMinimumWidth(400)
+    progress.setMinimumHeight(120)
     progress.show()
     
     # Start upload
     thread = UploadThread(file_path)
     
     def on_finished(success, message):
-        progress.close()
         if success:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Information)
-            msg.setWindowTitle("Success")
-            msg.setText(f"✓ {message} uploaded!")
-            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-            msg.exec()
+            progress.setLabelText(f"✓ {message} uploaded!")
+            QTimer.singleShot(1500, app.quit)
         else:
-            msg = QMessageBox()
-            msg.setIcon(QMessageBox.Icon.Critical)
-            msg.setWindowTitle("Error")
-            msg.setText(f"Upload failed:\n{message}")
-            msg.setStandardButtons(QMessageBox.StandardButton.Ok)
-            msg.exec()
-        app.quit()
+            progress.close()
+            app.quit()
     
     thread.finished.connect(on_finished)
     thread.start()
     
+    # Keep window open for 1 second after completion
     sys.exit(app.exec())
 
 if __name__ == "__main__":
