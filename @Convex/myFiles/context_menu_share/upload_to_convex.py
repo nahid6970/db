@@ -145,7 +145,7 @@ class UploadManager(QWidget):
                 margin: 0px 0px 0px 0px;
             }}
             QScrollBar::handle:vertical {{
-                background: {CP_DIM};
+                background: {CP_YELLOW};
                 min-height: 20px;
                 border-radius: 5px;
             }}
@@ -162,7 +162,7 @@ class UploadManager(QWidget):
                 margin: 0px 0px 0px 0px;
             }}
             QScrollBar::handle:horizontal {{
-                background: {CP_DIM};
+                background: {CP_YELLOW};
                 min-width: 20px;
                 border-radius: 5px;
             }}
