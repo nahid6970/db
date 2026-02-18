@@ -610,6 +610,16 @@
     
     let currentFolder = null;
     
+    window.openFolder = function(folder) {
+      currentFolder = folder;
+      loadFiles();
+    };
+    
+    window.goBack = function() {
+      currentFolder = null;
+      loadFiles();
+    };
+    
     function renderFiles(files) {
       const fileList = document.getElementById('fileList');
       const foldersSection = document.getElementById('foldersSection');
@@ -617,14 +627,14 @@
       
       if (currentFolder) {
         breadcrumb.style.display = 'block';
-        breadcrumb.innerHTML = `<a onclick="currentFolder = null; loadFiles()">All Files</a> / ${currentFolder}`;
+        breadcrumb.innerHTML = `<a onclick="goBack()">All Files</a> / ${currentFolder}`;
         foldersSection.style.display = 'none';
         files = files.filter(f => f.group === currentFolder);
       } else {
         breadcrumb.style.display = 'none';
         const folders = [...new Set(files.filter(f => f.group).map(f => f.group))];
         foldersSection.innerHTML = folders.map(folder => `
-          <div class="folder-card" onclick="currentFolder = '${folder}'; loadFiles()">
+          <div class="folder-card" onclick="openFolder('${folder}')">
             <div class="folder-icon">📁</div>
             <div class="folder-name">${folder}</div>
           </div>
