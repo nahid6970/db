@@ -105,40 +105,43 @@ class FileItem(QFrame):
         self.file_name = os.path.basename(file_path)
         self.is_done = False
         self.init_ui()
-        
+
     def init_ui(self):
         self.setFrameShape(QFrame.Shape.NoFrame)
         self.setStyleSheet(f"border-bottom: 1px solid {CP_DIM}; background-color: {CP_PANEL}; margin: 2px;")
         self.setFixedHeight(60)
-        
+
         layout = QHBoxLayout(self)
         layout.setContentsMargins(15, 5, 15, 5)
-        
+
         # File Icon (box)
         self.icon_box = QLabel(os.path.splitext(self.file_name)[1][1:4].upper() or "FILE")
         self.icon_box.setFixedSize(40, 40)
         self.icon_box.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.icon_box.setStyleSheet(f"""
-            background-color: {CP_CYAN}; 
-            color: {CP_BG}; 
-            font-weight: bold; 
-            font-size: 8pt; 
+            background-color: {CP_CYAN};
+            color: {CP_BG};
+            font-weight: bold;
+            font-size: 8pt;
             border-radius: 4px;
         """)
-        
+
         info_layout = QVBoxLayout()
+        info_layout.setSpacing(2)
         self.name_label = QLabel(self.file_name)
         self.name_label.setStyleSheet(f"color: {CP_TEXT}; font-weight: bold; border: none;")
-        
+        self.name_label.setWordWrap(True)
+        self.name_label.setMaximumWidth(400)
+
         self.status_label = QLabel("INITIALIZING...")
         self.status_label.setStyleSheet(f"color: {CP_CYAN}; font-size: 8pt; border: none;")
-        
+
         info_layout.addWidget(self.name_label)
         info_layout.addWidget(self.status_label)
-        
+
         layout.addWidget(self.icon_box)
-        layout.addLayout(info_layout)
-        layout.addStretch()
+        layout.addLayout(info_layout, 1)
+
 
     def update_progress(self, percent):
         if not self.is_done:
@@ -154,6 +157,7 @@ class FileItem(QFrame):
             self.status_label.setText(f"ERROR: {message}")
             self.status_label.setStyleSheet(f"color: {CP_RED}; font-size: 8pt; border: none;")
             self.icon_box.setStyleSheet(f"background-color: {CP_RED}; color: {CP_BG}; font-weight: bold; font-size: 8pt; border-radius: 4px;")
+
 
 class UploadManager(QWidget):
     def __init__(self, server):
@@ -250,6 +254,7 @@ class UploadManager(QWidget):
         
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
+        self.scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.scroll_content = QWidget()
         self.scroll_layout = QVBoxLayout(self.scroll_content)
         self.scroll_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
