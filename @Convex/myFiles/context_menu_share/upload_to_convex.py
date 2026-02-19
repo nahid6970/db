@@ -311,49 +311,133 @@ class UploadManager(QWidget):
                 item.setParent(None)
                 self.items.remove(item)
 
+def get_windows_args():
+    """Use Win32 API to get clean Unicode arguments."""
+    import ctypes
+    from ctypes import wintypes
+    
+    # Correctly set restype BEFORE calling
+    GetCommandLineW = ctypes.windll.kernel32.GetCommandLineW
+    GetCommandLineW.restype = wintypes.LPCWSTR
+    lpCmdLine = GetCommandLineW()
+    
+    if not lpCmdLine:
+        return sys.argv[1:]
+        
+    argc = ctypes.c_int(0)
+    CommandLineToArgvW = ctypes.windll.shell32.CommandLineToArgvW
+    CommandLineToArgvW.argtypes = [wintypes.LPCWSTR, ctypes.POINTER(ctypes.c_int)]
+    CommandLineToArgvW.restype = ctypes.POINTER(wintypes.LPWSTR)
+    
+    argv_ptr = CommandLineToArgvW(lpCmdLine, ctypes.byref(argc))
+    
+    if not argv_ptr:
+        return sys.argv[1:]
+        
+    args = []
+    for i in range(argc.value):
+        args.append(argv_ptr[i])
+    
+    ctypes.windll.kernel32.LocalFree(argv_ptr)
+    return args[1:] # Skip the executable/script itself
+
 def main():
-    app = QApplication(sys.argv)
+    # Logging for debugging
+    temp_dir = os.environ.get('TEMP', '')
+    log_path = os.path.join(temp_dir, 'convex_uploader.log')
     
-    # Singleton check with retries
-    socket = QLocalSocket()
-    is_client = False
-    
-    # Try multiple times to connect in case of simultaneous start
-    for _ in range(3):
-        socket.connectToServer(SERVER_NAME)
-        if socket.waitForConnected(300):
-            is_client = True
-            break
-        QTimer.singleShot(100, lambda: None) # Small yield
+    try:
+        # Get robust Unicode arguments
+        raw_args = get_windows_args()
+        
+        with open(log_path, 'a', encoding='utf-8') as f:
+            f.write(f"\n--- SESSION START (Robust Args): {raw_args} ---\n")
+            
+        app = QApplication(sys.argv)
+        
+        # Filter out empty args and handle quotes/absolute paths
+        # RECONSTRUCT PATHS if they were split by spaces
+        file_args = []
+        possible_parts = []
+        
+        for arg in raw_args:
+            arg = arg.strip().strip('"')
+            if not arg or arg.endswith('.py') or arg.endswith('.exe'):
+                continue
+                
+            # Is it a full path?
+            if os.path.exists(arg):
+                file_args.append(os.path.abspath(arg))
+                continue
+                
+            # If not, maybe it's part of a path
+            possible_parts.append(arg)
+            joined = " ".join(possible_parts)
+            if os.path.exists(joined):
+                file_args.append(os.path.abspath(joined))
+                possible_parts = []
+            elif os.path.exists(os.path.abspath(joined)): # check relative
+                 file_args.append(os.path.abspath(joined))
+                 possible_parts = []
+        
+        # If anything remains in possible_parts, it's either an invalid path or missing parts
+        if possible_parts:
+             with open(log_path, 'a', encoding='utf-8') as f:
+                f.write(f"Warning: Fragments remaining: {possible_parts}\n")
 
-    if is_client:
-        if len(sys.argv) > 1:
-            # Send file path to server
-            socket.write(sys.argv[1].encode('utf-8'))
-            socket.waitForBytesWritten(1000)
-        socket.disconnectFromServer()
-        return
+        # Singleton check with retries
+        socket = QLocalSocket()
+        is_client = False
+        
+        # Try multiple times to connect in case of simultaneous start
+        for _ in range(3):
+            socket.connectToServer(SERVER_NAME)
+            if socket.waitForConnected(300):
+                is_client = True
+                break
+            QTimer.singleShot(100, lambda: None)
 
-    # Attempt to become server
-    server = QLocalServer()
-    QLocalServer.removeServer(SERVER_NAME)
-    if not server.listen(SERVER_NAME):
-        # Last ditch effort: maybe someone just started listening
-        socket.connectToServer(SERVER_NAME)
-        if socket.waitForConnected(500):
-            if len(sys.argv) > 1:
-                socket.write(sys.argv[1].encode('utf-8'))
+        if is_client:
+            if file_args:
+                paths = "\n".join(file_args)
+                socket.write(paths.encode('utf-8'))
                 socket.waitForBytesWritten(1000)
+            socket.disconnectFromServer()
             return
-        # If still fails, just exit or continue as isolated (but server mode is better)
+
+        # Attempt to become server
+        server = QLocalServer()
+        QLocalServer.removeServer(SERVER_NAME)
+        if not server.listen(SERVER_NAME):
+            socket.connectToServer(SERVER_NAME)
+            if socket.waitForConnected(500):
+                if file_args:
+                    paths = "\n".join(file_args)
+                    socket.write(paths.encode('utf-8'))
+                    socket.waitForBytesWritten(1000)
+                return
+            
+        manager = UploadManager(server)
+        manager.show()
         
-    manager = UploadManager(server)
-    manager.show()
-    
-    if len(sys.argv) > 1:
-        manager.add_file(sys.argv[1])
-        
-    sys.exit(app.exec())
+        if file_args:
+            for path in file_args:
+                manager.add_file(path)
+            
+        sys.exit(app.exec())
+    except Exception as e:
+        import traceback
+        with open(log_path, 'a', encoding='utf-8') as f:
+            f.write(f"FATAL ERROR: {str(e)}\n")
+            f.write(traceback.format_exc())
+        # Show error in a message box if GUI fails
+        try:
+            from PyQt6.QtWidgets import QMessageBox
+            if 'app' in locals():
+                QMessageBox.critical(None, "Uploader Error", f"Fatal Error: {str(e)}\n\nCheck log: {log_path}")
+        except:
+            pass
+        raise e
 
 if __name__ == "__main__":
     main()
