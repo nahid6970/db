@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4021/4021539.png" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nerd-fonts-web@3.0.0/dist/nerd-fonts-generated.min.css">
+  <style>
+    /* Ensure nerd font icons display properly */
+    .nf, [class*="nf-"] {
+      font-family: 'JetBrainsMono NFP', monospace !important;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="topbar" id="topbar">
+    <div class="top-center-controls" id="sidebar-buttons-container"></div>
+    <button id="edit-mode-toggle" class="edit-mode-toggle" title="Toggle Edit Mode (F1)">✏️ Edit</button>
+  </div>
+
+  <div class="flex-container2">
+    <div id="links-container"></div>
+
+    <!-- Edit Group Popup -->
+    <div id="edit-group-popup" class="popup-container hidden">
+      <div class="Menu">
+        <div class="popup-header">
+          <h3>Group Settings</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="edit-group-form">
+          <input type="hidden" id="edit-group-original-name">
+          <div style="display: flex; gap: 10px;">
+            <div style="flex: 1;">
+              <label>Group Name:</label>
+              <input type="text" id="edit-group-name" placeholder="Group name" required>
+            </div>
+            <div style="flex: 1;">
+              <label>Display Name:</label>
+              <input type="text" id="edit-group-top-name" placeholder="Custom display name">
+            </div>
+          </div>
+          <div style="display: flex; gap: 20px; margin: 10px 0;">
+            <label><input type="radio" name="edit-group-display" value="flex" checked> Flex</label>
+            <label><input type="radio" name="edit-group-display" value="list-item"> List</label>
+          </div>
+          <label><input type="checkbox" id="edit-group-collapsible"> Collapsible</label>
+          <label><input type="checkbox" id="edit-group-horizontal-stack"> Horizontal Stack</label>
+          <label><input type="checkbox" id="edit-group-password-protect"> Password Protect</label>
+          <div id="collapsible-settings" style="display: none;">
+            <details>
+              <summary>Top Group Colors</summary>
+              <input type="text" id="edit-group-top-bg-color" placeholder="Background Color" class="color-input">
+              <input type="text" id="edit-group-top-text-color" placeholder="Text Color" class="color-input">
+              <input type="text" id="edit-group-top-border-color" placeholder="Border Color" class="color-input">
+              <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color" class="color-input">
+            </details>
+            <details>
+              <summary>Top Group Size</summary>
+              <input type="text" id="edit-group-top-width" placeholder="Width">
+              <input type="text" id="edit-group-top-height" placeholder="Height">
+              <input type="text" id="edit-group-top-font-family" placeholder="Font Family">
+              <input type="text" id="edit-group-top-font-size" placeholder="Font Size">
+            </details>
+            <details>
+              <summary>Popup Styling</summary>
+              <input type="text" id="edit-group-popup-bg-color" placeholder="Popup BG" class="color-input">
+              <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text" class="color-input">
+              <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border" class="color-input">
+              <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Radius">
+            </details>
+          </div>
+          <div id="horizontal-settings" style="display: none;">
+            <details>
+              <summary>Horizontal Stack Colors</summary>
+              <input type="text" id="edit-group-horizontal-bg-color" placeholder="BG Color" class="color-input">
+              <input type="text" id="edit-group-horizontal-text-color" placeholder="Text Color" class="color-input">
+              <input type="text" id="edit-group-horizontal-border-color" placeholder="Border Color" class="color-input">
+              <input type="text" id="edit-group-horizontal-hover-color" placeholder="Hover Color" class="color-input">
+            </details>
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Link Popup -->
+    <div id="add-link-popup" class="popup-container hidden">
+      <div class="Menu">
+        <div class="popup-header">
+          <h3>Add Link</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="add-link-form">
+          <input type="text" id="link-name" placeholder="Name">
+          <input type="text" id="link-group" placeholder="Group">
+          <label><input type="checkbox" id="link-hidden"> Hide</label>
+          <div id="urls-container">
+            <div class="url-input-group">
+              <input type="url" class="url-input" placeholder="URL" required>
+              <button type="button" onclick="addUrlField()">+</button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 20px;">
+            <div>
+              <h4>Type:</h4>
+              <label><input type="radio" name="link-type" value="text" checked> Text</label>
+              <label><input type="radio" name="link-type" value="nerd-font"> NerdF</label>
+              <label><input type="radio" name="link-type" value="img"> Image</label>
+              <label><input type="radio" name="link-type" value="svg"> SVG</label>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-text" placeholder="Text" style="flex: 1;">
+            <input type="text" id="link-icon-class" placeholder="Icon Class" style="flex: 1;">
+          </div>
+          <input type="url" id="link-img-src" placeholder="Image URL">
+          <textarea id="link-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-width" placeholder="Width" style="flex: 1;">
+            <input type="text" id="link-height" placeholder="Height" style="flex: 1;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-color" placeholder="Color" class="color-input" style="flex: 1;">
+            <input type="text" id="link-background-color" placeholder="Background" class="color-input" style="flex: 1;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-font-family" placeholder="Font Family" style="flex: 1;">
+            <input type="text" id="link-font-size" placeholder="Font Size" style="flex: 1;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-li-width" placeholder="Item Width" style="flex: 1;">
+            <input type="text" id="link-li-height" placeholder="Item Height" style="flex: 1;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-li-bg-color" placeholder="Item BG" class="color-input" style="flex: 1;">
+            <input type="text" id="link-li-hover-color" placeholder="Item Hover" class="color-input" style="flex: 1;">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="link-li-border-color" placeholder="Border Color" class="color-input" style="flex: 1;">
+            <input type="text" id="link-li-border-radius" placeholder="Border Radius" style="flex: 1;">
+          </div>
+          <input type="text" id="link-border-radius" placeholder="Inner Radius">
+          <input type="text" id="link-title" placeholder="Tooltip">
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Edit Link Popup -->
+    <div id="edit-link-popup" class="popup-container hidden">
+      <div class="Menu">
+        <div class="popup-header">
+          <h3>Edit Link</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="edit-link-form">
+          <input type="hidden" id="edit-link-id">
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
+            <input type="text" id="edit-link-group" placeholder="Group" style="flex: 1;">
+          </div>
+          <label><input type="checkbox" id="edit-link-hidden"> Hide</label>
+          <div id="edit-urls-container">
+            <div class="url-input-group">
+              <input type="url" class="url-input" placeholder="URL" required>
+              <button type="button" onclick="addEditUrlField()">+</button>
+            </div>
+          </div>
+          <div style="display: flex; gap: 20px;">
+            <div>
+              <h4>Type:</h4>
+              <label><input type="radio" name="edit-link-type" value="text" checked> Text</label>
+              <label><input type="radio" name="edit-link-type" value="nerd-font"> NerdF</label>
+              <label><input type="radio" name="edit-link-type" value="img"> Image</label>
+              <label><input type="radio" name="edit-link-type" value="svg"> SVG</label>
+            </div>
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-text" placeholder="Text">
+            <input type="text" id="edit-link-icon-class" placeholder="Icon Class">
+          </div>
+          <input type="url" id="edit-link-img-src" placeholder="Image URL">
+          <textarea id="edit-link-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-width" placeholder="Width">
+            <input type="text" id="edit-link-height" placeholder="Height">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-color" placeholder="Color" class="color-input">
+            <input type="text" id="edit-link-background-color" placeholder="Background" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-font-family" placeholder="Font Family">
+            <input type="text" id="edit-link-font-size" placeholder="Font Size">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-li-width" placeholder="Item Width">
+            <input type="text" id="edit-link-li-height" placeholder="Item Height">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-li-bg-color" placeholder="Item BG" class="color-input">
+            <input type="text" id="edit-link-li-hover-color" placeholder="Item Hover" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-link-li-border-color" placeholder="Border Color" class="color-input">
+            <input type="text" id="edit-link-li-border-radius" placeholder="Border Radius">
+          </div>
+          <input type="text" id="edit-link-border-radius" placeholder="Inner Radius">
+          <input type="text" id="edit-link-title" placeholder="Tooltip">
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Group Popup -->
+    <div id="group-popup" class="popup-container hidden">
+      <div class="group_type_box expanded">
+        <div class="popup-header">
+          <h3>Group Items</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <div class="popup-content-inner"></div>
+      </div>
+    </div>
+
+    <!-- Sidebar Button Popups -->
+    <div id="add-sidebar-button-popup" class="popup-container hidden">
+      <div class="Menu">
+        <div class="popup-header">
+          <h3>Add Sidebar Button</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="add-sidebar-button-form">
+          <input type="text" id="sidebar-button-name" placeholder="Name" required>
+          <input type="url" id="sidebar-button-url" placeholder="URL" required>
+          <select id="sidebar-button-display-type">
+            <option value="icon">Icon</option>
+            <option value="image">Image</option>
+            <option value="svg">SVG</option>
+          </select>
+          <input type="text" id="sidebar-button-icon" placeholder="Icon Class">
+          <input type="url" id="sidebar-button-img-src" placeholder="Image URL" style="display:none;">
+          <textarea id="sidebar-button-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-text-color" placeholder="Text Color" class="color-input">
+            <input type="text" id="sidebar-button-bg-color" placeholder="BG Color" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-hover-color" placeholder="Hover Color" class="color-input">
+            <input type="text" id="sidebar-button-border-color" placeholder="Border Color" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="sidebar-button-border-radius" placeholder="Border Radius">
+            <input type="text" id="sidebar-button-font-size" placeholder="Font Size">
+          </div>
+          <button type="submit">Add</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="edit-sidebar-button-popup" class="popup-container hidden">
+      <div class="Menu">
+        <div class="popup-header">
+          <h3>Edit Sidebar Button</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="edit-sidebar-button-form">
+          <input type="hidden" id="edit-sidebar-button-id">
+          <input type="text" id="edit-sidebar-button-name" placeholder="Name" required>
+          <input type="url" id="edit-sidebar-button-url" placeholder="URL" required>
+          <select id="edit-sidebar-button-display-type">
+            <option value="icon">Icon</option>
+            <option value="image">Image</option>
+            <option value="svg">SVG</option>
+          </select>
+          <input type="text" id="edit-sidebar-button-icon" placeholder="Icon Class">
+          <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL" style="display:none;">
+          <textarea id="edit-sidebar-button-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-text-color" placeholder="Text Color" class="color-input">
+            <input type="text" id="edit-sidebar-button-bg-color" placeholder="BG Color" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-hover-color" placeholder="Hover Color" class="color-input">
+            <input type="text" id="edit-sidebar-button-border-color" placeholder="Border Color" class="color-input">
+          </div>
+          <div style="display: flex; gap: 10px;">
+            <input type="text" id="edit-sidebar-button-border-radius" placeholder="Border Radius">
+            <input type="text" id="edit-sidebar-button-font-size" placeholder="Font Size">
+          </div>
+          <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div id="context-menu" class="context-menu hidden"></div>
+  <div id="copy-notification" class="copy-notification"></div>
+
+  <!-- Load regular scripts first -->
+  <script src="context-menu.js"></script>
+  <script src="links-handler.js"></script>
+  <script src="sidebar-handler.js"></script>
+  
+  <!-- Then load app.js as module which will initialize everything -->
+  <script type="module" src="app.js"></script>
+
+  <!-- Close button handlers - must run after DOM is loaded -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🔧 Setting up close button handlers...');
+      
+      // Close popups with X button
+      document.querySelectorAll('.close-button').forEach(btn => {
+        console.log('✅ Found close button:', btn);
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          const popup = btn.closest('.popup-container');
+          if (popup) {
+            popup.classList.add('hidden');
+            console.log('✅ Closed popup');
+          }
+        });
+      });
+      
+      // Close popup when clicking outside (on the backdrop)
+      document.querySelectorAll('.popup-container').forEach(popup => {
+        popup.addEventListener('click', (e) => {
+          if (e.target === popup) {
+            popup.classList.add('hidden');
+            console.log('✅ Closed popup by clicking outside');
+          }
+        });
+      });
+      
+      console.log('✅ Close button handlers set up!');
+    });
+  </script>
+
+  <!-- Color Preview Functionality -->
+  <script>
+    // Function to apply color preview to input fields
+    function applyColorPreview(input) {
+      const value = input.value.trim();
+      console.log('🎨 Applying color preview to:', input.id || input.placeholder, 'Value:', value);
+      
+      if (value) {
+        // Check if it's a valid color (hex, rgb, named color, etc.)
+        const tempDiv = document.createElement('div');
+        tempDiv.style.color = value;
+        if (tempDiv.style.color || value.match(/^#[0-9A-Fa-f]{3,6}$/)) {
+          input.style.setProperty('background-color', value, 'important');
+          // Determine text color based on background brightness
+          const brightness = getBrightness(value);
+          input.style.setProperty('color', brightness > 128 ? '#000000' : '#ffffff', 'important');
+          input.style.setProperty('border', '2px solid ' + value, 'important');
+          console.log('✅ Color applied:', value, 'Brightness:', brightness);
+        } else {
+          // Reset if invalid color
+          input.style.setProperty('background-color', '#2d2d2d', 'important');
+          input.style.setProperty('color', '#fff', 'important');
+          input.style.setProperty('border', '1px solid #555', 'important');
+          console.log('❌ Invalid color, reset');
+        }
+      } else {
+        // Reset if empty
+        input.style.setProperty('background-color', '#2d2d2d', 'important');
+        input.style.setProperty('color', '#fff', 'important');
+        input.style.setProperty('border', '1px solid #555', 'important');
+      }
+    }
+
+    // Function to calculate brightness of a color
+    function getBrightness(color) {
+      let r, g, b;
+
+      if (color.startsWith('#')) {
+        // Hex color
+        const hex = color.slice(1);
+        if (hex.length === 3) {
+          r = parseInt(hex[0] + hex[0], 16);
+          g = parseInt(hex[1] + hex[1], 16);
+          b = parseInt(hex[2] + hex[2], 16);
+        } else {
+          r = parseInt(hex.slice(0, 2), 16);
+          g = parseInt(hex.slice(2, 4), 16);
+          b = parseInt(hex.slice(4, 6), 16);
+        }
+      } else {
+        // For other color formats, use a temporary element
+        const tempDiv = document.createElement('div');
+        tempDiv.style.color = color;
+        document.body.appendChild(tempDiv);
+        const computedColor = window.getComputedStyle(tempDiv).color;
+        document.body.removeChild(tempDiv);
+
+        const match = computedColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+        if (match) {
+          r = parseInt(match[1]);
+          g = parseInt(match[2]);
+          b = parseInt(match[3]);
+        } else {
+          return 128; // Default to medium brightness
+        }
+      }
+
+      // Calculate brightness using luminance formula
+      return (r * 299 + g * 587 + b * 114) / 1000;
+    }
+
+    // Function to check if an input field is color-related
+    function isColorField(input) {
+      // Check if it has the color-input class (most reliable)
+      if (input.classList.contains('color-input')) {
+        return true;
+      }
+      // Fallback: check placeholder and id
+      return input.type === 'text' && (
+        input.placeholder.toLowerCase().includes('color') ||
+        input.id.toLowerCase().includes('color') ||
+        (input.name && input.name.toLowerCase().includes('color'))
+      );
+    }
+
+    // Function to apply color preview to all color fields in a container
+    function applyColorPreviewToContainer(container) {
+      const inputs = container.querySelectorAll('input[type="text"]');
+      console.log('🔍 Checking', inputs.length, 'text inputs for color fields');
+      
+      inputs.forEach(input => {
+        if (isColorField(input)) {
+          console.log('✅ Found color field:', input.id || input.placeholder);
+          applyColorPreview(input);
+
+          // Add event listeners if not already added
+          if (!input.hasAttribute('data-color-preview-enabled')) {
+            input.setAttribute('data-color-preview-enabled', 'true');
+
+            input.addEventListener('input', function () {
+              applyColorPreview(this);
+            });
+
+            input.addEventListener('change', function () {
+              applyColorPreview(this);
+            });
+
+            input.addEventListener('blur', function () {
+              applyColorPreview(this);
+            });
+            
+            input.addEventListener('focus', function () {
+              applyColorPreview(this);
+            });
+          }
+        }
+      });
+    }
+
+    // Apply color preview on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      console.log('🚀 Color preview system initialized');
+      applyColorPreviewToContainer(document);
+
+      // Use MutationObserver to detect when popups are opened and fields are populated
+      const observer = new MutationObserver(function (mutations) {
+        mutations.forEach(function (mutation) {
+          // Check for added nodes (popups opening)
+          mutation.addedNodes.forEach(function (node) {
+            if (node.nodeType === Node.ELEMENT_NODE) {
+              console.log('👀 New element added, checking for color fields');
+              applyColorPreviewToContainer(node);
+            }
+          });
+
+          // Check for attribute changes (value changes)
+          if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+            const target = mutation.target;
+            if (isColorField(target)) {
+              applyColorPreview(target);
+            }
+          }
+        });
+      });
+
+      // Start observing the document for changes
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['value']
+      });
+      
+      // Also listen for popup visibility changes
+      const popups = document.querySelectorAll('.popup-container');
+      popups.forEach(popup => {
+        const observer2 = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.attributeName === 'class') {
+              const isVisible = !popup.classList.contains('hidden');
+              if (isVisible) {
+                console.log('📦 Popup opened, applying color preview');
+                setTimeout(() => applyColorPreviewToContainer(popup), 100);
+              }
+            }
+          });
+        });
+        
+        observer2.observe(popup, { attributes: true, attributeFilter: ['class'] });
+      });
+    });
+  </script>
+
+</body>
+</html>
