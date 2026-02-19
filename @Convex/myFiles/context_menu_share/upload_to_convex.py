@@ -20,9 +20,38 @@ CP_TEXT = "#E0E0E0"
 CONVEX_URL = "https://good-basilisk-52.convex.cloud"
 SERVER_NAME = "convex_upload_manager_v2"
 
+class ProgressFile(object):
+    def __init__(self, file_path, callback):
+        self.file_path = file_path
+        self.callback = callback
+        self.total_size = os.path.getsize(file_path)
+        self.bytes_read = 0
+        self.f = open(file_path, 'rb')
+
+    def __len__(self):
+        return self.total_size
+
+    def read(self, size=-1):
+        chunk = self.f.read(size)
+        if chunk:
+            self.bytes_read += len(chunk)
+            self.callback(self.bytes_read, self.total_size)
+        return chunk
+
+    def close(self):
+        self.f.close()
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
 class UploadThread(QThread):
     # success, filename, message
     finished = pyqtSignal(bool, str, str)
+    # percent
+    progress = pyqtSignal(int)
     
     def __init__(self, file_path):
         super().__init__()
@@ -39,8 +68,16 @@ class UploadThread(QThread):
             upload_url = response.json()["value"]
             
             # Upload file
-            with open(self.file_path, 'rb') as f:
-                upload_response = requests.post(upload_url, files={'file': f})
+            def update_cb(current, total):
+                percent = int((current / total) * 100)
+                self.progress.emit(percent)
+
+            with ProgressFile(self.file_path, update_cb) as f:
+                # Raw binary POST to Convex storage URL
+                upload_response = requests.post(upload_url, data=f, headers={
+                    "Content-Type": "application/octet-stream"
+                })
+            
             storage_id = upload_response.json()["storageId"]
             
             # Add to database
@@ -102,6 +139,10 @@ class FileItem(QFrame):
         layout.addWidget(self.icon_box)
         layout.addLayout(info_layout)
         layout.addStretch()
+
+    def update_progress(self, percent):
+        if not self.is_done:
+            self.status_label.setText(f"UPLOADING... {percent}%")
 
     def update_status(self, success, message):
         self.is_done = True
@@ -252,6 +293,7 @@ class UploadManager(QWidget):
         
         thread = UploadThread(file_path)
         thread.finished.connect(item.update_status)
+        thread.progress.connect(item.update_progress)
         self.threads.append(thread)
         
         item.status_label.setText("UPLOADING...")
