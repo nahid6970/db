@@ -291,7 +291,18 @@ class UploadManager(QWidget):
     def add_file(self, file_path):
         if not os.path.exists(file_path):
             return
-            
+        
+        # If it's a directory, recursively add all files
+        if os.path.isdir(file_path):
+            for root, dirs, files in os.walk(file_path):
+                for file in files:
+                    full_path = os.path.join(root, file)
+                    self._upload_single_file(full_path)
+        else:
+            self._upload_single_file(file_path)
+    
+    def _upload_single_file(self, file_path):
+        """Upload a single file"""
         item = FileItem(file_path)
         self.items.append(item)
         self.scroll_layout.addWidget(item)
@@ -308,6 +319,11 @@ class UploadManager(QWidget):
         files, _ = QFileDialog.getOpenFileNames(self, "SELECT FILES TO UPLOAD")
         for f in files:
             self.add_file(f)
+        
+        # Also allow folder selection
+        folder = QFileDialog.getExistingDirectory(self, "SELECT FOLDER TO UPLOAD (Optional)")
+        if folder:
+            self.add_file(folder)
 
     def clear_finished(self):
         for item in self.items[:]:
