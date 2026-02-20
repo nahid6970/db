@@ -466,7 +466,7 @@ function createRegularGroup(groupName, items) {
   // Apply horizontal stack styling
   if (isHorizontal) {
     if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
-    if (firstLink.horizontal_text_color) div.style.color = firstLink.horizontal_text_color;
+    if (firstLink.horizontal_text_color) title.style.color = firstLink.horizontal_text_color;
     if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
     
     if (firstLink.horizontal_hover_color) {
