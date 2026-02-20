@@ -986,7 +986,7 @@ async function deleteGroup(groupName) {
 
   try {
     const remaining = links.filter(l => (l.group || 'Ungrouped') !== groupName);
-    await window.convexClient.mutation(window.api.functions.updateAllLinks.name, { links: remaining });
+    await window.convexMutation("functions:updateAllLinks", { links: remaining });
     await loadLinks();
     window.showNotification('Group deleted!');
   } catch (error) {
