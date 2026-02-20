@@ -319,6 +319,84 @@ function createRegularGroup(groupName, items) {
   const firstLink = items[0].link;
   const isHorizontal = firstLink.horizontal_stack;
 
+  const isBoxGroup = firstLink.box_group;
+
+  // Box group - compact button that opens popup
+  if (isBoxGroup) {
+    div.classList.add('group_type_box');
+    
+    const header = document.createElement('div');
+    header.className = 'group-header-container';
+    
+    const title = document.createElement('h3');
+    title.className = 'group-title';
+    const displayName = firstLink.top_name || groupName;
+    renderDisplayName(title, displayName);
+    
+    header.appendChild(title);
+    
+    if (window.editMode) {
+      const editBtn = document.createElement('button');
+      editBtn.className = 'edit-btn';
+      editBtn.textContent = '⚙';
+      editBtn.onclick = (e) => {
+        e.stopPropagation();
+        openEditGroupPopup(groupName);
+      };
+      header.appendChild(editBtn);
+    }
+    
+    div.appendChild(header);
+    
+    // Apply styling
+    if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
+    if (firstLink.horizontal_text_color) div.style.color = firstLink.horizontal_text_color;
+    if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
+    
+    // Click handler - opens popup
+    div.onclick = (e) => {
+      if (firstLink.password_protect) {
+        const pwd = prompt('Enter password:');
+        if (pwd !== '1823') {
+          alert('Incorrect password!');
+          return;
+        }
+      }
+      
+      const popup = document.getElementById('group_type_box-popup');
+      const popupBox = popup.querySelector('.group_type_box');
+      const popupContent = popup.querySelector('.popup-content-inner');
+      popupContent.innerHTML = '';
+
+      const popupTitle = popupBox.querySelector('h3');
+      if (popupTitle) {
+        renderDisplayName(popupTitle, displayName);
+      }
+
+      items.forEach(({ link, index }) => {
+        const clonedItem = createLinkItem(link, index);
+        popupContent.appendChild(clonedItem);
+      });
+
+      if (firstLink.popup_bg_color) popupBox.style.backgroundColor = firstLink.popup_bg_color;
+      if (firstLink.popup_text_color) popupBox.style.color = firstLink.popup_text_color;
+      if (firstLink.popup_border_color) popupBox.style.borderColor = firstLink.popup_border_color;
+      if (firstLink.popup_border_radius) popupBox.style.borderRadius = firstLink.popup_border_radius;
+
+      popup.classList.remove('hidden');
+    };
+    
+    div.addEventListener('contextmenu', (e) => {
+      showContextMenu(e, [
+        { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+        { label: 'Delete', action: () => deleteGroup(groupName) }
+      ]);
+    });
+    
+    return div;
+  }
+
+  // Regular group
   const title = document.createElement('h3');
   title.textContent = groupName;
   div.appendChild(title);
@@ -725,6 +803,7 @@ function openEditGroupPopup(groupName) {
   document.getElementById('edit-group-collapsible').checked = firstLink.collapsible || false;
   document.getElementById('edit-group-horizontal-stack').checked = firstLink.horizontal_stack || false;
   document.getElementById('edit-group-password-protect').checked = firstLink.password_protect || false;
+  document.getElementById('edit-group-box-group').checked = firstLink.box_group || false;
 
   const displayRadios = document.querySelectorAll('input[name="edit-group-display"]');
   displayRadios.forEach(r => r.checked = r.value === (firstLink.display_style || 'flex'));
@@ -782,6 +861,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
 
   const groupSettings = {
     collapsible: document.getElementById('edit-group-collapsible').checked,
+    box_group: document.getElementById('edit-group-box-group').checked,
     display_style: displayStyle,
     horizontal_stack: document.getElementById('edit-group-horizontal-stack').checked,
     password_protect: document.getElementById('edit-group-password-protect').checked,
