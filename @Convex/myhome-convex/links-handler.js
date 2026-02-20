@@ -113,6 +113,27 @@ async function loadLinks() {
     console.error('Error loading links:', error);
   }
   renderLinks();
+  refreshOpenPopup();
+
+// Refresh popup if it's open
+function refreshOpenPopup() {
+  const popup = document.getElementById('group_type_box-popup');
+  if (!popup || popup.classList.contains('hidden')) return;
+  
+  const popupTitle = popup.querySelector('h3');
+  if (!popupTitle || !popupTitle.dataset.groupName) return;
+  
+  const groupName = popupTitle.dataset.groupName;
+  const groupLinks = links.filter(l => (l.group || 'Ungrouped') === groupName);
+  
+  const popupContent = popup.querySelector('.popup-content-inner');
+  popupContent.innerHTML = '';
+  
+  groupLinks.forEach((link) => {
+    const linkIndex = links.findIndex(l => l._id === link._id);
+    const clonedItem = createLinkItem(link, linkIndex);
+    popupContent.appendChild(clonedItem);
+  });
 }
 
 // Render links
@@ -281,6 +302,7 @@ function createCollapsibleGroup(groupName, items) {
       const popupTitle = popupBox.querySelector('h3');
       if (popupTitle) {
         renderDisplayName(popupTitle, displayName);
+        popupTitle.dataset.groupName = groupName;
       }
 
       // Clone all link items into popup
@@ -372,6 +394,7 @@ function createRegularGroup(groupName, items) {
       const popupTitle = popupBox.querySelector('h3');
       if (popupTitle) {
         renderDisplayName(popupTitle, displayName);
+        popupTitle.dataset.groupName = groupName;
       }
 
       items.forEach(({ link, index }) => {
