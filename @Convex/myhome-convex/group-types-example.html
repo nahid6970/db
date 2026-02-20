@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Group Types Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #1a1a1a;
+      color: white;
+    }
+    .example-section {
+      margin-bottom: 40px;
+      padding: 20px;
+      background: #2d2d2d;
+      border-radius: 8px;
+    }
+    h2 {
+      color: #4CAF50;
+      margin-top: 0;
+    }
+    .description {
+      color: #aaa;
+      margin-bottom: 15px;
+    }
+    
+    /* Normal Group - Vertical */
+    .normal-group {
+      background: #2d2d2d;
+      border: 1px solid #b3d9ff;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .normal-group ul {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+    .normal-group .link-item {
+      background: #3a3a3a;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      text-align: center;
+    }
+    
+    /* Horizontal Stack - Horizontal */
+    .horizontal-group {
+      background: #2d2d2d;
+      border: 1px solid #b3d9ff;
+      border-radius: 8px;
+      padding: 15px;
+    }
+    .horizontal-group ul {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0 0;
+    }
+    .horizontal-group .link-item {
+      background: #3a3a3a;
+      padding: 15px;
+      border-radius: 5px;
+      border: 1px solid #555;
+      text-align: center;
+      flex: 0 0 auto;
+    }
+    
+    /* Top Group - Compact Button */
+    .top-group {
+      background: #2d2d2d;
+      border: 1px solid #0056b3;
+      border-radius: 0px;
+      padding: 10px;
+      min-width: 50px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+    }
+    .top-group:hover {
+      background: #3a3a3a;
+    }
+    
+    /* Box Group - Compact Button */
+    .box-group {
+      background: #2d2d2d;
+      border: 1px solid #0056b3;
+      border-radius: 0px;
+      padding: 10px;
+      min-width: 50px;
+      cursor: pointer;
+      text-align: center;
+      display: inline-block;
+      margin-right: 10px;
+    }
+    .box-group:hover {
+      background: #3a3a3a;
+    }
+    
+    h3 {
+      margin: 0 0 10px 0;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Group Types Comparison</h1>
+  
+  <div class="example-section">
+    <h2>1. Normal Group (Vertical Layout)</h2>
+    <p class="description">Items stack vertically in a column. Good for lists.</p>
+    <div class="normal-group">
+      <h3>My Links</h3>
+      <ul>
+        <li class="link-item">🏠 Home</li>
+        <li class="link-item">📧 Email</li>
+        <li class="link-item">📁 Files</li>
+        <li class="link-item">⚙️ Settings</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="example-section">
+    <h2>2. Horizontal Stack (Horizontal Layout)</h2>
+    <p class="description">Items line up horizontally in a row. Good for toolbars.</p>
+    <div class="horizontal-group">
+      <h3>Quick Actions</h3>
+      <ul>
+        <li class="link-item">🏠 Home</li>
+        <li class="link-item">📧 Email</li>
+        <li class="link-item">📁 Files</li>
+        <li class="link-item">⚙️ Settings</li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="example-section">
+    <h2>3. Top Group (Compact Button - Opens Popup)</h2>
+    <p class="description">Shows as a compact button at the top. Click to open popup with all items.</p>
+    <div style="display: flex; gap: 10px;">
+      <div class="top-group">📱 Apps</div>
+      <div class="top-group">🔧 Tools</div>
+      <div class="top-group">🎮 Games</div>
+    </div>
+    <p style="color: #888; margin-top: 10px; font-size: 14px;">
+      ↑ These buttons open a popup window when clicked
+    </p>
+  </div>
+  
+  <div class="example-section">
+    <h2>4. Box Group (Compact Button - Opens Popup)</h2>
+    <p class="description">Similar to Top Group but displays inline with other groups. Click to open popup.</p>
+    <div style="display: flex; gap: 10px;">
+      <div class="box-group">📚 Docs</div>
+      <div class="box-group">💼 Work</div>
+      <div class="box-group">🎨 Design</div>
+    </div>
+    <p style="color: #888; margin-top: 10px; font-size: 14px;">
+      ↑ These buttons also open a popup window when clicked
+    </p>
+  </div>
+  
+  <div class="example-section">
+    <h2>Summary</h2>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+      <tr style="background: #3a3a3a;">
+        <th style="padding: 10px; border: 1px solid #555; text-align: left;">Type</th>
+        <th style="padding: 10px; border: 1px solid #555; text-align: left;">Layout</th>
+        <th style="padding: 10px; border: 1px solid #555; text-align: left;">Best For</th>
+      </tr>
+      <tr>
+        <td style="padding: 10px; border: 1px solid #555;">Normal</td>
+        <td style="padding: 10px; border: 1px solid #555;">Vertical (Column)</td>
+        <td style="padding: 10px; border: 1px solid #555;">Traditional link lists</td>
+      </tr>
+      <tr style="background: #252525;">
+        <td style="padding: 10px; border: 1px solid #555;">Horizontal Stack</td>
+        <td style="padding: 10px; border: 1px solid #555;">Horizontal (Row)</td>
+        <td style="padding: 10px; border: 1px solid #555;">Toolbars, navigation bars</td>
+      </tr>
+      <tr>
+        <td style="padding: 10px; border: 1px solid #555;">Top Group</td>
+        <td style="padding: 10px; border: 1px solid #555;">Compact button (top area)</td>
+        <td style="padding: 10px; border: 1px solid #555;">Frequently accessed groups</td>
+      </tr>
+      <tr style="background: #252525;">
+        <td style="padding: 10px; border: 1px solid #555;">Box Group</td>
+        <td style="padding: 10px; border: 1px solid #555;">Compact button (inline)</td>
+        <td style="padding: 10px; border: 1px solid #555;">Space-saving grouped links</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>

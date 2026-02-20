@@ -385,6 +385,12 @@ function createRegularGroup(groupName, items) {
     if (firstLink.horizontal_text_color) div.style.color = firstLink.horizontal_text_color;
     if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
     
+    // Apply hover color
+    if (firstLink.horizontal_hover_color) {
+      div.addEventListener('mouseenter', () => div.style.backgroundColor = firstLink.horizontal_hover_color);
+      div.addEventListener('mouseleave', () => div.style.backgroundColor = firstLink.horizontal_bg_color || '#2d2d2d');
+    }
+    
     // Click handler - opens popup
     div.onclick = (e) => {
       if (firstLink.password_protect) {
@@ -456,6 +462,18 @@ function createRegularGroup(groupName, items) {
 
   const displayStyle = firstLink.display_style || 'flex';
   if (displayStyle === 'list-item') div.classList.add('list-style');
+  
+  // Apply horizontal stack styling
+  if (isHorizontal) {
+    if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
+    if (firstLink.horizontal_text_color) div.style.color = firstLink.horizontal_text_color;
+    if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
+    
+    if (firstLink.horizontal_hover_color) {
+      div.addEventListener("mouseenter", () => div.style.backgroundColor = firstLink.horizontal_hover_color);
+      div.addEventListener("mouseleave", () => div.style.backgroundColor = firstLink.horizontal_bg_color || "");
+    }
+  }
 
   items.forEach(({ link, index }) => {
     const item = createLinkItem(link, index);
@@ -853,7 +871,7 @@ function openEditGroupPopup(groupName) {
 
   // Set group type radio
   const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
-  let groupType = 'normal';
+  let groupType = 'horizontal';
   if (firstLink.collapsible) groupType = 'top';
   else if (firstLink.box_group) groupType = 'box';
   else if (firstLink.horizontal_stack) groupType = 'horizontal';
@@ -917,7 +935,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
 
   // Get group type from radio buttons
   const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
-  let groupType = 'normal';
+  let groupType = 'horizontal';
   typeRadios.forEach(r => { if (r.checked) groupType = r.value; });
 
   const groupSettings = {
