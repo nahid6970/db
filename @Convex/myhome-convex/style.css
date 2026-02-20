@@ -410,3 +410,15 @@ button, .link-item, .add-button { transition: all 0.3s; }
   transform: scale(1.05);
   box-shadow: 0 6px 8px rgba(0,0,0,0.4);
 }
+
+/* Group drag and drop */
+.group_type_top.dragging,
+.group_type_box.dragging {
+  opacity: 0.5;
+  transform: rotate(2deg);
+}
+.group_type_top.drag-over,
+.group_type_box.drag-over {
+  border: 2px dashed #4CAF50;
+  background-color: #2a4a2a;
+}

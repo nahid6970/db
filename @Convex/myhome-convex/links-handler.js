@@ -240,6 +240,7 @@ function createCollapsibleGroup(groupName, items) {
   const div = document.createElement('div');
   div.className = 'group_type_top';
   div.dataset.groupName = groupName;
+  div.draggable = true;
 
   const firstLink = items[0].link;
   const displayName = firstLink.top_name || groupName;
@@ -276,6 +277,12 @@ function createCollapsibleGroup(groupName, items) {
 
   div.appendChild(header);
   div.appendChild(content);
+  
+  // Drag and drop
+  div.addEventListener("dragstart", handleGroupDragStart);
+  div.addEventListener("dragover", handleGroupDragOver);
+  div.addEventListener("drop", handleGroupDrop);
+  div.addEventListener("dragend", handleGroupDragEnd);
 
   // Apply styling
   if (firstLink.top_bg_color) div.style.backgroundColor = firstLink.top_bg_color;
@@ -348,6 +355,7 @@ function createRegularGroup(groupName, items) {
   // Box group - compact button that opens popup
   if (isBoxGroup) {
     div.classList.add('group_type_box');
+    div.draggable = true;
     
     const header = document.createElement('div');
     header.className = 'group-header-container';
@@ -418,6 +426,12 @@ function createRegularGroup(groupName, items) {
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
     });
+    
+    // Drag and drop
+    div.addEventListener("dragstart", handleGroupDragStart);
+    div.addEventListener("dragover", handleGroupDragOver);
+    div.addEventListener("drop", handleGroupDrop);
+    div.addEventListener("dragend", handleGroupDragEnd);
     
     return div;
   }
@@ -1138,3 +1152,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }, 2000);
 });
+
+// Group drag and drop
+let draggedGroup = null;
+
+function handleGroupDragStart(e) {
+  draggedGroup = e.currentTarget;
+  draggedGroup.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function handleGroupDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const target = e.currentTarget;
+  if (target !== draggedGroup && target.classList.contains('group_type_top')) {
+    target.classList.add('drag-over');
+  }
+}
+
+function handleGroupDrop(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const target = e.currentTarget;
+  target.classList.remove('drag-over');
+  
+  if (draggedGroup && draggedGroup !== target) {
+    const container = target.parentNode;
+    const allGroups = Array.from(container.children);
+    const draggedIndex = allGroups.indexOf(draggedGroup);
+    const targetIndex = allGroups.indexOf(target);
+    
+    if (draggedIndex < targetIndex) {
+      target.parentNode.insertBefore(draggedGroup, target.nextSibling);
+    } else {
+      target.parentNode.insertBefore(draggedGroup, target);
+    }
+  }
+}
+
+function handleGroupDragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  draggedGroup = null;
+}
