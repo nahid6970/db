@@ -115,6 +115,7 @@ async function loadLinks() {
   renderLinks();
   refreshOpenPopup();
 
+}
 // Refresh popup if it's open
 function refreshOpenPopup() {
   const popup = document.getElementById('group_type_box-popup');
