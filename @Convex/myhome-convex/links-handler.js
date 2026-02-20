@@ -911,10 +911,9 @@ function openEditGroupPopup(groupName) {
 }
 
 function updateGroupTypeSettings(type) {
-  const showTop = type === 'top';
-  const showHorizontal = type === 'horizontal' || type === 'box';
-  document.getElementById('collapsible-settings').style.display = showTop ? 'block' : 'none';
-  document.getElementById('horizontal-settings').style.display = showHorizontal ? 'block' : 'none';
+  // Show all settings for all types
+  document.getElementById('collapsible-settings').style.display = 'block';
+  document.getElementById('horizontal-settings').style.display = 'block';
 }
 
 document.querySelectorAll('input[name="edit-group-type"]').forEach(radio => {
