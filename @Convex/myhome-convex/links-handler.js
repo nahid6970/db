@@ -803,10 +803,15 @@ function openEditGroupPopup(groupName) {
   document.getElementById('edit-group-original-name').value = groupName;
   document.getElementById('edit-group-name').value = groupName;
   document.getElementById('edit-group-top-name').value = firstLink.top_name || '';
-  document.getElementById('edit-group-collapsible').checked = firstLink.collapsible || false;
-  document.getElementById('edit-group-horizontal-stack').checked = firstLink.horizontal_stack || false;
   document.getElementById('edit-group-password-protect').checked = firstLink.password_protect || false;
-  document.getElementById('edit-group-box-group').checked = firstLink.box_group || false;
+
+  // Set group type radio
+  const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
+  let groupType = 'normal';
+  if (firstLink.collapsible) groupType = 'top';
+  else if (firstLink.box_group) groupType = 'box';
+  else if (firstLink.horizontal_stack) groupType = 'horizontal';
+  typeRadios.forEach(r => r.checked = r.value === groupType);
 
   const displayRadios = document.querySelectorAll('input[name="edit-group-display"]');
   displayRadios.forEach(r => r.checked = r.value === (firstLink.display_style || 'flex'));
@@ -830,8 +835,8 @@ function openEditGroupPopup(groupName) {
 
   document.getElementById('edit-group-popup').classList.remove('hidden');
 
-  // Show/hide sections
-  const collapsible = document.getElementById('edit-group-collapsible').checked;
+  // Show/hide sections based on type
+  updateGroupTypeSettings(groupType);
   
   // Apply color preview to all color fields
   setTimeout(() => {
@@ -839,17 +844,19 @@ function openEditGroupPopup(groupName) {
       applyColorPreviewToContainer(document.getElementById('edit-group-popup'));
     }
   }, 50);
-  const horizontal = document.getElementById('edit-group-horizontal-stack').checked;
-  document.getElementById('collapsible-settings').style.display = collapsible ? 'block' : 'none';
-  document.getElementById('horizontal-settings').style.display = horizontal ? 'block' : 'none';
 }
 
-document.getElementById('edit-group-collapsible').addEventListener('change', (e) => {
-  document.getElementById('collapsible-settings').style.display = e.target.checked ? 'block' : 'none';
-});
+function updateGroupTypeSettings(type) {
+  const showTop = type === 'top';
+  const showHorizontal = type === 'horizontal' || type === 'box';
+  document.getElementById('collapsible-settings').style.display = showTop ? 'block' : 'none';
+  document.getElementById('horizontal-settings').style.display = showHorizontal ? 'block' : 'none';
+}
 
-document.getElementById('edit-group-horizontal-stack').addEventListener('change', (e) => {
-  document.getElementById('horizontal-settings').style.display = e.target.checked ? 'block' : 'none';
+document.querySelectorAll('input[name="edit-group-type"]').forEach(radio => {
+  radio.addEventListener('change', (e) => {
+    updateGroupTypeSettings(e.target.value);
+  });
 });
 
 document.getElementById('edit-group-form').addEventListener('submit', async (e) => {
@@ -862,11 +869,16 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
   let displayStyle = 'flex';
   displayRadios.forEach(r => { if (r.checked) displayStyle = r.value; });
 
+  // Get group type from radio buttons
+  const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
+  let groupType = 'normal';
+  typeRadios.forEach(r => { if (r.checked) groupType = r.value; });
+
   const groupSettings = {
-    collapsible: document.getElementById('edit-group-collapsible').checked,
-    box_group: document.getElementById('edit-group-box-group').checked,
+    collapsible: groupType === 'top',
+    box_group: groupType === 'box',
+    horizontal_stack: groupType === 'horizontal',
     display_style: displayStyle,
-    horizontal_stack: document.getElementById('edit-group-horizontal-stack').checked,
     password_protect: document.getElementById('edit-group-password-protect').checked,
     top_name: document.getElementById('edit-group-top-name').value,
     top_bg_color: document.getElementById('edit-group-top-bg-color').value,
