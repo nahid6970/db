@@ -229,9 +229,6 @@ function createCollapsibleGroup(groupName, items) {
   title.className = 'group_type_top-title';
   renderDisplayName(title, displayName);
 
-  const toggleBtn = document.createElement('button');
-  toggleBtn.className = 'group_type_top-toggle-btn';
-  toggleBtn.textContent = '▼';
 
   header.appendChild(title);
 
@@ -246,7 +243,6 @@ function createCollapsibleGroup(groupName, items) {
     header.appendChild(editBtn);
   }
 
-  header.appendChild(toggleBtn);
 
   const content = document.createElement('ul');
   content.className = 'group_type_top-content';
@@ -265,7 +261,7 @@ function createCollapsibleGroup(groupName, items) {
   if (firstLink.top_border_color) div.style.borderColor = firstLink.top_border_color;
 
   div.onclick = (e) => {
-    if (e.target === toggleBtn || e.target === header) {
+    if (e.target === header || e.target === title) {
       if (firstLink.password_protect) {
         const pwd = prompt('Enter password:');
         if (pwd !== '1823') {
@@ -274,6 +270,32 @@ function createCollapsibleGroup(groupName, items) {
         }
       }
       div.classList.toggle('expanded');
+      
+      // Open popup instead of expanding
+      const popup = document.getElementById('group_type_box-popup');
+      const popupBox = popup.querySelector('.group_type_box');
+      const popupContent = popup.querySelector('.popup-content-inner');
+      popupContent.innerHTML = '';
+
+      // Update popup title
+      const popupTitle = popupBox.querySelector('h3');
+      if (popupTitle) {
+        renderDisplayName(popupTitle, displayName);
+      }
+
+      // Clone all link items into popup
+      items.forEach(({ link, index }) => {
+        const clonedItem = createLinkItem(link, index);
+        popupContent.appendChild(clonedItem);
+      });
+
+      // Apply group styling to popup
+      if (firstLink.popup_bg_color) popupBox.style.backgroundColor = firstLink.popup_bg_color;
+      if (firstLink.popup_text_color) popupBox.style.color = firstLink.popup_text_color;
+      if (firstLink.popup_border_color) popupBox.style.borderColor = firstLink.popup_border_color;
+      if (firstLink.popup_border_radius) popupBox.style.borderRadius = firstLink.popup_border_radius;
+
+      popup.classList.remove('hidden');
     }
   };
 
