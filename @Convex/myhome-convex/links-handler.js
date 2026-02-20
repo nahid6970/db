@@ -437,6 +437,8 @@ function createRegularGroup(groupName, items) {
   }
 
   // Regular group
+  div.draggable = true;
+
   const title = document.createElement('h3');
   title.textContent = groupName;
   div.appendChild(title);
@@ -472,6 +474,12 @@ function createRegularGroup(groupName, items) {
       ]);
     }
   });
+  
+  // Drag and drop
+  div.addEventListener("dragstart", handleGroupDragStart);
+  div.addEventListener("dragover", handleGroupDragOver);
+  div.addEventListener("drop", handleGroupDrop);
+  div.addEventListener("dragend", handleGroupDragEnd);
 
   return div;
 }
@@ -1166,7 +1174,7 @@ function handleGroupDragOver(e) {
   e.preventDefault();
   e.dataTransfer.dropEffect = 'move';
   const target = e.currentTarget;
-  if (target !== draggedGroup && target.classList.contains('group_type_top')) {
+  if (target !== draggedGroup && (target.classList.contains('group_type_top') || target.classList.contains('group_type_box') || target.classList.contains('link-group'))) {
     target.classList.add('drag-over');
   }
 }
