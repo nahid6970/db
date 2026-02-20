@@ -303,6 +303,7 @@ function createCollapsibleGroup(groupName, items) {
   div.addEventListener('contextmenu', (e) => {
     showContextMenu(e, [
       { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+      { label: 'Duplicate', action: () => duplicateGroup(groupName) },
       { label: 'Delete', action: () => deleteGroup(groupName) }
     ]);
   });
@@ -389,6 +390,7 @@ function createRegularGroup(groupName, items) {
     div.addEventListener('contextmenu', (e) => {
       showContextMenu(e, [
         { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+        { label: 'Duplicate', action: () => duplicateGroup(groupName) },
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
     });
@@ -427,6 +429,7 @@ function createRegularGroup(groupName, items) {
     if (e.target === div || e.target === title) {
       showContextMenu(e, [
         { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+        { label: 'Duplicate', action: () => duplicateGroup(groupName) },
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
     }
@@ -917,6 +920,30 @@ async function deleteGroup(groupName) {
   }
 }
 
+// Duplicate group
+async function duplicateGroup(groupName) {
+  const groupLinks = links.filter(l => (l.group || 'Ungrouped') === groupName);
+  if (groupLinks.length === 0) return;
+
+  const newGroupName = groupName + ' (Copy)';
+  const duplicatedLinks = groupLinks.map(link => {
+    const { _id, _creationTime, ...newLink } = link;
+    newLink.group = newGroupName;
+    return newLink;
+  });
+
+  try {
+    for (const link of duplicatedLinks) {
+      await window.convexMutation("functions:addLink", link);
+    }
+    await loadLinks();
+    window.showNotification('Group duplicated!');
+  } catch (error) {
+    console.error('Error duplicating group:', error);
+    alert('Error duplicating group: ' + error.message);
+  }
+}
+
 // SVG textarea toggle
 document.querySelectorAll('input[name="link-type"]').forEach(radio => {
   radio.addEventListener('change', () => {
@@ -1026,6 +1053,7 @@ window.openEditLinkPopup = openEditLinkPopup;
 window.openEditGroupPopup = openEditGroupPopup;
 window.deleteLink = deleteLink;
 window.deleteGroup = deleteGroup;
+window.duplicateGroup = duplicateGroup;
 window.copyLink = copyLink;
 window.reorderLinks = reorderLinks;
 
