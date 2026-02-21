@@ -244,7 +244,26 @@ function renderLinks() {
     }
 
     const groupDiv = createRegularGroup(groupName, grouped[groupName]);
+    
+    // Add invisible line break before group if needed
+    const firstLink = grouped[groupName][0].link;
+    if (firstLink.start_new_line) {
+      const lineBreak = document.createElement('div');
+      lineBreak.className = 'group-line-break';
+      container.appendChild(lineBreak);
+    }
+    
     container.appendChild(groupDiv);
+  });
+
+  // Render items with start_new_line as invisible separators
+  links.forEach((link, index) => {
+    if (link.start_new_line && !link.is_separator && !link.collapsible && !link.box_group) {
+      const itemSep = document.createElement('div');
+      itemSep.className = 'item-line-break';
+      itemSep.dataset.linkIndex = index;
+      // This will be inserted before the item in the group
+    }
   });
 
   // Only add floating action button (FAB) - removed the large button
@@ -372,6 +391,13 @@ function createCollapsibleGroup(groupName, items) {
 
       // Clone all link items into popup
       items.forEach(({ link, index }) => {
+        // Add invisible line break before item if needed
+        if (link.start_new_line) {
+          const lineBreak = document.createElement('div');
+          lineBreak.className = 'item-line-break';
+          popupContent.appendChild(lineBreak);
+        }
+        
         const clonedItem = createLinkItem(link, index);
         popupContent.appendChild(clonedItem);
       });
@@ -409,11 +435,6 @@ function createRegularGroup(groupName, items) {
   const isHorizontal = firstLink.horizontal_stack;
 
   const isBoxGroup = firstLink.box_group;
-  
-  // Apply start_new_line style
-  if (firstLink.start_new_line) {
-    div.style.flexBasis = '100%';
-  }
 
   // Box group - compact button that opens popup
   if (isBoxGroup) {
@@ -476,6 +497,13 @@ function createRegularGroup(groupName, items) {
       }
 
       items.forEach(({ link, index }) => {
+        // Add invisible line break before item if needed
+        if (link.start_new_line) {
+          const lineBreak = document.createElement('div');
+          lineBreak.className = 'item-line-break';
+          popupContent.appendChild(lineBreak);
+        }
+        
         const clonedItem = createLinkItem(link, index);
         popupContent.appendChild(clonedItem);
       });
@@ -540,6 +568,13 @@ function createRegularGroup(groupName, items) {
   }
 
   items.forEach(({ link, index }) => {
+    // Add invisible line break before item if needed
+    if (link.start_new_line) {
+      const lineBreak = document.createElement('div');
+      lineBreak.className = 'item-line-break';
+      ul.appendChild(lineBreak);
+    }
+    
     const item = createLinkItem(link, index);
     ul.appendChild(item);
   });
@@ -575,11 +610,6 @@ function createLinkItem(link, index) {
   li.draggable = true;
 
   if (link.hidden) li.classList.add('hidden-item');
-  
-  // Apply start_new_line style
-  if (link.start_new_line) {
-    li.style.flexBasis = '100%';
-  }
 
   const a = document.createElement('a');
   a.href = link.url;
