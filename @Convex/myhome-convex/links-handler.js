@@ -229,18 +229,16 @@ function renderLinks() {
       sepDiv.className = 'group-separator';
       sepDiv.dataset.linkIndex = separator.index;
       
-      if (window.editMode) {
-        const deleteBtn = document.createElement('button');
-        deleteBtn.className = 'separator-delete-btn';
-        deleteBtn.innerHTML = '×';
-        deleteBtn.title = 'Remove separator';
-        deleteBtn.onclick = async (e) => {
-          e.stopPropagation();
-          await window.convexMutation('functions:deleteLink', { id: separator.link._id });
-          await loadLinks();
-        };
-        sepDiv.appendChild(deleteBtn);
-      }
+      const deleteBtn = document.createElement('button');
+      deleteBtn.className = 'separator-delete-btn';
+      deleteBtn.innerHTML = '×';
+      deleteBtn.title = 'Remove separator';
+      deleteBtn.onclick = async (e) => {
+        e.stopPropagation();
+        await window.convexMutation('functions:deleteLink', { id: separator.link._id });
+        await loadLinks();
+      };
+      sepDiv.appendChild(deleteBtn);
       
       container.appendChild(sepDiv);
     }
