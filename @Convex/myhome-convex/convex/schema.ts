@@ -5,9 +5,10 @@ export default defineSchema({
   links: defineTable({
     name: v.optional(v.string()),
     group: v.optional(v.string()),
-    urls: v.array(v.string()),
-    url: v.string(),
-    default_type: v.string(),
+    urls: v.optional(v.array(v.string())),
+    url: v.optional(v.string()),
+    default_type: v.optional(v.string()),
+    is_separator: v.optional(v.boolean()),
     text: v.optional(v.string()),
     icon_class: v.optional(v.string()),
     img_src: v.optional(v.string()),

@@ -458,3 +458,50 @@ button, .link-item, .add-button { transition: all 0.3s; }
   border: 2px dashed #4CAF50;
   background-color: #2a4a2a;
 }
+
+/* Group Separator Styles - Forces line break between groups */
+.group-separator {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, #00ff9d 50%, transparent 100%);
+  margin: 12px 0;
+  position: relative;
+  opacity: 0.3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  clear: both;
+  flex-basis: 100%;
+}
+
+.group-separator:hover {
+  opacity: 0.6;
+}
+
+.separator-delete-btn {
+  background: #0d0d0d;
+  color: #00ff9d;
+  border: 1px solid #00ff9d;
+  border-radius: 3px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  z-index: 10;
+  transition: all 0.2s;
+}
+
+.group-separator:hover .separator-delete-btn {
+  display: flex;
+}
+
+.separator-delete-btn:hover {
+  background: #00ff9d;
+  color: #000;
+  transform: scale(1.1);
+}

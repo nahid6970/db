@@ -179,9 +179,16 @@ function renderLinks() {
 
   const grouped = {};
   const collapsible = {};
+  const separators = [];
 
   links.forEach((link, index) => {
     if (link.hidden && !window.editMode) return;
+
+    // Handle separators - store them separately
+    if (link.is_separator) {
+      separators.push({ link, index });
+      return;
+    }
 
     const group = link.group || 'Ungrouped';
     if (!grouped[group]) grouped[group] = [];
@@ -210,10 +217,33 @@ function renderLinks() {
     container.appendChild(topContainer);
   }
 
-  // Render regular groups
+  // Render regular groups with separators
   console.log('🔵 Rendering regular groups...');
   sortedGroupNames.forEach(groupName => {
     if (collapsible[groupName]) return;
+
+    // Check if there's a separator before this group
+    const separator = separators.find(s => s.link.group === groupName);
+    if (separator) {
+      const sepDiv = document.createElement('div');
+      sepDiv.className = 'group-separator';
+      sepDiv.dataset.linkIndex = separator.index;
+      
+      if (window.editMode) {
+        const deleteBtn = document.createElement('button');
+        deleteBtn.className = 'separator-delete-btn';
+        deleteBtn.innerHTML = '×';
+        deleteBtn.title = 'Remove separator';
+        deleteBtn.onclick = async (e) => {
+          e.stopPropagation();
+          await window.convexMutation('functions:deleteLink', { id: separator.link._id });
+          await loadLinks();
+        };
+        sepDiv.appendChild(deleteBtn);
+      }
+      
+      container.appendChild(sepDiv);
+    }
 
     const groupDiv = createRegularGroup(groupName, grouped[groupName]);
     container.appendChild(groupDiv);
@@ -362,6 +392,7 @@ function createCollapsibleGroup(groupName, items) {
   div.addEventListener('contextmenu', (e) => {
     showContextMenu(e, [
       { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+      { label: 'Add Separator', action: () => addSeparator(groupName) },
       { label: 'Duplicate', action: () => duplicateGroup(groupName) },
       { label: 'Delete', action: () => deleteGroup(groupName) }
     ]);
@@ -457,6 +488,7 @@ function createRegularGroup(groupName, items) {
     div.addEventListener('contextmenu', (e) => {
       showContextMenu(e, [
         { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+        { label: 'Add Separator', action: () => addSeparator(groupName) },
         { label: 'Duplicate', action: () => duplicateGroup(groupName) },
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
@@ -516,6 +548,7 @@ function createRegularGroup(groupName, items) {
     if (e.target === div || e.target === title) {
       showContextMenu(e, [
         { label: 'Edit', action: () => openEditGroupPopup(groupName) },
+        { label: 'Add Separator', action: () => addSeparator(groupName) },
         { label: 'Duplicate', action: () => duplicateGroup(groupName) },
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
@@ -696,6 +729,24 @@ function renderDisplayName(element, name) {
 function showAddLinkPopup() {
   document.getElementById('quick-add-link-popup').classList.remove('hidden');
   document.getElementById('quick-add-link-form').reset();
+}
+
+// Add separator function
+async function addSeparator(groupName) {
+  try {
+    await window.convexMutation('functions:addLink', {
+      name: '---',
+      group: groupName || '',
+      is_separator: true,
+      urls: [],
+      url: '',
+      default_type: 'separator'
+    });
+    await loadLinks();
+  } catch (error) {
+    console.error('Error adding separator:', error);
+    alert('Failed to add separator');
+  }
 }
 
 // Quick add link form handler
