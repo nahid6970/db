@@ -168,12 +168,21 @@ function renderLinks() {
   console.log('🔵 Grouped:', Object.keys(grouped).length, 'groups');
   console.log('🔵 Collapsible:', Object.keys(collapsible).length, 'groups');
 
-  // Render collapsible groups
+  // Sort groups by group_order
+  const sortedGroupNames = Object.keys(grouped).sort((a, b) => {
+    const aOrder = grouped[a][0].link.group_order ?? 999;
+    const bOrder = grouped[b][0].link.group_order ?? 999;
+    if (aOrder !== bOrder) return aOrder - bOrder;
+    return a.localeCompare(b);
+  });
+  console.log("Sorted group names:", sortedGroupNames);
+  console.log("Group orders:", sortedGroupNames.map(name => `${name}=${grouped[name][0].link.group_order ?? 999}`));
+
   if (Object.keys(collapsible).length > 0) {
     const topContainer = document.createElement('div');
     topContainer.className = 'group_type_top-container';
 
-    Object.keys(collapsible).forEach(groupName => {
+    sortedGroupNames.filter(name => collapsible[name]).forEach(groupName => {
       const groupDiv = createCollapsibleGroup(groupName, grouped[groupName]);
       topContainer.appendChild(groupDiv);
     });
@@ -183,7 +192,7 @@ function renderLinks() {
 
   // Render regular groups
   console.log('🔵 Rendering regular groups...');
-  Object.keys(grouped).forEach(groupName => {
+  sortedGroupNames.forEach(groupName => {
     if (collapsible[groupName]) return;
 
     const groupDiv = createRegularGroup(groupName, grouped[groupName]);
@@ -1268,6 +1277,9 @@ function handleGroupDrop(e) {
     } else {
       target.parentNode.insertBefore(draggedGroup, target);
     }
+    
+    // Save new group order after DOM updates
+    setTimeout(() => saveGroupOrder(), 300);
   }
 }
 
@@ -1275,4 +1287,34 @@ function handleGroupDragEnd(e) {
   e.currentTarget.classList.remove('dragging');
   document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
   draggedGroup = null;
+}
+
+async function saveGroupOrder() {
+  try {
+    // Get all groups in their actual DOM order
+    const container = document.getElementById('links-container');
+    const allGroups = [];
+    
+    // Iterate through all children in order
+    Array.from(container.children).forEach(child => {
+      if (child.classList.contains('group_type_top-container')) {
+        // Get all groups from inside top container (even if a regular group was dragged there)
+        const innerGroups = Array.from(child.children).filter(c => c.dataset.groupName);
+        allGroups.push(...innerGroups);
+      } else if (child.dataset.groupName) {
+        // Regular group, box group, or a top group dragged out
+        allGroups.push(child);
+      }
+    });
+    
+    const groupOrder = allGroups.map((group, index) => ({
+      name: group.dataset.groupName,
+      order: index
+    }));
+    
+    await window.convexMutation("functions:updateGroupOrder", { groupOrder });
+    console.log('✅ Group order saved:', groupOrder.length, 'groups');
+  } catch (error) {
+    console.error('❌ Error saving group order:', error);
+  }
 }

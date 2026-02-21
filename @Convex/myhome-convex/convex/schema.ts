@@ -30,6 +30,7 @@ export default defineSchema({
     hidden: v.optional(v.boolean()),
     collapsible: v.optional(v.boolean()),
     box_group: v.optional(v.boolean()),
+    group_order: v.optional(v.number()),
     display_style: v.optional(v.string()),
     horizontal_stack: v.optional(v.boolean()),
     password_protect: v.optional(v.boolean()),

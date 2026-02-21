@@ -38,6 +38,7 @@ export const addLink = mutation({
     hidden: v.optional(v.boolean()),
     collapsible: v.optional(v.boolean()),
     box_group: v.optional(v.boolean()),
+    group_order: v.optional(v.number()),
     display_style: v.optional(v.string()),
     horizontal_stack: v.optional(v.boolean()),
     password_protect: v.optional(v.boolean()),
@@ -98,6 +99,7 @@ export const updateLink = mutation({
     hidden: v.optional(v.boolean()),
     collapsible: v.optional(v.boolean()),
     box_group: v.optional(v.boolean()),
+    group_order: v.optional(v.number()),
     display_style: v.optional(v.string()),
     horizontal_stack: v.optional(v.boolean()),
     password_protect: v.optional(v.boolean()),
@@ -149,6 +151,19 @@ export const updateAllLinks = mutation({
     for (const link of args.links) {
       const { _id, _creationTime, ...data } = link;
       await ctx.db.insert("links", data);
+    }
+  },
+});
+
+export const updateGroupOrder = mutation({
+  args: { groupOrder: v.array(v.object({ name: v.string(), order: v.number() })) },
+  handler: async (ctx, args) => {
+    const links = await ctx.db.query("links").collect();
+    for (const link of links) {
+      const groupInfo = args.groupOrder.find(g => g.name === (link.group || 'Ungrouped'));
+      if (groupInfo) {
+        await ctx.db.patch(link._id, { group_order: groupInfo.order });
+      }
     }
   },
 });
