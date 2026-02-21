@@ -137,8 +137,60 @@ function refreshOpenPopup() {
   });
 }
 
+// Update group datalist for dropdowns
+function updateGroupDatalist() {
+  const datalist = document.getElementById('existing-groups');
+  if (!datalist) return;
+  
+  // Get unique group names from links
+  const groups = [...new Set(links.map(link => link.group || 'Ungrouped'))];
+  
+  // Sort alphabetically
+  groups.sort((a, b) => a.localeCompare(b));
+  
+  // Populate datalist
+  datalist.innerHTML = '';
+  groups.forEach(group => {
+    const option = document.createElement('option');
+    option.value = group;
+    datalist.appendChild(option);
+  });
+  
+  console.log('✅ Group datalist updated:', groups.length, 'groups');
+}
+
+// Show group picker context menu
+window.toggleGroupPicker = function(event, inputId) {
+  event.preventDefault();
+  event.stopPropagation();
+  
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  
+  // Get unique group names from links
+  const groups = [...new Set(links.map(link => link.group || 'Ungrouped'))];
+  groups.sort((a, b) => a.localeCompare(b));
+  
+  // Create menu items
+  const items = groups.map(group => ({
+    label: group,
+    action: () => {
+      input.value = group;
+      // Trigger input event for any listeners
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      input.dispatchEvent(new Event('change', { bubbles: true }));
+    }
+  }));
+  
+  // Show context menu at the button's position
+  if (typeof window.showContextMenu === 'function') {
+    window.showContextMenu(event, items);
+  }
+};
+
 // Render links
 function renderLinks() {
+  updateGroupDatalist();
   const container = document.getElementById('links-container');
   
   if (!container) {

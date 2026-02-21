@@ -42,7 +42,10 @@
           <div style="display: flex; gap: 10px;">
             <div style="flex: 1;">
               <label>Group Name:</label>
-              <input type="text" id="edit-group-name" placeholder="Group name" required>
+              <div class="group-input-container">
+                <input type="text" id="edit-group-name" placeholder="Group name" required list="existing-groups">
+                <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
+              </div>
             </div>
             <div style="flex: 1;">
               <label>Display Name:</label>
@@ -105,7 +108,10 @@
         </div>
         <form id="quick-add-link-form">
           <input type="url" id="quick-link-url" placeholder="URL (e.g., https://example.com)" required>
-          <input type="text" id="quick-link-group" placeholder="Group (optional)">
+          <div class="group-input-container">
+            <input type="text" id="quick-link-group" placeholder="Group (optional)" list="existing-groups">
+            <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'quick-link-group')">▼</button>
+          </div>
           <button type="submit">Add</button>
         </form>
       </div>
@@ -120,7 +126,10 @@
         </div>
         <form id="add-link-form">
           <input type="text" id="link-name" placeholder="Name">
-          <input type="text" id="link-group" placeholder="Group">
+          <div class="group-input-container">
+            <input type="text" id="link-group" placeholder="Group" list="existing-groups">
+            <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'link-group')">▼</button>
+          </div>
           <label><input type="checkbox" id="link-hidden"> Hide</label>
           <div id="urls-container">
             <div class="url-input-group">
@@ -185,7 +194,10 @@
           <input type="hidden" id="edit-link-id">
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
-            <input type="text" id="edit-link-group" placeholder="Group" style="flex: 1;">
+            <div class="group-input-container">
+              <input type="text" id="edit-link-group" placeholder="Group" list="existing-groups">
+              <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-link-group')">▼</button>
+            </div>
           </div>
           <label><input type="checkbox" id="edit-link-hidden"> Hide</label>
           <div id="edit-urls-container">
@@ -549,6 +561,8 @@
       });
     });
   </script>
+
+  <datalist id="existing-groups"></datalist>
 
 </body>
 </html>
