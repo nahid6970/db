@@ -43,7 +43,7 @@
             <div style="flex: 1;">
               <label>Group Name:</label>
               <div class="group-input-container">
-                <input type="text" id="edit-group-name" placeholder="Group name" required list="existing-groups">
+                <input type="text" id="edit-group-name" placeholder="Group name" required>
                 <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
               </div>
             </div>
@@ -109,7 +109,7 @@
         <form id="quick-add-link-form">
           <input type="url" id="quick-link-url" placeholder="URL (e.g., https://example.com)" required>
           <div class="group-input-container">
-            <input type="text" id="quick-link-group" placeholder="Group (optional)" list="existing-groups">
+            <input type="text" id="quick-link-group" placeholder="Group (optional)">
             <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'quick-link-group')">▼</button>
           </div>
           <button type="submit">Add</button>
@@ -127,7 +127,7 @@
         <form id="add-link-form">
           <input type="text" id="link-name" placeholder="Name">
           <div class="group-input-container">
-            <input type="text" id="link-group" placeholder="Group" list="existing-groups">
+            <input type="text" id="link-group" placeholder="Group">
             <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'link-group')">▼</button>
           </div>
           <label><input type="checkbox" id="link-hidden"> Hide</label>
@@ -195,7 +195,7 @@
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
             <div class="group-input-container">
-              <input type="text" id="edit-link-group" placeholder="Group" list="existing-groups">
+              <input type="text" id="edit-link-group" placeholder="Group">
               <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-link-group')">▼</button>
             </div>
           </div>
@@ -562,7 +562,6 @@
     });
   </script>
 
-  <datalist id="existing-groups"></datalist>
 
 </body>
 </html>
