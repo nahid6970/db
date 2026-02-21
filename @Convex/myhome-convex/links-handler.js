@@ -126,11 +126,29 @@ function refreshOpenPopup() {
   
   const groupName = popupTitle.dataset.groupName;
   const groupLinks = links.filter(l => (l.group || 'Ungrouped') === groupName);
+  const firstLink = groupLinks[0] || {};
   
+  const popupBox = popup.querySelector('.group_type_box');
   const popupContent = popup.querySelector('.popup-content-inner');
   popupContent.innerHTML = '';
   
+  // Update popup title and name
+  const displayName = firstLink.top_name || groupName;
+  renderDisplayName(popupTitle, displayName);
+  
+  // Apply group styling to popup
+  if (firstLink.popup_bg_color) popupBox.style.backgroundColor = firstLink.popup_bg_color;
+  if (firstLink.popup_text_color) popupBox.style.color = firstLink.popup_text_color;
+  if (firstLink.popup_border_color) popupBox.style.borderColor = firstLink.popup_border_color;
+  if (firstLink.popup_border_radius) popupBox.style.borderRadius = firstLink.popup_border_radius;
+
   groupLinks.forEach((link) => {
+    // Add invisible line break before item if needed
+    if (link.start_new_line) {
+      const lineBreak = document.createElement('div');
+      lineBreak.className = 'item-line-break';
+      popupContent.appendChild(lineBreak);
+    }
     const linkIndex = links.findIndex(l => l._id === link._id);
     const clonedItem = createLinkItem(link, linkIndex);
     popupContent.appendChild(clonedItem);
@@ -1147,6 +1165,13 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     });
 
     await window.convexMutation("functions:updateAllLinks", { links: updatedLinks });
+    
+    // Update open popup name if it matches the edited group
+    const popupTitle = document.querySelector('#group_type_box-popup h3');
+    if (popupTitle && popupTitle.dataset.groupName === originalName) {
+      popupTitle.dataset.groupName = newName;
+    }
+
     document.getElementById('edit-group-popup').classList.add('hidden');
     await loadLinks();
     window.showNotification('Group updated!');
