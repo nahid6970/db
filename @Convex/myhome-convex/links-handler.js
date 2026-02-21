@@ -409,6 +409,11 @@ function createRegularGroup(groupName, items) {
   const isHorizontal = firstLink.horizontal_stack;
 
   const isBoxGroup = firstLink.box_group;
+  
+  // Apply start_new_line style
+  if (firstLink.start_new_line) {
+    div.style.flexBasis = '100%';
+  }
 
   // Box group - compact button that opens popup
   if (isBoxGroup) {
@@ -570,6 +575,11 @@ function createLinkItem(link, index) {
   li.draggable = true;
 
   if (link.hidden) li.classList.add('hidden-item');
+  
+  // Apply start_new_line style
+  if (link.start_new_line) {
+    li.style.flexBasis = '100%';
+  }
 
   const a = document.createElement('a');
   a.href = link.url;
@@ -883,6 +893,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-border-radius').value = link.border_radius || '';
   document.getElementById('edit-link-title').value = link.title || '';
   document.getElementById('edit-link-hidden').checked = link.hidden || false;
+  document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -934,7 +945,8 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     li_border_radius: document.getElementById('edit-link-li-border-radius').value,
     border_radius: document.getElementById('edit-link-border-radius').value,
     title: document.getElementById('edit-link-title').value,
-    hidden: document.getElementById('edit-link-hidden').checked
+    hidden: document.getElementById('edit-link-hidden').checked,
+    start_new_line: document.getElementById('edit-link-start-new-line').checked
   };
 
   try {
@@ -1001,6 +1013,7 @@ function openEditGroupPopup(groupName) {
   document.getElementById('edit-group-name').value = groupName;
   document.getElementById('edit-group-top-name').value = firstLink.top_name || '';
   document.getElementById('edit-group-password-protect').checked = firstLink.password_protect || false;
+  document.getElementById('edit-group-start-new-line').checked = firstLink.start_new_line || false;
 
   // Set group type radio
   const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
@@ -1076,6 +1089,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     horizontal_stack: groupType === 'horizontal',
     display_style: displayStyle,
     password_protect: document.getElementById('edit-group-password-protect').checked,
+    start_new_line: document.getElementById('edit-group-start-new-line').checked,
     top_name: document.getElementById('edit-group-top-name').value,
     top_bg_color: document.getElementById('edit-group-top-bg-color').value,
     top_text_color: document.getElementById('edit-group-top-text-color').value,

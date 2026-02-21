@@ -490,8 +490,7 @@ button, .link-item, .add-button { transition: all 0.3s; }
   display: none;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  right: 10px;
+  position: relative;
   z-index: 10;
   transition: all 0.2s;
 }
