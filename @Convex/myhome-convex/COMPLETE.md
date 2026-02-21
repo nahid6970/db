@@ -104,6 +104,7 @@ convex-myhome/
     - Organized layouts
     - Better validation
     - Smooth interactions
+    - **Group Picker Dropdown**
 
 12. **Polish**
     - Loading states
@@ -185,6 +186,9 @@ python -m http.server 8000
 
 ### Color Preview
 Type color → instant preview with readable text
+
+### Group Picker
+Click the ▼ button next to any "Group" input to see a list of existing groups.
 
 ### Multiple URLs
 Click + to add, − to remove URL fields

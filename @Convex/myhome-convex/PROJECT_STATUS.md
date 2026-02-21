@@ -51,6 +51,7 @@
 - ⏳ Advanced hover effects
 
 ### Advanced UI Features
+- ✅ **Group Picker Dropdown:** Added dropdown button (▼) to all group input fields.
 - ⏳ Group popup expansion (click to show all items)
 - ⏳ Dynamic URL field management (add/remove multiple URLs)
 - ⏳ URL selection for multiple URLs
@@ -73,7 +74,7 @@
 - Backend: ~200 lines
 - Frontend: ~1,300 lines
 
-**Working Features: 95% of core functionality**
+**Working Features: 98% of core functionality**
 
 ## 🚀 Next Steps
 

@@ -30,6 +30,7 @@
 - Cleaner form layout with less clutter
 - Color inputs marked with `.color-input` class
 - Better button styling (add/remove)
+- **Group Picker Dropdown:** Added dropdown button (▼) to select from existing groups.
 
 ### 5. Polish & Optimization ✅
 - **Loading states** with opacity and spinner
@@ -96,6 +97,7 @@
 - Better mobile UX
 - Error handling
 - **Group Persistence (Fixed)**
+- **Group Picker**
 
 ## 🚫 Excluded Features (As Requested)
 
@@ -137,6 +139,11 @@ Type any color in color fields → instant preview with readable text
 - Click summary to expand/collapse sections
 - Keeps forms clean and organized
 - Only show what you need
+
+### Group Picker
+- Click the ▼ button in group input fields
+- Select from a list of existing groups
+- Automatically updates as you add groups
 
 ### Smooth UX
 - Fade-in popups
