@@ -211,6 +211,15 @@ function renderLinks() {
 
     sortedGroupNames.filter(name => collapsible[name]).forEach(groupName => {
       const groupDiv = createCollapsibleGroup(groupName, grouped[groupName]);
+      
+      // Add invisible line break before group if needed
+      const firstLink = grouped[groupName][0].link;
+      if (firstLink.group_start_new_line) {
+        const lineBreak = document.createElement('div');
+        lineBreak.className = 'group-line-break';
+        topContainer.appendChild(lineBreak);
+      }
+      
       topContainer.appendChild(groupDiv);
     });
 
@@ -247,23 +256,12 @@ function renderLinks() {
     
     // Add invisible line break before group if needed
     const firstLink = grouped[groupName][0].link;
-    if (firstLink.start_new_line) {
+    if (firstLink.group_start_new_line) {
       const lineBreak = document.createElement('div');
       lineBreak.className = 'group-line-break';
       container.appendChild(lineBreak);
     }
-    
     container.appendChild(groupDiv);
-  });
-
-  // Render items with start_new_line as invisible separators
-  links.forEach((link, index) => {
-    if (link.start_new_line && !link.is_separator && !link.collapsible && !link.box_group) {
-      const itemSep = document.createElement('div');
-      itemSep.className = 'item-line-break';
-      itemSep.dataset.linkIndex = index;
-      // This will be inserted before the item in the group
-    }
   });
 
   // Only add floating action button (FAB) - removed the large button
@@ -881,7 +879,8 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     li_border_radius: document.getElementById('link-li-border-radius').value,
     border_radius: document.getElementById('link-border-radius').value,
     title: document.getElementById('link-title').value,
-    hidden: document.getElementById('link-hidden').checked
+    hidden: document.getElementById('link-hidden').checked,
+    start_new_line: document.getElementById('link-start-new-line').checked
   };
 
   try {
@@ -1043,7 +1042,7 @@ function openEditGroupPopup(groupName) {
   document.getElementById('edit-group-name').value = groupName;
   document.getElementById('edit-group-top-name').value = firstLink.top_name || '';
   document.getElementById('edit-group-password-protect').checked = firstLink.password_protect || false;
-  document.getElementById('edit-group-start-new-line').checked = firstLink.start_new_line || false;
+  document.getElementById('edit-group-group-start-new-line').checked = firstLink.group_start_new_line || false;
 
   // Set group type radio
   const typeRadios = document.querySelectorAll('input[name="edit-group-type"]');
@@ -1119,7 +1118,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     horizontal_stack: groupType === 'horizontal',
     display_style: displayStyle,
     password_protect: document.getElementById('edit-group-password-protect').checked,
-    start_new_line: document.getElementById('edit-group-start-new-line').checked,
+    group_start_new_line: document.getElementById('edit-group-group-start-new-line').checked,
     top_name: document.getElementById('edit-group-top-name').value,
     top_bg_color: document.getElementById('edit-group-top-bg-color').value,
     top_text_color: document.getElementById('edit-group-top-text-color').value,

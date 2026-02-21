@@ -10,6 +10,7 @@ export default defineSchema({
     default_type: v.optional(v.string()),
     is_separator: v.optional(v.boolean()),
     start_new_line: v.optional(v.boolean()),
+    group_start_new_line: v.optional(v.boolean()),
     text: v.optional(v.string()),
     icon_class: v.optional(v.string()),
     img_src: v.optional(v.string()),
