@@ -665,6 +665,62 @@ function renderDisplayName(element, name) {
 
 // Add link popup
 function showAddLinkPopup() {
+  document.getElementById('quick-add-link-popup').classList.remove('hidden');
+  document.getElementById('quick-add-link-form').reset();
+}
+
+// Quick add link form handler
+document.getElementById('quick-add-link-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const url = document.getElementById('quick-link-url').value;
+  const group = document.getElementById('quick-link-group').value;
+
+  try {
+    // Extract domain from URL
+    const urlObj = new URL(url);
+    const domain = urlObj.hostname.replace('www.', '');
+    
+    // Get favicon using Google's service
+    const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+    
+    const newLink = {
+      name: domain,
+      group: group || 'Ungrouped',
+      urls: [url],
+      url: url,
+      default_type: 'img',
+      img_src: faviconUrl,
+      text: '',
+      icon_class: '',
+      svg_code: '',
+      width: '32px',
+      height: '32px',
+      color: '',
+      background_color: '',
+      font_family: '',
+      font_size: '',
+      li_width: '',
+      li_height: '',
+      li_bg_color: '',
+      li_hover_color: '',
+      li_border_color: '',
+      li_border_radius: '',
+      border_radius: '',
+      title: domain,
+      hidden: false
+    };
+
+    await window.convexMutation("functions:addLink", newLink);
+    document.getElementById('quick-add-link-popup').classList.add('hidden');
+    await loadLinks();
+    window.showNotification('Link added!');
+  } catch (error) {
+    console.error('Error adding link:', error);
+    alert('Error adding link: ' + error.message);
+  }
+});
+
   document.getElementById('add-link-popup').classList.remove('hidden');
   document.getElementById('add-link-form').reset();
   
