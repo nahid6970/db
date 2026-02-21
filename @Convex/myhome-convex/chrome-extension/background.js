@@ -46,7 +46,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       
       const newLink = {
         name: title,
-        group: "Inbox",
+        group: "",
         urls: [url],
         url: url,
         default_type: 'img',
@@ -86,7 +86,7 @@ async function addLinkToConvex(linkData) {
     // Construct the full object exactly as links-handler.js does
     const fullLinkData = {
       name: linkData.name || "New Link",
-      group: linkData.group || 'Inbox',
+      group: linkData.group || '',
       urls: linkData.urls || [linkData.url],
       url: linkData.url,
       default_type: linkData.default_type || 'img',

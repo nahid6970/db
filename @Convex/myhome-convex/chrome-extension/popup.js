@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const newLink = {
       name: name,
-      group: group || "Inbox",
+      group: group || "",
       urls: [url],
       url: url,
       default_type: 'img',
@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const fullLinkData = {
         name: name,
-        group: group || 'Inbox',
+        group: group || '',
         urls: [url],
         url: url,
         default_type: 'img',
