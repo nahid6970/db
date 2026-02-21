@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "MyHome Link Adder",
+  "version": "1.0",
+  "description": "Add links to your MyHome dashboard with a right-click.",
+  "permissions": [
+    "contextMenus",
+    "storage",
+    "tabs",
+    "activeTab",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://lovable-wildcat-595.convex.cloud/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}
