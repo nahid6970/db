@@ -684,8 +684,17 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     // Get favicon using Google's service
     const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
     
+    // Fetch page title
+    let pageTitle = domain;
+    try {
+      const result = await window.convexClient.action("actions:fetchPageTitle", { url });
+      pageTitle = result.title;
+    } catch (error) {
+      console.warn('Could not fetch page title, using domain:', error);
+    }
+    
     const newLink = {
-      name: domain,
+      name: pageTitle,
       group: group || 'Ungrouped',
       urls: [url],
       url: url,
@@ -707,7 +716,7 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
       li_border_color: '',
       li_border_radius: '',
       border_radius: '',
-      title: domain,
+      title: pageTitle,
       hidden: false
     };
 
