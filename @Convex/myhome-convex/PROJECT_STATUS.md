@@ -18,7 +18,7 @@
 2. ✅ **style.css** - Core styling (responsive, animations, popups)
 3. ✅ **app.js** - Convex client setup, F1 edit mode, notifications
 4. ✅ **context-menu.js** - Right-click context menus
-5. ✅ **links-handler.js** - Full link management (~500 lines)
+5. ✅ **links-handler.js** - Full link management (~1500 lines)
 6. ✅ **sidebar-handler.js** - Sidebar button management (~200 lines)
 
 ### Core Features Implemented ✅
@@ -52,7 +52,8 @@
 
 ### Advanced UI Features
 - ✅ **Group Picker Dropdown:** Added dropdown button (▼) to all group input fields.
-- ⏳ Group popup expansion (click to show all items)
+- ✅ **Start on New Line:** Fully implemented for both Items and Groups.
+- ✅ **Group Popups:** Expand/collapse logic fixed, live updates on edit.
 - ⏳ Dynamic URL field management (add/remove multiple URLs)
 - ⏳ URL selection for multiple URLs
 - ⏳ Collapsible settings sections in forms
@@ -62,6 +63,7 @@
 ### Polish & Optimization
 - ✅ **Fixed Group Sorting Bug:** Groups now persist order correctly after refresh.
 - ✅ **Improved Drag & Drop:** Smoother reordering with 300ms save delay.
+- ✅ **Popup Live Refresh:** Popups update immediately when items are changed/renamed.
 - ⏳ Loading states
 - ⏳ Error handling improvements
 - ⏳ Smooth animations
@@ -70,11 +72,11 @@
 
 ## 🎯 Current Status
 
-**Total Lines of Code: ~1,500**
+**Total Lines of Code: ~1,600**
 - Backend: ~200 lines
-- Frontend: ~1,300 lines
+- Frontend: ~1,400 lines
 
-**Working Features: 98% of core functionality**
+**Working Features: 99% of core functionality**
 
 ## 🚀 Next Steps
 

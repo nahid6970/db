@@ -17,7 +17,7 @@ convex-myhome/
 ├── style.css                  # All styling
 ├── app.js                     # Convex client & core logic
 ├── context-menu.js            # Right-click menus
-├── links-handler.js           # Link management (~900 lines)
+├── links-handler.js           # Link management (~1000 lines)
 ├── sidebar-handler.js         # Sidebar management (~320 lines)
 ├── package.json               # Dependencies
 ├── .gitignore                 # Git ignore rules
@@ -82,29 +82,30 @@ convex-myhome/
    - Notifications
 
 ### ✅ Advanced Features (Phase 2)
-8. **Color Preview System**
+8. **Layout Control**
+   - **Start on New Line (Item & Group)**
+   - **Visual Separators**
+   - **Live Popup Updates**
+   - Stable sorting algorithm
+
+9. **Color Preview System**
    - Live preview as you type
    - Contrast-based text color
    - Works with hex, rgb, named colors
    - Visual feedback
 
-9. **SVG Enhancements**
-   - Proper sizing (1em default)
-   - Color inheritance
-   - Fill attribute handling
-   - Works everywhere
-
-10. **Dynamic URL Fields**
-    - Add/remove URL fields
-    - Multiple URLs per link
-    - Clean UI with +/− buttons
+10. **SVG Enhancements**
+    - Proper sizing (1em default)
+    - Color inheritance
+    - Fill attribute handling
+    - Works everywhere
 
 11. **Form UX**
+    - **Group Picker Dropdown**
+    - Dynamic URL fields (add/remove)
     - Collapsible sections
     - Organized layouts
     - Better validation
-    - Smooth interactions
-    - **Group Picker Dropdown**
 
 12. **Polish**
     - Loading states
@@ -112,7 +113,6 @@ convex-myhome/
     - Fade-in effects
     - Mobile responsive
     - Error handling
-    - **Stable Group Sorting**
 
 ---
 
@@ -120,14 +120,14 @@ convex-myhome/
 
 | File | Lines | Purpose |
 |------|-------|---------|
-| `convex/functions.ts` | ~200 | Backend queries/mutations |
-| `index.html` | ~300 | HTML structure & forms |
-| `style.css` | ~150 | All styling |
+| `convex/functions.ts` | ~240 | Backend queries/mutations |
+| `index.html` | ~570 | HTML structure & forms |
+| `style.css` | ~520 | All styling |
 | `app.js` | ~100 | Convex client & core |
 | `context-menu.js` | ~30 | Context menus |
-| `links-handler.js` | ~900 | Link management |
+| `links-handler.js` | ~1400 | Link management |
 | `sidebar-handler.js` | ~320 | Sidebar management |
-| **TOTAL** | **~2,000** | **Full application** |
+| **TOTAL** | **~3,200** | **Full application** |
 
 ---
 
@@ -190,8 +190,9 @@ Type color → instant preview with readable text
 ### Group Picker
 Click the ▼ button next to any "Group" input to see a list of existing groups.
 
-### Multiple URLs
-Click + to add, − to remove URL fields
+### Layout Control
+- **Start on New Line**: Check this in Item or Group settings to force a line break.
+- **Separators**: Right-click a group -> "Add Separator".
 
 ---
 
@@ -286,6 +287,7 @@ Generates prod URL: `https://yyy.convex.cloud`
 4. **PROJECT_STATUS.md** - Development phases
 5. **PHASE2_COMPLETE.md** - Advanced features
 6. **FIXES_GROUP_ORDER.md** - Group ordering fix
+7. **START_NEW_LINE_ISSUE.md** - Layout fix details
 
 ---
 

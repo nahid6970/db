@@ -32,25 +32,19 @@
 - Better button styling (add/remove)
 - **Group Picker Dropdown:** Added dropdown button (▼) to select from existing groups.
 
-### 5. Polish & Optimization ✅
+### 5. Layout & Organization ✅
+- **Start on New Line (Item):** Force an item to start on a new row within a group.
+- **Start on New Line (Group):** Force an entire group to start on a new row in the main layout.
+- **Visual Separators:** Add visible separator lines between groups.
+- **Group Popups:** Top/Box groups open in a popup window for cleaner layout.
+
+### 6. Polish & Optimization ✅
+- **Popup Live Refresh:** Popups instantly reflect changes (renames, styling, new links) without closing.
 - **Loading states** with opacity and spinner
 - **Smooth transitions** on all interactive elements
 - **Fade-in animations** for popups
 - **Better mobile responsiveness**
-  - Smaller padding on mobile
-  - Responsive font sizes
-  - Flexible layouts
 - **Error notifications** with different colors
-  - Success: Green
-  - Error: Red
-  - Info: Blue
-
-### 6. Code Quality Improvements ✅
-- Modular URL field functions
-- Better SVG parsing and rendering
-- Improved color detection and contrast calculation
-- Cleaner event handlers
-- Better error handling
 
 ### 7. Critical Fixes & Stability ✅
 - **Group Order Persistence:** Fixed issue where group order reset on refresh.
@@ -64,10 +58,10 @@
 - Backend: ~200 lines (Convex functions)
 - Frontend HTML: ~300 lines
 - Frontend CSS: ~150 lines
-- Frontend JS: ~1,350 lines
+- Frontend JS: ~1,400 lines
   - app.js: ~100 lines
   - context-menu.js: ~30 lines
-  - links-handler.js: ~900 lines
+  - links-handler.js: ~1000 lines
   - sidebar-handler.js: ~320 lines
 
 ## 🎯 Features Summary
@@ -98,6 +92,7 @@
 - Error handling
 - **Group Persistence (Fixed)**
 - **Group Picker**
+- **Advanced Layout Control**
 
 ## 🚫 Excluded Features (As Requested)
 
@@ -117,33 +112,22 @@ The project is **fully functional** and ready for deployment:
 
 ## 🎨 Key Features in Action
 
-### Group Ordering (Fixed)
-- Drag any group to reorder
-- Move Top groups to Normal section and back
-- Refresh page → Order stays exactly the same!
-
-### Color Preview
-Type any color in color fields → instant preview with readable text
-
-### Dynamic URLs
-- Click + to add more URLs
-- Click − to remove URLs
-- First URL is always required
-
-### SVG Support
-- Paste SVG code directly
-- Automatic sizing and color inheritance
-- Works everywhere (links, groups, sidebar)
-
-### Collapsible Forms
-- Click summary to expand/collapse sections
-- Keeps forms clean and organized
-- Only show what you need
+### Layout Control
+- **"Start on New Line"**: Toggle on any item or group to force a line break.
+- **Popups**: Click a Box/Top group to see its items. Updates instantly when you edit!
 
 ### Group Picker
 - Click the ▼ button in group input fields
 - Select from a list of existing groups
 - Automatically updates as you add groups
+
+### Color Preview
+Type any color in color fields → instant preview with readable text
+
+### SVG Support
+- Paste SVG code directly
+- Automatic sizing and color inheritance
+- Works everywhere (links, groups, sidebar)
 
 ### Smooth UX
 - Fade-in popups
