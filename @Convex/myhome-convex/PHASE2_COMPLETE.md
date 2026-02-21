@@ -51,6 +51,12 @@
 - Cleaner event handlers
 - Better error handling
 
+### 7. Critical Fixes & Stability ✅
+- **Group Order Persistence:** Fixed issue where group order reset on refresh.
+- **Cross-Section Drag & Drop:** Groups can now be dragged between Top/Normal sections and save correctly.
+- **Stable Sorting:** Implemented stable sort algorithm to prevent random jumping of groups.
+- **Robust Save Logic:** Rewrote `saveGroupOrder` to handle complex DOM structures.
+
 ## 📊 Statistics
 
 **Total Lines of Code: ~2,000**
@@ -89,6 +95,7 @@
 - Smooth animations
 - Better mobile UX
 - Error handling
+- **Group Persistence (Fixed)**
 
 ## 🚫 Excluded Features (As Requested)
 
@@ -107,6 +114,11 @@ The project is **fully functional** and ready for deployment:
 5. Open `index.html` in browser
 
 ## 🎨 Key Features in Action
+
+### Group Ordering (Fixed)
+- Drag any group to reorder
+- Move Top groups to Normal section and back
+- Refresh page → Order stays exactly the same!
 
 ### Color Preview
 Type any color in color fields → instant preview with readable text

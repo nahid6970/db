@@ -101,6 +101,12 @@ div.onclick = (e) => {
 };
 ```
 
+## Other Critical Fixes
+
+### ✅ Group Order Persistence (New!)
+Fixed a major issue where group order was not saving correctly when dragging between sections.
+See detailed report in: **[FIXES_GROUP_ORDER.md](FIXES_GROUP_ORDER.md)**
+
 ## Features
 
 - ✅ Top Group displays as a compact bar with title

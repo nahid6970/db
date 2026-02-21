@@ -25,20 +25,26 @@
 
 ## Features Included
 
-✅ Link management (add, edit, delete, copy, reorder)
-✅ Multiple URLs per link
-✅ Link grouping with collapsible groups
-✅ Password-protected groups (password: "1823")
-✅ Horizontal stack layout
-✅ Display styles: flex or list-item
-✅ Hide/show links
-✅ Drag-and-drop reordering
-✅ Context menus (right-click)
-✅ Sidebar button management
-✅ Custom styling with gradients
-✅ NerdFont icons, images, SVG support
-✅ Edit mode (F1 key)
-✅ Color preview in inputs
+✅ **Robust Group Management:**
+  - Drag-and-drop reordering that **persists after refresh**
+  - Collapsible groups (Top Groups)
+  - Horizontal stack layout
+  - Password-protected groups (password: "1823")
+
+✅ **Link Management:**
+  - Add, edit, delete, copy, hide/show
+  - Multiple URLs per link
+  - Display styles: Flex (row) or List-Item (column)
+
+✅ **Rich Styling:**
+  - Custom colors, gradients, borders
+  - NerdFont icons, images, SVG support
+  - Color preview in input fields
+
+✅ **Sidebar & Navigation:**
+  - customizable Sidebar buttons
+  - Context menus (right-click)
+  - Edit mode toggle (F1 key or button)
 
 ## Production Deployment
 

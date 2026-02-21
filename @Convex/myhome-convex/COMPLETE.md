@@ -12,7 +12,7 @@
 ```
 convex-myhome/
 ├── convex/
-│   └── functions.ts          # Backend (9 Convex functions)
+│   └── functions.ts          # Backend (10 Convex functions)
 ├── index.html                 # Main HTML structure
 ├── style.css                  # All styling
 ├── app.js                     # Convex client & core logic
@@ -38,7 +38,7 @@ convex-myhome/
    - Multiple URLs per link
    - Link grouping
    - Hide/show links
-   - Drag-and-drop reordering
+   - **Robust Reordering (Persists after refresh)**
 
 2. **Display Types**
    - Text
@@ -111,6 +111,7 @@ convex-myhome/
     - Fade-in effects
     - Mobile responsive
     - Error handling
+    - **Stable Group Sorting**
 
 ---
 
@@ -280,6 +281,7 @@ Generates prod URL: `https://yyy.convex.cloud`
 3. **FEATURES.md** - Complete feature list
 4. **PROJECT_STATUS.md** - Development phases
 5. **PHASE2_COMPLETE.md** - Advanced features
+6. **FIXES_GROUP_ORDER.md** - Group ordering fix
 
 ---
 
