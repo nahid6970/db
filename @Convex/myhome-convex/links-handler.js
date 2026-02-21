@@ -139,9 +139,7 @@ function refreshOpenPopup() {
 
 // Render links
 function renderLinks() {
-  console.log('🔵 renderLinks() called!');
   const container = document.getElementById('links-container');
-  console.log('🔵 Container found:', container);
   
   if (!container) {
     console.error('❌ links-container not found!');
@@ -149,12 +147,10 @@ function renderLinks() {
   }
   
   container.innerHTML = '';
-  console.log('🔵 Container cleared');
 
   const grouped = {};
   const collapsible = {};
 
-  console.log('🔵 Processing links:', links.length);
   links.forEach((link, index) => {
     if (link.hidden && !window.editMode) return;
 
@@ -165,9 +161,6 @@ function renderLinks() {
     if (link.collapsible) collapsible[group] = true;
   });
 
-  console.log('🔵 Grouped:', Object.keys(grouped).length, 'groups');
-  console.log('🔵 Collapsible:', Object.keys(collapsible).length, 'groups');
-
   // Sort groups by group_order
   const sortedGroupNames = Object.keys(grouped).sort((a, b) => {
     const aOrder = grouped[a][0].link.group_order ?? 999;
@@ -175,8 +168,6 @@ function renderLinks() {
     if (aOrder !== bOrder) return aOrder - bOrder;
     return a.localeCompare(b);
   });
-  console.log("Sorted group names:", sortedGroupNames);
-  console.log("Group orders:", sortedGroupNames.map(name => `${name}=${grouped[name][0].link.group_order ?? 999}`));
 
   if (Object.keys(collapsible).length > 0) {
     const topContainer = document.createElement('div');
