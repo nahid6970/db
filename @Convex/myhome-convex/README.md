@@ -46,6 +46,11 @@
   - Context menus (right-click)
   - Edit mode toggle (F1 key or button)
 
+✅ **Chrome Extension:**
+  - Add links via right-click context menu
+  - Extension popup for quick link addition
+  - See `chrome-extension/README.md` for setup
+
 ## Production Deployment
 
 1. **Deploy to Convex:**
@@ -56,7 +61,9 @@
 
 2. **Update app.js with prod URL**
 
-3. **Deploy frontend to GitHub Pages or any static host**
+3. **Update Chrome extension files (`background.js` and `popup.js`) with prod URL**
+
+4. **Deploy frontend to GitHub Pages or any static host**
 
 ## Notes
 
@@ -64,3 +71,4 @@
 - Only changes to `convex/` folder count as deployments
 - HTML/CSS/JS changes don't count
 - Database tables created automatically on first insert
+- Chrome extension can be moved to any folder location
