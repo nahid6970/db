@@ -721,16 +721,6 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
   }
 });
 
-  document.getElementById('add-link-popup').classList.remove('hidden');
-  document.getElementById('add-link-form').reset();
-  
-  // Apply color preview to all color fields
-  setTimeout(() => {
-    if (typeof applyColorPreviewToContainer === 'function') {
-      applyColorPreviewToContainer(document.getElementById('add-link-popup'));
-    }
-  }, 50);
-}
 
 document.getElementById('add-link-form').addEventListener('submit', async (e) => {
   e.preventDefault();
