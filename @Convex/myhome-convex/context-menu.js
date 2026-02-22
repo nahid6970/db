@@ -20,9 +20,21 @@ function showContextMenu(event, items) {
     contextMenu.appendChild(div);
   });
   
-  contextMenu.style.left = event.pageX + 'px';
-  contextMenu.style.top = event.pageY + 'px';
+  contextMenu.style.left = event.clientX + 'px';
+  contextMenu.style.top = event.clientY + 'px';
   contextMenu.classList.remove('hidden');
+  
+  // Adjust position if menu goes off screen
+  const rect = contextMenu.getBoundingClientRect();
+  const viewportWidth = window.innerWidth;
+  const viewportHeight = window.innerHeight;
+  
+  if (rect.right > viewportWidth) {
+    contextMenu.style.left = (viewportWidth - rect.width - 10) + 'px';
+  }
+  if (rect.bottom > viewportHeight) {
+    contextMenu.style.top = (viewportHeight - rect.height - 10) + 'px';
+  }
 }
 
 function hideContextMenu() {
