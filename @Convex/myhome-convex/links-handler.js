@@ -643,8 +643,12 @@ function createLinkItem(link, index) {
   } else if (link.default_type === 'img' && link.img_src) {
     const img = document.createElement('img');
     img.src = link.img_src;
-    img.width = link.width || 50;
-    img.height = link.height || 50;
+    if (link.width) img.style.width = link.width.includes('px') ? link.width : link.width + 'px';
+    if (link.height) img.style.height = link.height.includes('px') ? link.height : link.height + 'px';
+    if (!link.width && !link.height) {
+      img.style.width = '50px';
+      img.style.height = '50px';
+    }
     a.appendChild(img);
   } else if (link.default_type === 'svg' && link.svg_code) {
     const temp = document.createElement('div');
