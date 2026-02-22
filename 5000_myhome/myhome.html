@@ -1155,6 +1155,16 @@ div.toggle-container {
   color: white;
 }
 
+.context-menu-item.context-menu-copy-url {
+  color: #00BCD4;
+  /* Cyan */
+}
+
+.context-menu-item.context-menu-copy-url:hover {
+  background-color: #00BCD4;
+  color: white;
+}
+
 .context-menu-item.context-menu-copy-note {
   color: #9C27B0;
   /* Purple */
@@ -2477,6 +2487,8 @@ function createContextMenu(items) {
             menuItem.classList.add('context-menu-edit');
         } else if (item.label === 'Copy') {
             menuItem.classList.add('context-menu-copy');
+        } else if (item.label === 'Copy URL') {
+            menuItem.classList.add('context-menu-copy-url');
         } else if (item.label === 'Copy Note') {
             menuItem.classList.add('context-menu-copy-note');
         } else if (item.label === 'Delete') {
@@ -2892,6 +2904,7 @@ document.addEventListener('DOMContentLoaded', function () {
             { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
             { label: 'Edit', action: () => openEditLinkPopup(link, index) },
             { label: 'Copy', action: () => copyLink(link, index) },
+            { label: 'Copy URL', action: () => copyURLToClipboard(link.url) },
             { label: 'Delete', action: () => deleteLink(index) }
           ];
           addMobileContextMenu(simpleListItem, items);
@@ -3297,6 +3310,10 @@ document.addEventListener('DOMContentLoaded', function () {
               action: () => copyLink(link, index)
             },
             {
+              label: 'Copy URL',
+              action: () => copyURLToClipboard(link.url)
+            },
+            {
               label: 'Delete',
               action: () => deleteLink(index)
             }
@@ -3696,6 +3713,10 @@ document.addEventListener('DOMContentLoaded', function () {
             action: () => copyLink(linkInfo.link, linkInfo.index)
           },
           {
+            label: 'Copy URL',
+            action: () => copyURLToClipboard(linkInfo.link.url)
+          },
+          {
             label: 'Copy Note',
             action: () => copyNote(linkInfo.link)
           },
@@ -3921,6 +3942,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                 { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                 { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
+                { label: 'Copy URL', action: () => copyURLToClipboard(linkData.url) },
                 { label: 'Copy Note', action: () => copyNote(linkData) },
                 { label: 'Delete', action: () => deleteLink(linkIndex) }
               ];
@@ -3957,6 +3979,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 { label: 'New-Tab', action: () => window.open(linkData.url, '_blank') },
                 { label: 'Edit', action: () => openEditLinkPopup(linkData, linkIndex) },
                 { label: 'Copy', action: () => copyLink(linkData, linkIndex) },
+                { label: 'Copy URL', action: () => copyURLToClipboard(linkData.url) },
                 { label: 'Copy Note', action: () => copyNote(linkData) },
                 { label: 'Delete', action: () => deleteLink(linkIndex) }
               ];
@@ -4333,6 +4356,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 {
                   label: 'Copy',
                   action: () => copyLink(linkData.link, linkData.index)
+                },
+                {
+                  label: 'Copy URL',
+                  action: () => copyURLToClipboard(linkData.link.url)
                 },
                 {
                   label: 'Delete',
@@ -5598,6 +5625,40 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       editGroupForm.setAttribute('data-listener-attached', 'true');
     }
+  }
+
+  // Function to copy text to clipboard using modern API with fallback
+  async function copyToClipboard(text) {
+    if (!navigator.clipboard) {
+      fallbackCopyTextToClipboard(text);
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(text);
+      showNotification('Text copied to clipboard!', 'success');
+    } catch (err) {
+      console.error('Could not copy text: ', err);
+      fallbackCopyTextToClipboard(text);
+    }
+  }
+
+  // Function to copy the URL to clipboard
+  function copyURLToClipboard(url) {
+    if (!url) {
+      showNotification('No URL to copy', 'error');
+      return;
+    }
+    copyToClipboard(url);
+  }
+
+  // Function to copy the note (title) to clipboard
+  function copyNote(link) {
+    if (!link || !link.title) {
+      showNotification('No note to copy', 'error');
+      return;
+    }
+    copyToClipboard(link.title);
   }
 
   // Fallback copy method for older browsers or non-secure contexts
@@ -14050,30 +14111,30 @@ async function triggerScans() {
     "url": "https://www.youtube.com/@veritasium"
   },
   {
-    "click_action": "url",
-    "collapsible": false,
-    "default_type": "img",
-    "display_style": "flex",
-    "group": "Youtube Channel",
-    "horizontal_bg_color": "#2d2d2d",
-    "horizontal_border_color": "#0056b3",
-    "horizontal_hover_color": "#3a3a3a",
-    "horizontal_stack": false,
-    "horizontal_text_color": "red",
-    "img_src": "https://yt3.ggpht.com/ytc/AIdro_n1Ribd7LwdP_qKtqWL3ZDfIgv9M1d6g78VwpHGXVR2Ir4=s48-c-k-c0x00ffffff-no-rj",
-    "li_height": "1%",
-    "li_width": "1%",
     "name": "Kurzgesagt \u2013 In a Nutshell",
+    "group": "Youtube Channel",
+    "url": "https://www.youtube.com/@kurzgesagt/videos",
+    "img_src": "https://yt3.ggpht.com/ytc/AIdro_n1Ribd7LwdP_qKtqWL3ZDfIgv9M1d6g78VwpHGXVR2Ir4=s48-c-k-c0x00ffffff-no-rj",
+    "default_type": "img",
+    "click_action": "url-1",
+    "li_width": "1%",
+    "li_height": "1%",
+    "collapsible": false,
+    "display_style": "flex",
+    "horizontal_stack": false,
     "password_protect": false,
-    "popup_bg_color": "#31343a",
-    "popup_border_color": "transparent",
-    "popup_border_radius": "8px",
-    "popup_text_color": "#ffffff",
     "top_bg_color": "#2d2d2d",
+    "top_text_color": "#ffffff",
     "top_border_color": "#444444",
     "top_hover_color": "#3a3a3a",
-    "top_text_color": "#ffffff",
-    "url": "https://www.youtube.com/@Fireship"
+    "popup_bg_color": "#31343a",
+    "popup_text_color": "#ffffff",
+    "popup_border_color": "transparent",
+    "popup_border_radius": "8px",
+    "horizontal_bg_color": "#2d2d2d",
+    "horizontal_text_color": "red",
+    "horizontal_border_color": "#0056b3",
+    "horizontal_hover_color": "#3a3a3a"
   },
   {
     "click_action": "url",

@@ -787,6 +787,17 @@ function renderDisplayName(element, name) {
 function showAddLinkPopup() {
   document.getElementById('quick-add-link-popup').classList.remove('hidden');
   document.getElementById('quick-add-link-form').reset();
+  
+  // Restore last used group
+  const lastGroup = localStorage.getItem('lastUsedGroup');
+  if (lastGroup) {
+    document.getElementById('quick-link-group').value = lastGroup;
+  }
+  
+  // Focus on URL input
+  setTimeout(() => {
+    document.getElementById('quick-link-url').focus();
+  }, 100);
 }
 
 // Add separator function
@@ -862,6 +873,12 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     };
 
     await window.convexMutation("functions:addLink", newLink);
+    
+    // Save last used group
+    if (group) {
+      localStorage.setItem('lastUsedGroup', group);
+    }
+    
     document.getElementById('quick-add-link-popup').classList.add('hidden');
     await loadLinks();
     window.showNotification('Link added!');
