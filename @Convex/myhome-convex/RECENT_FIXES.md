@@ -32,6 +32,9 @@
 - **Image Width/Height Fix**: Images now display correctly with custom dimensions
   - Changed from `img.width` attribute to `img.style.width`
   - Supports both numeric values and "px" strings
+- **Quick Add Link Improvements**:
+  - URL field auto-focuses when popup opens
+  - Remembers last used group (saved in localStorage)
 - **Files Modified**: `context-menu.js`, `links-handler.js`
 
 ### YouTube Integration
