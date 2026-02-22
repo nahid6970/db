@@ -1534,7 +1534,7 @@
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
-            "inline_script": "kiro-cli chat --trust-all-tools\n./gradlew assembleDebug --parallel --no-daemon --build-cache\nssh -L 5056:localhost:5056 -N nahid@192.168.0.101",
+            "inline_script": "kiro-cli chat --trust-all-tools\n./gradlew assembleDebug --parallel --no-daemon --build-cache\nssh -L 5056:localhost:5056 -N nahid@192.168.0.101\nfastboot flash recovery C:\\orangefox\\recovery.img",
             "font_family": "JetBrainsMono Nerd Font Propo",
             "font_size": 14,
             "is_bold": true,
