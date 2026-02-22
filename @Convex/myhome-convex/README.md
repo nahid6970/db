@@ -30,20 +30,25 @@
   - Collapsible groups (Top Groups)
   - Horizontal stack layout
   - Password-protected groups (password: "1823")
+  - Visual separators between groups
+  - "Start on New Line" toggle for groups
 
 ✅ **Link Management:**
   - Add, edit, delete, copy, hide/show
   - Multiple URLs per link
   - Display styles: Flex (row) or List-Item (column)
+  - "Start on New Line" toggle for individual items
+  - YouTube channel icon auto-detection
 
 ✅ **Rich Styling:**
   - Custom colors, gradients, borders
   - NerdFont icons, images, SVG support
   - Color preview in input fields
+  - Custom width/height for images
 
 ✅ **Sidebar & Navigation:**
-  - customizable Sidebar buttons
-  - Context menus (right-click)
+  - Customizable Sidebar buttons
+  - Context menus (right-click) with smart positioning
   - Edit mode toggle (F1 key or button)
 
 ✅ **Chrome Extension:**
@@ -72,3 +77,7 @@
 - HTML/CSS/JS changes don't count
 - Database tables created automatically on first insert
 - Chrome extension can be moved to any folder location
+
+## Known Issues
+
+- Group "Start on New Line" feature applies to all items inside the group (see `START_NEW_LINE_ISSUE.md` for details)
