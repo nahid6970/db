@@ -12,13 +12,23 @@ export const fetchPageTitle = action({
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : null;
       
+      // Extract YouTube channel icon if it's a YouTube channel
+      let channelIcon = null;
+      if (args.url.includes('youtube.com') && (args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/'))) {
+        const iconMatch = html.match(/"avatar":\{"thumbnails":\[\{"url":"([^"]+)"/);
+        if (iconMatch) {
+          channelIcon = iconMatch[1];
+        }
+      }
+      
       // Extract domain as fallback
       const urlObj = new URL(args.url);
       const domain = urlObj.hostname.replace('www.', '');
       
       return {
         title: title || domain,
-        domain: domain
+        domain: domain,
+        channelIcon: channelIcon
       };
     } catch (error) {
       // If fetch fails, return domain from URL
@@ -26,7 +36,8 @@ export const fetchPageTitle = action({
       const domain = urlObj.hostname.replace('www.', '');
       return {
         title: domain,
-        domain: domain
+        domain: domain,
+        channelIcon: null
       };
     }
   },

@@ -820,13 +820,16 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     const domain = urlObj.hostname.replace('www.', '');
     
     // Get favicon using Google's service
-    const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+    let faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
     
-    // Fetch page title
+    // Fetch page title and YouTube channel icon if applicable
     let pageTitle = domain;
     try {
       const result = await window.convexClient.action("actions:fetchPageTitle", { url });
       pageTitle = result.title;
+      if (result.channelIcon) {
+        faviconUrl = result.channelIcon;
+      }
     } catch (error) {
       console.warn('Could not fetch page title, using domain:', error);
     }
