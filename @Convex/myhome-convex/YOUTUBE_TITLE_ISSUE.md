@@ -121,4 +121,14 @@ if (args.url.includes('youtube.com') || args.url.includes('youtu.be')) {
 
 ## Status
 
-🔴 **BROKEN** - YouTube titles not fetching, shows "youtube.com" instead
+✅ **FIXED** - YouTube titles are now fetched using the official oEmbed API, avoiding HTTP 429 rate limiting.
+
+### Implemented Solution
+
+Updated `convex/actions.ts` to detect YouTube URLs and use the `https://www.youtube.com/oembed` endpoint. This endpoint is designed for third-party integrations and does not require an API key or aggressive scraping, making it much more reliable.
+
+**Key changes:**
+1. Detection of `youtube.com` or `youtu.be` in the domain.
+2. Use of `fetch` on the oEmbed URL first.
+3. Fallback to standard page fetch if oEmbed fails.
+4. Thumbnail from oEmbed is used as the channel icon for videos.

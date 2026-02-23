@@ -64,6 +64,7 @@
 - ✅ **Fixed Group Sorting Bug:** Groups now persist order correctly after refresh.
 - ✅ **Improved Drag & Drop:** Smoother reordering with 300ms save delay.
 - ✅ **Popup Live Refresh:** Popups update immediately when items are changed/renamed.
+- ✅ **YouTube Title Fetching:** Fixed 429 rate limit issue by using oEmbed API.
 - ⏳ Loading states
 - ⏳ Error handling improvements
 - ⏳ Smooth animations
