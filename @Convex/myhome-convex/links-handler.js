@@ -425,7 +425,6 @@ function createCollapsibleGroup(groupName, items) {
       if (firstLink.popup_border_radius) popupBox.style.borderRadius = firstLink.popup_border_radius;
 
       popup.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
     }
   };
 
@@ -531,7 +530,6 @@ function createRegularGroup(groupName, items) {
       if (firstLink.popup_border_radius) popupBox.style.borderRadius = firstLink.popup_border_radius;
 
       popup.classList.remove('hidden');
-      document.body.style.overflow = 'hidden';
     };
     
     div.addEventListener('contextmenu', (e) => {
