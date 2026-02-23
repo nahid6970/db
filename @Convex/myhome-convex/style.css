@@ -8,25 +8,23 @@ body { font-family: Arial, sans-serif; background: #1a1a1a; color: #fff; }
 .topbar { background: #2d2d2d; padding: 10px; display: flex; justify-content: center; border-bottom: 2px solid #444; }
 .top-center-controls { display: flex; gap: 10px; align-items: center; }
 .add-button { 
-  background: #ffffff; 
-  color: #000000; 
-  border: 2px solid #cccccc; 
-  padding: 8px 15px; 
+  background: transparent; 
+  color: #ffffff; 
+  border: none; 
+  padding: 4px; 
   border-radius: 4px; 
   cursor: pointer; 
   text-decoration: none; 
   display: inline-flex; 
   align-items: center; 
-  min-width: 40px;
-  min-height: 40px;
+  min-width: 30px;
+  min-height: 30px;
   justify-content: center;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 .add-button:hover { 
-  background: #e0e0e0; 
-  transform: scale(1.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 0.1); 
+  transform: scale(1.1);
 }
 
 /* Main Container */
