@@ -1,9 +1,38 @@
 {
     "directories": [
         {
-            "path": "C:\\@delta\\ms1\\@Flask\\",
-            "category": "Flask",
-            "name": "Flask"
+            "path": "C:\\@delta\\db\\@Convex\\Android-Cloud-Share",
+            "category": "Android-Apk",
+            "name": "Android-Cloud-Share"
+        },
+        {
+            "path": "C:\\@delta\\ms1\\test_project\\my-first-extension",
+            "category": "Chrome Extension"
+        },
+        {
+            "path": "C:\\@delta\\db\\@Convex\\image-share",
+            "category": "Convex",
+            "name": "Gallery-Cloudinary"
+        },
+        {
+            "path": "C:\\@delta\\db\\@Convex\\gameARR-convex",
+            "category": "Convex",
+            "name": "gameARR"
+        },
+        {
+            "path": "C:\\@delta\\db\\@Convex\\myhome-convex",
+            "category": "Convex",
+            "name": "myHome"
+        },
+        {
+            "path": "C:\\@delta\\db\\@Convex\\myFiles",
+            "category": "Convex",
+            "name": "Share-Files-Cloud"
+        },
+        {
+            "path": "C:\\@delta\\db\\@Convex\\share_text_convex",
+            "category": "Convex",
+            "name": "Share-Text"
         },
         {
             "path": "C:\\@delta\\ms1\\@Flask\\4998_Applist",
@@ -42,6 +71,11 @@
             "category": "Flask"
         },
         {
+            "path": "C:\\@delta\\ms1\\@Flask\\",
+            "category": "Flask",
+            "name": "Flask"
+        },
+        {
             "path": "C:\\@delta\\ms1\\scripts\\run",
             "category": "script",
             "name": "Run & Dir"
@@ -66,10 +100,6 @@
             "path": "C:\\@delta\\ms1\\Testing\\mypygui\\qt",
             "category": "Testing",
             "name": "Script Manager"
-        },
-        {
-            "path": "C:\\@delta\\ms1\\test_project\\my-first-extension",
-            "category": "Chrome Extension"
         }
     ],
     "commands": [
