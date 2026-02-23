@@ -63,7 +63,7 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
       
       const newLink = {
         name: title,
-        group: "Inbox",
+        group: "",
         urls: [url],
         url: url,
         default_type: 'img',
@@ -153,7 +153,7 @@ async function addLinkToConvex(linkData) {
     
     if (response.ok) {
       console.log("Successfully added link to MyHome");
-      showNotification("Added to MyHome", `Successfully added "${fullLinkData.name}" to your Inbox.`);
+      showNotification("Added to MyHome", `Successfully added "${fullLinkData.name}" to your dashboard.`);
     } else {
       console.error(`Failed to add link (Status ${response.status}):`, responseText);
       

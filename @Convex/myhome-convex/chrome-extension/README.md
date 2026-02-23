@@ -26,6 +26,6 @@ The extension is pre-configured to work with your MyHome Convex deployment at:
 
 ## Usage
 
-- New links are added to the **"Inbox"** group by default.
-- You can change the group name in the popup before clicking "Add".
+- New links are added without a group by default (Ungrouped).
+- You can specify a group name in the popup before clicking "Add".
 - A desktop notification will confirm when a link is successfully added via the context menu.
