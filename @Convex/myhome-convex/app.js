@@ -76,6 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const popup = btn.closest('.popup-container');
       if (popup) {
         popup.classList.add('hidden');
+        document.body.style.removeProperty('overflow');
         console.log('✅ Popup closed');
       }
     });
@@ -87,6 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.target === popup) {
         console.log('🖱️ Clicked outside popup', index, ', closing');
         popup.classList.add('hidden');
+        document.body.style.removeProperty('overflow');
       }
     });
   });
