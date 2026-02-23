@@ -24,7 +24,7 @@ chrome.runtime.onStartup.addListener(createContextMenu);
 // Also try to create it immediately just in case
 createContextMenu();
 
-chrome.contextMenus.onClicked.addListener((info, tab) => {
+chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   if (info.menuItemId === "addLinkToMyHome") {
     try {
       const url = info.linkUrl || info.pageUrl;
@@ -33,20 +33,37 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
         return;
       }
 
-      const title = tab.title || "New Link";
-      
-      // Default values for a new link
-      let faviconUrl = "";
+      const domain = new URL(url).hostname.replace('www.', '');
+      let title = tab.title || "New Link";
+      let faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+      // Try to fetch accurate metadata from backend action
       try {
-        const domain = new URL(url).hostname.replace('www.', '');
-        faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        const actionUrl = `${CONVEX_URL}/api/action`;
+        const actionResponse = await fetch(actionUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: "actions:fetchPageTitle",
+            args: { url },
+            format: "json"
+          })
+        });
+        
+        if (actionResponse.ok) {
+          const json = await actionResponse.json();
+          // Convex actions return { value: ... } when called via HTTP
+          const result = json.value || json;
+          if (result.title) title = result.title;
+          if (result.channelIcon) faviconUrl = result.channelIcon;
+        }
       } catch (e) {
-        console.warn("Favicon generation failed:", e);
+        console.warn("Metadata fetch failed, using fallbacks:", e);
       }
       
       const newLink = {
         name: title,
-        group: "",
+        group: "Inbox",
         urls: [url],
         url: url,
         default_type: 'img',

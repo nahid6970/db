@@ -7,11 +7,39 @@ document.addEventListener('DOMContentLoaded', () => {
   const addBtn = document.getElementById('add-btn');
   const statusDiv = document.getElementById('status');
 
-  // Fill in current tab info
-  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+  let currentFaviconUrl = "";
+
+  // Fill in current tab info and fetch metadata
+  chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
     if (tabs[0]) {
       nameInput.value = tabs[0].title;
       urlInput.value = tabs[0].url;
+      const url = tabs[0].url;
+      const domain = new URL(url).hostname.replace('www.', '');
+      currentFaviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+      // Try to fetch accurate metadata from backend
+      try {
+        const actionUrl = `${CONVEX_URL}/api/action`;
+        const actionResponse = await fetch(actionUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            path: "actions:fetchPageTitle",
+            args: { url },
+            format: "json"
+          })
+        });
+        
+        if (actionResponse.ok) {
+          const json = await actionResponse.json();
+          const result = json.value || json;
+          if (result.title) nameInput.value = result.title;
+          if (result.channelIcon) currentFaviconUrl = result.channelIcon;
+        }
+      } catch (e) {
+        console.warn("Metadata fetch failed:", e);
+      }
     }
   });
 
@@ -29,36 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
     statusDiv.textContent = 'Adding...';
     statusDiv.className = '';
 
-    const domain = new URL(url).hostname.replace('www.', '');
-    const faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-
-    const newLink = {
-      name: name,
-      group: group || "",
-      urls: [url],
-      url: url,
-      default_type: 'img',
-      img_src: faviconUrl,
-      text: '',
-      icon_class: '',
-      svg_code: '',
-      width: '',
-      height: '',
-      color: '',
-      background_color: '',
-      font_family: '',
-      font_size: '',
-      li_width: '',
-      li_height: '',
-      li_bg_color: '',
-      li_hover_color: '',
-      li_border_color: '',
-      li_border_radius: '',
-      border_radius: '',
-      title: name,
-      hidden: false
-    };
-
     try {
       const fullLinkData = {
         name: name,
@@ -66,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         urls: [url],
         url: url,
         default_type: 'img',
-        img_src: faviconUrl,
+        img_src: currentFaviconUrl,
         text: '',
         icon_class: '',
         svg_code: '',
