@@ -18,6 +18,8 @@ There are 3 group types in the application. Each type has specific styling optio
   - Text Color (`horizontal_text_color`) - applies to group title
   - Border Color (`horizontal_border_color`)
   - Hover Color (`horizontal_hover_color`)
+  - Width / Height (`top_width`, `top_height`)
+  - Font Family / Size (`top_font_family`, `top_font_size`)
 - **Universal Fallback**: If "Normal" fields are empty, the group will check "Top Group" fields.
 - **Corner Styling**: Controlled by the **Popup Radius** (`popup_border_radius`) field.
 
@@ -60,6 +62,8 @@ There are 3 group types in the application. Each type has specific styling optio
   - Text Color (`horizontal_text_color`)
   - Border Color (`horizontal_border_color`)
   - Hover Color (`horizontal_hover_color`)
+  - Width / Height (`top_width`, `top_height`)
+  - Font Family / Size (`top_font_family`, `top_font_size`)
 
 - **Popup Colors** (applies to popup window):
   - Background Color (`popup_bg_color`)
