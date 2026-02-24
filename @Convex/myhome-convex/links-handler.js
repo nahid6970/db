@@ -394,6 +394,10 @@ function createCollapsibleGroup(groupName, items) {
     div.style.borderWidth = '2px';
   }
 
+  if (firstLink.popup_border_radius) {
+    div.style.borderRadius = firstLink.popup_border_radius;
+  }
+
   div.onclick = (e) => {
     if (e.target === header || e.target === title) {
       if (firstLink.password_protect) {
@@ -512,6 +516,10 @@ function createRegularGroup(groupName, items) {
       div.style.borderWidth = '2px';
     }
 
+    if (firstLink.popup_border_radius) {
+      div.style.borderRadius = firstLink.popup_border_radius;
+    }
+
     // Apply hover color
     if (hoverColor) {
       div.addEventListener('mouseenter', () => div.style.backgroundColor = hoverColor);
@@ -615,6 +623,10 @@ function createRegularGroup(groupName, items) {
     div.style.borderColor = '#444';
     div.style.borderStyle = 'solid';
     div.style.borderWidth = '2px';
+  }
+
+  if (firstLink.popup_border_radius) {
+    div.style.borderRadius = firstLink.popup_border_radius;
   }
 
   if (hoverColor) {
