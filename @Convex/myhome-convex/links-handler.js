@@ -397,6 +397,10 @@ function createCollapsibleGroup(groupName, items) {
   if (firstLink.popup_border_radius) {
     div.style.borderRadius = firstLink.popup_border_radius;
   }
+  if (firstLink.top_width) div.style.width = firstLink.top_width.includes('px') || firstLink.top_width.includes('%') ? firstLink.top_width : firstLink.top_width + 'px';
+  if (firstLink.top_height) div.style.height = firstLink.top_height.includes('px') || firstLink.top_height.includes('%') ? firstLink.top_height : firstLink.top_height + 'px';
+  if (firstLink.top_font_family) title.style.fontFamily = firstLink.top_font_family;
+  if (firstLink.top_font_size) title.style.fontSize = firstLink.top_font_size.includes('px') || firstLink.top_font_size.includes('pt') ? firstLink.top_font_size : firstLink.top_font_size + 'px';
 
   div.onclick = (e) => {
     if (e.target === header || e.target === title) {
@@ -520,6 +524,12 @@ function createRegularGroup(groupName, items) {
       div.style.borderRadius = firstLink.popup_border_radius;
     }
 
+    // Apply size and font
+    if (firstLink.top_width) div.style.width = firstLink.top_width.includes('px') || firstLink.top_width.includes('%') ? firstLink.top_width : firstLink.top_width + 'px';
+    if (firstLink.top_height) div.style.height = firstLink.top_height.includes('px') || firstLink.top_height.includes('%') ? firstLink.top_height : firstLink.top_height + 'px';
+    if (firstLink.top_font_family) title.style.fontFamily = firstLink.top_font_family;
+    if (firstLink.top_font_size) title.style.fontSize = firstLink.top_font_size.includes('px') || firstLink.top_font_size.includes('pt') ? firstLink.top_font_size : firstLink.top_font_size + 'px';
+
     // Apply hover color
     if (hoverColor) {
       div.addEventListener('mouseenter', () => div.style.backgroundColor = hoverColor);
@@ -628,6 +638,10 @@ function createRegularGroup(groupName, items) {
   if (firstLink.popup_border_radius) {
     div.style.borderRadius = firstLink.popup_border_radius;
   }
+  if (firstLink.top_width) div.style.width = firstLink.top_width.includes('px') || firstLink.top_width.includes('%') ? firstLink.top_width : firstLink.top_width + 'px';
+  if (firstLink.top_height) div.style.height = firstLink.top_height.includes('px') || firstLink.top_height.includes('%') ? firstLink.top_height : firstLink.top_height + 'px';
+  if (firstLink.top_font_family) title.style.fontFamily = firstLink.top_font_family;
+  if (firstLink.top_font_size) title.style.fontSize = firstLink.top_font_size.includes('px') || firstLink.top_font_size.includes('pt') ? firstLink.top_font_size : firstLink.top_font_size + 'px';
 
   if (hoverColor) {
     div.addEventListener("mouseenter", () => div.style.backgroundColor = hoverColor);
