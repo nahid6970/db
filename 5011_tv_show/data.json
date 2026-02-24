@@ -1652,7 +1652,7 @@
                 "title": "The Rookie - S08E08 - Grand Theft Aircraft HDTV-720p",
                 "watched": false,
                 "added_date": "2026-02-24T12:43:41.203294",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 23,
@@ -2015,6 +2015,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\WWE Raw",
         "rating": "3",
         "episodes": [
+            {
+                "id": 20,
+                "title": "WWE Raw - 2026-02-23 - RAW 1709 WEBRip-720p",
+                "watched": true,
+                "added_date": "2026-02-24T17:43:41.128481",
+                "notify": "seen"
+            },
             {
                 "id": 19,
                 "title": "WWE Raw - 2026-02-16 - RAW 1708 WEBDL-1080p",
