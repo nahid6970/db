@@ -67,7 +67,8 @@
 
 ## Known Issues
 
-See `START_NEW_LINE_ISSUE.md` for details on the group "Start on New Line" bug.
+- **Group Width Wrap Bug**: Groups with manual line breaks stay too wide. See `GROUP_WIDTH_BREAK_ISSUE.md`.
+- **Start on New Line Toggle**: Known issue with groups (applies to all items inside) ⚠️. See `START_NEW_LINE_ISSUE.md`.
 
 ## Next Steps
 
