@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 24,
+                "title": "The Rookie - S08E08 - Grand Theft Aircraft HDTV-720p",
+                "watched": false,
+                "added_date": "2026-02-24T12:43:41.203294",
+                "notify": "unseen"
+            },
+            {
                 "id": 23,
                 "title": "The Rookie - S08E07 - Baja HDTV-720p",
                 "watched": false,
