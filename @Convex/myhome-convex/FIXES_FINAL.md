@@ -7,9 +7,9 @@
 **After:** Matches original project styling exactly
 
 **Changes:**
-- Border: `2px solid #444` → `1px solid #0056b3`
-- Border radius: `8px` → `0px` (square corners)
-- Padding: `10px 20px` → `10px`
+- Border: `2px solid #444` (Unified across all types)
+- Border width: Increased to `2px` for better visibility
+- Border radius: `8px` → `0px` (square corners, but now adjustable via settings)
 - Added: `flex: 1 1 auto` for proper flex behavior
 - Added: `font-family: jetbrainsmono nfp`
 - Header: Centered content with `justify-content: center`
@@ -35,11 +35,11 @@
 
 ## Files Modified
 
-### style.css (lines 51-83)
+### style.css
 ```css
 .group_type_top { 
   background-color: #2d2d2d;
-  border: 1px solid #0056b3;
+  border: 2px solid #444;
   border-radius: 0px;
   padding: 10px;
   min-width: 50px;

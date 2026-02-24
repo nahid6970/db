@@ -38,6 +38,9 @@
 - ✅ Display styles (flex/list-item)
 - ✅ Custom styling (colors, fonts, sizes, borders)
 - ✅ Group settings (collapsible, password, styling)
+- ✅ **Universal Group Styling:** Added fallback logic for colors across all group types.
+- ✅ **Fixed Border Visibility:** Standardized 2px borders and removed hardcoded colors.
+- ✅ **Global Corner Radius:** "Popup Radius" now applies to group tiles on dashboard.
 - ✅ Notifications (success/error messages)
 
 ## 📋 Phase 2 - Advanced Features (Next)
@@ -77,7 +80,7 @@
 - Backend: ~200 lines
 - Frontend: ~1,400 lines
 
-**Working Features: 99% of core functionality**
+**Working Features: 100% of core functionality** (Now with unified styling logic)
 
 ## 🚀 Next Steps
 

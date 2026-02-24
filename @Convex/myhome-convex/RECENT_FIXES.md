@@ -1,5 +1,26 @@
 # Recent Fixes and Improvements
 
+## Session: 2026-02-25 (Latest)
+
+### Group Styling and Border Resolution
+- **Fixed Border Visibility**: Resolved issues where border colors were not appearing for "Normal" and "Box" groups.
+  - Standardized all group borders to `2px solid`.
+  - Removed hardcoded blue fallback from CSS to allow custom color overrides.
+  - Implemented direct property application (`style.borderColor`) to ensure settings reflect immediately.
+- **Unified Styling Logic**: All group types now check both "Top" and "Horizontal" color fields.
+  - Prevents losing color settings when switching group types.
+  - Priorities: Primary field for group type first, then secondary field as fallback.
+- **Global Corner Radius**: The "Popup Radius" setting now applies to the **Group Tile** corners on the dashboard as well.
+  - Works for all types (Normal, Top, Box).
+  - Provides a more consistent and adjustable UI.
+- **Fixed Group Conversion**: Resolved a reference error that was preventing groups from being converted between types (Normal ↔ Box ↔ Top).
+- **Files Modified**: 
+  - `links-handler.js` - Rendering and form logic
+  - `style.css` - Standardized border rules
+  - `index.html` - UI labels and cache-busting version string
+
+---
+
 ## Session: 2026-02-22
 
 ### Chrome Extension Fixes

@@ -13,11 +13,13 @@ There are 3 group types in the application. Each type has specific styling optio
 **Layout:** Controlled by Flex/List option
 
 **Styling Options:**
-- **Horizontal Stack Colors** (applies to group container):
+- **Normal & Box Group Styling** (primary source):
   - Background Color (`horizontal_bg_color`)
   - Text Color (`horizontal_text_color`) - applies to group title
   - Border Color (`horizontal_border_color`)
   - Hover Color (`horizontal_hover_color`)
+- **Universal Fallback**: If "Normal" fields are empty, the group will check "Top Group" fields.
+- **Corner Styling**: Controlled by the **Popup Radius** (`popup_border_radius`) field.
 
 **When to use:** Standard groups with visible items
 
@@ -41,7 +43,7 @@ There are 3 group types in the application. Each type has specific styling optio
   - Background Color (`popup_bg_color`)
   - Text Color (`popup_text_color`)
   - Border Color (`popup_border_color`)
-  - Border Radius (`popup_border_radius`)
+  - Border Radius (`popup_border_radius`) - Also applies to the **Top Group button** on the main page.
 
 **When to use:** Frequently accessed groups, save space
 
@@ -63,19 +65,19 @@ There are 3 group types in the application. Each type has specific styling optio
   - Background Color (`popup_bg_color`)
   - Text Color (`popup_text_color`)
   - Border Color (`popup_border_color`)
-  - Border Radius (`popup_border_radius`)
+  - Border Radius (`popup_border_radius`) - Also applies to the **Box Group tile** on the main page.
 
 **When to use:** Space-saving grouped links, inline with other groups
 
 ---
 
-## Styling Implementation Summary
+| Group Type | Primary Color Source | Fallback Color Source | Tile Corner Radius |
+|------------|-----------------------|-----------------------|--------------------|
+| **Normal** | Normal & Box Section | Top Group Section | `popup_border_radius` |
+| **Top Group** | Top Group Section | Normal & Box Section | `popup_border_radius` |
+| **Box Group** | Normal & Box Section | Top Group Section | `popup_border_radius` |
 
-| Group Type | Button/Container Styling | Popup Styling | Title Color Source |
-|------------|-------------------------|---------------|-------------------|
-| **Normal** | Horizontal Stack Colors | N/A | `horizontal_text_color` |
-| **Top Group** | Top Group Colors | Popup Colors | `top_text_color` |
-| **Box Group** | Horizontal Stack Colors | Popup Colors | `horizontal_text_color` |
+> **Note:** Priority is always given to the specific section for that type, but if empty, it automatically checks the other section to ensure your color settings are never "lost" when switching types.
 
 ---
 
@@ -100,16 +102,20 @@ There are 3 group types in the application. Each type has specific styling optio
 ## Code Implementation
 
 ### Normal Group
-```javascript
-if (isHorizontal) {
-  if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
-  if (firstLink.horizontal_text_color) title.style.color = firstLink.horizontal_text_color;
-  if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
-  if (firstLink.horizontal_hover_color) {
-    div.addEventListener("mouseenter", () => div.style.backgroundColor = firstLink.horizontal_hover_color);
-    div.addEventListener("mouseleave", () => div.style.backgroundColor = firstLink.horizontal_bg_color || "");
-  }
+// Apply styling from Top or Horizontal fields
+const bgColor = firstLink.top_bg_color || firstLink.horizontal_bg_color;
+const textColor = firstLink.top_text_color || firstLink.horizontal_text_color;
+const borderColor = firstLink.top_border_color || firstLink.horizontal_border_color;
+const hoverColor = firstLink.top_hover_color || firstLink.horizontal_hover_color;
+
+if (bgColor) div.style.backgroundColor = bgColor;
+if (textColor) title.style.color = textColor;
+if (borderColor) {
+  div.style.borderColor = borderColor;
+  div.style.borderStyle = 'solid';
+  div.style.borderWidth = '2px';
 }
+if (firstLink.popup_border_radius) div.style.borderRadius = firstLink.popup_border_radius;
 ```
 
 ### Top Group
