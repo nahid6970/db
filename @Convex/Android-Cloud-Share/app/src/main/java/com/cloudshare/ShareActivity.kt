@@ -22,6 +22,11 @@ import kotlinx.coroutines.withContext
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.RequestBody.Companion.asRequestBody
+import okio.Buffer
+import okio.BufferedSink
+import okio.ForwardingSink
+import okio.Sink
+import okio.buffer
 import org.json.JSONObject
 import java.io.File
 import java.io.FileOutputStream
@@ -32,6 +37,23 @@ class ShareActivity : ComponentActivity() {
     private val CONVEX_URL = "https://good-basilisk-52.convex.cloud"
     private val CLOUDINARY_CLOUD_NAME = "dwc7hjiub"
     private val CLOUDINARY_UPLOAD_PRESET = "myFiles"
+
+    private fun createClient(onProgress: (Long, Long) -> Unit) = OkHttpClient.Builder()
+        .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
+        .writeTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
+        .readTimeout(60, java.util.concurrent.TimeUnit.SECONDS)
+        .addInterceptor { chain ->
+            val originalRequest = chain.request()
+            val originalBody = originalRequest.body
+            if (originalBody != null) {
+                val progressBody = ProgressRequestBody(originalBody, onProgress)
+                val progressRequest = originalRequest.newBuilder().method(originalRequest.method, progressBody).build()
+                chain.proceed(progressRequest)
+            } else {
+                chain.proceed(originalRequest)
+            }
+        }
+        .build()
 
     private val client = OkHttpClient.Builder()
         .connectTimeout(30, java.util.concurrent.TimeUnit.SECONDS)
@@ -186,6 +208,10 @@ class ShareActivity : ComponentActivity() {
     }
     
     private fun uploadToConvexStorage(file: File, mimeType: String, onProgress: (Int) -> Unit): String {
+        val progressClient = createClient { bytesWritten, totalBytes ->
+            if (totalBytes > 0) onProgress((100 * bytesWritten / totalBytes).toInt())
+        }
+        
         val uploadUrlRequest = RequestBody.create(
             "application/json".toMediaType(),
             JSONObject().apply {
@@ -200,7 +226,7 @@ class ShareActivity : ComponentActivity() {
             .post(uploadUrlRequest)
             .build()
 
-        val uploadUrl = client.newCall(uploadUrlResponse).execute().use { response ->
+        val uploadUrl = progressClient.newCall(uploadUrlResponse).execute().use { response ->
             if (!response.isSuccessful) throw Exception("Failed to get upload URL")
             JSONObject(response.body!!.string()).getString("value")
         }
@@ -213,13 +239,17 @@ class ShareActivity : ComponentActivity() {
             .addHeader("Content-Type", mimeType)
             .build()
 
-        return client.newCall(uploadRequest).execute().use { response ->
+        return progressClient.newCall(uploadRequest).execute().use { response ->
             if (!response.isSuccessful) throw Exception("Convex storage upload failed")
             JSONObject(response.body!!.string()).getString("storageId")
         }
     }
 
     private fun uploadToCloudinary(file: File, onProgress: (Int) -> Unit): String {
+        val progressClient = createClient { bytesWritten, totalBytes ->
+            if (totalBytes > 0) onProgress((100 * bytesWritten / totalBytes).toInt())
+        }
+        
         val requestBody = MultipartBody.Builder()
             .setType(MultipartBody.FORM)
             .addFormDataPart("file", file.name, file.asRequestBody("application/octet-stream".toMediaType()))
@@ -232,7 +262,7 @@ class ShareActivity : ComponentActivity() {
             .post(requestBody)
             .build()
 
-        client.newCall(request).execute().use { response ->
+        progressClient.newCall(request).execute().use { response ->
             if (!response.isSuccessful) throw Exception("Cloudinary upload failed")
             
             val json = JSONObject(response.body!!.string())
@@ -275,5 +305,30 @@ class ShareActivity : ComponentActivity() {
         data class Uploading(val progress: Int) : UploadState()
         object Success : UploadState()
         data class Error(val message: String) : UploadState()
+    }
+
+    class ProgressRequestBody(
+        private val delegate: RequestBody,
+        private val progressListener: (Long, Long) -> Unit
+    ) : RequestBody() {
+        override fun contentType() = delegate.contentType()
+        override fun contentLength() = delegate.contentLength()
+
+        override fun writeTo(sink: BufferedSink) {
+            val countingSink = CountingSink(sink)
+            val bufferedSink = countingSink.buffer()
+            delegate.writeTo(bufferedSink)
+            bufferedSink.flush()
+        }
+
+        inner class CountingSink(delegate: Sink) : ForwardingSink(delegate) {
+            private var bytesWritten = 0L
+
+            override fun write(source: Buffer, byteCount: Long) {
+                super.write(source, byteCount)
+                bytesWritten += byteCount
+                progressListener(bytesWritten, contentLength())
+            }
+        }
     }
 }
