@@ -73,6 +73,8 @@ body {
   border: 2px solid #444;
   width: fit-content;
   min-width: fit-content;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .link-group h3 {
@@ -142,7 +144,7 @@ body {
 
 .group_type_top {
   background-color: #2d2d2d;
-  border: 1px solid #0056b3;
+  border: 2px solid #444;
   border-radius: 0px;
   padding: 10px;
   min-width: 50px;
@@ -190,12 +192,12 @@ body {
 .link-group.group_type_box {
   flex: 1 1 auto;
   vertical-align: top;
-  border: 1px solid #0056b3;
+  border: 2px solid #444;
   border-radius: 0px;
   font-family: jetbrainsmono nfp;
   background-color: #2d2d2d;
   color: #ffffff;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
   cursor: pointer;
   padding: 10px;
   min-width: 150px;
@@ -205,7 +207,7 @@ body {
   flex-direction: column;
 }
 
-.group_type_box:hover {
+.link-group.group_type_box:hover {
   background-color: #3a3a3a;
 }
 

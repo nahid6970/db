@@ -14,23 +14,23 @@ document.addEventListener('keydown', (e) => {
     e.preventDefault();
     window.editMode = !window.editMode;
     console.log('🔵 Edit mode toggled:', window.editMode);
-    
+
     const container = document.querySelector('.flex-container2');
     if (container) {
       container.classList.toggle('edit-mode', window.editMode);
     }
-    
+
     // Dispatch event for other handlers
-    document.dispatchEvent(new CustomEvent('editModeChanged', { 
-      detail: { isEditMode: window.editMode } 
+    document.dispatchEvent(new CustomEvent('editModeChanged', {
+      detail: { isEditMode: window.editMode }
     }));
-    
+
     // Re-render to show/hide edit buttons
     renderLinks();
     if (typeof loadSidebarButtons === 'function') {
       loadSidebarButtons();
     }
-    
+
     // Show notification
     window.showNotification(
       window.editMode ? 'Edit mode enabled (F1 to disable)' : 'Edit mode disabled',
@@ -42,13 +42,13 @@ document.addEventListener('keydown', (e) => {
 // Initialize Convex client if not already initialized
 if (!window.convexClient) {
   console.log('🔵 Initializing Convex client in links-handler.js...');
-  
+
   // Load ConvexHttpClient dynamically
   import('https://esm.sh/convex@1.16.0/browser').then(module => {
     const { ConvexHttpClient } = module;
     window.convexClient = new ConvexHttpClient("https://lovable-wildcat-595.convex.cloud");
     console.log('✅ Convex client initialized!');
-    
+
     // Now load links
     if (typeof loadLinks === 'function') {
       loadLinks();
@@ -106,7 +106,7 @@ async function loadLinks() {
         }, 100);
       });
     }
-    
+
     const data = await window.convexQuery("functions:getLinks");
     links = data.sort((a, b) => (a._creationTime || 0) - (b._creationTime || 0));
   } catch (error) {
@@ -120,22 +120,22 @@ async function loadLinks() {
 function refreshOpenPopup() {
   const popup = document.getElementById('group_type_box-popup');
   if (!popup || popup.classList.contains('hidden')) return;
-  
+
   const popupTitle = popup.querySelector('h3');
   if (!popupTitle || !popupTitle.dataset.groupName) return;
-  
+
   const groupName = popupTitle.dataset.groupName;
   const groupLinks = links.filter(l => (l.group || 'Ungrouped') === groupName);
   const firstLink = groupLinks[0] || {};
-  
+
   const popupBox = popup.querySelector('.group_type_box');
   const popupContent = popup.querySelector('.popup-content-inner');
   popupContent.innerHTML = '';
-  
+
   // Update popup title and name
   const displayName = firstLink.top_name || groupName;
   renderDisplayName(popupTitle, displayName);
-  
+
   // Apply group styling to popup
   if (firstLink.popup_bg_color) popupBox.style.backgroundColor = firstLink.popup_bg_color;
   if (firstLink.popup_text_color) popupBox.style.color = firstLink.popup_text_color;
@@ -156,17 +156,17 @@ function refreshOpenPopup() {
 }
 
 // Show group picker context menu
-window.toggleGroupPicker = function(event, inputId) {
+window.toggleGroupPicker = function (event, inputId) {
   event.preventDefault();
   event.stopPropagation();
-  
+
   const input = document.getElementById(inputId);
   if (!input) return;
-  
+
   // Get unique group names from links
   const groups = [...new Set(links.map(link => link.group || 'Ungrouped'))];
   groups.sort((a, b) => a.localeCompare(b));
-  
+
   // Create menu items
   const items = groups.map(group => ({
     label: group,
@@ -177,7 +177,7 @@ window.toggleGroupPicker = function(event, inputId) {
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
   }));
-  
+
   // Show context menu at the button's position
   if (typeof window.showContextMenu === 'function') {
     window.showContextMenu(event, items);
@@ -187,12 +187,12 @@ window.toggleGroupPicker = function(event, inputId) {
 // Render links
 function renderLinks() {
   const container = document.getElementById('links-container');
-  
+
   if (!container) {
     console.error('❌ links-container not found!');
     return;
   }
-  
+
   container.innerHTML = '';
 
   const grouped = {};
@@ -229,7 +229,7 @@ function renderLinks() {
 
     sortedGroupNames.filter(name => collapsible[name]).forEach(groupName => {
       const groupDiv = createCollapsibleGroup(groupName, grouped[groupName]);
-      
+
       // Add invisible line break before group if needed
       const firstLink = grouped[groupName][0].link;
       if (firstLink.group_start_new_line) {
@@ -237,7 +237,7 @@ function renderLinks() {
         lineBreak.className = 'group-line-break';
         topContainer.appendChild(lineBreak);
       }
-      
+
       topContainer.appendChild(groupDiv);
     });
 
@@ -255,7 +255,7 @@ function renderLinks() {
       const sepDiv = document.createElement('div');
       sepDiv.className = 'group-separator';
       sepDiv.dataset.linkIndex = separator.index;
-      
+
       const deleteBtn = document.createElement('button');
       deleteBtn.className = 'separator-delete-btn';
       deleteBtn.innerHTML = '×';
@@ -266,12 +266,12 @@ function renderLinks() {
         await loadLinks();
       };
       sepDiv.appendChild(deleteBtn);
-      
+
       container.appendChild(sepDiv);
     }
 
     const groupDiv = createRegularGroup(groupName, grouped[groupName]);
-    
+
     // Add invisible line break before group if needed
     const firstLink = grouped[groupName][0].link;
     if (firstLink.group_start_new_line) {
@@ -323,7 +323,7 @@ function renderLinks() {
     console.log('✅ FAB element:', fab);
     console.log('✅ FAB in DOM:', document.getElementById('fab-add-link'));
   }
-  
+
   console.log('✅ renderLinks() completed!');
 }
 
@@ -369,7 +369,7 @@ function createCollapsibleGroup(groupName, items) {
 
   div.appendChild(header);
   div.appendChild(content);
-  
+
   // Drag and drop
   div.addEventListener("dragstart", handleGroupDragStart);
   div.addEventListener("dragover", handleGroupDragOver);
@@ -377,9 +377,22 @@ function createCollapsibleGroup(groupName, items) {
   div.addEventListener("dragend", handleGroupDragEnd);
 
   // Apply styling
-  if (firstLink.top_bg_color) div.style.backgroundColor = firstLink.top_bg_color;
-  if (firstLink.top_text_color) title.style.color = firstLink.top_text_color;
-  if (firstLink.top_border_color) div.style.borderColor = firstLink.top_border_color;
+  const bgColor = firstLink.top_bg_color || firstLink.horizontal_bg_color;
+  const textColor = firstLink.top_text_color || firstLink.horizontal_text_color;
+  const borderColor = firstLink.top_border_color || firstLink.horizontal_border_color;
+
+  if (bgColor) div.style.backgroundColor = bgColor;
+  if (textColor) title.style.color = textColor;
+  if (borderColor) {
+    div.style.borderColor = borderColor;
+    div.style.borderStyle = 'solid';
+    div.style.borderWidth = '2px';
+  } else {
+    // Default border if none specified
+    div.style.borderColor = '#444';
+    div.style.borderStyle = 'solid';
+    div.style.borderWidth = '2px';
+  }
 
   div.onclick = (e) => {
     if (e.target === header || e.target === title) {
@@ -391,7 +404,7 @@ function createCollapsibleGroup(groupName, items) {
         }
       }
       div.classList.toggle('expanded');
-      
+
       // Open popup instead of expanding
       const popup = document.getElementById('group_type_box-popup');
       const popupBox = popup.querySelector('.group_type_box');
@@ -413,7 +426,7 @@ function createCollapsibleGroup(groupName, items) {
           lineBreak.className = 'item-line-break';
           popupContent.appendChild(lineBreak);
         }
-        
+
         const clonedItem = createLinkItem(link, index);
         popupContent.appendChild(clonedItem);
       });
@@ -456,17 +469,17 @@ function createRegularGroup(groupName, items) {
   if (isBoxGroup) {
     div.classList.add('group_type_box');
     div.draggable = true;
-    
+
     const header = document.createElement('div');
     header.className = 'group-header-container';
-    
+
     const title = document.createElement('h3');
     title.className = 'group-title';
     const displayName = firstLink.top_name || groupName;
     renderDisplayName(title, displayName);
-    
+
     header.appendChild(title);
-    
+
     if (window.editMode) {
       const editBtn = document.createElement('button');
       editBtn.className = 'edit-btn';
@@ -477,20 +490,34 @@ function createRegularGroup(groupName, items) {
       };
       header.appendChild(editBtn);
     }
-    
+
     div.appendChild(header);
-    
+
     // Apply styling
-    if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
-    if (firstLink.horizontal_text_color) div.style.color = firstLink.horizontal_text_color;
-    if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
-    
-    // Apply hover color
-    if (firstLink.horizontal_hover_color) {
-      div.addEventListener('mouseenter', () => div.style.backgroundColor = firstLink.horizontal_hover_color);
-      div.addEventListener('mouseleave', () => div.style.backgroundColor = firstLink.horizontal_bg_color || '#2d2d2d');
+    const bgColor = firstLink.top_bg_color || firstLink.horizontal_bg_color;
+    const textColor = firstLink.top_text_color || firstLink.horizontal_text_color;
+    const borderColor = firstLink.top_border_color || firstLink.horizontal_border_color;
+    const hoverColor = firstLink.top_hover_color || firstLink.horizontal_hover_color;
+
+    if (bgColor) div.style.backgroundColor = bgColor;
+    if (textColor) title.style.color = textColor;
+    if (borderColor) {
+      div.style.borderColor = borderColor;
+      div.style.borderStyle = 'solid';
+      div.style.borderWidth = '2px';
+    } else {
+      // Default border if none specified
+      div.style.borderColor = '#444';
+      div.style.borderStyle = 'solid';
+      div.style.borderWidth = '2px';
     }
-    
+
+    // Apply hover color
+    if (hoverColor) {
+      div.addEventListener('mouseenter', () => div.style.backgroundColor = hoverColor);
+      div.addEventListener('mouseleave', () => div.style.backgroundColor = bgColor || '#2d2d2d');
+    }
+
     // Click handler - opens popup
     div.onclick = (e) => {
       if (firstLink.password_protect) {
@@ -500,7 +527,7 @@ function createRegularGroup(groupName, items) {
           return;
         }
       }
-      
+
       const popup = document.getElementById('group_type_box-popup');
       const popupBox = popup.querySelector('.group_type_box');
       const popupContent = popup.querySelector('.popup-content-inner');
@@ -519,7 +546,7 @@ function createRegularGroup(groupName, items) {
           lineBreak.className = 'item-line-break';
           popupContent.appendChild(lineBreak);
         }
-        
+
         const clonedItem = createLinkItem(link, index);
         popupContent.appendChild(clonedItem);
       });
@@ -531,7 +558,7 @@ function createRegularGroup(groupName, items) {
 
       popup.classList.remove('hidden');
     };
-    
+
     div.addEventListener('contextmenu', (e) => {
       showContextMenu(e, [
         { label: 'Edit', action: () => openEditGroupPopup(groupName) },
@@ -540,13 +567,13 @@ function createRegularGroup(groupName, items) {
         { label: 'Delete', action: () => deleteGroup(groupName) }
       ]);
     });
-    
+
     // Drag and drop
     div.addEventListener("dragstart", handleGroupDragStart);
     div.addEventListener("dragover", handleGroupDragOver);
     div.addEventListener("drop", handleGroupDrop);
     div.addEventListener("dragend", handleGroupDragEnd);
-    
+
     return div;
   }
 
@@ -570,17 +597,29 @@ function createRegularGroup(groupName, items) {
 
   const displayStyle = firstLink.display_style || 'flex';
   if (displayStyle === 'list-item') div.classList.add('list-style');
-  
-  // Apply horizontal stack styling
-  if (isHorizontal) {
-    if (firstLink.horizontal_bg_color) div.style.backgroundColor = firstLink.horizontal_bg_color;
-    if (firstLink.horizontal_text_color) title.style.color = firstLink.horizontal_text_color;
-    if (firstLink.horizontal_border_color) div.style.borderColor = firstLink.horizontal_border_color;
-    
-    if (firstLink.horizontal_hover_color) {
-      div.addEventListener("mouseenter", () => div.style.backgroundColor = firstLink.horizontal_hover_color);
-      div.addEventListener("mouseleave", () => div.style.backgroundColor = firstLink.horizontal_bg_color || "");
-    }
+
+  // Apply regular group styling (Normal or Horizontal Stack)
+  const bgColor = firstLink.top_bg_color || firstLink.horizontal_bg_color;
+  const textColor = firstLink.top_text_color || firstLink.horizontal_text_color;
+  const borderColor = firstLink.top_border_color || firstLink.horizontal_border_color;
+  const hoverColor = firstLink.top_hover_color || firstLink.horizontal_hover_color;
+
+  if (bgColor) div.style.backgroundColor = bgColor;
+  if (textColor) title.style.color = textColor;
+  if (borderColor) {
+    div.style.borderColor = borderColor;
+    div.style.borderStyle = 'solid';
+    div.style.borderWidth = '2px';
+  } else {
+    // Default border if none specified
+    div.style.borderColor = '#444';
+    div.style.borderStyle = 'solid';
+    div.style.borderWidth = '2px';
+  }
+
+  if (hoverColor) {
+    div.addEventListener("mouseenter", () => div.style.backgroundColor = hoverColor);
+    div.addEventListener("mouseleave", () => div.style.backgroundColor = bgColor || "#2d2d2d");
   }
 
   items.forEach(({ link, index }) => {
@@ -590,7 +629,7 @@ function createRegularGroup(groupName, items) {
       lineBreak.className = 'item-line-break';
       ul.appendChild(lineBreak);
     }
-    
+
     const item = createLinkItem(link, index);
     ul.appendChild(item);
   });
@@ -608,7 +647,7 @@ function createRegularGroup(groupName, items) {
       ]);
     }
   });
-  
+
   // Drag and drop
   div.addEventListener("dragstart", handleGroupDragStart);
   div.addEventListener("dragover", handleGroupDragOver);
@@ -787,13 +826,13 @@ function renderDisplayName(element, name) {
 function showAddLinkPopup() {
   document.getElementById('quick-add-link-popup').classList.remove('hidden');
   document.getElementById('quick-add-link-form').reset();
-  
+
   // Restore last used group
   const lastGroup = localStorage.getItem('lastUsedGroup');
   if (lastGroup) {
     document.getElementById('quick-link-group').value = lastGroup;
   }
-  
+
   // Focus on URL input
   setTimeout(() => {
     document.getElementById('quick-link-url').focus();
@@ -829,10 +868,10 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     // Extract domain from URL
     const urlObj = new URL(url);
     const domain = urlObj.hostname.replace('www.', '');
-    
+
     // Get favicon using Google's service
     let faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
-    
+
     // Fetch page title and YouTube channel icon if applicable
     let pageTitle = domain;
     try {
@@ -844,7 +883,7 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     } catch (error) {
       console.warn('Could not fetch page title, using domain:', error);
     }
-    
+
     const newLink = {
       name: pageTitle,
       group: group || 'Ungrouped',
@@ -873,12 +912,12 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     };
 
     await window.convexMutation("functions:addLink", newLink);
-    
+
     // Save last used group
     if (group) {
       localStorage.setItem('lastUsedGroup', group);
     }
-    
+
     document.getElementById('quick-add-link-popup').classList.add('hidden');
     await loadLinks();
     window.showNotification('Link added!');
@@ -973,7 +1012,7 @@ function openEditLinkPopup(link, index) {
   svgTextarea.style.display = link.default_type === 'svg' ? 'block' : 'none';
 
   document.getElementById('edit-link-popup').classList.remove('hidden');
-  
+
   // Apply color preview to all color fields
   setTimeout(() => {
     if (typeof applyColorPreviewToContainer === 'function') {
@@ -1118,7 +1157,7 @@ function openEditGroupPopup(groupName) {
 
   // Show/hide sections based on type
   updateGroupTypeSettings(groupType);
-  
+
   // Apply color preview to all color fields
   setTimeout(() => {
     if (typeof applyColorPreviewToContainer === 'function') {
@@ -1189,7 +1228,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     });
 
     await window.convexMutation("functions:updateAllLinks", { links: updatedLinks });
-    
+
     // Update open popup name if it matches the edited group
     const popupTitle = document.querySelector('#group_type_box-popup h3');
     if (popupTitle && popupTitle.dataset.groupName === originalName) {
@@ -1360,18 +1399,18 @@ window.reorderLinks = reorderLinks;
 // Fallback initialization if app.js fails
 document.addEventListener('DOMContentLoaded', () => {
   console.log('🔵 DOMContentLoaded fired in links-handler.js');
-  
+
   if (!window.convexClient) {
     console.warn('Convex client not initialized (app.js failed?), running fallback...');
     loadLinks();
   }
-  
+
   // EMERGENCY: Force create FAB after 2 seconds if it doesn't exist
   setTimeout(() => {
     console.log('🔵 Checking if FAB exists...');
-    
+
     const fab = document.getElementById('fab-add-link');
-    
+
     if (!fab) {
       console.warn('⚠️ FAB not found! Creating emergency FAB...');
       const emergencyFab = document.createElement('button');
@@ -1426,19 +1465,19 @@ function handleGroupDrop(e) {
   e.stopPropagation();
   const target = e.currentTarget;
   target.classList.remove('drag-over');
-  
+
   if (draggedGroup && draggedGroup !== target) {
     const container = target.parentNode;
     const allGroups = Array.from(container.children);
     const draggedIndex = allGroups.indexOf(draggedGroup);
     const targetIndex = allGroups.indexOf(target);
-    
+
     if (draggedIndex < targetIndex) {
       target.parentNode.insertBefore(draggedGroup, target.nextSibling);
     } else {
       target.parentNode.insertBefore(draggedGroup, target);
     }
-    
+
     // Save new group order after DOM updates
     setTimeout(() => saveGroupOrder(), 300);
   }
@@ -1455,7 +1494,7 @@ async function saveGroupOrder() {
     // Get all groups in their actual DOM order
     const container = document.getElementById('links-container');
     const allGroups = [];
-    
+
     // Iterate through all children in order
     Array.from(container.children).forEach(child => {
       if (child.classList.contains('group_type_top-container')) {
@@ -1467,12 +1506,12 @@ async function saveGroupOrder() {
         allGroups.push(child);
       }
     });
-    
+
     const groupOrder = allGroups.map((group, index) => ({
       name: group.dataset.groupName,
       order: index
     }));
-    
+
     await window.convexMutation("functions:updateGroupOrder", { groupOrder });
     console.log('✅ Group order saved:', groupOrder.length, 'groups');
   } catch (error) {

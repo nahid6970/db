@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Home</title>
   <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4021/4021539.png" type="image/x-icon">
@@ -8,7 +9,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nerd-fonts-web@3.0.0/dist/nerd-fonts-generated.min.css">
   <style>
     /* Ensure nerd font icons display properly */
-    .nf, [class*="nf-"] {
+    .nf,
+    [class*="nf-"] {
       font-family: 'JetBrainsMono NFP', monospace !important;
       font-style: normal;
       font-weight: normal;
@@ -19,8 +21,9 @@
       -moz-osx-font-smoothing: grayscale;
     }
   </style>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=2">
 </head>
+
 <body>
   <div class="topbar" id="topbar">
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
@@ -43,7 +46,8 @@
               <label>Group Name:</label>
               <div class="group-input-container">
                 <input type="text" id="edit-group-name" placeholder="Group name" required>
-                <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
+                <button type="button" class="group-picker-btn"
+                  onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
               </div>
             </div>
             <div style="flex: 1;">
@@ -87,7 +91,7 @@
           </div>
           <div id="horizontal-settings" style="display: none;">
             <details>
-              <summary>Horizontal Stack Colors</summary>
+              <summary>Normal & Box Group Styling</summary>
               <input type="text" id="edit-group-horizontal-bg-color" placeholder="BG Color" class="color-input">
               <input type="text" id="edit-group-horizontal-text-color" placeholder="Text Color" class="color-input">
               <input type="text" id="edit-group-horizontal-border-color" placeholder="Border Color" class="color-input">
@@ -110,7 +114,8 @@
           <input type="url" id="quick-link-url" placeholder="URL (e.g., https://example.com)" required>
           <div class="group-input-container">
             <input type="text" id="quick-link-group" placeholder="Group (optional)">
-            <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'quick-link-group')">▼</button>
+            <button type="button" class="group-picker-btn"
+              onclick="toggleGroupPicker(event, 'quick-link-group')">▼</button>
           </div>
           <button type="submit">Add</button>
         </form>
@@ -174,7 +179,8 @@
             <input type="text" id="link-li-hover-color" placeholder="Item Hover" class="color-input" style="flex: 1;">
           </div>
           <div style="display: flex; gap: 10px;">
-            <input type="text" id="link-li-border-color" placeholder="Border Color" class="color-input" style="flex: 1;">
+            <input type="text" id="link-li-border-color" placeholder="Border Color" class="color-input"
+              style="flex: 1;">
             <input type="text" id="link-li-border-radius" placeholder="Border Radius" style="flex: 1;">
           </div>
           <input type="text" id="link-border-radius" placeholder="Inner Radius">
@@ -197,7 +203,8 @@
             <input type="text" id="edit-link-name" placeholder="Name" style="flex: 1;">
             <div class="group-input-container">
               <input type="text" id="edit-link-group" placeholder="Group">
-              <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-link-group')">▼</button>
+              <button type="button" class="group-picker-btn"
+                onclick="toggleGroupPicker(event, 'edit-link-group')">▼</button>
             </div>
           </div>
           <label><input type="checkbox" id="edit-link-hidden"> Hide</label>
@@ -354,7 +361,7 @@
   <script src="context-menu.js"></script>
   <script src="links-handler.js"></script>
   <script src="sidebar-handler.js"></script>
-  
+
   <!-- Then load app.js as module which will initialize everything -->
   <script type="module" src="app.js"></script>
 
@@ -362,7 +369,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       console.log('🔧 Setting up close button handlers...');
-      
+
       // Close popups with X button
       document.querySelectorAll('.close-button').forEach(btn => {
         console.log('✅ Found close button:', btn);
@@ -376,7 +383,7 @@
           }
         });
       });
-      
+
       // Close popup when clicking outside (on the backdrop)
       document.querySelectorAll('.popup-container').forEach(popup => {
         popup.addEventListener('click', (e) => {
@@ -386,7 +393,7 @@
           }
         });
       });
-      
+
       console.log('✅ Close button handlers set up!');
     });
   </script>
@@ -397,7 +404,7 @@
     function applyColorPreview(input) {
       const value = input.value.trim();
       console.log('🎨 Applying color preview to:', input.id || input.placeholder, 'Value:', value);
-      
+
       if (value) {
         // Check if it's a valid color (hex, rgb, named color, etc.)
         const tempDiv = document.createElement('div');
@@ -480,7 +487,7 @@
     function applyColorPreviewToContainer(container) {
       const inputs = container.querySelectorAll('input[type="text"]');
       console.log('🔍 Checking', inputs.length, 'text inputs for color fields');
-      
+
       inputs.forEach(input => {
         if (isColorField(input)) {
           console.log('✅ Found color field:', input.id || input.placeholder);
@@ -501,7 +508,7 @@
             input.addEventListener('blur', function () {
               applyColorPreview(this);
             });
-            
+
             input.addEventListener('focus', function () {
               applyColorPreview(this);
             });
@@ -543,12 +550,12 @@
         attributes: true,
         attributeFilter: ['value']
       });
-      
+
       // Also listen for popup visibility changes
       const popups = document.querySelectorAll('.popup-container');
       popups.forEach(popup => {
-        const observer2 = new MutationObserver(function(mutations) {
-          mutations.forEach(function(mutation) {
+        const observer2 = new MutationObserver(function (mutations) {
+          mutations.forEach(function (mutation) {
             if (mutation.attributeName === 'class') {
               const isVisible = !popup.classList.contains('hidden');
               if (isVisible) {
@@ -558,7 +565,7 @@
             }
           });
         });
-        
+
         observer2.observe(popup, { attributes: true, attributeFilter: ['class'] });
       });
     });
@@ -566,4 +573,5 @@
 
 
 </body>
+
 </html>
