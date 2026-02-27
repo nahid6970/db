@@ -3591,28 +3591,21 @@
             {
                 "id": 9,
                 "title": "JUJUTSU KAISEN - s03e08 - [55] - Tokyo Colony No. 1, Part 2 WEBDL-1080p v2 - [ToonsHub]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-27T12:09:13.429589",
-                "notify": "unseen"
-            },
-            {
-                "id": 8,
-                "title": "JUJUTSU KAISEN - s03e08 - [55] - Tokyo Colony No. 1, Part 2 WEBDL-1080p - [VARYG]",
-                "watched": false,
-                "added_date": "2026-02-27T01:11:01.451109",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "JUJUTSU KAISEN - s03e07 - [54] - Tokyo Colony No. 1 WEBDL-1080p - [ToonsHub]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-12T23:48:36.389541",
                 "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "JUJUTSU KAISEN - s03e06 - [53] - Cog WEBDL-1080p - [ToonsHub]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-05T23:57:05.426727",
                 "notify": "seen"
             },
@@ -3705,7 +3698,7 @@
         "id": 46,
         "title": "Monarch - Legacy of Monsters",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/422598/posters/652989feed722.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Monarch - Legacy of Monsters",
         "rating": null,
         "status": "Continuing",
@@ -3713,10 +3706,11 @@
             {
                 "id": 1,
                 "title": "Monarch - Legacy of Monsters - S02E01 - Cause and Effect WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-27T12:09:13.468147",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": "http://192.168.0.101:8989/series/monarch-legacy-of-monsters"
     }
 ]
