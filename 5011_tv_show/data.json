@@ -3589,6 +3589,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 9,
+                "title": "JUJUTSU KAISEN - s03e08 - [55] - Tokyo Colony No. 1, Part 2 WEBDL-1080p v2 - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-02-27T12:09:13.429589",
+                "notify": "unseen"
+            },
+            {
                 "id": 8,
                 "title": "JUJUTSU KAISEN - s03e08 - [55] - Tokyo Colony No. 1, Part 2 WEBDL-1080p - [VARYG]",
                 "watched": false,
@@ -3693,5 +3700,23 @@
             }
         ],
         "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end"
+    },
+    {
+        "id": 46,
+        "title": "Monarch - Legacy of Monsters",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Monarch - Legacy of Monsters",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Monarch - Legacy of Monsters - S02E01 - Cause and Effect WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-02-27T12:09:13.468147",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
