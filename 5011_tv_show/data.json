@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 25,
+                "title": "The Rookie - S08E09 - Fun and Games HDTV-720p",
+                "watched": false,
+                "added_date": "2026-03-03T13:13:46.835489",
+                "notify": "unseen"
+            },
+            {
                 "id": 24,
                 "title": "The Rookie - S08E08 - Grand Theft Aircraft HDTV-720p",
                 "watched": false,
