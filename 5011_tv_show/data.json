@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 26,
+                "title": "The Rookie - S08E04 - Cut and Run WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-05T17:32:03.304257",
+                "notify": "unseen"
+            },
+            {
                 "id": 25,
                 "title": "The Rookie - S08E09 - Fun and Games HDTV-720p",
                 "watched": false,
