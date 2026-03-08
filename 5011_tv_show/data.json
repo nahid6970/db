@@ -3117,7 +3117,7 @@
                 "title": "To Your Eternity - s03e18 - [58] - A Willingness to Believe HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2026-03-07T22:58:03.148978",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 17,
@@ -3710,7 +3710,7 @@
                 "title": "Frieren - Beyond Journey's End - s02e07 - [35] - The Divine Revolte HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2026-03-06T23:37:33.293451",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 6,
@@ -3769,7 +3769,7 @@
             {
                 "id": 2,
                 "title": "Monarch - Legacy of Monsters - S02E02 - Resonance WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-06T12:53:10.930095",
                 "notify": "seen"
             },
