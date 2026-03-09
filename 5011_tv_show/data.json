@@ -1803,13 +1803,13 @@
             {
                 "id": 2,
                 "title": "The Rookie - S07E03 - Out of Pocket HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "The Rookie - S07E02 - The Watcher HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             }
         ],
