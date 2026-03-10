@@ -1648,6 +1648,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 27,
+                "title": "The Rookie - S08E10 - His Name Was Martin HDTV-720p",
+                "watched": false,
+                "added_date": "2026-03-10T13:29:29.585383",
+                "notify": "unseen"
+            },
+            {
                 "id": 26,
                 "title": "The Rookie - S08E04 - Cut and Run WEBDL-1080p",
                 "watched": false,
