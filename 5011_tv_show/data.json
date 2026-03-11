@@ -2037,6 +2037,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 22,
+                "title": "WWE Raw - 2026-03-09 - RAW 1711 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-03-11T11:46:19.666740",
+                "notify": "unseen"
+            },
+            {
                 "id": 21,
                 "title": "WWE Raw - 2026-03-02 - RAW 1710 HDTV-1080p",
                 "watched": true,
