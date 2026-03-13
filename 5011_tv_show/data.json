@@ -1652,7 +1652,7 @@
                 "title": "The Rookie - S08E10 - His Name Was Martin HDTV-720p",
                 "watched": false,
                 "added_date": "2026-03-10T13:29:29.585383",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 26,
@@ -2039,9 +2039,9 @@
             {
                 "id": 22,
                 "title": "WWE Raw - 2026-03-09 - RAW 1711 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-11T11:46:19.666740",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 21,
@@ -3649,7 +3649,7 @@
                 "title": "JUJUTSU KAISEN - s03e10 - [57] - Tokyo Colony No. 1, Part 4 WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2026-03-13T13:05:57.794628",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
@@ -3727,6 +3727,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "Frieren - Beyond Journey's End - s02e08 - [36] - A Magnificent End HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-03-13T22:05:57.759830",
+                "notify": "unseen"
+            },
+            {
                 "id": 7,
                 "title": "Frieren - Beyond Journey's End - s02e07 - [35] - The Divine Revolte HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -3790,9 +3797,9 @@
             {
                 "id": 3,
                 "title": "Monarch - Legacy of Monsters - S02E03 - Secrets WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-13T13:05:57.794628",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
