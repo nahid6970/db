@@ -725,6 +725,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 10,
+                "title": "Daredevil - Born Again - S02E01 - The Northern Star WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-27T19:16:50.594482",
+                "notify": "unseen"
+            },
+            {
                 "id": 9,
                 "title": "Daredevil - Born Again - S01E09 - Straight to Hell WEBDL-1080p",
                 "watched": false,
@@ -994,6 +1001,13 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/368207/posters/652a5ef981eab.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
+            {
+                "id": 12,
+                "title": "Invincible (2021) - S04E04 - HURM WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-27T19:16:50.608490",
+                "notify": "unseen"
+            },
             {
                 "id": 11,
                 "title": "Invincible (2021) - S04E03 - I GOTTA GET SOME AIR WEBDL-1080p",
