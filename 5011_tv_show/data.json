@@ -995,6 +995,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
             {
+                "id": 9,
+                "title": "Invincible (2021) - S04E02 - I'LL GIVE YOU THE GRAND TOUR WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-19T15:49:36.916373",
+                "notify": "seen"
+            },
+            {
                 "id": 8,
                 "title": "Invincible (2021) - S03E08 - I THOUGHT YOU'D NEVER SHUT UP HDTV-720p",
                 "watched": false,
@@ -1647,6 +1654,13 @@
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5d8a076567871.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
+            {
+                "id": 28,
+                "title": "The Rookie - S08E11 - Aftermath HDTV-720p",
+                "watched": false,
+                "added_date": "2026-03-17T11:56:36.462132",
+                "notify": "seen"
+            },
             {
                 "id": 27,
                 "title": "The Rookie - S08E10 - His Name Was Martin HDTV-720p",
