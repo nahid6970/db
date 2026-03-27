@@ -783,8 +783,11 @@ details[open] summary {
   }
 
   .Menu {
-    max-width: 90vw;
+    min-width: unset;
+    width: 95vw;
+    max-width: 95vw;
     padding: 15px;
+    box-sizing: border-box;
   }
 
   .popup-header h3 {
