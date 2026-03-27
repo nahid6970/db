@@ -995,6 +995,20 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
             {
+                "id": 11,
+                "title": "Invincible (2021) - S04E03 - I GOTTA GET SOME AIR WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-27T13:16:50.616630",
+                "notify": "unseen"
+            },
+            {
+                "id": 10,
+                "title": "Invincible (2021) - S04E01 - MAKING THE WORLD A BETTER PLACE WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-27T13:16:50.616630",
+                "notify": "unseen"
+            },
+            {
                 "id": 9,
                 "title": "Invincible (2021) - S04E02 - I'LL GIVE YOU THE GRAND TOUR WEBDL-1080p",
                 "watched": false,
