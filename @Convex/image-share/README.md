@@ -1,4 +1,4 @@
-# Image Share - Convex + Cloudinary
+# Gallery - Convex + Cloudinary
 
 ## Setup Steps
 
