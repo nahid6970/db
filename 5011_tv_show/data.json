@@ -1683,6 +1683,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 29,
+                "title": "The Rookie - S08E12 - Spy Games WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-28T10:12:07.288792",
+                "notify": "unseen"
+            },
+            {
                 "id": 28,
                 "title": "The Rookie - S08E11 - Aftermath HDTV-720p",
                 "watched": false,
