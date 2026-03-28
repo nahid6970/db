@@ -2325,6 +2325,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 21,
+                "title": "WWE SmackDown - 2026-03-27 - SmackDown 1388 WEBRip-720p",
+                "watched": false,
+                "added_date": "2026-03-28T14:48:41.162593",
+                "notify": "unseen"
+            },
+            {
                 "id": 20,
                 "title": "WWE SmackDown - 2026-02-27 - SmackDown 1384 WEBRip-720p",
                 "watched": true,
