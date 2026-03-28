@@ -3185,6 +3185,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 21,
+                "title": "To Your Eternity - s03e22 - [62] - To Fushi HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-03-29T01:00:02.503322",
+                "notify": "seen"
+            },
+            {
                 "id": 20,
                 "title": "To Your Eternity - s03e21 - [61] - Stay Here HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -3848,9 +3855,9 @@
             {
                 "id": 5,
                 "title": "Monarch - Legacy of Monsters - S02E04 - Trespass WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-29T00:00:02.508307",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
