@@ -6,7 +6,8 @@ from pathlib import Path
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QLineEdit, QPushButton, 
                              QFileDialog, QMessageBox, QTextEdit, QGroupBox,
-                             QProgressBar, QCheckBox, QListWidget, QListWidgetItem)
+                             QProgressBar, QCheckBox, QListWidget, QListWidgetItem,
+                             QSplitter)
 from PyQt6.QtCore import Qt, QThread, pyqtSignal
 from PyQt6.QtGui import QFont
 
@@ -192,7 +193,7 @@ class SearchReplacePaths(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("SEARCH_REPLACE // CYBER_QT")
-        self.setGeometry(100, 100, 900, 700)
+        self.setGeometry(100, 100, 1300, 560)
         self.config_file = "search_replace_config.json"
         
         # Apply cyberpunk theme
@@ -328,9 +329,26 @@ class SearchReplacePaths(QMainWindow):
     def setup_ui(self):
         central = QWidget()
         self.setCentralWidget(central)
-        main_layout = QVBoxLayout(central)
-        main_layout.setContentsMargins(20, 20, 20, 20)
-        main_layout.setSpacing(15)
+        root_layout = QVBoxLayout(central)
+        root_layout.setContentsMargins(20, 20, 20, 20)
+        root_layout.setSpacing(10)
+
+        # Splitter: left controls | right panels
+        splitter = QSplitter(Qt.Orientation.Horizontal)
+        root_layout.addWidget(splitter, 1)
+
+        left_widget = QWidget()
+        main_layout = QVBoxLayout(left_widget)
+        main_layout.setContentsMargins(0, 0, 10, 0)
+        main_layout.setSpacing(10)
+        splitter.addWidget(left_widget)
+
+        right_widget = QWidget()
+        right_layout = QVBoxLayout(right_widget)
+        right_layout.setContentsMargins(10, 0, 0, 0)
+        right_layout.setSpacing(10)
+        splitter.addWidget(right_widget)
+        splitter.setSizes([620, 580])
 
         # Header
         header = QLabel("SEARCH_REPLACE_PATHS")
@@ -454,23 +472,23 @@ class SearchReplacePaths(QMainWindow):
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
         main_layout.addWidget(self.progress_bar)
         
-        # Matches list (for preview)
+        # Status (left side bottom)
+        self.status_label = QLabel("SYSTEM_READY >> Configure search and replace parameters")
+        self.status_label.setObjectName("StatusLabel")
+        main_layout.addWidget(self.status_label)
+
+        # RIGHT PANEL: Matches list
         matches_group = QGroupBox("MATCHES_FOUND")
         matches_layout = QVBoxLayout(matches_group)
-        
         self.matches_list = QListWidget()
-        self.matches_list.setMinimumHeight(150)
         matches_layout.addWidget(self.matches_list)
-        
-        main_layout.addWidget(matches_group)
-        
-        # Log output
+        right_layout.addWidget(matches_group, 1)
+
+        # RIGHT PANEL: Log output
         log_group = QGroupBox("OPERATION_LOG")
         log_layout = QVBoxLayout(log_group)
-        
         self.log_output = QTextEdit()
         self.log_output.setReadOnly(True)
-        self.log_output.setMinimumHeight(150)
         self.log_output.setStyleSheet(f"""
             QTextEdit {{
                 background-color: {CP_PANEL}; 
@@ -482,13 +500,7 @@ class SearchReplacePaths(QMainWindow):
             }}
         """)
         log_layout.addWidget(self.log_output)
-        
-        main_layout.addWidget(log_group)
-        
-        # Status
-        self.status_label = QLabel("SYSTEM_READY >> Configure search and replace parameters")
-        self.status_label.setObjectName("StatusLabel")
-        main_layout.addWidget(self.status_label)
+        right_layout.addWidget(log_group, 1)
 
     def load_config(self):
         """Load last used parameters from config file"""
