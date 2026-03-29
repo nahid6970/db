@@ -1595,7 +1595,7 @@
         },
         {
             "name": "StatusBar",
-            "path": "C:\\@delta\\ms1\\@Status-Bar\\mypygui.py",
+            "path": "C:\\@delta\\ms1\\mypygui.py",
             "type": "script",
             "icon_path": "",
             "hide_terminal": true,
@@ -1603,7 +1603,7 @@
             "kill_window": false,
             "new_terminal": true,
             "run_admin": false,
-            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\@Status-Bar\\mypygui.py",
+            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\mypygui.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
@@ -1616,7 +1616,19 @@
             "_runtime_is_bold": true,
             "_runtime_is_italic": false,
             "nf_char": "",
-            "svg_content": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"#f7f7f7\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M16 10V17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M12 7V17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></rect> <path d=\"M8 13L8 17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> </g></svg>"
+            "svg_content": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\" stroke=\"#f7f7f7\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M16 10V17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M12 7V17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></rect> <path d=\"M8 13L8 17\" stroke=\"#ffffff\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> </g></svg>",
+            "icon_width": 0,
+            "icon_height": 0,
+            "icon_gap": 2,
+            "icon_position": "top",
+            "font_family": "JetBrainsMono Nerd Font Propo",
+            "font_size": 14,
+            "is_bold": true,
+            "is_italic": false,
+            "width": 0,
+            "height": 0,
+            "corner_radius": 0,
+            "border_width": 0
         },
         {
             "name": "Gradlew",
