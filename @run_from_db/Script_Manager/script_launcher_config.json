@@ -1987,7 +1987,7 @@
         },
         {
             "name": "PKG Manager",
-            "path": "C:\\@delta\\ms1\\@@init\\PackageManager.ps1",
+            "path": "C:\\@delta\\ms1\\@@init\\PKG-Manager\\PackageManager.ps1",
             "type": "script",
             "nf_char": "",
             "icon_path": "",
@@ -2000,7 +2000,7 @@
             "kill_window": false,
             "new_terminal": false,
             "run_admin": false,
-            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\@@init\\PackageManager.ps1",
+            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\@@init\\PKG-Manager\\PackageManager.ps1",
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
@@ -2014,7 +2014,12 @@
             "width": 0,
             "height": 0,
             "corner_radius": 0,
-            "border_width": 0
+            "border_width": 0,
+            "_runtime_height": 100,
+            "_runtime_font_size": 14,
+            "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+            "_runtime_is_bold": true,
+            "_runtime_is_italic": false
         }
     ],
     "github_repos": [
