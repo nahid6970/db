@@ -28,12 +28,13 @@ class SearchReplaceWorker(QThread):
     finished = pyqtSignal(dict)
     match_found = pyqtSignal(str, str, int)  # file_path, match_type, count
     
-    def __init__(self, folder_paths, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=True):
+    def __init__(self, folder_paths, search_text, replace_text, file_extensions, ignore_folders=None, preview_only=False, search_in_paths=True):
         super().__init__()
         self.folder_paths = folder_paths  # Now a list of paths
         self.search_text = search_text
         self.replace_text = replace_text
         self.file_extensions = file_extensions
+        self.ignore_folders = ignore_folders or []
         self.preview_only = preview_only
         self.search_in_paths = search_in_paths
         
@@ -87,6 +88,14 @@ class SearchReplaceWorker(QThread):
                 
                 # Walk through all files in the current folder
                 for root, dirs, files in os.walk(folder_path):
+                    # Prune ignored directories in-place to prevent os.walk from entering them
+                    if self.ignore_folders:
+                        original_dirs = list(dirs)
+                        for d in original_dirs:
+                            if d in self.ignore_folders:
+                                dirs.remove(d)
+                                self.progress.emit(f"⏭ Ignoring folder: {os.path.join(root, d)}")
+
                     # Check if search text appears in directory path
                     if self.search_in_paths:
                         for search_variant in search_variants:
@@ -396,10 +405,23 @@ class SearchReplacePaths(QMainWindow):
         filter_info_layout.addWidget(filter_label)
         
         self.extensions_input = QLineEdit()
-        self.extensions_input.setPlaceholderText("e.g., .py .txt .json (leave empty for all files)")
+        self.extensions_input.setPlaceholderText("e.g., .py, .txt, .json (leave empty for all files)")
         filter_info_layout.addWidget(self.extensions_input)
         
         filter_layout.addLayout(filter_info_layout)
+        
+        # Ignore folders
+        ignore_layout = QHBoxLayout()
+        ignore_label = QLabel("IGNORE:")
+        ignore_label.setObjectName("SectionLabel")
+        ignore_label.setMinimumWidth(80)
+        ignore_layout.addWidget(ignore_label)
+        
+        self.ignore_input = QLineEdit()
+        self.ignore_input.setPlaceholderText("e.g., .git, node_modules, __pycache__")
+        ignore_layout.addWidget(self.ignore_input)
+        
+        filter_layout.addLayout(ignore_layout)
         
         # Search options
         options_layout = QHBoxLayout()
@@ -477,6 +499,7 @@ class SearchReplacePaths(QMainWindow):
                     self.folder_input.setText(config.get("last_folders", ""))
                     self.search_input.setText(config.get("last_search", ""))
                     self.replace_input.setText(config.get("last_replace", ""))
+                    self.ignore_input.setText(config.get("last_ignore", ".git node_modules __pycache__"))
                     self.status_label.setText("CONFIG_LOADED >> Last session restored")
         except Exception as e:
             print(f"Error loading config: {e}")
@@ -487,7 +510,8 @@ class SearchReplacePaths(QMainWindow):
             config = {
                 "last_folders": self.folder_input.text().strip(),
                 "last_search": self.search_input.text().strip(),
-                "last_replace": self.replace_input.text().strip()
+                "last_replace": self.replace_input.text().strip(),
+                "last_ignore": self.ignore_input.text().strip()
             }
             with open(self.config_file, 'w', encoding='utf-8') as f:
                 json.dump(config, f, indent=4)
@@ -546,7 +570,7 @@ class SearchReplacePaths(QMainWindow):
         extensions_text = self.extensions_input.text().strip()
         file_extensions = []
         if extensions_text:
-            file_extensions = [ext.strip() for ext in extensions_text.split() if ext.strip()]
+            file_extensions = [ext.strip() for ext in extensions_text.split(',') if ext.strip()]
         
         # Clear previous results
         self.matches_list.clear()
@@ -566,9 +590,15 @@ class SearchReplacePaths(QMainWindow):
         self.execute_btn.setEnabled(False)
         self.status_label.setText("SCANNING >> Finding matches...")
         
+        # Parse ignore folders
+        ignore_text = self.ignore_input.text().strip()
+        ignore_folders = []
+        if ignore_text:
+            ignore_folders = [d.strip() for d in ignore_text.split() if d.strip()]
+        
         # Start worker thread in preview mode
         search_in_paths = self.search_paths_checkbox.isChecked()
-        self.worker = SearchReplaceWorker(valid_paths, search_text, "", file_extensions, preview_only=True, search_in_paths=search_in_paths)
+        self.worker = SearchReplaceWorker(valid_paths, search_text, "", file_extensions, ignore_folders=ignore_folders, preview_only=True, search_in_paths=search_in_paths)
         self.worker.progress.connect(self.on_progress)
         self.worker.match_found.connect(self.on_match_found)
         self.worker.finished.connect(self.on_preview_finished)
@@ -619,7 +649,7 @@ class SearchReplacePaths(QMainWindow):
         extensions_text = self.extensions_input.text().strip()
         file_extensions = []
         if extensions_text:
-            file_extensions = [ext.strip() for ext in extensions_text.split() if ext.strip()]
+            file_extensions = [ext.strip() for ext in extensions_text.split(',') if ext.strip()]
         
         # Clear log and show progress
         self.matches_list.clear()
