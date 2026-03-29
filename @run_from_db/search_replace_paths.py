@@ -671,7 +671,7 @@ class SearchReplacePaths(QMainWindow):
         
         # Start worker thread
         search_in_paths = self.search_paths_checkbox.isChecked()
-        self.worker = SearchReplaceWorker(valid_paths, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=search_in_paths)
+        self.worker = SearchReplaceWorker(valid_paths, search_text, replace_text, file_extensions, ignore_folders=ignore_folders, preview_only=False, search_in_paths=search_in_paths)
         self.worker.progress.connect(self.on_progress)
         self.worker.match_found.connect(self.on_match_found)
         self.worker.finished.connect(self.on_finished)
