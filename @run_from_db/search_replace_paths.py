@@ -1,6 +1,7 @@
 import sys
 import os
 import re
+import json
 from pathlib import Path
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QLineEdit, QPushButton, 
@@ -27,9 +28,9 @@ class SearchReplaceWorker(QThread):
     finished = pyqtSignal(dict)
     match_found = pyqtSignal(str, str, int)  # file_path, match_type, count
     
-    def __init__(self, folder_path, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=True):
+    def __init__(self, folder_paths, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=True):
         super().__init__()
-        self.folder_path = folder_path
+        self.folder_paths = folder_paths  # Now a list of paths
         self.search_text = search_text
         self.replace_text = replace_text
         self.file_extensions = file_extensions
@@ -76,96 +77,101 @@ class SearchReplaceWorker(QThread):
                 replace_normalized.replace('/', '\\\\')  # \\
             ]
             
-            # Walk through all files in the folder
-            for root, dirs, files in os.walk(self.folder_path):
-                # Check if search text appears in directory path
-                if self.search_in_paths:
-                    for search_variant in search_variants:
-                        if search_variant.lower() in root.lower():
-                            results['path_matches'] += 1
-                            self.match_found.emit(root, "DIRECTORY_PATH", 1)
-                            self.progress.emit(f"📁 Found in path: {root}")
-                            break
-                
-                for filename in files:
-                    file_path = os.path.join(root, filename)
+            # Iterate through all provided folder paths
+            for folder_path in self.folder_paths:
+                if not os.path.exists(folder_path):
+                    self.progress.emit(f"✗ Skipping non-existent path: {folder_path}")
+                    continue
                     
-                    # Check if search text appears in filename
+                self.progress.emit(f"📂 Scanning base folder: {folder_path}")
+                
+                # Walk through all files in the current folder
+                for root, dirs, files in os.walk(folder_path):
+                    # Check if search text appears in directory path
                     if self.search_in_paths:
                         for search_variant in search_variants:
-                            if search_variant.lower() in filename.lower():
+                            if search_variant.lower() in root.lower():
                                 results['path_matches'] += 1
-                                self.match_found.emit(file_path, "FILENAME", 1)
-                                self.progress.emit(f"📄 Found in filename: {file_path}")
+                                self.match_found.emit(root, "DIRECTORY_PATH", 1)
+                                self.progress.emit(f"📁 Found in path: {root}")
                                 break
                     
-                    # Check if file extension matches for content search
-                    if not self.file_extensions or any(filename.endswith(ext) for ext in self.file_extensions):
-                        self.progress.emit(f"Scanning: {file_path}")
+                    for filename in files:
+                        file_path = os.path.join(root, filename)
                         
-                        try:
-                            # Read file content
-                            with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
-                                content = f.read()
-                            
-                            results['files_processed'] += 1
-                            
-                            # Check for matches in content
-                            modified = False
-                            new_content = content
-                            replacements_in_file = 0
-                            
-                            # For case-insensitive search, work with lowercase version
-                            content_lower = content.lower()
-                            
-                            # Search/Replace each variant
-                            for search_variant, replace_variant in zip(search_variants, replace_variants):
-                                search_lower = search_variant.lower()
+                        # Check if search text appears in filename
+                        if self.search_in_paths:
+                            for search_variant in search_variants:
+                                if search_variant.lower() in filename.lower():
+                                    results['path_matches'] += 1
+                                    self.match_found.emit(file_path, "FILENAME", 1)
+                                    self.progress.emit(f"📄 Found in filename: {file_path}")
+                                    break
+                        
+                        # Check if file extension matches for content search
+                        if not self.file_extensions or any(filename.endswith(ext) for ext in self.file_extensions):
+                            self.progress.emit(f"Scanning: {file_path}")
+                            try:
+                                # Read file content
+                                with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
+                                    content = f.read()
                                 
-                                # Case-insensitive search
-                                if search_lower in content_lower:
-                                    # Count occurrences (case-insensitive)
-                                    count = content_lower.count(search_lower)
-                                    replacements_in_file += count
+                                results['files_processed'] += 1
+                                
+                                # Check for matches in content
+                                modified = False
+                                new_content = content
+                                replacements_in_file = 0
+                                
+                                # For case-insensitive search, work with lowercase version
+                                content_lower = content.lower()
+                                
+                                # Search/Replace each variant
+                                for search_variant, replace_variant in zip(search_variants, replace_variants):
+                                    search_lower = search_variant.lower()
                                     
-                                    if self.preview_only:
-                                        # Preview mode - just report findings
-                                        self.match_found.emit(file_path, "CONTENT", count)
-                                        self.progress.emit(f"🔍 Found in content: {file_path} ({count} matches)")
-                                    else:
-                                        # Replace mode - case-insensitive replace
-                                        # Simple string replacement (case-insensitive by checking both)
-                                        # Find all occurrences case-insensitively and replace
-                                        temp_content = new_content
-                                        start = 0
-                                        while True:
-                                            pos = temp_content.lower().find(search_lower, start)
-                                            if pos == -1:
-                                                break
-                                            # Replace the actual text (preserving what was there)
-                                            new_content = new_content[:pos] + replace_variant + new_content[pos + len(search_variant):]
+                                    # Case-insensitive search
+                                    if search_lower in content_lower:
+                                        # Count occurrences (case-insensitive)
+                                        count = content_lower.count(search_lower)
+                                        replacements_in_file += count
+                                        
+                                        if self.preview_only:
+                                            # Preview mode - just report findings
+                                            self.match_found.emit(file_path, "CONTENT", count)
+                                            self.progress.emit(f"🔍 Found in content: {file_path} ({count} matches)")
+                                        else:
+                                            # Replace mode - case-insensitive replace
                                             temp_content = new_content
-                                            start = pos + len(replace_variant)
-                                        if content != new_content:
-                                            modified = True
-                            
-                            # Write back if modified (only in replace mode)
-                            if modified and not self.preview_only:
-                                with open(file_path, 'w', encoding='utf-8') as f:
-                                    f.write(new_content)
+                                            start = 0
+                                            while True:
+                                                pos = temp_content.lower().find(search_lower, start)
+                                                if pos == -1:
+                                                    break
+                                                # Replace the actual text (preserving what was there)
+                                                new_content = new_content[:pos] + replace_variant + new_content[pos + len(search_variant):]
+                                                temp_content = new_content
+                                                start = pos + len(replace_variant)
+                                            if content != new_content:
+                                                modified = True
                                 
-                                results['files_modified'] += 1
-                                results['total_replacements'] += replacements_in_file
-                                results['content_matches'] += 1
-                                self.progress.emit(f"✓ Modified: {file_path} ({replacements_in_file} replacements)")
-                            elif replacements_in_file > 0:
-                                results['content_matches'] += 1
-                                results['total_replacements'] += replacements_in_file
-                        
-                        except Exception as e:
-                            error_msg = f"Error processing {file_path}: {str(e)}"
-                            results['errors'].append(error_msg)
-                            self.progress.emit(f"✗ {error_msg}")
+                                # Write back if modified (only in replace mode)
+                                if modified and not self.preview_only:
+                                    with open(file_path, 'w', encoding='utf-8') as f:
+                                        f.write(new_content)
+                                    
+                                    results['files_modified'] += 1
+                                    results['total_replacements'] += replacements_in_file
+                                    results['content_matches'] += 1
+                                    self.progress.emit(f"✓ Modified: {file_path} ({replacements_in_file} replacements)")
+                                elif replacements_in_file > 0:
+                                    results['content_matches'] += 1
+                                    results['total_replacements'] += replacements_in_file
+                            
+                            except Exception as e:
+                                error_msg = f"Error processing {file_path}: {str(e)}"
+                                results['errors'].append(error_msg)
+                                self.progress.emit(f"✗ {error_msg}")
         
         except Exception as e:
             results['errors'].append(f"Fatal error: {str(e)}")
@@ -178,6 +184,7 @@ class SearchReplacePaths(QMainWindow):
         super().__init__()
         self.setWindowTitle("SEARCH_REPLACE // CYBER_QT")
         self.setGeometry(100, 100, 900, 700)
+        self.config_file = "search_replace_config.json"
         
         # Apply cyberpunk theme
         self.setStyleSheet(f"""
@@ -307,6 +314,7 @@ class SearchReplacePaths(QMainWindow):
         self.worker = None
         self.matches = []  # Store preview matches
         self.setup_ui()
+        self.load_config()
         
     def setup_ui(self):
         central = QWidget()
@@ -322,15 +330,15 @@ class SearchReplacePaths(QMainWindow):
         main_layout.addWidget(header)
         
         # Folder selection
-        folder_group = QGroupBox("TARGET_FOLDER")
+        folder_group = QGroupBox("TARGET_FOLDERS")
         folder_layout = QHBoxLayout(folder_group)
         
-        folder_label = QLabel("FOLDER:")
+        folder_label = QLabel("FOLDERS:")
         folder_label.setObjectName("SectionLabel")
         folder_layout.addWidget(folder_label)
         
         self.folder_input = QLineEdit()
-        self.folder_input.setPlaceholderText("Select folder to search...")
+        self.folder_input.setPlaceholderText("Select folders (comma separated paths allowed)...")
         folder_layout.addWidget(self.folder_input, 1)
         
         self.browse_btn = QPushButton("BROWSE")
@@ -459,32 +467,75 @@ class SearchReplacePaths(QMainWindow):
         self.status_label = QLabel("SYSTEM_READY >> Configure search and replace parameters")
         self.status_label.setObjectName("StatusLabel")
         main_layout.addWidget(self.status_label)
+
+    def load_config(self):
+        """Load last used parameters from config file"""
+        try:
+            if os.path.exists(self.config_file):
+                with open(self.config_file, 'r', encoding='utf-8') as f:
+                    config = json.load(f)
+                    self.folder_input.setText(config.get("last_folders", ""))
+                    self.search_input.setText(config.get("last_search", ""))
+                    self.replace_input.setText(config.get("last_replace", ""))
+                    self.status_label.setText("CONFIG_LOADED >> Last session restored")
+        except Exception as e:
+            print(f"Error loading config: {e}")
+
+    def save_config(self):
+        """Save current parameters to config file"""
+        try:
+            config = {
+                "last_folders": self.folder_input.text().strip(),
+                "last_search": self.search_input.text().strip(),
+                "last_replace": self.replace_input.text().strip()
+            }
+            with open(self.config_file, 'w', encoding='utf-8') as f:
+                json.dump(config, f, indent=4)
+        except Exception as e:
+            print(f"Error saving config: {e}")
+
+    def closeEvent(self, event):
+        """Save config when closing window"""
+        self.save_config()
+        super().closeEvent(event)
     
     def browse_folder(self):
         """Open folder browser dialog"""
         folder = QFileDialog.getExistingDirectory(
             self,
-            "Select Folder to Search",
+            "Select Folder to Add",
             "",
             QFileDialog.Option.ShowDirsOnly
         )
         
         if folder:
-            self.folder_input.setText(folder)
-            self.status_label.setText(f"FOLDER_SELECTED >> {folder}")
-            self.log_output.append(f"<span style='color: {CP_CYAN};'>Selected folder: {folder}</span>")
+            current_text = self.folder_input.text().strip()
+            if current_text:
+                # Add to comma separated list if not already there
+                folders = [f.strip() for f in current_text.split(',') if f.strip()]
+                if folder not in folders:
+                    folders.append(folder)
+                    self.folder_input.setText(", ".join(folders))
+            else:
+                self.folder_input.setText(folder)
+            
+            self.status_label.setText(f"FOLDER_ADDED >> {folder}")
+            self.log_output.append(f"<span style='color: {CP_CYAN};'>Added folder: {folder}</span>")
     
     def preview_matches(self):
         """Preview what will be found without making changes"""
-        folder_path = self.folder_input.text().strip()
+        folder_text = self.folder_input.text().strip()
         search_text = self.search_input.text().strip()
         
-        if not folder_path:
-            QMessageBox.warning(self, "Missing Input", "Please select a folder to search.")
+        if not folder_text:
+            QMessageBox.warning(self, "Missing Input", "Please select at least one folder to search.")
             return
+            
+        folder_paths = [p.strip() for p in folder_text.split(',') if p.strip()]
+        valid_paths = [p for p in folder_paths if os.path.exists(p)]
         
-        if not os.path.exists(folder_path):
-            QMessageBox.warning(self, "Invalid Folder", "The selected folder does not exist.")
+        if not valid_paths:
+            QMessageBox.warning(self, "Invalid Folders", "None of the selected folders exist.")
             return
         
         if not search_text:
@@ -502,7 +553,7 @@ class SearchReplacePaths(QMainWindow):
         self.matches = []
         self.log_output.clear()
         self.log_output.append(f"<span style='color: {CP_YELLOW};'>PREVIEW_MODE...</span>")
-        self.log_output.append(f"<span style='color: {CP_CYAN};'>Folder: {folder_path}</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Folders: {', '.join(valid_paths)}</span>")
         self.log_output.append(f"<span style='color: {CP_CYAN};'>Find: {search_text}</span>")
         if file_extensions:
             self.log_output.append(f"<span style='color: {CP_CYAN};'>Extensions: {', '.join(file_extensions)}</span>")
@@ -517,7 +568,7 @@ class SearchReplacePaths(QMainWindow):
         
         # Start worker thread in preview mode
         search_in_paths = self.search_paths_checkbox.isChecked()
-        self.worker = SearchReplaceWorker(folder_path, search_text, "", file_extensions, preview_only=True, search_in_paths=search_in_paths)
+        self.worker = SearchReplaceWorker(valid_paths, search_text, "", file_extensions, preview_only=True, search_in_paths=search_in_paths)
         self.worker.progress.connect(self.on_progress)
         self.worker.match_found.connect(self.on_match_found)
         self.worker.finished.connect(self.on_preview_finished)
@@ -526,16 +577,19 @@ class SearchReplacePaths(QMainWindow):
     def execute_replace(self):
         """Execute the search and replace operation"""
         # Validate inputs
-        folder_path = self.folder_input.text().strip()
+        folder_text = self.folder_input.text().strip()
         search_text = self.search_input.text().strip()
         replace_text = self.replace_input.text().strip()
         
-        if not folder_path:
-            QMessageBox.warning(self, "Missing Input", "Please select a folder to search.")
+        if not folder_text:
+            QMessageBox.warning(self, "Missing Input", "Please select at least one folder to search.")
             return
+            
+        folder_paths = [p.strip() for p in folder_text.split(',') if p.strip()]
+        valid_paths = [p for p in folder_paths if os.path.exists(p)]
         
-        if not os.path.exists(folder_path):
-            QMessageBox.warning(self, "Invalid Folder", "The selected folder does not exist.")
+        if not valid_paths:
+            QMessageBox.warning(self, "Invalid Folders", "None of the selected folders exist.")
             return
         
         if not search_text:
@@ -550,7 +604,7 @@ class SearchReplacePaths(QMainWindow):
         reply = QMessageBox.question(
             self,
             "Confirm Replace",
-            f"This will search and replace in all files under:\n{folder_path}\n\n"
+            f"This will search and replace in all files under {len(valid_paths)} folders.\n\n"
             f"Find: {search_text}\n"
             f"Replace: {replace_text}\n\n"
             f"Will search for all 4 separator variations and replace with matching format.\n\n"
@@ -571,7 +625,7 @@ class SearchReplacePaths(QMainWindow):
         self.matches_list.clear()
         self.log_output.clear()
         self.log_output.append(f"<span style='color: {CP_YELLOW};'>STARTING_OPERATION...</span>")
-        self.log_output.append(f"<span style='color: {CP_CYAN};'>Folder: {folder_path}</span>")
+        self.log_output.append(f"<span style='color: {CP_CYAN};'>Folders: {', '.join(valid_paths)}</span>")
         self.log_output.append(f"<span style='color: {CP_CYAN};'>Find: {search_text}</span>")
         self.log_output.append(f"<span style='color: {CP_CYAN};'>Replace: {replace_text}</span>")
         if file_extensions:
@@ -587,7 +641,7 @@ class SearchReplacePaths(QMainWindow):
         
         # Start worker thread
         search_in_paths = self.search_paths_checkbox.isChecked()
-        self.worker = SearchReplaceWorker(folder_path, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=search_in_paths)
+        self.worker = SearchReplaceWorker(valid_paths, search_text, replace_text, file_extensions, preview_only=False, search_in_paths=search_in_paths)
         self.worker.progress.connect(self.on_progress)
         self.worker.match_found.connect(self.on_match_found)
         self.worker.finished.connect(self.on_finished)
@@ -614,7 +668,7 @@ class SearchReplacePaths(QMainWindow):
             self.log_output.append(f"<span style='color: {CP_GREEN};'>{message}</span>")
         elif message.startswith("✗"):
             self.log_output.append(f"<span style='color: {CP_RED};'>{message}</span>")
-        elif message.startswith("📁") or message.startswith("📄") or message.startswith("🔍"):
+        elif message.startswith("📁") or message.startswith("📄") or message.startswith("🔍") or message.startswith("📂"):
             self.log_output.append(f"<span style='color: {CP_YELLOW};'>{message}</span>")
         else:
             self.log_output.append(f"<span style='color: {CP_TEXT};'>{message}</span>")
@@ -657,9 +711,9 @@ class SearchReplacePaths(QMainWindow):
             QMessageBox.information(
                 self,
                 "No Matches Found",
-                f"No matches found for:\n{self.search_input.text()}\n\n"
+                f"No matches found in the scanned folders.\n\n"
                 f"Try checking:\n"
-                f"- The search path is correct\n"
+                f"- The search paths are correct\n"
                 f"- File extensions filter isn't too restrictive\n"
                 f"- The path exists in file contents or names"
             )
@@ -733,7 +787,7 @@ def main():
     
     # Set application properties
     app.setApplicationName("Search Replace Paths")
-    app.setApplicationVersion("1.0")
+    app.setApplicationVersion("1.1")
     
     window = SearchReplacePaths()
     window.show()
