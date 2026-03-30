@@ -1096,7 +1096,7 @@
             "path": "C:\\@delta\\db\\@run_from_db\\search_replace_paths.py",
             "type": "script",
             "icon_path": "",
-            "hide_terminal": false,
+            "hide_terminal": true,
             "keep_open": true,
             "kill_window": false,
             "new_terminal": true,
