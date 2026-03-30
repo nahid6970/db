@@ -3663,17 +3663,17 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 11,
-                "title": "Fate+strange Fake - S01E06 - The Wandering King's Rock 'n' Roll WEBDL-1080p",
+                "id": 4,
+                "title": "Fate+strange Fake - S01E13 - This Illusion Becomes Reality WEBDL-1080p Proper",
                 "watched": false,
-                "added_date": "2026-03-31T00:44:35.278484",
+                "added_date": "2026-03-29T20:31:47.547767",
                 "notify": "seen"
             },
             {
-                "id": 10,
-                "title": "Fate+strange Fake - S01E05 - Stars' Banquet WEBDL-1080p",
+                "id": 3,
+                "title": "Fate+strange Fake - S01E12 - At the End of the Rope WEBDL-1080p Proper",
                 "watched": false,
-                "added_date": "2026-03-30T23:44:35.287105",
+                "added_date": "2026-03-29T19:31:47.549462",
                 "notify": "seen"
             },
             {
@@ -3698,6 +3698,20 @@
                 "notify": "seen"
             },
             {
+                "id": 11,
+                "title": "Fate+strange Fake - S01E06 - The Wandering King's Rock 'n' Roll WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-31T00:44:35.278484",
+                "notify": "seen"
+            },
+            {
+                "id": 10,
+                "title": "Fate+strange Fake - S01E05 - Stars' Banquet WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-30T23:44:35.287105",
+                "notify": "seen"
+            },
+            {
                 "id": 6,
                 "title": "Fate+strange Fake - S01E04 - The Canon of Demigods WEBDL-1080p",
                 "watched": false,
@@ -3709,20 +3723,6 @@
                 "title": "Fate+strange Fake - S01E03 - A Battle Without Heroes WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-03-29T21:31:47.562230",
-                "notify": "seen"
-            },
-            {
-                "id": 4,
-                "title": "Fate+strange Fake - S01E13 - This Illusion Becomes Reality WEBDL-1080p Proper",
-                "watched": false,
-                "added_date": "2026-03-29T20:31:47.547767",
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Fate+strange Fake - S01E12 - At the End of the Rope WEBDL-1080p Proper",
-                "watched": false,
-                "added_date": "2026-03-29T19:31:47.549462",
                 "notify": "seen"
             },
             {
@@ -3740,7 +3740,9 @@
                 "notify": "seen"
             }
         ],
-        "sonarr_url": "http://192.168.0.101:8989/series/fatestrange-fake"
+        "sonarr_url": "http://192.168.0.101:8989/series/fatestrange-fake",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     },
     {
         "id": 44,
