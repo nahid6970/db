@@ -2473,7 +2473,9 @@
             }
         ],
         "status": "Continuing",
-        "sonarr_url": ""
+        "sonarr_url": "",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     },
     {
         "id": 27,
@@ -3918,17 +3920,17 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 5,
-                "title": "Monarch - Legacy of Monsters - S02E04 - Trespass WEBDL-1080p",
-                "watched": true,
-                "added_date": "2026-03-29T00:00:02.508307",
-                "notify": "seen"
-            },
-            {
                 "id": 4,
                 "title": "Monarch - Legacy of Monsters - S02E05 - Furusato WEBDL-1080p",
                 "watched": true,
                 "added_date": "2026-03-27T15:16:50.688123",
+                "notify": "seen"
+            },
+            {
+                "id": 5,
+                "title": "Monarch - Legacy of Monsters - S02E04 - Trespass WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-03-29T00:00:02.508307",
                 "notify": "seen"
             },
             {
@@ -3953,6 +3955,8 @@
                 "notify": "seen"
             }
         ],
-        "sonarr_url": "http://192.168.0.101:8989/series/monarch-legacy-of-monsters"
+        "sonarr_url": "http://192.168.0.101:8989/series/monarch-legacy-of-monsters",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     }
 ]
