@@ -1950,7 +1950,7 @@
             "_runtime_is_italic": false
         },
         {
-            "name": "PKG Manager",
+            "name": "PKG <br> Manager",
             "path": "C:\\@delta\\ms1\\@@init\\PKG-Manager\\PackageManager.ps1",
             "type": "script",
             "nf_char": "",
@@ -1986,7 +1986,7 @@
             "_runtime_is_italic": false
         },
         {
-            "name": "Rclone Script",
+            "name": "Rclone <br> Script",
             "path": "C:\\@delta\\ms1\\scripts\\rclone\\rclone_Script.py",
             "type": "script",
             "nf_char": "",
