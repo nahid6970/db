@@ -511,7 +511,7 @@ class SearchReplacePaths(QMainWindow):
                     self.folder_input.setText(config.get("last_folders", ""))
                     self.search_input.setText(config.get("last_search", ""))
                     self.replace_input.setText(config.get("last_replace", ""))
-                    self.ignore_input.setText(config.get("last_ignore", ".git node_modules __pycache__"))
+                    self.ignore_input.setText(config.get("last_ignore", ".git, node_modules, __pycache__"))
                     self.status_label.setText("CONFIG_LOADED >> Last session restored")
         except Exception as e:
             print(f"Error loading config: {e}")
@@ -606,7 +606,7 @@ class SearchReplacePaths(QMainWindow):
         ignore_text = self.ignore_input.text().strip()
         ignore_folders = []
         if ignore_text:
-            ignore_folders = [d.strip() for d in ignore_text.split() if d.strip()]
+            ignore_folders = [d.strip() for d in ignore_text.split(',') if d.strip()]
         
         # Start worker thread in preview mode
         search_in_paths = self.search_paths_checkbox.isChecked()
@@ -685,7 +685,7 @@ class SearchReplacePaths(QMainWindow):
         ignore_text = self.ignore_input.text().strip()
         ignore_folders = []
         if ignore_text:
-            ignore_folders = [d.strip() for d in ignore_text.split() if d.strip()]
+            ignore_folders = [d.strip() for d in ignore_text.split(',') if d.strip()]
         
         # Start worker thread
         search_in_paths = self.search_paths_checkbox.isChecked()
