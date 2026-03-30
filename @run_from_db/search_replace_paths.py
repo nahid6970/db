@@ -194,7 +194,7 @@ class SearchReplacePaths(QMainWindow):
         super().__init__()
         self.setWindowTitle("SEARCH_REPLACE // CYBER_QT")
         self.setGeometry(100, 100, 1300, 560)
-        self.config_file = "search_replace_config.json"
+        self.config_file = r"C:\@delta\output\search_replace_path\search_replace_config.json"
         
         # Apply cyberpunk theme
         self.setStyleSheet(f"""
@@ -519,6 +519,8 @@ class SearchReplacePaths(QMainWindow):
     def save_config(self):
         """Save current parameters to config file"""
         try:
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(self.config_file), exist_ok=True)
             config = {
                 "last_folders": self.folder_input.text().strip(),
                 "last_search": self.search_input.text().strip(),
