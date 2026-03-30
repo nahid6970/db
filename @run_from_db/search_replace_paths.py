@@ -681,6 +681,12 @@ class SearchReplacePaths(QMainWindow):
         self.execute_btn.setEnabled(False)
         self.status_label.setText("PROCESSING >> Searching and replacing...")
         
+        # Parse ignore folders
+        ignore_text = self.ignore_input.text().strip()
+        ignore_folders = []
+        if ignore_text:
+            ignore_folders = [d.strip() for d in ignore_text.split() if d.strip()]
+        
         # Start worker thread
         search_in_paths = self.search_paths_checkbox.isChecked()
         self.worker = SearchReplaceWorker(valid_paths, search_text, replace_text, file_extensions, ignore_folders=ignore_folders, preview_only=False, search_in_paths=search_in_paths)
