@@ -2095,6 +2095,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 24,
+                "title": "WWE Raw - 2026-03-30 - RAW 1714 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-03-31T23:22:26.401436",
+                "notify": "seen"
+            },
+            {
                 "id": 23,
                 "title": "WWE Raw - 2026-03-16 - RAW 1712 HDTV-1080p",
                 "watched": true,
