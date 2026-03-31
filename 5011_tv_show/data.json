@@ -1687,7 +1687,7 @@
                 "title": "The Rookie - S08E13 - The Thinker HDTV-720p",
                 "watched": false,
                 "added_date": "2026-03-31T09:22:31.127466",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 29,
@@ -1708,13 +1708,6 @@
                 "title": "The Rookie - S08E10 - His Name Was Martin HDTV-720p",
                 "watched": false,
                 "added_date": "2026-03-10T13:29:29.585383",
-                "notify": "seen"
-            },
-            {
-                "id": 26,
-                "title": "The Rookie - S08E04 - Cut and Run WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-05T17:32:03.304257",
                 "notify": "seen"
             },
             {
@@ -1750,6 +1743,13 @@
                 "title": "The Rookie - S08E05 - The Network HDTV-720p",
                 "watched": false,
                 "added_date": "2026-02-03T08:18:42.629081",
+                "notify": "seen"
+            },
+            {
+                "id": 26,
+                "title": "The Rookie - S08E04 - Cut and Run WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-05T17:32:03.304257",
                 "notify": "seen"
             },
             {
@@ -1876,7 +1876,9 @@
                 "notify": "seen"
             }
         ],
-        "rating": "4"
+        "rating": "4",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     },
     {
         "id": 20,
@@ -3704,7 +3706,7 @@
                 "title": "Fate+strange Fake - S01E09 - The Nightmare Comes With the Dawn of London WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-03-31T02:15:35.965144",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 7,
@@ -3718,7 +3720,7 @@
                 "title": "Fate+strange Fake - S01E07 - Back from Twilight, the God Is Come WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-03-31T01:44:35.283152",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 11,
