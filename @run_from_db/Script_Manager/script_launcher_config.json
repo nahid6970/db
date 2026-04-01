@@ -978,7 +978,8 @@
             "text_color": "#ff0000",
             "color": "#00007f",
             "hover_color": "#55007f",
-            "border_color": "#ff0000"
+            "border_color": "#ff0000",
+            "hover_text_color": "#ff0000"
         },
         {
             "name": "mklink",
