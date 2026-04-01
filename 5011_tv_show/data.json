@@ -1016,6 +1016,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
             {
+                "id": 13,
+                "title": "Invincible (2021) - S04E05 - GIVE US A MOMENT WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-02T02:02:04.948693",
+                "notify": "unseen"
+            },
+            {
                 "id": 12,
                 "title": "Invincible (2021) - S04E04 - HURM WEBDL-1080p",
                 "watched": false,
