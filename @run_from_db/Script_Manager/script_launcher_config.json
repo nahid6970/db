@@ -3000,7 +3000,7 @@
             "keep_open": false,
             "kill_window": true,
             "new_terminal": true,
-            "run_admin": true,
+            "run_admin": false,
             "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\TOOLS\\Editor\\cyber_editor.py",
             "ctrl_right_cmd": "",
             "use_inline": false,
