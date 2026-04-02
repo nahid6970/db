@@ -942,6 +942,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 10,
+                "title": "Dr. STONE - s04e25 - [83] - FUTURE ENGINE HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-04-02T21:21:25.898475",
+                "notify": "unseen"
+            },
+            {
                 "id": 9,
                 "title": "Dr. STONE - s04e24 - [82] - WHOLE NEW WORLD HDTV-1080p - [SubsPlease]",
                 "watched": true,
