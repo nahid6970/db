@@ -3047,7 +3047,7 @@
             "ctrl_right_cmd": "",
             "use_inline": false,
             "inline_type": "cmd",
-            "inline_script": "",
+            "inline_script": "pyinstaller --onefile --noconsole --icon=icon.ico --name=CyberEditor --add-data \"icon.ico;.\" cyber_editor.py",
             "font_family": "JetBrainsMono Nerd Font Propo",
             "font_size": 14,
             "is_bold": true,
