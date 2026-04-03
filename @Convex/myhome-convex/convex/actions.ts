@@ -49,7 +49,6 @@ export const fetchPageTitle = action({
         // If we get a 400 or other error, try one more time WITHOUT special headers
         // Some servers (like Facebook's edge) reject requests if headers look "suspicious"
         if (!response.ok && (response.status === 400 || response.status === 403)) {
-          console.log(`Retrying fetch for ${targetUrl} without custom headers...`);
           response = await fetch(targetUrl);
         }
       } catch (e) {
@@ -96,7 +95,8 @@ export const fetchPageTitle = action({
           /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
           /<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i,
           /<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:image["']/i,
-          /<link[^>]*rel=["']image_src["'][^>]*href=["']([^"']+)["']/i
+          /<link[^>]*rel=["']image_src["'][^>]*href=["']([^"']+)["']/i,
+          /<meta[^>]*itemprop=["']image["'][^>]*content=["']([^"']+)["']/i
         ];
 
         for (const pattern of patterns) {
@@ -109,21 +109,26 @@ export const fetchPageTitle = action({
         }
       }
 
-      // 4. Facebook specific handling (SVG image extraction)
-      if (!channelIcon && domain.includes('facebook.com')) {
-        // Facebook often uses <image> tags inside <svg> for profile pictures
-        // We look for the image tag that likely contains the profile pic
-        const svgImageMatch = html.match(/<image[^>]*xlink:href=["']([^"']+)["']/i) || 
-                              html.match(/<image[^>]*href=["']([^"']+)["']/i);
-        if (svgImageMatch) {
-          channelIcon = svgImageMatch[1].replace(/&amp;/g, '&');
-        }
+      // 4. Facebook specific handling (SVG, Profiles, and JSON patterns)
+      if (domain.includes('facebook.com')) {
+        const fbPatterns = [
+          // SVG image tag (common for profile pics in newer FB UI)
+          /<image[^>]*xlink:href=["']([^"']+)["']/i,
+          /<image[^>]*href=["']([^"']+)["']/i,
+          // JSON patterns (common in script tags)
+          /"profile_pic":\{"uri":"([^"]+)"/,
+          /"group_icon":\{"uri":"([^"]+)"/,
+          /"image":\{"uri":"([^"]+)"/,
+          /"Thumbnail":\{"uri":"([^"]+)"/
+        ];
 
-        // Fallback to JSON pattern in script tags
         if (!channelIcon) {
-          const fbIconMatch = html.match(/"profile_pic":\{"uri":"([^"]+)"/);
-          if (fbIconMatch) {
-            channelIcon = fbIconMatch[1].replace(/\\/g, '').replace(/&amp;/g, '&');
+          for (const pattern of fbPatterns) {
+            const match = html.match(pattern);
+            if (match && match[1]) {
+              channelIcon = match[1].replace(/\\/g, '').replace(/&amp;/g, '&');
+              break;
+            }
           }
         }
       }
