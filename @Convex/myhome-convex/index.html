@@ -156,7 +156,10 @@
             <input type="text" id="link-text" placeholder="Text" style="flex: 1;">
             <input type="text" id="link-icon-class" placeholder="Icon Class" style="flex: 1;">
           </div>
-          <input type="url" id="link-img-src" placeholder="Image URL">
+          <div style="display: flex; gap: 5px; width: 100%;">
+            <input type="url" id="link-img-src" placeholder="Image URL" style="flex: 1;">
+            <button type="button" class="reload-icon-btn" onclick="reloadLinkIcon('urls-container', 'link-img-src')" title="Reload Icon">🔄</button>
+          </div>
           <textarea id="link-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-width" placeholder="Width" style="flex: 1;">
@@ -228,7 +231,10 @@
             <input type="text" id="edit-link-text" placeholder="Text" style="flex: 1;">
             <input type="text" id="edit-link-icon-class" placeholder="Icon Class" style="flex: 1;">
           </div>
-          <input type="url" id="edit-link-img-src" placeholder="Image URL">
+          <div style="display: flex; gap: 5px; width: 100%;">
+            <input type="url" id="edit-link-img-src" placeholder="Image URL" style="flex: 1;">
+            <button type="button" class="reload-icon-btn" onclick="reloadLinkIcon('edit-urls-container', 'edit-link-img-src')" title="Reload Icon">🔄</button>
+          </div>
           <textarea id="edit-link-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-width" placeholder="Width" style="flex: 1;">
@@ -288,7 +294,10 @@
             <option value="svg">SVG</option>
           </select>
           <input type="text" id="sidebar-button-icon" placeholder="Icon Class">
-          <input type="url" id="sidebar-button-img-src" placeholder="Image URL" style="display:none;">
+          <div id="sidebar-button-img-src-container" style="display: none; gap: 5px; width: 100%;">
+            <input type="url" id="sidebar-button-img-src" placeholder="Image URL" style="flex: 1;">
+            <button type="button" class="reload-icon-btn" onclick="reloadSidebarIcon('sidebar-button-url', 'sidebar-button-img-src')" title="Reload Icon">🔄</button>
+          </div>
           <textarea id="sidebar-button-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="sidebar-button-text-color" placeholder="Text Color" class="color-input">
@@ -323,7 +332,10 @@
             <option value="svg">SVG</option>
           </select>
           <input type="text" id="edit-sidebar-button-icon" placeholder="Icon Class">
-          <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL" style="display:none;">
+          <div id="edit-sidebar-button-img-src-container" style="display: none; gap: 5px; width: 100%;">
+            <input type="url" id="edit-sidebar-button-img-src" placeholder="Image URL" style="flex: 1;">
+            <button type="button" class="reload-icon-btn" onclick="reloadSidebarIcon('edit-sidebar-button-url', 'edit-sidebar-button-img-src')" title="Reload Icon">🔄</button>
+          </div>
           <textarea id="edit-sidebar-button-svg-code" placeholder="SVG Code" style="display:none;"></textarea>
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-sidebar-button-text-color" placeholder="Text Color" class="color-input">

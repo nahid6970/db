@@ -8,7 +8,7 @@ export const fetchPageTitle = action({
     const domain = urlObj.hostname.replace('www.', '');
     
     try {
-      // Special handling for YouTube to avoid 429 rate limiting
+      // 1. Try oEmbed for YouTube (best for titles and thumbnails)
       if (domain.includes('youtube.com') || domain.includes('youtu.be')) {
         try {
           const oembedUrl = `https://www.youtube.com/oembed?url=${encodeURIComponent(args.url)}&format=json`;
@@ -18,14 +18,15 @@ export const fetchPageTitle = action({
             return {
               title: data.title || domain,
               domain: domain,
-              channelIcon: data.thumbnail_url // Use video thumbnail as icon if title is fetched
+              channelIcon: data.thumbnail_url
             };
           }
         } catch (e) {
-          console.warn('YouTube oEmbed fetch failed, falling back to direct fetch', e);
+          console.warn('YouTube oEmbed fetch failed', e);
         }
       }
 
+      // 2. Fallback to direct fetch
       const response = await fetch(args.url);
       if (!response.ok) {
         throw new Error(`HTTP ${response.status}`);
@@ -36,8 +37,11 @@ export const fetchPageTitle = action({
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : null;
       
-      // Extract YouTube channel icon if it's a YouTube channel (only if not already handled by oEmbed)
       let channelIcon = null;
+
+      // 3. Specific icon extraction logic
+      
+      // YouTube Channel Icon (if not handled by oEmbed)
       if (domain.includes('youtube.com') && (args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/'))) {
         const iconMatch = html.match(/"avatar":\{"thumbnails":\[\{"url":"([^"]+)"/);
         if (iconMatch) {
@@ -45,6 +49,23 @@ export const fetchPageTitle = action({
         }
       }
       
+      // GitHub Icon (Owner avatar)
+      if (!channelIcon && domain.includes('github.com')) {
+        const parts = urlObj.pathname.split('/').filter(p => p);
+        if (parts.length >= 1) {
+          channelIcon = `https://github.com/${parts[0]}.png`;
+        }
+      }
+
+      // General og:image extraction (covers Facebook, Chrome Web Store, and many others)
+      if (!channelIcon) {
+        const ogImageMatch = html.match(/<meta[^>]*property="og:image"[^>]*content="([^"]+)"/i) || 
+                             html.match(/<meta[^>]*content="([^"]+)"[^>]*property="og:image"/i);
+        if (ogImageMatch) {
+          channelIcon = ogImageMatch[1];
+        }
+      }
+
       return {
         title: title || domain,
         domain: domain,

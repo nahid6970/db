@@ -244,11 +244,11 @@ function showAddSidebarButtonPopup() {
 
 document.getElementById('sidebar-button-display-type').addEventListener('change', (e) => {
   const iconInput = document.getElementById('sidebar-button-icon');
-  const imgInput = document.getElementById('sidebar-button-img-src');
+  const imgInput = document.getElementById('sidebar-button-img-src-container');
   const svgInput = document.getElementById('sidebar-button-svg-code');
 
   iconInput.style.display = e.target.value === 'icon' ? 'block' : 'none';
-  imgInput.style.display = e.target.value === 'image' ? 'block' : 'none';
+  imgInput.style.display = e.target.value === 'image' ? 'flex' : 'none';
   svgInput.style.display = e.target.value === 'svg' ? 'block' : 'none';
 });
 
@@ -300,11 +300,11 @@ function openEditSidebarButtonPopup(button, index) {
   document.getElementById('edit-sidebar-button-font-size').value = button.font_size;
 
   const iconInput = document.getElementById('edit-sidebar-button-icon');
-  const imgInput = document.getElementById('edit-sidebar-button-img-src');
+  const imgInput = document.getElementById('edit-sidebar-button-img-src-container');
   const svgInput = document.getElementById('edit-sidebar-button-svg-code');
 
   iconInput.style.display = button.display_type === 'icon' ? 'block' : 'none';
-  imgInput.style.display = button.display_type === 'image' ? 'block' : 'none';
+  imgInput.style.display = button.display_type === 'image' ? 'flex' : 'none';
   svgInput.style.display = button.display_type === 'svg' ? 'block' : 'none';
 
   document.getElementById('edit-sidebar-button-popup').classList.remove('hidden');
@@ -319,11 +319,11 @@ function openEditSidebarButtonPopup(button, index) {
 
 document.getElementById('edit-sidebar-button-display-type').addEventListener('change', (e) => {
   const iconInput = document.getElementById('edit-sidebar-button-icon');
-  const imgInput = document.getElementById('edit-sidebar-button-img-src');
+  const imgInput = document.getElementById('edit-sidebar-button-img-src-container');
   const svgInput = document.getElementById('edit-sidebar-button-svg-code');
 
   iconInput.style.display = e.target.value === 'icon' ? 'block' : 'none';
-  imgInput.style.display = e.target.value === 'image' ? 'block' : 'none';
+  imgInput.style.display = e.target.value === 'image' ? 'flex' : 'none';
   svgInput.style.display = e.target.value === 'svg' ? 'block' : 'none';
 });
 

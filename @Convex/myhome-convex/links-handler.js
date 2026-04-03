@@ -1544,3 +1544,70 @@ async function saveGroupOrder() {
     console.error('❌ Error saving group order:', error);
   }
 }
+
+// Reload link icon from URL
+async function reloadLinkIcon(containerId, imgUrlInputId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  
+  const firstInput = container.querySelector('.url-input');
+  const url = firstInput ? firstInput.value : '';
+  
+  if (!url) {
+    window.showNotification('Please enter a URL first', 'error');
+    return;
+  }
+
+  await fetchAndSetIcon(url, imgUrlInputId);
+}
+
+// Reload sidebar button icon from URL
+async function reloadSidebarIcon(urlInputId, imgUrlInputId) {
+  const url = document.getElementById(urlInputId).value;
+  
+  if (!url) {
+    window.showNotification('Please enter a URL first', 'error');
+    return;
+  }
+
+  await fetchAndSetIcon(url, imgUrlInputId);
+}
+
+// Shared logic to fetch and set icon
+async function fetchAndSetIcon(url, imgUrlInputId) {
+  const btn = document.querySelector(`.reload-icon-btn[onclick*="${imgUrlInputId}"]`);
+  try {
+    if (btn) btn.textContent = '⏳';
+
+    const urlObj = new URL(url);
+    const domain = urlObj.hostname.replace('www.', '');
+    let faviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+
+    try {
+      const result = await window.convexClient.action("actions:fetchPageTitle", { url });
+      if (result.channelIcon) {
+        faviconUrl = result.channelIcon;
+      }
+    } catch (error) {
+      console.warn('Could not fetch icon from backend, using favicon fallback:', error);
+    }
+
+    const input = document.getElementById(imgUrlInputId);
+    if (input) {
+      input.value = faviconUrl;
+      // Trigger change event if needed
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    window.showNotification('Icon reloaded successfully', 'success');
+  } catch (error) {
+    console.error('Error reloading icon:', error);
+    window.showNotification('Invalid URL format', 'error');
+  } finally {
+    if (btn) btn.textContent = '🔄';
+  }
+}
+
+// Make them global so onclick works
+window.reloadLinkIcon = reloadLinkIcon;
+window.reloadSidebarIcon = reloadSidebarIcon;
+
