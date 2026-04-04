@@ -1596,23 +1596,23 @@ async function fetchAndSetIcon(url, imgUrlInputId) {
       console.warn('Could not fetch icon from backend:', error);
     }
 
-    // If no specific icon found, we still have the favicon fallback for NEW additions, 
-    // but for RELOAD we only want to update if we found something better than standard favicon
+    // Always provide a fallback icon if no specific one is found
     if (!foundSpecificIcon) {
       const urlObj = new URL(url);
       const domain = urlObj.hostname.replace('www.', '');
       iconToSet = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
     }
 
+    const input = document.getElementById(imgUrlInputId);
+    if (input) {
+      input.value = iconToSet;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+
     if (foundSpecificIcon) {
-      const input = document.getElementById(imgUrlInputId);
-      if (input) {
-        input.value = iconToSet;
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-      }
       window.showNotification('Specific icon found and loaded', 'success');
     } else {
-      window.showNotification('Specific icon not found (Manual addition needed)', 'info');
+      window.showNotification('Standard favicon loaded', 'success');
     }
   } catch (error) {
     console.error('Error reloading icon:', error);

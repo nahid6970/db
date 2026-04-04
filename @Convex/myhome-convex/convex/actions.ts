@@ -88,29 +88,8 @@ export const fetchPageTitle = action({
         }
       }
 
-      // General og:image and twitter:image extraction
-      if (!channelIcon) {
-        const patterns = [
-          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
-          /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
-          /<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i,
-          /<meta[^>]*content=["']([^"']+)["'][^>]*name=["']twitter:image["']/i,
-          /<link[^>]*rel=["']image_src["'][^>]*href=["']([^"']+)["']/i,
-          /<meta[^>]*itemprop=["']image["'][^>]*content=["']([^"']+)["']/i
-        ];
-
-        for (const pattern of patterns) {
-          const match = html.match(pattern);
-          if (match && match[1]) {
-            channelIcon = match[1];
-            channelIcon = channelIcon.replace(/&amp;/g, '&');
-            break;
-          }
-        }
-      }
-
-      // 4. Facebook specific handling (SVG, Profiles, and JSON patterns)
-      if (domain.includes('facebook.com')) {
+      // Facebook specific handling (SVG, Profiles, and JSON patterns)
+      if (!channelIcon && domain.includes('facebook.com')) {
         const fbPatterns = [
           // SVG image tag (common for profile pics in newer FB UI)
           /<image[^>]*xlink:href=["']([^"']+)["']/i,
@@ -119,16 +98,33 @@ export const fetchPageTitle = action({
           /"profile_pic":\{"uri":"([^"]+)"/,
           /"group_icon":\{"uri":"([^"]+)"/,
           /"image":\{"uri":"([^"]+)"/,
-          /"Thumbnail":\{"uri":"([^"]+)"/
+          /"Thumbnail":\{"uri":"([^"]+)"/,
+          // Meta tags as fallback for FB
+          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
+          /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i
         ];
 
-        if (!channelIcon) {
-          for (const pattern of fbPatterns) {
-            const match = html.match(pattern);
-            if (match && match[1]) {
-              channelIcon = match[1].replace(/\\/g, '').replace(/&amp;/g, '&');
-              break;
-            }
+        for (const pattern of fbPatterns) {
+          const match = html.match(pattern);
+          if (match && match[1]) {
+            channelIcon = match[1].replace(/\\/g, '').replace(/&amp;/g, '&');
+            break;
+          }
+        }
+      }
+
+      // Chrome Web Store specific handling (Extract from meta tags)
+      if (!channelIcon && (domain.includes('chromewebstore.google.com') || domain.includes('chrome.google.com/webstore'))) {
+        const storePatterns = [
+          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
+          /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
+          /<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i
+        ];
+        for (const pattern of storePatterns) {
+          const match = html.match(pattern);
+          if (match && match[1]) {
+            channelIcon = match[1].replace(/&amp;/g, '&');
+            break;
           }
         }
       }
