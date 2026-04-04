@@ -129,31 +129,49 @@ export const fetchPageTitle = action({
         }
       }
 
-      // Google specifically (search, main page, etc.)
+      // Google specifically (search, main page, and subdomains like Gmail, Colab, etc.)
       if (!channelIcon && domain.includes('google.')) {
-        // Try to find specific icon in HTML meta/link tags first
-        const googlePatterns = [
-          /<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i,
-          /<link[^>]*href=["']([^"']+)["'][^>]*rel=["'](?:shortcut )?icon["']/i,
-          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i
-        ];
-        
-        for (const pattern of googlePatterns) {
-          const match = html.match(pattern);
-          if (match && match[1]) {
-            let iconUrl = match[1].replace(/&amp;/g, '&');
-            // Handle relative URLs
-            if (iconUrl.startsWith('//')) iconUrl = 'https:' + iconUrl;
-            else if (iconUrl.startsWith('/')) iconUrl = `https://${domain}${iconUrl}`;
-            else if (!iconUrl.startsWith('http')) iconUrl = `https://${domain}/${iconUrl}`;
-            channelIcon = iconUrl;
-            break;
+        // 1. Hardcoded mappings for services that often redirect to login pages (like Gmail)
+        const googleServiceIcons: Record<string, string> = {
+          'mail.google.com': 'https://ssl.gstatic.com/ui/v1/icons/mail/images/favicon5.ico',
+          'drive.google.com': 'https://ssl.gstatic.com/images/branding/product/1x/drive_2020q4_48dp.png',
+          'calendar.google.com': 'https://ssl.gstatic.com/calendar/images/favicon_v2014_15.ico',
+          'photos.google.com': 'https://ssl.gstatic.com/social/white/br/p-v1.png',
+          'docs.google.com': 'https://ssl.gstatic.com/docs/documents/images/kix-favicon7.ico',
+          'sheets.google.com': 'https://ssl.gstatic.com/docs/spreadsheets/favicon3.ico',
+          'slides.google.com': 'https://ssl.gstatic.com/docs/presentations/images/favicon5.ico',
+          'meet.google.com': 'https://ssl.gstatic.com/s2/favicons?domain=meet.google.com&sz=128'
+        };
+
+        if (googleServiceIcons[domain]) {
+          channelIcon = googleServiceIcons[domain];
+        }
+
+        // 2. Try to find specific icon in HTML meta/link tags (works for public pages like Colab)
+        if (!channelIcon) {
+          const googlePatterns = [
+            /<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i,
+            /<link[^>]*href=["']([^"']+)["'][^>]*rel=["'](?:shortcut )?icon["']/i,
+            /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i
+          ];
+
+          for (const pattern of googlePatterns) {
+            const match = html.match(pattern);
+            if (match && match[1]) {
+              let iconUrl = match[1].replace(/&amp;/g, '&');
+              // Handle relative URLs
+              if (iconUrl.startsWith('//')) iconUrl = 'https:' + iconUrl;
+              else if (iconUrl.startsWith('/')) iconUrl = `https://${domain}${iconUrl}`;
+              else if (!iconUrl.startsWith('http')) iconUrl = `https://${domain}/${iconUrl}`;
+              channelIcon = iconUrl;
+              break;
+            }
           }
         }
 
-        // If no HTML icon found, fallback to 64px service (more reliable for subdomains than 128px)
+        // 3. Fallback to favicon service with specific subdomain
         if (!channelIcon) {
-          channelIcon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+          channelIcon = `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
         }
       }
 
