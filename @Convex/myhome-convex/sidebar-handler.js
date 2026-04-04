@@ -143,12 +143,33 @@ function createSidebarButton(button, index) {
     btn.style.backgroundColor = button.bg_color;
   });
 
+  // Handle click to open URL
+  btn.onclick = (e) => {
+    if (window.editMode) return; // Don't open link in edit mode
+    
+    if (button.url.startsWith('file:///')) {
+      window.location.href = button.url;
+    } else {
+      window.open(button.url, '_blank');
+    }
+  };
+
   // Add context menu for right-click
   btn.addEventListener('contextmenu', (e) => {
     e.preventDefault();
     e.stopPropagation();
 
     const items = [
+      {
+        label: 'New-Tab',
+        action: () => {
+          if (button.url.startsWith('file:///')) {
+            window.location.href = button.url;
+          } else {
+            window.open(button.url, '_blank');
+          }
+        }
+      },
       {
         label: 'Edit',
         className: 'context-menu-edit',

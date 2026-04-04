@@ -755,9 +755,16 @@ function createLinkItem(link, index) {
 
   // Handle multiple URLs
   a.onclick = (e) => {
+    e.stopPropagation();
     if (link.urls && link.urls.length > 1) {
       e.preventDefault();
       window.open(link.urls[0], '_blank');
+    } else if (link.url.startsWith('file:///')) {
+      // For local files, direct navigation sometimes works better than window.open
+      // but we'll try to let the default action happen (opening in same tab)
+      // or use location.href if it's being blocked.
+      // If user wants it in new tab, they can use context menu.
+      return true; 
     }
   };
 
@@ -770,6 +777,7 @@ function createLinkItem(link, index) {
     editBtn.textContent = '✏';
     editBtn.onclick = (e) => {
       e.preventDefault();
+      e.stopPropagation();
       openEditLinkPopup(link, index);
     };
     li.appendChild(editBtn);
@@ -779,6 +787,7 @@ function createLinkItem(link, index) {
     delBtn.textContent = '🗑';
     delBtn.onclick = (e) => {
       e.preventDefault();
+      e.stopPropagation();
       deleteLink(link._id);
     };
     li.appendChild(delBtn);
@@ -787,7 +796,16 @@ function createLinkItem(link, index) {
   // Context menu
   li.addEventListener('contextmenu', (e) => {
     showContextMenu(e, [
-      { label: 'New-Tab', action: () => window.open(link.url, '_blank') },
+      { 
+        label: 'New-Tab', 
+        action: () => {
+          if (link.url.startsWith('file:///')) {
+            window.location.href = link.url;
+          } else {
+            window.open(link.url, '_blank');
+          }
+        } 
+      },
       { label: 'Edit', action: () => openEditLinkPopup(link, index) },
       { label: 'Copy', action: () => copyLink(link) },
       { label: 'Delete', action: () => deleteLink(link._id) }
