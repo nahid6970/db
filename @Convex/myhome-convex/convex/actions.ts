@@ -129,6 +129,34 @@ export const fetchPageTitle = action({
         }
       }
 
+      // Google specifically (search, main page, etc.)
+      if (!channelIcon && domain.includes('google.')) {
+        // Try to find specific icon in HTML meta/link tags first
+        const googlePatterns = [
+          /<link[^>]*rel=["'](?:shortcut )?icon["'][^>]*href=["']([^"']+)["']/i,
+          /<link[^>]*href=["']([^"']+)["'][^>]*rel=["'](?:shortcut )?icon["']/i,
+          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i
+        ];
+        
+        for (const pattern of googlePatterns) {
+          const match = html.match(pattern);
+          if (match && match[1]) {
+            let iconUrl = match[1].replace(/&amp;/g, '&');
+            // Handle relative URLs
+            if (iconUrl.startsWith('//')) iconUrl = 'https:' + iconUrl;
+            else if (iconUrl.startsWith('/')) iconUrl = `https://${domain}${iconUrl}`;
+            else if (!iconUrl.startsWith('http')) iconUrl = `https://${domain}/${iconUrl}`;
+            channelIcon = iconUrl;
+            break;
+          }
+        }
+
+        // If no HTML icon found, fallback to 64px service (more reliable for subdomains than 128px)
+        if (!channelIcon) {
+          channelIcon = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        }
+      }
+
       return {
         title: title || domain,
         domain: domain,
