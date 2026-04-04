@@ -147,7 +147,14 @@ function createSidebarButton(button, index) {
   btn.onclick = (e) => {
     if (window.editMode) return; // Don't open link in edit mode
     
-    if (button.url.startsWith('file:///')) {
+    if (button.url.startsWith('chrome://') || button.url.startsWith('edge://')) {
+      e.preventDefault();
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(button.url).then(() => {
+          window.showNotification('URL copied! (Browser blocks chrome:// links)', 'info');
+        });
+      }
+    } else if (button.url.startsWith('file:///')) {
       window.location.href = button.url;
     } else {
       window.open(button.url, '_blank');

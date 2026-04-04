@@ -759,11 +759,19 @@ function createLinkItem(link, index) {
     if (link.urls && link.urls.length > 1) {
       e.preventDefault();
       window.open(link.urls[0], '_blank');
+    } else if (link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
+      e.preventDefault();
+      // Browser security blocks direct navigation to chrome:// from web pages.
+      // We'll copy it to clipboard so the user can paste it.
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(link.url).then(() => {
+          window.showNotification('URL copied! (Browser blocks chrome:// links)', 'info');
+        }).catch(() => {
+          window.showNotification('Please copy manually (Browser blocked)', 'error');
+        });
+      }
     } else if (link.url.startsWith('file:///')) {
-      // For local files, direct navigation sometimes works better than window.open
-      // but we'll try to let the default action happen (opening in same tab)
-      // or use location.href if it's being blocked.
-      // If user wants it in new tab, they can use context menu.
+      // For local files, direct navigation works when running from file://
       return true; 
     }
   };
@@ -799,7 +807,7 @@ function createLinkItem(link, index) {
       { 
         label: 'New-Tab', 
         action: () => {
-          if (link.url.startsWith('file:///')) {
+          if (link.url.startsWith('file:///') || link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
             window.location.href = link.url;
           } else {
             window.open(link.url, '_blank');
