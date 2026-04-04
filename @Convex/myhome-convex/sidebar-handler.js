@@ -149,17 +149,43 @@ function createSidebarButton(button, index) {
     
     if (button.url.startsWith('chrome://') || button.url.startsWith('edge://')) {
       e.preventDefault();
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(button.url).then(() => {
-          window.showNotification('URL copied! (Browser blocks chrome:// links)', 'info');
-        });
-      }
+      copyToClipboard(button.url, 'URL copied! (Paste in new tab to open)');
     } else if (button.url.startsWith('file:///')) {
-      window.location.href = button.url;
+      e.preventDefault();
+      if (window.location.protocol === 'file:') {
+        window.location.href = button.url;
+      } else {
+        copyToClipboard(button.url, 'Local file URL copied (Security blocks direct opening)');
+      }
     } else {
       window.open(button.url, '_blank');
     }
   };
+
+  // Helper for clipboard with fallback
+  function copyToClipboard(text, successMsg) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        window.showNotification(successMsg, 'info');
+      }).catch(() => fallbackCopy(text, successMsg));
+    } else {
+      fallbackCopy(text, successMsg);
+    }
+  }
+
+  function fallbackCopy(text, successMsg) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      window.showNotification(successMsg, 'info');
+    } catch (err) {
+      window.showNotification('Copy failed (Please copy manually)', 'error');
+    }
+    document.body.removeChild(textArea);
+  }
 
   // Add context menu for right-click
   btn.addEventListener('contextmenu', (e) => {

@@ -761,20 +761,44 @@ function createLinkItem(link, index) {
       window.open(link.urls[0], '_blank');
     } else if (link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
       e.preventDefault();
-      // Browser security blocks direct navigation to chrome:// from web pages.
-      // We'll copy it to clipboard so the user can paste it.
-      if (navigator.clipboard) {
-        navigator.clipboard.writeText(link.url).then(() => {
-          window.showNotification('URL copied! (Browser blocks chrome:// links)', 'info');
-        }).catch(() => {
-          window.showNotification('Please copy manually (Browser blocked)', 'error');
-        });
-      }
+      // Copy to clipboard fallback for GitHub Pages (https)
+      copyToClipboard(link.url, 'URL copied! (Paste in new tab to open)');
     } else if (link.url.startsWith('file:///')) {
-      // For local files, direct navigation works when running from file://
-      return true; 
+      e.preventDefault();
+      // Browsers block web-hosted sites (like GitHub Pages) from accessing local files
+      if (window.location.protocol === 'file:') {
+        // If running locally, try to navigate
+        window.location.href = link.url;
+      } else {
+        copyToClipboard(link.url, 'Local file URL copied (Security blocks direct opening)');
+      }
     }
   };
+
+  // Helper for clipboard with fallback
+  function copyToClipboard(text, successMsg) {
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(() => {
+        window.showNotification(successMsg, 'info');
+      }).catch(() => fallbackCopy(text, successMsg));
+    } else {
+      fallbackCopy(text, successMsg);
+    }
+  }
+
+  function fallbackCopy(text, successMsg) {
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      window.showNotification(successMsg, 'info');
+    } catch (err) {
+      window.showNotification('Copy failed (Please copy manually)', 'error');
+    }
+    document.body.removeChild(textArea);
+  }
 
   li.appendChild(a);
 
