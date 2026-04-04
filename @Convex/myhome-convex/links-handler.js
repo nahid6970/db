@@ -796,16 +796,19 @@ function createLinkItem(link, index) {
 
   // Drag and drop
   li.addEventListener('dragstart', (e) => {
+    e.stopPropagation();
     draggedElement = li;
     li.classList.add('dragging');
   });
 
   li.addEventListener('dragover', (e) => {
     e.preventDefault();
+    e.stopPropagation();
   });
 
   li.addEventListener('drop', async (e) => {
     e.preventDefault();
+    e.stopPropagation();
     if (draggedElement && draggedElement !== li) {
       const fromIndex = parseInt(draggedElement.dataset.linkIndex);
       const toIndex = parseInt(li.dataset.linkIndex);
@@ -813,7 +816,8 @@ function createLinkItem(link, index) {
     }
   });
 
-  li.addEventListener('dragend', () => {
+  li.addEventListener('dragend', (e) => {
+    e.stopPropagation();
     li.classList.remove('dragging');
     draggedElement = null;
   });
