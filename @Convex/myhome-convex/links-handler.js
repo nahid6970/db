@@ -683,6 +683,31 @@ function createRegularGroup(groupName, items) {
   return div;
 }
 
+// Helper for clipboard with fallback
+function copyToClipboard(text, successMsg) {
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(text).then(() => {
+      window.showNotification(successMsg, 'info');
+    }).catch(() => fallbackCopy(text, successMsg));
+  } else {
+    fallbackCopy(text, successMsg);
+  }
+}
+
+function fallbackCopy(text, successMsg) {
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  document.body.appendChild(textArea);
+  textArea.select();
+  try {
+    document.execCommand('copy');
+    window.showNotification(successMsg, 'info');
+  } catch (err) {
+    window.showNotification('Copy failed (Please copy manually)', 'error');
+  }
+  document.body.removeChild(textArea);
+}
+
 // Create link item
 function createLinkItem(link, index) {
   const li = document.createElement('li');
@@ -693,9 +718,21 @@ function createLinkItem(link, index) {
   if (link.hidden) li.classList.add('hidden-item');
 
   const a = document.createElement('a');
-  a.href = link.url;
+  
+  // Security: browsers block chrome:// and file:/// links from web servers.
+  // We use javascript:void(0) to ensure the click event still fires.
+  const isProtectedUrl = link.url.startsWith('chrome://') || 
+                         link.url.startsWith('edge://') || 
+                         link.url.startsWith('file:///');
+                         
+  if (isProtectedUrl) {
+    a.href = 'javascript:void(0)';
+  } else {
+    a.href = link.url;
+  }
+  
   a.target = '_blank';
-  a.title = link.title || link.name || '';
+  a.title = link.url; // Show full URL on hover
 
   // Render content based on type
   if (link.default_type === 'nerd-font' && link.icon_class) {
