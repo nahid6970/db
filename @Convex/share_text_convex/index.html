@@ -109,12 +109,16 @@
             margin-bottom: 10px;
             position: relative;
         }
+        .log-entry.pinned {
+            border: 2px solid #8e44ad;
+            background-color: #fdf2ff;
+        }
         .timestamp {
             font-size: 12px;
             color: #666;
             font-weight: bold;
         }
-        .copy-btn, .delete-btn, .edit-btn {
+        .copy-btn, .delete-btn, .edit-btn, .pin-btn {
             position: absolute;
             top: 10px;
             color: white;
@@ -123,16 +127,14 @@
             cursor: pointer;
             border-radius: 5px;
             border: none;
+            min-width: 60px;
         }
-        .copy-btn {
-            right: 130px;
-            background-color: #007BFF;
+        .delete-btn {
+            right: 10px;
+            background-color: #dc3545;
         }
-        .copy-btn:hover {
-            background-color: #0056b3;
-        }
-        .copy-btn.success {
-            background-color: #28a745;
+        .delete-btn:hover {
+            background-color: #c82333;
         }
         .edit-btn {
             right: 80px;
@@ -141,12 +143,22 @@
         .edit-btn:hover {
             background-color: #e67e22;
         }
-        .delete-btn {
-            right: 10px;
-            background-color: #dc3545;
+        .pin-btn {
+            right: 150px;
+            background-color: #9b59b6;
         }
-        .delete-btn:hover {
-            background-color: #c82333;
+        .pin-btn.pinned-active {
+            background-color: #8e44ad;
+        }
+        .copy-btn {
+            right: 220px;
+            background-color: #007BFF;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+        .copy-btn.success {
+            background-color: #28a745;
         }
         .clean-all-container {
             text-align: right;
@@ -294,10 +306,11 @@
                     });
                     const renderedText = marked.parse(log.text);
                     return `
-                        <div class="log-entry" id="entry-${log._id}">
+                        <div class="log-entry ${log.pinned ? 'pinned' : ''}" id="entry-${log._id}">
                             <div class="timestamp">${timestamp}</div>
                             <div id="log-${index}" class="shared-text">${renderedText}</div>
                             <button id="copy-btn-${index}" class="copy-btn" onclick="copyText(${index}, 'copy-btn-${index}')">Copy</button>
+                            <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" onclick="togglePin('${log._id}')">${log.pinned ? '📌' : 'Pin'}</button>
                             <button class="edit-btn" onclick="startEditing('${log._id}', ${index})">Edit</button>
                             <button class="delete-btn" onclick="deleteEntry('${log._id}')">Delete</button>
                         </div>
@@ -307,6 +320,15 @@
                 console.error("Error loading logs:", err);
             }
         }
+
+        window.togglePin = async (id) => {
+            try {
+                await client.mutation("functions:togglePin", { id });
+                await loadLogs();
+            } catch (err) {
+                console.error("Error toggling pin:", err);
+            }
+        };
 
         document.getElementById('shareForm').addEventListener('submit', async (e) => {
             e.preventDefault();
