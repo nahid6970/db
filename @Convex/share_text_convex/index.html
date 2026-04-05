@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4400/4400968.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sharing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
     <style>
         body {
             font-family: 'JetBrains Mono', monospace;
@@ -50,8 +51,42 @@
             background-color: #fff;
             border-radius: 5px;
             border: 1px solid #ccc;
-            white-space: pre-wrap;
             word-wrap: break-word;
+        }
+        .shared-text h1, .shared-text h2, .shared-text h3, .shared-text h4, .shared-text h5, .shared-text h6 {
+            margin-top: 0.5em;
+            margin-bottom: 0.3em;
+        }
+        .shared-text p, .shared-text ul, .shared-text ol {
+            margin-top: 0;
+            margin-bottom: 0.5em;
+        }
+        .shared-text *:first-child {
+            margin-top: 0;
+        }
+        .shared-text *:last-child {
+            margin-bottom: 0;
+        }
+        .shared-text pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        .shared-text code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        .shared-text blockquote {
+            border-left: 4px solid #ccc;
+            margin: 0;
+            padding-left: 10px;
+            color: #666;
+        }
+        .shared-text img {
+            max-width: 100%;
         }
         .log-entry {
             background-color: #fff;
@@ -118,11 +153,27 @@
 
     <script type="module">
         import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+        import { Marked } from "https://esm.sh/marked@12.0.0";
+        import { markedHighlight } from "https://esm.sh/marked-highlight@2.1.1";
+        import hljs from "https://esm.sh/highlight.js@11.9.0";
         
         const client = new ConvexHttpClient("https://dazzling-akita-709.convex.cloud");
 
+        const marked = new Marked(
+            markedHighlight({
+                langPrefix: 'hljs language-',
+                highlight(code, lang) {
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
+                }
+            })
+        );
+
+        let currentLogs = [];
+
         async function loadLogs() {
             const logs = await client.query("functions:list");
+            currentLogs = logs;
             const logsList = document.getElementById('logsList');
             logsList.innerHTML = logs.map((log, index) => {
                 const date = new Date(log.timestamp);
@@ -134,11 +185,12 @@
                     minute: '2-digit',
                     hour12: true
                 });
+                const renderedText = marked.parse(log.text);
                 return `
                     <div class="log-entry">
                         <div class="timestamp">${timestamp}</div>
-                        <div id="log-${index}" class="shared-text">${log.text}</div>
-                        <button id="copy-btn-${index}" class="copy-btn" onclick="copyText('log-${index}', 'copy-btn-${index}')">Copy</button>
+                        <div id="log-${index}" class="shared-text">${renderedText}</div>
+                        <button id="copy-btn-${index}" class="copy-btn" onclick="copyText(${index}, 'copy-btn-${index}')">Copy</button>
                         <button class="delete-btn" onclick="deleteEntry('${log._id}')">Delete</button>
                     </div>
                 `;
@@ -169,9 +221,8 @@
             }
         };
 
-        window.copyText = (elementId, buttonId) => {
-            const textElement = document.getElementById(elementId);
-            const text = textElement.innerText;
+        window.copyText = (index, buttonId) => {
+            const text = currentLogs[index].text;
             navigator.clipboard.writeText(text);
             const copyBtn = document.getElementById(buttonId);
             copyBtn.innerText = '✔';
