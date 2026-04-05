@@ -148,38 +148,76 @@
         .delete-btn:hover {
             background-color: #c82333;
         }
-        .edit-textarea {
-            width: 98%;
-            padding: 10px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 10px;
-        }
-        .edit-controls {
-            margin-top: 5px;
-        }
-        .save-btn {
-            background-color: #2ecc71;
-            padding: 5px 15px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .cancel-btn {
-            background-color: #95a5a6;
-            padding: 5px 15px;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-left: 5px;
-        }
         .clean-all-container {
             text-align: right;
             margin-top: 20px;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fff;
+            width: 80%;
+            height: 80%;
+            padding: 20px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .modal-header h2 {
+            margin: 0;
+        }
+        .modal-textarea {
+            flex-grow: 1;
+            width: 98%;
+            padding: 15px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+        .modal-footer {
+            margin-top: 15px;
+            text-align: right;
+        }
+        .save-btn {
+            background-color: #2ecc71;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .cancel-btn {
+            background-color: #95a5a6;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+            font-size: 16px;
         }
     </style>
 </head>
@@ -198,6 +236,21 @@
 
     <div class="clean-all-container">
         <button class="clean-btn" onclick="cleanAll()">Clean All</button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Text</h2>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal()">×</button>
+            </div>
+            <textarea id="modalTextarea" class="modal-textarea"></textarea>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="save-btn" id="modalSaveBtn">Save Changes</button>
+            </div>
+        </div>
     </div>
 
     <script type="module">
@@ -244,7 +297,7 @@
                         <div class="timestamp">${timestamp}</div>
                         <div id="log-${index}" class="shared-text">${renderedText}</div>
                         <button id="copy-btn-${index}" class="copy-btn" onclick="copyText(${index}, 'copy-btn-${index}')">Copy</button>
-                        <button id="edit-btn-${index}" class="edit-btn" onclick="startEditing('${log._id}', ${index})">Edit</button>
+                        <button class="edit-btn" onclick="startEditing('${log._id}', ${index})">Edit</button>
                         <button class="delete-btn" onclick="deleteEntry('${log._id}')">Delete</button>
                     </div>
                 `;
@@ -269,39 +322,26 @@
         };
 
         window.startEditing = (id, index) => {
-            const entry = document.getElementById(`entry-${id}`);
-            const textDiv = document.getElementById(`log-${index}`);
             const rawText = currentLogs[index].text;
+            const modal = document.getElementById('editModal');
+            const textarea = document.getElementById('modalTextarea');
+            const saveBtn = document.getElementById('modalSaveBtn');
             
-            const textarea = document.createElement('textarea');
-            textarea.className = 'edit-textarea';
-            textarea.rows = 5;
             textarea.value = rawText;
+            modal.style.display = 'flex';
             
-            const controls = document.createElement('div');
-            controls.className = 'edit-controls';
-            controls.innerHTML = `
-                <button class="save-btn" onclick="saveEdit('${id}', ${index})">Save</button>
-                <button class="cancel-btn" onclick="loadLogs()">Cancel</button>
-            `;
-            
-            textDiv.innerHTML = '';
-            textDiv.appendChild(textarea);
-            textDiv.appendChild(controls);
-            
-            // Hide buttons while editing
-            entry.querySelectorAll('.copy-btn, .edit-btn, .delete-btn').forEach(btn => btn.style.display = 'none');
+            saveBtn.onclick = async () => {
+                const newText = textarea.value;
+                if (newText.trim() !== "") {
+                    await client.mutation("functions:update", { id, text: newText });
+                    closeModal();
+                    loadLogs();
+                }
+            };
         };
 
-        window.saveEdit = async (id, index) => {
-            const entry = document.getElementById(`entry-${id}`);
-            const textarea = entry.querySelector('textarea');
-            const newText = textarea.value;
-            
-            if (newText.trim() !== "") {
-                await client.mutation("functions:update", { id, text: newText });
-                loadLogs();
-            }
+        window.closeModal = () => {
+            document.getElementById('editModal').style.display = 'none';
         };
 
         window.cleanAll = async () => {
