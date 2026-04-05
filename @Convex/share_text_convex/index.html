@@ -168,6 +168,10 @@
                 }
             })
         );
+        marked.setOptions({
+            gfm: true,
+            breaks: true
+        });
 
         let currentLogs = [];
 
@@ -227,6 +231,18 @@
             const copyBtn = document.getElementById(buttonId);
             copyBtn.innerText = '✔';
             copyBtn.classList.add('success');
+            setTimeout(() => {
+                copyBtn.innerText = 'Copy';
+                copyBtn.classList.remove('success');
+            }, 2000);
+        };
+
+        loadLogs();
+        setInterval(loadLogs, 5000);
+    </script>
+</body>
+</html>
+.add('success');
             setTimeout(() => {
                 copyBtn.innerText = 'Copy';
                 copyBtn.classList.remove('success');
