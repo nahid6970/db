@@ -122,12 +122,14 @@
             position: absolute;
             top: 10px;
             color: white;
-            padding: 5px 10px;
-            font-size: 14px;
+            padding: 6px;
             cursor: pointer;
             border-radius: 5px;
             border: none;
-            min-width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
         }
         .delete-btn {
             right: 10px;
@@ -137,21 +139,24 @@
             background-color: #c82333;
         }
         .edit-btn {
-            right: 80px;
+            right: 50px;
             background-color: #f39c12;
         }
         .edit-btn:hover {
             background-color: #e67e22;
         }
         .pin-btn {
-            right: 150px;
+            right: 90px;
             background-color: #9b59b6;
         }
         .pin-btn.pinned-active {
             background-color: #8e44ad;
         }
+        .pin-btn.pinned-active svg {
+            fill: white;
+        }
         .copy-btn {
-            right: 220px;
+            right: 130px;
             background-color: #007BFF;
         }
         .copy-btn:hover {
@@ -287,6 +292,14 @@
             breaks: true
         });
 
+        const ICONS = {
+            copy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
+            pin: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg>`,
+            edit: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>`,
+            delete: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
+            check: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`
+        };
+
         let currentLogs = [];
 
         async function loadLogs() {
@@ -309,10 +322,10 @@
                         <div class="log-entry ${log.pinned ? 'pinned' : ''}" id="entry-${log._id}">
                             <div class="timestamp">${timestamp}</div>
                             <div id="log-${index}" class="shared-text">${renderedText}</div>
-                            <button id="copy-btn-${index}" class="copy-btn" onclick="copyText(${index}, 'copy-btn-${index}')">Copy</button>
-                            <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" onclick="togglePin('${log._id}')">${log.pinned ? '📌' : 'Pin'}</button>
-                            <button class="edit-btn" onclick="startEditing('${log._id}', ${index})">Edit</button>
-                            <button class="delete-btn" onclick="deleteEntry('${log._id}')">Delete</button>
+                            <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index}, 'copy-btn-${index}')">${ICONS.copy}</button>
+                            <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
+                            <button class="edit-btn" title="Edit" onclick="startEditing('${log._id}', ${index})">${ICONS.edit}</button>
+                            <button class="delete-btn" title="Delete" onclick="deleteEntry('${log._id}')">${ICONS.delete}</button>
                         </div>
                     `;
                 }).join('');
@@ -386,10 +399,11 @@
             const text = currentLogs[index].text;
             navigator.clipboard.writeText(text);
             const copyBtn = document.getElementById(buttonId);
-            copyBtn.innerText = '✔';
+            const originalIcon = copyBtn.innerHTML;
+            copyBtn.innerHTML = ICONS.check;
             copyBtn.classList.add('success');
             setTimeout(() => {
-                copyBtn.innerText = 'Copy';
+                copyBtn.innerHTML = originalIcon;
                 copyBtn.classList.remove('success');
             }, 2000);
         };
