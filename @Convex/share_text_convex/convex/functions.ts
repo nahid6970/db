@@ -25,6 +25,13 @@ export const remove = mutation({
   },
 });
 
+export const update = mutation({
+  args: { id: v.id("texts"), text: v.string() },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { text: args.text });
+  },
+});
+
 export const clean = mutation({
   args: {},
   handler: async (ctx) => {
