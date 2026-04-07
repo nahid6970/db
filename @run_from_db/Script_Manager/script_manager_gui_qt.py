@@ -1470,41 +1470,69 @@ class ConvexLabelDialog(QDialog):
 
 
 class RestoreDialog(QDialog):
-    """Shows list of backups and lets user pick one to restore."""
-    def __init__(self, backups, parent=None):
+    """Shows list of backups and lets user pick one to restore or delete."""
+    DEL_SVG = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#FF003C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4h6v2"/></svg>'''
+
+    def __init__(self, backups, convex_call_fn, parent=None):
         super().__init__(parent)
         self.setWindowTitle("RESTORE FROM BACKUP")
-        self.setFixedWidth(480)
+        self.setFixedWidth(520)
         self.selected_id = None
+        self._convex_call = convex_call_fn
+        self._backups = list(backups)
         self.setStyleSheet(f"QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_YELLOW}; }} QLabel {{ color: {CP_TEXT}; }} QPushButton {{ background: {CP_DIM}; color: white; padding: 6px 14px; border: 1px solid {CP_DIM}; }} QPushButton:hover {{ border: 1px solid {CP_YELLOW}; }}")
-        layout = QVBoxLayout(self)
-        layout.addWidget(QLabel("Select a backup to restore:"))
+        self._layout = QVBoxLayout(self)
+        self._layout.addWidget(QLabel("Select a backup to restore:"))
+        self._scroll = QScrollArea()
+        self._scroll.setWidgetResizable(True)
+        self._scroll.setStyleSheet("background: transparent; border: 1px solid #3a3a3a;")
+        self._scroll.setFixedHeight(300)
+        self._layout.addWidget(self._scroll)
+        cancel = QPushButton("CANCEL")
+        cancel.clicked.connect(self.reject)
+        self._layout.addWidget(cancel)
+        self._render_list()
 
-        scroll = QScrollArea()
-        scroll.setWidgetResizable(True)
-        scroll.setStyleSheet("background: transparent; border: 1px solid #3a3a3a;")
-        scroll.setFixedHeight(280)
+    def _render_list(self):
+        import datetime
         inner = QWidget()
         inner.setStyleSheet(f"background: {CP_PANEL};")
         vbox = QVBoxLayout(inner)
         vbox.setSpacing(4)
-
-        import datetime
-        for b in backups:
+        vbox.setContentsMargins(4, 4, 4, 4)
+        for b in self._backups:
             dt = datetime.datetime.fromtimestamp(b["createdAt"] / 1000).strftime("%Y-%m-%d %H:%M")
+            row = QHBoxLayout()
+            row.setSpacing(4)
             btn = QPushButton(f"  {dt}  —  {b['label']}")
             btn.setStyleSheet(f"text-align: left; padding: 8px; background: {CP_BG}; color: {CP_TEXT}; border: 1px solid #2a2a2a;")
-            btn.setProperty("backup_id", b["id"])
             btn.clicked.connect(lambda checked, bid=b["id"]: self._select(bid))
-            vbox.addWidget(btn)
-
+            # Delete button with SVG icon
+            del_btn = QPushButton()
+            del_btn.setFixedSize(32, 32)
+            del_btn.setToolTip("Delete this backup")
+            del_btn.setStyleSheet("background: transparent; border: 1px solid #2a2a2a; padding: 3px;")
+            renderer = QSvgRenderer(QByteArray(self.DEL_SVG.encode()))
+            pix = QPixmap(22, 22)
+            pix.fill(Qt.GlobalColor.transparent)
+            painter = QPainter(pix)
+            renderer.render(painter)
+            painter.end()
+            del_btn.setIcon(QIcon(pix))
+            del_btn.clicked.connect(lambda checked, bid=b["id"]: self._delete(bid))
+            row.addWidget(btn)
+            row.addWidget(del_btn)
+            vbox.addLayout(row)
         vbox.addStretch()
-        scroll.setWidget(inner)
-        layout.addWidget(scroll)
+        self._scroll.setWidget(inner)
 
-        cancel = QPushButton("CANCEL")
-        cancel.clicked.connect(self.reject)
-        layout.addWidget(cancel)
+    def _delete(self, backup_id):
+        try:
+            self._convex_call("mutation", {"path": "functions:remove", "args": {"id": backup_id}})
+            self._backups = [b for b in self._backups if b["id"] != backup_id]
+            self._render_list()
+        except Exception as e:
+            QMessageBox.critical(self, "DELETE FAILED", str(e))
 
     def _select(self, backup_id):
         self.selected_id = backup_id
@@ -1781,7 +1809,7 @@ class MainWindow(QMainWindow):
             if not backups:
                 QMessageBox.information(self, "RESTORE", "No backups found for this script.")
                 return
-            dlg = RestoreDialog(backups, self)
+            dlg = RestoreDialog(backups, self._convex_call, self)
             if dlg.exec() == QDialog.DialogCode.Accepted and dlg.selected_id:
                 data = self._convex_call("query", {
                     "path": "functions:get",
