@@ -1718,6 +1718,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 31,
+                "title": "The Rookie - S08E14 - Tiger Bear HDTV-720p",
+                "watched": false,
+                "added_date": "2026-04-07T08:09:29.214111",
+                "notify": "unseen"
+            },
+            {
                 "id": 30,
                 "title": "The Rookie - S08E13 - The Thinker HDTV-720p",
                 "watched": false,

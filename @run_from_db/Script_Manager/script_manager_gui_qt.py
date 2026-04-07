@@ -5,6 +5,7 @@ import subprocess
 import shutil
 from functools import partial
 import re
+import urllib.request
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QPushButton, QScrollArea, 
                              QFrame, QMessageBox, QGridLayout, QSizePolicy,
@@ -44,6 +45,8 @@ CP_GREEN = "#00ff21"        # Success Green
 CP_ORANGE = "#ff934b"       # Warning Orange
 
 CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script_launcher_config.json")
+CONVEX_URL = ""  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
+SCRIPT_NAME = "script_manager"  # Unique key for this script
 
 # -----------------------------------------------------------------------------
 # WIDGETS
@@ -1435,6 +1438,79 @@ class SettingsDialog(QDialog):
         self.accept()
 
 # -----------------------------------------------------------------------------
+# CONVEX DIALOGS
+# -----------------------------------------------------------------------------
+
+class ConvexLabelDialog(QDialog):
+    """Simple dialog to get a backup label from the user."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("BACKUP LABEL")
+        self.setFixedWidth(380)
+        self.setStyleSheet(f"QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }} QLabel {{ color: {CP_TEXT}; }} QLineEdit {{ background: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 5px; font-family: Consolas; }} QPushButton {{ background: {CP_DIM}; color: white; padding: 6px 14px; border: 1px solid {CP_DIM}; }} QPushButton:hover {{ border: 1px solid {CP_CYAN}; }}")
+        layout = QVBoxLayout(self)
+        layout.addWidget(QLabel("Enter a label for this backup:"))
+        self.inp = QLineEdit()
+        self.inp.setPlaceholderText("e.g. before v2 update")
+        layout.addWidget(self.inp)
+        btns = QHBoxLayout()
+        ok = QPushButton("BACKUP")
+        ok.setStyleSheet(f"background: {CP_CYAN}; color: black; font-weight: bold;")
+        ok.clicked.connect(self.accept)
+        cancel = QPushButton("CANCEL")
+        cancel.clicked.connect(self.reject)
+        btns.addWidget(ok); btns.addWidget(cancel)
+        layout.addLayout(btns)
+
+    @staticmethod
+    def get_label(parent=None):
+        dlg = ConvexLabelDialog(parent)
+        ok = dlg.exec() == QDialog.DialogCode.Accepted
+        return dlg.inp.text(), ok
+
+
+class RestoreDialog(QDialog):
+    """Shows list of backups and lets user pick one to restore."""
+    def __init__(self, backups, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("RESTORE FROM BACKUP")
+        self.setFixedWidth(480)
+        self.selected_id = None
+        self.setStyleSheet(f"QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_YELLOW}; }} QLabel {{ color: {CP_TEXT}; }} QPushButton {{ background: {CP_DIM}; color: white; padding: 6px 14px; border: 1px solid {CP_DIM}; }} QPushButton:hover {{ border: 1px solid {CP_YELLOW}; }}")
+        layout = QVBoxLayout(self)
+        layout.addWidget(QLabel("Select a backup to restore:"))
+
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        scroll.setStyleSheet("background: transparent; border: 1px solid #3a3a3a;")
+        scroll.setFixedHeight(280)
+        inner = QWidget()
+        inner.setStyleSheet(f"background: {CP_PANEL};")
+        vbox = QVBoxLayout(inner)
+        vbox.setSpacing(4)
+
+        import datetime
+        for b in backups:
+            dt = datetime.datetime.fromtimestamp(b["createdAt"] / 1000).strftime("%Y-%m-%d %H:%M")
+            btn = QPushButton(f"  {dt}  —  {b['label']}")
+            btn.setStyleSheet(f"text-align: left; padding: 8px; background: {CP_BG}; color: {CP_TEXT}; border: 1px solid #2a2a2a;")
+            btn.setProperty("backup_id", b["id"])
+            btn.clicked.connect(lambda checked, bid=b["id"]: self._select(bid))
+            vbox.addWidget(btn)
+
+        vbox.addStretch()
+        scroll.setWidget(inner)
+        layout.addWidget(scroll)
+
+        cancel = QPushButton("CANCEL")
+        cancel.clicked.connect(self.reject)
+        layout.addWidget(cancel)
+
+    def _select(self, backup_id):
+        self.selected_id = backup_id
+        self.accept()
+
+
 # MAIN WINDOW
 # -----------------------------------------------------------------------------
 
@@ -1612,7 +1688,19 @@ class MainWindow(QMainWindow):
 
         header.addWidget(self.inp_search) # Add search here
         header.addWidget(self.btn_add_script)
+        self.btn_backup = CyberButton("☁", script_data={"color": "#1a3a5c", "type": "script", "text_color": CP_CYAN}, config=self.config)
+        self.btn_backup.setFixedSize(35, 35)
+        self.btn_backup.setToolTip("Backup config to Convex cloud")
+        self.btn_backup.clicked.connect(self.backup_to_convex)
+
+        self.btn_restore = CyberButton("⬇", script_data={"color": "#1a3a5c", "type": "script", "text_color": CP_YELLOW}, config=self.config)
+        self.btn_restore.setFixedSize(35, 35)
+        self.btn_restore.setToolTip("Restore config from Convex cloud")
+        self.btn_restore.clicked.connect(self.restore_from_convex)
+
         header.addWidget(self.btn_add_folder)
+        header.addWidget(self.btn_backup)
+        header.addWidget(self.btn_restore)
         header.addWidget(self.btn_cfg)
         header.addWidget(self.btn_close)
         
@@ -1640,6 +1728,63 @@ class MainWindow(QMainWindow):
         
         self.scroll.setWidget(self.grid_container)
         self.main_layout.addWidget(self.scroll)
+
+    # -------------------------------------------------------------------------
+    # CONVEX BACKUP / RESTORE
+    # -------------------------------------------------------------------------
+    def _convex_call(self, endpoint, payload):
+        """Generic Convex HTTP API call. Returns parsed JSON or raises."""
+        if not CONVEX_URL:
+            raise RuntimeError("CONVEX_URL is not set in the script.")
+        url = f"{CONVEX_URL.rstrip('/')}/api/{endpoint}"
+        data = json.dumps(payload).encode("utf-8")
+        req = urllib.request.Request(url, data=data, headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=15) as resp:
+            return json.loads(resp.read().decode("utf-8"))
+
+    def backup_to_convex(self):
+        if not CONVEX_URL:
+            QMessageBox.warning(self, "CONVEX", "Set CONVEX_URL in the script first.")
+            return
+        label, ok = ConvexLabelDialog.get_label(self)
+        if not ok or not label.strip():
+            return
+        try:
+            self._convex_call("mutation", {
+                "path": "functions:save",
+                "args": {"scriptName": SCRIPT_NAME, "label": label.strip(), "data": self.config}
+            })
+            QMessageBox.information(self, "BACKUP", f'Config backed up: "{label.strip()}"')
+        except Exception as e:
+            QMessageBox.critical(self, "BACKUP FAILED", str(e))
+
+    def restore_from_convex(self):
+        if not CONVEX_URL:
+            QMessageBox.warning(self, "CONVEX", "Set CONVEX_URL in the script first.")
+            return
+        try:
+            result = self._convex_call("query", {
+                "path": "functions:list",
+                "args": {"scriptName": SCRIPT_NAME}
+            })
+            backups = result.get("value", [])
+            if not backups:
+                QMessageBox.information(self, "RESTORE", "No backups found for this script.")
+                return
+            dlg = RestoreDialog(backups, self)
+            if dlg.exec() == QDialog.DialogCode.Accepted and dlg.selected_id:
+                data = self._convex_call("query", {
+                    "path": "functions:get",
+                    "args": {"id": dlg.selected_id}
+                }).get("value")
+                if data is None:
+                    QMessageBox.critical(self, "RESTORE", "Could not fetch backup data.")
+                    return
+                self.config = data
+                self.save_config()
+                QMessageBox.information(self, "RESTORE", "Config restored successfully.")
+        except Exception as e:
+            QMessageBox.critical(self, "RESTORE FAILED", str(e))
 
     def show_grid_context_menu(self, pos):
         menu = QMenu(self)
