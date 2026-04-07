@@ -44,7 +44,7 @@ CP_SUBTEXT = "#808080"      # Sub Text
 CP_GREEN = "#00ff21"        # Success Green
 CP_ORANGE = "#ff934b"       # Warning Orange
 
-CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script_launcher_config.json")
+CONFIG_FILE = r"C:\@delta\output\script_manager\script_launcher_config.json"
 CONVEX_URL = "https://different-gnat-734.convex.cloud"  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
 SCRIPT_NAME = "script_manager"  # Unique key for this script
 
