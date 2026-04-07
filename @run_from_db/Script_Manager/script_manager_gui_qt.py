@@ -45,7 +45,7 @@ CP_GREEN = "#00ff21"        # Success Green
 CP_ORANGE = "#ff934b"       # Warning Orange
 
 CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script_launcher_config.json")
-CONVEX_URL = ""  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
+CONVEX_URL = "https://different-gnat-734.convex.cloud"  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
 SCRIPT_NAME = "script_manager"  # Unique key for this script
 
 # -----------------------------------------------------------------------------
@@ -1589,11 +1589,21 @@ class MainWindow(QMainWindow):
             self.move(event.globalPosition().toPoint() - self.drag_pos)
             event.accept()
 
+    def _fix_floats(self, obj):
+        """Recursively convert float values that should be ints (whole numbers)."""
+        if isinstance(obj, dict):
+            return {k: self._fix_floats(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [self._fix_floats(i) for i in obj]
+        if isinstance(obj, float) and obj.is_integer():
+            return int(obj)
+        return obj
+
     def load_config(self):
         if os.path.exists(CONFIG_FILE):
             try:
                 with open(CONFIG_FILE, "r", encoding='utf-8') as f:
-                    self.config = json.load(f)
+                    self.config = self._fix_floats(json.load(f))
             except: self.config = {"scripts": []}
         else: self.config = {"scripts": []}
             
@@ -1780,6 +1790,12 @@ class MainWindow(QMainWindow):
                 if data is None:
                     QMessageBox.critical(self, "RESTORE", "Could not fetch backup data.")
                     return
+                # Convex returns numbers as floats; Qt requires ints for size fields
+                for key in ("window_width", "window_height", "window_x", "window_y",
+                            "btn_w", "btn_h", "grid_cols", "icon_w", "icon_h", "icon_gap",
+                            "font_size", "border_radius", "border_width"):
+                    if key in data and isinstance(data[key], float):
+                        data[key] = int(data[key])
                 self.config = data
                 self.save_config()
                 QMessageBox.information(self, "RESTORE", "Config restored successfully.")
