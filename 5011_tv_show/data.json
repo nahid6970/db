@@ -732,6 +732,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 13,
+                "title": "Daredevil - Born Again - S02E04 - Gloves Off WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-08T09:30:43.853532",
+                "notify": "seen"
+            },
+            {
                 "id": 12,
                 "title": "Daredevil - Born Again - S02E03 - The Scales & the Sword WEBDL-1080p",
                 "watched": false,
@@ -1030,6 +1037,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
             {
+                "id": 14,
+                "title": "Invincible (2021) - S04E06 - YOU LOOK HORRIBLE WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-08T14:54:44.358238",
+                "notify": "seen"
+            },
+            {
                 "id": 13,
                 "title": "Invincible (2021) - S04E05 - GIVE US A MOMENT WEBDL-1080p",
                 "watched": false,
@@ -1051,17 +1065,17 @@
                 "notify": "seen"
             },
             {
-                "id": 10,
-                "title": "Invincible (2021) - S04E01 - MAKING THE WORLD A BETTER PLACE WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-27T13:16:50.616630",
-                "notify": "seen"
-            },
-            {
                 "id": 9,
                 "title": "Invincible (2021) - S04E02 - I'LL GIVE YOU THE GRAND TOUR WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-03-19T15:49:36.916373",
+                "notify": "seen"
+            },
+            {
+                "id": 10,
+                "title": "Invincible (2021) - S04E01 - MAKING THE WORLD A BETTER PLACE WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-03-27T13:16:50.616630",
                 "notify": "seen"
             },
             {
@@ -1114,7 +1128,9 @@
             }
         ],
         "rating": null,
-        "status": "Continuing"
+        "status": "Continuing",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     },
     {
         "id": 11,
@@ -1722,7 +1738,7 @@
                 "title": "The Rookie - S08E14 - Tiger Bear HDTV-720p",
                 "watched": false,
                 "added_date": "2026-04-07T08:09:29.214111",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 30,
@@ -2139,9 +2155,9 @@
             {
                 "id": 25,
                 "title": "WWE Raw - 2026-04-06 - RAW 1715 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-07T17:42:35.312079",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 24,
@@ -4058,5 +4074,31 @@
         "sonarr_url": "http://192.168.0.101:8989/series/monarch-legacy-of-monsters",
         "episode_sort_type": "alphabetical",
         "episode_sort_order": "desc"
+    },
+    {
+        "id": 47,
+        "title": "The Boys",
+        "year": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/posters/5c5c402b075cc.jpg",
+        "directory_path": "D:\\Downloads\\@Sonarr\\The Boys",
+        "rating": "5",
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 2,
+                "title": "The Boys - S05E02 - Teenage Kix WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-08T16:32:31.238312",
+                "notify": "seen"
+            },
+            {
+                "id": 1,
+                "title": "The Boys - S05E01 - Fifteen Inches of Sheer Dynamite WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2026-04-08T15:54:44.154667",
+                "notify": "seen"
+            }
+        ],
+        "sonarr_url": ""
     }
 ]
