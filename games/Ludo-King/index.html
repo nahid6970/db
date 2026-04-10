@@ -157,7 +157,8 @@
         }
         #dice:hover:not(.disabled) { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.5); }
         #dice:active:not(.disabled) { transform: translateY(2px); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
-        #dice.disabled { cursor: not-allowed; opacity: 0.8; filter: grayscale(0.5); }
+        #dice.disabled { cursor: not-allowed; opacity: 0.6; filter: grayscale(0.5); pointer-events: none; }
+        #dice.cooldown { opacity: 0.6; pointer-events: none; }
         
         #test-controls { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin-top: 15px; }
         .test-btn {
@@ -446,6 +447,7 @@
     let lastProcessedTurnId = "";
     let localState = null;
     let isRolling = false;
+    let isSyncing = false;
     let isTesting = false;
 
     const STAR_SVG = `<svg class="star" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>`;
@@ -472,32 +474,41 @@
     }
 
     async function updateGameState(patch) {
-        if (!localState) return;
+        if (!localState || isSyncing) return;
+        isSyncing = true;
+        
+        // Optimistic local update
         localState = { ...localState, ...patch, timestamp: Date.now() };
         renderUI(localState);
-        await client.mutation("game:setState", { patch: localState });
+
+        try {
+            await client.mutation("game:setState", { patch: localState });
+        } catch (err) {
+            console.error("Mutation failed:", err);
+            // On failure, we'll let the next poll revert us if needed
+        } finally {
+            isSyncing = false;
+        }
     }
 
     async function updateUI() {
-        const state = await client.query("game:getGameState");
-        if (!state) return;
+        if (isSyncing || isRolling) return; 
         
-        // Prevent "Revert-Flicker": Only update if the server state is actually NEWER 
-        // than our local state, based on turnId (which we set to current timestamp).
-        const serverTurnId = parseInt(state.turnId) || 0;
-        const localTurnId = localState ? (parseInt(localState.turnId) || 0) : 0;
+        try {
+            const state = await client.query("game:getGameState");
+            if (!state) return;
+            
+            const serverTurnId = parseInt(state.turnId) || 0;
+            const localTurnId = localState ? (parseInt(localState.turnId) || 0) : 0;
 
-        if (!localState || serverTurnId > localTurnId) {
-            localState = state;
-            renderUI(state);
-            updateLobbyUI(state);
-        } else if (serverTurnId === localTurnId) {
-            // If same turn, check if the server has a newer timestamp (e.g. from a different player)
-            if (state.timestamp > localState.timestamp) {
+            // Only pull if server has a NEWER state
+            if (!localState || serverTurnId > localTurnId || (serverTurnId === localTurnId && state.timestamp > localState.timestamp)) {
                 localState = state;
                 renderUI(state);
                 updateLobbyUI(state);
             }
+        } catch (err) {
+            console.warn("Polling error:", err);
         }
     }
 
@@ -519,6 +530,12 @@
         });
 
         if (state.waitingForRoll) {
+            // Add a small delay so player doesn't accidentally click for the next person immediately
+            const turnChanged = lastProcessedTurnId !== state.turnId;
+            if (turnChanged) {
+                diceEl.classList.add('cooldown');
+                setTimeout(() => diceEl.classList.remove('cooldown'), 800);
+            }
             diceEl.classList.remove('disabled');
             if (isTesting) document.getElementById('test-controls').classList.remove('hidden');
             lastProcessedTurnId = state.turnId;
@@ -690,7 +707,7 @@
         const mySeat = Object.keys(localState.playerMap || {}).find(k => localState.playerMap[k] === currentUser.username);
         if (mySeat === undefined || parseInt(mySeat) !== playerIndex) return;
         
-        if (!localState || !localState.waitingForRoll || localState.currentPlayer !== playerIndex || isRolling) return;
+        if (!localState || !localState.waitingForRoll || localState.currentPlayer !== playerIndex || isRolling || isSyncing) return;
         if (isTesting) return; // Dice click ignored in testing mode (use buttons)
         isRolling = true;
         diceEl.classList.add('disabled');
@@ -1078,8 +1095,13 @@
     };
 
     generateBoard();
-    updateUI();
-    setInterval(updateUI, 500);
+    
+    // Use a robust polling loop instead of setInterval to avoid overlapping requests
+    async function pollingLoop() {
+        await updateUI();
+        setTimeout(pollingLoop, 800);
+    }
+    pollingLoop();
     checkContinue();
 </script>
 
