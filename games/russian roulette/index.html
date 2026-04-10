@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Roulette - Fatal Fortune</title>
+    <meta name="description"
+        content="A high-stakes, premium Russian Roulette simulator with custom ammo selection and immersive animations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="FATAL FORTUNE">FATAL FORTUNE</h1>
+            <p class="subtitle">Test Your Luck. One Chamber, One Risk.</p>
+        </header>
+
+        <main>
+            <div class="game-area">
+                <div class="cylinder-container" id="cylinderContainer">
+                    <div class="cylinder" id="cylinder">
+                        <div class="chamber" style="--i:0"></div>
+                        <div class="chamber" style="--i:1"></div>
+                        <div class="chamber" style="--i:2"></div>
+                        <div class="chamber" style="--i:3"></div>
+                        <div class="chamber" style="--i:4"></div>
+                        <div class="chamber" style="--i:5"></div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <div class="ammo-selector">
+                        <label>LOAD AMMO</label>
+                        <div class="bullets-input">
+                            <button type="button" class="btn-step" id="btnDown">-</button>
+                            <span id="ammoCount">1</span>
+                            <button type="button" class="btn-step" id="btnUp">+</button>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="randomizeBtn" class="btn-secondary">RANDOMIZE</button>
+                        <button id="spinBtn" class="btn-primary">HOLD TO SPIN</button>
+                        <button id="pullTriggerBtn" class="btn-danger" disabled>PULL TRIGGER</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div id="statusBoard" class="status-board">
+            <span id="statusText">READY TO PLAY</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="label">SURVIVED</span>
+                <span class="value" id="survivedCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">DEATHS</span>
+                <span class="value" id="deathCount">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <h2 id="resultTitle">CLICK!</h2>
+            <p id="resultDesc">You survived... for now.</p>
+            <button id="closeModal" class="btn-primary">CONTINUE</button>
+        </div>
+    </div>
+
+    <!-- Hidden audio elements for immersion -->
+    <audio id="audioSpin" src="https://assets.mixkit.co/active_storage/sfx/2567/2567-preview.mp3"></audio>
+    <audio id="audioClick" src="https://assets.mixkit.co/active_storage/sfx/2568/2568-preview.mp3"></audio>
+    <audio id="audioShot" src="https://www.soundjay.com/mechanical/gun-shot-01.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

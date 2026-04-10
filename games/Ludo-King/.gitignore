@@ -1,0 +1,5 @@
+node_modules/
+.convex/
+package-lock.json
+
+.env.local

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIERRA TACTICAL - SWAT OPERATOR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui-layer">
+            <!-- Pause Menu -->
+            <div id="main-menu" class="overlay">
+                <div class="menu-box">
+                    <h1>SIERRA TACTICAL</h1>
+                    <button class="menu-btn" onclick="UI.showMapList()">START MISSION</button>
+                    <button class="menu-btn" disabled>SETTINGS</button>
+                    <button class="menu-btn" onclick="UI.resume()">RESUME</button>
+                </div>
+            </div>
+
+            <!-- Map Selection -->
+            <div id="map-list-screen" class="overlay hidden">
+                <div class="menu-box">
+                    <h2>SELECT SECTOR</h2>
+                    <div id="map-items"></div>
+                    <button class="menu-btn" onclick="UI.showMainMenu()">BACK</button>
+                </div>
+            </div>
+
+            <!-- Context Menu for Maps -->
+            <div id="map-context-menu" class="hidden">
+                <button onclick="UI.contextEdit()">EDIT SECTOR</button>
+                <button onclick="UI.contextDelete()" class="delete-btn">DELETE SECTOR</button>
+            </div>
+
+            <!-- Save Map Dialog -->
+            <div id="save-map-dialog" class="overlay hidden">
+                <div class="menu-box">
+                    <h2>SAVE SECTOR</h2>
+                    <input type="text" id="map-name-input" placeholder="SECTOR NAME...">
+                    <button class="menu-btn" onclick="UI.saveCustomMap()">COMMIT SAVE</button>
+                    <button class="menu-btn" onclick="UI.closeSaveDialog()">CANCEL</button>
+                </div>
+            </div>
+
+            <!-- Editor UI -->
+            <div id="editor-ui" class="hidden">
+                <div class="editor-bar top">
+                    <div class="editor-group"><span class="key">Z</span> WALL</div>
+                    <div class="editor-group"><span class="key">X</span> COVER</div>
+                    <div class="editor-group"><span class="key">C</span> ENEMY</div>
+                    <div class="editor-group"><span class="key">V</span> RAMP UP</div>
+                    <div class="editor-group"><span class="key">B</span> RAMP DOWN</div>
+                    <div class="editor-group"><span class="key">1-4</span> CLASS</div>
+                    <div class="editor-group"><span class="key">S</span> SAVE</div>
+                    <div class="editor-group"><span class="key">DEL</span> CLEAR</div>
+                    <div class="editor-group"><span class="key">TAB</span> PLAY</div>
+                </div>
+                <div class="editor-bar bottom">
+                    CURRENT TOOL: <span id="ed-item">WALL</span> | CLASS: <span id="ed-class">ASSAULT</span> | CAMERA:
+                    A/D
+                </div>
+            </div>
+
+            <div id="hud">
+                <div class="hud-item">
+                    <span class="label">WEAPON:</span>
+                    <span id="weapon-name">SIDEARM</span>
+                </div>
+                <div class="hud-item">
+                    <span class="label">AMMO:</span>
+                    <span id="ammo-count">15 / 45</span>
+                </div>
+                <div class="hud-item">
+                    <span class="label">MISSION:</span>
+                    <span id="mission-status">CLEAR SECTOR</span>
+                </div>
+            </div>
+            <div id="death-screen" class="hidden">
+                <h1>OPERATOR DOWN</h1>
+                <button onclick="location.reload()">RETRY MISSION</button>
+            </div>
+            <div id="win-screen" class="hidden">
+                <h1>MISSION ACCOMPLISHED</h1>
+                <button onclick="location.reload()">NEXT MISSION</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+
+</html>

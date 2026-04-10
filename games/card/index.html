@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neon Blackjack | Premium Casino Experience</title>
+    <meta name="description"
+        content="A high-stakes, premium Blackjack experience with stunning visuals and smooth animations.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-container">
+        <header>
+            <div class="logo">NEON<span>BLACKJACK</span></div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="label">BALANCE</span>
+                    <span id="balance" class="value">$1,000</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">BET</span>
+                    <span id="current-bet" class="value">$0</span>
+                </div>
+            </div>
+        </header>
+
+        <main>
+            <!-- Dealer Area -->
+            <section class="table-area" id="dealer-area">
+                <div class="hand-label">DEALER <span id="dealer-score" class="score-badge">0</span></div>
+                <div id="dealer-cards" class="card-slot">
+                    <!-- Cards will be injected here -->
+                </div>
+            </section>
+
+            <!-- Game status message -->
+            <div id="message-container">
+                <h2 id="game-message">Place your bet to start</h2>
+            </div>
+
+            <!-- Players Area -->
+            <section id="players-container">
+                <div class="player-seat" id="seat-0">
+                    <div class="card-slot" id="player-cards-0"></div>
+                    <div class="hand-label">P1 <span id="player-score-0" class="score-badge">0</span></div>
+                    <div class="bet-badge" id="bet-0">$0</div>
+                </div>
+                <div class="player-seat" id="seat-1">
+                    <div class="card-slot" id="player-cards-1"></div>
+                    <div class="hand-label">P2 <span id="player-score-1" class="score-badge">0</span></div>
+                    <div class="bet-badge" id="bet-1">$0</div>
+                </div>
+                <div class="player-seat" id="seat-2">
+                    <div class="card-slot" id="player-cards-2"></div>
+                    <div class="hand-label">P3 <span id="player-score-2" class="score-badge">0</span></div>
+                    <div class="bet-badge" id="bet-2">$0</div>
+                </div>
+                <div class="player-seat" id="seat-3">
+                    <div class="card-slot" id="player-cards-3"></div>
+                    <div class="hand-label">P4 <span id="player-score-3" class="score-badge">0</span></div>
+                    <div class="bet-badge" id="bet-3">$0</div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <!-- Betting Controls -->
+            <div id="betting-controls" class="controls">
+                <div class="chip-container">
+                    <button class="chip chip-10" onclick="placeBet(10)">10</button>
+                    <button class="chip chip-50" onclick="placeBet(50)">50</button>
+                    <button class="chip chip-100" onclick="placeBet(100)">100</button>
+                    <button class="chip chip-500" onclick="placeBet(500)">500</button>
+                </div>
+                <button id="deal-btn" class="btn primary-btn" disabled>DEAL</button>
+                <button id="clear-btn" class="btn secondary-btn">CLEAR</button>
+            </div>
+
+            <!-- Action Controls -->
+            <div id="action-controls" class="controls hidden">
+                <button id="hit-btn" class="btn primary-btn">HIT</button>
+                <button id="stand-btn" class="btn secondary-btn">STAND</button>
+                <button id="double-btn" class="btn secondary-btn">DOUBLE</button>
+            </div>
+        </footer>
+
+        <!-- Win/Loss Overlay -->
+        <div id="overlay" class="hidden">
+            <div class="overlay-content">
+                <h1 id="overlay-title">BLACKJACK!</h1>
+                <p id="overlay-subtitle">You won $200</p>
+                <button id="play-again-btn" class="btn primary-btn">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

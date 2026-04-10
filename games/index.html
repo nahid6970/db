@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Rubik's Cube</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #333;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .scene {
+            width: 300px;
+            height: 300px;
+            perspective: 1800px;
+        }
+
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-30deg) rotateY(-45deg);
+            transition: transform 0.5s;
+        }
+
+        .cubie {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            transform-style: preserve-3d;
+        }
+
+        .face {
+            position: absolute;
+            width: 98px;
+            height: 98px;
+            border: 1px solid #111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+        }
+
+        .front  { transform: rotateY(  0deg) translateZ(50px); }
+        .back   { transform: rotateY(180deg) translateZ(50px); }
+        .right  { transform: rotateY( 90deg) translateZ(50px); }
+        .left   { transform: rotateY(-90deg) translateZ(50px); }
+        .top    { transform: rotateX( 90deg) translateZ(50px); }
+        .bottom { transform: rotateX(-90deg) translateZ(50px); }
+
+        .color-W { background-color: #FFFFFF; } /* White */
+        .color-Y { background-color: #FFD700; } /* Yellow */
+        .color-B { background-color: #0046AD; } /* Blue */
+        .color-G { background-color: #009B48; } /* Green */
+        .color-R { background-color: #B90000; } /* Red */
+        .color-O { background-color: #FF5900; } /* Orange */
+        .color-X { background-color: #222222; } /* Black/Inside */
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        .controls h3 {
+            grid-column: 1 / -1;
+            margin: 10px 0 0;
+        }
+        .controls button {
+            padding: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: #555;
+            color: #fff;
+        }
+        .controls button:hover {
+            background-color: #666;
+        }
+        .controls .span-2 {
+            grid-column: span 2;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="scene">
+            <div class="cube" id="cube"></div>
+        </div>
+        <div class="controls">
+            <h3>View</h3>
+            <button id="view-left">←</button>
+            <button id="view-up">↑</button>
+            <button id="view-right">→</button>
+            <button id="view-down">↓</button>
+            <button id="reset-view" class="span-2">Reset View</button>
+
+            <h3>Front / Back</h3>
+            <button onclick="rotateFace('F')">F</button>
+            <button onclick="rotateFace('F', true)">F'</button>
+            <button onclick="rotateFace('B')">B</button>
+            <button onclick="rotateFace('B', true)">B'</button>
+
+            <h3>Up / Down</h3>
+            <button onclick="rotateFace('U')">U</button>
+            <button onclick="rotateFace('U', true)">U'</button>
+            <button onclick="rotateFace('D')">D</button>
+            <button onclick="rotateFace('D', true)">D'</button>
+
+            <h3>Left / Right</h3>
+            <button onclick="rotateFace('L')">L</button>
+            <button onclick="rotateFace('L', true)">L'</button>
+            <button onclick="rotateFace('R')">R</button>
+            <button onclick="rotateFace('R', true)">R'</button>
+        </div>
+    </div>
+
+    <script>
+        const cube = document.getElementById('cube');
+        const cubieSize = 100;
+        const cubies = [];
+
+        // Position mapping:
+        // x: -1 (left), 0 (middle), 1 (right)
+        // y: -1 (top), 0 (middle), 1 (bottom)
+        // z: -1 (back), 0 (middle), 1 (front)
+        
+        // Face color mapping based on position
+        const faceColors = {
+            'x-1': 'O', // Orange on the left
+            'x+1': 'R', // Red on the right
+            'y-1': 'W', // White on the top
+            'y+1': 'Y', // Yellow on the bottom
+            'z-1': 'G', // Green on the back
+            'z+1': 'B', // Blue on the front
+        };
+
+        // Create all 26 cubies (not the center one)
+        for (let x = -1; x <= 1; x++) {
+            for (let y = -1; y <= 1; y++) {
+                for (let z = -1; z <= 1; z++) {
+                    if (x === 0 && y === 0 && z === 0) continue;
+
+                    const cubie = document.createElement('div');
+                    cubie.className = 'cubie';
+                    cubie.dataset.x = x;
+                    cubie.dataset.y = y;
+                    cubie.dataset.z = z;
+
+                    const faces = {
+                        front:  { color: z ===  1 ? faceColors['z+1'] : 'X', transform: 'rotateY(0deg) translateZ(50px)' },
+                        back:   { color: z === -1 ? faceColors['z-1'] : 'X', transform: 'rotateY(180deg) translateZ(50px)' },
+                        right:  { color: x ===  1 ? faceColors['x+1'] : 'X', transform: 'rotateY(90deg) translateZ(50px)' },
+                        left:   { color: x === -1 ? faceColors['x-1'] : 'X', transform: 'rotateY(-90deg) translateZ(50px)' },
+                        top:    { color: y === -1 ? faceColors['y-1'] : 'X', transform: 'rotateX(90deg) translateZ(50px)' },
+                        bottom: { color: y ===  1 ? faceColors['y+1'] : 'X', transform: 'rotateX(-90deg) translateZ(50px)' },
+                    };
+
+                    for (const [faceName, faceData] of Object.entries(faces)) {
+                        const faceDiv = document.createElement('div');
+                        faceDiv.className = `face color-${faceData.color}`;
+                        faceDiv.style.transform = faceData.transform;
+                        cubie.appendChild(faceDiv);
+                    }
+                    
+                    cubie.style.transform = `translate3d(${x * cubieSize}px, ${y * cubieSize}px, ${z * cubieSize}px)`;
+                    cube.appendChild(cubie);
+                    cubies.push(cubie);
+                }
+            }
+        }
+
+        let isRotating = false;
+
+        function rotateFace(face, counterClockwise = false) {
+            if (isRotating) return;
+            isRotating = true;
+
+            const angle = counterClockwise ? -90 : 90;
+            const cubiesToRotate = [];
+            let axis = '';
+            let layer = 0;
+
+            switch (face) {
+                case 'U': axis = 'y'; layer = -1; break;
+                case 'D': axis = 'y'; layer = 1; break;
+                case 'L': axis = 'x'; layer = -1; break;
+                case 'R': axis = 'x'; layer = 1; break;
+                case 'F': axis = 'z'; layer = 1; break;
+                case 'B': axis = 'z'; layer = -1; break;
+            }
+
+            cubies.forEach(c => {
+                if (c.dataset[axis] == layer) {
+                    cubiesToRotate.push(c);
+                }
+            });
+
+            const pivot = document.createElement('div');
+            pivot.style.transformStyle = 'preserve-3d';
+            pivot.style.transition = 'transform 0.5s';
+            cube.appendChild(pivot);
+
+            cubiesToRotate.forEach(c => pivot.appendChild(c));
+            
+            // The rotation needs to be inverted for some axes/directions
+            let rotationAngle = angle;
+            if (axis === 'y') rotationAngle *= -1; // Y-axis rotation is inverted in CSS 3D
+            
+            pivot.style.transform = `rotate${axis.toUpperCase()}(${rotationAngle}deg)`;
+
+            setTimeout(() => {
+                // After rotation, update cubies' positions and re-parent them
+                cubiesToRotate.forEach(c => {
+                    const style = window.getComputedStyle(c);
+                    const matrix = new DOMMatrix(style.transform);
+                    
+                    // New position is the cubie's position transformed by the pivot's rotation
+                    const newPos = new DOMPoint(c.dataset.x, c.dataset.y, c.dataset.z).matrixTransform(
+                         new DOMMatrix().rotate(0, (axis === 'y' ? -angle : 0), 0)
+                                        .rotate((axis === 'x' ? angle : 0), 0, 0)
+                                        .rotate(0, 0, (axis === 'z' ? angle : 0))
+                    );
+
+                    c.dataset.x = Math.round(newPos.x);
+                    c.dataset.y = Math.round(newPos.y);
+                    c.dataset.z = Math.round(newPos.z);
+                    
+                    // Combine the pivot's rotation with the cubie's own transform
+                    const newMatrix = new DOMMatrix(window.getComputedStyle(pivot).transform).multiply(matrix);
+                    c.style.transform = newMatrix.toString();
+                    cube.appendChild(c);
+                });
+
+                cube.removeChild(pivot);
+                isRotating = false;
+            }, 500);
+        }
+
+        // View controls
+        let rotX = -30;
+        let rotY = -45;
+        const updateView = () => {
+            cube.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        };
+
+        document.getElementById('view-left').onclick = () => { rotY -= 45; updateView(); };
+        document.getElementById('view-right').onclick = () => { rotY += 45; updateView(); };
+        document.getElementById('view-up').onclick = () => { rotX -= 45; updateView(); };
+        document.getElementById('view-down').onclick = () => { rotX += 45; updateView(); };
+        document.getElementById('reset-view').onclick = () => {
+            rotX = -30;
+            rotY = -45;
+            updateView();
+        };
+
+    </script>
+</body>
+</html>

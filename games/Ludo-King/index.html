@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/7101/7101743.png">
+    <title>Ludo Master</title>
+    <style>
+        :root {
+            --red: #ff0000; --green: #00a000; --yellow: #e6ac00; --blue: #0099ff;
+            --white: #ffffff; --border: #333; --cell-size: 40px;
+            --board-rotate: 0deg;
+        }
+
+        body {
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            min-height: 100vh; margin: 0; background-color: #2c3e50; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white; gap: 20px;
+        }
+
+        #menu-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: flex; justify-content: center; align-items: center;
+            z-index: 1000; flex-direction: column; gap: 20px;
+        }
+
+        .menu-card {
+            background: white; padding: 40px; border-radius: 20px; color: #333;
+            text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.5); min-width: 300px;
+        }
+
+        .menu-btn {
+            display: block; width: 100%; padding: 15px; margin: 10px 0;
+            border: none; border-radius: 10px; font-size: 18px; font-weight: bold;
+            cursor: pointer; transition: transform 0.2s, background 0.2s;
+        }
+
+        .btn-primary { background: #3498db; color: white; }
+        .btn-success { background: #2ecc71; color: white; }
+        .btn-player { background: #f1c40f; color: #333; margin: 5px; min-width: 100px; width: auto; display: inline-block; padding: 10px 15px; }
+        .menu-btn:hover { transform: scale(1.05); }
+
+        .ludo-board {
+            display: grid; grid-template-columns: repeat(15, var(--cell-size));
+            grid-template-rows: repeat(15, var(--cell-size));
+            background-color: var(--white); border: 2px solid var(--border);
+            box-shadow: 0 0 50px rgba(0,0,0,0.3); position: relative;
+            transform: rotate(var(--board-rotate));
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .c { border: 0.5px solid #aaa; box-sizing: border-box; position: relative; }
+        .home { grid-column: span 6; grid-row: span 6; display: flex; justify-content: center; align-items: center; padding: 30px; }
+        .home-inner {
+            background: white; width: 100%; height: 100%; display: grid;
+            grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+            gap: 15px; padding: 15px; box-sizing: border-box; border: 1px solid rgba(0,0,0,0.1);
+        }
+        .slot { border: 1px solid rgba(0,0,0,0.1); position: relative; }
+
+        .r-h { grid-area: 1 / 1 / 7 / 7; background: var(--red); }
+        .g-h { grid-area: 1 / 10 / 7 / 16; background: var(--green); }
+        .y-h { grid-area: 10 / 1 / 16 / 7; background: var(--yellow); }
+        .b-h { grid-area: 10 / 10 / 16 / 16; background: var(--blue); }
+        
+        .path-color.red { background-color: var(--red); }
+        .path-color.green { background-color: var(--green); }
+        .path-color.yellow { background-color: var(--yellow); }
+        .path-color.blue { background-color: var(--blue); }
+
+        .center {
+            grid-area: 7 / 7 / 10 / 10; position: relative; background: white;
+            border: 1px solid var(--border); overflow: hidden;
+        }
+        .tri { position: absolute; width: 100%; height: 100%; }
+        .t-r { background: var(--red); clip-path: polygon(0 0, 50% 50%, 0 100%); }
+        .t-g { background: var(--green); clip-path: polygon(0 0, 100% 0, 50% 50%); }
+        .t-y { background: var(--yellow); clip-path: polygon(0 100%, 50% 50%, 100% 100%); }
+        .t-b { background: var(--blue); clip-path: polygon(100% 0, 100% 100%, 50% 50%); }
+
+        .star {
+            position: absolute; top: 15%; left: 15%; width: 70%; height: 70%;
+            fill: rgba(0,0,0,0.4); z-index: 1; pointer-events: none;
+            transform: rotate(calc(-1 * var(--board-rotate)));
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .token {
+            width: 24px; height: 24px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%; left: 50%;
+            z-index: 50;
+            pointer-events: auto;
+        }
+        .token-inner {
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            transform: translate(0, -35%); /* Shift to pin base */
+            transition: all 0.2s ease-out;
+            position: relative;
+        }
+        .token svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 4px rgba(0,0,0,0.4)); }
+        
+        .token.active-player svg {
+             filter: drop-shadow(0 0 8px currentColor) drop-shadow(0 4px 4px rgba(0,0,0,0.5));
+             transform: scale(1.1);
+        }
+
+        .token.pulse svg {
+            /* Handled by tokenGlow */
+        }
+        @keyframes bounce { 
+            from { transform: translateY(0); }
+            to { transform: translateY(-5px); }
+        }
+
+        /* Color the internal circle of the pin */
+        .token.red .pin-core { fill: var(--red); }
+        .token.green .pin-core { fill: var(--green); }
+        .token.yellow .pin-core { fill: var(--yellow); }
+        .token.blue .pin-core { fill: var(--blue); }
+
+        /* Center offsets for victory tokens */
+        .t-r .token { left: 25%; }
+        .t-g .token { top: 25%; }
+        .t-y .token { top: 75%; }
+        .t-b .token { left: 75%; }
+
+
+        #dice-container {
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+            background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; min-width: 250px;
+        }
+        #dice {
+            width: 80px; height: 80px; background: white; border: 4px solid #333;
+            border-radius: 18px; display: flex; justify-content: center; align-items: center;
+            font-size: 44px; font-weight: bold; color: #333; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            cursor: pointer; transition: transform 0.1s, box-shadow 0.1s, background-color 0.3s;
+        }
+        #dice:hover:not(.disabled) { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.5); }
+        #dice:active:not(.disabled) { transform: translateY(2px); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        #dice.disabled { cursor: not-allowed; opacity: 0.8; filter: grayscale(0.5); }
+        
+        #test-controls { display: grid; grid-template-columns: repeat(10, 1fr); gap: 5px; margin-top: 15px; }
+        .test-btn {
+            padding: 5px; background: #9b59b6; color: white; border: none; border-radius: 4px;
+            font-weight: bold; cursor: pointer; transition: background 0.2s; font-size: 11px;
+        }
+
+        .test-btn:hover { background: #8e44ad; }
+        .test-btn:active { transform: translateY(2px); }
+
+        .btn-test-mode { background: #9b59b6; color: white; }
+        
+        .token.pulse .token-inner::before {
+            content: '';
+            position: absolute;
+            width: 100%; height: 100%;
+            border: 2px solid rgba(0,0,0,0.5);
+            border-radius: 50%;
+            z-index: -1;
+            animation: radarPulse 1.2s infinite ease-out;
+        }
+
+        @keyframes radarPulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.4); opacity: 0; }
+        }
+
+        .token.pulse svg {
+             /* Subtle lift instead of glow */
+             transform: translateY(-2px);
+             filter: drop-shadow(0 6px 4px rgba(0,0,0,0.4));
+        }
+
+        #results-popup, #details-popup {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center;
+            z-index: 2000; flex-direction: column; gap: 20px;
+            backdrop-filter: blur(5px);
+        }
+        .ranking-list { list-style: none; padding: 0; margin: 20px 0; text-align: left; font-size: 24px; }
+        .ranking-list li { padding: 10px 20px; margin: 10px 0; border-radius: 12px; display: flex; align-items: center; gap: 15px; font-weight: bold; background: white; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 1px solid rgba(0,0,0,0.05); }
+
+        .hidden { display: none !important; }
+
+        #login-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+            display: flex; justify-content: center; align-items: center;
+            z-index: 3000; transition: opacity 0.5s ease;
+        }
+        .menu-input {
+            width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd;
+            border-radius: 8px; box-sizing: border-box; font-size: 16px; outline: none;
+            transition: border-color 0.3s;
+        }
+        .menu-input:focus { border-color: #3498db; }
+        
+        #user-badge {
+            position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.9);
+            color: #333; padding: 10px 15px; border-radius: 25px; font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 500; display: flex; align-items: center; gap: 8px;
+        }
+        .badge-dot { width: 10px; height: 10px; border-radius: 50%; }
+    </style>
+</head>
+<body>
+
+<div id="login-overlay">
+    <div class="menu-card" style="box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
+        <h2 style="margin-bottom: 25px; color: #1e3c72;">Member Access</h2>
+        <input type="text" id="username" placeholder="Username (p1-p4)" class="menu-input">
+        <input type="password" id="password" placeholder="Password (player1-4)" class="menu-input">
+        <div id="login-error" style="color: #e74c3c; font-size: 14px; margin-bottom: 10px;" class="hidden">⚠️ Access Denied: Invalid Credentials</div>
+        <button id="btn-login" class="menu-btn btn-success">AUTHENTICATE</button>
+        <p style="font-size: 12px; color: #7f8c8d; margin-top: 15px;">Official Ludo Master Online Terminal</p>
+    </div>
+</div>
+
+<div id="user-badge" class="hidden">
+    <div class="badge-dot" id="badge-color"></div>
+    <span id="badge-name"></span>
+    <button onclick="logout()" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:12px; margin-left:10px; padding:0; text-decoration:underline;">Logout</button>
+</div>
+
+<div id="menu-overlay">
+    <div id="main-menu" class="menu-card">
+        <h2>Ludo Master</h2>
+        <button id="btn-continue" class="menu-btn btn-primary hidden">CONTINUE GAME</button>
+        <button id="btn-new-game" class="menu-btn btn-success">NEW GAME</button>
+        
+        <button id="btn-testing" class="menu-btn btn-test-mode" style="margin-top: 20px;">TESTING MODE</button>
+    </div>
+    <div id="player-select" class="menu-card hidden">
+        <h2>Select Players</h2>
+        <div>
+            <button class="menu-btn btn-player" onclick="startGame(1)">1</button>
+            <button class="menu-btn btn-player" onclick="startGame(2)">2</button>
+            <button class="menu-btn btn-player" onclick="startGame(3)">3</button>
+            <button class="menu-btn btn-player" onclick="startGame(4)">4</button>
+        </div>
+        <button onclick="showMainMenu()" class="menu-btn">Back</button>
+    </div>
+    <div id="lobby-select" class="menu-card hidden">
+        <h2>Choose Color</h2>
+        <div id="lobby-buttons" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+            <button id="lobby-0" class="menu-btn btn-player" style="background: var(--red); color: white;" onclick="takeSeat(0)">RED</button>
+            <button id="lobby-1" class="menu-btn btn-player" style="background: var(--green); color: white;" onclick="takeSeat(1)">GREEN</button>
+            <button id="lobby-2" class="menu-btn btn-player" style="background: var(--blue); color: white;" onclick="takeSeat(2)">BLUE</button>
+            <button id="lobby-3" class="menu-btn btn-player" style="background: var(--yellow); color: white;" onclick="takeSeat(3)">YELLOW</button>
+        </div>
+        <button id="btn-enter-game" class="menu-btn btn-success hidden" onclick="document.getElementById('menu-overlay').classList.add('hidden')">ENTER GAME</button>
+        <p id="lobby-wait" style="font-size: 14px; color: #7f8c8d;">Select a seat to continue...</p>
+    </div>
+</div>
+
+<div id="results-popup" class="hidden">
+    <div class="menu-card">
+        <h2>Game Over</h2>
+        <ul id="ranking-list" class="ranking-list"></ul>
+        <button onclick="showMainMenu(); document.getElementById('results-popup').classList.add('hidden');" class="menu-btn btn-success">PLAY AGAIN</button>
+        <button onclick="document.getElementById('details-popup').classList.remove('hidden');" class="menu-btn btn-primary">SHOW DETAILS</button>
+    </div>
+</div>
+
+<div id="details-popup" class="hidden">
+    <div class="menu-card" style="max-height: 80vh; overflow-y: auto; text-align: left;">
+        <h2>Game Stats</h2>
+        <div id="stats-content"></div>
+        <button onclick="document.getElementById('details-popup').classList.add('hidden');" class="menu-btn">Close</button>
+    </div>
+</div>
+
+<div class="ludo-board" id="board">
+    <div class="home r-h"><div class="home-inner"><div class="slot" id="r-0"></div><div class="slot" id="r-1"></div><div class="slot" id="r-2"></div><div class="slot" id="r-3"></div></div></div>
+    <div class="home g-h"><div class="home-inner"><div class="slot" id="g-0"></div><div class="slot" id="g-1"></div><div class="slot" id="g-2"></div><div class="slot" id="g-3"></div></div></div>
+    <div class="home b-h"><div class="home-inner"><div class="slot" id="b-0"></div><div class="slot" id="b-1"></div><div class="slot" id="b-2"></div><div class="slot" id="b-3"></div></div></div>
+    <div class="home y-h"><div class="home-inner"><div class="slot" id="y-0"></div><div class="slot" id="y-1"></div><div class="slot" id="y-2"></div><div class="slot" id="y-3"></div></div></div>
+    <div class="center"><div class="tri t-r"></div><div class="tri t-g"></div><div class="tri t-y"></div><div class="tri t-b"></div></div>
+</div>
+
+<div id="dice-container">
+    <div id="dice">1</div>
+    <div id="test-controls" class="hidden">
+        <button class="test-btn" onclick="testRoll(1)">1</button>
+        <button class="test-btn" onclick="testRoll(2)">2</button>
+        <button class="test-btn" onclick="testRoll(3)">3</button>
+        <button class="test-btn" onclick="testRoll(4)">4</button>
+        <button class="test-btn" onclick="testRoll(5)">5</button>
+        <button class="test-btn" onclick="testRoll(6)">6</button>
+        <button class="test-btn" onclick="testRoll(7)">7</button>
+        <button class="test-btn" onclick="testRoll(8)">8</button>
+        <button class="test-btn" onclick="testRoll(9)">9</button>
+        <button class="test-btn" onclick="testRoll(10)">10</button>
+        <button class="test-btn" onclick="testRoll(11)">11</button>
+        <button class="test-btn" onclick="testRoll(12)">12</button>
+        <button class="test-btn" onclick="testRoll(13)">13</button>
+        <button class="test-btn" onclick="testRoll(14)">14</button>
+        <button class="test-btn" onclick="testRoll(15)">15</button>
+        <button class="test-btn" onclick="testRoll(16)">16</button>
+        <button class="test-btn" onclick="testRoll(17)">17</button>
+        <button class="test-btn" onclick="testRoll(18)">18</button>
+        <button class="test-btn" onclick="testRoll(19)">19</button>
+        <button class="test-btn" onclick="testRoll(20)">20</button>
+    </div>
+</div>
+
+<script type="module">
+    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+    const client = new ConvexHttpClient("https://silent-scorpion-207.convex.cloud");
+
+    const USERS = {
+        'p1': { pass: 'player1', idx: 0 },
+        'p2': { pass: 'player2', idx: 1 },
+        'p3': { pass: 'player3', idx: 2 },
+        'p4': { pass: 'player4', idx: 3 },
+    };
+    let currentUser = JSON.parse(localStorage.getItem('ludoUser'));
+
+    function checkLogin() {
+        if (!currentUser) {
+            document.getElementById('login-overlay').classList.remove('hidden');
+            document.getElementById('menu-overlay').classList.add('hidden');
+            document.getElementById('user-badge').classList.add('hidden');
+        } else {
+            document.getElementById('login-overlay').classList.add('hidden');
+            document.getElementById('menu-overlay').classList.remove('hidden');
+            document.getElementById('user-badge').classList.remove('hidden');
+            document.getElementById('badge-name').innerText = currentUser.username.toUpperCase();
+            document.getElementById('badge-color').style.background = '#ccc';
+        }
+    }
+
+    window.logout = () => {
+        localStorage.removeItem('ludoUser');
+        currentUser = null;
+        document.getElementById('badge-name').innerText = "";
+        checkLogin();
+    };
+
+    document.getElementById('btn-login').onclick = () => {
+        const u = document.getElementById('username').value.toLowerCase();
+        const p = document.getElementById('password').value;
+        if (USERS[u] && USERS[u].pass === p) {
+            currentUser = { username: u };
+            localStorage.setItem('ludoUser', JSON.stringify(currentUser));
+            checkLogin();
+        } else {
+            document.getElementById('login-error').classList.remove('hidden');
+        }
+    };
+    checkLogin();
+
+    window.takeSeat = async (idx) => {
+        if (!localState || !currentUser) return;
+        const playerMap = { ...(localState.playerMap || {}) };
+        
+        // Remove me from other seats first
+        for (const k in playerMap) {
+            if (playerMap[k] === currentUser.username) delete playerMap[k];
+        }
+        
+        // Check if seat is taken by someone else
+        if (playerMap[idx] && playerMap[idx] !== currentUser.username) {
+            alert("Seat already taken!");
+            return;
+        }
+
+        playerMap[idx] = currentUser.username;
+        await updateGameState({ playerMap });
+    };
+
+    function updateLobbyUI(state) {
+        if (!state) return;
+        
+        const map = state.playerMap || {};
+        const availableIdxs = state.numPlayers === 2 ? [1, 3] : (state.numPlayers === 3 ? [0, 1, 2] : [0, 1, 2, 3]);
+        let myIdx = -1;
+
+        [0, 1, 2, 3].forEach(i => {
+            const btn = document.getElementById(`lobby-${i}`);
+            const isAvailable = availableIdxs.includes(i);
+            const takenBy = map[i];
+            
+            if (!isAvailable) {
+                btn.style.display = 'none';
+            } else {
+                btn.style.display = 'inline-block';
+                if (takenBy) {
+                    btn.innerText = takenBy.toUpperCase();
+                    btn.disabled = true;
+                    btn.style.opacity = '0.5';
+                    btn.style.border = 'none';
+                    
+                    if (takenBy === currentUser?.username) {
+                        myIdx = i;
+                        btn.style.opacity = '1';
+                        btn.style.border = '4px solid white';
+                        const rotations = [270, 180, 90, 0];
+                        document.documentElement.style.setProperty('--board-rotate', `${rotations[i]}deg`);
+                        document.getElementById('badge-color').style.background = ['#ff0000', '#00a000', '#0099ff', '#e6ac00'][i];
+                    }
+                } else {
+                    btn.innerText = ['RED', 'GREEN', 'BLUE', 'YELLOW'][i];
+                    btn.disabled = false;
+                    btn.style.opacity = '1';
+                    btn.style.border = 'none';
+                }
+            }
+        });
+
+        if (myIdx !== -1) {
+            document.getElementById('btn-enter-game').classList.remove('hidden');
+            document.getElementById('lobby-wait').innerText = "Seat reserved. You are ready!";
+        } else {
+            document.getElementById('btn-enter-game').classList.add('hidden');
+            document.getElementById('lobby-wait').innerText = "Select a seat to continue...";
+        }
+    }
+
+    const diceEl = document.getElementById('dice');
+    const colors = ['Red', 'Green', 'Blue', 'Yellow'];
+    const START_INDEX = { 'red': 1, 'green': 14, 'yellow': 40, 'blue': 27 };
+    const START_INDEXES = [1, 14, 27, 40];
+    const SAFE_SQUARES = [1, 9, 14, 22, 27, 35, 40, 48];
+    const MAX_POS = 56; 
+    let lastProcessedTurnId = "";
+    let localState = null;
+    let isRolling = false;
+    let isTesting = false;
+
+    const STAR_SVG = `<svg class="star" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>`;
+    const PIN_SVG = `
+        <svg viewBox="0 0 100 120">
+            <path d="M50,10 C30,10 15,25 15,45 C15,75 50,115 50,115 C50,115 85,75 85,45 C85,25 70,10 50,10 Z" fill="white" stroke="#666" stroke-width="1.5" />
+            <circle class="pin-core" cx="50" cy="45" r="23" />
+        </svg>
+    `;
+
+    function getAbsPos(playerIdx, relativePos) {
+        if (relativePos === -1 || relativePos >= 52) return -1;
+        return (relativePos + START_INDEXES[playerIdx]) % 52;
+    }
+
+    function getNextPlayer(curr, total, winners = []) {
+        if (winners.length >= total - 1 && total > 0) return curr;
+        let next = curr;
+        do {
+            if (total === 2) next = (next === 1 ? 3 : 1);
+            else next = (next + 1) % total;
+        } while (winners.includes(next));
+        return next;
+    }
+
+    async function updateGameState(patch) {
+        if (!localState) return;
+        localState = { ...localState, ...patch, timestamp: Date.now() };
+        renderUI(localState);
+        await client.mutation("game:setState", { patch: localState });
+    }
+
+    async function updateUI() {
+        const state = await client.query("game:getGameState");
+        if (!state) return;
+        
+        // Prevent "Revert-Flicker": Only update if the server state is actually NEWER 
+        // than our local state, based on turnId (which we set to current timestamp).
+        const serverTurnId = parseInt(state.turnId) || 0;
+        const localTurnId = localState ? (parseInt(localState.turnId) || 0) : 0;
+
+        if (!localState || serverTurnId > localTurnId) {
+            localState = state;
+            renderUI(state);
+            updateLobbyUI(state);
+        } else if (serverTurnId === localTurnId) {
+            // If same turn, check if the server has a newer timestamp (e.g. from a different player)
+            if (state.timestamp > localState.timestamp) {
+                localState = state;
+                renderUI(state);
+                updateLobbyUI(state);
+            }
+        }
+    }
+
+
+    function renderUI(state) {
+        if (!state) return;
+
+        diceEl.innerText = state.diceValue;
+        const activeColor = colors[state.currentPlayer];
+        diceEl.style.backgroundColor = `var(--${activeColor.toLowerCase()})`;
+        diceEl.style.color = 'white';
+        
+        const validMoves = [];
+        state.tokens.forEach((t, i) => {
+            if (Math.floor(i/4) === state.currentPlayer) {
+                if (t.pos === -1) { if (state.diceValue === 6) validMoves.push(i); }
+                else if (t.pos + state.diceValue <= MAX_POS) { validMoves.push(i); }
+            }
+        });
+
+        if (state.waitingForRoll) {
+            diceEl.classList.remove('disabled');
+            if (isTesting) document.getElementById('test-controls').classList.remove('hidden');
+            lastProcessedTurnId = state.turnId;
+        } else {
+            diceEl.classList.add('disabled');
+            document.getElementById('test-controls').classList.add('hidden');
+            // Turn automation: only if turnId is new to avoid "speedrun" loops
+            if (lastProcessedTurnId !== state.turnId) {
+                lastProcessedTurnId = state.turnId;
+                if (validMoves.length === 0) {
+                    setTimeout(() => localSkipTurn(state.currentPlayer), 1200);
+                } else if (validMoves.length === 1) {
+                    setTimeout(() => localMoveToken(validMoves[0]), 1200);
+                }
+            }
+        }
+
+        renderTokens(state, validMoves);
+        updateLobbyUI(state);
+    }
+
+    function renderTokens(state, validMoves) {
+        state.tokens.forEach((t, i) => {
+            const playerIdx = Math.floor(i / 4);
+            
+            // Check if player is actually in the game
+            let isActive = true;
+            if (state.numPlayers === 2) isActive = (playerIdx === 1 || playerIdx === 3);
+            else if (state.numPlayers === 3) isActive = (playerIdx < 3);
+
+            let token = document.getElementById(`token-${i}`);
+            if (!isActive) {
+                if (token) token.remove();
+                return;
+            }
+
+            let parent;
+            if (t.pos === -1) {
+                parent = document.getElementById(`${t.player[0]}-${i % 4}`);
+            } else if (t.pos === MAX_POS) {
+                // TOKEN FINISHED (Goes to the matching center triangle)
+                const triMap = { red: 'r', green: 'g', yellow: 'y', blue: 'b' };
+                parent = document.querySelector(`.center .t-${triMap[t.player]}`);
+            } else if (t.pos >= 51) {
+                parent = document.getElementById(`stretch-${t.player}-${t.pos - 51}`);
+            } else {
+                parent = document.getElementById(`path-${(t.pos + START_INDEX[t.player]) % 52}`);
+            }
+
+
+
+
+
+            if (parent) {
+                if (!token) {
+                    token = document.createElement('div');
+                    token.id = `token-${i}`;
+                    token.className = `token ${t.player}`;
+                    token.innerHTML = `<div class="token-inner">${PIN_SVG}</div>`;
+                    token.style.color = `var(--${t.player})`; 
+                }
+                
+                const inCenter = !!parent.closest('.center');
+                const isCurrentTurn = state.currentPlayer === playerIdx && !inCenter;
+                if (isCurrentTurn) token.classList.add('active-player');
+                else token.classList.remove('active-player');
+
+                const isClickable = !state.waitingForRoll && validMoves.includes(i);
+                if (isClickable) {
+                    token.classList.add('pulse');
+                    token.onclick = () => localMoveToken(i);
+                } else {
+                    token.classList.remove('pulse');
+                    token.onclick = null;
+                }
+
+                // Testing Mode: Right click to move backwards
+                token.oncontextmenu = (e) => {
+                    e.preventDefault();
+                    if (isTesting) localMoveBack(i);
+                };
+
+                if (token.parentElement !== parent) {
+                    parent.appendChild(token);
+                }
+
+
+            }
+        });
+
+
+        // Cleanup stale tokens FIRST
+        document.querySelectorAll('.token').forEach(el => {
+            const id = parseInt(el.id.replace('token-', ''));
+            const playerIdx = Math.floor(id / 4);
+            let isActive = true;
+            if (state.numPlayers === 2) isActive = (playerIdx === 1 || playerIdx === 3);
+            else if (state.numPlayers === 3) isActive = (playerIdx < 3);
+
+            if (isNaN(id) || id >= state.tokens.length || !isActive) el.remove();
+        });
+
+        // SECOND PASS for final overlapping logic
+        document.querySelectorAll('.token').forEach(token => {
+            const id = parseInt(token.id.replace('token-', ''));
+            const parent = token.parentElement;
+            if (!parent) return;
+            const playerIdx = Math.floor(id / 4);
+            const inCenter = !!parent.closest('.center');
+            const isCurrentTurn = state.currentPlayer === playerIdx && !inCenter;
+            
+            let scale = isCurrentTurn ? 1.2 : 1.0;
+            let offset = { x: 0, y: 0 };
+            
+            const siblings = Array.from(parent.querySelectorAll('.token'));
+            const index = siblings.indexOf(token);
+            token.style.zIndex = 50 + index + (isCurrentTurn ? 100 : 0);
+
+            if (!inCenter) {
+                const count = siblings.length;
+                if (count > 1) {
+                    scale *= (count > 4 ? 0.6 : 0.75);
+                    const angle = (index / count) * 2 * Math.PI - (Math.PI / 2);
+                    const radius = count > 4 ? 13 : 10;
+                    offset.x = Math.cos(angle) * radius;
+                    offset.y = Math.sin(angle) * radius;
+                }
+            } else {
+                const count = siblings.length;
+                const spread = 11;
+                scale *= 0.8; // Shrink slightly
+                if (parent.classList.contains('t-g') || parent.classList.contains('t-y')) {
+                    offset.x = (index - (count - 1) / 2) * spread - 1;
+                    offset.y = 0;
+                } else {
+                    offset.x = 0;
+                    offset.y = (index - (count - 1) / 2) * spread;
+                }
+            }
+            const mySeatIdx = Object.keys(state.playerMap || {}).find(k => state.playerMap[k] === currentUser?.username);
+            const viewIdx = mySeatIdx !== undefined ? parseInt(mySeatIdx) : 3;
+            const angle = [270, 180, 90, 0][viewIdx];
+            token.style.transform = `translate(calc(-50% + ${offset.x}px), calc(-50% + ${offset.y}px))`;
+            const inner = token.querySelector('.token-inner');
+            if (inner) {
+                inner.style.transform = `rotate(${-angle}deg) translate(0, -35%) scale(${scale})`;
+            }
+        });
+    }
+
+
+
+    async function rewindAnimation(tokenIndex, fromPos) {
+        if (fromPos < 0) return;
+        isRolling = true; // Block other actions during rewind
+        const tempTokens = [...localState.tokens.map(t => ({...t}))];
+        
+        // Fast reverse traversal
+        for (let p = fromPos - 1; p >= -1; p--) {
+            tempTokens[tokenIndex].pos = p;
+            renderTokens({ ...localState, tokens: tempTokens }, []); 
+            await new Promise(r => setTimeout(r, 40)); 
+        }
+        isRolling = false;
+    }
+
+    async function localRollDice(playerIndex) {
+        if (!currentUser) return;
+        const mySeat = Object.keys(localState.playerMap || {}).find(k => localState.playerMap[k] === currentUser.username);
+        if (mySeat === undefined || parseInt(mySeat) !== playerIndex) return;
+        
+        if (!localState || !localState.waitingForRoll || localState.currentPlayer !== playerIndex || isRolling) return;
+        if (isTesting) return; // Dice click ignored in testing mode (use buttons)
+        isRolling = true;
+        diceEl.classList.add('disabled');
+
+        // Visual rolling effect
+        let rollCount = 0;
+        const rollInterval = setInterval(() => {
+            diceEl.innerText = Math.floor(Math.random() * 6) + 1;
+            rollCount++;
+            if (rollCount > 10) clearInterval(rollInterval);
+        }, 500 / 10);
+
+        const diceValue = Math.floor(Math.random() * 6) + 1;
+        
+        // Wait for the animation to finish
+        setTimeout(async () => {
+            const stats = localState.stats ? JSON.parse(JSON.stringify(localState.stats)) : null;
+            if (stats) stats[localState.currentPlayer].dice[diceValue]++;
+            let sixCount = localState.sixCount;
+            if (diceValue === 6) sixCount++; else sixCount = 0;
+
+            if (sixCount === 3) {
+                await updateGameState({
+                    diceValue, sixCount: 0, stats: stats || localState.stats,
+                    currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
+                    waitingForRoll: true,
+                    turnId: Date.now().toString(),
+                });
+                return;
+            }
+
+            await updateGameState({ 
+                diceValue, 
+                sixCount, stats: stats || localState.stats,
+                waitingForRoll: false,
+                turnId: Date.now().toString() 
+            });
+            isRolling = false;
+        }, 600);
+    }
+
+    async function localMoveToken(tokenIndex) {
+        if (!localState || localState.waitingForRoll) return;
+
+        const playerIndex = Math.floor(tokenIndex / 4);
+        if (!currentUser) return;
+        const mySeat = Object.keys(localState.playerMap || {}).find(k => localState.playerMap[k] === currentUser.username);
+        if (mySeat === undefined || parseInt(mySeat) !== playerIndex) return;
+
+        if (playerIndex !== localState.currentPlayer) return;
+
+        const tokens = [...localState.tokens.map(t => ({...t}))];
+        const token = tokens[tokenIndex];
+        let extraTurn = false;
+
+        if (token.pos === -1) {
+            if (localState.diceValue === 6) { token.pos = 0; extraTurn = true; }
+            else return;
+        } else {
+            const newPos = token.pos + localState.diceValue;
+            if (newPos <= MAX_POS) {
+                token.pos = newPos;
+                if (localState.diceValue === 6) extraTurn = true;
+                if (newPos === MAX_POS) extraTurn = true; // Bonus for reaching home
+            } else return;
+        }
+
+        const stats = localState.stats ? JSON.parse(JSON.stringify(localState.stats)) : null;
+        // Capture Logic
+        const myAbsPos = getAbsPos(localState.currentPlayer, token.pos);
+        const isAtSafeSquare = SAFE_SQUARES.includes(myAbsPos);
+
+        let capturedInfo = [];
+        if (myAbsPos !== -1 && !isAtSafeSquare) {
+            for (let i = 0; i < tokens.length; i++) {
+                const otherPlayerIdx = Math.floor(i / 4);
+                if (otherPlayerIdx !== localState.currentPlayer) {
+                    const otherAbsPos = getAbsPos(otherPlayerIdx, tokens[i].pos);
+                    if (otherAbsPos === myAbsPos) {
+                        capturedInfo.push({ index: i, startPos: tokens[i].pos });
+                        tokens[i].pos = -1; // Capture in final state
+                        extraTurn = true; 
+                        if (stats) {
+                            stats[localState.currentPlayer].captures++;
+                            stats[otherPlayerIdx].captured++;
+                        }
+                    }
+                }
+            }
+        }
+
+        if (capturedInfo.length > 0) {
+            for (const item of capturedInfo) {
+                await rewindAnimation(item.index, item.startPos);
+            }
+        }
+
+        let winners = localState.winners ? [...localState.winners] : [];
+        if (!winners.includes(localState.currentPlayer)) {
+            const myTokens = tokens.slice(localState.currentPlayer * 4, localState.currentPlayer * 4 + 4);
+            if (myTokens.every(t => t.pos === MAX_POS)) {
+                winners.push(localState.currentPlayer);
+            }
+        }
+
+        let nextPlayer = localState.currentPlayer;
+        if (!extraTurn || winners.includes(localState.currentPlayer)) {
+            nextPlayer = getNextPlayer(localState.currentPlayer, localState.numPlayers, winners);
+        }
+
+        let gameOver = false;
+        if (localState.numPlayers === 2 && winners.length === 1) gameOver = true;
+        if (localState.numPlayers > 2 && winners.length >= localState.numPlayers - 1) gameOver = true;
+
+        let patchStatus = localState.status;
+        if (gameOver) {
+            patchStatus = "finished";
+            for(let p=0; p<localState.numPlayers; p++) {
+                let actualP = localState.numPlayers === 2 ? (p===0 ? 1 : 3) : p;
+                if (!winners.includes(actualP)) winners.push(actualP);
+            }
+            setTimeout(() => window.showResultsPopup(winners), 500);
+        }
+
+        await updateGameState({
+            tokens,
+            winners,
+            stats: stats || localState.stats,
+            status: patchStatus,
+            currentPlayer: nextPlayer,
+            waitingForRoll: !gameOver,
+            sixCount: (extraTurn && !winners.includes(localState.currentPlayer)) ? localState.sixCount : 0,
+            turnId: Date.now().toString(),
+        });
+    }
+
+    async function localMoveBack(tokenIndex) {
+        if (!localState) return;
+        const tokens = [...localState.tokens.map(t => ({...t}))];
+        const token = tokens[tokenIndex];
+        
+        if (token.pos > -1) {
+            token.pos--;
+            await updateGameState({ tokens, turnId: Date.now().toString() });
+        }
+    }
+
+
+    async function localSkipTurn(playerIndex) {
+        if (!localState || localState.waitingForRoll || localState.currentPlayer !== playerIndex) return;
+        await updateGameState({
+            currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
+            waitingForRoll: true,
+            sixCount: 0,
+            turnId: Date.now().toString(),
+        });
+    }
+
+    diceEl.onclick = () => {
+        if (localState && localState.waitingForRoll && !isRolling) {
+            diceEl.classList.add('shake');
+            setTimeout(() => diceEl.classList.remove('shake'), 400);
+            localRollDice(localState.currentPlayer);
+        }
+    };
+
+    window.startGame = async (num) => {
+        let firstPlayer = 0;
+        if (num === 2) firstPlayer = 1;
+
+        const initialStats = Array(4).fill(0).map(() => ({
+            dice: {1:0, 2:0, 3:0, 4:0, 5:0, 6:0},
+            captures: 0,
+            captured: 0
+        }));
+
+        const initialState = {
+            status: "playing",
+            numPlayers: num,
+            winners: [],
+            stats: initialStats,
+            playerMap: {},
+            currentPlayer: firstPlayer,             diceValue: 1,
+            waitingForRoll: true,
+            sixCount: 0,
+            turnId: Date.now().toString(),
+            tokens: [
+                { player: 'red', pos: -1 }, { player: 'red', pos: -1 }, { player: 'red', pos: -1 }, { player: 'red', pos: -1 },
+                { player: 'green', pos: -1 }, { player: 'green', pos: -1 }, { player: 'green', pos: -1 }, { player: 'green', pos: -1 },
+                { player: 'blue', pos: -1 }, { player: 'blue', pos: -1 }, { player: 'blue', pos: -1 }, { player: 'blue', pos: -1 },
+                { player: 'yellow', pos: -1 }, { player: 'yellow', pos: -1 }, { player: 'yellow', pos: -1 }, { player: 'yellow', pos: -1 },
+            ],
+            timestamp: Date.now(),
+        };
+
+        localState = initialState;
+        renderUI(localState);
+        await client.mutation("game:setState", { patch: localState });
+        
+        // Show seat selection
+        document.getElementById('player-select').classList.add('hidden');
+        document.getElementById('lobby-select').classList.remove('hidden');
+        updateLobbyUI(localState);
+    };
+
+    window.testRoll = async (val) => {
+        if (!localState || !localState.waitingForRoll) return;
+        const stats = localState.stats ? JSON.parse(JSON.stringify(localState.stats)) : null;
+        if (stats) stats[localState.currentPlayer].dice[val]++;
+        let sixCount = localState.sixCount;
+        if (val === 6) sixCount++; else sixCount = 0;
+
+        if (sixCount === 3) {
+            await updateGameState({
+                diceValue: val, sixCount: 0, stats: stats || localState.stats,
+                currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
+                waitingForRoll: true,
+                turnId: Date.now().toString(),
+            });
+            return;
+        }
+        await updateGameState({ diceValue: val, sixCount, stats: stats || localState.stats, waitingForRoll: false, turnId: Date.now().toString() });
+    };
+
+    document.getElementById('btn-testing').onclick = () => {
+        isTesting = true;
+        document.getElementById('main-menu').classList.add('hidden');
+        document.getElementById('player-select').classList.remove('hidden');
+    };
+
+
+    function generateBoard() {
+        const board = document.getElementById('board');
+        const PATH = [
+            {r:7, c:1}, {r:7, c:2}, {r:7, c:3}, {r:7, c:4}, {r:7, c:5}, {r:7, c:6},
+            {r:6, c:7}, {r:5, c:7}, {r:4, c:7}, {r:3, c:7}, {r:2, c:7}, {r:1, c:7}, {r:1, c:8}, {r:1, c:9},
+            {r:2, c:9}, {r:3, c:9}, {r:4, c:9}, {r:5, c:9}, {r:6, c:9},
+            {r:7, c:10}, {r:7, c:11}, {r:7, c:12}, {r:7, c:13}, {r:7, c:14}, {r:7, c:15}, {r:8, c:15}, {r:9, c:15},
+            {r:9, c:14}, {r:9, c:13}, {r:9, c:12}, {r:9, c:11}, {r:9, c:10},
+            {r:10, c:9}, {r:11, c:9}, {r:12, c:9}, {r:13, c:9}, {r:14, c:9}, {r:15, c:9}, {r:15, c:8}, {r:15, c:7},
+            {r:14, c:7}, {r:13, c:7}, {r:12, c:7}, {r:11, c:7}, {r:10, c:7},
+            {r:9, c:6}, {r:9, c:5}, {r:9, c:4}, {r:9, c:3}, {r:9, c:2}, {r:9, c:1}, {r:8, c:1}
+        ];
+        PATH.forEach((p, i) => {
+            const cell = document.createElement('div');
+            cell.className = 'c'; cell.id = `path-${i}`;
+            cell.style.gridRow = p.r; cell.style.gridColumn = p.c;
+            if (i === 1) cell.classList.add('path-color', 'red');
+            if (i === 14) cell.classList.add('path-color', 'green');
+            if (i === 27) cell.classList.add('path-color', 'blue');
+            if (i === 40) cell.classList.add('path-color', 'yellow');
+            if (SAFE_SQUARES.includes(i)) cell.innerHTML = STAR_SVG;
+            board.appendChild(cell);
+        });
+
+        const HOME_STRETCH = {
+            'red': [{r:8, c:2}, {r:8, c:3}, {r:8, c:4}, {r:8, c:5}, {r:8, c:6}],
+            'green': [{r:2, c:8}, {r:3, c:8}, {r:4, c:8}, {r:5, c:8}, {r:6, c:8}],
+            'yellow': [{r:14, c:8}, {r:13, c:8}, {r:12, c:8}, {r:11, c:8}, {r:10, c:8}],
+            'blue': [{r:8, c:14}, {r:8, c:13}, {r:8, c:12}, {r:8, c:11}, {r:8, c:10}]
+        };
+
+        Object.keys(HOME_STRETCH).forEach(color => {
+            HOME_STRETCH[color].forEach((p, i) => {
+                const cell = document.createElement('div');
+                cell.className = `c path-color ${color}`; cell.id = `stretch-${color}-${i}`;
+                cell.style.gridRow = p.r; cell.style.gridColumn = p.c;
+                board.appendChild(cell);
+            });
+        });
+
+        for (let r=1; r<=15; r++) {
+            for (let c=1; c<=15; c++) {
+                const isHome = (r<=6 && c<=6) || (r<=6 && c>=10) || (r>=10 && c<=6) || (r>=10 && c>=10);
+                const isCenter = (r>=7 && r<=9 && c>=7 && c<=9);
+                if (!isHome && !isCenter) {
+                    const exists = document.querySelector(`.c[style*="grid-row: ${r}"][style*="grid-column: ${c}"]`);
+                    if (!exists) {
+                        const cell = document.createElement('div');
+                        cell.className = 'c'; cell.style.gridRow = r; cell.style.gridColumn = c;
+                        board.appendChild(cell);
+                    }
+                }
+            }
+        }
+    }
+
+    document.getElementById('btn-new-game').onclick = () => {
+        document.getElementById('main-menu').classList.add('hidden');
+        document.getElementById('player-select').classList.remove('hidden');
+        document.getElementById('lobby-select').classList.add('hidden');
+    };
+
+    window.showMainMenu = () => {
+        document.getElementById('main-menu').classList.remove('hidden');
+        document.getElementById('player-select').classList.add('hidden');
+        document.getElementById('lobby-select').classList.add('hidden');
+    };
+
+    document.getElementById('btn-continue').onclick = () => {
+        if (localState?.status === "finished") {
+             document.getElementById('menu-overlay').classList.add('hidden');
+             window.showResultsPopup(localState.winners);
+             return;
+        }
+        
+        const mySeat = Object.keys(localState?.playerMap || {}).find(k => localState.playerMap[k] === currentUser?.username);
+        if (mySeat === undefined) {
+             document.getElementById('main-menu').classList.add('hidden');
+             document.getElementById('lobby-select').classList.remove('hidden');
+             updateLobbyUI(localState);
+        } else {
+             document.getElementById('menu-overlay').classList.add('hidden');
+             updateUI();
+        }
+    };
+
+    window.showResultsPopup = (winners) => {
+        const list = document.getElementById('ranking-list');
+        list.innerHTML = '';
+        const names = {'red': 'Red', 'green': 'Green', 'blue': 'Blue', 'yellow': 'Yellow'};
+        const colorCodes = ['red', 'green', 'blue', 'yellow'];
+        
+        winners.forEach((pIdx, i) => {
+            const li = document.createElement('li');
+            li.style.color = `var(--${colorCodes[pIdx]})`;
+            const pos = i === 0 ? '👑 1st' : (i === 1 ? '🥈 2nd' : (i === 2 ? '🥉 3rd' : '4th'));
+            li.innerHTML = `<span>${pos}</span> - ${names[colorCodes[pIdx]]}`;
+            list.appendChild(li);
+        });
+
+        const statsContainer = document.getElementById('stats-content');
+        statsContainer.innerHTML = '';
+        if (localState.stats) {
+            localState.stats.forEach((st, idx) => {
+                const isActive = localState.numPlayers === 2 ? (idx === 1 || idx === 3) : (idx < localState.numPlayers);
+                if (!isActive) return;
+
+                const stDiv = document.createElement('div');
+                stDiv.style.marginBottom = '20px';
+                stDiv.style.background = '#f8f9fa';
+                stDiv.style.padding = '15px';
+                stDiv.style.borderRadius = '10px';
+                stDiv.style.borderLeft = `5px solid var(--${colorCodes[idx]})`;
+                
+                stDiv.innerHTML = `
+                    <h3 style="margin-top:0; color:var(--${colorCodes[idx]})">${names[colorCodes[idx]]} Team</h3>
+                    
+                    <table style="width:100%; border-collapse: collapse; text-align: center; background: white; border-radius: 6px; overflow: hidden; border: 1px solid #eee;">
+                        <thead style="background: #f1f1f1; font-size: 11px; color: #666;">
+                            <tr>
+                                <th style="padding: 6px; border: 1px solid #eee;">1</th>
+                                <th style="padding: 6px; border: 1px solid #eee;">2</th>
+                                <th style="padding: 6px; border: 1px solid #eee;">3</th>
+                                <th style="padding: 6px; border: 1px solid #eee;">4</th>
+                                <th style="padding: 6px; border: 1px solid #eee;">5</th>
+                                <th style="padding: 6px; border: 1px solid #eee;">6</th>
+                                <th style="padding: 6px; border: 1px solid #eee; background: #e8f5e9;">Cuts (⚔️)</th>
+                                <th style="padding: 6px; border: 1px solid #eee; background: #ffebee;">Lost (💀)</th>
+                            </tr>
+                        </thead>
+                        <tbody style="font-size: 14px;">
+                            <tr>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[1]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[2]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[3]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[4]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[5]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee;">${st.dice[6]}</td>
+                                <td style="padding: 8px; border: 1px solid #eee; font-weight: bold; color: #2e7d32; background: #f1f8e9;">${st.captures}</td>
+                                <td style="padding: 8px; border: 1px solid #eee; font-weight: bold; color: #c62828; background: #fffbfa;">${st.captured}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                `;
+                statsContainer.appendChild(stDiv);
+            });
+        }
+        document.getElementById('results-popup').classList.remove('hidden');
+    };
+
+    const checkContinue = async () => {
+        const state = await client.query("game:getGameState");
+        if (state && state.status === "playing") document.getElementById('btn-continue').classList.remove('hidden');
+    };
+
+    generateBoard();
+    updateUI();
+    setInterval(updateUI, 500);
+    checkContinue();
+</script>
+
+</body>
+</html>

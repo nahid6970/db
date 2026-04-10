@@ -1,0 +1,97 @@
+/* --- SNIPER VARIANT --- */
+.target.sniper .t-head,
+.target.sniper .t-body,
+.target.sniper .t-arm,
+.target.sniper .t-leg {
+    background: #ff3333;
+    /* Red Stickman */
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.6);
+}
+
+.target.sniper .t-gun {
+    background: #330000;
+    /* Darker gun */
+}
+
+/* Sniper Scope Glint */
+.sniper-glint {
+    position: absolute;
+    top: -5px;
+    /* Adjust to be on top of the gun/arm */
+    left: 20px;
+    /* Adjust to be at the end of the arm/gun */
+    width: 60px;
+    height: 60px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 50;
+    mix-blend-mode: screen;
+}
+
+.target.aiming .sniper-glint {
+    animation: chargeShot 3s linear forwards;
+}
+
+/* Ensure Sniper Raises Arm to Aim */
+.target.aiming .t-arm.right {
+    transform: rotate(-90deg);
+    /* Point forward */
+    transition: transform 0.5s ease;
+}
+
+.target.aiming .t-arm.left {
+    transform: rotate(-45deg);
+    /* Support arm */
+    transition: transform 0.5s ease;
+}
+
+@keyframes chargeShot {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+
+    10% {
+        transform: scale(0.5);
+        opacity: 1;
+    }
+
+    80% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+
+    /* Warning period */
+    90% {
+        transform: scale(1.5);
+        opacity: 1;
+        background: radial-gradient(circle, rgba(255, 0, 0, 1) 0%, rgba(255, 0, 0, 0) 70%);
+    }
+
+    /* About to fire */
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Player Damage FX */
+.player-hit #damage-overlay {
+    opacity: 1;
+}
+
+#damage-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(255, 0, 0, 0.5) 100%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 500;
+    transition: opacity 0.5s;
+}
