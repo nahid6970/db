@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sharing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
     <style>
         body {
             font-family: 'JetBrains Mono', monospace;
@@ -274,6 +275,7 @@
         import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
         import { Marked } from "https://esm.sh/marked@12.0.0";
         import { markedHighlight } from "https://esm.sh/marked-highlight@2.1.1";
+        import { markedKatex } from "https://esm.sh/marked-katex-extension@5.1.2";
         import hljs from "https://esm.sh/highlight.js@11.9.0";
         
         const client = new ConvexHttpClient("https://dazzling-akita-709.convex.cloud");
@@ -287,6 +289,9 @@
                 }
             })
         );
+        marked.use(markedKatex({
+            throwOnError: false
+        }));
         marked.setOptions({
             gfm: true,
             breaks: true

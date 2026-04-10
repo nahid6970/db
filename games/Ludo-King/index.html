@@ -154,6 +154,11 @@
             border-radius: 18px; display: flex; justify-content: center; align-items: center;
             font-size: 44px; font-weight: bold; color: #333; box-shadow: 0 8px 20px rgba(0,0,0,0.4);
             cursor: pointer; transition: transform 0.1s, box-shadow 0.1s, background-color 0.3s;
+            user-select: none; -webkit-user-select: none;
+        }
+        .not-my-turn {
+            filter: saturate(30%) opacity(0.5) !important;
+            cursor: not-allowed !important;
         }
         #dice:hover:not(.disabled) { transform: translateY(-5px); box-shadow: 0 12px 25px rgba(0,0,0,0.5); }
         #dice:active:not(.disabled) { transform: translateY(2px); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
@@ -395,7 +400,7 @@
         }
 
         playerMap[idx] = currentUser.username;
-        await updateGameState({ playerMap });
+        updateGameState({ playerMap });
     };
 
     function updateLobbyUI(state) {
@@ -459,6 +464,7 @@
     let isSyncing = false;
     let isTesting = false;
     let lastServerVersion = 0;
+    let ignoreUpdatesUntil = 0;
 
     const STAR_SVG = `<svg class="star" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>`;
     const PIN_SVG = `
@@ -483,21 +489,25 @@
         return next;
     }
 
-    async function updateGameState(patch) {
+    function updateGameState(patch) {
         if (!localState || isSyncing) return;
         isSyncing = true;
         
-        // Optimistic local update
+        // Optimistic local update - ALWAYS INSTANT
         localState = { ...localState, ...patch };
         renderUI(localState);
+        // Ignore server for a buffer period to allow propagation
+        ignoreUpdatesUntil = Date.now() + 2500; 
 
-        try {
-            await client.mutation("game:setState", { patch: localState });
-        } catch (err) {
-            console.error("Mutation failed:", err);
-        } finally {
-            isSyncing = false;
-        }
+        // Perform mutation in background
+        client.mutation("game:setState", { patch: localState })
+            .catch(err => {
+                console.error("BG Mutation failed:", err);
+                ignoreUpdatesUntil = 0;
+            })
+            .finally(() => {
+                isSyncing = false;
+            });
     }
 
     async function updateUI() {
@@ -512,6 +522,12 @@
             if (!state) return;
             
             const serverVersion = state.version || 0;
+
+            // Robust skip: don't overwrite if we just moved locally, or if server version hasn't advanced
+            const isLocalWait = Date.now() < ignoreUpdatesUntil;
+            if (isLocalWait && serverVersion <= lastServerVersion) {
+                return; // Still waiting for our move to be the latest on server
+            }
 
             if (!localState || serverVersion > lastServerVersion) {
                 lastServerVersion = serverVersion;
@@ -538,7 +554,7 @@
         try {
             await updateUI();
         } catch(e) {}
-        setTimeout(pollingLoop, 1000);
+        setTimeout(pollingLoop, 500);
     }
     pollingLoop();
 
@@ -550,6 +566,11 @@
         const activeColor = colors[state.currentPlayer];
         diceEl.style.backgroundColor = `var(--${activeColor.toLowerCase()})`;
         diceEl.style.color = 'white';
+        
+        // Visual indicator: gray out if it's NOT my turn
+        const isMySeat = (state.playerMap && state.playerMap[state.currentPlayer] === currentUser?.username);
+        if (!isMySeat) diceEl.classList.add('not-my-turn');
+        else diceEl.classList.remove('not-my-turn');
         
         const validMoves = [];
         state.tokens.forEach((t, i) => {
@@ -760,7 +781,7 @@
             if (diceValue === 6) sixCount++; else sixCount = 0;
 
             if (sixCount === 3) {
-                await updateGameState({
+                updateGameState({
                     diceValue, sixCount: 0, stats: stats || localState.stats,
                     currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
                     waitingForRoll: true,
@@ -769,7 +790,7 @@
                 return;
             }
 
-            await updateGameState({ 
+            updateGameState({ 
                 diceValue, 
                 sixCount, stats: stats || localState.stats,
                 waitingForRoll: false,
@@ -862,7 +883,7 @@
             setTimeout(() => window.showResultsPopup(winners), 500);
         }
 
-        await updateGameState({
+        updateGameState({
             tokens,
             winners,
             stats: stats || localState.stats,
@@ -881,14 +902,14 @@
         
         if (token.pos > -1) {
             token.pos--;
-            await updateGameState({ tokens, turnId: Date.now().toString() });
+            updateGameState({ tokens, turnId: Date.now().toString() });
         }
     }
 
 
     async function localSkipTurn(playerIndex) {
         if (!localState || localState.waitingForRoll || localState.currentPlayer !== playerIndex) return;
-        await updateGameState({
+        updateGameState({
             currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
             waitingForRoll: true,
             sixCount: 0,
@@ -951,7 +972,7 @@
         if (val === 6) sixCount++; else sixCount = 0;
 
         if (sixCount === 3) {
-            await updateGameState({
+            updateGameState({
                 diceValue: val, sixCount: 0, stats: stats || localState.stats,
                 currentPlayer: getNextPlayer(localState.currentPlayer, localState.numPlayers, localState.winners),
                 waitingForRoll: true,
@@ -959,7 +980,7 @@
             });
             return;
         }
-        await updateGameState({ diceValue: val, sixCount, stats: stats || localState.stats, waitingForRoll: false, turnId: Date.now().toString() });
+        updateGameState({ diceValue: val, sixCount, stats: stats || localState.stats, waitingForRoll: false, turnId: Date.now().toString() });
     };
 
     document.getElementById('btn-testing').onclick = () => {
