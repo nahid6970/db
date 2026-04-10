@@ -963,6 +963,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 11,
+                "title": "Dr. STONE - s04e26 - [84] - FIRE HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-04-09T21:06:07.627782",
+                "notify": "seen"
+            },
+            {
                 "id": 10,
                 "title": "Dr. STONE - s04e25 - [83] - FUTURE ENGINE HDTV-1080p - [SubsPlease]",
                 "watched": true,
