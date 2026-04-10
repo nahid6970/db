@@ -13,9 +13,10 @@ export const setState = mutation({
   handler: async (ctx, args) => {
     const state = await ctx.db.query("game_state").order("desc").first();
     if (state) {
-      await ctx.db.patch(state._id, { ...args.patch, timestamp: Date.now() });
+      const newVersion = (state.version || 0) + 1;
+      await ctx.db.patch(state._id, { ...args.patch, version: newVersion, timestamp: Date.now() });
     } else {
-      await ctx.db.insert("game_state", { ...args.patch, timestamp: Date.now() });
+      await ctx.db.insert("game_state", { ...args.patch, version: 1, timestamp: Date.now() });
     }
   },
 });
