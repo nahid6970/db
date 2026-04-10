@@ -8,14 +8,30 @@
     <style>
         :root {
             --red: #ff0000; --green: #00a000; --yellow: #e6ac00; --blue: #0099ff;
-            --white: #ffffff; --border: #333; --cell-size: 40px;
+            --white: #ffffff; --border: #333; 
+            --cell-size: min(6vw, 6.2vh, 45px);
             --board-rotate: 0deg;
         }
 
         body {
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             min-height: 100vh; margin: 0; background-color: #2c3e50; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white; gap: 20px;
+            color: white; gap: 20px; transition: all 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        @media screen and (min-aspect-ratio: 1/1) {
+            body { 
+                flex-direction: row; 
+                padding: 10px;
+                gap: 40px;
+            }
+            :root {
+                --cell-size: min(5.5vw, 6.2vh, 45px);
+            }
+            #dice-container {
+                min-width: 200px;
+            }
         }
 
         #menu-overlay {
@@ -50,11 +66,11 @@
         }
 
         .c { border: 0.5px solid #aaa; box-sizing: border-box; position: relative; }
-        .home { grid-column: span 6; grid-row: span 6; display: flex; justify-content: center; align-items: center; padding: 30px; }
+        .home { grid-column: span 6; grid-row: span 6; display: flex; justify-content: center; align-items: center; padding: calc(var(--cell-size) * 0.5); }
         .home-inner {
             background: white; width: 100%; height: 100%; display: grid;
             grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-            gap: 15px; padding: 15px; box-sizing: border-box; border: 1px solid rgba(0,0,0,0.1);
+            gap: calc(var(--cell-size) * 0.3); padding: calc(var(--cell-size) * 0.3); box-sizing: border-box; border: 1px solid rgba(0,0,0,0.1);
         }
         .slot { border: 1px solid rgba(0,0,0,0.1); position: relative; }
 
@@ -130,7 +146,8 @@
 
         #dice-container {
             display: flex; flex-direction: column; align-items: center; gap: 10px;
-            background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; min-width: 250px;
+            background: rgba(255,255,255,0.1); padding: 20px; border-radius: 20px; min-width: 200px;
+            transition: all 0.3s ease;
         }
         #dice {
             width: 80px; height: 80px; background: white; border: 4px solid #333;
