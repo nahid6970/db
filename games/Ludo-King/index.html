@@ -508,7 +508,7 @@
         
         try {
             // AUTHORITATIVE sync using server-side 'version' and timestamp
-            const state = await client.query("game:getGameState", { _cb: Date.now() });
+            const state = await client.query("game:getGameState", { cb: Date.now() });
             if (!state) return;
             
             const serverVersion = state.version || 0;
@@ -1039,7 +1039,7 @@
 
     document.getElementById('btn-continue').onclick = async () => {
         // Fetch fresh state immediately to ensure correct player count filtering
-        const state = await client.query("game:getGameState", { _cb: Date.now() });
+        const state = await client.query("game:getGameState", { cb: Date.now() });
         if (!state) return;
         localState = state;
         lastServerVersion = state.version || 0;
