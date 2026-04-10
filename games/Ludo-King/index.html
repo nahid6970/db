@@ -402,7 +402,8 @@
         if (!state) return;
         
         const map = state.playerMap || {};
-        const availableIdxs = state.numPlayers === 2 ? [1, 3] : (state.numPlayers === 3 ? [0, 1, 2] : [0, 1, 2, 3]);
+        const n = parseInt(state.numPlayers) || 4;
+        const availableIdxs = n === 2 ? [1, 3] : (n === 3 ? [0, 1, 2] : [0, 1, 2, 3]);
         let myIdx = -1;
 
         [0, 1, 2, 3].forEach(i => {
@@ -1036,21 +1037,27 @@
         document.getElementById('lobby-select').classList.add('hidden');
     };
 
-    document.getElementById('btn-continue').onclick = () => {
-        if (localState?.status === "finished") {
+    document.getElementById('btn-continue').onclick = async () => {
+        // Fetch fresh state immediately to ensure correct player count filtering
+        const state = await client.query("game:getGameState", { _cb: Date.now() });
+        if (!state) return;
+        localState = state;
+        lastServerVersion = state.version || 0;
+
+        if (state.status === "finished") {
              document.getElementById('menu-overlay').classList.add('hidden');
-             window.showResultsPopup(localState.winners);
+             window.showResultsPopup(state.winners);
              return;
         }
         
-        const mySeat = Object.keys(localState?.playerMap || {}).find(k => localState.playerMap[k] === currentUser?.username);
+        const mySeat = Object.keys(state.playerMap || {}).find(k => state.playerMap[k] === currentUser?.username);
         if (mySeat === undefined) {
              document.getElementById('main-menu').classList.add('hidden');
              document.getElementById('lobby-select').classList.remove('hidden');
-             updateLobbyUI(localState);
+             updateLobbyUI(state);
         } else {
              document.getElementById('menu-overlay').classList.add('hidden');
-             updateUI();
+             renderUI(state);
         }
     };
 
