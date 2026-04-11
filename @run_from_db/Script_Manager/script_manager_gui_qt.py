@@ -1516,7 +1516,8 @@ SVGS = {
     "UPLOAD": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>',        
     "DOWNLOAD": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>',   
     "TRASH": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2-0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>',
-    "DIFF": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>'
+    "DIFF": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>',
+    "CLOUD": '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"></path></svg>'
 }
 
 class ConvexButton(QPushButton):
@@ -1635,62 +1636,152 @@ class DiffDialog(QDialog):
         close.clicked.connect(self.accept)
         layout.addWidget(close)
 
-class ConvexLabelDialog(QDialog):
-    """Backup label dialog with inline CHECK button to compare local vs latest backup."""
-    def __init__(self, parent=None, convex_call_fn=None, config_data=None):
+class CloudSyncDialog(QDialog):
+    """Unified Cloud Sync Manager: Backup and Restore in one interface."""
+    def __init__(self, convex_call_fn, config_data, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("BACKUP LABEL")
-        self.setFixedWidth(420)
+        self.setWindowTitle("CLOUD // SYNC MANAGER")
+        self.resize(550, 750)
         self._convex_call = convex_call_fn
-        self._config_data = config_data or {}
+        self._config_data = config_data
+        self._backups = []
         self._remote_data = None
-        self.setStyleSheet(f"QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }} QLabel {{ color: {CP_TEXT}; }} QLineEdit {{ background: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 5px; font-family: Consolas; }}")
+        self.selected_id = None
+        
+        self.setStyleSheet(f"""
+            QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }}
+            QLabel {{ color: {CP_TEXT}; font-family: 'Consolas'; }}
+            QLineEdit {{ background: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 8px; font-family: Consolas; }}
+            QScrollArea {{ border: 1px solid {CP_DIM}; background-color: {CP_PANEL}; }}
+            QGroupBox {{ color: {CP_YELLOW}; font-weight: bold; border: 1px solid {CP_DIM}; margin-top: 10px; padding-top: 15px; }}
+            QGroupBox::title {{ subcontrol-origin: margin; left: 10px; }}
+        """)
+        
         layout = QVBoxLayout(self)
-        layout.addWidget(QLabel("Enter a label for this backup:"))
-        self.inp = QLineEdit()
-        self.inp.setPlaceholderText("e.g. before v2 update")
-        layout.addWidget(self.inp)
-
-        self.status_lbl = QLabel("")
+        layout.setSpacing(15)
+        
+        # --- TOP SECTION: NEW BACKUP ---
+        grp_new = QGroupBox("CREATE NEW BACKUP")
+        new_lay = QVBoxLayout(grp_new)
+        
+        self.inp_label = QLineEdit()
+        self.inp_label.setPlaceholderText("Enter backup label (e.g. v3-stable)")
+        new_lay.addWidget(self.inp_label)
+        
+        self.status_lbl = QLabel("Ready to sync.")
         self.status_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.status_lbl.setStyleSheet("font-family: Consolas; font-size: 9pt; padding: 4px;")
-        layout.addWidget(self.status_lbl)
-
-        btns = QHBoxLayout()
-        ok = ConvexButton("BACKUP", color=CP_CYAN)
-        ok.clicked.connect(self.accept)
-        self.check_btn = ConvexButton("CHECK", color=CP_YELLOW, is_outlined=True)
-        self.check_btn.clicked.connect(self._check_sync)
+        self.status_lbl.setStyleSheet("font-size: 9pt; color: #888888; padding: 4px;")
+        new_lay.addWidget(self.status_lbl)
         
-        self.diff_btn = ConvexButton("DIFF", color=CP_YELLOW, is_outlined=True, svg_data=SVGS["DIFF"])
-        self.diff_btn.clicked.connect(self._show_diff)
-        self.diff_btn.hide()
-
-        cancel = ConvexButton("CANCEL", color=CP_DIM, is_outlined=True)
-        cancel.clicked.connect(self.reject)
+        btn_row = QHBoxLayout()
+        self.btn_backup = ConvexButton("UPLOAD", color=CP_CYAN, svg_data=SVGS["UPLOAD"])
+        self.btn_backup.clicked.connect(self._do_backup)
+        self.btn_check = ConvexButton("CHECK", color=CP_YELLOW, is_outlined=True)
+        self.btn_check.clicked.connect(self._check_sync)
+        self.btn_diff = ConvexButton("DIFF", color=CP_YELLOW, is_outlined=True, svg_data=SVGS["DIFF"])
+        self.btn_diff.clicked.connect(self._show_top_diff)
+        self.btn_diff.hide()
         
-        btns.addWidget(ok); btns.addWidget(self.check_btn); btns.addWidget(self.diff_btn); btns.addWidget(cancel)
-        layout.addLayout(btns)
+        btn_row.addWidget(self.btn_backup)
+        btn_row.addWidget(self.btn_check)
+        btn_row.addWidget(self.btn_diff)
+        new_lay.addLayout(btn_row)
+        layout.addWidget(grp_new)
+        
+        # --- HISTORY ---
+        layout.addWidget(QLabel("CLOUD BACKUP HISTORY:"))
+        self.scroll = QScrollArea()
+        self.scroll.setWidgetResizable(True)
+        self.scroll.setStyleSheet("background: transparent; border: 1px solid #3a3a3a;")
+        layout.addWidget(self.scroll)
+        
+        close_btn = ConvexButton("CLOSE MANAGER", color=CP_DIM, is_outlined=True)
+        close_btn.clicked.connect(self.reject)
+        layout.addWidget(close_btn)
+        
+        # Initial Load
+        QTimer.singleShot(10, self._fetch_and_render)
 
-    def _show_diff(self):
-        if self._remote_data is not None:
-            DiffDialog(self._config_data, self._remote_data, parent=self).exec()
+    def _fetch_and_render(self):
+        try:
+            result = self._convex_call("query", {"path": "functions:list", "args": {"scriptName": SCRIPT_NAME}})
+            self._backups = result.get("value", [])
+            self._render_list()
+        except Exception as e:
+            QMessageBox.critical(self, "LOAD FAILED", str(e))
 
-    def _check_sync(self):
-        if not self._convex_call:
-            self.status_lbl.setText("No connection available.")
+    def _render_list(self):
+        import datetime
+        inner = QWidget(); inner.setStyleSheet(f"background: {CP_PANEL};")
+        vbox = QVBoxLayout(inner); vbox.setSpacing(4); vbox.setContentsMargins(4, 4, 4, 4)
+        
+        if not self._backups:
+            lbl = QLabel("No backups found.")
+            lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+            lbl.setStyleSheet("color: #666; padding: 20px;")
+            vbox.addWidget(lbl)
+        else:
+            for b in sorted(self._backups, key=lambda x: x["createdAt"], reverse=True):
+                dt = datetime.datetime.fromtimestamp(b["createdAt"] / 1000).strftime("%Y-%m-%d %I:%M %p")
+                row = QHBoxLayout(); row.setSpacing(4)
+                
+                btn = QPushButton(f"  {dt}  ->  {b['label']}")
+                btn.setStyleSheet(f"text-align: left; padding: 8px; background: {CP_BG}; color: {CP_TEXT}; border: 1px solid #2a2a2a; font-family: Consolas;")
+                btn.setCursor(Qt.CursorShape.PointingHandCursor)
+                btn.clicked.connect(lambda checked, bid=b["id"]: self._select_restore(bid))
+                
+                diff_btn = QPushButton()
+                diff_btn.setFixedSize(32, 32); diff_btn.setToolTip("Compare with local")
+                diff_btn.setStyleSheet("background: transparent; border: 1px solid #2a2a2a; padding: 3px;")
+                renderer_diff = QSvgRenderer(QByteArray(SVGS["DIFF"].replace('currentColor', CP_YELLOW).encode()))
+                pix_diff = QPixmap(20, 20); pix_diff.fill(Qt.GlobalColor.transparent)
+                painter_diff = QPainter(pix_diff); renderer_diff.render(painter_diff); painter_diff.end()
+                diff_btn.setIcon(QIcon(pix_diff)); diff_btn.clicked.connect(lambda checked, bid=b["id"], lbl=b["label"]: self._show_list_diff(bid, lbl))
+                
+                del_btn = QPushButton()
+                del_btn.setFixedSize(32, 32); del_btn.setToolTip("Delete")
+                del_btn.setStyleSheet("background: transparent; border: 1px solid #2a2a2a; padding: 3px;")
+                renderer_del = QSvgRenderer(QByteArray(SVGS["TRASH"].replace('currentColor', CP_RED).encode()))
+                pix_del = QPixmap(20, 20); pix_del.fill(Qt.GlobalColor.transparent)
+                painter_del = QPainter(pix_del); renderer_del.render(painter_del); painter_del.end()
+                del_btn.setIcon(QIcon(pix_del)); del_btn.clicked.connect(lambda checked, bid=b["id"]: self._do_delete(bid))
+                
+                row.addWidget(btn); row.addWidget(diff_btn); row.addWidget(del_btn)
+                vbox.addLayout(row)
+        
+        vbox.addStretch()
+        self.scroll.setWidget(inner)
+
+    def _do_backup(self):
+        label = self.inp_label.text().strip()
+        if not label:
+            QMessageBox.warning(self, "BACKUP", "Please enter a label first.")
             return
         try:
-            self.check_btn.setEnabled(False)
-            self.status_lbl.setStyleSheet(f"color: {CP_SUBTEXT}; font-family: Consolas; font-size: 9pt; padding: 4px;")
-            self.status_lbl.setText("Checking...")
+            res = self._convex_call("mutation", {"path": "functions:save", "args": {"scriptName": SCRIPT_NAME, "label": label, "data": self._config_data}})
+            if res.get("status") == "success":
+                self.inp_label.clear()
+                self.status_lbl.setText(f"Success! Backed up: {label}")
+                self.status_lbl.setStyleSheet("color: #00ff21;")
+                self._fetch_and_render()
+            else:
+                QMessageBox.warning(self, "BACKUP ERROR", str(res))
+        except Exception as e:
+            QMessageBox.critical(self, "BACKUP FAILED", str(e))
+
+    def _check_sync(self):
+        try:
+            self.btn_check.setEnabled(False)
+            self.status_lbl.setText("Checking sync status...")
             QApplication.processEvents()
+            
             result = self._convex_call("query", {"path": "functions:list", "args": {"scriptName": SCRIPT_NAME}})
             backups = result.get("value", [])
             if not backups:
-                self.status_lbl.setStyleSheet(f"color: {CP_RED}; font-family: Consolas; font-size: 9pt; padding: 4px;")
-                self.status_lbl.setText("⚠ No backups found — backup recommended!")
+                self.status_lbl.setText("⚠ No backups found.")
+                self.status_lbl.setStyleSheet("color: #ff003c;")
                 return
+            
             latest = max(backups, key=lambda b: b["createdAt"])
             remote_raw = self._convex_call("query", {"path": "functions:get", "args": {"id": latest["id"]}}).get("value", {})
             
@@ -1707,124 +1798,38 @@ class ConvexLabelDialog(QDialog):
             
             dirty = json.dumps(local_cmp, sort_keys=True) != json.dumps(remote_cmp, sort_keys=True)
             if dirty:
-                self.status_lbl.setStyleSheet(f"color: {CP_RED}; font-family: Consolas; font-size: 9pt; padding: 4px;")
-                self.status_lbl.setText(f"⚠ OUT OF SYNC with '{latest['label']}' — backup recommended!")
-                self.diff_btn.show()
+                self.status_lbl.setText(f"⚠ OUT OF SYNC with '{latest['label']}'")
+                self.status_lbl.setStyleSheet("color: #ff003c;")
+                self.btn_diff.show()
             else:
-                self.status_lbl.setStyleSheet(f"color: {CP_GREEN}; font-family: Consolas; font-size: 9pt; padding: 4px;")
-                self.status_lbl.setText(f"✔ In sync with '{latest['label']}' — no backup needed.")
-                self.diff_btn.hide()
+                self.status_lbl.setText(f"✔ In sync with '{latest['label']}'")
+                self.status_lbl.setStyleSheet("color: #00ff21;")
+                self.btn_diff.hide()
         except Exception as e:
-            self.status_lbl.setStyleSheet(f"color: {CP_RED}; font-family: Consolas; font-size: 9pt; padding: 4px;")
             self.status_lbl.setText(f"Error: {e}")
         finally:
-            self.check_btn.setEnabled(True)
+            self.btn_check.setEnabled(True)
 
-    @staticmethod
-    def get_label(parent=None, convex_call_fn=None, config_data=None):
-        dlg = ConvexLabelDialog(parent, convex_call_fn=convex_call_fn, config_data=config_data)
-        ok = dlg.exec() == QDialog.DialogCode.Accepted
-        return dlg.inp.text(), ok
+    def _show_top_diff(self):
+        if self._remote_data:
+            DiffDialog(self._config_data, self._remote_data, parent=self).exec()
 
-
-class RestoreDialog(QDialog):
-    """Shows list of backups and lets user pick one to restore or delete."""
-    def __init__(self, backups, convex_call_fn, parent=None):
-        super().__init__(parent)
-        self.setWindowTitle("RESTORE FROM BACKUP")
-        self.setFixedWidth(520)
-        self.selected_id = None
-        self._convex_call = convex_call_fn
-        self._backups = list(backups)
-        self.setStyleSheet(f"QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_YELLOW}; font-family: 'Consolas'; font-size: 10pt; }} QLabel {{ color: {CP_TEXT}; font-family: 'Consolas'; }} QPushButton {{ font-family: 'Consolas'; font-size: 10pt; font-weight: bold; }}")
-        self._layout = QVBoxLayout(self)
-        self._layout.addWidget(QLabel("Select a backup to restore:"))
-        self._scroll = QScrollArea()
-        self._scroll.setWidgetResizable(True)
-        self._scroll.setStyleSheet("background: transparent; border: 1px solid #3a3a3a;")
-        self._scroll.setFixedHeight(300)
-        self._layout.addWidget(self._scroll)
-        
-        cancel = ConvexButton("ABORT", color=CP_DIM, is_outlined=True)
-        cancel.clicked.connect(self.reject)
-        self._layout.addWidget(cancel)
-        self._render_list()
-
-    def _render_list(self):
-        import datetime
-        inner = QWidget()
-        inner.setStyleSheet(f"background: {CP_PANEL};")
-        vbox = QVBoxLayout(inner)
-        vbox.setSpacing(4)
-        vbox.setContentsMargins(4, 4, 4, 4)
-        for b in sorted(self._backups, key=lambda x: x["createdAt"], reverse=True):
-            # 12-hour format: %I:%M %p
-            dt = datetime.datetime.fromtimestamp(b["createdAt"] / 1000).strftime("%Y-%m-%d %I:%M %p")
-            row = QHBoxLayout()
-            row.setSpacing(4)
-
-            # Separator: ->
-            btn = QPushButton(f"  {dt}  ->  {b['label']}")
-            btn.setStyleSheet(f"text-align: left; padding: 8px; background: {CP_BG}; color: {CP_TEXT}; border: 1px solid #2a2a2a;")
-            btn.clicked.connect(lambda checked, bid=b["id"]: self._select(bid))
-
-            # Delete button with SVG icon
-            del_btn = QPushButton()
-            del_btn.setFixedSize(32, 32)
-            del_btn.setToolTip("Delete this backup")
-            del_btn.setStyleSheet("background: transparent; border: 1px solid #2a2a2a; padding: 3px;")
-
-            # Render TRASH icon with RED color
-            renderer = QSvgRenderer(QByteArray(SVGS["TRASH"].replace('currentColor', CP_RED).encode()))
-            pix = QPixmap(22, 22)
-            pix.fill(Qt.GlobalColor.transparent)
-            painter = QPainter(pix)
-            renderer.render(painter)
-            painter.end()
-            del_btn.setIcon(QIcon(pix))
-            del_btn.clicked.connect(lambda checked, bid=b["id"]: self._delete(bid))
-
-            # Diff button with DIFF SVG
-            diff_btn = QPushButton()
-            diff_btn.setFixedSize(32, 32)
-            diff_btn.setToolTip("Compare with local config")
-            diff_btn.setStyleSheet("background: transparent; border: 1px solid #2a2a2a; padding: 3px;")
-            renderer_diff = QSvgRenderer(QByteArray(SVGS["DIFF"].replace('currentColor', CP_YELLOW).encode()))
-            pix_diff = QPixmap(22, 22)
-            pix_diff.fill(Qt.GlobalColor.transparent)
-            painter_diff = QPainter(pix_diff)
-            renderer_diff.render(painter_diff)
-            painter_diff.end()
-            diff_btn.setIcon(QIcon(pix_diff))
-            diff_btn.clicked.connect(lambda checked, bid=b["id"], lbl=b["label"]: self._diff_check(bid, lbl))
-
-            row.addWidget(btn)
-            row.addWidget(diff_btn)
-            row.addWidget(del_btn)
-            vbox.addLayout(row)
-        vbox.addStretch()
-        self._scroll.setWidget(inner)
-
-    def _diff_check(self, backup_id, label):
+    def _show_list_diff(self, bid, label):
         try:
-            remote = self._convex_call("query", {"path": "functions:get", "args": {"id": backup_id}}).get("value", {})
-            # Local config from MainWindow
-            local_config = self.parent().config 
-            
-            DiffDialog(local_config, remote, title=f"DIFF // {label}", parent=self).exec()
+            remote = self._convex_call("query", {"path": "functions:get", "args": {"id": bid}}).get("value", {})
+            DiffDialog(self._config_data, remote, title=f"DIFF // {label}", parent=self).exec()
         except Exception as e:
             QMessageBox.critical(self, "DIFF FAILED", str(e))
 
-    def _delete(self, backup_id):
+    def _do_delete(self, bid):
         try:
-            self._convex_call("mutation", {"path": "functions:remove", "args": {"id": backup_id}})
-            self._backups = [b for b in self._backups if b["id"] != backup_id]
-            self._render_list()
+            self._convex_call("mutation", {"path": "functions:remove", "args": {"id": bid}})
+            self._fetch_and_render()
         except Exception as e:
             QMessageBox.critical(self, "DELETE FAILED", str(e))
 
-    def _select(self, backup_id):
-        self.selected_id = backup_id
+    def _select_restore(self, bid):
+        self.selected_id = bid
         self.accept()
 
 
@@ -2016,19 +2021,13 @@ class MainWindow(QMainWindow):
         header.addWidget(self.inp_search) # Add search here
         header.addWidget(self.btn_add_script)
         
-        self.btn_backup = ConvexButton("", color=CP_CYAN, is_outlined=True, svg_data=SVGS["UPLOAD"])
-        self.btn_backup.setFixedSize(35, 35)
-        self.btn_backup.setToolTip("Backup config to Convex cloud")
-        self.btn_backup.clicked.connect(self.backup_to_convex)
-
-        self.btn_restore = ConvexButton("", color=CP_YELLOW, is_outlined=True, svg_data=SVGS["DOWNLOAD"])
-        self.btn_restore.setFixedSize(35, 35)
-        self.btn_restore.setToolTip("Restore config from Convex cloud")
-        self.btn_restore.clicked.connect(self.restore_from_convex)
+        self.btn_cloud = ConvexButton("", color=CP_CYAN, is_outlined=True, svg_data=SVGS["CLOUD"])
+        self.btn_cloud.setFixedSize(35, 35)
+        self.btn_cloud.setToolTip("Cloud Sync: Backup & Restore")
+        self.btn_cloud.clicked.connect(self.open_cloud_sync)
 
         header.addWidget(self.btn_add_folder)
-        header.addWidget(self.btn_backup)
-        header.addWidget(self.btn_restore)
+        header.addWidget(self.btn_cloud)
         header.addWidget(self.btn_cfg)
         header.addWidget(self.btn_close)
         
@@ -2070,61 +2069,22 @@ class MainWindow(QMainWindow):
         with urllib.request.urlopen(req, timeout=15) as resp:
             return json.loads(resp.read().decode("utf-8"))
 
-    def backup_to_convex(self):
+    def open_cloud_sync(self):
         if not CONVEX_URL:
             QMessageBox.warning(self, "CONVEX", "Set CONVEX_URL in the script first.")
             return
-        
-        # Prepare data for backup (strip reserved fields)
+            
         backup_data = self.config.copy()
         if "$schema" in backup_data:
             del backup_data["$schema"]
             
-        label, ok = ConvexLabelDialog.get_label(self, convex_call_fn=self._convex_call, config_data=backup_data)
-        if not ok or not label.strip():
-            return
-            
-        try:
-            res = self._convex_call("mutation", {
-                "path": "functions:save",
-                "args": {"scriptName": SCRIPT_NAME, "label": label.strip(), "data": backup_data}
-            })
-            if res.get("status") == "success":
-                QMessageBox.information(self, "BACKUP", f'Config backed up: "{label.strip()}"')
-            else:
-                QMessageBox.warning(self, "BACKUP ERROR", str(res))
-        except Exception as e:
-            QMessageBox.critical(self, "BACKUP FAILED", str(e))
-
-    def restore_from_convex(self):
-        if not CONVEX_URL:
-            QMessageBox.warning(self, "CONVEX", "Set CONVEX_URL in the script first.")
-            return
-        try:
-            result = self._convex_call("query", {
-                "path": "functions:list",
-                "args": {"scriptName": SCRIPT_NAME}
-            })
-            backups = result.get("value", [])
-            if not backups:
-                QMessageBox.information(self, "RESTORE", "No backups found for this script.")
-                return
-            dlg = RestoreDialog(backups, self._convex_call, self)
-            if dlg.exec() == QDialog.DialogCode.Accepted and dlg.selected_id:
-                data = self._convex_call("query", {
-                    "path": "functions:get",
-                    "args": {"id": dlg.selected_id}
-                }).get("value")
-                if data:
-                    # Convex returns numbers as floats; Qt requires ints for size fields
-                    data = self._fix_floats(data)
-                    self.config = data
-                    self.save_config()
-                    QMessageBox.information(self, "RESTORE", "Config restored successfully.")
-                else:
-                    QMessageBox.critical(self, "RESTORE", "Could not fetch backup data.")
-        except Exception as e:
-            QMessageBox.critical(self, "RESTORE FAILED", str(e))
+        dlg = CloudSyncDialog(self._convex_call, backup_data, self)
+        if dlg.exec() == QDialog.DialogCode.Accepted and dlg.selected_id:
+            data = self._convex_call("query", {"path": "functions:get", "args": {"id": dlg.selected_id}}).get("value")
+            if data:
+                self.config = self._fix_floats(data)
+                self.save_config()
+                QMessageBox.information(self, "RESTORE", "Config restored successfully.")
 
     def show_grid_context_menu(self, pos):
         menu = QMenu(self)
