@@ -56,20 +56,41 @@ class SvgInputDialog(QDialog):
     def __init__(self, current_svg="", parent=None):
         super().__init__(parent)
         self.setWindowTitle("PASTE SVG CODE")
-        self.resize(500, 400)
+        self.resize(600, 500)
         self.svg_code = current_svg
         self.setStyleSheet(f"""
             QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }}
             QPlainTextEdit {{ background-color: {CP_PANEL}; color: {CP_TEXT}; font-family: 'Consolas'; border: 1px solid {CP_DIM}; }}
             QPushButton {{ background-color: {CP_DIM}; color: white; padding: 8px; border: 1px solid {CP_DIM}; }}
             QPushButton:hover {{ border: 1px solid {CP_CYAN}; }}
+            QLabel {{ color: {CP_YELLOW}; font-family: 'Consolas'; font-weight: bold; font-size: 9pt; }}
+            QScrollArea {{ border: 1px solid {CP_DIM}; background: {CP_PANEL}; }}
         """)
         
         layout = QVBoxLayout(self)
+        
+        layout.addWidget(QLabel("SVG CODE:"))
         self.txt_input = QPlainTextEdit()
         self.txt_input.setPlaceholderText("<svg>...</svg>")
         self.txt_input.setPlainText(self.svg_code)
-        layout.addWidget(self.txt_input)
+        layout.addWidget(self.txt_input, stretch=2)
+        
+        layout.addWidget(QLabel("DETECTED COLORS (CLICK TO CHANGE):"))
+        self.color_scroll = QScrollArea()
+        self.color_scroll.setWidgetResizable(True)
+        self.color_scroll.setFixedHeight(60)
+        self.color_widget = QWidget()
+        self.color_layout = QHBoxLayout(self.color_widget)
+        self.color_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.color_layout.setContentsMargins(5, 5, 5, 5)
+        self.color_scroll.setWidget(self.color_widget)
+        layout.addWidget(self.color_scroll)
+        
+        # Debounce timer for color extraction
+        self.color_timer = QTimer()
+        self.color_timer.setSingleShot(True)
+        self.color_timer.timeout.connect(self.update_color_panel)
+        self.txt_input.textChanged.connect(lambda: self.color_timer.start(500))
         
         btn_box = QHBoxLayout()
         btn_save = QPushButton("SAVE SVG")
@@ -87,6 +108,54 @@ class SvgInputDialog(QDialog):
         btn_box.addWidget(btn_cancel)
         layout.addLayout(btn_box)
         
+        # Initial extraction
+        self.update_color_panel()
+        
+    def update_color_panel(self):
+        # Clear existing buttons
+        while self.color_layout.count():
+            item = self.color_layout.takeAt(0)
+            if item.widget():
+                item.widget().deleteLater()
+        
+        svg = self.txt_input.toPlainText()
+        # Regex to find hex colors: #RRGGBB or #RGB
+        colors = sorted(list(set(re.findall(r'#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}', svg))), key=len, reverse=True)
+        
+        if not colors:
+            lbl = QLabel("None")
+            lbl.setStyleSheet(f"color: {CP_DIM}; font-style: italic;")
+            self.color_layout.addWidget(lbl)
+        else:
+            for c in colors:
+                btn = QPushButton()
+                btn.setFixedSize(30, 30)
+                btn.setToolTip(f"Replace all {c}")
+                btn.setCursor(Qt.CursorShape.PointingHandCursor)
+                btn.setStyleSheet(f"""
+                    QPushButton {{ 
+                        background-color: {c}; 
+                        border: 1px solid {CP_DIM}; 
+                        border-radius: 4px; 
+                    }}
+                    QPushButton:hover {{ border: 1px solid white; }}
+                """)
+                btn.clicked.connect(partial(self.pick_replacement_color, c))
+                self.color_layout.addWidget(btn)
+        
+        self.color_layout.addStretch()
+            
+    def pick_replacement_color(self, old_color):
+        c = QColorDialog.getColor(QColor(old_color), self, "Select New Color")
+        if c.isValid():
+            new_color = c.name().upper()
+            svg = self.txt_input.toPlainText()
+            # Replace all occurrences of the old hex code (case-insensitive)
+            pattern = re.compile(re.escape(old_color), re.IGNORECASE)
+            new_svg = pattern.sub(new_color, svg)
+            self.txt_input.setPlainText(new_svg)
+            self.update_color_panel()
+
     def save_and_close(self):
         self.svg_code = self.txt_input.toPlainText()
         self.accept()
