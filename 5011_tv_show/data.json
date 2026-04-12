@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 29,
+                "title": "One Piece - s23e02 - [1157] - Nami in a Fix! An Adventure in Block Kingdom WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-04-12T22:27:01.850899",
+                "notify": "seen"
+            },
+            {
                 "id": 28,
                 "title": "One Piece - s23e01 - [1156] - The Long-sought Elbaph! The Big Reunion Banquet WEBDL-1080p - [ToonsHub]",
                 "watched": false,
@@ -3975,6 +3982,13 @@
                 "notify": "seen"
             },
             {
+                "id": 10,
+                "title": "Frieren - Beyond Journey's End - s02e09 - [37] - Himmel's Memoirs HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-04-12T20:45:16.426521",
+                "notify": "seen"
+            },
+            {
                 "id": 8,
                 "title": "Frieren - Beyond Journey's End - s02e08 - [36] - A Magnificent End HDTV-1080p - [SubsPlease]",
                 "watched": true,
@@ -4031,7 +4045,9 @@
                 "notify": "seen"
             }
         ],
-        "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end"
+        "sonarr_url": "http://192.168.0.101:8989/series/frieren-beyond-journeys-end",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     },
     {
         "id": 46,
