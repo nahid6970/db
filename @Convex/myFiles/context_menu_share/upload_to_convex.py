@@ -165,6 +165,7 @@ class UploadManager(QWidget):
         self.server = server
         self.setWindowTitle("NEON // UPLOADER")
         self.resize(500, 500)
+        self.setWindowFlags(self.windowFlags() | Qt.WindowType.WindowStaysOnTopHint)
         self.threads = []
         self.items = []
         self.init_ui()
