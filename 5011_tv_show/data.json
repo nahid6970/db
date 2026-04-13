@@ -4142,7 +4142,7 @@
         "id": 48,
         "title": "Doctor Who (2005)",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/posters/78804-52.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Doctor Who (2005)",
         "rating": null,
         "status": "Continuing",
@@ -4152,92 +4152,93 @@
                 "title": "Doctor Who (2005) - S01E13 - The Parting of the Ways (2) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 12,
                 "title": "Doctor Who (2005) - S01E12 - Bad Wolf (1) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 11,
                 "title": "Doctor Who (2005) - S01E11 - Boom Town Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 10,
                 "title": "Doctor Who (2005) - S01E10 - The Doctor Dances (2) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 9,
                 "title": "Doctor Who (2005) - S01E09 - The Empty Child (1) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 8,
                 "title": "Doctor Who (2005) - S01E08 - Father's Day Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 7,
                 "title": "Doctor Who (2005) - S01E07 - The Long Game Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 6,
                 "title": "Doctor Who (2005) - S01E06 - Dalek Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "Doctor Who (2005) - S01E05 - World War Three (2) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "Doctor Who (2005) - S01E04 - Aliens of London (1) Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Doctor Who (2005) - S01E03 - The Unquiet Dead Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Doctor Who (2005) - S01E02 - The End of the World Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959567",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Doctor Who (2005) - S01E01 - Rose Bluray-1080p",
                 "watched": false,
                 "added_date": "2026-04-13T10:36:19.959057",
-                "notify": "unseen"
+                "notify": "seen"
             }
-        ]
+        ],
+        "sonarr_url": ""
     }
 ]
