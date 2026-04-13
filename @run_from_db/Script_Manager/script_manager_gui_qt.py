@@ -164,6 +164,58 @@ class SvgInputDialog(QDialog):
     def clear_svg(self):
         self.txt_input.clear()
 
+class PasswordDialog(QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("SECURED ACCESS")
+        self.setFixedSize(300, 160)
+        self.setWindowFlags(Qt.WindowType.FramelessWindowHint | Qt.WindowType.Dialog)
+        self.setStyleSheet(f"""
+            QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_RED}; }}
+            QLabel {{ color: {CP_YELLOW}; font-family: 'Consolas'; font-size: 10pt; font-weight: bold; }}
+            QLineEdit {{ 
+                background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; 
+                padding: 10px; font-family: 'Consolas'; font-size: 14pt;
+            }}
+            QPushButton {{ 
+                background-color: {CP_DIM}; color: white; border: 1px solid {CP_DIM}; 
+                padding: 10px; font-family: 'Consolas'; font-weight: bold;
+            }}
+            QPushButton:hover {{ border: 1px solid {CP_CYAN}; background-color: #222222; }}
+        """)
+        
+        layout = QVBoxLayout(self)
+        title_lbl = QLabel("CRITICAL ACCESS // ENTER CODE")
+        title_lbl.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(title_lbl)
+        
+        self.inp = QLineEdit()
+        self.inp.setEchoMode(QLineEdit.EchoMode.Password)
+        self.inp.setPlaceholderText("****")
+        self.inp.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        layout.addWidget(self.inp)
+        
+        btns = QHBoxLayout()
+        self.btn_ok = QPushButton("AUTHORIZE")
+        self.btn_ok.clicked.connect(self.verify)
+        self.inp.returnPressed.connect(self.verify)
+        
+        self.btn_cancel = QPushButton("CANCEL")
+        self.btn_cancel.clicked.connect(self.reject)
+        
+        btns.addWidget(self.btn_ok)
+        btns.addWidget(self.btn_cancel)
+        layout.addLayout(btns)
+        self.inp.setFocus()
+
+    def verify(self):
+        if self.inp.text() == "1823":
+            self.accept()
+        else:
+            self.inp.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_RED}; border: 1px solid {CP_RED}; padding: 10px; font-family: 'Consolas'; font-size: 14pt;")
+            QTimer.singleShot(500, lambda: self.inp.setStyleSheet(""))
+            self.inp.clear()
+
 class CyberButton(QPushButton):
     def __init__(self, text, parent=None, script_data=None, config=None):
         self.raw_text = text or ""
@@ -208,6 +260,10 @@ class CyberButton(QPushButton):
             if event.button() == Qt.MouseButton.LeftButton:
                 cmd = self.script.get("ctrl_left_cmd", "").strip()
                 if cmd:
+                    if self.script.get("require_password"):
+                        if PasswordDialog(self).exec() != QDialog.DialogCode.Accepted:
+                            event.accept()
+                            return
                     self.execute_ctrl_command(cmd)
                     event.accept()
                     return
@@ -733,9 +789,10 @@ class EditDialog(QDialog):
         left_layout.addWidget(grp_basic)
         
         # 2. Execution
+        grp_exec = QGroupBox("BEHAVIOR")
+        l_exec = QVBoxLayout()
+        
         if self.script.get("type") != "folder":
-            grp_exec = QGroupBox("BEHAVIOR")
-            l_exec = QVBoxLayout()
             self.chk_hide = QCheckBox("Hide Term")
             self.chk_hide.setChecked(self.script.get("hide_terminal", False))
             self.chk_keep = QCheckBox("Keep Open")
@@ -752,21 +809,29 @@ class EditDialog(QDialog):
             row1.addWidget(self.chk_keep)
             row1.addWidget(self.chk_kill)
             row1.addWidget(self.chk_new_term)
+            l_exec.addLayout(row1)
             
             row2 = QHBoxLayout()
             row2.addWidget(self.chk_admin)
-            row2.addStretch() 
-            
-            l_exec.addLayout(row1)
-            l_exec.addLayout(row2)
+        else:
+            row2 = QHBoxLayout()
+
+        self.chk_pass_lock = QCheckBox("Password Lock")
+        self.chk_pass_lock.setChecked(self.script.get("require_password", False))
+        row2.addWidget(self.chk_pass_lock)
+        row2.addStretch() 
+        l_exec.addLayout(row2)
+
+        if self.script.get("type") != "folder":
             l_sc = QFormLayout()
             self.inp_ctrl_left = QLineEdit(self.script.get("ctrl_left_cmd", ""))
             self.inp_ctrl_right = QLineEdit(self.script.get("ctrl_right_cmd", ""))
             l_sc.addRow("Ctrl+Left:", self.inp_ctrl_left)
             l_sc.addRow("Ctrl+Right:", self.inp_ctrl_right)
             l_exec.addLayout(l_sc)
-            grp_exec.setLayout(l_exec)
-            left_layout.addWidget(grp_exec)
+            
+        grp_exec.setLayout(l_exec)
+        left_layout.addWidget(grp_exec)
             
         # 3. Typography
         grp_typo = QGroupBox("TYPOGRAPHY")
@@ -1190,7 +1255,8 @@ class EditDialog(QDialog):
             self.script["use_inline"] = self.rb_inline.isChecked()
             self.script["inline_type"] = self.cmb_type.currentText()
             self.script["inline_script"] = self.txt_inline.toPlainText()
-            
+        
+        self.script["require_password"] = self.chk_pass_lock.isChecked()
         self.script["font_family"] = self.cmb_font.currentText()
         self.script["font_size"] = self.spn_size.value()
         self.script["is_bold"] = self.chk_bold.isChecked()
@@ -2342,6 +2408,10 @@ class MainWindow(QMainWindow):
 
 
     def handle_click(self, script):
+        if script.get("require_password"):
+            if PasswordDialog(self).exec() != QDialog.DialogCode.Accepted:
+                return
+                
         if script.get("type") == "folder":
             self.view_stack.append(script)
             self.refresh_grid()
