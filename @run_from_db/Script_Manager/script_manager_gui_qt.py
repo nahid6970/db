@@ -270,6 +270,11 @@ class CyberButton(QPushButton):
             elif event.button() == Qt.MouseButton.RightButton:
                 cmd = self.script.get("ctrl_right_cmd", "").strip()
                 if cmd:
+                    if self.script.get("require_password"):
+                        if PasswordDialog(self).exec() != QDialog.DialogCode.Accepted:
+                            self.suppress_context_menu = True # Still suppress menu even if cancelled
+                            event.accept()
+                            return
                     self.suppress_context_menu = True  # Suppress context menu
                     self.execute_ctrl_command(cmd)
                     event.accept()
