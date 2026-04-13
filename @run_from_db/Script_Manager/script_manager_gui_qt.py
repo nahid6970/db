@@ -54,11 +54,12 @@ SCRIPT_NAME = "script_manager"  # Unique key for this script
 # -----------------------------------------------------------------------------
 
 class SvgInputDialog(QDialog):
-    def __init__(self, current_svg="", parent=None):
+    def __init__(self, current_svg="", hover_map=None, parent=None):
         super().__init__(parent)
         self.setWindowTitle("PASTE SVG CODE")
-        self.resize(600, 500)
+        self.resize(600, 580)
         self.svg_code = current_svg
+        self.hover_map = hover_map or {}
         self.setStyleSheet(f"""
             QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }}
             QPlainTextEdit {{ background-color: {CP_PANEL}; color: {CP_TEXT}; font-family: 'Consolas'; border: 1px solid {CP_DIM}; }}
@@ -76,7 +77,7 @@ class SvgInputDialog(QDialog):
         self.txt_input.setPlainText(self.svg_code)
         layout.addWidget(self.txt_input, stretch=2)
         
-        layout.addWidget(QLabel("DETECTED COLORS (CLICK TO CHANGE):"))
+        layout.addWidget(QLabel("BASE COLORS (CLICK TO REPLACE IN CODE):"))
         self.color_scroll = QScrollArea()
         self.color_scroll.setWidgetResizable(True)
         self.color_scroll.setFixedHeight(60)
@@ -86,6 +87,17 @@ class SvgInputDialog(QDialog):
         self.color_layout.setContentsMargins(5, 5, 5, 5)
         self.color_scroll.setWidget(self.color_widget)
         layout.addWidget(self.color_scroll)
+
+        layout.addWidget(QLabel("HOVER OVERRIDES (CLICK TO SET HOVER COLOR):"))
+        self.hover_scroll = QScrollArea()
+        self.hover_scroll.setWidgetResizable(True)
+        self.hover_scroll.setFixedHeight(60)
+        self.hover_widget = QWidget()
+        self.hover_layout = QHBoxLayout(self.hover_widget)
+        self.hover_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.hover_layout.setContentsMargins(5, 5, 5, 5)
+        self.hover_scroll.setWidget(self.hover_widget)
+        layout.addWidget(self.hover_scroll)
         
         # Debounce timer for color extraction
         self.color_timer = QTimer()
@@ -114,44 +126,59 @@ class SvgInputDialog(QDialog):
         
     def update_color_panel(self):
         # Clear existing buttons
-        while self.color_layout.count():
-            item = self.color_layout.takeAt(0)
-            if item.widget():
-                item.widget().deleteLater()
+        for lay in [self.color_layout, self.hover_layout]:
+            while lay.count():
+                item = lay.takeAt(0)
+                if item.widget():
+                    item.widget().deleteLater()
         
         svg = self.txt_input.toPlainText()
-        # Regex to find hex colors: #RRGGBB or #RGB
         colors = sorted(list(set(re.findall(r'#[0-9a-fA-F]{6}|#[0-9a-fA-F]{3}', svg))), key=len, reverse=True)
         
         if not colors:
-            lbl = QLabel("None")
-            lbl.setStyleSheet(f"color: {CP_DIM}; font-style: italic;")
-            self.color_layout.addWidget(lbl)
+            for lay in [self.color_layout, self.hover_layout]:
+                lbl = QLabel("None")
+                lbl.setStyleSheet(f"color: {CP_DIM}; font-style: italic;")
+                lay.addWidget(lbl)
         else:
             for c in colors:
+                # Normal Row
                 btn = QPushButton()
                 btn.setFixedSize(30, 30)
-                btn.setToolTip(f"Replace all {c}")
-                btn.setCursor(Qt.CursorShape.PointingHandCursor)
-                btn.setStyleSheet(f"""
-                    QPushButton {{ 
-                        background-color: {c}; 
-                        border: 1px solid {CP_DIM}; 
-                        border-radius: 4px; 
-                    }}
-                    QPushButton:hover {{ border: 1px solid white; }}
-                """)
+                btn.setToolTip(f"Replace {c} in SVG")
+                btn.setStyleSheet(f"background-color: {c}; border: 1px solid {CP_DIM}; border-radius: 4px;")
                 btn.clicked.connect(partial(self.pick_replacement_color, c))
                 self.color_layout.addWidget(btn)
+
+                # Hover Row
+                h_btn = QPushButton()
+                h_btn.setFixedSize(30, 30)
+                hover_c = self.hover_map.get(c, c)
+                h_btn.setToolTip(f"Set hover color for {c} (Current: {hover_c})")
+                h_btn.setStyleSheet(f"background-color: {hover_c}; border: 2px solid {CP_YELLOW if c in self.hover_map else CP_DIM}; border-radius: 4px;")
+                h_btn.clicked.connect(partial(self.pick_hover_color, c))
+                self.hover_layout.addWidget(h_btn)
         
         self.color_layout.addStretch()
+        self.hover_layout.addStretch()
+
+    def pick_hover_color(self, base_color):
+        curr = self.hover_map.get(base_color, base_color)
+        c = QColorDialog.getColor(QColor(curr), self, f"Select Hover Color for {base_color}")
+        if c.isValid():
+            self.hover_map[base_color] = c.name().upper()
+            self.update_color_panel()
             
     def pick_replacement_color(self, old_color):
         c = QColorDialog.getColor(QColor(old_color), self, "Select New Color")
         if c.isValid():
             new_color = c.name().upper()
+            
+            # Update map if color is renamed
+            if old_color in self.hover_map:
+                self.hover_map[new_color] = self.hover_map.pop(old_color)
+                
             svg = self.txt_input.toPlainText()
-            # Replace all occurrences of the old hex code (case-insensitive)
             pattern = re.compile(re.escape(old_color), re.IGNORECASE)
             new_svg = pattern.sub(new_color, svg)
             self.txt_input.setPlainText(new_svg)
@@ -384,8 +411,16 @@ class CyberButton(QPushButton):
                 icon_pixmap = QPixmap(gen_w, gen_h)
                 icon_pixmap.fill(Qt.GlobalColor.transparent)
                 
+                actual_svg = svg_content
+                if is_hovered:
+                    hmap = self.script.get("svg_hover_map", {})
+                    for base_c, hover_c in hmap.items():
+                        # Case insensitive replace for hex codes
+                        pattern = re.compile(re.escape(base_c), re.IGNORECASE)
+                        actual_svg = pattern.sub(hover_c, actual_svg)
+
                 painter_svg = QPainter(icon_pixmap)
-                renderer = QSvgRenderer(QByteArray(svg_content.encode('utf-8')))
+                renderer = QSvgRenderer(QByteArray(actual_svg.encode('utf-8')))
                 renderer.render(painter_svg)
                 painter_svg.end()
                 
@@ -1227,12 +1262,14 @@ class EditDialog(QDialog):
 
     def open_svg_dialog(self):
         current = self._temp_svg_content if hasattr(self, "_temp_svg_content") else self.script.get("svg_content", "")
+        current_map = self.script.get("svg_hover_map", {})
         if not hasattr(self, "_temp_svg_content"):
              self._temp_svg_content = current
              
-        dlg = SvgInputDialog(self._temp_svg_content, self)
+        dlg = SvgInputDialog(self._temp_svg_content, current_map, self)
         if dlg.exec():
             self._temp_svg_content = dlg.svg_code
+            self.script["svg_hover_map"] = dlg.hover_map
             self.update_svg_preview(self._temp_svg_content)
 
     def save(self):
