@@ -1755,6 +1755,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 32,
+                "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-14T15:21:44.752993",
+                "notify": "unseen"
+            },
+            {
                 "id": 31,
                 "title": "The Rookie - S08E14 - Tiger Bear HDTV-720p",
                 "watched": false,
