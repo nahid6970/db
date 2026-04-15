@@ -746,6 +746,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 14,
+                "title": "Daredevil - Born Again - S02E05 - The Grand Design WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-15T09:13:44.650784",
+                "notify": "seen"
+            },
+            {
                 "id": 13,
                 "title": "Daredevil - Born Again - S02E04 - Gloves Off WEBDL-1080p",
                 "watched": false,
@@ -1057,6 +1064,13 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/368207/posters/652a5ef981eab.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
+            {
+                "id": 15,
+                "title": "Invincible (2021) - S04E07 - DON'T DO ANYTHING RASH WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-15T19:14:32.897072",
+                "notify": "unseen"
+            },
             {
                 "id": 14,
                 "title": "Invincible (2021) - S04E06 - YOU LOOK HORRIBLE WEBDL-1080p",
@@ -1759,7 +1773,7 @@
                 "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-04-14T15:21:44.752993",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 31,
@@ -4128,6 +4142,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 3,
+                "title": "The Boys - S05E03 - Every One of You Sons of Bitches WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-15T18:14:33.286040",
+                "notify": "seen"
+            },
             {
                 "id": 2,
                 "title": "The Boys - S05E02 - Teenage Kix WEBDL-1080p",
