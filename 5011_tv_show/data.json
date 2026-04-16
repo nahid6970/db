@@ -297,6 +297,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Re - ZERO, Starting Life in Another World",
         "episodes": [
             {
+                "id": 43,
+                "title": "Re - ZERO, Starting Life in Another World - s04e02 - [68] - TBA WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-04-15T21:14:32.892472",
+                "notify": "seen"
+            },
+            {
                 "id": 42,
                 "title": "Re - ZERO, Starting Life in Another World - s04e01 - [67] - The Reason I'm Taking You With Me + Gorgeous Tiger Reloaded WEBDL-1080p - [ToonsHub]",
                 "watched": false,
@@ -1069,7 +1076,7 @@
                 "title": "Invincible (2021) - S04E07 - DON'T DO ANYTHING RASH WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-04-15T19:14:32.897072",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 14,
