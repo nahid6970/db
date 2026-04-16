@@ -984,6 +984,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 12,
+                "title": "Dr. STONE - s04e27 - [86] - The Universe Is Written in the Language of Mathematics HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-04-16T21:24:08.980551",
+                "notify": "unseen"
+            },
+            {
                 "id": 11,
                 "title": "Dr. STONE - s04e26 - [84] - FIRE HDTV-1080p - [SubsPlease]",
                 "watched": true,
