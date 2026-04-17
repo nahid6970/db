@@ -16,55 +16,37 @@
             margin: 0;
             padding: 20px;
             background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-        }
-        .container {
-            width: 100%;
-            max-width: 900px;
         }
         h1 {
             color: #333;
-            font-size: 22px;
-            margin: 0;
         }
         .header-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            background: white;
-            padding: 15px 20px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
         }
         form {
             margin-bottom: 20px;
         }
         textarea {
-            width: 100%;
-            padding: 15px;
-            font-size: 15px;
-            border-radius: 8px;
+            width: 98%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
             border: 1px solid #ccc;
-            box-sizing: border-box;
-            font-family: 'JetBrains Mono', monospace;
-            background: white;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
         }
         button {
             padding: 10px 15px;
-            font-size: 14px;
+            font-size: 16px;
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
             margin-right: 10px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 600;
+            gap: 5px;
         }
         button:hover {
             background-color: #45a049;
@@ -86,21 +68,14 @@
             background-color: transparent;
             border-radius: 5px;
             word-wrap: break-word;
-            font-size: 14px;
-            line-height: 1.6;
         }
-        .shared-text h1 { font-size: 18px; border-bottom: 1px solid rgba(0,0,0,0.1); padding-bottom: 5px; }
-        .shared-text h2 { font-size: 16px; }
-        .shared-text h3 { font-size: 15px; }
-        
         .shared-text h1, .shared-text h2, .shared-text h3, .shared-text h4, .shared-text h5, .shared-text h6 {
-            margin-top: 1em;
-            margin-bottom: 0.5em;
-            font-weight: 700;
+            margin-top: 0.5em;
+            margin-bottom: 0.3em;
         }
         .shared-text p, .shared-text ul, .shared-text ol {
             margin-top: 0;
-            margin-bottom: 0.8em;
+            margin-bottom: 0.5em;
         }
         .shared-text *:first-child {
             margin-top: 0;
@@ -110,10 +85,9 @@
         }
         .shared-text pre {
             background-color: rgba(0,0,0,0.05);
-            padding: 12px;
-            border-radius: 6px;
+            padding: 10px;
+            border-radius: 5px;
             overflow-x: auto;
-            border: 1px solid rgba(0,0,0,0.05);
         }
         .shared-text code {
             font-family: 'JetBrains Mono', monospace;
@@ -122,130 +96,114 @@
             border-radius: 3px;
         }
         .shared-text blockquote {
-            border-left: 4px solid #ddd;
-            margin: 10px 0;
-            padding-left: 15px;
+            border-left: 4px solid #ccc;
+            margin: 0;
+            padding-left: 10px;
             color: inherit;
             opacity: 0.8;
-            font-style: italic;
         }
         .shared-text table {
             border-collapse: collapse;
-            margin: 15px auto;
-            background-color: rgba(255,255,255,0.4);
-            border-radius: 6px;
-            overflow: hidden;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-            width: auto;
-            min-width: 300px;
+            width: 100%;
+            margin-bottom: 0.5em;
         }
         .shared-text th, .shared-text td {
-            border: 1px solid rgba(0,0,0,0.08);
-            padding: 10px 15px;
-            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 8px;
+            text-align: left;
         }
         .shared-text th {
             background-color: rgba(0,0,0,0.05);
-            font-weight: bold;
         }
-        .math-block {
-            display: block;
-            text-align: center;
-            margin: 1.5em 0;
-            width: 100%;
-            overflow-x: auto;
-        }
-        .math-inline {
-            padding: 0 0.1em;
+        .shared-text img {
+            max-width: 100%;
         }
         .log-entry {
             background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 10px;
             position: relative;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: transform 0.1s;
         }
         .log-entry.pinned {
             border: 3px solid #8e44ad !important;
             background-color: #fdf2ff;
-            box-shadow: 0 4px 15px rgba(142, 68, 173, 0.12);
+            box-shadow: 0 0 10px rgba(142, 68, 173, 0.2);
         }
         .timestamp {
-            font-size: 11px;
+            font-size: 12px;
             color: inherit;
-            opacity: 0.5;
+            opacity: 0.6;
             font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
         .copy-btn, .delete-btn, .edit-btn, .pin-btn {
             position: absolute;
-            top: 15px;
+            top: 10px;
             color: white;
             padding: 6px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 5px;
             border: none;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: background-color 0.2s, opacity 0.2s;
-            opacity: 0.85;
-        }
-        .copy-btn:hover, .delete-btn:hover, .edit-btn:hover, .pin-btn:hover {
-            opacity: 1;
+            transition: background-color 0.2s;
         }
         .delete-btn {
-            right: 15px;
+            right: 10px;
             background-color: #dc3545;
         }
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
         .edit-btn {
-            right: 55px;
+            right: 50px;
             background-color: #f39c12;
         }
+        .edit-btn:hover {
+            background-color: #e67e22;
+        }
         .pin-btn {
-            right: 95px;
+            right: 90px;
             background-color: #9b59b6;
         }
         .pin-btn.pinned-active {
             background-color: #8e44ad;
         }
         .copy-btn {
-            right: 135px;
+            right: 130px;
             background-color: #007BFF;
+        }
+        .copy-btn:hover {
+            background-color: #0056b3;
         }
         .copy-btn.success {
             background-color: #28a745;
         }
         .clean-all-container {
             text-align: right;
-            margin-top: 30px;
-            padding-bottom: 50px;
+            margin-top: 20px;
         }
 
         .expand-btn {
-            background: #f0f0f0;
-            border: 1px solid #ddd;
-            color: #555;
-            padding: 6px 12px;
-            border-radius: 6px;
+            background: none;
+            border: none;
+            color: #007BFF;
+            padding: 5px 0;
             cursor: pointer;
             display: flex;
             align-items: center;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
+            font-weight: bold;
             font-family: 'JetBrains Mono', monospace;
-            margin: 15px auto 5px auto;
+            margin-top: 10px;
         }
         .expand-btn:hover {
-            background: #e5e5e5;
+            text-decoration: underline;
         }
         .expand-btn svg {
-            margin-right: 6px;
+            margin-right: 5px;
             transition: transform 0.2s;
         }
         .expand-btn.active svg {
@@ -253,9 +211,9 @@
         }
         .details-content {
             display: none;
-            margin-top: 15px;
+            margin-top: 10px;
             border-top: 1px dashed rgba(0,0,0,0.1);
-            padding-top: 15px;
+            padding-top: 10px;
         }
         .details-content.show {
             display: block;
@@ -269,52 +227,45 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(2px);
         }
         .modal-content {
             background-color: #fff;
-            width: 90%;
-            max-width: 1000px;
-            height: 85%;
-            padding: 25px;
-            border-radius: 12px;
+            width: 80%;
+            height: 80%;
+            padding: 20px;
+            border-radius: 8px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
         }
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            gap: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            gap: 15px;
         }
         .modal-header h2 {
             margin: 0;
             flex-grow: 1;
-            font-size: 20px;
         }
         .modal-textarea {
             flex-grow: 1;
-            width: 100%;
-            padding: 20px;
+            width: 98%;
+            padding: 15px;
             font-family: 'JetBrains Mono', monospace;
             font-size: 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
             resize: none;
-            background: #fafafa;
-            box-shadow: inset 0 1px 4px rgba(0,0,0,0.05);
         }
         .modal-footer {
-            margin-top: 20px;
+            margin-top: 15px;
             text-align: right;
         }
         .save-btn {
@@ -322,59 +273,56 @@
             padding: 10px 20px;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 15px;
-            font-weight: 600;
+            font-size: 16px;
         }
         .cancel-btn {
             background-color: #95a5a6;
             padding: 10px 20px;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-left: 12px;
-            font-size: 15px;
-            font-weight: 600;
+            margin-left: 10px;
+            font-size: 16px;
         }
 
         /* Settings Modal Specifics */
         .syntax-row {
             display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 10px;
+            margin-bottom: 10px;
             align-items: center;
             background: #f9f9f9;
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 5px;
+            flex-wrap: wrap;
         }
         .syntax-row input[type="text"] {
-            padding: 10px;
+            padding: 8px;
             border: 1px solid #ccc;
-            border-radius: 6px;
+            border-radius: 4px;
             flex: 1;
-            min-width: 120px;
+            min-width: 100px;
         }
         .syntax-preview {
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-size: 13px;
-            min-width: 90px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 80px;
             text-align: center;
-            border: 1px solid #ddd;
+            border: 1px solid #eee;
             background-color: white;
-            font-weight: 600;
         }
         .syntax-row input[type="color"], .modal-header input[type="color"] {
-            width: 44px;
-            height: 38px;
+            width: 40px;
+            height: 35px;
             border: 1px solid #ccc;
             cursor: pointer;
             padding: 0;
             background: none;
-            border-radius: 6px;
+            border-radius: 4px;
         }
         .syntax-row input[type="color"]:disabled {
             opacity: 0.3;
@@ -384,42 +332,37 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
+            gap: 2px;
             font-size: 10px;
-            color: #777;
-            font-weight: bold;
+            color: #666;
         }
         .settings-scroll {
             overflow-y: auto;
             flex-grow: 1;
-            padding: 15px;
+            padding: 10px;
             border: 1px solid #eee;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            background: #fff;
+            margin-bottom: 15px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header-container">
-            <h1>Share Text Locally</h1>
-            <button class="settings-btn" id="openSettingsBtn" onclick="openSettings()">Settings</button>
-        </div>
+    <div class="header-container">
+        <h1>Share Text Locally</h1>
+        <button class="settings-btn" id="openSettingsBtn" onclick="openSettings()">Settings</button>
+    </div>
 
-        <form id="shareForm">
-            <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
-            <button type="submit">Share</button>
-        </form>
+    <form id="shareForm">
+        <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
+        <button type="submit">Share</button>
+    </form>
 
-        <div class="logs">
-            <h2 style="font-size: 18px; color: #555; margin-bottom: 15px;">Previous Shared Texts:</h2>
-            <div id="logsList"></div>
-        </div>
+    <div class="logs">
+        <h2>Previous Shared Texts:</h2>
+        <div id="logsList"></div>
+    </div>
 
-        <div class="clean-all-container">
-            <button class="clean-btn" onclick="cleanAll()">Clean All</button>
-        </div>
+    <div class="clean-all-container">
+        <button class="clean-btn" onclick="cleanAll()">Clean All</button>
     </div>
 
     <!-- Edit Modal -->
@@ -428,14 +371,14 @@
             <div class="modal-header">
                 <h2>Edit Text</h2>
                 <div class="trans-toggle">
-                    <label>TEXT</label>
+                    <label>Text Color</label>
                     <input type="color" id="editFgColor">
                 </div>
                 <div class="trans-toggle">
-                    <label>BG</label>
+                    <label>BG Color</label>
                     <input type="color" id="editBgColor">
                 </div>
-                <button class="clean-btn" style="position: static; padding: 5px 10px; min-width: 30px;" onclick="closeModal('editModal')">×</button>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('editModal')">×</button>
             </div>
             <textarea id="modalTextarea" class="modal-textarea"></textarea>
             <div class="modal-footer">
@@ -450,23 +393,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Custom Color Syntax</h2>
-                <button class="clean-btn" style="position: static; padding: 5px 10px; min-width: 30px;" onclick="closeModal('settingsModal')">×</button>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('settingsModal')">×</button>
             </div>
             <div style="margin-bottom: 15px;">
-                <button class="expand-btn" onclick="toggleReservedList()" style="margin: 0; color: #e67e22; width: 100%; justify-content: center;">
+                <button class="expand-btn" onclick="toggleReservedList()" style="margin-top: 0; color: #e67e22;">
                     View Reserved Syntaxes (Avoid these)
                 </button>
-                <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 12px; border-radius: 8px; margin-top: 8px; border: 1px solid #ffe082; line-height: 1.6;">
+                <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 10px; border-radius: 5px; margin-top: 5px; border: 1px solid #ffe082;">
                     <strong>Avoid:</strong> #, ##, ###, ****, __, ~~, *, _, [ ], ( ), |, ---, >>>>>
                 </div>
             </div>
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px; text-align: center;">
+            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
                 Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger
             </p>
             <div id="syntaxList" class="settings-scroll">
                 <!-- Syntax rows will be added here -->
             </div>
-            <button class="save-btn" style="background-color: #3498db; margin-bottom: 15px; width: 100%; justify-content: center;" onclick="addSyntaxRow()">+ Add New Syntax</button>
+            <button class="save-btn" style="background-color: #3498db; margin-bottom: 15px;" onclick="addSyntaxRow()">+ Add New Syntax</button>
             <div class="modal-footer">
                 <button class="cancel-btn" onclick="closeModal('settingsModal')">Cancel</button>
                 <button class="save-btn" onclick="saveSettings()">Save Settings</button>
@@ -558,6 +501,7 @@
             }
         };
 
+        // Initialize header icons
         document.getElementById('openSettingsBtn').innerHTML = `${ICONS.settings} Settings`;
 
         function parseCustomColors(text) {
@@ -621,7 +565,7 @@
                     }
 
                     const fgStyle = log.color ? `color: ${log.color};` : '';
-                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor}; border-color: ${log.bgColor};` : '';
+                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor};` : '';
                     const extraClass = log.pinned ? 'pinned' : '';
 
                     return `
@@ -660,19 +604,19 @@
                 <input type="text" class="trigger-input" placeholder="Trigger (e.g. @@)" value="${trigger}">
                 
                 <div class="trans-toggle">
-                    <label>TEXT</label>
+                    <label>No Text</label>
                     <input type="checkbox" class="fg-trans-toggle" ${isFgTrans ? 'checked' : ''}>
                 </div>
                 <input type="color" class="fg-color" title="Text Color" value="${isFgTrans ? '#000000' : color}" ${isFgTrans ? 'disabled' : ''}>
                 
                 <div class="trans-toggle">
-                    <label>BG</label>
+                    <label>No BG</label>
                     <input type="checkbox" class="bg-trans-toggle" ${isBgTrans ? 'checked' : ''}>
                 </div>
                 <input type="color" class="bg-color" title="Background Color" value="${isBgTrans ? '#ffffff' : bgColor}" ${isBgTrans ? 'disabled' : ''}>
                 
                 <div class="syntax-preview" style="color: ${color}; background-color: ${isBgTrans ? 'transparent' : bgColor}">Preview</div>
-                <button class="clean-btn" style="position: static; padding: 5px 10px; min-width: 30px;" onclick="this.parentElement.remove()">×</button>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="this.parentElement.remove()">×</button>
             `;
             
             const updatePreview = () => {
