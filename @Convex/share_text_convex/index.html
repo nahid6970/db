@@ -685,6 +685,9 @@
                     <div class="folder-chip ${!currentFolderId ? 'active' : ''}" onclick="selectFolder(null, 'All')">
                         All
                     </div>
+                    <div class="folder-chip ${currentFolderId === 'none' ? 'active' : ''}" onclick="selectFolder('none', 'None')">
+                        None
+                    </div>
                 `;
                 
                 let selectHtml = `<option value="">None (All)</option>`;
@@ -708,7 +711,7 @@
                 shareSelect.innerHTML = selectHtml;
 
                 // Sync shareSelect value with current state
-                shareSelect.value = currentFolderId || "";
+                shareSelect.value = (currentFolderId === 'none' ? '' : currentFolderId) || "";
                 
                 // Add listener to shareSelect to change view when dropdown changes
                 shareSelect.onchange = (e) => {
@@ -794,7 +797,7 @@
                     const extraClass = log.pinned ? 'pinned' : '';
 
                     const folder = folders.find(f => f._id === log.folderId);
-                    const folderName = folder ? folder.name : 'All';
+                    const folderName = folder ? folder.name : 'None';
 
                     return `
                         <div class="log-entry ${extraClass}" id="entry-${log._id}" style="${fgStyle} ${bgStyle}">
@@ -1027,9 +1030,10 @@
             e.preventDefault();
             const text = document.getElementById('textInput').value;
             if (text) {
+                const targetFolderId = currentFolderId === 'none' ? undefined : (currentFolderId || undefined);
                 await client.mutation("functions:add", { 
                     text, 
-                    folderId: currentFolderId || undefined 
+                    folderId: targetFolderId
                 });
                 document.getElementById('textInput').value = '';
                 await loadLogs();

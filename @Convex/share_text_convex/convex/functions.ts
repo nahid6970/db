@@ -5,7 +5,12 @@ export const list = query({
   args: { folderId: v.optional(v.string()) },
   handler: async (ctx, args) => {
     let texts;
-    if (args.folderId) {
+    if (args.folderId === "none") {
+      texts = await ctx.db
+        .query("texts")
+        .filter((q) => q.eq(q.field("folderId"), undefined))
+        .collect();
+    } else if (args.folderId) {
       texts = await ctx.db
         .query("texts")
         .filter((q) => q.eq(q.field("folderId"), args.folderId))
@@ -80,7 +85,9 @@ export const clean = mutation({
   args: { folderId: v.optional(v.string()) },
   handler: async (ctx, args) => {
     let all;
-    if (args.folderId) {
+    if (args.folderId === "none") {
+      all = await ctx.db.query("texts").filter(q => q.eq(q.field("folderId"), undefined)).collect();
+    } else if (args.folderId) {
       all = await ctx.db.query("texts").filter(q => q.eq(q.field("folderId"), args.folderId)).collect();
     } else {
       all = await ctx.db.query("texts").collect();
