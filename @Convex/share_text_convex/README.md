@@ -9,6 +9,7 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 | Category | Reserved Symbols |
 | :--- | :--- |
 | **Project Specific** | `>>>>>` (used for Read More/Preview split) |
+| **Math** | `$`, `$$` (Inline and Block math) |
 | **Headers** | `#`, `##`, `###`, `####`, `#####`, `######` |
 | **Emphasis** | `**`, `__` (Bold), `*`, `_` (Italic), `~~` (Strikethrough) |
 | **Lists** | `- `, `* `, `+ `, `1. ` |
@@ -18,12 +19,17 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 ## 🚀 Key Features
 
 - **Rich Markdown Rendering**: Full support for standard Markdown, including headers, lists, tables, and formatted text.
+- **Math Rendering (KaTeX)**: Support for both inline math (`$E=mc^2$`) and block math (`$$ \int f(x) dx $$`).
 - **Syntax Highlighting**: Automatic code block highlighting for multiple languages.
 - **Advanced Text Controls**:
-  - **Pin to Top**: Keep important notes at the top of your list.
-  - **Edit Modal**: A spacious, dedicated interface for modifying existing entries.
+  - **Pin to Top**: Keep important notes at the top of your list with distinctive styling.
+  - **Edit Modal**: A spacious interface for modifying entries, now with **individual note color customization** (foreground and background).
   - **Read More Delimiter**: Use five or more greater-than signs (`>>>>>`) to split long notes into a preview and a toggleable detail section.
-- **Custom Color Syntax**: Define your own triggers (e.g., `@@text@@` or `##text##`) in Settings to apply custom foreground and background colors.
+- **Custom Color Syntax**: 
+  - Define your own triggers (e.g., `@@`, `##`) in Settings.
+  - Apply custom foreground and background colors.
+  - **Transparency Support**: Toggle "No Text" or "No BG" for flexible styling.
+  - **Live Preview**: See your style changes instantly in the settings modal.
 - **Modern Icon UI**: Streamlined interface using SVG icons for all primary actions.
 - **Real-time Persistence**: All data is stored and synced via Convex mutations and queries.
 - **Auto-Refresh**: Stay up to date with the latest shared texts automatically.
@@ -62,7 +68,9 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 📝 Usage Tips
 
-- **Pinning**: Click the 📌 icon to keep an entry at the top. Click again to unpin.
+- **Pinning**: Click the 📌 icon to keep an entry at the top. Pinned notes have a distinctive purple border.
+- **Math Expressions**: Use single `$` for inline math (e.g., `$x+y$`) and double `$$` for centered block math.
 - **Preview/Details**: Insert `>>>>>` in your text to hide long content behind a "Show More" button.
-- **Custom Styling**: Go to **Settings** to add triggers like `@@` or `!!`. Then use them in your notes like `@@Your colored text@@` to apply specific styles.
+- **Individual Styling**: When editing a note, use the color pickers in the modal header to change the background and text color of that specific note.
+- **Custom Syntax Triggers**: Go to **Settings** to add triggers. Use them in your notes like `@@Your colored text@@` to apply the predefined styles.
 - **Copying**: Use the copy icon to quickly grab the raw markdown source of any entry.
