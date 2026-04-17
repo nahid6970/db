@@ -17,25 +17,28 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 🚀 Key Features
 
-- **Sticky Action Header**: Primary actions are always accessible at the top of the screen with a modern blurred glass effect.
-- **Icon-Driven Interface**: Clean SVG icons for all actions, including the new **Green Plus** for notes and **Gear Icon** for settings.
-- **Modal-Based Creation**: Notes are added via a dedicated modal, keeping the home page focused on your content.
+- **Integrated Sticky Header**: 
+  - **Folders on the Left**: Your entire folder navigation is now part of the sticky header.
+  - **Smart Wrapping**: Folders automatically wrap to new lines as the list grows, ensuring they never overlap with the action buttons.
+  - **Sticky Actions**: The **+ (New Note)** and **Gear (Settings)** icons stay fixed on the right for instant access.
+- **Improved Settings Experience**:
+  - **Optimized Scrolling**: The Settings modal now features a robust flexbox layout that handles large amounts of custom data without overflowing the screen.
+  - **Tabbed Management**: Dedicated tabs for **Color Styles** and **Folder Config**.
+  - **Instant UI Refresh**: Folder deletions and reorderings are reflected immediately across the entire interface.
+- **Modal-Based Creation**: Home page stays focused on reading while creation happens in a dedicated, streamlined modal.
 - **Rich Markdown & Math**: Full support for standard Markdown and LaTeX math equations (Inline `$ ... $` and Block `$$ ... $$`).
-- **Syntax Highlighting**: Automatic code block highlighting for multiple languages.
 - **Custom Color Syntax**: 
-  - Define your own triggers (e.g., `@@text@@`) in **Settings**.
-  - Support for custom foreground and background colors.
-  - **F3 Quick Format**: Highlight text in any note modal and press **F3** to apply styles instantly.
+  - Define your own triggers in **Settings**.
+  - **F3 Quick Format**: Apply styles instantly to selected text while adding or editing.
 - **Advanced Text Controls**:
-  - **Individual Note Styling**: Custom colors for the entire note via edit modal pickers.
-  - **Pin to Top**: Highlight and stick important notes to the top of your feed.
-  - **Pill-Shaped Toggles**: Modern "Show More/Less" buttons for long logs using the `>>>>>` delimiter.
+  - **Individual Note Styling**: Custom colors for the entire note.
+  - **Pin to Top**: Keep critical information at the top of your feed.
+  - **Pill-Shaped Toggles**: Modern "Show More" buttons for long logs using the `>>>>>` delimiter.
 - **Folder Management**: 
-  - **None Folder**: Special view for uncategorized notes.
-  - **Folder Styling & Sorting**: Customize colors and rearrange the order of your folders in Settings.
-  - **Active Dot Indicator**: A visual dot marks your current folder location.
-- **Tabbed Settings**: Organized management of color syntaxes and folder configurations.
-- **Real-time Sync**: Instant multi-device synchronization powered by Convex.
+  - **None Folder**: Special view for uncategorized content.
+  - **Folder Customization**: Personalize each folder with unique background, text, and border colors.
+  - **Rearrange Order**: Simple up-arrow (▲) sorting to prioritize your workspace.
+- **Real-time Sync**: Multi-device synchronization powered by Convex.
 
 ## 🛠️ Setup Instructions
 
@@ -51,8 +54,8 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 📝 Usage Tips
 
-- **Add Note**: Click the green **+** icon in the sticky header.
-- **Settings**: Click the gear icon in the sticky header to customize triggers or folders.
-- **F3 Shortcut**: Quickly style selected text while adding or editing a note.
-- **Rearrange**: Use the up arrow (▲) in Folder Config to prioritize your folder list.
-- **Math**: Render formulas like `$E = mc^2$` with KaTeX.
+- **Add Note**: Click the green **+** icon in the header.
+- **Settings**: Click the gear icon to manage triggers and folders.
+- **Folders**: Navigate via the chips on the left of the header. The **Dot Icon** shows your current location.
+- **Sorting**: Prioritize folders by moving them up in the Folder Config tab.
+- **Scrollable Settings**: Don't worry about adding too many styles; the settings menu now scrolls smoothly to handle any amount of customization.
