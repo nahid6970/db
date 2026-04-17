@@ -599,7 +599,7 @@
         let currentLogs = [];
         let expandedItems = new Set();
         let customSyntaxes = [];
-        let currentFolderId = null;
+        let currentFolderId = localStorage.getItem('lastFolderId');
         let folders = [];
 
         window.renderMath = () => {
@@ -664,6 +664,9 @@
                 const bar = document.getElementById('folderBar');
                 const select = document.getElementById('editFolderSelect');
                 
+                const lastFolderName = localStorage.getItem('lastFolderName') || 'All';
+                document.getElementById('currentFolderName').innerText = lastFolderName;
+
                 let html = `
                     <div class="folder-chip ${!currentFolderId ? 'active' : ''}" onclick="selectFolder(null, 'All')">
                         All
@@ -695,7 +698,14 @@
 
         window.selectFolder = (id, name) => {
             currentFolderId = id;
-            document.getElementById('currentFolderName').innerText = name;
+            if (id) {
+                localStorage.setItem('lastFolderId', id);
+                localStorage.setItem('lastFolderName', name);
+            } else {
+                localStorage.removeItem('lastFolderId');
+                localStorage.setItem('lastFolderName', 'All');
+            }
+            document.getElementById('currentFolderName').innerText = name || 'All';
             loadFolders();
             loadLogs();
         };
@@ -711,7 +721,11 @@
         window.deleteFolder = async (id) => {
             if (confirm("Delete this folder? (Notes will be moved to 'All')")) {
                 await client.mutation("functions:removeFolder", { id });
-                if (currentFolderId === id) currentFolderId = null;
+                if (currentFolderId === id) {
+                    currentFolderId = null;
+                    localStorage.removeItem('lastFolderId');
+                    localStorage.setItem('lastFolderName', 'All');
+                }
                 await loadFolders();
                 await loadLogs();
             }
