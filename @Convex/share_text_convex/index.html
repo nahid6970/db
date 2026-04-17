@@ -785,8 +785,19 @@
                     <button class="add-folder-btn" title="Add Folder" onclick="addFolder()">+</button>
                 `;
                 
+                // Preserve current selections
+                const currentEditVal = editSelect.value;
+                const addSelect = document.getElementById('addFolderSelect');
+                const currentAddVal = addSelect ? addSelect.value : null;
+
                 bar.innerHTML = html;
                 editSelect.innerHTML = selectHtml;
+                editSelect.value = currentEditVal;
+
+                if (addSelect) {
+                    addSelect.innerHTML = selectHtml;
+                    if (currentAddVal !== null) addSelect.value = currentAddVal;
+                }
             } catch (err) {
                 console.error("Error loading folders:", err);
             }
