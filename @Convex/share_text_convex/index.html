@@ -422,6 +422,41 @@
                 }
             })
         );
+
+        // Custom math extension for marked to protect LaTeX from markdown mangling
+        marked.use({
+            extensions: [
+                {
+                    name: 'blockMath',
+                    level: 'block',
+                    start(src) { return src.match(/\$\$/)?.index; },
+                    tokenizer(src) {
+                        const cap = /^\$\$\n?([\s\S]+?)\n?\$\$/.exec(src);
+                        if (cap) {
+                            return { type: 'blockMath', raw: cap[0], text: cap[1] };
+                        }
+                    },
+                    renderer(token) {
+                        return `<div class="math-block">$$${token.text}$$</div>`;
+                    }
+                },
+                {
+                    name: 'inlineMath',
+                    level: 'inline',
+                    start(src) { return src.match(/\$/)?.index; },
+                    tokenizer(src) {
+                        const cap = /^\$((?:[^\$\n]|\\\$)+)\$/.exec(src);
+                        if (cap) {
+                            return { type: 'inlineMath', raw: cap[0], text: cap[1] };
+                        }
+                    },
+                    renderer(token) {
+                        return `<span class="math-inline">$${token.text}$</span>`;
+                    }
+                }
+            ]
+        });
+
         marked.setOptions({
             gfm: true,
             breaks: true
