@@ -127,8 +127,8 @@
             position: relative;
         }
         .log-entry.pinned {
-            border: 2px solid #8e44ad;
-            background-color: #fdf2ff;
+            border: 3px solid #8e44ad !important;
+            box-shadow: 0 0 10px rgba(142, 68, 173, 0.2);
         }
         .timestamp {
             font-size: 12px;
@@ -646,7 +646,7 @@
             const rows = document.querySelectorAll('.syntax-row');
             const newSyntaxes = Array.from(rows).map(row => {
                 const isFgTrans = row.querySelector('.fg-trans-toggle').checked;
-                const isBgTrans = row.querySelector('.bg-transparent-toggle') ? row.querySelector('.bg-transparent-toggle').checked : row.querySelector('.bg-trans-toggle').checked;
+                const isBgTrans = row.querySelector('.bg-trans-toggle').checked;
                 return {
                     trigger: row.querySelector('.trigger-input').value,
                     color: isFgTrans ? 'transparent' : row.querySelector('.fg-color').value,
@@ -767,6 +767,15 @@
             setTimeout(() => {
                 copyBtn.innerHTML = originalIcon;
                 copyBtn.classList.remove('success');
+            }, 2000);
+        };
+
+        loadLogs();
+        setInterval(loadLogs, 5000);
+    </script>
+</body>
+</html>
+uccess');
             }, 2000);
         };
 
