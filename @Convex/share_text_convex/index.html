@@ -290,12 +290,23 @@
             background: #f9f9f9;
             padding: 10px;
             border-radius: 5px;
+            flex-wrap: wrap;
         }
         .syntax-row input[type="text"] {
             padding: 8px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            flex-grow: 1;
+            flex: 1;
+            min-width: 100px;
+        }
+        .syntax-preview {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 14px;
+            min-width: 80px;
+            text-align: center;
+            border: 1px solid #eee;
+            background-color: white;
         }
         .color-group {
             display: flex;
@@ -365,6 +376,14 @@
             <div class="modal-header">
                 <h2>Custom Color Syntax</h2>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <div style="margin-bottom: 15px;">
+                <button class="expand-btn" onclick="toggleReservedList()" style="margin-top: 0; color: #e67e22;">
+                    View Reserved Syntaxes (Avoid these)
+                </button>
+                <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 10px; border-radius: 5px; margin-top: 5px; border: 1px solid #ffe082;">
+                    <strong>Avoid:</strong> #, ##, ###, ****, __, ~~, *, _, [ ], ( ), |, ---, >>>>>
+                </div>
             </div>
             <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
                 Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger
@@ -507,7 +526,7 @@
             const row = document.createElement('div');
             row.className = 'syntax-row';
             row.innerHTML = `
-                <input type="text" placeholder="Trigger (e.g. @@)" value="${trigger}">
+                <input type="text" class="trigger-input" placeholder="Trigger (e.g. @@)" value="${trigger}">
                 <div class="color-group">
                     <label>Text</label>
                     <input type="color" class="fg-color" value="${color}">
@@ -516,15 +535,28 @@
                     <label>BG</label>
                     <input type="color" class="bg-color" value="${bgColor || '#ffffff'}">
                 </div>
+                <div class="syntax-preview" style="color: ${color}; background-color: ${bgColor || '#ffffff'}">Preview</div>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="this.parentElement.remove()">×</button>
             `;
+            
+            const updatePreview = () => {
+                const fg = row.querySelector('.fg-color').value;
+                const bg = row.querySelector('.bg-color').value;
+                const preview = row.querySelector('.syntax-preview');
+                preview.style.color = fg;
+                preview.style.backgroundColor = bg;
+            };
+
+            row.querySelector('.fg-color').oninput = updatePreview;
+            row.querySelector('.bg-color').oninput = updatePreview;
+            
             document.getElementById('syntaxList').appendChild(row);
         };
 
         window.saveSettings = async () => {
             const rows = document.querySelectorAll('.syntax-row');
             const newSyntaxes = Array.from(rows).map(row => ({
-                trigger: row.querySelector('input[type="text"]').value,
+                trigger: row.querySelector('.trigger-input').value,
                 color: row.querySelector('.fg-color').value,
                 bgColor: row.querySelector('.bg-color').value
             })).filter(s => s.trigger.trim() !== "");
@@ -537,6 +569,18 @@
             } catch (err) {
                 console.error("Failed to save settings:", err);
                 alert("Failed to save settings.");
+            }
+        };
+
+        window.toggleReservedList = () => {
+            const list = document.getElementById('reservedList');
+            const btn = list.previousElementSibling;
+            if (list.style.display === 'none') {
+                list.style.display = 'block';
+                btn.classList.add('active');
+            } else {
+                list.style.display = 'none';
+                btn.classList.remove('active');
             }
         };
 
