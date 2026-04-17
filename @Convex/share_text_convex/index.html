@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text Sharing</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" onload="renderMath()"></script>
     <style>
         body {
             font-family: 'JetBrains Mono', monospace;
@@ -438,6 +441,20 @@
         let expandedItems = new Set();
         let customSyntaxes = [];
 
+        window.renderMath = () => {
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById('logsList'), {
+                    delimiters: [
+                        {left: '$$', right: '$$', display: true},
+                        {left: '$', right: '$', display: false},
+                        {left: '\\(', right: '\\)', display: false},
+                        {left: '\\[', right: '\\]', display: true}
+                    ],
+                    throwOnError: false
+                });
+            }
+        };
+
         // Initialize header icons
         document.getElementById('openSettingsBtn').innerHTML = `${ICONS.settings} Settings`;
 
@@ -512,6 +529,7 @@
                         </div>
                     `;
                 }).join('');
+                renderMath();
             } catch (err) {
                 console.error("Error loading logs:", err);
             }
