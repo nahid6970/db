@@ -350,11 +350,11 @@
                         hour12: true
                     });
 
-                    const parts = log.text.split(/-----+/);
+                    const parts = log.text.split(/>>>>>+/);
                     let renderedContent = '';
                     if (parts.length > 1) {
                         const preview = marked.parse(parts[0]);
-                        const details = marked.parse(parts.slice(1).join('-----'));
+                        const details = marked.parse(parts.slice(1).join(''));
                         const isExpanded = expandedItems.has(log._id);
                         renderedContent = `
                             <div class="preview-content">${preview}</div>
