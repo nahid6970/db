@@ -58,7 +58,12 @@
             background-color: #c0392b;
         }
         .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
             background-color: #607d8b;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .settings-btn:hover {
             background-color: #455a64;
@@ -450,8 +455,8 @@
     </style>
 </head>
 <body>
-    <div class="header-container">
-        <h1>Share Text Locally</h1>
+    <div class="header-container" style="height: 20px;">
+        <!-- Header text removed for space -->
         <button class="settings-btn" id="openSettingsBtn" onclick="openSettings()">Settings</button>
     </div>
 
