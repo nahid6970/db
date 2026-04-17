@@ -17,13 +17,14 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 🚀 Key Features
 
+- **Modal-Based Creation**: Notes are added via a dedicated **+ New Note** modal, keeping the home page clean and focused.
 - **Rich Markdown & Math**: Full support for standard Markdown and LaTeX math equations (Inline `$ ... $` and Block `$$ ... $$`).
 - **Syntax Highlighting**: Automatic code block highlighting for multiple languages.
 - **Custom Color Syntax**: 
   - Define your own triggers (e.g., `@@text@@`) in **Settings**.
   - Support for custom foreground and background colors.
   - **Transparency Options**: Toggle "No Text" or "No BG" for flexible, layered styling.
-  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly.
+  - **F3 Quick Format**: Highlight text in any note modal and press **F3** to pick and apply a custom style instantly.
 - **Advanced Text Controls**:
   - **Individual Note Styling**: Use the color pickers in the edit modal header to change the text and background color of the entire note.
   - **Pin to Top**: Keep important notes at the top with a prominent purple border and light purple background.
@@ -37,7 +38,10 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 - **Tabbed Settings Modal**: 
   - **Color Styles**: Manage your custom markdown triggers.
   - **Folder Config**: Centrally manage folder names, styles, sorting, and deletion.
-- **Modern Icon UI**: Clean, minimalist interface using SVG icons for all primary actions.
+- **Streamlined UI**: 
+  - Minimalist header with integrated action buttons.
+  - Simplified Add/Edit modals with labels removed for a cleaner aesthetic.
+  - Modern icon set using SVG for all primary actions.
 - **Real-time Sync**: Instant persistence and multi-device synchronization via Convex.
 
 ## 🛠️ Setup Instructions
@@ -64,8 +68,9 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 📝 Usage Tips
 
+- **Add Note**: Click the green **+ New Note** button in the header to start writing.
 - **Math**: Render beautiful formulas like `$E = mc^2$`.
-- **F3 Shortcut**: Quickly style specific words or phrases while editing.
-- **Note Colors**: Style entire "notebooks" by clicking the color pickers in the edit modal.
-- **Folders**: Organize your workspace by grouping related notes into custom folders. The "None" folder helps you find uncategorized content.
+- **F3 Shortcut**: Quickly style specific words or phrases while editing or adding a note.
+- **Folders**: Organize your workspace by grouping related notes into custom folders. Use the "None" folder for uncategorized content.
 - **Sorting**: Move your most used folders to the beginning of the list using the Folder Config settings.
+- **Clean Interface**: The home page stays clutter-free by moving creation and configuration into dedicated modals.
