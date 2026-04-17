@@ -2,9 +2,18 @@ import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
 export const list = query({
-  args: {},
-  handler: async (ctx) => {
-    const texts = await ctx.db.query("texts").collect();
+  args: { folderId: v.optional(v.string()) },
+  handler: async (ctx, args) => {
+    let texts;
+    if (args.folderId) {
+      texts = await ctx.db
+        .query("texts")
+        .filter((q) => q.eq(q.field("folderId"), args.folderId))
+        .collect();
+    } else {
+      texts = await ctx.db.query("texts").collect();
+    }
+    
     return texts.sort((a, b) => {
       if (a.pinned && !b.pinned) return -1;
       if (!a.pinned && b.pinned) return 1;
@@ -17,7 +26,8 @@ export const add = mutation({
   args: { 
     text: v.string(),
     color: v.optional(v.string()),
-    bgColor: v.optional(v.string())
+    bgColor: v.optional(v.string()),
+    folderId: v.optional(v.string())
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("texts", {
@@ -25,7 +35,8 @@ export const add = mutation({
       timestamp: Date.now(),
       pinned: false,
       color: args.color,
-      bgColor: args.bgColor
+      bgColor: args.bgColor,
+      folderId: args.folderId
     });
   },
 });
@@ -42,13 +53,15 @@ export const update = mutation({
     id: v.id("texts"), 
     text: v.string(),
     color: v.optional(v.string()),
-    bgColor: v.optional(v.string())
+    bgColor: v.optional(v.string()),
+    folderId: v.optional(v.string())
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, { 
       text: args.text,
       color: args.color,
-      bgColor: args.bgColor
+      bgColor: args.bgColor,
+      folderId: args.folderId
     });
   },
 });
@@ -64,9 +77,14 @@ export const togglePin = mutation({
 });
 
 export const clean = mutation({
-  args: {},
-  handler: async (ctx) => {
-    const all = await ctx.db.query("texts").collect();
+  args: { folderId: v.optional(v.string()) },
+  handler: async (ctx, args) => {
+    let all;
+    if (args.folderId) {
+      all = await ctx.db.query("texts").filter(q => q.eq(q.field("folderId"), args.folderId)).collect();
+    } else {
+      all = await ctx.db.query("texts").collect();
+    }
     for (const item of all) {
       await ctx.db.delete(item._id);
     }
@@ -95,5 +113,40 @@ export const updateSettings = mutation({
     } else {
       await ctx.db.insert("settings", { customSyntaxes: args.customSyntaxes });
     }
+  },
+});
+
+// Folder Logic
+export const listFolders = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db.query("folders").collect();
+  },
+});
+
+export const createFolder = mutation({
+  args: { name: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("folders", { name: args.name });
+  },
+});
+
+export const removeFolder = mutation({
+  args: { id: v.id("folders") },
+  handler: async (ctx, args) => {
+    // Optionally move notes to "All" or delete them.
+    // Let's set their folderId to undefined.
+    const notes = await ctx.db.query("texts").filter(q => q.eq(q.field("folderId"), args.id)).collect();
+    for (const note of notes) {
+      await ctx.db.patch(note._id, { folderId: undefined });
+    }
+    await ctx.db.delete(args.id);
+  },
+});
+
+export const moveToFolder = mutation({
+  args: { textId: v.id("texts"), folderId: v.optional(v.string()) },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.textId, { folderId: args.folderId });
   },
 });
