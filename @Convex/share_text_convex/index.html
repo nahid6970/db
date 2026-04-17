@@ -192,20 +192,24 @@
         }
 
         .expand-btn {
-            background: none;
-            border: none;
+            background: rgba(0, 123, 255, 0.05);
+            border: 1px solid rgba(0, 123, 255, 0.1);
             color: #007BFF;
-            padding: 5px 0;
+            padding: 4px 12px;
             cursor: pointer;
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             font-family: 'JetBrains Mono', monospace;
             margin-top: 10px;
+            border-radius: 20px;
+            transition: all 0.2s ease;
         }
         .expand-btn:hover {
-            text-decoration: underline;
+            background: rgba(0, 123, 255, 0.12);
+            border-color: rgba(0, 123, 255, 0.2);
+            color: #0056b3;
         }
         .expand-btn svg {
             margin-right: 5px;
