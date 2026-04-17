@@ -510,7 +510,6 @@
         <div class="folder-container" id="folderBar">
             <!-- Folders will be listed here -->
         </div>
-        <h2>Shared Texts: <span id="currentFolderName">All</span></h2>
         <div id="logsList"></div>
     </div>
 
@@ -732,7 +731,6 @@
                 const shareSelect = document.getElementById('shareFolderSelect');
                 
                 const lastFolderName = localStorage.getItem('lastFolderName') || 'All';
-                document.getElementById('currentFolderName').innerText = lastFolderName;
 
                 let html = `
                     <div class="folder-chip ${!currentFolderId ? 'active' : ''}" onclick="selectFolder(null, 'All')">
@@ -795,7 +793,6 @@
                 localStorage.removeItem('lastFolderId');
                 localStorage.setItem('lastFolderName', 'All');
             }
-            document.getElementById('currentFolderName').innerText = name || 'All';
             loadFolders();
             loadLogs();
         };
