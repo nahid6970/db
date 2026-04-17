@@ -356,10 +356,10 @@
             align-items: center;
         }
         .folder-chip {
-            padding: 8px 15px;
+            padding: 6px 12px;
             background: white;
             border: 1px solid #ced4da;
-            border-radius: 20px;
+            border-radius: 4px;
             cursor: pointer;
             font-size: 14px;
             display: flex;
@@ -387,16 +387,18 @@
             opacity: 1;
         }
         .add-folder-btn {
-            padding: 8px 12px;
+            width: 34px;
+            height: 34px;
             background: #607d8b;
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 14px;
+            font-size: 20px;
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            flex-shrink: 0;
         }
         .add-folder-btn:hover {
             background: #455a64;
@@ -686,7 +688,7 @@
                 });
                 
                 html += `
-                    <button class="add-folder-btn" onclick="addFolder()">+ Add Folder</button>
+                    <button class="add-folder-btn" title="Add Folder" onclick="addFolder()">+</button>
                 `;
                 
                 bar.innerHTML = html;
