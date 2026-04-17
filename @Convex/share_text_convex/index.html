@@ -343,6 +343,48 @@
             border: 1px solid #eee;
             margin-bottom: 15px;
         }
+
+        /* F3 Menu Styles */
+        #f3Menu {
+            display: none;
+            position: fixed;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            z-index: 2000;
+            min-width: 180px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .f3-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+        .f3-item:hover {
+            background-color: #f5f5f5;
+        }
+        .f3-swatch {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            flex-shrink: 0;
+        }
+        .f3-trigger {
+            font-weight: bold;
+            color: #444;
+            font-family: 'JetBrains Mono', monospace;
+            background: #eee;
+            padding: 2px 5px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
@@ -382,6 +424,7 @@
             </div>
             <textarea id="modalTextarea" class="modal-textarea"></textarea>
             <div class="modal-footer">
+                <p style="float: left; font-size: 12px; color: #666; margin: 10px 0;">Press <b>F3</b> to apply custom colors to selected text</p>
                 <button class="cancel-btn" onclick="closeModal('editModal')">Cancel</button>
                 <button class="save-btn" id="modalSaveBtn">Save Changes</button>
             </div>
@@ -416,6 +459,9 @@
             </div>
         </div>
     </div>
+
+    <!-- F3 Menu -->
+    <div id="f3Menu"></div>
 
     <script type="module">
         import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
@@ -501,6 +547,17 @@
             }
         };
 
+        // Global keydown listener for F3
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'F3') {
+                const textarea = document.activeElement;
+                if (textarea && textarea.id === 'modalTextarea') {
+                    e.preventDefault();
+                    showF3Menu(textarea);
+                }
+            }
+        });
+
         // Initialize header icons
         document.getElementById('openSettingsBtn').innerHTML = `${ICONS.settings} Settings`;
 
@@ -565,7 +622,7 @@
                     }
 
                     const fgStyle = log.color ? `color: ${log.color};` : '';
-                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor};` : '';
+                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor}; border-color: ${log.bgColor};` : '';
                     const extraClass = log.pinned ? 'pinned' : '';
 
                     return `
@@ -676,6 +733,54 @@
                 list.style.display = 'none';
                 btn.classList.remove('active');
             }
+        };
+
+        function showF3Menu(textarea) {
+            const menu = document.getElementById('f3Menu');
+            if (customSyntaxes.length === 0) {
+                alert("Please define custom syntaxes in Settings first!");
+                return;
+            }
+
+            menu.innerHTML = customSyntaxes.map(s => `
+                <div class="f3-item" onclick="applyF3('${s.trigger}')">
+                    <div class="f3-swatch" style="background-color: ${s.bgColor === 'transparent' ? 'transparent' : s.bgColor}; border-color: ${s.color === 'transparent' ? '#ccc' : s.color}; background-image: ${s.bgColor === 'transparent' ? 'linear-gradient(45deg, #eee 25%, transparent 25%, transparent 50%, #eee 50%, #eee 75%, transparent 75%, transparent)' : 'none'}; background-size: 10px 10px;"></div>
+                    <span class="f3-trigger">${s.trigger}</span>
+                    <span style="color: ${s.color === 'transparent' ? 'inherit' : s.color}">Sample</span>
+                </div>
+            `).join('');
+
+            // Get caret position for menu placement
+            const { selectionStart } = textarea;
+            const rect = textarea.getBoundingClientRect();
+            
+            menu.style.display = 'block';
+            menu.style.left = `${rect.left + 50}px`;
+            menu.style.top = `${rect.top + 50}px`;
+
+            const closeMenu = (e) => {
+                if (!menu.contains(e.target) && e.target !== textarea) {
+                    menu.style.display = 'none';
+                    document.removeEventListener('click', closeMenu);
+                }
+            };
+            setTimeout(() => document.addEventListener('click', closeMenu), 10);
+        }
+
+        window.applyF3 = (trigger) => {
+            const textarea = document.getElementById('modalTextarea');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            const selected = text.substring(start, end);
+            
+            const newText = text.substring(0, start) + trigger + selected + trigger + text.substring(end);
+            textarea.value = newText;
+            
+            textarea.focus();
+            textarea.setSelectionRange(start + trigger.length, start + trigger.length + selected.length);
+            
+            document.getElementById('f3Menu').style.display = 'none';
         };
 
         window.toggleExpand = (id) => {
