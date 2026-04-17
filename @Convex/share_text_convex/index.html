@@ -65,9 +65,8 @@
         }
         .shared-text {
             padding: 10px;
-            background-color: #fff;
+            background-color: transparent;
             border-radius: 5px;
-            border: 1px solid #ccc;
             word-wrap: break-word;
         }
         .shared-text h1, .shared-text h2, .shared-text h3, .shared-text h4, .shared-text h5, .shared-text h6 {
@@ -85,14 +84,14 @@
             margin-bottom: 0;
         }
         .shared-text pre {
-            background-color: #f0f0f0;
+            background-color: rgba(0,0,0,0.05);
             padding: 10px;
             border-radius: 5px;
             overflow-x: auto;
         }
         .shared-text code {
             font-family: 'JetBrains Mono', monospace;
-            background-color: #f0f0f0;
+            background-color: rgba(0,0,0,0.05);
             padding: 2px 4px;
             border-radius: 3px;
         }
@@ -100,7 +99,8 @@
             border-left: 4px solid #ccc;
             margin: 0;
             padding-left: 10px;
-            color: #666;
+            color: inherit;
+            opacity: 0.8;
         }
         .shared-text table {
             border-collapse: collapse;
@@ -108,12 +108,12 @@
             margin-bottom: 0.5em;
         }
         .shared-text th, .shared-text td {
-            border: 1px solid #ddd;
+            border: 1px solid rgba(0,0,0,0.1);
             padding: 8px;
             text-align: left;
         }
         .shared-text th {
-            background-color: #f2f2f2;
+            background-color: rgba(0,0,0,0.05);
         }
         .shared-text img {
             max-width: 100%;
@@ -132,7 +132,8 @@
         }
         .timestamp {
             font-size: 12px;
-            color: #666;
+            color: inherit;
+            opacity: 0.6;
             font-weight: bold;
         }
         .copy-btn, .delete-btn, .edit-btn, .pin-btn {
@@ -210,7 +211,7 @@
         .details-content {
             display: none;
             margin-top: 10px;
-            border-top: 1px dashed #ccc;
+            border-top: 1px dashed rgba(0,0,0,0.1);
             padding-top: 10px;
         }
         .details-content.show {
@@ -246,9 +247,11 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 15px;
+            gap: 15px;
         }
         .modal-header h2 {
             margin: 0;
+            flex-grow: 1;
         }
         .modal-textarea {
             flex-grow: 1;
@@ -311,7 +314,7 @@
             border: 1px solid #eee;
             background-color: white;
         }
-        .syntax-row input[type="color"] {
+        .syntax-row input[type="color"], .modal-header input[type="color"] {
             width: 40px;
             height: 35px;
             border: 1px solid #ccc;
@@ -366,6 +369,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Edit Text</h2>
+                <div class="trans-toggle">
+                    <label>Text Color</label>
+                    <input type="color" id="editFgColor">
+                </div>
+                <div class="trans-toggle">
+                    <label>BG Color</label>
+                    <input type="color" id="editBgColor">
+                </div>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('editModal')">×</button>
             </div>
             <textarea id="modalTextarea" class="modal-textarea"></textarea>
@@ -423,7 +434,6 @@
             })
         );
 
-        // Custom math extension for marked to protect LaTeX from markdown mangling
         marked.use({
             extensions: [
                 {
@@ -553,10 +563,14 @@
                         renderedContent = marked.parse(parseCustomColors(log.text));
                     }
 
+                    const fgStyle = log.color ? `color: ${log.color};` : '';
+                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor}; border-color: ${log.bgColor};` : '';
+                    const extraClass = log.pinned ? 'pinned' : '';
+
                     return `
-                        <div class="log-entry ${log.pinned ? 'pinned' : ''}" id="entry-${log._id}">
+                        <div class="log-entry ${extraClass}" id="entry-${log._id}" style="${fgStyle} ${bgStyle}">
                             <div class="timestamp">${timestamp}</div>
-                            <div id="log-${index}" class="shared-text">${renderedContent}</div>
+                            <div id="log-${index}" class="shared-text" style="color: inherit;">${renderedContent}</div>
                             <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index}, 'copy-btn-${index}')">${ICONS.copy}</button>
                             <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
                             <button class="edit-btn" title="Edit" onclick="startEditing('${log._id}', ${index})">${ICONS.edit}</button>
@@ -632,7 +646,7 @@
             const rows = document.querySelectorAll('.syntax-row');
             const newSyntaxes = Array.from(rows).map(row => {
                 const isFgTrans = row.querySelector('.fg-trans-toggle').checked;
-                const isBgTrans = row.querySelector('.bg-trans-toggle').checked;
+                const isBgTrans = row.querySelector('.bg-transparent-toggle') ? row.querySelector('.bg-transparent-toggle').checked : row.querySelector('.bg-trans-toggle').checked;
                 return {
                     trigger: row.querySelector('.trigger-input').value,
                     color: isFgTrans ? 'transparent' : row.querySelector('.fg-color').value,
@@ -702,18 +716,30 @@
         };
 
         window.startEditing = (id, index) => {
-            const rawText = currentLogs[index].text;
+            const log = currentLogs[index];
+            const rawText = log.text;
             const modal = document.getElementById('editModal');
             const textarea = document.getElementById('modalTextarea');
             const saveBtn = document.getElementById('modalSaveBtn');
+            const fgInput = document.getElementById('editFgColor');
+            const bgInput = document.getElementById('editBgColor');
             
             textarea.value = rawText;
+            fgInput.value = log.color || '#333333';
+            bgInput.value = log.bgColor || '#ffffff';
             modal.style.display = 'flex';
             
             saveBtn.onclick = async () => {
                 const newText = textarea.value;
+                const newFg = fgInput.value;
+                const newBg = bgInput.value;
                 if (newText.trim() !== "") {
-                    await client.mutation("functions:update", { id, text: newText });
+                    await client.mutation("functions:update", { 
+                        id, 
+                        text: newText,
+                        color: newFg,
+                        bgColor: newBg
+                    });
                     window.closeModal('editModal');
                     await loadLogs();
                 }

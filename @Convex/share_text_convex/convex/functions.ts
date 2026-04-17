@@ -14,12 +14,18 @@ export const list = query({
 });
 
 export const add = mutation({
-  args: { text: v.string() },
+  args: { 
+    text: v.string(),
+    color: v.optional(v.string()),
+    bgColor: v.optional(v.string())
+  },
   handler: async (ctx, args) => {
     await ctx.db.insert("texts", {
       text: args.text,
       timestamp: Date.now(),
       pinned: false,
+      color: args.color,
+      bgColor: args.bgColor
     });
   },
 });
@@ -32,9 +38,18 @@ export const remove = mutation({
 });
 
 export const update = mutation({
-  args: { id: v.id("texts"), text: v.string() },
+  args: { 
+    id: v.id("texts"), 
+    text: v.string(),
+    color: v.optional(v.string()),
+    bgColor: v.optional(v.string())
+  },
   handler: async (ctx, args) => {
-    await ctx.db.patch(args.id, { text: args.text });
+    await ctx.db.patch(args.id, { 
+      text: args.text,
+      color: args.color,
+      bgColor: args.bgColor
+    });
   },
 });
 
