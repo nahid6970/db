@@ -753,9 +753,12 @@
                     const bgStyle = log.bgColor ? `background-color: ${log.bgColor}; border-color: ${log.bgColor};` : '';
                     const extraClass = log.pinned ? 'pinned' : '';
 
+                    const folder = folders.find(f => f._id === log.folderId);
+                    const folderName = folder ? folder.name : 'All';
+
                     return `
                         <div class="log-entry ${extraClass}" id="entry-${log._id}" style="${fgStyle} ${bgStyle}">
-                            <div class="timestamp">${timestamp}</div>
+                            <div class="timestamp">${timestamp} • 📁 ${folderName}</div>
                             <div id="log-${index}" class="shared-text" style="color: inherit;">${renderedContent}</div>
                             <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index}, 'copy-btn-${index}')">${ICONS.copy}</button>
                             <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
