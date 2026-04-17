@@ -125,9 +125,9 @@ export const updateSettings = mutation({
 
 // Folder Logic
 export const listFolders = query({
-  args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("folders").collect();
+    const folders = await ctx.db.query("folders").collect();
+    return folders.sort((a, b) => (a.position ?? 0) - (b.position ?? 0));
   },
 });
 
@@ -139,11 +139,15 @@ export const createFolder = mutation({
     borderColor: v.optional(v.string())
   },
   handler: async (ctx, args) => {
+    const existing = await ctx.db.query("folders").collect();
+    const maxPos = existing.reduce((max, f) => Math.max(max, f.position ?? 0), -1);
+
     return await ctx.db.insert("folders", { 
       name: args.name,
       color: args.color,
       bgColor: args.bgColor,
-      borderColor: args.borderColor
+      borderColor: args.borderColor,
+      position: maxPos + 1
     });
   },
 });
@@ -154,14 +158,16 @@ export const updateFolder = mutation({
     name: v.string(),
     color: v.optional(v.string()),
     bgColor: v.optional(v.string()),
-    borderColor: v.optional(v.string())
+    borderColor: v.optional(v.string()),
+    position: v.optional(v.number())
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, { 
       name: args.name,
       color: args.color,
       bgColor: args.bgColor,
-      borderColor: args.borderColor
+      borderColor: args.borderColor,
+      position: args.position
     });
   },
 });

@@ -956,6 +956,10 @@
             row.dataset.id = folder._id;
             
             row.innerHTML = `
+                <div style="display: flex; flex-direction: column; gap: 2px;">
+                    <button class="add-folder-btn" style="width: 24px; height: 24px; font-size: 12px;" onclick="moveFolderSettingRow(this, -1)">▲</button>
+                    <button class="add-folder-btn" style="width: 24px; height: 24px; font-size: 12px;" onclick="moveFolderSettingRow(this, 1)">▼</button>
+                </div>
                 <input type="text" class="folder-name-input" value="${folder.name}" style="flex: 1;">
                 <div class="trans-toggle">
                     <label>FG</label>
@@ -990,6 +994,15 @@
             document.getElementById('folderSettingsList').appendChild(row);
         };
 
+        window.moveFolderSettingRow = (btn, direction) => {
+            const row = btn.closest('.syntax-row');
+            if (direction === -1 && row.previousElementSibling) {
+                row.parentNode.insertBefore(row, row.previousElementSibling);
+            } else if (direction === 1 && row.nextElementSibling) {
+                row.parentNode.insertBefore(row.nextElementSibling, row);
+            }
+        };
+
         window.saveSettings = async () => {
             // Save Syntax Settings
             const syntaxRows = document.querySelectorAll('#syntaxList .syntax-row');
@@ -1005,13 +1018,14 @@
             
             // Save Folder Settings
             const folderRows = document.querySelectorAll('#folderSettingsList .syntax-row');
-            const folderPromises = Array.from(folderRows).map(row => {
+            const folderPromises = Array.from(folderRows).map((row, index) => {
                 return client.mutation("functions:updateFolder", {
                     id: row.dataset.id,
                     name: row.querySelector('.folder-name-input').value,
                     color: row.querySelector('.folder-fg').value,
                     bgColor: row.querySelector('.folder-bg').value,
-                    borderColor: row.querySelector('.folder-border').value
+                    borderColor: row.querySelector('.folder-border').value,
+                    position: index
                 });
             });
 
