@@ -23,17 +23,21 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
   - Define your own triggers (e.g., `@@text@@`) in **Settings**.
   - Support for custom foreground and background colors.
   - **Transparency Options**: Toggle "No Text" or "No BG" for flexible, layered styling.
-  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly, or use the **Clear All Styles** option to strip all custom triggers from the selection.
+  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly.
 - **Advanced Text Controls**:
   - **Individual Note Styling**: Use the color pickers in the edit modal header to change the text and background color of the entire note.
   - **Pin to Top**: Keep important notes at the top with a prominent purple border and light purple background.
-  - **Read More Delimiter**: Use five or more greater-than signs (`>>>>>`) to create a preview/detail split.
-  - **Edit Modal**: A large, dedicated popup for comfortable long-form editing.
+  - **Read More Delimiter**: Use five or more greater-than signs (`>>>>>`) to create a preview/detail split with a modern **pill-shaped toggle button**.
 - **Folder Management**: 
-  - Create horizontal folders that wrap to new rows as needed.
-  - Move notes between folders using the dropdown in the **Edit Modal**.
-  - Filter notes by selecting a folder; shared notes are automatically added to the active folder.
-- **Modern Icon UI**: Clean interface using SVG icons for all primary actions.
+  - **None Folder**: Special view for notes not assigned to any folder.
+  - **Auto-Assignment**: New notes are automatically added to the currently active folder.
+  - **Custom Folder Styling**: Customize each folder's background, text, and border color in Settings.
+  - **Rearrange Order**: Use the up arrow (▲) in Settings to move folders to the top and organize your navigation.
+  - **Visual Indicator**: Active folders are marked with a distinct **dot icon**.
+- **Tabbed Settings Modal**: 
+  - **Color Styles**: Manage your custom markdown triggers.
+  - **Folder Config**: Centrally manage folder names, styles, sorting, and deletion.
+- **Modern Icon UI**: Clean, minimalist interface using SVG icons for all primary actions.
 - **Real-time Sync**: Instant persistence and multi-device synchronization via Convex.
 
 ## 🛠️ Setup Instructions
@@ -62,6 +66,6 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 - **Math**: Render beautiful formulas like `$E = mc^2$`.
 - **F3 Shortcut**: Quickly style specific words or phrases while editing.
-- **Note Colors**: Style entire "notebooks" by clicking the color pickers beside the close button in the edit modal.
-- **Folders**: Organize your workspace by grouping related notes into custom folders.
-- **Preview/Details**: Keep your list organized by hiding long logs behind the `>>>>>` trigger.
+- **Note Colors**: Style entire "notebooks" by clicking the color pickers in the edit modal.
+- **Folders**: Organize your workspace by grouping related notes into custom folders. The "None" folder helps you find uncategorized content.
+- **Sorting**: Move your most used folders to the beginning of the list using the Folder Config settings.
