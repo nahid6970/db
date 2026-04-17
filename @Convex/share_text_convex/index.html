@@ -527,14 +527,8 @@
             row.className = 'syntax-row';
             row.innerHTML = `
                 <input type="text" class="trigger-input" placeholder="Trigger (e.g. @@)" value="${trigger}">
-                <div class="color-group">
-                    <label>Text</label>
-                    <input type="color" class="fg-color" value="${color}">
-                </div>
-                <div class="color-group">
-                    <label>BG</label>
-                    <input type="color" class="bg-color" value="${bgColor || '#ffffff'}">
-                </div>
+                <input type="color" class="fg-color" title="Text Color" value="${color}">
+                <input type="color" class="bg-color" title="Background Color" value="${bgColor || '#ffffff'}">
                 <div class="syntax-preview" style="color: ${color}; background-color: ${bgColor || '#ffffff'}">Preview</div>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="this.parentElement.remove()">×</button>
             `;
