@@ -175,6 +175,9 @@ export const updateFolder = mutation({
 export const removeFolder = mutation({
   args: { id: v.id("folders") },
   handler: async (ctx, args) => {
+    const existing = await ctx.db.get(args.id);
+    if (!existing) return;
+
     // Optionally move notes to "All" or delete them.
     // Let's set their folderId to undefined.
     const notes = await ctx.db.query("texts").filter(q => q.eq(q.field("folderId"), args.id)).collect();

@@ -814,7 +814,7 @@
         };
 
         window.deleteFolder = async (id) => {
-            if (confirm("Delete this folder? (Notes will be moved to 'All')")) {
+            if (confirm("Delete this folder? (Notes will be moved to 'None')")) {
                 await client.mutation("functions:removeFolder", { id });
                 if (currentFolderId === id) {
                     currentFolderId = null;
@@ -823,6 +823,14 @@
                 }
                 await loadFolders();
                 await loadLogs();
+
+                // If settings modal is open, refresh the folder list there too
+                const settingsModal = document.getElementById('settingsModal');
+                if (settingsModal.style.display === 'flex') {
+                    const folderList = document.getElementById('folderSettingsList');
+                    folderList.innerHTML = '';
+                    folders.forEach(folder => addFolderSettingRow(folder));
+                }
             }
         };
 
