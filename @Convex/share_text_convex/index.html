@@ -739,12 +739,8 @@
 
         function showF3Menu(textarea) {
             const menu = document.getElementById('f3Menu');
-            if (customSyntaxes.length === 0) {
-                alert("Please define custom syntaxes in Settings first!");
-                return;
-            }
-
-            menu.innerHTML = customSyntaxes.map(s => {
+            
+            let html = customSyntaxes.map(s => {
                 const fg = s.color === 'transparent' ? 'inherit' : s.color;
                 const bg = s.bgColor === 'transparent' ? 'transparent' : s.bgColor;
                 const swatchBg = s.bgColor === 'transparent' ? 'transparent' : s.bgColor;
@@ -758,6 +754,16 @@
                     </div>
                 `;
             }).join('');
+
+            // Add Clear option
+            html += `
+                <div class="f3-item" onclick="clearF3Style()" style="border-top: 2px solid #eee; background-color: #fff9f9;">
+                    <div class="f3-swatch" style="background: #e74c3c; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold;">×</div>
+                    <span style="color: #e74c3c; font-weight: bold;">Clear All Styles</span>
+                </div>
+            `;
+
+            menu.innerHTML = html;
 
             // Get caret position for menu placement
             const rect = textarea.getBoundingClientRect();
@@ -774,6 +780,42 @@
             };
             setTimeout(() => document.addEventListener('click', closeMenu), 10);
         }
+
+        window.clearF3Style = () => {
+            const textarea = document.getElementById('modalTextarea');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            let selected = text.substring(start, end);
+            
+            if (selected.length === 0) {
+                document.getElementById('f3Menu').style.display = 'none';
+                return;
+            }
+
+            customSyntaxes.forEach(syntax => {
+                if (syntax.trigger && syntax.trigger.trim() !== "") {
+                    const escapedTrigger = syntax.trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    
+                    // Case 1: Selection is exactly wrapped (e.g., "@@text@@")
+                    if (selected.startsWith(syntax.trigger) && selected.endsWith(syntax.trigger)) {
+                        selected = selected.substring(syntax.trigger.length, selected.length - syntax.trigger.length);
+                    }
+                    
+                    // Case 2: Selection contains multiple instances (strip all)
+                    const regex = new RegExp(escapedTrigger, 'g');
+                    selected = selected.replace(regex, '');
+                }
+            });
+            
+            const newText = text.substring(0, start) + selected + text.substring(end);
+            textarea.value = newText;
+            
+            textarea.focus();
+            textarea.setSelectionRange(start, start + selected.length);
+            
+            document.getElementById('f3Menu').style.display = 'none';
+        };
 
         window.applyF3 = (trigger) => {
             const textarea = document.getElementById('modalTextarea');

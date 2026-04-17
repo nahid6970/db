@@ -23,7 +23,7 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
   - Define your own triggers (e.g., `@@text@@`) in **Settings**.
   - Support for custom foreground and background colors.
   - **Transparency Options**: Toggle "No Text" or "No BG" for flexible, layered styling.
-  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly.
+  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly, or use the **Clear All Styles** option to strip all custom triggers from the selection.
 - **Advanced Text Controls**:
   - **Individual Note Styling**: Use the color pickers in the edit modal header to change the text and background color of the entire note.
   - **Pin to Top**: Keep important notes at the top with a prominent purple border and light purple background.
