@@ -570,7 +570,6 @@
                 <div id="syntaxList" class="settings-scroll">
                     <!-- Syntax rows will be added here -->
                 </div>
-                <button class="save-btn" style="background-color: #3498db; margin-bottom: 10px;" onclick="addSyntaxRow()">+ Add New Syntax</button>
             </div>
 
             <div id="section-folders" class="settings-section">
@@ -583,6 +582,7 @@
             </div>
 
             <div class="modal-footer">
+                <button id="addSyntaxBtn" class="save-btn" style="background-color: #3498db; float: left;" onclick="addSyntaxRow()">+ Add New Syntax</button>
                 <button class="cancel-btn" onclick="closeModal('settingsModal')">Cancel</button>
                 <button class="save-btn" onclick="saveSettings()">Save Settings</button>
             </div>
@@ -882,6 +882,9 @@
             // Update sections
             document.querySelectorAll('.settings-section').forEach(section => section.classList.remove('active'));
             document.getElementById(`section-${tabId}`).classList.add('active');
+
+            // Toggle Add Syntax button
+            document.getElementById('addSyntaxBtn').style.display = tabId === 'colors' ? 'block' : 'none';
         };
 
         window.openSettings = () => {
