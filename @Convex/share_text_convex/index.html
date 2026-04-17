@@ -128,6 +128,7 @@
         }
         .log-entry.pinned {
             border: 3px solid #8e44ad !important;
+            background-color: #fdf2ff;
             box-shadow: 0 0 10px rgba(142, 68, 173, 0.2);
         }
         .timestamp {
@@ -564,7 +565,7 @@
                     }
 
                     const fgStyle = log.color ? `color: ${log.color};` : '';
-                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor}; border-color: ${log.bgColor};` : '';
+                    const bgStyle = log.bgColor ? `background-color: ${log.bgColor};` : '';
                     const extraClass = log.pinned ? 'pinned' : '';
 
                     return `
@@ -767,15 +768,6 @@
             setTimeout(() => {
                 copyBtn.innerHTML = originalIcon;
                 copyBtn.classList.remove('success');
-            }, 2000);
-        };
-
-        loadLogs();
-        setInterval(loadLogs, 5000);
-    </script>
-</body>
-</html>
-uccess');
             }, 2000);
         };
 
