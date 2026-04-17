@@ -22,11 +22,11 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 - **Custom Color Syntax**: 
   - Define your own triggers (e.g., `@@text@@`) in **Settings**.
   - Support for custom foreground and background colors.
-  - Transparency options ("No Text", "No BG") for flexible styling.
-  - **F3 Quick Format**: Press `F3` while editing to quickly apply your triggers to selected text.
+  - **Transparency Options**: Toggle "No Text" or "No BG" for flexible, layered styling.
+  - **F3 Quick Format**: Highlight text in the edit modal and press **F3** to pick and apply a custom style instantly.
 - **Advanced Text Controls**:
-  - **Individual Note Styling**: Change the entire color scheme (text and background) for any specific note.
-  - **Pin to Top**: Keep important notes at the top with a prominent purple border.
+  - **Individual Note Styling**: Use the color pickers in the edit modal header to change the text and background color of the entire note.
+  - **Pin to Top**: Keep important notes at the top with a prominent purple border and light purple background.
   - **Read More Delimiter**: Use five or more greater-than signs (`>>>>>`) to create a preview/detail split.
   - **Edit Modal**: A large, dedicated popup for comfortable long-form editing.
 - **Modern Icon UI**: Clean interface using SVG icons for all primary actions.
@@ -57,6 +57,6 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 ## 📝 Usage Tips
 
 - **Math**: Render beautiful formulas like `$E = mc^2$`.
-- **F3 Shortcut**: Highlight text in the edit modal and press **F3** to pick a custom style instantly.
-- **Note Colors**: While editing a note, use the color pickers in the header to change its "notebook" color.
-- **Preview/Details**: Insert `>>>>>` in your text to hide extra content behind a "Show More" button.
+- **F3 Shortcut**: Quickly style specific words or phrases while editing.
+- **Note Colors**: Style entire "notebooks" by clicking the color pickers beside the close button in the edit modal.
+- **Preview/Details**: Keep your list organized by hiding long logs behind the `>>>>>` trigger.

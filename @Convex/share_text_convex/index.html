@@ -353,19 +353,21 @@
             border-radius: 5px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             z-index: 2000;
-            min-width: 180px;
+            min-width: 120px;
+            width: fit-content;
             max-height: 400px;
             overflow-y: auto;
         }
         .f3-item {
-            padding: 10px 15px;
+            padding: 8px 12px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-size: 14px;
             border-bottom: 1px solid #eee;
             transition: background-color 0.2s;
+            white-space: nowrap;
         }
         .f3-item:hover {
             background-color: #f5f5f5;
