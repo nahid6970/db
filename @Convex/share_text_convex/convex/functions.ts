@@ -132,9 +132,37 @@ export const listFolders = query({
 });
 
 export const createFolder = mutation({
-  args: { name: v.string() },
+  args: { 
+    name: v.string(),
+    color: v.optional(v.string()),
+    bgColor: v.optional(v.string()),
+    borderColor: v.optional(v.string())
+  },
   handler: async (ctx, args) => {
-    return await ctx.db.insert("folders", { name: args.name });
+    return await ctx.db.insert("folders", { 
+      name: args.name,
+      color: args.color,
+      bgColor: args.bgColor,
+      borderColor: args.borderColor
+    });
+  },
+});
+
+export const updateFolder = mutation({
+  args: { 
+    id: v.id("folders"),
+    name: v.string(),
+    color: v.optional(v.string()),
+    bgColor: v.optional(v.string()),
+    borderColor: v.optional(v.string())
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { 
+      name: args.name,
+      color: args.color,
+      bgColor: args.bgColor,
+      borderColor: args.borderColor
+    });
   },
 });
 

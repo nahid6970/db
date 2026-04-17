@@ -294,6 +294,37 @@
         }
 
         /* Settings Modal Specifics */
+        .settings-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .settings-tab {
+            padding: 8px 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.2s;
+        }
+        .settings-tab:hover {
+            background-color: #f0f0f0;
+        }
+        .settings-tab.active {
+            background-color: #3498db;
+            color: white;
+        }
+        .settings-section {
+            display: none;
+            flex-direction: column;
+            flex-grow: 1;
+            height: 100%;
+        }
+        .settings-section.active {
+            display: flex;
+        }
         .syntax-row {
             display: flex;
             gap: 10px;
@@ -515,24 +546,42 @@
     <div id="settingsModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Custom Color Syntax</h2>
+                <h2>Settings</h2>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('settingsModal')">×</button>
             </div>
-            <div style="margin-bottom: 15px;">
-                <button class="expand-btn" onclick="toggleReservedList()" style="margin-top: 0; color: #e67e22;">
-                    View Reserved Syntaxes (Avoid these)
-                </button>
-                <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 10px; border-radius: 5px; margin-top: 5px; border: 1px solid #ffe082;">
-                    <strong>Avoid:</strong> #, ##, ###, ****, __, ~~, *, _, [ ], ( ), |, ---, >>>>>
+
+            <div class="settings-tabs">
+                <div class="settings-tab active" id="tab-colors" onclick="switchSettingsTab('colors')">Color Styles</div>
+                <div class="settings-tab" id="tab-folders" onclick="switchSettingsTab('folders')">Folder Config</div>
+            </div>
+
+            <div id="section-colors" class="settings-section active">
+                <div style="margin-bottom: 15px;">
+                    <button class="expand-btn" onclick="toggleReservedList()" style="margin-top: 0; color: #e67e22;">
+                        View Reserved Syntaxes (Avoid these)
+                    </button>
+                    <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 10px; border-radius: 5px; margin-top: 5px; border: 1px solid #ffe082;">
+                        <strong>Avoid:</strong> #, ##, ###, ****, __, ~~, *, _, [ ], ( ), |, ---, >>>>>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                    Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger
+                </p>
+                <div id="syntaxList" class="settings-scroll">
+                    <!-- Syntax rows will be added here -->
+                </div>
+                <button class="save-btn" style="background-color: #3498db; margin-bottom: 10px;" onclick="addSyntaxRow()">+ Add New Syntax</button>
+            </div>
+
+            <div id="section-folders" class="settings-section">
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                    Customize folder appearance (Background, Foreground, Border).
+                </p>
+                <div id="folderSettingsList" class="settings-scroll">
+                    <!-- Folder settings will be added here -->
                 </div>
             </div>
-            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
-                Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger
-            </p>
-            <div id="syntaxList" class="settings-scroll">
-                <!-- Syntax rows will be added here -->
-            </div>
-            <button class="save-btn" style="background-color: #3498db; margin-bottom: 15px;" onclick="addSyntaxRow()">+ Add New Syntax</button>
+
             <div class="modal-footer">
                 <button class="cancel-btn" onclick="closeModal('settingsModal')">Cancel</button>
                 <button class="save-btn" onclick="saveSettings()">Save Settings</button>
@@ -693,8 +742,17 @@
                 let selectHtml = `<option value="">None (All)</option>`;
                 
                 folders.forEach(f => {
+                    const style = `
+                        background-color: ${f.bgColor || 'white'}; 
+                        color: ${f.color || 'inherit'}; 
+                        border-color: ${f.borderColor || '#ced4da'};
+                    `;
+                    const activeStyle = f.bgColor ? `filter: brightness(0.9); border-width: 2px; border-color: ${f.borderColor || f.color || '#4CAF50'};` : '';
+
                     html += `
-                        <div class="folder-chip ${currentFolderId === f._id ? 'active' : ''}" onclick="selectFolder('${f._id}', '${f.name}')">
+                        <div class="folder-chip ${currentFolderId === f._id ? 'active' : ''}" 
+                             style="${style} ${currentFolderId === f._id ? activeStyle : ''}"
+                             onclick="selectFolder('${f._id}', '${f.name}')">
                             ${f.name}
                             <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${f._id}')">×</span>
                         </div>
@@ -816,11 +874,26 @@
             }
         }
 
+        window.switchSettingsTab = (tabId) => {
+            // Update tabs
+            document.querySelectorAll('.settings-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+
+            // Update sections
+            document.querySelectorAll('.settings-section').forEach(section => section.classList.remove('active'));
+            document.getElementById(`section-${tabId}`).classList.add('active');
+        };
+
         window.openSettings = () => {
             const list = document.getElementById('syntaxList');
             list.innerHTML = '';
             customSyntaxes.forEach((syntax, i) => addSyntaxRow(syntax.trigger, syntax.color, syntax.bgColor));
             if (customSyntaxes.length === 0) addSyntaxRow();
+
+            const folderList = document.getElementById('folderSettingsList');
+            folderList.innerHTML = '';
+            folders.forEach(folder => addFolderSettingRow(folder));
+
             document.getElementById('settingsModal').style.display = 'flex';
         };
 
@@ -874,9 +947,50 @@
             document.getElementById('syntaxList').appendChild(row);
         };
 
+        window.addFolderSettingRow = (folder) => {
+            const row = document.createElement('div');
+            row.className = 'syntax-row';
+            row.dataset.id = folder._id;
+            
+            row.innerHTML = `
+                <input type="text" class="folder-name-input" value="${folder.name}" style="flex: 1;">
+                <div class="trans-toggle">
+                    <label>FG</label>
+                    <input type="color" class="folder-fg" value="${folder.color || '#333333'}">
+                </div>
+                <div class="trans-toggle">
+                    <label>BG</label>
+                    <input type="color" class="folder-bg" value="${folder.bgColor || '#ffffff'}">
+                </div>
+                <div class="trans-toggle">
+                    <label>Border</label>
+                    <input type="color" class="folder-border" value="${folder.borderColor || '#ced4da'}">
+                </div>
+                <div class="syntax-preview" style="color: ${folder.color || 'inherit'}; background-color: ${folder.bgColor || 'white'}; border: 1px solid ${folder.borderColor || '#ced4da'};">
+                    ${folder.name}
+                </div>
+            `;
+
+            const updatePreview = () => {
+                const name = row.querySelector('.folder-name-input').value;
+                const fg = row.querySelector('.folder-fg').value;
+                const bg = row.querySelector('.folder-bg').value;
+                const border = row.querySelector('.folder-border').value;
+                const preview = row.querySelector('.syntax-preview');
+                preview.innerText = name;
+                preview.style.color = fg;
+                preview.style.backgroundColor = bg;
+                preview.style.borderColor = border;
+            };
+
+            row.querySelectorAll('input').forEach(input => input.oninput = updatePreview);
+            document.getElementById('folderSettingsList').appendChild(row);
+        };
+
         window.saveSettings = async () => {
-            const rows = document.querySelectorAll('.syntax-row');
-            const newSyntaxes = Array.from(rows).map(row => {
+            // Save Syntax Settings
+            const syntaxRows = document.querySelectorAll('#syntaxList .syntax-row');
+            const newSyntaxes = Array.from(syntaxRows).map(row => {
                 const isFgTrans = row.querySelector('.fg-trans-toggle').checked;
                 const isBgTrans = row.querySelector('.bg-trans-toggle').checked;
                 return {
@@ -886,10 +1000,26 @@
                 };
             }).filter(s => s.trigger.trim() !== "");
             
+            // Save Folder Settings
+            const folderRows = document.querySelectorAll('#folderSettingsList .syntax-row');
+            const folderPromises = Array.from(folderRows).map(row => {
+                return client.mutation("functions:updateFolder", {
+                    id: row.dataset.id,
+                    name: row.querySelector('.folder-name-input').value,
+                    color: row.querySelector('.folder-fg').value,
+                    bgColor: row.querySelector('.folder-bg').value,
+                    borderColor: row.querySelector('.folder-border').value
+                });
+            });
+
             try {
-                await client.mutation("functions:updateSettings", { customSyntaxes: newSyntaxes });
+                await Promise.all([
+                    client.mutation("functions:updateSettings", { customSyntaxes: newSyntaxes }),
+                    ...folderPromises
+                ]);
                 customSyntaxes = newSyntaxes;
                 window.closeModal('settingsModal');
+                await loadFolders();
                 await loadLogs();
             } catch (err) {
                 console.error("Failed to save settings:", err);
