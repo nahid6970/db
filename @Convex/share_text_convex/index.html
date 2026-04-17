@@ -457,7 +457,13 @@
 
     <form id="shareForm">
         <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
-        <button type="submit">Share</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button type="submit">Share</button>
+            <div style="display: flex; align-items: center; gap: 5px; font-size: 14px; color: #666;">
+                <label for="shareFolderSelect">Target Folder:</label>
+                <select id="shareFolderSelect" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; background: white; cursor: pointer;"></select>
+            </div>
+        </div>
     </form>
 
     <div class="logs">
@@ -664,7 +670,8 @@
             try {
                 folders = await client.query("functions:listFolders");
                 const bar = document.getElementById('folderBar');
-                const select = document.getElementById('editFolderSelect');
+                const editSelect = document.getElementById('editFolderSelect');
+                const shareSelect = document.getElementById('shareFolderSelect');
                 
                 const lastFolderName = localStorage.getItem('lastFolderName') || 'All';
                 document.getElementById('currentFolderName').innerText = lastFolderName;
@@ -692,7 +699,19 @@
                 `;
                 
                 bar.innerHTML = html;
-                select.innerHTML = selectHtml;
+                editSelect.innerHTML = selectHtml;
+                shareSelect.innerHTML = selectHtml;
+
+                // Sync shareSelect value with current state
+                shareSelect.value = currentFolderId || "";
+                
+                // Add listener to shareSelect to change view when dropdown changes
+                shareSelect.onchange = (e) => {
+                    const id = e.target.value || null;
+                    const folder = folders.find(f => f._id === id);
+                    const name = folder ? folder.name : 'All';
+                    selectFolder(id, name);
+                };
             } catch (err) {
                 console.error("Error loading folders:", err);
             }
