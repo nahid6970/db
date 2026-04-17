@@ -758,7 +758,6 @@
                              style="${style} ${currentFolderId === f._id ? activeStyle : ''}"
                              onclick="selectFolder('${f._id}', '${f.name}')">
                             ${f.name}
-                            <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${f._id}')">×</span>
                         </div>
                     `;
                     selectHtml += `<option value="${f._id}">${f.name}</option>`;
@@ -979,6 +978,7 @@
                 <div class="syntax-preview" style="color: ${folder.color || 'inherit'}; background-color: ${folder.bgColor || 'white'}; border: 1px solid ${folder.borderColor || '#ced4da'};">
                     ${folder.name}
                 </div>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="deleteFolder('${folder._id}')">×</button>
             `;
 
             const updatePreview = () => {
