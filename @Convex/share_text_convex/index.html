@@ -308,23 +308,26 @@
             border: 1px solid #eee;
             background-color: white;
         }
-        .color-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 2px;
-        }
-        .color-group label {
-            font-size: 10px;
-            color: #666;
-        }
         .syntax-row input[type="color"] {
             width: 40px;
-            height: 30px;
+            height: 35px;
             border: 1px solid #ccc;
             cursor: pointer;
             padding: 0;
             background: none;
+            border-radius: 4px;
+        }
+        .syntax-row input[type="color"]:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        .trans-toggle {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            font-size: 10px;
+            color: #666;
         }
         .settings-scroll {
             overflow-y: auto;
@@ -446,8 +449,8 @@
                         const escapedTrigger = syntax.trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
                         const regex = new RegExp(`${escapedTrigger}(.*?)${escapedTrigger}`, 'g');
                         processedText = processedText.replace(regex, (match, content) => {
-                            const fg = syntax.color || 'inherit';
-                            const bg = syntax.bgColor || 'transparent';
+                            const fg = syntax.color === 'transparent' ? 'inherit' : (syntax.color || 'inherit');
+                            const bg = syntax.bgColor === 'transparent' ? 'transparent' : (syntax.bgColor || 'transparent');
                             return `<span style="color: ${fg}; background-color: ${bg}; padding: 0 2px; border-radius: 3px;">${content}</span>`;
                         });
                     }
@@ -525,23 +528,48 @@
         window.addSyntaxRow = (trigger = '', color = '#000000', bgColor = '#ffffff') => {
             const row = document.createElement('div');
             row.className = 'syntax-row';
+            
+            const isFgTrans = color === 'transparent';
+            const isBgTrans = bgColor === 'transparent' || !bgColor;
+            
             row.innerHTML = `
                 <input type="text" class="trigger-input" placeholder="Trigger (e.g. @@)" value="${trigger}">
-                <input type="color" class="fg-color" title="Text Color" value="${color}">
-                <input type="color" class="bg-color" title="Background Color" value="${bgColor || '#ffffff'}">
-                <div class="syntax-preview" style="color: ${color}; background-color: ${bgColor || '#ffffff'}">Preview</div>
+                
+                <div class="trans-toggle">
+                    <label>No Text</label>
+                    <input type="checkbox" class="fg-trans-toggle" ${isFgTrans ? 'checked' : ''}>
+                </div>
+                <input type="color" class="fg-color" title="Text Color" value="${isFgTrans ? '#000000' : color}" ${isFgTrans ? 'disabled' : ''}>
+                
+                <div class="trans-toggle">
+                    <label>No BG</label>
+                    <input type="checkbox" class="bg-trans-toggle" ${isBgTrans ? 'checked' : ''}>
+                </div>
+                <input type="color" class="bg-color" title="Background Color" value="${isBgTrans ? '#ffffff' : bgColor}" ${isBgTrans ? 'disabled' : ''}>
+                
+                <div class="syntax-preview" style="color: ${color}; background-color: ${isBgTrans ? 'transparent' : bgColor}">Preview</div>
                 <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="this.parentElement.remove()">×</button>
             `;
             
             const updatePreview = () => {
-                const fg = row.querySelector('.fg-color').value;
-                const bg = row.querySelector('.bg-color').value;
+                const isFgNo = row.querySelector('.fg-trans-toggle').checked;
+                const fgInput = row.querySelector('.fg-color');
+                fgInput.disabled = isFgNo;
+                const fg = isFgNo ? 'transparent' : fgInput.value;
+                
+                const isBgNo = row.querySelector('.bg-trans-toggle').checked;
+                const bgInput = row.querySelector('.bg-color');
+                bgInput.disabled = isBgNo;
+                const bg = isBgNo ? 'transparent' : bgInput.value;
+                
                 const preview = row.querySelector('.syntax-preview');
-                preview.style.color = fg;
+                preview.style.color = fg === 'transparent' ? 'inherit' : fg;
                 preview.style.backgroundColor = bg;
             };
 
+            row.querySelector('.fg-trans-toggle').onchange = updatePreview;
             row.querySelector('.fg-color').oninput = updatePreview;
+            row.querySelector('.bg-trans-toggle').onchange = updatePreview;
             row.querySelector('.bg-color').oninput = updatePreview;
             
             document.getElementById('syntaxList').appendChild(row);
@@ -549,11 +577,15 @@
 
         window.saveSettings = async () => {
             const rows = document.querySelectorAll('.syntax-row');
-            const newSyntaxes = Array.from(rows).map(row => ({
-                trigger: row.querySelector('.trigger-input').value,
-                color: row.querySelector('.fg-color').value,
-                bgColor: row.querySelector('.bg-color').value
-            })).filter(s => s.trigger.trim() !== "");
+            const newSyntaxes = Array.from(rows).map(row => {
+                const isFgTrans = row.querySelector('.fg-trans-toggle').checked;
+                const isBgTrans = row.querySelector('.bg-trans-toggle').checked;
+                return {
+                    trigger: row.querySelector('.trigger-input').value,
+                    color: isFgTrans ? 'transparent' : row.querySelector('.fg-color').value,
+                    bgColor: isBgTrans ? 'transparent' : row.querySelector('.bg-color').value
+                };
+            }).filter(s => s.trigger.trim() !== "");
             
             try {
                 await client.mutation("functions:updateSettings", { customSyntaxes: newSyntaxes });
