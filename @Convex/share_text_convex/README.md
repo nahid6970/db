@@ -2,6 +2,19 @@
 
 A powerful, markdown-enabled text sharing application powered by a Convex backend and a clean, responsive vanilla HTML/JS frontend.
 
+## ⚠️ Reserved Syntaxes (Avoid in Custom Triggers)
+
+To avoid conflicts with standard Markdown and project features, do **not** use the following symbols as your custom color syntax triggers in Settings:
+
+| Category | Reserved Symbols |
+| :--- | :--- |
+| **Project Specific** | `>>>>>` (used for Read More/Preview split) |
+| **Headers** | `#`, `##`, `###`, `####`, `#####`, `######` |
+| **Emphasis** | `**`, `__` (Bold), `*`, `_` (Italic), `~~` (Strikethrough) |
+| **Lists** | `- `, `* `, `+ `, `1. ` |
+| **Code** | `` ` `` (Inline), ` ``` ` (Block) |
+| **Others** | `> ` (Quotes), `[ ]` (Links/Images), `|` (Tables), `---` (Horizontal Rule) |
+
 ## 🚀 Key Features
 
 - **Rich Markdown Rendering**: Full support for standard Markdown, including headers, lists, tables, and formatted text.
