@@ -57,3 +57,28 @@ export const clean = mutation({
     }
   },
 });
+
+export const getSettings = query({
+  args: {},
+  handler: async (ctx) => {
+    const settings = await ctx.db.query("settings").unique();
+    return settings || { customSyntaxes: [] };
+  },
+});
+
+export const updateSettings = mutation({
+  args: { customSyntaxes: v.array(v.object({ 
+    trigger: v.string(), 
+    color: v.string(),
+    bgColor: v.optional(v.string()),
+    description: v.optional(v.string())
+  })) },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db.query("settings").unique();
+    if (existing) {
+      await ctx.db.patch(existing._id, { customSyntaxes: args.customSyntaxes });
+    } else {
+      await ctx.db.insert("settings", { customSyntaxes: args.customSyntaxes });
+    }
+  },
+});

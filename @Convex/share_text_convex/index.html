@@ -17,6 +17,11 @@
         h1 {
             color: #333;
         }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
         form {
             margin-bottom: 20px;
         }
@@ -36,6 +41,9 @@
             border-radius: 5px;
             cursor: pointer;
             margin-right: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
         button:hover {
             background-color: #45a049;
@@ -45,6 +53,12 @@
         }
         .clean-btn:hover {
             background-color: #c0392b;
+        }
+        .settings-btn {
+            background-color: #607d8b;
+        }
+        .settings-btn:hover {
+            background-color: #455a64;
         }
         .shared-text {
             padding: 10px;
@@ -266,10 +280,55 @@
             margin-left: 10px;
             font-size: 16px;
         }
+
+        /* Settings Modal Specifics */
+        .syntax-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 10px;
+            align-items: center;
+            background: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .syntax-row input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            flex-grow: 1;
+        }
+        .color-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+        .color-group label {
+            font-size: 10px;
+            color: #666;
+        }
+        .syntax-row input[type="color"] {
+            width: 40px;
+            height: 30px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            padding: 0;
+            background: none;
+        }
+        .settings-scroll {
+            overflow-y: auto;
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #eee;
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
-    <h1>Share Text Locally</h1>
+    <div class="header-container">
+        <h1>Share Text Locally</h1>
+        <button class="settings-btn" id="openSettingsBtn" onclick="openSettings()">Settings</button>
+    </div>
 
     <form id="shareForm">
         <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
@@ -290,12 +349,33 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Edit Text</h2>
-                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal()">×</button>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('editModal')">×</button>
             </div>
             <textarea id="modalTextarea" class="modal-textarea"></textarea>
             <div class="modal-footer">
-                <button class="cancel-btn" onclick="closeModal()">Cancel</button>
+                <button class="cancel-btn" onclick="closeModal('editModal')">Cancel</button>
                 <button class="save-btn" id="modalSaveBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Custom Color Syntax</h2>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <p style="font-size: 14px; color: #666; margin-bottom: 15px;">
+                Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger
+            </p>
+            <div id="syntaxList" class="settings-scroll">
+                <!-- Syntax rows will be added here -->
+            </div>
+            <button class="save-btn" style="background-color: #3498db; margin-bottom: 15px;" onclick="addSyntaxRow()">+ Add New Syntax</button>
+            <div class="modal-footer">
+                <button class="cancel-btn" onclick="closeModal('settingsModal')">Cancel</button>
+                <button class="save-btn" onclick="saveSettings()">Save Settings</button>
             </div>
         </div>
     </div>
@@ -328,33 +408,63 @@
             edit: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>`,
             delete: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
             check: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
-            chevronDown: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`
+            chevronDown: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`,
+            settings: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>`
         };
 
         let currentLogs = [];
         let expandedItems = new Set();
+        let customSyntaxes = [];
+
+        // Initialize header icons
+        document.getElementById('openSettingsBtn').innerHTML = `${ICONS.settings} Settings`;
+
+        function parseCustomColors(text) {
+            let processedText = text;
+            if (customSyntaxes && customSyntaxes.length > 0) {
+                customSyntaxes.forEach(syntax => {
+                    if (syntax.trigger && syntax.trigger.trim() !== "") {
+                        const escapedTrigger = syntax.trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                        const regex = new RegExp(`${escapedTrigger}(.*?)${escapedTrigger}`, 'g');
+                        processedText = processedText.replace(regex, (match, content) => {
+                            const fg = syntax.color || 'inherit';
+                            const bg = syntax.bgColor || 'transparent';
+                            return `<span style="color: ${fg}; background-color: ${bg}; padding: 0 2px; border-radius: 3px;">${content}</span>`;
+                        });
+                    }
+                });
+            }
+            return processedText;
+        }
+
+        async function loadSettings() {
+            try {
+                const settings = await client.query("functions:getSettings");
+                customSyntaxes = settings.customSyntaxes || [];
+            } catch (err) {
+                console.error("Error loading settings:", err);
+                customSyntaxes = [];
+            }
+        }
 
         async function loadLogs() {
             try {
+                await loadSettings();
                 const logs = await client.query("functions:list");
                 currentLogs = logs;
                 const logsList = document.getElementById('logsList');
                 logsList.innerHTML = logs.map((log, index) => {
                     const date = new Date(log.timestamp);
                     const timestamp = date.toLocaleString('en-US', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        hour12: true
+                        year: 'numeric', month: '2-digit', day: '2-digit',
+                        hour: '2-digit', minute: '2-digit', hour12: true
                     });
 
                     const parts = log.text.split(/>>>>>+/);
                     let renderedContent = '';
                     if (parts.length > 1) {
-                        const preview = marked.parse(parts[0]);
-                        const details = marked.parse(parts.slice(1).join(''));
+                        const preview = marked.parse(parseCustomColors(parts[0]));
+                        const details = marked.parse(parseCustomColors(parts.slice(1).join('')));
                         const isExpanded = expandedItems.has(log._id);
                         renderedContent = `
                             <div class="preview-content">${preview}</div>
@@ -366,7 +476,7 @@
                             </div>
                         `;
                     } else {
-                        renderedContent = marked.parse(log.text);
+                        renderedContent = marked.parse(parseCustomColors(log.text));
                     }
 
                     return `
@@ -385,6 +495,51 @@
             }
         }
 
+        window.openSettings = () => {
+            const list = document.getElementById('syntaxList');
+            list.innerHTML = '';
+            customSyntaxes.forEach((syntax, i) => addSyntaxRow(syntax.trigger, syntax.color, syntax.bgColor));
+            if (customSyntaxes.length === 0) addSyntaxRow();
+            document.getElementById('settingsModal').style.display = 'flex';
+        };
+
+        window.addSyntaxRow = (trigger = '', color = '#000000', bgColor = '#ffffff') => {
+            const row = document.createElement('div');
+            row.className = 'syntax-row';
+            row.innerHTML = `
+                <input type="text" placeholder="Trigger (e.g. @@)" value="${trigger}">
+                <div class="color-group">
+                    <label>Text</label>
+                    <input type="color" class="fg-color" value="${color}">
+                </div>
+                <div class="color-group">
+                    <label>BG</label>
+                    <input type="color" class="bg-color" value="${bgColor || '#ffffff'}">
+                </div>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="this.parentElement.remove()">×</button>
+            `;
+            document.getElementById('syntaxList').appendChild(row);
+        };
+
+        window.saveSettings = async () => {
+            const rows = document.querySelectorAll('.syntax-row');
+            const newSyntaxes = Array.from(rows).map(row => ({
+                trigger: row.querySelector('input[type="text"]').value,
+                color: row.querySelector('.fg-color').value,
+                bgColor: row.querySelector('.bg-color').value
+            })).filter(s => s.trigger.trim() !== "");
+            
+            try {
+                await client.mutation("functions:updateSettings", { customSyntaxes: newSyntaxes });
+                customSyntaxes = newSyntaxes;
+                window.closeModal('settingsModal');
+                await loadLogs();
+            } catch (err) {
+                console.error("Failed to save settings:", err);
+                alert("Failed to save settings.");
+            }
+        };
+
         window.toggleExpand = (id) => {
             const details = document.getElementById(`details-${id}`);
             const btn = details.previousElementSibling;
@@ -402,12 +557,8 @@
         };
 
         window.togglePin = async (id) => {
-            try {
-                await client.mutation("functions:togglePin", { id });
-                await loadLogs();
-            } catch (err) {
-                console.error("Error toggling pin:", err);
-            }
+            await client.mutation("functions:togglePin", { id });
+            await loadLogs();
         };
 
         document.getElementById('shareForm').addEventListener('submit', async (e) => {
@@ -439,20 +590,15 @@
             saveBtn.onclick = async () => {
                 const newText = textarea.value;
                 if (newText.trim() !== "") {
-                    try {
-                        await client.mutation("functions:update", { id, text: newText });
-                        window.closeModal();
-                        await loadLogs();
-                    } catch (err) {
-                        console.error("Error updating text:", err);
-                        alert("Failed to save changes.");
-                    }
+                    await client.mutation("functions:update", { id, text: newText });
+                    window.closeModal('editModal');
+                    await loadLogs();
                 }
             };
         };
 
-        window.closeModal = () => {
-            document.getElementById('editModal').style.display = 'none';
+        window.closeModal = (id) => {
+            document.getElementById(id).style.display = 'none';
         };
 
         window.cleanAll = async () => {
