@@ -244,13 +244,14 @@
         .modal-content {
             background-color: #fff;
             width: 80%;
-            height: 80%;
+            height: 85vh;
             padding: 20px;
             border-radius: 8px;
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             position: relative;
+            overflow: hidden;
         }
         .modal-header {
             display: flex;
@@ -258,6 +259,7 @@
             align-items: center;
             margin-bottom: 15px;
             gap: 15px;
+            flex-shrink: 0;
         }
         .modal-header h2 {
             margin: 0;
@@ -272,10 +274,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             resize: none;
+            min-height: 0;
         }
         .modal-footer {
             margin-top: 15px;
             text-align: right;
+            flex-shrink: 0;
         }
         .save-btn {
             background-color: #2ecc71;
@@ -304,6 +308,7 @@
             margin-bottom: 20px;
             border-bottom: 2px solid #eee;
             padding-bottom: 10px;
+            flex-shrink: 0;
         }
         .settings-tab {
             padding: 8px 16px;
@@ -324,7 +329,7 @@
             display: none;
             flex-direction: column;
             flex-grow: 1;
-            height: 100%;
+            min-height: 0;
         }
         .settings-section.active {
             display: flex;
