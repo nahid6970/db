@@ -956,9 +956,8 @@
             row.dataset.id = folder._id;
             
             row.innerHTML = `
-                <div style="display: flex; flex-direction: column; gap: 2px;">
-                    <button class="add-folder-btn" style="width: 24px; height: 24px; font-size: 12px;" onclick="moveFolderSettingRow(this, -1)">▲</button>
-                    <button class="add-folder-btn" style="width: 24px; height: 24px; font-size: 12px;" onclick="moveFolderSettingRow(this, 1)">▼</button>
+                <div style="display: flex; align-items: center;">
+                    <button class="add-folder-btn" style="width: 28px; height: 28px; font-size: 14px;" onclick="moveFolderSettingRow(this)" title="Move Up">▲</button>
                 </div>
                 <input type="text" class="folder-name-input" value="${folder.name}" style="flex: 1;">
                 <div class="trans-toggle">
@@ -994,12 +993,10 @@
             document.getElementById('folderSettingsList').appendChild(row);
         };
 
-        window.moveFolderSettingRow = (btn, direction) => {
+        window.moveFolderSettingRow = (btn) => {
             const row = btn.closest('.syntax-row');
-            if (direction === -1 && row.previousElementSibling) {
+            if (row.previousElementSibling) {
                 row.parentNode.insertBefore(row, row.previousElementSibling);
-            } else if (direction === 1 && row.nextElementSibling) {
-                row.parentNode.insertBefore(row.nextElementSibling, row);
             }
         };
 
