@@ -494,17 +494,13 @@
     </style>
 </head>
 <body>
-    <div class="header-container" style="height: 20px;">
-        <!-- Header text removed for space -->
-        <button class="settings-btn" id="openSettingsBtn" onclick="openSettings()">Settings</button>
-    </div>
-
-    <form id="shareForm">
-        <textarea id="textInput" rows="5" placeholder="Paste your text here..."></textarea><br><br>
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <button type="submit">Share</button>
+    <div class="header-container" style="height: 40px; margin-bottom: 20px;">
+        <div style="flex-grow: 1;"></div>
+        <div style="display: flex; gap: 10px;">
+            <button class="save-btn" style="background-color: #4CAF50; padding: 8px 16px;" onclick="openAddModal()">+ New Note</button>
+            <button class="settings-btn" style="position: static;" id="openSettingsBtn" onclick="openSettings()">Settings</button>
         </div>
-    </form>
+    </div>
 
     <div class="logs">
         <div class="folder-container" id="folderBar">
@@ -515,6 +511,26 @@
 
     <div class="clean-all-container">
         <button class="clean-btn" onclick="cleanAll()">Clean All</button>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Note</h2>
+                <div class="trans-toggle" style="margin-left: 10px;">
+                    <label>Folder</label>
+                    <select id="addFolderSelect" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;"></select>
+                </div>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('addModal')">×</button>
+            </div>
+            <textarea id="addModalTextarea" class="modal-textarea" placeholder="Type your note here..."></textarea>
+            <div class="modal-footer">
+                <p style="float: left; font-size: 12px; color: #666; margin: 10px 0;">Press <b>F3</b> to apply custom colors to selected text</p>
+                <button class="cancel-btn" onclick="closeModal('addModal')">Cancel</button>
+                <button class="save-btn" id="addModalSaveBtn">Share Note</button>
+            </div>
+        </div>
     </div>
 
     <!-- Edit Modal -->
@@ -1159,19 +1175,36 @@
             await loadLogs();
         };
 
-        document.getElementById('shareForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const text = document.getElementById('textInput').value;
-            if (text) {
-                const targetFolderId = currentFolderId === 'none' ? undefined : (currentFolderId || undefined);
-                await client.mutation("functions:add", { 
-                    text, 
-                    folderId: targetFolderId
-                });
-                document.getElementById('textInput').value = '';
-                await loadLogs();
-            }
-        });
+        window.openAddModal = () => {
+            const modal = document.getElementById('addModal');
+            const textarea = document.getElementById('addModalTextarea');
+            const folderSelect = document.getElementById('addFolderSelect');
+            const saveBtn = document.getElementById('addModalSaveBtn');
+            
+            textarea.value = '';
+            
+            // Reuse folder options from editSelect
+            const editSelect = document.getElementById('editFolderSelect');
+            folderSelect.innerHTML = editSelect.innerHTML;
+            
+            // Default to current folder (if not 'none' or null)
+            folderSelect.value = (currentFolderId === 'none' ? '' : (currentFolderId || ''));
+            
+            modal.style.display = 'flex';
+            
+            saveBtn.onclick = async () => {
+                const text = textarea.value;
+                const targetFolderId = folderSelect.value || undefined;
+                if (text.trim() !== "") {
+                    await client.mutation("functions:add", { 
+                        text, 
+                        folderId: targetFolderId
+                    });
+                    window.closeModal('addModal');
+                    await loadLogs();
+                }
+            };
+        };
 
         window.deleteEntry = async (id) => {
             if (confirm("Are you sure you want to delete this entry?")) {
