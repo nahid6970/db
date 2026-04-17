@@ -17,48 +17,31 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 🚀 Key Features
 
-- **Modal-Based Creation**: Notes are added via a dedicated **+ New Note** modal, keeping the home page clean and focused.
+- **Sticky Action Header**: Primary actions are always accessible at the top of the screen with a modern blurred glass effect.
+- **Icon-Driven Interface**: Clean SVG icons for all actions, including the new **Green Plus** for notes and **Gear Icon** for settings.
+- **Modal-Based Creation**: Notes are added via a dedicated modal, keeping the home page focused on your content.
 - **Rich Markdown & Math**: Full support for standard Markdown and LaTeX math equations (Inline `$ ... $` and Block `$$ ... $$`).
 - **Syntax Highlighting**: Automatic code block highlighting for multiple languages.
 - **Custom Color Syntax**: 
   - Define your own triggers (e.g., `@@text@@`) in **Settings**.
   - Support for custom foreground and background colors.
-  - **Transparency Options**: Toggle "No Text" or "No BG" for flexible, layered styling.
-  - **F3 Quick Format**: Highlight text in any note modal and press **F3** to pick and apply a custom style instantly.
+  - **F3 Quick Format**: Highlight text in any note modal and press **F3** to apply styles instantly.
 - **Advanced Text Controls**:
-  - **Individual Note Styling**: Use the color pickers in the edit modal header to change the text and background color of the entire note.
-  - **Pin to Top**: Keep important notes at the top with a prominent purple border and light purple background.
-  - **Read More Delimiter**: Use five or more greater-than signs (`>>>>>`) to create a preview/detail split with a modern **pill-shaped toggle button**.
+  - **Individual Note Styling**: Custom colors for the entire note via edit modal pickers.
+  - **Pin to Top**: Highlight and stick important notes to the top of your feed.
+  - **Pill-Shaped Toggles**: Modern "Show More/Less" buttons for long logs using the `>>>>>` delimiter.
 - **Folder Management**: 
-  - **None Folder**: Special view for notes not assigned to any folder.
-  - **Auto-Assignment**: New notes are automatically added to the currently active folder.
-  - **Custom Folder Styling**: Customize each folder's background, text, and border color in Settings.
-  - **Rearrange Order**: Use the up arrow (▲) in Settings to move folders to the top and organize your navigation.
-  - **Visual Indicator**: Active folders are marked with a distinct **dot icon**.
-- **Tabbed Settings Modal**: 
-  - **Color Styles**: Manage your custom markdown triggers.
-  - **Folder Config**: Centrally manage folder names, styles, sorting, and deletion.
-- **Streamlined UI**: 
-  - Minimalist header with integrated action buttons.
-  - Simplified Add/Edit modals with labels removed for a cleaner aesthetic.
-  - Modern icon set using SVG for all primary actions.
-- **Real-time Sync**: Instant persistence and multi-device synchronization via Convex.
+  - **None Folder**: Special view for uncategorized notes.
+  - **Folder Styling & Sorting**: Customize colors and rearrange the order of your folders in Settings.
+  - **Active Dot Indicator**: A visual dot marks your current folder location.
+- **Tabbed Settings**: Organized management of color syntaxes and folder configurations.
+- **Real-time Sync**: Instant multi-device synchronization powered by Convex.
 
 ## 🛠️ Setup Instructions
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-2. **Initialize Convex**:
-   ```bash
-   npx convex dev
-   ```
-
-3. **Run Locally**:
-   - Open `index.html` in your browser.
-   - Start sharing and styling your notes!
+1. **Install dependencies**: `npm install`
+2. **Initialize Convex**: `npx convex dev`
+3. **Run Locally**: Open `index.html` in your browser.
 
 ## 🔧 Deployment
 
@@ -68,9 +51,8 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 📝 Usage Tips
 
-- **Add Note**: Click the green **+ New Note** button in the header to start writing.
-- **Math**: Render beautiful formulas like `$E = mc^2$`.
-- **F3 Shortcut**: Quickly style specific words or phrases while editing or adding a note.
-- **Folders**: Organize your workspace by grouping related notes into custom folders. Use the "None" folder for uncategorized content.
-- **Sorting**: Move your most used folders to the beginning of the list using the Folder Config settings.
-- **Clean Interface**: The home page stays clutter-free by moving creation and configuration into dedicated modals.
+- **Add Note**: Click the green **+** icon in the sticky header.
+- **Settings**: Click the gear icon in the sticky header to customize triggers or folders.
+- **F3 Shortcut**: Quickly style selected text while adding or editing a note.
+- **Rearrange**: Use the up arrow (▲) in Folder Config to prioritize your folder list.
+- **Math**: Render formulas like `$E = mc^2$` with KaTeX.
