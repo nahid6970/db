@@ -599,6 +599,8 @@
         let currentLogs = [];
         let expandedItems = new Set();
         let customSyntaxes = [];
+        let currentFolderId = null;
+        let folders = [];
 
         window.renderMath = () => {
             if (window.renderMathInElement) {
@@ -656,10 +658,69 @@
             }
         }
 
+        async function loadFolders() {
+            try {
+                folders = await client.query("functions:listFolders");
+                const bar = document.getElementById('folderBar');
+                const select = document.getElementById('editFolderSelect');
+                
+                let html = `
+                    <div class="folder-chip ${!currentFolderId ? 'active' : ''}" onclick="selectFolder(null, 'All')">
+                        All
+                    </div>
+                `;
+                
+                let selectHtml = `<option value="">None (All)</option>`;
+                
+                folders.forEach(f => {
+                    html += `
+                        <div class="folder-chip ${currentFolderId === f._id ? 'active' : ''}" onclick="selectFolder('${f._id}', '${f.name}')">
+                            ${f.name}
+                            <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${f._id}')">×</span>
+                        </div>
+                    `;
+                    selectHtml += `<option value="${f._id}">${f.name}</option>`;
+                });
+                
+                html += `
+                    <button class="add-folder-btn" onclick="addFolder()">+ Add Folder</button>
+                `;
+                
+                bar.innerHTML = html;
+                select.innerHTML = selectHtml;
+            } catch (err) {
+                console.error("Error loading folders:", err);
+            }
+        }
+
+        window.selectFolder = (id, name) => {
+            currentFolderId = id;
+            document.getElementById('currentFolderName').innerText = name;
+            loadFolders();
+            loadLogs();
+        };
+
+        window.addFolder = async () => {
+            const name = prompt("Enter folder name:");
+            if (name) {
+                await client.mutation("functions:createFolder", { name });
+                await loadFolders();
+            }
+        };
+
+        window.deleteFolder = async (id) => {
+            if (confirm("Delete this folder? (Notes will be moved to 'All')")) {
+                await client.mutation("functions:removeFolder", { id });
+                if (currentFolderId === id) currentFolderId = null;
+                await loadFolders();
+                await loadLogs();
+            }
+        };
+
         async function loadLogs() {
             try {
                 await loadSettings();
-                const logs = await client.query("functions:list");
+                const logs = await client.query("functions:list", { folderId: currentFolderId || undefined });
                 currentLogs = logs;
                 const logsList = document.getElementById('logsList');
                 logsList.innerHTML = logs.map((log, index) => {
@@ -923,7 +984,10 @@
             e.preventDefault();
             const text = document.getElementById('textInput').value;
             if (text) {
-                await client.mutation("functions:add", { text });
+                await client.mutation("functions:add", { 
+                    text, 
+                    folderId: currentFolderId || undefined 
+                });
                 document.getElementById('textInput').value = '';
                 await loadLogs();
             }
@@ -944,22 +1008,26 @@
             const saveBtn = document.getElementById('modalSaveBtn');
             const fgInput = document.getElementById('editFgColor');
             const bgInput = document.getElementById('editBgColor');
+            const folderSelect = document.getElementById('editFolderSelect');
             
             textarea.value = rawText;
             fgInput.value = log.color || '#333333';
             bgInput.value = log.bgColor || '#ffffff';
+            folderSelect.value = log.folderId || "";
             modal.style.display = 'flex';
             
             saveBtn.onclick = async () => {
                 const newText = textarea.value;
                 const newFg = fgInput.value;
                 const newBg = bgInput.value;
+                const newFolderId = folderSelect.value || undefined;
                 if (newText.trim() !== "") {
                     await client.mutation("functions:update", { 
                         id, 
                         text: newText,
                         color: newFg,
-                        bgColor: newBg
+                        bgColor: newBg,
+                        folderId: newFolderId
                     });
                     window.closeModal('editModal');
                     await loadLogs();
@@ -972,8 +1040,8 @@
         };
 
         window.cleanAll = async () => {
-            if (confirm("Are you sure you want to delete all entries?")) {
-                await client.mutation("functions:clean");
+            if (confirm("Are you sure you want to delete all entries in this view?")) {
+                await client.mutation("functions:clean", { folderId: currentFolderId || undefined });
                 await loadLogs();
             }
         };
@@ -991,8 +1059,12 @@
             }, 2000);
         };
 
+        loadFolders();
         loadLogs();
-        setInterval(loadLogs, 5000);
+        setInterval(() => {
+            loadFolders();
+            loadLogs();
+        }, 5000);
     </script>
 </body>
 </html>
