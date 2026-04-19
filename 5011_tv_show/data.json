@@ -1783,9 +1783,16 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 33,
+                "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2026-04-19T17:54:21.045280",
+                "notify": "unseen"
+            },
+            {
                 "id": 32,
                 "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-14T15:21:44.752993",
                 "notify": "seen"
             },
@@ -1890,25 +1897,25 @@
             {
                 "id": 17,
                 "title": "The Rookie - S07E18 - The Good, the Bad, and the Oscar HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 16,
                 "title": "The Rookie - S07E17 - Mutiny and the Bounty WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 15,
                 "title": "The Rookie - S07E16 - The Return HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 14,
                 "title": "The Rookie - S07E15 - A Deadly Secret HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
