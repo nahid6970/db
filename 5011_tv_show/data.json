@@ -11,7 +11,7 @@
                 "title": "One Piece - s23e03 - [1158] - A Quest in the Land of Mystery! The Secret of the Sun God WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2026-04-19T22:34:19.408031",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 29,
@@ -1794,13 +1794,6 @@
                 "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p Proper",
                 "watched": false,
                 "added_date": "2026-04-19T17:54:21.045280",
-                "notify": "unseen"
-            },
-            {
-                "id": 32,
-                "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p",
-                "watched": true,
-                "added_date": "2026-04-14T15:21:44.752993",
                 "notify": "seen"
             },
             {
@@ -1832,72 +1825,79 @@
                 "notify": "seen"
             },
             {
+                "id": 34,
+                "title": "The Rookie - S08E10 - His Name Was Martin WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2026-04-20T08:33:43.917494",
+                "notify": "unseen"
+            },
+            {
                 "id": 27,
                 "title": "The Rookie - S08E10 - His Name Was Martin HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-10T13:29:29.585383",
                 "notify": "seen"
             },
             {
                 "id": 25,
                 "title": "The Rookie - S08E09 - Fun and Games HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-03T13:13:46.835489",
                 "notify": "seen"
             },
             {
                 "id": 24,
                 "title": "The Rookie - S08E08 - Grand Theft Aircraft HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-24T12:43:41.203294",
                 "notify": "seen"
             },
             {
                 "id": 23,
                 "title": "The Rookie - S08E07 - Baja HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-17T11:46:25.338016",
                 "notify": "seen"
             },
             {
                 "id": 22,
                 "title": "The Rookie - S08E06 - Burn 4 Love HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-10T10:43:52.596195",
                 "notify": "seen"
             },
             {
                 "id": 21,
                 "title": "The Rookie - S08E05 - The Network HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-02-03T08:18:42.629081",
                 "notify": "seen"
             },
             {
                 "id": 26,
                 "title": "The Rookie - S08E04 - Cut and Run WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-05T17:32:03.304257",
                 "notify": "seen"
             },
             {
                 "id": 20,
                 "title": "The Rookie - S08E03 - The Red Place HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-21T11:04:19.111421",
                 "notify": "seen"
             },
             {
                 "id": 19,
                 "title": "The Rookie - S08E02 - Fast Andy WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-14T18:55:08.970762",
                 "notify": "seen"
             },
             {
                 "id": 18,
                 "title": "The Rookie - S08E01 - Czech Mate HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-01-07T18:36:43.835206",
                 "notify": "seen"
             },
