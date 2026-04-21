@@ -1790,6 +1790,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 34,
+                "title": "The Rookie - S08E16 - Out of Time HDTV-720p",
+                "watched": false,
+                "added_date": "2026-04-21T08:59:43.492652",
+                "notify": "unseen"
+            },
+            {
                 "id": 33,
                 "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p Proper",
                 "watched": false,
