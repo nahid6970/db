@@ -1790,52 +1790,38 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
-                "id": 34,
-                "title": "The Rookie - S08E16 - Out of Time HDTV-720p",
-                "watched": false,
-                "added_date": "2026-04-21T08:59:43.492652",
-                "notify": "unseen"
-            },
-            {
                 "id": 33,
                 "title": "The Rookie - S08E15 - Survive the Streets WEBDL-1080p Proper",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-19T17:54:21.045280",
                 "notify": "seen"
             },
             {
                 "id": 31,
                 "title": "The Rookie - S08E14 - Tiger Bear HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-07T08:09:29.214111",
                 "notify": "seen"
             },
             {
                 "id": 30,
                 "title": "The Rookie - S08E13 - The Thinker HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-31T09:22:31.127466",
                 "notify": "seen"
             },
             {
                 "id": 29,
                 "title": "The Rookie - S08E12 - Spy Games WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-28T10:12:07.288792",
                 "notify": "seen"
             },
             {
                 "id": 28,
                 "title": "The Rookie - S08E11 - Aftermath HDTV-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-03-17T11:56:36.462132",
-                "notify": "seen"
-            },
-            {
-                "id": 34,
-                "title": "The Rookie - S08E10 - His Name Was Martin WEBDL-1080p Proper",
-                "watched": false,
-                "added_date": "2026-04-20T08:33:43.917494",
                 "notify": "seen"
             },
             {
