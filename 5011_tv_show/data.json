@@ -760,6 +760,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 15,
+                "title": "Daredevil - Born Again - S02E06 - Requiem WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-22T10:38:36.972631",
+                "notify": "unseen"
+            },
+            {
                 "id": 14,
                 "title": "Daredevil - Born Again - S02E05 - The Grand Design WEBDL-1080p",
                 "watched": false,
@@ -1085,6 +1092,13 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/368207/posters/652a5ef981eab.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
         "episodes": [
+            {
+                "id": 16,
+                "title": "INVINCIBLE (2021) - S04E08 - DON'T LEAVE ME HANGING HERE WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-22T15:57:43.609856",
+                "notify": "unseen"
+            },
             {
                 "id": 15,
                 "title": "Invincible (2021) - S04E07 - DON'T DO ANYTHING RASH WEBDL-1080p",
@@ -2215,6 +2229,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\WWE Raw",
         "rating": "3",
         "episodes": [
+            {
+                "id": 26,
+                "title": "WWE Raw - 2026-04-20 - RAW 1717 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-22T00:33:33.708761",
+                "notify": "seen"
+            },
             {
                 "id": 25,
                 "title": "WWE Raw - 2026-04-06 - RAW 1715 WEBDL-1080p",
@@ -4170,6 +4191,13 @@
         "rating": "5",
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 4,
+                "title": "The Boys - S05E04 - Though the Heavens Fall WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-22T15:46:09.499349",
+                "notify": "unseen"
+            },
             {
                 "id": 3,
                 "title": "The Boys - S05E03 - Every One of You Sons of Bitches WEBDL-1080p",
