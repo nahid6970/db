@@ -764,7 +764,7 @@
                 "title": "Daredevil - Born Again - S02E06 - Requiem WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-04-22T10:38:36.972631",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 14,
@@ -1097,7 +1097,7 @@
                 "title": "INVINCIBLE (2021) - S04E08 - DON'T LEAVE ME HANGING HERE WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-04-22T15:57:43.609856",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 15,
@@ -4194,9 +4194,9 @@
             {
                 "id": 4,
                 "title": "The Boys - S05E04 - Though the Heavens Fall WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-22T15:46:09.499349",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 3,
