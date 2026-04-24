@@ -350,6 +350,8 @@
 
   <div class="context-menu" id="folderContextMenu">
     <button onclick="renameFolderFromMenu()">Rename</button>
+    <button onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">Set Password</button>
+    <button onclick="removeFolderPasswordFromMenu()" id="folderPasswordRemoveBtn">Remove Password</button>
     <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
   </div>
 
@@ -394,6 +396,7 @@
     let currentFolderId = readStoredFolderId();
     let isShiftPressed = false;
     const selectedImageIds = new Set();
+    const unlockedFolderIds = new Set();
     let pointerX = 0;
     let pointerY = 0;
     let folderContextMenuId = null;
@@ -566,7 +569,7 @@
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
         ...folders.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
-            ${escapeHtml(folder.name)}
+            ${folder.password ? 'Lock ' : ''}${escapeHtml(folder.name)}
           </option>
         `)
       ].join('');
@@ -607,6 +610,29 @@
       renderFolderBar();
     }
 
+    async function ensureFolderAccess(folderId) {
+      if (!folderId || folderId === 'none') {
+        return true;
+      }
+
+      const folder = folders.find(item => item._id === folderId);
+      if (!folder?.password || unlockedFolderIds.has(folderId)) {
+        return true;
+      }
+
+      const attempt = prompt(`Password for "${folder.name}"`);
+      if (attempt === null) {
+        return false;
+      }
+      if (attempt !== folder.password) {
+        alert('Wrong password.');
+        return false;
+      }
+
+      unlockedFolderIds.add(folderId);
+      return true;
+    }
+
     function renderFolderBar() {
       const folderBar = document.getElementById('folderBar');
       const selectionCount = selectedImageIds.size;
@@ -628,7 +654,7 @@
             onclick="handleFolderAction('${folder._id}')"
             oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
           >
-            <span>${escapeHtml(folder.name)}</span>
+            <span>${folder.password ? 'Lock ' : ''}${escapeHtml(folder.name)}</span>
           </button>
         `),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
@@ -656,6 +682,9 @@
 
     window.selectFolder = async function(folderId) {
       closeFolderContextMenu();
+      if (!(await ensureFolderAccess(folderId))) {
+        return;
+      }
       currentFolderId = folderId;
       storeCurrentFolderId(currentFolderId);
       selectedImageIds.clear();
@@ -694,7 +723,12 @@
       }
 
       const menu = document.getElementById('folderContextMenu');
+      const passwordBtn = document.getElementById('folderPasswordBtn');
+      const passwordRemoveBtn = document.getElementById('folderPasswordRemoveBtn');
+      const folder = folders.find(item => item._id === id);
       folderContextMenuId = id;
+      passwordBtn.textContent = folder?.password ? 'Change Password' : 'Set Password';
+      passwordRemoveBtn.style.display = folder?.password ? 'block' : 'none';
       menu.style.left = `${event.clientX}px`;
       menu.style.top = `${event.clientY}px`;
       menu.classList.add('visible');
@@ -724,6 +758,54 @@
       closeFolderContextMenu();
       await loadFolders();
       renderFolderBar();
+    };
+
+    window.setFolderPasswordFromMenu = async function() {
+      if (!folderContextMenuId) return;
+      const folder = folders.find(item => item._id === folderContextMenuId);
+      if (!folder) return;
+
+      const nextPassword = prompt(
+        folder.password ? `Change password for "${folder.name}"` : `Set password for "${folder.name}"`
+      );
+      if (nextPassword === null) {
+        closeFolderContextMenu();
+        return;
+      }
+      if (!nextPassword.trim()) {
+        alert('Password cannot be empty.');
+        return;
+      }
+
+      await client.mutation("images:setFolderPassword", {
+        id: folder._id,
+        password: nextPassword,
+      });
+      unlockedFolderIds.delete(folder._id);
+      closeFolderContextMenu();
+      await loadFolders();
+      renderFolderBar();
+      await loadImages();
+    };
+
+    window.removeFolderPasswordFromMenu = async function() {
+      if (!folderContextMenuId) return;
+      const folder = folders.find(item => item._id === folderContextMenuId);
+      if (!folder?.password) {
+        closeFolderContextMenu();
+        return;
+      }
+      if (!confirm(`Remove password from "${folder.name}"?`)) return;
+
+      await client.mutation("images:setFolderPassword", {
+        id: folder._id,
+        password: undefined,
+      });
+      unlockedFolderIds.delete(folder._id);
+      closeFolderContextMenu();
+      await loadFolders();
+      renderFolderBar();
+      await loadImages();
     };
 
     window.deleteFolderFromMenu = async function() {
@@ -798,6 +880,12 @@
       try {
         folders = await client.query("images:listFolders");
         normalizeCurrentFolderId();
+        Array.from(unlockedFolderIds).forEach(id => {
+          const folder = folders.find(item => item._id === id);
+          if (!folder?.password) {
+            unlockedFolderIds.delete(id);
+          }
+        });
       } catch (err) {
         console.error("Failed to load folders:", err);
       }
@@ -814,6 +902,10 @@
     
     // Initial load
     await loadFolders();
+    if (!(await ensureFolderAccess(currentFolderId))) {
+      currentFolderId = null;
+      storeCurrentFolderId(currentFolderId);
+    }
     renderFolderBar();
     await loadImages();
     

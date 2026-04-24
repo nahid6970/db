@@ -17,7 +17,13 @@ export const list = query({
         .filter((q) => q.eq(q.field("folderId"), args.folderId))
         .collect();
     } else {
-      images = await ctx.db.query("images").collect();
+      const folders = await ctx.db.query("folders").collect();
+      const protectedFolderIds = new Set(
+        folders.filter((folder) => folder.password).map((folder) => String(folder._id))
+      );
+      images = (await ctx.db.query("images").collect()).filter(
+        (image) => !image.folderId || !protectedFolderIds.has(image.folderId)
+      );
     }
 
     return images.sort((a, b) => b.timestamp - a.timestamp);
@@ -99,6 +105,7 @@ export const createFolder = mutation({
     return await ctx.db.insert("folders", {
       name: args.name,
       position: maxPosition + 1,
+      password: undefined,
     });
   },
 });
@@ -113,6 +120,18 @@ export const updateFolder = mutation({
     await ctx.db.patch(args.id, {
       name: args.name,
       position: args.position,
+    });
+  },
+});
+
+export const setFolderPassword = mutation({
+  args: {
+    id: v.id("folders"),
+    password: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, {
+      password: args.password,
     });
   },
 });
