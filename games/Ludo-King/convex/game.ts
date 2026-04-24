@@ -2,7 +2,7 @@ import { mutation, query } from "./_generated/server";
 import { v } from "convex/values";
 
 export const getGameState = query({
-  args: { cb: v.optional(v.any()) },
+  args: {},
   handler: async (ctx) => {
     return await ctx.db.query("game_state").order("desc").first();
   },

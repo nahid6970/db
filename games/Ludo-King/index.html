@@ -339,8 +339,10 @@
 </div>
 
 <script type="module">
-    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
-    const client = new ConvexHttpClient("https://silent-scorpion-207.convex.cloud");
+    import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
+    import { anyApi } from "https://esm.sh/convex@1.16.0/server";
+    const api = anyApi;
+    const client = new ConvexClient("https://silent-scorpion-207.convex.cloud");
 
     const USERS = {
         'p1': { pass: 'p1', idx: 0 },
@@ -465,6 +467,7 @@
     let isTesting = false;
     let lastServerVersion = 0;
     let ignoreUpdatesUntil = 0;
+    let gameSubscriptionCleanup = null;
 
     const STAR_SVG = `<svg class="star" viewBox="0 0 24 24"><path d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"/></svg>`;
     const PIN_SVG = `
@@ -500,7 +503,7 @@
         ignoreUpdatesUntil = Date.now() + 2500; 
 
         // Perform mutation in background
-        client.mutation("game:setState", { patch: localState })
+        client.mutation(api.game.setState, { patch: localState })
             .catch(err => {
                 console.error("BG Mutation failed:", err);
                 ignoreUpdatesUntil = 0;
@@ -510,53 +513,36 @@
             });
     }
 
-    async function updateUI() {
-        if (isSyncing || isRolling) return; 
-        
+    function handleRemoteState(state) {
+        if (!state) return;
+
         const dot = document.getElementById('sync-dot');
         if (dot) dot.classList.add('active');
-        
-        try {
-            // AUTHORITATIVE sync using server-side 'version' and timestamp
-            const state = await client.query("game:getGameState", { cb: Date.now() });
-            if (!state) return;
-            
-            const serverVersion = state.version || 0;
 
-            // Robust skip: don't overwrite if we just moved locally, or if server version hasn't advanced
-            const isLocalWait = Date.now() < ignoreUpdatesUntil;
-            if (isLocalWait && serverVersion <= lastServerVersion) {
-                return; // Still waiting for our move to be the latest on server
-            }
-
-            if (!localState || serverVersion > lastServerVersion) {
-                lastServerVersion = serverVersion;
-                localState = state;
-                renderUI(state);
-                updateLobbyUI(state);
-            }
-        } catch (err) {
-            console.warn("Polling error:", err);
-        } finally {
+        const serverVersion = state.version || 0;
+        const isLocalWait = Date.now() < ignoreUpdatesUntil;
+        if (isLocalWait && serverVersion <= lastServerVersion) {
             if (dot) setTimeout(() => dot.classList.remove('active'), 300);
+            return;
         }
+
+        if (!localState || serverVersion > lastServerVersion) {
+            lastServerVersion = serverVersion;
+            localState = state;
+            renderUI(state);
+            updateLobbyUI(state);
+        }
+
+        if (dot) setTimeout(() => dot.classList.remove('active'), 300);
     }
 
-    // Refresh for background/foreground transitions
-    document.addEventListener("visibilitychange", async () => {
-        if (document.visibilityState === 'visible') {
-            updateUI();
-        }
-    });
-
-    // Explicitly check for updates every second as requested
-    async function pollingLoop() {
-        try {
-            await updateUI();
-        } catch(e) {}
-        setTimeout(pollingLoop, 500);
+    function subscribeToGameState() {
+        gameSubscriptionCleanup?.();
+        gameSubscriptionCleanup = client.onUpdate(api.game.getGameState, {}, (state) => {
+            handleRemoteState(state);
+        });
     }
-    pollingLoop();
+    subscribeToGameState();
 
 
     function renderUI(state) {
@@ -956,7 +942,7 @@
 
         localState = initialState;
         renderUI(localState);
-        await client.mutation("game:setState", { patch: localState });
+        await client.mutation(api.game.setState, { patch: localState });
         
         // Show seat selection
         document.getElementById('player-select').classList.add('hidden');
@@ -1060,7 +1046,7 @@
 
     document.getElementById('btn-continue').onclick = async () => {
         // Fetch fresh state immediately to ensure correct player count filtering
-        const state = await client.query("game:getGameState", { cb: Date.now() });
+        const state = localState || await client.query(api.game.getGameState, {});
         if (!state) return;
         localState = state;
         lastServerVersion = state.version || 0;
@@ -1147,7 +1133,7 @@
     };
 
     const checkContinue = async () => {
-        const state = await client.query("game:getGameState");
+        const state = localState || await client.query(api.game.getGameState, {});
         if (state && state.status === "playing") document.getElementById('btn-continue').classList.remove('hidden');
     };
 
