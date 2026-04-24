@@ -165,28 +165,15 @@
       gap: 16px; 
     }
 
-    .bulk-bar {
-      display: none;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-      padding: 12px;
-      background: #eef6ff;
+    .folder-bar.selection-active {
       border: 1px solid #cfe2ff;
-      border-radius: 12px;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.08), 0 2px 8px rgba(0,0,0,0.08);
     }
 
-    .bulk-bar.visible {
-      display: flex;
-    }
-
-    .bulk-bar select {
-      min-width: 180px;
-      padding: 10px 12px;
-      border: 1px solid #ced4da;
-      border-radius: 8px;
-      background: white;
+    .selection-hint {
+      font-size: 13px;
+      color: #0b5ed7;
+      font-weight: 600;
     }
     
     .image-card { 
@@ -321,13 +308,6 @@
         </div>
         <div id="status"></div>
       </div>
-    </div>
-
-    <div class="bulk-bar" id="bulkBar">
-      <strong id="bulkCount">0 selected</strong>
-      <select id="bulkFolderSelect"></select>
-      <button onclick="moveSelectedImages()">Move Selected</button>
-      <button class="danger" onclick="clearSelection()">Clear Selection</button>
     </div>
 
     <div id="gallery" class="gallery"></div>
@@ -513,26 +493,6 @@
       ].join('');
     }
 
-    function getBulkFolderOptions() {
-      return [
-        '<option value="">Move to: No folder</option>',
-        ...folders.map(folder => `
-          <option value="${folder._id}">${escapeHtml(folder.name)}</option>
-        `)
-      ].join('');
-    }
-
-    function updateBulkBar() {
-      const bulkBar = document.getElementById('bulkBar');
-      const bulkCount = document.getElementById('bulkCount');
-      const bulkFolderSelect = document.getElementById('bulkFolderSelect');
-      const count = selectedImageIds.size;
-
-      bulkCount.textContent = `${count} selected`;
-      bulkFolderSelect.innerHTML = getBulkFolderOptions();
-      bulkBar.classList.toggle('visible', count > 0);
-    }
-
     function updateSelectionMode() {
       document.querySelectorAll('.image-card').forEach(card => {
         card.classList.toggle('selection-mode', isShiftPressed);
@@ -564,12 +524,13 @@
       document.querySelectorAll('.image-card').forEach(card => {
         card.classList.toggle('selected', selectedImageIds.has(card.dataset.id));
       });
-      updateBulkBar();
       updateSelectionMode();
+      renderFolderBar();
     }
 
     function renderFolderBar() {
       const folderBar = document.getElementById('folderBar');
+      const selectionCount = selectedImageIds.size;
       const baseFolders = [
         { id: null, name: 'All' },
         { id: 'none', name: 'No folder' },
@@ -579,23 +540,40 @@
         ...baseFolders.map(folder => `
           <button
             class="folder-chip ${currentFolderId === folder.id ? 'active' : ''}"
-            onclick="selectFolder(${folder.id === null ? 'null' : `'${folder.id}'`})"
+            onclick="handleFolderAction(${folder.id === null ? 'null' : `'${folder.id}'`})"
           >${folder.name}</button>
         `),
         ...folders.map(folder => `
           <button
             class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
-            onclick="selectFolder('${folder._id}')"
+            onclick="handleFolderAction('${folder._id}')"
           >
             <span>${escapeHtml(folder.name)}</span>
             <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${folder._id}')">×</span>
           </button>
         `),
-        `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`
+        `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
+        selectionCount
+          ? `<span class="selection-hint">${selectionCount} selected. Click a folder or No folder to move them.</span>`
+          : ''
       ];
 
+      folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
     }
+
+    window.handleFolderAction = async function(folderId) {
+      if (selectedImageIds.size > 0) {
+        if (folderId === null) {
+          await selectFolder(null);
+          return;
+        }
+        await moveSelectedImages(folderId === 'none' ? undefined : folderId);
+        return;
+      }
+
+      await selectFolder(folderId);
+    };
 
     window.selectFolder = async function(folderId) {
       currentFolderId = folderId;
@@ -631,14 +609,11 @@
       await loadImages();
     };
 
-    window.moveSelectedImages = async function() {
+    window.moveSelectedImages = async function(targetFolderId) {
       if (!selectedImageIds.size) return;
-      const bulkFolderSelect = document.getElementById('bulkFolderSelect');
-      const folderId = bulkFolderSelect.value || undefined;
-
       await Promise.all(
         Array.from(selectedImageIds).map(imageId =>
-          client.mutation("images:moveToFolder", { imageId, folderId })
+          client.mutation("images:moveToFolder", { imageId, folderId: targetFolderId })
         )
       );
 
@@ -659,7 +634,7 @@
       
       if (!images.length) {
         gallery.innerHTML = '<div class="loading">No images yet</div>';
-        updateBulkBar();
+        renderFolderBar();
         return;
       }
       
