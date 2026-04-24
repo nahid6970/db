@@ -96,6 +96,12 @@
       background: #e7f3ff;
       border-color: #0056b3;
     }
+
+    .page-drop-active .drop-zone {
+      background: #e7f3ff;
+      border-color: #0056b3;
+      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.12);
+    }
     
     button { 
       padding: 9px 14px; 
@@ -409,6 +415,7 @@
     const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
     const FOLDER_STORAGE_KEY = "image-share.currentFolderId";
+    const DEFAULT_PAGE_TITLE = document.title;
 
     function readStoredFolderId() {
       const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
@@ -449,6 +456,7 @@
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('fileInput');
+    let pageDragDepth = 0;
 
     dropZone.addEventListener('click', () => fileInput.click());
 
@@ -466,6 +474,48 @@
       dropZone.classList.remove('drag-over');
       fileInput.files = e.dataTransfer.files;
       updateFileCount();
+    });
+
+    window.addEventListener('dragenter', (e) => {
+      if (!e.dataTransfer?.types?.includes('Files')) {
+        return;
+      }
+      pageDragDepth += 1;
+      document.body.classList.add('page-drop-active');
+    });
+
+    window.addEventListener('dragover', (e) => {
+      if (!e.dataTransfer?.types?.includes('Files')) {
+        return;
+      }
+      e.preventDefault();
+    });
+
+    window.addEventListener('dragleave', (e) => {
+      if (!e.dataTransfer?.types?.includes('Files')) {
+        return;
+      }
+      pageDragDepth = Math.max(0, pageDragDepth - 1);
+      if (pageDragDepth === 0) {
+        document.body.classList.remove('page-drop-active');
+      }
+    });
+
+    window.addEventListener('drop', (e) => {
+      if (!e.dataTransfer?.files?.length) {
+        return;
+      }
+      e.preventDefault();
+      pageDragDepth = 0;
+      document.body.classList.remove('page-drop-active');
+
+      if (e.target.closest('#dropZone')) {
+        return;
+      }
+
+      fileInput.files = e.dataTransfer.files;
+      updateFileCount();
+      uploadImages();
     });
 
     window.addEventListener('keydown', (e) => {
@@ -541,6 +591,7 @@
       
       const total = files.length;
       let completed = 0;
+      document.title = `Uploading 0/${total} • ${DEFAULT_PAGE_TITLE}`;
       
       for (const file of files) {
         const formData = new FormData();
@@ -566,6 +617,7 @@
           const percent = Math.round((completed / total) * 100);
           progressFill.style.width = percent + '%';
           progressText.textContent = `${completed} of ${total} uploaded`;
+          document.title = `Uploading ${completed}/${total} • ${DEFAULT_PAGE_TITLE}`;
         } catch (error) {
           console.error('Upload failed:', error);
         }
@@ -573,10 +625,12 @@
       
       status.textContent = 'Upload complete!';
       status.style.color = '#28a745';
+      document.title = `Upload complete • ${DEFAULT_PAGE_TITLE}`;
       setTimeout(() => {
         status.textContent = '';
         progressContainer.style.display = 'none';
         progressFill.style.width = '0%';
+        document.title = DEFAULT_PAGE_TITLE;
       }, 2000);
       document.getElementById('fileInput').value = '';
       document.getElementById('uploadBtn').title = 'Upload';
