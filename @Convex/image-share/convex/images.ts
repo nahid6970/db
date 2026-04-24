@@ -74,7 +74,13 @@ export const clear = mutation({
         .filter((q) => q.eq(q.field("folderId"), args.folderId))
         .collect();
     } else {
-      images = await ctx.db.query("images").collect();
+      const folders = await ctx.db.query("folders").collect();
+      const protectedFolderIds = new Set(
+        folders.filter((folder) => folder.password).map((folder) => String(folder._id))
+      );
+      images = (await ctx.db.query("images").collect()).filter(
+        (image) => !image.folderId || !protectedFolderIds.has(image.folderId)
+      );
     }
 
     for (const img of images) {
