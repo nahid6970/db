@@ -137,8 +137,17 @@ export const setFolderPassword = mutation({
 });
 
 export const removeFolder = mutation({
-  args: { id: v.id("folders") },
+  args: { id: v.id("folders"), password: v.optional(v.string()) },
   handler: async (ctx, args) => {
+    const folder = await ctx.db.get(args.id);
+    if (!folder) {
+      return;
+    }
+
+    if (folder.password && folder.password !== args.password) {
+      throw new Error("Incorrect folder password.");
+    }
+
     const images = await ctx.db
       .query("images")
       .filter((q) => q.eq(q.field("folderId"), args.id))

@@ -751,8 +751,21 @@
       closeFolderContextMenu();
       const folder = folders.find(item => item._id === id);
       const name = folder?.name || 'this folder';
+      let password;
+
+      if (folder?.password) {
+        password = prompt(`Password required to delete "${name}"`);
+        if (password === null) {
+          return;
+        }
+        if (password !== folder.password) {
+          alert('Wrong password.');
+          return;
+        }
+      }
+
       if (!confirm(`Delete folder "${name}"? Images in it will be moved to No folder.`)) return;
-      await client.mutation("images:removeFolder", { id });
+      await client.mutation("images:removeFolder", { id, password });
       if (currentFolderId === id) {
         currentFolderId = null;
         storeCurrentFolderId(currentFolderId);
