@@ -362,10 +362,36 @@
     // REPLACE WITH YOUR CLOUDINARY CREDENTIALS
     const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
+    const FOLDER_STORAGE_KEY = "image-share.currentFolderId";
+
+    function readStoredFolderId() {
+      const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
+      return stored === null ? null : stored;
+    }
+
+    function storeCurrentFolderId(folderId) {
+      if (folderId === null) {
+        window.localStorage.removeItem(FOLDER_STORAGE_KEY);
+      } else {
+        window.localStorage.setItem(FOLDER_STORAGE_KEY, folderId);
+      }
+    }
+
+    function normalizeCurrentFolderId() {
+      if (currentFolderId === null || currentFolderId === 'none') {
+        return;
+      }
+
+      const exists = folders.some(folder => folder._id === currentFolderId);
+      if (!exists) {
+        currentFolderId = null;
+        storeCurrentFolderId(currentFolderId);
+      }
+    }
     
     const client = new ConvexHttpClient(CONVEX_URL);
     let folders = [];
-    let currentFolderId = null;
+    let currentFolderId = readStoredFolderId();
     let isShiftPressed = false;
     const selectedImageIds = new Set();
     let pointerX = 0;
@@ -631,6 +657,7 @@
     window.selectFolder = async function(folderId) {
       closeFolderContextMenu();
       currentFolderId = folderId;
+      storeCurrentFolderId(currentFolderId);
       selectedImageIds.clear();
       renderFolderBar();
       await loadImages();
@@ -653,6 +680,7 @@
       await client.mutation("images:removeFolder", { id });
       if (currentFolderId === id) {
         currentFolderId = null;
+        storeCurrentFolderId(currentFolderId);
       }
       await loadFolders();
       renderFolderBar();
@@ -769,6 +797,7 @@
     async function loadFolders() {
       try {
         folders = await client.query("images:listFolders");
+        normalizeCurrentFolderId();
       } catch (err) {
         console.error("Failed to load folders:", err);
       }
