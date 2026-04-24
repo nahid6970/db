@@ -18,12 +18,22 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      margin-bottom: 16px;
+      padding-top: 8px;
+      background: linear-gradient(180deg, rgba(245,245,245,0.98), rgba(245,245,245,0.94));
+      backdrop-filter: blur(10px);
+    }
+
     .folder-bar {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
       padding: 12px;
       background: white;
       border-radius: 12px;
@@ -194,12 +204,42 @@
     }
 
     .image-card.selected {
-      outline: 3px solid #007bff;
-      box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.22);
     }
 
     .image-card.selection-mode {
       cursor: crosshair;
+    }
+
+    .select-indicator {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 123, 255, 0.18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.15s ease;
+      z-index: 6;
+    }
+
+    .image-card.selected .select-indicator {
+      opacity: 1;
+    }
+
+    .select-indicator-mark {
+      width: 58px;
+      height: 58px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      color: #007bff;
+      font-size: 30px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.2);
     }
     
     .delete-btn {
@@ -263,22 +303,24 @@
 </head>
 <body>
   <div class="container">
-    <div class="folder-bar" id="folderBar"></div>
+    <div class="top-bar">
+      <div class="folder-bar" id="folderBar"></div>
 
-    <div class="upload-section">
-      <div class="upload-controls">
-        <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
-        <div class="drop-zone" id="dropZone">Drop images here</div>
-        <button id="uploadBtn" onclick="handleUpload()">Upload</button>
-        <button class="danger" onclick="clearAll()">Clear All</button>
-      </div>
-      <div class="progress-container" id="progressContainer">
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill"></div>
+      <div class="upload-section">
+        <div class="upload-controls">
+          <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
+          <div class="drop-zone" id="dropZone">Drop images here</div>
+          <button id="uploadBtn" onclick="handleUpload()">Upload</button>
+          <button class="danger" onclick="clearAll()">Clear All</button>
         </div>
-        <div class="progress-text" id="progressText"></div>
+        <div class="progress-container" id="progressContainer">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-text" id="progressText"></div>
+        </div>
+        <div id="status"></div>
       </div>
-      <div id="status"></div>
     </div>
 
     <div class="bulk-bar" id="bulkBar">
@@ -306,6 +348,8 @@
     let currentFolderId = null;
     let isShiftPressed = false;
     const selectedImageIds = new Set();
+    let pointerX = 0;
+    let pointerY = 0;
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -333,6 +377,7 @@
       if (e.key === 'Shift' && !isShiftPressed) {
         isShiftPressed = true;
         updateSelectionMode();
+        selectHoveredImageUnderPointer();
       }
     });
 
@@ -346,6 +391,11 @@
     window.addEventListener('blur', () => {
       isShiftPressed = false;
       updateSelectionMode();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      pointerX = e.clientX;
+      pointerY = e.clientY;
     });
 
     window.updateFileCount = function() {
@@ -500,6 +550,16 @@
       renderSelectionState();
     };
 
+    function selectHoveredImageUnderPointer() {
+      const hoveredElement = document.elementFromPoint(pointerX, pointerY);
+      const hoveredCard = hoveredElement?.closest('.image-card');
+      const imageId = hoveredCard?.dataset.id;
+      if (imageId && !selectedImageIds.has(imageId)) {
+        selectedImageIds.add(imageId);
+        renderSelectionState();
+      }
+    }
+
     function renderSelectionState() {
       document.querySelectorAll('.image-card').forEach(card => {
         card.classList.toggle('selected', selectedImageIds.has(card.dataset.id));
@@ -610,6 +670,9 @@
           onmouseenter="selectImageByHover('${img._id}')"
         >
           <img src="${img.url}" alt="${escapeHtml(img.filename)}" onclick="openImage('${img.url}')">
+          <div class="select-indicator">
+            <div class="select-indicator-mark">✓</div>
+          </div>
           <button class="danger delete-btn" onclick="deleteImage('${img._id}')">Delete</button>
           <div class="image-info">
             <p><strong>${escapeHtml(img.filename)}</strong></p>
