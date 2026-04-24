@@ -17,6 +17,48 @@
       margin-bottom: 16px; 
       box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
+
+    .folder-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .folder-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid #d6dbe1;
+      border-radius: 999px;
+      background: #f8f9fa;
+      color: #334155;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+    }
+
+    .folder-chip.active {
+      background: #007bff;
+      border-color: #007bff;
+      color: white;
+    }
+
+    .folder-delete {
+      font-weight: 700;
+      opacity: 0.7;
+      cursor: pointer;
+    }
+
+    .folder-delete:hover {
+      opacity: 1;
+    }
     
     .upload-controls {
       display: flex;
@@ -159,6 +201,21 @@
     .image-info { padding: 12px; }
     .image-info p { font-size: 13px; color: #666; margin-bottom: 8px; }
     .image-info button { padding: 8px 16px; font-size: 13px; width: 100%; }
+    .image-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .image-actions select {
+      flex: 1;
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      font-size: 13px;
+      background: white;
+    }
     .loading { text-align: center; padding: 40px; color: #999; font-size: 15px; }
     
     @media (max-width: 640px) {
@@ -173,6 +230,8 @@
 </head>
 <body>
   <div class="container">
+    <div class="folder-bar" id="folderBar"></div>
+
     <div class="upload-section">
       <div class="upload-controls">
         <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
@@ -203,6 +262,8 @@
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
     
     const client = new ConvexHttpClient(CONVEX_URL);
+    let folders = [];
+    let currentFolderId = null;
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -278,7 +339,8 @@
           
           await client.mutation("images:add", { 
             url: data.secure_url,
-            filename: file.name
+            filename: file.name,
+            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
           });
           
           completed++;
@@ -305,15 +367,101 @@
     window.deleteImage = async function(id) {
       if (!confirm('Delete this image?')) return;
       await client.mutation("images:remove", { id });
+      await loadImages();
     };
     
     window.clearAll = async function() {
-      if (!confirm('Delete all images?')) return;
-      await client.mutation("images:clear");
+      const scope = currentFolderId === null ? 'all images' : 'all images in this folder';
+      if (!confirm(`Delete ${scope}?`)) return;
+      await client.mutation("images:clear", { folderId: currentFolderId || undefined });
+      await loadImages();
     };
     
     window.openImage = function(url) {
       window.open(url, '_blank');
+    };
+
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
+    function getFolderOptions(selectedFolderId) {
+      const selectedValue = selectedFolderId || '';
+      return [
+        `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
+        ...folders.map(folder => `
+          <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
+            ${escapeHtml(folder.name)}
+          </option>
+        `)
+      ].join('');
+    }
+
+    function renderFolderBar() {
+      const folderBar = document.getElementById('folderBar');
+      const baseFolders = [
+        { id: null, name: 'All' },
+        { id: 'none', name: 'No folder' },
+      ];
+
+      const chips = [
+        ...baseFolders.map(folder => `
+          <button
+            class="folder-chip ${currentFolderId === folder.id ? 'active' : ''}"
+            onclick="selectFolder(${folder.id === null ? 'null' : `'${folder.id}'`})"
+          >${folder.name}</button>
+        `),
+        ...folders.map(folder => `
+          <button
+            class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
+            onclick="selectFolder('${folder._id}')"
+          >
+            <span>${escapeHtml(folder.name)}</span>
+            <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${folder._id}')">×</span>
+          </button>
+        `),
+        `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`
+      ];
+
+      folderBar.innerHTML = chips.join('');
+    }
+
+    window.selectFolder = async function(folderId) {
+      currentFolderId = folderId;
+      renderFolderBar();
+      await loadImages();
+    };
+
+    window.createFolder = async function() {
+      const name = prompt('Folder name?');
+      if (!name || !name.trim()) return;
+      await client.mutation("images:createFolder", { name: name.trim() });
+      await loadFolders();
+      renderFolderBar();
+    };
+
+    window.deleteFolder = async function(id) {
+      const folder = folders.find(item => item._id === id);
+      const name = folder?.name || 'this folder';
+      if (!confirm(`Delete folder "${name}"? Images in it will be moved to No folder.`)) return;
+      await client.mutation("images:removeFolder", { id });
+      if (currentFolderId === id) {
+        currentFolderId = null;
+      }
+      await loadFolders();
+      renderFolderBar();
+      await loadImages();
+    };
+
+    window.moveImageToFolder = async function(imageId, selectEl) {
+      const folderId = selectEl.value || undefined;
+      await client.mutation("images:moveToFolder", { imageId, folderId });
+      await loadImages();
     };
     
     function renderImages(images) {
@@ -326,19 +474,32 @@
       
       gallery.innerHTML = images.map(img => `
         <div class="image-card">
-          <img src="${img.url}" alt="${img.filename}" onclick="openImage('${img.url}')">
+          <img src="${img.url}" alt="${escapeHtml(img.filename)}" onclick="openImage('${img.url}')">
           <button class="danger delete-btn" onclick="deleteImage('${img._id}')">Delete</button>
           <div class="image-info">
-            <p><strong>${img.filename}</strong></p>
+            <p><strong>${escapeHtml(img.filename)}</strong></p>
             <p>${new Date(img.timestamp).toLocaleString()}</p>
+            <div class="image-actions">
+              <select onchange="moveImageToFolder('${img._id}', this)">
+                ${getFolderOptions(img.folderId)}
+              </select>
+            </div>
           </div>
         </div>
       `).join('');
     }
+
+    async function loadFolders() {
+      try {
+        folders = await client.query("images:listFolders");
+      } catch (err) {
+        console.error("Failed to load folders:", err);
+      }
+    }
     
     async function loadImages() {
       try {
-        const images = await client.query("images:list");
+        const images = await client.query("images:list", { folderId: currentFolderId || undefined });
         renderImages(images);
       } catch (err) {
         console.error("Failed to load images:", err);
@@ -346,10 +507,16 @@
     }
     
     // Initial load
-    loadImages();
+    await loadFolders();
+    renderFolderBar();
+    await loadImages();
     
     // Basic polling (every 3 seconds) since ConvexHttpClient doesn't support real-time subscriptions
-    setInterval(loadImages, 3000);
+    setInterval(async () => {
+      await loadFolders();
+      renderFolderBar();
+      await loadImages();
+    }, 3000);
   </script>
 </body>
 </html>
