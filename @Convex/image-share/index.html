@@ -175,6 +175,12 @@
       font-weight: 600;
     }
 
+    .folder-lock {
+      font-size: 12px;
+      opacity: 0.8;
+      margin-left: 2px;
+    }
+
     .context-menu {
       position: fixed;
       z-index: 2000;
@@ -372,7 +378,8 @@
     }
 
     function storeCurrentFolderId(folderId) {
-      if (folderId === null) {
+      const targetFolder = folders.find(folder => folder._id === folderId);
+      if (folderId === null || targetFolder?.password) {
         window.localStorage.removeItem(FOLDER_STORAGE_KEY);
       } else {
         window.localStorage.setItem(FOLDER_STORAGE_KEY, folderId);
@@ -569,7 +576,7 @@
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
         ...folders.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
-            ${folder.password ? 'Lock ' : ''}${escapeHtml(folder.name)}
+            ${escapeHtml(folder.name)}${folder.password ? ' 🔒' : ''}
           </option>
         `)
       ].join('');
@@ -654,7 +661,7 @@
             onclick="handleFolderAction('${folder._id}')"
             oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
           >
-            <span>${folder.password ? 'Lock ' : ''}${escapeHtml(folder.name)}</span>
+            <span>${escapeHtml(folder.name)}${folder.password ? '<span class="folder-lock">🔒</span>' : ''}</span>
           </button>
         `),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
