@@ -154,6 +154,30 @@
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
       gap: 16px; 
     }
+
+    .bulk-bar {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: #eef6ff;
+      border: 1px solid #cfe2ff;
+      border-radius: 12px;
+    }
+
+    .bulk-bar.visible {
+      display: flex;
+    }
+
+    .bulk-bar select {
+      min-width: 180px;
+      padding: 10px 12px;
+      border: 1px solid #ced4da;
+      border-radius: 8px;
+      background: white;
+    }
     
     .image-card { 
       position: relative;
@@ -167,6 +191,15 @@
     .image-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .image-card.selected {
+      outline: 3px solid #007bff;
+      box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.2);
+    }
+
+    .image-card.selection-mode {
+      cursor: crosshair;
     }
     
     .delete-btn {
@@ -248,6 +281,13 @@
       <div id="status"></div>
     </div>
 
+    <div class="bulk-bar" id="bulkBar">
+      <strong id="bulkCount">0 selected</strong>
+      <select id="bulkFolderSelect"></select>
+      <button onclick="moveSelectedImages()">Move Selected</button>
+      <button class="danger" onclick="clearSelection()">Clear Selection</button>
+    </div>
+
     <div id="gallery" class="gallery"></div>
   </div>
 
@@ -264,6 +304,8 @@
     const client = new ConvexHttpClient(CONVEX_URL);
     let folders = [];
     let currentFolderId = null;
+    let isShiftPressed = false;
+    const selectedImageIds = new Set();
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -285,6 +327,25 @@
       dropZone.classList.remove('drag-over');
       fileInput.files = e.dataTransfer.files;
       updateFileCount();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Shift' && !isShiftPressed) {
+        isShiftPressed = true;
+        updateSelectionMode();
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      if (e.key === 'Shift') {
+        isShiftPressed = false;
+        updateSelectionMode();
+      }
+    });
+
+    window.addEventListener('blur', () => {
+      isShiftPressed = false;
+      updateSelectionMode();
     });
 
     window.updateFileCount = function() {
@@ -402,6 +463,51 @@
       ].join('');
     }
 
+    function getBulkFolderOptions() {
+      return [
+        '<option value="">Move to: No folder</option>',
+        ...folders.map(folder => `
+          <option value="${folder._id}">${escapeHtml(folder.name)}</option>
+        `)
+      ].join('');
+    }
+
+    function updateBulkBar() {
+      const bulkBar = document.getElementById('bulkBar');
+      const bulkCount = document.getElementById('bulkCount');
+      const bulkFolderSelect = document.getElementById('bulkFolderSelect');
+      const count = selectedImageIds.size;
+
+      bulkCount.textContent = `${count} selected`;
+      bulkFolderSelect.innerHTML = getBulkFolderOptions();
+      bulkBar.classList.toggle('visible', count > 0);
+    }
+
+    function updateSelectionMode() {
+      document.querySelectorAll('.image-card').forEach(card => {
+        card.classList.toggle('selection-mode', isShiftPressed);
+      });
+    }
+
+    window.clearSelection = function() {
+      selectedImageIds.clear();
+      renderSelectionState();
+    };
+
+    window.selectImageByHover = function(imageId) {
+      if (!isShiftPressed || selectedImageIds.has(imageId)) return;
+      selectedImageIds.add(imageId);
+      renderSelectionState();
+    };
+
+    function renderSelectionState() {
+      document.querySelectorAll('.image-card').forEach(card => {
+        card.classList.toggle('selected', selectedImageIds.has(card.dataset.id));
+      });
+      updateBulkBar();
+      updateSelectionMode();
+    }
+
     function renderFolderBar() {
       const folderBar = document.getElementById('folderBar');
       const baseFolders = [
@@ -433,6 +539,7 @@
 
     window.selectFolder = async function(folderId) {
       currentFolderId = folderId;
+      selectedImageIds.clear();
       renderFolderBar();
       await loadImages();
     };
@@ -463,17 +570,45 @@
       await client.mutation("images:moveToFolder", { imageId, folderId });
       await loadImages();
     };
+
+    window.moveSelectedImages = async function() {
+      if (!selectedImageIds.size) return;
+      const bulkFolderSelect = document.getElementById('bulkFolderSelect');
+      const folderId = bulkFolderSelect.value || undefined;
+
+      await Promise.all(
+        Array.from(selectedImageIds).map(imageId =>
+          client.mutation("images:moveToFolder", { imageId, folderId })
+        )
+      );
+
+      selectedImageIds.clear();
+      await loadImages();
+      renderSelectionState();
+    };
     
     function renderImages(images) {
       const gallery = document.getElementById('gallery');
+      const visibleIds = new Set(images.map(img => img._id));
+
+      Array.from(selectedImageIds).forEach(id => {
+        if (!visibleIds.has(id)) {
+          selectedImageIds.delete(id);
+        }
+      });
       
       if (!images.length) {
         gallery.innerHTML = '<div class="loading">No images yet</div>';
+        updateBulkBar();
         return;
       }
       
       gallery.innerHTML = images.map(img => `
-        <div class="image-card">
+        <div
+          class="image-card ${selectedImageIds.has(img._id) ? 'selected' : ''}"
+          data-id="${img._id}"
+          onmouseenter="selectImageByHover('${img._id}')"
+        >
           <img src="${img.url}" alt="${escapeHtml(img.filename)}" onclick="openImage('${img.url}')">
           <button class="danger delete-btn" onclick="deleteImage('${img._id}')">Delete</button>
           <div class="image-info">
@@ -487,6 +622,8 @@
           </div>
         </div>
       `).join('');
+
+      renderSelectionState();
     }
 
     async function loadFolders() {
