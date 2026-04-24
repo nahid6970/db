@@ -249,18 +249,18 @@
     .image-card { 
       position: relative;
       background: #eee; 
-      border-radius: 12px; 
+      border-radius: 0; 
       overflow: hidden; 
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid transparent;
+      transition: border-color 0.2s ease;
     }
 
     .image-card.pinned {
-      box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.28), 0 2px 8px rgba(0,0,0,0.1);
+      border-color: #16a34a;
     }
     
     .image-card:hover {
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      border-color: #15803d;
     }
 
     .image-card.selected {
@@ -277,7 +277,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: rgba(0, 123, 255, 0.18);
+      background: rgba(34, 197, 94, 0.18);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.15s ease;
@@ -291,9 +291,9 @@
     .select-indicator-mark {
       width: 58px;
       height: 58px;
-      border-radius: 999px;
+      border-radius: 0;
       background: rgba(255, 255, 255, 0.96);
-      color: #007bff;
+      color: #15803d;
       font-size: 30px;
       font-weight: 800;
       display: flex;
@@ -437,7 +437,8 @@
   </div>
 
   <script type="module">
-    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+    import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
+    import { anyApi } from "https://esm.sh/convex@1.16.0/server";
     
     // REPLACE WITH YOUR CONVEX URL
     const CONVEX_URL = "https://modest-goose-860.convex.cloud";
@@ -447,6 +448,7 @@
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
     const FOLDER_STORAGE_KEY = "image-share.currentFolderId";
     const DEFAULT_PAGE_TITLE = document.title;
+    const api = anyApi;
 
     function readStoredFolderId() {
       const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
@@ -474,7 +476,7 @@
       }
     }
     
-    const client = new ConvexHttpClient(CONVEX_URL);
+    const client = new ConvexClient(CONVEX_URL);
     let folders = [];
     let currentFolderId = readStoredFolderId();
     let isShiftPressed = false;
@@ -484,6 +486,8 @@
     let pointerY = 0;
     let folderContextMenuId = null;
     let suppressRefreshUntil = 0;
+    let folderSubscriptionCleanup = null;
+    let imageSubscriptionCleanup = null;
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -639,7 +643,7 @@
           
           const data = await res.json();
           
-          await client.mutation("images:add", { 
+          await client.mutation(api.images.add, { 
             url: data.secure_url,
             filename: file.name,
             folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
@@ -671,20 +675,17 @@
     
     window.deleteImage = async function(id) {
       if (!confirm('Delete this image?')) return;
-      await client.mutation("images:remove", { id });
-      await loadImages();
+      await client.mutation(api.images.remove, { id });
     };
 
     window.togglePin = async function(id) {
-      await client.mutation("images:togglePin", { id });
-      await loadImages();
+      await client.mutation(api.images.togglePin, { id });
     };
     
     window.clearAll = async function() {
       const scope = currentFolderId === null ? 'all images' : 'all images in this folder';
       if (!confirm(`Delete ${scope}?`)) return;
-      await client.mutation("images:clear", { folderId: currentFolderId || undefined });
-      await loadImages();
+      await client.mutation(api.images.clear, { folderId: currentFolderId || undefined });
     };
     
     window.openImage = function(url) {
@@ -850,16 +851,14 @@
       storeCurrentFolderId(currentFolderId);
       selectedImageIds.clear();
       renderFolderBar();
-      await loadImages();
+      subscribeToImages();
     };
 
     window.createFolder = async function() {
       closeFolderContextMenu();
       const name = prompt('Folder name?');
       if (!name || !name.trim()) return;
-      await client.mutation("images:createFolder", { name: name.trim() });
-      await loadFolders();
-      renderFolderBar();
+      await client.mutation(api.images.createFolder, { name: name.trim() });
     };
 
     window.deleteFolder = async function(id) {
@@ -880,14 +879,12 @@
       }
 
       if (!confirm(`Delete folder "${name}"? Images in it will be moved to No folder.`)) return;
-      await client.mutation("images:removeFolder", { id, password });
+      await client.mutation(api.images.removeFolder, { id, password });
       if (currentFolderId === id) {
         currentFolderId = null;
         storeCurrentFolderId(currentFolderId);
+        subscribeToImages();
       }
-      await loadFolders();
-      renderFolderBar();
-      await loadImages();
     };
 
     window.openFolderContextMenu = function(event, id) {
@@ -925,14 +922,12 @@
         return;
       }
 
-      await client.mutation("images:updateFolder", {
+      await client.mutation(api.images.updateFolder, {
         id: folder._id,
         name: nextName.trim(),
         position: folder.position ?? 0,
       });
       closeFolderContextMenu();
-      await loadFolders();
-      renderFolderBar();
     };
 
     window.setFolderPasswordFromMenu = async function() {
@@ -952,15 +947,12 @@
         return;
       }
 
-      await client.mutation("images:setFolderPassword", {
+      await client.mutation(api.images.setFolderPassword, {
         id: folder._id,
         password: nextPassword,
       });
       unlockedFolderIds.delete(folder._id);
       closeFolderContextMenu();
-      await loadFolders();
-      renderFolderBar();
-      await loadImages();
     };
 
     window.removeFolderPasswordFromMenu = async function() {
@@ -972,15 +964,12 @@
       }
       if (!confirm(`Remove password from "${folder.name}"?`)) return;
 
-      await client.mutation("images:setFolderPassword", {
+      await client.mutation(api.images.setFolderPassword, {
         id: folder._id,
         password: undefined,
       });
       unlockedFolderIds.delete(folder._id);
       closeFolderContextMenu();
-      await loadFolders();
-      renderFolderBar();
-      await loadImages();
     };
 
     window.deleteFolderFromMenu = async function() {
@@ -993,20 +982,18 @@
     window.moveImageToFolder = async function(imageId, selectEl) {
       pauseAutoRefresh();
       const folderId = selectEl.value || undefined;
-      await client.mutation("images:moveToFolder", { imageId, folderId });
-      await loadImages();
+      await client.mutation(api.images.moveToFolder, { imageId, folderId });
     };
 
     window.moveSelectedImages = async function(targetFolderId) {
       if (!selectedImageIds.size) return;
       await Promise.all(
         Array.from(selectedImageIds).map(imageId =>
-          client.mutation("images:moveToFolder", { imageId, folderId: targetFolderId })
+          client.mutation(api.images.moveToFolder, { imageId, folderId: targetFolderId })
         )
       );
 
       selectedImageIds.clear();
-      await loadImages();
       renderSelectionState();
     };
     
@@ -1058,9 +1045,11 @@
       renderSelectionState();
     }
 
-    async function loadFolders() {
-      try {
-        folders = await client.query("images:listFolders");
+    function subscribeToFolders() {
+      folderSubscriptionCleanup?.();
+      folderSubscriptionCleanup = client.onUpdate(api.images.listFolders, {}, (nextFolders) => {
+        const previousFolderId = currentFolderId;
+        folders = nextFolders;
         normalizeCurrentFolderId();
         Array.from(unlockedFolderIds).forEach(id => {
           const folder = folders.find(item => item._id === id);
@@ -1068,38 +1057,32 @@
             unlockedFolderIds.delete(id);
           }
         });
-      } catch (err) {
-        console.error("Failed to load folders:", err);
-      }
+        if (previousFolderId !== currentFolderId) {
+          subscribeToImages();
+        }
+        renderFolderBar();
+      });
     }
-    
-    async function loadImages() {
-      try {
-        const images = await client.query("images:list", { folderId: currentFolderId || undefined });
-        renderImages(images);
-      } catch (err) {
-        console.error("Failed to load images:", err);
-      }
+
+    function subscribeToImages() {
+      imageSubscriptionCleanup?.();
+      imageSubscriptionCleanup = client.onUpdate(
+        api.images.list,
+        { folderId: currentFolderId || undefined },
+        (images) => {
+          renderImages(images);
+        }
+      );
     }
     
     // Initial load
-    await loadFolders();
+    subscribeToFolders();
+    renderFolderBar();
     if (!(await ensureFolderAccess(currentFolderId))) {
       currentFolderId = null;
       storeCurrentFolderId(currentFolderId);
     }
-    renderFolderBar();
-    await loadImages();
-    
-    // Basic polling (every 3 seconds) since ConvexHttpClient doesn't support real-time subscriptions
-    setInterval(async () => {
-      if (shouldSkipAutoRefresh()) {
-        return;
-      }
-      await loadFolders();
-      renderFolderBar();
-      await loadImages();
-    }, 3000);
+    subscribeToImages();
   </script>
 </body>
 </html>
