@@ -103,6 +103,20 @@ export const createFolder = mutation({
   },
 });
 
+export const updateFolder = mutation({
+  args: {
+    id: v.id("folders"),
+    name: v.string(),
+    position: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, {
+      name: args.name,
+      position: args.position,
+    });
+  },
+});
+
 export const removeFolder = mutation({
   args: { id: v.id("folders") },
   handler: async (ctx, args) => {

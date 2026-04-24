@@ -52,22 +52,18 @@
       cursor: pointer;
       font-size: 14px;
       line-height: 1;
+      transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .folder-chip:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
     }
 
     .folder-chip.active {
       background: #007bff;
       border-color: #007bff;
       color: white;
-    }
-
-    .folder-delete {
-      font-weight: 700;
-      opacity: 0.7;
-      cursor: pointer;
-    }
-
-    .folder-delete:hover {
-      opacity: 1;
     }
     
     .upload-controls {
@@ -174,6 +170,41 @@
       font-size: 13px;
       color: #0b5ed7;
       font-weight: 600;
+    }
+
+    .context-menu {
+      position: fixed;
+      z-index: 2000;
+      min-width: 160px;
+      padding: 6px;
+      background: white;
+      border: 1px solid #d6dbe1;
+      border-radius: 10px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.18);
+      display: none;
+    }
+
+    .context-menu.visible {
+      display: block;
+    }
+
+    .context-menu button {
+      width: 100%;
+      padding: 10px 12px;
+      background: transparent;
+      color: #1e293b;
+      border: none;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    .context-menu button:hover {
+      background: #f1f5f9;
+    }
+
+    .context-menu button.danger-item {
+      color: #b42318;
     }
     
     .image-card { 
@@ -313,6 +344,11 @@
     <div id="gallery" class="gallery"></div>
   </div>
 
+  <div class="context-menu" id="folderContextMenu">
+    <button onclick="renameFolderFromMenu()">Rename</button>
+    <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
+  </div>
+
   <script type="module">
     import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
     
@@ -330,6 +366,7 @@
     const selectedImageIds = new Set();
     let pointerX = 0;
     let pointerY = 0;
+    let folderContextMenuId = null;
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -371,12 +408,24 @@
     window.addEventListener('blur', () => {
       isShiftPressed = false;
       updateSelectionMode();
+      closeFolderContextMenu();
     });
 
     window.addEventListener('mousemove', (e) => {
       pointerX = e.clientX;
       pointerY = e.clientY;
     });
+
+    window.addEventListener('click', (e) => {
+      const menu = document.getElementById('folderContextMenu');
+      if (!menu.contains(e.target)) {
+        closeFolderContextMenu();
+      }
+    });
+
+    window.addEventListener('scroll', () => {
+      closeFolderContextMenu();
+    }, true);
 
     window.updateFileCount = function() {
       const files = document.getElementById('fileInput').files;
@@ -547,9 +596,9 @@
           <button
             class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
             onclick="handleFolderAction('${folder._id}')"
+            oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
           >
             <span>${escapeHtml(folder.name)}</span>
-            <span class="folder-delete" onclick="event.stopPropagation(); deleteFolder('${folder._id}')">×</span>
           </button>
         `),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
@@ -576,6 +625,7 @@
     };
 
     window.selectFolder = async function(folderId) {
+      closeFolderContextMenu();
       currentFolderId = folderId;
       selectedImageIds.clear();
       renderFolderBar();
@@ -583,6 +633,7 @@
     };
 
     window.createFolder = async function() {
+      closeFolderContextMenu();
       const name = prompt('Folder name?');
       if (!name || !name.trim()) return;
       await client.mutation("images:createFolder", { name: name.trim() });
@@ -591,6 +642,7 @@
     };
 
     window.deleteFolder = async function(id) {
+      closeFolderContextMenu();
       const folder = folders.find(item => item._id === id);
       const name = folder?.name || 'this folder';
       if (!confirm(`Delete folder "${name}"? Images in it will be moved to No folder.`)) return;
@@ -601,6 +653,52 @@
       await loadFolders();
       renderFolderBar();
       await loadImages();
+    };
+
+    window.openFolderContextMenu = function(event, id) {
+      event.preventDefault();
+      if (selectedImageIds.size > 0) {
+        return;
+      }
+
+      const menu = document.getElementById('folderContextMenu');
+      folderContextMenuId = id;
+      menu.style.left = `${event.clientX}px`;
+      menu.style.top = `${event.clientY}px`;
+      menu.classList.add('visible');
+    };
+
+    function closeFolderContextMenu() {
+      document.getElementById('folderContextMenu').classList.remove('visible');
+      folderContextMenuId = null;
+    }
+
+    window.renameFolderFromMenu = async function() {
+      if (!folderContextMenuId) return;
+      const folder = folders.find(item => item._id === folderContextMenuId);
+      if (!folder) return;
+
+      const nextName = prompt('Rename folder', folder.name);
+      if (!nextName || !nextName.trim() || nextName.trim() === folder.name) {
+        closeFolderContextMenu();
+        return;
+      }
+
+      await client.mutation("images:updateFolder", {
+        id: folder._id,
+        name: nextName.trim(),
+        position: folder.position ?? 0,
+      });
+      closeFolderContextMenu();
+      await loadFolders();
+      renderFolderBar();
+    };
+
+    window.deleteFolderFromMenu = async function() {
+      if (!folderContextMenuId) return;
+      const id = folderContextMenuId;
+      closeFolderContextMenu();
+      await deleteFolder(id);
     };
 
     window.moveImageToFolder = async function(imageId, selectEl) {
