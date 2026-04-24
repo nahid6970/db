@@ -26,7 +26,11 @@ export const list = query({
       );
     }
 
-    return images.sort((a, b) => b.timestamp - a.timestamp);
+    return images.sort((a, b) => {
+      if (a.pinned && !b.pinned) return -1;
+      if (!a.pinned && b.pinned) return 1;
+      return b.timestamp - a.timestamp;
+    });
   },
 });
 
@@ -42,6 +46,7 @@ export const add = mutation({
       filename: args.filename,
       timestamp: Date.now(),
       folderId: args.folderId,
+      pinned: false,
     });
   },
 });
@@ -73,8 +78,24 @@ export const clear = mutation({
     }
 
     for (const img of images) {
-      await ctx.db.delete(img._id);
+      if (!img.pinned) {
+        await ctx.db.delete(img._id);
+      }
     }
+  },
+});
+
+export const togglePin = mutation({
+  args: { id: v.id("images") },
+  handler: async (ctx, args) => {
+    const image = await ctx.db.get(args.id);
+    if (!image) {
+      return;
+    }
+
+    await ctx.db.patch(args.id, {
+      pinned: !image.pinned,
+    });
   },
 });
 
