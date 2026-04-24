@@ -196,9 +196,13 @@
     }
 
     .folder-lock {
-      font-size: 12px;
-      opacity: 0.8;
+      width: 12px;
+      height: 12px;
       margin-left: 2px;
+      opacity: 1;
+      vertical-align: -1px;
+      fill: #111111;
+      stroke: none;
     }
 
     .context-menu {
@@ -611,7 +615,7 @@
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
         ...folders.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
-            ${escapeHtml(folder.name)}${folder.password ? ' 🔒' : ''}
+            ${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
           </option>
         `)
       ].join('');
@@ -696,7 +700,7 @@
             onclick="handleFolderAction('${folder._id}')"
             oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
           >
-            <span>${escapeHtml(folder.name)}${folder.password ? '<span class="folder-lock">🔒</span>' : ''}</span>
+            <span>${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}</span>
           </button>
         `),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
