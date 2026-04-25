@@ -17,10 +17,10 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 ## 🚀 Key Features
 
-- **Integrated Sticky Header**: 
-  - **Folders on the Left**: Your entire folder navigation is now part of the sticky header.
-  - **Smart Wrapping**: Folders automatically wrap to new lines as the list grows, ensuring they never overlap with the action buttons.
-  - **Sticky Actions**: The **+ (New Note)** and **Gear (Settings)** icons stay fixed on the right for instant access.
+- **Split Sticky Header**: 
+  - **Top Action Bar**: The **+ (New Note)** and **Gear (Settings)** icons live in their own sticky row at the top.
+  - **Dedicated Folder Bar**: Folder navigation sits on a separate sticky bar directly below the actions.
+  - **Smart Wrapping**: Folders automatically wrap to new lines as the list grows without competing with the action buttons.
 - **Improved Settings Experience**:
   - **Optimized Scrolling**: The Settings modal now features a robust flexbox layout that handles large amounts of custom data without overflowing the screen.
   - **Tabbed Management**: Dedicated tabs for **Color Styles** and **Folder Config**.
@@ -56,6 +56,6 @@ To avoid conflicts with standard Markdown and project features, do **not** use t
 
 - **Add Note**: Click the green **+** icon in the header.
 - **Settings**: Click the gear icon to manage triggers and folders.
-- **Folders**: Navigate via the chips on the left of the header. The **Dot Icon** shows your current location.
+- **Folders**: Navigate via the chips in the folder bar below the top action bar. The **Dot Icon** shows your current location.
 - **Sorting**: Prioritize folders by moving them up in the Folder Config tab.
 - **Scrollable Settings**: Don't worry about adding too many styles; the settings menu now scrolls smoothly to handle any amount of customization.
