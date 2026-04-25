@@ -1000,7 +1000,7 @@
             {
                 "id": 13,
                 "title": "Dr. STONE - s04e28 - [87] - Dawn of the Computer HDTV-1080p - [SubsPlease]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-23T21:07:32.677381",
                 "notify": "seen"
             },
@@ -2496,6 +2496,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\WWE SmackDown",
         "rating": "3",
         "episodes": [
+            {
+                "id": 23,
+                "title": "WWE SmackDown - 2026-04-24 - SmackDown 1392 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-04-25T20:49:17.968336",
+                "notify": "seen"
+            },
             {
                 "id": 22,
                 "title": "WWE SmackDown - 2026-04-03 - SmackDown 1389 WEBDL-1080p",
@@ -4131,7 +4138,7 @@
             {
                 "id": 9,
                 "title": "Monarch - Legacy of Monsters - S02E09 - Ends of the Earth WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-24T09:28:06.607081",
                 "notify": "seen"
             },
