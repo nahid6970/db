@@ -194,14 +194,64 @@ function computeReminderNextTrigger(reminder) {
   return baseTime + days * 24 * 60 * 60 * 1000;
 }
 
+function parseReminderIntervalDays(rawValue) {
+  if (rawValue == null || rawValue === '') return null;
+  if (typeof rawValue === 'number') {
+    return Number.isFinite(rawValue) && rawValue > 0 ? rawValue : null;
+  }
+
+  const value = String(rawValue).trim().toLowerCase();
+  if (!value) return null;
+
+  if (/^\d+(\.\d+)?$/.test(value)) {
+    const numericDays = Number(value);
+    return Number.isFinite(numericDays) && numericDays > 0 ? numericDays : null;
+  }
+
+  const matches = [...value.matchAll(/(\d+(?:\.\d+)?)\s*([dhm])/g)];
+  const normalized = value.replace(/(\d+(?:\.\d+)?)\s*([dhm])/g, '').trim();
+  if (!matches.length || normalized) return null;
+
+  let totalMinutes = 0;
+  for (const [, amountRaw, unit] of matches) {
+    const amount = Number(amountRaw);
+    if (!Number.isFinite(amount) || amount < 0) return null;
+
+    if (unit === 'd') totalMinutes += amount * 24 * 60;
+    if (unit === 'h') totalMinutes += amount * 60;
+    if (unit === 'm') totalMinutes += amount;
+  }
+
+  return totalMinutes > 0 ? totalMinutes / (24 * 60) : null;
+}
+
+function formatReminderIntervalInput(daysValue) {
+  if (!Number.isFinite(daysValue) || daysValue <= 0) return '';
+
+  let remainingMinutes = Math.round(daysValue * 24 * 60);
+  const days = Math.floor(remainingMinutes / (24 * 60));
+  remainingMinutes -= days * 24 * 60;
+  const hours = Math.floor(remainingMinutes / 60);
+  remainingMinutes -= hours * 60;
+  const minutes = remainingMinutes;
+
+  const parts = [];
+  if (days) parts.push(`${days}d`);
+  if (hours) parts.push(`${hours}h`);
+  if (minutes) parts.push(`${minutes}m`);
+  return parts.join(' ') || `${daysValue}d`;
+}
+
+function formatReminderIntervalLabel(daysValue) {
+  return formatReminderIntervalInput(daysValue) || 'custom interval';
+}
+
 function sanitizeReminderDraft(reminder) {
   const draft = {
     reminder_enabled: Boolean(reminder?.reminder_enabled),
     reminder_mode: reminder?.reminder_mode === 'datetime' ? 'datetime' : 'interval',
     reminder_frequency: reminder?.reminder_frequency === 'continuous' ? 'continuous' : 'one_time',
-    reminder_interval_days: reminder?.reminder_interval_days != null && reminder?.reminder_interval_days !== ''
-      ? Number(reminder.reminder_interval_days)
-      : null,
+    reminder_interval_days: parseReminderIntervalDays(reminder?.reminder_interval_days),
     reminder_datetime: reminder?.reminder_datetime || '',
     reminder_next_trigger_at: reminder?.reminder_next_trigger_at ?? null,
     reminder_last_triggered_at: reminder?.reminder_last_triggered_at ?? null,
@@ -276,7 +326,7 @@ function formatReminderSummary(reminder) {
       : `Specific reminder in ${meta.countdown} (${meta.nextDateLabel}).`;
   }
 
-  const intervalLabel = `${reminder.reminder_interval_days} day${Number(reminder.reminder_interval_days) === 1 ? '' : 's'}`;
+  const intervalLabel = formatReminderIntervalLabel(reminder.reminder_interval_days);
   const repeatLabel = reminder.reminder_frequency === 'continuous' ? 'repeats' : 'one time';
   return meta.due
     ? `Every ${intervalLabel} reminder is due now (${repeatLabel}).`
@@ -306,7 +356,7 @@ function populateReminderPopup(reminder) {
   document.getElementById('reminder-enabled').checked = safeReminder.reminder_enabled;
   document.getElementById('reminder-mode').value = safeReminder.reminder_mode;
   document.getElementById('reminder-frequency').value = safeReminder.reminder_frequency;
-  document.getElementById('reminder-interval-days').value = safeReminder.reminder_interval_days ?? '';
+  document.getElementById('reminder-interval-days').value = formatReminderIntervalInput(safeReminder.reminder_interval_days);
   document.getElementById('reminder-datetime').value = safeReminder.reminder_datetime
     ? safeReminder.reminder_datetime.slice(0, 16)
     : '';
@@ -352,7 +402,7 @@ function validateReminderDraft(reminder) {
   }
 
   if (!Number.isFinite(reminder.reminder_interval_days) || reminder.reminder_interval_days <= 0) {
-    return { valid: false, message: 'Enter a reminder interval greater than 0 days.' };
+    return { valid: false, message: 'Enter a valid duration like 7d 8h 99m, 25d, 66h, or 35m.' };
   }
 
   if (!reminder.reminder_next_trigger_at) {

@@ -287,7 +287,7 @@
             <div>
               <label for="reminder-mode">Reminder Type</label>
               <select id="reminder-mode">
-                <option value="interval">Every X days</option>
+                <option value="interval">Custom duration</option>
                 <option value="datetime">Specific date & time</option>
               </select>
             </div>
@@ -300,8 +300,9 @@
             </div>
           </div>
           <div id="reminder-interval-fields" class="reminder-section">
-            <label for="reminder-interval-days">Interval in days</label>
-            <input type="number" id="reminder-interval-days" min="0.01" step="0.01" placeholder="3">
+            <label for="reminder-interval-days">Duration</label>
+            <input type="text" id="reminder-interval-days" placeholder="7d 8h 99m">
+            <div class="reminder-hint">Use any mix of `d`, `h`, and `m`, like `25d`, `66h`, or `35m`.</div>
           </div>
           <div id="reminder-datetime-fields" class="reminder-section hidden">
             <label for="reminder-datetime">Choose date & time</label>
