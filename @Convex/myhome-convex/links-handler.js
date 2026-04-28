@@ -373,6 +373,20 @@ function formatReminderDate(timestamp) {
   return new Date(timestamp).toLocaleString();
 }
 
+function getDefaultReminderDateTimeValue() {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}T23:59`;
+}
+
+function prefillReminderDateTimeIfEmpty() {
+  const dateTimeInput = document.getElementById('reminder-datetime');
+  if (!dateTimeInput || dateTimeInput.value) return;
+  dateTimeInput.value = getDefaultReminderDateTimeValue();
+}
+
 function formatReminderSummary(reminder) {
   const meta = getReminderMeta(reminder);
   if (!reminder.reminder_enabled || !meta.active) return 'No reminder set.';
@@ -404,6 +418,7 @@ function updateReminderModeUI() {
     frequency.disabled = !enabled || mode === 'datetime';
     if (mode === 'datetime') {
       frequency.value = 'one_time';
+      prefillReminderDateTimeIfEmpty();
     }
   }
 }
