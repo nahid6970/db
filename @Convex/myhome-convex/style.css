@@ -595,6 +595,67 @@ button[type="button"]:hover {
   flex: 1;
 }
 
+.type-picker-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.type-picker-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.type-chip {
+  position: relative;
+  display: block;
+  margin: 0;
+}
+
+.type-chip input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.type-chip-body {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 92px;
+  padding: 10px 12px;
+  border: 1px solid #50555d;
+  border-radius: 10px;
+  background: #24282e;
+  color: #dbe2ea;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.type-chip-body svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+}
+
+.type-chip:hover .type-chip-body {
+  border-color: #6a7380;
+  background: #2b3138;
+}
+
+.type-chip input[type="radio"]:checked + .type-chip-body {
+  border-color: #4caf50;
+  background: #203325;
+  color: #effff0;
+  box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.25);
+}
+
+.type-chip input[type="radio"]:focus-visible + .type-chip-body {
+  outline: 2px solid #7cc8ff;
+  outline-offset: 2px;
+}
+
 button.remove-btn {
   background: #f44336;
 }
