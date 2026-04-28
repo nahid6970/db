@@ -135,8 +135,26 @@
             <input type="text" id="link-group" placeholder="Group">
             <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'link-group')">▼</button>
           </div>
-          <label><input type="checkbox" id="link-hidden"> Hide</label>
-          <label><input type="checkbox" id="link-start-new-line"> Start on New Line</label>
+          <div class="option-chip-row">
+            <label class="option-chip">
+              <input type="checkbox" id="link-hidden">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 5c5.5 0 9.5 5.4 10.5 7-1 1.6-5 7-10.5 7S2.5 13.6 1.5 12C2.5 10.4 6.5 5 12 5zm0 2C8.3 7 5.2 10.2 3.9 12 5.2 13.8 8.3 17 12 17s6.8-3.2 8.1-5C18.8 10.2 15.7 7 12 7zm0 2.5A2.5 2.5 0 1112 14.5 2.5 2.5 0 0112 9.5z" fill="currentColor"></path>
+                </svg>
+                <span>Hide</span>
+              </span>
+            </label>
+            <label class="option-chip">
+              <input type="checkbox" id="link-start-new-line">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h10v2H4zm0 5h10v2H4zm0 5h6v2H4zm11-8 5 4-5 4v-3h-4v-2h4z" fill="currentColor"></path>
+                </svg>
+                <span>Start on New Line</span>
+              </span>
+            </label>
+          </div>
           <div id="urls-container">
             <div class="url-input-group">
               <input type="url" class="url-input" placeholder="URL" required>
@@ -241,8 +259,26 @@
                 onclick="toggleGroupPicker(event, 'edit-link-group')">▼</button>
             </div>
           </div>
-          <label><input type="checkbox" id="edit-link-hidden"> Hide</label>
-          <label><input type="checkbox" id="edit-link-start-new-line"> Start on New Line</label>
+          <div class="option-chip-row">
+            <label class="option-chip">
+              <input type="checkbox" id="edit-link-hidden">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 5c5.5 0 9.5 5.4 10.5 7-1 1.6-5 7-10.5 7S2.5 13.6 1.5 12C2.5 10.4 6.5 5 12 5zm0 2C8.3 7 5.2 10.2 3.9 12 5.2 13.8 8.3 17 12 17s6.8-3.2 8.1-5C18.8 10.2 15.7 7 12 7zm0 2.5A2.5 2.5 0 1112 14.5 2.5 2.5 0 0112 9.5z" fill="currentColor"></path>
+                </svg>
+                <span>Hide</span>
+              </span>
+            </label>
+            <label class="option-chip">
+              <input type="checkbox" id="edit-link-start-new-line">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 6h10v2H4zm0 5h10v2H4zm0 5h6v2H4zm11-8 5 4-5 4v-3h-4v-2h4z" fill="currentColor"></path>
+                </svg>
+                <span>Start on New Line</span>
+              </span>
+            </label>
+          </div>
           <div id="edit-urls-container">
             <div class="url-input-group">
               <input type="url" class="url-input" placeholder="URL" required>
