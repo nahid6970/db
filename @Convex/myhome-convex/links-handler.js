@@ -5,6 +5,8 @@ let draggedElement = null;
 let duplicateInfoById = new Map();
 let currentReminderDraft = null;
 let reminderRefreshTimer = null;
+const LINKS_CACHE_KEY = 'myhome-links-cache-v1';
+let lastLinksSignature = '';
 
 // Initialize edit mode
 if (typeof window.editMode === 'undefined') {
@@ -92,6 +94,61 @@ if (!window.showNotification) {
       console.log(`[${type.toUpperCase()}] ${message}`);
     }
   };
+}
+
+function buildLinksSignature(linkItems) {
+  try {
+    return JSON.stringify(linkItems);
+  } catch (error) {
+    console.warn('Could not build links signature:', error);
+    return String(Date.now());
+  }
+}
+
+function applyLinksData(linkItems, options = {}) {
+  const sortedLinks = [...linkItems].sort((a, b) => (a._creationTime || 0) - (b._creationTime || 0));
+  const nextSignature = buildLinksSignature(sortedLinks);
+  const changed = nextSignature !== lastLinksSignature;
+
+  links = sortedLinks;
+  duplicateInfoById = buildDuplicateInfoMap(links);
+  ensureReminderRefreshTimer();
+
+  if (changed || options.forceRender) {
+    lastLinksSignature = nextSignature;
+    renderLinks();
+    refreshOpenPopup();
+  }
+
+  if (options.persistCache) {
+    try {
+      localStorage.setItem(LINKS_CACHE_KEY, JSON.stringify({
+        savedAt: Date.now(),
+        links: sortedLinks,
+      }));
+    } catch (error) {
+      console.warn('Could not save links cache:', error);
+    }
+  }
+
+  return changed;
+}
+
+function loadLinksFromCache() {
+  try {
+    const rawCache = localStorage.getItem(LINKS_CACHE_KEY);
+    if (!rawCache) return false;
+
+    const parsedCache = JSON.parse(rawCache);
+    if (!parsedCache || !Array.isArray(parsedCache.links)) return false;
+
+    applyLinksData(parsedCache.links, { forceRender: true });
+    console.log(`⚡ Loaded ${parsedCache.links.length} cached links`);
+    return true;
+  } catch (error) {
+    console.warn('Could not load links cache:', error);
+    return false;
+  }
 }
 
 function getLinkUrls(link) {
@@ -485,15 +542,13 @@ async function loadLinks() {
     }
 
     const data = await window.convexQuery("functions:getLinks");
-    links = data.sort((a, b) => (a._creationTime || 0) - (b._creationTime || 0));
-    duplicateInfoById = buildDuplicateInfoMap(links);
+    const changed = applyLinksData(data, { persistCache: true, forceRender: !links.length });
+    if (changed) {
+      console.log('✅ Links refreshed from Convex');
+    }
   } catch (error) {
     console.error('Error loading links:', error);
   }
-  ensureReminderRefreshTimer();
-  renderLinks();
-  refreshOpenPopup();
-
 }
 // Refresh popup if it's open
 function refreshOpenPopup() {
@@ -533,6 +588,8 @@ function refreshOpenPopup() {
     popupContent.appendChild(clonedItem);
   });
 }
+
+loadLinksFromCache();
 
 // Show group picker context menu
 window.toggleGroupPicker = function (event, inputId) {
