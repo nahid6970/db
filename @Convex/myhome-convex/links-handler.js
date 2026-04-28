@@ -1137,7 +1137,7 @@ function createLinkItem(link, index) {
   }
   
   a.target = '_blank';
-  a.title = link.url; // Show full URL on hover
+  a.title = link.title || link.name || link.url || ''; // Prefer custom tooltip over raw URL
 
   // Render content based on type
   if (link.default_type === 'nerd-font' && link.icon_class) {
