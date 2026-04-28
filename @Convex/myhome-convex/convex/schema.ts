@@ -58,6 +58,13 @@ export default defineSchema({
     horizontal_height: v.optional(v.string()),
     horizontal_font_family: v.optional(v.string()),
     horizontal_font_size: v.optional(v.string()),
+    reminder_enabled: v.optional(v.boolean()),
+    reminder_mode: v.optional(v.string()),
+    reminder_frequency: v.optional(v.string()),
+    reminder_interval_days: v.optional(v.number()),
+    reminder_datetime: v.optional(v.string()),
+    reminder_next_trigger_at: v.optional(v.number()),
+    reminder_last_triggered_at: v.optional(v.number()),
   }),
 
   sidebar_buttons: defineTable({

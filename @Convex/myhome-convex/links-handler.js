@@ -2,6 +2,9 @@ console.log('🔍 links-handler.js loaded!');
 
 let links = [];
 let draggedElement = null;
+let duplicateInfoById = new Map();
+let currentReminderDraft = null;
+let reminderRefreshTimer = null;
 
 // Initialize edit mode
 if (typeof window.editMode === 'undefined') {
@@ -91,6 +94,330 @@ if (!window.showNotification) {
   };
 }
 
+function getLinkUrls(link) {
+  const values = [];
+  if (Array.isArray(link.urls)) values.push(...link.urls);
+  if (link.url) values.push(link.url);
+  return [...new Set(values.filter(Boolean))];
+}
+
+function normalizeUrl(rawUrl) {
+  if (!rawUrl) return '';
+
+  try {
+    const url = new URL(rawUrl.trim());
+    const protocol = url.protocol.toLowerCase();
+    const host = url.hostname.toLowerCase();
+    const port = url.port ? `:${url.port}` : '';
+    const pathname = (url.pathname || '/').replace(/\/+$/, '') || '/';
+    const search = url.search || '';
+    return `${protocol}//${host}${port}${pathname}${search}`;
+  } catch (error) {
+    return rawUrl.trim().replace(/\/+$/, '').toLowerCase();
+  }
+}
+
+function buildDuplicateInfoMap(allLinks) {
+  const urlGroups = new Map();
+
+  allLinks.forEach((link) => {
+    if (link.is_separator) return;
+
+    getLinkUrls(link)
+      .map(normalizeUrl)
+      .filter(Boolean)
+      .forEach((normalizedUrl) => {
+        if (!urlGroups.has(normalizedUrl)) {
+          urlGroups.set(normalizedUrl, []);
+        }
+        urlGroups.get(normalizedUrl).push(link);
+      });
+  });
+
+  const infoMap = new Map();
+  urlGroups.forEach((matchedLinks) => {
+    if (matchedLinks.length < 2) return;
+
+    matchedLinks.forEach((link) => {
+      const otherGroups = matchedLinks
+        .filter(other => other._id !== link._id)
+        .map(other => other.group || 'Ungrouped');
+      const uniqueGroups = [...new Set(otherGroups)];
+
+      infoMap.set(link._id, {
+        count: matchedLinks.length,
+        groups: uniqueGroups
+      });
+    });
+  });
+
+  return infoMap;
+}
+
+function ensureReminderRefreshTimer() {
+  if (reminderRefreshTimer) return;
+
+  reminderRefreshTimer = window.setInterval(() => {
+    if (document.hidden) return;
+    renderLinks();
+    refreshOpenPopup();
+    updateEditReminderSummary();
+    updateReminderStatus();
+  }, 30000);
+}
+
+function getReminderDraftFromLink(link) {
+  return {
+    reminder_enabled: Boolean(link.reminder_enabled),
+    reminder_mode: link.reminder_mode || 'interval',
+    reminder_frequency: link.reminder_frequency || 'one_time',
+    reminder_interval_days: typeof link.reminder_interval_days === 'number' ? link.reminder_interval_days : null,
+    reminder_datetime: link.reminder_datetime || '',
+    reminder_next_trigger_at: typeof link.reminder_next_trigger_at === 'number' ? link.reminder_next_trigger_at : null,
+    reminder_last_triggered_at: typeof link.reminder_last_triggered_at === 'number' ? link.reminder_last_triggered_at : null,
+  };
+}
+
+function computeReminderNextTrigger(reminder) {
+  if (!reminder.reminder_enabled) return null;
+
+  if (reminder.reminder_mode === 'datetime') {
+    if (!reminder.reminder_datetime) return null;
+    const timestamp = new Date(reminder.reminder_datetime).getTime();
+    return Number.isFinite(timestamp) ? timestamp : null;
+  }
+
+  const days = Number(reminder.reminder_interval_days);
+  if (!Number.isFinite(days) || days <= 0) return null;
+
+  const baseTime = reminder.reminder_last_triggered_at || Date.now();
+  return baseTime + days * 24 * 60 * 60 * 1000;
+}
+
+function sanitizeReminderDraft(reminder) {
+  const draft = {
+    reminder_enabled: Boolean(reminder?.reminder_enabled),
+    reminder_mode: reminder?.reminder_mode === 'datetime' ? 'datetime' : 'interval',
+    reminder_frequency: reminder?.reminder_frequency === 'continuous' ? 'continuous' : 'one_time',
+    reminder_interval_days: reminder?.reminder_interval_days != null && reminder?.reminder_interval_days !== ''
+      ? Number(reminder.reminder_interval_days)
+      : null,
+    reminder_datetime: reminder?.reminder_datetime || '',
+    reminder_next_trigger_at: reminder?.reminder_next_trigger_at ?? null,
+    reminder_last_triggered_at: reminder?.reminder_last_triggered_at ?? null,
+  };
+
+  if (!draft.reminder_enabled) {
+    return {
+      reminder_enabled: false,
+      reminder_mode: 'interval',
+      reminder_frequency: 'one_time',
+      reminder_interval_days: null,
+      reminder_datetime: '',
+      reminder_next_trigger_at: null,
+      reminder_last_triggered_at: null,
+    };
+  }
+
+  if (draft.reminder_mode === 'datetime') {
+    draft.reminder_frequency = 'one_time';
+    draft.reminder_interval_days = null;
+  } else if (!draft.reminder_last_triggered_at) {
+    draft.reminder_last_triggered_at = Date.now();
+  }
+
+  draft.reminder_next_trigger_at = computeReminderNextTrigger(draft);
+  return draft;
+}
+
+function getReminderMeta(link, now = Date.now()) {
+  if (!link.reminder_enabled || !link.reminder_next_trigger_at) {
+    return { active: false };
+  }
+
+  const timeLeft = link.reminder_next_trigger_at - now;
+  const due = timeLeft <= 0;
+
+  return {
+    active: true,
+    due,
+    timeLeft,
+    countdown: due ? 'Due' : formatDuration(timeLeft),
+    nextDateLabel: formatReminderDate(link.reminder_next_trigger_at),
+    tooltip: due
+      ? `Reminder due since ${formatReminderDate(link.reminder_next_trigger_at)}`
+      : `Reminder due ${formatReminderDate(link.reminder_next_trigger_at)}`,
+  };
+}
+
+function formatDuration(milliseconds) {
+  const totalMinutes = Math.max(1, Math.floor(milliseconds / 60000));
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) return hours > 0 ? `${days}d ${hours}h` : `${days}d`;
+  if (hours > 0) return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
+  return `${minutes}m`;
+}
+
+function formatReminderDate(timestamp) {
+  if (!timestamp) return 'Unknown';
+  return new Date(timestamp).toLocaleString();
+}
+
+function formatReminderSummary(reminder) {
+  const meta = getReminderMeta(reminder);
+  if (!reminder.reminder_enabled || !meta.active) return 'No reminder set.';
+
+  if (reminder.reminder_mode === 'datetime') {
+    return meta.due
+      ? `Specific reminder is due now.`
+      : `Specific reminder in ${meta.countdown} (${meta.nextDateLabel}).`;
+  }
+
+  const intervalLabel = `${reminder.reminder_interval_days} day${Number(reminder.reminder_interval_days) === 1 ? '' : 's'}`;
+  const repeatLabel = reminder.reminder_frequency === 'continuous' ? 'repeats' : 'one time';
+  return meta.due
+    ? `Every ${intervalLabel} reminder is due now (${repeatLabel}).`
+    : `Every ${intervalLabel}, ${repeatLabel}, due in ${meta.countdown}.`;
+}
+
+function updateReminderModeUI() {
+  const enabled = document.getElementById('reminder-enabled')?.checked;
+  const mode = document.getElementById('reminder-mode')?.value || 'interval';
+  const intervalFields = document.getElementById('reminder-interval-fields');
+  const datetimeFields = document.getElementById('reminder-datetime-fields');
+  const frequency = document.getElementById('reminder-frequency');
+
+  if (intervalFields) intervalFields.classList.toggle('hidden', !enabled || mode !== 'interval');
+  if (datetimeFields) datetimeFields.classList.toggle('hidden', !enabled || mode !== 'datetime');
+
+  if (frequency) {
+    frequency.disabled = !enabled || mode === 'datetime';
+    if (mode === 'datetime') {
+      frequency.value = 'one_time';
+    }
+  }
+}
+
+function populateReminderPopup(reminder) {
+  const safeReminder = sanitizeReminderDraft(reminder || {});
+  document.getElementById('reminder-enabled').checked = safeReminder.reminder_enabled;
+  document.getElementById('reminder-mode').value = safeReminder.reminder_mode;
+  document.getElementById('reminder-frequency').value = safeReminder.reminder_frequency;
+  document.getElementById('reminder-interval-days').value = safeReminder.reminder_interval_days ?? '';
+  document.getElementById('reminder-datetime').value = safeReminder.reminder_datetime
+    ? safeReminder.reminder_datetime.slice(0, 16)
+    : '';
+
+  currentReminderDraft = safeReminder;
+  updateReminderModeUI();
+  updateReminderStatus();
+}
+
+function updateReminderStatus() {
+  const statusEl = document.getElementById('reminder-status');
+  if (!statusEl) return;
+
+  const pendingDraft = collectReminderFormDraft();
+  statusEl.textContent = formatReminderSummary(pendingDraft);
+}
+
+function collectReminderFormDraft() {
+  return sanitizeReminderDraft({
+    reminder_enabled: document.getElementById('reminder-enabled')?.checked,
+    reminder_mode: document.getElementById('reminder-mode')?.value,
+    reminder_frequency: document.getElementById('reminder-frequency')?.value,
+    reminder_interval_days: document.getElementById('reminder-interval-days')?.value,
+    reminder_datetime: document.getElementById('reminder-datetime')?.value,
+    reminder_last_triggered_at: currentReminderDraft?.reminder_last_triggered_at,
+  });
+}
+
+function updateEditReminderSummary() {
+  const summaryEl = document.getElementById('edit-link-reminder-summary');
+  if (!summaryEl) return;
+  summaryEl.textContent = formatReminderSummary(currentReminderDraft || {});
+}
+
+function validateReminderDraft(reminder) {
+  if (!reminder.reminder_enabled) return { valid: true };
+
+  if (reminder.reminder_mode === 'datetime') {
+    if (!reminder.reminder_datetime || !reminder.reminder_next_trigger_at) {
+      return { valid: false, message: 'Choose a valid reminder date and time.' };
+    }
+    return { valid: true };
+  }
+
+  if (!Number.isFinite(reminder.reminder_interval_days) || reminder.reminder_interval_days <= 0) {
+    return { valid: false, message: 'Enter a reminder interval greater than 0 days.' };
+  }
+
+  if (!reminder.reminder_next_trigger_at) {
+    return { valid: false, message: 'Could not calculate the next reminder time.' };
+  }
+
+  return { valid: true };
+}
+
+function getOptionalReminderDraft(reminder) {
+  const sanitized = sanitizeReminderDraft(reminder || {});
+  const validation = validateReminderDraft(sanitized);
+
+  if (validation.valid) {
+    return { reminder: sanitized, skipped: false };
+  }
+
+  return {
+    reminder: sanitizeReminderDraft({ reminder_enabled: false }),
+    skipped: true
+  };
+}
+
+function compactObject(value) {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, fieldValue]) => fieldValue !== null && fieldValue !== undefined)
+  );
+}
+
+function openReminderPopup() {
+  populateReminderPopup(currentReminderDraft || {});
+  document.getElementById('reminder-popup').classList.remove('hidden');
+}
+
+function resetReminderFromPopup() {
+  const draft = collectReminderFormDraft();
+  if (!draft.reminder_enabled) {
+    currentReminderDraft = draft;
+    updateReminderStatus();
+    updateEditReminderSummary();
+    return;
+  }
+
+  if (draft.reminder_mode === 'interval' && draft.reminder_frequency === 'continuous' && draft.reminder_interval_days) {
+    const resetTime = Date.now();
+    currentReminderDraft = sanitizeReminderDraft({
+      ...draft,
+      reminder_last_triggered_at: resetTime,
+    });
+  } else if (draft.reminder_mode === 'datetime') {
+    currentReminderDraft = sanitizeReminderDraft({
+      ...draft,
+      reminder_enabled: false,
+    });
+  } else {
+    currentReminderDraft = sanitizeReminderDraft({
+      ...draft,
+      reminder_enabled: false,
+    });
+  }
+
+  populateReminderPopup(currentReminderDraft);
+  updateEditReminderSummary();
+}
+
 // Load links from Convex
 async function loadLinks() {
   try {
@@ -109,9 +436,11 @@ async function loadLinks() {
 
     const data = await window.convexQuery("functions:getLinks");
     links = data.sort((a, b) => (a._creationTime || 0) - (b._creationTime || 0));
+    duplicateInfoById = buildDuplicateInfoMap(links);
   } catch (error) {
     console.error('Error loading links:', error);
   }
+  ensureReminderRefreshTimer();
   renderLinks();
   refreshOpenPopup();
 
@@ -717,6 +1046,32 @@ function createLinkItem(link, index) {
 
   if (link.hidden) li.classList.add('hidden-item');
 
+  const duplicateInfo = duplicateInfoById.get(link._id);
+  if (duplicateInfo) {
+    const duplicateBadge = document.createElement('span');
+    duplicateBadge.className = 'link-badge-dot duplicate-badge';
+    duplicateBadge.title = duplicateInfo.groups.length
+      ? `Duplicate link also in: ${duplicateInfo.groups.join(', ')}`
+      : 'Duplicate link already exists in this category.';
+    li.appendChild(duplicateBadge);
+  }
+
+  const reminderMeta = getReminderMeta(link);
+  if (reminderMeta.active) {
+    if (reminderMeta.due) {
+      const reminderBadge = document.createElement('span');
+      reminderBadge.className = 'link-badge-dot reminder-badge';
+      reminderBadge.title = reminderMeta.tooltip;
+      li.appendChild(reminderBadge);
+    } else {
+      const countdownBadge = document.createElement('span');
+      countdownBadge.className = 'link-badge-countdown';
+      countdownBadge.textContent = reminderMeta.countdown;
+      countdownBadge.title = reminderMeta.tooltip;
+      li.appendChild(countdownBadge);
+    }
+  }
+
   const a = document.createElement('a');
   
   // Security: browsers block chrome:// and file:/// links from web servers.
@@ -980,6 +1335,7 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
 
   const url = document.getElementById('quick-link-url').value;
   const group = document.getElementById('quick-link-group').value;
+  const duplicateMatch = links.find(link => !link.is_separator && getLinkUrls(link).some(existingUrl => normalizeUrl(existingUrl) === normalizeUrl(url)));
 
   try {
     // Extract domain from URL
@@ -1025,7 +1381,8 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
       li_border_radius: '',
       border_radius: '',
       title: pageTitle,
-      hidden: false
+      hidden: false,
+      reminder_enabled: false
     };
 
     await window.convexMutation("functions:addLink", newLink);
@@ -1037,7 +1394,11 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
 
     document.getElementById('quick-add-link-popup').classList.add('hidden');
     await loadLinks();
-    window.showNotification('Link added!');
+    if (duplicateMatch) {
+      window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
+    } else {
+      window.showNotification('Link added!');
+    }
   } catch (error) {
     console.error('Error adding link:', error);
     alert('Error adding link: ' + error.message);
@@ -1049,6 +1410,7 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
   e.preventDefault();
 
   const urls = getAllUrls(false);
+  const duplicateMatch = links.find(link => !link.is_separator && getLinkUrls(link).some(existingUrl => urls.some(url => normalizeUrl(existingUrl) === normalizeUrl(url))));
   const typeRadios = document.querySelectorAll('input[name="link-type"]');
   let defaultType = 'text';
   typeRadios.forEach(r => { if (r.checked) defaultType = r.value; });
@@ -1078,14 +1440,19 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     border_radius: document.getElementById('link-border-radius').value,
     title: document.getElementById('link-title').value,
     hidden: document.getElementById('link-hidden').checked,
-    start_new_line: document.getElementById('link-start-new-line').checked
+    start_new_line: document.getElementById('link-start-new-line').checked,
+    reminder_enabled: false
   };
 
   try {
     await window.convexMutation("functions:addLink", newLink);
     document.getElementById('add-link-popup').classList.add('hidden');
     await loadLinks();
-    window.showNotification('Link added!');
+    if (duplicateMatch) {
+      window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
+    } else {
+      window.showNotification('Link added!');
+    }
   } catch (error) {
     console.error('Error adding link:', error);
     alert('Error adding link: ' + error.message);
@@ -1097,6 +1464,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-id').value = link._id;
   document.getElementById('edit-link-name').value = link.name || '';
   document.getElementById('edit-link-group').value = link.group || '';
+  currentReminderDraft = getReminderDraftFromLink(link);
 
   // Populate URL fields
   populateUrlFields(link.urls || [link.url], true);
@@ -1128,6 +1496,7 @@ function openEditLinkPopup(link, index) {
   const svgTextarea = document.getElementById('edit-link-svg-code');
   svgTextarea.style.display = link.default_type === 'svg' ? 'block' : 'none';
 
+  updateEditReminderSummary();
   document.getElementById('edit-link-popup').classList.remove('hidden');
 
   // Apply color preview to all color fields
@@ -1146,6 +1515,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   let defaultType = 'text';
   typeRadios.forEach(r => { if (r.checked) defaultType = r.value; });
+  const { reminder: reminderDraft, skipped: reminderSkipped } = getOptionalReminderDraft(currentReminderDraft || {});
 
   const updatedLink = {
     id,
@@ -1173,17 +1543,56 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     border_radius: document.getElementById('edit-link-border-radius').value,
     title: document.getElementById('edit-link-title').value,
     hidden: document.getElementById('edit-link-hidden').checked,
-    start_new_line: document.getElementById('edit-link-start-new-line').checked
+    start_new_line: document.getElementById('edit-link-start-new-line').checked,
+    ...compactObject(reminderDraft)
   };
 
   try {
     await window.convexMutation("functions:updateLink", updatedLink);
     document.getElementById('edit-link-popup').classList.add('hidden');
     await loadLinks();
-    window.showNotification('Link updated!');
+    if (reminderSkipped) {
+      currentReminderDraft = reminderDraft;
+      updateEditReminderSummary();
+      window.showNotification('Link updated. Reminder was skipped.', 'info');
+    } else {
+      window.showNotification('Link updated!');
+    }
   } catch (error) {
     console.error('Error updating link:', error);
     alert('Error updating link: ' + error.message);
+  }
+});
+
+document.getElementById('edit-link-reminder-button').addEventListener('click', () => {
+  openReminderPopup();
+});
+
+document.getElementById('reminder-mode').addEventListener('change', () => {
+  updateReminderModeUI();
+  updateReminderStatus();
+});
+
+document.getElementById('reminder-frequency').addEventListener('change', updateReminderStatus);
+document.getElementById('reminder-enabled').addEventListener('change', () => {
+  updateReminderModeUI();
+  updateReminderStatus();
+});
+document.getElementById('reminder-interval-days').addEventListener('input', updateReminderStatus);
+document.getElementById('reminder-datetime').addEventListener('change', updateReminderStatus);
+
+document.getElementById('reminder-reset-due').addEventListener('click', () => {
+  resetReminderFromPopup();
+});
+
+document.getElementById('reminder-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const { reminder: reminderDraft, skipped: reminderSkipped } = getOptionalReminderDraft(collectReminderFormDraft());
+  currentReminderDraft = reminderDraft;
+  updateEditReminderSummary();
+  document.getElementById('reminder-popup').classList.add('hidden');
+  if (reminderSkipped) {
+    window.showNotification('Reminder not set. Link can be saved without it.', 'info');
   }
 });
 

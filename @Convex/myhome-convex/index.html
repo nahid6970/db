@@ -262,7 +262,57 @@
           </div>
           <input type="text" id="edit-link-border-radius" placeholder="Inner Radius">
           <input type="text" id="edit-link-title" placeholder="Tooltip">
+          <div class="reminder-summary-card">
+            <div>
+              <strong>Reminder</strong>
+              <div id="edit-link-reminder-summary" class="reminder-summary-text">No reminder set.</div>
+            </div>
+            <button type="button" id="edit-link-reminder-button">Reminder Settings</button>
+          </div>
           <button type="submit">Save</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Reminder Popup -->
+    <div id="reminder-popup" class="popup-container hidden">
+      <div class="Menu reminder-menu">
+        <div class="popup-header">
+          <h3>Reminder Settings</h3>
+          <span class="close-button">&times;</span>
+        </div>
+        <form id="reminder-form">
+          <label><input type="checkbox" id="reminder-enabled"> Enable reminder</label>
+          <div class="reminder-grid">
+            <div>
+              <label for="reminder-mode">Reminder Type</label>
+              <select id="reminder-mode">
+                <option value="interval">Every X days</option>
+                <option value="datetime">Specific date & time</option>
+              </select>
+            </div>
+            <div>
+              <label for="reminder-frequency">Repeat</label>
+              <select id="reminder-frequency">
+                <option value="one_time">One time</option>
+                <option value="continuous">Continuous</option>
+              </select>
+            </div>
+          </div>
+          <div id="reminder-interval-fields" class="reminder-section">
+            <label for="reminder-interval-days">Interval in days</label>
+            <input type="number" id="reminder-interval-days" min="0.01" step="0.01" placeholder="3">
+          </div>
+          <div id="reminder-datetime-fields" class="reminder-section hidden">
+            <label for="reminder-datetime">Choose date & time</label>
+            <input type="datetime-local" id="reminder-datetime">
+            <div class="reminder-hint">Specific date reminders are treated as one-time alerts.</div>
+          </div>
+          <div id="reminder-status" class="reminder-status">No reminder set.</div>
+          <div class="reminder-actions">
+            <button type="button" id="reminder-reset-due">Mark as done / reset</button>
+            <button type="submit">Apply Reminder</button>
+          </div>
         </form>
       </div>
     </div>

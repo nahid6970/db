@@ -107,6 +107,8 @@ body {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s;
+  position: relative;
+  overflow: visible;
 }
 
 .link-item:hover {
@@ -146,6 +148,49 @@ body {
   justify-content: center;
   width: 100%;
   height: 100%;
+}
+
+.link-badge-dot,
+.link-badge-countdown {
+  position: absolute;
+  z-index: 3;
+}
+
+.link-badge-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #101010;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.link-badge-dot.duplicate-badge {
+  top: -5px;
+  right: -5px;
+  background: #ff4d4f;
+}
+
+.link-badge-dot.reminder-badge {
+  top: -5px;
+  left: -5px;
+  background: #2f80ff;
+}
+
+.link-badge-countdown {
+  top: -10px;
+  left: -8px;
+  max-width: calc(100% + 16px);
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #2f80ff;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-shadow: 0 2px 8px rgba(47, 128, 255, 0.35);
 }
 
 .link-item.hidden-item {
@@ -365,6 +410,10 @@ body {
   display: none;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .Menu {
   background: #31343a;
   padding: 20px;
@@ -487,6 +536,63 @@ button[type="button"] {
 
 button[type="button"]:hover {
   background: #0b7dda;
+}
+
+.reminder-summary-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #4a4f57;
+  background: #272b31;
+}
+
+.reminder-summary-text {
+  margin-top: 4px;
+  color: #b8c2d1;
+  font-size: 13px;
+}
+
+.reminder-menu {
+  min-width: 420px;
+  max-width: 560px;
+}
+
+.reminder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.reminder-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.reminder-hint {
+  color: #9aa6b5;
+  font-size: 12px;
+}
+
+.reminder-status {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #43506a;
+  background: #222b3d;
+  color: #d8e6ff;
+}
+
+.reminder-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.reminder-actions button {
+  flex: 1;
 }
 
 button.remove-btn {
@@ -816,6 +922,16 @@ details[open] summary {
 
   .popup-header h3 {
     font-size: 18px;
+  }
+
+  .reminder-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reminder-summary-card,
+  .reminder-actions {
+    flex-direction: column;
+    align-items: stretch;
   }
 
   form {
