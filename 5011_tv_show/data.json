@@ -767,6 +767,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 16,
+                "title": "Daredevil - Born Again - S02E07 - The Hateful Darkness WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-04-29T11:41:03.497627",
+                "notify": "unseen"
+            },
+            {
                 "id": 15,
                 "title": "Daredevil - Born Again - S02E06 - Requiem WEBDL-1080p",
                 "watched": false,

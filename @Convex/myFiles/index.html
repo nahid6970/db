@@ -453,7 +453,7 @@
   </div>
 
   <script type="module">
-    import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
+    import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
     
     // REPLACE WITH YOUR CONVEX URL
     const CONVEX_URL = "https://good-basilisk-52.convex.cloud";
@@ -462,8 +462,7 @@
     const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
     const CLOUDINARY_UPLOAD_PRESET = "myFiles";
     
-    const client = new ConvexHttpClient(CONVEX_URL);
-    
+    const client = new ConvexClient(CONVEX_URL);
     
     // Drop zone functionality
     const dropZone = document.getElementById('dropZone');
@@ -485,7 +484,9 @@
       dropZone.classList.remove('drag-over');
       fileInput.files = e.dataTransfer.files;
       updateFileCount();
-    });    window.updateFileCount = function() {
+    });
+
+    window.updateFileCount = function() {
       const files = document.getElementById('fileInput').files;
       const count = files.length;
       const btn = document.getElementById('uploadBtn');
@@ -656,7 +657,6 @@
       closeRenameModal();
     };
     
-    // Close modal when clicking outside
     document.getElementById('renameModal').addEventListener('click', function(e) {
       if (e.target === this) closeRenameModal();
     });
@@ -668,9 +668,6 @@
     
     window.togglePin = async function(id) {
       await client.mutation("files:togglePin", { id });
-    };    
-    window.togglePin = async function(id) {
-      await client.mutation("files:togglePin", { id });
     };
     
     window.clearAll = async function() {
@@ -680,11 +677,9 @@
     
     window.downloadFile = async function(url, filename, storageId) {
       if (storageId) {
-        // Download from Convex Storage
         const fileUrl = client.query("files:getUrl", { storageId });
         window.open(await fileUrl, '_blank');
       } else if (url.startsWith('data:')) {
-        // Base64 download (legacy)
         const a = document.createElement('a');
         a.href = url;
         a.download = filename;
@@ -692,29 +687,20 @@
         a.click();
         document.body.removeChild(a);
       } else {
-        // Cloudinary image
         window.open(url, '_blank');
       }
     };
     
+    let allFiles = [];
     let currentFolder = null;
     
-    window.openFolder = function(folder) {
-      currentFolder = folder;
-      loadFiles();
-    };
-    
-    window.goBack = function() {
-      currentFolder = null;
-      loadFiles();
-    };
-    
     function renderFiles(files) {
+      if (files) allFiles = files;
+
       const fileList = document.getElementById('fileList');
       const foldersSection = document.getElementById('foldersSection');
-      const breadcrumb = document.getElementById('breadcrumb');
       
-      const folders = [...new Set(files.filter(f => f.group).map(f => f.group))].sort();
+      const folders = [...new Set(allFiles.filter(f => f.group).map(f => f.group))].sort();
       
       if (folders.length > 0) {
         foldersSection.innerHTML = folders.map(folder => `
@@ -727,18 +713,19 @@
         foldersSection.innerHTML = '';
       }
       
+      let displayFiles = allFiles;
       if (currentFolder) {
-        files = files.filter(f => f.group === currentFolder);
+        displayFiles = allFiles.filter(f => f.group === currentFolder);
       } else {
-        files = files.filter(f => !f.group);
+        displayFiles = allFiles.filter(f => !f.group);
       }
       
-      if (!files.length) {
+      if (!displayFiles.length) {
         fileList.innerHTML = '<div class="loading">No files yet</div>';
         return;
       }
       
-      fileList.innerHTML = files.map((file, index) => `
+      fileList.innerHTML = displayFiles.map((file, index) => `
         <div class="file-card" draggable="false" data-id="${file._id}" data-index="${index}">
           <div class="file-icon">${getFileExtension(file.filename)}</div>
           <div class="file-info">
@@ -762,10 +749,9 @@
         card.addEventListener('dragend', handleDragEnd);
       });
     }
-    
+
     let draggedElement = null;
     
-    // Global Ctrl key listeners
     document.addEventListener('keydown', (e) => {
       if (e.ctrlKey) {
         document.querySelectorAll('.file-card').forEach(card => {
@@ -795,7 +781,6 @@
     function handleDragOver(e) {
       e.preventDefault();
       e.dataTransfer.dropEffect = 'move';
-      
       const afterElement = getDragAfterElement(this.parentElement, e.clientY);
       if (afterElement == null) {
         this.parentElement.appendChild(draggedElement);
@@ -810,22 +795,16 @@
     
     function handleDragEnd(e) {
       this.classList.remove('dragging');
-      
-      // Get new order
       const cards = document.querySelectorAll('.file-card');
       const fileIds = Array.from(cards).map(card => card.dataset.id);
-      
-      // Save new order
       client.mutation("files:reorder", { fileIds });
     }
     
     function getDragAfterElement(container, y) {
       const draggableElements = [...container.querySelectorAll('.file-card:not(.dragging)')];
-      
       return draggableElements.reduce((closest, child) => {
         const box = child.getBoundingClientRect();
         const offset = y - box.top - box.height / 2;
-        
         if (offset < 0 && offset > closest.offset) {
           return { offset: offset, element: child };
         } else {
@@ -833,14 +812,20 @@
         }
       }, { offset: Number.NEGATIVE_INFINITY }).element;
     }
+
+    window.openFolder = function(folder) {
+      currentFolder = folder;
+      renderFiles();
+    };
     
-    async function loadFiles() {
-      const files = await client.query("files:list");
+    window.goBack = function() {
+      currentFolder = null;
+      renderFiles();
+    };
+
+    client.onUpdate("files:list", {}, (files) => {
       renderFiles(files);
-    }
-    
-    loadFiles();
-    client.onUpdate("files:list", {}, renderFiles);
+    });
   </script>
 </body>
 </html>
