@@ -16,7 +16,19 @@ export const list = query({
   args: {},
   handler: async (ctx) => {
     const files = await ctx.db.query("files").order("desc").collect();
-    return files.sort((a, b) => {
+    
+    // Resolve storage URLs for files that have a storageId but no URL yet
+    const filesWithUrls = await Promise.all(
+      files.map(async (file) => {
+        if (file.storageId && !file.url) {
+          const url = await ctx.storage.getUrl(file.storageId);
+          return { ...file, url: url || undefined };
+        }
+        return file;
+      })
+    );
+
+    return filesWithUrls.sort((a, b) => {
       if (a.pinned !== b.pinned) return (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0);
       return (a.order || 0) - (b.order || 0);
     });

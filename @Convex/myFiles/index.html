@@ -725,9 +725,20 @@
         return;
       }
       
-      fileList.innerHTML = displayFiles.map((file, index) => `
+      fileList.innerHTML = displayFiles.map((file, index) => {
+        let previewHtml = `<div class="file-icon">${getFileExtension(file.filename)}</div>`;
+        
+        if (file.url) {
+          if (file.fileType.startsWith('image/')) {
+            previewHtml = `<div class="file-icon" style="background: none; overflow: hidden;"><img src="${file.url}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"></div>`;
+          } else if (file.fileType.startsWith('video/')) {
+            previewHtml = `<div class="file-icon" style="background: none; overflow: hidden;"><video src="${file.url}#t=0.1" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;" muted preload="metadata"></video></div>`;
+          }
+        }
+
+        return `
         <div class="file-card" draggable="false" data-id="${file._id}" data-index="${index}">
-          <div class="file-icon">${getFileExtension(file.filename)}</div>
+          ${previewHtml}
           <div class="file-info">
             <h3>${file.filename}</h3>
             <p>${formatFileSize(file.fileSize)} • ${new Date(file.timestamp).toLocaleString()}</p>
@@ -739,7 +750,8 @@
             <button class="icon-btn danger" onclick="deleteFile('${file._id}')">🗑️</button>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
       
       const cards = fileList.querySelectorAll('.file-card');
       cards.forEach(card => {
