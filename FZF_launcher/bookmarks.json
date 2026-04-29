@@ -1,50 +1,50 @@
 [
   {
-    "path": "C:\\@delta\\ms1\\scripts\\run\\dir_launcher\\dir_launcher.py",
-    "name": ""
+    "path": "C:\\@delta\\ms1\\@Flask\\5018_cell",
+    "name": "5018 [Cell]"
   },
   {
-    "path": "C:\\@delta\\ms1\\scripts\\run\\command_runner\\RunCommand.py",
-    "name": ""
+    "path": "C:\\@delta\\ms1\\@Flask\\5000_myhome",
+    "name": "5000 [myHome]"
   },
   {
-    "path": "C:\\@delta\\ms1\\scripts\\run\\Run.py",
-    "name": ""
-  },
-  {
-    "path": "C:\\@delta\\ms1\\@Flask\\5018_cell\\app.py",
-    "name": "5018 [myCell]"
-  },
-  {
-    "path": "C:\\@delta\\ms1\\@Flask\\5000_myhome\\app.py",
-    "name": ""
-  },
-  {
-    "path": "C:\\@delta\\ms1\\asset\\Glance\\glance.yml",
-    "name": ""
-  },
-  {
-    "path": "C:\\@delta\\ms1\\@AutoHotKey\\ahk_shortcuts.json",
-    "name": ""
-  },
-  {
-    "path": "C:\\@delta\\ms1\\TOOLS\\port killer\\port_killer.py",
-    "name": ""
-  },
-  {
-    "path": "C:\\@delta\\ms1\\Testing\\MD_Launcher\\md_launcher.py",
-    "name": "md files drag down"
+    "path": "C:\\@delta\\ms1\\scripts\\run",
+    "name": "RUN Manager"
   },
   {
     "path": "C:\\@delta\\db\\@Convex",
     "name": "Convex Projects"
   },
   {
-    "path": "C:\\@delta\\ms1\\test_project\\my-first-extension\\convex",
+    "path": "C:\\@delta\\ms1\\test_project\\my-first-extension",
     "name": "Chrome Extension"
   },
   {
     "path": "C:\\@delta\\ms1\\scripts\\ytc",
     "name": "YTC + Chrome Extension"
+  },
+  {
+    "path": "C:\\@delta\\ms1\\@AutoHotKey\\ahk_shortcuts.json",
+    "name": ""
+  },
+  {
+    "path": "C:\\@delta\\ms1\\Testing\\MD_Launcher",
+    "name": "Drag & Drop Launcher"
+  },
+  {
+    "path": "C:\\@delta\\ms1\\scripts\\run\\dir_launcher",
+    "name": "Directory Launcher Manager"
+  },
+  {
+    "path": "C:\\@delta\\ms1\\scripts\\run\\command_runner",
+    "name": "Command Runner Manager"
+  },
+  {
+    "path": "C:\\@delta\\ms1\\asset\\Glance\\glance.yml",
+    "name": "Glance"
+  },
+  {
+    "path": "C:\\@delta\\ms1\\TOOLS\\port killer\\port_killer.py",
+    "name": "Port Killer"
   }
 ]
