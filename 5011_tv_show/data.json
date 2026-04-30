@@ -1012,6 +1012,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 14,
+                "title": "Dr. STONE - s04e29 - [87] - The Truth About the Rocket HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-04-30T21:03:14.622433",
+                "notify": "unseen"
+            },
+            {
                 "id": 13,
                 "title": "Dr. STONE - s04e28 - [87] - Dawn of the Computer HDTV-1080p - [SubsPlease]",
                 "watched": true,
