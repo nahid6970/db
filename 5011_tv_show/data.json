@@ -2267,7 +2267,7 @@
             {
                 "id": 27,
                 "title": "WWE Raw - 2026-04-27 - RAW 1718 WEBDL-720p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-04-29T00:49:19.824855",
                 "notify": "seen"
             },
@@ -2531,6 +2531,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\WWE SmackDown",
         "rating": "3",
         "episodes": [
+            {
+                "id": 24,
+                "title": "WWE SmackDown - 2026-05-01 - SmackDown 1393 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-05-02T19:29:24.270977",
+                "notify": "unseen"
+            },
             {
                 "id": 23,
                 "title": "WWE SmackDown - 2026-04-24 - SmackDown 1392 WEBDL-1080p",
