@@ -380,10 +380,10 @@ body {
 /* New Edit Controls Styling */
 .item-edit-controls {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: -8px;
+  right: -8px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4px;
   z-index: 100;
   pointer-events: auto;
@@ -391,8 +391,8 @@ body {
 
 /* Adjustments for different parents */
 .sidebar-button .item-edit-controls {
-  top: -5px;
-  right: -5px;
+  top: -6px;
+  right: -6px;
 }
 
 .group_type_top-header .item-edit-controls,
@@ -400,25 +400,22 @@ body {
 .link-group > .item-edit-controls {
   top: 5px;
   right: 5px;
-  flex-direction: row;
 }
 
 .edit-btn,
 .delete-btn {
-  width: 24px;
-  height: 24px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
-  border: 2px solid #2d2d2d;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 14px;
   padding: 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.3);
   transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   background: #ff9800;
-  color: white;
 }
 
 .delete-btn {
@@ -427,7 +424,8 @@ body {
 
 .edit-btn:hover,
 .delete-btn:hover {
-  transform: scale(1.2) rotate(5deg);
+  transform: scale(1.4);
+  border-color: #fff;
   z-index: 110;
 }
 

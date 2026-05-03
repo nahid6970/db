@@ -263,7 +263,7 @@ function createSidebarButton(button, index) {
 
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.innerHTML = '✏️';
+    editBtn.innerHTML = '';
     editBtn.title = 'Edit Sidebar Button';
     editBtn.onclick = (e) => {
       e.preventDefault();
@@ -274,7 +274,7 @@ function createSidebarButton(button, index) {
 
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-btn';
-    delBtn.innerHTML = '🗑️';
+    delBtn.innerHTML = '';
     delBtn.title = 'Delete Sidebar Button';
     delBtn.onclick = (e) => {
       e.preventDefault();

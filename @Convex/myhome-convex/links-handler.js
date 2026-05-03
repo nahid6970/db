@@ -804,7 +804,7 @@ function createCollapsibleGroup(groupName, items) {
 
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.innerHTML = '⚙️';
+    editBtn.innerHTML = '';
     editBtn.title = 'Edit Group';
     editBtn.onclick = (e) => {
       e.stopPropagation();
@@ -1069,7 +1069,7 @@ function createRegularGroup(groupName, items) {
 
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.innerHTML = '⚙️';
+    editBtn.innerHTML = '';
     editBtn.title = 'Edit Group';
     editBtn.onclick = (e) => {
       e.stopPropagation();
@@ -1341,7 +1341,7 @@ function createLinkItem(link, index) {
 
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.innerHTML = '✏️';
+    editBtn.innerHTML = '';
     editBtn.title = 'Edit Link';
     editBtn.onclick = (e) => {
       e.preventDefault();
@@ -1352,7 +1352,7 @@ function createLinkItem(link, index) {
 
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-btn';
-    delBtn.innerHTML = '🗑️';
+    delBtn.innerHTML = '';
     delBtn.title = 'Delete Link';
     delBtn.onclick = (e) => {
       e.preventDefault();
