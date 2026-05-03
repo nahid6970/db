@@ -380,7 +380,7 @@ body {
 /* New Edit Controls Styling */
 .item-edit-controls {
   position: absolute;
-  top: -8px;
+  bottom: -8px;
   right: -8px;
   display: flex;
   flex-direction: row;
@@ -391,14 +391,14 @@ body {
 
 /* Adjustments for different parents */
 .sidebar-button .item-edit-controls {
-  top: -6px;
+  bottom: -6px;
   right: -6px;
 }
 
 .group_type_top-header .item-edit-controls,
 .group-header-container .item-edit-controls,
 .link-group > .item-edit-controls {
-  top: 5px;
+  bottom: 5px;
   right: 5px;
 }
 
