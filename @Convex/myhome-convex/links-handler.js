@@ -1177,6 +1177,22 @@ function fallbackCopy(text, successMsg) {
   document.body.removeChild(textArea);
 }
 
+function handleUrlOpening(url) {
+  if (!url) return;
+  
+  if (url.startsWith('chrome://') || url.startsWith('edge://')) {
+    copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
+  } else if (url.startsWith('file:///')) {
+    if (window.location.protocol === 'file:') {
+      window.location.href = url;
+    } else {
+      copyToClipboard(url, 'Local file URL copied (Security blocks direct opening)');
+    }
+  } else {
+    window.open(url, '_blank');
+  }
+}
+
 // Create link item
 function createLinkItem(link, index) {
   const li = document.createElement('li');
@@ -1288,49 +1304,13 @@ function createLinkItem(link, index) {
   // Handle multiple URLs
   a.onclick = (e) => {
     e.stopPropagation();
+    e.preventDefault();
     if (link.urls && link.urls.length > 1) {
-      e.preventDefault();
-      window.open(link.urls[0], '_blank');
-    } else if (link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
-      e.preventDefault();
-      // Copy to clipboard fallback for GitHub Pages (https)
-      copyToClipboard(link.url, 'URL copied! (Paste in new tab to open)');
-    } else if (link.url.startsWith('file:///')) {
-      e.preventDefault();
-      // Browsers block web-hosted sites (like GitHub Pages) from accessing local files
-      if (window.location.protocol === 'file:') {
-        // If running locally, try to navigate
-        window.location.href = link.url;
-      } else {
-        copyToClipboard(link.url, 'Local file URL copied (Security blocks direct opening)');
-      }
+      handleUrlOpening(link.urls[0]);
+    } else {
+      handleUrlOpening(link.url);
     }
   };
-
-  // Helper for clipboard with fallback
-  function copyToClipboard(text, successMsg) {
-    if (navigator.clipboard && window.isSecureContext) {
-      navigator.clipboard.writeText(text).then(() => {
-        window.showNotification(successMsg, 'info');
-      }).catch(() => fallbackCopy(text, successMsg));
-    } else {
-      fallbackCopy(text, successMsg);
-    }
-  }
-
-  function fallbackCopy(text, successMsg) {
-    const textArea = document.createElement("textarea");
-    textArea.value = text;
-    document.body.appendChild(textArea);
-    textArea.select();
-    try {
-      document.execCommand('copy');
-      window.showNotification(successMsg, 'info');
-    } catch (err) {
-      window.showNotification('Copy failed (Please copy manually)', 'error');
-    }
-    document.body.removeChild(textArea);
-  }
 
   li.appendChild(a);
 
@@ -1374,13 +1354,7 @@ function createLinkItem(link, index) {
         menuItems.push({
           label: `Open URL ${i + 1}`,
           title: u,
-          action: () => {
-            if (u.startsWith('file:///') || u.startsWith('chrome://') || u.startsWith('edge://')) {
-              window.location.href = u;
-            } else {
-              window.open(u, '_blank');
-            }
-          }
+          action: () => handleUrlOpening(u)
         });
       });
     }

@@ -146,20 +146,8 @@ function createSidebarButton(button, index) {
   // Handle click to open URL
   btn.onclick = (e) => {
     if (window.editMode) return; // Don't open link in edit mode
-    
-    if (button.url.startsWith('chrome://') || button.url.startsWith('edge://')) {
-      e.preventDefault();
-      copyToClipboard(button.url, 'URL copied! (Paste in new tab to open)');
-    } else if (button.url.startsWith('file:///')) {
-      e.preventDefault();
-      if (window.location.protocol === 'file:') {
-        window.location.href = button.url;
-      } else {
-        copyToClipboard(button.url, 'Local file URL copied (Security blocks direct opening)');
-      }
-    } else {
-      window.open(button.url, '_blank');
-    }
+    e.preventDefault();
+    handleUrlOpening(button.url);
   };
 
   // Helper for clipboard with fallback
@@ -185,6 +173,22 @@ function createSidebarButton(button, index) {
       window.showNotification('Copy failed (Please copy manually)', 'error');
     }
     document.body.removeChild(textArea);
+  }
+
+  function handleUrlOpening(url) {
+    if (!url) return;
+    
+    if (url.startsWith('chrome://') || url.startsWith('edge://')) {
+      copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
+    } else if (url.startsWith('file:///')) {
+      if (window.location.protocol === 'file:') {
+        window.location.href = url;
+      } else {
+        copyToClipboard(url, 'Local file URL copied (Security blocks direct opening)');
+      }
+    } else {
+      window.open(url, '_blank');
+    }
   }
 
   // Add context menu for right-click
