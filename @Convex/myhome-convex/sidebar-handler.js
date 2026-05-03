@@ -195,6 +195,7 @@ function createSidebarButton(button, index) {
     const items = [
       {
         label: 'New-Tab',
+        title: button.url,
         action: () => {
           if (button.url.startsWith('file:///')) {
             window.location.href = button.url;

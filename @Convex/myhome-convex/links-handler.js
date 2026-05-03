@@ -1366,9 +1366,10 @@ function createLinkItem(link, index) {
 
   // Context menu
   li.addEventListener('contextmenu', (e) => {
-    showContextMenu(e, [
+    const menuItems = [
       { 
         label: 'New-Tab', 
+        title: link.url,
         action: () => {
           if (link.url.startsWith('file:///') || link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
             window.location.href = link.url;
@@ -1376,11 +1377,33 @@ function createLinkItem(link, index) {
             window.open(link.url, '_blank');
           }
         } 
-      },
+      }
+    ];
+
+    // Add extra URLs if present
+    if (link.urls && link.urls.length > 1) {
+      link.urls.forEach((u, i) => {
+        menuItems.push({
+          label: `Open URL ${i + 1}`,
+          title: u,
+          action: () => {
+            if (u.startsWith('file:///') || u.startsWith('chrome://') || u.startsWith('edge://')) {
+              window.location.href = u;
+            } else {
+              window.open(u, '_blank');
+            }
+          }
+        });
+      });
+    }
+
+    menuItems.push(
       { label: 'Edit', action: () => openEditLinkPopup(link, index) },
       { label: 'Copy', action: () => copyLink(link) },
       { label: 'Delete', action: () => deleteLink(link._id) }
-    ]);
+    );
+
+    showContextMenu(e, menuItems);
   });
 
   // Drag and drop

@@ -13,6 +13,7 @@ function showContextMenu(event, items) {
     const div = document.createElement('div');
     div.className = 'context-menu-item' + (item.className ? ' ' + item.className : '');
     div.textContent = item.label;
+    if (item.title) div.title = item.title;
     div.onclick = () => {
       item.action();
       hideContextMenu();
