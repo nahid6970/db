@@ -709,7 +709,7 @@ function renderLinks() {
 
       const deleteBtn = document.createElement('button');
       deleteBtn.className = 'separator-delete-btn';
-      deleteBtn.innerHTML = '×';
+      deleteBtn.innerHTML = '🗑️';
       deleteBtn.title = 'Remove separator';
       deleteBtn.onclick = async (e) => {
         e.stopPropagation();
@@ -799,14 +799,19 @@ function createCollapsibleGroup(groupName, items) {
   header.appendChild(title);
 
   if (window.editMode) {
+    const editControls = document.createElement('div');
+    editControls.className = 'item-edit-controls';
+
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.textContent = '⚙';
+    editBtn.innerHTML = '⚙️';
+    editBtn.title = 'Edit Group';
     editBtn.onclick = (e) => {
       e.stopPropagation();
       openEditGroupPopup(groupName);
     };
-    header.appendChild(editBtn);
+    editControls.appendChild(editBtn);
+    header.appendChild(editControls);
   }
 
 
@@ -940,14 +945,19 @@ function createRegularGroup(groupName, items) {
     header.appendChild(title);
 
     if (window.editMode) {
+      const editControls = document.createElement('div');
+      editControls.className = 'item-edit-controls';
+
       const editBtn = document.createElement('button');
       editBtn.className = 'edit-btn';
-      editBtn.textContent = '⚙';
+      editBtn.innerHTML = '⚙️';
+      editBtn.title = 'Edit Group';
       editBtn.onclick = (e) => {
         e.stopPropagation();
         openEditGroupPopup(groupName);
       };
-      header.appendChild(editBtn);
+      editControls.appendChild(editBtn);
+      header.appendChild(editControls);
     }
 
     div.appendChild(header);
@@ -1054,11 +1064,19 @@ function createRegularGroup(groupName, items) {
   div.appendChild(title);
 
   if (window.editMode) {
+    const editControls = document.createElement('div');
+    editControls.className = 'item-edit-controls';
+
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.textContent = 'Edit Group';
-    editBtn.onclick = () => openEditGroupPopup(groupName);
-    div.appendChild(editBtn);
+    editBtn.innerHTML = '⚙️';
+    editBtn.title = 'Edit Group';
+    editBtn.onclick = (e) => {
+      e.stopPropagation();
+      openEditGroupPopup(groupName);
+    };
+    editControls.appendChild(editBtn);
+    div.appendChild(editControls);
   }
 
   const ul = document.createElement('ul');
@@ -1318,25 +1336,32 @@ function createLinkItem(link, index) {
 
   // Edit buttons
   if (window.editMode) {
+    const editControls = document.createElement('div');
+    editControls.className = 'item-edit-controls';
+
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.textContent = '✏';
+    editBtn.innerHTML = '✏️';
+    editBtn.title = 'Edit Link';
     editBtn.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
       openEditLinkPopup(link, index);
     };
-    li.appendChild(editBtn);
+    editControls.appendChild(editBtn);
 
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-btn';
-    delBtn.textContent = '🗑';
+    delBtn.innerHTML = '🗑️';
+    delBtn.title = 'Delete Link';
     delBtn.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
       deleteLink(link._id);
     };
-    li.appendChild(delBtn);
+    editControls.appendChild(delBtn);
+    
+    li.appendChild(editControls);
   }
 
   // Context menu

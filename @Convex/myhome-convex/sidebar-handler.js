@@ -258,25 +258,32 @@ function createSidebarButton(button, index) {
 
   // Edit mode buttons
   if (window.editMode) {
+    const editControls = document.createElement('div');
+    editControls.className = 'item-edit-controls';
+
     const editBtn = document.createElement('button');
     editBtn.className = 'edit-btn';
-    editBtn.textContent = '✏';
+    editBtn.innerHTML = '✏️';
+    editBtn.title = 'Edit Sidebar Button';
     editBtn.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
       openEditSidebarButtonPopup(button, index);
     };
-    btn.appendChild(editBtn);
+    editControls.appendChild(editBtn);
 
     const delBtn = document.createElement('button');
     delBtn.className = 'delete-btn';
-    delBtn.textContent = '🗑';
+    delBtn.innerHTML = '🗑️';
+    delBtn.title = 'Delete Sidebar Button';
     delBtn.onclick = (e) => {
       e.preventDefault();
       e.stopPropagation();
       deleteSidebarButton(button._id);
     };
-    btn.appendChild(delBtn);
+    editControls.appendChild(delBtn);
+    
+    btn.appendChild(editControls);
   }
 
   return btn;

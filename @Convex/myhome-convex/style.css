@@ -377,19 +377,63 @@ body {
   display: flex;
 }
 
+/* New Edit Controls Styling */
+.item-edit-controls {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 100;
+  pointer-events: auto;
+}
+
+/* Adjustments for different parents */
+.sidebar-button .item-edit-controls {
+  top: -5px;
+  right: -5px;
+}
+
+.group_type_top-header .item-edit-controls,
+.group-header-container .item-edit-controls,
+.link-group > .item-edit-controls {
+  top: 5px;
+  right: 5px;
+  flex-direction: row;
+}
+
 .edit-btn,
 .delete-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid #2d2d2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   background: #ff9800;
   color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 3px;
-  cursor: pointer;
-  font-size: 12px;
 }
 
 .delete-btn {
   background: #f44336;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  transform: scale(1.2) rotate(5deg);
+  z-index: 110;
+}
+
+.edit-btn:active,
+.delete-btn:active {
+  transform: scale(0.9);
 }
 
 /* Popups */
@@ -1234,12 +1278,12 @@ button,
 }
 
 .separator-delete-btn {
-  background: #0d0d0d;
-  color: #00ff9d;
-  border: 1px solid #00ff9d;
-  border-radius: 3px;
-  width: 20px;
-  height: 20px;
+  background: #f44336;
+  color: white;
+  border: 2px solid #2d2d2d;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
   cursor: pointer;
   font-size: 14px;
   display: none;
@@ -1247,7 +1291,9 @@ button,
   justify-content: center;
   position: relative;
   z-index: 10;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+  padding: 0;
 }
 
 .group-separator:hover .separator-delete-btn {
@@ -1255,7 +1301,6 @@ button,
 }
 
 .separator-delete-btn:hover {
-  background: #00ff9d;
-  color: #000;
-  transform: scale(1.1);
+  background: #ff5252;
+  transform: scale(1.2) rotate(5deg);
 }
