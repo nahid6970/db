@@ -1366,21 +1366,9 @@ function createLinkItem(link, index) {
 
   // Context menu
   li.addEventListener('contextmenu', (e) => {
-    const menuItems = [
-      { 
-        label: 'New-Tab', 
-        title: link.url,
-        action: () => {
-          if (link.url.startsWith('file:///') || link.url.startsWith('chrome://') || link.url.startsWith('edge://')) {
-            window.location.href = link.url;
-          } else {
-            window.open(link.url, '_blank');
-          }
-        } 
-      }
-    ];
+    const menuItems = [];
 
-    // Add extra URLs if present
+    // Add URLs if present
     if (link.urls && link.urls.length > 1) {
       link.urls.forEach((u, i) => {
         menuItems.push({
