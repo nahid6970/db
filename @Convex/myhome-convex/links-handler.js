@@ -862,7 +862,7 @@ function createCollapsibleGroup(groupName, items) {
     if (e.target === header || e.target === title) {
       if (firstLink.password_protect) {
         const pwd = prompt('Enter password:');
-        if (pwd !== '1823') {
+        if (pwd !== (firstLink.group_password || '1823')) {
           alert('Incorrect password!');
           return;
         }
@@ -1001,7 +1001,7 @@ function createRegularGroup(groupName, items) {
     div.onclick = (e) => {
       if (firstLink.password_protect) {
         const pwd = prompt('Enter password:');
-        if (pwd !== '1823') {
+        if (pwd !== (firstLink.group_password || '1823')) {
           alert('Incorrect password!');
           return;
         }
@@ -1781,6 +1781,11 @@ function openEditGroupPopup(groupName) {
   document.getElementById('edit-group-name').value = groupName;
   document.getElementById('edit-group-top-name').value = firstLink.top_name || '';
   document.getElementById('edit-group-password-protect').checked = firstLink.password_protect || false;
+  const pwdInput = document.getElementById('edit-group-password-value');
+  if (pwdInput) {
+    pwdInput.value = firstLink.group_password || '';
+    pwdInput.style.display = firstLink.password_protect ? 'block' : 'none';
+  }
   document.getElementById('edit-group-group-start-new-line').checked = firstLink.group_start_new_line || false;
 
   // Set group type radio
@@ -1857,6 +1862,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     horizontal_stack: groupType === 'horizontal',
     display_style: displayStyle,
     password_protect: document.getElementById('edit-group-password-protect').checked,
+    group_password: document.getElementById('edit-group-password-value')?.value || undefined,
     group_start_new_line: document.getElementById('edit-group-group-start-new-line').checked,
     top_name: document.getElementById('edit-group-top-name').value,
     top_bg_color: document.getElementById('edit-group-top-bg-color').value,

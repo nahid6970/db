@@ -37,6 +37,7 @@ export default defineSchema({
     display_style: v.optional(v.string()),
     horizontal_stack: v.optional(v.boolean()),
     password_protect: v.optional(v.boolean()),
+    group_password: v.optional(v.string()),
     top_name: v.optional(v.string()),
     top_bg_color: v.optional(v.string()),
     top_text_color: v.optional(v.string()),

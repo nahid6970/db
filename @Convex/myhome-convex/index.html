@@ -65,6 +65,7 @@
             <label><input type="radio" name="edit-group-display" value="list-item"> List</label>
           </div>
           <label><input type="checkbox" id="edit-group-password-protect"> Password Protect</label>
+          <input type="text" id="edit-group-password-value" placeholder="Group password" style="display:none; margin-top:4px;">
           <label><input type="checkbox" id="edit-group-group-start-new-line"> Start on New Line</label>
           <div id="collapsible-settings" style="display: none;">
             <details>
@@ -552,6 +553,15 @@
       });
 
       console.log('✅ Close button handlers set up!');
+
+      // Show/hide group password input based on checkbox
+      const pwdCheckbox = document.getElementById('edit-group-password-protect');
+      const pwdInput = document.getElementById('edit-group-password-value');
+      if (pwdCheckbox && pwdInput) {
+        pwdCheckbox.addEventListener('change', () => {
+          pwdInput.style.display = pwdCheckbox.checked ? 'block' : 'none';
+        });
+      }
     });
   </script>
 
