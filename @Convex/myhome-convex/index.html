@@ -26,12 +26,12 @@
 
 <body>
   <div class="topbar" id="topbar">
-    <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:4px;color:#fff;cursor:pointer;font-size:18px;padding:4px 10px;flex-shrink:0;">⚙️</button>
+    <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:4px 10px;flex-shrink:0;">⚙️</button>
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
   </div>
 
   <!-- Settings Panel -->
-  <div id="settings-panel" class="hidden" style="position:fixed;top:48px;left:8px;background:#2d2d2d;border:1px solid #555;border-radius:6px;padding:12px 16px;z-index:999;min-width:220px;box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+  <div id="settings-panel" class="hidden" style="position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#2d2d2d;border:1px solid #555;border-radius:6px;padding:12px 16px;z-index:999;min-width:260px;box-shadow:0 4px 12px rgba(0,0,0,0.5);">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
       <strong style="color:#fff;">Settings</strong>
       <span onclick="document.getElementById('settings-panel').classList.add('hidden')" style="cursor:pointer;color:#aaa;font-size:18px;">&times;</span>
