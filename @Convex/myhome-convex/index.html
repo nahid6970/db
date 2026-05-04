@@ -36,10 +36,7 @@
     <div id="edit-group-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Group Settings</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Group Settings</h3>
           <span class="close-button">&times;</span>
         </div>
         <form id="edit-group-form">
@@ -110,10 +107,7 @@
     <div id="quick-add-link-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Quick Add Link</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Quick Add Link</h3>
           <span class="close-button">&times;</span>
         </div>
         <form id="quick-add-link-form">
@@ -132,10 +126,7 @@
     <div id="add-link-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Add Link</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Add Link</h3>
           <span class="close-button">&times;</span>
         </div>
         <form id="add-link-form">
@@ -251,9 +242,10 @@
     <div id="edit-link-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
+          <div style="display: flex; align-items: center; gap: 6px;">
             <h3>Edit Link</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
+            <button type="button" id="format-capture-btn" onclick="window.formatPainter.capture()" title="Copy format from this item">📋</button>
+            <button type="button" class="format-painter-btn" onclick="window.formatPainter.paste()" title="Paste format to this item">🎨</button>
           </div>
           <span class="close-button">&times;</span>
         </div>
@@ -424,10 +416,7 @@
     <div id="group-popup" class="popup-container hidden">
       <div class="group_type_box expanded">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Group Items</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Group Items</h3>
           <span class="close-button">&times;</span>
         </div>
         <div class="popup-content-inner"></div>
@@ -438,10 +427,7 @@
     <div id="add-sidebar-button-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Add Sidebar Button</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Add Sidebar Button</h3>
           <span class="close-button">&times;</span>
         </div>
         <form id="add-sidebar-button-form">
@@ -478,10 +464,7 @@
     <div id="edit-sidebar-button-popup" class="popup-container hidden">
       <div class="Menu">
         <div class="popup-header">
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <h3>Edit Sidebar Button</h3>
-            <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-          </div>
+          <h3>Edit Sidebar Button</h3>
           <span class="close-button">&times;</span>
         </div>
         <form id="edit-sidebar-button-form">
@@ -521,10 +504,7 @@
   <div id="group_type_box-popup" class="popup-container hidden">
     <div class="group_type_box expanded">
       <div class="popup-header">
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <h3>Group Items</h3>
-          <button type="button" class="format-painter-btn" title="Apply last used format">🎨</button>
-        </div>
+        <h3>Group Items</h3>
         <span class="close-button">&times;</span>
       </div>
       <div class="popup-content-inner" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
@@ -749,6 +729,41 @@
   </script>
 
 
+
+  <!-- Format Painter -->
+  <script>
+    window.formatPainter = (function() {
+      var FIELDS = ['color','background-color','li-bg-color','li-hover-color','li-border-color','li-border-radius','border-radius','font-family','font-size','width','height','li-width','li-height'];
+      var saved = JSON.parse(localStorage.getItem('lastUsedStyles') || '{}');
+      function getForm() { return document.getElementById('edit-link-form'); }
+      return {
+        capture: function() {
+          var form = getForm(); if (!form) return;
+          var styles = {};
+          form.querySelectorAll('input[id]').forEach(function(input) {
+            var key = input.id.replace('edit-link-', '');
+            if (FIELDS.indexOf(key) !== -1 && input.value) styles[key] = input.value;
+          });
+          if (!Object.keys(styles).length) { window.showNotification('No style fields filled in.', 'info'); return; }
+          saved = styles; localStorage.setItem('lastUsedStyles', JSON.stringify(saved));
+          window.showNotification('Format copied! (' + Object.keys(styles).length + ' fields)', 'success');
+        },
+        paste: function() {
+          var form = getForm(); if (!form) return;
+          if (!Object.keys(saved).length) { window.showNotification('Nothing copied yet. Click 📋 first.', 'info'); return; }
+          form.querySelectorAll('input[id]').forEach(function(input) {
+            var key = input.id.replace('edit-link-', '');
+            if (saved[key] !== undefined) {
+              input.value = saved[key];
+              if (input.classList.contains('color-input') && typeof applyColorPreview === 'function') applyColorPreview(input);
+              input.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+          });
+          window.showNotification('Format pasted!', 'success');
+        }
+      };
+    })();
+  </script>
 </body>
 
 </html>

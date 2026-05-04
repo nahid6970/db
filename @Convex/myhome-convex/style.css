@@ -1312,7 +1312,22 @@ button,
   transform: scale(1.2) rotate(5deg);
 }
 
-/* Format Painter Button */
+/* Format Capture/Painter Buttons */
+#format-capture-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+}
+#format-capture-btn:hover {
+  background: rgba(33, 150, 243, 0.2);
+  border-color: #2196F3;
+  transform: scale(1.1);
+}
+
 .format-painter-btn {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
