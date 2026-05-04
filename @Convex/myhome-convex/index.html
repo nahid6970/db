@@ -42,63 +42,111 @@
         <form id="edit-group-form">
           <input type="hidden" id="edit-group-original-name">
           <div style="display: flex; gap: 10px;">
-            <div style="flex: 1;">
-              <label>Group Name:</label>
-              <div class="group-input-container">
-                <input type="text" id="edit-group-name" placeholder="Group name" required>
-                <button type="button" class="group-picker-btn"
-                  onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
-              </div>
+            <div class="group-input-container" style="flex:1;">
+              <input type="text" id="edit-group-name" placeholder="Group Name" required>
+              <button type="button" class="group-picker-btn" onclick="toggleGroupPicker(event, 'edit-group-name')">▼</button>
             </div>
-            <div style="flex: 1;">
-              <label>Display Name:</label>
-              <input type="text" id="edit-group-top-name" placeholder="Custom display name">
+            <input type="text" id="edit-group-top-name" placeholder="Display Name" style="flex:1;">
+          </div>
+
+          <!-- Group Type -->
+          <div class="type-picker-block">
+            <div class="type-picker-row">
+              <label class="type-chip">
+                <input type="radio" name="edit-group-type" value="horizontal" checked>
+                <span class="type-chip-body">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18v2H3zm0 6h18v2H3zm0 6h18v2H3z" fill="currentColor"/></svg>
+                  <span>Normal</span>
+                </span>
+              </label>
+              <label class="type-chip">
+                <input type="radio" name="edit-group-type" value="top">
+                <span class="type-chip-body">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h18v5H3zm0 8h8v10H3zm10 0h8v5h-8zm0 7h8v3h-8z" fill="currentColor"/></svg>
+                  <span>Top</span>
+                </span>
+              </label>
+              <label class="type-chip">
+                <input type="radio" name="edit-group-type" value="box">
+                <span class="type-chip-body">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h8v8H3zm10 0h8v8h-8zM3 13h8v8H3zm10 0h8v8h-8z" fill="currentColor"/></svg>
+                  <span>Box</span>
+                </span>
+              </label>
             </div>
           </div>
-          <div style="display: flex; gap: 20px; margin: 10px 0;">
-            <label><input type="radio" name="edit-group-type" value="horizontal" checked> Normal</label>
-            <label><input type="radio" name="edit-group-type" value="top"> Top Group</label>
-            <label><input type="radio" name="edit-group-type" value="box"> Box Group</label>
+
+          <!-- Display Style -->
+          <div class="type-picker-block">
+            <div class="type-picker-row">
+              <label class="type-chip">
+                <input type="radio" name="edit-group-display" value="flex" checked>
+                <span class="type-chip-body">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h4v14H3zm6 0h4v14H9zm6 0h6v14h-6z" fill="currentColor"/></svg>
+                  <span>Flex</span>
+                </span>
+              </label>
+              <label class="type-chip">
+                <input type="radio" name="edit-group-display" value="list-item">
+                <span class="type-chip-body">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h2v2H3zm4 0h14v2H7zM3 11h2v2H3zm4 0h14v2H7zM3 17h2v2H3zm4 0h14v2H7z" fill="currentColor"/></svg>
+                  <span>List</span>
+                </span>
+              </label>
+            </div>
           </div>
-          <div style="display: flex; gap: 20px; margin: 10px 0;">
-            <label><input type="radio" name="edit-group-display" value="flex" checked> Flex</label>
-            <label><input type="radio" name="edit-group-display" value="list-item"> List</label>
+
+          <!-- Options -->
+          <div class="option-chip-row">
+            <label class="option-chip">
+              <input type="checkbox" id="edit-group-password-protect">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1a5 5 0 015 5v2h1a2 2 0 012 2v10a2 2 0 01-2 2H6a2 2 0 01-2-2V10a2 2 0 012-2h1V6a5 5 0 015-5zm0 2a3 3 0 00-3 3v2h6V6a3 3 0 00-3-3zm0 9a2 2 0 110 4 2 2 0 010-4z" fill="currentColor"/></svg>
+                <span>Password</span>
+              </span>
+            </label>
+            <label class="option-chip">
+              <input type="checkbox" id="edit-group-group-start-new-line">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h10v2H4zm0 5h10v2H4zm0 5h6v2H4zm11-8 5 4-5 4v-3h-4v-2h4z" fill="currentColor"/></svg>
+                <span>New Line</span>
+              </span>
+            </label>
           </div>
-          <label><input type="checkbox" id="edit-group-password-protect"> Password Protect</label>
-          <input type="text" id="edit-group-password-value" placeholder="Group password" style="display:none; margin-top:4px;">
-          <label><input type="checkbox" id="edit-group-group-start-new-line"> Start on New Line</label>
+          <input type="password" id="edit-group-password-value" placeholder="Group password" style="display:none; margin-top:4px;">
+
+          <!-- Top/Box Group Colors -->
           <div id="collapsible-settings" style="display: none;">
-            <details>
-              <summary>Top Group Colors</summary>
-              <input type="text" id="edit-group-top-bg-color" placeholder="Background Color" class="color-input">
-              <input type="text" id="edit-group-top-text-color" placeholder="Text Color" class="color-input">
-              <input type="text" id="edit-group-top-border-color" placeholder="Border Color" class="color-input">
-              <input type="text" id="edit-group-top-hover-color" placeholder="Hover Color" class="color-input">
-            </details>
-            <details>
-              <summary>Top Group Size</summary>
-              <input type="text" id="edit-group-top-width" placeholder="Width">
-              <input type="text" id="edit-group-top-height" placeholder="Height">
-              <input type="text" id="edit-group-top-font-family" placeholder="Font Family">
-              <input type="text" id="edit-group-top-font-size" placeholder="Font Size">
-            </details>
-            <details>
-              <summary>Popup Styling</summary>
-              <input type="text" id="edit-group-popup-bg-color" placeholder="Popup BG" class="color-input">
-              <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text" class="color-input">
-              <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border" class="color-input">
-              <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Radius">
-            </details>
+            <div class="compact-size-row">
+              <input type="text" id="edit-group-top-bg-color" placeholder="BG" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-top-text-color" placeholder="Text" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-top-border-color" placeholder="Border" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-top-hover-color" placeholder="Hover" class="color-input" style="flex:1;">
+            </div>
+            <div class="compact-size-row">
+              <input type="text" id="edit-group-top-width" placeholder="Width" style="flex:1;">
+              <input type="text" id="edit-group-top-height" placeholder="Height" style="flex:1;">
+              <input type="text" id="edit-group-top-font-family" placeholder="Font" style="flex:1;">
+              <input type="text" id="edit-group-top-font-size" placeholder="Size" style="flex:1;">
+            </div>
+            <div class="compact-size-row">
+              <input type="text" id="edit-group-popup-bg-color" placeholder="Popup BG" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-popup-text-color" placeholder="Popup Text" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-popup-border-color" placeholder="Popup Border" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-popup-border-radius" placeholder="Popup Radius" style="flex:1;">
+            </div>
           </div>
+
+          <!-- Normal/Box Group Colors -->
           <div id="horizontal-settings" style="display: none;">
-            <details>
-              <summary>Normal & Box Group Styling</summary>
-              <input type="text" id="edit-group-horizontal-bg-color" placeholder="BG Color" class="color-input">
-              <input type="text" id="edit-group-horizontal-text-color" placeholder="Text Color" class="color-input">
-              <input type="text" id="edit-group-horizontal-border-color" placeholder="Border Color" class="color-input">
-              <input type="text" id="edit-group-horizontal-hover-color" placeholder="Hover Color" class="color-input">
-            </details>
+            <div class="compact-size-row">
+              <input type="text" id="edit-group-horizontal-bg-color" placeholder="BG" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-horizontal-text-color" placeholder="Text" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-horizontal-border-color" placeholder="Border" class="color-input" style="flex:1;">
+              <input type="text" id="edit-group-horizontal-hover-color" placeholder="Hover" class="color-input" style="flex:1;">
+            </div>
           </div>
+
           <button type="submit">Save</button>
         </form>
       </div>
