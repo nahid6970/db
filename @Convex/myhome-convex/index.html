@@ -631,11 +631,11 @@
       const pwdCheckbox = document.getElementById('edit-group-password-protect');
       const pwdInput = document.getElementById('edit-group-password-value');
       if (pwdCheckbox && pwdInput) {
-        pwdCheckbox.addEventListener('change', () => {
+        pwdCheckbox.addEventListener('change', async () => {
           if (!pwdCheckbox.checked) {
-            const attempt = prompt('Enter master password to remove protection:');
-            if (attempt !== '182358') {
-              window.showNotification('Incorrect master password', 'error');
+            const attempt = await window.promptPassword('Enter master password to remove protection:');
+            if (attempt === null || attempt !== '182358') {
+              if (attempt !== null) window.showNotification('Incorrect master password', 'error');
               pwdCheckbox.checked = true; // revert
               return;
             }
@@ -820,6 +820,41 @@
   </script>
 
 
+
+  <!-- Custom Password Modal -->
+  <div id="pwd-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9999;align-items:center;justify-content:center;">
+    <div style="background:#2d2d2d;border:1px solid #e53935;border-radius:6px;padding:20px;min-width:280px;box-shadow:0 4px 16px rgba(0,0,0,0.6);">
+      <div id="pwd-modal-msg" style="color:#ccc;margin-bottom:12px;"></div>
+      <input type="password" id="pwd-modal-input" placeholder="Password" style="width:100%;box-sizing:border-box;padding:8px;background:#1a1a1a;border:1px solid #555;color:#fff;border-radius:4px;font-size:14px;">
+      <div style="display:flex;gap:8px;margin-top:12px;justify-content:flex-end;">
+        <button id="pwd-modal-cancel" style="padding:6px 14px;background:#444;border:none;color:#fff;border-radius:4px;cursor:pointer;">Cancel</button>
+        <button id="pwd-modal-ok" style="padding:6px 14px;background:#e53935;border:none;color:#fff;border-radius:4px;cursor:pointer;">OK</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    window.promptPassword = function(message) {
+      return new Promise(function(resolve) {
+        var modal = document.getElementById('pwd-modal');
+        var input = document.getElementById('pwd-modal-input');
+        var msg = document.getElementById('pwd-modal-msg');
+        msg.textContent = message;
+        input.value = '';
+        modal.style.display = 'flex';
+        setTimeout(function() { input.focus(); }, 50);
+        function done(val) {
+          modal.style.display = 'none';
+          document.getElementById('pwd-modal-ok').onclick = null;
+          document.getElementById('pwd-modal-cancel').onclick = null;
+          input.onkeydown = null;
+          resolve(val);
+        }
+        document.getElementById('pwd-modal-ok').onclick = function() { done(input.value); };
+        document.getElementById('pwd-modal-cancel').onclick = function() { done(null); };
+        input.onkeydown = function(e) { if (e.key === 'Enter') done(input.value); if (e.key === 'Escape') done(null); };
+      });
+    };
+  </script>
 
   <!-- App Settings -->
   <script>

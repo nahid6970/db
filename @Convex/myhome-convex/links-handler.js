@@ -858,12 +858,12 @@ function createCollapsibleGroup(groupName, items) {
   if (firstLink.top_font_family) title.style.fontFamily = firstLink.top_font_family;
   if (firstLink.top_font_size) title.style.fontSize = firstLink.top_font_size.includes('px') || firstLink.top_font_size.includes('pt') ? firstLink.top_font_size : firstLink.top_font_size + 'px';
 
-  div.onclick = (e) => {
+  div.onclick = async (e) => {
     if (e.target === header || e.target === title) {
       if (firstLink.password_protect) {
-        const pwd = prompt('Enter password:');
-        if (pwd !== (firstLink.group_password || '1823') && pwd !== '182358') {
-          window.showNotification('Incorrect password', 'error');
+        const pwd = await window.promptPassword('Enter password:');
+        if (pwd === null || (pwd !== (firstLink.group_password || '1823') && pwd !== '182358')) {
+          if (pwd !== null) window.showNotification('Incorrect password', 'error');
           return;
         }
       }
@@ -998,11 +998,11 @@ function createRegularGroup(groupName, items) {
     }
 
     // Click handler - opens popup
-    div.onclick = (e) => {
+    div.onclick = async (e) => {
       if (firstLink.password_protect) {
-        const pwd = prompt('Enter password:');
-        if (pwd !== (firstLink.group_password || '1823') && pwd !== '182358') {
-          window.showNotification('Incorrect password', 'error');
+        const pwd = await window.promptPassword('Enter password:');
+        if (pwd === null || (pwd !== (firstLink.group_password || '1823') && pwd !== '182358')) {
+          if (pwd !== null) window.showNotification('Incorrect password', 'error');
           return;
         }
       }
@@ -1860,7 +1860,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
   const newProtect = document.getElementById('edit-group-password-protect').checked;
   const newPwd = document.getElementById('edit-group-password-value')?.value || '';
   if (newProtect !== origProtect || newPwd !== origPwd) {
-    const masterAttempt = prompt('Enter master password to change password settings:');
+    const masterAttempt = await window.promptPassword('Enter master password to change password settings:');
     if (masterAttempt !== '182358') {
       window.showNotification('Incorrect master password', 'error');
       return;
