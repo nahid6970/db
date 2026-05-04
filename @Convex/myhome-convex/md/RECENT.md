@@ -3,6 +3,26 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-04 15:10] - Group Password System & UI Overhaul
+
+**What We Accomplished:**
+- Redesigned group edit form UI to match link edit form (type-chip, option-chip, SVG icons, compact-size-row color fields)
+- Added per-group configurable password (`group_password` field in schema/functions)
+- Added master password `182358` that unlocks any group and is required to save group settings or uncheck password protection
+- Replaced all `alert()` wrong-password dialogs with `showNotification` toast (no more blocking popups)
+- Password input uses `type="password"` (hidden characters)
+- Unchecking "Password" chip requires master password — reverts if wrong
+
+**Files Modified:**
+- `index.html` - Group edit form redesign, password chip toggle with master password guard
+- `links-handler.js` - Master password check on group save, unlock checks accept master password, alert → showNotification
+- `convex/schema.ts` - Added `group_password: v.optional(v.string())`
+- `convex/functions.ts` - Added `group_password` to updateLink args
+
+*Next session: Continue feature development*
+
+---
+
 ## [2026-05-04 14:30] - Format Painter Feature
 
 **What We Accomplished:**

@@ -2,6 +2,25 @@
 
 ---
 
+## Per-Group Password
+**Status:** ✅ Complete
+**Description:** Each group can have its own password set in the group edit form. Password field uses `type="password"` (hidden characters).
+**Implementation:** `group_password` field stored in Convex. Password check: `pwd !== (firstLink.group_password || '1823') && pwd !== '182358'`
+**Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `links-handler.js`, `index.html`
+**Usage:** Edit group → check "Password" chip → type password → Save (requires master password)
+
+---
+
+## Master Password
+**Status:** ✅ Complete
+**Description:** Master password `182358` that:
+- Unlocks any password-protected group regardless of its own password
+- Required to save group settings (any change)
+- Required to uncheck the Password protection chip (reverts if wrong)
+**Implementation:** Hardcoded in `links-handler.js` and `index.html` change listener.
+
+---
+
 ## Format Painter
 **Status:** ✅ Complete
 **Description:** Copy styling from one link item and paste it to another.

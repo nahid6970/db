@@ -2,6 +2,16 @@
 
 ---
 
+## [2026-05-04] - Wrong Password alert() Blocking UI
+
+**Problem:** Entering a wrong group password showed a browser `alert()` dialog requiring a click to dismiss, making it annoying especially on repeated attempts.
+
+**Solution:** Replaced all `alert('Incorrect password!')` and `alert('Incorrect master password.')` calls with `window.showNotification(..., 'error')` toast notifications that auto-dismiss.
+
+**Files Modified:** `links-handler.js`, `index.html`
+
+---
+
 ## [2026-05-04] - Format Painter Not Working
 
 **Problem:** 📋/🎨 buttons in Edit Link popup did nothing when clicked.
