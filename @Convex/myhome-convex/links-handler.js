@@ -1295,6 +1295,7 @@ function createLinkItem(link, index) {
   if (link.li_border_radius) li.style.borderRadius = link.li_border_radius;
   if (link.li_width) li.style.minWidth = link.li_width;
   if (link.li_height) li.style.minHeight = link.li_height;
+  if (link.li_auto_fit) { li.style.minWidth = '0'; li.style.minHeight = '0'; li.style.padding = '0'; li.style.width = 'fit-content'; li.style.height = 'fit-content'; }
 
   if (link.li_hover_color) {
     li.addEventListener('mouseenter', () => li.style.backgroundColor = link.li_hover_color);
@@ -1621,6 +1622,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-title').value = link.title || '';
   document.getElementById('edit-link-hidden').checked = link.hidden || false;
   document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
+  document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -1676,6 +1678,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     title: document.getElementById('edit-link-title').value,
     hidden: document.getElementById('edit-link-hidden').checked,
     start_new_line: document.getElementById('edit-link-start-new-line').checked,
+    li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
     ...compactObject(reminderDraft)
   };
 
