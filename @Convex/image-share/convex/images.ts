@@ -51,9 +51,41 @@ export const add = mutation({
   },
 });
 
+export const generateUploadUrl = mutation({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.storage.generateUploadUrl();
+  },
+});
+
+export const saveStorageImage = mutation({
+  args: { 
+    storageId: v.id("_storage"), 
+    filename: v.string(),
+    folderId: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const url = await ctx.storage.getUrl(args.storageId);
+    if (!url) throw new Error("Failed to get storage URL");
+    
+    await ctx.db.insert("images", { 
+      url,
+      storageId: args.storageId,
+      filename: args.filename,
+      timestamp: Date.now(),
+      folderId: args.folderId,
+      pinned: false,
+    });
+  },
+});
+
 export const remove = mutation({
   args: { id: v.id("images") },
   handler: async (ctx, args) => {
+    const image = await ctx.db.get(args.id);
+    if (image?.storageId) {
+      await ctx.storage.delete(image.storageId);
+    }
     await ctx.db.delete(args.id);
   },
 });

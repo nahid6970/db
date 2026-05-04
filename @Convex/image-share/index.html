@@ -144,6 +144,72 @@
     
     button.danger:hover { background: #c82333; }
     
+    button.secondary {
+      background: #6c757d;
+    }
+    button.secondary:hover {
+      background: #5a6268;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 24px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      font-size: 18px;
+    }
+
+    .close-modal {
+      background: transparent;
+      color: #666;
+      font-size: 24px;
+      padding: 0;
+    }
+    .close-modal:hover { background: transparent; color: #000; }
+
+    .setting-item {
+      margin-bottom: 16px;
+    }
+
+    .setting-item label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .setting-item select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+    }
+
     button.has-files {
       background: #ff8c00;
     }
@@ -421,6 +487,12 @@
               <path d="M14 11v6"></path>
             </svg>
           </button>
+          <button class="secondary icon-btn" onclick="openSettings()" title="Settings">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
         </div>
         <div class="progress-container" id="progressContainer">
           <div class="progress-bar">
@@ -444,6 +516,22 @@
     <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
   </div>
 
+  <div class="modal-overlay" id="settingsModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Settings</h2>
+        <button class="close-modal" onclick="closeSettings()">&times;</button>
+      </div>
+      <div class="setting-item">
+        <label for="storageType">Storage Type</label>
+        <select id="storageType" onchange="updateStorageType()">
+          <option value="cloudinary">Cloudinary</option>
+          <option value="convex">Convex</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
   <script type="module">
     import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
     import { anyApi } from "https://esm.sh/convex@1.16.0/server";
@@ -457,6 +545,23 @@
     const FOLDER_STORAGE_KEY = "image-share.currentFolderId";
     const DEFAULT_PAGE_TITLE = document.title;
     const api = anyApi;
+
+    const STORAGE_TYPE_KEY = "image-share.storageType";
+    let storageType = window.localStorage.getItem(STORAGE_TYPE_KEY) || "cloudinary";
+
+    window.openSettings = function() {
+      document.getElementById('storageType').value = storageType;
+      document.getElementById('settingsModal').style.display = 'flex';
+    };
+
+    window.closeSettings = function() {
+      document.getElementById('settingsModal').style.display = 'none';
+    };
+
+    window.updateStorageType = function() {
+      storageType = document.getElementById('storageType').value;
+      window.localStorage.setItem(STORAGE_TYPE_KEY, storageType);
+    };
 
     function readStoredFolderId() {
       const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
@@ -638,24 +743,42 @@
       document.title = `Uploading 0/${total} • ${DEFAULT_PAGE_TITLE}`;
       
       for (const file of files) {
-        const formData = new FormData();
-        formData.append('file', file);
-        formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-        formData.append('folder', 'myGallery');
-        
         try {
-          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
-            method: 'POST',
-            body: formData
-          });
-          
-          const data = await res.json();
-          
-          await client.mutation(api.images.add, { 
-            url: data.secure_url,
-            filename: file.name,
-            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
-          });
+          if (storageType === "convex") {
+            // Convex Storage Upload
+            const postUrl = await client.mutation(api.images.generateUploadUrl);
+            const result = await fetch(postUrl, {
+              method: "POST",
+              headers: { "Content-Type": file.type },
+              body: file,
+            });
+            const { storageId } = await result.json();
+            
+            await client.mutation(api.images.saveStorageImage, {
+              storageId,
+              filename: file.name,
+              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            });
+          } else {
+            // Cloudinary Upload
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            formData.append('folder', 'myGallery');
+            
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
+              method: 'POST',
+              body: formData
+            });
+            
+            const data = await res.json();
+            
+            await client.mutation(api.images.add, { 
+              url: data.secure_url,
+              filename: file.name,
+              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            });
+          }
           
           completed++;
           const percent = Math.round((completed / total) * 100);
@@ -664,6 +787,8 @@
           document.title = `Uploading ${completed}/${total} • ${DEFAULT_PAGE_TITLE}`;
         } catch (error) {
           console.error('Upload failed:', error);
+          status.textContent = `Upload failed for ${file.name}`;
+          status.style.color = '#dc3545';
         }
       }
       
