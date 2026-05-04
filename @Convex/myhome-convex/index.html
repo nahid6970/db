@@ -26,7 +26,20 @@
 
 <body>
   <div class="topbar" id="topbar">
+    <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:4px;color:#fff;cursor:pointer;font-size:18px;padding:4px 10px;flex-shrink:0;">⚙️</button>
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
+  </div>
+
+  <!-- Settings Panel -->
+  <div id="settings-panel" class="hidden" style="position:fixed;top:48px;left:8px;background:#2d2d2d;border:1px solid #555;border-radius:6px;padding:12px 16px;z-index:999;min-width:220px;box-shadow:0 4px 12px rgba(0,0,0,0.5);">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+      <strong style="color:#fff;">Settings</strong>
+      <span onclick="document.getElementById('settings-panel').classList.add('hidden')" style="cursor:pointer;color:#aaa;font-size:18px;">&times;</span>
+    </div>
+    <label style="display:flex;align-items:center;gap:8px;color:#ccc;cursor:pointer;">
+      <input type="checkbox" id="setting-hide-group-names" onchange="window.applySettings()">
+      Hide group names
+    </label>
   </div>
 
   <div class="flex-container2">
@@ -807,6 +820,35 @@
   </script>
 
 
+
+  <!-- App Settings -->
+  <script>
+    (function() {
+      var SETTINGS_KEY = 'myhome-settings';
+      function loadSettings() {
+        try { return JSON.parse(localStorage.getItem(SETTINGS_KEY) || '{}'); } catch(e) { return {}; }
+      }
+      function saveSettings(s) { localStorage.setItem(SETTINGS_KEY, JSON.stringify(s)); }
+
+      window.applySettings = function() {
+        var s = loadSettings();
+        var hideNames = document.getElementById('setting-hide-group-names').checked;
+        s.hideGroupNames = hideNames;
+        saveSettings(s);
+        // Toggle CSS class on body
+        document.body.classList.toggle('hide-group-names', hideNames);
+      };
+
+      // Init on load
+      document.addEventListener('DOMContentLoaded', function() {
+        var s = loadSettings();
+        if (s.hideGroupNames) {
+          document.getElementById('setting-hide-group-names').checked = true;
+          document.body.classList.add('hide-group-names');
+        }
+      });
+    })();
+  </script>
 
   <!-- Format Painter -->
   <script>

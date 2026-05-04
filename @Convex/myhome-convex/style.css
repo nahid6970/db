@@ -1355,3 +1355,8 @@ button,
   background: #4CAF50;
   color: white;
 }
+
+/* Settings: hide group names */
+body.hide-group-names .link-group > h3 {
+  display: none;
+}
