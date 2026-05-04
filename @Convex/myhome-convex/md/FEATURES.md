@@ -21,6 +21,15 @@
 
 ---
 
+## Auto Fit (Link Items)
+**Status:** ✅ Complete
+**Description:** Toggle in Edit Link form that removes the default item box padding/min-size and shrinks the item to exactly wrap its content (icon, SVG, NerdFont, text).
+**Implementation:** `li_auto_fit` boolean field. When true: `min-width:0; min-height:0; padding:0; width:fit-content; height:fit-content` applied to the `li` element.
+**Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `links-handler.js`, `index.html`
+**Usage:** Edit Link → check "Auto Fit" chip → Save
+
+---
+
 ## Format Painter
 **Status:** ✅ Complete
 **Description:** Copy styling from one link item and paste it to another.

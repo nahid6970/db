@@ -3,6 +3,22 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-04 15:40] - Auto Fit Toggle for Link Items
+
+**What We Accomplished:**
+- Added "Auto Fit" chip toggle in Edit Link form (beside Start on New Line)
+- When enabled: removes default `min-width/min-height/padding` from item `li`, sets `width/height: fit-content` so item shrinks to wrap its content exactly
+- Added `li_auto_fit: v.optional(v.boolean())` to schema and functions
+
+**Files Modified:**
+- `index.html` - Auto Fit option-chip in edit-link form
+- `links-handler.js` - load/save/apply li_auto_fit
+- `convex/schema.ts`, `convex/functions.ts` - li_auto_fit field
+
+*Next session: Continue feature development*
+
+---
+
 ## [2026-05-04 15:10] - Group Password System & UI Overhaul
 
 **What We Accomplished:**
