@@ -1789,6 +1789,13 @@ function openEditGroupPopup(groupName) {
     pwdInput.value = firstLink.group_password || '';
     pwdInput.style.display = firstLink.password_protect ? 'block' : 'none';
   }
+  // Store originals for change detection
+  let origPwdProtect = document.getElementById('edit-group-original-password-protect');
+  if (!origPwdProtect) { origPwdProtect = document.createElement('input'); origPwdProtect.type = 'hidden'; origPwdProtect.id = 'edit-group-original-password-protect'; document.getElementById('edit-group-form').appendChild(origPwdProtect); }
+  origPwdProtect.value = firstLink.password_protect || false;
+  let origPwdVal = document.getElementById('edit-group-original-password-value');
+  if (!origPwdVal) { origPwdVal = document.createElement('input'); origPwdVal.type = 'hidden'; origPwdVal.id = 'edit-group-original-password-value'; document.getElementById('edit-group-form').appendChild(origPwdVal); }
+  origPwdVal.value = firstLink.group_password || '';
   document.getElementById('edit-group-group-start-new-line').checked = firstLink.group_start_new_line || false;
 
   // Set group type radio
@@ -1847,11 +1854,17 @@ document.querySelectorAll('input[name="edit-group-type"]').forEach(radio => {
 document.getElementById('edit-group-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Require master password to save group settings
-  const masterAttempt = prompt('Enter master password to save:');
-  if (masterAttempt !== '182358') {
-    window.showNotification('Incorrect master password', 'error');
-    return;
+  // Only require master password if password protection settings changed
+  const origProtect = document.getElementById('edit-group-original-password-protect')?.value === 'true';
+  const origPwd = document.getElementById('edit-group-original-password-value')?.value || '';
+  const newProtect = document.getElementById('edit-group-password-protect').checked;
+  const newPwd = document.getElementById('edit-group-password-value')?.value || '';
+  if (newProtect !== origProtect || newPwd !== origPwd) {
+    const masterAttempt = prompt('Enter master password to change password settings:');
+    if (masterAttempt !== '182358') {
+      window.showNotification('Incorrect master password', 'error');
+      return;
+    }
   }
 
   const originalName = document.getElementById('edit-group-original-name').value;
