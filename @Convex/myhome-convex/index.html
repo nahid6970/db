@@ -607,6 +607,14 @@
       const pwdInput = document.getElementById('edit-group-password-value');
       if (pwdCheckbox && pwdInput) {
         pwdCheckbox.addEventListener('change', () => {
+          if (!pwdCheckbox.checked) {
+            const attempt = prompt('Enter master password to remove protection:');
+            if (attempt !== '182358') {
+              alert('Incorrect master password.');
+              pwdCheckbox.checked = true; // revert
+              return;
+            }
+          }
           pwdInput.style.display = pwdCheckbox.checked ? 'block' : 'none';
         });
       }
