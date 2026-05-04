@@ -863,7 +863,7 @@ function createCollapsibleGroup(groupName, items) {
       if (firstLink.password_protect) {
         const pwd = prompt('Enter password:');
         if (pwd !== (firstLink.group_password || '1823') && pwd !== '182358') {
-          alert('Incorrect password!');
+          window.showNotification('Incorrect password', 'error');
           return;
         }
       }
@@ -1002,7 +1002,7 @@ function createRegularGroup(groupName, items) {
       if (firstLink.password_protect) {
         const pwd = prompt('Enter password:');
         if (pwd !== (firstLink.group_password || '1823') && pwd !== '182358') {
-          alert('Incorrect password!');
+          window.showNotification('Incorrect password', 'error');
           return;
         }
       }
@@ -1847,7 +1847,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
   // Require master password to save group settings
   const masterAttempt = prompt('Enter master password to save:');
   if (masterAttempt !== '182358') {
-    alert('Incorrect master password.');
+    window.showNotification('Incorrect master password', 'error');
     return;
   }
 

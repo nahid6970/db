@@ -610,7 +610,7 @@
           if (!pwdCheckbox.checked) {
             const attempt = prompt('Enter master password to remove protection:');
             if (attempt !== '182358') {
-              alert('Incorrect master password.');
+              window.showNotification('Incorrect master password', 'error');
               pwdCheckbox.checked = true; // revert
               return;
             }
