@@ -3,6 +3,27 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-05 01:20] - Custom Password Modal & Various Fixes
+
+**What We Accomplished:**
+- Replaced all `prompt()` password dialogs with a custom modal using `<input type="password">` (characters hidden as dots)
+- Modal has red border, Cancel/OK buttons, Enter/Escape key support
+- Master password now only required when password protect checkbox or password value actually changes (not on every group save)
+- Added ⚙️ settings button to topbar (no background, left side) opening a centered panel with red border
+- Settings panel: "Hide group names" toggle (persists in localStorage via `body.hide-group-names` CSS class)
+- Added section labels to group edit form color rows: "Button Colors", "Button Size & Font", "Popup Colors", "Group Colors"
+- Auto Fit toggle for link items (shrinks item box to content size)
+
+**Files Modified:**
+- `index.html` - custom password modal, settings button/panel, section labels, auto-fit chip
+- `links-handler.js` - async prompt replacements, master password change detection, auto-fit apply
+- `style.css` - `body.hide-group-names .link-group > h3 { display:none }`
+- `convex/schema.ts`, `convex/functions.ts` - `li_auto_fit` field
+
+*Next session: Continue feature development*
+
+---
+
 ## [2026-05-04 15:40] - Auto Fit Toggle for Link Items
 
 **What We Accomplished:**

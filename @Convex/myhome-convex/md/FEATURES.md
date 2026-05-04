@@ -21,6 +21,23 @@
 
 ---
 
+## Settings Panel
+**Status:** ✅ Complete
+**Description:** ⚙️ button at left of topbar opens a centered modal panel (red border) with app-wide settings. Persisted in `localStorage` under key `myhome-settings`.
+**Current Settings:**
+- Hide group names — adds `body.hide-group-names` class, CSS hides `h3` in normal groups
+**Files Involved:** `index.html`, `style.css`
+
+---
+
+## Custom Password Modal
+**Status:** ✅ Complete
+**Description:** All password prompts use a custom modal with `<input type="password">` instead of browser `prompt()`. Characters are hidden as dots.
+**Implementation:** `window.promptPassword(message)` returns a Promise. Resolves with the entered value or `null` on cancel. Enter/Escape key support.
+**Files Involved:** `index.html`, `links-handler.js`
+
+---
+
 ## Auto Fit (Link Items)
 **Status:** ✅ Complete
 **Description:** Toggle in Edit Link form that removes the default item box padding/min-size and shrinks the item to exactly wrap its content (icon, SVG, NerdFont, text).
