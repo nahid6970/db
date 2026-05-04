@@ -251,3 +251,20 @@ export const deleteSidebarButton = mutation({
     await ctx.db.delete(args.id);
   },
 });
+
+export const updateAllSidebarButtons = mutation({
+  args: { buttons: v.array(v.any()) },
+  handler: async (ctx, args) => {
+    // Delete all existing sidebar buttons
+    const existing = await ctx.db.query("sidebar_buttons").collect();
+    for (const btn of existing) {
+      await ctx.db.delete(btn._id);
+    }
+    
+    // Insert new buttons without _id and _creationTime fields
+    for (const btn of args.buttons) {
+      const { _id, _creationTime, ...data } = btn;
+      await ctx.db.insert("sidebar_buttons", data);
+    }
+  },
+});

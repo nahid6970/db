@@ -363,6 +363,15 @@ body {
   }
 }
 
+.sidebar-button.dragging {
+  opacity: 0.5;
+}
+
+.sidebar-button.drag-over {
+  border: 2px dashed #00ff9d !important;
+  transform: scale(1.1);
+}
+
 /* Edit Mode */
 .edit-mode .link-item {
   border: 2px solid #4CAF50;

@@ -91,6 +91,16 @@ function createSidebarButton(button, index) {
   btn.target = '_blank';
   btn.className = 'sidebar-button add-button';
   btn.title = button.name;
+  btn.dataset.dbId = button._id;
+
+  // Enable dragging in edit mode
+  if (window.editMode) {
+    btn.draggable = true;
+    btn.addEventListener("dragstart", handleSidebarDragStart);
+    btn.addEventListener("dragover", handleSidebarDragOver);
+    btn.addEventListener("drop", handleSidebarDrop);
+    btn.addEventListener("dragend", handleSidebarDragEnd);
+  }
 
   // Apply custom CSS variables for dynamic styling
   btn.style.setProperty('--custom-text-color', button.text_color);
@@ -428,6 +438,73 @@ async function deleteSidebarButton(id) {
   } catch (error) {
     console.error('Error deleting button:', error);
     alert('Error deleting button: ' + error.message);
+  }
+}
+
+// Drag and drop for sidebar
+let draggedSidebarBtn = null;
+
+function handleSidebarDragStart(e) {
+  draggedSidebarBtn = e.currentTarget;
+  draggedSidebarBtn.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function handleSidebarDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const target = e.currentTarget;
+  if (target !== draggedSidebarBtn && target.classList.contains('sidebar-button')) {
+    target.classList.add('drag-over');
+  }
+}
+
+function handleSidebarDrop(e) {
+  e.preventDefault();
+  e.stopPropagation();
+  const target = e.currentTarget;
+  target.classList.remove('drag-over');
+
+  if (draggedSidebarBtn && draggedSidebarBtn !== target) {
+    const container = target.parentNode;
+    const allBtns = Array.from(container.children).filter(c => c.classList.contains('sidebar-button'));
+    const draggedIndex = allBtns.indexOf(draggedSidebarBtn);
+    const targetIndex = allBtns.indexOf(target);
+
+    if (draggedIndex < targetIndex) {
+      target.parentNode.insertBefore(draggedSidebarBtn, target.nextSibling);
+    } else {
+      target.parentNode.insertBefore(draggedSidebarBtn, target);
+    }
+
+    // Save new order
+    setTimeout(() => saveSidebarOrder(), 300);
+  }
+}
+
+function handleSidebarDragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  document.querySelectorAll('.sidebar-button.drag-over').forEach(el => el.classList.remove('drag-over'));
+  draggedSidebarBtn = null;
+}
+
+async function saveSidebarOrder() {
+  try {
+    const container = document.getElementById('sidebar-buttons-container');
+    const allBtns = Array.from(container.children).filter(c => c.classList.contains('sidebar-button'));
+    
+    // Map DOM elements back to button objects from our state
+    const reorderedButtons = allBtns.map(btnEl => {
+      const dbId = btnEl.dataset.dbId;
+      return sidebarButtons.find(b => b._id === dbId);
+    }).filter(Boolean);
+
+    await window.convexMutation("functions:updateAllSidebarButtons", { buttons: reorderedButtons });
+    console.log('✅ Sidebar order saved');
+    // Update local state to match new order
+    sidebarButtons = reorderedButtons;
+  } catch (error) {
+    console.error('❌ Error saving sidebar order:', error);
   }
 }
 
