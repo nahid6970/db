@@ -1311,3 +1311,32 @@ button,
   background: #ff5252;
   transform: scale(1.2) rotate(5deg);
 }
+
+/* Format Painter Button */
+.format-painter-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 16px;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.format-painter-btn:hover {
+  background: rgba(76, 175, 80, 0.2);
+  border-color: #4CAF50;
+  transform: scale(1.1);
+}
+
+.format-painter-btn:active {
+  transform: scale(0.95);
+}
+
+.format-painter-btn.active {
+  background: #4CAF50;
+  color: white;
+}
