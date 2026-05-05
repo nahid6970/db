@@ -121,6 +121,9 @@ export const clear = mutation({
 
     for (const img of images) {
       if (!img.pinned) {
+        if (img.storageId) {
+          await ctx.storage.delete(img.storageId);
+        }
         await ctx.db.delete(img._id);
       }
     }
