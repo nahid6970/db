@@ -800,7 +800,6 @@
       
       for (const file of files) {
         try {
-          console.log(`Uploading ${file.name}, size: ${file.size} bytes`);
           if (storageType === "convex") {
             // Convex Storage Upload
             const postUrl = await client.mutation(api.images.generateUploadUrl);
