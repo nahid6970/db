@@ -502,6 +502,13 @@
               <path d="M4 20h16"></path>
             </svg>
           </button>
+          <button id="downloadFolderBtn" class="icon-btn" onclick="downloadFolder()" title="Download Folder" style="display: none; background: #28a745;">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+          </button>
           <button class="danger icon-btn" onclick="clearAll()" title="Clear All">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M3 6h18"></path>
@@ -570,6 +577,7 @@
     </div>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script type="module">
     import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
     import { anyApi } from "https://esm.sh/convex@1.16.0/server";
@@ -864,6 +872,56 @@
       document.getElementById('uploadBtn').classList.remove('has-files');
     };
     
+    window.downloadFolder = async function() {
+      const gallery = document.getElementById('gallery');
+      const cards = gallery.querySelectorAll('.image-card');
+      if (!cards.length) {
+        alert('No images to download.');
+        return;
+      }
+
+      const status = document.getElementById('status');
+      status.textContent = 'Preparing ZIP...';
+      status.style.color = '#007bff';
+
+      const zip = new JSZip();
+      const folderName = currentFolderId === 'none' ? 'no-folder' : 
+                         (folders.find(f => f._id === currentFolderId)?.name || 'all-images');
+      
+      try {
+        for (let i = 0; i < cards.length; i++) {
+          const card = cards[i];
+          const img = card.querySelector('img');
+          const filename = img.alt || `image-${i}.jpg`;
+          const url = img.src;
+
+          status.textContent = `Fetching image ${i + 1} of ${cards.length}...`;
+          
+          const response = await fetch(url);
+          const blob = await response.blob();
+          zip.file(filename, blob);
+        }
+
+        status.textContent = 'Generating ZIP file...';
+        const content = await zip.generateAsync({ type: 'blob' });
+        
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(content);
+        link.download = `${folderName}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        status.textContent = 'Download complete!';
+        status.style.color = '#28a745';
+        setTimeout(() => status.textContent = '', 3000);
+      } catch (error) {
+        console.error('Download failed:', error);
+        status.textContent = 'Download failed.';
+        status.style.color = '#dc3545';
+      }
+    };
+
     window.deleteImage = async function(id) {
       if (!confirm('Delete this image?')) return;
       await client.mutation(api.images.remove, { id });
@@ -1211,7 +1269,15 @@
     
     function renderImages(images) {
       const gallery = document.getElementById('gallery');
+      const downloadBtn = document.getElementById('downloadFolderBtn');
       const visibleIds = new Set(images.map(img => img._id));
+
+      // Show download button only if we are in a folder and have images
+      if (currentFolderId !== null && images.length > 0) {
+        downloadBtn.style.display = 'inline-flex';
+      } else {
+        downloadBtn.style.display = 'none';
+      }
 
       Array.from(selectedImageIds).forEach(id => {
         if (!visibleIds.has(id)) {
