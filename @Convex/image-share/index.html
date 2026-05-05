@@ -501,15 +501,8 @@
     <div class="top-bar">
       <div class="upload-section">
         <div class="upload-controls">
-          <input type="file" id="fileInput" multiple accept="image/*" onchange="updateFileCount()">
+          <input type="file" id="fileInput" multiple accept="image/*" onchange="uploadImages()">
           <div class="drop-zone" id="dropZone">Drop images here</div>
-          <button id="uploadBtn" class="icon-btn" onclick="handleUpload()" title="Upload">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M12 16V4"></path>
-              <path d="M7 9l5-5 5 5"></path>
-              <path d="M4 20h16"></path>
-            </svg>
-          </button>
           <button id="downloadFolderBtn" class="icon-btn" onclick="downloadFolder()" title="Download Folder" style="display: none; background: #28a745;">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
