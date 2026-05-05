@@ -231,18 +231,34 @@ export const getSettings = query({
   args: {},
   handler: async (ctx) => {
     const settings = await ctx.db.query("settings").unique();
-    return settings || { storageType: "cloudinary" };
+    return settings || { 
+      storageType: "cloudinary",
+      megaEmail: "",
+      megaPassword: "",
+      megaFolderLink: ""
+    };
   },
 });
 
 export const updateSettings = mutation({
-  args: { storageType: v.string() },
+  args: { 
+    storageType: v.string(),
+    megaEmail: v.optional(v.string()),
+    megaPassword: v.optional(v.string()),
+    megaFolderLink: v.optional(v.string()),
+  },
   handler: async (ctx, args) => {
     const settings = await ctx.db.query("settings").unique();
+    const data = { 
+      storageType: args.storageType,
+      megaEmail: args.megaEmail,
+      megaPassword: args.megaPassword,
+      megaFolderLink: args.megaFolderLink
+    };
     if (settings) {
-      await ctx.db.patch(settings._id, { storageType: args.storageType });
+      await ctx.db.patch(settings._id, data);
     } else {
-      await ctx.db.insert("settings", { storageType: args.storageType });
+      await ctx.db.insert("settings", data);
     }
   },
 });

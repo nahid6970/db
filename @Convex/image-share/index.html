@@ -544,6 +544,7 @@
 
     .storage-dot.cloudinary { background-color: #007bff; } /* Blue */
     .storage-dot.convex { background-color: #dc3545; } /* Red */
+    .storage-dot.mega { background-color: #ff0000; box-shadow: 0 0 4px rgba(255,0,0,0.5); } /* Red with glow */
     
     @media (max-width: 640px) {
       .container { padding: 8px; }
@@ -652,7 +653,31 @@
               <span>Convex</span>
             </span>
           </label>
+
+          <label class="type-chip">
+            <input type="radio" name="storageTypeRadio" value="mega" onchange="updateStorageType()">
+            <span class="type-chip-body">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" fill="currentColor"/></svg>
+              <span>MEGA</span>
+            </span>
+          </label>
         </div>
+      </div>
+
+      <div id="megaConfig" style="display: none; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px; flex-direction: column; gap: 12px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">MEGA Email</label>
+          <input type="email" id="megaEmail" placeholder="email@example.com" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">MEGA Password</label>
+          <input type="password" id="megaPassword" placeholder="••••••••" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">Shared Folder Link (Full Link with Key)</label>
+          <input type="text" id="megaFolderLink" placeholder="https://mega.nz/folder/..." style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+        </div>
+        <button onclick="saveMegaSettings()" style="background: #4CAF50; border-radius: 6px;">Save MEGA Config</button>
       </div>
     </div>
   </div>
@@ -673,14 +698,27 @@
     const api = anyApi;
 
     let storageType = "cloudinary";
+    let megaSettings = { email: '', password: '', folderLink: '' };
 
     window.openSettings = function() {
       const radios = document.getElementsByName('storageTypeRadio');
       for (const radio of radios) {
         if (radio.value === storageType) radio.checked = true;
       }
+      updateMegaConfigVisibility();
       document.getElementById('settingsModal').classList.remove('hidden');
     };
+
+    function updateMegaConfigVisibility() {
+      const config = document.getElementById('megaConfig');
+      if (!config) return;
+      config.style.display = (storageType === 'mega') ? 'flex' : 'none';
+      if (storageType === 'mega') {
+        document.getElementById('megaEmail').value = megaSettings.email || '';
+        document.getElementById('megaPassword').value = megaSettings.password || '';
+        document.getElementById('megaFolderLink').value = megaSettings.folderLink || '';
+      }
+    }
 
     window.closeSettings = function() {
       document.getElementById('settingsModal').classList.add('hidden');
@@ -693,16 +731,47 @@
         if (radio.checked) newType = radio.value;
       }
       if (newType !== storageType) {
-        await client.mutation(api.images.updateSettings, { storageType: newType });
+        storageType = newType;
+        updateMegaConfigVisibility();
+        await client.mutation(api.images.updateSettings, { 
+          storageType: newType,
+          megaEmail: megaSettings.email,
+          megaPassword: megaSettings.password,
+          megaFolderLink: megaSettings.folderLink
+        });
       }
+    };
+
+    window.saveMegaSettings = async function() {
+      const email = document.getElementById('megaEmail').value;
+      const password = document.getElementById('megaPassword').value;
+      const folderLink = document.getElementById('megaFolderLink').value;
+      
+      megaSettings = { email, password, folderLink };
+      
+      await client.mutation(api.images.updateSettings, { 
+        storageType: storageType,
+        megaEmail: email,
+        megaPassword: password,
+        megaFolderLink: folderLink
+      });
+      alert('MEGA Settings Saved');
     };
 
     function subscribeToSettings() {
       client.onUpdate(api.images.getSettings, {}, (settings) => {
         storageType = settings.storageType;
+        megaSettings = {
+          email: settings.megaEmail || '',
+          password: settings.megaPassword || '',
+          folderLink: settings.megaFolderLink || ''
+        };
         const radios = document.getElementsByName('storageTypeRadio');
         for (const radio of radios) {
           if (radio.value === storageType) radio.checked = true;
+        }
+        if (document.getElementById('settingsModal').classList.contains('hidden') === false) {
+          updateMegaConfigVisibility();
         }
       });
     }
@@ -1400,7 +1469,7 @@
           <div class="image-info">
             <p>
               <strong>${escapeHtml(img.filename)}</strong>
-              <span class="storage-dot ${img.storageId ? 'convex' : 'cloudinary'}" title="${img.storageId ? 'Convex Storage' : 'Cloudinary Storage'}"></span>
+              <span class="storage-dot ${img.storageId ? 'convex' : (img.url.includes('mega') ? 'mega' : 'cloudinary')}" title="${img.storageId ? 'Convex' : (img.url.includes('mega') ? 'MEGA' : 'Cloudinary')}"></span>
             </p>
             <div class="meta-row">
               <p>${formatTime(img.timestamp)}</p>
