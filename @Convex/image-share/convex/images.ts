@@ -235,7 +235,12 @@ export const getSettings = query({
       storageType: "cloudinary",
       megaEmail: "",
       megaPassword: "",
-      megaSubfolder: ""
+      megaSubfolder: "",
+      colors: {
+        cloudinary: "#0369a1",
+        convex: "#ec4899",
+        mega: "#ef4444"
+      }
     };
   },
 });
@@ -246,6 +251,11 @@ export const updateSettings = mutation({
     megaEmail: v.optional(v.string()),
     megaPassword: v.optional(v.string()),
     megaSubfolder: v.optional(v.string()),
+    colors: v.optional(v.object({
+      cloudinary: v.string(),
+      convex: v.string(),
+      mega: v.string(),
+    })),
   },
   handler: async (ctx, args) => {
     const settings = await ctx.db.query("settings").unique();
@@ -253,7 +263,8 @@ export const updateSettings = mutation({
       storageType: args.storageType,
       megaEmail: args.megaEmail,
       megaPassword: args.megaPassword,
-      megaSubfolder: args.megaSubfolder
+      megaSubfolder: args.megaSubfolder,
+      colors: args.colors,
     };
     if (settings) {
       await ctx.db.patch(settings._id, data);
