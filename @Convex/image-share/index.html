@@ -624,11 +624,6 @@
             <span id="activeStorageText">Cloudinary</span>
           </span>
 
-        <div id="megaStatusBadge">
-          <span class="status-dot"></span>
-          <span id="megaStatusText">MEGA</span>
-        </div>
-
         <div id="status"></div>
       </div>
 
@@ -699,6 +694,15 @@
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">Current App Folder</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <select id="settingsFolderSelect" onchange="updateSettingsFolder()" style="flex: 1; background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px; font-size: 13px;">
+              <option value="">No Folder Selected</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 4px;">
           <label style="color: #999; font-size: 12px;">MEGA Email</label>
           <input type="email" id="megaEmail" placeholder="email@example.com" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
         </div>
@@ -766,18 +770,6 @@
     }
 
 
-    function updateMegaStatusBadge() {
-      const badge = document.getElementById('megaStatusBadge');
-      const text = document.getElementById('megaStatusText');
-      if (storageType !== 'mega') { badge.style.display = 'none'; return; }
-      badge.style.display = 'flex';
-      const hasCredentials = !!(megaSettings.email && megaSettings.password);
-      badge.className = hasCredentials ? 'connected' : 'disconnected';
-      text.textContent = hasCredentials
-        ? 'MEGA' + (megaSettings.subfolder ? ' / ' + megaSettings.subfolder : '')
-        : 'MEGA \u2013 not configured';
-    }
-
     function updateMegaSettingsStatus() {
       const el = document.getElementById('megaSettingsStatus');
       const dot = document.getElementById('megaSettingsStatusDot');
@@ -810,10 +802,28 @@
       document.getElementById('settingsModal').classList.remove('hidden');
     };
 
+    window.updateSettingsFolder = function() {
+      const sel = document.getElementById('settingsFolderSelect');
+      const folderId = sel.value === "" ? null : (sel.value === "none" ? "none" : sel.value);
+      handleFolderAction(folderId);
+    };
+
     function updateMegaConfigVisibility() {
       const config = document.getElementById('megaConfig');
       if (!config) return;
       config.style.display = (storageType === 'mega') ? 'flex' : 'none';
+
+      // Populate Settings Folder Select
+      const sfs = document.getElementById('settingsFolderSelect');
+      if (sfs) {
+        const options = [
+          { id: "", name: "No Folder Selected" },
+          { id: "none", name: "No folder (images only)" },
+          ...folders.map(f => ({ id: f._id, name: f.name }))
+        ];
+        sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${escapeHtml(o.name)}</option>`).join("");
+      }
+
       if (storageType === 'mega') {
         document.getElementById('megaEmail').value = megaSettings.email || '';
         document.getElementById('megaPassword').value = megaSettings.password || '';
@@ -825,9 +835,8 @@
           sel.value = megaSettings.subfolder;
         } else {
           sel.value = '';
-        updateMegaSettingsStatus();
-
         }
+        updateMegaSettingsStatus();
       }
     }
 
@@ -844,7 +853,6 @@
       if (newType !== storageType) {
         storageType = newType;
         updateMegaConfigVisibility();
-        updateMegaStatusBadge();
         updateActiveStorageBadge();
         await client.mutation(api.images.updateSettings, {
           storageType: newType,
@@ -870,7 +878,6 @@
         megaFolderLink: folderLink,
         megaSubfolder: subfolder
       });
-      updateMegaStatusBadge();
       updateActiveStorageBadge();
       updateMegaSettingsStatus();
 
@@ -929,7 +936,6 @@
         for (const radio of radios) {
           if (radio.value === storageType) radio.checked = true;
         }
-        updateMegaStatusBadge();
         updateActiveStorageBadge();
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
@@ -1688,6 +1694,7 @@
           subscribeToImages();
         }
         renderFolderBar();
+        updateMegaConfigVisibility();
       });
     }
 
