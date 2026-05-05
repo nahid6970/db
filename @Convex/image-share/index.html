@@ -546,8 +546,7 @@
     const DEFAULT_PAGE_TITLE = document.title;
     const api = anyApi;
 
-    const STORAGE_TYPE_KEY = "image-share.storageType";
-    let storageType = window.localStorage.getItem(STORAGE_TYPE_KEY) || "cloudinary";
+    let storageType = "cloudinary";
 
     window.openSettings = function() {
       document.getElementById('storageType').value = storageType;
@@ -558,10 +557,18 @@
       document.getElementById('settingsModal').style.display = 'none';
     };
 
-    window.updateStorageType = function() {
-      storageType = document.getElementById('storageType').value;
-      window.localStorage.setItem(STORAGE_TYPE_KEY, storageType);
+    window.updateStorageType = async function() {
+      const newType = document.getElementById('storageType').value;
+      await client.mutation(api.images.updateSettings, { storageType: newType });
     };
+
+    function subscribeToSettings() {
+      client.onUpdate(api.images.getSettings, {}, (settings) => {
+        storageType = settings.storageType;
+        const select = document.getElementById('storageType');
+        if (select) select.value = storageType;
+      });
+    }
 
     function readStoredFolderId() {
       const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
@@ -1217,6 +1224,7 @@
     }
     
     // Initial load
+    subscribeToSettings();
     subscribeToFolders();
     renderFolderBar();
     if (!(await ensureFolderAccess(currentFolderId))) {

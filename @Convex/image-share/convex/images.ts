@@ -219,3 +219,23 @@ export const removeFolder = mutation({
     await ctx.db.delete(args.id);
   },
 });
+
+export const getSettings = query({
+  args: {},
+  handler: async (ctx) => {
+    const settings = await ctx.db.query("settings").unique();
+    return settings || { storageType: "cloudinary" };
+  },
+});
+
+export const updateSettings = mutation({
+  args: { storageType: v.string() },
+  handler: async (ctx, args) => {
+    const settings = await ctx.db.query("settings").unique();
+    if (settings) {
+      await ctx.db.patch(settings._id, { storageType: args.storageType });
+    } else {
+      await ctx.db.insert("settings", { storageType: args.storageType });
+    }
+  },
+});
