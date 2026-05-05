@@ -719,8 +719,10 @@
     dropZone.addEventListener('drop', (e) => {
       e.preventDefault();
       dropZone.classList.remove('drag-over');
-      fileInput.files = e.dataTransfer.files;
-      updateFileCount();
+      if (e.dataTransfer?.files?.length) {
+        fileInput.files = e.dataTransfer.files;
+        uploadImages();
+      }
     });
 
     window.addEventListener('dragenter', (e) => {
