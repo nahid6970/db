@@ -151,63 +151,70 @@
       background: #5a6268;
     }
 
-    .modal-overlay {
+    /* Popup System */
+    .popup-container {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: none;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
       align-items: center;
       justify-content: center;
       z-index: 2000;
     }
+    .popup-container.hidden { display: none; }
 
-    .modal-content {
-      background: white;
+    .Menu {
+      background: #31343a;
       padding: 24px;
       border-radius: 12px;
-      width: 90%;
-      max-width: 400px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      border: 1px solid #444;
+      min-width: 350px;
+      max-width: 500px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      position: relative;
     }
 
-    .modal-header {
+    .popup-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
+    .popup-header h3 { margin: 0; color: #4CAF50; font-size: 18px; }
 
-    .modal-header h2 {
-      font-size: 18px;
-    }
+    .close-button { font-size: 28px; cursor: pointer; color: #999; line-height: 1; }
+    .close-button:hover { color: #f44336; }
 
-    .close-modal {
-      background: transparent;
-      color: #666;
-      font-size: 24px;
-      padding: 0;
-    }
-    .close-modal:hover { background: transparent; color: #000; }
+    /* Type Chips */
+    .type-picker-block { display: flex; flex-direction: column; gap: 10px; }
+    .type-picker-row { display: flex; flex-wrap: wrap; gap: 12px; }
 
-    .setting-item {
-      margin-bottom: 16px;
-    }
+    .type-chip { position: relative; display: block; margin: 0; }
+    .type-chip input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
 
-    .setting-item label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
+    .type-chip-body {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 130px;
+      padding: 12px 16px;
+      border: 1px solid #50555d;
+      border-radius: 10px;
+      background: #24282e;
+      color: #dbe2ea;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-weight: 500;
       font-size: 14px;
     }
-
-    .setting-item select {
-      width: 100%;
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ddd;
+    .type-chip-body svg { width: 20px; height: 20px; flex: 0 0 20px; }
+    .type-chip:hover .type-chip-body { border-color: #6a7380; background: #2b3138; }
+    .type-chip input[type="radio"]:checked + .type-chip-body {
+      border-color: #4caf50;
+      background: #203325;
+      color: #effff0;
+      box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.25);
     }
 
     button.has-files {
@@ -533,18 +540,32 @@
     <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
   </div>
 
-  <div class="modal-overlay" id="settingsModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Settings</h2>
-        <button class="close-modal" onclick="closeSettings()">&times;</button>
+  <div class="popup-container hidden" id="settingsModal">
+    <div class="Menu">
+      <div class="popup-header">
+        <h3>Settings</h3>
+        <span class="close-button" onclick="closeSettings()">&times;</span>
       </div>
-      <div class="setting-item">
-        <label for="storageType">Storage Type</label>
-        <select id="storageType" onchange="updateStorageType()">
-          <option value="cloudinary">Cloudinary</option>
-          <option value="convex">Convex</option>
-        </select>
+      
+      <div class="type-picker-block">
+        <label style="color: #999; font-size: 13px; margin-bottom: 8px; display: block;">Storage Provider</label>
+        <div class="type-picker-row">
+          <label class="type-chip">
+            <input type="radio" name="storageTypeRadio" value="cloudinary" onchange="updateStorageType()">
+            <span class="type-chip-body">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 19c2.5 0 4.5-2 4.5-4.5 0-2.4-1.9-4.3-4.3-4.5-.3-2.6-2.5-4.5-5.2-4.5-2 0-3.8 1.1-4.7 2.8-.8-.3-1.6-.5-2.5-.5-2.8 0-5 2.2-5 5s2.2 5 5 5h12.2z" fill="currentColor"/></svg>
+              <span>Cloudinary</span>
+            </span>
+          </label>
+
+          <label class="type-chip">
+            <input type="radio" name="storageTypeRadio" value="convex" onchange="updateStorageType()">
+            <span class="type-chip-body">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c-4.97 0-9 1.57-9 3.5s4.03 3.5 9 3.5 9-1.57 9-3.5-4.03-3.5-9-3.5zm0 15c-4.97 0-9-1.57-9-3.5V17c0 1.93 4.03 3.5 9 3.5s9-1.57 9-3.5v-2.5c0 1.93-4.03 3.5-9 3.5zm0-5c-4.97 0-9-1.57-9-3.5V12c0 1.93 4.03 3.5 9 3.5s9-1.57 9-3.5v-2.5c0 1.93-4.03 3.5-9 3.5z" fill="currentColor"/></svg>
+              <span>Convex</span>
+            </span>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -566,24 +587,35 @@
     let storageType = "cloudinary";
 
     window.openSettings = function() {
-      document.getElementById('storageType').value = storageType;
-      document.getElementById('settingsModal').style.display = 'flex';
+      const radios = document.getElementsByName('storageTypeRadio');
+      for (const radio of radios) {
+        if (radio.value === storageType) radio.checked = true;
+      }
+      document.getElementById('settingsModal').classList.remove('hidden');
     };
 
     window.closeSettings = function() {
-      document.getElementById('settingsModal').style.display = 'none';
+      document.getElementById('settingsModal').classList.add('hidden');
     };
 
     window.updateStorageType = async function() {
-      const newType = document.getElementById('storageType').value;
-      await client.mutation(api.images.updateSettings, { storageType: newType });
+      const radios = document.getElementsByName('storageTypeRadio');
+      let newType = storageType;
+      for (const radio of radios) {
+        if (radio.checked) newType = radio.value;
+      }
+      if (newType !== storageType) {
+        await client.mutation(api.images.updateSettings, { storageType: newType });
+      }
     };
 
     function subscribeToSettings() {
       client.onUpdate(api.images.getSettings, {}, (settings) => {
         storageType = settings.storageType;
-        const select = document.getElementById('storageType');
-        if (select) select.value = storageType;
+        const radios = document.getElementsByName('storageTypeRadio');
+        for (const radio of radios) {
+          if (radio.value === storageType) radio.checked = true;
+        }
       });
     }
 
