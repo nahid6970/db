@@ -688,6 +688,11 @@
       </div>
 
       <div id="megaConfig" style="display: none; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px; flex-direction: column; gap: 12px;">
+        <div id="megaSettingsStatus" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600;">
+          <span id="megaSettingsStatusDot" style="width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;"></span>
+          <span id="megaSettingsStatusText"></span>
+        </div>
+
         <div style="display: flex; flex-direction: column; gap: 4px;">
           <label style="color: #999; font-size: 12px;">MEGA Email</label>
           <input type="email" id="megaEmail" placeholder="email@example.com" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
@@ -749,6 +754,29 @@
         : 'MEGA \u2013 not configured';
     }
 
+    function updateMegaSettingsStatus() {
+      const el = document.getElementById('megaSettingsStatus');
+      const dot = document.getElementById('megaSettingsStatusDot');
+      const txt = document.getElementById('megaSettingsStatusText');
+      if (!el) return;
+      const hasCredentials = !!(megaSettings.email && megaSettings.password);
+      if (hasCredentials) {
+        el.style.background = '#1a3a2a';
+        el.style.border = '1px solid #2d6a4f';
+        dot.style.background = '#10b981';
+        txt.style.color = '#6ee7b7';
+        txt.textContent = 'Connected' + (megaSettings.subfolder ? ' \u2192 ' + megaSettings.subfolder : '');
+      } else {
+        el.style.background = '#3a1a1a';
+        el.style.border = '1px solid #6a2d2d';
+        dot.style.background = '#ef4444';
+        txt.style.color = '#fca5a5';
+        txt.textContent = 'Not configured \u2013 enter credentials below';
+      }
+    }
+
+
+
     window.openSettings = function() {
       const radios = document.getElementsByName('storageTypeRadio');
       for (const radio of radios) {
@@ -773,6 +801,8 @@
           sel.value = megaSettings.subfolder;
         } else {
           sel.value = '';
+        updateMegaSettingsStatus();
+
         }
       }
     }
@@ -816,6 +846,8 @@
         megaSubfolder: subfolder
       });
       updateMegaStatusBadge();
+      updateMegaSettingsStatus();
+
       alert('MEGA Settings Saved');
     };
 
@@ -1065,47 +1097,76 @@
               body: file,
             });
             const { storageId } = await result.json();
-            
             await client.mutation(api.images.saveStorageImage, {
               storageId,
               filename: file.name,
               fileSize: Number(file.size),
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
+
+          } else if (storageType === "mega") {
+            // MEGA Upload
+            const MegaStorage = window.mega && window.mega.Storage;
+            if (!MegaStorage) throw new Error('megajs library not loaded');
+            if (!megaSettings.email || !megaSettings.password) throw new Error('MEGA credentials not configured');
+
+            if (!megaStorage) {
+              megaStorage = new MegaStorage({ email: megaSettings.email, password: megaSettings.password, autologin: false });
+              await new Promise((resolve, reject) => megaStorage.login((err) => err ? reject(err) : resolve()));
+            }
+
+            let targetNode = megaStorage.root;
+            if (megaSettings.subfolder) {
+              const found = (megaStorage.root.children || []).find(n => n.directory && n.name === megaSettings.subfolder);
+              if (found) targetNode = found;
+            }
+
+            const buffer = await file.arrayBuffer();
+            const uploadedFile = await new Promise((resolve, reject) => {
+              const upload = targetNode.upload({ name: file.name, size: file.size }, new Uint8Array(buffer));
+              upload.on('complete', resolve);
+              upload.on('error', reject);
+            });
+
+            const link = await new Promise((resolve, reject) => uploadedFile.link((err, url) => err ? reject(err) : resolve(url)));
+
+            await client.mutation(api.images.add, {
+              url: link,
+              filename: file.name,
+              fileSize: Number(file.size),
+              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            });
+
           } else {
             // Cloudinary Upload
             const formData = new FormData();
             formData.append('file', file);
             formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
             formData.append('folder', 'myGallery');
-            
             const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`, {
               method: 'POST',
               body: formData
             });
-            
             const data = await res.json();
-            
-            await client.mutation(api.images.add, { 
+            await client.mutation(api.images.add, {
               url: data.secure_url,
               filename: file.name,
               fileSize: Number(file.size),
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
           }
-          
+
           completed++;
           const percent = Math.round((completed / total) * 100);
           progressBar.style.width = percent + '%';
           progressInfo.textContent = `${completed}/${total}`;
-          document.title = `Uploading ${completed}/${total} • ${DEFAULT_PAGE_TITLE}`;
+          document.title = `Uploading ${completed}/${total} \u2022 ${DEFAULT_PAGE_TITLE}`;
         } catch (error) {
           console.error('Upload failed:', error);
           status.textContent = `Upload failed for ${file.name}`;
           status.style.color = '#dc3545';
         }
       }
-      
       status.textContent = 'Upload complete!';
       status.style.color = '#28a745';
       document.title = `Upload complete • ${DEFAULT_PAGE_TITLE}`;
