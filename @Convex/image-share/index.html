@@ -813,6 +813,7 @@
             await client.mutation(api.images.saveStorageImage, {
               storageId,
               filename: file.name,
+              size: file.size,
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
           } else {
@@ -832,6 +833,7 @@
             await client.mutation(api.images.add, { 
               url: data.secure_url,
               filename: file.name,
+              size: file.size,
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
           }
@@ -888,6 +890,27 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
+    }
+
+    function formatBytes(bytes) {
+      if (!bytes) return '';
+      if (bytes === 0) return '0 B';
+      const k = 1024;
+      const sizes = ['B', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function formatTime(timestamp) {
+      return new Date(timestamp).toLocaleString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true,
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      });
     }
 
     function getFolderOptions(selectedFolderId) {
@@ -1237,7 +1260,8 @@
               <strong>${escapeHtml(img.filename)}</strong>
               <span class="storage-dot ${img.storageId ? 'convex' : 'cloudinary'}" title="${img.storageId ? 'Convex Storage' : 'Cloudinary Storage'}"></span>
             </p>
-            <p>${new Date(img.timestamp).toLocaleString()}</p>
+            <p>${formatTime(img.timestamp)}</p>
+            <p style="font-size: 11px; margin-top: -4px; opacity: 0.8;">${formatBytes(img.size)}</p>
           </div>
         </div>
       `).join('');

@@ -38,12 +38,14 @@ export const add = mutation({
   args: { 
     url: v.string(), 
     filename: v.string(),
+    size: v.optional(v.number()),
     folderId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("images", { 
       url: args.url,
       filename: args.filename,
+      size: args.size,
       timestamp: Date.now(),
       folderId: args.folderId,
       pinned: false,
@@ -62,6 +64,7 @@ export const saveStorageImage = mutation({
   args: { 
     storageId: v.id("_storage"), 
     filename: v.string(),
+    size: v.optional(v.number()),
     folderId: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
@@ -72,6 +75,7 @@ export const saveStorageImage = mutation({
       url,
       storageId: args.storageId,
       filename: args.filename,
+      size: args.size,
       timestamp: Date.now(),
       folderId: args.folderId,
       pinned: false,
