@@ -711,10 +711,6 @@
           <input type="password" id="megaPassword" placeholder="••••••••" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="color: #999; font-size: 12px;">Shared Folder Link (Full Link with Key)</label>
-          <input type="text" id="megaFolderLink" placeholder="https://mega.nz/folder/..." style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
-        </div>
-        <div style="display: flex; flex-direction: column; gap: 4px;">
           <label style="color: #999; font-size: 12px;">Upload Subfolder</label>
           <div style="display: flex; gap: 8px; align-items: center;">
             <select id="megaFolderSelect" style="flex: 1;">
@@ -827,7 +823,6 @@
       if (storageType === 'mega') {
         document.getElementById('megaEmail').value = megaSettings.email || '';
         document.getElementById('megaPassword').value = megaSettings.password || '';
-        document.getElementById('megaFolderLink').value = megaSettings.folderLink || '';
         const sel = document.getElementById('megaFolderSelect');
         if (megaSettings.subfolder) {
           const found = Array.from(sel.options).some(o => o.value === megaSettings.subfolder);
@@ -858,7 +853,6 @@
           storageType: newType,
           megaEmail: megaSettings.email,
           megaPassword: megaSettings.password,
-          megaFolderLink: megaSettings.folderLink,
           megaSubfolder: megaSettings.subfolder
         });
       }
@@ -867,15 +861,13 @@
     window.saveMegaSettings = async function() {
       const email = document.getElementById('megaEmail').value;
       const password = document.getElementById('megaPassword').value;
-      const folderLink = document.getElementById('megaFolderLink').value;
       const subfolder = document.getElementById('megaFolderSelect').value;
-      megaSettings = { email, password, folderLink, subfolder };
+      megaSettings = { email, password, subfolder };
       megaStorage = null;
       await client.mutation(api.images.updateSettings, {
         storageType: storageType,
         megaEmail: email,
         megaPassword: password,
-        megaFolderLink: folderLink,
         megaSubfolder: subfolder
       });
       updateActiveStorageBadge();
@@ -929,7 +921,6 @@
         megaSettings = {
           email: settings.megaEmail || '',
           password: settings.megaPassword || '',
-          folderLink: settings.megaFolderLink || '',
           subfolder: settings.megaSubfolder || ''
         };
         const radios = document.getElementsByName('storageTypeRadio');
@@ -939,6 +930,48 @@
         updateActiveStorageBadge();
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
+        }
+      });
+    }
+
+    const megaPreviews = new Map();
+
+    async function loadMegaPreview(url, imgElement) {
+      if (megaPreviews.has(url)) {
+        imgElement.src = megaPreviews.get(url);
+        return;
+      }
+
+      try {
+        const File = window.mega && window.mega.File;
+        if (!File) return;
+        const file = File.fromURL(url);
+        await new Promise((resolve, reject) => {
+          file.loadAttributes((err, file) => err ? reject(err) : resolve(file));
+        });
+
+        const data = await new Promise((resolve, reject) => {
+          const stream = file.download();
+          const chunks = [];
+          stream.on('data', chunk => chunks.push(chunk));
+          stream.on('end', () => resolve(new Blob(chunks)));
+          stream.on('error', reject);
+        });
+
+        const blobUrl = URL.createObjectURL(data);
+        megaPreviews.set(url, blobUrl);
+        imgElement.src = blobUrl;
+      } catch (err) {
+        console.error('Failed to load MEGA preview:', err);
+      }
+    }
+
+    function loadAllMegaPreviews() {
+      document.querySelectorAll('img[data-mega-url]').forEach(img => {
+        const url = img.getAttribute('data-mega-url');
+        if (url) {
+          loadMegaPreview(url, img);
+          img.removeAttribute('data-mega-url');
         }
       });
     }
@@ -1632,13 +1665,19 @@
         return;
       }
       
-      gallery.innerHTML = images.map(img => `
+      gallery.innerHTML = images.map(img => {
+        const isMega = !!(img.url && img.url.includes('mega.nz'));
+        return `
         <div
           class="image-card ${selectedImageIds.has(img._id) ? 'selected' : ''} ${img.pinned ? 'pinned' : ''}"
           data-id="${img._id}"
           onmouseenter="selectImageByHover('${img._id}')"
         >
-          <img src="${img.url}" alt="${escapeHtml(img.filename)}" onclick="openImage('${img.url}')">
+          <img 
+            ${isMega ? `data-mega-url="${img.url}" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'/%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'/%3E%3Cpolyline points='21 15 16 10 5 21'/%3E%3C/svg%3E"` : `src="${img.url}"`}
+            alt="${escapeHtml(img.filename)}" 
+            onclick="openImage('${img.url}')"
+          >
           <div class="select-indicator">
             <div class="select-indicator-mark">✓</div>
           </div>
@@ -1673,8 +1712,10 @@
             </div>
           </div>
         </div>
-      `).join('');
+      `;
+      }).join('');
 
+      loadAllMegaPreviews();
       renderSelectionState();
     }
 

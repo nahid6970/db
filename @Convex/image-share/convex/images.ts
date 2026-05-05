@@ -235,7 +235,6 @@ export const getSettings = query({
       storageType: "cloudinary",
       megaEmail: "",
       megaPassword: "",
-      megaFolderLink: "",
       megaSubfolder: ""
     };
   },
@@ -246,7 +245,6 @@ export const updateSettings = mutation({
     storageType: v.string(),
     megaEmail: v.optional(v.string()),
     megaPassword: v.optional(v.string()),
-    megaFolderLink: v.optional(v.string()),
     megaSubfolder: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
@@ -255,7 +253,6 @@ export const updateSettings = mutation({
       storageType: args.storageType,
       megaEmail: args.megaEmail,
       megaPassword: args.megaPassword,
-      megaFolderLink: args.megaFolderLink,
       megaSubfolder: args.megaSubfolder
     };
     if (settings) {
