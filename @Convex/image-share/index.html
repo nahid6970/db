@@ -566,11 +566,15 @@
       border-radius: 50%;
       margin-left: 6px;
       vertical-align: middle;
+      transition: background-color 0.2s, box-shadow 0.2s;
     }
 
-    .storage-dot.cloudinary { background-color: #007bff; } /* Blue */
-    .storage-dot.convex { background-color: #dc3545; } /* Red */
-    .storage-dot.mega { background-color: #ff0000; box-shadow: 0 0 4px rgba(255,0,0,0.5); } /* Red with glow */
+    .storage-dot.cloudinary { background-color: var(--color-cloudinary, #007bff); }
+    .storage-dot.convex { background-color: var(--color-convex, #dc3545); }
+    .storage-dot.mega { 
+      background-color: var(--color-mega, #ff0000); 
+      box-shadow: 0 0 4px var(--color-mega-glow, rgba(255,0,0,0.5)); 
+    }
 
     #megaStatusBadge {
       display: none;
@@ -865,6 +869,16 @@
       const txt = document.getElementById('activeStorageText');
       const badge = document.getElementById('activeStorageBadge');
       if (!txt || !badge) return;
+
+      // Update CSS Variables for global storage dots
+      const root = document.documentElement;
+      Object.keys(uiColors).forEach(provider => {
+        const hex = uiColors[provider];
+        root.style.setProperty(`--color-${provider}`, hex);
+        if (provider === 'mega') {
+          root.style.setProperty(`--color-mega-glow`, getVariantColor(hex, 0.5));
+        }
+      });
 
       const mainColor = uiColors[storageType] || uiColors.cloudinary;
       const labelMap = { cloudinary: 'Cloudinary', convex: 'Convex', mega: 'MEGA' };
