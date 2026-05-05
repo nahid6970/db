@@ -82,6 +82,7 @@
     }
     
     .drop-zone {
+      position: relative;
       padding: 9px 14px;
       border: 2px dashed #007bff;
       border-radius: 8px;
@@ -90,7 +91,50 @@
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s;
+      min-width: 140px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
     }
+
+    .drop-zone .progress-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e7f3ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .drop-zone .progress-bar-container {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(0, 123, 255, 0.1);
+    }
+
+    .drop-zone .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #007bff;
+      transition: width 0.2s ease;
+    }
+
+    .drop-zone .progress-info {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0056b3;
+    }
+
+    .progress-container { display: none !important; }
 
     .drop-zone:hover, .drop-zone.drag-over {
       background: #e7f3ff;
@@ -228,33 +272,6 @@
       width: 100%;
       margin-top: 6px;
       font-size: 12px;
-    }
-    
-    .progress-container {
-      width: 100%;
-      margin-top: 6px;
-      display: none;
-    }
-    
-    .progress-bar {
-      width: 100%;
-      height: 8px;
-      background: #e9ecef;
-      border-radius: 4px;
-      overflow: hidden;
-    }
-    
-    .progress-fill {
-      height: 100%;
-      background: #007bff;
-      transition: width 0.3s;
-      border-radius: 4px;
-    }
-    
-    .progress-text {
-      font-size: 12px;
-      color: #666;
-      margin-top: 4px;
     }
     
     .gallery { 
@@ -502,7 +519,15 @@
       <div class="upload-section">
         <div class="upload-controls">
           <input type="file" id="fileInput" multiple accept="image/*" onchange="uploadImages()">
-          <div class="drop-zone" id="dropZone">Drop images here</div>
+          <div class="drop-zone" id="dropZone">
+            <span id="dropZoneText">Drop images here</span>
+            <div id="dropZoneProgress" class="progress-wrapper" style="display: none;">
+              <span id="progressInfo" class="progress-info">0/0</span>
+              <div class="progress-bar-container">
+                <div id="progressBar" class="progress-bar-fill"></div>
+              </div>
+            </div>
+          </div>
           <button id="downloadFolderBtn" class="icon-btn" onclick="downloadFolder()" title="Download Folder" style="display: none; background: #28a745;">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -525,12 +550,6 @@
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
           </button>
-        </div>
-        <div class="progress-container" id="progressContainer">
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill"></div>
-          </div>
-          <div class="progress-text" id="progressText"></div>
         </div>
         <div id="status"></div>
       </div>
@@ -795,12 +814,14 @@
       const files = document.getElementById('fileInput').files;
       if (!files.length) return;
       
-      const progressContainer = document.getElementById('progressContainer');
-      const progressFill = document.getElementById('progressFill');
-      const progressText = document.getElementById('progressText');
+      const dropZoneText = document.getElementById('dropZoneText');
+      const dropZoneProgress = document.getElementById('dropZoneProgress');
+      const progressInfo = document.getElementById('progressInfo');
+      const progressBar = document.getElementById('progressBar');
       const status = document.getElementById('status');
       
-      progressContainer.style.display = 'block';
+      dropZoneText.style.display = 'none';
+      dropZoneProgress.style.display = 'flex';
       status.textContent = '';
       
       const total = files.length;
@@ -849,8 +870,8 @@
           
           completed++;
           const percent = Math.round((completed / total) * 100);
-          progressFill.style.width = percent + '%';
-          progressText.textContent = `${completed} of ${total} uploaded`;
+          progressBar.style.width = percent + '%';
+          progressInfo.textContent = `${completed}/${total}`;
           document.title = `Uploading ${completed}/${total} • ${DEFAULT_PAGE_TITLE}`;
         } catch (error) {
           console.error('Upload failed:', error);
@@ -864,13 +885,12 @@
       document.title = `Upload complete • ${DEFAULT_PAGE_TITLE}`;
       setTimeout(() => {
         status.textContent = '';
-        progressContainer.style.display = 'none';
-        progressFill.style.width = '0%';
+        dropZoneText.style.display = 'block';
+        dropZoneProgress.style.display = 'none';
+        progressBar.style.width = '0%';
         document.title = DEFAULT_PAGE_TITLE;
       }, 2000);
       document.getElementById('fileInput').value = '';
-      document.getElementById('uploadBtn').title = 'Upload';
-      document.getElementById('uploadBtn').classList.remove('has-files');
     };
     
     window.downloadFolder = async function() {
