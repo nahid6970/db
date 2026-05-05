@@ -545,6 +545,24 @@
     .storage-dot.cloudinary { background-color: #007bff; } /* Blue */
     .storage-dot.convex { background-color: #dc3545; } /* Red */
     .storage-dot.mega { background-color: #ff0000; box-shadow: 0 0 4px rgba(255,0,0,0.5); } /* Red with glow */
+
+    #megaStatusBadge {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+    #megaStatusBadge.connected { background: #d1fae5; border-color: #6ee7b7; color: #065f46; }
+    #megaStatusBadge.disconnected { background: #fee2e2; border-color: #fca5a5; color: #991b1b; }
+    #megaStatusBadge .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    #megaStatusBadge.connected .status-dot { background: #10b981; }
+    #megaStatusBadge.disconnected .status-dot { background: #ef4444; }
+    #megaFolderSelect { background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px; font-size: 13px; }
+
     
     @media (max-width: 640px) {
       .container { padding: 8px; }
@@ -601,6 +619,11 @@
             </svg>
           </button>
         </div>
+        <div id="megaStatusBadge">
+          <span class="status-dot"></span>
+          <span id="megaStatusText">MEGA</span>
+        </div>
+
         <div id="status"></div>
       </div>
 
@@ -665,47 +688,40 @@
       </div>
 
       <div id="megaConfig" style="display: none; margin-top: 20px; border-top: 1px solid #444; padding-top: 20px; flex-direction: column; gap: 12px;">
-        <div id="megaStatus" style="color: #999; font-size: 13px; margin-bottom: 8px;">Not connected</div>
-        <button id="megaConnectBtn" onclick="openMegaLogin()" style="background: #4CAF50; border-radius: 6px;">Connect MEGA Account</button>
-        
-        <div id="megaFolderSelection" style="display: none; flex-direction: column; gap: 8px;">
-          <label style="color: #999; font-size: 12px;">Select Destination Folder</label>
-          <select id="megaFolderSelect" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;"></select>
-          <button onclick="saveMegaFolder()" style="background: #3b82f6; border-radius: 6px; margin-top: 4px;">Save Folder Selection</button>
-        </div>
-
-        <button id="megaDisconnectBtn" onclick="disconnectMega()" style="display: none; background: #dc3545; border-radius: 6px; margin-top: 12px;">Disconnect Account</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="popup-container hidden" id="megaLoginModal">
-    <div class="Menu">
-      <div class="popup-header">
-        <h3>Connect MEGA</h3>
-        <span class="close-button" onclick="closeMegaLogin()">&times;</span>
-      </div>
-      <p style="color: #ccc; font-size: 13px; margin-bottom: 16px;">Log in once to authorize this app. We only save a secure session token, never your password.</p>
-      <div style="display: flex; flex-direction: column; gap: 12px;">
         <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="color: #999; font-size: 12px;">Email</label>
-          <input type="email" id="loginMegaEmail" placeholder="email@example.com" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+          <label style="color: #999; font-size: 12px;">MEGA Email</label>
+          <input type="email" id="megaEmail" placeholder="email@example.com" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px;">
-          <label style="color: #999; font-size: 12px;">Password</label>
-          <input type="password" id="loginMegaPassword" placeholder="••••••••" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+          <label style="color: #999; font-size: 12px;">MEGA Password</label>
+          <input type="password" id="megaPassword" placeholder="••••••••" style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
         </div>
-        <div id="megaLoginError" style="color: #ff5252; font-size: 12px; display: none;">Login failed. Please check credentials.</div>
-        <button id="doMegaLoginBtn" onclick="handleMegaLogin()" style="background: #4CAF50; border-radius: 6px; margin-top: 8px;">Authorize & Connect</button>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">Shared Folder Link (Full Link with Key)</label>
+          <input type="text" id="megaFolderLink" placeholder="https://mega.nz/folder/..." style="background: #24282e; border: 1px solid #444; color: white; padding: 8px; border-radius: 6px;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="color: #999; font-size: 12px;">Upload Subfolder</label>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <select id="megaFolderSelect" style="flex: 1;">
+              <option value="">Root (no subfolder)</option>
+            </select>
+            <button onclick="fetchMegaFolders()" id="megaFetchBtn" style="background: #555; border-radius: 6px; white-space: nowrap; flex-shrink: 0;">Fetch Folders</button>
+          </div>
+          <span id="megaFolderFetchStatus" style="font-size: 11px; color: #888;"></span>
+        </div>
+
+        <button onclick="saveMegaSettings()" style="background: #4CAF50; border-radius: 6px;">Save MEGA Config</button>
       </div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
+
   <script type="module">
     import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
     import { anyApi } from "https://esm.sh/convex@1.16.0/server";
-    import { Storage } from "https://esm.sh/megajs@1.3.1";
     
     // REPLACE WITH YOUR CONVEX URL
     const CONVEX_URL = "https://modest-goose-860.convex.cloud";
@@ -718,9 +734,20 @@
     const api = anyApi;
 
     let storageType = "cloudinary";
-    let megaSessionData = null; // { sid, key }
-    let megaFolderId = "";
+    let megaSettings = { email: '', password: '', folderLink: '', subfolder: '' };
     let megaStorage = null;
+
+    function updateMegaStatusBadge() {
+      const badge = document.getElementById('megaStatusBadge');
+      const text = document.getElementById('megaStatusText');
+      if (storageType !== 'mega') { badge.style.display = 'none'; return; }
+      badge.style.display = 'flex';
+      const hasCredentials = !!(megaSettings.email && megaSettings.password);
+      badge.className = hasCredentials ? 'connected' : 'disconnected';
+      text.textContent = hasCredentials
+        ? 'MEGA' + (megaSettings.subfolder ? ' / ' + megaSettings.subfolder : '')
+        : 'MEGA \u2013 not configured';
+    }
 
     window.openSettings = function() {
       const radios = document.getElementsByName('storageTypeRadio');
@@ -735,25 +762,18 @@
       const config = document.getElementById('megaConfig');
       if (!config) return;
       config.style.display = (storageType === 'mega') ? 'flex' : 'none';
-      
-      const status = document.getElementById('megaStatus');
-      const connectBtn = document.getElementById('megaConnectBtn');
-      const disconnectBtn = document.getElementById('megaDisconnectBtn');
-      const folderSelection = document.getElementById('megaFolderSelection');
-
-      if (megaSessionData) {
-        status.textContent = "Connected to MEGA";
-        status.style.color = "#4CAF50";
-        connectBtn.style.display = "none";
-        disconnectBtn.style.display = "block";
-        folderSelection.style.display = "flex";
-        loadMegaFolders();
-      } else {
-        status.textContent = "Not connected";
-        status.style.color = "#999";
-        connectBtn.style.display = "block";
-        disconnectBtn.style.display = "none";
-        folderSelection.style.display = "none";
+      if (storageType === 'mega') {
+        document.getElementById('megaEmail').value = megaSettings.email || '';
+        document.getElementById('megaPassword').value = megaSettings.password || '';
+        document.getElementById('megaFolderLink').value = megaSettings.folderLink || '';
+        const sel = document.getElementById('megaFolderSelect');
+        if (megaSettings.subfolder) {
+          const found = Array.from(sel.options).some(o => o.value === megaSettings.subfolder);
+          if (!found) sel.add(new Option(megaSettings.subfolder, megaSettings.subfolder));
+          sel.value = megaSettings.subfolder;
+        } else {
+          sel.value = '';
+        }
       }
     }
 
@@ -770,145 +790,95 @@
       if (newType !== storageType) {
         storageType = newType;
         updateMegaConfigVisibility();
-        await client.mutation(api.images.updateSettings, { 
+        updateMegaStatusBadge();
+        await client.mutation(api.images.updateSettings, {
           storageType: newType,
-          megaSession: megaSessionData ? JSON.stringify(megaSessionData) : "",
-          megaFolderId: megaFolderId
+          megaEmail: megaSettings.email,
+          megaPassword: megaSettings.password,
+          megaFolderLink: megaSettings.folderLink,
+          megaSubfolder: megaSettings.subfolder
         });
       }
     };
 
-    window.openMegaLogin = function() {
-      document.getElementById('megaLoginModal').classList.remove('hidden');
-      document.getElementById('megaLoginError').style.display = 'none';
+    window.saveMegaSettings = async function() {
+      const email = document.getElementById('megaEmail').value;
+      const password = document.getElementById('megaPassword').value;
+      const folderLink = document.getElementById('megaFolderLink').value;
+      const subfolder = document.getElementById('megaFolderSelect').value;
+      megaSettings = { email, password, folderLink, subfolder };
+      megaStorage = null;
+      await client.mutation(api.images.updateSettings, {
+        storageType: storageType,
+        megaEmail: email,
+        megaPassword: password,
+        megaFolderLink: folderLink,
+        megaSubfolder: subfolder
+      });
+      updateMegaStatusBadge();
+      alert('MEGA Settings Saved');
     };
 
-    window.closeMegaLogin = function() {
-      document.getElementById('megaLoginModal').classList.add('hidden');
-    };
-
-    window.handleMegaLogin = async function() {
-      const email = document.getElementById('loginMegaEmail').value;
-      const password = document.getElementById('loginMegaPassword').value;
-      const btn = document.getElementById('doMegaLoginBtn');
-      const errorEl = document.getElementById('megaLoginError');
-
-      if (!email || !password) return;
-
+    window.fetchMegaFolders = async function() {
+      const email = document.getElementById('megaEmail').value.trim();
+      const password = document.getElementById('megaPassword').value.trim();
+      const statusEl = document.getElementById('megaFolderFetchStatus');
+      const btn = document.getElementById('megaFetchBtn');
+      const sel = document.getElementById('megaFolderSelect');
+      if (!email || !password) {
+        statusEl.textContent = 'Enter email and password first.';
+        statusEl.style.color = '#f87171';
+        return;
+      }
       btn.disabled = true;
-      btn.textContent = "Connecting...";
-      errorEl.style.display = 'none';
-
+      btn.textContent = 'Connecting\u2026';
+      statusEl.textContent = '';
       try {
-        console.log("Attempting MEGA login for:", email);
-        const storage = await new Storage({
-          email,
-          password
-        }).ready;
-
-        megaSessionData = {
-          sid: storage.sid,
-          key: Array.from(storage.key)
-        };
-        megaStorage = storage;
-
-        await client.mutation(api.images.updateSettings, { 
-          storageType: storageType,
-          megaSession: JSON.stringify(megaSessionData),
-          megaFolderId: megaFolderId
+        const MegaStorage = window.mega && window.mega.Storage;
+        if (!MegaStorage) throw new Error('megajs library not loaded');
+        if (megaStorage) { try { megaStorage.close(); } catch(_) {} megaStorage = null; }
+        megaStorage = new MegaStorage({ email, password, autologin: false });
+        await new Promise((resolve, reject) => {
+          megaStorage.login((err) => err ? reject(err) : resolve());
         });
-
-        closeMegaLogin();
-        updateMegaConfigVisibility();
-        console.log("MEGA Login successful");
+        const rootChildren = megaStorage.root && megaStorage.root.children ? megaStorage.root.children : [];
+        const folderNodes = rootChildren.filter(n => n.directory);
+        sel.innerHTML = '<option value="">Root (no subfolder)</option>';
+        folderNodes.forEach(node => sel.add(new Option(node.name, node.name)));
+        if (megaSettings.subfolder) sel.value = megaSettings.subfolder;
+        statusEl.textContent = 'Found ' + folderNodes.length + ' folder(s).';
+        statusEl.style.color = '#6ee7b7';
       } catch (err) {
-        console.error("MEGA Login failed:", err);
-        errorEl.textContent = `Login failed: ${err.message || 'Check credentials or 2FA'}`;
-        errorEl.style.display = 'block';
+        statusEl.textContent = 'Failed: ' + (err.message || String(err));
+        statusEl.style.color = '#f87171';
+        megaStorage = null;
       } finally {
         btn.disabled = false;
-        btn.textContent = "Authorize & Connect";
+        btn.textContent = 'Fetch Folders';
       }
     };
-
-    window.disconnectMega = async function() {
-      if (!confirm("Disconnect MEGA account?")) return;
-      megaSessionData = null;
-      megaStorage = null;
-      megaFolderId = "";
-      await client.mutation(api.images.updateSettings, { 
-        storageType: storageType,
-        megaSession: "",
-        megaFolderId: ""
-      });
-      updateMegaConfigVisibility();
-    };
-
-    async function loadMegaFolders() {
-      if (!megaStorage) return;
-      const select = document.getElementById('megaFolderSelect');
-      const folders = megaStorage.root.children.filter(f => f.directory);
-      
-      select.innerHTML = folders.map(f => `
-        <option value="${f.handle}" ${megaFolderId === f.handle ? 'selected' : ''}>${f.name}</option>
-      `).join('') || '<option value="">No folders found</option>';
-    }
-
-    window.saveMegaFolder = async function() {
-      const select = document.getElementById('megaFolderSelect');
-      megaFolderId = select.value;
-      await client.mutation(api.images.updateSettings, { 
-        storageType: storageType,
-        megaSession: JSON.stringify(megaSessionData),
-        megaFolderId: megaFolderId
-      });
-      alert("MEGA Folder saved!");
-    };
-
-    async function initMegaStorage(sessionJson) {
-      if (!sessionJson) return;
-      try {
-        const data = JSON.parse(sessionJson);
-        megaSessionData = data;
-        megaStorage = new Storage({
-          sid: data.sid,
-          key: new Uint8Array(data.key),
-          autologin: true,
-          autoload: true,
-          userAgent: null
-        });
-        await megaStorage.ready;
-        console.log("MEGA Storage resumed");
-      } catch (err) {
-        console.error("Failed to resume MEGA storage:", err);
-        megaSessionData = null;
-      }
-    }
 
     function subscribeToSettings() {
-      client.onUpdate(api.images.getSettings, {}, async (settings) => {
-        const oldSession = megaSessionData ? JSON.stringify(megaSessionData) : "";
+      client.onUpdate(api.images.getSettings, {}, (settings) => {
         storageType = settings.storageType;
-        megaFolderId = settings.megaFolderId || "";
-        
-        if (settings.megaSession && settings.megaSession !== oldSession) {
-          await initMegaStorage(settings.megaSession);
-        } else if (!settings.megaSession) {
-          megaSessionData = null;
-          megaStorage = null;
-        }
-
+        megaSettings = {
+          email: settings.megaEmail || '',
+          password: settings.megaPassword || '',
+          folderLink: settings.megaFolderLink || '',
+          subfolder: settings.megaSubfolder || ''
+        };
         const radios = document.getElementsByName('storageTypeRadio');
         for (const radio of radios) {
           if (radio.value === storageType) radio.checked = true;
         }
+        updateMegaStatusBadge();
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
         }
       });
     }
 
-    function readStoredFolderId() {
+        function readStoredFolderId() {
       const stored = window.localStorage.getItem(FOLDER_STORAGE_KEY);
       return stored === null ? null : stored;
     }
@@ -1102,25 +1072,6 @@
               fileSize: Number(file.size),
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
-          } else if (storageType === "mega") {
-            // MEGA Upload
-            if (!megaStorage) throw new Error("MEGA not connected");
-            
-            const targetFolder = megaStorage.root.children.find(f => f.handle === megaFolderId) || megaStorage.root;
-            const megaFile = await megaStorage.upload({
-              name: file.name,
-              size: file.size,
-              target: targetFolder
-            }, file).complete;
-            
-            const url = await megaFile.link();
-            
-            await client.mutation(api.images.add, { 
-              url,
-              filename: file.name,
-              fileSize: Number(file.size),
-              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
-            });
           } else {
             // Cloudinary Upload
             const formData = new FormData();
@@ -1150,7 +1101,7 @@
           document.title = `Uploading ${completed}/${total} • ${DEFAULT_PAGE_TITLE}`;
         } catch (error) {
           console.error('Upload failed:', error);
-          status.textContent = `Upload failed for ${file.name}: ${error.message}`;
+          status.textContent = `Upload failed for ${file.name}`;
           status.style.color = '#dc3545';
         }
       }

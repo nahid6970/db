@@ -1839,6 +1839,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
         "episodes": [
             {
+                "id": 34,
+                "title": "The Rookie - S08E18 - The Bandit HDTV-720p",
+                "watched": false,
+                "added_date": "2026-05-05T12:35:23.220818",
+                "notify": "unseen"
+            },
+            {
                 "id": 33,
                 "title": "The Rookie - S08E17 - Dead Ringer HDTV-720p",
                 "watched": false,

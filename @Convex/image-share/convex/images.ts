@@ -233,8 +233,10 @@ export const getSettings = query({
     const settings = await ctx.db.query("settings").unique();
     return settings || { 
       storageType: "cloudinary",
-      megaSession: "",
-      megaFolderId: ""
+      megaEmail: "",
+      megaPassword: "",
+      megaFolderLink: "",
+      megaSubfolder: ""
     };
   },
 });
@@ -242,15 +244,19 @@ export const getSettings = query({
 export const updateSettings = mutation({
   args: { 
     storageType: v.string(),
-    megaSession: v.optional(v.string()),
-    megaFolderId: v.optional(v.string()),
+    megaEmail: v.optional(v.string()),
+    megaPassword: v.optional(v.string()),
+    megaFolderLink: v.optional(v.string()),
+    megaSubfolder: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const settings = await ctx.db.query("settings").unique();
     const data = { 
       storageType: args.storageType,
-      megaSession: args.megaSession,
-      megaFolderId: args.megaFolderId
+      megaEmail: args.megaEmail,
+      megaPassword: args.megaPassword,
+      megaFolderLink: args.megaFolderLink,
+      megaSubfolder: args.megaSubfolder
     };
     if (settings) {
       await ctx.db.patch(settings._id, data);
