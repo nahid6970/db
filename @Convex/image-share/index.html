@@ -800,6 +800,7 @@
       
       for (const file of files) {
         try {
+          console.log(`Uploading ${file.name}, size: ${file.size} bytes`);
           if (storageType === "convex") {
             // Convex Storage Upload
             const postUrl = await client.mutation(api.images.generateUploadUrl);
@@ -813,7 +814,7 @@
             await client.mutation(api.images.saveStorageImage, {
               storageId,
               filename: file.name,
-              size: file.size,
+              fileSize: Number(file.size),
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
           } else {
@@ -833,7 +834,7 @@
             await client.mutation(api.images.add, { 
               url: data.secure_url,
               filename: file.name,
-              size: file.size,
+              fileSize: Number(file.size),
               folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
             });
           }
@@ -893,7 +894,7 @@
     }
 
     function formatBytes(bytes) {
-      if (!bytes) return '';
+      if (bytes === undefined || bytes === null) return 'N/A';
       if (bytes === 0) return '0 B';
       const k = 1024;
       const sizes = ['B', 'KB', 'MB', 'GB'];
@@ -1261,7 +1262,7 @@
               <span class="storage-dot ${img.storageId ? 'convex' : 'cloudinary'}" title="${img.storageId ? 'Convex Storage' : 'Cloudinary Storage'}"></span>
             </p>
             <p>${formatTime(img.timestamp)}</p>
-            <p style="font-size: 11px; margin-top: -4px; opacity: 0.8;">${formatBytes(img.size)}</p>
+            <p style="font-size: 12px; color: #444; font-weight: 500;">Size: ${formatBytes(img.fileSize)}</p>
           </div>
         </div>
       `).join('');
