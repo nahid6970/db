@@ -458,6 +458,14 @@
     
     .image-info { padding: 12px; }
     .image-info p { font-size: 13px; color: #666; margin-bottom: 8px; }
+    .image-info .meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: -4px;
+    }
+    .image-info .meta-row p { margin-bottom: 0; font-size: 12px; }
+    .image-info .file-size { color: #444; font-weight: 500; text-align: right; }
     .image-info button { padding: 8px 16px; font-size: 13px; width: 100%; }
     .loading { text-align: center; padding: 40px; color: #999; font-size: 15px; }
     
@@ -1326,8 +1334,10 @@
               <strong>${escapeHtml(img.filename)}</strong>
               <span class="storage-dot ${img.storageId ? 'convex' : 'cloudinary'}" title="${img.storageId ? 'Convex Storage' : 'Cloudinary Storage'}"></span>
             </p>
-            <p>${formatTime(img.timestamp)}</p>
-            <p style="font-size: 12px; color: #444; font-weight: 500;">Size: ${formatBytes(img.fileSize)}</p>
+            <div class="meta-row">
+              <p>${formatTime(img.timestamp)}</p>
+              <p class="file-size">Size: ${formatBytes(img.fileSize)}</p>
+            </div>
           </div>
         </div>
       `).join('');
