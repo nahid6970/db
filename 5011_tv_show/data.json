@@ -2279,6 +2279,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 28,
+                "title": "WWE Raw - 2026-05-04 - RAW 1719 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-05T21:16:00.030598",
+                "notify": "unseen"
+            },
+            {
                 "id": 27,
                 "title": "WWE Raw - 2026-04-27 - RAW 1718 WEBDL-720p",
                 "watched": true,
