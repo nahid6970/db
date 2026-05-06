@@ -774,6 +774,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
         "episodes": [
             {
+                "id": 17,
+                "title": "Daredevil - Born Again - S02E08 - The Southern Cross WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-06T08:52:06.395289",
+                "notify": "unseen"
+            },
+            {
                 "id": 16,
                 "title": "Daredevil - Born Again - S02E07 - The Hateful Darkness WEBDL-1080p",
                 "watched": false,
