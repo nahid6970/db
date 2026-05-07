@@ -1,14 +1,16 @@
 # Recent Development Log
 All sessions recorded here — no archiving, full history in one place.
 
-## [2026-05-07 10:00] - Unified Settings and Storage Badge
+## [2026-05-07 10:15] - Icon-Only Unified Settings/Storage Button
 **What We Accomplished:**
-- Merged the "Active Storage" badge into the "Settings" button.
-- Consolidated the UI top bar by removing redundant buttons.
-- Updated dynamic styling logic to apply theme colors directly to the unified Settings/Storage button.
+- Removed the explicit storage provider text ("Cloudinary", etc.) from the settings button.
+- Refactored the button to be an icon-only element that uses dynamic CSS colors (background/border) to indicate the active storage provider.
+- Simplified the top bar further by reducing text clutter while maintaining visual status feedback.
 
 **Files Modified:**
-- `index.html`: Refactored HTML structure and updated `updateActiveStorageBadge` JavaScript function.
+- `index.html`: Removed text elements and updated JavaScript color-application logic.
+
+## [2026-05-07 10:00] - Unified Settings and Storage Badge
 
 ## [2026-05-05 17:15] - Tabbed Settings and Dynamic Theme Integration
 **What We Accomplished:**

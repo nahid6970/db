@@ -2,7 +2,7 @@
 
 ## Top Bar Controls
 **Layout:** Sticky top bar containing upload zone, clear/download buttons, and settings.
-**Recent Change:** Merged the active storage badge into the settings button. The settings icon is now paired with the current storage provider name (e.g., "⚙️ Cloudinary"), reducing UI clutter and providing immediate context for the settings menu.
+**Recent Change:** The active storage badge has been unified with the settings button as an icon-only control. The button's background and border color dynamically update to reflect the selected storage provider, eliminating the need for text labels and reducing visual noise.
 
 ## Settings Modal
 **Layout:** Tabbed interface with three sections:
@@ -14,7 +14,7 @@
 ## Dynamic Theming
 **Implementation:** Uses CSS variables (`--color-cloudinary`, etc.) injected via JavaScript.
 **Application:** Custom colors apply to:
-- The **Unified Settings/Storage Button**.
+- The **Icon-Only Settings/Storage Button**.
 - The **Storage Dots** displayed next to each image name in the gallery.
 **Visual Feedback:** Integrated color pickers with real-time previews for immediate visual confirmation.
 
