@@ -642,16 +642,13 @@
               <path d="M14 11v6"></path>
             </svg>
           </button>
-          <button class="secondary icon-btn" onclick="openSettings()" title="Settings">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
+          <button id="activeStorageBadge" class="secondary" onclick="openSettings()" title="Settings" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:12px;font-weight:600;background:#e0f2fe;color:#0369a1;border:1px solid #7dd3fc;cursor:pointer;height:38px;transition:all 0.2s;">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;">
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
-          </button>
-          <span id="activeStorageBadge" style="display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:600;background:#e0f2fe;color:#0369a1;border:1px solid #7dd3fc;">
-            <span id="activeStorageDot" style="width:7px;height:7px;border-radius:50%;background:#0369a1;flex-shrink:0;"></span>
             <span id="activeStorageText">Cloudinary</span>
-          </span>
+          </button>
         </div>
 
         <div id="status"></div>
@@ -865,7 +862,6 @@
     };
 
     function updateActiveStorageBadge() {
-      const dot = document.getElementById('activeStorageDot');
       const txt = document.getElementById('activeStorageText');
       const badge = document.getElementById('activeStorageBadge');
       if (!txt || !badge) return;
@@ -886,7 +882,6 @@
       badge.style.background = getVariantColor(mainColor, 0.12);
       badge.style.borderColor = getVariantColor(mainColor, 0.35);
       badge.style.color = mainColor;
-      dot.style.background = mainColor;
       txt.textContent = labelMap[storageType] || 'Cloudinary';
     }
 
