@@ -642,6 +642,10 @@
       margin-bottom: 16px;
       font-family: monospace;
       transition: border-color .2s;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: clip;
+      direction: rtl;
     }
     #customDialogDisplay:not(:empty) { border-color: #4CAF50; }
     #customDialogDisplay.hidden { display: none; }
