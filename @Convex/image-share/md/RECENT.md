@@ -1,6 +1,15 @@
 # Recent Development Log
 All sessions recorded here — no archiving, full history in one place.
 
+## [2026-05-07 10:00] - Unified Settings and Storage Badge
+**What We Accomplished:**
+- Merged the "Active Storage" badge into the "Settings" button.
+- Consolidated the UI top bar by removing redundant buttons.
+- Updated dynamic styling logic to apply theme colors directly to the unified Settings/Storage button.
+
+**Files Modified:**
+- `index.html`: Refactored HTML structure and updated `updateActiveStorageBadge` JavaScript function.
+
 ## [2026-05-05 17:15] - Tabbed Settings and Dynamic Theme Integration
 **What We Accomplished:**
 - Refactored Settings modal into a tabbed UI (Storage, Theme, MEGA) [16:45].
