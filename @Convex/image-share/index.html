@@ -644,8 +644,6 @@
       transition: border-color .2s;
       overflow: hidden;
       white-space: nowrap;
-      text-overflow: clip;
-      direction: rtl;
     }
     #customDialogDisplay:not(:empty) { border-color: #4CAF50; }
     #customDialogDisplay.hidden { display: none; }
@@ -2025,7 +2023,12 @@
 
     function updateDisplay() {
       const el = document.getElementById('customDialogDisplay');
-      el.textContent = _isPassword ? '•'.repeat(_value.length) : (_value || '');
+      if (_isPassword) {
+        const dots = Math.min(_value.length, 8);
+        el.textContent = '•'.repeat(dots);
+      } else {
+        el.textContent = _value;
+      }
     }
 
     function openDialog() {
