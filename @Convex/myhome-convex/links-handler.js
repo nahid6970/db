@@ -1805,6 +1805,9 @@ function openEditGroupPopup(groupName) {
   else if (firstLink.box_group) groupType = 'box';
   else if (firstLink.horizontal_stack) groupType = 'horizontal';
   typeRadios.forEach(r => r.checked = r.value === groupType);
+  let origGroupType = document.getElementById('edit-group-original-type');
+  if (!origGroupType) { origGroupType = document.createElement('input'); origGroupType.type = 'hidden'; origGroupType.id = 'edit-group-original-type'; document.getElementById('edit-group-form').appendChild(origGroupType); }
+  origGroupType.value = groupType;
 
   const displayRadios = document.querySelectorAll('input[name="edit-group-display"]');
   displayRadios.forEach(r => r.checked = r.value === (firstLink.display_style || 'flex'));
@@ -1853,6 +1856,19 @@ document.querySelectorAll('input[name="edit-group-type"]').forEach(radio => {
 
 document.getElementById('edit-group-form').addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  // Require master password if group type changed on a password-protected group
+  const currentProtect = document.getElementById('edit-group-password-protect').checked;
+  const origType = document.getElementById('edit-group-original-type')?.value || 'horizontal';
+  let currentType = 'horizontal';
+  document.querySelectorAll('input[name="edit-group-type"]').forEach(r => { if (r.checked) currentType = r.value; });
+  if (currentProtect && currentType !== origType) {
+    const typeAttempt = await window.promptPassword('Enter master password to change group type:');
+    if (typeAttempt !== '182358') {
+      window.showNotification('Incorrect master password', 'error');
+      return;
+    }
+  }
 
   // Only require master password if password protection settings changed
   const origProtect = document.getElementById('edit-group-original-password-protect')?.value === 'true';
