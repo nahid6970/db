@@ -1026,6 +1026,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 15,
+                "title": "Dr. STONE - s04e30 - [88] - STONE TO SPACE HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-05-07T20:33:26.025464",
+                "notify": "unseen"
+            },
+            {
                 "id": 14,
                 "title": "Dr. STONE - s04e29 - [87] - The Truth About the Rocket HDTV-1080p - [SubsPlease]",
                 "watched": true,

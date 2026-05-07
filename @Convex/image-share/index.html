@@ -603,6 +603,97 @@
       button { padding: 10px 18px; font-size: 14px; }
     }
   </style>
+  <style>
+    /* ── Custom Dialog Modal ── */
+    #customDialog {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(6px);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      animation: dlgFadeIn .18s ease;
+    }
+    @keyframes dlgFadeIn { from { opacity:0; } to { opacity:1; } }
+    #customDialog.hidden { display: none; }
+    #customDialogBox {
+      background: #23272e;
+      border: 1px solid #3a3f47;
+      border-radius: 18px;
+      padding: 28px 24px 20px;
+      width: 300px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      animation: dlgSlideUp .2s cubic-bezier(.34,1.3,.64,1);
+    }
+    @keyframes dlgSlideUp { from { transform:translateY(24px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+    #customDialogTitle {
+      color: #aaa; font-size: 13px; font-weight: 500; letter-spacing: .4px;
+      margin: 0 0 14px; text-align: center; text-transform: uppercase;
+    }
+    #customDialogDisplay {
+      background: #1a1d22;
+      border: 1px solid #3a3f47;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 28px;
+      letter-spacing: 8px;
+      color: #fff;
+      min-height: 52px;
+      text-align: center;
+      margin-bottom: 16px;
+      font-family: monospace;
+      transition: border-color .2s;
+    }
+    #customDialogDisplay:not(:empty) { border-color: #4CAF50; }
+    #customDialogDisplay.hidden { display: none; }
+    #customDialogTextInput {
+      display: block; width: 100%; box-sizing: border-box;
+      background: #1a1d22; border: 1px solid #3a3f47;
+      border-radius: 10px; padding: 12px 16px;
+      font-size: 16px; color: #fff; outline: none;
+      margin-bottom: 16px; transition: border-color .2s;
+    }
+    #customDialogTextInput:focus { border-color: #4CAF50; }
+    #customDialogTextInput.hidden { display: none; }
+    /* numpad */
+    #customDialogKeyboard { margin-bottom: 14px; }
+    #customDialogKeyboard.hidden { display: none; }
+    .osk-numpad {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .osk-key {
+      height: 52px;
+      background: #2c3038;
+      border: 1px solid #3a3f47;
+      border-radius: 10px;
+      color: #e8e8e8;
+      font-size: 20px;
+      font-weight: 500;
+      cursor: pointer;
+      user-select: none;
+      transition: background .12s, transform .08s, border-color .12s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .osk-key:hover { background: #363b45; border-color: #555; }
+    .osk-key:active { background: #4CAF50; border-color: #4CAF50; color: #fff; transform: scale(.94); }
+    .osk-key.backspace { font-size: 18px; color: #f87171; }
+    .osk-key.backspace:active { background: #7f1d1d; border-color: #f87171; color: #fff; }
+    .osk-actions { display: flex; gap: 8px; }
+    .osk-actions button {
+      flex: 1; padding: 11px;
+      border-radius: 10px; border: none;
+      font-size: 14px; cursor: pointer; font-weight: 600;
+      transition: background .15s, transform .08s;
+    }
+    .osk-actions button:active { transform: scale(.96); }
+    #dialogCancelBtn { background: #2c3038; color: #aaa; border: 1px solid #3a3f47; }
+    #dialogCancelBtn:hover { background: #363b45; }
+    #dialogOkBtn { background: #4CAF50; color: #fff; }
+    #dialogOkBtn:hover { background: #43a047; }
+    #dialogOkBtn.danger { background: #e53935; }
+    #dialogOkBtn.danger:hover { background: #c62828; }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -857,7 +948,7 @@
       });
 
       updateActiveStorageBadge();
-      alert('Theme colors saved!');
+      await showAlert('Theme colors saved!');
     };
 
     function updateActiveStorageBadge() {
@@ -991,8 +1082,7 @@
       });
       updateActiveStorageBadge();
       updateMegaSettingsStatus();
-
-      alert('MEGA Settings Saved');
+      await showAlert('MEGA Settings Saved');
     };
 
     window.fetchMegaFolders = async function() {
@@ -1377,7 +1467,7 @@
       const gallery = document.getElementById('gallery');
       const cards = gallery.querySelectorAll('.image-card');
       if (!cards.length) {
-        alert('No images to download.');
+        await showAlert('No images to download.');
         return;
       }
 
@@ -1424,7 +1514,7 @@
     };
 
     window.deleteImage = async function(id) {
-      if (!confirm('Delete this image?')) return;
+      if (!await showConfirm('Delete this image?', true)) return;
       await client.mutation(api.images.remove, { id });
     };
 
@@ -1434,7 +1524,7 @@
     
     window.clearAll = async function() {
       const scope = currentFolderId === null ? 'all images' : 'all images in this folder';
-      if (!confirm(`Delete ${scope}?`)) return;
+      if (!await showConfirm(`Delete ${scope}?`, true)) return;
       await client.mutation(api.images.clear, { folderId: currentFolderId || undefined });
     };
     
@@ -1553,12 +1643,12 @@
         return true;
       }
 
-      const attempt = prompt(`Password for "${folder.name}"`);
+      const attempt = await showDialog(`Password for "${folder.name}"`, '', true);
       if (attempt === null) {
         return false;
       }
       if (attempt !== folder.password) {
-        alert('Wrong password.');
+        await showAlert('Wrong password.');
         return false;
       }
 
@@ -1627,7 +1717,7 @@
 
     window.createFolder = async function() {
       closeFolderContextMenu();
-      const name = prompt('Folder name?');
+      const name = await showDialog('Folder name?');
       if (!name || !name.trim()) return;
       await client.mutation(api.images.createFolder, { name: name.trim() });
     };
@@ -1639,17 +1729,17 @@
       let password;
 
       if (folder?.password) {
-        password = prompt(`Password required to delete "${name}"`);
+        password = await showDialog(`Password required to delete "${name}"`, '', true);
         if (password === null) {
           return;
         }
         if (password !== folder.password) {
-          alert('Wrong password.');
+          await showAlert('Wrong password.');
           return;
         }
       }
 
-      if (!confirm(`Delete folder "${name}"? Images in it will be moved to No folder.`)) return;
+      if (!await showConfirm(`Delete folder "${name}"? Images in it will be moved to No folder.`, true)) return;
       await client.mutation(api.images.removeFolder, { id, password });
       if (currentFolderId === id) {
         currentFolderId = null;
@@ -1687,7 +1777,7 @@
       const folder = folders.find(item => item._id === folderContextMenuId);
       if (!folder) return;
 
-      const nextName = prompt('Rename folder', folder.name);
+      const nextName = await showDialog('Rename folder', folder.name);
       if (!nextName || !nextName.trim() || nextName.trim() === folder.name) {
         closeFolderContextMenu();
         return;
@@ -1706,15 +1796,16 @@
       const folder = folders.find(item => item._id === folderContextMenuId);
       if (!folder) return;
 
-      const nextPassword = prompt(
-        folder.password ? `Change password for "${folder.name}"` : `Set password for "${folder.name}"`
+      const nextPassword = await showDialog(
+        folder.password ? `Change password for "${folder.name}"` : `Set password for "${folder.name}"`,
+        '', true
       );
       if (nextPassword === null) {
         closeFolderContextMenu();
         return;
       }
       if (!nextPassword.trim()) {
-        alert('Password cannot be empty.');
+        await showAlert('Password cannot be empty.');
         return;
       }
 
@@ -1733,7 +1824,7 @@
         closeFolderContextMenu();
         return;
       }
-      if (!confirm(`Remove password from "${folder.name}"?`)) return;
+      if (!await showConfirm(`Remove password from "${folder.name}"?`)) return;
 
       await client.mutation(api.images.setFolderPassword, {
         id: folder._id,
@@ -1886,6 +1977,147 @@
       storeCurrentFolderId(currentFolderId);
     }
     subscribeToImages();
+  </script>
+
+  <!-- Custom Dialog Modal -->
+  <div id="customDialog" class="hidden">
+    <div id="customDialogBox">
+      <p id="customDialogTitle"></p>
+      <div id="customDialogDisplay"></div>
+      <input id="customDialogTextInput" type="text" autocomplete="off" spellcheck="false">
+      <div id="customDialogKeyboard">
+        <div class="osk-numpad" id="oskNumpad"></div>
+      </div>
+      <div class="osk-actions">
+        <button id="dialogCancelBtn">Cancel</button>
+        <button id="dialogOkBtn">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    const NUMPAD = ['1','2','3','4','5','6','7','8','9','⌫','0','✕'];
+
+    let _resolve = null, _value = '', _isPassword = false;
+
+    function buildNumpad() {
+      const pad = document.getElementById('oskNumpad');
+      pad.innerHTML = '';
+      NUMPAD.forEach(k => {
+        const btn = document.createElement('button');
+        btn.className = 'osk-key' + (k === '⌫' ? ' backspace' : '');
+        btn.textContent = k;
+        btn.addEventListener('mousedown', e => {
+          e.preventDefault();
+          if (k === '⌫') { _value = _value.slice(0, -1); }
+          else if (k === '✕') { _value = ''; }
+          else { _value += k; }
+          updateDisplay();
+        });
+        pad.appendChild(btn);
+      });
+    }
+
+    function updateDisplay() {
+      const el = document.getElementById('customDialogDisplay');
+      el.textContent = _isPassword ? '•'.repeat(_value.length) : (_value || '');
+    }
+
+    function openDialog() {
+      const dlg = document.getElementById('customDialog');
+      dlg.classList.remove('hidden');
+      // re-trigger animation
+      const box = document.getElementById('customDialogBox');
+      box.style.animation = 'none';
+      box.offsetHeight;
+      box.style.animation = '';
+    }
+
+    window.showDialog = function(title, defaultValue = '', isPassword = false) {
+      return new Promise(resolve => {
+        _resolve = resolve; _value = defaultValue; _isPassword = isPassword;
+        document.getElementById('customDialogTitle').textContent = title;
+
+        const display = document.getElementById('customDialogDisplay');
+        const textInput = document.getElementById('customDialogTextInput');
+        const keyboard = document.getElementById('customDialogKeyboard');
+
+        if (isPassword) {
+          // numpad mode
+          display.classList.remove('hidden');
+          textInput.classList.add('hidden');
+          keyboard.classList.remove('hidden');
+          updateDisplay();
+          buildNumpad();
+        } else {
+          // text input mode
+          display.classList.add('hidden');
+          textInput.classList.remove('hidden');
+          keyboard.classList.add('hidden');
+          textInput.value = defaultValue;
+          setTimeout(() => textInput.focus(), 50);
+        }
+
+        document.getElementById('dialogOkBtn').className = '';
+        document.getElementById('dialogOkBtn').textContent = 'OK';
+        document.getElementById('dialogCancelBtn').style.display = '';
+        openDialog();
+      });
+    };
+
+    window.showAlert = function(message) {
+      return new Promise(resolve => {
+        _resolve = () => resolve();
+        document.getElementById('customDialogTitle').textContent = message;
+        document.getElementById('customDialogDisplay').classList.add('hidden');
+        document.getElementById('customDialogKeyboard').classList.add('hidden');
+        document.getElementById('dialogOkBtn').className = '';
+        document.getElementById('dialogOkBtn').textContent = 'OK';
+        document.getElementById('dialogCancelBtn').style.display = 'none';
+        openDialog();
+      });
+    };
+
+    window.showConfirm = function(message, danger = false) {
+      return new Promise(resolve => {
+        _resolve = resolve;
+        document.getElementById('customDialogTitle').textContent = message;
+        document.getElementById('customDialogDisplay').classList.add('hidden');
+        document.getElementById('customDialogKeyboard').classList.add('hidden');
+        document.getElementById('dialogOkBtn').className = danger ? 'danger' : '';
+        document.getElementById('dialogOkBtn').textContent = 'Confirm';
+        document.getElementById('dialogCancelBtn').style.display = '';
+        openDialog();
+      });
+    };
+
+    function closeDialog() {
+      document.getElementById('customDialog').classList.add('hidden');
+    }
+
+    document.getElementById('customDialogTextInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') document.getElementById('dialogOkBtn').click();
+      if (e.key === 'Escape') document.getElementById('dialogCancelBtn').click();
+    });
+
+    document.getElementById('dialogOkBtn').addEventListener('click', () => {
+      closeDialog();
+      const isInputMode = !document.getElementById('customDialogDisplay').classList.contains('hidden');
+      const isTextMode = !document.getElementById('customDialogTextInput').classList.contains('hidden');
+      if (_resolve) {
+        if (isInputMode) _resolve(_value);
+        else if (isTextMode) _resolve(document.getElementById('customDialogTextInput').value);
+        else _resolve(true);
+      }
+    });
+
+    document.getElementById('dialogCancelBtn').addEventListener('click', () => {
+      closeDialog();
+      const isConfirm = document.getElementById('dialogOkBtn').textContent === 'Confirm';
+      if (_resolve) _resolve(isConfirm ? false : null);
+    });
+  })();
   </script>
 </body>
 </html>
