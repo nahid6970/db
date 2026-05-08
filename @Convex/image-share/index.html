@@ -740,6 +740,11 @@
       <div class="upload-section">
         <div class="upload-controls">
           <input type="file" id="fileInput" multiple accept="image/*" onchange="uploadImages()">
+          <button class="icon-btn" onclick="uploadFromClipboard()" title="Paste from clipboard">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="9" y="2" width="6" height="4" rx="1"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/>
+            </svg>
+          </button>
           <div class="drop-zone" id="dropZone">
             <span id="dropZoneText" style="display: flex; align-items: center; gap: 8px;">
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1506,6 +1511,34 @@
         document.title = DEFAULT_PAGE_TITLE;
       }, 2000);
       document.getElementById('fileInput').value = '';
+    };
+
+    window.uploadFromClipboard = async function() {
+      let items;
+      try {
+        items = await navigator.clipboard.read();
+      } catch {
+        await showAlert('Clipboard access denied. Copy an image first.');
+        return;
+      }
+      const files = [];
+      for (const item of items) {
+        const imgType = item.types.find(t => t.startsWith('image/'));
+        if (imgType) {
+          const blob = await item.getType(imgType);
+          const ext = imgType.split('/')[1] || 'png';
+          files.push(new File([blob], `clipboard-${Date.now()}.${ext}`, { type: imgType }));
+        }
+      }
+      if (!files.length) {
+        await showAlert('No image found in clipboard.');
+        return;
+      }
+      // Inject into fileInput and reuse uploadImages
+      const dt = new DataTransfer();
+      files.forEach(f => dt.items.add(f));
+      document.getElementById('fileInput').files = dt.files;
+      uploadImages();
     };
     
     window.downloadFolder = async function() {
