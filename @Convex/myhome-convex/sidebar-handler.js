@@ -232,7 +232,6 @@ function createSidebarButton(button, index) {
           };
           try {
             await window.convexMutation("functions:addSidebarButton", duplicatedButton);
-            await loadSidebarButtons();
             window.showNotification('Button duplicated!', 'success');
           } catch (error) {
             console.error('Error duplicating button:', error);
@@ -336,7 +335,6 @@ document.getElementById('add-sidebar-button-form').addEventListener('submit', as
   try {
     await window.convexMutation("functions:addSidebarButton", newButton);
     document.getElementById('add-sidebar-button-popup').classList.add('hidden');
-    await loadSidebarButtons();
     window.showNotification('Button added!');
   } catch (error) {
     console.error('Error adding button:', error);
@@ -415,7 +413,6 @@ document.getElementById('edit-sidebar-button-form').addEventListener('submit', a
   try {
     await window.convexMutation("functions:updateSidebarButton", updatedButton);
     document.getElementById('edit-sidebar-button-popup').classList.add('hidden');
-    await loadSidebarButtons();
     window.showNotification('Button updated!');
   } catch (error) {
     console.error('Error updating button:', error);
@@ -429,7 +426,6 @@ async function deleteSidebarButton(id) {
 
   try {
     await window.convexMutation("functions:deleteSidebarButton", { id });
-    await loadSidebarButtons();
     window.showNotification('Button deleted!');
   } catch (error) {
     console.error('Error deleting button:', error);
