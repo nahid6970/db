@@ -2050,6 +2050,7 @@
     function openDialog() {
       const dlg = document.getElementById('customDialog');
       dlg.classList.remove('hidden');
+      dlg.addEventListener('click', e => e.stopPropagation(), { once: false });
       // re-trigger animation
       const box = document.getElementById('customDialogBox');
       box.style.animation = 'none';
@@ -2094,6 +2095,7 @@
         _resolve = () => resolve();
         document.getElementById('customDialogTitle').textContent = message;
         document.getElementById('customDialogDisplay').classList.add('hidden');
+        document.getElementById('customDialogTextInput').classList.add('hidden');
         document.getElementById('customDialogKeyboard').classList.add('hidden');
         document.getElementById('dialogOkBtn').className = '';
         document.getElementById('dialogOkBtn').textContent = 'OK';
@@ -2107,6 +2109,7 @@
         _resolve = resolve;
         document.getElementById('customDialogTitle').textContent = message;
         document.getElementById('customDialogDisplay').classList.add('hidden');
+        document.getElementById('customDialogTextInput').classList.add('hidden');
         document.getElementById('customDialogKeyboard').classList.add('hidden');
         document.getElementById('dialogOkBtn').className = danger ? 'danger' : '';
         document.getElementById('dialogOkBtn').textContent = 'Confirm';
@@ -2124,7 +2127,8 @@
       if (e.key === 'Escape') document.getElementById('dialogCancelBtn').click();
     });
 
-    document.getElementById('dialogOkBtn').addEventListener('click', () => {
+    document.getElementById('dialogOkBtn').addEventListener('click', e => {
+      e.stopPropagation();
       closeDialog();
       const isInputMode = !document.getElementById('customDialogDisplay').classList.contains('hidden');
       const isTextMode = !document.getElementById('customDialogTextInput').classList.contains('hidden');
@@ -2135,7 +2139,8 @@
       }
     });
 
-    document.getElementById('dialogCancelBtn').addEventListener('click', () => {
+    document.getElementById('dialogCancelBtn').addEventListener('click', e => {
+      e.stopPropagation();
       closeDialog();
       const isConfirm = document.getElementById('dialogOkBtn').textContent === 'Confirm';
       if (_resolve) _resolve(isConfirm ? false : null);
