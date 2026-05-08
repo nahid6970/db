@@ -540,15 +540,15 @@ function resetReminderFromPopup() {
   updateEditReminderSummary();
 }
 
-// Load links from Convex
+// Load links from Convex with real-time updates
 async function loadLinks() {
   try {
-    // Wait for convexQuery to be available
-    if (!window.convexQuery) {
+    // Wait for convexSubscribe to be available
+    if (!window.convexSubscribe) {
       console.warn('Waiting for Convex client to initialize...');
       await new Promise(resolve => {
         const checkInterval = setInterval(() => {
-          if (window.convexQuery) {
+          if (window.convexSubscribe) {
             clearInterval(checkInterval);
             resolve();
           }
@@ -556,11 +556,13 @@ async function loadLinks() {
       });
     }
 
-    const data = await window.convexQuery("functions:getLinks");
-    const changed = applyLinksData(data, { persistCache: true, forceRender: !links.length });
-    if (changed) {
-      console.log('✅ Links refreshed from Convex');
-    }
+    // Subscribe to real-time updates
+    window.convexSubscribe("functions:getLinks", {}, (data) => {
+      const changed = applyLinksData(data, { persistCache: true, forceRender: !links.length });
+      if (changed) {
+        console.log('✅ Links auto-updated from Convex');
+      }
+    });
   } catch (error) {
     console.error('Error loading links:', error);
   }

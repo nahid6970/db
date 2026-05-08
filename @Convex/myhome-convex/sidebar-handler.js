@@ -16,42 +16,38 @@ if (!window.showNotification) {
   };
 }
 
-// Load sidebar buttons
+// Load sidebar buttons with real-time updates
 async function loadSidebarButtons() {
   console.log('🔵 loadSidebarButtons() called');
   try {
-    // Wait for both convexClient and convexQuery to be available
-    if (!window.convexClient || !window.convexQuery) {
+    // Wait for convexSubscribe to be available
+    if (!window.convexSubscribe) {
       console.warn('Waiting for Convex client to initialize...');
       await new Promise(resolve => {
         const checkInterval = setInterval(() => {
-          if (window.convexClient && window.convexQuery) {
+          if (window.convexSubscribe) {
             clearInterval(checkInterval);
             resolve();
           }
         }, 100);
-        
-        // Timeout after 10 seconds
-        setTimeout(() => {
-          clearInterval(checkInterval);
-          resolve();
-        }, 10000);
+        setTimeout(() => { clearInterval(checkInterval); resolve(); }, 10000);
       });
     }
-    
-    if (!window.convexClient) {
+
+    if (!window.convexSubscribe) {
       console.error('❌ Convex client still not available after timeout');
       return;
     }
-    
-    console.log('🔵 Calling convexQuery for sidebar buttons...');
-    const data = await window.convexQuery("functions:getSidebarButtons");
-    sidebarButtons = data;
-    console.log('🔵 Loaded sidebar buttons:', sidebarButtons.length);
+
+    // Subscribe to real-time updates
+    window.convexSubscribe("functions:getSidebarButtons", {}, (data) => {
+      sidebarButtons = data;
+      console.log('🔵 Sidebar buttons auto-updated:', sidebarButtons.length);
+      renderSidebarButtons();
+    });
   } catch (error) {
     console.error('Error loading sidebar buttons:', error);
   }
-  renderSidebarButtons();
 }
 
 // Render sidebar buttons
