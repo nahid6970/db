@@ -157,7 +157,8 @@ export const updateLink = mutation({
 export const deleteLink = mutation({
   args: { id: v.id("links") },
   handler: async (ctx, args) => {
-    await ctx.db.delete(args.id);
+    const existing = await ctx.db.get(args.id);
+    if (existing) await ctx.db.delete(args.id);
   },
 });
 

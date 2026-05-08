@@ -16,38 +16,42 @@ if (!window.showNotification) {
   };
 }
 
-// Load sidebar buttons with real-time updates
+// Load sidebar buttons
 async function loadSidebarButtons() {
   console.log('🔵 loadSidebarButtons() called');
   try {
-    // Wait for convexSubscribe to be available
-    if (!window.convexSubscribe) {
+    // Wait for both convexClient and convexQuery to be available
+    if (!window.convexClient || !window.convexQuery) {
       console.warn('Waiting for Convex client to initialize...');
       await new Promise(resolve => {
         const checkInterval = setInterval(() => {
-          if (window.convexSubscribe) {
+          if (window.convexClient && window.convexQuery) {
             clearInterval(checkInterval);
             resolve();
           }
         }, 100);
-        setTimeout(() => { clearInterval(checkInterval); resolve(); }, 10000);
+        
+        // Timeout after 10 seconds
+        setTimeout(() => {
+          clearInterval(checkInterval);
+          resolve();
+        }, 10000);
       });
     }
-
-    if (!window.convexSubscribe) {
+    
+    if (!window.convexClient) {
       console.error('❌ Convex client still not available after timeout');
       return;
     }
-
-    // Subscribe to real-time updates
-    window.convexSubscribe("functions:getSidebarButtons", {}, (data) => {
-      sidebarButtons = data;
-      console.log('🔵 Sidebar buttons auto-updated:', sidebarButtons.length);
-      renderSidebarButtons();
-    });
+    
+    console.log('🔵 Calling convexQuery for sidebar buttons...');
+    const data = await window.convexQuery("functions:getSidebarButtons");
+    sidebarButtons = data;
+    console.log('🔵 Loaded sidebar buttons:', sidebarButtons.length);
   } catch (error) {
     console.error('Error loading sidebar buttons:', error);
   }
+  renderSidebarButtons();
 }
 
 // Render sidebar buttons
@@ -232,6 +236,7 @@ function createSidebarButton(button, index) {
           };
           try {
             await window.convexMutation("functions:addSidebarButton", duplicatedButton);
+            await loadSidebarButtons();
             window.showNotification('Button duplicated!', 'success');
           } catch (error) {
             console.error('Error duplicating button:', error);
@@ -335,6 +340,7 @@ document.getElementById('add-sidebar-button-form').addEventListener('submit', as
   try {
     await window.convexMutation("functions:addSidebarButton", newButton);
     document.getElementById('add-sidebar-button-popup').classList.add('hidden');
+    await loadSidebarButtons();
     window.showNotification('Button added!');
   } catch (error) {
     console.error('Error adding button:', error);
@@ -413,6 +419,7 @@ document.getElementById('edit-sidebar-button-form').addEventListener('submit', a
   try {
     await window.convexMutation("functions:updateSidebarButton", updatedButton);
     document.getElementById('edit-sidebar-button-popup').classList.add('hidden');
+    await loadSidebarButtons();
     window.showNotification('Button updated!');
   } catch (error) {
     console.error('Error updating button:', error);
@@ -426,6 +433,7 @@ async function deleteSidebarButton(id) {
 
   try {
     await window.convexMutation("functions:deleteSidebarButton", { id });
+    await loadSidebarButtons();
     window.showNotification('Button deleted!');
   } catch (error) {
     console.error('Error deleting button:', error);

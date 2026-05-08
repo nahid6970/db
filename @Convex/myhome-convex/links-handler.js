@@ -540,15 +540,15 @@ function resetReminderFromPopup() {
   updateEditReminderSummary();
 }
 
-// Load links from Convex with real-time updates
+// Load links from Convex
 async function loadLinks() {
   try {
-    // Wait for convexSubscribe to be available
-    if (!window.convexSubscribe) {
+    // Wait for convexQuery to be available
+    if (!window.convexQuery) {
       console.warn('Waiting for Convex client to initialize...');
       await new Promise(resolve => {
         const checkInterval = setInterval(() => {
-          if (window.convexSubscribe) {
+          if (window.convexQuery) {
             clearInterval(checkInterval);
             resolve();
           }
@@ -556,13 +556,11 @@ async function loadLinks() {
       });
     }
 
-    // Subscribe to real-time updates
-    window.convexSubscribe("functions:getLinks", {}, (data) => {
-      const changed = applyLinksData(data, { persistCache: true, forceRender: !links.length });
-      if (changed) {
-        console.log('✅ Links auto-updated from Convex');
-      }
-    });
+    const data = await window.convexQuery("functions:getLinks");
+    const changed = applyLinksData(data, { persistCache: true, forceRender: !links.length });
+    if (changed) {
+      console.log('✅ Links refreshed from Convex');
+    }
   } catch (error) {
     console.error('Error loading links:', error);
   }
@@ -716,6 +714,7 @@ function renderLinks() {
       deleteBtn.onclick = async (e) => {
         e.stopPropagation();
         await window.convexMutation('functions:deleteLink', { id: separator.link._id });
+        await loadLinks();
       };
       sepDiv.appendChild(deleteBtn);
 
@@ -1456,6 +1455,7 @@ async function addSeparator(groupName) {
       url: '',
       default_type: 'separator'
     });
+    await loadLinks();
   } catch (error) {
     console.error('Error adding separator:', error);
     alert('Failed to add separator');
@@ -1526,6 +1526,7 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
     }
 
     document.getElementById('quick-add-link-popup').classList.add('hidden');
+    await loadLinks();
     if (duplicateMatch) {
       window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
     } else {
@@ -1579,6 +1580,7 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
   try {
     await window.convexMutation("functions:addLink", newLink);
     document.getElementById('add-link-popup').classList.add('hidden');
+    await loadLinks();
     if (duplicateMatch) {
       window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
     } else {
@@ -1683,6 +1685,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
   try {
     await window.convexMutation("functions:updateLink", updatedLink);
     document.getElementById('edit-link-popup').classList.add('hidden');
+    await loadLinks();
     if (reminderSkipped) {
       currentReminderDraft = reminderDraft;
       updateEditReminderSummary();
@@ -1734,6 +1737,7 @@ async function deleteLink(id) {
 
   try {
     await window.convexMutation("functions:deleteLink", { id });
+    await loadLinks();
     window.showNotification('Link deleted!');
   } catch (error) {
     console.error('Error deleting link:', error);
@@ -1748,6 +1752,7 @@ async function copyLink(link) {
 
   try {
     await window.convexMutation("functions:addLink", newLink);
+    await loadLinks();
     window.showNotification('Link copied!');
   } catch (error) {
     console.error('Error copying link:', error);
@@ -1763,6 +1768,7 @@ async function reorderLinks(fromIndex, toIndex) {
 
   try {
     await window.convexMutation("functions:updateAllLinks", { links: newLinks });
+    await loadLinks();
   } catch (error) {
     console.error('Error reordering:', error);
     alert('Error reordering: ' + error.message);
@@ -1933,6 +1939,7 @@ document.getElementById('edit-group-form').addEventListener('submit', async (e) 
     }
 
     document.getElementById('edit-group-popup').classList.add('hidden');
+    await loadLinks();
     window.showNotification('Group updated!');
   } catch (error) {
     console.error('Error updating group:', error);
@@ -1947,6 +1954,7 @@ async function deleteGroup(groupName) {
   try {
     const remaining = links.filter(l => (l.group || 'Ungrouped') !== groupName);
     await window.convexMutation("functions:updateAllLinks", { links: remaining });
+    await loadLinks();
     window.showNotification('Group deleted!');
   } catch (error) {
     console.error('Error deleting group:', error);
@@ -1970,6 +1978,7 @@ async function duplicateGroup(groupName) {
     for (const link of duplicatedLinks) {
       await window.convexMutation("functions:addLink", link);
     }
+    await loadLinks();
     window.showNotification('Group duplicated!');
   } catch (error) {
     console.error('Error duplicating group:', error);

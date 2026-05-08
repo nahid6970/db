@@ -1,7 +1,7 @@
-import { ConvexClient } from "https://esm.sh/convex@1.16.0/browser";
+import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
 import { api } from "./convex/_generated/api.js";
 
-const client = new ConvexClient("https://lovable-wildcat-595.convex.cloud");
+const client = new ConvexHttpClient("https://lovable-wildcat-595.convex.cloud");
 
 window.convexClient = client;
 window.api = api;
@@ -16,12 +16,6 @@ window.convexQuery = async (functionPath) => {
 window.convexMutation = async (functionPath, args) => {
   const [module, funcName] = functionPath.split(':');
   return await client.mutation(api[module][funcName], args);
-};
-
-// Real-time subscription helper
-window.convexSubscribe = (functionPath, args, callback) => {
-  const [module, funcName] = functionPath.split(':');
-  return client.onUpdate(api[module][funcName], args || {}, callback);
 };
 
 // Notify that Convex is ready
