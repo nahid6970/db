@@ -938,6 +938,7 @@
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
 
   <script type="module">
@@ -1610,6 +1611,91 @@
     
     let _lbIndex = 0;
 
+    window.handleImageClick = function(event, index) {
+      const imgs = window._lastImages;
+      if (!imgs) return;
+      const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+      const img = sorted[index];
+      
+      if (event.shiftKey || isShiftPressed) {
+        if (selectedImageIds.has(img._id)) {
+          selectedImageIds.delete(img._id);
+        } else {
+          selectedImageIds.add(img._id);
+        }
+        renderSelectionState();
+      } else {
+        openImage(index);
+      }
+    };
+
+    window.exportToPdf = async function() {
+      if (selectedImageIds.size === 0) return;
+      
+      const status = document.getElementById('status');
+      status.textContent = 'Generating PDF...';
+      status.style.color = '#007bff';
+      
+      try {
+        const { jsPDF } = window.jspdf;
+        const pdf = new jsPDF();
+        
+        const imgs = window._lastImages;
+        const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+        const selectedImages = sorted.filter(img => selectedImageIds.has(img._id));
+        
+        for (let i = 0; i < selectedImages.length; i++) {
+          const imgData = selectedImages[i];
+          if (imgData.filename?.toLowerCase().endsWith('.pdf')) continue; // Skip PDFs for now
+          
+          status.textContent = `Processing image ${i + 1} of ${selectedImages.length}...`;
+          
+          const img = new Image();
+          img.crossOrigin = "anonymous";
+          
+          // Wait for image to load
+          await new Promise((resolve, reject) => {
+            img.onload = resolve;
+            img.onerror = reject;
+            img.src = imgData.url;
+          });
+          
+          const canvas = document.createElement('canvas');
+          canvas.width = img.width;
+          canvas.height = img.height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0);
+          
+          const imgType = imgData.filename?.toLowerCase().endsWith('.png') ? 'PNG' : 'JPEG';
+          const base64 = canvas.toDataURL(`image/${imgType === 'PNG' ? 'png' : 'jpeg'}`);
+          
+          if (i > 0) pdf.addPage();
+          
+          const pageWidth = pdf.internal.pageSize.getWidth();
+          const pageHeight = pdf.internal.pageSize.getHeight();
+          const ratio = Math.min(pageWidth / img.width, pageHeight / img.height);
+          const w = img.width * ratio;
+          const h = img.height * ratio;
+          const x = (pageWidth - w) / 2;
+          const y = (pageHeight - h) / 2;
+          
+          pdf.addImage(base64, imgType, x, y, w, h);
+        }
+        
+        pdf.save('exported-images.pdf');
+        status.textContent = 'PDF Exported!';
+        status.style.color = '#28a745';
+        setTimeout(() => status.textContent = '', 3000);
+        
+        selectedImageIds.clear();
+        renderSelectionState();
+      } catch (error) {
+        console.error('PDF Export failed:', error);
+        status.textContent = 'PDF Export failed.';
+        status.style.color = '#dc3545';
+      }
+    };
+
     window.openImage = function(index) {
       _lbIndex = index;
       showLightbox();
@@ -1827,7 +1913,9 @@
         `),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
         selectionCount
-          ? `<span class="selection-hint">${selectionCount} selected. Click a folder or No folder to move them.</span>`
+          ? `<span class="selection-hint">${selectionCount} selected. Click a folder to move, or 
+             <button class="secondary" onclick="exportToPdf()" style="padding: 4px 8px; border-radius: 4px; margin-left: 8px;">Export to PDF</button>
+             </span>`
           : ''
       ];
 
@@ -2081,7 +2169,7 @@
             ${isMega && !isPdf ? `data-mega-url="${img.url}"` : ''} 
             src="${displayUrl}"
             alt="${escapeHtml(img.filename)}" 
-            onclick="openImage(${i})"
+            onclick="handleImageClick(event, ${i})"
             style="${isPdf ? 'object-fit: contain; padding: 20px; background: #fff;' : ''}"
           >
           <div class="select-indicator">
