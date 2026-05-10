@@ -1404,6 +1404,80 @@
       }
     };
     
+    window.performUpload = async function(file) {
+      const status = document.getElementById('status');
+      try {
+        if (storageType === "convex") {
+          const postUrl = await client.mutation(api.images.generateUploadUrl);
+          const result = await fetch(postUrl, {
+            method: "POST",
+            headers: { "Content-Type": file.type },
+            body: file,
+          });
+          const { storageId } = await result.json();
+          await client.mutation(api.images.saveStorageImage, {
+            storageId,
+            filename: file.name,
+            fileSize: Number(file.size),
+            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+          });
+        } else if (storageType === "mega") {
+          const MegaStorage = window.mega && window.mega.Storage;
+          if (!MegaStorage) throw new Error('megajs library not loaded');
+          if (!megaSettings.email || !megaSettings.password) throw new Error('MEGA credentials not configured');
+
+          if (!megaStorage) {
+            megaStorage = new MegaStorage({ email: megaSettings.email, password: megaSettings.password, autologin: false });
+            await new Promise((resolve, reject) => megaStorage.login((err) => err ? reject(err) : resolve()));
+          }
+
+          let targetNode = megaStorage.root;
+          if (megaSettings.subfolder) {
+            const found = (megaStorage.root.children || []).find(n => n.directory && n.name === megaSettings.subfolder);
+            if (found) targetNode = found;
+          }
+
+          const buffer = await file.arrayBuffer();
+          const uploadedFile = await new Promise((resolve, reject) => {
+            const upload = targetNode.upload({ name: file.name, size: file.size }, new Uint8Array(buffer));
+            upload.on('complete', resolve);
+            upload.on('error', reject);
+          });
+
+          const link = await new Promise((resolve, reject) => uploadedFile.link((err, url) => err ? reject(err) : resolve(url)));
+
+          await client.mutation(api.images.add, {
+            url: link,
+            filename: file.name,
+            fileSize: Number(file.size),
+            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+          });
+        } else {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+          formData.append('folder', 'myGallery');
+          const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+            method: 'POST',
+            body: formData
+          });
+          const data = await res.json();
+          await client.mutation(api.images.add, {
+            url: data.secure_url,
+            filename: file.name,
+            fileSize: Number(file.size),
+            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+          });
+        }
+        return true;
+      } catch (error) {
+        console.error('Upload failed:', error);
+        status.textContent = `Upload failed for ${file.name}`;
+        status.style.color = '#dc3545';
+        return false;
+      }
+    };
+
     window.uploadImages = async function() {
       const files = document.getElementById('fileInput').files;
       if (!files.length) return;
@@ -1423,84 +1497,13 @@
       document.title = `Uploading 0/${total} • ${DEFAULT_PAGE_TITLE}`;
       
       for (const file of files) {
-        try {
-          if (storageType === "convex") {
-            // Convex Storage Upload
-            const postUrl = await client.mutation(api.images.generateUploadUrl);
-            const result = await fetch(postUrl, {
-              method: "POST",
-              headers: { "Content-Type": file.type },
-              body: file,
-            });
-            const { storageId } = await result.json();
-            await client.mutation(api.images.saveStorageImage, {
-              storageId,
-              filename: file.name,
-              fileSize: Number(file.size),
-              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
-            });
-
-          } else if (storageType === "mega") {
-            // MEGA Upload
-            const MegaStorage = window.mega && window.mega.Storage;
-            if (!MegaStorage) throw new Error('megajs library not loaded');
-            if (!megaSettings.email || !megaSettings.password) throw new Error('MEGA credentials not configured');
-
-            if (!megaStorage) {
-              megaStorage = new MegaStorage({ email: megaSettings.email, password: megaSettings.password, autologin: false });
-              await new Promise((resolve, reject) => megaStorage.login((err) => err ? reject(err) : resolve()));
-            }
-
-            let targetNode = megaStorage.root;
-            if (megaSettings.subfolder) {
-              const found = (megaStorage.root.children || []).find(n => n.directory && n.name === megaSettings.subfolder);
-              if (found) targetNode = found;
-            }
-
-            const buffer = await file.arrayBuffer();
-            const uploadedFile = await new Promise((resolve, reject) => {
-              const upload = targetNode.upload({ name: file.name, size: file.size }, new Uint8Array(buffer));
-              upload.on('complete', resolve);
-              upload.on('error', reject);
-            });
-
-            const link = await new Promise((resolve, reject) => uploadedFile.link((err, url) => err ? reject(err) : resolve(url)));
-
-            await client.mutation(api.images.add, {
-              url: link,
-              filename: file.name,
-              fileSize: Number(file.size),
-              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
-            });
-
-          } else {
-            // Cloudinary Upload
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
-            formData.append('folder', 'myGallery');
-            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, {
-              method: 'POST',
-              body: formData
-            });
-            const data = await res.json();
-            await client.mutation(api.images.add, {
-              url: data.secure_url,
-              filename: file.name,
-              fileSize: Number(file.size),
-              folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
-            });
-          }
-
+        const success = await performUpload(file);
+        if (success) {
           completed++;
           const percent = Math.round((completed / total) * 100);
           progressBar.style.width = percent + '%';
           progressInfo.textContent = `${completed}/${total}`;
           document.title = `Uploading ${completed}/${total} \u2022 ${DEFAULT_PAGE_TITLE}`;
-        } catch (error) {
-          console.error('Upload failed:', error);
-          status.textContent = `Upload failed for ${file.name}`;
-          status.style.color = '#dc3545';
         }
       }
       status.textContent = 'Upload complete!';
@@ -1682,9 +1685,22 @@
           pdf.addImage(base64, imgType, x, y, w, h);
         }
         
-        pdf.save('exported-images.pdf');
-        status.textContent = 'PDF Exported!';
-        status.style.color = '#28a745';
+        status.textContent = 'Uploading PDF...';
+        const pdfBlob = pdf.output('blob');
+        const filename = `export-${Date.now()}.pdf`;
+        const pdfFile = new File([pdfBlob], filename, { type: 'application/pdf' });
+        
+        const success = await performUpload(pdfFile);
+        
+        if (success) {
+          status.textContent = 'PDF Exported & Uploaded!';
+          status.style.color = '#28a745';
+        } else {
+          status.textContent = 'PDF Generated but Upload failed. Downloading...';
+          status.style.color = '#ffc107';
+          pdf.save(filename);
+        }
+
         setTimeout(() => status.textContent = '', 3000);
         
         selectedImageIds.clear();
