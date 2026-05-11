@@ -1205,7 +1205,7 @@
 
     const megaPreviews = new Map();
 
-    async function getMegaBlobUrl(url) {
+    async function getMegaBlobUrl(url, filename) {
       if (megaPreviews.has(url)) return megaPreviews.get(url);
 
       try {
@@ -1220,7 +1220,14 @@
           const stream = file.download();
           const chunks = [];
           stream.on('data', chunk => chunks.push(chunk));
-          stream.on('end', () => resolve(new Blob(chunks)));
+          stream.on('end', () => {
+            const ext = filename?.toLowerCase().split('.').pop();
+            let mimeType = 'application/octet-stream';
+            if (ext === 'pdf') mimeType = 'application/pdf';
+            else if (['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'].includes(ext)) mimeType = `image/${ext === 'jpg' ? 'jpeg' : (ext === 'svg' ? 'svg+xml' : ext)}`;
+            
+            resolve(new Blob(chunks, { type: mimeType }));
+          });
           stream.on('error', reject);
         });
 
@@ -1233,16 +1240,17 @@
       }
     }
 
-    async function loadMegaPreview(url, imgElement) {
-      const blobUrl = await getMegaBlobUrl(url);
+    async function loadMegaPreview(url, imgElement, filename) {
+      const blobUrl = await getMegaBlobUrl(url, filename);
       if (blobUrl) imgElement.src = blobUrl;
     }
 
     function loadAllMegaPreviews() {
       document.querySelectorAll('img[data-mega-url]').forEach(img => {
         const url = img.getAttribute('data-mega-url');
+        const filename = img.alt;
         if (url) {
-          loadMegaPreview(url, img);
+          loadMegaPreview(url, img, filename);
           img.removeAttribute('data-mega-url');
         }
       });
@@ -1743,7 +1751,7 @@
             status.textContent = 'Decrypting MEGA file...';
             status.style.color = '#007bff';
         }
-        displayUrl = await getMegaBlobUrl(img.url);
+        displayUrl = await getMegaBlobUrl(img.url, img.filename);
         if (status) {
             status.textContent = '';
         }
