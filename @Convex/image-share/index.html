@@ -2435,6 +2435,27 @@
       document.getElementById('customDialog').classList.add('hidden');
     }
 
+    document.addEventListener('keydown', e => {
+      const dlg = document.getElementById('customDialog');
+      if (dlg.classList.contains('hidden')) return;
+
+      if (_isPassword) {
+        if (e.key >= '0' && e.key <= '9') {
+          _value += e.key;
+          updateDisplay();
+        } else if (e.key === 'Backspace') {
+          _value = _value.slice(0, -1);
+          updateDisplay();
+        } else if (e.key === 'Delete' || e.key === 'Escape') {
+          _value = '';
+          updateDisplay();
+          if (e.key === 'Escape') document.getElementById('dialogCancelBtn').click();
+        } else if (e.key === 'Enter') {
+          document.getElementById('dialogOkBtn').click();
+        }
+      }
+    });
+
     document.getElementById('customDialogTextInput').addEventListener('keydown', e => {
       if (e.key === 'Enter') document.getElementById('dialogOkBtn').click();
       if (e.key === 'Escape') document.getElementById('dialogCancelBtn').click();
