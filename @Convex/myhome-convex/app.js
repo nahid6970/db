@@ -51,6 +51,47 @@ function getHostedProjectUrl(url) {
 
 window.getHostedProjectUrl = getHostedProjectUrl;
 window.resolveRuntimeUrl = (url) => getHostedProjectUrl(url) || url;
+window.openLocalFileViaExtension = (url) => {
+  if (!url || !url.startsWith("file:///") || window.location.protocol === "file:") {
+    return Promise.resolve(false);
+  }
+
+  return new Promise((resolve) => {
+    const requestId = `local-file-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    let settled = false;
+
+    const cleanup = () => {
+      window.removeEventListener("message", handleMessage);
+      clearTimeout(timeoutId);
+    };
+
+    const finish = (opened) => {
+      if (settled) return;
+      settled = true;
+      cleanup();
+      resolve(opened);
+    };
+
+    const handleMessage = (event) => {
+      if (event.source !== window) return;
+      const data = event.data;
+      if (!data || data.source !== "myhome-extension-bridge" || data.type !== "OPEN_LOCAL_FILE_RESULT") {
+        return;
+      }
+      if (data.requestId !== requestId) return;
+      finish(Boolean(data.ok));
+    };
+
+    const timeoutId = window.setTimeout(() => finish(false), 1500);
+    window.addEventListener("message", handleMessage);
+    window.postMessage({
+      source: "myhome-convex",
+      type: "OPEN_LOCAL_FILE",
+      url,
+      requestId,
+    }, "*");
+  });
+};
 
 // Helper functions for queries and mutations
 window.convexQuery = async (functionPath) => {

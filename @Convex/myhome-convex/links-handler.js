@@ -1177,7 +1177,7 @@ function fallbackCopy(text, successMsg) {
   document.body.removeChild(textArea);
 }
 
-function handleUrlOpening(url) {
+async function handleUrlOpening(url) {
   if (!url) return;
 
   const hostedProjectUrl = window.getHostedProjectUrl?.(url);
@@ -1192,7 +1192,10 @@ function handleUrlOpening(url) {
     if (window.location.protocol === 'file:') {
       window.location.href = url;
     } else {
-      copyToClipboard(url, 'Local file URL copied. Add that file to the site to open it on GitHub Pages.');
+      const opened = await (window.openLocalFileViaExtension?.(url) || Promise.resolve(false));
+      if (!opened) {
+        copyToClipboard(url, 'Local file URL copied. Reload the extension and allow file access if direct open is blocked.');
+      }
     }
   } else {
     window.open(url, '_blank');
