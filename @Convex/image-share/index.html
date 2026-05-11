@@ -1205,15 +1205,12 @@
 
     const megaPreviews = new Map();
 
-    async function loadMegaPreview(url, imgElement) {
-      if (megaPreviews.has(url)) {
-        imgElement.src = megaPreviews.get(url);
-        return;
-      }
+    async function getMegaBlobUrl(url) {
+      if (megaPreviews.has(url)) return megaPreviews.get(url);
 
       try {
         const File = window.mega && window.mega.File;
-        if (!File) return;
+        if (!File) throw new Error('MEGA library not loaded');
         const file = File.fromURL(url);
         await new Promise((resolve, reject) => {
           file.loadAttributes((err, file) => err ? reject(err) : resolve(file));
@@ -1229,10 +1226,16 @@
 
         const blobUrl = URL.createObjectURL(data);
         megaPreviews.set(url, blobUrl);
-        imgElement.src = blobUrl;
+        return blobUrl;
       } catch (err) {
-        console.error('Failed to load MEGA preview:', err);
+        console.error('Failed to load MEGA file:', err);
+        return null;
       }
+    }
+
+    async function loadMegaPreview(url, imgElement) {
+      const blobUrl = await getMegaBlobUrl(url);
+      if (blobUrl) imgElement.src = blobUrl;
     }
 
     function loadAllMegaPreviews() {
@@ -1717,7 +1720,7 @@
       showLightbox();
     };
 
-    function showLightbox() {
+    async function showLightbox() {
       const imgs = window._lastImages;
       if (!imgs || !imgs.length) return;
       const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
@@ -1727,15 +1730,33 @@
       const lb = document.getElementById('lightbox');
       const lbImg = document.getElementById('lightboxImg');
       const isPdf = img.filename?.toLowerCase().endsWith('.pdf');
+      const isMega = img.url && img.url.includes('mega.nz');
 
       // Clean up previous iframe if any
       const existingIframe = lb.querySelector('iframe');
       if (existingIframe) existingIframe.remove();
 
+      let displayUrl = img.url;
+      if (isMega) {
+        const status = document.getElementById('status');
+        if (status) {
+            status.textContent = 'Decrypting MEGA file...';
+            status.style.color = '#007bff';
+        }
+        displayUrl = await getMegaBlobUrl(img.url);
+        if (status) {
+            status.textContent = '';
+        }
+        if (!displayUrl) {
+            await showAlert('Failed to decrypt MEGA file.');
+            return;
+        }
+      }
+
       if (isPdf) {
         lbImg.style.display = 'none';
         const iframe = document.createElement('iframe');
-        iframe.src = img.url;
+        iframe.src = displayUrl;
         iframe.style.width = '80vw';
         iframe.style.height = '80vh';
         iframe.style.border = 'none';
@@ -1744,7 +1765,7 @@
         lb.appendChild(iframe);
       } else {
         lbImg.style.display = 'block';
-        lbImg.src = img.url;
+        lbImg.src = displayUrl;
       }
 
       document.getElementById('lbCounter').textContent = `${_lbIndex + 1} / ${sorted.length}`;
