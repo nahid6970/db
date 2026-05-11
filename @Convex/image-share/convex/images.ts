@@ -18,11 +18,13 @@ export const list = query({
         .collect();
     } else {
       const folders = await ctx.db.query("folders").collect();
-      const protectedFolderIds = new Set(
-        folders.filter((folder) => folder.password).map((folder) => String(folder._id))
+      const hiddenFolderIds = new Set(
+        folders
+          .filter((folder) => folder.password || folder.hideFromAll)
+          .map((folder) => String(folder._id))
       );
       images = (await ctx.db.query("images").collect()).filter(
-        (image) => !image.folderId || !protectedFolderIds.has(image.folderId)
+        (image) => !image.folderId || !hiddenFolderIds.has(image.folderId)
       );
     }
 
@@ -111,11 +113,13 @@ export const clear = mutation({
         .collect();
     } else {
       const folders = await ctx.db.query("folders").collect();
-      const protectedFolderIds = new Set(
-        folders.filter((folder) => folder.password).map((folder) => String(folder._id))
+      const hiddenFolderIds = new Set(
+        folders
+          .filter((folder) => folder.password || folder.hideFromAll)
+          .map((folder) => String(folder._id))
       );
       images = (await ctx.db.query("images").collect()).filter(
-        (image) => !image.folderId || !protectedFolderIds.has(image.folderId)
+        (image) => !image.folderId || !hiddenFolderIds.has(image.folderId)
       );
     }
 
@@ -224,6 +228,17 @@ export const removeFolder = mutation({
     }
 
     await ctx.db.delete(args.id);
+  },
+});
+
+export const toggleHideFromAll = mutation({
+  args: { id: v.id("folders") },
+  handler: async (ctx, args) => {
+    const folder = await ctx.db.get(args.id);
+    if (!folder) return;
+    await ctx.db.patch(args.id, {
+      hideFromAll: !folder.hideFromAll,
+    });
   },
 });
 
