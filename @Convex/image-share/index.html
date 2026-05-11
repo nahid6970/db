@@ -1373,6 +1373,16 @@
         updateSelectionMode();
         selectHoveredImageUnderPointer();
       }
+      if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
+        const activeTag = document.activeElement?.tagName;
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeTag === 'SELECT') return;
+        if (!document.getElementById('customDialog').classList.contains('hidden')) return;
+        e.preventDefault();
+        const imgs = window._lastImages;
+        if (!imgs) return;
+        imgs.forEach(img => selectedImageIds.add(img._id));
+        renderSelectionState();
+      }
     });
 
     window.addEventListener('keyup', (e) => {
