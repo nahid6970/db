@@ -1179,6 +1179,12 @@ function fallbackCopy(text, successMsg) {
 
 function handleUrlOpening(url) {
   if (!url) return;
+
+  const hostedProjectUrl = window.getHostedProjectUrl?.(url);
+  if (hostedProjectUrl) {
+    window.open(hostedProjectUrl, '_blank');
+    return;
+  }
   
   if (url.startsWith('chrome://') || url.startsWith('edge://')) {
     copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
@@ -1186,7 +1192,7 @@ function handleUrlOpening(url) {
     if (window.location.protocol === 'file:') {
       window.location.href = url;
     } else {
-      copyToClipboard(url, 'Local file URL copied (Security blocks direct opening)');
+      copyToClipboard(url, 'Local file URL copied. Add that file to the site to open it on GitHub Pages.');
     }
   } else {
     window.open(url, '_blank');
@@ -1229,17 +1235,18 @@ function createLinkItem(link, index) {
   }
 
   const a = document.createElement('a');
+  const runtimeUrl = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.url) : link.url;
   
   // Security: browsers block chrome:// and file:/// links from web servers.
   // We use javascript:void(0) to ensure the click event still fires.
-  const isProtectedUrl = link.url.startsWith('chrome://') || 
-                         link.url.startsWith('edge://') || 
-                         link.url.startsWith('file:///');
+  const isProtectedUrl = runtimeUrl.startsWith('chrome://') || 
+                         runtimeUrl.startsWith('edge://') || 
+                         (runtimeUrl.startsWith('file:///') && !window.getHostedProjectUrl?.(runtimeUrl));
                          
   if (isProtectedUrl) {
     a.href = 'javascript:void(0)';
   } else {
-    a.href = link.url;
+    a.href = runtimeUrl;
   }
   
   a.target = '_blank';
@@ -1255,7 +1262,7 @@ function createLinkItem(link, index) {
     a.appendChild(icon);
   } else if (link.default_type === 'img' && link.img_src) {
     const img = document.createElement('img');
-    img.src = link.img_src;
+    img.src = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.img_src) : link.img_src;
     if (link.width) img.style.width = link.width.includes('px') ? link.width : link.width + 'px';
     if (link.height) img.style.height = link.height.includes('px') ? link.height : link.height + 'px';
     if (!link.width && !link.height) {

@@ -7,6 +7,51 @@ window.convexClient = client;
 window.api = api;
 window.editMode = false;
 
+const PROJECT_FILE_ROOTS = [
+  "C:/@delta/db/@Convex/myhome-convex/",
+];
+
+function normalizeWindowsPath(path) {
+  return (path || "")
+    .replace(/\\/g, "/")
+    .replace(/^\/([A-Za-z]:)/, "$1")
+    .replace(/\/{2,}/g, "/");
+}
+
+function decodeFileUrlPath(url) {
+  try {
+    const parsed = new URL(url);
+    if (parsed.protocol !== "file:") return null;
+    return normalizeWindowsPath(decodeURIComponent(parsed.pathname));
+  } catch {
+    return null;
+  }
+}
+
+function getHostedProjectUrl(url) {
+  if (!url || !url.startsWith("file:///") || window.location.protocol === "file:") {
+    return null;
+  }
+
+  const filePath = decodeFileUrlPath(url);
+  if (!filePath) return null;
+
+  const normalizedFilePath = normalizeWindowsPath(filePath).toLowerCase();
+  for (const root of PROJECT_FILE_ROOTS) {
+    const normalizedRoot = normalizeWindowsPath(root).toLowerCase();
+    if (!normalizedFilePath.startsWith(normalizedRoot)) continue;
+
+    const relativePath = filePath.slice(root.length).replace(/^\/+/, "");
+    if (!relativePath) return new URL("./", window.location.href).href;
+    return new URL(relativePath, window.location.href).href;
+  }
+
+  return null;
+}
+
+window.getHostedProjectUrl = getHostedProjectUrl;
+window.resolveRuntimeUrl = (url) => getHostedProjectUrl(url) || url;
+
 // Helper functions for queries and mutations
 window.convexQuery = async (functionPath) => {
   const [module, funcName] = functionPath.split(':');

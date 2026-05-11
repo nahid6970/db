@@ -87,7 +87,7 @@ function renderSidebarButtons() {
 // Create sidebar button
 function createSidebarButton(button, index) {
   const btn = document.createElement('a');
-  btn.href = button.url;
+  btn.href = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(button.url) : button.url;
   btn.target = '_blank';
   btn.className = 'sidebar-button add-button';
   btn.title = button.name;
@@ -120,7 +120,7 @@ function createSidebarButton(button, index) {
   // Content based on display type
   if (button.display_type === 'image' && button.img_src) {
     const img = document.createElement('img');
-    img.src = button.img_src;
+    img.src = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(button.img_src) : button.img_src;
     img.style.width = '25px';
     img.style.height = '25px';
     btn.appendChild(img);
@@ -187,6 +187,12 @@ function createSidebarButton(button, index) {
 
   function handleUrlOpening(url) {
     if (!url) return;
+
+    const hostedProjectUrl = window.getHostedProjectUrl?.(url);
+    if (hostedProjectUrl) {
+      window.open(hostedProjectUrl, '_blank');
+      return;
+    }
     
     if (url.startsWith('chrome://') || url.startsWith('edge://')) {
       copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
@@ -194,7 +200,7 @@ function createSidebarButton(button, index) {
       if (window.location.protocol === 'file:') {
         window.location.href = url;
       } else {
-        copyToClipboard(url, 'Local file URL copied (Security blocks direct opening)');
+        copyToClipboard(url, 'Local file URL copied. Add that file to the site to open it on GitHub Pages.');
       }
     } else {
       window.open(url, '_blank');
