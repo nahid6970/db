@@ -829,6 +829,9 @@ function createCollapsibleGroup(groupName, items) {
   // Drag and drop
   div.addEventListener("dragstart", handleGroupDragStart);
   div.addEventListener("dragover", handleGroupDragOver);
+  div.addEventListener("dragleave", (e) => {
+    div.classList.remove('drag-over-before', 'drag-over-after');
+  });
   div.addEventListener("drop", handleGroupDrop);
   div.addEventListener("dragend", handleGroupDragEnd);
 
@@ -1146,6 +1149,9 @@ function createRegularGroup(groupName, items) {
   // Drag and drop
   div.addEventListener("dragstart", handleGroupDragStart);
   div.addEventListener("dragover", handleGroupDragOver);
+  div.addEventListener("dragleave", (e) => {
+    div.classList.remove('drag-over-before', 'drag-over-after');
+  });
   div.addEventListener("drop", handleGroupDrop);
   div.addEventListener("dragend", handleGroupDragEnd);
 
@@ -1401,6 +1407,10 @@ function createLinkItem(link, index) {
     } else {
       li.classList.add('drag-over-after');
     }
+  });
+
+  li.addEventListener('dragleave', (e) => {
+    li.classList.remove('drag-over-before', 'drag-over-after');
   });
 
   li.addEventListener('drop', async (e) => {

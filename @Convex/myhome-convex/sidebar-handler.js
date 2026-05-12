@@ -98,6 +98,9 @@ function createSidebarButton(button, index) {
     btn.draggable = true;
     btn.addEventListener("dragstart", handleSidebarDragStart);
     btn.addEventListener("dragover", handleSidebarDragOver);
+    btn.addEventListener("dragleave", (e) => {
+      btn.classList.remove('drag-over-before', 'drag-over-after');
+    });
     btn.addEventListener("drop", handleSidebarDrop);
     btn.addEventListener("dragend", handleSidebarDragEnd);
   }
