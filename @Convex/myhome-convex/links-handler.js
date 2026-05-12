@@ -1387,16 +1387,41 @@ function createLinkItem(link, index) {
   });
 
   li.addEventListener('dragover', (e) => {
+    if (!draggedElement) return; // Ignore if not a link
     e.preventDefault();
     e.stopPropagation();
+    
+    // Links are usually side-by-side in flex wrap
+    const rect = li.getBoundingClientRect();
+    const isBefore = e.clientX < rect.left + rect.width / 2;
+    
+    li.classList.remove('drag-over-before', 'drag-over-after');
+    if (isBefore) {
+      li.classList.add('drag-over-before');
+    } else {
+      li.classList.add('drag-over-after');
+    }
   });
 
   li.addEventListener('drop', async (e) => {
+    if (!draggedElement) return;
     e.preventDefault();
     e.stopPropagation();
+    const isBefore = li.classList.contains('drag-over-before');
+    li.classList.remove('drag-over-before', 'drag-over-after');
+    
     if (draggedElement && draggedElement !== li) {
       const fromIndex = parseInt(draggedElement.dataset.linkIndex);
-      const toIndex = parseInt(li.dataset.linkIndex);
+      let toIndex = parseInt(li.dataset.linkIndex);
+      
+      if (isBefore) {
+        // Drop before target
+        if (fromIndex < toIndex) toIndex--;
+      } else {
+        // Drop after target
+        if (fromIndex > toIndex) toIndex++;
+      }
+      
       await reorderLinks(fromIndex, toIndex);
     }
   });
@@ -1404,6 +1429,9 @@ function createLinkItem(link, index) {
   li.addEventListener('dragend', (e) => {
     e.stopPropagation();
     li.classList.remove('dragging');
+    document.querySelectorAll('.drag-over-before, .drag-over-after').forEach(el => {
+      el.classList.remove('drag-over-before', 'drag-over-after');
+    });
     draggedElement = null;
   });
 
@@ -2165,30 +2193,37 @@ function handleGroupDragStart(e) {
 }
 
 function handleGroupDragOver(e) {
+  if (!draggedGroup) return; // Only groups react to groups
   e.preventDefault();
   e.dataTransfer.dropEffect = 'move';
   const target = e.currentTarget;
   if (target !== draggedGroup && (target.classList.contains('group_type_top') || target.classList.contains('group_type_box') || target.classList.contains('link-group'))) {
-    target.classList.add('drag-over');
+    // For groups, we use horizontal detection as they are usually side-by-side
+    const rect = target.getBoundingClientRect();
+    const isBefore = e.clientX < rect.left + rect.width / 2;
+    
+    target.classList.remove('drag-over-before', 'drag-over-after');
+    if (isBefore) {
+      target.classList.add('drag-over-before');
+    } else {
+      target.classList.add('drag-over-after');
+    }
   }
 }
 
 function handleGroupDrop(e) {
+  if (!draggedGroup) return;
   e.preventDefault();
   e.stopPropagation();
   const target = e.currentTarget;
-  target.classList.remove('drag-over');
+  const isBefore = target.classList.contains('drag-over-before');
+  target.classList.remove('drag-over-before', 'drag-over-after');
 
   if (draggedGroup && draggedGroup !== target) {
-    const container = target.parentNode;
-    const allGroups = Array.from(container.children);
-    const draggedIndex = allGroups.indexOf(draggedGroup);
-    const targetIndex = allGroups.indexOf(target);
-
-    if (draggedIndex < targetIndex) {
-      target.parentNode.insertBefore(draggedGroup, target.nextSibling);
-    } else {
+    if (isBefore) {
       target.parentNode.insertBefore(draggedGroup, target);
+    } else {
+      target.parentNode.insertBefore(draggedGroup, target.nextSibling);
     }
 
     // Save new group order after DOM updates
@@ -2198,7 +2233,9 @@ function handleGroupDrop(e) {
 
 function handleGroupDragEnd(e) {
   e.currentTarget.classList.remove('dragging');
-  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  document.querySelectorAll('.drag-over-before, .drag-over-after').forEach(el => {
+    el.classList.remove('drag-over-before', 'drag-over-after');
+  });
   draggedGroup = null;
 }
 
@@ -2227,6 +2264,9 @@ async function saveGroupOrder() {
 
     await window.convexMutation("functions:updateGroupOrder", { groupOrder });
     console.log('✅ Group order saved:', groupOrder.length, 'groups');
+    
+    // Crucial: Reload links to keep global 'links' array in sync with new orders
+    await loadLinks();
   } catch (error) {
     console.error('❌ Error saving group order:', error);
   }

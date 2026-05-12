@@ -367,11 +367,6 @@ body {
   opacity: 0.5;
 }
 
-.sidebar-button.drag-over {
-  border: 2px dashed #00ff9d !important;
-  transform: scale(1.1);
-}
-
 /* Edit Mode */
 .edit-mode .link-item {
   border: 2px solid #4CAF50;
@@ -1246,11 +1241,62 @@ button,
   transform: rotate(2deg);
 }
 
-.group_type_top.drag-over,
-.group_type_box.drag-over,
-.link-group.drag-over {
-  border: 2px dashed #4CAF50;
-  background-color: #2a4a2a;
+.group_type_top.drag-over-before,
+.group_type_box.drag-over-before,
+.link-group.drag-over-before,
+.sidebar-button.drag-over-before,
+.link-item.drag-over-before,
+.group_type_top.drag-over-after,
+.group_type_box.drag-over-after,
+.link-group.drag-over-after,
+.sidebar-button.drag-over-after,
+.link-item.drag-over-after {
+  position: relative;
+}
+
+.group_type_top.drag-over-before::before,
+.group_type_box.drag-over-before::before,
+.link-group.drag-over-before::before,
+.sidebar-button.drag-over-before::before,
+.link-item.drag-over-before::before,
+.group_type_top.drag-over-after::after,
+.group_type_box.drag-over-after::after,
+.link-group.drag-over-after::after,
+.sidebar-button.drag-over-after::after,
+.link-item.drag-over-after::after {
+  content: '';
+  position: absolute;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+/* Horizontal indicators (For items stacked horizontally, showing a vertical pipe between them) */
+.link-item.drag-over-before::before,
+.link-group.drag-over-before::before,
+.sidebar-button.drag-over-before::before,
+.group_type_top.drag-over-before::before,
+.group_type_box.drag-over-before::before {
+  left: -9px;
+  top: 10%;
+  bottom: 10%;
+  width: 4px;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
+}
+
+.link-item.drag-over-after::after,
+.link-group.drag-over-after::after,
+.sidebar-button.drag-over-after::after,
+.group_type_top.drag-over-after::after,
+.group_type_box.drag-over-after::after {
+  right: -9px;
+  top: 10%;
+  bottom: 10%;
+  width: 4px;
+  border-radius: 4px;
+  background-color: #4CAF50;
+  box-shadow: 0 0 8px rgba(76, 175, 80, 0.8);
 }
 
 /* Start New Line - Forces line break without visual separator */

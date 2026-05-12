@@ -5,7 +5,14 @@ import { v } from "convex/values";
 export const getLinks = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("links").collect();
+    const links = await ctx.db.query("links").collect();
+    // Sort by group_order (asc), then by _creationTime (asc)
+    return links.sort((a, b) => {
+      const orderA = a.group_order ?? 0;
+      const orderB = b.group_order ?? 0;
+      if (orderA !== orderB) return orderA - orderB;
+      return a._creationTime - b._creationTime;
+    });
   },
 });
 
@@ -196,7 +203,8 @@ export const updateGroupOrder = mutation({
 export const getSidebarButtons = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("sidebar_buttons").collect();
+    const buttons = await ctx.db.query("sidebar_buttons").collect();
+    return buttons.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
   },
 });
 
@@ -218,6 +226,7 @@ export const addSidebarButton = mutation({
     font_size: v.string(),
     notification_api: v.optional(v.string()),
     mark_seen_api: v.optional(v.string()),
+    order: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("sidebar_buttons", args);
@@ -243,10 +252,24 @@ export const updateSidebarButton = mutation({
     font_size: v.string(),
     notification_api: v.optional(v.string()),
     mark_seen_api: v.optional(v.string()),
+    order: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { dbId, ...data } = args;
     await ctx.db.patch(dbId, data);
+  },
+});
+
+export const updateSidebarOrder = mutation({
+  args: { order: v.array(v.object({ id: v.string(), order: v.number() })) },
+  handler: async (ctx, args) => {
+    const buttons = await ctx.db.query("sidebar_buttons").collect();
+    for (const btn of buttons) {
+      const orderInfo = args.order.find(o => o.id === btn.id);
+      if (orderInfo) {
+        await ctx.db.patch(btn._id, { order: orderInfo.order });
+      }
+    }
   },
 });
 

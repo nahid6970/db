@@ -86,5 +86,6 @@ export default defineSchema({
     font_size: v.string(),
     notification_api: v.optional(v.string()),
     mark_seen_api: v.optional(v.string()),
+    order: v.optional(v.number()),
   }),
 });

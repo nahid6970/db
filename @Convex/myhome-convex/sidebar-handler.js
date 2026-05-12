@@ -460,30 +460,36 @@ function handleSidebarDragStart(e) {
 }
 
 function handleSidebarDragOver(e) {
+  if (!draggedSidebarBtn) return; // Only sidebar buttons react
   e.preventDefault();
   e.dataTransfer.dropEffect = 'move';
   const target = e.currentTarget;
   if (target !== draggedSidebarBtn && target.classList.contains('sidebar-button')) {
-    target.classList.add('drag-over');
+    const rect = target.getBoundingClientRect();
+    const isBefore = e.clientX < rect.left + rect.width / 2;
+    
+    target.classList.remove('drag-over-before', 'drag-over-after');
+    if (isBefore) {
+      target.classList.add('drag-over-before');
+    } else {
+      target.classList.add('drag-over-after');
+    }
   }
 }
 
 function handleSidebarDrop(e) {
+  if (!draggedSidebarBtn) return;
   e.preventDefault();
   e.stopPropagation();
   const target = e.currentTarget;
-  target.classList.remove('drag-over');
+  const isBefore = target.classList.contains('drag-over-before');
+  target.classList.remove('drag-over-before', 'drag-over-after');
 
   if (draggedSidebarBtn && draggedSidebarBtn !== target) {
-    const container = target.parentNode;
-    const allBtns = Array.from(container.children).filter(c => c.classList.contains('sidebar-button'));
-    const draggedIndex = allBtns.indexOf(draggedSidebarBtn);
-    const targetIndex = allBtns.indexOf(target);
-
-    if (draggedIndex < targetIndex) {
-      target.parentNode.insertBefore(draggedSidebarBtn, target.nextSibling);
-    } else {
+    if (isBefore) {
       target.parentNode.insertBefore(draggedSidebarBtn, target);
+    } else {
+      target.parentNode.insertBefore(draggedSidebarBtn, target.nextSibling);
     }
 
     // Save new order
@@ -493,7 +499,9 @@ function handleSidebarDrop(e) {
 
 function handleSidebarDragEnd(e) {
   e.currentTarget.classList.remove('dragging');
-  document.querySelectorAll('.sidebar-button.drag-over').forEach(el => el.classList.remove('drag-over'));
+  document.querySelectorAll('.sidebar-button.drag-over-before, .sidebar-button.drag-over-after').forEach(el => {
+    el.classList.remove('drag-over-before', 'drag-over-after');
+  });
   draggedSidebarBtn = null;
 }
 
@@ -502,16 +510,19 @@ async function saveSidebarOrder() {
     const container = document.getElementById('sidebar-buttons-container');
     const allBtns = Array.from(container.children).filter(c => c.classList.contains('sidebar-button'));
     
-    // Map DOM elements back to button objects from our state
-    const reorderedButtons = allBtns.map(btnEl => {
-      const dbId = btnEl.dataset.dbId;
-      return sidebarButtons.find(b => b._id === dbId);
-    }).filter(Boolean);
+    const order = allBtns.map((btn, index) => {
+      const dbId = btn.dataset.dbId;
+      const button = sidebarButtons.find(b => b._id === dbId);
+      return {
+        id: button ? button.id : dbId,
+        order: index
+      };
+    });
 
-    await window.convexMutation("functions:updateAllSidebarButtons", { buttons: reorderedButtons });
+    await window.convexMutation("functions:updateSidebarOrder", { order });
     console.log('✅ Sidebar order saved');
-    // Update local state to match new order
-    sidebarButtons = reorderedButtons;
+    // Refresh local state
+    await loadSidebarButtons();
   } catch (error) {
     console.error('❌ Error saving sidebar order:', error);
   }
