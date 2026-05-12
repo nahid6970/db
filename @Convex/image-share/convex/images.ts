@@ -268,6 +268,7 @@ export const getSettings = query({
     const settings = await ctx.db.query("settings").unique();
     return settings || { 
       storageType: "cloudinary",
+      pdfStorageType: "cloudinary",
       megaEmail: "",
       megaPassword: "",
       megaSubfolder: "",
@@ -283,6 +284,7 @@ export const getSettings = query({
 export const updateSettings = mutation({
   args: { 
     storageType: v.string(),
+    pdfStorageType: v.optional(v.string()),
     megaEmail: v.optional(v.string()),
     megaPassword: v.optional(v.string()),
     megaSubfolder: v.optional(v.string()),
@@ -296,6 +298,7 @@ export const updateSettings = mutation({
     const settings = await ctx.db.query("settings").unique();
     const data = { 
       storageType: args.storageType,
+      pdfStorageType: args.pdfStorageType || (settings?.pdfStorageType || args.storageType),
       megaEmail: args.megaEmail,
       megaPassword: args.megaPassword,
       megaSubfolder: args.megaSubfolder,
