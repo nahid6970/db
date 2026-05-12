@@ -148,6 +148,13 @@ export const togglePin = mutation({
   },
 });
 
+export const renameImage = mutation({
+  args: { id: v.id("images"), filename: v.string() },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { filename: args.filename });
+  },
+});
+
 export const moveToFolder = mutation({
   args: { imageId: v.id("images"), folderId: v.optional(v.string()) },
   handler: async (ctx, args) => {

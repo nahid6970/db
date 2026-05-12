@@ -830,6 +830,11 @@
     <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
   </div>
 
+  <div class="context-menu" id="imageContextMenu">
+    <button onclick="renameImageFromMenu()">Rename</button>
+    <button class="danger-item" onclick="deleteImageFromMenu()">Delete</button>
+  </div>
+
   <div class="popup-container hidden" id="settingsModal">
     <div class="Menu">
       <div class="popup-header">
@@ -1404,10 +1409,10 @@
     });
 
     window.addEventListener('click', (e) => {
-      const menu = document.getElementById('folderContextMenu');
-      if (!menu.contains(e.target)) {
-        closeFolderContextMenu();
-      }
+      const fMenu = document.getElementById('folderContextMenu');
+      const iMenu = document.getElementById('imageContextMenu');
+      if (!fMenu.contains(e.target)) closeFolderContextMenu();
+      if (!iMenu.contains(e.target)) closeImageContextMenu();
     });
 
     window.addEventListener('scroll', () => {
@@ -2161,10 +2166,60 @@
     };
 
     window.deleteFolderFromMenu = async function() {
-      if (!folderContextMenuId) return;
-      const id = folderContextMenuId;
-      closeFolderContextMenu();
-      await deleteFolder(id);
+      if (folderContextMenuId) {
+        const id = folderContextMenuId;
+        closeFolderContextMenu();
+        await deleteFolder(id);
+      }
+    };
+
+    let imageContextMenuId = null;
+
+    window.openImageContextMenu = function(event, id) {
+      event.preventDefault();
+      if (selectedImageIds.size > 1 && selectedImageIds.has(id)) {
+        // Optional: show bulk actions menu? For now, just return or show single.
+      }
+
+      const menu = document.getElementById('imageContextMenu');
+      imageContextMenuId = id;
+      pauseAutoRefresh();
+
+      menu.style.left = `${event.clientX}px`;
+      menu.style.top = `${event.clientY}px`;
+      menu.classList.add('visible');
+    };
+
+    window.closeImageContextMenu = function() {
+      document.getElementById('imageContextMenu').classList.remove('visible');
+      imageContextMenuId = null;
+    };
+
+    window.renameImageFromMenu = async function() {
+      if (!imageContextMenuId) return;
+      const imgs = window._lastImages;
+      const img = imgs.find(i => i._id === imageContextMenuId);
+      if (!img) return;
+
+      const nextName = await showDialog('Rename Image', img.filename);
+      if (!nextName || !nextName.trim() || nextName.trim() === img.filename) {
+        closeImageContextMenu();
+        return;
+      }
+
+      await client.mutation(api.images.renameImage, {
+        id: img._id,
+        filename: nextName.trim(),
+      });
+      closeImageContextMenu();
+    };
+
+    window.deleteImageFromMenu = async function() {
+      if (imageContextMenuId) {
+        const id = imageContextMenuId;
+        closeImageContextMenu();
+        await deleteImage(id);
+      }
     };
 
     window.moveImageToFolder = async function(imageId, selectEl) {
@@ -2241,6 +2296,7 @@
           class="image-card ${selectedImageIds.has(img._id) ? 'selected' : ''} ${img.pinned ? 'pinned' : ''}"
           data-id="${img._id}"
           onmouseenter="selectImageByHover('${img._id}')"
+          oncontextmenu="openImageContextMenu(event, '${img._id}')"
         >
           <img 
             ${isMega && !isPdf ? `data-mega-url="${img.url}"` : ''} 
