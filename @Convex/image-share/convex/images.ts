@@ -201,6 +201,19 @@ export const updateFolder = mutation({
   },
 });
 
+export const reorderFolders = mutation({
+  args: {
+    folderIds: v.array(v.id("folders")),
+  },
+  handler: async (ctx, args) => {
+    await Promise.all(
+      args.folderIds.map((id, index) =>
+        ctx.db.patch(id, { position: index })
+      )
+    );
+  },
+});
+
 export const setFolderPassword = mutation({
   args: {
     id: v.id("folders"),

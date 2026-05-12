@@ -68,6 +68,17 @@
       color: white;
       box-shadow: 0 8px 18px rgba(0, 123, 255, 0.22);
     }
+
+    .folder-chip.dragging {
+      opacity: 0.5;
+      background: #e2e8f0;
+      border-style: dashed;
+    }
+
+    .folder-chip.drag-over {
+      border-left: 3px solid #3b82f6;
+      padding-left: 8px;
+    }
     
     .upload-controls {
       display: flex;
@@ -1973,11 +1984,18 @@
             onclick="handleFolderAction(${folder.id === null ? 'null' : `'${folder.id}'`})"
           >${folder.name}</button>
         `),
-        ...folders.map(folder => `
+        ...folders.map((folder, index) => `
           <button
             class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
             onclick="handleFolderAction('${folder._id}')"
             oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
+            draggable="true"
+            ondragstart="onFolderDragStart(event, '${folder._id}')"
+            ondragover="onFolderDragOver(event)"
+            ondragleave="onFolderDragLeave(event)"
+            ondrop="onFolderDrop(event, '${folder._id}')"
+            ondragend="onFolderDragEnd(event)"
+            data-index="${index}"
           >
             <span>${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}${folder.hideFromAll ? `<span class="hidden-dot" title="Hidden from All view"></span>` : ''}</span>
           </button>
@@ -1993,6 +2011,61 @@
       folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
     }
+
+    let draggedFolderId = null;
+
+    window.onFolderDragStart = function(e, id) {
+      draggedFolderId = id;
+      e.target.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', id);
+    };
+
+    window.onFolderDragOver = function(e) {
+      e.preventDefault();
+      const chip = e.target.closest('.folder-chip');
+      if (chip && !chip.classList.contains('dragging')) {
+        chip.classList.add('drag-over');
+      }
+      return false;
+    };
+
+    window.onFolderDragLeave = function(e) {
+      const chip = e.target.closest('.folder-chip');
+      if (chip) chip.classList.remove('drag-over');
+    };
+
+    window.onFolderDrop = async function(e, targetId) {
+      e.preventDefault();
+      const chip = e.target.closest('.folder-chip');
+      if (chip) chip.classList.remove('drag-over');
+
+      if (draggedFolderId === targetId) return;
+
+      const draggedIndex = folders.findIndex(f => f._id === draggedFolderId);
+      const targetIndex = folders.findIndex(f => f._id === targetId);
+      
+      if (draggedIndex === -1 || targetIndex === -1) return;
+
+      const newFolders = [...folders];
+      const [moved] = newFolders.splice(draggedIndex, 1);
+      newFolders.splice(targetIndex, 0, moved);
+
+      // Optimistic update locally
+      folders = newFolders;
+      renderFolderBar();
+
+      // Persist to backend
+      await client.mutation(api.images.reorderFolders, {
+        folderIds: newFolders.map(f => f._id)
+      });
+    };
+
+    window.onFolderDragEnd = function(e) {
+      e.target.classList.remove('dragging');
+      document.querySelectorAll('.folder-chip').forEach(c => c.classList.remove('drag-over'));
+      draggedFolderId = null;
+    };
 
     window.handleFolderAction = async function(folderId) {
       if (selectedImageIds.size > 0) {
