@@ -1012,6 +1012,7 @@
     const api = anyApi;
 
     let storageType = "cloudinary";
+    let pdfStorageType = "cloudinary";
     let megaSettings = { email: '', password: '', subfolder: '' };
     let megaStorage = null;
     let uiColors = { cloudinary: '#0369a1', convex: '#ec4899', mega: '#ef4444' };
@@ -1109,6 +1110,10 @@
       for (const radio of radios) {
         if (radio.value === storageType) radio.checked = true;
       }
+      const pdfRadios = document.getElementsByName('pdfStorageTypeRadio');
+      for (const radio of pdfRadios) {
+        if (radio.value === pdfStorageType) radio.checked = true;
+      }
       updateMegaConfigVisibility();
       ['cloudinary', 'convex', 'mega'].forEach(p => updateColorPreview(p));
       document.getElementById('settingsModal').classList.remove('hidden');
@@ -1167,6 +1172,25 @@
         updateActiveStorageBadge();
         await client.mutation(api.images.updateSettings, {
           storageType: newType,
+          megaEmail: megaSettings.email,
+          megaPassword: megaSettings.password,
+          megaSubfolder: megaSettings.subfolder,
+          colors: uiColors
+        });
+      }
+    };
+
+    window.updatePdfStorageType = async function() {
+      const radios = document.getElementsByName('pdfStorageTypeRadio');
+      let newType = pdfStorageType;
+      for (const radio of radios) {
+        if (radio.checked) newType = radio.value;
+      }
+      if (newType !== pdfStorageType) {
+        pdfStorageType = newType;
+        await client.mutation(api.images.updateSettings, {
+          storageType: storageType,
+          pdfStorageType: newType,
           megaEmail: megaSettings.email,
           megaPassword: megaSettings.password,
           megaSubfolder: megaSettings.subfolder,
@@ -1235,6 +1259,7 @@
     function subscribeToSettings() {
       client.onUpdate(api.images.getSettings, {}, (settings) => {
         storageType = settings.storageType;
+        pdfStorageType = settings.pdfStorageType || settings.storageType;
         megaSettings = {
           email: settings.megaEmail || '',
           password: settings.megaPassword || '',
@@ -1250,6 +1275,10 @@
         const radios = document.getElementsByName('storageTypeRadio');
         for (const radio of radios) {
           if (radio.value === storageType) radio.checked = true;
+        }
+        const pdfRadios = document.getElementsByName('pdfStorageTypeRadio');
+        for (const radio of pdfRadios) {
+          if (radio.value === pdfStorageType) radio.checked = true;
         }
         updateActiveStorageBadge();
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
@@ -1767,7 +1796,10 @@
         const filename = `export-${Date.now()}.pdf`;
         const pdfFile = new File([pdfBlob], filename, { type: 'application/pdf' });
         
+        const prevStorageType = storageType;
+        storageType = pdfStorageType;
         const success = await performUpload(pdfFile);
+        storageType = prevStorageType;
         
         if (success) {
           status.textContent = 'PDF Exported & Uploaded!';
