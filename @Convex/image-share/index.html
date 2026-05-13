@@ -745,20 +745,23 @@
     #lbPrev { left: 12px; }
     #lbNext { right: 12px; }
     #lbClose {
-      position: absolute; top: 12px; right: 14px;
       background: none; border: none; color: #aaa;
       font-size: 28px; cursor: pointer; line-height: 1;
-      z-index: 8100;
+      z-index: 8100; padding: 0 2px;
     }
     #lbClose:hover { color: #fff; }
     #lbExternal {
-      position: absolute; top: 12px; right: 54px;
       background: none; border: none; color: #aaa;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       z-index: 8100; padding: 4px; border-radius: 4px;
     }
     #lbExternal:hover { color: #fff; background: rgba(255,255,255,0.1); }
-    #lbExternal svg { width: 22px; height: 22px; }
+    #lbExternal svg { width: 20px; height: 20px; }
+    #lbActions {
+      position: absolute; top: 12px; right: 14px;
+      display: flex; align-items: center; gap: 4px;
+      z-index: 8100;
+    }
     #lbCounter {
       position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
       color: #888; font-size: 13px;
@@ -2631,14 +2634,16 @@
     <button class="lb-nav" id="lbPrev" onclick="lbNav(-1)">&#8249;</button>
     <img id="lightboxImg" src="" alt="">
     <button class="lb-nav" id="lbNext" onclick="lbNav(1)">&#8250;</button>
-    <button id="lbExternal" onclick="openCurrentLightboxImageInNewTab()" title="Open in New Tab">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-        <polyline points="15 3 21 3 21 9"></polyline>
-        <line x1="10" y1="14" x2="21" y2="3"></line>
-      </svg>
-    </button>
-    <button id="lbClose" onclick="closeLightbox()">&times;</button>
+    <div id="lbActions">
+      <button id="lbExternal" onclick="openCurrentLightboxImageInNewTab()" title="Open in New Tab">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+          <polyline points="15 3 21 3 21 9"></polyline>
+          <line x1="10" y1="14" x2="21" y2="3"></line>
+        </svg>
+      </button>
+      <button id="lbClose" onclick="closeLightbox()">&times;</button>
+    </div>
     <span id="lbCounter"></span>
   </div>
 
