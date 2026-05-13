@@ -844,6 +844,7 @@
   <div class="context-menu" id="imageContextMenu">
     <button onclick="shareImageFromMenu()" id="shareBtn">Share Link</button>
     <button onclick="unshareImageFromMenu()" id="unshareBtn" style="display: none;">Remove Share</button>
+    <button onclick="openImageInNewTabFromMenu()">Open in New Tab</button>
     <button onclick="renameImageFromMenu()">Rename</button>
     <button class="danger-item" onclick="deleteImageFromMenu()">Delete</button>
   </div>
@@ -2371,6 +2372,31 @@
       await client.mutation(api.images.toggleSharing, { id: img._id, isShared: false });
       closeImageContextMenu();
       await showAlert('Sharing removed.');
+    };
+
+    window.openImageInNewTabFromMenu = async function() {
+      if (!imageContextMenuId) return;
+      const img = window._lastImages.find(i => i._id === imageContextMenuId);
+      if (!img) return;
+
+      closeImageContextMenu();
+
+      let url = img.url;
+      const isMega = !!(url && url.includes('mega.nz'));
+      if (isMega) {
+        const status = document.getElementById('status');
+        if (status) {
+          status.textContent = 'Decrypting MEGA file...';
+          status.style.color = '#007bff';
+        }
+        url = await getMegaBlobUrl(img.url, img.filename);
+        if (status) status.textContent = '';
+        if (!url) {
+          await showAlert('Failed to decrypt MEGA file.');
+          return;
+        }
+      }
+      window.open(url, '_blank');
     };
 
     window.renameImageFromMenu = async function() {
