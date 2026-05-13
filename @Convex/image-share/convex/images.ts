@@ -262,6 +262,42 @@ export const toggleHideFromAll = mutation({
   },
 });
 
+export const setShareToken = mutation({
+  args: { id: v.id("images") },
+  handler: async (ctx, args) => {
+    const token = Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2);
+    await ctx.db.patch(args.id, { shareToken: token });
+    return token;
+  },
+});
+
+export const removeShareToken = mutation({
+  args: { id: v.id("images") },
+  handler: async (ctx, args) => {
+    await ctx.db.patch(args.id, { shareToken: undefined });
+  },
+});
+
+export const getByShareToken = query({
+  args: { token: v.string() },
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("images")
+      .filter((q) => q.eq(q.field("shareToken"), args.token))
+      .unique();
+  },
+});
+
+export const listShared = query({
+  args: {},
+  handler: async (ctx) => {
+    const images = await ctx.db.query("images").collect();
+    return images
+      .filter((img) => img.shareToken)
+      .sort((a, b) => b.timestamp - a.timestamp);
+  },
+});
+
 export const getSettings = query({
   args: {},
   handler: async (ctx) => {
