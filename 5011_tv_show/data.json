@@ -4311,6 +4311,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 7,
+                "title": "The Boys - S05E07 - The Frenchman, the Female, and the Man Called Mother's Milk WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-13T14:56:33.494984",
+                "notify": "unseen"
+            },
+            {
                 "id": 6,
                 "title": "The Boys - S05E06 - Though the Heavens Fall WEBDL-1080p",
                 "watched": true,
