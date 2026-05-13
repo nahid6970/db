@@ -751,6 +751,14 @@
       z-index: 8100;
     }
     #lbClose:hover { color: #fff; }
+    #lbExternal {
+      position: absolute; top: 12px; right: 54px;
+      background: none; border: none; color: #aaa;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      z-index: 8100; padding: 4px; border-radius: 4px;
+    }
+    #lbExternal:hover { color: #fff; background: rgba(255,255,255,0.1); }
+    #lbExternal svg { width: 22px; height: 22px; }
     #lbCounter {
       position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
       color: #888; font-size: 13px;
@@ -1889,6 +1897,31 @@
       showLightbox();
     };
 
+    window.openCurrentLightboxImageInNewTab = async function() {
+      const imgs = window._lastImages;
+      if (!imgs || !imgs.length) return;
+      const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+      const img = sorted[_lbIndex];
+      if (!img) return;
+
+      let url = img.url;
+      const isMega = !!(url && url.includes('mega.nz'));
+      if (isMega) {
+        const status = document.getElementById('status');
+        if (status) {
+          status.textContent = 'Decrypting MEGA file...';
+          status.style.color = '#007bff';
+        }
+        url = await getMegaBlobUrl(img.url, img.filename);
+        if (status) status.textContent = '';
+        if (!url) {
+          await showAlert('Failed to decrypt MEGA file.');
+          return;
+        }
+      }
+      window.open(url, '_blank');
+    };
+
     window.closeLightbox = function() {
       const lb = document.getElementById('lightbox');
       lb.classList.add('hidden');
@@ -2598,6 +2631,13 @@
     <button class="lb-nav" id="lbPrev" onclick="lbNav(-1)">&#8249;</button>
     <img id="lightboxImg" src="" alt="">
     <button class="lb-nav" id="lbNext" onclick="lbNav(1)">&#8250;</button>
+    <button id="lbExternal" onclick="openCurrentLightboxImageInNewTab()" title="Open in New Tab">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <line x1="10" y1="14" x2="21" y2="3"></line>
+      </svg>
+    </button>
     <button id="lbClose" onclick="closeLightbox()">&times;</button>
     <span id="lbCounter"></span>
   </div>
