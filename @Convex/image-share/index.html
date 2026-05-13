@@ -842,9 +842,9 @@
   </div>
 
   <div class="context-menu" id="imageContextMenu">
+    <button onclick="shareImageFromMenu()" id="shareBtn">Share Link</button>
+    <button onclick="unshareImageFromMenu()" id="unshareBtn" style="display: none;">Remove Share</button>
     <button onclick="renameImageFromMenu()">Rename</button>
-    <button onclick="shareImageFromMenu()" id="shareImageBtn">Share Link</button>
-    <button onclick="removeShareFromMenu()" id="removeShareBtn" class="danger-item" style="display:none">Remove Share Link</button>
     <button class="danger-item" onclick="deleteImageFromMenu()">Delete</button>
   </div>
 
@@ -1358,7 +1358,7 @@
     }
 
     function normalizeCurrentFolderId() {
-      if (currentFolderId === null || currentFolderId === 'none' || currentFolderId === 'shared') {
+      if (currentFolderId === null || currentFolderId === 'none') {
         return;
       }
 
@@ -1527,7 +1527,7 @@
             storageId,
             filename: file.name,
             fileSize: Number(file.size),
-            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            folderId: (currentFolderId === 'none' || currentFolderId === 'shared') ? undefined : (currentFolderId || undefined)
           });
         } else if (storageType === "mega") {
           const MegaStorage = window.mega && window.mega.Storage;
@@ -1558,7 +1558,7 @@
             url: link,
             filename: file.name,
             fileSize: Number(file.size),
-            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            folderId: (currentFolderId === 'none' || currentFolderId === 'shared') ? undefined : (currentFolderId || undefined)
           });
         } else {
           const formData = new FormData();
@@ -1574,7 +1574,7 @@
             url: data.secure_url,
             filename: file.name,
             fileSize: Number(file.size),
-            folderId: currentFolderId === 'none' ? undefined : (currentFolderId || undefined)
+            folderId: (currentFolderId === 'none' || currentFolderId === 'shared') ? undefined : (currentFolderId || undefined)
           });
         }
         return true;
@@ -2038,7 +2038,7 @@
       const baseFolders = [
         { id: null, name: 'All' },
         { id: 'none', name: 'No folder' },
-        { id: 'shared', name: '🔗 SHARED' },
+        { id: 'shared', name: 'SHARED' },
       ];
 
       const chips = [
@@ -2133,8 +2133,8 @@
 
     window.handleFolderAction = async function(folderId) {
       if (selectedImageIds.size > 0) {
-        if (folderId === null || folderId === 'shared') {
-          await selectFolder(folderId === 'shared' ? 'shared' : null);
+        if (folderId === null) {
+          await selectFolder(null);
           return;
         }
         await moveSelectedImages(folderId === 'none' ? undefined : folderId);
@@ -2319,14 +2319,22 @@
       }
 
       const menu = document.getElementById('imageContextMenu');
+      const shareBtn = document.getElementById('shareBtn');
+      const unshareBtn = document.getElementById('unshareBtn');
+      
+      const img = window._lastImages.find(i => i._id === id);
+      if (img) {
+        if (img.isShared) {
+          shareBtn.style.display = 'none';
+          unshareBtn.style.display = 'block';
+        } else {
+          shareBtn.style.display = 'block';
+          unshareBtn.style.display = 'none';
+        }
+      }
+
       imageContextMenuId = id;
       pauseAutoRefresh();
-
-      // Show/hide share buttons based on whether image already has a share token
-      const img = (window._lastImages || []).find(i => i._id === id);
-      const hasToken = !!(img && img.shareToken);
-      document.getElementById('shareImageBtn').style.display = hasToken ? 'none' : 'block';
-      document.getElementById('removeShareBtn').style.display = hasToken ? 'block' : 'none';
 
       menu.style.left = `${event.clientX}px`;
       menu.style.top = `${event.clientY}px`;
@@ -2336,6 +2344,33 @@
     window.closeImageContextMenu = function() {
       document.getElementById('imageContextMenu').classList.remove('visible');
       imageContextMenuId = null;
+    };
+
+    window.shareImageFromMenu = async function() {
+      if (!imageContextMenuId) return;
+      const img = window._lastImages.find(i => i._id === imageContextMenuId);
+      if (!img) return;
+
+      await client.mutation(api.images.toggleSharing, { id: img._id, isShared: true });
+      closeImageContextMenu();
+
+      // Copy link to clipboard
+      try {
+        await navigator.clipboard.writeText(img.url);
+        await showAlert('Link copied to clipboard!');
+      } catch (err) {
+        await showAlert('Failed to copy link, but sharing is enabled.');
+      }
+    };
+
+    window.unshareImageFromMenu = async function() {
+      if (!imageContextMenuId) return;
+      const img = window._lastImages.find(i => i._id === imageContextMenuId);
+      if (!img) return;
+
+      await client.mutation(api.images.toggleSharing, { id: img._id, isShared: false });
+      closeImageContextMenu();
+      await showAlert('Sharing removed.');
     };
 
     window.renameImageFromMenu = async function() {
@@ -2363,24 +2398,6 @@
         closeImageContextMenu();
         await deleteImage(id);
       }
-    };
-
-    window.shareImageFromMenu = async function() {
-      if (!imageContextMenuId) return;
-      const id = imageContextMenuId;
-      closeImageContextMenu();
-      const token = await client.mutation(api.images.setShareToken, { id });
-      const shareUrl = `${location.origin}${location.pathname}?share=${token}`;
-      await navigator.clipboard.writeText(shareUrl).catch(() => {});
-      await showAlert(`Share link copied!\n${shareUrl}`);
-    };
-
-    window.removeShareFromMenu = async function() {
-      if (!imageContextMenuId) return;
-      const id = imageContextMenuId;
-      closeImageContextMenu();
-      await client.mutation(api.images.removeShareToken, { id });
-      await showAlert('Share link removed.');
     };
 
     window.moveImageToFolder = async function(imageId, selectEl) {
@@ -2529,49 +2546,18 @@
 
     function subscribeToImages() {
       imageSubscriptionCleanup?.();
-      if (currentFolderId === 'shared') {
-        imageSubscriptionCleanup = client.onUpdate(
-          api.images.listShared,
-          {},
-          (images) => { renderImages(images); }
-        );
-      } else {
-        imageSubscriptionCleanup = client.onUpdate(
-          api.images.list,
-          { folderId: currentFolderId || undefined },
-          (images) => { renderImages(images); }
-        );
-      }
+      imageSubscriptionCleanup = client.onUpdate(
+        api.images.list,
+        { folderId: currentFolderId || undefined },
+        (images) => {
+          renderImages(images);
+        }
+      );
     }
     
     // Initial load
     subscribeToSettings();
     applySortIcon();
-
-    // Handle ?share=TOKEN — show shared image view
-    const shareToken = new URLSearchParams(location.search).get('share');
-    if (shareToken) {
-      document.body.innerHTML = `
-        <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#111;color:#eee;font-family:sans-serif;padding:24px;">
-          <div id="shareView" style="max-width:800px;width:100%;text-align:center;">
-            <p style="color:#888;margin-bottom:16px;">Loading shared file…</p>
-          </div>
-        </div>`;
-      const img = await client.query(api.images.getByShareToken, { token: shareToken });
-      const view = document.getElementById('shareView');
-      if (!img) {
-        view.innerHTML = '<p style="color:#f87171;">This share link is invalid or has been removed.</p>';
-      } else {
-        const isImg = /\.(png|jpe?g|gif|webp|bmp|svg)$/i.test(img.filename);
-        view.innerHTML = `
-          <h2 style="margin-bottom:16px;font-size:18px;color:#ccc;">${img.filename}</h2>
-          ${isImg ? `<img src="${img.url}" style="max-width:100%;max-height:80vh;border-radius:8px;box-shadow:0 4px 32px #0008;" alt="${img.filename}">` : `<a href="${img.url}" target="_blank" style="color:#60a5fa;font-size:16px;">Open / Download file</a>`}
-          <p style="margin-top:16px;"><a href="${img.url}" download="${img.filename}" style="color:#60a5fa;">⬇ Download</a></p>
-          <p style="margin-top:24px;"><a href="${location.pathname}" style="color:#888;font-size:13px;">← Back to gallery</a></p>`;
-      }
-      return; // Don't load the rest of the app
-    }
-
     subscribeToFolders();
     renderFolderBar();
     if (!(await ensureFolderAccess(currentFolderId))) {
