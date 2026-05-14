@@ -1668,9 +1668,8 @@
     };
     
     window.downloadFolder = async function() {
-      const gallery = document.getElementById('gallery');
-      const cards = gallery.querySelectorAll('.image-card');
-      if (!cards.length) {
+      const imgs = window._lastImages;
+      if (!imgs || !imgs.length) {
         await showAlert('No images to download.');
         return;
       }
@@ -1680,26 +1679,32 @@
       status.style.color = '#007bff';
 
       const zip = new JSZip();
-      const folderName = currentFolderId === 'none' ? 'no-folder' : 
+      const folderName = currentFolderId === 'none' ? 'no-folder' :
                          (folders.find(f => f._id === currentFolderId)?.name || 'all-images');
-      
-      try {
-        for (let i = 0; i < cards.length; i++) {
-          const card = cards[i];
-          const img = card.querySelector('img');
-          const filename = img.alt || `image-${i}.jpg`;
-          const url = img.src;
 
-          status.textContent = `Fetching image ${i + 1} of ${cards.length}...`;
-          
-          const response = await fetch(url);
-          const blob = await response.blob();
+      try {
+        for (let i = 0; i < imgs.length; i++) {
+          const imgData = imgs[i];
+          const filename = imgData.filename || `file-${i}`;
+          const isMega = imgData.url && imgData.url.includes('mega.nz');
+
+          status.textContent = `Fetching file ${i + 1} of ${imgs.length}...`;
+
+          let blob;
+          if (isMega) {
+            const blobUrl = await getMegaBlobUrl(imgData.url, filename);
+            const res = await fetch(blobUrl);
+            blob = await res.blob();
+          } else {
+            const res = await fetch(imgData.url);
+            blob = await res.blob();
+          }
           zip.file(filename, blob);
         }
 
         status.textContent = 'Generating ZIP file...';
         const content = await zip.generateAsync({ type: 'blob' });
-        
+
         const link = document.createElement('a');
         link.href = URL.createObjectURL(content);
         link.download = `${folderName}.zip`;
