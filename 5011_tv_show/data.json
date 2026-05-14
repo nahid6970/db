@@ -1033,6 +1033,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 16,
+                "title": "Dr. STONE - s04e31 - [89] - UNKNOWN KNOWN HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-05-14T21:42:36.005854",
+                "notify": "unseen"
+            },
+            {
                 "id": 15,
                 "title": "Dr. STONE - s04e30 - [88] - STONE TO SPACE HDTV-1080p - [SubsPlease]",
                 "watched": true,
