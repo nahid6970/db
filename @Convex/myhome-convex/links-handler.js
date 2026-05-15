@@ -1201,10 +1201,8 @@ async function handleUrlOpening(url) {
     if (window.location.protocol === 'file:') {
       window.location.href = url;
     } else {
-      const opened = await (window.openLocalFileViaExtension?.(url) || Promise.resolve(false));
-      if (!opened) {
-        copyToClipboard(url, 'Local file URL copied. Reload the extension and allow file access if direct open is blocked.');
-      }
+      copyToClipboard(url, 'Local file URL copied! Open a new tab and paste (Ctrl+V)');
+      window.open('about:blank', '_blank');
     }
   } else {
     window.open(url, target);
