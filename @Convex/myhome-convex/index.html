@@ -40,6 +40,10 @@
       <input type="checkbox" id="setting-hide-group-names" onchange="window.applySettings()">
       Hide group names
     </label>
+    <label style="display:flex;align-items:center;gap:8px;color:#ccc;cursor:pointer;margin-top:8px;">
+      <input type="checkbox" id="setting-open-same-tab" onchange="window.applySettings()">
+      Open links in same tab
+    </label>
   </div>
 
   <div class="flex-container2">
@@ -869,6 +873,7 @@
         var s = loadSettings();
         var hideNames = document.getElementById('setting-hide-group-names').checked;
         s.hideGroupNames = hideNames;
+        s.openSameTab = document.getElementById('setting-open-same-tab').checked;
         saveSettings(s);
         // Toggle CSS class on body
         document.body.classList.toggle('hide-group-names', hideNames);
@@ -880,6 +885,9 @@
         if (s.hideGroupNames) {
           document.getElementById('setting-hide-group-names').checked = true;
           document.body.classList.add('hide-group-names');
+        }
+        if (s.openSameTab) {
+          document.getElementById('setting-open-same-tab').checked = true;
         }
       });
     })();

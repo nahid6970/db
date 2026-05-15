@@ -1258,7 +1258,7 @@ function createLinkItem(link, index) {
     a.href = runtimeUrl;
   }
   
-  a.target = '_blank';
+  a.target = (function() { try { var s = JSON.parse(localStorage.getItem('myhome-settings') || '{}'); return s.openSameTab ? '_self' : '_blank'; } catch(e) { return '_blank'; } })();
   a.title = link.title || link.name || link.url || ''; // Prefer custom tooltip over raw URL
 
   // Render content based on type
