@@ -1186,9 +1186,12 @@ function fallbackCopy(text, successMsg) {
 async function handleUrlOpening(url) {
   if (!url) return;
 
+  const openSameTab = (function() { try { return JSON.parse(localStorage.getItem('myhome-settings') || '{}').openSameTab; } catch(e) { return false; } })();
+  const target = openSameTab ? '_self' : '_blank';
+
   const hostedProjectUrl = window.getHostedProjectUrl?.(url);
   if (hostedProjectUrl) {
-    window.open(hostedProjectUrl, '_blank');
+    window.open(hostedProjectUrl, target);
     return;
   }
   
@@ -1204,7 +1207,7 @@ async function handleUrlOpening(url) {
       }
     }
   } else {
-    window.open(url, '_blank');
+    window.open(url, target);
   }
 }
 
