@@ -1,6 +1,8 @@
 import { ConvexHttpClient } from "https://esm.sh/convex@1.16.0/browser";
 import { api } from "./convex/_generated/api.js";
 
+window.APP_VERSION = "20260515-2154";
+
 const client = new ConvexHttpClient("https://lovable-wildcat-595.convex.cloud");
 
 window.convexClient = client;
