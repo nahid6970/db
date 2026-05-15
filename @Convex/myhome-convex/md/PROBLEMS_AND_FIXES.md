@@ -2,6 +2,30 @@
 
 ---
 
+## [2026-05-15] - Links Ignoring "Open in Same Tab" Setting
+
+**Problem:** Setting `a.target = '_self'` had no effect — links still opened in a new tab.
+
+**Root Cause:** `a.onclick` calls `e.preventDefault()` then `handleUrlOpening()`, which always used `window.open(url, '_blank')`. The `a.target` attribute is irrelevant when `preventDefault` is called.
+
+**Solution:** Updated `handleUrlOpening()` to read `localStorage('myhome-settings').openSameTab` and use `_self` or `_blank` accordingly.
+
+**Files Modified:** `links-handler.js`
+
+---
+
+## [2026-05-15] - Local File Extension Opening Not Working
+
+**Problem:** Clicking `file:///` links on GitHub Pages showed the extension error message even after implementing `openLocalFileViaExtension`.
+
+**Root Cause:** The chrome extension bridge approach was unreliable — extension not always active, message passing timing issues.
+
+**Solution:** Removed extension-based approach entirely. Now copies the URL to clipboard and opens `about:blank` in a new tab. User presses Ctrl+V + Enter to navigate.
+
+**Files Modified:** `links-handler.js`, `sidebar-handler.js`
+
+---
+
 ## [2026-05-04] - Wrong Password alert() Blocking UI
 
 **Problem:** Entering a wrong group password showed a browser `alert()` dialog requiring a click to dismiss, making it annoying especially on repeated attempts.

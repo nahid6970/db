@@ -3,6 +3,28 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-15 22:00] - Open in Same Tab, Local File Fix, Version Label
+
+**What We Accomplished:**
+- Added "Open links in same tab" toggle to Settings panel (persists in `localStorage` under `myhome-settings.openSameTab`)
+- Fixed: links were ignoring `a.target` because `a.onclick` calls `handleUrlOpening()` with hardcoded `window.open(..., '_blank')` — fixed `handleUrlOpening` to read the setting
+- Removed chrome-extension-based local file opening (`openLocalFileViaExtension`) from call sites — replaced with: copy URL to clipboard + open `about:blank` new tab (user presses Ctrl+V to navigate)
+- Added static version label `<div id="version-badge">v1</div>` in topbar before ⚙️ button — change text before each push to verify GitHub Pages has updated
+- Added `set_version.py` — PyQt6 GUI script to change the version label without opening a text editor
+- Added `align-items: center` to `.topbar` CSS so version badge aligns with buttons
+
+**Files Modified:**
+- `index.html` - "Open links in same tab" checkbox in settings, version badge in topbar
+- `links-handler.js` - `handleUrlOpening` respects `openSameTab` setting; local file handling uses copy+open-blank
+- `sidebar-handler.js` - local file handling uses copy+open-blank
+- `app.js` - added `window.APP_VERSION` constant (unused now, kept for reference)
+- `style.css` - `align-items: center` on `.topbar`
+- `set_version.py` - new PyQt6 GUI to update version label
+
+*Next session: Continue feature development*
+
+---
+
 ## [2026-05-05 01:20] - Custom Password Modal & Various Fixes
 
 **What We Accomplished:**

@@ -26,7 +26,18 @@
 **Description:** ⚙️ button at left of topbar opens a centered modal panel (red border) with app-wide settings. Persisted in `localStorage` under key `myhome-settings`.
 **Current Settings:**
 - Hide group names — adds `body.hide-group-names` class, CSS hides `h3` in normal groups
-**Files Involved:** `index.html`, `style.css`
+- Open links in same tab — when enabled, `handleUrlOpening` uses `window.open(url, '_self')` instead of `_blank`
+**Files Involved:** `index.html`, `style.css`, `links-handler.js`
+
+---
+
+## Static Version Label
+**Status:** ✅ Complete
+**Description:** A small label in the topbar (left of ⚙️) showing the current version text (e.g. `v1`, `v2`). Change it before each push to verify GitHub Pages has deployed the latest version.
+**Implementation:** Plain `<div id="version-badge">` in topbar. No JS logic — purely static text.
+**Helper:** `set_version.py` — PyQt6 GUI to update the label without opening a text editor.
+**Files Involved:** `index.html`, `set_version.py`
+**Usage:** Run `python set_version.py`, type new label, click Save, then push.
 
 ---
 

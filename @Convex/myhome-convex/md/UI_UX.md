@@ -9,6 +9,11 @@
 **Typography:** JetBrainsMono NFP for group buttons and icons
 **Edit Mode:** Toggle with F1 key or ✏️ Edit button. Shows drag handles, edit/delete buttons on items.
 
+### Topbar Elements (left to right)
+1. `#version-badge` — static version label (e.g. `v1`), change before each push to verify deployment
+2. `#settings-btn` ⚙️ — opens settings panel
+3. `#sidebar-buttons-container` — customizable sidebar buttons (center)
+
 ---
 
 ## Group Display
