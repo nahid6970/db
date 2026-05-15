@@ -26,6 +26,7 @@
 
 <body>
   <div class="topbar" id="topbar">
+    <div id="version-badge" title="Click to hard-refresh" onclick="location.reload(true)" style="display:none;background:#e53935;color:#fff;padding:3px 8px;border-radius:4px;font-size:12px;cursor:pointer;flex-shrink:0;margin-right:4px;">⚠️ Outdated</div>
     <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:none;border:none;color:#fff;cursor:pointer;font-size:18px;padding:4px 10px;flex-shrink:0;">⚙️</button>
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
   </div>
@@ -603,28 +604,15 @@
   <!-- Version staleness checker -->
   <script>
     (function() {
-      var badge = document.createElement('div');
-      badge.id = 'version-badge';
-      badge.title = 'Click to hard-refresh';
-      badge.onclick = function() { location.reload(true); };
-      badge.style.cssText = 'display:none;position:fixed;bottom:10px;right:10px;background:#e53935;color:#fff;padding:4px 10px;border-radius:4px;font-size:12px;cursor:pointer;z-index:9999;';
-      badge.textContent = '⚠️ Page outdated — click to refresh';
-      document.body.appendChild(badge);
-
       function check() {
         fetch('app.js?_=' + Date.now())
           .then(function(r) { return r.text(); })
           .then(function(text) {
             var m = text.match(/APP_VERSION\s*=\s*"([^"]+)"/);
-            if (m && window.APP_VERSION && m[1] !== window.APP_VERSION) {
-              badge.style.display = 'block';
-            } else {
-              badge.style.display = 'none';
-            }
+            var badge = document.getElementById('version-badge');
+            if (badge) badge.style.display = (m && window.APP_VERSION && m[1] !== window.APP_VERSION) ? 'block' : 'none';
           }).catch(function(){});
       }
-
-      // Check after 10s (let page load), then every 60s
       setTimeout(function() { check(); setInterval(check, 60000); }, 10000);
     })();
   </script>
