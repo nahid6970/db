@@ -7,9 +7,10 @@ Based on the text provided, here is the organized information for your two refer
 *   **E-mail:** dorakhaichi272@gmail.com
 *   **Address:** AAM Tower, Flat: A-8, Giridhara Residential Area
 
-### **Reference 2**
-*   **Name:** Rashik Amin, CFA
-*   **Position:** Assistant Professor
-*   **Contact Phone:** 880296619
-*   **E-mail:** amin.rashik@gmail.com
-*   **Address:** MBA Building, Dhaka University Campus
+Md. Imran Hossain
+Associate Professor (Study Leave)
+Department of Finance
+Faculty of Business Studies
+Email: imran@du.ac.bd
+Phone: +8801675550775
+MBA Building, Dhaka University Campus
