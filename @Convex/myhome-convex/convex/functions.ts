@@ -82,6 +82,9 @@ export const addLink = mutation({
     reminder_datetime: v.optional(v.string()),
     reminder_next_trigger_at: v.optional(v.number()),
     reminder_last_triggered_at: v.optional(v.number()),
+    youtube_channel_id: v.optional(v.string()),
+    youtube_last_video_id: v.optional(v.string()),
+    youtube_new_video_count: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("links", args);
@@ -154,12 +157,34 @@ export const updateLink = mutation({
     reminder_datetime: v.optional(v.string()),
     reminder_next_trigger_at: v.optional(v.number()),
     reminder_last_triggered_at: v.optional(v.number()),
+    youtube_channel_id: v.optional(v.string()),
+    youtube_last_video_id: v.optional(v.string()),
+    youtube_new_video_count: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { id, ...data } = args;
     await ctx.db.patch(id, data);
   },
 });
+
+export const updateYouTubeStatus = mutation({
+  args: {
+    id: v.union(v.id("links"), v.id("sidebar_buttons")),
+    table: v.string(), // "links" or "sidebar_buttons"
+    youtube_channel_id: v.optional(v.string()),
+    youtube_last_video_id: v.optional(v.string()),
+    youtube_new_video_count: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const { id, table, ...data } = args;
+    if (table === "links") {
+      await ctx.db.patch(id as any, data);
+    } else if (table === "sidebar_buttons") {
+      await ctx.db.patch(id as any, data);
+    }
+  },
+});
+
 
 export const deleteLink = mutation({
   args: { id: v.id("links") },
@@ -227,6 +252,9 @@ export const addSidebarButton = mutation({
     notification_api: v.optional(v.string()),
     mark_seen_api: v.optional(v.string()),
     order: v.optional(v.number()),
+    youtube_channel_id: v.optional(v.string()),
+    youtube_last_video_id: v.optional(v.string()),
+    youtube_new_video_count: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("sidebar_buttons", args);
@@ -253,6 +281,9 @@ export const updateSidebarButton = mutation({
     notification_api: v.optional(v.string()),
     mark_seen_api: v.optional(v.string()),
     order: v.optional(v.number()),
+    youtube_channel_id: v.optional(v.string()),
+    youtube_last_video_id: v.optional(v.string()),
+    youtube_new_video_count: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { dbId, ...data } = args;

@@ -69,14 +69,25 @@ export const fetchPageTitle = action({
       const title = titleMatch ? titleMatch[1].trim() : null;
       
       let channelIcon = null;
+      let youtubeChannelId = null;
 
       // 3. Specific icon extraction logic
       
-      // YouTube Channel Icon (if not handled by oEmbed)
-      if (domain.includes('youtube.com') && (args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/'))) {
-        const iconMatch = html.match(/"avatar":\{"thumbnails":\[\{"url":"([^"]+)"/);
-        if (iconMatch) {
-          channelIcon = iconMatch[1];
+      // YouTube Channel Icon & ID (if not handled by oEmbed)
+      if (domain.includes('youtube.com')) {
+        // Extract Icon
+        if (args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/')) {
+          const iconMatch = html.match(/"avatar":\{"thumbnails":\[\{"url":"([^"]+)"/);
+          if (iconMatch) {
+            channelIcon = iconMatch[1];
+          }
+        }
+        
+        // Extract Channel ID
+        const channelIdMatch = html.match(/<meta itemprop="channelId" content="(UC[^"]+)">/) || 
+                               html.match(/"channelId":"(UC[^"]+)"/);
+        if (channelIdMatch) {
+          youtubeChannelId = channelIdMatch[1];
         }
       }
       
@@ -178,15 +189,53 @@ export const fetchPageTitle = action({
       return {
         title: title || domain,
         domain: domain,
-        channelIcon: channelIcon
+        channelIcon: channelIcon,
+        youtubeChannelId: youtubeChannelId
       };
     } catch (error) {
       console.error('Fetch error:', error);
       return {
         title: domain,
         domain: domain,
-        channelIcon: null
+        channelIcon: null,
+        youtubeChannelId: null
       };
     }
   },
 });
+
+export const checkYouTubeUpdates = action({
+  args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
+  handler: async (ctx, args) => {
+    try {
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
+      const response = await fetch(rssUrl);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      
+      const xml = await response.text();
+      
+      // Simple parsing using regex for latest video ID
+      // Example: <yt:videoId>VIDEO_ID</yt:videoId>
+      const videoIdMatch = xml.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
+      const latestVideoId = videoIdMatch ? videoIdMatch[1] : null;
+      
+      if (!latestVideoId) return { count: 0, latestVideoId: null };
+      if (latestVideoId === args.lastVideoId) return { count: 0, latestVideoId };
+      
+      // Count videos (approximate by counting yt:videoId tags until we hit the last one)
+      const videoIds = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)].map(m => m[1]);
+      const lastIndex = args.lastVideoId ? videoIds.indexOf(args.lastVideoId) : -1;
+      
+      const count = lastIndex === -1 ? videoIds.length : lastIndex;
+      
+      return {
+        count: count,
+        latestVideoId: latestVideoId
+      };
+    } catch (error) {
+      console.error('YouTube update check failed:', error);
+      return { count: 0, latestVideoId: args.lastVideoId || null };
+    }
+  },
+});
+

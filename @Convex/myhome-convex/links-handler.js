@@ -561,6 +561,12 @@ async function loadLinks() {
     if (changed) {
       console.log('✅ Links refreshed from Convex');
     }
+
+    // Trigger YouTube check once
+    if (!window._youtubeChecked && window.convexClient && window.api) {
+      window._youtubeChecked = true;
+      setTimeout(checkAllYouTubeUpdates, 3000);
+    }
   } catch (error) {
     console.error('Error loading links:', error);
   }
@@ -777,6 +783,57 @@ function renderLinks() {
 
   console.log('✅ renderLinks() completed!');
 }
+
+async function checkAllYouTubeUpdates() {
+  console.log('📺 Checking YouTube updates...');
+  
+  // Combine links and sidebar buttons for checking
+  const allItems = [
+    ...links.map(l => ({ ...l, table: 'links' })),
+    ...(window.sidebarButtons || []).map(b => ({ ...b, table: 'sidebar_buttons' }))
+  ];
+  
+  const youtubeItems = allItems.filter(item => item.youtube_channel_id);
+  console.log(`📺 Found ${youtubeItems.length} YouTube channels to check`);
+  
+  for (const item of youtubeItems) {
+    try {
+      // Use window.convexClient directly if window.convexAction is not yet defined
+      const result = await window.convexClient.action(window.api.actions.checkYouTubeUpdates, {
+        channelId: item.youtube_channel_id,
+        lastVideoId: item.youtube_last_video_id
+      });
+      
+      if (result.count > 0 || (result.latestVideoId && result.latestVideoId !== item.youtube_last_video_id)) {
+        console.log(`📺 New videos found for ${item.name || 'YouTube channel'}: ${result.count}`);
+        await window.convexMutation("functions:updateYouTubeStatus", {
+          id: item._id,
+          table: item.table,
+          youtube_last_video_id: result.latestVideoId,
+          youtube_new_video_count: (item.youtube_new_video_count || 0) + result.count
+        });
+      }
+    } catch (error) {
+      console.error(`Error checking YouTube updates for ${item.name}:`, error);
+    }
+  }
+  
+  if (youtubeItems.length > 0) {
+    // Only reload once if we found any updates to refresh the UI
+    loadLinks();
+    if (window.loadSidebarButtons) window.loadSidebarButtons();
+  }
+}
+
+// Global helper for actions
+window.convexAction = async (functionPath, args) => {
+  const [module, funcName] = functionPath.split(':');
+  if (!window.convexClient || !window.api || !window.api[module] || !window.api[module][funcName]) {
+    console.error('Convex Action Helper: Dependencies not ready');
+    return;
+  }
+  return await window.convexClient.action(window.api[module][funcName], args);
+};
 
 // Create collapsible group
 function createCollapsibleGroup(groupName, items) {
@@ -1244,6 +1301,14 @@ function createLinkItem(link, index) {
     }
   }
 
+  if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
+    const youtubeBadge = document.createElement('span');
+    youtubeBadge.className = 'link-badge-count';
+    youtubeBadge.textContent = link.youtube_new_video_count;
+    youtubeBadge.title = `${link.youtube_new_video_count} new video${link.youtube_new_video_count > 1 ? 's' : ''}`;
+    li.appendChild(youtubeBadge);
+  }
+
   const a = document.createElement('a');
   const runtimeUrl = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.url) : link.url;
   
@@ -1323,6 +1388,22 @@ function createLinkItem(link, index) {
   a.onclick = (e) => {
     e.stopPropagation();
     e.preventDefault();
+
+    // Reset YouTube count if applicable
+    if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
+      try {
+        window.convexMutation("functions:updateYouTubeStatus", {
+          id: link._id,
+          table: "links",
+          youtube_new_video_count: 0
+        });
+        link.youtube_new_video_count = 0;
+        renderLinks(); // Re-render to clear badge
+      } catch (error) {
+        console.error('Error resetting YouTube count:', error);
+      }
+    }
+
     if (link.urls && link.urls.length > 1) {
       handleUrlOpening(link.urls[0]);
     } else {
@@ -1529,11 +1610,15 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
 
     // Fetch page title and YouTube channel icon if applicable
     let pageTitle = domain;
+    let youtubeChannelId = null;
     try {
       const result = await window.convexClient.action("actions:fetchPageTitle", { url });
       pageTitle = result.title;
       if (result.channelIcon) {
         faviconUrl = result.channelIcon;
+      }
+      if (result.youtubeChannelId) {
+        youtubeChannelId = result.youtubeChannelId;
       }
     } catch (error) {
       console.warn('Could not fetch page title, using domain:', error);
@@ -1564,7 +1649,8 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
       border_radius: '',
       title: pageTitle,
       hidden: false,
-      reminder_enabled: false
+      reminder_enabled: false,
+      youtube_channel_id: youtubeChannelId || undefined
     };
 
     await window.convexMutation("functions:addLink", newLink);
