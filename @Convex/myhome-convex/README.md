@@ -33,6 +33,11 @@
   - Visual separators between groups
   - "Start on New Line" toggle for groups
 
+✅ **Automated Notifications:**
+  - **YouTube Update Tracking:** Auto-detects new video uploads and shows a red badge with the count
+  - Reset notifications automatically by clicking the channel link
+  - Background RSS-based checking for updates
+
 ✅ **Link Management:**
   - Add, edit, delete, copy, hide/show
   - Multiple URLs per link

@@ -3,6 +3,32 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-18] - YouTube Update Notifications
+
+**What We Accomplished:**
+- Implemented automatic YouTube channel update tracking
+- **Backend (Convex):**
+    - Updated schema with `youtube_channel_id`, `youtube_last_video_id`, and `youtube_new_video_count`
+    - Added `checkYouTubeUpdates` action to fetch channel RSS feeds and count new videos
+    - Added `updateYouTubeStatus` mutation to reset counts when channels are visited
+- **Frontend:**
+    - Modified `links-handler.js` to extract `channelId` during link creation/update
+    - Implemented background update check on page load (3s delay)
+    - Added bottom-left notification badge showing new video count
+    - Implemented auto-reset of video count when clicking a channel link
+- **UI/UX:**
+    - Styled red notification badges at bottom-left corner of items
+
+**Files Modified:**
+- `convex/schema.ts` - added YouTube tracking fields
+- `convex/functions.ts` - added update/reset mutations
+- `convex/actions.ts` - added RSS check action and channelId extraction
+- `links-handler.js` - added background checking and badge rendering logic
+- `style.css` - added `.link-badge-count` and `.youtube-badge` styles
+- `md/FEATURES.md`, `README.md`, `md/UI_UX.md` - documentation updates
+
+---
+
 ## [2026-05-15 22:00] - Open in Same Tab, Local File Fix, Version Label
 
 **What We Accomplished:**

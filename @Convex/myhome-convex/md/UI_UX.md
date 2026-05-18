@@ -33,6 +33,12 @@
 - 30% opacity, increases to 60% on hover
 - × delete button appears on hover
 
+### YouTube Update Badge
+- Red circular/rounded badge (`#ff0000`)
+- Positioned at **bottom-left** (`bottom: -8px`, `left: -8px`)
+- Shows white numerical count of new videos
+- Disappears instantly when the item is clicked
+
 ---
 
 ## Popups

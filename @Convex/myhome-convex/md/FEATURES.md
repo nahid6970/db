@@ -189,6 +189,19 @@
 
 ---
 
+## YouTube Update Notifications
+**Status:** ✅ Complete
+**Description:** Automatically detects new video uploads for YouTube channels and displays a notification badge with the new video count.
+**Implementation:** 
+- **Auto-Detection:** Extracts `channelId` from YouTube URLs using regex during link creation/icon reload.
+- **Backend Action:** `checkYouTubeUpdates` fetches the channel's RSS feed (`feeds/videos.xml?channel_id=...`) and compares the latest video ID with the stored one.
+- **Background Check:** Runs on page load (3s delay) to fetch updates for all tracked items.
+- **Reset Logic:** Clicking the link to visit the channel resets the count to 0 via `updateYouTubeStatus` mutation.
+- **UI:** A red badge at the **bottom-left** of the item showing the number of new videos.
+**Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `convex/actions.ts`, `links-handler.js`, `style.css`
+
+---
+
 ## Known Limitations
 
 - **Group Width with Line Breaks:** When items use "Start on New Line", the group border stays as wide as all items in a single row. CSS `fit-content` doesn't shrink correctly with flex line breaks. See `md/PROBLEMS_AND_FIXES.md` for investigation notes.
