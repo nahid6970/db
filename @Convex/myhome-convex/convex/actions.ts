@@ -6,6 +6,8 @@ export const fetchPageTitle = action({
   handler: async (ctx, args) => {
     const urlObj = new URL(args.url);
     const domain = urlObj.hostname.replace('www.', '');
+    let oembedTitle: string | null = null;
+    let oembedThumbnail: string | null = null;
     
     try {
       // 1. Try oEmbed for YouTube (best for titles and thumbnails)
@@ -15,11 +17,8 @@ export const fetchPageTitle = action({
           const response = await fetch(oembedUrl);
           if (response.ok) {
             const data = await response.json();
-            return {
-              title: data.title || domain,
-              domain: domain,
-              channelIcon: data.thumbnail_url
-            };
+            oembedTitle = data.title || null;
+            oembedThumbnail = data.thumbnail_url || null;
           }
         } catch (e) {
           console.warn('YouTube oEmbed fetch failed', e);
@@ -68,7 +67,7 @@ export const fetchPageTitle = action({
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : null;
       
-      let channelIcon = null;
+      let channelIcon = oembedThumbnail;
       let youtubeChannelId = null;
 
       // 3. Specific icon extraction logic
@@ -84,8 +83,22 @@ export const fetchPageTitle = action({
         }
         
         // Extract Channel ID
-        const channelIdMatch = html.match(/<meta itemprop="channelId" content="(UC[^"]+)">/) || 
-                               html.match(/"channelId":"(UC[^"]+)"/);
+        const channelIdMatch = html.match(/<meta itemprop="channelId" content="(UC[^"]+)">/i) || 
+                               html.match(/"channelId":"(UC[^"]+)"/) ||
+                               html.match(/"externalId":"(UC[^"]+)"/) ||
+                               html.match(/"browseId":"(UC[^"]+)"/) ||
+                               html.match(/https:\/\/www\.youtube\.com\/channel\/(UC[\w-]+)/) ||
+                               html.match(/channel_id=(UC[\w-]+)/);
+        if (channelIdMatch) {
+          youtubeChannelId = channelIdMatch[1];
+        }
+      }
+
+      if (!youtubeChannelId && domain.includes('youtu.be')) {
+        const channelIdMatch = html.match(/<meta itemprop="channelId" content="(UC[^"]+)">/i) || 
+                               html.match(/"channelId":"(UC[^"]+)"/) ||
+                               html.match(/"externalId":"(UC[^"]+)"/) ||
+                               html.match(/"browseId":"(UC[^"]+)"/);
         if (channelIdMatch) {
           youtubeChannelId = channelIdMatch[1];
         }
@@ -187,7 +200,7 @@ export const fetchPageTitle = action({
       }
 
       return {
-        title: title || domain,
+        title: oembedTitle || title || domain,
         domain: domain,
         channelIcon: channelIcon,
         youtubeChannelId: youtubeChannelId
