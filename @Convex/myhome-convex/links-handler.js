@@ -1764,6 +1764,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-hidden').checked = link.hidden || false;
   document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
   document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
+  document.getElementById('edit-link-youtube-tracking').checked = !!link.youtube_channel_id;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -1822,6 +1823,37 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
     ...compactObject(reminderDraft)
   };
+
+  const isTrackingEnabled = document.getElementById('edit-link-youtube-tracking').checked;
+  const originalLink = links.find(l => l._id === id);
+
+  if (isTrackingEnabled) {
+    if (!originalLink.youtube_channel_id) {
+      // Try to fetch channel ID if not present
+      try {
+        window.showNotification('Fetching YouTube channel ID...', 'info');
+        const res = await window.convexClient.action("actions:fetchPageTitle", { url: updatedLink.url });
+        if (res.youtubeChannelId) {
+          updatedLink.youtube_channel_id = res.youtubeChannelId;
+          window.showNotification('YouTube tracking enabled!', 'success');
+        } else {
+          window.showNotification('Could not find YouTube channel ID', 'error');
+        }
+      } catch (error) {
+        console.error('Error fetching YouTube ID during save:', error);
+      }
+    } else {
+      // Keep existing
+      updatedLink.youtube_channel_id = originalLink.youtube_channel_id;
+      updatedLink.youtube_last_video_id = originalLink.youtube_last_video_id;
+      updatedLink.youtube_new_video_count = originalLink.youtube_new_video_count;
+    }
+  } else {
+    // Clear tracking
+    updatedLink.youtube_channel_id = "";
+    updatedLink.youtube_last_video_id = "";
+    updatedLink.youtube_new_video_count = 0;
+  }
 
   try {
     await window.convexMutation("functions:updateLink", updatedLink);
