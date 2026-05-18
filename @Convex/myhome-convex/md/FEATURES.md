@@ -193,11 +193,13 @@
 **Status:** ✅ Complete
 **Description:** Automatically detects new video uploads for YouTube channels and displays a notification badge with the new video count.
 **Implementation:** 
-- **Auto-Detection:** Extracts `channelId` from YouTube URLs using regex during link creation/icon reload.
+- **Per-Item Toggle:** Tracking is enabled or disabled per saved item, not globally per channel.
+- **Auto-Detection:** Resolves `youtube_channel_id` from YouTube URLs using multiple HTML and URL fallback patterns.
+- **Baseline Initialization:** When tracking is enabled, the current latest upload is stored as the baseline so older videos are not counted as new.
 - **Backend Action:** `checkYouTubeUpdates` fetches the channel's RSS feed (`feeds/videos.xml?channel_id=...`) and compares the latest video ID with the stored one.
-- **Background Check:** Runs on page load (3s delay) to fetch updates for all tracked items.
+- **Background Check:** Runs once on page load (3s delay) to fetch updates for all tracked items.
 - **Reset Logic:** Clicking the link to visit the channel resets the count to 0 via `updateYouTubeStatus` mutation.
-- **UI:** A red badge at the **bottom-left** of the item showing the number of new videos.
+- **UI:** A red badge at the **bottom-left** of the item shows the number of new videos. If tracking is enabled and there are no unseen videos, a small yellow dot is shown instead.
 **Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `convex/actions.ts`, `links-handler.js`, `style.css`
 
 ---

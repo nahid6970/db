@@ -16,8 +16,14 @@ All sessions recorded here — no archiving, full history in one place.
     - Implemented background update check on page load (3s delay)
     - Added bottom-left notification badge showing new video count
     - Implemented auto-reset of video count when clicking a channel link
+    - Added per-item YouTube Tracking chip toggle in the edit link form
+    - Added matching YouTube Tracking toggle to the add link form
+    - Added baseline initialization so enabling tracking does not count old uploads as new
+    - Improved channel ID extraction for more YouTube URL/page formats
 - **UI/UX:**
     - Styled red notification badges at bottom-left corner of items
+    - Added small yellow dot state when tracking is enabled but there are no unseen uploads
+    - Fixed oversized edit-link popup width and compact row sizing issues
 
 **Files Modified:**
 - `convex/schema.ts` - added YouTube tracking fields

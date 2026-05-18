@@ -38,6 +38,7 @@
 - Positioned at **bottom-left** (`bottom: -8px`, `left: -8px`)
 - Shows white numerical count of new videos
 - Disappears instantly when the item is clicked
+- If tracking is enabled but there are no unseen uploads, a small yellow dot is shown instead
 
 ---
 
@@ -49,7 +50,7 @@
 
 ### Edit Link Popup
 - Header: "Edit Link" + 📋 (copy format) + 🎨 (paste format) + ×
-- Fields: name, group, hide/start-new-line chips, URLs, type picker, text/icon/image/SVG, size, colors, font, border, tooltip, reminder
+- Fields: name, group, hide/start-new-line/auto-fit/YouTube-tracking chips, URLs, type picker, text/icon/image/SVG, size, colors, font, border, tooltip, reminder
 
 ### Edit Group Popup
 - Sections: Group Type (Normal/Top/Box), Display (Flex/List), Password, Display Name, Top Group Colors, Popup Colors, Horizontal Stack Colors

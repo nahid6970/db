@@ -506,6 +506,11 @@ body {
   position: relative;
 }
 
+#edit-link-popup .Menu {
+  width: min(760px, calc(100vw - 48px));
+  max-width: 760px;
+}
+
 .popup-header {
   display: flex;
   justify-content: space-between;

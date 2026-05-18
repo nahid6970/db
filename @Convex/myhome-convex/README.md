@@ -34,9 +34,11 @@
   - "Start on New Line" toggle for groups
 
 ✅ **Automated Notifications:**
-  - **YouTube Update Tracking:** Auto-detects new video uploads and shows a red badge with the count
-  - Reset notifications automatically by clicking the channel link
-  - Background RSS-based checking for updates
+  - **YouTube Update Tracking:** Per-item toggle for YouTube channels, with automatic upload detection
+  - Red bottom-left badge shows how many new videos were uploaded since the last visit
+  - Yellow dot shows tracking is enabled but there are no unseen videos
+  - Clicking the tracked channel resets the count for that item
+  - Checks run once per page load, about 3 seconds after links load, using YouTube RSS through a Convex action
 
 ✅ **Link Management:**
   - Add, edit, delete, copy, hide/show
@@ -44,6 +46,7 @@
   - Display styles: Flex (row) or List-Item (column)
   - "Start on New Line" toggle for individual items
   - YouTube channel icon auto-detection
+  - Reminder scheduling with countdown/due badges
 
 ✅ **Rich Styling:**
   - Custom colors, gradients, borders
