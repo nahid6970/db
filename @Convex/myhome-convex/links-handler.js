@@ -1307,6 +1307,12 @@ function createLinkItem(link, index) {
     youtubeBadge.textContent = link.youtube_new_video_count;
     youtubeBadge.title = `${link.youtube_new_video_count} new video${link.youtube_new_video_count > 1 ? 's' : ''}`;
     li.appendChild(youtubeBadge);
+  } else if (link.youtube_channel_id) {
+    // Show a small yellow dot if enabled but no new videos
+    const enabledBadge = document.createElement('span');
+    enabledBadge.className = 'link-badge-dot youtube-enabled-badge';
+    enabledBadge.title = 'YouTube tracking enabled';
+    li.appendChild(enabledBadge);
   }
 
   const a = document.createElement('a');

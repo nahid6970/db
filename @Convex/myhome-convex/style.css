@@ -184,6 +184,15 @@ body {
   border-color: #ffffff;
 }
 
+.link-badge-dot.youtube-enabled-badge {
+  bottom: -5px;
+  left: -5px;
+  background: #ffeb3b; /* Yellow */
+  border-color: #000000;
+  width: 8px;
+  height: 8px;
+}
+
 .link-badge-countdown {
   top: -10px;
   left: -8px;

@@ -113,6 +113,22 @@ function createSidebarButton(button, index) {
   btn.style.setProperty('--custom-border-radius', button.border_radius);
   btn.style.setProperty('--custom-font-size', button.font_size);
 
+  // YouTube Badge Rendering
+  if (button.youtube_new_video_count && button.youtube_new_video_count > 0) {
+    const youtubeBadge = document.createElement('span');
+    youtubeBadge.className = 'link-badge-count';
+    youtubeBadge.textContent = button.youtube_new_video_count;
+    youtubeBadge.style.bottom = '-5px';
+    youtubeBadge.style.left = '-5px';
+    btn.appendChild(youtubeBadge);
+  } else if (button.youtube_channel_id) {
+    const enabledBadge = document.createElement('span');
+    enabledBadge.className = 'link-badge-dot youtube-enabled-badge';
+    enabledBadge.style.bottom = '-5px';
+    enabledBadge.style.left = '-5px';
+    btn.appendChild(enabledBadge);
+  }
+
   // Apply inline styles
   btn.style.color = button.text_color;
   btn.style.backgroundColor = button.bg_color;
@@ -157,9 +173,25 @@ function createSidebarButton(button, index) {
   });
 
   // Handle click to open URL
-  btn.onclick = (e) => {
+  btn.onclick = async (e) => {
     if (window.editMode) return; // Don't open link in edit mode
     e.preventDefault();
+    
+    // Reset YouTube count if applicable
+    if (button.youtube_new_video_count && button.youtube_new_video_count > 0) {
+      try {
+        await window.convexMutation("functions:updateYouTubeStatus", {
+          id: button._id,
+          table: "sidebar_buttons",
+          youtube_new_video_count: 0
+        });
+        button.youtube_new_video_count = 0;
+        renderSidebarButtons(); // Re-render to clear badge
+      } catch (error) {
+        console.error('Error resetting YouTube count (sidebar):', error);
+      }
+    }
+    
     handleUrlOpening(button.url);
   };
 
