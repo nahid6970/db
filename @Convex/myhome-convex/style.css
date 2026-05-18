@@ -790,14 +790,14 @@ button[type="button"]:hover {
 }
 
 .compact-size-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
+  width: 100%;
 }
 
 .compact-size-row input {
-  flex: 1 1 0;
   min-width: 0;
-  max-width: 110px;
   padding-left: 7px;
   padding-right: 7px;
   font-size: 13px;
@@ -1143,12 +1143,11 @@ details[open] summary {
   }
 
   .compact-size-row {
-    flex-wrap: wrap;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .compact-size-row input {
-    max-width: none;
-    flex: 1 1 calc(50% - 4px);
+    width: 100%;
   }
 
   form {
