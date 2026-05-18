@@ -825,6 +825,40 @@ async function checkAllYouTubeUpdates() {
   }
 }
 
+async function initializeYouTubeTrackingForUrl(url, existingChannelId) {
+  const trackingState = {
+    youtube_channel_id: undefined,
+    youtube_last_video_id: undefined,
+    youtube_new_video_count: 0,
+  };
+
+  let channelId = existingChannelId;
+
+  if (!channelId) {
+    const lookup = await window.convexClient.action("actions:fetchPageTitle", { url });
+    channelId = lookup.youtubeChannelId || undefined;
+  }
+
+  if (!channelId) {
+    return trackingState;
+  }
+
+  trackingState.youtube_channel_id = channelId;
+
+  try {
+    const baseline = await window.convexClient.action(window.api.actions.checkYouTubeUpdates, {
+      channelId,
+    });
+    if (baseline.latestVideoId) {
+      trackingState.youtube_last_video_id = baseline.latestVideoId;
+    }
+  } catch (error) {
+    console.error('Error getting YouTube baseline video:', error);
+  }
+
+  return trackingState;
+}
+
 // Global helper for actions
 window.convexAction = async (functionPath, args) => {
   const [module, funcName] = functionPath.split(':');
@@ -1685,6 +1719,7 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
 
   const urls = getAllUrls(false);
   const duplicateMatch = links.find(link => !link.is_separator && getLinkUrls(link).some(existingUrl => urls.some(url => normalizeUrl(existingUrl) === normalizeUrl(url))));
+  const isTrackingEnabled = document.getElementById('link-youtube-tracking').checked;
   const typeRadios = document.querySelectorAll('input[name="link-type"]');
   let defaultType = 'text';
   typeRadios.forEach(r => { if (r.checked) defaultType = r.value; });
@@ -1719,8 +1754,19 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
   };
 
   try {
+    if (isTrackingEnabled) {
+      const trackingState = await initializeYouTubeTrackingForUrl(newLink.url);
+      if (trackingState.youtube_channel_id) {
+        Object.assign(newLink, compactObject(trackingState));
+        window.showNotification('YouTube tracking enabled!', 'success');
+      } else {
+        window.showNotification('Could not find YouTube channel ID. Saved without tracking.', 'error');
+      }
+    }
+
     await window.convexMutation("functions:addLink", newLink);
     document.getElementById('add-link-popup').classList.add('hidden');
+    document.getElementById('add-link-form').reset();
     await loadLinks();
     if (duplicateMatch) {
       window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
@@ -1828,22 +1874,30 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
   const originalLink = links.find(l => l._id === id);
 
   if (isTrackingEnabled) {
-    if (!originalLink.youtube_channel_id) {
-      // Try to fetch channel ID if not present
+    const needsInitialization = !originalLink.youtube_channel_id || !originalLink.youtube_last_video_id;
+
+    if (needsInitialization) {
       try {
-        window.showNotification('Fetching YouTube channel ID...', 'info');
-        const res = await window.convexClient.action("actions:fetchPageTitle", { url: updatedLink.url });
-        if (res.youtubeChannelId) {
-          updatedLink.youtube_channel_id = res.youtubeChannelId;
+        window.showNotification('Initializing YouTube tracking...', 'info');
+        const trackingState = await initializeYouTubeTrackingForUrl(updatedLink.url, originalLink.youtube_channel_id);
+        if (trackingState.youtube_channel_id) {
+          updatedLink.youtube_channel_id = trackingState.youtube_channel_id;
+          updatedLink.youtube_last_video_id = trackingState.youtube_last_video_id || "";
+          updatedLink.youtube_new_video_count = originalLink.youtube_new_video_count || 0;
           window.showNotification('YouTube tracking enabled!', 'success');
         } else {
-          window.showNotification('Could not find YouTube channel ID', 'error');
+          updatedLink.youtube_channel_id = "";
+          updatedLink.youtube_last_video_id = "";
+          updatedLink.youtube_new_video_count = 0;
+          window.showNotification('Could not find YouTube channel ID. Tracking left off.', 'error');
         }
       } catch (error) {
-        console.error('Error fetching YouTube ID during save:', error);
+        console.error('Error initializing YouTube tracking during save:', error);
+        updatedLink.youtube_channel_id = "";
+        updatedLink.youtube_last_video_id = "";
+        updatedLink.youtube_new_video_count = 0;
       }
     } else {
-      // Keep existing
       updatedLink.youtube_channel_id = originalLink.youtube_channel_id;
       updatedLink.youtube_last_video_id = originalLink.youtube_last_video_id;
       updatedLink.youtube_new_video_count = originalLink.youtube_new_video_count;
