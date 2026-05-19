@@ -1466,6 +1466,7 @@ function createLinkItem(link, index) {
         window.convexMutation("functions:updateYouTubeStatus", {
           id: link._id,
           table: "links",
+          youtube_last_video_id: link.youtube_last_video_id, // persist latest so next check doesn't re-count
           youtube_new_video_count: 0
         });
         link.youtube_new_video_count = 0;
