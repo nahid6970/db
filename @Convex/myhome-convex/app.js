@@ -106,6 +106,11 @@ window.convexMutation = async (functionPath, args) => {
   return await client.mutation(api[module][funcName], args);
 };
 
+window.convexAction = async (functionPath, args) => {
+  const [module, funcName] = functionPath.split(':');
+  return await client.action(api[module][funcName], args);
+};
+
 // Notify that Convex is ready
 console.log('✓ Convex client initialized');
 window.convexReady = true;

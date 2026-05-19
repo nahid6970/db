@@ -82,6 +82,15 @@ if (!window.convexMutation) {
   };
 }
 
+if (!window.convexAction) {
+  window.convexAction = async (functionName, args = {}) => {
+    if (!window.convexClient) {
+      throw new Error('Convex client not initialized');
+    }
+    return await window.convexClient.action(functionName, args);
+  };
+}
+
 // Show notification helper
 if (!window.showNotification) {
   window.showNotification = (message, type = 'success') => {
@@ -562,10 +571,11 @@ async function loadLinks() {
       console.log('✅ Links refreshed from Convex');
     }
 
-    // Trigger YouTube check once
-    if (!window._youtubeChecked && window.convexClient && window.api) {
+    // Trigger YouTube check periodically (first run after 3s, then every 30 minutes)
+    if (!window._youtubeChecked && window.convexClient) {
       window._youtubeChecked = true;
       setTimeout(checkAllYouTubeUpdates, 3000);
+      setInterval(checkAllYouTubeUpdates, 30 * 60 * 1000);
     }
   } catch (error) {
     console.error('Error loading links:', error);
@@ -796,10 +806,10 @@ async function checkAllYouTubeUpdates() {
   const youtubeItems = allItems.filter(item => item.youtube_channel_id);
   console.log(`📺 Found ${youtubeItems.length} YouTube channels to check`);
   
+  let hasUpdates = false;
   for (const item of youtubeItems) {
     try {
-      // Use window.convexClient directly if window.convexAction is not yet defined
-      const result = await window.convexClient.action(window.api.actions.checkYouTubeUpdates, {
+      const result = await window.convexAction("actions:checkYouTubeUpdates", {
         channelId: item.youtube_channel_id,
         lastVideoId: item.youtube_last_video_id
       });
@@ -812,14 +822,14 @@ async function checkAllYouTubeUpdates() {
           youtube_last_video_id: result.latestVideoId,
           youtube_new_video_count: (item.youtube_new_video_count || 0) + result.count
         });
+        hasUpdates = true;
       }
     } catch (error) {
       console.error(`Error checking YouTube updates for ${item.name}:`, error);
     }
   }
   
-  if (youtubeItems.length > 0) {
-    // Only reload once if we found any updates to refresh the UI
+  if (hasUpdates) {
     loadLinks();
     if (window.loadSidebarButtons) window.loadSidebarButtons();
   }
@@ -846,7 +856,7 @@ async function initializeYouTubeTrackingForUrl(url, existingChannelId) {
   trackingState.youtube_channel_id = channelId;
 
   try {
-    const baseline = await window.convexClient.action(window.api.actions.checkYouTubeUpdates, {
+    const baseline = await window.convexAction("actions:checkYouTubeUpdates", {
       channelId,
     });
     if (baseline.latestVideoId) {
@@ -858,16 +868,6 @@ async function initializeYouTubeTrackingForUrl(url, existingChannelId) {
 
   return trackingState;
 }
-
-// Global helper for actions
-window.convexAction = async (functionPath, args) => {
-  const [module, funcName] = functionPath.split(':');
-  if (!window.convexClient || !window.api || !window.api[module] || !window.api[module][funcName]) {
-    console.error('Convex Action Helper: Dependencies not ready');
-    return;
-  }
-  return await window.convexClient.action(window.api[module][funcName], args);
-};
 
 // Create collapsible group
 function createCollapsibleGroup(groupName, items) {
