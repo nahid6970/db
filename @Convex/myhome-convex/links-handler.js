@@ -811,17 +811,40 @@ async function checkAllYouTubeUpdates() {
     try {
       const result = await window.convexAction("actions:checkYouTubeUpdates", {
         channelId: item.youtube_channel_id,
-        lastVideoId: item.youtube_last_video_id
+        lastVideoId: item.youtube_last_video_id || undefined
       });
-      
-      if (result.count > 0 || (result.latestVideoId && result.latestVideoId !== item.youtube_last_video_id)) {
-        console.log(`📺 New videos found for ${item.name || 'YouTube channel'}: ${result.count}`);
+
+      if (!result.latestVideoId) continue;
+
+      // No baseline yet — just save the latest video ID without counting it as new
+      if (!item.youtube_last_video_id) {
         await window.convexMutation("functions:updateYouTubeStatus", {
           id: item._id,
           table: item.table,
           youtube_last_video_id: result.latestVideoId,
-          youtube_new_video_count: (item.youtube_new_video_count || 0) + result.count
+          youtube_new_video_count: item.youtube_new_video_count || 0
         });
+        // Update local cache
+        const localLink = links.find(l => l._id === item._id);
+        if (localLink) localLink.youtube_last_video_id = result.latestVideoId;
+        continue;
+      }
+
+      if (result.count > 0 || result.latestVideoId !== item.youtube_last_video_id) {
+        console.log(`📺 New videos found for ${item.name || 'YouTube channel'}: ${result.count}`);
+        const newCount = (item.youtube_new_video_count || 0) + result.count;
+        await window.convexMutation("functions:updateYouTubeStatus", {
+          id: item._id,
+          table: item.table,
+          youtube_last_video_id: result.latestVideoId,
+          youtube_new_video_count: newCount
+        });
+        // Update local cache to prevent re-counting on next interval check
+        const localLink = links.find(l => l._id === item._id);
+        if (localLink) {
+          localLink.youtube_last_video_id = result.latestVideoId;
+          localLink.youtube_new_video_count = newCount;
+        }
         hasUpdates = true;
       }
     } catch (error) {
