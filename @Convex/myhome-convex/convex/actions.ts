@@ -221,30 +221,42 @@ export const checkYouTubeUpdates = action({
   args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
   handler: async (ctx, args) => {
     try {
-      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
-      const response = await fetch(rssUrl);
+      // Fetch the channel's videos page and extract video IDs from embedded JSON
+      const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
+      const response = await fetch(channelUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept-Language': 'en-US,en;q=0.9',
+        }
+      });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      
-      const xml = await response.text();
-      
-      // Simple parsing using regex for latest video ID
-      // Example: <yt:videoId>VIDEO_ID</yt:videoId>
-      const videoIdMatch = xml.match(/<yt:videoId>([^<]+)<\/yt:videoId>/);
-      const latestVideoId = videoIdMatch ? videoIdMatch[1] : null;
-      
-      if (!latestVideoId) return { count: 0, latestVideoId: null };
+
+      const html = await response.text();
+
+      // Extract video IDs from ytInitialData JSON embedded in the page
+      const videoIds: string[] = [];
+      const videoIdRegex = /"videoId":"([a-zA-Z0-9_-]{11})"/g;
+      let match;
+      const seen = new Set<string>();
+      while ((match = videoIdRegex.exec(html)) !== null) {
+        if (!seen.has(match[1])) {
+          seen.add(match[1]);
+          videoIds.push(match[1]);
+        }
+        if (videoIds.length >= 15) break;
+      }
+
+      if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
+
+      const latestVideoId = videoIds[0];
+
+      if (!args.lastVideoId) return { count: 0, latestVideoId };
       if (latestVideoId === args.lastVideoId) return { count: 0, latestVideoId };
-      
-      // Count videos (approximate by counting yt:videoId tags until we hit the last one)
-      const videoIds = [...xml.matchAll(/<yt:videoId>([^<]+)<\/yt:videoId>/g)].map(m => m[1]);
-      const lastIndex = args.lastVideoId ? videoIds.indexOf(args.lastVideoId) : -1;
-      
+
+      const lastIndex = videoIds.indexOf(args.lastVideoId);
       const count = lastIndex === -1 ? videoIds.length : lastIndex;
-      
-      return {
-        count: count,
-        latestVideoId: latestVideoId
-      };
+
+      return { count, latestVideoId };
     } catch (error) {
       console.error('YouTube update check failed:', error);
       return { count: 0, latestVideoId: args.lastVideoId || null };

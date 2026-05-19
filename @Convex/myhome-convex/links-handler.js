@@ -797,58 +797,66 @@ function renderLinks() {
 async function checkAllYouTubeUpdates() {
   console.log('📺 Checking YouTube updates...');
   
-  // Combine links and sidebar buttons for checking
   const allItems = [
     ...links.map(l => ({ ...l, table: 'links' })),
     ...(window.sidebarButtons || []).map(b => ({ ...b, table: 'sidebar_buttons' }))
-  ];
-  
-  const youtubeItems = allItems.filter(item => item.youtube_channel_id);
-  console.log(`📺 Found ${youtubeItems.length} YouTube channels to check`);
-  
+  ].filter(item => item.youtube_channel_id);
+
+  if (!allItems.length) return;
+  console.log(`📺 Found ${allItems.length} YouTube channels to check`);
+
+  // Fetch each unique channel in parallel (max 5 concurrent to avoid rate limiting)
+  const CONCURRENCY = 5;
+  const resultCache = new Map(); // key: "channelId|lastVideoId"
+  const uniqueKeys = [...new Set(allItems.map(i => `${i.youtube_channel_id}|${i.youtube_last_video_id || ''}`))];
+
+  for (let i = 0; i < uniqueKeys.length; i += CONCURRENCY) {
+    await Promise.all(uniqueKeys.slice(i, i + CONCURRENCY).map(async key => {
+      const [channelId, lastVideoId] = key.split('|');
+      try {
+        const result = await window.convexAction("actions:checkYouTubeUpdates", {
+          channelId,
+          lastVideoId: lastVideoId || undefined
+        });
+        resultCache.set(key, result);
+      } catch (e) {
+        console.error(`Error fetching channel ${channelId}:`, e);
+      }
+    }));
+  }
+
   let hasUpdates = false;
-  for (const item of youtubeItems) {
-    try {
-      const result = await window.convexAction("actions:checkYouTubeUpdates", {
-        channelId: item.youtube_channel_id,
-        lastVideoId: item.youtube_last_video_id || undefined
+  for (const item of allItems) {
+    const key = `${item.youtube_channel_id}|${item.youtube_last_video_id || ''}`;
+    const result = resultCache.get(key);
+    if (!result?.latestVideoId) continue;
+
+    // No baseline yet — save latest video ID without counting as new
+    if (!item.youtube_last_video_id) {
+      await window.convexMutation("functions:updateYouTubeStatus", {
+        id: item._id, table: item.table,
+        youtube_last_video_id: result.latestVideoId,
+        youtube_new_video_count: item.youtube_new_video_count || 0
       });
+      const localLink = links.find(l => l._id === item._id);
+      if (localLink) localLink.youtube_last_video_id = result.latestVideoId;
+      continue;
+    }
 
-      if (!result.latestVideoId) continue;
-
-      // No baseline yet — just save the latest video ID without counting it as new
-      if (!item.youtube_last_video_id) {
-        await window.convexMutation("functions:updateYouTubeStatus", {
-          id: item._id,
-          table: item.table,
-          youtube_last_video_id: result.latestVideoId,
-          youtube_new_video_count: item.youtube_new_video_count || 0
-        });
-        // Update local cache
-        const localLink = links.find(l => l._id === item._id);
-        if (localLink) localLink.youtube_last_video_id = result.latestVideoId;
-        continue;
+    if (result.latestVideoId !== item.youtube_last_video_id) {
+      console.log(`📺 ${item.name}: ${result.count} new video(s)`);
+      const newCount = (item.youtube_new_video_count || 0) + result.count;
+      await window.convexMutation("functions:updateYouTubeStatus", {
+        id: item._id, table: item.table,
+        youtube_last_video_id: result.latestVideoId,
+        youtube_new_video_count: newCount
+      });
+      const localLink = links.find(l => l._id === item._id);
+      if (localLink) {
+        localLink.youtube_last_video_id = result.latestVideoId;
+        localLink.youtube_new_video_count = newCount;
       }
-
-      if (result.count > 0 || result.latestVideoId !== item.youtube_last_video_id) {
-        console.log(`📺 New videos found for ${item.name || 'YouTube channel'}: ${result.count}`);
-        const newCount = (item.youtube_new_video_count || 0) + result.count;
-        await window.convexMutation("functions:updateYouTubeStatus", {
-          id: item._id,
-          table: item.table,
-          youtube_last_video_id: result.latestVideoId,
-          youtube_new_video_count: newCount
-        });
-        // Update local cache to prevent re-counting on next interval check
-        const localLink = links.find(l => l._id === item._id);
-        if (localLink) {
-          localLink.youtube_last_video_id = result.latestVideoId;
-          localLink.youtube_new_video_count = newCount;
-        }
-        hasUpdates = true;
-      }
-    } catch (error) {
-      console.error(`Error checking YouTube updates for ${item.name}:`, error);
+      hasUpdates = true;
     }
   }
   
