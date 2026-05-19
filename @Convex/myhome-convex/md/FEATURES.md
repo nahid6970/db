@@ -196,11 +196,13 @@
 - **Per-Item Toggle:** Tracking is enabled or disabled per saved item, not globally per channel.
 - **Auto-Detection:** Resolves `youtube_channel_id` from YouTube URLs using multiple HTML and URL fallback patterns.
 - **Baseline Initialization:** When tracking is enabled, the current latest upload is stored as the baseline so older videos are not counted as new.
-- **Backend Action:** `checkYouTubeUpdates` fetches the channel's RSS feed (`feeds/videos.xml?channel_id=...`) and compares the latest video ID with the stored one.
-- **Background Check:** Runs once on page load (3s delay) to fetch updates for all tracked items.
+- **Backend Action:** `checkYouTubeUpdates` scrapes the channel's `/videos` page and extracts video IDs from embedded JSON (RSS feed was shut down by YouTube).
+- **Background Check:** Runs 3s after page load, then every 30 minutes while the tab is open.
+- **Parallel Fetching:** Up to 5 channels checked simultaneously; duplicate channel+lastVideoId pairs share one request.
 - **Reset Logic:** Clicking the link to visit the channel resets the count to 0 via `updateYouTubeStatus` mutation.
 - **UI:** A red badge at the **bottom-left** of the item shows the number of new videos. If tracking is enabled and there are no unseen videos, a small yellow dot is shown instead.
-**Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `convex/actions.ts`, `links-handler.js`, `style.css`
+- **`window.convexAction`** helper defined in `links-handler.js` (and `app.js`) using string paths — does not depend on `window.api`.
+**Files Involved:** `convex/schema.ts`, `convex/functions.ts`, `convex/actions.ts`, `links-handler.js`, `app.js`, `style.css`
 
 ---
 

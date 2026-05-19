@@ -3,6 +3,37 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-19] - YouTube Notification Bug Fixes & Optimizations
+
+**What We Accomplished:**
+
+**Root Cause Investigation:**
+- Confirmed `window.api` was `undefined` at check time (app.js fails to load via `file://` due to CORS on ES modules) — silently blocked all YouTube checks
+- Confirmed YouTube RSS feed (`/feeds/videos.xml`) returns 404 for all channels — YouTube has shut it down
+- Confirmed 40 channels had `youtube_channel_id` stored correctly but checks never ran
+
+**Fixes:**
+- Added `window.convexAction` helper to `links-handler.js` (same string-path pattern as `convexMutation`) — no longer depends on `window.api`
+- Removed broken `convexAction` stub that silently returned `undefined`
+- Removed `window.api` from the YouTube check guard condition
+- Added `window.convexAction` to `app.js` as well for when it loads successfully
+- Replaced dead RSS feed with **channel page scraping** — fetches `youtube.com/channel/{id}/videos` and extracts video IDs from embedded JSON using regex
+- Fixed empty `youtube_last_video_id` (`""`) being treated as a valid baseline — now treated as "no baseline yet", sets baseline without counting old videos as new
+- Fixed check running only once per page load — now runs every **30 minutes** via `setInterval` (first run 3s after load)
+- Fixed unconditional `loadLinks()` after check — now only reloads when mutations were actually made
+- Fixed local `links` array not being updated after mutation — prevented re-counting on next interval check
+
+**Optimizations:**
+- **Parallel fetching** — 5 channels checked simultaneously (batched) instead of sequential awaits
+- **Deduplication** — channels sharing the same `channelId + lastVideoId` make only one HTTP request
+
+**Files Modified:**
+- `convex/actions.ts` - replaced RSS with channel page scraping
+- `links-handler.js` - added `convexAction` helper, fixed check trigger, parallel+dedup logic, baseline handling
+- `app.js` - added `window.convexAction` helper
+
+---
+
 ## [2026-05-18] - YouTube Update Notifications
 
 **What We Accomplished:**
