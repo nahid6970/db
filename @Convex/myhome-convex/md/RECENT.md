@@ -3,6 +3,39 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-05-20] - Top Bar Notification Badges & Cyberpunk Popup Styling
+
+**What We Accomplished:**
+
+**Top Bar Notification Badges:**
+- Implemented notification badge system for sidebar (topbar) buttons — ported from old Flask project
+- Schema already had `has_notification`, `notification_api`, `mark_seen_api` fields — wired up the UI
+- Added "Has Notification Badge" checkbox + two API endpoint inputs to both Add and Edit sidebar button popups
+- Badge renders as red pill (top-right of button), hidden when count is 0
+- Click handler: if count > 0, confirms then POSTs to `mark_seen_api` before opening URL; if 0, opens URL directly
+- `initNotificationBadges()` called after load — fetches counts for all notification buttons on page load
+- Added CORS header (`Access-Control-Allow-Origin: *`) to `5011_tv_show/app.py` and `5013_movie_tracker/app.py`
+- Added `/api/unseen_count` and `/api/mark_all_seen` routes to `5013_movie_tracker/app.py` (didn't exist before)
+
+**Topbar UI Improvements:**
+- Grouped version badge (`v2`) and settings button (⚙️) into a separate left section with a right border separator
+- Stacked them vertically (v2 on top, ⚙️ below) to match topbar button height
+
+**Cyberpunk Popup Styling:**
+- Applied cyberpunk dark theme to all popups: add/edit link, add/edit sidebar button, edit group, quick-add, reminder
+- Black background (`#0a0a0f`), neon green borders/focus glow, red close button, transparent submit with green border
+- Custom checkbox/radio styling with neon green fill
+- `.add-url-btn` and `.preview-note-button` styled to match
+
+**Files Modified:**
+- `style.css` - notification badge CSS, cyberpunk popup styles
+- `index.html` - notification fields in add/edit sidebar popups, topbar version+settings grouping
+- `sidebar-handler.js` - badge rendering, click handler, `updateButtonNotifications`, `initNotificationBadges`, checkbox toggle wiring, form save/load
+- `C:\@delta\ms1\@Flask\5011_tv_show\app.py` - CORS header
+- `C:\@delta\ms1\@Flask\5013_movie_tracker\app.py` - CORS header + notification API routes
+
+---
+
 ## [2026-05-19] - YouTube Notification Bug Fixes & Optimizations
 
 **What We Accomplished:**

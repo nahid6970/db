@@ -182,6 +182,22 @@
 
 ---
 
+## Sidebar Button Notification Badges
+**Status:** ✅ Complete
+**Description:** Topbar buttons can show a notification badge with an unseen count fetched from an external API endpoint.
+**Implementation:** `has_notification` boolean on the button. When true, button is wrapped in `.notification-button-container` with a badge `<span>`. `initNotificationBadges()` fetches `notification_api` on page load and updates badge count. Click: if count > 0, confirms then POSTs to `mark_seen_api` before opening URL.
+**Files Involved:** `sidebar-handler.js`, `style.css`, `index.html`, `convex/schema.ts`
+**Usage:** Edit sidebar button → check "Has Notification Badge" → fill in Notification API URL and Mark Seen API URL → Save
+
+---
+
+## Cyberpunk Popup Styling
+**Status:** ✅ Complete
+**Description:** All add/edit popups use a cyberpunk dark theme — black background, neon green borders, red close button, custom checkbox/radio styling.
+**Files Involved:** `style.css`
+
+---
+
 ## Sidebar Buttons
 **Status:** ✅ Complete
 **Description:** Customizable sidebar buttons with icon/image/SVG display types and custom styling.
