@@ -32,11 +32,7 @@ body {
 /* Notification badge on topbar buttons */
 .notification-button-container {
   position: relative;
-  display: inline-flex;
-  padding: 0;
-  border: none;
-  background: none;
-  cursor: grab;
+  display: inline-block;
 }
 
 .notification-badge {
