@@ -1470,3 +1470,218 @@ button,
 body.hide-group-names .link-group > h3 {
   display: none;
 }
+
+/* ── Cyberpunk styling for popups ── */
+#add-sidebar-button-popup .Menu,
+#edit-sidebar-button-popup .Menu,
+#add-link-popup .Menu,
+#edit-link-popup .Menu,
+#edit-group-popup .Menu,
+#quick-add-link-popup .Menu,
+#reminder-popup .Menu {
+  background-color: #0a0a0f !important;
+  border: 2px solid #00ff41 !important;
+  box-shadow: 0 0 20px rgba(0,255,65,0.4) !important;
+  border-radius: 0 !important;
+  color: #00ff41 !important;
+}
+
+#add-sidebar-button-popup h3,
+#edit-sidebar-button-popup h3,
+#add-link-popup h3,
+#edit-link-popup h3,
+#edit-group-popup h3,
+#quick-add-link-popup h3,
+#reminder-popup h3 {
+  color: #00ff41 !important;
+  text-shadow: 0 0 5px rgba(0,255,65,0.5);
+  font-family: 'JetBrainsMono NFP', monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+#add-sidebar-button-popup .close-button,
+#edit-sidebar-button-popup .close-button,
+#add-link-popup .close-button,
+#edit-link-popup .close-button,
+#edit-group-popup .close-button,
+#quick-add-link-popup .close-button,
+#reminder-popup .close-button {
+  color: #ff0055 !important;
+  background: transparent !important;
+  font-size: 28px;
+  transition: all 0.3s ease;
+}
+
+#add-sidebar-button-popup .close-button:hover,
+#edit-sidebar-button-popup .close-button:hover,
+#add-link-popup .close-button:hover,
+#edit-link-popup .close-button:hover,
+#edit-group-popup .close-button:hover,
+#quick-add-link-popup .close-button:hover,
+#reminder-popup .close-button:hover {
+  text-shadow: 0 0 10px #ff0055;
+  transform: scale(1.1);
+}
+
+#add-sidebar-button-popup input[type="text"],
+#add-sidebar-button-popup input[type="url"],
+#add-sidebar-button-popup select,
+#add-sidebar-button-popup textarea,
+#edit-sidebar-button-popup input[type="text"],
+#edit-sidebar-button-popup input[type="url"],
+#edit-sidebar-button-popup select,
+#edit-sidebar-button-popup textarea,
+#add-link-popup input[type="text"],
+#add-link-popup input[type="url"],
+#add-link-popup input[type="number"],
+#add-link-popup select,
+#add-link-popup textarea,
+#edit-link-popup input[type="text"],
+#edit-link-popup input[type="url"],
+#edit-link-popup input[type="number"],
+#edit-link-popup select,
+#edit-link-popup textarea,
+#edit-group-popup input[type="text"],
+#edit-group-popup select,
+#edit-group-popup textarea,
+#quick-add-link-popup input,
+#quick-add-link-popup select,
+#reminder-popup input,
+#reminder-popup select {
+  background-color: #1a1a20 !important;
+  border: 1px solid #333 !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
+  font-family: 'JetBrainsMono NFP', monospace;
+  transition: border-color 0.3s ease;
+}
+
+#add-sidebar-button-popup input:focus,
+#add-sidebar-button-popup select:focus,
+#add-sidebar-button-popup textarea:focus,
+#edit-sidebar-button-popup input:focus,
+#edit-sidebar-button-popup select:focus,
+#edit-sidebar-button-popup textarea:focus,
+#add-link-popup input:focus,
+#add-link-popup select:focus,
+#add-link-popup textarea:focus,
+#edit-link-popup input:focus,
+#edit-link-popup select:focus,
+#edit-link-popup textarea:focus,
+#edit-group-popup input:focus,
+#edit-group-popup select:focus,
+#edit-group-popup textarea:focus,
+#quick-add-link-popup input:focus,
+#quick-add-link-popup select:focus,
+#reminder-popup input:focus,
+#reminder-popup select:focus {
+  border-color: #00ff41 !important;
+  box-shadow: 0 0 10px rgba(0,255,65,0.2) !important;
+  outline: none;
+}
+
+#add-sidebar-button-popup button[type="submit"],
+#edit-sidebar-button-popup button[type="submit"],
+#add-link-popup button[type="submit"],
+#edit-link-popup button[type="submit"],
+#edit-group-popup button[type="submit"],
+#quick-add-link-popup button[type="submit"],
+#reminder-popup button[type="submit"] {
+  background-color: transparent !important;
+  color: #00ff41 !important;
+  border: 1px solid #00ff41 !important;
+  border-radius: 0 !important;
+  font-family: 'JetBrainsMono NFP', monospace;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 12px !important;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+}
+
+#add-sidebar-button-popup button[type="submit"]:hover,
+#edit-sidebar-button-popup button[type="submit"]:hover,
+#add-link-popup button[type="submit"]:hover,
+#edit-link-popup button[type="submit"]:hover,
+#edit-group-popup button[type="submit"]:hover,
+#quick-add-link-popup button[type="submit"]:hover,
+#reminder-popup button[type="submit"]:hover {
+  background-color: #00ff41 !important;
+  color: #000000 !important;
+  box-shadow: 0 0 15px rgba(0,255,65,0.5);
+}
+
+#add-sidebar-button-popup label,
+#edit-sidebar-button-popup label,
+#add-link-popup label,
+#edit-link-popup label,
+#edit-group-popup label,
+#quick-add-link-popup label,
+#reminder-popup label {
+  color: #cccccc !important;
+  font-size: 0.9em;
+}
+
+.add-url-btn {
+  background-color: transparent !important;
+  color: #00ff41 !important;
+  border: 1px solid #00ff41 !important;
+  border-radius: 0 !important;
+  transition: all 0.3s ease;
+}
+.add-url-btn:hover {
+  background-color: #00ff41 !important;
+  color: black !important;
+  box-shadow: 0 0 5px rgba(0,255,65,0.5);
+}
+
+.preview-note-button {
+  background-color: #1a1a20 !important;
+  border: 1px solid #00f3ff !important;
+  color: #00f3ff !important;
+  border-radius: 0 !important;
+}
+.preview-note-button:hover {
+  background-color: #00f3ff !important;
+  color: #000 !important;
+  box-shadow: 0 0 15px rgba(0,243,255,0.6) !important;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: #1a1a20;
+  border: 1px solid #333;
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+input[type="radio"] { border-radius: 50%; }
+input[type="checkbox"] { border-radius: 0; }
+
+input[type="radio"]::before,
+input[type="checkbox"]::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #00ff41;
+}
+input[type="radio"]::before { border-radius: 50%; }
+
+input[type="radio"]:checked,
+input[type="checkbox"]:checked {
+  border-color: #00ff41;
+  box-shadow: 0 0 8px rgba(0,255,65,0.4);
+}
+input[type="radio"]:checked::before,
+input[type="checkbox"]:checked::before {
+  transform: scale(1);
+}
