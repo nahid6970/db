@@ -52,6 +52,7 @@ async function loadSidebarButtons() {
     console.error('Error loading sidebar buttons:', error);
   }
   renderSidebarButtons();
+  initNotificationBadges();
 }
 
 // Render sidebar buttons
@@ -176,6 +177,12 @@ function createSidebarButton(button, index) {
   btn.onclick = async (e) => {
     if (window.editMode) return; // Don't open link in edit mode
     e.preventDefault();
+
+    // Handle notification button click
+    if (button.has_notification) {
+      handleNotificationButtonClick(button);
+      return;
+    }
     
     // Reset YouTube count if applicable
     if (button.youtube_new_video_count && button.youtube_new_video_count > 0) {
@@ -332,9 +339,76 @@ function createSidebarButton(button, index) {
     btn.appendChild(editControls);
   }
 
+  // Wrap in container with badge if has_notification
+  if (button.has_notification) {
+    const container = document.createElement('div');
+    container.className = 'notification-button-container';
+    const badge = document.createElement('span');
+    badge.id = `${button.id}-notification-badge`;
+    badge.className = 'notification-badge zero';
+    badge.textContent = '0';
+    container.appendChild(btn);
+    container.appendChild(badge);
+    return container;
+  }
+
   return btn;
 }
 
+
+// Fetch and update notification badge for a button
+function updateButtonNotifications(button) {
+  if (!button.notification_api) return;
+  fetch(button.notification_api)
+    .then(r => r.json())
+    .then(data => {
+      const count = data.unseen_count || 0;
+      const badge = document.getElementById(`${button.id}-notification-badge`);
+      if (!badge) return;
+      if (count > 0) {
+        badge.textContent = count;
+        badge.classList.remove('zero');
+      } else {
+        badge.textContent = '0';
+        badge.classList.add('zero');
+      }
+    })
+    .catch(err => console.error(`Notification fetch error for ${button.name}:`, err));
+}
+
+// Handle click on a notification button
+function handleNotificationButtonClick(button) {
+  const badge = document.getElementById(`${button.id}-notification-badge`);
+  const count = badge ? parseInt(badge.textContent) || 0 : 0;
+
+  if (count === 0) {
+    window.open(button.url, '_blank');
+    return;
+  }
+
+  if (button.mark_seen_api && confirm(`Mark all ${count} items as seen?`)) {
+    fetch(button.mark_seen_api, { method: 'POST' })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          updateButtonNotifications(button);
+          window.open(button.url, '_blank');
+        } else {
+          alert('Failed to mark items as seen');
+        }
+      })
+      .catch(() => alert('Error marking items as seen'));
+  } else {
+    window.open(button.url, '_blank');
+  }
+}
+
+// Poll notifications for all notification buttons after render
+function initNotificationBadges() {
+  sidebarButtons.forEach(button => {
+    if (button.has_notification) updateButtonNotifications(button);
+  });
+}
 
 // Add sidebar button popup
 function showAddSidebarButtonPopup() {
@@ -359,6 +433,10 @@ document.getElementById('sidebar-button-display-type').addEventListener('change'
   svgInput.style.display = e.target.value === 'svg' ? 'block' : 'none';
 });
 
+document.getElementById('sidebar-button-notification').addEventListener('change', (e) => {
+  document.getElementById('add-notification-settings').style.display = e.target.checked ? 'flex' : 'none';
+});
+
 document.getElementById('add-sidebar-button-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -376,7 +454,9 @@ document.getElementById('add-sidebar-button-form').addEventListener('submit', as
     border_color: document.getElementById('sidebar-button-border-color').value || '#ccc',
     border_radius: document.getElementById('sidebar-button-border-radius').value || '4px',
     font_size: document.getElementById('sidebar-button-font-size').value || '16px',
-    has_notification: false
+    has_notification: document.getElementById('sidebar-button-notification').checked,
+    notification_api: document.getElementById('sidebar-button-notification-api').value || '',
+    mark_seen_api: document.getElementById('sidebar-button-mark-seen-api').value || '',
   };
 
   try {
@@ -406,6 +486,12 @@ function openEditSidebarButtonPopup(button, index) {
   document.getElementById('edit-sidebar-button-border-radius').value = button.border_radius;
   document.getElementById('edit-sidebar-button-font-size').value = button.font_size;
 
+  const hasNotif = !!button.has_notification;
+  document.getElementById('edit-sidebar-button-notification').checked = hasNotif;
+  document.getElementById('edit-notification-settings').style.display = hasNotif ? 'flex' : 'none';
+  document.getElementById('edit-sidebar-button-notification-api').value = button.notification_api || '';
+  document.getElementById('edit-sidebar-button-mark-seen-api').value = button.mark_seen_api || '';
+
   const iconInput = document.getElementById('edit-sidebar-button-icon');
   const imgInput = document.getElementById('edit-sidebar-button-img-src-container');
   const svgInput = document.getElementById('edit-sidebar-button-svg-code');
@@ -434,6 +520,10 @@ document.getElementById('edit-sidebar-button-display-type').addEventListener('ch
   svgInput.style.display = e.target.value === 'svg' ? 'block' : 'none';
 });
 
+document.getElementById('edit-sidebar-button-notification').addEventListener('change', (e) => {
+  document.getElementById('edit-notification-settings').style.display = e.target.checked ? 'flex' : 'none';
+});
+
 document.getElementById('edit-sidebar-button-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
@@ -455,7 +545,9 @@ document.getElementById('edit-sidebar-button-form').addEventListener('submit', a
     border_color: document.getElementById('edit-sidebar-button-border-color').value,
     border_radius: document.getElementById('edit-sidebar-button-border-radius').value,
     font_size: document.getElementById('edit-sidebar-button-font-size').value,
-    has_notification: button.has_notification || false
+    has_notification: document.getElementById('edit-sidebar-button-notification').checked,
+    notification_api: document.getElementById('edit-sidebar-button-notification-api').value || '',
+    mark_seen_api: document.getElementById('edit-sidebar-button-mark-seen-api').value || '',
   };
 
   try {

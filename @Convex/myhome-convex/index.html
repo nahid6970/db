@@ -564,6 +564,16 @@
               </span>
             </label>
           </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="sidebar-button-notification">
+              Has Notification Badge
+            </label>
+          </div>
+          <div id="add-notification-settings" style="display: none; flex-direction: column; gap: 6px;">
+            <input type="text" id="sidebar-button-notification-api" placeholder="/api/tv-notifications">
+            <input type="text" id="sidebar-button-mark-seen-api" placeholder="/api/mark-all-tv-seen">
+          </div>
           <button type="submit">Add</button>
         </form>
       </div>
@@ -601,6 +611,16 @@
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-sidebar-button-border-radius" placeholder="Border Radius">
             <input type="text" id="edit-sidebar-button-font-size" placeholder="Font Size">
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              <input type="checkbox" id="edit-sidebar-button-notification">
+              Has Notification Badge
+            </label>
+          </div>
+          <div id="edit-notification-settings" style="display: none; flex-direction: column; gap: 6px;">
+            <input type="text" id="edit-sidebar-button-notification-api" placeholder="/api/tv-notifications">
+            <input type="text" id="edit-sidebar-button-mark-seen-api" placeholder="/api/mark-all-tv-seen">
           </div>
           <button type="submit">Save</button>
         </form>
