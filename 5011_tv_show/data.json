@@ -4346,6 +4346,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 8,
+                "title": "The Boys - S05E08 - Blood and Bone WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-20T14:38:41.018520",
+                "notify": "unseen"
+            },
+            {
                 "id": 7,
                 "title": "The Boys - S05E07 - The Frenchman, the Female, and the Man Called Mother's Milk WEBDL-1080p",
                 "watched": true,
