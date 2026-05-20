@@ -1456,7 +1456,7 @@ function createLinkItem(link, index) {
   }
 
   // Handle multiple URLs
-  a.onclick = (e) => {
+  a.onclick = async (e) => {
     e.stopPropagation();
     e.preventDefault();
 
