@@ -95,16 +95,7 @@ function createSidebarButton(button, index) {
   btn.dataset.dbId = button._id;
 
   // Enable dragging in edit mode
-  if (window.editMode) {
-    btn.draggable = true;
-    btn.addEventListener("dragstart", handleSidebarDragStart);
-    btn.addEventListener("dragover", handleSidebarDragOver);
-    btn.addEventListener("dragleave", (e) => {
-      btn.classList.remove('drag-over-before', 'drag-over-after');
-    });
-    btn.addEventListener("drop", handleSidebarDrop);
-    btn.addEventListener("dragend", handleSidebarDragEnd);
-  }
+  // (will be attached to wrapper for notification buttons, see below)
 
   // Apply custom CSS variables for dynamic styling
   btn.style.setProperty('--custom-text-color', button.text_color);
@@ -341,18 +332,38 @@ function createSidebarButton(button, index) {
 
   // Wrap in container with badge if has_notification
   if (button.has_notification) {
-    const container = document.createElement('div');
-    container.className = 'notification-button-container';
+    const wrapper = document.createElement('div');
+    wrapper.className = 'notification-button-container sidebar-button';
+    wrapper.dataset.dbId = button._id;
     const badge = document.createElement('span');
     badge.id = `${button.id}-notification-badge`;
     badge.className = 'notification-badge zero';
     badge.textContent = '0';
-    container.appendChild(btn);
-    container.appendChild(badge);
-    return container;
+    wrapper.appendChild(btn);
+    wrapper.appendChild(badge);
+
+    if (window.editMode) {
+      btn.style.pointerEvents = 'none';
+      attachDrag(wrapper);
+    }
+    return wrapper;
   }
 
+  if (window.editMode) {
+    attachDrag(btn);
+  }
   return btn;
+}
+
+function attachDrag(el) {
+  el.draggable = true;
+  el.addEventListener("dragstart", handleSidebarDragStart);
+  el.addEventListener("dragover", handleSidebarDragOver);
+  el.addEventListener("dragleave", () => {
+    el.classList.remove('drag-over-before', 'drag-over-after');
+  });
+  el.addEventListener("drop", handleSidebarDrop);
+  el.addEventListener("dragend", handleSidebarDragEnd);
 }
 
 
