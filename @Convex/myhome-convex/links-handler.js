@@ -1463,7 +1463,7 @@ function createLinkItem(link, index) {
     // Reset YouTube count if applicable
     if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
       try {
-        window.convexMutation("functions:updateYouTubeStatus", {
+        await window.convexMutation("functions:updateYouTubeStatus", {
           id: link._id,
           table: "links",
           youtube_last_video_id: link.youtube_last_video_id, // persist latest so next check doesn't re-count

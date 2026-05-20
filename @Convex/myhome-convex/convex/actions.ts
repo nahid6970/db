@@ -1,6 +1,81 @@
 import { action } from "./_generated/server";
 import { v } from "convex/values";
 
+function isYouTubeVideoId(value: unknown): value is string {
+  return typeof value === "string" && /^[a-zA-Z0-9_-]{11}$/.test(value);
+}
+
+function extractYouTubeInitialData(html: string) {
+  const patterns = [
+    /var ytInitialData = ([\s\S]*?);<\/script>/,
+    /window\["ytInitialData"\] = ([\s\S]*?);<\/script>/,
+  ];
+
+  for (const pattern of patterns) {
+    const match = html.match(pattern);
+    if (!match) continue;
+
+    try {
+      return JSON.parse(match[1]);
+    } catch (error) {
+      console.warn("Failed to parse ytInitialData", error);
+    }
+  }
+
+  return null;
+}
+
+function extractYouTubeUploadsVideoIds(html: string) {
+  const initialData = extractYouTubeInitialData(html);
+  const seen = new Set<string>();
+  const videoIds: string[] = [];
+
+  const addVideoId = (value: unknown) => {
+    if (!isYouTubeVideoId(value) || seen.has(value)) return;
+    seen.add(value);
+    videoIds.push(value);
+  };
+
+  const richGridContents =
+    initialData?.contents?.twoColumnBrowseResultsRenderer?.tabs?.find((tab: any) => {
+      const renderer = tab?.tabRenderer;
+      if (!renderer) return false;
+
+      const title = typeof renderer.title === "string" ? renderer.title.toLowerCase() : "";
+      const url = renderer.endpoint?.commandMetadata?.webCommandMetadata?.url || "";
+      return title === "videos" || url.includes("/videos");
+    })?.tabRenderer?.content?.richGridRenderer?.contents || [];
+
+  for (const item of richGridContents) {
+    const content = item?.richItemRenderer?.content;
+    const lockup = content?.lockupViewModel;
+
+    if (lockup?.contentType && lockup.contentType !== "LOCKUP_CONTENT_TYPE_VIDEO") {
+      continue;
+    }
+
+    addVideoId(lockup?.contentId);
+    addVideoId(content?.videoRenderer?.videoId);
+    addVideoId(content?.reelItemRenderer?.videoId);
+
+    if (videoIds.length >= 50) break;
+  }
+
+  if (videoIds.length > 0) {
+    return videoIds;
+  }
+
+  // Fallback for unexpected page layouts.
+  const fallbackRegex = /"(?:videoId|contentId)":"([a-zA-Z0-9_-]{11})"/g;
+  let match: RegExpExecArray | null;
+  while ((match = fallbackRegex.exec(html)) !== null) {
+    addVideoId(match[1]);
+    if (videoIds.length >= 50) break;
+  }
+
+  return videoIds;
+}
+
 export const fetchPageTitle = action({
   args: { url: v.string() },
   handler: async (ctx, args) => {
@@ -232,19 +307,7 @@ export const checkYouTubeUpdates = action({
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const html = await response.text();
-
-      // Extract video IDs from ytInitialData JSON embedded in the page
-      const videoIds: string[] = [];
-      const videoIdRegex = /"videoId":"([a-zA-Z0-9_-]{11})"/g;
-      let match;
-      const seen = new Set<string>();
-      while ((match = videoIdRegex.exec(html)) !== null) {
-        if (!seen.has(match[1])) {
-          seen.add(match[1]);
-          videoIds.push(match[1]);
-        }
-        if (videoIds.length >= 15) break;
-      }
+      const videoIds = extractYouTubeUploadsVideoIds(html);
 
       if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
 
