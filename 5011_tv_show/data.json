@@ -7,17 +7,10 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
-                "id": 35,
-                "title": "One Piece - s23e07 - [1162] - A Gargantuan Wave of Emotion - The Dreamlike Scenery of Elbaph WEBDL-1080p v2 - [ToonsHub]",
-                "watched": false,
-                "added_date": "2026-05-18T09:06:27.285129",
-                "notify": "seen"
-            },
-            {
                 "id": 34,
-                "title": "One Piece - s23e07 - [1162] - A Gargantuan Wave of Emotion - The Dreamlike Scenery of Elbaph WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "added_date": "2026-05-17T22:54:38.380595",
+                "title": "One Piece - s23e07 - [1162] - A Gargantuan Wave of Emotion - The Dreamlike Scenery of Elbaph WEBDL-1080p v2 - [ToonsHub]",
+                "watched": true,
+                "added_date": "2026-05-21T19:02:02.990964",
                 "notify": "seen"
             },
             {
@@ -610,25 +603,25 @@
             {
                 "id": 4,
                 "title": "Black Mirror - S07E06 - USS Callister - Into Infinity WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "Black Mirror - S07E05 - Eulogy WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "Black Mirror - S07E04 - Plaything WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
                 "id": 1,
                 "title": "Black Mirror - S07E03 - Hotel Reverie WEBRip-1080p",
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             }
         ],
@@ -4348,7 +4341,7 @@
             {
                 "id": 8,
                 "title": "The Boys - S05E08 - Blood and Bone WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-05-20T14:38:41.018520",
                 "notify": "seen"
             },
