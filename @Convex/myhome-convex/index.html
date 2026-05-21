@@ -27,7 +27,7 @@
 <body>
   <div class="topbar" id="topbar">
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;flex-shrink:0;border-right:1px solid #555;padding-right:8px;margin-right:4px;height:40px;">
-      <div id="version-badge" style="background:#555;color:#ccc;padding:1px 5px;border-radius:3px;font-size:10px;line-height:1.4;">v2</div>
+      <div id="version-badge" style="background:#555;color:#ccc;padding:1px 5px;border-radius:3px;font-size:10px;line-height:1.4;">v3</div>
       <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:none;border:none;color:#fff;cursor:pointer;font-size:14px;padding:0;line-height:1;">⚙️</button>
     </div>
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
@@ -217,31 +217,28 @@
                 <span>Hide</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="link-start-new-line">
+            <label class="option-chip" title="Start on New Line">
+              <input type="checkbox" id="link-start-new-line" aria-label="Start on New Line">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 6h10v2H4zm0 5h10v2H4zm0 5h6v2H4zm11-8 5 4-5 4v-3h-4v-2h4z" fill="currentColor"></path>
                 </svg>
-                <span>Start on New Line</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="link-youtube-tracking">
+            <label class="option-chip" title="YouTube Tracking">
+              <input type="checkbox" id="link-youtube-tracking" aria-label="YouTube Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 .6-.03 1.29-.1 2.09-.06.8-.15 1.43-.28 1.9-.13.47-.36.85-.66 1.13-.3.28-.73.48-1.28.62-.55.13-1.4.24-2.55.33-1.15.08-2.27.12-3.36.12s-2.21-.04-3.36-.12c-1.15-.09-2-.2-2.55-.33-.55-.14-.98-.34-1.28-.62-.3-.28-.53-.66-.66-1.13-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.13-.47.36-.85.66-1.13.3-.28.73-.48 1.28-.62.55-.13 1.4-.24 2.55-.33C7.96 5.86 9.08 5.82 10.17 5.82s2.21.04 3.36.12c1.15.09 2 .2 2.55.33.55.14.98.34 1.28.62.3.28.53.66.66 1.13z" fill="currentColor"></path>
                 </svg>
-                <span>YouTube Tracking</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="link-click-tracking">
+            <label class="option-chip" title="Click Tracking">
+              <input type="checkbox" id="link-click-tracking" aria-label="Click Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l3.6 2.1-1 1.7-4.6-2.7V7h2z" fill="currentColor"></path>
                 </svg>
-                <span>Click Tracking</span>
               </span>
             </label>
           </div>
@@ -359,40 +356,36 @@
                 <span>Hide</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="edit-link-start-new-line">
+            <label class="option-chip" title="Start on New Line">
+              <input type="checkbox" id="edit-link-start-new-line" aria-label="Start on New Line">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 6h10v2H4zm0 5h10v2H4zm0 5h6v2H4zm11-8 5 4-5 4v-3h-4v-2h4z" fill="currentColor"></path>
                 </svg>
-                <span>Start on New Line</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="edit-link-li-auto-fit">
+            <label class="option-chip" title="Auto Fit">
+              <input type="checkbox" id="edit-link-li-auto-fit" aria-label="Auto Fit">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4h-4v2h6v-6h-2z" fill="currentColor"></path>
                 </svg>
-                <span>Auto Fit</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="edit-link-youtube-tracking">
+            <label class="option-chip" title="YouTube Tracking">
+              <input type="checkbox" id="edit-link-youtube-tracking" aria-label="YouTube Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 .6-.03 1.29-.1 2.09-.06.8-.15 1.43-.28 1.9-.13.47-.36.85-.66 1.13-.3.28-.73.48-1.28.62-.55.13-1.4.24-2.55.33-1.15.08-2.27.12-3.36.12s-2.21-.04-3.36-.12c-1.15-.09-2-.2-2.55-.33-.55-.14-.98-.34-1.28-.62-.3-.28-.53-.66-.66-1.13-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.13-.47.36-.85.66-1.13.3-.28.73-.48 1.28-.62.55-.13 1.4-.24 2.55-.33C7.96 5.86 9.08 5.82 10.17 5.82s2.21.04 3.36.12c1.15.09 2 .2 2.55.33.55.14.98.34 1.28.62.3.28.53.66.66 1.13z" fill="currentColor"></path>
                 </svg>
-                <span>YouTube Tracking</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="edit-link-click-tracking">
+            <label class="option-chip" title="Click Tracking">
+              <input type="checkbox" id="edit-link-click-tracking" aria-label="Click Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l3.6 2.1-1 1.7-4.6-2.7V7h2z" fill="currentColor"></path>
                 </svg>
-                <span>Click Tracking</span>
               </span>
             </label>
           </div>
@@ -574,22 +567,20 @@
             <input type="text" id="sidebar-button-font-size" placeholder="Font Size">
           </div>
           <div class="option-chip-row">
-            <label class="option-chip">
-              <input type="checkbox" id="sidebar-button-youtube-tracking">
+            <label class="option-chip" title="YouTube Tracking">
+              <input type="checkbox" id="sidebar-button-youtube-tracking" aria-label="YouTube Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 .6-.03 1.29-.1 2.09-.06.8-.15 1.43-.28 1.9-.13.47-.36.85-.66 1.13-.3.28-.73.48-1.28.62-.55.13-1.4.24-2.55.33-1.15.08-2.27.12-3.36.12s-2.21-.04-3.36-.12c-1.15-.09-2-.2-2.55-.33-.55-.14-.98-.34-1.28-.62-.3-.28-.53-.66-.66-1.13-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.13-.47.36-.85.66-1.13.3-.28.73-.48 1.28-.62.55-.13 1.4-.24 2.55-.33C7.96 5.86 9.08 5.82 10.17 5.82s2.21.04 3.36.12c1.15.09 2 .2 2.55.33.55.14.98.34 1.28.62.3.28.53.66.66 1.13z" fill="currentColor"></path>
                 </svg>
-                <span>YouTube Tracking</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="sidebar-button-click-tracking">
+            <label class="option-chip" title="Click Tracking">
+              <input type="checkbox" id="sidebar-button-click-tracking" aria-label="Click Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l3.6 2.1-1 1.7-4.6-2.7V7h2z" fill="currentColor"></path>
                 </svg>
-                <span>Click Tracking</span>
               </span>
             </label>
           </div>
@@ -642,22 +633,20 @@
             <input type="text" id="edit-sidebar-button-font-size" placeholder="Font Size">
           </div>
           <div class="option-chip-row">
-            <label class="option-chip">
-              <input type="checkbox" id="edit-sidebar-button-youtube-tracking">
+            <label class="option-chip" title="YouTube Tracking">
+              <input type="checkbox" id="edit-sidebar-button-youtube-tracking" aria-label="YouTube Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 .6-.03 1.29-.1 2.09-.06.8-.15 1.43-.28 1.9-.13.47-.36.85-.66 1.13-.3.28-.73.48-1.28.62-.55.13-1.4.24-2.55.33-1.15.08-2.27.12-3.36.12s-2.21-.04-3.36-.12c-1.15-.09-2-.2-2.55-.33-.55-.14-.98-.34-1.28-.62-.3-.28-.53-.66-.66-1.13-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-.6.03-1.29.1-2.09.06-.8.15-1.43.28-1.9.13-.47.36-.85.66-1.13.3-.28.73-.48 1.28-.62.55-.13 1.4-.24 2.55-.33C7.96 5.86 9.08 5.82 10.17 5.82s2.21.04 3.36.12c1.15.09 2 .2 2.55.33.55.14.98.34 1.28.62.3.28.53.66.66 1.13z" fill="currentColor"></path>
                 </svg>
-                <span>YouTube Tracking</span>
               </span>
             </label>
-            <label class="option-chip">
-              <input type="checkbox" id="edit-sidebar-button-click-tracking">
+            <label class="option-chip" title="Click Tracking">
+              <input type="checkbox" id="edit-sidebar-button-click-tracking" aria-label="Click Tracking">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M12 2a10 10 0 100 20 10 10 0 000-20zm1 5v5.2l3.6 2.1-1 1.7-4.6-2.7V7h2z" fill="currentColor"></path>
                 </svg>
-                <span>Click Tracking</span>
               </span>
             </label>
           </div>
