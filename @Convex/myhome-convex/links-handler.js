@@ -233,7 +233,7 @@ function formatClickTrackingBadge(lastClickedAt) {
   const timestamp = Number(lastClickedAt || 0);
   if (!timestamp) {
     return {
-      text: '0h',
+      text: '0',
       title: 'Never clicked yet',
     };
   }
@@ -241,7 +241,7 @@ function formatClickTrackingBadge(lastClickedAt) {
   const hours = Math.floor((Date.now() - timestamp) / (60 * 60 * 1000));
   const safeHours = Math.max(0, hours);
   return {
-    text: `${safeHours}h`,
+    text: `${safeHours}`,
     title: `Last clicked ${safeHours} hour${safeHours === 1 ? '' : 's'} ago`,
   };
 }
@@ -1465,7 +1465,7 @@ function createLinkItem(link, index) {
   if (link.click_tracking_enabled) {
     const clickBadge = document.createElement('span');
     const badge = formatClickTrackingBadge(link.click_tracking_last_clicked_at);
-    clickBadge.className = 'link-badge-count';
+    clickBadge.className = 'link-badge-count click-tracking-badge';
     clickBadge.textContent = badge.text;
     clickBadge.title = badge.title;
     li.appendChild(clickBadge);

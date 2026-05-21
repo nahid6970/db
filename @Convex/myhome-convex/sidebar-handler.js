@@ -6,7 +6,7 @@ function formatClickTrackingBadge(lastClickedAt) {
   const timestamp = Number(lastClickedAt || 0);
   if (!timestamp) {
     return {
-      text: '0h',
+      text: '0',
       title: 'Never clicked yet'
     };
   }
@@ -14,7 +14,7 @@ function formatClickTrackingBadge(lastClickedAt) {
   const hours = Math.floor((Date.now() - timestamp) / (60 * 60 * 1000));
   const safeHours = Math.max(0, hours);
   return {
-    text: `${safeHours}h`,
+    text: `${safeHours}`,
     title: `Last clicked ${safeHours} hour${safeHours === 1 ? '' : 's'} ago`
   };
 }
@@ -175,7 +175,7 @@ function createSidebarButton(button, index) {
   // Tracking badge rendering
   if (button.click_tracking_enabled) {
     const clickBadge = document.createElement('span');
-    clickBadge.className = 'link-badge-count';
+    clickBadge.className = 'link-badge-count click-tracking-badge';
     const badge = formatClickTrackingBadge(button.click_tracking_last_clicked_at);
     clickBadge.textContent = badge.text;
     clickBadge.style.bottom = '-5px';
