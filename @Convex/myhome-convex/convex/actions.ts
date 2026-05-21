@@ -134,6 +134,14 @@ export const fetchPageTitle = action({
       if (!response.ok) {
         const errorBody = await response.text().catch(() => 'No body');
         console.error(`Fetch failed with ${response.status}: ${errorBody.substring(0, 200)}`);
+        if ((domain.includes('youtube.com') || domain.includes('youtu.be')) && (oembedTitle || oembedThumbnail)) {
+          return {
+            title: oembedTitle || title || domain,
+            domain: domain,
+            channelIcon: oembedThumbnail,
+            youtubeChannelId: null
+          };
+        }
         throw new Error(`HTTP ${response.status}`);
       }
       const html = await response.text();
@@ -142,7 +150,14 @@ export const fetchPageTitle = action({
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
       const title = titleMatch ? titleMatch[1].trim() : null;
       
-      let channelIcon = oembedThumbnail;
+      const ogImageMatch =
+        html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
+        html.match(/<meta[^>]*name=["']twitter:image["'][^>]*content=["']([^"']+)["']/i);
+      const ogImage = ogImageMatch ? ogImageMatch[1].replace(/&amp;/g, '&') : null;
+      const isYouTubeChannelPage = args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/') || args.url.includes('/user/');
+      const isYouTubeVideoPage = domain.includes('youtube.com') && !isYouTubeChannelPage;
+
+      let channelIcon = oembedThumbnail || (isYouTubeVideoPage ? ogImage : null);
       let youtubeChannelId = null;
 
       // 3. Specific icon extraction logic
@@ -150,11 +165,17 @@ export const fetchPageTitle = action({
       // YouTube Channel Icon & ID (if not handled by oEmbed)
       if (domain.includes('youtube.com')) {
         // Extract Icon
-        if (args.url.includes('/@') || args.url.includes('/channel/') || args.url.includes('/c/')) {
+        if (isYouTubeChannelPage) {
           const iconMatch = html.match(/"avatar":\{"thumbnails":\[\{"url":"([^"]+)"/);
           if (iconMatch) {
-            channelIcon = iconMatch[1];
+            channelIcon = iconMatch[1].replace(/&amp;/g, '&');
+          } else if (!channelIcon && ogImage) {
+            channelIcon = ogImage;
           }
+        }
+
+        if (!channelIcon && ogImage) {
+          channelIcon = ogImage;
         }
         
         // Extract Channel ID
@@ -282,6 +303,14 @@ export const fetchPageTitle = action({
       };
     } catch (error) {
       console.error('Fetch error:', error);
+      if (domain.includes('youtube.com') || domain.includes('youtu.be')) {
+        return {
+          title: oembedTitle || domain,
+          domain: domain,
+          channelIcon: oembedThumbnail,
+          youtubeChannelId: null
+        };
+      }
       return {
         title: domain,
         domain: domain,

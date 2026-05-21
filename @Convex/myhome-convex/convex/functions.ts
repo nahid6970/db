@@ -185,6 +185,17 @@ export const updateYouTubeStatus = mutation({
   },
 });
 
+export const updateLinkImage = mutation({
+  args: {
+    id: v.id("links"),
+    img_src: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const { id, ...data } = args;
+    await ctx.db.patch(id, data);
+  },
+});
+
 
 
 export const deleteLink = mutation({

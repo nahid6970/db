@@ -160,6 +160,68 @@ function loadLinksFromCache() {
   }
 }
 
+async function refreshMissingYouTubeMetadata() {
+  if (window._youtubeMetadataRefreshStarted) return;
+  window._youtubeMetadataRefreshStarted = true;
+
+  const candidates = links.filter((link) => {
+    if (link.is_separator) return false;
+    const urls = getLinkUrls(link);
+    const isYouTubeLink = urls.some((url) => /youtube\.com|youtu\.be/i.test(url));
+    if (!isYouTubeLink) return false;
+
+    const hasCustomImage = !!link.img_src && !/google\.com\/s2\/favicons/i.test(link.img_src);
+    return !hasCustomImage;
+  });
+
+  if (!candidates.length) return;
+
+  const CONCURRENCY = 3;
+  for (let i = 0; i < candidates.length; i += CONCURRENCY) {
+    await Promise.all(candidates.slice(i, i + CONCURRENCY).map(async (link) => {
+      const sourceUrl = getLinkUrls(link)[0];
+      if (!sourceUrl) return;
+
+      try {
+        const result = await window.convexAction("actions:fetchPageTitle", { url: sourceUrl });
+        const updates = {};
+
+        if (result.youtubeChannelId && result.youtubeChannelId !== link.youtube_channel_id) {
+          updates.youtube_channel_id = result.youtubeChannelId;
+        }
+
+        if (result.channelIcon && result.channelIcon !== link.img_src) {
+          updates.img_src = result.channelIcon;
+        }
+
+        if (!Object.keys(updates).length) return;
+
+        if (updates.img_src) {
+          await window.convexMutation("functions:updateLinkImage", {
+            id: link._id,
+            img_src: updates.img_src,
+          });
+        }
+
+        if (updates.youtube_channel_id || updates.youtube_last_video_id) {
+          await window.convexMutation("functions:updateYouTubeStatus", {
+            id: link._id,
+            table: "links",
+            youtube_channel_id: updates.youtube_channel_id,
+            youtube_last_video_id: updates.youtube_last_video_id,
+          });
+        }
+
+        Object.assign(link, updates);
+      } catch (error) {
+        console.warn('Could not refresh YouTube metadata:', error);
+      }
+    }));
+  }
+
+  renderLinks();
+}
+
 function getLinkUrls(link) {
   const values = [];
   if (Array.isArray(link.urls)) values.push(...link.urls);
@@ -576,6 +638,15 @@ async function loadLinks() {
       window._youtubeChecked = true;
       setTimeout(checkAllYouTubeUpdates, 3000);
       setInterval(checkAllYouTubeUpdates, 30 * 60 * 1000);
+    }
+
+    if (!window._youtubeMetadataRefreshQueued) {
+      window._youtubeMetadataRefreshQueued = true;
+      setTimeout(() => {
+        refreshMissingYouTubeMetadata().catch((error) => {
+          console.warn('YouTube metadata refresh failed:', error);
+        });
+      }, 1500);
     }
   } catch (error) {
     console.error('Error loading links:', error);
