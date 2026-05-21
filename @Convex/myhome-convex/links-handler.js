@@ -229,6 +229,23 @@ function getLinkUrls(link) {
   return [...new Set(values.filter(Boolean))];
 }
 
+function formatClickTrackingBadge(lastClickedAt) {
+  const timestamp = Number(lastClickedAt || 0);
+  if (!timestamp) {
+    return {
+      text: '0h',
+      title: 'Never clicked yet',
+    };
+  }
+
+  const hours = Math.floor((Date.now() - timestamp) / (60 * 60 * 1000));
+  const safeHours = Math.max(0, hours);
+  return {
+    text: `${safeHours}h`,
+    title: `Last clicked ${safeHours} hour${safeHours === 1 ? '' : 's'} ago`,
+  };
+}
+
 function normalizeUrl(rawUrl) {
   if (!rawUrl) return '';
 
@@ -638,6 +655,14 @@ async function loadLinks() {
       window._youtubeChecked = true;
       setTimeout(checkAllYouTubeUpdates, 3000);
       setInterval(checkAllYouTubeUpdates, 30 * 60 * 1000);
+    }
+
+    if (!window._clickTrackingRefreshTimer) {
+      window._clickTrackingRefreshTimer = setInterval(() => {
+        if (links.some((link) => link.click_tracking_enabled)) {
+          renderLinks();
+        }
+      }, 10 * 60 * 1000);
     }
 
     if (!window._youtubeMetadataRefreshQueued) {
@@ -1437,7 +1462,14 @@ function createLinkItem(link, index) {
     }
   }
 
-  if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
+  if (link.click_tracking_enabled) {
+    const clickBadge = document.createElement('span');
+    const badge = formatClickTrackingBadge(link.click_tracking_last_clicked_at);
+    clickBadge.className = 'link-badge-count';
+    clickBadge.textContent = badge.text;
+    clickBadge.title = badge.title;
+    li.appendChild(clickBadge);
+  } else if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
     const youtubeBadge = document.createElement('span');
     youtubeBadge.className = 'link-badge-count';
     youtubeBadge.textContent = link.youtube_new_video_count;
@@ -1531,8 +1563,21 @@ function createLinkItem(link, index) {
     e.stopPropagation();
     e.preventDefault();
 
-    // Reset YouTube count if applicable
-    if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
+    if (link.click_tracking_enabled) {
+      try {
+        const now = Date.now();
+        await window.convexMutation("functions:updateYouTubeStatus", {
+          id: link._id,
+          table: "links",
+          click_tracking_enabled: true,
+          click_tracking_last_clicked_at: now
+        });
+        link.click_tracking_last_clicked_at = now;
+        renderLinks();
+      } catch (error) {
+        console.error('Error updating click tracking:', error);
+      }
+    } else if (link.youtube_new_video_count && link.youtube_new_video_count > 0) {
       try {
         await window.convexMutation("functions:updateYouTubeStatus", {
           id: link._id,
@@ -1816,13 +1861,26 @@ document.getElementById('quick-add-link-form').addEventListener('submit', async 
   }
 });
 
+document.getElementById('link-youtube-tracking').addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.getElementById('link-click-tracking').checked = false;
+  }
+});
+
+document.getElementById('link-click-tracking').addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.getElementById('link-youtube-tracking').checked = false;
+  }
+});
+
 
 document.getElementById('add-link-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const urls = getAllUrls(false);
   const duplicateMatch = links.find(link => !link.is_separator && getLinkUrls(link).some(existingUrl => urls.some(url => normalizeUrl(existingUrl) === normalizeUrl(url))));
-  const isTrackingEnabled = document.getElementById('link-youtube-tracking').checked;
+  const isYoutubeTrackingEnabled = document.getElementById('link-youtube-tracking').checked;
+  const isClickTrackingEnabled = document.getElementById('link-click-tracking').checked;
   const typeRadios = document.querySelectorAll('input[name="link-type"]');
   let defaultType = 'text';
   typeRadios.forEach(r => { if (r.checked) defaultType = r.value; });
@@ -1857,14 +1915,25 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
   };
 
   try {
-    if (isTrackingEnabled) {
+    if (isClickTrackingEnabled) {
+      newLink.click_tracking_enabled = true;
+      newLink.click_tracking_last_clicked_at = Date.now();
+      newLink.youtube_channel_id = undefined;
+      newLink.youtube_last_video_id = undefined;
+      newLink.youtube_new_video_count = 0;
+    } else if (isYoutubeTrackingEnabled) {
       const trackingState = await initializeYouTubeTrackingForUrl(newLink.url);
       if (trackingState.youtube_channel_id) {
         Object.assign(newLink, compactObject(trackingState));
+        newLink.click_tracking_enabled = false;
+        newLink.click_tracking_last_clicked_at = 0;
         window.showNotification('YouTube tracking enabled!', 'success');
       } else {
         window.showNotification('Could not find YouTube channel ID. Saved without tracking.', 'error');
       }
+    } else {
+      newLink.click_tracking_enabled = false;
+      newLink.click_tracking_last_clicked_at = 0;
     }
 
     await window.convexMutation("functions:addLink", newLink);
@@ -1914,6 +1983,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
   document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
   document.getElementById('edit-link-youtube-tracking').checked = !!link.youtube_channel_id;
+  document.getElementById('edit-link-click-tracking').checked = !!link.click_tracking_enabled;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -1931,6 +2001,18 @@ function openEditLinkPopup(link, index) {
     }
   }, 50);
 }
+
+document.getElementById('edit-link-youtube-tracking').addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.getElementById('edit-link-click-tracking').checked = false;
+  }
+});
+
+document.getElementById('edit-link-click-tracking').addEventListener('change', (e) => {
+  if (e.target.checked) {
+    document.getElementById('edit-link-youtube-tracking').checked = false;
+  }
+});
 
 document.getElementById('edit-link-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -1973,11 +2055,21 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     ...compactObject(reminderDraft)
   };
 
-  const isTrackingEnabled = document.getElementById('edit-link-youtube-tracking').checked;
+  const isYoutubeTrackingEnabled = document.getElementById('edit-link-youtube-tracking').checked;
+  const isClickTrackingEnabled = document.getElementById('edit-link-click-tracking').checked;
   const originalLink = links.find(l => l._id === id);
 
-  if (isTrackingEnabled) {
+  if (isClickTrackingEnabled) {
+    updatedLink.click_tracking_enabled = true;
+    updatedLink.click_tracking_last_clicked_at = originalLink.click_tracking_enabled ? (originalLink.click_tracking_last_clicked_at || Date.now()) : Date.now();
+    updatedLink.youtube_channel_id = "";
+    updatedLink.youtube_last_video_id = "";
+    updatedLink.youtube_new_video_count = 0;
+  } else if (isYoutubeTrackingEnabled) {
     const needsInitialization = !originalLink.youtube_channel_id || !originalLink.youtube_last_video_id;
+
+    updatedLink.click_tracking_enabled = false;
+    updatedLink.click_tracking_last_clicked_at = 0;
 
     if (needsInitialization) {
       try {
@@ -2007,6 +2099,8 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     }
   } else {
     // Clear tracking
+    updatedLink.click_tracking_enabled = false;
+    updatedLink.click_tracking_last_clicked_at = 0;
     updatedLink.youtube_channel_id = "";
     updatedLink.youtube_last_video_id = "";
     updatedLink.youtube_new_video_count = 0;
