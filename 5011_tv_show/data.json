@@ -1040,6 +1040,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 17,
+                "title": "Dr. STONE - s04e32 - [90] - Challengers of Science HDTV-1080p - [SubsPlease]",
+                "watched": true,
+                "added_date": "2026-05-21T20:38:47.940174",
+                "notify": "seen"
+            },
+            {
                 "id": 16,
                 "title": "Dr. STONE - s04e31 - [89] - UNKNOWN KNOWN HDTV-1080p - [SubsPlease]",
                 "watched": true,
