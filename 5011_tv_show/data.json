@@ -4506,5 +4506,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 49,
+        "title": "Wistoria - Wand and Sword",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Wistoria - Wand and Sword",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "Wistoria - Wand and Sword - S02E06 - The First Bloom WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T12:55:55.304552",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
