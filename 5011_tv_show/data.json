@@ -7,6 +7,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
         "episodes": [
             {
+                "id": 35,
+                "title": "One Piece - s23e08 - [1163] - I Want You to Praise Me - The Reunion of Robin and Saul WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-05-25T00:56:05.914601",
+                "notify": "unseen"
+            },
+            {
                 "id": 34,
                 "title": "One Piece - s23e07 - [1162] - A Gargantuan Wave of Emotion - The Dreamlike Scenery of Elbaph WEBDL-1080p v2 - [ToonsHub]",
                 "watched": true,
@@ -4511,18 +4518,133 @@
         "id": 49,
         "title": "Wistoria - Wand and Sword",
         "year": "",
-        "cover_image": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/445829/posters/693a275d0bb65.jpg",
         "directory_path": "D:\\Downloads\\@Sonarr\\Wistoria - Wand and Sword",
         "rating": null,
         "status": "Continuing",
         "episodes": [
             {
+                "id": 17,
+                "title": "Wistoria - Wand and Sword - S02E07 - He Said He Would No Longer Hang His Head WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-25T00:56:06.521301",
+                "notify": "unseen"
+            },
+            {
                 "id": 1,
                 "title": "Wistoria - Wand and Sword - S02E06 - The First Bloom WEBRip-1080p",
                 "watched": false,
                 "added_date": "2026-05-24T12:55:55.304552",
+                "notify": "seen"
+            },
+            {
+                "id": 3,
+                "title": "Wistoria - Wand and Sword - S02E05 - The Day of Departure WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T13:55:55.265296",
+                "notify": "seen"
+            },
+            {
+                "id": 4,
+                "title": "Wistoria - Wand and Sword - S02E04 - And the Story Begins WEBRip-1080p Proper",
+                "watched": false,
+                "added_date": "2026-05-24T14:06:02.689741",
+                "notify": "seen"
+            },
+            {
+                "id": 2,
+                "title": "Wistoria - Wand and Sword - S02E03 - One Single Magic Spell WEBRip-1080p Proper",
+                "watched": false,
+                "added_date": "2026-05-24T13:55:55.265296",
+                "notify": "seen"
+            },
+            {
+                "id": 16,
+                "title": "Wistoria - Wand and Sword - S01E12 - Wand and Sword WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 15,
+                "title": "Wistoria - Wand and Sword - S01E11 - The True Name of Cowards WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 14,
+                "title": "Wistoria - Wand and Sword - S01E10 - Our Dream WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 13,
+                "title": "Wistoria - Wand and Sword - S01E09 - Praxis Begins WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 12,
+                "title": "Wistoria - Wand and Sword - S01E08 - Shall we date WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 11,
+                "title": "Wistoria - Wand and Sword - S01E07 - Twelve Secret Ice Magics, El Glace Frosse WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 10,
+                "title": "Wistoria - Wand and Sword - S01E06 - Between Pride and Passion WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 9,
+                "title": "Wistoria - Wand and Sword - S01E05 - Raise the Starting Pistol WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 8,
+                "title": "Wistoria - Wand and Sword - S01E04 - The Eve of the Grand Festival WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 7,
+                "title": "Wistoria - Wand and Sword - S01E03 - Order & Watcher WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 6,
+                "title": "Wistoria - Wand and Sword - S01E02 - As Though Undaunted WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
+                "notify": "unseen"
+            },
+            {
+                "id": 5,
+                "title": "Wistoria - Wand and Sword - S01E01 - Like a Lone Sword WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-05-24T16:06:02.682502",
                 "notify": "unseen"
             }
-        ]
+        ],
+        "sonarr_url": "http://192.168.0.101:8989/series/wistoria-wand-and-sword",
+        "episode_sort_type": "alphabetical",
+        "episode_sort_order": "desc"
     }
 ]
