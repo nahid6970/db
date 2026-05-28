@@ -30,7 +30,7 @@
 
     .folder-bar {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       gap: 8px;
       align-items: center;
       margin-bottom: 8px;
@@ -38,12 +38,18 @@
       background: white;
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow-x: auto;
+      overflow-y: hidden;
+      scrollbar-width: thin;
+      -webkit-overflow-scrolling: touch;
     }
 
     .folder-chip {
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      flex: 0 0 auto;
+      max-width: 180px;
       padding: 6px 10px;
       border: 1px solid #d6dbe1;
       border-radius: 999px;
@@ -53,6 +59,16 @@
       font-size: 13px;
       line-height: 1;
       transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
+    }
+
+    .folder-chip > span {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .folder-chip:hover {
@@ -365,9 +381,11 @@
     }
 
     .selection-hint {
+      flex: 0 0 auto;
       font-size: 12px;
       color: #0b5ed7;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .folder-lock {
@@ -635,6 +653,7 @@
         height: 36px;
         flex: 0 0 36px;
       }
+      .folder-chip { max-width: 140px; }
       .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
       .image-card img { height: 150px; }
       .file-label { min-width: 100%; font-size: 14px; }
@@ -2134,6 +2153,13 @@
 
       folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
+      requestAnimationFrame(() => {
+        const activeChip = folderBar.querySelector('.folder-chip.active');
+        if (!activeChip || folderBar.scrollWidth <= folderBar.clientWidth) return;
+
+        const targetLeft = activeChip.offsetLeft - (folderBar.clientWidth - activeChip.offsetWidth) / 2;
+        folderBar.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+      });
     }
 
     let draggedFolderId = null;
