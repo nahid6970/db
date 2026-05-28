@@ -72,7 +72,7 @@
 
     .content-shell {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 260px;
+      grid-template-columns: minmax(0, 1fr) auto;
       gap: 12px;
       align-items: start;
     }
@@ -81,6 +81,8 @@
       position: sticky;
       top: 78px;
       max-height: calc(100vh - 94px);
+      min-width: 120px;
+      max-width: 320px;
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
@@ -2249,6 +2251,14 @@
       folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
+        // Size panel to widest chip
+        const panel = document.getElementById('folderPanel');
+        if (panel) {
+          const allChips = folderBar.querySelectorAll('.folder-chip');
+          let maxW = 0;
+          allChips.forEach(c => { const w = c.scrollWidth; if (w > maxW) maxW = w; });
+          if (maxW > 0) panel.style.width = (maxW + 22) + 'px'; // 22 = bar padding + border
+        }
         const activeChip = folderBar.querySelector('.folder-chip.active');
         if (!activeChip || folderBar.scrollHeight <= folderBar.clientHeight) return;
 
