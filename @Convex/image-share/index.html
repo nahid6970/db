@@ -617,11 +617,29 @@
     
     @media (max-width: 640px) {
       .container { padding: 8px; }
-      .upload-section { padding: 12px; }
+      .upload-section { padding: 8px; }
+      .upload-controls {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 6px;
+      }
+      .drop-zone {
+        flex: 1 1 auto;
+        min-width: 0;
+        height: 36px;
+        padding: 0 8px;
+        font-size: 13px;
+      }
+      .icon-btn {
+        width: 36px;
+        height: 36px;
+        flex: 0 0 36px;
+      }
       .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
       .image-card img { height: 150px; }
       .file-label { min-width: 100%; font-size: 14px; }
       button { padding: 10px 18px; font-size: 14px; }
+      button.icon-btn { padding: 0; }
     }
   </style>
   <style>
