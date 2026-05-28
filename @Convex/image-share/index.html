@@ -30,16 +30,13 @@
 
     .folder-bar {
       display: flex;
+      flex-direction: column;
       flex-wrap: nowrap;
-      gap: 8px;
-      align-items: center;
-      margin-bottom: 8px;
-      padding: 8px 10px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      overflow-x: auto;
-      overflow-y: hidden;
+      gap: 6px;
+      align-items: stretch;
+      padding: 8px;
+      overflow-x: hidden;
+      overflow-y: auto;
       scrollbar-width: thin;
       -webkit-overflow-scrolling: touch;
     }
@@ -49,15 +46,17 @@
       align-items: center;
       gap: 6px;
       flex: 0 0 auto;
-      max-width: 180px;
-      padding: 6px 10px;
+      width: 100%;
+      min-height: 34px;
+      padding: 8px 10px;
       border: 1px solid #d6dbe1;
-      border-radius: 999px;
+      border-radius: 8px;
       background: #f8f9fa;
       color: #334155;
       cursor: pointer;
       font-size: 13px;
       line-height: 1;
+      text-align: left;
       transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
     }
 
@@ -69,6 +68,48 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+    }
+
+    .content-shell {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 260px;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .folder-panel {
+      position: sticky;
+      top: 78px;
+      max-height: calc(100vh - 94px);
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .folder-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .folder-panel .folder-bar {
+      max-height: calc(100vh - 145px);
+    }
+
+    .folder-panel-close,
+    #folderToggleBtn {
+      display: none;
+    }
+
+    .folder-drawer-backdrop {
+      display: none;
     }
 
     .folder-chip:hover {
@@ -385,7 +426,7 @@
       font-size: 12px;
       color: #0b5ed7;
       font-weight: 600;
-      white-space: nowrap;
+      padding: 6px 2px;
     }
 
     .folder-lock {
@@ -653,7 +694,46 @@
         height: 36px;
         flex: 0 0 36px;
       }
-      .folder-chip { max-width: 140px; }
+      #folderToggleBtn { display: inline-flex; }
+      .content-shell {
+        display: block;
+      }
+      .folder-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 4200;
+        width: min(320px, 88vw);
+        height: 100vh;
+        max-height: none;
+        border-radius: 12px 0 0 12px;
+        transform: translateX(100%);
+        transition: transform 0.2s ease;
+      }
+      .folder-panel.open {
+        transform: translateX(0);
+      }
+      .folder-panel-close {
+        display: inline-flex;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        background: #f1f5f9;
+        color: #334155;
+      }
+      .folder-panel .folder-bar {
+        max-height: calc(100vh - 52px);
+      }
+      .folder-drawer-backdrop.open {
+        display: block;
+        position: fixed;
+        inset: 0;
+        z-index: 4190;
+        background: rgba(15, 23, 42, 0.35);
+      }
       .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
       .image-card img { height: 150px; }
       .file-label { min-width: 100%; font-size: 14px; }
@@ -853,6 +933,12 @@
               <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
             </svg>
           </button>
+          <button id="folderToggleBtn" class="secondary icon-btn" onclick="toggleFolderPanel()" title="Folders">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v2H3V6z"></path>
+              <path d="M3 10h18l-2 9H5l-2-9z"></path>
+            </svg>
+          </button>
           <button id="activeStorageBadge" class="secondary icon-btn" onclick="openSettings()" title="Settings" style="background:#e0f2fe;color:#0369a1;border:1px solid #7dd3fc;transition:all 0.2s;">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
@@ -863,12 +949,21 @@
 
         <div id="status"></div>
       </div>
-
-      <div class="folder-bar" id="folderBar"></div>
     </div>
 
-    <div id="gallery" class="gallery"></div>
+    <div class="content-shell">
+      <div id="gallery" class="gallery"></div>
+      <aside class="folder-panel" id="folderPanel">
+        <div class="folder-panel-header">
+          <span>Folders</span>
+          <button class="folder-panel-close" onclick="closeFolderPanel()" title="Close folders">&times;</button>
+        </div>
+        <div class="folder-bar" id="folderBar"></div>
+      </aside>
+    </div>
   </div>
+
+  <div class="folder-drawer-backdrop" id="folderDrawerBackdrop" onclick="closeFolderPanel()"></div>
 
   <div id="globalDropOverlay">
     <div class="overlay-content">
@@ -2155,12 +2250,31 @@
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
         const activeChip = folderBar.querySelector('.folder-chip.active');
-        if (!activeChip || folderBar.scrollWidth <= folderBar.clientWidth) return;
+        if (!activeChip || folderBar.scrollHeight <= folderBar.clientHeight) return;
 
-        const targetLeft = activeChip.offsetLeft - (folderBar.clientWidth - activeChip.offsetWidth) / 2;
-        folderBar.scrollTo({ left: Math.max(0, targetLeft), behavior: 'smooth' });
+        const targetTop = activeChip.offsetTop - (folderBar.clientHeight - activeChip.offsetHeight) / 2;
+        folderBar.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
       });
     }
+
+    window.openFolderPanel = function() {
+      document.getElementById('folderPanel')?.classList.add('open');
+      document.getElementById('folderDrawerBackdrop')?.classList.add('open');
+    };
+
+    window.closeFolderPanel = function() {
+      document.getElementById('folderPanel')?.classList.remove('open');
+      document.getElementById('folderDrawerBackdrop')?.classList.remove('open');
+    };
+
+    window.toggleFolderPanel = function() {
+      const panel = document.getElementById('folderPanel');
+      if (panel?.classList.contains('open')) {
+        closeFolderPanel();
+      } else {
+        openFolderPanel();
+      }
+    };
 
     let draggedFolderId = null;
 
@@ -2224,6 +2338,7 @@
           return;
         }
         await moveSelectedImages(folderId === 'none' ? undefined : folderId);
+        closeFolderPanel();
         return;
       }
 
@@ -2240,6 +2355,7 @@
       selectedImageIds.clear();
       renderFolderBar();
       subscribeToImages();
+      closeFolderPanel();
     };
 
     window.createFolder = async function() {
