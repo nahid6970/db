@@ -1047,6 +1047,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 18,
+                "title": "Dr. STONE - s04e33 - [91] - Wanting Everything HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-05-28T20:15:17.391536",
+                "notify": "unseen"
+            },
+            {
                 "id": 17,
                 "title": "Dr. STONE - s04e32 - [90] - Challengers of Science HDTV-1080p - [SubsPlease]",
                 "watched": true,
