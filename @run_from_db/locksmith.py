@@ -5,7 +5,6 @@ import threading
 from tkinter import filedialog, messagebox
 import ctypes
 import sys
-from pathlib import Path
 
 # CYBERPUNK THEME PALETTE
 CP_BG = "#050505"
