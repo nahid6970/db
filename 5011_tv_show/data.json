@@ -2630,6 +2630,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 27,
+                "title": "WWE SmackDown - 2026-05-29 - SmackDown 1397 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-05-31T12:03:19.532122",
+                "notify": "unseen"
+            },
+            {
                 "id": 26,
                 "title": "WWE SmackDown - 2026-05-22 - SmackDown 1396 WEBDL-1080p",
                 "watched": true,
@@ -4544,6 +4551,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 20,
+                "title": "Wistoria - Wand and Sword - S02E08 - Teachings of the Witch WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-05-31T16:03:19.541425",
+                "notify": "unseen"
+            },
             {
                 "id": 17,
                 "title": "Wistoria - Wand and Sword - S02E07 - He Said He Would No Longer Hang His Head WEBDL-1080p",
