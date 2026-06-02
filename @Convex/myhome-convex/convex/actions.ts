@@ -76,21 +76,6 @@ function extractYouTubeUploadsVideoIds(html: string) {
   return videoIds;
 }
 
-function extractVideoIdsFromRss(xml: string): string[] {
-  const videoIds: string[] = [];
-  const regex = /<yt:videoId>([a-zA-Z0-9_-]{11})<\/yt:videoId>/g;
-  let match;
-  const seen = new Set<string>();
-  while ((match = regex.exec(xml)) !== null) {
-    const id = match[1];
-    if (!seen.has(id)) {
-      seen.add(id);
-      videoIds.push(id);
-    }
-  }
-  return videoIds;
-}
-
 export const fetchPageTitle = action({
   args: { url: v.string() },
   handler: async (ctx, args) => {
@@ -151,7 +136,7 @@ export const fetchPageTitle = action({
         console.error(`Fetch failed with ${response.status}: ${errorBody.substring(0, 200)}`);
         if ((domain.includes('youtube.com') || domain.includes('youtu.be')) && (oembedTitle || oembedThumbnail)) {
           return {
-            title: oembedTitle || domain,
+            title: oembedTitle || title || domain,
             domain: domain,
             channelIcon: oembedThumbnail,
             youtubeChannelId: null
@@ -339,57 +324,35 @@ export const fetchPageTitle = action({
 export const checkYouTubeUpdates = action({
   args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
   handler: async (ctx, args) => {
-    let videoIds: string[] = [];
-
-    // 1. Try RSS feed first (most reliable, chronological, and avoids scraper rate limits/noise)
     try {
-      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
-      const rssResponse = await fetch(rssUrl, {
+      // Fetch the channel's videos page and extract video IDs from embedded JSON
+      const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
+      const response = await fetch(channelUrl, {
         headers: {
           'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept-Language': 'en-US,en;q=0.9',
         }
       });
-      if (rssResponse.ok) {
-        const xml = await rssResponse.text();
-        videoIds = extractVideoIdsFromRss(xml);
-      } else {
-        console.warn(`YouTube RSS feed fetch failed with HTTP ${rssResponse.status} for channel ${args.channelId}`);
-      }
-    } catch (e) {
-      console.warn(`YouTube RSS feed check failed for channel ${args.channelId}, falling back to scraping:`, e);
-    }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    // 2. Fallback to HTML scraping if RSS failed or returned no videos
-    if (videoIds.length === 0) {
-      try {
-        const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
-        const response = await fetch(channelUrl, {
-          headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept-Language': 'en-US,en;q=0.9',
-          }
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const html = await response.text();
+      const videoIds = extractYouTubeUploadsVideoIds(html);
 
-        const html = await response.text();
-        videoIds = extractYouTubeUploadsVideoIds(html);
-      } catch (error) {
-        console.error(`YouTube scraping fallback failed for channel ${args.channelId}:`, error);
-      }
-    }
+      if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
 
-    if (videoIds.length === 0) {
+      const latestVideoId = videoIds[0];
+
+      if (!args.lastVideoId) return { count: 0, latestVideoId };
+      if (latestVideoId === args.lastVideoId) return { count: 0, latestVideoId };
+
+      const lastIndex = videoIds.indexOf(args.lastVideoId);
+      const count = lastIndex === -1 ? videoIds.length : lastIndex;
+
+      return { count, latestVideoId };
+    } catch (error) {
+      console.error('YouTube update check failed:', error);
       return { count: 0, latestVideoId: args.lastVideoId || null };
     }
-
-    const latestVideoId = videoIds[0];
-
-    if (!args.lastVideoId) return { count: 0, latestVideoId };
-    if (latestVideoId === args.lastVideoId) return { count: 0, latestVideoId };
-
-    const lastIndex = videoIds.indexOf(args.lastVideoId);
-    const count = lastIndex === -1 ? videoIds.length : lastIndex;
-
-    return { count, latestVideoId };
   },
 });
+
