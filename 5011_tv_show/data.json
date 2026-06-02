@@ -4702,5 +4702,52 @@
         "sonarr_url": "http://192.168.0.101:8989/series/wistoria-wand-and-sword",
         "episode_sort_type": "alphabetical",
         "episode_sort_order": "desc"
+    },
+    {
+        "id": 50,
+        "title": "The War Between the Land and the Sea",
+        "year": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/444613/posters/69368ce67f30c.jpg",
+        "directory_path": "D:\\Downloads\\@Sonarr\\The War Between the Land and the Sea",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 5,
+                "title": "The War Between the Land and the Sea - S01E05 - The End of the War WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-01T23:17:56.507325",
+                "notify": "unseen"
+            },
+            {
+                "id": 4,
+                "title": "The War Between the Land and the Sea - S01E04 - The Witch of the Waterfall WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-01T23:17:56.507325",
+                "notify": "unseen"
+            },
+            {
+                "id": 3,
+                "title": "The War Between the Land and the Sea - S01E03 - The Deep WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-01T23:17:56.507325",
+                "notify": "unseen"
+            },
+            {
+                "id": 2,
+                "title": "The War Between the Land and the Sea - S01E02 - Plastic Apocalypse WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-01T23:17:56.507325",
+                "notify": "unseen"
+            },
+            {
+                "id": 1,
+                "title": "The War Between the Land and the Sea - S01E01 - Homo Aqua WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-01T23:17:56.507325",
+                "notify": "unseen"
+            }
+        ],
+        "sonarr_url": ""
     }
 ]
