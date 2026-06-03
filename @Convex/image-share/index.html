@@ -46,7 +46,9 @@
       align-items: center;
       gap: 5px;
       flex: 0 0 auto;
-      width: 100%;
+      width: auto;
+      max-width: 100%;
+      align-self: flex-start;
       min-height: 26px;
       padding: 4px 8px;
       border: 1px solid #d6dbe1;
@@ -80,9 +82,10 @@
     .folder-panel {
       position: sticky;
       top: 78px;
-      max-height: calc(100vh - 94px);
+      width: fit-content;
       min-width: 120px;
       max-width: 320px;
+      max-height: calc(100vh - 94px);
       background: white;
       border: 1px solid #e2e8f0;
       border-radius: 12px;
@@ -2210,6 +2213,7 @@
 
     function renderFolderBar() {
       const folderBar = document.getElementById('folderBar');
+      const folderPanel = document.getElementById('folderPanel');
       const selectionCount = selectedImageIds.size;
       const baseFolders = [
         { id: null, name: 'All' },
@@ -2251,13 +2255,23 @@
       folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
-        // Size panel to widest chip
-        const panel = document.getElementById('folderPanel');
-        if (panel) {
-          const allChips = folderBar.querySelectorAll('.folder-chip');
-          let maxW = 0;
-          allChips.forEach(c => { const w = c.scrollWidth; if (w > maxW) maxW = w; });
-          if (maxW > 0) panel.style.width = (maxW + 22) + 'px'; // 22 = bar padding + border
+        if (folderPanel) {
+          const allFolders = [
+            ...baseFolders,
+            ...folders.map(folder => ({ name: folder.name })),
+            { name: '+ Folder' },
+          ];
+          const measurements = document.createElement('canvas').getContext('2d');
+          if (measurements) {
+            const styles = getComputedStyle(folderBar.querySelector('.folder-chip') || folderBar);
+            measurements.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+            const widestLabel = allFolders.reduce((max, folder) => {
+              const textWidth = measurements.measureText(folder.name).width;
+              return Math.max(max, textWidth);
+            }, 0);
+            const chromeWidth = 34;
+            folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widestLabel + chromeWidth)))}px`;
+          }
         }
         const activeChip = folderBar.querySelector('.folder-chip.active');
         if (!activeChip || folderBar.scrollHeight <= folderBar.clientHeight) return;
