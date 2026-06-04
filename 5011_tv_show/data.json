@@ -4756,5 +4756,52 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 51,
+        "title": "Ling Cage",
+        "year": "",
+        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/366841/posters/68c953b10d8a4.jpg",
+        "directory_path": "D:\\Downloads\\@Sonarr\\Ling Cage",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 5,
+                "title": "Ling Cage - S02E09 - Shadow Ashes HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-04T14:38:39.724631",
+                "notify": "seen"
+            },
+            {
+                "id": 4,
+                "title": "Ling Cage - S02E08 - The storm is coming HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-04T14:38:39.724631",
+                "notify": "seen"
+            },
+            {
+                "id": 3,
+                "title": "Ling Cage - S02E07 - Initial solution to the mystery HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-04T14:38:39.724631",
+                "notify": "seen"
+            },
+            {
+                "id": 2,
+                "title": "Ling Cage - S02E06 - Souls finally reunited HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-04T14:38:39.724631",
+                "notify": "seen"
+            },
+            {
+                "id": 1,
+                "title": "Ling Cage - S02E05 - Rainbow Voyage HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-04T14:38:39.724631",
+                "notify": "seen"
+            }
+        ],
+        "sonarr_url": ""
     }
 ]
