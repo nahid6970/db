@@ -1054,6 +1054,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 19,
+                "title": "Dr. STONE - s04e34 - [92] - COUNTDOWN HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-06-04T21:38:39.707469",
+                "notify": "unseen"
+            },
+            {
                 "id": 18,
                 "title": "Dr. STONE - s04e33 - [91] - Wanting Everything HDTV-1080p - [SubsPlease]",
                 "watched": true,
