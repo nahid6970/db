@@ -9,7 +9,7 @@
             {
                 "id": 36,
                 "title": "One Piece - s23e09 - [1164] - Saul's Resolve - The Inherited Will of Ohara WEBDL-1080p - [Erai-raws]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-05-31T23:03:19.536793",
                 "notify": "seen"
             },
@@ -1056,9 +1056,9 @@
             {
                 "id": 19,
                 "title": "Dr. STONE - s04e34 - [92] - COUNTDOWN HDTV-1080p - [SubsPlease]",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-06-04T21:38:39.707469",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 18,
@@ -2351,7 +2351,7 @@
             {
                 "id": 32,
                 "title": "WWE Raw - 2026-06-01 - RAW 1723 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-06-03T20:07:39.565569",
                 "notify": "seen"
             },
@@ -4773,6 +4773,90 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 17,
+                "title": "Ling Cage - S01E12 - Chapter 12 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 16,
+                "title": "Ling Cage - S01E11 - Chapter 11 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 15,
+                "title": "Ling Cage - S01E10 - Chapter 10 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 14,
+                "title": "Ling Cage - S01E09 - Chapter 9 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 13,
+                "title": "Ling Cage - S01E08 - Chapter 8 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 12,
+                "title": "Ling Cage - S01E07 - Chapter 7 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 11,
+                "title": "Ling Cage - S01E06 - Chapter 6 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 10,
+                "title": "Ling Cage - S01E05 - Chapter 5 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 9,
+                "title": "Ling Cage - S01E04 - Chapter 4 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 8,
+                "title": "Ling Cage - S01E03 - Chapter 3 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 7,
+                "title": "Ling Cage - S01E02 - Chapter 2 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
+            {
+                "id": 6,
+                "title": "Ling Cage - S01E01 - Chapter 1 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-05T07:04:19.885934",
+                "notify": "seen"
+            },
             {
                 "id": 5,
                 "title": "Ling Cage - S02E09 - Shadow Ashes HDTV-1080p",
