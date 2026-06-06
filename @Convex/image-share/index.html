@@ -1366,7 +1366,7 @@
     function updateMegaConfigVisibility() {
       const config = document.getElementById('megaConfig');
       if (!config) return;
-      config.style.display = (storageType === 'mega') ? 'flex' : 'none';
+      config.style.display = 'flex';
 
       // Populate Settings Folder Select
       const sfs = document.getElementById('settingsFolderSelect');
