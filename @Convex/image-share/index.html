@@ -1066,11 +1066,11 @@
 
   <div class="context-menu" id="folderContextMenu">
     <button onclick="renameFolderFromMenu()">Rename</button>
-    <button onclick="createSubfolderFromMenu()">New subfolder</button>
-    <button onclick="setFolderColorsFromMenu()">Set Colors</button>
-    <button onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">Hide from All</button>
-    <button onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">Set Password</button>
-    <button onclick="removeFolderPasswordFromMenu()" id="folderPasswordRemoveBtn">Remove Password</button>
+    <button class="top-folder-only" onclick="createSubfolderFromMenu()">New subfolder</button>
+    <button class="top-folder-only" onclick="setFolderColorsFromMenu()">Set Colors</button>
+    <button class="top-folder-only" onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">Hide from All</button>
+    <button class="top-folder-only" onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">Set Password</button>
+    <button class="top-folder-only" onclick="removeFolderPasswordFromMenu()" id="folderPasswordRemoveBtn">Remove Password</button>
     <button class="danger-item" onclick="deleteFolderFromMenu()">Delete</button>
   </div>
 
@@ -2558,10 +2558,15 @@
       const folder = folders.find(item => item._id === id);
       folderContextMenuId = id;
       pauseAutoRefresh();
-      
-      passwordBtn.textContent = folder?.password ? 'Change Password' : 'Set Password';
-      passwordRemoveBtn.style.display = folder?.password ? 'block' : 'none';
-      hideBtn.textContent = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
+
+      const isSubfolder = !!folder?.parentId;
+      menu.querySelectorAll('.top-folder-only').forEach(el => el.style.display = isSubfolder ? 'none' : '');
+
+      if (!isSubfolder) {
+        passwordBtn.textContent = folder?.password ? 'Change Password' : 'Set Password';
+        passwordRemoveBtn.style.display = folder?.password ? 'block' : 'none';
+        hideBtn.textContent = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
+      }
 
       menu.style.visibility = 'hidden';
       menu.classList.add('visible');
@@ -2600,6 +2605,7 @@
         position: folder.position ?? 0,
         bgColor: folder.bgColor,
         fgColor: folder.fgColor,
+        parentId: folder.parentId,
       });
       closeFolderContextMenu();
     };
@@ -2657,6 +2663,7 @@
         position: folder.position ?? 0,
         bgColor: bg,
         fgColor: fg,
+        parentId: folder.parentId,
       });
       closeFolderColorModal();
     };
@@ -2997,6 +3004,7 @@
         }
         renderFolderBar();
         updateMegaConfigVisibility();
+        if (window._lastImages) renderImages(window._lastImages);
       });
     }
 
