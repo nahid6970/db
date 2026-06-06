@@ -421,6 +421,58 @@
       gap: 16px; 
     }
 
+    /* ── View modes ── */
+    /* list view */
+    .gallery.view-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .gallery.view-list .image-card {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: white;
+    }
+    .gallery.view-list .image-card img {
+      width: 56px;
+      height: 56px;
+      flex: 0 0 56px;
+      object-fit: cover;
+    }
+    .gallery.view-list .image-info {
+      flex: 1;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .gallery.view-list .image-info p { margin: 0; }
+    .gallery.view-list .image-info .meta-row {
+      margin-top: 0;
+      gap: 16px;
+    }
+    .gallery.view-list .card-actions {
+      position: static;
+      opacity: 1;
+      pointer-events: auto;
+      flex-shrink: 0;
+      padding-right: 10px;
+    }
+    .gallery.view-list .select-indicator { display: none; }
+
+    /* compact view */
+    .gallery.view-compact {
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 6px;
+    }
+    .gallery.view-compact .image-card img { height: 110px; }
+    .gallery.view-compact .image-info { padding: 6px 8px; }
+    .gallery.view-compact .image-info p { font-size: 11px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .gallery.view-compact .image-info .meta-row { display: none; }
+
     .folder-bar.selection-active {
       border: 1px solid #cfe2ff;
       box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.08), 0 2px 8px rgba(0,0,0,0.08);
@@ -932,6 +984,9 @@
               <path d="M10 11v6"></path>
               <path d="M14 11v6"></path>
             </svg>
+          </button>
+          <button id="viewToggleBtn" class="icon-btn secondary" onclick="cycleView()" title="Switch view">
+            <svg id="viewToggleIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
           </button>
           <button id="sortBtn" class="icon-btn" onclick="toggleSort()" title="Newest first">
             <svg id="sortIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -2806,6 +2861,37 @@
       );
     }
     
+    // ── View toggle ──
+    const VIEW_MODES = ['grid', 'list', 'compact'];
+    const VIEW_ICONS = {
+      grid: '<path d="M3 3h7v7H3zm11 0h7v7h-7zM3 14h7v7H3zm11 0h7v7h-7z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+      list: '<line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>',
+      compact: '<rect x="3" y="3" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="3" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17" y="3" width="4" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="10" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="10" width="5" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17" y="10" width="4" height="5" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="3" y="17" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="10" y="17" width="5" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/><rect x="17" y="17" width="4" height="4" rx="1" fill="none" stroke="currentColor" stroke-width="2"/>',
+    };
+    let currentView = localStorage.getItem('galleryView') || 'grid';
+
+    function applyView(view) {
+      const gallery = document.getElementById('gallery');
+      const icon = document.getElementById('viewToggleIcon');
+      gallery.classList.remove('view-list', 'view-compact');
+      if (view !== 'grid') gallery.classList.add(`view-${view}`);
+      // Show next-mode icon (what you'll switch TO)
+      const nextView = VIEW_MODES[(VIEW_MODES.indexOf(view) + 1) % VIEW_MODES.length];
+      icon.innerHTML = VIEW_ICONS[nextView];
+      document.getElementById('viewToggleBtn').title = `Switch to ${nextView} view`;
+    }
+
+    window.cycleView = function() {
+      const idx = VIEW_MODES.indexOf(currentView);
+      currentView = VIEW_MODES[(idx + 1) % VIEW_MODES.length];
+      localStorage.setItem('galleryView', currentView);
+      applyView(currentView);
+    };
+
+    applyView(currentView);
+
+    // ── View toggle end ──
+
     // Initial load
     subscribeToSettings();
     applySortIcon();
