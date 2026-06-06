@@ -2342,18 +2342,12 @@
           >${folder.name}</button>
         `),
         ...(function() {
-          // If a user folder is selected, show its subfolders at the top (indented)
-          const subFirst = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
-            ? folders.filter(f => f.parentId === currentFolderId)
-            : [];
+          // Only show top-level folders in the sidebar
           const topLevel = folders.filter(f => !f.parentId);
-          const ordered = [...subFirst, ...topLevel.filter(f => !subFirst.includes(f))];
-          return ordered.map((folder, index) => {
-            const isSubFirst = subFirst.includes(folder);
-            const indent = isSubFirst ? 'padding-left:18px;border-left:3px solid #3b82f6;' : '';
+          return topLevel.map((folder, index) => {
             const customStyle = folder.bgColor && currentFolderId !== folder._id
-              ? `background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};${indent}`
-              : indent;
+              ? `background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};`
+              : '';
             return `
               <button
                 class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
@@ -2368,7 +2362,7 @@
                 data-index="${index}"
                 ${customStyle ? `style="${customStyle}"` : ''}
               >
-                <span>${isSubFirst ? '↳ ' : ''}${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}${folder.hideFromAll ? `<span class="hidden-dot" title="Hidden from All view"></span>` : ''}</span>
+                <span>${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}${folder.hideFromAll ? `<span class="hidden-dot" title="Hidden from All view"></span>` : ''}</span>
               </button>
             `;
           });
@@ -2909,7 +2903,7 @@
         const subfolders0 = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
           ? folders.filter(f => f.parentId === currentFolderId) : [];
         const subHtml0 = subfolders0.map(sf =>
-          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')">📁 ${escapeHtml(sf.name)}</button>`
+          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">📁 ${escapeHtml(sf.name)}</button>`
         ).join('');
         gallery.innerHTML = subHtml0
           ? `<div class="subfolder-grid">${subHtml0}</div>`
@@ -2925,7 +2919,7 @@
       const subfolderHtml = subfolders.length ? `
         <div class="subfolder-grid">
           ${subfolders.map(sf => `
-            <button class="subfolder-card" onclick="selectFolder('${sf._id}')">
+            <button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">
               📁 ${escapeHtml(sf.name)}
             </button>
           `).join('')}
