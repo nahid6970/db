@@ -506,7 +506,7 @@
     .context-menu {
       position: fixed;
       z-index: 2000;
-      min-width: 160px;
+      width: 160px;
       padding: 6px;
       background: white;
       border: 1px solid #d6dbe1;
@@ -2457,10 +2457,14 @@
       passwordBtn.textContent = folder?.password ? 'Change Password' : 'Set Password';
       passwordRemoveBtn.style.display = folder?.password ? 'block' : 'none';
       hideBtn.textContent = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
-      
-      menu.style.left = `${event.clientX}px`;
-      menu.style.top = `${event.clientY}px`;
+
+      menu.style.visibility = 'hidden';
       menu.classList.add('visible');
+      requestAnimationFrame(() => {
+        menu.style.left = `${Math.min(event.clientX, window.innerWidth  - menu.offsetWidth  - 6)}px`;
+        menu.style.top  = `${Math.min(event.clientY, window.innerHeight - menu.offsetHeight - 6)}px`;
+        menu.style.visibility = '';
+      });
     };
 
     window.toggleHideFromAllFromMenu = async function() {
@@ -2586,9 +2590,13 @@
       imageContextMenuId = id;
       pauseAutoRefresh();
 
-      menu.style.left = `${event.clientX}px`;
-      menu.style.top = `${event.clientY}px`;
+      menu.style.visibility = 'hidden';
       menu.classList.add('visible');
+      requestAnimationFrame(() => {
+        menu.style.left = `${Math.min(event.clientX, window.innerWidth  - menu.offsetWidth  - 6)}px`;
+        menu.style.top  = `${Math.min(event.clientY, window.innerHeight - menu.offsetHeight - 6)}px`;
+        menu.style.visibility = '';
+      });
     };
 
     window.closeImageContextMenu = function() {
