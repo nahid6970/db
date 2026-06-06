@@ -183,7 +183,7 @@ export const listFolders = query({
 });
 
 export const createFolder = mutation({
-  args: { name: v.string() },
+  args: { name: v.string(), parentId: v.optional(v.id("folders")) },
   handler: async (ctx, args) => {
     const folders = await ctx.db.query("folders").collect();
     const maxPosition = folders.reduce(
@@ -195,6 +195,7 @@ export const createFolder = mutation({
       name: args.name,
       position: maxPosition + 1,
       password: undefined,
+      parentId: args.parentId,
     });
   },
 });
@@ -206,6 +207,7 @@ export const updateFolder = mutation({
     position: v.optional(v.number()),
     bgColor: v.optional(v.string()),
     fgColor: v.optional(v.string()),
+    parentId: v.optional(v.id("folders")),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
@@ -213,6 +215,7 @@ export const updateFolder = mutation({
       position: args.position,
       bgColor: args.bgColor,
       fgColor: args.fgColor,
+      parentId: args.parentId,
     });
   },
 });

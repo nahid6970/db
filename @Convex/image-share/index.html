@@ -1042,6 +1042,7 @@
 
   <div class="context-menu" id="folderContextMenu">
     <button onclick="renameFolderFromMenu()">Rename</button>
+    <button onclick="createSubfolderFromMenu()">New subfolder</button>
     <button onclick="setFolderColorsFromMenu()">Set Colors</button>
     <button onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">Hide from All</button>
     <button onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">Set Password</button>
@@ -2316,23 +2317,38 @@
             onclick="handleFolderAction(${folder.id === null ? 'null' : `'${folder.id}'`})"
           >${folder.name}</button>
         `),
-        ...folders.map((folder, index) => `
-          <button
-            class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
-            onclick="handleFolderAction('${folder._id}')"
-            oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
-            draggable="true"
-            ondragstart="onFolderDragStart(event, '${folder._id}')"
-            ondragover="onFolderDragOver(event)"
-            ondragleave="onFolderDragLeave(event)"
-            ondrop="onFolderDrop(event, '${folder._id}')"
-            ondragend="onFolderDragEnd(event)"
-            data-index="${index}"
-            ${folder.bgColor && currentFolderId !== folder._id ? `style="background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};"` : ''}
-          >
-            <span>${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}${folder.hideFromAll ? `<span class="hidden-dot" title="Hidden from All view"></span>` : ''}</span>
-          </button>
-        `),
+        ...(function() {
+          // If a user folder is selected, show its subfolders at the top (indented)
+          const subFirst = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
+            ? folders.filter(f => f.parentId === currentFolderId)
+            : [];
+          const topLevel = folders.filter(f => !f.parentId);
+          const ordered = [...subFirst, ...topLevel.filter(f => !subFirst.includes(f))];
+          return ordered.map((folder, index) => {
+            const isSubFirst = subFirst.includes(folder);
+            const indent = isSubFirst ? 'padding-left:18px;border-left:3px solid #3b82f6;' : '';
+            const customStyle = folder.bgColor && currentFolderId !== folder._id
+              ? `background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};${indent}`
+              : indent;
+            return `
+              <button
+                class="folder-chip ${currentFolderId === folder._id ? 'active' : ''}"
+                onclick="handleFolderAction('${folder._id}')"
+                oncontextmenu="openFolderContextMenu(event, '${folder._id}')"
+                draggable="true"
+                ondragstart="onFolderDragStart(event, '${folder._id}')"
+                ondragover="onFolderDragOver(event)"
+                ondragleave="onFolderDragLeave(event)"
+                ondrop="onFolderDrop(event, '${folder._id}')"
+                ondragend="onFolderDragEnd(event)"
+                data-index="${index}"
+                ${customStyle ? `style="${customStyle}"` : ''}
+              >
+                <span>${isSubFirst ? '↳ ' : ''}${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}${folder.hideFromAll ? `<span class="hidden-dot" title="Hidden from All view"></span>` : ''}</span>
+              </button>
+            `;
+          });
+        })(),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
         selectionCount
           ? `<span class="selection-hint">${selectionCount} selected. Click a folder to move, or 
@@ -2472,6 +2488,15 @@
       const name = await showDialog('Folder name?');
       if (!name || !name.trim()) return;
       await client.mutation(api.images.createFolder, { name: name.trim() });
+    };
+
+    window.createSubfolderFromMenu = async function() {
+      if (!folderContextMenuId) return;
+      const parent = folders.find(f => f._id === folderContextMenuId);
+      closeFolderContextMenu();
+      const name = await showDialog(`Subfolder of "${parent?.name}"?`);
+      if (!name || !name.trim()) return;
+      await client.mutation(api.images.createFolder, { name: name.trim(), parentId: folderContextMenuId });
     };
 
     window.deleteFolder = async function(id) {
