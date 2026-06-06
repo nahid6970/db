@@ -30,11 +30,11 @@
 
     .folder-bar {
       display: flex;
-      flex-direction: column;
-      flex-wrap: nowrap;
-      gap: 3px;
-      align-items: stretch;
-      padding: 5px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 4px;
+      align-items: flex-start;
+      padding: 6px;
       overflow-x: hidden;
       overflow-y: auto;
       scrollbar-width: thin;
@@ -46,9 +46,6 @@
       align-items: center;
       gap: 5px;
       flex: 0 0 auto;
-      width: auto;
-      max-width: 100%;
-      align-self: flex-start;
       min-height: 26px;
       padding: 4px 8px;
       border: 1px solid #d6dbe1;
@@ -2289,19 +2286,15 @@
         if (folderPanel) {
           const allFolders = [
             ...baseFolders,
-            ...folders.map(folder => ({ name: folder.name })),
+            ...folders.map(f => ({ name: f.name })),
             { name: '+ Folder' },
           ];
-          const measurements = document.createElement('canvas').getContext('2d');
-          if (measurements) {
+          const ctx = document.createElement('canvas').getContext('2d');
+          if (ctx) {
             const styles = getComputedStyle(folderBar.querySelector('.folder-chip') || folderBar);
-            measurements.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
-            const widestLabel = allFolders.reduce((max, folder) => {
-              const textWidth = measurements.measureText(folder.name).width;
-              return Math.max(max, textWidth);
-            }, 0);
-            const chromeWidth = 34;
-            folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widestLabel + chromeWidth)))}px`;
+            ctx.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
+            const widest = allFolders.reduce((max, f) => Math.max(max, ctx.measureText(f.name).width), 0);
+            folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widest + 34)))}px`;
           }
         }
         const activeChip = folderBar.querySelector('.folder-chip.active');
