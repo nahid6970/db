@@ -204,11 +204,15 @@ export const updateFolder = mutation({
     id: v.id("folders"),
     name: v.string(),
     position: v.optional(v.number()),
+    bgColor: v.optional(v.string()),
+    fgColor: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
       name: args.name,
       position: args.position,
+      bgColor: args.bgColor,
+      fgColor: args.fgColor,
     });
   },
 });
