@@ -419,6 +419,30 @@
       gap: 16px; 
     }
 
+    /* ── Subfolder cards in gallery ── */
+    .subfolder-grid {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .subfolder-card {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background: #f0f6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 0;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1d4ed8;
+      transition: background .15s;
+    }
+    .subfolder-card:hover { background: #dbeafe; }
+
     /* ── View modes ── */
     /* list view */
     .gallery.view-list {
@@ -2492,11 +2516,12 @@
 
     window.createSubfolderFromMenu = async function() {
       if (!folderContextMenuId) return;
-      const parent = folders.find(f => f._id === folderContextMenuId);
+      const parentId = folderContextMenuId;
+      const parent = folders.find(f => f._id === parentId);
       closeFolderContextMenu();
       const name = await showDialog(`Subfolder of "${parent?.name}"?`);
       if (!name || !name.trim()) return;
-      await client.mutation(api.images.createFolder, { name: name.trim(), parentId: folderContextMenuId });
+      await client.mutation(api.images.createFolder, { name: name.trim(), parentId });
     };
 
     window.deleteFolder = async function(id) {
@@ -2881,12 +2906,32 @@
       });
       
       if (!images.length) {
-        gallery.innerHTML = '<div class="loading">No images yet</div>';
+        const subfolders0 = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
+          ? folders.filter(f => f.parentId === currentFolderId) : [];
+        const subHtml0 = subfolders0.map(sf =>
+          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')">📁 ${escapeHtml(sf.name)}</button>`
+        ).join('');
+        gallery.innerHTML = subHtml0
+          ? `<div class="subfolder-grid">${subHtml0}</div>`
+          : '<div class="loading">No images yet</div>';
         renderFolderBar();
         return;
       }
+
+      // Subfolder cards (shown at top when inside a folder)
+      const subfolders = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
+        ? folders.filter(f => f.parentId === currentFolderId)
+        : [];
+      const subfolderHtml = subfolders.length ? `
+        <div class="subfolder-grid">
+          ${subfolders.map(sf => `
+            <button class="subfolder-card" onclick="selectFolder('${sf._id}')">
+              📁 ${escapeHtml(sf.name)}
+            </button>
+          `).join('')}
+        </div>` : '';
       
-      gallery.innerHTML = sorted.map((img, i) => {
+      gallery.innerHTML = subfolderHtml + sorted.map((img, i) => {
         const isMega = !!(img.url && img.url.includes('mega.nz'));
         const isPdf = img.filename?.toLowerCase().endsWith('.pdf');
         
