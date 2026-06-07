@@ -1439,7 +1439,7 @@
           { id: "none", name: "No folder (images only)" },
           ...folders.filter(f => !f.parentId).flatMap(f => [f, ...folders.filter(s => s.parentId === f._id)]).map(f => ({ id: f._id, name: f.name, parentId: f.parentId }))
         ];
-        sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${o.parentId ? '╰ ' : ''}${escapeHtml(o.name)}</option>`).join("");
+        sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${o.parentId ? '  › ' : ''}${escapeHtml(o.name)}</option>`).join("");
       }
 
       if (storageType === 'mega') {
@@ -2276,7 +2276,7 @@
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
         ...ordered.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
-            ${folder.parentId ? '╰ ' : ''}${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
+            ${folder.parentId ? '  › ' : ''}${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
           </option>
         `)
       ].join('');
@@ -3316,12 +3316,12 @@
       const ordered = topLevel.flatMap(f => [f, ...allFolders.filter(s => s.parentId === f._id)]);
       const items = [
         { label: 'No folder', value: '' },
-        ...ordered.map(f => ({ label: (f.parentId ? '╰ ' : '') + f.name, value: f._id }))
+        ...ordered.map(f => ({ label: f.name, isSubfolder: !!f.parentId, value: f._id }))
       ];
 
       popup.innerHTML = items.map(item => `
-        <button onclick="pickFolder('${item.value}')" style="display:block;width:100%;text-align:left;padding:9px 14px;background:${item.value === currentFolderId ? '#eff6ff' : 'transparent'};color:${item.value === currentFolderId ? '#1d4ed8' : '#1e293b'};border:none;border-radius:8px;font-size:13px;cursor:pointer;">
-          ${item.label}
+        <button onclick="pickFolder('${item.value}')" style="display:flex;align-items:center;gap:6px;width:100%;text-align:left;padding:9px 14px;background:${item.value === currentFolderId ? '#eff6ff' : 'transparent'};color:${item.value === currentFolderId ? '#1d4ed8' : '#1e293b'};border:none;border-radius:8px;font-size:13px;cursor:pointer;">
+          ${item.isSubfolder ? `<svg width="12" height="12" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;opacity:0.45"><path d="M2 2v6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 8l3 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 6l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}${item.label}
         </button>
       `).join('');
 
