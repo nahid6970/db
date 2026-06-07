@@ -1399,7 +1399,7 @@
         const options = [
           { id: "", name: "No Folder Selected" },
           { id: "none", name: "No folder (images only)" },
-          ...folders.map(f => ({ id: f._id, name: f.name, parentId: f.parentId }))
+          ...folders.filter(f => !f.parentId).flatMap(f => [f, ...folders.filter(s => s.parentId === f._id)]).map(f => ({ id: f._id, name: f.name, parentId: f.parentId }))
         ];
         sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${o.parentId ? '\u00a0\u00a0\u00a0↳ ' : ''}${escapeHtml(o.name)}</option>`).join("");
       }
@@ -2232,9 +2232,11 @@
 
     function getFolderOptions(selectedFolderId) {
       const selectedValue = selectedFolderId || '';
+      const topLevel = folders.filter(f => !f.parentId);
+      const ordered = topLevel.flatMap(f => [f, ...folders.filter(s => s.parentId === f._id)]);
       return [
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
-        ...folders.map(folder => `
+        ...ordered.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
             ${folder.parentId ? '\u00a0\u00a0\u00a0↳ ' : ''}${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
           </option>
@@ -3271,9 +3273,12 @@
       _pickerImageId = imageId;
 
       // Build items: no folder + all folders
+      const allFolders = window._folders;
+      const topLevel = allFolders.filter(f => !f.parentId);
+      const ordered = topLevel.flatMap(f => [f, ...allFolders.filter(s => s.parentId === f._id)]);
       const items = [
         { label: 'No folder', value: '' },
-        ...window._folders.map(f => ({ label: (f.parentId ? '\u00a0\u00a0\u00a0↳ ' : '') + f.name, value: f._id }))
+        ...ordered.map(f => ({ label: (f.parentId ? '\u00a0\u00a0\u00a0↳ ' : '') + f.name, value: f._id }))
       ];
 
       popup.innerHTML = items.map(item => `
