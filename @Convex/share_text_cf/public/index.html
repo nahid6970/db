@@ -78,22 +78,30 @@
         }
         .log-entry.pinned { border: 3px solid #8e44ad !important; background-color: #fdf2ff; box-shadow: 0 0 10px rgba(142,68,173,0.2); }
         .timestamp { font-size: 12px; color: inherit; opacity: 0.6; font-weight: bold; }
-        .copy-btn,.delete-btn,.edit-btn,.pin-btn {
-            position: absolute; top: 10px; color: white; padding: 6px; cursor: pointer;
-            border-radius: 5px; border: none; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s, opacity 0.2s;
-            opacity: 0; pointer-events: none;
+        .entry-actions {
+            position: sticky;
+            top: var(--header-h, 100px);
+            display: flex;
+            justify-content: flex-end;
+            gap: 6px;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            margin-bottom: -44px;
         }
-        .log-entry:hover .copy-btn,
-        .log-entry:hover .delete-btn,
-        .log-entry:hover .edit-btn,
-        .log-entry:hover .pin-btn { opacity: 1; pointer-events: auto; }
-        .delete-btn { right: 10px; background-color: #dc3545; }
+        .log-entry:hover .entry-actions { opacity: 1; pointer-events: auto; }
+        .copy-btn,.delete-btn,.edit-btn,.pin-btn {
+            color: white; padding: 6px; cursor: pointer;
+            border-radius: 5px; border: none; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s;
+        }
+        .delete-btn { background-color: #dc3545; }
         .delete-btn:hover { background-color: #c82333; }
-        .edit-btn { right: 50px; background-color: #f39c12; }
+        .edit-btn { background-color: #f39c12; }
         .edit-btn:hover { background-color: #e67e22; }
-        .pin-btn { right: 90px; background-color: #9b59b6; }
+        .pin-btn { background-color: #9b59b6; }
         .pin-btn.pinned-active { background-color: #8e44ad; }
-        .copy-btn { right: 130px; background-color: #007BFF; }
+        .copy-btn { background-color: #007BFF; }
         .copy-btn:hover { background-color: #0056b3; }
         .copy-btn.success { background-color: #28a745; }
         .clean-all-container { text-align: right; margin-top: 20px; }
@@ -458,12 +466,14 @@
                     const folderName = folder ? folder.name : 'None';
                     return `
                         <div class="log-entry ${log.pinned ? 'pinned' : ''}" id="entry-${log._id}" style="${fgStyle}${bgStyle}">
+                            <div class="entry-actions">
+                                <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index},'copy-btn-${index}')">${ICONS.copy}</button>
+                                <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
+                                <button class="edit-btn" title="Edit" onclick="startEditing('${log._id}',${index})">${ICONS.edit}</button>
+                                <button class="delete-btn" title="Delete" onclick="deleteEntry('${log._id}')">${ICONS.delete}</button>
+                            </div>
                             <div class="timestamp">${timestamp} • 📁 ${folderName}</div>
                             <div id="log-${index}" class="shared-text" style="color:inherit;">${renderedContent}</div>
-                            <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index},'copy-btn-${index}')">${ICONS.copy}</button>
-                            <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
-                            <button class="edit-btn" title="Edit" onclick="startEditing('${log._id}',${index})">${ICONS.edit}</button>
-                            <button class="delete-btn" title="Delete" onclick="deleteEntry('${log._id}')">${ICONS.delete}</button>
                         </div>`;
                 }).join('');
                 renderMath();
@@ -734,6 +744,12 @@
         loadFolders();
         loadLogs();
         setInterval(() => { loadFolders(); loadLogs(); }, 5000);
+
+        // Keep --header-h in sync with actual sticky header height
+        const headerStack = document.querySelector('.header-stack');
+        const updateHeaderH = () => document.documentElement.style.setProperty('--header-h', headerStack.offsetHeight + 'px');
+        updateHeaderH();
+        new ResizeObserver(updateHeaderH).observe(headerStack);
     </script>
 </body>
 </html>
