@@ -1,0 +1,8 @@
+name = "share-text-cf"
+compatibility_date = "2024-04-01"
+pages_build_output_dir = "public"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "share-text-db"
+database_id = "df0484c1-2316-4ad4-aa05-587304570169"

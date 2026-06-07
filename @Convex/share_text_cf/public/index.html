@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href='https://fonts.googleapis.com/css?family=JetBrains Mono' rel='stylesheet'>
+    <link rel="shortcut icon" href="https://cdn-icons-png.flaticon.com/512/4400/4400968.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Sharing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js" onload="renderMath()"></script>
+    <style>
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 { color: #333; }
+        .header-stack {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            margin: -20px -20px 20px;
+            background: rgba(244, 244, 244, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+        }
+        .action-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px 8px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+        .action-btn {
+            width: 42px; height: 42px; padding: 0; margin-right: 0;
+            color: #ffffff; justify-content: center;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.08);
+            transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+        }
+        .action-btn svg { display: block; width: 20px; height: 20px; flex-shrink: 0; }
+        .action-btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px rgba(0,0,0,0.12); }
+        .add-action-btn { background: linear-gradient(135deg, #4CAF50, #3f9a44); }
+        .add-action-btn:hover { background: linear-gradient(135deg, #47a84b, #37873c); }
+        .folder-bar-row { padding: 10px 20px; }
+        form { margin-bottom: 20px; }
+        textarea { width: 98%; padding: 10px; font-size: 16px; border-radius: 5px; border: 1px solid #ccc; }
+        button {
+            padding: 10px 15px; font-size: 16px; background-color: #4CAF50;
+            color: white; border: none; border-radius: 5px; cursor: pointer;
+            margin-right: 10px; display: inline-flex; align-items: center; gap: 5px;
+        }
+        button:hover { background-color: #45a049; }
+        .clean-btn { background-color: #e74c3c; }
+        .clean-btn:hover { background-color: #c0392b; }
+        .settings-btn { background: linear-gradient(135deg, #6f8793, #546d78); box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        .settings-btn:hover { background: linear-gradient(135deg, #637983, #485e68); }
+        .shared-text { padding: 10px; background-color: transparent; border-radius: 5px; word-wrap: break-word; }
+        .shared-text h1,.shared-text h2,.shared-text h3,.shared-text h4,.shared-text h5,.shared-text h6 { margin-top: 0.5em; margin-bottom: 0.3em; }
+        .shared-text p,.shared-text ul,.shared-text ol { margin-top: 0; margin-bottom: 0.5em; }
+        .shared-text *:first-child { margin-top: 0; }
+        .shared-text *:last-child { margin-bottom: 0; }
+        .shared-text pre { background-color: rgba(0,0,0,0.05); padding: 10px; border-radius: 5px; overflow-x: auto; }
+        .shared-text code { font-family: 'JetBrains Mono', monospace; background-color: rgba(0,0,0,0.05); padding: 2px 4px; border-radius: 3px; }
+        .shared-text blockquote { border-left: 4px solid #ccc; margin: 0; padding-left: 10px; color: inherit; opacity: 0.8; }
+        .shared-text table { border-collapse: collapse; width: 100%; margin-bottom: 0.5em; }
+        .shared-text th,.shared-text td { border: 1px solid rgba(0,0,0,0.1); padding: 8px; text-align: left; }
+        .shared-text th { background-color: rgba(0,0,0,0.05); }
+        .shared-text img { max-width: 100%; }
+        .log-entry {
+            background-color: #fff; padding: 10px; border-radius: 5px;
+            border: 1px solid #ccc; margin-bottom: 10px; position: relative;
+        }
+        .log-entry.pinned { border: 3px solid #8e44ad !important; background-color: #fdf2ff; box-shadow: 0 0 10px rgba(142,68,173,0.2); }
+        .timestamp { font-size: 12px; color: inherit; opacity: 0.6; font-weight: bold; }
+        .copy-btn,.delete-btn,.edit-btn,.pin-btn {
+            position: absolute; top: 10px; color: white; padding: 6px; cursor: pointer;
+            border-radius: 5px; border: none; display: flex; align-items: center; justify-content: center; transition: background-color 0.2s;
+        }
+        .delete-btn { right: 10px; background-color: #dc3545; }
+        .delete-btn:hover { background-color: #c82333; }
+        .edit-btn { right: 50px; background-color: #f39c12; }
+        .edit-btn:hover { background-color: #e67e22; }
+        .pin-btn { right: 90px; background-color: #9b59b6; }
+        .pin-btn.pinned-active { background-color: #8e44ad; }
+        .copy-btn { right: 130px; background-color: #007BFF; }
+        .copy-btn:hover { background-color: #0056b3; }
+        .copy-btn.success { background-color: #28a745; }
+        .clean-all-container { text-align: right; margin-top: 20px; }
+        .expand-btn {
+            background: rgba(0,123,255,0.05); border: 1px solid rgba(0,123,255,0.1);
+            color: #007BFF; padding: 4px 12px; cursor: pointer; display: inline-flex;
+            align-items: center; font-size: 12px; font-weight: bold;
+            font-family: 'JetBrains Mono', monospace; margin-top: 10px;
+            border-radius: 20px; transition: all 0.2s ease;
+        }
+        .expand-btn:hover { background: rgba(0,123,255,0.12); border-color: rgba(0,123,255,0.2); color: #0056b3; }
+        .expand-btn svg { margin-right: 5px; transition: transform 0.2s; }
+        .expand-btn.active svg { transform: rotate(180deg); }
+        .details-content { display: none; margin-top: 10px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 10px; }
+        .details-content.show { display: block; }
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background-color: #fff; width: 80%; height: 85vh; padding: 20px; border-radius: 8px; display: flex; flex-direction: column; box-shadow: 0 4px 15px rgba(0,0,0,0.2); position: relative; overflow: hidden; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; gap: 15px; flex-shrink: 0; }
+        .modal-header h2 { margin: 0; flex-grow: 1; }
+        .modal-textarea { flex-grow: 1; width: 98%; padding: 15px; font-family: 'JetBrains Mono', monospace; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; resize: none; min-height: 0; }
+        .modal-footer { margin-top: 15px; text-align: right; flex-shrink: 0; }
+        .save-btn { background-color: #2ecc71; padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .cancel-btn { background-color: #95a5a6; padding: 10px 20px; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px; font-size: 16px; }
+        .settings-tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; flex-shrink: 0; }
+        .settings-tab { padding: 8px 16px; cursor: pointer; border-radius: 4px; font-weight: bold; color: #666; transition: all 0.2s; }
+        .settings-tab:hover { background-color: #f0f0f0; }
+        .settings-tab.active { background-color: #3498db; color: white; }
+        .settings-section { display: none; flex-direction: column; flex-grow: 1; min-height: 0; }
+        .settings-section.active { display: flex; }
+        .syntax-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; background: #f9f9f9; padding: 10px; border-radius: 5px; flex-wrap: wrap; }
+        .syntax-row input[type="text"] { padding: 8px; border: 1px solid #ccc; border-radius: 4px; flex: 1; min-width: 100px; }
+        .syntax-preview { padding: 4px 8px; border-radius: 4px; font-size: 14px; min-width: 80px; text-align: center; border: 1px solid #eee; background-color: white; display: flex; align-items: center; justify-content: center; min-height: 28px; }
+        .syntax-row input[type="color"],.modal-header input[type="color"] { width: 40px; height: 35px; border: 1px solid #ccc; cursor: pointer; padding: 0; background: none; border-radius: 4px; }
+        .syntax-row input[type="color"]:disabled { opacity: 0.3; cursor: not-allowed; }
+        .trans-toggle { display: flex; flex-direction: column; align-items: center; gap: 2px; font-size: 10px; color: #666; }
+        .settings-scroll { overflow-y: auto; flex-grow: 1; padding: 10px; border: 1px solid #eee; margin-bottom: 15px; }
+        .folder-container { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 0; padding: 10px; background: #e9ecef; border-radius: 8px; align-items: center; }
+        .folder-chip { padding: 6px 12px; background: white; border: 1px solid #ced4da; border-radius: 4px; cursor: pointer; font-size: 14px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; position: relative; }
+        .folder-chip:hover { border-color: #4CAF50; background: #f8f9fa; }
+        .folder-chip.active { background: #4CAF50; color: white; border-color: #4CAF50; }
+        .add-folder-btn { width: 34px; height: 34px; background: #607d8b; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .add-folder-btn:hover { background: #455a64; }
+        #f3Menu { display: none; position: fixed; background: white; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); z-index: 2000; min-width: 120px; width: fit-content; max-height: 400px; overflow-y: auto; }
+        .f3-item { padding: 8px 12px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 14px; border-bottom: 1px solid #eee; transition: background-color 0.2s; white-space: nowrap; }
+        .f3-item:hover { background-color: #f5f5f5; }
+        .f3-swatch { width: 20px; height: 20px; border-radius: 4px; border: 1px solid #ddd; flex-shrink: 0; }
+        .f3-trigger { font-weight: bold; color: #444; font-family: 'JetBrains Mono', monospace; background: #eee; padding: 2px 5px; border-radius: 3px; }
+        @media (max-width: 640px) {
+            body { padding: 16px; }
+            .header-stack { margin: -16px -16px 16px; }
+            .action-bar,.folder-bar-row { padding-left: 16px; padding-right: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-stack">
+        <div class="action-bar">
+            <button class="save-btn action-btn add-action-btn" id="addNoteBtn" onclick="openAddModal()" title="New Note"></button>
+            <button class="settings-btn action-btn" id="openSettingsBtn" onclick="openSettings()" title="Settings"></button>
+        </div>
+        <div class="folder-bar-row">
+            <div class="folder-container" id="folderBar" style="background: transparent; padding: 0; gap: 8px;"></div>
+        </div>
+    </div>
+
+    <div class="logs"><div id="logsList"></div></div>
+    <div class="clean-all-container">
+        <button class="clean-btn" onclick="cleanAll()">Clean All</button>
+    </div>
+
+    <!-- Add Modal -->
+    <div id="addModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Note</h2>
+                <div class="trans-toggle" style="margin-left: 10px;">
+                    <select id="addFolderSelect" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;"></select>
+                </div>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('addModal')">×</button>
+            </div>
+            <textarea id="addModalTextarea" class="modal-textarea" placeholder="Type your note here..."></textarea>
+            <div class="modal-footer">
+                <p style="float: left; font-size: 12px; color: #666; margin: 10px 0;">Press <b>F3</b> to apply custom colors to selected text</p>
+                <button class="cancel-btn" onclick="closeModal('addModal')">Cancel</button>
+                <button class="save-btn" id="addModalSaveBtn">Share Note</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="editModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Text</h2>
+                <div class="trans-toggle"><label>Text Color</label><input type="color" id="editFgColor"></div>
+                <div class="trans-toggle"><label>BG Color</label><input type="color" id="editBgColor"></div>
+                <div class="trans-toggle" style="margin-left: 10px;">
+                    <select id="editFolderSelect" style="padding: 5px; border-radius: 4px; border: 1px solid #ccc;"></select>
+                </div>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('editModal')">×</button>
+            </div>
+            <textarea id="modalTextarea" class="modal-textarea"></textarea>
+            <div class="modal-footer">
+                <p style="float: left; font-size: 12px; color: #666; margin: 10px 0;">Press <b>F3</b> to apply custom colors to selected text</p>
+                <button class="cancel-btn" onclick="closeModal('editModal')">Cancel</button>
+                <button class="save-btn" id="modalSaveBtn">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Settings</h2>
+                <button class="clean-btn" style="position: static; padding: 5px 10px;" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <div class="settings-tabs">
+                <div class="settings-tab active" id="tab-colors" onclick="switchSettingsTab('colors')">Color Styles</div>
+                <div class="settings-tab" id="tab-folders" onclick="switchSettingsTab('folders')">Folder Config</div>
+            </div>
+            <div id="section-colors" class="settings-section active">
+                <div style="margin-bottom: 15px;">
+                    <button class="expand-btn" onclick="toggleReservedList()" style="margin-top: 0; color: #e67e22;">View Reserved Syntaxes (Avoid these)</button>
+                    <div id="reservedList" style="display: none; font-size: 12px; background: #fff8e1; padding: 10px; border-radius: 5px; margin-top: 5px; border: 1px solid #ffe082;">
+                        <strong>Avoid:</strong> #, ##, ###, ****, __, ~~, *, _, [ ], ( ), |, ---, >>>>>
+                    </div>
+                </div>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Define triggers (e.g., @@, ##) and colors. Use: Trigger Text Trigger</p>
+                <div id="syntaxList" class="settings-scroll"></div>
+            </div>
+            <div id="section-folders" class="settings-section">
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Customize folder appearance (Background, Foreground, Border).</p>
+                <div id="folderSettingsList" class="settings-scroll"></div>
+            </div>
+            <div class="modal-footer">
+                <button id="addSyntaxBtn" class="save-btn" style="background-color: #3498db; float: left;" onclick="addSyntaxRow()">+ Add New Syntax</button>
+                <button class="cancel-btn" onclick="closeModal('settingsModal')">Cancel</button>
+                <button class="save-btn" onclick="saveSettings()">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="f3Menu"></div>
+
+    <script type="module">
+        import { Marked } from "https://esm.sh/marked@12.0.0";
+        import { markedHighlight } from "https://esm.sh/marked-highlight@2.1.1";
+        import hljs from "https://esm.sh/highlight.js@11.9.0";
+
+        const API = '';  // same-origin, Worker handles /api/*
+
+        const api = {
+            get: (path) => fetch(API + path).then(r => r.json()),
+            post: (path, body) => fetch(API + path, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
+            patch: (path, body) => fetch(API + path, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()),
+            delete: (path) => fetch(API + path, { method: 'DELETE' }).then(r => r.json()),
+        };
+
+        const marked = new Marked(
+            markedHighlight({
+                langPrefix: 'hljs language-',
+                highlight(code, lang) {
+                    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+                    return hljs.highlight(code, { language }).value;
+                }
+            })
+        );
+
+        marked.use({
+            extensions: [
+                {
+                    name: 'blockMath', level: 'block',
+                    start(src) { return src.match(/\$\$/)?.index; },
+                    tokenizer(src) {
+                        const cap = /^\$\$\n?([\s\S]+?)\n?\$\$/.exec(src);
+                        if (cap) return { type: 'blockMath', raw: cap[0], text: cap[1] };
+                    },
+                    renderer(token) { return `<div class="math-block">$$${token.text}$$</div>`; }
+                },
+                {
+                    name: 'inlineMath', level: 'inline',
+                    start(src) { return src.match(/\$/)?.index; },
+                    tokenizer(src) {
+                        const cap = /^\$((?:[^\$\n]|\\\$)+)\$/.exec(src);
+                        if (cap) return { type: 'inlineMath', raw: cap[0], text: cap[1] };
+                    },
+                    renderer(token) { return `<span class="math-inline">$${token.text}$</span>`; }
+                }
+            ]
+        });
+        marked.setOptions({ gfm: true, breaks: true });
+
+        const ICONS = {
+            copy: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>`,
+            pin: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="17" x2="12" y2="22"></line><path d="M5 17h14v-1.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3v4.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24Z"></path></svg>`,
+            edit: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"></path><path d="m15 5 4 4"></path></svg>`,
+            delete: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"></path><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>`,
+            check: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`,
+            chevronDown: `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>`,
+            settings: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>`,
+            dot: `<svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor"><circle cx="4" cy="4" r="3" /></svg>`,
+            plus: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`
+        };
+
+        let currentLogs = [];
+        let expandedItems = new Set();
+        let customSyntaxes = [];
+        let currentFolderId = localStorage.getItem('lastFolderId');
+        let folders = [];
+
+        window.renderMath = () => {
+            if (window.renderMathInElement) {
+                renderMathInElement(document.getElementById('logsList'), {
+                    delimiters: [
+                        { left: '$$', right: '$$', display: true },
+                        { left: '$', right: '$', display: false },
+                        { left: '\\(', right: '\\)', display: false },
+                        { left: '\\[', right: '\\]', display: true }
+                    ],
+                    throwOnError: false
+                });
+            }
+        };
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'F3') {
+                const textarea = document.activeElement;
+                if (textarea && textarea.id === 'modalTextarea') {
+                    e.preventDefault();
+                    showF3Menu(textarea);
+                }
+            }
+        });
+
+        document.getElementById('addNoteBtn').innerHTML = ICONS.plus;
+        document.getElementById('openSettingsBtn').innerHTML = ICONS.settings;
+
+        function parseCustomColors(text) {
+            let out = text;
+            customSyntaxes.forEach(syntax => {
+                if (!syntax.trigger?.trim()) return;
+                const esc = syntax.trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                out = out.replace(new RegExp(`${esc}(.*?)${esc}`, 'g'), (_, content) => {
+                    const fg = syntax.color === 'transparent' ? 'inherit' : (syntax.color || 'inherit');
+                    const bg = syntax.bgColor === 'transparent' ? 'transparent' : (syntax.bgColor || 'transparent');
+                    return `<span style="color:${fg};background-color:${bg};padding:0 2px;border-radius:3px;">${content}</span>`;
+                });
+            });
+            return out;
+        }
+
+        async function loadSettings() {
+            try {
+                const data = await api.get('/api/settings');
+                customSyntaxes = data.customSyntaxes || [];
+            } catch { customSyntaxes = []; }
+        }
+
+        async function loadFolders() {
+            try {
+                folders = await api.get('/api/folders');
+                const bar = document.getElementById('folderBar');
+                const editSelect = document.getElementById('editFolderSelect');
+
+                let html = `
+                    <div class="folder-chip ${!currentFolderId ? 'active' : ''}" onclick="selectFolder(null,'All')">
+                        ${!currentFolderId ? ICONS.dot : ''} All
+                    </div>
+                    <div class="folder-chip ${currentFolderId === 'none' ? 'active' : ''}" onclick="selectFolder('none','None')">
+                        ${currentFolderId === 'none' ? ICONS.dot : ''} None
+                    </div>`;
+                let selectHtml = `<option value="">None (All)</option>`;
+
+                folders.forEach(f => {
+                    const style = `background-color:${f.bgColor||'white'};color:${f.color||'inherit'};border-color:${f.borderColor||'#ced4da'};`;
+                    const activeStyle = f.bgColor ? `filter:brightness(0.9);border-width:2px;border-color:${f.borderColor||f.color||'#4CAF50'};` : '';
+                    html += `
+                        <div class="folder-chip ${currentFolderId === f._id ? 'active' : ''}"
+                             style="${style}${currentFolderId === f._id ? activeStyle : ''}"
+                             onclick="selectFolder('${f._id}','${f.name}')">
+                            ${currentFolderId === f._id ? ICONS.dot : ''} ${f.name}
+                        </div>`;
+                    selectHtml += `<option value="${f._id}">${f.name}</option>`;
+                });
+                html += `<button class="add-folder-btn" title="Add Folder" onclick="addFolder()">+</button>`;
+
+                const currentEditVal = editSelect.value;
+                const addSelect = document.getElementById('addFolderSelect');
+                const currentAddVal = addSelect?.value;
+
+                bar.innerHTML = html;
+                editSelect.innerHTML = selectHtml;
+                editSelect.value = currentEditVal;
+                if (addSelect) { addSelect.innerHTML = selectHtml; if (currentAddVal) addSelect.value = currentAddVal; }
+            } catch (err) { console.error(err); }
+        }
+
+        window.selectFolder = (id, name) => {
+            currentFolderId = id;
+            if (id) { localStorage.setItem('lastFolderId', id); localStorage.setItem('lastFolderName', name); }
+            else { localStorage.removeItem('lastFolderId'); localStorage.setItem('lastFolderName', 'All'); }
+            loadFolders();
+            loadLogs();
+        };
+
+        window.addFolder = async () => {
+            const name = prompt("Enter folder name:");
+            if (name) {
+                await api.post('/api/folders', { name });
+                await loadFolders();
+            }
+        };
+
+        window.deleteFolder = async (id) => {
+            if (confirm("Delete this folder? (Notes will be moved to 'None')")) {
+                await api.delete(`/api/folders/${id}`);
+                if (currentFolderId === id) {
+                    currentFolderId = null;
+                    localStorage.removeItem('lastFolderId');
+                    localStorage.setItem('lastFolderName', 'All');
+                }
+                await loadFolders();
+                await loadLogs();
+                const settingsModal = document.getElementById('settingsModal');
+                if (settingsModal.style.display === 'flex') {
+                    document.getElementById('folderSettingsList').innerHTML = '';
+                    folders.forEach(f => addFolderSettingRow(f));
+                }
+            }
+        };
+
+        async function loadLogs() {
+            try {
+                await loadSettings();
+                const params = currentFolderId ? `?folderId=${currentFolderId}` : '';
+                currentLogs = await api.get(`/api/notes${params}`);
+                const logsList = document.getElementById('logsList');
+                logsList.innerHTML = currentLogs.map((log, index) => {
+                    const date = new Date(log.timestamp);
+                    const timestamp = date.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true });
+                    const parts = log.text.split(/>>>>>+/);
+                    let renderedContent = '';
+                    if (parts.length > 1) {
+                        const preview = marked.parse(parseCustomColors(parts[0]));
+                        const details = marked.parse(parseCustomColors(parts.slice(1).join('')));
+                        const isExpanded = expandedItems.has(log._id);
+                        renderedContent = `
+                            <div class="preview-content">${preview}</div>
+                            <button class="expand-btn ${isExpanded ? 'active' : ''}" onclick="toggleExpand('${log._id}')">
+                                ${ICONS.chevronDown} ${isExpanded ? 'Show Less' : 'Show More'}
+                            </button>
+                            <div id="details-${log._id}" class="details-content ${isExpanded ? 'show' : ''}">
+                                ${details}
+                            </div>`;
+                    } else {
+                        renderedContent = marked.parse(parseCustomColors(log.text));
+                    }
+                    const fgStyle = log.color ? `color:${log.color};` : '';
+                    const bgStyle = log.bgColor ? `background-color:${log.bgColor};border-color:${log.bgColor};` : '';
+                    const folder = folders.find(f => f._id === log.folderId);
+                    const folderName = folder ? folder.name : 'None';
+                    return `
+                        <div class="log-entry ${log.pinned ? 'pinned' : ''}" id="entry-${log._id}" style="${fgStyle}${bgStyle}">
+                            <div class="timestamp">${timestamp} • 📁 ${folderName}</div>
+                            <div id="log-${index}" class="shared-text" style="color:inherit;">${renderedContent}</div>
+                            <button id="copy-btn-${index}" class="copy-btn" title="Copy" onclick="copyText(${index},'copy-btn-${index}')">${ICONS.copy}</button>
+                            <button class="pin-btn ${log.pinned ? 'pinned-active' : ''}" title="${log.pinned ? 'Unpin' : 'Pin'}" onclick="togglePin('${log._id}')">${ICONS.pin}</button>
+                            <button class="edit-btn" title="Edit" onclick="startEditing('${log._id}',${index})">${ICONS.edit}</button>
+                            <button class="delete-btn" title="Delete" onclick="deleteEntry('${log._id}')">${ICONS.delete}</button>
+                        </div>`;
+                }).join('');
+                renderMath();
+            } catch (err) { console.error(err); }
+        }
+
+        window.switchSettingsTab = (tabId) => {
+            document.querySelectorAll('.settings-tab').forEach(t => t.classList.remove('active'));
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            document.querySelectorAll('.settings-section').forEach(s => s.classList.remove('active'));
+            document.getElementById(`section-${tabId}`).classList.add('active');
+            document.getElementById('addSyntaxBtn').style.display = tabId === 'colors' ? 'block' : 'none';
+        };
+
+        window.openSettings = () => {
+            const list = document.getElementById('syntaxList');
+            list.innerHTML = '';
+            customSyntaxes.forEach(s => addSyntaxRow(s.trigger, s.color, s.bgColor));
+            if (customSyntaxes.length === 0) addSyntaxRow();
+            const folderList = document.getElementById('folderSettingsList');
+            folderList.innerHTML = '';
+            folders.forEach(f => addFolderSettingRow(f));
+            document.getElementById('settingsModal').style.display = 'flex';
+        };
+
+        window.addSyntaxRow = (trigger = '', color = '#000000', bgColor = '#ffffff') => {
+            const row = document.createElement('div');
+            row.className = 'syntax-row';
+            const isFgTrans = color === 'transparent';
+            const isBgTrans = bgColor === 'transparent' || !bgColor;
+            row.innerHTML = `
+                <input type="text" class="trigger-input" placeholder="Trigger (e.g. @@)" value="${trigger}">
+                <div class="trans-toggle"><label>No Text</label><input type="checkbox" class="fg-trans-toggle" ${isFgTrans ? 'checked' : ''}></div>
+                <input type="color" class="fg-color" title="Text Color" value="${isFgTrans ? '#000000' : color}" ${isFgTrans ? 'disabled' : ''}>
+                <div class="trans-toggle"><label>No BG</label><input type="checkbox" class="bg-trans-toggle" ${isBgTrans ? 'checked' : ''}></div>
+                <input type="color" class="bg-color" title="Background Color" value="${isBgTrans ? '#ffffff' : bgColor}" ${isBgTrans ? 'disabled' : ''}>
+                <div class="syntax-preview" style="color:${color};background-color:${isBgTrans ? 'transparent' : bgColor}">Preview</div>
+                <button class="clean-btn" style="position:static;padding:5px 10px;" onclick="this.parentElement.remove()">×</button>`;
+            const updatePreview = () => {
+                const isFgNo = row.querySelector('.fg-trans-toggle').checked;
+                const fgInput = row.querySelector('.fg-color'); fgInput.disabled = isFgNo;
+                const fg = isFgNo ? 'transparent' : fgInput.value;
+                const isBgNo = row.querySelector('.bg-trans-toggle').checked;
+                const bgInput = row.querySelector('.bg-color'); bgInput.disabled = isBgNo;
+                const bg = isBgNo ? 'transparent' : bgInput.value;
+                const preview = row.querySelector('.syntax-preview');
+                preview.style.color = fg === 'transparent' ? 'inherit' : fg;
+                preview.style.backgroundColor = bg;
+            };
+            row.querySelector('.fg-trans-toggle').onchange = updatePreview;
+            row.querySelector('.fg-color').oninput = updatePreview;
+            row.querySelector('.bg-trans-toggle').onchange = updatePreview;
+            row.querySelector('.bg-color').oninput = updatePreview;
+            document.getElementById('syntaxList').appendChild(row);
+        };
+
+        window.addFolderSettingRow = (folder) => {
+            const row = document.createElement('div');
+            row.className = 'syntax-row';
+            row.dataset.id = folder._id;
+            row.innerHTML = `
+                <div style="display:flex;align-items:center;">
+                    <button class="add-folder-btn" style="width:28px;height:28px;font-size:14px;" onclick="moveFolderSettingRow(this)" title="Move Up">▲</button>
+                </div>
+                <input type="text" class="folder-name-input" value="${folder.name}" style="flex:1;">
+                <div class="trans-toggle"><label>FG</label><input type="color" class="folder-fg" value="${folder.color||'#333333'}"></div>
+                <div class="trans-toggle"><label>BG</label><input type="color" class="folder-bg" value="${folder.bgColor||'#ffffff'}"></div>
+                <div class="trans-toggle"><label>Border</label><input type="color" class="folder-border" value="${folder.borderColor||'#ced4da'}"></div>
+                <div class="syntax-preview" style="color:${folder.color||'inherit'};background-color:${folder.bgColor||'white'};border:1px solid ${folder.borderColor||'#ced4da'};">${folder.name}</div>
+                <button class="clean-btn" style="position:static;padding:5px 10px;" onclick="deleteFolder('${folder._id}')">×</button>`;
+            const updatePreview = () => {
+                const name = row.querySelector('.folder-name-input').value;
+                const preview = row.querySelector('.syntax-preview');
+                preview.innerText = name;
+                preview.style.color = row.querySelector('.folder-fg').value;
+                preview.style.backgroundColor = row.querySelector('.folder-bg').value;
+                preview.style.borderColor = row.querySelector('.folder-border').value;
+            };
+            row.querySelectorAll('input').forEach(i => i.oninput = updatePreview);
+            document.getElementById('folderSettingsList').appendChild(row);
+        };
+
+        window.moveFolderSettingRow = (btn) => {
+            const row = btn.closest('.syntax-row');
+            if (row.previousElementSibling) row.parentNode.insertBefore(row, row.previousElementSibling);
+        };
+
+        window.saveSettings = async () => {
+            const newSyntaxes = Array.from(document.querySelectorAll('#syntaxList .syntax-row')).map(row => ({
+                trigger: row.querySelector('.trigger-input').value,
+                color: row.querySelector('.fg-trans-toggle').checked ? 'transparent' : row.querySelector('.fg-color').value,
+                bgColor: row.querySelector('.bg-trans-toggle').checked ? 'transparent' : row.querySelector('.bg-color').value,
+            })).filter(s => s.trigger.trim());
+
+            const folderPromises = Array.from(document.querySelectorAll('#folderSettingsList .syntax-row')).map((row, index) =>
+                api.patch(`/api/folders/${row.dataset.id}`, {
+                    name: row.querySelector('.folder-name-input').value,
+                    color: row.querySelector('.folder-fg').value,
+                    bgColor: row.querySelector('.folder-bg').value,
+                    borderColor: row.querySelector('.folder-border').value,
+                    position: index,
+                })
+            );
+
+            try {
+                await Promise.all([api.post('/api/settings', { customSyntaxes: newSyntaxes }), ...folderPromises]);
+                customSyntaxes = newSyntaxes;
+                window.closeModal('settingsModal');
+                await loadFolders();
+                await loadLogs();
+            } catch { alert("Failed to save settings."); }
+        };
+
+        window.toggleReservedList = () => {
+            const list = document.getElementById('reservedList');
+            const btn = list.previousElementSibling;
+            const show = list.style.display === 'none';
+            list.style.display = show ? 'block' : 'none';
+            btn.classList.toggle('active', show);
+        };
+
+        function showF3Menu(textarea) {
+            const menu = document.getElementById('f3Menu');
+            let html = customSyntaxes.map(s => {
+                const fg = s.color === 'transparent' ? 'inherit' : s.color;
+                const bg = s.bgColor === 'transparent' ? 'transparent' : s.bgColor;
+                return `
+                    <div class="f3-item" onclick="applyF3('${s.trigger}')">
+                        <div class="f3-swatch" style="background-color:${bg};border-color:${s.color==='transparent'?'#ccc':s.color};"></div>
+                        <span class="f3-trigger">${s.trigger}</span>
+                        <span style="color:${fg};background-color:${bg};padding:2px 6px;border-radius:3px;">Text</span>
+                    </div>`;
+            }).join('');
+            html += `
+                <div class="f3-item" onclick="clearF3Style()" style="border-top:2px solid #eee;background-color:#fff9f9;">
+                    <div class="f3-swatch" style="background:#e74c3c;display:flex;align-items:center;justify-content:center;color:white;font-size:12px;font-weight:bold;">×</div>
+                    <span style="color:#e74c3c;font-weight:bold;">Clear All Styles</span>
+                </div>`;
+            menu.innerHTML = html;
+            const rect = textarea.getBoundingClientRect();
+            menu.style.display = 'block';
+            menu.style.left = `${rect.left + 50}px`;
+            menu.style.top = `${rect.top + 50}px`;
+            const closeMenu = (e) => {
+                if (!menu.contains(e.target) && e.target !== textarea) {
+                    menu.style.display = 'none';
+                    document.removeEventListener('click', closeMenu);
+                }
+            };
+            setTimeout(() => document.addEventListener('click', closeMenu), 10);
+        }
+
+        window.clearF3Style = () => {
+            const textarea = document.getElementById('modalTextarea');
+            const start = textarea.selectionStart, end = textarea.selectionEnd;
+            let selected = textarea.value.substring(start, end);
+            if (!selected.length) { document.getElementById('f3Menu').style.display = 'none'; return; }
+            customSyntaxes.forEach(syntax => {
+                if (!syntax.trigger?.trim()) return;
+                const esc = syntax.trigger.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                if (selected.startsWith(syntax.trigger) && selected.endsWith(syntax.trigger))
+                    selected = selected.substring(syntax.trigger.length, selected.length - syntax.trigger.length);
+                selected = selected.replace(new RegExp(esc, 'g'), '');
+            });
+            textarea.value = textarea.value.substring(0, start) + selected + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start, start + selected.length);
+            document.getElementById('f3Menu').style.display = 'none';
+        };
+
+        window.applyF3 = (trigger) => {
+            const textarea = document.getElementById('modalTextarea');
+            const start = textarea.selectionStart, end = textarea.selectionEnd;
+            const selected = textarea.value.substring(start, end);
+            textarea.value = textarea.value.substring(0, start) + trigger + selected + trigger + textarea.value.substring(end);
+            textarea.focus();
+            textarea.setSelectionRange(start + trigger.length, start + trigger.length + selected.length);
+            document.getElementById('f3Menu').style.display = 'none';
+        };
+
+        window.toggleExpand = (id) => {
+            const details = document.getElementById(`details-${id}`);
+            const btn = details.previousElementSibling;
+            if (expandedItems.has(id)) {
+                expandedItems.delete(id); details.classList.remove('show'); btn.classList.remove('active');
+                btn.innerHTML = `${ICONS.chevronDown} Show More`;
+            } else {
+                expandedItems.add(id); details.classList.add('show'); btn.classList.add('active');
+                btn.innerHTML = `${ICONS.chevronDown} Show Less`;
+            }
+        };
+
+        window.togglePin = async (id) => {
+            await api.patch(`/api/notes/${id}/pin`, {});
+            await loadLogs();
+        };
+
+        window.openAddModal = () => {
+            const modal = document.getElementById('addModal');
+            const textarea = document.getElementById('addModalTextarea');
+            const folderSelect = document.getElementById('addFolderSelect');
+            const saveBtn = document.getElementById('addModalSaveBtn');
+            textarea.value = '';
+            folderSelect.innerHTML = document.getElementById('editFolderSelect').innerHTML;
+            folderSelect.value = (currentFolderId === 'none' ? '' : (currentFolderId || ''));
+            modal.style.display = 'flex';
+            saveBtn.onclick = async () => {
+                const text = textarea.value;
+                if (!text.trim()) return;
+                await api.post('/api/notes', { text, folderId: folderSelect.value || undefined });
+                window.closeModal('addModal');
+                await loadLogs();
+            };
+        };
+
+        window.deleteEntry = async (id) => {
+            if (confirm("Are you sure you want to delete this entry?")) {
+                await api.delete(`/api/notes/${id}`);
+                await loadLogs();
+            }
+        };
+
+        window.startEditing = (id, index) => {
+            const log = currentLogs[index];
+            const modal = document.getElementById('editModal');
+            const textarea = document.getElementById('modalTextarea');
+            const saveBtn = document.getElementById('modalSaveBtn');
+            const fgInput = document.getElementById('editFgColor');
+            const bgInput = document.getElementById('editBgColor');
+            const folderSelect = document.getElementById('editFolderSelect');
+            textarea.value = log.text;
+            fgInput.value = log.color || '#333333';
+            bgInput.value = log.bgColor || '#ffffff';
+            folderSelect.value = log.folderId || "";
+            modal.style.display = 'flex';
+            saveBtn.onclick = async () => {
+                const newText = textarea.value;
+                if (!newText.trim()) return;
+                await api.patch(`/api/notes/${id}`, {
+                    text: newText,
+                    color: fgInput.value,
+                    bgColor: bgInput.value,
+                    folderId: folderSelect.value || undefined,
+                });
+                window.closeModal('editModal');
+                await loadLogs();
+            };
+        };
+
+        window.closeModal = (id) => { document.getElementById(id).style.display = 'none'; };
+
+        window.cleanAll = async () => {
+            if (confirm("Are you sure you want to delete all entries in this view?")) {
+                const params = currentFolderId ? `?folderId=${currentFolderId}` : '';
+                await api.delete(`/api/notes${params}`);
+                await loadLogs();
+            }
+        };
+
+        window.copyText = (index, buttonId) => {
+            navigator.clipboard.writeText(currentLogs[index].text);
+            const btn = document.getElementById(buttonId);
+            const orig = btn.innerHTML;
+            btn.innerHTML = ICONS.check; btn.classList.add('success');
+            setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('success'); }, 2000);
+        };
+
+        loadFolders();
+        loadLogs();
+        setInterval(() => { loadFolders(); loadLogs(); }, 5000);
+    </script>
+</body>
+</html>
