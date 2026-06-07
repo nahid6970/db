@@ -2651,6 +2651,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 28,
+                "title": "WWE SmackDown - 2026-06-05 - SmackDown 1398 WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-07T14:13:03.366460",
+                "notify": "unseen"
+            },
+            {
                 "id": 27,
                 "title": "WWE SmackDown - 2026-05-29 - SmackDown 1397 WEBDL-1080p",
                 "watched": true,
