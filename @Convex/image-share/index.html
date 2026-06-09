@@ -1245,9 +1245,7 @@
             <svg id="viewToggleIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
           </button>
           <button id="sortBtn" class="icon-btn" onclick="toggleSort(event)" title="Sort: Newest first">
-            <svg id="sortIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
-            </svg>
+            <svg id="sortIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
           </button>
           <div class="context-menu" id="sortMenu">
             <button title="Newest first" data-sort="newest" onclick="setSortMode('newest')"><span class="sort-menu-label">Newest first</span><span class="sort-menu-check">✓</span></button>
@@ -1556,6 +1554,41 @@
           return 'Name Z-A';
         default:
           return 'Newest first';
+      }
+    }
+
+    function getSortIcon(mode) {
+      switch (mode) {
+        case 'oldest':
+          return `
+            <path d="M12 5v14"></path>
+            <polyline points="8 9 12 5 16 9"></polyline>
+            <circle cx="18" cy="18" r="3"></circle>
+          `;
+        case 'name-asc':
+          return `
+            <path d="M4 17l3-8 3 8"></path>
+            <path d="M4.9 14h4.2"></path>
+            <path d="M14 7h6"></path>
+            <path d="M14 12h6"></path>
+            <path d="M14 17h6"></path>
+          `;
+        case 'name-desc':
+          return `
+            <path d="M4 17l3-8 3 8"></path>
+            <path d="M4.9 14h4.2"></path>
+            <path d="M14 7h6"></path>
+            <path d="M14 12h6"></path>
+            <path d="M14 17h6"></path>
+            <path d="M16 7l2 2 2-2"></path>
+            <path d="M18 9V5"></path>
+          `;
+        default:
+          return `
+            <path d="M12 5v14"></path>
+            <polyline points="8 15 12 19 16 15"></polyline>
+            <circle cx="18" cy="6" r="3"></circle>
+          `;
       }
     }
 
@@ -3325,7 +3358,7 @@
 
     function applySortIcon() {
       const icon = document.getElementById('sortIcon');
-      icon.style.transform = sortOrder === 'oldest' ? 'rotate(180deg)' : '';
+      icon.innerHTML = getSortIcon(sortOrder);
       icon.style.transition = 'transform .2s';
       document.getElementById('sortBtn').title = `Sort: ${getSortLabel(sortOrder)}`;
       refreshSortMenuState();
