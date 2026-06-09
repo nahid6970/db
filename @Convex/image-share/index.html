@@ -427,6 +427,47 @@
       gap: 8px;
       margin-bottom: 4px;
     }
+
+    .breadcrumb-bar {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+    }
+    .breadcrumb-link,
+    .breadcrumb-current {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .breadcrumb-link {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1d4ed8;
+      cursor: pointer;
+      transition: background .15s, border-color .15s;
+    }
+    .breadcrumb-link:hover {
+      background: #dbeafe;
+      border-color: #93c5fd;
+    }
+    .breadcrumb-current {
+      color: #0f172a;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+    .breadcrumb-separator {
+      color: #94a3b8;
+      user-select: none;
+    }
+
     .subfolder-card {
       display: inline-flex;
       align-items: center;
@@ -1684,6 +1725,25 @@
       }
 
       return activeFolderId;
+    }
+
+    function getFolderBreadcrumb(folderId) {
+      if (!folderId || folderId === 'none' || folderId === 'shared') {
+        return [];
+      }
+
+      const path = [];
+      const visited = new Set();
+      let folder = folders.find(item => item._id === folderId);
+
+      while (folder && !visited.has(folder._id)) {
+        path.unshift(folder);
+        visited.add(folder._id);
+        if (!folder.parentId) break;
+        folder = folders.find(item => item._id === folder.parentId);
+      }
+
+      return path;
     }
     
     const client = new ConvexClient(CONVEX_URL);
@@ -2951,6 +3011,21 @@
       const gallery = document.getElementById('gallery');
       const downloadBtn = document.getElementById('downloadFolderBtn');
       const visibleIds = new Set(images.map(img => img._id));
+      const breadcrumb = getFolderBreadcrumb(currentFolderId);
+      const breadcrumbHtml = breadcrumb.length > 1 ? `
+        <div class="breadcrumb-bar" aria-label="Folder path">
+          ${breadcrumb.map((folder, index) => {
+            const isLast = index === breadcrumb.length - 1;
+            return `
+              ${index > 0 ? '<span class="breadcrumb-separator">›</span>' : ''}
+              ${isLast
+                ? `<span class="breadcrumb-current">${escapeHtml(folder.name)}</span>`
+                : `<button class="breadcrumb-link" onclick="selectFolder('${folder._id}')">${escapeHtml(folder.name)}</button>`
+              }
+            `;
+          }).join('')}
+        </div>
+      ` : '';
 
       // Show download button only if we are in a folder and have images
       if (currentFolderId !== null && images.length > 0) {
@@ -2971,9 +3046,11 @@
         const subHtml0 = subfolders0.map(sf =>
           `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">📁 ${escapeHtml(sf.name)}</button>`
         ).join('');
-        gallery.innerHTML = subHtml0
-          ? `<div class="subfolder-grid">${subHtml0}</div>`
-          : '<div class="loading">No images yet</div>';
+        gallery.innerHTML = breadcrumbHtml + (
+          subHtml0
+            ? `<div class="subfolder-grid">${subHtml0}</div>`
+            : '<div class="loading">No images yet</div>'
+        );
         renderFolderBar();
         return;
       }
@@ -2991,7 +3068,7 @@
           `).join('')}
         </div>` : '';
       
-      gallery.innerHTML = subfolderHtml + sorted.map((img, i) => {
+      gallery.innerHTML = breadcrumbHtml + subfolderHtml + sorted.map((img, i) => {
         const isMega = !!(img.url && img.url.includes('mega.nz'));
         const isPdf = img.filename?.toLowerCase().endsWith('.pdf');
         
