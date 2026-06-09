@@ -773,10 +773,35 @@
       font-size: 13px;
       line-height: 1;
       position: relative;
+      transition: background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+    }
+    #sortMenu button .sort-menu-label {
+      flex: 1;
+      text-align: left;
+    }
+    #sortMenu button .sort-menu-check {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: opacity 0.15s ease, transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
     }
     #sortMenu button.active-sort {
-      background: #eff6ff;
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
       color: #1d4ed8;
+      box-shadow: inset 0 0 0 1px rgba(37, 99, 235, 0.18);
+      transform: translateX(1px);
+    }
+    #sortMenu button.active-sort .sort-menu-check {
+      opacity: 1;
+      transform: scale(1);
+      background: #1d4ed8;
+      color: #fff;
     }
     
     .image-card { 
@@ -1225,10 +1250,10 @@
             </svg>
           </button>
           <div class="context-menu" id="sortMenu">
-            <button title="Newest first" onclick="setSortMode('newest')">Newest first</button>
-            <button title="Oldest first" onclick="setSortMode('oldest')">Oldest first</button>
-            <button title="Name A-Z" onclick="setSortMode('name-asc')">Name A-Z</button>
-            <button title="Name Z-A" onclick="setSortMode('name-desc')">Name Z-A</button>
+            <button title="Newest first" data-sort="newest" onclick="setSortMode('newest')"><span class="sort-menu-label">Newest first</span><span class="sort-menu-check">✓</span></button>
+            <button title="Oldest first" data-sort="oldest" onclick="setSortMode('oldest')"><span class="sort-menu-label">Oldest first</span><span class="sort-menu-check">✓</span></button>
+            <button title="Name A-Z" data-sort="name-asc" onclick="setSortMode('name-asc')"><span class="sort-menu-label">Name A-Z</span><span class="sort-menu-check">✓</span></button>
+            <button title="Name Z-A" data-sort="name-desc" onclick="setSortMode('name-desc')"><span class="sort-menu-label">Name Z-A</span><span class="sort-menu-check">✓</span></button>
           </div>
           <button id="folderToggleBtn" class="secondary icon-btn" onclick="toggleFolderPanel()" title="Folders">
             <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -3261,7 +3286,7 @@
       const menu = document.getElementById('sortMenu');
       if (!menu) return;
       menu.querySelectorAll('button').forEach(btn => {
-        const isActive = btn.getAttribute('onclick')?.includes(`'${sortOrder}'`);
+        const isActive = btn.dataset.sort === sortOrder;
         btn.classList.toggle('active-sort', !!isActive);
       });
     }
