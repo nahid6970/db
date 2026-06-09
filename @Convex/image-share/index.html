@@ -283,7 +283,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: 0;
     }
 
     .icon-btn svg {
@@ -695,7 +695,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: 0;
       font-size: 18px;
       line-height: 1;
       position: relative;
@@ -732,7 +732,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 8px;
+      border-radius: 0;
       font-size: 18px;
       line-height: 1;
       position: relative;
@@ -774,7 +774,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      border-radius: 8px;
+      border-radius: 0;
       font-size: 13px;
       line-height: 1;
       position: relative;
@@ -1330,18 +1330,18 @@
           <label style="color:#ccc;font-size:13px;">Background</label>
           <div style="display:flex;align-items:center;gap:8px;">
             <input type="color" id="folderBgColorInput" style="width:36px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
-            <button onclick="clearFolderColor('bg')" style="background:#444;border-radius:6px;padding:6px 10px;font-size:12px;">Clear</button>
+            <button onclick="clearFolderColor('bg')" style="background:#444;border-radius:0;padding:6px 10px;font-size:12px;">Clear</button>
           </div>
         </div>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <label style="color:#ccc;font-size:13px;">Text</label>
           <div style="display:flex;align-items:center;gap:8px;">
             <input type="color" id="folderFgColorInput" style="width:36px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
-            <button onclick="clearFolderColor('fg')" style="background:#444;border-radius:6px;padding:6px 10px;font-size:12px;">Clear</button>
+            <button onclick="clearFolderColor('fg')" style="background:#444;border-radius:0;padding:6px 10px;font-size:12px;">Clear</button>
           </div>
         </div>
         <div id="folderColorPreview" style="padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;text-align:center;border:1px solid #555;">Preview</div>
-        <button onclick="saveFolderColors()" style="background:#4CAF50;border-radius:8px;">Save</button>
+        <button onclick="saveFolderColors()" style="background:#4CAF50;border-radius:0;">Save</button>
       </div>
     </div>
   </div>
@@ -1447,7 +1447,7 @@
               </div>
             </div>
           </div>
-          <button onclick="saveThemeColors()" style="background: #555; border-radius: 6px; margin-top: 12px; width: 100%;">Save Theme Colors</button>
+          <button onclick="saveThemeColors()" style="background: #555; border-radius: 0; margin-top: 12px; width: 100%;">Save Theme Colors</button>
         </div>
       </div>
 
@@ -1482,12 +1482,12 @@
               <select id="megaFolderSelect" style="flex: 1;">
                 <option value="">Root (no subfolder)</option>
               </select>
-              <button onclick="fetchMegaFolders()" id="megaFetchBtn" style="background: #555; border-radius: 6px; white-space: nowrap; flex-shrink: 0;">Fetch Folders</button>
+              <button onclick="fetchMegaFolders()" id="megaFetchBtn" style="background: #555; border-radius: 0; white-space: nowrap; flex-shrink: 0;">Fetch Folders</button>
             </div>
             <span id="megaFolderFetchStatus" style="font-size: 11px; color: #888;"></span>
           </div>
 
-          <button onclick="saveMegaSettings()" style="background: #4CAF50; border-radius: 6px;">Save MEGA Config</button>
+          <button onclick="saveMegaSettings()" style="background: #4CAF50; border-radius: 0;">Save MEGA Config</button>
         </div>
       </div>
     </div>
@@ -2786,7 +2786,7 @@
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
         selectionCount
           ? `<span class="selection-hint">${selectionCount} selected. Click a folder to move, or 
-             <button class="secondary" onclick="exportToPdf()" style="padding: 4px 8px; border-radius: 4px; margin-left: 8px;">Export to PDF</button>
+             <button class="secondary" onclick="exportToPdf()" style="padding: 4px 8px; border-radius: 0; margin-left: 8px;">Export to PDF</button>
              </span>`
           : ''
       ];
@@ -3768,7 +3768,7 @@
       ];
 
       popup.innerHTML = items.map(item => `
-        <button onclick="pickFolder('${item.value}')" style="display:flex;align-items:center;gap:5px;width:100%;text-align:left;padding:${item.isSubfolder ? '5px 10px 5px 22px' : '8px 14px'};background:${item.value === currentFolderId ? '#eff6ff' : 'transparent'};color:${item.value === currentFolderId ? '#1d4ed8' : '#1e293b'};border:none;border-radius:8px;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;">
+        <button onclick="pickFolder('${item.value}')" style="display:flex;align-items:center;gap:5px;width:100%;text-align:left;padding:${item.isSubfolder ? '5px 10px 5px 22px' : '8px 14px'};background:${item.value === currentFolderId ? '#eff6ff' : 'transparent'};color:${item.value === currentFolderId ? '#1d4ed8' : '#1e293b'};border:none;border-radius:0;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;">
           ${item.isSubfolder ? `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;opacity:0.4"><path d="M2 2v6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 8l3 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 6l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}${item.label}
         </button>
       `).join('');
