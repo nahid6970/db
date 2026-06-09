@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery</title>
   <link rel="icon" href="https://play-lh.googleusercontent.com/UQ-CoA-zMl9azJcm1UWcVPG1BzfL0UvGeysak43Wl5jRJvbPfLjgdNiyx-daRnT2oA1N">
+  <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: system-ui; background: #f5f5f5; }
@@ -293,6 +294,10 @@
       stroke-width: 2;
       stroke-linecap: round;
       stroke-linejoin: round;
+    }
+    .icon-btn i {
+      font-size: 17px;
+      line-height: 1;
     }
     
     button.danger { 
@@ -1245,7 +1250,7 @@
             <svg id="viewToggleIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
           </button>
           <button id="sortBtn" class="icon-btn" onclick="toggleSort(event)" title="Sort: Newest first">
-            <svg id="sortIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"></svg>
+            <i id="sortIcon" class="nf nf-fa-clock_o" aria-hidden="true"></i>
           </button>
           <div class="context-menu" id="sortMenu">
             <button title="Newest first" data-sort="newest" onclick="setSortMode('newest')"><span class="sort-menu-label">Newest first</span><span class="sort-menu-check">✓</span></button>
@@ -1557,38 +1562,16 @@
       }
     }
 
-    function getSortIcon(mode) {
+    function getSortIconClass(mode) {
       switch (mode) {
         case 'oldest':
-          return `
-            <path d="M12 5v14"></path>
-            <polyline points="8 9 12 5 16 9"></polyline>
-            <circle cx="18" cy="18" r="3"></circle>
-          `;
+          return 'nf nf-fa-history';
         case 'name-asc':
-          return `
-            <path d="M4 17l3-8 3 8"></path>
-            <path d="M4.9 14h4.2"></path>
-            <path d="M14 7h6"></path>
-            <path d="M14 12h6"></path>
-            <path d="M14 17h6"></path>
-          `;
+          return 'nf nf-fa-sort_alpha_asc';
         case 'name-desc':
-          return `
-            <path d="M4 17l3-8 3 8"></path>
-            <path d="M4.9 14h4.2"></path>
-            <path d="M14 7h6"></path>
-            <path d="M14 12h6"></path>
-            <path d="M14 17h6"></path>
-            <path d="M16 7l2 2 2-2"></path>
-            <path d="M18 9V5"></path>
-          `;
+          return 'nf nf-fa-sort_alpha_desc';
         default:
-          return `
-            <path d="M12 5v14"></path>
-            <polyline points="8 15 12 19 16 15"></polyline>
-            <circle cx="18" cy="6" r="3"></circle>
-          `;
+          return 'nf nf-fa-clock_o';
       }
     }
 
@@ -3358,8 +3341,7 @@
 
     function applySortIcon() {
       const icon = document.getElementById('sortIcon');
-      icon.innerHTML = getSortIcon(sortOrder);
-      icon.style.transition = 'transform .2s';
+      icon.className = getSortIconClass(sortOrder);
       document.getElementById('sortBtn').title = `Sort: ${getSortLabel(sortOrder)}`;
       refreshSortMenuState();
     }
