@@ -750,6 +750,34 @@
     #imageContextMenu button.danger-item {
       color: #b42318;
     }
+
+    #sortMenu {
+      width: auto;
+      min-width: 190px;
+      padding: 6px;
+      display: none;
+      flex-direction: column;
+      gap: 1px;
+      border-radius: 12px;
+    }
+    #sortMenu.visible { display: flex; }
+    #sortMenu button {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1;
+      position: relative;
+    }
+    #sortMenu button.active-sort {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
     
     .image-card { 
       position: relative;
@@ -1191,11 +1219,17 @@
           <button id="viewToggleBtn" class="icon-btn secondary" onclick="cycleView()" title="Switch view">
             <svg id="viewToggleIcon" viewBox="0 0 24 24" aria-hidden="true"></svg>
           </button>
-          <button id="sortBtn" class="icon-btn" onclick="toggleSort()" title="Newest first">
+          <button id="sortBtn" class="icon-btn" onclick="toggleSort(event)" title="Sort: Newest first">
             <svg id="sortIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>
             </svg>
           </button>
+          <div class="context-menu" id="sortMenu">
+            <button title="Newest first" onclick="setSortMode('newest')">Newest first</button>
+            <button title="Oldest first" onclick="setSortMode('oldest')">Oldest first</button>
+            <button title="Name A-Z" onclick="setSortMode('name-asc')">Name A-Z</button>
+            <button title="Name Z-A" onclick="setSortMode('name-desc')">Name Z-A</button>
+          </div>
           <button id="folderToggleBtn" class="secondary icon-btn" onclick="toggleFolderPanel()" title="Folders">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v2H3V6z"></path>
@@ -1446,6 +1480,7 @@
     const CLOUDINARY_CLOUD_NAME = "dwc7hjiub";
     const CLOUDINARY_UPLOAD_PRESET = "myGallery";
     const FOLDER_STORAGE_KEY = "image-share.currentFolderId";
+    const SORT_STORAGE_KEY = "image-share.sortOrder";
     const DEFAULT_PAGE_TITLE = document.title;
     const api = anyApi;
 
@@ -1468,6 +1503,78 @@
       const g = parseInt(hex.slice(3, 5), 16);
       const b = parseInt(hex.slice(5, 7), 16);
       return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+    }
+
+    function normalizeSortMode(value) {
+      switch (value) {
+        case 'asc':
+        case 'oldest':
+          return 'oldest';
+        case 'desc':
+        case 'newest':
+          return 'newest';
+        case 'name-asc':
+        case 'name-desc':
+          return value;
+        default:
+          return 'newest';
+      }
+    }
+
+    function getSortLabel(mode) {
+      switch (mode) {
+        case 'oldest':
+          return 'Oldest first';
+        case 'name-asc':
+          return 'Name A-Z';
+        case 'name-desc':
+          return 'Name Z-A';
+        default:
+          return 'Newest first';
+      }
+    }
+
+    function getSortedImages(images) {
+      const sorted = [...(images || [])];
+      const compareNames = (a, b) => {
+        const aName = (a.filename || '').toLowerCase();
+        const bName = (b.filename || '').toLowerCase();
+        return aName.localeCompare(bName, undefined, { sensitivity: 'base', numeric: true });
+      };
+
+      sorted.sort((a, b) => {
+        if (a.pinned && !b.pinned) return -1;
+        if (!a.pinned && b.pinned) return 1;
+
+        switch (sortOrder) {
+          case 'oldest':
+            return (a.timestamp - b.timestamp) || compareNames(a, b);
+          case 'name-asc':
+            return compareNames(a, b) || (b.timestamp - a.timestamp);
+          case 'name-desc':
+            return compareNames(b, a) || (b.timestamp - a.timestamp);
+          default:
+            return (b.timestamp - a.timestamp) || compareNames(a, b);
+        }
+      });
+
+      return sorted;
+    }
+
+    async function persistUiState() {
+      try {
+        await client.mutation(api.images.updateSettings, {
+          storageType,
+          megaEmail: megaSettings.email,
+          megaPassword: megaSettings.password,
+          megaSubfolder: megaSettings.subfolder,
+          colors: uiColors,
+          sortOrder,
+          currentFolderId: currentFolderId === null ? null : currentFolderId,
+        });
+      } catch (err) {
+        console.error('Failed to persist UI state:', err);
+      }
     }
 
     window.updateColorPreview = function(provider) {
@@ -1696,6 +1803,7 @@
 
     function subscribeToSettings() {
       client.onUpdate(api.images.getSettings, {}, (settings) => {
+        settingsHydrated = true;
         storageType = settings.storageType;
         pdfStorageType = settings.pdfStorageType || settings.storageType;
         megaSettings = {
@@ -1703,6 +1811,10 @@
           password: settings.megaPassword || '',
           subfolder: settings.megaSubfolder || ''
         };
+        remoteSortOrder = settings.sortOrder ? normalizeSortMode(settings.sortOrder) : remoteSortOrder;
+        if (settings.currentFolderId !== undefined) {
+          remoteFolderId = settings.currentFolderId;
+        }
         if (settings.colors) {
           uiColors = settings.colors;
           document.getElementById('colorCloudinary').value = uiColors.cloudinary;
@@ -1719,6 +1831,7 @@
           if (radio.value === pdfStorageType) radio.checked = true;
         }
         updateActiveStorageBadge();
+        applyPersistedUiState();
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
           ['cloudinary', 'convex', 'mega'].forEach(p => updateColorPreview(p));
@@ -1802,6 +1915,9 @@
       if (!exists) {
         currentFolderId = null;
         storeCurrentFolderId(currentFolderId);
+        if (settingsHydrated) {
+          void persistUiState();
+        }
       }
     }
 
@@ -1841,12 +1957,47 @@
 
       return path;
     }
+
+    async function applyPersistedUiState() {
+      if (settingsHydrated) {
+        const nextSort = normalizeSortMode(remoteSortOrder || sortOrder);
+        if (nextSort !== sortOrder) {
+          sortOrder = nextSort;
+          localStorage.setItem(SORT_STORAGE_KEY, sortOrder);
+          applySortIcon();
+          if (window._lastImages) renderImages(window._lastImages);
+        }
+      }
+
+      if (settingsHydrated && foldersHydrated && remoteFolderId !== undefined) {
+        const nextFolderId = remoteFolderId || null;
+        const previousFolderId = currentFolderId;
+        currentFolderId = nextFolderId;
+        normalizeCurrentFolderId();
+        if (!(await ensureFolderAccess(currentFolderId))) {
+          currentFolderId = null;
+        }
+        if (previousFolderId !== currentFolderId) {
+          storeCurrentFolderId(currentFolderId);
+          remoteFolderId = currentFolderId;
+          renderFolderBar();
+          updateMegaConfigVisibility();
+          subscribeToImages();
+          if (window._lastImages) renderImages(window._lastImages);
+          void persistUiState();
+        }
+      }
+    }
     
     const client = new ConvexClient(CONVEX_URL);
     let folders = [];
     window._folders = folders;
-    let sortOrder = localStorage.getItem('sortOrder') || 'desc';
+    let sortOrder = normalizeSortMode(localStorage.getItem(SORT_STORAGE_KEY) || localStorage.getItem('sortOrder'));
     let currentFolderId = readStoredFolderId();
+    let settingsHydrated = false;
+    let foldersHydrated = false;
+    let remoteSortOrder = undefined;
+    let remoteFolderId = undefined;
     let isShiftPressed = false;
     const selectedImageIds = new Set();
     const unlockedFolderIds = new Set();
@@ -1918,6 +2069,9 @@
     });
 
     window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeSortMenu();
+      }
       if (e.key === 'Shift' && !isShiftPressed) {
         isShiftPressed = true;
         updateSelectionMode();
@@ -1946,6 +2100,8 @@
       isShiftPressed = false;
       updateSelectionMode();
       closeFolderContextMenu();
+      closeImageContextMenu();
+      closeSortMenu();
     });
 
     window.addEventListener('mousemove', (e) => {
@@ -1956,12 +2112,16 @@
     window.addEventListener('click', (e) => {
       const fMenu = document.getElementById('folderContextMenu');
       const iMenu = document.getElementById('imageContextMenu');
+      const sMenu = document.getElementById('sortMenu');
       if (!fMenu.contains(e.target)) closeFolderContextMenu();
       if (!iMenu.contains(e.target)) closeImageContextMenu();
+      if (!sMenu.contains(e.target) && !e.target.closest('#sortBtn')) closeSortMenu();
     });
 
     window.addEventListener('scroll', () => {
       closeFolderContextMenu();
+      closeImageContextMenu();
+      closeSortMenu();
     }, true);
 
     window.updateFileCount = function() {
@@ -2204,7 +2364,7 @@
     window.handleImageClick = function(event, index) {
       const imgs = window._lastImages;
       if (!imgs) return;
-      const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+      const sorted = getSortedImages(imgs);
       const img = sorted[index];
       
       if (event.shiftKey || isShiftPressed) {
@@ -2231,7 +2391,7 @@
         const pdf = new jsPDF();
         
         const imgs = window._lastImages;
-        const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+        const sorted = getSortedImages(imgs);
         const selectedImages = sorted.filter(img => selectedImageIds.has(img._id));
         
         for (let i = 0; i < selectedImages.length; i++) {
@@ -2310,7 +2470,7 @@
     async function showLightbox() {
       const imgs = window._lastImages;
       if (!imgs || !imgs.length) return;
-      const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+      const sorted = getSortedImages(imgs);
       const img = sorted[_lbIndex];
       if (!img) return;
 
@@ -2362,7 +2522,7 @@
     }
 
     window.lbNav = function(dir) {
-      const sorted = sortOrder === 'asc' ? [...(window._lastImages||[])].reverse() : (window._lastImages||[]);
+      const sorted = getSortedImages(window._lastImages || []);
       _lbIndex = Math.max(0, Math.min(sorted.length - 1, _lbIndex + dir));
       showLightbox();
     };
@@ -2370,7 +2530,7 @@
     window.openCurrentLightboxImageInNewTab = async function() {
       const imgs = window._lastImages;
       if (!imgs || !imgs.length) return;
-      const sorted = sortOrder === 'asc' ? [...imgs].reverse() : imgs;
+      const sorted = getSortedImages(imgs);
       const img = sorted[_lbIndex];
       if (!img) return;
 
@@ -2710,6 +2870,7 @@
       }
       currentFolderId = folderId;
       storeCurrentFolderId(currentFolderId);
+      void persistUiState();
       selectedImageIds.clear();
       renderFolderBar();
       subscribeToImages();
@@ -2755,12 +2916,14 @@
       if (currentFolderId === id) {
         currentFolderId = null;
         storeCurrentFolderId(currentFolderId);
+        void persistUiState();
         subscribeToImages();
       }
     };
 
     window.openFolderContextMenu = function(event, id) {
       event.preventDefault();
+      closeSortMenu();
       if (selectedImageIds.size > 0) {
         return;
       }
@@ -2956,6 +3119,7 @@
 
     window.openImageContextMenu = function(event, id) {
       event.preventDefault();
+      closeSortMenu();
       if (selectedImageIds.size > 1 && selectedImageIds.has(id)) {
         // Optional: show bulk actions menu? For now, just return or show single.
       }
@@ -3089,23 +3253,62 @@
       renderSelectionState();
     };
     
-    window.toggleSort = function() {
-      sortOrder = sortOrder === 'desc' ? 'asc' : 'desc';
+    function closeSortMenu() {
+      document.getElementById('sortMenu').classList.remove('visible');
+    }
+
+    function refreshSortMenuState() {
+      const menu = document.getElementById('sortMenu');
+      if (!menu) return;
+      menu.querySelectorAll('button').forEach(btn => {
+        const isActive = btn.getAttribute('onclick')?.includes(`'${sortOrder}'`);
+        btn.classList.toggle('active-sort', !!isActive);
+      });
+    }
+
+    window.toggleSort = function(event) {
+      event?.stopPropagation();
+      const menu = document.getElementById('sortMenu');
+      const btn = document.getElementById('sortBtn');
+      if (menu.classList.contains('visible')) {
+        closeSortMenu();
+        return;
+      }
+
+      menu.style.visibility = 'hidden';
+      menu.classList.add('visible');
+      refreshSortMenuState();
+      requestAnimationFrame(() => {
+        const rect = btn.getBoundingClientRect();
+        const left = Math.min(rect.left, window.innerWidth - menu.offsetWidth - 6);
+        const top = Math.min(rect.bottom + 6, window.innerHeight - menu.offsetHeight - 6);
+        menu.style.left = `${Math.max(6, left)}px`;
+        menu.style.top = `${Math.max(6, top)}px`;
+        menu.style.visibility = '';
+      });
+    };
+
+    window.setSortMode = async function(mode) {
+      sortOrder = normalizeSortMode(mode);
+      localStorage.setItem(SORT_STORAGE_KEY, sortOrder);
       localStorage.setItem('sortOrder', sortOrder);
       applySortIcon();
+      closeSortMenu();
       if (window._lastImages) renderImages(window._lastImages);
+      await persistUiState();
     };
 
     function applySortIcon() {
       const icon = document.getElementById('sortIcon');
-      icon.style.transform = sortOrder === 'asc' ? 'rotate(180deg)' : '';
+      icon.style.transform = sortOrder === 'oldest' ? 'rotate(180deg)' : '';
       icon.style.transition = 'transform .2s';
-      document.getElementById('sortBtn').title = sortOrder === 'desc' ? 'Newest first' : 'Oldest first';
+      document.getElementById('sortBtn').title = `Sort: ${getSortLabel(sortOrder)}`;
+      refreshSortMenuState();
     }
 
     function renderImages(images) {
       window._lastImages = images;
-      const sorted = sortOrder === 'asc' ? [...images].reverse() : images;
+      const sorted = getSortedImages(images);
       const gallery = document.getElementById('gallery');
       const downloadBtn = document.getElementById('downloadFolderBtn');
       const visibleIds = new Set(images.map(img => img._id));
@@ -3231,6 +3434,7 @@
     function subscribeToFolders() {
       folderSubscriptionCleanup?.();
       folderSubscriptionCleanup = client.onUpdate(api.images.listFolders, {}, (nextFolders) => {
+        foldersHydrated = true;
         const previousFolderId = currentFolderId;
         folders = nextFolders;
         window._folders = folders;
@@ -3247,6 +3451,7 @@
         renderFolderBar();
         updateMegaConfigVisibility();
         if (window._lastImages) renderImages(window._lastImages);
+        applyPersistedUiState();
       });
     }
 
@@ -3300,6 +3505,7 @@
     if (!(await ensureFolderAccess(currentFolderId))) {
       currentFolderId = null;
       storeCurrentFolderId(currentFolderId);
+      void persistUiState();
     }
     subscribeToImages();
   </script>

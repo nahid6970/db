@@ -291,6 +291,8 @@ export const getSettings = query({
       megaEmail: "",
       megaPassword: "",
       megaSubfolder: "",
+      sortOrder: "newest",
+      currentFolderId: null,
       colors: {
         cloudinary: "#0369a1",
         convex: "#ec4899",
@@ -307,6 +309,8 @@ export const updateSettings = mutation({
     megaEmail: v.optional(v.string()),
     megaPassword: v.optional(v.string()),
     megaSubfolder: v.optional(v.string()),
+    sortOrder: v.optional(v.string()),
+    currentFolderId: v.optional(v.union(v.string(), v.null())),
     colors: v.optional(v.object({
       cloudinary: v.string(),
       convex: v.string(),
@@ -315,18 +319,30 @@ export const updateSettings = mutation({
   },
   handler: async (ctx, args) => {
     const settings = await ctx.db.query("settings").unique();
-    const data = { 
-      storageType: args.storageType,
-      pdfStorageType: args.pdfStorageType || (settings?.pdfStorageType || args.storageType),
-      megaEmail: args.megaEmail,
-      megaPassword: args.megaPassword,
-      megaSubfolder: args.megaSubfolder,
-      colors: args.colors,
-    };
+    const data: Record<string, unknown> = {};
+
+    if (args.storageType !== undefined) data.storageType = args.storageType;
+    if (args.pdfStorageType !== undefined) data.pdfStorageType = args.pdfStorageType;
+    if (args.megaEmail !== undefined) data.megaEmail = args.megaEmail;
+    if (args.megaPassword !== undefined) data.megaPassword = args.megaPassword;
+    if (args.megaSubfolder !== undefined) data.megaSubfolder = args.megaSubfolder;
+    if (args.sortOrder !== undefined) data.sortOrder = args.sortOrder;
+    if (args.currentFolderId !== undefined) data.currentFolderId = args.currentFolderId;
+    if (args.colors !== undefined) data.colors = args.colors;
+
     if (settings) {
       await ctx.db.patch(settings._id, data);
     } else {
-      await ctx.db.insert("settings", data);
+      await ctx.db.insert("settings", {
+        storageType: args.storageType,
+        pdfStorageType: args.pdfStorageType || args.storageType,
+        megaEmail: args.megaEmail || "",
+        megaPassword: args.megaPassword || "",
+        megaSubfolder: args.megaSubfolder || "",
+        sortOrder: args.sortOrder || "newest",
+        currentFolderId: args.currentFolderId ?? null,
+        colors: args.colors,
+      });
     }
   },
 });
