@@ -348,6 +348,50 @@
     .close-button { font-size: 28px; cursor: pointer; color: #999; line-height: 1; }
     .close-button:hover { color: #f44336; }
 
+    #folderPickerPopup {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .folder-picker-search {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: #fff;
+      padding-bottom: 2px;
+    }
+
+    .folder-picker-search input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 8px 10px;
+      border: 1px solid #cbd5e1;
+      border-radius: 0;
+      font-size: 13px;
+      color: #0f172a;
+      background: #f8fafc;
+      outline: none;
+    }
+
+    .folder-picker-search input:focus {
+      border-color: #3b82f6;
+      background: #fff;
+    }
+
+    .folder-picker-list {
+      display: flex;
+      flex-direction: column;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .folder-picker-empty {
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #64748b;
+    }
+
     /* Type Chips */
     .type-picker-block { display: flex; flex-direction: column; gap: 10px; }
     .type-picker-row { display: flex; flex-wrap: wrap; gap: 12px; }
@@ -1999,6 +2043,8 @@
       return path;
     }
 
+    window.getFolderBreadcrumb = getFolderBreadcrumb;
+
     async function applyPersistedUiState() {
       if (settingsHydrated) {
         const nextSort = normalizeSortMode(remoteSortOrder || sortOrder);
@@ -2621,6 +2667,8 @@
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#39;');
     }
+
+    window.escapeHtml = escapeHtml;
 
     function formatBytes(bytes) {
       if (bytes === undefined || bytes === null) return 'N/A';
@@ -3551,7 +3599,7 @@
   </script>
 
   <!-- Folder Picker Popup -->
-  <div id="folderPickerPopup" style="display:none;position:fixed;z-index:5000;background:white;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);min-width:160px;padding:6px;max-height:320px;overflow-y:auto;">
+  <div id="folderPickerPopup" style="display:none;position:fixed;z-index:5000;background:white;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);min-width:240px;padding:8px;max-height:320px;overflow:hidden;">
   </div>
 
   <!-- Lightbox -->
@@ -3748,34 +3796,94 @@
   (function() {
     const popup = document.getElementById('folderPickerPopup');
     let _pickerImageId = null;
+    let _pickerItems = [];
+    let _pickerSelectedFolderId = '';
 
     function closePopup() {
       popup.style.display = 'none';
       _pickerImageId = null;
+      _pickerItems = [];
+      _pickerSelectedFolderId = '';
+    }
+
+    function getFolderPickerItems(currentFolderId) {
+      const allFolders = window._folders || [];
+      const topLevel = allFolders.filter(f => !f.parentId);
+      const ordered = topLevel.flatMap(f => [f, ...allFolders.filter(s => s.parentId === f._id)]);
+
+      return [
+        {
+          label: 'No folder',
+          value: '',
+          searchText: 'no folder'
+        },
+        ...ordered.map(folder => {
+          const breadcrumb = window.getFolderBreadcrumb(folder._id);
+          const path = breadcrumb.map(item => item.name).join(' / ');
+          const parentPath = breadcrumb.length > 1
+            ? breadcrumb.slice(0, -1).map(item => item.name).join(' / ')
+            : '';
+          return {
+            label: folder.name,
+            value: folder._id,
+            isSubfolder: !!folder.parentId,
+            searchText: `${folder.name} ${path}`.toLowerCase(),
+            displayPath: path,
+            parentPath,
+            selected: folder._id === currentFolderId
+          };
+        })
+      ];
+    }
+
+    function renderFolderPickerList(query = '') {
+      const list = popup.querySelector('#folderPickerList');
+      if (!list) return;
+
+      const normalized = query.trim().toLowerCase();
+      const items = !normalized
+        ? _pickerItems
+        : _pickerItems.filter(item => item.searchText.includes(normalized));
+
+      if (!items.length) {
+        list.innerHTML = '<div class="folder-picker-empty">No matching folders</div>';
+        return;
+      }
+
+      list.innerHTML = items.map(item => {
+        const isSelected = item.value === _pickerSelectedFolderId;
+        return `
+          <button
+            onclick="pickFolder('${item.value}')"
+            style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:${item.isSubfolder ? '5px 10px 5px 22px' : '8px 12px'};background:${isSelected ? '#eff6ff' : 'transparent'};color:${isSelected ? '#1d4ed8' : '#1e293b'};border:none;border-radius:0;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;"
+          >
+            ${item.isSubfolder ? `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;opacity:0.4"><path d="M2 2v6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 8l3 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 6l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
+            <span style="display:flex;flex-direction:column;min-width:0;">
+              <span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${window.escapeHtml(item.label)}</span>
+              ${item.parentPath ? `<span style="font-size:11px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${window.escapeHtml(item.parentPath)}</span>` : ''}
+            </span>
+          </button>
+        `;
+      }).join('');
     }
 
     window.openFolderPickerPopup = function(event, imageId, currentFolderId) {
       event.stopPropagation();
+      event.preventDefault?.();
       _pickerImageId = imageId;
-
-      // Build items: no folder + all folders
-      const allFolders = window._folders;
-      const topLevel = allFolders.filter(f => !f.parentId);
-      const ordered = topLevel.flatMap(f => [f, ...allFolders.filter(s => s.parentId === f._id)]);
-      const items = [
-        { label: 'No folder', value: '' },
-        ...ordered.map(f => ({ label: f.name, isSubfolder: !!f.parentId, value: f._id }))
-      ];
-
-      popup.innerHTML = items.map(item => `
-        <button onclick="pickFolder('${item.value}')" style="display:flex;align-items:center;gap:5px;width:100%;text-align:left;padding:${item.isSubfolder ? '5px 10px 5px 22px' : '8px 14px'};background:${item.value === currentFolderId ? '#eff6ff' : 'transparent'};color:${item.value === currentFolderId ? '#1d4ed8' : '#1e293b'};border:none;border-radius:0;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;">
-          ${item.isSubfolder ? `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;opacity:0.4"><path d="M2 2v6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 8l3 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 6l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}${item.label}
-        </button>
-      `).join('');
+      _pickerSelectedFolderId = currentFolderId || '';
+      _pickerItems = getFolderPickerItems(currentFolderId || '');
+      popup.innerHTML = `
+        <div class="folder-picker-search">
+          <input id="folderPickerSearch" type="text" placeholder="Search folders" autocomplete="off" spellcheck="false">
+        </div>
+        <div id="folderPickerList" class="folder-picker-list"></div>
+      `;
+      renderFolderPickerList('');
 
       // Position near the dot
-      const rect = event.target.getBoundingClientRect();
-      popup.style.display = 'block';
+      const rect = event.currentTarget.getBoundingClientRect();
+      popup.style.display = 'flex';
       const pw = popup.offsetWidth || 160;
       const ph = popup.offsetHeight || 200;
       let left = rect.left;
@@ -3784,6 +3892,16 @@
       if (top + ph > window.innerHeight - 8) top = rect.top - ph - 6;
       popup.style.left = left + 'px';
       popup.style.top = top + 'px';
+      popup.addEventListener('click', e => e.stopPropagation(), { once: true });
+
+      const search = popup.querySelector('#folderPickerSearch');
+      if (search) {
+        search.value = '';
+        search.addEventListener('input', () => {
+          renderFolderPickerList(search.value);
+        });
+        requestAnimationFrame(() => search.focus());
+      }
     };
 
     window.pickFolder = function(folderId) {
