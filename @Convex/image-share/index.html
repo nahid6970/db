@@ -433,7 +433,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 6px;
+      gap: 0;
       margin-bottom: 2px;
       font-size: 13px;
       font-weight: 600;
@@ -444,28 +444,66 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
+      padding: 7px 12px;
+      min-height: 32px;
+      white-space: nowrap;
     }
     .breadcrumb-link {
+      margin-right: -1px;
       border: 1px solid #bfdbfe;
       background: #eff6ff;
       color: #1d4ed8;
       cursor: pointer;
-      transition: background .15s, border-color .15s;
+      transition: background .15s, border-color .15s, color .15s;
     }
     .breadcrumb-link:hover {
       background: #dbeafe;
       border-color: #93c5fd;
     }
+    .breadcrumb-link:first-child {
+      border-radius: 999px 0 0 999px;
+    }
+    .breadcrumb-link:not(:first-child) {
+      border-left: 0;
+    }
     .breadcrumb-current {
+      border-radius: 0 999px 999px 0;
+      border: 1px solid #e2e8f0;
       color: #0f172a;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
+    }
+    .breadcrumb-step {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
     }
     .breadcrumb-separator {
-      color: #94a3b8;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 32px;
+      margin-left: -1px;
+      margin-right: -1px;
+      background: linear-gradient(180deg, #3b82f6, #2563eb);
+      color: #fff;
+      border: 1px solid #2563eb;
+      clip-path: polygon(0 0, 72% 0, 100% 50%, 72% 100%, 0 100%, 18% 50%);
       user-select: none;
+      position: relative;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .breadcrumb-separator svg {
+      width: 11px;
+      height: 11px;
+      display: block;
+      stroke: #fff;
+    }
+    .breadcrumb-link,
+    .breadcrumb-current {
+      position: relative;
+      z-index: 0;
     }
 
     .subfolder-card {
@@ -3017,11 +3055,19 @@
           ${breadcrumb.map((folder, index) => {
             const isLast = index === breadcrumb.length - 1;
             return `
-              ${index > 0 ? '<span class="breadcrumb-separator">›</span>' : ''}
-              ${isLast
-                ? `<span class="breadcrumb-current">${escapeHtml(folder.name)}</span>`
-                : `<button class="breadcrumb-link" onclick="selectFolder('${folder._id}')">${escapeHtml(folder.name)}</button>`
-              }
+              ${index > 0 ? `
+                <span class="breadcrumb-separator" aria-hidden="true">
+                  <svg viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                    <path d="M4 2.5L7.5 6L4 9.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </svg>
+                </span>
+              ` : ''}
+              <span class="breadcrumb-step">
+                ${isLast
+                  ? `<span class="breadcrumb-current">${escapeHtml(folder.name)}</span>`
+                  : `<button class="breadcrumb-link" onclick="selectFolder('${folder._id}')">${escapeHtml(folder.name)}</button>`
+                }
+              </span>
             `;
           }).join('')}
         </div>
