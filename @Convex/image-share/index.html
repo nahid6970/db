@@ -1183,7 +1183,7 @@
 
   <div class="context-menu" id="folderContextMenu">
     <button title="Rename" onclick="renameFolderFromMenu()">✏️</button>
-    <button title="New subfolder" class="top-folder-only" onclick="createSubfolderFromMenu()">📁</button>
+    <button title="New subfolder" onclick="createSubfolderFromMenu()">📁</button>
     <button title="Set Colors" class="top-folder-only" onclick="setFolderColorsFromMenu()">🎨</button>
     <button title="Hide from All" class="top-folder-only" onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">👁️</button>
     <button title="Set Password" class="top-folder-only" onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">🔒</button>
@@ -2670,7 +2670,7 @@
       const parentId = folderContextMenuId;
       const parent = folders.find(f => f._id === parentId);
       closeFolderContextMenu();
-      const name = await showDialog(`Subfolder of "${parent?.name}"?`);
+      const name = await showDialog(`Subfolder of "${parent?.name || 'this folder'}"?`);
       if (!name || !name.trim()) return;
       await client.mutation(api.images.createFolder, { name: name.trim(), parentId });
     };
@@ -2722,8 +2722,10 @@
       if (!isSubfolder) {
         passwordBtn.title = folder?.password ? 'Change Password' : 'Set Password';
         passwordRemoveBtn.style.display = folder?.password ? 'block' : 'none';
-      hideBtn.title = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
+      } else {
+        passwordRemoveBtn.style.display = 'none';
       }
+      hideBtn.title = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
 
       menu.style.visibility = 'hidden';
       menu.classList.add('visible');
