@@ -1502,6 +1502,21 @@ function createLinkItem(link, index) {
     li.appendChild(noteBadge);
   }
 
+  if (link.folder_picker) {
+    const folderBadge = document.createElement('span');
+    folderBadge.className = 'link-badge-dot folder-picker-badge';
+    folderBadge.title = `Open folder picker${link.title || link.name ? ' — ' + (link.title || link.name) : ''}`;
+    folderBadge.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.webkitdirectory = true;
+      input.click();
+    });
+    li.appendChild(folderBadge);
+  }
+
   const a = document.createElement('a');
   const runtimeUrl = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.url) : link.url;
   
@@ -2008,6 +2023,7 @@ function openEditLinkPopup(link, index) {
   noteChip.checked = !!link.note_enabled;
   noteInput.style.display = 'none';
   document.getElementById('edit-link-note').value = link.note || '';
+  document.getElementById('edit-link-folder-picker').checked = !!link.folder_picker;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -2078,6 +2094,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
     note: document.getElementById('edit-link-note').value,
     note_enabled: document.getElementById('edit-link-note-chip').checked,
+    folder_picker: document.getElementById('edit-link-folder-picker').checked,
     ...compactObject(reminderDraft)
   };
 

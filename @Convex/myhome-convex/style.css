@@ -230,6 +230,17 @@ body {
   cursor: pointer;
 }
 
+.link-badge-dot.folder-picker-badge {
+  top: 50%;
+  right: -5px;
+  transform: translateY(-50%);
+  background: #ff9800;
+  border-color: #000;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
 .note-edit-toggle-btn {
   position: absolute;
   top: -5px;

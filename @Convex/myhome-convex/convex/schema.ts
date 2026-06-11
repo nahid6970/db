@@ -74,6 +74,7 @@ export default defineSchema({
     youtube_new_video_count: v.optional(v.number()),
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
+    folder_picker: v.optional(v.boolean()),
   }),
 
   sidebar_buttons: defineTable({
