@@ -2190,6 +2190,31 @@ async function reorderLinks(fromIndex, toIndex) {
   const [moved] = newLinks.splice(fromIndex, 1);
   newLinks.splice(toIndex, 0, moved);
 
+  // Normalize group props: all items in a group must share the same group-level fields.
+  // After a reorder, _creationTime is reassigned in flat array order, changing which item
+  // becomes items[0] (the source of truth for group styling/order). We fix this by copying
+  // the canonical group props (from whichever item has the most set) to all group members.
+  const GROUP_PROPS = ['collapsible','box_group','horizontal_stack','display_style',
+    'group_order','group_start_new_line','top_name','top_bg_color','top_text_color',
+    'top_border_color','top_hover_color','top_width','top_height','top_font_family',
+    'top_font_size','popup_bg_color','popup_text_color','popup_border_color',
+    'popup_border_radius','horizontal_bg_color','horizontal_text_color',
+    'horizontal_border_color','horizontal_hover_color','password_protect','group_password'];
+
+  const byGroup = {};
+  newLinks.forEach(l => {
+    const g = l.group || 'Ungrouped';
+    (byGroup[g] = byGroup[g] || []).push(l);
+  });
+  for (const items of Object.values(byGroup)) {
+    const canonical = items.reduce((best, item) => {
+      const score = p => GROUP_PROPS.filter(k => item[k] !== undefined && item[k] !== '').length;
+      return score(item) > score(best) ? item : best;
+    });
+    const props = Object.fromEntries(GROUP_PROPS.filter(p => canonical[p] !== undefined).map(p => [p, canonical[p]]));
+    items.forEach(item => Object.assign(item, props));
+  }
+
   try {
     await window.convexMutation("functions:updateAllLinks", { links: newLinks });
     await loadLinks();
