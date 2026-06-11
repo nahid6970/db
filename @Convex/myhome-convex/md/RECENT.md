@@ -3,6 +3,35 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-11] - Folder Opener via opendir: URI Scheme
+
+**What We Accomplished:**
+- Added `folder_picker` (bool) and `folder_path` (string) fields to schema and `updateLink` args
+- Folder chip (folder icon) in edit/add link forms — when enabled shows a `folder_path` text input
+- Orange dot badge at middle-right of item when folder picker is enabled:
+  - Click → triggers `opendir:<folder_path>` URI → Windows opens Explorer at that folder
+  - Shows notification if no path is set
+- Created `open-folder-handler.py`:
+  - `--register`: writes `HKCU\Software\Classes\opendir` registry key (no admin needed, idempotent)
+  - `--unregister`: removes the registry key
+  - Called by Windows with the URI as argument → strips protocol, URL-decodes, runs `explorer.exe`
+  - Handles spaces in paths via `urllib.parse.unquote` + list-based `subprocess.Popen`
+
+**Setup:**
+```
+python open-folder-handler.py --register
+```
+Chrome shows one-time "Open Python?" prompt — check "Always allow" and click Open Python.
+
+**Files Modified:**
+- `open-folder-handler.py` - new file
+- `convex/schema.ts` - added `folder_picker`, `folder_path`
+- `convex/functions.ts` - added `folder_picker`, `folder_path` to updateLink args
+- `index.html` - folder chip + path input in add/edit forms
+- `links-handler.js` - badge render, opendir: click handler, load/save fields
+
+---
+
 ## [2026-06-11] - Note Field for Link Items
 
 **What We Accomplished:**
