@@ -44,10 +44,10 @@
     gap: 10px; flex-wrap: wrap;
   }
   .match-card:hover { border-color: #f9ca24; }
-  .team { display: flex; align-items: center; gap: 10px; min-width: 160px; }
+  .team { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
   .team.right { flex-direction: row-reverse; text-align: right; }
   .team-name { font-weight: 700; font-size: 1rem; }
-  .score-box { text-align: center; min-width: 130px; }
+  .score-box { text-align: center; width: 180px; flex-shrink: 0; }
 
   /* Score / time display */
   .score { font-size: 1.8rem; font-weight: 900; letter-spacing: 4px; color: #f9ca24; }
@@ -205,7 +205,7 @@ function bdTime(utcStr) {
   h = h % 12 || 12;
   const mm = m ? ':' + String(m).padStart(2,'0') : '';
   const day = d.toUTCString().slice(5,11); // e.g. "13 Jun"
-  return `${h}${mm} ${ampm} · ${day} (BD)`;
+  return `${h}${mm} ${ampm} · ${day}`;
 }
 
 function statusBadge(st, clock) {
