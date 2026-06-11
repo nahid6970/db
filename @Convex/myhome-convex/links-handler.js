@@ -2076,7 +2076,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     hidden: document.getElementById('edit-link-hidden').checked,
     start_new_line: document.getElementById('edit-link-start-new-line').checked,
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
-    note: document.getElementById('edit-link-note').value,
+    note: document.getElementById('edit-link-note-chip').checked ? document.getElementById('edit-link-note').value : '',
     ...compactObject(reminderDraft)
   };
 
