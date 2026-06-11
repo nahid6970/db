@@ -354,6 +354,14 @@ function show(id, btn) {
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+  localStorage.setItem('tab', id);
+}
+
+// Restore last tab on load
+const saved = localStorage.getItem('tab');
+if (saved) {
+  const btn = document.querySelector(`nav button[onclick*="'${saved}'"]`);
+  if (btn) show(saved, btn);
 }
 
 function fi(code, cls) {
