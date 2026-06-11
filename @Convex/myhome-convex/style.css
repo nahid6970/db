@@ -1040,7 +1040,7 @@ details[open] summary {
   padding: 5px 4px;
   flex-direction: row;
   gap: 1px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .context-menu.list-layout {
