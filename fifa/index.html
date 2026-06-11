@@ -139,8 +139,9 @@
 
 <!-- ===== GROUPS ===== -->
 <section id="groups">
-  <div class="groups-grid" id="groupsGrid"></div>
-  <p style="color:#555;font-size:0.78rem;margin-top:14px;text-align:center">Top 2 + best 8 third-placed teams advance &bull; Tournament just started</p>
+  <div id="groups-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
+  <div class="groups-grid" id="groupsGrid"><div style="text-align:center;padding:40px;color:#666">Loading standings...</div></div>
+  <p style="color:#555;font-size:0.78rem;margin-top:14px;text-align:center">Top 2 + best 8 third-placed teams advance</p>
 </section>
 
 <!-- ===== KNOCKOUT ===== -->
@@ -348,6 +349,43 @@ async function fetchSchedule() {
 
 fetchSchedule();
 setInterval(fetchSchedule, 60000);
+
+const ESPN_STANDINGS = 'https://site.api.espn.com/apis/v2/sports/soccer/fifa.world/standings';
+
+async function fetchGroups() {
+  try {
+    const r = await fetch(ESPN_STANDINGS);
+    const data = await r.json();
+    const gg = document.getElementById('groupsGrid');
+    let html = '';
+    for (const grp of data.children || []) {
+      const entries = grp.standings?.entries || [];
+      const rows = entries.map(e => {
+        const st = (k) => (e.stats.find(s => s.abbreviation === k) || {}).displayValue || '0';
+        return `<tr>
+          <td><div class="tf"><img class="flag-sm" src="${e.team.logos?.[0]?.href||''}" onerror="this.style.display='none'" alt="">${e.team.displayName}</div></td>
+          <td>${st('GP')}</td><td>${st('W')}</td><td>${st('D')}</td><td>${st('L')}</td>
+          <td>${st('GD')}</td><td>${st('P')}</td>
+        </tr>`;
+      }).join('');
+      html += `<div class="group-card">
+        <div class="group-title">${grp.name}</div>
+        <table class="group-table">
+          <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+          ${rows}
+        </table>
+      </div>`;
+    }
+    gg.innerHTML = html;
+    const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
+    document.getElementById('groups-status').textContent = `Updated: ${t} BD`;
+  } catch(e) {
+    document.getElementById('groupsGrid').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load standings.</p>';
+  }
+}
+
+fetchGroups();
+setInterval(fetchGroups, 60000);
 
 function show(id, btn) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
