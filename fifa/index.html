@@ -350,22 +350,24 @@ async function fetchSchedule() {
 fetchSchedule();
 setInterval(fetchSchedule, 60000);
 
-const ESPN_STANDINGS = 'https://site.api.espn.com/apis/v2/sports/soccer/fifa.world/standings';
+function formatBdUpdated(value) {
+  if (!value) return 'N/A';
+  const d = new Date(value);
+  return d.toLocaleTimeString('en-BD', { timeZone:'Asia/Dhaka' });
+}
 
 async function fetchGroups() {
   try {
-    const r = await fetch(ESPN_STANDINGS);
+    const r = await fetch('/groups.json', { cache:'no-store' });
     const data = await r.json();
     const gg = document.getElementById('groupsGrid');
     let html = '';
-    for (const grp of data.children || []) {
-      const entries = grp.standings?.entries || [];
-      const rows = entries.map(e => {
-        const st = (k) => (e.stats.find(s => s.abbreviation === k) || {}).displayValue || '0';
+    for (const grp of data.groups || []) {
+      const rows = (grp.teams || []).map(team => {
         return `<tr>
-          <td><div class="tf"><img class="flag-sm" src="${e.team.logos?.[0]?.href||''}" onerror="this.style.display='none'" alt="">${e.team.displayName}</div></td>
-          <td>${st('GP')}</td><td>${st('W')}</td><td>${st('D')}</td><td>${st('L')}</td>
-          <td>${st('GD')}</td><td>${st('P')}</td>
+          <td><div class="tf"><img class="flag-sm" src="${team.logo||''}" onerror="this.style.display='none'" alt="">${team.name}</div></td>
+          <td>${team.P ?? '0'}</td><td>${team.W ?? '0'}</td><td>${team.D ?? '0'}</td><td>${team.L ?? '0'}</td>
+          <td>${team.GD ?? '0'}</td><td>${team.Pts ?? '0'}</td>
         </tr>`;
       }).join('');
       html += `<div class="group-card">
@@ -376,9 +378,8 @@ async function fetchGroups() {
         </table>
       </div>`;
     }
-    gg.innerHTML = html;
-    const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
-    document.getElementById('groups-status').textContent = `Updated: ${t} BD`;
+    gg.innerHTML = html || '<p style="color:#666;padding:30px;text-align:center">No group data available.</p>';
+    document.getElementById('groups-status').textContent = `Updated: ${formatBdUpdated(data.updated_at)} BD`;
   } catch(e) {
     document.getElementById('groupsGrid').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load standings.</p>';
   }
@@ -467,23 +468,6 @@ teams.forEach(t => {
   </div>`;
 });
 
-// Groups grid
-const grps = {};
-teams.forEach(t => { if(!grps[t.group]) grps[t.group]=[]; grps[t.group].push(t); });
-const gg = document.getElementById('groupsGrid');
-Object.keys(grps).sort().forEach(g => {
-  const rows = grps[g].map(t => `<tr>
-    <td><div class="tf">${fi(t.code,'flag-sm')}<span>${t.name}</span></div></td>
-    <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
-  </tr>`).join('');
-  gg.innerHTML += `<div class="group-card">
-    <div class="group-title">Group ${g}</div>
-    <table class="group-table">
-      <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
-      ${rows}
-    </table>
-  </div>`;
-});
 </script>
 </body>
 </html>
