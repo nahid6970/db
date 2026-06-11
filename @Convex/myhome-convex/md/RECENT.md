@@ -3,6 +3,27 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-11] - Note Field for Link Items
+
+**What We Accomplished:**
+- Added `note` and `note_enabled` fields to schema and `updateLink` args
+- Note chip (document icon) in edit/add link forms — toggles the badge on the item
+- Blue dot indicator on top-right of chip opens/hides the note textarea
+- `note_enabled` persists chip state independently of note text (untoggling doesn't erase text)
+- Green dot badge (bottom-right of item) when note is enabled:
+  - Left-click → copies note to clipboard
+  - Right-click → opens quick note edit modal (Save / Clear)
+- Note text label removed from chip, icon only
+
+**Files Modified:**
+- `convex/schema.ts` - added `note`, `note_enabled` fields
+- `convex/functions.ts` - added `note`, `note_enabled` to updateLink args
+- `index.html` - note chip + blue dot toggle in add/edit forms, note edit modal
+- `links-handler.js` - note badge render, copy on click, edit modal on right-click, load/save fields, `openNoteEditPopup()`
+- `style.css` - `.note-badge`, `.note-edit-toggle-btn` styles
+
+---
+
 ## [2026-06-11] - Fix: Group Styling/Position Resets on Item Drag-Drop
 
 **Root Cause Diagnosed:**
