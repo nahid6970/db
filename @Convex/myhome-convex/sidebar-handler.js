@@ -337,11 +337,13 @@ function createSidebarButton(button, index) {
     const items = [
       {
         label: 'Edit',
+        icon: '✏️',
         className: 'context-menu-edit',
         action: () => openEditSidebarButtonPopup(button, index)
       },
       {
         label: 'Duplicate',
+        icon: '📋',
         className: 'context-menu-copy',
         action: async () => {
           const duplicatedButton = {
@@ -379,6 +381,7 @@ function createSidebarButton(button, index) {
       },
       {
         label: 'Delete',
+        icon: '🗑️',
         className: 'context-menu-delete',
         action: () => {
           if (confirm(`Delete "${button.name}"?`)) {

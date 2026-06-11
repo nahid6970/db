@@ -733,6 +733,7 @@ window.toggleGroupPicker = function (event, inputId) {
   // Create menu items
   const items = groups.map(group => ({
     label: group,
+    icon: '📁',
     action: () => {
       input.value = group;
       // Trigger input event for any listeners
@@ -743,7 +744,7 @@ window.toggleGroupPicker = function (event, inputId) {
 
   // Show context menu at the button's position
   if (typeof window.showContextMenu === 'function') {
-    window.showContextMenu(event, items);
+    window.showContextMenu(event, items, { layout: 'list' });
   }
 };
 
@@ -1129,10 +1130,10 @@ function createCollapsibleGroup(groupName, items) {
   // Context menu
   div.addEventListener('contextmenu', (e) => {
     showContextMenu(e, [
-      { label: 'Edit', action: () => openEditGroupPopup(groupName) },
-      { label: 'Add Separator', action: () => addSeparator(groupName) },
-      { label: 'Duplicate', action: () => duplicateGroup(groupName) },
-      { label: 'Delete', action: () => deleteGroup(groupName) }
+      { label: 'Edit', icon: '✏️', action: () => openEditGroupPopup(groupName) },
+      { label: 'Add Separator', icon: '➕', action: () => addSeparator(groupName) },
+      { label: 'Duplicate', icon: '📋', action: () => duplicateGroup(groupName) },
+      { label: 'Delete', icon: '🗑️', className: 'danger-item', action: () => deleteGroup(groupName) }
     ]);
   });
 
@@ -1261,10 +1262,10 @@ function createRegularGroup(groupName, items) {
 
     div.addEventListener('contextmenu', (e) => {
       showContextMenu(e, [
-        { label: 'Edit', action: () => openEditGroupPopup(groupName) },
-        { label: 'Add Separator', action: () => addSeparator(groupName) },
-        { label: 'Duplicate', action: () => duplicateGroup(groupName) },
-        { label: 'Delete', action: () => deleteGroup(groupName) }
+        { label: 'Edit', icon: '✏️', action: () => openEditGroupPopup(groupName) },
+        { label: 'Add Separator', icon: '➕', action: () => addSeparator(groupName) },
+        { label: 'Duplicate', icon: '📋', action: () => duplicateGroup(groupName) },
+        { label: 'Delete', icon: '🗑️', className: 'danger-item', action: () => deleteGroup(groupName) }
       ]);
     });
 
@@ -1356,10 +1357,10 @@ function createRegularGroup(groupName, items) {
   div.addEventListener('contextmenu', (e) => {
     if (e.target === div || e.target === title) {
       showContextMenu(e, [
-        { label: 'Edit', action: () => openEditGroupPopup(groupName) },
-        { label: 'Add Separator', action: () => addSeparator(groupName) },
-        { label: 'Duplicate', action: () => duplicateGroup(groupName) },
-        { label: 'Delete', action: () => deleteGroup(groupName) }
+        { label: 'Edit', icon: '✏️', action: () => openEditGroupPopup(groupName) },
+        { label: 'Add Separator', icon: '➕', action: () => addSeparator(groupName) },
+        { label: 'Duplicate', icon: '📋', action: () => duplicateGroup(groupName) },
+        { label: 'Delete', icon: '🗑️', className: 'danger-item', action: () => deleteGroup(groupName) }
       ]);
     }
   });
@@ -1677,15 +1678,16 @@ function createLinkItem(link, index) {
         menuItems.push({
           label: `Open URL ${i + 1}`,
           title: u,
+          icon: '🔗',
           action: () => handleUrlOpening(u)
         });
       });
     }
 
     menuItems.push(
-      { label: 'Edit', action: () => openEditLinkPopup(link, index) },
-      { label: 'Copy', action: () => copyLink(link) },
-      { label: 'Delete', action: () => deleteLink(link._id) }
+      { label: 'Edit', icon: '✏️', action: () => openEditLinkPopup(link, index) },
+      { label: 'Copy', icon: '📋', action: () => copyLink(link) },
+      { label: 'Delete', icon: '🗑️', className: 'danger-item', action: () => deleteLink(link._id) }
     );
 
     showContextMenu(e, menuItems);

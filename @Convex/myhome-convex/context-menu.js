@@ -1,6 +1,6 @@
 let contextMenu = null;
 
-function showContextMenu(event, items) {
+function showContextMenu(event, items, options = {}) {
   event.preventDefault();
   event.stopPropagation();
   
@@ -9,37 +9,46 @@ function showContextMenu(event, items) {
   }
   
   contextMenu.innerHTML = '';
+  const layout = options.layout === 'list' ? 'list-layout' : 'strip-layout';
+  contextMenu.classList.remove('list-layout', 'strip-layout');
+  contextMenu.classList.add(layout);
   items.forEach(item => {
-    const div = document.createElement('div');
-    div.className = 'context-menu-item' + (item.className ? ' ' + item.className : '');
-    div.textContent = item.label;
-    if (item.title) div.title = item.title;
-    div.onclick = () => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'context-menu-item' + (item.className ? ' ' + item.className : '');
+    const label = item.label || item.title || '';
+    const icon = item.icon || '•';
+    button.title = item.title || label;
+    button.setAttribute('aria-label', label);
+    if (layout === 'strip-layout') {
+      button.innerHTML = `
+        <span class="context-menu-icon" aria-hidden="true">${icon}</span>
+        <span class="sr-only">${label}</span>
+      `;
+    } else {
+      button.textContent = label;
+    }
+    button.onclick = () => {
       item.action();
       hideContextMenu();
     };
-    contextMenu.appendChild(div);
+    contextMenu.appendChild(button);
   });
   
-  contextMenu.style.left = event.clientX + 'px';
-  contextMenu.style.top = event.clientY + 'px';
+  contextMenu.style.visibility = 'hidden';
   contextMenu.classList.remove('hidden');
-  
-  // Adjust position if menu goes off screen
-  const rect = contextMenu.getBoundingClientRect();
-  const viewportWidth = window.innerWidth;
-  const viewportHeight = window.innerHeight;
-  
-  if (rect.right > viewportWidth) {
-    contextMenu.style.left = (viewportWidth - rect.width - 10) + 'px';
-  }
-  if (rect.bottom > viewportHeight) {
-    contextMenu.style.top = (viewportHeight - rect.height - 10) + 'px';
-  }
+  contextMenu.classList.add('visible');
+
+  const x = Math.min(event.clientX, window.innerWidth - contextMenu.offsetWidth - 6);
+  const y = Math.min(event.clientY, window.innerHeight - contextMenu.offsetHeight - 6);
+  contextMenu.style.left = Math.max(6, x) + 'px';
+  contextMenu.style.top = Math.max(6, y) + 'px';
+  contextMenu.style.visibility = '';
 }
 
 function hideContextMenu() {
   if (contextMenu) {
+    contextMenu.classList.remove('visible');
     contextMenu.classList.add('hidden');
   }
 }
