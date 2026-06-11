@@ -5,7 +5,7 @@ SETUP (run once as normal user, no admin needed):
     python open-folder-handler.py --register
 
 USAGE after registration:
-    Clicking opendir:C:\some\folder in the browser opens that folder in Explorer.
+    Clicking opendir:C:/some/folder in the browser opens that folder in Explorer.
 
 UNINSTALL:
     python open-folder-handler.py --unregister
@@ -51,7 +51,7 @@ def unregister():
 
 
 def open_folder(uri):
-    """Handle opendir:C:\path\to\folder"""
+    """Handle opendir:C:/path/to/folder"""
     # Strip the protocol prefix
     path = uri
     if path.lower().startswith(f"{PROTOCOL}:"):
