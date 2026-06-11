@@ -3,6 +3,22 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-11] - openfile: URI Scheme for Local File Links
+
+**What We Accomplished:**
+- Extended `open-folder-handler.py` to also register `openfile:` URI scheme (alongside `opendir:`)
+- Refactored script: shared `_register_protocol`/`_unregister_protocol` helpers, shared `_decode_uri_path`
+- `open_file(uri)` handler: strips `openfile:` prefix, URL-decodes, converts `/` to `\`, calls `os.startfile(path)` → opens with default app
+- In `links-handler.js`: replaced the old `file:///` clipboard workaround (copy + open about:blank) with `openfile:C:\path` URI trigger
+- Conversion: `file:///C:/path/to/file` → `openfile:C:\path\to\file`
+- Re-registered both schemes automatically
+
+**Files Modified:**
+- `open-folder-handler.py` - added `openfile:` registration + `open_file()` handler, refactored helpers
+- `links-handler.js` - `handleUrlOpening` now uses `openfile:` for `file:///` URLs when running from web
+
+---
+
 ## [2026-06-11] - Folder Opener via opendir: URI Scheme
 
 **What We Accomplished:**

@@ -2,6 +2,18 @@
 
 ---
 
+## [2026-06-11] - Local file:/// Links Not Opening from Web Host
+
+**Problem:** Clicking `file:///` links (local files/PDFs) when the app is hosted on GitHub Pages/Convex copied the URL to clipboard and opened `about:blank` — user had to paste manually.
+
+**Root Cause:** Browsers block navigation to `file:///` URLs from web origins for security.
+
+**Solution:** Registered `openfile:` custom URI scheme via `open-folder-handler.py`. `file:///C:/path` links now trigger `openfile:C:\path` → Python script calls `os.startfile(path)` → file opens with its default app directly.
+
+**Files Modified:** `open-folder-handler.py`, `links-handler.js`
+
+---
+
 ## [2026-06-11] - Group Styling/Position Changes After Item Drag-Drop
 
 **Problem:** After dragging an item within a group (or between groups), the group's CSS styling (colors, borders), position on screen, and layout flags would change unexpectedly.
