@@ -19,7 +19,8 @@ import winreg
 PROTOCOL = "opendir"
 PROTOCOL_FILE = "openfile"
 SCRIPT_PATH = os.path.abspath(__file__)
-PYTHON_EXE = sys.executable
+# Use pythonw.exe (no console window) if available, else fall back to python.exe
+PYTHON_EXE = sys.executable.replace("python.exe", "pythonw.exe").replace("python3.exe", "pythonw.exe")
 
 
 def _register_protocol(protocol):
