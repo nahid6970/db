@@ -17,57 +17,68 @@ import subprocess
 import winreg
 
 PROTOCOL = "opendir"
+PROTOCOL_FILE = "openfile"
 SCRIPT_PATH = os.path.abspath(__file__)
 PYTHON_EXE = sys.executable
 
 
-def register():
-    """Register opendir: URI scheme under HKCU (no admin needed)."""
-    base = rf"Software\Classes\{PROTOCOL}"
+def _register_protocol(protocol):
+    base = rf"Software\Classes\{protocol}"
     with winreg.CreateKey(winreg.HKEY_CURRENT_USER, base) as key:
-        winreg.SetValueEx(key, "", 0, winreg.REG_SZ, f"URL:{PROTOCOL} Protocol")
+        winreg.SetValueEx(key, "", 0, winreg.REG_SZ, f"URL:{protocol} Protocol")
         winreg.SetValueEx(key, "URL Protocol", 0, winreg.REG_SZ, "")
     with winreg.CreateKey(winreg.HKEY_CURRENT_USER, rf"{base}\shell\open\command") as key:
         cmd = f'"{PYTHON_EXE}" "{SCRIPT_PATH}" "%1"'
         winreg.SetValueEx(key, "", 0, winreg.REG_SZ, cmd)
-    print(f"Registered: {PROTOCOL}: -> {cmd}")
+    print(f"Registered: {protocol}: -> {cmd}")
+
+
+def _unregister_protocol(protocol):
+    base = rf"Software\Classes\{protocol}"
+    for sub in [r"\shell\open\command", r"\shell\open", r"\shell", ""]:
+        try:
+            winreg.DeleteKey(winreg.HKEY_CURRENT_USER, base + sub)
+        except FileNotFoundError:
+            pass
+    print(f"Unregistered: {protocol}:")
+
+
+def register():
+    _register_protocol(PROTOCOL)
+    _register_protocol(PROTOCOL_FILE)
 
 
 def unregister():
-    """Remove the opendir: URI scheme registration."""
-    import shutil
-    try:
-        winreg.DeleteKey(winreg.HKEY_CURRENT_USER,
-                         rf"Software\Classes\{PROTOCOL}\shell\open\command")
-        winreg.DeleteKey(winreg.HKEY_CURRENT_USER,
-                         rf"Software\Classes\{PROTOCOL}\shell\open")
-        winreg.DeleteKey(winreg.HKEY_CURRENT_USER,
-                         rf"Software\Classes\{PROTOCOL}\shell")
-        winreg.DeleteKey(winreg.HKEY_CURRENT_USER,
-                         rf"Software\Classes\{PROTOCOL}")
-        print(f"Unregistered: {PROTOCOL}:")
-    except FileNotFoundError:
-        print("Not registered.")
+    _unregister_protocol(PROTOCOL)
+    _unregister_protocol(PROTOCOL_FILE)
+
+
+def _decode_uri_path(uri, protocol):
+    from urllib.parse import unquote
+    path = uri
+    if path.lower().startswith(f"{protocol}:"):
+        path = path[len(protocol) + 1:]
+    path = path.lstrip("/")
+    path = unquote(path)
+    # Convert forward slashes to backslashes
+    path = path.replace("/", "\\")
+    return path
 
 
 def open_folder(uri):
-    """Handle opendir:C:/path/to/folder"""
-    # Strip the protocol prefix
-    path = uri
-    if path.lower().startswith(f"{PROTOCOL}:"):
-        path = path[len(PROTOCOL) + 1:]
-    # Remove leading slashes (browsers may add opendir:///path)
-    path = path.lstrip("/")
-    # Decode %20 etc.
-    from urllib.parse import unquote
-    path = unquote(path)
+    path = _decode_uri_path(uri, PROTOCOL)
     if os.path.exists(path):
         subprocess.Popen(["explorer.exe", path])
     else:
-        # Try to open parent if path doesn't exist
         parent = os.path.dirname(path)
         if os.path.exists(parent):
             subprocess.Popen(["explorer.exe", parent])
+
+
+def open_file(uri):
+    path = _decode_uri_path(uri, PROTOCOL_FILE)
+    if os.path.exists(path):
+        os.startfile(path)
 
 
 if __name__ == "__main__":
@@ -79,5 +90,7 @@ if __name__ == "__main__":
         register()
     elif arg == "--unregister":
         unregister()
+    elif arg.lower().startswith(f"{PROTOCOL_FILE}:"):
+        open_file(arg)
     else:
         open_folder(arg)
