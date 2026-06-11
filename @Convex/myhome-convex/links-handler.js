@@ -1512,6 +1512,7 @@ function createLinkItem(link, index) {
       const input = document.createElement('input');
       input.type = 'file';
       input.webkitdirectory = true;
+      input.accept = (link.title || link.name || '');
       input.click();
     });
     li.appendChild(folderBadge);
