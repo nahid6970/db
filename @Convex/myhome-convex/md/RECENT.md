@@ -7,7 +7,7 @@ All sessions recorded here — no archiving, full history in one place.
 
 **What We Accomplished:**
 - Added `folder_picker` (bool) and `folder_path` (string) fields to schema and `updateLink` args
-- Folder chip (folder icon) in edit/add link forms — when enabled shows a `folder_path` text input
+- Folder chip (folder icon) in edit/add link forms — when enabled shows orange badge; blue dot on chip toggles the `folder_path` text input (hidden by default, same pattern as note chip)
 - Orange dot badge at middle-right of item when folder picker is enabled:
   - Click → triggers `opendir:<folder_path>` URI → Windows opens Explorer at that folder
   - Shows notification if no path is set

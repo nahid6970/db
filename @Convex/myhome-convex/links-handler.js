@@ -2026,7 +2026,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-note').value = link.note || '';
   document.getElementById('edit-link-folder-picker').checked = !!link.folder_picker;
   const folderPathInput = document.getElementById('edit-link-folder-path-input');
-  folderPathInput.style.display = link.folder_picker ? 'block' : 'none';
+  folderPathInput.style.display = 'none';
   document.getElementById('edit-link-folder-path').value = link.folder_path || '';
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
