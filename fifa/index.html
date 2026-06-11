@@ -94,6 +94,18 @@
     .team.right { flex-direction: row; }
     header h1 { font-size: 1.4rem; }
   }
+
+  /* Live badges */
+  .badge-live { color:#e74c3c; font-weight:700; animation:pulse 1.2s infinite; font-size:0.85rem; }
+  .badge-ht   { color:#f39c12; font-weight:700; font-size:0.85rem; }
+  .badge-ft   { color:#2ecc71; font-weight:700; font-size:0.85rem; }
+  .badge-pre  { color:#888;    font-size:0.78rem; }
+  .card-live  { border-color:#e74c3c !important; box-shadow:0 0 12px rgba(231,76,60,0.3); }
+  .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
+  .live-score.ht { color:#f39c12; }
+  .goal-list  { margin-top:8px; display:flex; flex-direction:column; gap:3px; }
+  .goal-item  { font-size:0.75rem; color:#aaa; }
+  .goal-item em { color:#888; font-style:normal; }
 </style>
 </head>
 <body>
@@ -115,141 +127,8 @@
 
 <!-- ===== RESULTS ===== -->
 <section id="results" class="active">
-
-  <div class="date-header">&#128994; June 11 &mdash; Matchday 1 (Today)</div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/mx.png" alt="Mexico">
-      <span class="team-name">Mexico</span>
-    </div>
-    <div class="score-box">
-      <div class="score">? &ndash; ?</div>
-      <div class="match-meta"><span class="status-live">&#9679; LIVE</span></div>
-      <div class="match-meta">Estadio Azteca &bull; Group A</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/za.png" alt="South Africa">
-      <span class="team-name">South Africa</span>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/kr.png" alt="South Korea">
-      <span class="team-name">South Korea</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">8:00 AM</div>
-      <div class="kick-day">Jun 12 &bull; BD Time</div>
-      <div class="match-meta">Estadio Guadalajara &bull; Group A</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/cz.png" alt="Czechia">
-      <span class="team-name">Czechia</span>
-    </div>
-  </div>
-
-  <div class="date-header">&#128197; June 12</div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/ca.png" alt="Canada">
-      <span class="team-name">Canada</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">1:00 AM</div>
-      <div class="kick-day">Jun 13 &bull; BD Time</div>
-      <div class="match-meta">Toronto Stadium &bull; Group B</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/ba.png" alt="Bosnia">
-      <span class="team-name">Bosnia &amp; Herz.</span>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/us.png" alt="USA">
-      <span class="team-name">USA</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">7:00 AM</div>
-      <div class="kick-day">Jun 13 &bull; BD Time</div>
-      <div class="match-meta">Los Angeles Stadium &bull; Group D</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/py.png" alt="Paraguay">
-      <span class="team-name">Paraguay</span>
-    </div>
-  </div>
-
-  <div class="date-header">&#128197; June 13</div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/qa.png" alt="Qatar">
-      <span class="team-name">Qatar</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">1:00 AM</div>
-      <div class="kick-day">Jun 14 &bull; BD Time</div>
-      <div class="match-meta">SF Bay Area Stadium &bull; Group B</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/ch.png" alt="Switzerland">
-      <span class="team-name">Switzerland</span>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/br.png" alt="Brazil">
-      <span class="team-name">Brazil</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">4:00 AM</div>
-      <div class="kick-day">Jun 14 &bull; BD Time</div>
-      <div class="match-meta">New York NJ Stadium &bull; Group C</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/ma.png" alt="Morocco">
-      <span class="team-name">Morocco</span>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/ht.png" alt="Haiti">
-      <span class="team-name">Haiti</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">7:00 AM</div>
-      <div class="kick-day">Jun 14 &bull; BD Time</div>
-      <div class="match-meta">Boston Stadium &bull; Group C</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/gb-sct.png" alt="Scotland">
-      <span class="team-name">Scotland</span>
-    </div>
-  </div>
-
-  <div class="match-card">
-    <div class="team">
-      <img class="flag" src="https://flagcdn.com/w40/au.png" alt="Australia">
-      <span class="team-name">Australia</span>
-    </div>
-    <div class="score-box">
-      <div class="kick-time">7:00 AM</div>
-      <div class="kick-day">Jun 14 &bull; BD Time</div>
-      <div class="match-meta">BC Place, Vancouver &bull; Group D</div>
-    </div>
-    <div class="team right">
-      <img class="flag" src="https://flagcdn.com/w40/tr.png" alt="Turkiye">
-      <span class="team-name">T&uuml;rkiye</span>
-    </div>
-  </div>
-
+  <div id="live-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
+  <div id="matches-container"><div style="text-align:center;padding:40px;color:#666">Loading matches...</div></div>
 </section>
 
 <!-- ===== SCHEDULE ===== -->
@@ -431,6 +310,110 @@
 </div>
 
 <script>
+/* ── Live match fetcher ── */
+const ESPN = 'https://site.api.espn.com/apis/site/v2/sports/soccer/fifa.world/scoreboard';
+
+function bdTime(utcStr) {
+  const d = new Date(utcStr);
+  d.setHours(d.getHours() + 6); // UTC → BD
+  let h = d.getUTCHours(), m = d.getUTCMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  const mm = m ? ':' + String(m).padStart(2,'0') : '';
+  const day = d.toUTCString().slice(5,11); // e.g. "13 Jun"
+  return `${h}${mm} ${ampm} · ${day} (BD)`;
+}
+
+function statusBadge(st, clock) {
+  const s = st.type.state;
+  const name = st.type.name;
+  if (s === 'in') {
+    const min = clock > 0 ? Math.floor(clock) + "'" : '';
+    if (name === 'STATUS_HALFTIME') return `<span class="badge-ht">HT</span>`;
+    return `<span class="badge-live">&#9679; LIVE ${min}</span>`;
+  }
+  if (s === 'post') return `<span class="badge-ft">FT</span>`;
+  return `<span class="badge-pre">${st.type.shortDetail||'Upcoming'}</span>`;
+}
+
+function scoreOrTime(comp) {
+  const st = comp.status;
+  const [home, away] = comp.competitors;
+  if (st.type.state === 'pre') {
+    return `<div class="kick-time">${bdTime(comp.date)}</div>`;
+  }
+  const ht = st.type.name === 'STATUS_HALFTIME';
+  return `<div class="live-score ${ht?'ht':''}">${home.score} &ndash; ${away.score}</div>`;
+}
+
+function goalEvents(details) {
+  if (!details || !details.length) return '';
+  const goals = details.filter(d => d.type && d.type.text === 'Goal');
+  if (!goals.length) return '';
+  return '<div class="goal-list">' + goals.map(g => {
+    const min = g.clock?.displayValue || '';
+    const team = g.team?.displayName || '';
+    const scorer = g.athletesInvolved?.[0]?.displayName || '';
+    return `<span class="goal-item">&#9917; ${scorer} ${min} <em>(${team})</em></span>`;
+  }).join('') + '</div>';
+}
+
+async function fetchMatches() {
+  try {
+    const r = await fetch(ESPN);
+    const data = await r.json();
+    const events = data.events || [];
+
+    // group by date (BD)
+    const byDate = {};
+    events.forEach(ev => {
+      const comp = ev.competitions[0];
+      const bd = new Date(new Date(comp.date).getTime() + 6*3600000);
+      const key = bd.toUTCString().slice(0,16); // "Wed, 11 Jun 2026"
+      if (!byDate[key]) byDate[key] = [];
+      byDate[key].push({ev, comp});
+    });
+
+    let html = '';
+    for (const [date, matches] of Object.entries(byDate)) {
+      const hasLive = matches.some(m => m.comp.status.type.state === 'in');
+      html += `<div class="date-header">${hasLive ? '&#128994; ' : '&#128197; '}${date}</div>`;
+      for (const {ev, comp} of matches) {
+        const [home, away] = comp.competitors;
+        const st = comp.status;
+        const isLive = st.type.state === 'in';
+        const isFt = st.type.state === 'post';
+        html += `
+        <div class="match-card${isLive?' card-live':''}">
+          <div class="team">
+            <img class="flag" src="${home.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${home.team.displayName}">
+            <span class="team-name">${home.team.displayName}</span>
+          </div>
+          <div class="score-box">
+            ${scoreOrTime(comp)}
+            <div class="match-meta">${statusBadge(st, st.clock)}</div>
+            <div class="match-meta">${comp.venue?.displayName || ''}</div>
+            ${goalEvents(comp.details)}
+          </div>
+          <div class="team right">
+            <img class="flag" src="${away.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${away.team.displayName}">
+            <span class="team-name">${away.team.displayName}</span>
+          </div>
+        </div>`;
+      }
+    }
+
+    document.getElementById('matches-container').innerHTML = html || '<p style="color:#666;padding:20px">No matches today.</p>';
+    const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
+    document.getElementById('live-status').textContent = `Updated: ${t} BD · auto-refreshes every 30s`;
+  } catch(e) {
+    document.getElementById('matches-container').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load. Check connection.</p>';
+  }
+}
+
+fetchMatches();
+setInterval(fetchMatches, 30000);
+
 function show(id, btn) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
