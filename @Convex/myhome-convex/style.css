@@ -220,6 +220,16 @@ body {
   height: 8px;
 }
 
+.link-badge-dot.note-badge {
+  bottom: -5px;
+  right: -5px;
+  background: #4caf50;
+  border-color: #000;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+}
+
 .link-badge-countdown {
   top: -10px;
   left: -8px;

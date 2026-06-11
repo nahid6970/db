@@ -241,6 +241,16 @@
                 </svg>
               </span>
             </label>
+            <label class="option-chip" title="Note">
+              <input type="checkbox" id="link-note-chip" aria-label="Note" onchange="document.getElementById('link-note-input').style.display=this.checked?'block':'none'">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14a1 1 0 011 1v14l-4 4H5a1 1 0 01-1-1V4a1 1 0 011-1zm1 2v14h9v-3h3V5zm10 12v1.6L17.6 17z" fill="currentColor"/></svg>
+                <span>Note</span>
+              </span>
+            </label>
+          </div>
+          <div id="link-note-input" style="display:none;">
+            <textarea id="link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>
           </div>
           <div id="urls-container">
             <div class="url-input-group">
@@ -388,6 +398,16 @@
                 </svg>
               </span>
             </label>
+            <label class="option-chip" title="Note">
+              <input type="checkbox" id="edit-link-note-chip" aria-label="Note" onchange="document.getElementById('edit-link-note-input').style.display=this.checked?'block':'none'">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14a1 1 0 011 1v14l-4 4H5a1 1 0 01-1-1V4a1 1 0 011-1zm1 2v14h9v-3h3V5zm10 12v1.6L17.6 17z" fill="currentColor"/></svg>
+                <span>Note</span>
+              </span>
+            </label>
+          </div>
+          <div id="edit-link-note-input" style="display:none;">
+            <textarea id="edit-link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>
           </div>
           <div id="edit-urls-container">
             <div class="url-input-group">
@@ -662,6 +682,21 @@
           </div>
           <button type="submit">Save</button>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Edit Modal -->
+  <div id="note-edit-popup" class="popup-container hidden">
+    <div class="Menu">
+      <div class="popup-header">
+        <h3>Edit Note</h3>
+        <span class="close-button">&times;</span>
+      </div>
+      <textarea id="note-edit-textarea" placeholder="Write a note..." style="width:100%;box-sizing:border-box;min-height:100px;resize:vertical;"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button type="button" id="note-edit-save">Save</button>
+        <button type="button" id="note-edit-clear" style="background:#555;border-color:#555;">Clear</button>
       </div>
     </div>
   </div>

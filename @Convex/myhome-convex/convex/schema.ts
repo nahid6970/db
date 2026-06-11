@@ -72,6 +72,7 @@ export default defineSchema({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    note: v.optional(v.string()),
   }),
 
   sidebar_buttons: defineTable({

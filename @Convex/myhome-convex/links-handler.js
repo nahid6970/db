@@ -1483,6 +1483,25 @@ function createLinkItem(link, index) {
     li.appendChild(enabledBadge);
   }
 
+  if (link.note) {
+    const noteBadge = document.createElement('span');
+    noteBadge.className = 'link-badge-dot note-badge';
+    noteBadge.title = link.note;
+    noteBadge.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      navigator.clipboard.writeText(link.note).then(() => {
+        window.showNotification('Note copied!', 'success');
+      });
+    });
+    noteBadge.addEventListener('contextmenu', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openNoteEditPopup(link);
+    });
+    li.appendChild(noteBadge);
+  }
+
   const a = document.createElement('a');
   const runtimeUrl = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.url) : link.url;
   
@@ -1984,6 +2003,11 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
   document.getElementById('edit-link-youtube-tracking').checked = !!link.youtube_channel_id;
   document.getElementById('edit-link-click-tracking').checked = !!link.click_tracking_enabled;
+  const noteChip = document.getElementById('edit-link-note-chip');
+  const noteInput = document.getElementById('edit-link-note-input');
+  noteChip.checked = !!link.note;
+  noteInput.style.display = link.note ? 'block' : 'none';
+  document.getElementById('edit-link-note').value = link.note || '';
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -2052,6 +2076,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     hidden: document.getElementById('edit-link-hidden').checked,
     start_new_line: document.getElementById('edit-link-start-new-line').checked,
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
+    note: document.getElementById('edit-link-note').value,
     ...compactObject(reminderDraft)
   };
 
@@ -2538,6 +2563,40 @@ function populateUrlFields(urls, isEdit = false) {
 
 // Edit mode listener
 document.addEventListener('editModeChanged', loadLinks);
+
+// Note edit modal
+function openNoteEditPopup(link) {
+  const popup = document.getElementById('note-edit-popup');
+  const textarea = document.getElementById('note-edit-textarea');
+  textarea.value = link.note || '';
+  popup.classList.remove('hidden');
+  setTimeout(() => textarea.focus(), 50);
+
+  const saveBtn = document.getElementById('note-edit-save');
+  const clearBtn = document.getElementById('note-edit-clear');
+
+  function cleanup() {
+    saveBtn.onclick = null;
+    clearBtn.onclick = null;
+  }
+
+  saveBtn.onclick = async () => {
+    const note = textarea.value.trim();
+    await window.convexMutation('functions:updateLink', { id: link._id, note });
+    await loadLinks();
+    popup.classList.add('hidden');
+    cleanup();
+    window.showNotification('Note saved!', 'success');
+  };
+
+  clearBtn.onclick = async () => {
+    await window.convexMutation('functions:updateLink', { id: link._id, note: '' });
+    await loadLinks();
+    popup.classList.add('hidden');
+    cleanup();
+    window.showNotification('Note cleared.', 'success');
+  };
+}
 
 window.loadLinks = loadLinks;
 window.openEditLinkPopup = openEditLinkPopup;
