@@ -1040,6 +1040,7 @@ details[open] summary {
   padding: 5px 4px;
   flex-direction: row;
   gap: 1px;
+  overflow: hidden;
 }
 
 .context-menu.list-layout {
@@ -1083,13 +1084,23 @@ details[open] summary {
   justify-content: center;
 }
 
+.context-menu.strip-layout .context-menu-item:first-child {
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+
+.context-menu.strip-layout .context-menu-item:last-child {
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
 .context-menu.strip-layout .context-menu-item:hover {
   background: #f1f5f9 !important;
 }
 
 .context-menu.strip-layout .context-menu-item.danger-item:hover {
-  background: #fef2f2 !important;
-  color: #b42318 !important;
+  background: #f44336 !important;
+  color: #ffffff !important;
 }
 
 .context-menu.list-layout .context-menu-item {
@@ -1126,7 +1137,8 @@ details[open] summary {
 }
 
 .context-menu-item.danger-item:hover {
-  background: #fef2f2;
+  background: #f44336;
+  color: #ffffff;
 }
 
 .context-menu-icon {
