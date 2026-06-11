@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA World Cup 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; }
+  header {
+    background: linear-gradient(135deg, #0a3d62, #1e3799);
+    padding: 24px 20px;
+    text-align: center;
+    border-bottom: 3px solid #f9ca24;
+  }
+  header h1 { font-size: 2rem; color: #f9ca24; letter-spacing: 2px; }
+  header p { color: #aad4f5; margin-top: 6px; font-size: 0.95rem; }
+  nav {
+    display: flex; gap: 10px; justify-content: center;
+    padding: 14px; background: #111; flex-wrap: wrap;
+  }
+  nav button {
+    padding: 8px 20px; border: none; border-radius: 20px;
+    cursor: pointer; font-size: 0.9rem; font-weight: 600;
+    background: #1e3799; color: #fff; transition: background 0.2s;
+  }
+  nav button.active, nav button:hover { background: #f9ca24; color: #111; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* Match Card */
+  .date-header {
+    margin: 20px 0 10px;
+    font-size: 1rem; font-weight: 700; color: #f9ca24;
+    border-left: 4px solid #f9ca24; padding-left: 10px;
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+  .match-card {
+    background: #12122a;
+    border-radius: 12px;
+    padding: 16px 20px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #1e3799;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .match-card:hover { border-color: #f9ca24; }
+  .team {
+    display: flex; align-items: center; gap: 10px;
+    min-width: 160px;
+  }
+  .team.right { flex-direction: row-reverse; text-align: right; }
+  .flag { font-size: 1.8rem; }
+  .team-name { font-weight: 700; font-size: 1rem; }
+  .score-box {
+    text-align: center; min-width: 120px;
+  }
+  .score {
+    font-size: 1.8rem; font-weight: 900; letter-spacing: 4px;
+    color: #f9ca24;
+  }
+  .score.tbd { color: #888; font-size: 1.1rem; font-weight: 600; }
+  .match-meta {
+    font-size: 0.75rem; color: #888; margin-top: 4px;
+  }
+  .status-live { color: #e74c3c; font-weight: 700; animation: pulse 1.2s infinite; }
+  .status-ft { color: #2ecc71; font-weight: 700; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  /* Groups */
+  .groups-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .group-card {
+    background: #12122a;
+    border-radius: 12px;
+    border: 1px solid #1e3799;
+    overflow: hidden;
+  }
+  .group-title {
+    background: #1e3799;
+    padding: 10px 16px;
+    font-weight: 800;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: #f9ca24;
+  }
+  .group-table { width: 100%; border-collapse: collapse; }
+  .group-table th {
+    background: #0d0d20; color: #888;
+    font-size: 0.7rem; padding: 6px 8px; text-align: center;
+  }
+  .group-table th:first-child { text-align: left; padding-left: 14px; }
+  .group-table td {
+    padding: 8px 8px; font-size: 0.85rem; text-align: center;
+    border-top: 1px solid #1a1a3a;
+  }
+  .group-table td:first-child { text-align: left; padding-left: 14px; }
+  .group-table tr:nth-child(1) td, .group-table tr:nth-child(2) td { color: #2ecc71; }
+  .team-flag-name { display: flex; align-items: center; gap: 8px; }
+
+  /* Knockout */
+  .round-label {
+    font-size: 1.1rem; font-weight: 800; color: #f9ca24;
+    margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px;
+    border-bottom: 2px solid #1e3799; padding-bottom: 6px;
+  }
+  .knockout-note {
+    background: #12122a; border-radius: 10px;
+    padding: 16px; border: 1px solid #1e3799;
+    color: #aaa; font-size: 0.9rem; line-height: 1.7;
+  }
+  .knockout-note span { color: #f9ca24; font-weight: 700; }
+
+  /* Teams */
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px; margin-top: 20px;
+  }
+  .team-card {
+    background: #12122a; border-radius: 10px;
+    padding: 14px; text-align: center;
+    border: 1px solid #1e3799;
+    transition: border-color 0.2s;
+  }
+  .team-card:hover { border-color: #f9ca24; }
+  .team-card .big-flag { font-size: 2.5rem; margin-bottom: 6px; }
+  .team-card .tname { font-weight: 700; font-size: 0.95rem; }
+  .team-card .tgroup { font-size: 0.75rem; color: #888; margin-top: 4px; }
+
+  @media(max-width:600px) {
+    .match-card { flex-direction: column; text-align: center; }
+    .team.right { flex-direction: row; }
+    header h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚽ FIFA WORLD CUP 2026</h1>
+  <p>Canada · Mexico · United States &nbsp;|&nbsp; June 11 – July 19, 2026</p>
+</header>
+
+<nav>
+  <button class="active" onclick="show('results')">🏆 Results</button>
+  <button onclick="show('schedule')">📅 Schedule</button>
+  <button onclick="show('groups')">📊 Groups</button>
+  <button onclick="show('knockout')">🥊 Knockout</button>
+  <button onclick="show('teams')">🌍 Teams</button>
+</nav>
+
+<div class="container">
+
+<!-- ========== RESULTS ========== -->
+<section id="results" class="active">
+  <div class="date-header">🟢 June 11, 2026 — Matchday 1</div>
+
+  <div class="match-card">
+    <div class="team">
+      <span class="flag">🇲🇽</span>
+      <span class="team-name">Mexico</span>
+    </div>
+    <div class="score-box">
+      <div class="score">? – ?</div>
+      <div class="match-meta"><span class="status-live">● LIVE</span></div>
+      <div class="match-meta">Estadio Azteca, Mexico City</div>
+      <div class="match-meta">Group A</div>
+    </div>
+    <div class="team right">
+      <span class="flag">🇿🇦</span>
+      <span class="team-name">South Africa</span>
+    </div>
+  </div>
+
+  <div class="match-card">
+    <div class="team">
+      <span class="flag">🇰🇷</span>
+      <span class="team-name">South Korea</span>
+    </div>
+    <div class="score-box">
+      <div class="score tbd">20:00 CST</div>
+      <div class="match-meta">Estadio Guadalajara</div>
+      <div class="match-meta">Group A</div>
+    </div>
+    <div class="team right">
+      <span class="flag">🇨🇿</span>
+      <span class="team-name">Czechia</span>
+    </div>
+  </div>
+
+  <div class="date-header">📅 June 12, 2026 — Matchday 1</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇨🇦</span><span class="team-name">Canada</span></div>
+    <div class="score-box">
+      <div class="score tbd">15:00 ET</div>
+      <div class="match-meta">Toronto Stadium</div>
+      <div class="match-meta">Group B</div>
+    </div>
+    <div class="team right"><span class="flag">🇧🇦</span><span class="team-name">Bosnia &amp; Herz.</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇺🇸</span><span class="team-name">USA</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 PT</div>
+      <div class="match-meta">Los Angeles Stadium</div>
+      <div class="match-meta">Group D</div>
+    </div>
+    <div class="team right"><span class="flag">🇵🇾</span><span class="team-name">Paraguay</span></div>
+  </div>
+
+  <div class="date-header">📅 June 13 — Matchday 1</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇶🇦</span><span class="team-name">Qatar</span></div>
+    <div class="score-box">
+      <div class="score tbd">12:00 PT</div>
+      <div class="match-meta">San Francisco Bay Area Stadium</div>
+      <div class="match-meta">Group B</div>
+    </div>
+    <div class="team right"><span class="flag">🇨🇭</span><span class="team-name">Switzerland</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇧🇷</span><span class="team-name">Brazil</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 ET</div>
+      <div class="match-meta">New York New Jersey Stadium</div>
+      <div class="match-meta">Group C</div>
+    </div>
+    <div class="team right"><span class="flag">🇲🇦</span><span class="team-name">Morocco</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇭🇹</span><span class="team-name">Haiti</span></div>
+    <div class="score-box">
+      <div class="score tbd">21:00 ET</div>
+      <div class="match-meta">Boston Stadium</div>
+      <div class="match-meta">Group C</div>
+    </div>
+    <div class="team right"><span class="flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="team-name">Scotland</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇦🇺</span><span class="team-name">Australia</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 PT</div>
+      <div class="match-meta">BC Place, Vancouver</div>
+      <div class="match-meta">Group D</div>
+    </div>
+    <div class="team right"><span class="flag">🇹🇷</span><span class="team-name">Türkiye</span></div>
+  </div>
+</section>
+
+<!-- ========== SCHEDULE ========== -->
+<section id="schedule">
+  <div class="date-header">June 14 — Group E &amp; F</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇩🇪</span><span class="team-name">Germany</span></div>
+    <div class="score-box">
+      <div class="score tbd">12:00 CDT</div>
+      <div class="match-meta">Houston Stadium</div>
+      <div class="match-meta">Group E</div>
+    </div>
+    <div class="team right"><span class="flag">🇨🇼</span><span class="team-name">Curaçao</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇳🇱</span><span class="team-name">Netherlands</span></div>
+    <div class="score-box">
+      <div class="score tbd">15:00 CDT</div>
+      <div class="match-meta">Dallas Stadium</div>
+      <div class="match-meta">Group F</div>
+    </div>
+    <div class="team right"><span class="flag">🇯🇵</span><span class="team-name">Japan</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇨🇮</span><span class="team-name">Ivory Coast</span></div>
+    <div class="score-box">
+      <div class="score tbd">19:00 ET</div>
+      <div class="match-meta">Philadelphia Stadium</div>
+      <div class="match-meta">Group E</div>
+    </div>
+    <div class="team right"><span class="flag">🇪🇨</span><span class="team-name">Ecuador</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇸🇪</span><span class="team-name">Sweden</span></div>
+    <div class="score-box">
+      <div class="score tbd">20:00 CST</div>
+      <div class="match-meta">Estadio Monterrey</div>
+      <div class="match-meta">Group F</div>
+    </div>
+    <div class="team right"><span class="flag">🇹🇳</span><span class="team-name">Tunisia</span></div>
+  </div>
+
+  <div class="date-header">June 15 — Group G &amp; H</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇪🇸</span><span class="team-name">Spain</span></div>
+    <div class="score-box">
+      <div class="score tbd">12:00 ET</div>
+      <div class="match-meta">Atlanta Stadium</div>
+      <div class="match-meta">Group H</div>
+    </div>
+    <div class="team right"><span class="flag">🇨🇻</span><span class="team-name">Cape Verde</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇧🇪</span><span class="team-name">Belgium</span></div>
+    <div class="score-box">
+      <div class="score tbd">12:00 PT</div>
+      <div class="match-meta">BC Place, Vancouver</div>
+      <div class="match-meta">Group G</div>
+    </div>
+    <div class="team right"><span class="flag">🇪🇬</span><span class="team-name">Egypt</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇸🇦</span><span class="team-name">Saudi Arabia</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 ET</div>
+      <div class="match-meta">Miami Stadium</div>
+      <div class="match-meta">Group H</div>
+    </div>
+    <div class="team right"><span class="flag">🇺🇾</span><span class="team-name">Uruguay</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇮🇷</span><span class="team-name">Iran</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 PT</div>
+      <div class="match-meta">Los Angeles Stadium</div>
+      <div class="match-meta">Group G</div>
+    </div>
+    <div class="team right"><span class="flag">🇳🇿</span><span class="team-name">New Zealand</span></div>
+  </div>
+
+  <div class="date-header">June 16 — Group I &amp; J</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇫🇷</span><span class="team-name">France</span></div>
+    <div class="score-box">
+      <div class="score tbd">15:00 ET</div>
+      <div class="match-meta">New York NJ Stadium</div>
+      <div class="match-meta">Group I</div>
+    </div>
+    <div class="team right"><span class="flag">🇸🇳</span><span class="team-name">Senegal</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇮🇶</span><span class="team-name">Iraq</span></div>
+    <div class="score-box">
+      <div class="score tbd">18:00 ET</div>
+      <div class="match-meta">Boston Stadium</div>
+      <div class="match-meta">Group I</div>
+    </div>
+    <div class="team right"><span class="flag">🇳🇴</span><span class="team-name">Norway</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇦🇷</span><span class="team-name">Argentina</span></div>
+    <div class="score-box">
+      <div class="score tbd">20:00 CDT</div>
+      <div class="match-meta">Kansas City Stadium</div>
+      <div class="match-meta">Group J</div>
+    </div>
+    <div class="team right"><span class="flag">🇩🇿</span><span class="team-name">Algeria</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇦🇹</span><span class="team-name">Austria</span></div>
+    <div class="score-box">
+      <div class="score tbd">21:00 PT</div>
+      <div class="match-meta">San Francisco Bay Area Stadium</div>
+      <div class="match-meta">Group J</div>
+    </div>
+    <div class="team right"><span class="flag">🇯🇴</span><span class="team-name">Jordan</span></div>
+  </div>
+
+  <div class="date-header">June 17 — Group K &amp; L</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇵🇹</span><span class="team-name">Portugal</span></div>
+    <div class="score-box">
+      <div class="score tbd">12:00 CDT</div>
+      <div class="match-meta">Houston Stadium</div>
+      <div class="match-meta">Group K</div>
+    </div>
+    <div class="team right"><span class="flag">🇨🇩</span><span class="team-name">DR Congo</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="team-name">England</span></div>
+    <div class="score-box">
+      <div class="score tbd">15:00 CDT</div>
+      <div class="match-meta">Dallas Stadium</div>
+      <div class="match-meta">Group L</div>
+    </div>
+    <div class="team right"><span class="flag">🇭🇷</span><span class="team-name">Croatia</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇬🇭</span><span class="team-name">Ghana</span></div>
+    <div class="score-box">
+      <div class="score tbd">19:00 ET</div>
+      <div class="match-meta">Toronto Stadium</div>
+      <div class="match-meta">Group L</div>
+    </div>
+    <div class="team right"><span class="flag">🇵🇦</span><span class="team-name">Panama</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🇺🇿</span><span class="team-name">Uzbekistan</span></div>
+    <div class="score-box">
+      <div class="score tbd">20:00 CST</div>
+      <div class="match-meta">Mexico City Stadium</div>
+      <div class="match-meta">Group K</div>
+    </div>
+    <div class="team right"><span class="flag">🇨🇴</span><span class="team-name">Colombia</span></div>
+  </div>
+
+  <div class="date-header">Matchday 2 — June 18–23</div>
+  <div class="knockout-note">
+    Matchday 2 begins <span>June 18</span>. All 48 teams play their second group match.<br><br>
+    <span>Jun 18:</span> Groups A &amp; B &nbsp;|&nbsp; <span>Jun 19:</span> Groups C &amp; D<br>
+    <span>Jun 20:</span> Groups E &amp; F &nbsp;|&nbsp; <span>Jun 21:</span> Groups G &amp; H<br>
+    <span>Jun 22:</span> Groups I &amp; J &nbsp;|&nbsp; <span>Jun 23:</span> Groups K &amp; L
+  </div>
+
+  <div class="date-header">Matchday 3 — June 24–27 (Final Group Stage)</div>
+  <div class="knockout-note">
+    Final group stage matches — all played simultaneously per group.<br><br>
+    <span>Jun 24:</span> Groups A, B &amp; C &nbsp;|&nbsp; <span>Jun 25:</span> Groups D, E &amp; F<br>
+    <span>Jun 26:</span> Groups G, H &amp; I &nbsp;|&nbsp; <span>Jun 27:</span> Groups J, K &amp; L
+  </div>
+</section>
+
+<!-- ========== GROUPS ========== -->
+<section id="groups">
+  <div class="groups-grid">
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group A</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇲🇽 Mexico (H)</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇿🇦 South Africa</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇰🇷 South Korea</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇿 Czechia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group B</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇨🇦 Canada (H)</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇧🇦 Bosnia &amp; Herz.</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇶🇦 Qatar</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇭 Switzerland</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group C</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇧🇷 Brazil</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇲🇦 Morocco</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇭🇹 Haiti</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group D</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇺🇸 USA (H)</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇵🇾 Paraguay</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇦🇺 Australia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇹🇷 Türkiye</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group E</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇩🇪 Germany</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇼 Curaçao</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇮 Ivory Coast</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇪🇨 Ecuador</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group F</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇳🇱 Netherlands</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇯🇵 Japan</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇸🇪 Sweden</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇹🇳 Tunisia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group G</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇧🇪 Belgium</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇪🇬 Egypt</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇮🇷 Iran</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇳🇿 New Zealand</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group H</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇪🇸 Spain</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇻 Cape Verde</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇸🇦 Saudi Arabia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇺🇾 Uruguay</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group I</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇫🇷 France</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇸🇳 Senegal</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇮🇶 Iraq</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇳🇴 Norway</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group J</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇦🇷 Argentina</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇩🇿 Algeria</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇦🇹 Austria</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇯🇴 Jordan</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group K</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🇵🇹 Portugal</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇩 DR Congo</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇺🇿 Uzbekistan</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇨🇴 Colombia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+    <div class="group-card">
+      <div class="group-title">⚽ Group L</div>
+      <table class="group-table">
+        <tr><th>Team</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>
+        <tr><td><div class="team-flag-name">🏴󠁧󠁢󠁥󠁮󠁧󠁿 England</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇭🇷 Croatia</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇬🇭 Ghana</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+        <tr><td><div class="team-flag-name">🇵🇦 Panama</div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+      </table>
+    </div>
+
+  </div>
+  <p style="color:#666;font-size:0.8rem;margin-top:14px;text-align:center">★ Top 2 + best 8 third-placed teams advance to Round of 32. Tournament just started — standings will update.</p>
+</section>
+
+<!-- ========== KNOCKOUT ========== -->
+<section id="knockout">
+  <div class="round-label">📅 Knockout Stage Dates</div>
+  <div class="knockout-note">
+    <span>Round of 32:</span> June 28 – July 3, 2026<br>
+    <span>Round of 16:</span> July 4 – 7, 2026<br>
+    <span>Quarterfinals:</span> July 9 – 11, 2026<br>
+    <span>Semifinals:</span> July 14 – 15, 2026<br>
+    <span>Bronze Medal Match:</span> July 18, 2026 — Miami Stadium<br>
+    <span>🏆 Final:</span> July 19, 2026 — New York New Jersey Stadium (MetLife)
+  </div>
+
+  <div class="round-label">Round of 32 — First matches</div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🏆</span><span class="team-name">Runner-up Group A</span></div>
+    <div class="score-box">
+      <div class="score tbd">Jun 28</div>
+      <div class="match-meta">Los Angeles Stadium</div>
+    </div>
+    <div class="team right"><span class="flag">🏆</span><span class="team-name">Runner-up Group B</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🏆</span><span class="team-name">Winner Group C</span></div>
+    <div class="score-box">
+      <div class="score tbd">Jun 29</div>
+      <div class="match-meta">Houston Stadium</div>
+    </div>
+    <div class="team right"><span class="flag">🏆</span><span class="team-name">Runner-up Group F</span></div>
+  </div>
+
+  <div class="match-card">
+    <div class="team"><span class="flag">🏆</span><span class="team-name">Winner Group E</span></div>
+    <div class="score-box">
+      <div class="score tbd">Jun 29</div>
+      <div class="match-meta">Boston Stadium</div>
+    </div>
+    <div class="team right"><span class="flag">🏆</span><span class="team-name">3rd Grp A/B/C/D/F</span></div>
+  </div>
+
+  <div class="knockout-note" style="margin-top:16px">
+    The full Round of 32 bracket has 16 matches. Teams are determined based on group stage final standings.<br>
+    All 32 Round of 32 matchups will be filled once the group stage concludes on <span>June 27</span>.
+  </div>
+
+  <div class="round-label">🏆 Final</div>
+  <div class="match-card">
+    <div class="team"><span class="flag">🏆</span><span class="team-name">TBD</span></div>
+    <div class="score-box">
+      <div class="score tbd">Jul 19 · 15:00 ET</div>
+      <div class="match-meta">New York New Jersey Stadium</div>
+      <div class="match-meta">MetLife Stadium, East Rutherford, NJ</div>
+    </div>
+    <div class="team right"><span class="flag">🏆</span><span class="team-name">TBD</span></div>
+  </div>
+</section>
+
+<!-- ========== TEAMS ========== -->
+<section id="teams">
+  <div style="margin-bottom:10px;color:#888;font-size:0.85rem">48 teams • 12 groups • 3 hosts</div>
+  <div class="teams-grid">
+    <div class="team-card"><div class="big-flag">🇲🇽</div><div class="tname">Mexico</div><div class="tgroup">Group A · Host</div></div>
+    <div class="team-card"><div class="big-flag">🇿🇦</div><div class="tname">South Africa</div><div class="tgroup">Group A</div></div>
+    <div class="team-card"><div class="big-flag">🇰🇷</div><div class="tname">South Korea</div><div class="tgroup">Group A</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇿</div><div class="tname">Czechia</div><div class="tgroup">Group A</div></div>
+
+    <div class="team-card"><div class="big-flag">🇨🇦</div><div class="tname">Canada</div><div class="tgroup">Group B · Host</div></div>
+    <div class="team-card"><div class="big-flag">🇧🇦</div><div class="tname">Bosnia &amp; Herz.</div><div class="tgroup">Group B</div></div>
+    <div class="team-card"><div class="big-flag">🇶🇦</div><div class="tname">Qatar</div><div class="tgroup">Group B</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇭</div><div class="tname">Switzerland</div><div class="tgroup">Group B</div></div>
+
+    <div class="team-card"><div class="big-flag">🇧🇷</div><div class="tname">Brazil</div><div class="tgroup">Group C</div></div>
+    <div class="team-card"><div class="big-flag">🇲🇦</div><div class="tname">Morocco</div><div class="tgroup">Group C</div></div>
+    <div class="team-card"><div class="big-flag">🇭🇹</div><div class="tname">Haiti</div><div class="tgroup">Group C</div></div>
+    <div class="team-card"><div class="big-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</div><div class="tname">Scotland</div><div class="tgroup">Group C</div></div>
+
+    <div class="team-card"><div class="big-flag">🇺🇸</div><div class="tname">USA</div><div class="tgroup">Group D · Host</div></div>
+    <div class="team-card"><div class="big-flag">🇵🇾</div><div class="tname">Paraguay</div><div class="tgroup">Group D</div></div>
+    <div class="team-card"><div class="big-flag">🇦🇺</div><div class="tname">Australia</div><div class="tgroup">Group D</div></div>
+    <div class="team-card"><div class="big-flag">🇹🇷</div><div class="tname">Türkiye</div><div class="tgroup">Group D</div></div>
+
+    <div class="team-card"><div class="big-flag">🇩🇪</div><div class="tname">Germany</div><div class="tgroup">Group E</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇼</div><div class="tname">Curaçao</div><div class="tgroup">Group E · Debut</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇮</div><div class="tname">Ivory Coast</div><div class="tgroup">Group E</div></div>
+    <div class="team-card"><div class="big-flag">🇪🇨</div><div class="tname">Ecuador</div><div class="tgroup">Group E</div></div>
+
+    <div class="team-card"><div class="big-flag">🇳🇱</div><div class="tname">Netherlands</div><div class="tgroup">Group F</div></div>
+    <div class="team-card"><div class="big-flag">🇯🇵</div><div class="tname">Japan</div><div class="tgroup">Group F</div></div>
+    <div class="team-card"><div class="big-flag">🇸🇪</div><div class="tname">Sweden</div><div class="tgroup">Group F</div></div>
+    <div class="team-card"><div class="big-flag">🇹🇳</div><div class="tname">Tunisia</div><div class="tgroup">Group F</div></div>
+
+    <div class="team-card"><div class="big-flag">🇧🇪</div><div class="tname">Belgium</div><div class="tgroup">Group G</div></div>
+    <div class="team-card"><div class="big-flag">🇪🇬</div><div class="tname">Egypt</div><div class="tgroup">Group G</div></div>
+    <div class="team-card"><div class="big-flag">🇮🇷</div><div class="tname">Iran</div><div class="tgroup">Group G</div></div>
+    <div class="team-card"><div class="big-flag">🇳🇿</div><div class="tname">New Zealand</div><div class="tgroup">Group G</div></div>
+
+    <div class="team-card"><div class="big-flag">🇪🇸</div><div class="tname">Spain</div><div class="tgroup">Group H</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇻</div><div class="tname">Cape Verde</div><div class="tgroup">Group H · Debut</div></div>
+    <div class="team-card"><div class="big-flag">🇸🇦</div><div class="tname">Saudi Arabia</div><div class="tgroup">Group H</div></div>
+    <div class="team-card"><div class="big-flag">🇺🇾</div><div class="tname">Uruguay</div><div class="tgroup">Group H</div></div>
+
+    <div class="team-card"><div class="big-flag">🇫🇷</div><div class="tname">France</div><div class="tgroup">Group I</div></div>
+    <div class="team-card"><div class="big-flag">🇸🇳</div><div class="tname">Senegal</div><div class="tgroup">Group I</div></div>
+    <div class="team-card"><div class="big-flag">🇮🇶</div><div class="tname">Iraq</div><div class="tgroup">Group I</div></div>
+    <div class="team-card"><div class="big-flag">🇳🇴</div><div class="tname">Norway</div><div class="tgroup">Group I</div></div>
+
+    <div class="team-card"><div class="big-flag">🇦🇷</div><div class="tname">Argentina</div><div class="tgroup">Group J · Champions</div></div>
+    <div class="team-card"><div class="big-flag">🇩🇿</div><div class="tname">Algeria</div><div class="tgroup">Group J</div></div>
+    <div class="team-card"><div class="big-flag">🇦🇹</div><div class="tname">Austria</div><div class="tgroup">Group J</div></div>
+    <div class="team-card"><div class="big-flag">🇯🇴</div><div class="tname">Jordan</div><div class="tgroup">Group J · Debut</div></div>
+
+    <div class="team-card"><div class="big-flag">🇵🇹</div><div class="tname">Portugal</div><div class="tgroup">Group K</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇩</div><div class="tname">DR Congo</div><div class="tgroup">Group K</div></div>
+    <div class="team-card"><div class="big-flag">🇺🇿</div><div class="tname">Uzbekistan</div><div class="tgroup">Group K · Debut</div></div>
+    <div class="team-card"><div class="big-flag">🇨🇴</div><div class="tname">Colombia</div><div class="tgroup">Group K</div></div>
+
+    <div class="team-card"><div class="big-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</div><div class="tname">England</div><div class="tgroup">Group L</div></div>
+    <div class="team-card"><div class="big-flag">🇭🇷</div><div class="tname">Croatia</div><div class="tgroup">Group L</div></div>
+    <div class="team-card"><div class="big-flag">🇬🇭</div><div class="tname">Ghana</div><div class="tgroup">Group L</div></div>
+    <div class="team-card"><div class="big-flag">🇵🇦</div><div class="tname">Panama</div><div class="tgroup">Group L</div></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+function show(id) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
