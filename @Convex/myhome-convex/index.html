@@ -249,11 +249,14 @@
               <span class="note-edit-toggle-btn" title="Edit note" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-note-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
             <label class="option-chip" title="Folder Picker">
-              <input type="checkbox" id="link-folder-picker" aria-label="Folder Picker">
+              <input type="checkbox" id="link-folder-picker" aria-label="Folder Picker" onchange="document.getElementById('link-folder-path-input').style.display=this.checked?'block':'none'">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" fill="currentColor"/></svg>
               </span>
             </label>
+          </div>
+          <div id="link-folder-path-input" style="display:none;">
+            <input type="text" id="link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">
           </div>
           <div id="link-note-input" style="display:none;">
             <textarea id="link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>
@@ -412,11 +415,14 @@
               <span class="note-edit-toggle-btn" title="Edit note" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-note-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
             <label class="option-chip" title="Folder Picker">
-              <input type="checkbox" id="edit-link-folder-picker" aria-label="Folder Picker">
+              <input type="checkbox" id="edit-link-folder-picker" aria-label="Folder Picker" onchange="document.getElementById('edit-link-folder-path-input').style.display=this.checked?'block':'none'">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V8a2 2 0 00-2-2h-8l-2-2z" fill="currentColor"/></svg>
               </span>
             </label>
+          </div>
+          <div id="edit-link-folder-path-input" style="display:none;">
+            <input type="text" id="edit-link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">
           </div>
           <div id="edit-link-note-input" style="display:none;">
             <textarea id="edit-link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>

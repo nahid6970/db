@@ -1505,15 +1505,15 @@ function createLinkItem(link, index) {
   if (link.folder_picker) {
     const folderBadge = document.createElement('span');
     folderBadge.className = 'link-badge-dot folder-picker-badge';
-    folderBadge.title = `Open folder picker${link.title || link.name ? ' — ' + (link.title || link.name) : ''}`;
+    folderBadge.title = `Open folder${link.title || link.name ? ': ' + (link.title || link.name) : ''}`;
     folderBadge.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      const input = document.createElement('input');
-      input.type = 'file';
-      input.webkitdirectory = true;
-      input.accept = (link.title || link.name || '');
-      input.click();
+      if (link.folder_path) {
+        window.location.href = 'opendir:' + link.folder_path;
+      } else {
+        window.showNotification('No folder path set. Edit the link to add one.', 'info');
+      }
     });
     li.appendChild(folderBadge);
   }
@@ -2025,6 +2025,9 @@ function openEditLinkPopup(link, index) {
   noteInput.style.display = 'none';
   document.getElementById('edit-link-note').value = link.note || '';
   document.getElementById('edit-link-folder-picker').checked = !!link.folder_picker;
+  const folderPathInput = document.getElementById('edit-link-folder-path-input');
+  folderPathInput.style.display = link.folder_picker ? 'block' : 'none';
+  document.getElementById('edit-link-folder-path').value = link.folder_path || '';
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -2096,6 +2099,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     note: document.getElementById('edit-link-note').value,
     note_enabled: document.getElementById('edit-link-note-chip').checked,
     folder_picker: document.getElementById('edit-link-folder-picker').checked,
+    folder_path: document.getElementById('edit-link-folder-path').value,
     ...compactObject(reminderDraft)
   };
 

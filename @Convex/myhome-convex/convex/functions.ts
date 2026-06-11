@@ -167,6 +167,7 @@ export const updateLink = mutation({
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
+    folder_path: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const { id, ...data } = args;

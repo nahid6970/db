@@ -75,6 +75,7 @@ export default defineSchema({
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
+    folder_path: v.optional(v.string()),
   }),
 
   sidebar_buttons: defineTable({
