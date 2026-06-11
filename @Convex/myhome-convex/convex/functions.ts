@@ -87,6 +87,10 @@ export const addLink = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    note: v.optional(v.string()),
+    note_enabled: v.optional(v.boolean()),
+    folder_picker: v.optional(v.boolean()),
+    folder_path: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("links", args);

@@ -1947,7 +1947,11 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     title: document.getElementById('link-title').value,
     hidden: document.getElementById('link-hidden').checked,
     start_new_line: document.getElementById('link-start-new-line').checked,
-    reminder_enabled: false
+    reminder_enabled: false,
+    note: document.getElementById('link-note').value,
+    note_enabled: document.getElementById('link-note-chip').checked,
+    folder_picker: document.getElementById('link-folder-picker').checked,
+    folder_path: document.getElementById('link-folder-path').value
   };
 
   try {
