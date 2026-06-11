@@ -165,6 +165,7 @@ export const updateLink = mutation({
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
     note: v.optional(v.string()),
+    note_enabled: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const { id, ...data } = args;

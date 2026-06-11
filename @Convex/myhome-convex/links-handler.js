@@ -1483,7 +1483,7 @@ function createLinkItem(link, index) {
     li.appendChild(enabledBadge);
   }
 
-  if (link.note) {
+  if (link.note_enabled && link.note) {
     const noteBadge = document.createElement('span');
     noteBadge.className = 'link-badge-dot note-badge';
     noteBadge.title = link.note;
@@ -2005,7 +2005,7 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-click-tracking').checked = !!link.click_tracking_enabled;
   const noteChip = document.getElementById('edit-link-note-chip');
   const noteInput = document.getElementById('edit-link-note-input');
-  noteChip.checked = !!link.note;
+  noteChip.checked = !!link.note_enabled;
   noteInput.style.display = 'none';
   document.getElementById('edit-link-note').value = link.note || '';
 
@@ -2077,6 +2077,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     start_new_line: document.getElementById('edit-link-start-new-line').checked,
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
     note: document.getElementById('edit-link-note').value,
+    note_enabled: document.getElementById('edit-link-note-chip').checked,
     ...compactObject(reminderDraft)
   };
 
