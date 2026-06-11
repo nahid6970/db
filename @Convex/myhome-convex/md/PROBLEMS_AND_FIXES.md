@@ -2,6 +2,18 @@
 
 ---
 
+## [2026-06-11] - Group Styling/Position Changes After Item Drag-Drop
+
+**Problem:** After dragging an item within a group (or between groups), the group's CSS styling (colors, borders), position on screen, and layout flags would change unexpectedly.
+
+**Root Cause:** Group properties are denormalized — stored on every item but read only from `items[0]` (the first item of the group in the sorted flat array). `updateAllLinks` deletes all records and re-inserts in flat array order, which reassigns `_creationTime`. The frontend sorts by `_creationTime`, so which item is `items[0]` changes after any reorder. If the new `items[0]` has different/missing group property values (e.g., added before the group was styled, or moved in from another group), the entire group's visual identity changes.
+
+**Solution:** Added normalization in `reorderLinks()` — after splicing, finds the "canonical" item per group (whichever has the most group props set) and copies all group-level fields to all items in that group before saving.
+
+**Files Modified:** `links-handler.js`
+
+---
+
 ## [2026-05-15] - Links Ignoring "Open in Same Tab" Setting
 
 **Problem:** Setting `a.target = '_self'` had no effect — links still opened in a new tab.

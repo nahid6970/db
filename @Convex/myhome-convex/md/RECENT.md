@@ -3,6 +3,23 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-11] - Fix: Group Styling/Position Resets on Item Drag-Drop
+
+**Root Cause Diagnosed:**
+- Group properties (`top_bg_color`, `group_order`, `collapsible`, etc.) are stored denormalized on every item, but rendering reads only from `items[0]` of each group.
+- `updateAllLinks` deletes and re-inserts all links in flat array order, which reassigns `_creationTime`. Frontend sorts by `_creationTime`, so `items[0]` = the item earliest in the flat array for that group.
+- After a drag-drop reorder changes the flat array order, a different item can become `items[0]`, causing the group to inherit that item's group property values — changing the CSS styling, `group_order` (position), and layout flags.
+
+**Fix:**
+- Added group props normalization step in `reorderLinks()` before saving.
+- For each group in the reordered flat array, finds the "canonical" item (most group props set) and copies all group-level fields to every item in that group.
+- Ensures `items[0]` always has the correct group props regardless of drag position.
+
+**Files Modified:**
+- `links-handler.js` - `reorderLinks()` normalization logic
+
+---
+
 ## [2026-05-20] - Top Bar Notification Badges & Cyberpunk Popup Styling
 
 **What We Accomplished:**
