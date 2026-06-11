@@ -1061,6 +1061,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 20,
+                "title": "Dr. STONE - s04e35 - [93] - GIANT STEP HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-06-11T21:22:39.322796",
+                "notify": "unseen"
+            },
+            {
                 "id": 19,
                 "title": "Dr. STONE - s04e34 - [92] - COUNTDOWN HDTV-1080p - [SubsPlease]",
                 "watched": true,

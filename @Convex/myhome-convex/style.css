@@ -231,9 +231,9 @@ body {
 }
 
 .link-badge-dot.folder-picker-badge {
-  top: 50%;
-  right: -5px;
-  transform: translateY(-50%);
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
   background: #ff9800;
   border-color: #000;
   width: 10px;
