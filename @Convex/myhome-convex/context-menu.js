@@ -18,14 +18,16 @@ function showContextMenu(event, items, options = {}) {
     button.className = 'context-menu-item' + (item.className ? ' ' + item.className : '');
     const label = item.label || item.title || '';
     const icon = item.icon || '•';
-    button.title = item.title || label;
+    const tooltip = item.title || label;
     button.setAttribute('aria-label', label);
     if (layout === 'strip-layout') {
+      button.setAttribute('data-tooltip', tooltip);
       button.innerHTML = `
         <span class="context-menu-icon" aria-hidden="true">${icon}</span>
         <span class="sr-only">${label}</span>
       `;
     } else {
+      button.title = tooltip;
       button.textContent = label;
     }
     button.onclick = () => {
