@@ -2,6 +2,18 @@
 
 ---
 
+## [2026-06-12] - `functions:addLink` Rejected `folder_path` on Add
+
+**Problem:** Creating a new link from the add-link form or Chrome extension failed with `ArgumentValidationError` because `folder_path` was present in the payload but not accepted by the `functions:addLink` mutation.
+
+**Root Cause:** The add flow was sending the same expanded link object used by the edit flow, including `note`, `note_enabled`, `folder_picker`, and `folder_path`, but `addLink` only validated a narrower subset of fields.
+
+**Solution:** Expanded the `addLink` mutation args to accept the same note/folder fields as `updateLink`, and updated the add-link form submission to include the note and folder controls so the payload matches the validator.
+
+**Files Modified:** `convex/functions.ts`, `links-handler.js`
+
+---
+
 ## [2026-06-11] - Local file:/// Links Not Opening from Web Host
 
 **Problem:** Clicking `file:///` links (local files/PDFs) when the app is hosted on GitHub Pages/Convex copied the URL to clipboard and opened `about:blank` — user had to paste manually.

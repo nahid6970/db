@@ -3,6 +3,19 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-12] - Add Link Payload Now Matches `addLink` Validator
+
+**What We Accomplished:**
+- Expanded `functions:addLink` to accept the same note/folder fields already supported by `updateLink`
+- Updated the add-link form submit handler to send `note`, `note_enabled`, `folder_picker`, and `folder_path`
+- Fixed the `ArgumentValidationError` that occurred when `folder_path` was present in add payloads
+
+**Files Modified:**
+- `convex/functions.ts` - added note/folder fields to `addLink` args
+- `links-handler.js` - add-link submit now includes note/folder values
+
+---
+
 ## [2026-06-11] - openfile: URI Scheme for Local File Links
 
 **What We Accomplished:**
