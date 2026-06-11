@@ -3,6 +3,22 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-12] - Icon-Strip Context Menus
+
+**What We Accomplished:**
+- Reworked the shared right-click menu into a horizontal icon strip for action menus
+- Kept group-pick menus in a vertical list layout so group names remain readable
+- Removed duplicate native tooltip bubbles in strip mode and used a single custom tooltip
+- Rounded the strip edges so the delete button hover state matches the popup container
+
+**Files Modified:**
+- `context-menu.js` - icon-only strip rendering, layout switch, tooltip handling
+- `links-handler.js` - action menus now supply icons; group picker uses list layout
+- `sidebar-handler.js` - sidebar button menu now uses icons too
+- `style.css` - strip/list layout styling, hover states, rounded outer edges
+
+---
+
 ## [2026-06-12] - Add Link Payload Now Matches `addLink` Validator
 
 **What We Accomplished:**

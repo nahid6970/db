@@ -2,6 +2,18 @@
 
 ---
 
+## [2026-06-12] - Context Menu Look Did Not Match Image-Share
+
+**Problem:** Right-click menus still showed text-heavy, vertically stacked items and the delete action looked like a separate square block instead of matching the rounded icon-strip style used in `image-share`.
+
+**Root Cause:** The shared context menu renderer was using label-based items by default, and strip styling was not clipping or rounding the outer buttons tightly enough for the destructive action to blend with the rounded popup container.
+
+**Solution:** Switched the shared right-click menu to an icon-only horizontal strip for action menus, kept a vertical list layout for group picking, removed duplicate native tooltips in strip mode, and rounded/clipped the outer buttons so the delete hover state matches the popup edges.
+
+**Files Modified:** `context-menu.js`, `links-handler.js`, `sidebar-handler.js`, `style.css`
+
+---
+
 ## [2026-06-12] - `functions:addLink` Rejected `folder_path` on Add
 
 **Problem:** Creating a new link from the add-link form or Chrome extension failed with `ArgumentValidationError` because `folder_path` was present in the payload but not accepted by the `functions:addLink` mutation.
