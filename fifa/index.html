@@ -13,7 +13,7 @@
     border-bottom: 3px solid #f9ca24;
   }
   header h1 { font-size: 2rem; color: #f9ca24; letter-spacing: 2px; }
-  header p { color: #aad4f5; margin-top: 6px; font-size: 0.95rem; }
+  header p { color: #aad4f5; margin-top: 6px; font-size: 0.9rem; }
   nav {
     display: flex; gap: 10px; justify-content: center;
     padding: 14px; background: #111; flex-wrap: wrap;
@@ -28,22 +28,9 @@
   section { display: none; }
   section.active { display: block; }
 
-  img.flag {
-    width: 36px; height: 24px;
-    object-fit: cover; border-radius: 3px;
-    border: 1px solid #333; flex-shrink: 0;
-  }
-  img.flag-sm {
-    width: 24px; height: 16px;
-    object-fit: cover; border-radius: 2px;
-    border: 1px solid #333; flex-shrink: 0;
-    vertical-align: middle; margin-right: 6px;
-  }
-  img.flag-lg {
-    width: 52px; height: 35px;
-    object-fit: cover; border-radius: 4px;
-    border: 1px solid #333; display: block; margin: 0 auto 6px;
-  }
+  img.flag { width: 36px; height: 24px; object-fit: cover; border-radius: 3px; border: 1px solid #333; flex-shrink: 0; }
+  img.flag-sm { width: 24px; height: 16px; object-fit: cover; border-radius: 2px; border: 1px solid #333; flex-shrink: 0; vertical-align: middle; margin-right: 6px; }
+  img.flag-lg { width: 52px; height: 35px; object-fit: cover; border-radius: 4px; border: 1px solid #333; display: block; margin: 0 auto 6px; }
 
   .date-header {
     margin: 20px 0 10px; font-size: 1rem; font-weight: 700; color: #f9ca24;
@@ -61,17 +48,27 @@
   .team.right { flex-direction: row-reverse; text-align: right; }
   .team-name { font-weight: 700; font-size: 1rem; }
   .score-box { text-align: center; min-width: 130px; }
+
+  /* Score / time display */
   .score { font-size: 1.8rem; font-weight: 900; letter-spacing: 4px; color: #f9ca24; }
-  .score.tbd { color: #888; font-size: 1rem; font-weight: 600; }
-  .match-meta { font-size: 0.75rem; color: #888; margin-top: 4px; }
+  .kick-time {
+    display: inline-block;
+    background: #0d1f4a;
+    border: 1px solid #2e50aa;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #7eb8ff;
+    letter-spacing: 0.5px;
+  }
+  .kick-day { font-size: 0.7rem; color: #556; font-weight: 600; margin-top: 3px; }
+
+  .match-meta { font-size: 0.75rem; color: #666; margin-top: 5px; }
   .status-live { color: #e74c3c; font-weight: 700; animation: pulse 1.2s infinite; }
-  .status-ft { color: #2ecc71; font-weight: 700; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  .groups-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 16px; margin-top: 20px;
-  }
+  .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
   .group-card { background: #12122a; border-radius: 12px; border: 1px solid #1e3799; overflow: hidden; }
   .group-title { background: #1e3799; padding: 10px 16px; font-weight: 800; font-size: 1rem; color: #f9ca24; }
   .group-table { width: 100%; border-collapse: collapse; }
@@ -82,25 +79,12 @@
   .group-table tr:nth-child(1) td, .group-table tr:nth-child(2) td { color: #2ecc71; }
   .tf { display: flex; align-items: center; gap: 7px; }
 
-  .round-label {
-    font-size: 1.1rem; font-weight: 800; color: #f9ca24;
-    margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px;
-    border-bottom: 2px solid #1e3799; padding-bottom: 6px;
-  }
-  .info-box {
-    background: #12122a; border-radius: 10px; padding: 16px;
-    border: 1px solid #1e3799; color: #aaa; font-size: 0.9rem; line-height: 1.8;
-  }
+  .round-label { font-size: 1.1rem; font-weight: 800; color: #f9ca24; margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #1e3799; padding-bottom: 6px; }
+  .info-box { background: #12122a; border-radius: 10px; padding: 16px; border: 1px solid #1e3799; color: #aaa; font-size: 0.9rem; line-height: 1.8; }
   .info-box span { color: #f9ca24; font-weight: 700; }
 
-  .teams-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 12px; margin-top: 20px;
-  }
-  .team-card {
-    background: #12122a; border-radius: 10px; padding: 14px; text-align: center;
-    border: 1px solid #1e3799; transition: border-color 0.2s;
-  }
+  .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
+  .team-card { background: #12122a; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #1e3799; transition: border-color 0.2s; }
   .team-card:hover { border-color: #f9ca24; }
   .team-card .tname { font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
   .team-card .tgroup { font-size: 0.72rem; color: #888; margin-top: 3px; }
@@ -116,7 +100,7 @@
 
 <header>
   <h1>&#9917; FIFA WORLD CUP 2026</h1>
-  <p>Canada &middot; Mexico &middot; United States &nbsp;|&nbsp; June 11 &ndash; July 19, 2026</p>
+  <p>Canada &middot; Mexico &middot; United States &nbsp;|&nbsp; June 11 &ndash; July 19, 2026 &nbsp;&bull;&nbsp; All times Bangladesh (BD / UTC+6)</p>
 </header>
 
 <nav>
@@ -129,18 +113,10 @@
 
 <div class="container">
 
-<!-- helper: f(code) = flagcdn img tag -->
-<!-- flags: mx=mexico, za=south africa, kr=south korea, cz=czechia, ca=canada, ba=bosnia, qa=qatar, ch=switzerland -->
-<!-- br=brazil, ma=morocco, ht=haiti, gb-sct=scotland(use gb), us=usa, py=paraguay, au=australia, tr=turkey -->
-<!-- de=germany, cw=curacao, ci=ivory coast, ec=ecuador, nl=netherlands, jp=japan, se=sweden, tn=tunisia -->
-<!-- es=spain, cv=cape verde, sa=saudi arabia, uy=uruguay, be=belgium, eg=egypt, ir=iran, nz=new zealand -->
-<!-- fr=france, sn=senegal, iq=iraq, no=norway, ar=argentina, dz=algeria, at=austria, jo=jordan -->
-<!-- pt=portugal, cd=dr congo, uz=uzbekistan, co=colombia, gb-eng=england(use gb), hr=croatia, gh=ghana, pa=panama -->
-
 <!-- ===== RESULTS ===== -->
 <section id="results" class="active">
 
-  <div class="date-header">&#128994; June 11, 2026 &mdash; Matchday 1 (Today)</div>
+  <div class="date-header">&#128994; June 11 &mdash; Matchday 1 (Today)</div>
 
   <div class="match-card">
     <div class="team">
@@ -150,7 +126,7 @@
     <div class="score-box">
       <div class="score">? &ndash; ?</div>
       <div class="match-meta"><span class="status-live">&#9679; LIVE</span></div>
-      <div class="match-meta">Estadio Azteca, Mexico City &bull; Group A</div>
+      <div class="match-meta">Estadio Azteca &bull; Group A</div>
     </div>
     <div class="team right">
       <img class="flag" src="https://flagcdn.com/w40/za.png" alt="South Africa">
@@ -164,7 +140,8 @@
       <span class="team-name">South Korea</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">20:00 CST</div>
+      <div class="kick-time">8:00 AM</div>
+      <div class="kick-day">Jun 12 &bull; BD Time</div>
       <div class="match-meta">Estadio Guadalajara &bull; Group A</div>
     </div>
     <div class="team right">
@@ -181,7 +158,8 @@
       <span class="team-name">Canada</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">15:00 ET</div>
+      <div class="kick-time">1:00 AM</div>
+      <div class="kick-day">Jun 13 &bull; BD Time</div>
       <div class="match-meta">Toronto Stadium &bull; Group B</div>
     </div>
     <div class="team right">
@@ -196,7 +174,8 @@
       <span class="team-name">USA</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">18:00 PT</div>
+      <div class="kick-time">7:00 AM</div>
+      <div class="kick-day">Jun 13 &bull; BD Time</div>
       <div class="match-meta">Los Angeles Stadium &bull; Group D</div>
     </div>
     <div class="team right">
@@ -213,7 +192,8 @@
       <span class="team-name">Qatar</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">12:00 PT</div>
+      <div class="kick-time">1:00 AM</div>
+      <div class="kick-day">Jun 14 &bull; BD Time</div>
       <div class="match-meta">SF Bay Area Stadium &bull; Group B</div>
     </div>
     <div class="team right">
@@ -228,7 +208,8 @@
       <span class="team-name">Brazil</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">18:00 ET</div>
+      <div class="kick-time">4:00 AM</div>
+      <div class="kick-day">Jun 14 &bull; BD Time</div>
       <div class="match-meta">New York NJ Stadium &bull; Group C</div>
     </div>
     <div class="team right">
@@ -243,7 +224,8 @@
       <span class="team-name">Haiti</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">21:00 ET</div>
+      <div class="kick-time">7:00 AM</div>
+      <div class="kick-day">Jun 14 &bull; BD Time</div>
       <div class="match-meta">Boston Stadium &bull; Group C</div>
     </div>
     <div class="team right">
@@ -258,7 +240,8 @@
       <span class="team-name">Australia</span>
     </div>
     <div class="score-box">
-      <div class="score tbd">18:00 PT</div>
+      <div class="kick-time">7:00 AM</div>
+      <div class="kick-day">Jun 14 &bull; BD Time</div>
       <div class="match-meta">BC Place, Vancouver &bull; Group D</div>
     </div>
     <div class="team right">
@@ -276,22 +259,25 @@
 
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/de.png" alt="Germany"><span class="team-name">Germany</span></div>
-    <div class="score-box"><div class="score tbd">12:00 CDT</div><div class="match-meta">Houston Stadium &bull; Group E</div></div>
+    <div class="score-box"><div class="kick-time">11:00 PM</div><div class="kick-day">Jun 14 &bull; BD Time</div><div class="match-meta">Houston Stadium &bull; Group E</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/cw.png" alt="Curacao"><span class="team-name">Cura&ccedil;ao</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/nl.png" alt="Netherlands"><span class="team-name">Netherlands</span></div>
-    <div class="score-box"><div class="score tbd">15:00 CDT</div><div class="match-meta">Dallas Stadium &bull; Group F</div></div>
+    <div class="score-box"><div class="kick-time">2:00 AM</div><div class="kick-day">Jun 15 &bull; BD Time</div><div class="match-meta">Dallas Stadium &bull; Group F</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/jp.png" alt="Japan"><span class="team-name">Japan</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/ci.png" alt="Ivory Coast"><span class="team-name">Ivory Coast</span></div>
-    <div class="score-box"><div class="score tbd">19:00 ET</div><div class="match-meta">Philadelphia Stadium &bull; Group E</div></div>
+    <div class="score-box"><div class="kick-time">5:00 AM</div><div class="kick-day">Jun 15 &bull; BD Time</div><div class="match-meta">Philadelphia Stadium &bull; Group E</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/ec.png" alt="Ecuador"><span class="team-name">Ecuador</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/se.png" alt="Sweden"><span class="team-name">Sweden</span></div>
-    <div class="score-box"><div class="score tbd">20:00 CST</div><div class="match-meta">Estadio Monterrey &bull; Group F</div></div>
+    <div class="score-box"><div class="kick-time">8:00 AM</div><div class="kick-day">Jun 15 &bull; BD Time</div><div class="match-meta">Estadio Monterrey &bull; Group F</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/tn.png" alt="Tunisia"><span class="team-name">Tunisia</span></div>
   </div>
 
@@ -299,22 +285,25 @@
 
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/es.png" alt="Spain"><span class="team-name">Spain</span></div>
-    <div class="score-box"><div class="score tbd">12:00 ET</div><div class="match-meta">Atlanta Stadium &bull; Group H</div></div>
+    <div class="score-box"><div class="kick-time">10:00 PM</div><div class="kick-day">Jun 15 &bull; BD Time</div><div class="match-meta">Atlanta Stadium &bull; Group H</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/cv.png" alt="Cape Verde"><span class="team-name">Cape Verde</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/be.png" alt="Belgium"><span class="team-name">Belgium</span></div>
-    <div class="score-box"><div class="score tbd">12:00 PT</div><div class="match-meta">BC Place, Vancouver &bull; Group G</div></div>
+    <div class="score-box"><div class="kick-time">1:00 AM</div><div class="kick-day">Jun 16 &bull; BD Time</div><div class="match-meta">BC Place, Vancouver &bull; Group G</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/eg.png" alt="Egypt"><span class="team-name">Egypt</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/sa.png" alt="Saudi Arabia"><span class="team-name">Saudi Arabia</span></div>
-    <div class="score-box"><div class="score tbd">18:00 ET</div><div class="match-meta">Miami Stadium &bull; Group H</div></div>
+    <div class="score-box"><div class="kick-time">4:00 AM</div><div class="kick-day">Jun 16 &bull; BD Time</div><div class="match-meta">Miami Stadium &bull; Group H</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/uy.png" alt="Uruguay"><span class="team-name">Uruguay</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/ir.png" alt="Iran"><span class="team-name">Iran</span></div>
-    <div class="score-box"><div class="score tbd">18:00 PT</div><div class="match-meta">Los Angeles Stadium &bull; Group G</div></div>
+    <div class="score-box"><div class="kick-time">7:00 AM</div><div class="kick-day">Jun 16 &bull; BD Time</div><div class="match-meta">Los Angeles Stadium &bull; Group G</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/nz.png" alt="New Zealand"><span class="team-name">New Zealand</span></div>
   </div>
 
@@ -322,22 +311,25 @@
 
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/fr.png" alt="France"><span class="team-name">France</span></div>
-    <div class="score-box"><div class="score tbd">15:00 ET</div><div class="match-meta">NY NJ Stadium &bull; Group I</div></div>
+    <div class="score-box"><div class="kick-time">1:00 AM</div><div class="kick-day">Jun 17 &bull; BD Time</div><div class="match-meta">NY NJ Stadium &bull; Group I</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/sn.png" alt="Senegal"><span class="team-name">Senegal</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/iq.png" alt="Iraq"><span class="team-name">Iraq</span></div>
-    <div class="score-box"><div class="score tbd">18:00 ET</div><div class="match-meta">Boston Stadium &bull; Group I</div></div>
+    <div class="score-box"><div class="kick-time">4:00 AM</div><div class="kick-day">Jun 17 &bull; BD Time</div><div class="match-meta">Boston Stadium &bull; Group I</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/no.png" alt="Norway"><span class="team-name">Norway</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/ar.png" alt="Argentina"><span class="team-name">Argentina</span></div>
-    <div class="score-box"><div class="score tbd">20:00 CDT</div><div class="match-meta">Kansas City Stadium &bull; Group J</div></div>
+    <div class="score-box"><div class="kick-time">7:00 AM</div><div class="kick-day">Jun 17 &bull; BD Time</div><div class="match-meta">Kansas City Stadium &bull; Group J</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/dz.png" alt="Algeria"><span class="team-name">Algeria</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/at.png" alt="Austria"><span class="team-name">Austria</span></div>
-    <div class="score-box"><div class="score tbd">21:00 PT</div><div class="match-meta">SF Bay Area Stadium &bull; Group J</div></div>
+    <div class="score-box"><div class="kick-time">10:00 AM</div><div class="kick-day">Jun 17 &bull; BD Time</div><div class="match-meta">SF Bay Area Stadium &bull; Group J</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/jo.png" alt="Jordan"><span class="team-name">Jordan</span></div>
   </div>
 
@@ -345,22 +337,25 @@
 
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/pt.png" alt="Portugal"><span class="team-name">Portugal</span></div>
-    <div class="score-box"><div class="score tbd">12:00 CDT</div><div class="match-meta">Houston Stadium &bull; Group K</div></div>
+    <div class="score-box"><div class="kick-time">11:00 PM</div><div class="kick-day">Jun 17 &bull; BD Time</div><div class="match-meta">Houston Stadium &bull; Group K</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/cd.png" alt="DR Congo"><span class="team-name">DR Congo</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/gb-eng.png" alt="England"><span class="team-name">England</span></div>
-    <div class="score-box"><div class="score tbd">15:00 CDT</div><div class="match-meta">Dallas Stadium &bull; Group L</div></div>
+    <div class="score-box"><div class="kick-time">2:00 AM</div><div class="kick-day">Jun 18 &bull; BD Time</div><div class="match-meta">Dallas Stadium &bull; Group L</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/hr.png" alt="Croatia"><span class="team-name">Croatia</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/gh.png" alt="Ghana"><span class="team-name">Ghana</span></div>
-    <div class="score-box"><div class="score tbd">19:00 ET</div><div class="match-meta">Toronto Stadium &bull; Group L</div></div>
+    <div class="score-box"><div class="kick-time">5:00 AM</div><div class="kick-day">Jun 18 &bull; BD Time</div><div class="match-meta">Toronto Stadium &bull; Group L</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/pa.png" alt="Panama"><span class="team-name">Panama</span></div>
   </div>
+
   <div class="match-card">
     <div class="team"><img class="flag" src="https://flagcdn.com/w40/uz.png" alt="Uzbekistan"><span class="team-name">Uzbekistan</span></div>
-    <div class="score-box"><div class="score tbd">20:00 CST</div><div class="match-meta">Mexico City Stadium &bull; Group K</div></div>
+    <div class="score-box"><div class="kick-time">8:00 AM</div><div class="kick-day">Jun 18 &bull; BD Time</div><div class="match-meta">Mexico City Stadium &bull; Group K</div></div>
     <div class="team right"><img class="flag" src="https://flagcdn.com/w40/co.png" alt="Colombia"><span class="team-name">Colombia</span></div>
   </div>
 
@@ -394,24 +389,24 @@
     <span>Quarterfinals:</span> July 9 &ndash; 11<br>
     <span>Semifinals:</span> July 14 &ndash; 15<br>
     <span>Bronze Medal:</span> July 18 &mdash; Miami Stadium<br>
-    <span>&#127942; Final:</span> July 19 &mdash; New York New Jersey Stadium (MetLife)
+    <span>&#127942; Final:</span> July 19 &mdash; MetLife Stadium, New Jersey
   </div>
 
-  <div class="round-label">Round of 32 &mdash; Sample Fixtures</div>
+  <div class="round-label">Round of 32 &mdash; Opening Fixtures</div>
 
   <div class="match-card">
-    <div class="team"><img class="flag" src="https://flagcdn.com/w40/xx.png" onerror="this.style.display='none'" alt=""><span class="team-name">Runner-up Group A</span></div>
-    <div class="score-box"><div class="score tbd">Jun 28</div><div class="match-meta">Los Angeles Stadium</div></div>
+    <div class="team"><span class="team-name">Runner-up Group A</span></div>
+    <div class="score-box"><div class="kick-time">Jun 29</div><div class="kick-day">1:00 AM BD</div><div class="match-meta">Los Angeles Stadium</div></div>
     <div class="team right"><span class="team-name">Runner-up Group B</span></div>
   </div>
   <div class="match-card">
     <div class="team"><span class="team-name">Winner Group C</span></div>
-    <div class="score-box"><div class="score tbd">Jun 29</div><div class="match-meta">Houston Stadium</div></div>
+    <div class="score-box"><div class="kick-time">Jun 30</div><div class="kick-day">1:00 AM BD</div><div class="match-meta">Houston Stadium</div></div>
     <div class="team right"><span class="team-name">Runner-up Group F</span></div>
   </div>
   <div class="match-card">
     <div class="team"><span class="team-name">Winner Group E</span></div>
-    <div class="score-box"><div class="score tbd">Jun 29</div><div class="match-meta">Boston Stadium</div></div>
+    <div class="score-box"><div class="kick-time">Jun 30</div><div class="kick-day">4:30 AM BD</div><div class="match-meta">Boston Stadium</div></div>
     <div class="team right"><span class="team-name">3rd Best A/B/C/D/F</span></div>
   </div>
 
@@ -419,9 +414,9 @@
   <div class="match-card">
     <div class="team"><span class="team-name">TBD</span></div>
     <div class="score-box">
-      <div class="score tbd">15:00 ET</div>
-      <div class="match-meta">MetLife Stadium</div>
-      <div class="match-meta">East Rutherford, New Jersey</div>
+      <div class="kick-time">1:00 AM</div>
+      <div class="kick-day">Jul 20 &bull; BD Time</div>
+      <div class="match-meta">MetLife Stadium, New Jersey</div>
     </div>
     <div class="team right"><span class="team-name">TBD</span></div>
   </div>
@@ -443,83 +438,78 @@ function show(id, btn) {
   btn.classList.add('active');
 }
 
-// flag image helper
-function fi(code, size) {
-  return `<img class="flag${size||''}" src="https://flagcdn.com/w40/${code}.png" alt="${code}">`;
-}
-function fiLg(code, name) {
-  return `<img class="flag-lg" src="https://flagcdn.com/w80/${code}.png" alt="${name}">`;
+function fi(code, cls) {
+  return `<img class="${cls||'flag'}" src="https://flagcdn.com/w40/${code}.png" alt="${code}">`;
 }
 
-// All 48 teams data
 const teams = [
-  {name:'Mexico',       code:'mx', group:'A', note:'Host'},
-  {name:'South Africa', code:'za', group:'A'},
-  {name:'South Korea',  code:'kr', group:'A'},
-  {name:'Czechia',      code:'cz', group:'A'},
-  {name:'Canada',       code:'ca', group:'B', note:'Host'},
-  {name:'Bosnia & Herz.',code:'ba',group:'B'},
-  {name:'Qatar',        code:'qa', group:'B'},
-  {name:'Switzerland',  code:'ch', group:'B'},
-  {name:'Brazil',       code:'br', group:'C'},
-  {name:'Morocco',      code:'ma', group:'C'},
-  {name:'Haiti',        code:'ht', group:'C'},
-  {name:'Scotland',     code:'gb-sct', group:'C'},
-  {name:'USA',          code:'us', group:'D', note:'Host'},
-  {name:'Paraguay',     code:'py', group:'D'},
-  {name:'Australia',    code:'au', group:'D'},
-  {name:'Türkiye',      code:'tr', group:'D'},
-  {name:'Germany',      code:'de', group:'E'},
-  {name:'Curaçao',      code:'cw', group:'E', note:'Debut'},
-  {name:'Ivory Coast',  code:'ci', group:'E'},
-  {name:'Ecuador',      code:'ec', group:'E'},
-  {name:'Netherlands',  code:'nl', group:'F'},
-  {name:'Japan',        code:'jp', group:'F'},
-  {name:'Sweden',       code:'se', group:'F'},
-  {name:'Tunisia',      code:'tn', group:'F'},
-  {name:'Belgium',      code:'be', group:'G'},
-  {name:'Egypt',        code:'eg', group:'G'},
-  {name:'Iran',         code:'ir', group:'G'},
-  {name:'New Zealand',  code:'nz', group:'G'},
-  {name:'Spain',        code:'es', group:'H'},
-  {name:'Cape Verde',   code:'cv', group:'H', note:'Debut'},
-  {name:'Saudi Arabia', code:'sa', group:'H'},
-  {name:'Uruguay',      code:'uy', group:'H'},
-  {name:'France',       code:'fr', group:'I'},
-  {name:'Senegal',      code:'sn', group:'I'},
-  {name:'Iraq',         code:'iq', group:'I'},
-  {name:'Norway',       code:'no', group:'I'},
-  {name:'Argentina',    code:'ar', group:'J', note:'Champions'},
-  {name:'Algeria',      code:'dz', group:'J'},
-  {name:'Austria',      code:'at', group:'J'},
-  {name:'Jordan',       code:'jo', group:'J', note:'Debut'},
-  {name:'Portugal',     code:'pt', group:'K'},
-  {name:'DR Congo',     code:'cd', group:'K'},
-  {name:'Uzbekistan',   code:'uz', group:'K', note:'Debut'},
-  {name:'Colombia',     code:'co', group:'K'},
-  {name:'England',      code:'gb-eng', group:'L'},
-  {name:'Croatia',      code:'hr', group:'L'},
-  {name:'Ghana',        code:'gh', group:'L'},
-  {name:'Panama',       code:'pa', group:'L'},
+  {name:'Mexico',        code:'mx', group:'A', note:'Host'},
+  {name:'South Africa',  code:'za', group:'A'},
+  {name:'South Korea',   code:'kr', group:'A'},
+  {name:'Czechia',       code:'cz', group:'A'},
+  {name:'Canada',        code:'ca', group:'B', note:'Host'},
+  {name:'Bosnia & Herz.',code:'ba', group:'B'},
+  {name:'Qatar',         code:'qa', group:'B'},
+  {name:'Switzerland',   code:'ch', group:'B'},
+  {name:'Brazil',        code:'br', group:'C'},
+  {name:'Morocco',       code:'ma', group:'C'},
+  {name:'Haiti',         code:'ht', group:'C'},
+  {name:'Scotland',      code:'gb-sct', group:'C'},
+  {name:'USA',           code:'us', group:'D', note:'Host'},
+  {name:'Paraguay',      code:'py', group:'D'},
+  {name:'Australia',     code:'au', group:'D'},
+  {name:'Türkiye',       code:'tr', group:'D'},
+  {name:'Germany',       code:'de', group:'E'},
+  {name:'Curaçao',       code:'cw', group:'E', note:'Debut'},
+  {name:'Ivory Coast',   code:'ci', group:'E'},
+  {name:'Ecuador',       code:'ec', group:'E'},
+  {name:'Netherlands',   code:'nl', group:'F'},
+  {name:'Japan',         code:'jp', group:'F'},
+  {name:'Sweden',        code:'se', group:'F'},
+  {name:'Tunisia',       code:'tn', group:'F'},
+  {name:'Belgium',       code:'be', group:'G'},
+  {name:'Egypt',         code:'eg', group:'G'},
+  {name:'Iran',          code:'ir', group:'G'},
+  {name:'New Zealand',   code:'nz', group:'G'},
+  {name:'Spain',         code:'es', group:'H'},
+  {name:'Cape Verde',    code:'cv', group:'H', note:'Debut'},
+  {name:'Saudi Arabia',  code:'sa', group:'H'},
+  {name:'Uruguay',       code:'uy', group:'H'},
+  {name:'France',        code:'fr', group:'I'},
+  {name:'Senegal',       code:'sn', group:'I'},
+  {name:'Iraq',          code:'iq', group:'I'},
+  {name:'Norway',        code:'no', group:'I'},
+  {name:'Argentina',     code:'ar', group:'J', note:'Champions'},
+  {name:'Algeria',       code:'dz', group:'J'},
+  {name:'Austria',       code:'at', group:'J'},
+  {name:'Jordan',        code:'jo', group:'J', note:'Debut'},
+  {name:'Portugal',      code:'pt', group:'K'},
+  {name:'DR Congo',      code:'cd', group:'K'},
+  {name:'Uzbekistan',    code:'uz', group:'K', note:'Debut'},
+  {name:'Colombia',      code:'co', group:'K'},
+  {name:'England',       code:'gb-eng', group:'L'},
+  {name:'Croatia',       code:'hr', group:'L'},
+  {name:'Ghana',         code:'gh', group:'L'},
+  {name:'Panama',        code:'pa', group:'L'},
 ];
 
-// Build teams grid
+// Teams grid
 const tg = document.getElementById('teamsGrid');
 teams.forEach(t => {
   tg.innerHTML += `<div class="team-card">
-    ${fiLg(t.code, t.name)}
+    <img class="flag-lg" src="https://flagcdn.com/w80/${t.code}.png" alt="${t.name}">
     <div class="tname">${t.name}</div>
     <div class="tgroup">Group ${t.group}${t.note?' · '+t.note:''}</div>
   </div>`;
 });
 
-// Build groups
-const groups = {};
-teams.forEach(t => { if(!groups[t.group]) groups[t.group]=[]; groups[t.group].push(t); });
+// Groups grid
+const grps = {};
+teams.forEach(t => { if(!grps[t.group]) grps[t.group]=[]; grps[t.group].push(t); });
 const gg = document.getElementById('groupsGrid');
-Object.keys(groups).sort().forEach(g => {
-  let rows = groups[g].map(t => `<tr>
-    <td><div class="tf">${fi(t.code,'-sm')}<span>${t.name}</span></div></td>
+Object.keys(grps).sort().forEach(g => {
+  const rows = grps[g].map(t => `<tr>
+    <td><div class="tf">${fi(t.code,'flag-sm')}<span>${t.name}</span></div></td>
     <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
   </tr>`).join('');
   gg.innerHTML += `<div class="group-card">
