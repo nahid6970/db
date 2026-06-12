@@ -45,7 +45,10 @@
   }
   .match-card:hover { border-color: #f9ca24; }
   .team { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
-  .team.right { flex-direction: row-reverse; text-align: right; }
+  .team-panel { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .team-panel.right { align-items: flex-end; text-align: right; }
+  .team-head { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .team-panel.right .team-head { flex-direction: row-reverse; }
   .team-name { font-weight: 700; font-size: 1rem; }
   .score-box { text-align: center; width: 180px; flex-shrink: 0; }
 
@@ -91,7 +94,8 @@
 
   @media(max-width:600px) {
     .match-card { flex-direction: column; text-align: center; }
-    .team.right { flex-direction: row; }
+    .team-panel, .team-panel.right { align-items: center; text-align: center; }
+    .team-head, .team-panel.right .team-head { flex-direction: row; }
     header h1 { font-size: 1.4rem; }
   }
 
@@ -103,9 +107,12 @@
   .card-live  { border-color:#e74c3c !important; box-shadow:0 0 12px rgba(231,76,60,0.3); }
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
   .live-score.ht { color:#f39c12; }
-  .goal-list  { margin-top:8px; display:flex; flex-direction:column; gap:3px; }
-  .goal-item  { font-size:0.75rem; color:#aaa; }
+  .goal-list  { display:flex; flex-direction:column; gap:3px; }
+  .goal-item  { font-size:0.72rem; line-height:1.25; color:#b8c4ea; }
+  .goal-min   { color:#7eb8ff; }
+  .goal-kind  { color:#888; }
   .goal-item em { color:#888; font-style:normal; }
+  .team-panel .goal-list { margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -231,19 +238,25 @@ function scoreOrTime(comp) {
   return `<div class="live-score ${ht?'ht':''}">${home.score} &ndash; ${away.score}</div>`;
 }
 
-function goalEvents(details) {
-  if (!details || !details.length) return '';
-  const goals = details.filter(d => d.scoringPlay || (d.type && String(d.type.text || '').startsWith('Goal')));
-  if (!goals.length) return '';
-  return '<div class="goal-list">' + goals.map(g => {
-    const min = g.clock?.displayValue || '';
-    const team = g.team?.displayName || '';
-    const scorers = (g.athletesInvolved || []).map(a => a.displayName).filter(Boolean);
-    const scorerText = scorers.length ? scorers.join(', ') : (g.shortText || g.text || 'Goal');
-    const label = g.ownGoal ? `Own Goal by ${scorerText}` : scorerText;
-    const kind = g.type?.text && g.type.text !== 'Goal' ? ` <em>(${g.type.text})</em>` : '';
-    return `<span class="goal-item">&#9917; ${label} ${min}${kind} <em>(${team})</em></span>`;
-  }).join('') + '</div>';
+function goalSide(comp, goal) {
+  const homeId = comp.competitors?.[0]?.team?.id;
+  const awayId = comp.competitors?.[1]?.team?.id;
+  const involvedId = goal.team?.id || goal.athletesInvolved?.[0]?.team?.id || '';
+  let side = involvedId === homeId ? 'home' : involvedId === awayId ? 'away' : '';
+  if (goal.ownGoal) {
+    if (side === 'home') side = 'away';
+    else if (side === 'away') side = 'home';
+  }
+  return side;
+}
+
+function goalBadge(goal) {
+  const min = goal.clock?.displayValue || '';
+  const scorers = (goal.athletesInvolved || []).map(a => a.displayName).filter(Boolean);
+  const scorerText = scorers.length ? scorers.join(', ') : (goal.shortText || goal.text || 'Goal');
+  const label = goal.ownGoal ? `Own Goal by ${scorerText}` : scorerText;
+  const kind = goal.type?.text && goal.type.text !== 'Goal' ? ` <span class="goal-kind">${goal.type.text}</span>` : '';
+  return `<div class="goal-item">⚽ ${label} <span class="goal-min">${min}</span>${kind}</div>`;
 }
 
 async function fetchMatches() {
@@ -271,22 +284,28 @@ async function fetchMatches() {
         const [home, away] = comp.competitors;
         const st = comp.status;
         const isLive = st.type.state === 'in';
-        const isFt = st.type.state === 'post';
+        const homeGoals = (comp.details || []).filter(g => goalSide(comp, g) === 'home');
+        const awayGoals = (comp.details || []).filter(g => goalSide(comp, g) === 'away');
         html += `
         <div class="match-card${isLive?' card-live':''}">
-          <div class="team">
-            <img class="flag" src="${home.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${home.team.displayName}">
-            <span class="team-name">${home.team.displayName}</span>
+          <div class="team team-panel">
+            <div class="team-head">
+              <img class="flag" src="${home.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${home.team.displayName}">
+              <span class="team-name">${home.team.displayName}</span>
+            </div>
+            ${homeGoals.length ? `<div class="goal-list">${homeGoals.map(goalBadge).join('')}</div>` : ''}
           </div>
           <div class="score-box">
             ${scoreOrTime(comp)}
             <div class="match-meta">${statusBadge(st, st.clock)}</div>
             <div class="match-meta">${comp.venue?.displayName || ''}</div>
-            ${goalEvents(comp.details)}
           </div>
-          <div class="team right">
-            <img class="flag" src="${away.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${away.team.displayName}">
-            <span class="team-name">${away.team.displayName}</span>
+          <div class="team team-panel right">
+            <div class="team-head">
+              <img class="flag" src="${away.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${away.team.displayName}">
+              <span class="team-name">${away.team.displayName}</span>
+            </div>
+            ${awayGoals.length ? `<div class="goal-list">${awayGoals.map(goalBadge).join('')}</div>` : ''}
           </div>
         </div>`;
       }
