@@ -108,10 +108,17 @@
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
   .live-score.ht { color:#f39c12; }
   .goal-list  { display:flex; flex-direction:column; gap:3px; }
-  .goal-item  { font-size:0.72rem; line-height:1.25; color:#b8c4ea; }
+  .goal-item  { display:flex; align-items:center; gap:5px; font-size:0.72rem; line-height:1.25; color:#b8c4ea; }
+  .team-panel.right .goal-list { align-items:flex-end; }
+  .team-panel.right .goal-item { flex-direction:row-reverse; }
   .goal-min   { color:#7eb8ff; }
   .goal-kind  { color:#888; }
-  .goal-item em { color:#888; font-style:normal; }
+  .goal-icon  { display:inline-block; width:13px; height:13px; background:radial-gradient(circle at 35% 35%,#fff 30%,#222 31%,#222 40%,#fff 41%); border-radius:50%; border:1px solid #aaa; flex-shrink:0; }
+  .card-y     { display:inline-block; width:8px; height:11px; background:#f9ca24; border-radius:1px; flex-shrink:0; }
+  .card-r     { display:inline-block; width:8px; height:11px; background:#e74c3c; border-radius:1px; flex-shrink:0; }
+  .card-yr    { position:relative; display:inline-block; width:12px; height:11px; flex-shrink:0; }
+  .card-yr::before { content:''; position:absolute; left:0; width:8px; height:11px; background:#f9ca24; border-radius:1px; }
+  .card-yr::after  { content:''; position:absolute; left:4px; width:8px; height:11px; background:#e74c3c; border-radius:1px; }
   .team-panel .goal-list { margin-top: 2px; }
 </style>
 </head>
@@ -253,10 +260,20 @@ function goalSide(comp, goal) {
 function goalBadge(goal) {
   const min = goal.clock?.displayValue || '';
   const scorers = (goal.athletesInvolved || []).map(a => a.displayName).filter(Boolean);
-  const scorerText = scorers.length ? scorers.join(', ') : (goal.shortText || goal.text || 'Goal');
-  const label = goal.ownGoal ? `Own Goal by ${scorerText}` : scorerText;
-  const kind = goal.type?.text && goal.type.text !== 'Goal' ? ` <span class="goal-kind">${goal.type.text}</span>` : '';
-  return `<div class="goal-item">⚽ ${label} <span class="goal-min">${min}</span>${kind}</div>`;
+  const scorerText = scorers.length ? scorers.join(', ') : (goal.shortText || goal.text || '');
+  const typeText = goal.type?.text || '';
+  const isYellow = /yellow/i.test(typeText);
+  const isRed = /red/i.test(typeText);
+  const isYR = /yellow.*red|second.*yellow/i.test(typeText);
+  let icon;
+  if (isYR)     icon = `<span class="card-yr"></span>`;
+  else if (isYellow) icon = `<span class="card-y"></span>`;
+  else if (isRed)    icon = `<span class="card-r"></span>`;
+  else               icon = `<span class="goal-icon"></span>`;
+  const label = goal.ownGoal ? `OG · ${scorerText}` : scorerText;
+  const kind = !isYellow && !isRed && !isYR && typeText && typeText !== 'Goal'
+    ? ` <span class="goal-kind">${typeText}</span>` : '';
+  return `<div class="goal-item">${icon}<span>${label} <span class="goal-min">${min}</span>${kind}</span></div>`;
 }
 
 async function fetchMatches() {
