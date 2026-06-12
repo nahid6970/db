@@ -3,6 +3,21 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-06-12] - Folder/File Badge & Chip Improvements
+
+**What We Accomplished:**
+- Folder badge dot on rendered item now turns **green** when `folder_path` is a file (has extension like `.exe`, `.txt`), stays **orange** for folder paths
+- File paths automatically use `openfile:` URI scheme instead of `opendir:` when clicked
+- File detection: regex `/\.[^\\/.]+$/` on the path
+- Form folder chip turns green (`has-path` CSS class) when a path is typed in the path input
+- Tooltip on the badge dot now shows `Open: <path>` instead of the link name
+
+**Files Modified:**
+- `links-handler.js` - badge renders `.is-file` class + uses `openfile:` for files; `updateFolderChipColor()` helper; input listeners for both add/edit forms; fixed `openEditLinkPopup` to call color update on load
+- `style.css` - `.folder-picker-badge.is-file { background: #4caf50 }`, `.option-chip .option-chip-body.has-path` green style
+
+---
+
 ## [2026-06-12] - Icon-Strip Context Menus
 
 **What We Accomplished:**
