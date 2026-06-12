@@ -233,13 +233,16 @@ function scoreOrTime(comp) {
 
 function goalEvents(details) {
   if (!details || !details.length) return '';
-  const goals = details.filter(d => d.type && d.type.text === 'Goal');
+  const goals = details.filter(d => d.scoringPlay || (d.type && String(d.type.text || '').startsWith('Goal')));
   if (!goals.length) return '';
   return '<div class="goal-list">' + goals.map(g => {
     const min = g.clock?.displayValue || '';
     const team = g.team?.displayName || '';
-    const scorer = g.athletesInvolved?.[0]?.displayName || '';
-    return `<span class="goal-item">&#9917; ${scorer} ${min} <em>(${team})</em></span>`;
+    const scorers = (g.athletesInvolved || []).map(a => a.displayName).filter(Boolean);
+    const scorerText = scorers.length ? scorers.join(', ') : (g.shortText || g.text || 'Goal');
+    const label = g.ownGoal ? `Own Goal by ${scorerText}` : scorerText;
+    const kind = g.type?.text && g.type.text !== 'Goal' ? ` <em>(${g.type.text})</em>` : '';
+    return `<span class="goal-item">&#9917; ${label} ${min}${kind} <em>(${team})</em></span>`;
   }).join('') + '</div>';
 }
 
