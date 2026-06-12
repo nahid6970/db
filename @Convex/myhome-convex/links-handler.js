@@ -1506,13 +1506,14 @@ function createLinkItem(link, index) {
 
   if (link.folder_picker) {
     const folderBadge = document.createElement('span');
-    folderBadge.className = 'link-badge-dot folder-picker-badge';
+    const isFile = link.folder_path && /\.[^\\/.]+$/.test(link.folder_path.trim());
+    folderBadge.className = 'link-badge-dot folder-picker-badge' + (isFile ? ' is-file' : '');
     folderBadge.title = link.folder_path ? `Open: ${link.folder_path}` : 'Open folder (no path set)';
     folderBadge.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       if (link.folder_path) {
-        window.location.href = 'opendir:' + link.folder_path;
+        window.location.href = (isFile ? 'openfile:' : 'opendir:') + link.folder_path;
       } else {
         window.showNotification('No folder path set. Edit the link to add one.', 'info');
       }
@@ -2859,16 +2860,15 @@ function updateFolderChipColor(pathInputId, chipId) {
   const pathEl = document.getElementById(pathInputId);
   const chipEl = document.getElementById(chipId);
   if (!pathEl || !chipEl) return;
-  const body = chipEl.closest('.option-chip')?.querySelector('.option-chip-body');
+  // chipEl is the <input> inside <label class="option-chip">, sibling of <span class="option-chip-body">
+  const body = chipEl.parentElement?.querySelector('.option-chip-body');
   if (body) body.classList.toggle('has-path', pathEl.value.trim() !== '');
 }
 
 // Wire up live updates for both add and edit forms
-document.addEventListener('DOMContentLoaded', () => {
-  ['link-folder-path', 'edit-link-folder-path'].forEach(pathId => {
-    const chipId = pathId === 'link-folder-path' ? 'link-folder-picker' : 'edit-link-folder-picker';
-    const el = document.getElementById(pathId);
-    if (el) el.addEventListener('input', () => updateFolderChipColor(pathId, chipId));
-  });
+['link-folder-path', 'edit-link-folder-path'].forEach(pathId => {
+  const chipId = pathId === 'link-folder-path' ? 'link-folder-picker' : 'edit-link-folder-picker';
+  const el = document.getElementById(pathId);
+  if (el) el.addEventListener('input', () => updateFolderChipColor(pathId, chipId));
 });
 

@@ -241,6 +241,10 @@ body {
   cursor: pointer;
 }
 
+.link-badge-dot.folder-picker-badge.is-file {
+  background: #4caf50;
+}
+
 .option-chip .option-chip-body.has-path {
   border-color: #4caf50;
   background: #203325;
