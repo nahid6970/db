@@ -241,6 +241,13 @@ body {
   cursor: pointer;
 }
 
+.option-chip .option-chip-body.has-path {
+  border-color: #4caf50;
+  background: #203325;
+  color: #effff0;
+  box-shadow: 0 0 0 1px rgba(76, 175, 80, 0.25);
+}
+
 .note-edit-toggle-btn {
   position: absolute;
   top: -5px;

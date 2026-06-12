@@ -1507,7 +1507,7 @@ function createLinkItem(link, index) {
   if (link.folder_picker) {
     const folderBadge = document.createElement('span');
     folderBadge.className = 'link-badge-dot folder-picker-badge';
-    folderBadge.title = `Open folder${link.title || link.name ? ': ' + (link.title || link.name) : ''}`;
+    folderBadge.title = link.folder_path ? `Open: ${link.folder_path}` : 'Open folder (no path set)';
     folderBadge.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
@@ -2035,6 +2035,7 @@ function openEditLinkPopup(link, index) {
   const folderPathInput = document.getElementById('edit-link-folder-path-input');
   folderPathInput.style.display = 'none';
   document.getElementById('edit-link-folder-path').value = link.folder_path || '';
+  updateFolderChipColor('edit-link-folder-path', 'edit-link-folder-picker');
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -2852,4 +2853,22 @@ async function fetchAndSetIcon(url, imgUrlInputId) {
 // Make them global so onclick works
 window.reloadLinkIcon = reloadLinkIcon;
 window.reloadSidebarIcon = reloadSidebarIcon;
+
+// Folder chip green highlight when a path is set
+function updateFolderChipColor(pathInputId, chipId) {
+  const pathEl = document.getElementById(pathInputId);
+  const chipEl = document.getElementById(chipId);
+  if (!pathEl || !chipEl) return;
+  const body = chipEl.closest('.option-chip')?.querySelector('.option-chip-body');
+  if (body) body.classList.toggle('has-path', pathEl.value.trim() !== '');
+}
+
+// Wire up live updates for both add and edit forms
+document.addEventListener('DOMContentLoaded', () => {
+  ['link-folder-path', 'edit-link-folder-path'].forEach(pathId => {
+    const chipId = pathId === 'link-folder-path' ? 'link-folder-picker' : 'edit-link-folder-picker';
+    const el = document.getElementById(pathId);
+    if (el) el.addEventListener('input', () => updateFolderChipColor(pathId, chipId));
+  });
+});
 
