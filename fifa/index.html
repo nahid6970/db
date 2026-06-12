@@ -271,9 +271,7 @@ function goalBadge(goal) {
   else if (isRed)    icon = `<span class="card-r"></span>`;
   else               icon = `<span class="goal-icon"></span>`;
   const label = goal.ownGoal ? `OG · ${scorerText}` : scorerText;
-  const kind = !isYellow && !isRed && !isYR && typeText && typeText !== 'Goal'
-    ? ` <span class="goal-kind">${typeText}</span>` : '';
-  return `<div class="goal-item">${icon}<span>${label} <span class="goal-min">${min}</span>${kind}</span></div>`;
+  return `<div class="goal-item"><span>${label} <span class="goal-min">${min}</span></span>${icon}</div>`;
 }
 
 async function fetchMatches() {
