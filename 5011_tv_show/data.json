@@ -2672,6 +2672,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 29,
+                "title": "WWE SmackDown - 2026-06-12 - SmackDown 1399 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-06-13T17:42:42.335273",
+                "notify": "unseen"
+            },
+            {
                 "id": 28,
                 "title": "WWE SmackDown - 2026-06-05 - SmackDown 1398 WEBDL-1080p",
                 "watched": true,
