@@ -1361,7 +1361,7 @@
     <button title="Rename" onclick="renameFolderFromMenu()">✏️</button>
     <button title="New subfolder" onclick="createSubfolderFromMenu()">📁</button>
     <button title="Set Colors" class="top-folder-only" onclick="setFolderColorsFromMenu()">🎨</button>
-    <button title="Hide from All" class="top-folder-only" onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">👁️</button>
+    <button title="Hide from All" onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">👁️</button>
     <button title="Set Password" class="top-folder-only" onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">🔒</button>
     <button title="Remove Password" class="top-folder-only" onclick="removeFolderPasswordFromMenu()" id="folderPasswordRemoveBtn">🔓</button>
     <button title="Delete" class="danger-item" onclick="deleteFolderFromMenu()">🗑️</button>
@@ -3047,6 +3047,7 @@
       } else {
         passwordRemoveBtn.style.display = 'none';
       }
+      hideBtn.style.display = '';
       hideBtn.title = folder?.hideFromAll ? 'Show in All' : 'Hide from All';
 
       menu.style.visibility = 'hidden';
