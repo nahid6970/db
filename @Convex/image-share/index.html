@@ -1969,7 +1969,7 @@
           subfolder: settings.megaSubfolder || ''
         };
         remoteSortOrder = settings.sortOrder ? normalizeSortMode(settings.sortOrder) : remoteSortOrder;
-        if (isFirstSettings && settings.currentFolderId !== undefined) {
+        if (settings.currentFolderId !== undefined) {
           remoteFolderId = settings.currentFolderId;
         }
         if (settings.colors) {
@@ -2127,19 +2127,23 @@
 
       if (settingsHydrated && foldersHydrated && remoteFolderId !== undefined) {
         const nextFolderId = remoteFolderId || null;
-        remoteFolderId = undefined; // consume it — only apply once on initial load
-        const previousFolderId = currentFolderId;
-        currentFolderId = nextFolderId;
-        normalizeCurrentFolderId();
-        if (!(await ensureFolderAccess(currentFolderId))) {
-          currentFolderId = null;
-        }
-        if (previousFolderId !== currentFolderId) {
-          storeCurrentFolderId(currentFolderId);
-          renderFolderBar();
-          updateMegaConfigVisibility();
-          subscribeToImages();
-          if (window._lastImages) renderImages(window._lastImages);
+        remoteFolderId = undefined;
+        // Only navigate if a *different* device changed the folder
+        if (nextFolderId !== window._lastAppliedRemoteFolder) {
+          window._lastAppliedRemoteFolder = nextFolderId;
+          const previousFolderId = currentFolderId;
+          currentFolderId = nextFolderId;
+          normalizeCurrentFolderId();
+          if (!(await ensureFolderAccess(currentFolderId))) {
+            currentFolderId = null;
+          }
+          if (previousFolderId !== currentFolderId) {
+            storeCurrentFolderId(currentFolderId);
+            renderFolderBar();
+            updateMegaConfigVisibility();
+            subscribeToImages();
+            if (window._lastImages) renderImages(window._lastImages);
+          }
         }
       }
     }
@@ -3040,6 +3044,7 @@
         return;
       }
       currentFolderId = folderId;
+      window._lastAppliedRemoteFolder = folderId; // suppress echo from our own write
       storeCurrentFolderId(currentFolderId);
       void persistUiState();
       selectedImageIds.clear();
