@@ -2664,6 +2664,7 @@
       document.getElementById('lbCounter').textContent = `${_lbIndex + 1} / ${sorted.length}`;
       document.getElementById('lbPrev').style.visibility = _lbIndex > 0 ? '' : 'hidden';
       document.getElementById('lbNext').style.visibility = _lbIndex < sorted.length - 1 ? '' : 'hidden';
+      document.getElementById('lbPaint').style.display = (img.storageId && !isPdf) ? '' : 'none';
       lb.classList.remove('hidden');
     }
 
@@ -2704,6 +2705,14 @@
       document.getElementById('lightboxImg').src = '';
       const existingIframe = lb.querySelector('iframe');
       if (existingIframe) existingIframe.remove();
+    };
+
+    window.lbOpenPaint = function() {
+      const sorted = getSortedImages(window._lastImages || []);
+      const img = sorted[_lbIndex];
+      if (!img) return;
+      closeLightbox();
+      openPaintEditor(img._id, img.url, img.filename);
     };
 
     document.addEventListener('keydown', e => {
@@ -3601,7 +3610,6 @@
               ${getFolderOptions(img.folderId)}
             </select>
             <button class="action-dot blue" onclick="openFolderPickerPopup(event,'${img._id}','${img.folderId||''}')" title="Move to folder"></button>
-            ${isConvex && !isPdf ? `<button class="action-dot green" onclick="openPaintEditor('${img._id}','${img.url}','${escapeHtml(img.filename)}')" title="Paint &amp; Edit"></button>` : ''}
             <button class="danger delete-btn action-dot red" onclick="deleteImage('${img._id}')" title="Delete"></button>
           </div>
           <div class="image-info">
@@ -3711,6 +3719,11 @@
     <img id="lightboxImg" src="" alt="">
     <button class="lb-nav" id="lbNext" onclick="lbNav(1)">&#8250;</button>
     <div id="lbActions">
+      <button id="lbPaint" onclick="lbOpenPaint()" title="Paint &amp; Edit" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 19l7-7-4-4-7 7v4h4z"/><path d="M15 6l3 3"/><path d="M3 21h4"/>
+        </svg>
+      </button>
       <button id="lbExternal" onclick="openCurrentLightboxImageInNewTab()" title="Open in New Tab">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M5 12h12"></path>
