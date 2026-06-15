@@ -208,6 +208,8 @@ export const updateFolder = mutation({
     bgColor: v.optional(v.string()),
     fgColor: v.optional(v.string()),
     parentId: v.optional(v.id("folders")),
+    fontBold: v.optional(v.boolean()),
+    fontItalic: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
@@ -216,6 +218,8 @@ export const updateFolder = mutation({
       bgColor: args.bgColor,
       fgColor: args.fgColor,
       parentId: args.parentId,
+      fontBold: args.fontBold,
+      fontItalic: args.fontItalic,
     });
   },
 });
