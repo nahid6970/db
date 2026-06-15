@@ -2177,6 +2177,7 @@
       if (e.key === 'Shift' && !isShiftPressed) {
         isShiftPressed = true;
         updateSelectionMode();
+        selectHoveredImageUnderPointer();
       }
       if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         const activeTag = document.activeElement?.tagName;
@@ -2757,7 +2758,13 @@
     };
 
     window.selectImageByHover = function(imageId) {
-      // selection is handled by shift+click only
+      if (!isShiftPressed) return;
+      if (selectedImageIds.has(imageId)) {
+        selectedImageIds.delete(imageId);
+      } else {
+        selectedImageIds.add(imageId);
+      }
+      renderSelectionState();
     };
 
     function selectHoveredImageUnderPointer() {
