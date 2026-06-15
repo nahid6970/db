@@ -2863,7 +2863,6 @@
       ];
 
       document.getElementById('exportPdfBtn').style.display = selectionCount ? '' : 'none';
-      folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
         if (folderPanel) {
