@@ -1429,14 +1429,6 @@
 
   <div class="popup-container hidden" id="paintModal" style="z-index:3000;">
     <div class="Menu" style="width:100vw;height:100vh;max-width:none;max-height:none;padding:0;overflow:hidden;display:flex;flex-direction:column;border-radius:0;">
-      <div class="popup-header" style="padding:10px 14px;flex-shrink:0;">
-        <h3 id="paintModalTitle" style="margin:0;font-size:14px;">Paint</h3>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <button onclick="paintUndo()" title="Undo" style="background:#444;border-radius:4px;padding:4px 10px;font-size:12px;">↩ Undo</button>
-          <button onclick="savePaint()" style="background:#22c55e;border-radius:4px;padding:4px 14px;font-size:12px;font-weight:600;">Save</button>
-          <span class="close-button" onclick="closePaintEditor()" style="margin-left:4px;">&times;</span>
-        </div>
-      </div>
       <div style="display:flex;gap:10px;padding:8px 14px;background:#1a1a2e;align-items:center;flex-wrap:wrap;flex-shrink:0;">
         <label style="color:#ccc;font-size:12px;">Tool:</label>
         <button id="paintToolBrush" onclick="setPaintTool('brush')" style="background:#22c55e;border-radius:4px;padding:3px 10px;font-size:12px;">Brush</button>
@@ -1449,6 +1441,11 @@
         <label style="color:#ccc;font-size:12px;margin-left:8px;">Zoom:</label>
         <input type="range" id="paintZoom" min="20" max="300" value="100" step="10" style="width:80px;" oninput="applyPaintZoom(this.value)">
         <span id="paintZoomVal" style="color:#ccc;font-size:12px;min-width:30px;">100%</span>
+        <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+          <button onclick="paintUndo()" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">↩ Undo</button>
+          <button onclick="savePaint()" style="background:#22c55e;border-radius:4px;padding:3px 14px;font-size:12px;font-weight:600;">Save</button>
+          <button onclick="closePaintEditor()" style="background:none;border:none;color:#aaa;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>
+        </div>
       </div>
       <div style="flex:1;overflow:auto;background:#111;display:flex;justify-content:center;align-items:flex-start;">
         <canvas id="paintCanvas" style="display:block;cursor:crosshair;touch-action:none;max-width:100%;height:auto;"></canvas>
@@ -4079,7 +4076,6 @@
 
     window.openPaintEditor = async function(id, url, filename, folderId) {
       _paintId = id; _paintFilename = filename; _paintFolderId = folderId || null;
-      document.getElementById('paintModalTitle').textContent = `Paint: ${filename}`;
       document.getElementById('paintZoom').value = 100;
       document.getElementById('paintZoomVal').textContent = '100%';
       modal().classList.remove('hidden');
