@@ -1408,6 +1408,13 @@
             <button onclick="clearFolderColor('fg')" style="background:#444;border-radius:0;padding:6px 10px;font-size:12px;">Clear</button>
           </div>
         </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <label style="color:#ccc;font-size:13px;">Border</label>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input type="color" id="folderBorderColorInput" style="width:36px;height:36px;padding:0;border:none;background:transparent;cursor:pointer;">
+            <button onclick="clearFolderColor('border')" style="background:#444;border-radius:0;padding:6px 10px;font-size:12px;">Clear</button>
+          </div>
+        </div>
         <div id="folderColorPreview" style="padding:8px 12px;border-radius:8px;font-size:13px;font-weight:600;text-align:center;border:1px solid #555;">Preview</div>
         <div style="display:flex;gap:8px;">
           <button id="folderFontBoldBtn" onclick="toggleFolderFontStyle('bold')" style="flex:1;background:#444;border-radius:0;font-weight:700;letter-spacing:0.5px;" title="Bold">B</button>
@@ -2896,8 +2903,8 @@
           const topLevel = folders.filter(f => !f.parentId);
           return topLevel.map((folder, index) => {
             const customStyle = folder.bgColor && activeFolderId !== folder._id
-              ? `background:${folder.bgColor};color:${folder.fgColor || '#334155'};${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`
-              : `${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`;
+              ? `background:${folder.bgColor};${folder.borderColor ? `border-color:${folder.borderColor};` : ''}color:${folder.fgColor || '#334155'};${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`
+              : `${folder.borderColor && activeFolderId !== folder._id ? `border-color:${folder.borderColor};` : ''}${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`;
             return `
               <button
                 class="folder-chip ${activeFolderId === folder._id ? 'active' : ''}"
@@ -3168,6 +3175,7 @@
     let _colorFolderId = null;
     let _pendingBg = null;
     let _pendingFg = null;
+    let _pendingBorder = null;
     let _pendingBold = false;
     let _pendingItalic = false;
 
@@ -3179,10 +3187,12 @@
       document.getElementById('folderColorTitle').textContent = `Colors: ${folder?.name || ''}`;
       _pendingBg = folder?.bgColor || '#ffffff';
       _pendingFg = folder?.fgColor || '#334155';
+      _pendingBorder = folder?.borderColor || '#d6dbe1';
       _pendingBold = folder?.fontBold || false;
       _pendingItalic = folder?.fontItalic || false;
       document.getElementById('folderBgColorInput').value = _pendingBg;
       document.getElementById('folderFgColorInput').value = _pendingFg;
+      document.getElementById('folderBorderColorInput').value = _pendingBorder;
       document.getElementById('folderFontSizeInput').value = folder?.fontSize || 13;
       updateFolderColorPreview();
       document.getElementById('folderColorModal').classList.remove('hidden');
@@ -3191,10 +3201,11 @@
     function updateFolderColorPreview() {
       const bg = document.getElementById('folderBgColorInput').value;
       const fg = document.getElementById('folderFgColorInput').value;
+      const border = document.getElementById('folderBorderColorInput').value;
       const preview = document.getElementById('folderColorPreview');
       preview.style.background = bg;
       preview.style.color = fg;
-      preview.style.borderColor = fg + '55';
+      preview.style.borderColor = border;
       preview.style.fontWeight = _pendingBold ? '700' : '600';
       preview.style.fontStyle = _pendingItalic ? 'italic' : 'normal';
       const fs = parseInt(document.getElementById('folderFontSizeInput')?.value) || 13;
@@ -3207,6 +3218,7 @@
 
     document.getElementById('folderBgColorInput').addEventListener('input', updateFolderColorPreview);
     document.getElementById('folderFgColorInput').addEventListener('input', updateFolderColorPreview);
+    document.getElementById('folderBorderColorInput').addEventListener('input', updateFolderColorPreview);
 
     window.toggleFolderFontStyle = function(style) {
       if (style === 'bold') _pendingBold = !_pendingBold;
@@ -3216,7 +3228,8 @@
 
     window.clearFolderColor = function(which) {
       if (which === 'bg') { document.getElementById('folderBgColorInput').value = '#f8f9fa'; }
-      else                { document.getElementById('folderFgColorInput').value = '#334155'; }
+      else if (which === 'fg') { document.getElementById('folderFgColorInput').value = '#334155'; }
+      else { document.getElementById('folderBorderColorInput').value = '#d6dbe1'; }
       updateFolderColorPreview();
     };
 
@@ -3231,12 +3244,14 @@
       if (!folder) return;
       const bg = document.getElementById('folderBgColorInput').value;
       const fg = document.getElementById('folderFgColorInput').value;
+      const border = document.getElementById('folderBorderColorInput').value;
       await client.mutation(api.images.updateFolder, {
         id: _colorFolderId,
         name: folder.name,
         position: folder.position ?? 0,
         bgColor: bg,
         fgColor: fg,
+        borderColor: border,
         fontBold: _pendingBold || undefined,
         fontItalic: _pendingItalic || undefined,
         fontSize: parseInt(document.getElementById('folderFontSizeInput').value) || undefined,

@@ -211,6 +211,7 @@ export const updateFolder = mutation({
     fontBold: v.optional(v.boolean()),
     fontItalic: v.optional(v.boolean()),
     fontSize: v.optional(v.number()),
+    borderColor: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
@@ -222,6 +223,7 @@ export const updateFolder = mutation({
       fontBold: args.fontBold,
       fontItalic: args.fontItalic,
       fontSize: args.fontSize,
+      borderColor: args.borderColor,
     });
   },
 });
