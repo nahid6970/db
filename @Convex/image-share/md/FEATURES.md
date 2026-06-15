@@ -1,5 +1,25 @@
 # Feature Specifications
 
+## Subfolder Hide from All
+**Status:** ✅ Complete
+**Description:** Subfolders can now be hidden from the All section, same as top-level folders. Hidden subfolders show a grey dot indicator on their card.
+**Files Involved:** `index.html`
+
+## Recursive Folder Dropdown
+**Status:** ✅ Complete
+**Description:** Folder picker popup, image move dropdown, and settings folder select now show all nesting levels (depth 1, 2, 3…) with indented labels.
+**Files Involved:** `index.html`
+
+## Bulk Move via Dropdown
+**Status:** ✅ Complete
+**Description:** When multiple images are selected, changing the folder via any selected image's dropdown moves all selected images to that folder.
+**Files Involved:** `index.html`
+
+## Shift+Hover Toggle Selection
+**Status:** ✅ Complete
+**Description:** Holding shift and hovering over images toggles their selection state — hover selects unselected images and deselects already-selected ones.
+**Files Involved:** `index.html`
+
 ## MEGA Integration
 **Status:** ✅ Complete
 **Description:** Support for using MEGA.nz as an image storage provider.

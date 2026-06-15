@@ -1,6 +1,17 @@
 # Recent Development Log
 All sessions recorded here — no archiving, full history in one place.
 
+## [2026-06-15 11:25] - Subfolder Improvements & Selection Fixes
+**What We Accomplished:**
+- Fixed "Hide from All" context menu button now appears for subfolders (was `top-folder-only` only).
+- Subfolder cards now show a `hidden-dot` indicator when hidden from All view.
+- Fixed folder dropdowns (`getFolderOptions`, `getFolderPickerItems`, settings modal) to recursively show all nesting levels beyond depth-1 with proper indentation.
+- Moving images via the folder dropdown now moves all selected images when the target image is part of a multi-selection.
+- Fixed shift+hover selection to toggle (deselect if already selected) instead of add-only.
+
+**Files Modified:**
+- `index.html`
+
 ## [2026-05-07 10:15] - Icon-Only Unified Settings/Storage Button
 **What We Accomplished:**
 - Removed the explicit storage provider text ("Cloudinary", etc.) from the settings button.
