@@ -1710,20 +1710,24 @@
       return sorted;
     }
 
+    let _persistDebounce = null;
     async function persistUiState() {
-      try {
-        await client.mutation(api.images.updateSettings, {
-          storageType,
-          megaEmail: megaSettings.email,
-          megaPassword: megaSettings.password,
-          megaSubfolder: megaSettings.subfolder,
-          colors: uiColors,
-          sortOrder,
-          currentFolderId: currentFolderId === null ? null : currentFolderId,
-        });
-      } catch (err) {
-        console.error('Failed to persist UI state:', err);
-      }
+      clearTimeout(_persistDebounce);
+      _persistDebounce = setTimeout(async () => {
+        try {
+          await client.mutation(api.images.updateSettings, {
+            storageType,
+            megaEmail: megaSettings.email,
+            megaPassword: megaSettings.password,
+            megaSubfolder: megaSettings.subfolder,
+            colors: uiColors,
+            sortOrder,
+            currentFolderId: currentFolderId === null ? null : currentFolderId,
+          });
+        } catch (err) {
+          console.error('Failed to persist UI state:', err);
+        }
+      }, 600);
     }
 
     window.updateColorPreview = function(provider) {
@@ -1955,6 +1959,7 @@
 
     function subscribeToSettings() {
       client.onUpdate(api.images.getSettings, {}, (settings) => {
+        const isFirstSettings = !settingsHydrated;
         settingsHydrated = true;
         storageType = settings.storageType;
         pdfStorageType = settings.pdfStorageType || settings.storageType;
@@ -1964,7 +1969,7 @@
           subfolder: settings.megaSubfolder || ''
         };
         remoteSortOrder = settings.sortOrder ? normalizeSortMode(settings.sortOrder) : remoteSortOrder;
-        if (settings.currentFolderId !== undefined) {
+        if (isFirstSettings && settings.currentFolderId !== undefined) {
           remoteFolderId = settings.currentFolderId;
         }
         if (settings.colors) {
@@ -2067,9 +2072,6 @@
       if (!exists) {
         currentFolderId = null;
         storeCurrentFolderId(currentFolderId);
-        if (settingsHydrated) {
-          void persistUiState();
-        }
       }
     }
 
@@ -2125,6 +2127,7 @@
 
       if (settingsHydrated && foldersHydrated && remoteFolderId !== undefined) {
         const nextFolderId = remoteFolderId || null;
+        remoteFolderId = undefined; // consume it — only apply once on initial load
         const previousFolderId = currentFolderId;
         currentFolderId = nextFolderId;
         normalizeCurrentFolderId();
@@ -2133,12 +2136,10 @@
         }
         if (previousFolderId !== currentFolderId) {
           storeCurrentFolderId(currentFolderId);
-          remoteFolderId = currentFolderId;
           renderFolderBar();
           updateMegaConfigVisibility();
           subscribeToImages();
           if (window._lastImages) renderImages(window._lastImages);
-          void persistUiState();
         }
       }
     }
@@ -3642,11 +3643,12 @@
     function subscribeToFolders() {
       folderSubscriptionCleanup?.();
       folderSubscriptionCleanup = client.onUpdate(api.images.listFolders, {}, (nextFolders) => {
+        const firstLoad = !foldersHydrated;
         foldersHydrated = true;
         const previousFolderId = currentFolderId;
         folders = nextFolders;
         window._folders = folders;
-        normalizeCurrentFolderId();
+        if (firstLoad) normalizeCurrentFolderId();
         Array.from(unlockedFolderIds).forEach(id => {
           const folder = folders.find(item => item._id === id);
           if (!folder?.password) {
@@ -3658,8 +3660,10 @@
         }
         renderFolderBar();
         updateMegaConfigVisibility();
-        if (window._lastImages) renderImages(window._lastImages);
-        applyPersistedUiState();
+        if (window._lastImages) {
+          clearTimeout(window._folderRenderDebounce);
+          window._folderRenderDebounce = setTimeout(() => renderImages(window._lastImages), 80);
+        }
       });
     }
 
