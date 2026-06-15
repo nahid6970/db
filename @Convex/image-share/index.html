@@ -3462,7 +3462,7 @@
         const subfolders0 = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
           ? folders.filter(f => f.parentId === currentFolderId) : [];
         const subHtml0 = subfolders0.map(sf =>
-          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">📁 ${escapeHtml(sf.name)}</button>`
+          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">📁 ${escapeHtml(sf.name)}${sf.hideFromAll ? '<span class="hidden-dot" title="Hidden from All view"></span>' : ''}</button>`
         ).join('');
         gallery.innerHTML = breadcrumbHtml + (
           subHtml0
@@ -3481,7 +3481,7 @@
         <div class="subfolder-grid">
           ${subfolders.map(sf => `
             <button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')">
-              📁 ${escapeHtml(sf.name)}
+              📁 ${escapeHtml(sf.name)}${sf.hideFromAll ? '<span class="hidden-dot" title="Hidden from All view"></span>' : ''}
             </button>
           `).join('')}
         </div>` : '';
