@@ -2177,7 +2177,6 @@
       if (e.key === 'Shift' && !isShiftPressed) {
         isShiftPressed = true;
         updateSelectionMode();
-        selectHoveredImageUnderPointer();
       }
       if (e.key === 'a' && (e.ctrlKey || e.metaKey)) {
         const activeTag = document.activeElement?.tagName;
@@ -2758,9 +2757,7 @@
     };
 
     window.selectImageByHover = function(imageId) {
-      if (!isShiftPressed || selectedImageIds.has(imageId)) return;
-      selectedImageIds.add(imageId);
-      renderSelectionState();
+      // selection is handled by shift+click only
     };
 
     function selectHoveredImageUnderPointer() {
