@@ -1407,6 +1407,13 @@
           <button id="folderFontBoldBtn" onclick="toggleFolderFontStyle('bold')" style="flex:1;background:#444;border-radius:0;font-weight:700;letter-spacing:0.5px;" title="Bold">B</button>
           <button id="folderFontItalicBtn" onclick="toggleFolderFontStyle('italic')" style="flex:1;background:#444;border-radius:0;font-style:italic;" title="Italic"><em>I</em></button>
         </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <label style="color:#ccc;font-size:13px;">Font Size</label>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <input type="number" id="folderFontSizeInput" min="10" max="24" step="1" value="13" oninput="updateFolderColorPreview()" style="width:60px;padding:4px 6px;background:#333;border:1px solid #555;color:#fff;border-radius:4px;font-size:13px;">
+            <span style="color:#888;font-size:12px;">px</span>
+          </div>
+        </div>
         <button onclick="saveFolderColors()" style="background:#4CAF50;border-radius:0;">Save</button>
       </div>
     </div>
@@ -2841,8 +2848,8 @@
           const topLevel = folders.filter(f => !f.parentId);
           return topLevel.map((folder, index) => {
             const customStyle = folder.bgColor && activeFolderId !== folder._id
-              ? `background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}`
-              : `${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}`;
+              ? `background:${folder.bgColor};border-color:${folder.bgColor};color:${folder.fgColor || '#334155'};${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`
+              : `${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`;
             return `
               <button
                 class="folder-chip ${activeFolderId === folder._id ? 'active' : ''}"
@@ -3125,6 +3132,7 @@
       _pendingItalic = folder?.fontItalic || false;
       document.getElementById('folderBgColorInput').value = _pendingBg;
       document.getElementById('folderFgColorInput').value = _pendingFg;
+      document.getElementById('folderFontSizeInput').value = folder?.fontSize || 13;
       updateFolderColorPreview();
       document.getElementById('folderColorModal').classList.remove('hidden');
     };
@@ -3138,6 +3146,8 @@
       preview.style.borderColor = fg + '55';
       preview.style.fontWeight = _pendingBold ? '700' : '600';
       preview.style.fontStyle = _pendingItalic ? 'italic' : 'normal';
+      const fs = parseInt(document.getElementById('folderFontSizeInput')?.value) || 13;
+      preview.style.fontSize = fs + 'px';
       const boldBtn = document.getElementById('folderFontBoldBtn');
       const italicBtn = document.getElementById('folderFontItalicBtn');
       if (boldBtn) boldBtn.style.outline = _pendingBold ? '2px solid #4CAF50' : 'none';
@@ -3178,6 +3188,7 @@
         fgColor: fg,
         fontBold: _pendingBold || undefined,
         fontItalic: _pendingItalic || undefined,
+        fontSize: parseInt(document.getElementById('folderFontSizeInput').value) || undefined,
         parentId: folder.parentId,
       });
       closeFolderColorModal();

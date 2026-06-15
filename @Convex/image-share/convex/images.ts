@@ -210,6 +210,7 @@ export const updateFolder = mutation({
     parentId: v.optional(v.id("folders")),
     fontBold: v.optional(v.boolean()),
     fontItalic: v.optional(v.boolean()),
+    fontSize: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
@@ -220,6 +221,7 @@ export const updateFolder = mutation({
       parentId: args.parentId,
       fontBold: args.fontBold,
       fontItalic: args.fontItalic,
+      fontSize: args.fontSize,
     });
   },
 });
