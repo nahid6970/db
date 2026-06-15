@@ -1286,6 +1286,12 @@
               </div>
             </div>
           </div>
+          <button id="exportPdfBtn" class="icon-btn" onclick="exportToPdf()" title="Export selected to PDF" style="display: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+              <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/>
+            </svg>
+          </button>
           <button id="downloadFolderBtn" class="icon-btn" onclick="downloadFolder()" title="Download Folder" style="display: none; background: #28a745;">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -2854,12 +2860,11 @@
         })(),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
         selectionCount
-          ? `<span class="selection-hint">${selectionCount} selected. Click a folder to move, or 
-             <button class="secondary" onclick="exportToPdf()" style="padding: 4px 8px; border-radius: 0; margin-left: 8px;">Export to PDF</button>
-             </span>`
+          ? `<span class="selection-hint">${selectionCount} selected — click a folder to move</span>`
           : ''
       ];
 
+      document.getElementById('exportPdfBtn').style.display = selectionCount ? '' : 'none';
       folderBar.classList.toggle('selection-active', selectionCount > 0);
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
