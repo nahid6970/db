@@ -1249,6 +1249,13 @@
     }
     #lbExternal:hover { color: #fff; background: rgba(255,255,255,0.1); }
     #lbExternal svg { width: 18px; height: 18px; display: block; }
+    #lbPaint {
+      background: none; border: none; color: #aaa;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      z-index: 8100; padding: 0;
+      width: 28px; height: 28px; border-radius: 0; flex: 0 0 28px;
+    }
+    #lbPaint:hover { color: #22c55e; background: rgba(255,255,255,0.1); }
     #lbActions {
       position: absolute; top: 12px; right: 14px;
       display: flex; align-items: center; gap: 2px;
@@ -3725,8 +3732,8 @@
     <button class="lb-nav" id="lbNext" onclick="lbNav(1)">&#8250;</button>
     <div id="lbActions">
       <button id="lbPaint" onclick="lbOpenPaint()" title="Paint &amp; Edit" style="display:none;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M12 19l7-7-4-4-7 7v4h4z"/><path d="M15 6l3 3"/><path d="M3 21h4"/>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:18px;height:18px;display:block;">
+          <path d="M2 21a1 1 0 0 0 1 1h4a1 1 0 0 0 .707-.293l11-11a1 1 0 0 0 0-1.414l-4-4a1 1 0 0 0-1.414 0l-11 11A1 1 0 0 0 2 17v4z"/><line x1="15.5" y1="5.5" x2="18.5" y2="8.5"/>
         </svg>
       </button>
       <button id="lbExternal" onclick="openCurrentLightboxImageInNewTab()" title="Open in New Tab">
