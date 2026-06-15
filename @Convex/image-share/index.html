@@ -2882,12 +2882,12 @@
             const styles = getComputedStyle(folderBar.querySelector('.folder-chip') || folderBar);
             const baseFontSize = parseFloat(styles.fontSize);
             const widest = [
-              ...baseFolders.map(f => ({ name: f.name, fontSize: baseFontSize })),
-              ...folders.map(f => ({ name: f.name, fontSize: f.fontSize || baseFontSize })),
-              { name: '+ Folder', fontSize: baseFontSize },
+              ...baseFolders.map(f => ({ name: f.name, fontSize: baseFontSize, extra: 0 })),
+              ...folders.map(f => ({ name: f.name, fontSize: f.fontSize || baseFontSize, extra: (f.password ? 20 : 0) + (f.hideFromAll ? 14 : 0) })),
+              { name: '+ Folder', fontSize: baseFontSize, extra: 0 },
             ].reduce((max, f) => {
               ctx.font = `${styles.fontWeight} ${f.fontSize}px ${styles.fontFamily}`;
-              return Math.max(max, ctx.measureText(f.name).width);
+              return Math.max(max, ctx.measureText(f.name).width + f.extra);
             }, 0);
             folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widest + 34)))}px`;
           }
