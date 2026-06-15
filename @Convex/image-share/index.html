@@ -2859,9 +2859,7 @@
           });
         })(),
         `<button class="folder-chip" onclick="createFolder()">+ Folder</button>`,
-        selectionCount
-          ? `<span class="selection-hint">${selectionCount} selected — click a folder to move</span>`
-          : ''
+        ''
       ];
 
       document.getElementById('exportPdfBtn').style.display = selectionCount ? '' : 'none';
