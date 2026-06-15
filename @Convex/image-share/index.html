@@ -665,6 +665,9 @@
       padding: 6px 2px;
     }
 
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+
     .folder-lock {
       width: 12px;
       height: 12px;
@@ -1364,7 +1367,7 @@
   <div class="context-menu" id="folderContextMenu">
     <button title="Rename" onclick="renameFolderFromMenu()">✏️</button>
     <button title="New subfolder" onclick="createSubfolderFromMenu()">📁</button>
-    <button title="Set Colors" class="top-folder-only" onclick="setFolderColorsFromMenu()">🎨</button>
+    <button title="Set Colors" onclick="setFolderColorsFromMenu()">🎨</button>
     <button title="Hide from All" onclick="toggleHideFromAllFromMenu()" id="folderHideFromAllBtn">👁️</button>
     <button title="Set Password" class="top-folder-only" onclick="setFolderPasswordFromMenu()" id="folderPasswordBtn">🔒</button>
     <button title="Remove Password" class="top-folder-only" onclick="removeFolderPasswordFromMenu()" id="folderPasswordRemoveBtn">🔓</button>
@@ -1415,7 +1418,7 @@
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <label style="color:#ccc;font-size:13px;">Font Size</label>
           <div style="display:flex;align-items:center;gap:8px;">
-            <input type="number" id="folderFontSizeInput" min="10" max="24" step="1" value="13" oninput="updateFolderColorPreview()" style="width:60px;padding:4px 6px;background:#333;border:1px solid #555;color:#fff;border-radius:4px;font-size:13px;">
+            <input type="number" id="folderFontSizeInput" min="10" max="24" step="1" value="13" oninput="updateFolderColorPreview()" style="width:60px;padding:4px 6px;background:#333;border:1px solid #555;color:#fff;border-radius:4px;font-size:13px;-moz-appearance:textfield;appearance:textfield;">
             <span style="color:#888;font-size:12px;">px</span>
           </div>
         </div>
@@ -3568,9 +3571,18 @@
       if (!images.length) {
         const subfolders0 = currentFolderId && currentFolderId !== 'none' && currentFolderId !== 'shared'
           ? folders.filter(f => f.parentId === currentFolderId) : [];
-        const subHtml0 = subfolders0.map(sf =>
-          `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')" title="${sf.hideFromAll ? 'Hidden from All view' : ''}" ${sf.hideFromAll ? 'style="opacity:0.45;"' : ''}>📁 ${escapeHtml(sf.name)}</button>`
-        ).join('');
+        const subHtml0 = subfolders0.map(sf => {
+          const sfStyle = [
+            sf.bgColor ? `background:${sf.bgColor}` : '',
+            sf.fgColor ? `color:${sf.fgColor}` : '',
+            sf.borderColor ? `border-color:${sf.borderColor}` : '',
+            sf.fontBold ? 'font-weight:700' : '',
+            sf.fontItalic ? 'font-style:italic' : '',
+            sf.fontSize ? `font-size:${sf.fontSize}px` : '',
+            sf.hideFromAll ? 'opacity:0.45' : '',
+          ].filter(Boolean).join(';');
+          return `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')" title="${sf.hideFromAll ? 'Hidden from All view' : ''}" ${sfStyle ? `style="${sfStyle}"` : ''}>📁 ${escapeHtml(sf.name)}</button>`;
+        }).join('');
         gallery.innerHTML = breadcrumbHtml + (
           subHtml0
             ? `<div class="subfolder-grid">${subHtml0}</div>`
@@ -3586,11 +3598,20 @@
         : [];
       const subfolderHtml = subfolders.length ? `
         <div class="subfolder-grid">
-          ${subfolders.map(sf => `
-            <button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')" title="${sf.hideFromAll ? 'Hidden from All view' : ''}" ${sf.hideFromAll ? 'style="opacity:0.45;"' : ''}>
+          ${subfolders.map(sf => {
+            const sfStyle = [
+              sf.bgColor ? `background:${sf.bgColor}` : '',
+              sf.fgColor ? `color:${sf.fgColor}` : '',
+              sf.borderColor ? `border-color:${sf.borderColor}` : '',
+              sf.fontBold ? 'font-weight:700' : '',
+              sf.fontItalic ? 'font-style:italic' : '',
+              sf.fontSize ? `font-size:${sf.fontSize}px` : '',
+              sf.hideFromAll ? 'opacity:0.45' : '',
+            ].filter(Boolean).join(';');
+            return `<button class="subfolder-card" onclick="selectFolder('${sf._id}')" oncontextmenu="openFolderContextMenu(event, '${sf._id}')" title="${sf.hideFromAll ? 'Hidden from All view' : ''}" ${sfStyle ? `style="${sfStyle}"` : ''}>
               📁 ${escapeHtml(sf.name)}
-            </button>
-          `).join('')}
+            </button>`;
+          }).join('')}
         </div>` : '';
       
       gallery.innerHTML = breadcrumbHtml + subfolderHtml + sorted.map((img, i) => {
