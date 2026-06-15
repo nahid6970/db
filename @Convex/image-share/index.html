@@ -3353,7 +3353,11 @@
     window.moveImageToFolder = async function(imageId, selectEl) {
       pauseAutoRefresh();
       const folderId = selectEl.value || undefined;
-      await client.mutation(api.images.moveToFolder, { imageId, folderId });
+      if (selectedImageIds.size > 1 && selectedImageIds.has(imageId)) {
+        await moveSelectedImages(folderId);
+      } else {
+        await client.mutation(api.images.moveToFolder, { imageId, folderId });
+      }
     };
 
     window.moveSelectedImages = async function(targetFolderId) {
