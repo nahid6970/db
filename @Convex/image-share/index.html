@@ -2877,16 +2877,18 @@
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
         if (folderPanel) {
-          const allFolders = [
-            ...baseFolders,
-            ...folders.map(f => ({ name: f.name })),
-            { name: '+ Folder' },
-          ];
           const ctx = document.createElement('canvas').getContext('2d');
           if (ctx) {
             const styles = getComputedStyle(folderBar.querySelector('.folder-chip') || folderBar);
-            ctx.font = `${styles.fontWeight} ${styles.fontSize} ${styles.fontFamily}`;
-            const widest = allFolders.reduce((max, f) => Math.max(max, ctx.measureText(f.name).width), 0);
+            const baseFontSize = parseFloat(styles.fontSize);
+            const widest = [
+              ...baseFolders.map(f => ({ name: f.name, fontSize: baseFontSize })),
+              ...folders.map(f => ({ name: f.name, fontSize: f.fontSize || baseFontSize })),
+              { name: '+ Folder', fontSize: baseFontSize },
+            ].reduce((max, f) => {
+              ctx.font = `${styles.fontWeight} ${f.fontSize}px ${styles.fontFamily}`;
+              return Math.max(max, ctx.measureText(f.name).width);
+            }, 0);
             folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widest + 34)))}px`;
           }
         }
