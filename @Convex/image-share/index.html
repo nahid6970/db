@@ -1775,12 +1775,15 @@
       // Populate Settings Folder Select
       const sfs = document.getElementById('settingsFolderSelect');
       if (sfs) {
+        const flattenSfs = (parentId, depth) =>
+          folders.filter(f => (f.parentId || null) === (parentId || null))
+            .flatMap(f => [{ id: f._id, name: f.name, _depth: depth }, ...flattenSfs(f._id, depth + 1)]);
         const options = [
-          { id: "", name: "No Folder Selected" },
-          { id: "none", name: "No folder (images only)" },
-          ...folders.filter(f => !f.parentId).flatMap(f => [f, ...folders.filter(s => s.parentId === f._id)]).map(f => ({ id: f._id, name: f.name, parentId: f.parentId }))
+          { id: "", name: "No Folder Selected", _depth: 0 },
+          { id: "none", name: "No folder (images only)", _depth: 0 },
+          ...flattenSfs(null, 0)
         ];
-        sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${o.parentId ? '  › ' : ''}${escapeHtml(o.name)}</option>`).join("");
+        sfs.innerHTML = options.map(o => `<option value="${o.id}" ${currentFolderId === (o.id === "" ? null : o.id) ? "selected" : ""}>${'  '.repeat(o._depth)}${o._depth ? '› ' : ''}${escapeHtml(o.name)}</option>`).join("");
       }
 
       if (storageType === 'mega') {
@@ -2705,13 +2708,15 @@
 
     function getFolderOptions(selectedFolderId) {
       const selectedValue = selectedFolderId || '';
-      const topLevel = folders.filter(f => !f.parentId);
-      const ordered = topLevel.flatMap(f => [f, ...folders.filter(s => s.parentId === f._id)]);
+      const flattenFolders = (parentId, depth) =>
+        folders.filter(f => (f.parentId || null) === (parentId || null))
+          .flatMap(f => [{ ...f, _depth: depth }, ...flattenFolders(f._id, depth + 1)]);
+      const ordered = flattenFolders(null, 0);
       return [
         `<option value="" ${selectedValue === '' ? 'selected' : ''}>No folder</option>`,
         ...ordered.map(folder => `
           <option value="${folder._id}" ${selectedValue === folder._id ? 'selected' : ''}>
-            ${folder.parentId ? '  › ' : ''}${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
+            ${'  '.repeat(folder._depth)}${folder._depth ? '› ' : ''}${escapeHtml(folder.name)}${folder.password ? ' [locked]' : ''}
           </option>
         `)
       ].join('');
@@ -3837,8 +3842,10 @@
 
     function getFolderPickerItems(currentFolderId) {
       const allFolders = window._folders || [];
-      const topLevel = allFolders.filter(f => !f.parentId);
-      const ordered = topLevel.flatMap(f => [f, ...allFolders.filter(s => s.parentId === f._id)]);
+      const flattenFolders = (parentId, depth) =>
+        allFolders.filter(f => (f.parentId || null) === (parentId || null))
+          .flatMap(f => [{ ...f, _depth: depth }, ...flattenFolders(f._id, depth + 1)]);
+      const ordered = flattenFolders(null, 0);
 
       return [
         {
@@ -3852,7 +3859,8 @@
           return {
             label: folder.name,
             value: folder._id,
-            isSubfolder: !!folder.parentId,
+            isSubfolder: folder._depth > 0,
+            depth: folder._depth,
             searchText: `${folder.name} ${path}`.toLowerCase(),
             displayPath: path,
             selected: folder._id === currentFolderId
@@ -3877,10 +3885,11 @@
 
       list.innerHTML = items.map(item => {
         const isSelected = item.value === _pickerSelectedFolderId;
+        const indent = item.depth ? 10 + item.depth * 12 : 12;
         return `
           <button
             onclick="pickFolder('${item.value}')"
-            style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:${item.isSubfolder ? '5px 10px 5px 22px' : '8px 12px'};background:${isSelected ? '#eff6ff' : 'transparent'};color:${isSelected ? '#1d4ed8' : '#1e293b'};border:none;border-radius:0;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;"
+            style="display:flex;align-items:center;gap:8px;width:100%;text-align:left;padding:${item.isSubfolder ? `5px 10px 5px ${indent}px` : '8px 12px'};background:${isSelected ? '#eff6ff' : 'transparent'};color:${isSelected ? '#1d4ed8' : '#1e293b'};border:none;border-radius:0;font-size:${item.isSubfolder ? '12px' : '13px'};cursor:pointer;"
           >
             ${item.isSubfolder ? `<svg width="11" height="11" viewBox="0 0 12 12" fill="none" style="flex-shrink:0;opacity:0.4"><path d="M2 2v6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 8l3 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M8 6l2 2-2 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>` : ''}
             <span style="display:flex;flex-direction:column;min-width:0;">
