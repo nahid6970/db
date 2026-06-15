@@ -2717,7 +2717,7 @@
       const img = sorted[_lbIndex];
       if (!img) return;
       closeLightbox();
-      openPaintEditor(img._id, img.url, img.filename);
+      openPaintEditor(img._id, img.url, img.filename, img.folderId);
     };
 
     document.addEventListener('keydown', e => {
@@ -4045,7 +4045,7 @@
 
   // ── Paint Editor ────────────────────────────────────────────────────────
   (() => {
-    let _paintId = null, _paintFilename = null;
+    let _paintId = null, _paintFilename = null, _paintFolderId = null;
     let _tool = 'brush', _drawing = false;
     let _history = [];
     const MAX_UNDO = 20;
@@ -4070,8 +4070,8 @@
       canvas().style.height = 'auto';
     };
 
-    window.openPaintEditor = async function(id, url, filename) {
-      _paintId = id; _paintFilename = filename;
+    window.openPaintEditor = async function(id, url, filename, folderId) {
+      _paintId = id; _paintFilename = filename; _paintFolderId = folderId || null;
       document.getElementById('paintModalTitle').textContent = `Paint: ${filename}`;
       document.getElementById('paintZoom').value = 100;
       document.getElementById('paintZoomVal').textContent = '100%';
@@ -4158,7 +4158,7 @@
           const uploadUrl = await cl.mutation(api.images.generateUploadUrl);
           const res = await fetch(uploadUrl, { method: 'POST', headers: { 'Content-Type': 'image/jpeg' }, body: blob });
           const { storageId } = await res.json();
-          await cl.mutation(api.images.saveStorageImage, { storageId, filename: _paintFilename });
+          await cl.mutation(api.images.saveStorageImage, { storageId, filename: _paintFilename, folderId: _paintFolderId || undefined });
           await cl.mutation(api.images.remove, { id: _paintId });
           closePaintEditor();
         } catch(err) { alert('Save failed: ' + err.message); }
