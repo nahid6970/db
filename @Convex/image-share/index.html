@@ -1293,6 +1293,11 @@
               <line x1="9" y1="13" x2="15" y2="13"/><line x1="9" y1="17" x2="12" y2="17"/>
             </svg>
           </button>
+          <button id="bulkMoveStorageBtn" class="icon-btn" onclick="openStoragePickerPopup(event, null)" title="Move selected to storage" style="display: none; background: #22c55e;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"/><path d="M12 5l7 7-7 7"/>
+            </svg>
+          </button>
           <button id="downloadFolderBtn" class="icon-btn" onclick="downloadFolder()" title="Download Folder" style="display: none; background: #28a745;">
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
@@ -2375,6 +2380,14 @@
     window.performUpload = async function(file) {
       const status = document.getElementById('status');
       try {
+        // Dedup: if same filename+size already exists, skip upload
+        const existing = window._lastImages || [];
+        const duplicate = existing.find(img => img.filename === file.name && img.fileSize === file.size);
+        if (duplicate) {
+          status.textContent = `Skipped duplicate: ${file.name}`;
+          status.style.color = '#f59e0b';
+          return true;
+        }
         if (storageType === "convex") {
           const postUrl = await client.mutation(api.images.generateUploadUrl);
           const result = await fetch(postUrl, {
@@ -2573,6 +2586,127 @@
     window.deleteImage = async function(id) {
       if (!await showConfirm('Delete this image?', true)) return;
       await client.mutation(api.images.remove, { id });
+    };
+
+    // ── Storage Picker ──────────────────────────────────────────────
+    let _storagePickerIds = []; // one or many image IDs
+
+    window.openStoragePickerPopup = function(event, imageId) {
+      event.stopPropagation();
+      _storagePickerIds = imageId ? [imageId] : Array.from(selectedImageIds);
+      const popup = document.getElementById('storagePickerPopup');
+      popup.style.display = 'block';
+      const rect = event.currentTarget.getBoundingClientRect();
+      const pw = popup.offsetWidth || 160;
+      let left = rect.left;
+      let top = rect.bottom + 6;
+      if (left + pw > window.innerWidth - 8) left = window.innerWidth - pw - 8;
+      if (top + popup.offsetHeight > window.innerHeight - 8) top = rect.top - popup.offsetHeight - 6;
+      popup.style.left = Math.max(6, left) + 'px';
+      popup.style.top = Math.max(6, top) + 'px';
+    };
+
+    window.closeStoragePickerPopup = function() {
+      document.getElementById('storagePickerPopup').style.display = 'none';
+    };
+
+    document.addEventListener('click', e => {
+      if (!document.getElementById('storagePickerPopup').contains(e.target)) closeStoragePickerPopup();
+    });
+
+    window.confirmStorageMove = async function(targetStorage) {
+      closeStoragePickerPopup();
+      if (!_storagePickerIds.length) return;
+      const ids = [..._storagePickerIds];
+      _storagePickerIds = [];
+
+      const status = document.getElementById('status');
+      let done = 0;
+      for (const id of ids) {
+        const img = window._lastImages?.find(i => i._id === id);
+        if (!img) continue;
+
+        // Detect current storage
+        const isMega = img.url?.includes('mega.nz');
+        const isConvex = !!img.storageId;
+        const currentStorage = isConvex ? 'convex' : (isMega ? 'mega' : 'cloudinary');
+        if (currentStorage === targetStorage) { done++; continue; }
+
+        status.textContent = `Moving ${done + 1}/${ids.length}: ${img.filename}...`;
+        status.style.color = '#007bff';
+
+        try {
+          // 1. Download file as blob from current storage
+          let blob;
+          if (isMega) {
+            const blobUrl = await getMegaBlobUrl(img.url, img.filename);
+            if (!blobUrl) throw new Error('Failed to decrypt MEGA file');
+            blob = await fetch(blobUrl).then(r => r.blob());
+          } else {
+            blob = await fetch(img.url).then(r => r.blob());
+          }
+          const file = new File([blob], img.filename, { type: blob.type });
+
+          // 2. Upload to target storage, get new URL
+          let newUrl = null;
+          let newStorageId = undefined;
+
+          if (targetStorage === 'convex') {
+            const postUrl = await client.mutation(api.images.generateUploadUrl);
+            const res = await fetch(postUrl, { method: 'POST', headers: { 'Content-Type': file.type }, body: blob });
+            const { storageId } = await res.json();
+            newStorageId = storageId;
+            // newUrl left null — mutation resolves it from storageId
+          } else if (targetStorage === 'mega') {
+            const MegaStorage = window.mega?.Storage;
+            if (!MegaStorage || !megaSettings.email || !megaSettings.password) throw new Error('MEGA not configured');
+            if (!megaStorage) {
+              megaStorage = new MegaStorage({ email: megaSettings.email, password: megaSettings.password, autologin: false });
+              await new Promise((resolve, reject) => megaStorage.login(err => err ? reject(err) : resolve()));
+            }
+            let targetNode = megaStorage.root;
+            if (megaSettings.subfolder) {
+              const found = (megaStorage.root.children || []).find(n => n.directory && n.name === megaSettings.subfolder);
+              if (found) targetNode = found;
+            }
+            const buf = await blob.arrayBuffer();
+            const uploaded = await new Promise((resolve, reject) => {
+              const up = targetNode.upload({ name: file.name, size: file.size }, new Uint8Array(buf));
+              up.on('complete', resolve); up.on('error', reject);
+            });
+            newUrl = await new Promise((resolve, reject) => uploaded.link((err, url) => err ? reject(err) : resolve(url)));
+          } else {
+            // Cloudinary
+            const formData = new FormData();
+            formData.append('file', file);
+            formData.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+            formData.append('folder', 'myGallery');
+            const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/auto/upload`, { method: 'POST', body: formData });
+            const data = await res.json();
+            newUrl = data.secure_url;
+          }
+
+          // 3. Update DB record (also deletes old Convex file if needed)
+          await client.mutation(api.images.updateImageStorage, {
+            id: img._id,
+            ...(newUrl ? { url: newUrl } : {}),
+            ...(newStorageId ? { storageId: newStorageId } : {}),
+          });
+
+          done++;
+        } catch (err) {
+          console.error(`Failed to move ${img.filename}:`, err);
+          status.textContent = `Failed: ${img.filename} — ${err.message}`;
+          status.style.color = '#dc3545';
+          await new Promise(r => setTimeout(r, 2000));
+        }
+      }
+
+      selectedImageIds.clear();
+      renderSelectionState();
+      status.textContent = `Moved ${done} file${done !== 1 ? 's' : ''} successfully!`;
+      status.style.color = '#28a745';
+      setTimeout(() => status.textContent = '', 3000);
     };
 
     window.togglePin = async function(id) {
@@ -2991,6 +3125,7 @@
       ];
 
       document.getElementById('exportPdfBtn').style.display = selectionCount ? '' : 'none';
+      document.getElementById('bulkMoveStorageBtn').style.display = selectionCount ? '' : 'none';
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
         if (folderPanel) {
@@ -3718,6 +3853,7 @@
               ${getFolderOptions(img.folderId)}
             </select>
             <button class="action-dot blue" onclick="openFolderPickerPopup(event,'${img._id}','${img.folderId||''}')" title="Move to folder"></button>
+            <button class="action-dot green" onclick="openStoragePickerPopup(event,'${img._id}')" title="Move to storage"></button>
             <button class="danger delete-btn action-dot red" onclick="deleteImage('${img._id}')" title="Delete"></button>
           </div>
           <div class="image-info">
@@ -3825,6 +3961,20 @@
 
   <!-- Folder Picker Popup -->
   <div id="folderPickerPopup" style="display:none;position:fixed;z-index:5000;background:white;border:1px solid #e2e8f0;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);min-width:170px;padding:8px;max-height:320px;overflow:hidden;">
+  </div>
+
+  <!-- Storage Picker Popup -->
+  <div id="storagePickerPopup" style="display:none;position:fixed;z-index:5000;background:#1e2228;border:1px solid #3a3f47;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.45);padding:8px;min-width:160px;">
+    <div style="font-size:11px;color:#888;padding:4px 8px 6px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Move to Storage</div>
+    <button onclick="confirmStorageMove('cloudinary')" style="display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;background:transparent;color:#dbe2ea;border:none;border-radius:8px;font-size:13px;cursor:pointer;" onmouseover="this.style.background='#2b3138'" onmouseout="this.style.background='transparent'">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--color-cloudinary,#0369a1);flex-shrink:0;display:inline-block;"></span> Cloudinary
+    </button>
+    <button onclick="confirmStorageMove('convex')" style="display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;background:transparent;color:#dbe2ea;border:none;border-radius:8px;font-size:13px;cursor:pointer;" onmouseover="this.style.background='#2b3138'" onmouseout="this.style.background='transparent'">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--color-convex,#ec4899);flex-shrink:0;display:inline-block;"></span> Convex
+    </button>
+    <button onclick="confirmStorageMove('mega')" style="display:flex;align-items:center;gap:8px;width:100%;padding:8px 10px;background:transparent;color:#dbe2ea;border:none;border-radius:8px;font-size:13px;cursor:pointer;" onmouseover="this.style.background='#2b3138'" onmouseout="this.style.background='transparent'">
+      <span style="width:8px;height:8px;border-radius:50%;background:var(--color-mega,#ef4444);flex-shrink:0;display:inline-block;"></span> MEGA
+    </button>
   </div>
 
   <!-- Lightbox -->

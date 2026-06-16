@@ -41,6 +41,35 @@ export const list = query({
   },
 });
 
+export const getStorageUrl = query({
+  args: { storageId: v.id("_storage") },
+  handler: async (ctx, args) => {
+    return await ctx.storage.getUrl(args.storageId);
+  },
+});
+
+export const updateImageStorage = mutation({
+  args: {
+    id: v.id("images"),
+    url: v.optional(v.string()),
+    storageId: v.optional(v.id("_storage")),
+  },
+  handler: async (ctx, args) => {
+    const image = await ctx.db.get(args.id);
+    if (!image) throw new Error("Image not found");
+    // Delete old Convex file
+    if (image.storageId) {
+      await ctx.storage.delete(image.storageId);
+    }
+    let url = args.url;
+    if (args.storageId) {
+      url = (await ctx.storage.getUrl(args.storageId)) ?? url;
+    }
+    if (!url) throw new Error("No URL or storageId provided");
+    await ctx.db.patch(args.id, { url, storageId: args.storageId });
+  },
+});
+
 export const toggleSharing = mutation({
   args: { id: v.id("images"), isShared: v.boolean() },
   handler: async (ctx, args) => {
