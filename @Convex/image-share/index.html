@@ -1433,6 +1433,21 @@
         <label style="color:#ccc;font-size:12px;">Tool:</label>
         <button id="paintToolBrush" onclick="setPaintTool('brush')" style="background:#22c55e;border-radius:4px;padding:3px 10px;font-size:12px;">Brush</button>
         <button id="paintToolEraser" onclick="setPaintTool('eraser')" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">Eraser</button>
+        <div style="position:relative;display:inline-block;">
+          <button id="paintToolShapeBtn" onclick="toggleShapePicker()" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">
+            <span id="paintShapeIcon">▭</span> ▾
+          </button>
+          <div id="paintShapePicker" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:6px;z-index:100;display:none;grid-template-columns:repeat(4,32px);gap:4px;">
+            <button title="Line" onclick="selectShape('line')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">╱</button>
+            <button title="Rectangle" onclick="selectShape('rect')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">▭</button>
+            <button title="Filled Rectangle" onclick="selectShape('rectFill')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">▬</button>
+            <button title="Circle" onclick="selectShape('circle')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">○</button>
+            <button title="Filled Circle" onclick="selectShape('circleFill')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">●</button>
+            <button title="Triangle" onclick="selectShape('triangle')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">△</button>
+            <button title="Arrow" onclick="selectShape('arrow')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">→</button>
+            <button title="Text" onclick="selectShape('text')" style="background:#333;border-radius:4px;padding:4px;font-size:13px;font-weight:700;width:32px;height:32px;">T</button>
+          </div>
+        </div>
         <label style="color:#ccc;font-size:12px;margin-left:8px;">Color:</label>
         <input type="color" id="paintColor" value="#ff0000" style="width:32px;height:28px;padding:0;border:none;background:transparent;cursor:pointer;">
         <label style="color:#ccc;font-size:12px;margin-left:8px;">Size:</label>
@@ -4088,6 +4103,9 @@
     let _paintId = null, _paintFilename = null, _paintFolderId = null;
     let _tool = 'brush', _drawing = false;
     let _history = [];
+    let _shape = null; // current shape type
+    let _shapeStart = null; // {x,y} where shape drag began
+    let _snapShot = null; // imageData snapshot before shape preview
     const MAX_UNDO = 20;
 
     const modal  = () => document.getElementById('paintModal');
@@ -4099,10 +4117,35 @@
     });
 
     window.setPaintTool = function(tool) {
-      _tool = tool;
+      _tool = tool; _shape = null;
       document.getElementById('paintToolBrush').style.background = tool === 'brush' ? '#22c55e' : '#444';
       document.getElementById('paintToolEraser').style.background = tool === 'eraser' ? '#22c55e' : '#444';
+      document.getElementById('paintToolShapeBtn').style.background = '#444';
     };
+
+    const SHAPE_ICONS = { line:'╱', rect:'▭', rectFill:'▬', circle:'○', circleFill:'●', triangle:'△', arrow:'→', text:'T' };
+
+    window.toggleShapePicker = function() {
+      const p = document.getElementById('paintShapePicker');
+      p.style.display = p.style.display === 'grid' ? 'none' : 'grid';
+    };
+
+    window.selectShape = function(shape) {
+      _shape = shape; _tool = 'shape';
+      document.getElementById('paintShapeIcon').textContent = SHAPE_ICONS[shape] || '▭';
+      document.getElementById('paintToolShapeBtn').style.background = '#22c55e';
+      document.getElementById('paintToolBrush').style.background = '#444';
+      document.getElementById('paintToolEraser').style.background = '#444';
+      document.getElementById('paintShapePicker').style.display = 'none';
+    };
+
+    // close picker when clicking outside
+    document.addEventListener('mousedown', e => {
+      if (!e.target.closest('#paintShapePicker') && !e.target.closest('#paintToolShapeBtn')) {
+        const p = document.getElementById('paintShapePicker');
+        if (p) p.style.display = 'none';
+      }
+    });
 
     window.applyPaintZoom = function(val) {
       document.getElementById('paintZoomVal').textContent = val + '%';
@@ -4163,22 +4206,95 @@
     }
 
     function startDraw(e) {
-      e.preventDefault(); saveHistory(); _drawing = true;
+      e.preventDefault();
       const c = canvas(), x = ctx(), [px, py] = getPos(e, c);
+      if (_tool === 'shape') {
+        saveHistory();
+        _shapeStart = { x: px, y: py };
+        _snapShot = x.getImageData(0, 0, c.width, c.height);
+        _drawing = true;
+        if (_shape === 'text') {
+          _drawing = false;
+          const txt = prompt('Enter text:');
+          if (txt) {
+            x.globalCompositeOperation = 'source-over';
+            x.fillStyle = document.getElementById('paintColor').value;
+            x.font = `${parseInt(document.getElementById('paintSize').value) * 3 + 10}px sans-serif`;
+            x.fillText(txt, px, py);
+          }
+          _shapeStart = null; _snapShot = null;
+        }
+        return;
+      }
+      saveHistory(); _drawing = true;
       applyTool(x); x.beginPath(); x.moveTo(px, py);
     }
+
+    function drawShape(x, sx, sy, ex, ey) {
+      const color = document.getElementById('paintColor').value;
+      const lw = parseInt(document.getElementById('paintSize').value);
+      x.globalCompositeOperation = 'source-over';
+      x.strokeStyle = color; x.fillStyle = color; x.lineWidth = lw;
+      x.lineCap = 'round'; x.lineJoin = 'round';
+      x.beginPath();
+      if (_shape === 'line') {
+        x.moveTo(sx, sy); x.lineTo(ex, ey); x.stroke();
+      } else if (_shape === 'rect') {
+        x.strokeRect(sx, sy, ex - sx, ey - sy);
+      } else if (_shape === 'rectFill') {
+        x.fillRect(sx, sy, ex - sx, ey - sy);
+      } else if (_shape === 'circle') {
+        const rx = Math.abs(ex-sx)/2, ry = Math.abs(ey-sy)/2;
+        x.ellipse(sx+(ex-sx)/2, sy+(ey-sy)/2, rx, ry, 0, 0, Math.PI*2);
+        x.stroke();
+      } else if (_shape === 'circleFill') {
+        const rx = Math.abs(ex-sx)/2, ry = Math.abs(ey-sy)/2;
+        x.ellipse(sx+(ex-sx)/2, sy+(ey-sy)/2, rx, ry, 0, 0, Math.PI*2);
+        x.fill();
+      } else if (_shape === 'triangle') {
+        x.moveTo((sx+ex)/2, sy); x.lineTo(ex, ey); x.lineTo(sx, ey); x.closePath(); x.stroke();
+      } else if (_shape === 'arrow') {
+        const dx = ex-sx, dy = ey-sy, len = Math.sqrt(dx*dx+dy*dy);
+        const ux = dx/len, uy = dy/len, hw = Math.max(lw*3, 12);
+        x.moveTo(sx, sy); x.lineTo(ex - ux*hw, ey - uy*hw); x.stroke();
+        x.beginPath();
+        const angle = Math.atan2(dy, dx);
+        x.moveTo(ex, ey);
+        x.lineTo(ex - hw*Math.cos(angle-0.4), ey - hw*Math.sin(angle-0.4));
+        x.lineTo(ex - hw*Math.cos(angle+0.4), ey - hw*Math.sin(angle+0.4));
+        x.closePath(); x.fill();
+      }
+    }
+
     function moveDraw(e) {
       if (!_drawing) return;
       e.preventDefault();
       const c = canvas(), x = ctx(), [px, py] = getPos(e, c);
+      if (_tool === 'shape' && _shapeStart && _snapShot) {
+        x.putImageData(_snapShot, 0, 0); // restore before redrawing preview
+        drawShape(x, _shapeStart.x, _shapeStart.y, px, py);
+        return;
+      }
       x.lineTo(px, py); x.stroke();
     }
-    function endDraw() { _drawing = false; ctx()?.closePath(); }
+
+    function endDraw(e) {
+      if (!_drawing) return;
+      _drawing = false;
+      if (_tool === 'shape' && _shapeStart && e) {
+        const c = canvas(), x = ctx(), [px, py] = getPos(e.touches ? { ...e, touches: [{ clientX: e.changedTouches?.[0]?.clientX || _shapeStart.x, clientY: e.changedTouches?.[0]?.clientY || _shapeStart.y }] } : e, c);
+        if (_snapShot) x.putImageData(_snapShot, 0, 0);
+        drawShape(x, _shapeStart.x, _shapeStart.y, px, py);
+        _shapeStart = null; _snapShot = null;
+        return;
+      }
+      ctx()?.closePath();
+    }
 
     canvas().addEventListener('mousedown', startDraw);
     canvas().addEventListener('mousemove', moveDraw);
     canvas().addEventListener('mouseup', endDraw);
-    canvas().addEventListener('mouseleave', endDraw);
+    canvas().addEventListener('mouseleave', e => { if (_drawing) endDraw(e); });
     canvas().addEventListener('touchstart', startDraw, { passive: false });
     canvas().addEventListener('touchmove', moveDraw, { passive: false });
     canvas().addEventListener('touchend', endDraw);
