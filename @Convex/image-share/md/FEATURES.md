@@ -1,5 +1,33 @@
 # Feature Specifications
 
+## Move Storage (Per-Image & Bulk)
+**Status:** ✅ Complete
+**Description:** Move any image(s) from one storage provider to another without creating a new record.
+**Implementation:**
+- Green action dot on each card opens a storage picker popup (Cloudinary / Convex / MEGA).
+- Green arrow button appears in top toolbar when multiple images are selected (bulk move).
+- Downloads file from current storage, uploads to target, updates the same DB record (`updateImageStorage` mutation).
+- Moving from Convex: old file is deleted from Convex file storage inside the mutation.
+- Moving from MEGA: uses `getMegaBlobUrl` for client-side decryption before download.
+**Files Involved:** `index.html`, `convex/images.ts`
+
+## Dedup Upload Prevention
+**Status:** ✅ Complete
+**Description:** Before uploading any file, checks if an image with the same filename and file size already exists in the gallery. If so, skips the upload.
+**Implementation:** Checked in `performUpload` against `window._lastImages`. Shows amber "Skipped duplicate" status message. Applies to all storage types.
+**Files Involved:** `index.html`
+
+## Convex Function Call Optimizations
+**Status:** ✅ Complete
+**Description:** Reduces unnecessary Convex function calls (was: getSettings 44K, list 34K, updateSettings 30K).
+**Implementation:**
+- `persistUiState` dirty-check: skips `updateSettings` mutation if state hasn't changed since last write.
+- `subscribeToImages` dedup: skips re-subscription if folderId is unchanged.
+- `subscribeToSettings` guard: `applyPersistedUiState` only called when remote sort/folder actually changed.
+- Initial settings load seeds the dirty-check state to prevent echo-write.
+- Cross-device folder sync preserved: `currentFolderId` changes always write through.
+**Files Involved:** `index.html`
+
 ## Paint Editor
 **Status:** ✅ Complete
 **Description:** Full-screen paint/annotation editor for Convex-stored images, opened from the lightbox.

@@ -1,5 +1,20 @@
 # Problems & Fixes Log
 
+## [2026-06-16] - Convex updateSettings Called 30K Times
+**Problem:** Dashboard showed `images.updateSettings` at 30K function calls, causing excessive DB I/O.
+**Root Cause:** `subscribeToSettings` called `applyPersistedUiState()` on every settings update, which could trigger `persistUiState()` (a write), which then triggered another subscription update — a write loop.
+**Solution:**
+- Added dirty-check in `persistUiState`: serializes storageType/colors/sortOrder/mega to JSON, skips mutation if identical to last write (`_lastPersistedState`).
+- `subscribeToSettings` now only calls `applyPersistedUiState` when remote sort or folder actually changed (`_lastSettingsKey` comparison).
+- Seeds `_lastPersistedState` on first settings load to prevent immediate echo-write.
+- `currentFolderId` changes bypass the dirty-check so cross-device folder sync still works.
+**Files Modified:** `index.html`
+
+## [2026-06-16] - subscribeToImages Re-subscribing on Every Settings Update
+**Problem:** `subscribeToImages` was called from `applyPersistedUiState` which ran on every settings update, creating redundant `list` subscriptions.
+**Solution:** Track `window._lastImageSubKey` (the folderId). If already subscribed to the same folder, return early without tearing down and recreating the subscription.
+**Files Modified:** `index.html`
+
 ## [2026-06-16] - Folder Bar Jiggle / Constant Re-render Loop
 **Problem:** Folder bar and subfolder breadcrumb flickered rapidly. `updateSettings` Convex errors every ~2 seconds.
 **Root Cause (multi-part):**

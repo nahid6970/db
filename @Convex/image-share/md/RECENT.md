@@ -1,6 +1,37 @@
 # Recent Development Log
 All sessions recorded here — no archiving, full history in one place.
 
+## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
+
+### Move Storage Button
+- Added green action dot on every image card → opens storage picker popup (Cloudinary / Convex / MEGA).
+- Green arrow button appears in toolbar when images are selected (bulk move).
+- `openStoragePickerPopup(event, imageId)` — single image or null for bulk (uses `selectedImageIds`).
+- `confirmStorageMove(targetStorage)` — downloads file from current storage, uploads to target, updates same DB record via `updateImageStorage` mutation (no duplicate record created).
+- Moving from Convex: old file deleted from Convex file storage automatically inside the mutation.
+- Moving from MEGA: uses existing `getMegaBlobUrl` for decryption before download.
+- Status bar shows progress: "Moving 1/N: filename..." and final count.
+
+### Dedup on Upload
+- `performUpload` checks `window._lastImages` for matching `filename + fileSize` before any upload.
+- If duplicate found: skips upload, shows "Skipped duplicate: filename" in amber. Returns `true` so progress counter still advances.
+- Applied to all storage types (Cloudinary, Convex, MEGA).
+
+### Convex Function Call Optimizations
+- `persistUiState` dirty-check: serializes storageType/mega/colors/sortOrder to JSON, skips mutation if unchanged. Prevents echo-writes after settings subscription fires.
+- `_lastPersistedFolderId` tracked separately so folder changes still write (cross-device sync preserved).
+- `subscribeToImages` dedup: tracks `window._lastImageSubKey`; skips re-subscription if folderId unchanged.
+- `subscribeToSettings` guard: `_lastSettingsKey` tracks remoteSort+remoteFolder; `applyPersistedUiState` only called when something actually changed.
+- Seed `_lastPersistedState` and `_lastPersistedFolderId` on first settings load to prevent immediate echo-write of what was just read.
+
+### Backend
+- Added `getStorageUrl` query: resolves a `storageId` to a public URL.
+- Added `updateImageStorage` mutation: patches `url` + `storageId` on existing record, deletes old Convex file if present. Resolves URL server-side when only `storageId` provided.
+
+**Files Modified:**
+- `index.html`
+- `convex/images.ts`
+
 ## [2026-06-16 00:00] - Paint Editor, Folder Styling, UI Polish
 **What We Accomplished:**
 
