@@ -249,7 +249,12 @@ function scoreOrTime(comp) {
 function goalSide(comp, goal) {
   const homeId = comp.competitors?.[0]?.team?.id;
   const awayId = comp.competitors?.[1]?.team?.id;
-  const involvedId = goal.team?.id || goal.athletesInvolved?.[0]?.team?.id || '';
+  // goal.team = team that scored (beneficiary); athletesInvolved[0].team = player's team
+  if (goal.team?.id) {
+    return goal.team.id === homeId ? 'home' : goal.team.id === awayId ? 'away' : '';
+  }
+  // fallback: derive from player's team, then flip for OG
+  const involvedId = goal.athletesInvolved?.[0]?.team?.id || '';
   let side = involvedId === homeId ? 'home' : involvedId === awayId ? 'away' : '';
   if (goal.ownGoal) {
     if (side === 'home') side = 'away';
