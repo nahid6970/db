@@ -1437,15 +1437,32 @@
           <button id="paintToolShapeBtn" onclick="toggleShapePicker()" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">
             <span id="paintShapeIcon">▭</span> ▾
           </button>
-          <div id="paintShapePicker" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:6px;z-index:100;display:none;grid-template-columns:repeat(4,32px);gap:4px;">
-            <button title="Line" onclick="selectShape('line')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">╱</button>
-            <button title="Rectangle" onclick="selectShape('rect')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">▭</button>
-            <button title="Filled Rectangle" onclick="selectShape('rectFill')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">▬</button>
-            <button title="Circle" onclick="selectShape('circle')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">○</button>
-            <button title="Filled Circle" onclick="selectShape('circleFill')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">●</button>
-            <button title="Triangle" onclick="selectShape('triangle')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">△</button>
-            <button title="Arrow" onclick="selectShape('arrow')" style="background:#333;border-radius:4px;padding:4px;font-size:15px;width:32px;height:32px;">→</button>
-            <button title="Text" onclick="selectShape('text')" style="background:#333;border-radius:4px;padding:4px;font-size:13px;font-weight:700;width:32px;height:32px;">T</button>
+          <div id="paintShapePicker" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:8px;z-index:100;grid-template-columns:repeat(5,34px);gap:4px;min-width:200px;">
+            <button title="Line" onclick="selectShape('line')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">╱</button>
+            <button title="Rectangle" onclick="selectShape('rect')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">▭</button>
+            <button title="Filled Rectangle" onclick="selectShape('rectFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">▬</button>
+            <button title="Rounded Rectangle" onclick="selectShape('rectRound')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;">▢</button>
+            <button title="Filled Rounded Rect" onclick="selectShape('rectRoundFill')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;border-radius:6px;">■</button>
+            <button title="Circle" onclick="selectShape('circle')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">○</button>
+            <button title="Filled Circle" onclick="selectShape('circleFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">●</button>
+            <button title="Ring" onclick="selectShape('ring')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">◎</button>
+            <button title="Triangle" onclick="selectShape('triangle')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">△</button>
+            <button title="Filled Triangle" onclick="selectShape('triangleFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">▲</button>
+            <button title="Right Triangle" onclick="selectShape('rightTri')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;">◺</button>
+            <button title="Diamond" onclick="selectShape('diamond')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">◇</button>
+            <button title="Filled Diamond" onclick="selectShape('diamondFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">◆</button>
+            <button title="Pentagon" onclick="selectShape('pentagon')" style="background:#333;border-radius:4px;font-size:14px;width:34px;height:34px;">⬠</button>
+            <button title="Hexagon" onclick="selectShape('hexagon')" style="background:#333;border-radius:4px;font-size:14px;width:34px;height:34px;">⬡</button>
+            <button title="Star" onclick="selectShape('star')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">☆</button>
+            <button title="Filled Star" onclick="selectShape('starFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">★</button>
+            <button title="Arrow →" onclick="selectShape('arrow')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">→</button>
+            <button title="Double Arrow ↔" onclick="selectShape('arrowDouble')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">↔</button>
+            <button title="Curved Arrow" onclick="selectShape('arrowCurved')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">↩</button>
+            <button title="Cross +" onclick="selectShape('cross')" style="background:#333;border-radius:4px;font-size:17px;width:34px;height:34px;">✚</button>
+            <button title="Heart" onclick="selectShape('heart')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">♥</button>
+            <button title="Smiley" onclick="selectShape('smiley')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">☺</button>
+            <button title="Speech Bubble" onclick="selectShape('bubble')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;">💬</button>
+            <button title="Text" onclick="selectShape('text')" style="background:#333;border-radius:4px;font-size:13px;font-weight:700;width:34px;height:34px;">T</button>
           </div>
         </div>
         <label style="color:#ccc;font-size:12px;margin-left:8px;">Color:</label>
@@ -4123,7 +4140,7 @@
       document.getElementById('paintToolShapeBtn').style.background = '#444';
     };
 
-    const SHAPE_ICONS = { line:'╱', rect:'▭', rectFill:'▬', circle:'○', circleFill:'●', triangle:'△', arrow:'→', text:'T' };
+    const SHAPE_ICONS = { line:'╱', rect:'▭', rectFill:'▬', rectRound:'▢', rectRoundFill:'■', circle:'○', circleFill:'●', ring:'◎', triangle:'△', triangleFill:'▲', rightTri:'◺', diamond:'◇', diamondFill:'◆', pentagon:'⬠', hexagon:'⬡', star:'☆', starFill:'★', arrow:'→', arrowDouble:'↔', arrowCurved:'↩', cross:'✚', heart:'♥', smiley:'☺', bubble:'💬', text:'T' };
 
     window.toggleShapePicker = function() {
       const p = document.getElementById('paintShapePicker');
@@ -4236,33 +4253,114 @@
       x.globalCompositeOperation = 'source-over';
       x.strokeStyle = color; x.fillStyle = color; x.lineWidth = lw;
       x.lineCap = 'round'; x.lineJoin = 'round';
+      const cx = sx+(ex-sx)/2, cy = sy+(ey-sy)/2;
+      const rx = Math.abs(ex-sx)/2, ry = Math.abs(ey-sy)/2;
+      const w = ex-sx, h = ey-sy;
+
+      // helper: regular polygon points
+      function polyPts(n, cx2, cy2, r, rot=0) {
+        return Array.from({length:n}, (_,i) => {
+          const a = (i*2*Math.PI/n) - Math.PI/2 + rot;
+          return [cx2+r*Math.cos(a), cy2+r*Math.sin(a)];
+        });
+      }
+      function drawPoly(pts, fill) {
+        x.beginPath(); x.moveTo(pts[0][0],pts[0][1]);
+        pts.slice(1).forEach(p => x.lineTo(p[0],p[1])); x.closePath();
+        fill ? x.fill() : x.stroke();
+      }
+
       x.beginPath();
       if (_shape === 'line') {
         x.moveTo(sx, sy); x.lineTo(ex, ey); x.stroke();
       } else if (_shape === 'rect') {
-        x.strokeRect(sx, sy, ex - sx, ey - sy);
+        x.strokeRect(sx, sy, w, h);
       } else if (_shape === 'rectFill') {
-        x.fillRect(sx, sy, ex - sx, ey - sy);
+        x.fillRect(sx, sy, w, h);
+      } else if (_shape === 'rectRound') {
+        const r = Math.min(Math.abs(w),Math.abs(h))*0.15;
+        x.roundRect(sx, sy, w, h, r); x.stroke();
+      } else if (_shape === 'rectRoundFill') {
+        const r = Math.min(Math.abs(w),Math.abs(h))*0.15;
+        x.roundRect(sx, sy, w, h, r); x.fill();
       } else if (_shape === 'circle') {
-        const rx = Math.abs(ex-sx)/2, ry = Math.abs(ey-sy)/2;
-        x.ellipse(sx+(ex-sx)/2, sy+(ey-sy)/2, rx, ry, 0, 0, Math.PI*2);
-        x.stroke();
+        x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); x.stroke();
       } else if (_shape === 'circleFill') {
-        const rx = Math.abs(ex-sx)/2, ry = Math.abs(ey-sy)/2;
-        x.ellipse(sx+(ex-sx)/2, sy+(ey-sy)/2, rx, ry, 0, 0, Math.PI*2);
-        x.fill();
+        x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); x.fill();
+      } else if (_shape === 'ring') {
+        x.ellipse(cx, cy, rx, ry, 0, 0, Math.PI*2); x.stroke();
+        x.beginPath(); x.ellipse(cx, cy, rx*0.5, ry*0.5, 0, 0, Math.PI*2); x.stroke();
       } else if (_shape === 'triangle') {
-        x.moveTo((sx+ex)/2, sy); x.lineTo(ex, ey); x.lineTo(sx, ey); x.closePath(); x.stroke();
+        x.moveTo(cx, sy); x.lineTo(ex, ey); x.lineTo(sx, ey); x.closePath(); x.stroke();
+      } else if (_shape === 'triangleFill') {
+        x.moveTo(cx, sy); x.lineTo(ex, ey); x.lineTo(sx, ey); x.closePath(); x.fill();
+      } else if (_shape === 'rightTri') {
+        x.moveTo(sx, sy); x.lineTo(sx, ey); x.lineTo(ex, ey); x.closePath(); x.stroke();
+      } else if (_shape === 'diamond') {
+        x.moveTo(cx,sy); x.lineTo(ex,cy); x.lineTo(cx,ey); x.lineTo(sx,cy); x.closePath(); x.stroke();
+      } else if (_shape === 'diamondFill') {
+        x.moveTo(cx,sy); x.lineTo(ex,cy); x.lineTo(cx,ey); x.lineTo(sx,cy); x.closePath(); x.fill();
+      } else if (_shape === 'pentagon') {
+        drawPoly(polyPts(5, cx, cy, Math.min(rx,ry)), false);
+      } else if (_shape === 'hexagon') {
+        drawPoly(polyPts(6, cx, cy, Math.min(rx,ry), Math.PI/6), false);
+      } else if (_shape === 'star' || _shape === 'starFill') {
+        const R = Math.min(rx,ry), r2 = R*0.4;
+        const pts = [];
+        for (let i=0;i<10;i++) {
+          const a = (i*Math.PI/5) - Math.PI/2;
+          const d = i%2===0 ? R : r2;
+          pts.push([cx+d*Math.cos(a), cy+d*Math.sin(a)]);
+        }
+        drawPoly(pts, _shape==='starFill');
       } else if (_shape === 'arrow') {
-        const dx = ex-sx, dy = ey-sy, len = Math.sqrt(dx*dx+dy*dy);
-        const ux = dx/len, uy = dy/len, hw = Math.max(lw*3, 12);
-        x.moveTo(sx, sy); x.lineTo(ex - ux*hw, ey - uy*hw); x.stroke();
-        x.beginPath();
-        const angle = Math.atan2(dy, dx);
-        x.moveTo(ex, ey);
-        x.lineTo(ex - hw*Math.cos(angle-0.4), ey - hw*Math.sin(angle-0.4));
-        x.lineTo(ex - hw*Math.cos(angle+0.4), ey - hw*Math.sin(angle+0.4));
+        const dx=ex-sx,dy=ey-sy,len=Math.sqrt(dx*dx+dy*dy)||1;
+        const ux=dx/len,uy=dy/len,hw=Math.max(lw*3,14);
+        x.moveTo(sx,sy); x.lineTo(ex-ux*hw, ey-uy*hw); x.stroke();
+        const a=Math.atan2(dy,dx);
+        x.beginPath(); x.moveTo(ex,ey);
+        x.lineTo(ex-hw*Math.cos(a-0.4),ey-hw*Math.sin(a-0.4));
+        x.lineTo(ex-hw*Math.cos(a+0.4),ey-hw*Math.sin(a+0.4));
         x.closePath(); x.fill();
+      } else if (_shape === 'arrowDouble') {
+        const dx=ex-sx,dy=ey-sy,len=Math.sqrt(dx*dx+dy*dy)||1;
+        const ux=dx/len,uy=dy/len,hw=Math.max(lw*3,14);
+        x.moveTo(sx+ux*hw,sy+uy*hw); x.lineTo(ex-ux*hw,ey-uy*hw); x.stroke();
+        const a=Math.atan2(dy,dx);
+        [[ex,ey,a],[sx,sy,a+Math.PI]].forEach(([px2,py2,ang]) => {
+          x.beginPath(); x.moveTo(px2,py2);
+          x.lineTo(px2-hw*Math.cos(ang-0.4),py2-hw*Math.sin(ang-0.4));
+          x.lineTo(px2-hw*Math.cos(ang+0.4),py2-hw*Math.sin(ang+0.4));
+          x.closePath(); x.fill();
+        });
+      } else if (_shape === 'arrowCurved') {
+        const r2 = Math.min(rx,ry);
+        x.arc(cx, cy, r2, -Math.PI*0.8, 0.1); x.stroke();
+        const endX=cx+r2*Math.cos(0.1),endY=cy+r2*Math.sin(0.1),hw=Math.max(lw*3,12);
+        x.beginPath(); x.moveTo(endX,endY);
+        x.lineTo(endX-hw*Math.cos(0.1-1.2),endY-hw*Math.sin(0.1-1.2));
+        x.lineTo(endX-hw*Math.cos(0.1+0),endY-hw*Math.sin(0.1+0)+hw);
+        x.closePath(); x.fill();
+      } else if (_shape === 'cross') {
+        const tw=Math.abs(w)/3, th=Math.abs(h)/3;
+        x.rect(sx+tw,sy, tw,h); x.fill(); x.beginPath();
+        x.rect(sx,sy+th, w,th); x.fill();
+      } else if (_shape === 'heart') {
+        const s=Math.min(rx,ry);
+        x.moveTo(cx, cy+s*0.9);
+        x.bezierCurveTo(sx, cy, sx, sy, cx, sy+s*0.3);
+        x.bezierCurveTo(ex, sy, ex, cy, cx, cy+s*0.9);
+        x.closePath(); x.fill();
+      } else if (_shape === 'smiley') {
+        x.arc(cx, cy, Math.min(rx,ry), 0, Math.PI*2); x.stroke();
+        const fr=Math.min(rx,ry);
+        x.beginPath(); x.arc(cx-fr*0.3, cy-fr*0.15, fr*0.08, 0, Math.PI*2); x.fill();
+        x.beginPath(); x.arc(cx+fr*0.3, cy-fr*0.15, fr*0.08, 0, Math.PI*2); x.fill();
+        x.beginPath(); x.arc(cx, cy+fr*0.1, fr*0.4, 0, Math.PI); x.stroke();
+      } else if (_shape === 'bubble') {
+        const br=Math.min(Math.abs(w),Math.abs(h))*0.1;
+        x.roundRect(sx, sy, w, h*0.8, br); x.stroke();
+        x.beginPath(); x.moveTo(cx-10, sy+h*0.8); x.lineTo(cx, ey); x.lineTo(cx+10, sy+h*0.8); x.stroke();
       }
     }
 
