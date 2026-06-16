@@ -1744,28 +1744,42 @@
 
     let _persistDebounce = null;
     let _lastPersistedState = null;
+    // Only dirty-check the fields that are noisy (not currentFolderId — that must sync cross-device)
+    function _settingsStateKey() {
+      return JSON.stringify({
+        storageType,
+        megaEmail: megaSettings.email,
+        megaPassword: megaSettings.password,
+        megaSubfolder: megaSettings.subfolder,
+        colors: uiColors,
+        sortOrder,
+      });
+    }
     async function persistUiState() {
       clearTimeout(_persistDebounce);
       _persistDebounce = setTimeout(async () => {
-        const next = JSON.stringify({
-          storageType,
-          megaEmail: megaSettings.email,
-          megaPassword: megaSettings.password,
-          megaSubfolder: megaSettings.subfolder,
-          colors: uiColors,
-          sortOrder,
-          currentFolderId: currentFolderId === null ? null : currentFolderId,
-        });
-        if (next === _lastPersistedState) return;
-        _lastPersistedState = next;
+        const key = _settingsStateKey();
+        const folderChanged = _lastPersistedFolderId !== (currentFolderId === null ? null : currentFolderId);
+        if (key === _lastPersistedState && !folderChanged) return;
+        _lastPersistedState = key;
+        _lastPersistedFolderId = currentFolderId === null ? null : currentFolderId;
         try {
-          await client.mutation(api.images.updateSettings, JSON.parse(next));
+          await client.mutation(api.images.updateSettings, {
+            storageType,
+            megaEmail: megaSettings.email,
+            megaPassword: megaSettings.password,
+            megaSubfolder: megaSettings.subfolder,
+            colors: uiColors,
+            sortOrder,
+            currentFolderId: currentFolderId === null ? null : currentFolderId,
+          });
         } catch (err) {
           _lastPersistedState = null; // allow retry
           console.error('Failed to persist UI state:', err);
         }
       }, 600);
     }
+    let _lastPersistedFolderId = undefined;
 
     window.updateColorPreview = function(provider) {
       const hex = document.getElementById(`color${provider.charAt(0).toUpperCase() + provider.slice(1)}`).value;
@@ -2035,17 +2049,11 @@
         }
         updateActiveStorageBadge();
         if (stateChanged) applyPersistedUiState();
-        // Seed persisted state after first load so we don't immediately echo it back
+        // Seed persisted state after first load so we don't immediately echo back storage/colors/sort
+        // currentFolderId is intentionally NOT seeded here so cross-device folder sync still triggers
         if (isFirstSettings) {
-          _lastPersistedState = JSON.stringify({
-            storageType,
-            megaEmail: megaSettings.email,
-            megaPassword: megaSettings.password,
-            megaSubfolder: megaSettings.subfolder,
-            colors: uiColors,
-            sortOrder: remoteSortOrder,
-            currentFolderId: remoteFolder === null ? null : remoteFolder,
-          });
+          _lastPersistedState = _settingsStateKey();
+          _lastPersistedFolderId = remoteFolder === null ? null : remoteFolder;
         }
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
