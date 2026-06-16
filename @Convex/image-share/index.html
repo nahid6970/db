@@ -1743,20 +1743,25 @@
     }
 
     let _persistDebounce = null;
+    let _lastPersistedState = null;
     async function persistUiState() {
       clearTimeout(_persistDebounce);
       _persistDebounce = setTimeout(async () => {
+        const next = JSON.stringify({
+          storageType,
+          megaEmail: megaSettings.email,
+          megaPassword: megaSettings.password,
+          megaSubfolder: megaSettings.subfolder,
+          colors: uiColors,
+          sortOrder,
+          currentFolderId: currentFolderId === null ? null : currentFolderId,
+        });
+        if (next === _lastPersistedState) return;
+        _lastPersistedState = next;
         try {
-          await client.mutation(api.images.updateSettings, {
-            storageType,
-            megaEmail: megaSettings.email,
-            megaPassword: megaSettings.password,
-            megaSubfolder: megaSettings.subfolder,
-            colors: uiColors,
-            sortOrder,
-            currentFolderId: currentFolderId === null ? null : currentFolderId,
-          });
+          await client.mutation(api.images.updateSettings, JSON.parse(next));
         } catch (err) {
+          _lastPersistedState = null; // allow retry
           console.error('Failed to persist UI state:', err);
         }
       }, 600);
@@ -1990,9 +1995,18 @@
     };
 
     function subscribeToSettings() {
+      let _lastSettingsKey = null;
       client.onUpdate(api.images.getSettings, {}, (settings) => {
         const isFirstSettings = !settingsHydrated;
         settingsHydrated = true;
+
+        // Build a key from the fields that drive UI state changes
+        const remoteSort = settings.sortOrder ? normalizeSortMode(settings.sortOrder) : 'newest';
+        const remoteFolder = settings.currentFolderId !== undefined ? settings.currentFolderId : null;
+        const settingsKey = JSON.stringify({ remoteSort, remoteFolder });
+        const stateChanged = isFirstSettings || settingsKey !== _lastSettingsKey;
+        _lastSettingsKey = settingsKey;
+
         storageType = settings.storageType;
         pdfStorageType = settings.pdfStorageType || settings.storageType;
         megaSettings = {
@@ -2000,9 +2014,9 @@
           password: settings.megaPassword || '',
           subfolder: settings.megaSubfolder || ''
         };
-        remoteSortOrder = settings.sortOrder ? normalizeSortMode(settings.sortOrder) : remoteSortOrder;
+        remoteSortOrder = remoteSort;
         if (settings.currentFolderId !== undefined) {
-          remoteFolderId = settings.currentFolderId;
+          remoteFolderId = remoteFolder;
         }
         if (settings.colors) {
           uiColors = settings.colors;
@@ -2020,7 +2034,19 @@
           if (radio.value === pdfStorageType) radio.checked = true;
         }
         updateActiveStorageBadge();
-        applyPersistedUiState();
+        if (stateChanged) applyPersistedUiState();
+        // Seed persisted state after first load so we don't immediately echo it back
+        if (isFirstSettings) {
+          _lastPersistedState = JSON.stringify({
+            storageType,
+            megaEmail: megaSettings.email,
+            megaPassword: megaSettings.password,
+            megaSubfolder: megaSettings.subfolder,
+            colors: uiColors,
+            sortOrder: remoteSortOrder,
+            currentFolderId: remoteFolder === null ? null : remoteFolder,
+          });
+        }
         if (!document.getElementById('settingsModal').classList.contains('hidden')) {
           updateMegaConfigVisibility();
           ['cloudinary', 'convex', 'mega'].forEach(p => updateColorPreview(p));
@@ -3732,10 +3758,13 @@
     }
 
     function subscribeToImages() {
+      const key = currentFolderId || undefined;
+      if (imageSubscriptionCleanup && window._lastImageSubKey === key) return;
+      window._lastImageSubKey = key;
       imageSubscriptionCleanup?.();
       imageSubscriptionCleanup = client.onUpdate(
         api.images.list,
-        { folderId: currentFolderId || undefined },
+        { folderId: key },
         (images) => {
           renderImages(images);
         }
