@@ -67,6 +67,7 @@
     letter-spacing: 0.5px;
   }
   .kick-day { font-size: 0.7rem; color: #556; font-weight: 600; margin-top: 3px; }
+  .kick-countdown { font-size: 0.7rem; color: #7eb8ff; opacity: 0.7; margin-top: 3px; }
 
   .match-meta { font-size: 0.75rem; color: #666; margin-top: 5px; }
   .status-live { color: #e74c3c; font-weight: 700; animation: pulse 1.2s infinite; }
@@ -224,6 +225,20 @@ function bdTime(utcStr) {
   return `${h}${mm} ${ampm} · ${day}`;
 }
 
+function countdown(utcStr) {
+  const diff = new Date(utcStr) - Date.now();
+  if (diff <= 0) return '';
+  const tot = Math.floor(diff / 1000);
+  const d = Math.floor(tot / 86400);
+  const h = Math.floor((tot % 86400) / 3600);
+  const m = Math.floor((tot % 3600) / 60);
+  const parts = [];
+  if (d) parts.push(`${d}d`);
+  if (h) parts.push(`${h}h`);
+  parts.push(`${m}m`);
+  return `<div class="kick-countdown">in ${parts.join(' ')}</div>`;
+}
+
 function statusBadge(st, clock) {
   const s = st.type.state;
   const name = st.type.name;
@@ -240,7 +255,7 @@ function scoreOrTime(comp) {
   const st = comp.status;
   const [home, away] = comp.competitors;
   if (st.type.state === 'pre') {
-    return `<div class="kick-time">${bdTime(comp.date)}</div>`;
+    return `<div class="kick-time">${bdTime(comp.date)}</div>${countdown(comp.date)}`;
   }
   const ht = st.type.name === 'STATUS_HALFTIME';
   return `<div class="live-score ${ht?'ht':''}">${home.score} &ndash; ${away.score}</div>`;
@@ -371,7 +386,7 @@ async function fetchSchedule() {
             <span class="team-name">${home.team.displayName}</span>
           </div>
           <div class="score-box">
-            <div class="kick-time">${bdTime(comp.date)}</div>
+            <div class="kick-time">${bdTime(comp.date)}</div>${countdown(comp.date)}
             <div class="match-meta">${comp.venue?.displayName || ''}</div>
           </div>
           <div class="team right">
