@@ -1,0 +1,421 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // DOM Elements
+    const bstClock = document.getElementById("current-bst-clock");
+    const searchInput = document.getElementById("team-search");
+    const statusBtns = document.querySelectorAll(".status-btn");
+    const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
+    const selectAllBtn = document.getElementById("btn-select-all");
+    const deselectAllBtn = document.getElementById("btn-deselect-all");
+    const refreshBtn = document.getElementById("refresh-data-btn");
+    const matchesGrid = document.getElementById("matches-grid-container");
+    
+    // Global filter state
+    let activeStatus = "all";
+    let searchQuery = "";
+    let checkedTournaments = new Set();
+    
+    // Initialize checked tournaments
+    tourneyCheckboxes.forEach(cb => {
+        if (cb.checked) checkedTournaments.add(cb.value);
+    });
+
+    // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
+    function updateBSTClock() {
+        const now = new Date();
+        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
+        const bst = new Date(utc + (3600000 * 6)); // UTC+6
+        
+        const timeString = bst.toLocaleTimeString('en-US', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        
+        const dateString = bst.toLocaleDateString('en-US', {
+            weekday: 'short',
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+        
+        if (bstClock) {
+            bstClock.innerHTML = `<span class="date">${dateString}</span> | <span class="time">${timeString}</span>`;
+        }
+    }
+    setInterval(updateBSTClock, 1000);
+    updateBSTClock();
+
+    // 2. Live Countdown Timers
+    function updateCountdowns() {
+        const countdownContainers = document.querySelectorAll(".countdown-container[data-timestamp]");
+        const now = new Date().getTime();
+        
+        countdownContainers.forEach(container => {
+            const timestamp = parseInt(container.getAttribute("data-timestamp"));
+            if (!timestamp) return;
+            
+            const timerSpan = container.querySelector(".countdown-timer");
+            if (!timerSpan) return;
+            
+            const diff = timestamp - now;
+            
+            if (diff <= 0) {
+                // Match has started
+                timerSpan.textContent = "Started";
+                timerSpan.style.color = "var(--accent-green)";
+                const card = container.closest(".match-card");
+                if (card && card.getAttribute("data-status") === "upcoming") {
+                    card.setAttribute("data-status", "live");
+                    const statusBadge = card.querySelector(".match-status-badge");
+                    if (statusBadge) {
+                        statusBadge.className = "match-status-badge status-live";
+                        statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
+                    }
+                }
+            } else {
+                // Calculate days, hours, minutes, seconds
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                let countdownStr = "";
+                if (d > 0) countdownStr += `${d}d `;
+                if (h > 0 || d > 0) countdownStr += `${h}h `;
+                countdownStr += `${m}m ${s}s`;
+                
+                timerSpan.textContent = countdownStr;
+            }
+        });
+    }
+    setInterval(updateCountdowns, 1000);
+    updateCountdowns();
+
+    // 3. Filter Application Logic
+    function applyFilters() {
+        const matchCards = document.querySelectorAll(".match-card");
+        let visibleCount = 0;
+        
+        matchCards.forEach(card => {
+            const status = card.getAttribute("data-status");
+            const tournament = card.getAttribute("data-tournament");
+            
+            // Extract team names
+            const team1Name = card.querySelector(".team-1 .team-name")?.textContent.toLowerCase() || "";
+            const team2Name = card.querySelector(".team-2 .team-name")?.textContent.toLowerCase() || "";
+            
+            // Check status match
+            const statusMatches = (activeStatus === "all") || (status === activeStatus);
+            
+            // Check tournament match
+            const tournamentMatches = checkedTournaments.has(tournament);
+            
+            // Check search query match
+            const searchMatches = searchQuery === "" || 
+                                  team1Name.includes(searchQuery) || 
+                                  team2Name.includes(searchQuery);
+            
+            if (statusMatches && tournamentMatches && searchMatches) {
+                card.style.display = "flex";
+                card.style.animation = "fadeIn 0.3s ease forwards";
+                visibleCount++;
+            } else {
+                card.style.display = "none";
+            }
+        });
+        
+        // Handle no results display
+        let fallback = document.querySelector(".no-matches-fallback");
+        if (visibleCount === 0) {
+            if (!fallback && matchesGrid) {
+                fallback = document.createElement("div");
+                fallback.className = "no-matches-fallback";
+                fallback.innerHTML = `
+                    <i class="fa-solid fa-filter-circle-xmark fallback-icon"></i>
+                    <h3>No Matches Match Filters</h3>
+                    <p>Try adjusting your search queries, tournament toggles, or status filters.</p>
+                `;
+                matchesGrid.appendChild(fallback);
+            } else if (fallback) {
+                fallback.style.display = "flex";
+            }
+        } else {
+            if (fallback) {
+                fallback.style.display = "none";
+            }
+        }
+    }
+
+    // 4. Input Listeners
+    // Search input
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value.toLowerCase().trim();
+            applyFilters();
+        });
+    }
+
+    // Status filter buttons
+    statusBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            statusBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            activeStatus = btn.getAttribute("data-status");
+            applyFilters();
+        });
+    });
+
+    // Tournament checklist item change
+    tourneyCheckboxes.forEach(cb => {
+        cb.addEventListener("change", () => {
+            if (cb.checked) {
+                checkedTournaments.add(cb.value);
+            } else {
+                checkedTournaments.delete(cb.value);
+            }
+            applyFilters();
+        });
+    });
+
+    // Select all tournaments
+    if (selectAllBtn) {
+        selectAllBtn.addEventListener("click", () => {
+            tourneyCheckboxes.forEach(cb => {
+                cb.checked = true;
+                checkedTournaments.add(cb.value);
+            });
+            applyFilters();
+        });
+    }
+
+    // Deselect all tournaments
+    if (deselectAllBtn) {
+        deselectAllBtn.addEventListener("click", () => {
+            tourneyCheckboxes.forEach(cb => {
+                cb.checked = false;
+                checkedTournaments.delete(cb.value);
+            });
+            applyFilters();
+        });
+    }
+
+    // 5. AJAX Live Sync Data
+    if (refreshBtn) {
+        refreshBtn.addEventListener("click", async () => {
+            const icon = refreshBtn.querySelector("i");
+            if (icon) icon.classList.add("spinning");
+            refreshBtn.disabled = true;
+            refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> Syncing...`;
+            
+            try {
+                const response = await fetch("/api/matches");
+                if (!response.ok) throw new Error("Sync failed");
+                const matches = await response.json();
+                
+                // Re-render matches grid
+                renderMatchesGrid(matches);
+                
+                // Re-render tournament list in sidebar
+                updateTournamentList(matches);
+                
+                // Re-apply filters with new elements
+                applyFilters();
+            } catch (err) {
+                console.error("Error syncing data:", err);
+                alert("Failed to sync live data from VLR.gg. Please try again later.");
+            } finally {
+                if (icon) icon.classList.remove("spinning");
+                refreshBtn.disabled = false;
+                refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Sync Live Data`;
+            }
+        });
+    }
+
+    function renderMatchesGrid(matches) {
+        if (!matchesGrid) return;
+        
+        // Clear all except fallback if present
+        matchesGrid.innerHTML = "";
+        
+        if (matches.length === 0) {
+            matchesGrid.innerHTML = `
+                <div class="no-matches-fallback">
+                    <i class="fa-solid fa-gamepad fallback-icon"></i>
+                    <h3>No Schedules Found</h3>
+                    <p>We couldn't retrieve any match schedules at this time. Click 'Sync Live Data' to force-refresh from source.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        matches.forEach(m => {
+            const card = document.createElement("div");
+            card.className = "match-card";
+            card.setAttribute("data-tournament", m.tournament);
+            card.setAttribute("data-status", (m.status || "").toLowerCase());
+            card.setAttribute("data-id", m.id);
+            
+            // Create status badge inner HTML
+            let statusBadgeHTML = "";
+            if (m.status === "Live") {
+                statusBadgeHTML = '<span class="live-dot"></span> LIVE';
+            } else {
+                statusBadgeHTML = m.status;
+            }
+            
+            // Create vs/score inner HTML
+            let vsScoreHTML = "";
+            if (m.status === "Upcoming") {
+                vsScoreHTML = '<span class="vs-label">VS</span>';
+            } else {
+                const s1 = parseInt(m.score1) || 0;
+                const s2 = parseInt(m.score2) || 0;
+                const completed = m.status === "Completed";
+                
+                vsScoreHTML = `
+                    <div class="score-display">
+                        <span class="score-num ${completed && s1 > s2 ? 'winner' : ''}">${m.score1 || '0'}</span>
+                        <span class="score-divider">-</span>
+                        <span class="score-num ${completed && s2 > s1 ? 'winner' : ''}">${m.score2 || '0'}</span>
+                    </div>
+                `;
+            }
+            
+            // Create countdown container inner HTML
+            let countdownHTML = "";
+            if (m.status === "Upcoming") {
+                countdownHTML = `
+                    <div class="countdown-container" data-timestamp="${m.js_timestamp}">
+                        <span class="countdown-label">Starts In:</span>
+                        <span class="countdown-timer">--d --h --m</span>
+                    </div>
+                `;
+            } else if (m.status === "Live") {
+                countdownHTML = `
+                    <div class="countdown-container status-live-container">
+                        <span class="live-pulse-indicator"></span>
+                        <span class="live-countdown-text">In Progress</span>
+                    </div>
+                `;
+            } else {
+                countdownHTML = `
+                    <div class="countdown-container status-completed-container">
+                        <span class="completed-text">Final Match</span>
+                    </div>
+                `;
+            }
+            
+            card.innerHTML = `
+                <div class="match-card-header">
+                    <div class="tournament-info">
+                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="tournament-logo" onerror="this.src='https://placehold.co/32x32/ff4655/ffffff?text=VLR';">` : '<div class="tournament-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                        <div class="tournament-name-container">
+                            <span class="tournament-name" title="${m.tournament}">${m.tournament}</span>
+                            <span class="tournament-series" title="${m.series}">${m.series || 'Main Event'}</span>
+                        </div>
+                    </div>
+                    <div class="match-status-badge status-${(m.status || "").toLowerCase()}">
+                        ${statusBadgeHTML}
+                    </div>
+                </div>
+
+                <div class="match-card-body">
+                    <div class="team-container team-1">
+                        <div class="logo-wrapper">
+                            ${m.team1_logo ? `<img src="${m.team1_logo}" class="team-logo" alt="${m.team1} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
+                            <div class="team-initial" style="display:${m.team1_logo ? 'none' : 'flex'};">${m.team1 ? m.team1[0].toUpperCase() : 'T'}</div>
+                        </div>
+                        <span class="team-name" title="${m.team1}">${m.team1}</span>
+                    </div>
+
+                    <div class="match-vs-score">
+                        ${vsScoreHTML}
+                    </div>
+
+                    <div class="team-container team-2">
+                        <span class="team-name" title="${m.team2}">${m.team2}</span>
+                        <div class="logo-wrapper">
+                            ${m.team2_logo ? `<img src="${m.team2_logo}" class="team-logo" alt="${m.team2} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
+                            <div class="team-initial" style="display:${m.team2_logo ? 'none' : 'flex'};">${m.team2 ? m.team2[0].toUpperCase() : 'T'}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="match-card-footer">
+                    <div class="time-info">
+                        <i class="fa-regular fa-clock clock-icon"></i>
+                        <span class="bst-time" title="Bangladesh Standard Time">${m.formatted_bst} BST</span>
+                    </div>
+                    ${countdownHTML}
+                </div>
+            `;
+            
+            matchesGrid.appendChild(card);
+        });
+        
+        // Re-run countdown initializations
+        updateCountdowns();
+    }
+
+    function updateTournamentList(matches) {
+        const checklist = document.getElementById("tournament-checklist");
+        if (!checklist) return;
+        
+        // Extract unique tournaments
+        const tourneys = new Map();
+        matches.forEach(m => {
+            if (m.tournament) {
+                tourneys.set(m.tournament, m.tournament_logo || "");
+            }
+        });
+        
+        const sortedTourneys = Array.from(tourneys.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+        
+        // We will keep checked status for existing tournaments, default check for new ones
+        const newChecked = new Set();
+        
+        checklist.innerHTML = "";
+        
+        if (sortedTourneys.length === 0) {
+            checklist.innerHTML = `
+                <div class="no-tournaments-fallback">
+                    <p>No active tournaments found.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        sortedTourneys.forEach(([name, logo]) => {
+            // Keep status if already checked/unchecked before
+            const isChecked = checkedTournaments.has(name) || !checkedTournaments.size; // check by default if set is empty
+            if (isChecked) newChecked.add(name);
+            
+            const label = document.createElement("label");
+            label.className = "tourney-item";
+            label.setAttribute("data-tourney-name", name);
+            
+            label.innerHTML = `
+                <input type="checkbox" ${isChecked ? 'checked' : ''} class="tourney-checkbox" value="${name}">
+                <span class="custom-checkbox"></span>
+                ${logo ? `<img src="${logo}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';">` : '<div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                <span class="tourney-label-text" title="${name}">${name}</span>
+            `;
+            
+            checklist.appendChild(label);
+            
+            // Add listener to the new checkbox
+            const cb = label.querySelector(".tourney-checkbox");
+            cb.addEventListener("change", () => {
+                if (cb.checked) {
+                    checkedTournaments.add(cb.value);
+                } else {
+                    checkedTournaments.delete(cb.value);
+                }
+                applyFilters();
+            });
+        });
+        
+        checkedTournaments = newChecked;
+    }
+});
