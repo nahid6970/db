@@ -549,6 +549,27 @@ body {
     gap: 12px;
 }
 
+.matches-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.matches-header h2 {
+    font-family: var(--font-heading);
+    font-size: 26px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+}
+
+.matches-header h2 i {
+    color: var(--accent-red);
+}
+
 .sync-controls {
     display: flex;
     align-items: center;
