@@ -14,7 +14,7 @@
     <!-- Custom Style Sheet -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
-<body>
+<body class="{{ 'light' if theme == 'light' else '' }}">
     <div class="app-container">
         <!-- Header -->
         <header class="app-header" id="app-header-main">

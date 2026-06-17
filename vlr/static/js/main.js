@@ -5,14 +5,21 @@ document.addEventListener("DOMContentLoaded", () => {
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
     const themeIcon = themeBtn?.querySelector("i");
-    if (localStorage.getItem("theme") === "light") {
-        document.body.classList.add("light");
-        if (themeIcon) { themeIcon.className = "fa-solid fa-sun"; }
+    // Set icon based on current body class (set server-side)
+    if (document.body.classList.contains("light")) {
+        if (themeIcon) themeIcon.className = "fa-solid fa-sun";
     }
-    themeBtn?.addEventListener("click", () => {
+    themeBtn?.addEventListener("click", async () => {
         const isLight = document.body.classList.toggle("light");
-        localStorage.setItem("theme", isLight ? "light" : "dark");
         if (themeIcon) themeIcon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+        // Persist theme to server settings
+        const settings = await fetch("/api/settings").then(r => r.json());
+        settings.theme = isLight ? "light" : "dark";
+        fetch("/api/settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(settings)
+        });
     });
 
     // Restore scroll position on page load
@@ -67,14 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         try {
+            const current = await fetch("/api/settings").then(r => r.json());
+            current.unchecked_tournaments = unchecked;
             await fetch("/api/settings", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    unchecked_tournaments: unchecked
-                })
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(current)
             });
         } catch (err) {
             console.error("Failed to save settings:", err);

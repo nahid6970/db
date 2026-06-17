@@ -64,6 +64,7 @@ def index():
     settings = load_settings()
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
     results_pages = settings.get("results_pages", 5)
+    theme = settings.get("theme", "dark")
     
     # Get unique tournaments for the filter checklist
     tournaments = set()
@@ -82,7 +83,8 @@ def index():
         matches=matches, 
         tournaments=sorted_tournaments,
         unchecked_tournaments=unchecked_tournaments,
-        results_pages=results_pages
+        results_pages=results_pages,
+        theme=theme
     )
 
 @app.route("/api/matches")

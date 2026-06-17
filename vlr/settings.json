@@ -1,4 +1,6 @@
 {
+    "results_pages": 10,
+    "theme": "light",
     "unchecked_tournaments": [
         "Valorant Masters London 2026",
         "Challengers 2026: Brazil Gamers Club Stage 2",
@@ -40,6 +42,5 @@
         "VCT 2026: Americas Stage 1",
         "VCT 2026: China Stage 1",
         "VCT 2026: EMEA Stage 1"
-    ],
-    "results_pages": 10
+    ]
 }
