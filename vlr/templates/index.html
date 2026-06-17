@@ -210,40 +210,39 @@
                 <button id="settings-close-btn" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <div class="settings-actions">
-                    <button id="toggle-ignore-btn" class="settings-action-btn" title="Ignore List">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>
-                        Ignore List
-                    </button>
-                    <button id="backup-btn" class="settings-action-btn" title="Backup matches data">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Backup
-                    </button>
-                    <button id="restore-btn" class="settings-action-btn" title="Restore from backup">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                        Restore
-                    </button>
+                <div class="modal-section">
+                    <h3>Ignore List</h3>
+                    <p class="modal-section-desc">Tournaments in this list are completely hidden from matches and the sidebar.</p>
+                    <div id="ignore-list-container">
+                        {% if ignore_list %}
+                            {% for t in ignore_list %}
+                            <div class="ignore-item" data-name="{{ t.name }}">
+                                {% if t.logo %}
+                                <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';">
+                                {% else %}
+                                <div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>
+                                {% endif %}
+                                <span class="ignore-item-name" title="{{ t.name }}">{{ t.name }}</span>
+                                <button class="ignore-remove-btn" data-name="{{ t.name }}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <p class="ignore-empty">No tournaments ignored.</p>
+                        {% endif %}
+                    </div>
                 </div>
-                <div id="ignore-list-section" style="display:none;">
-                    <div class="modal-section">
-                        <p class="modal-section-desc">Tournaments hidden from matches and sidebar.</p>
-                        <div id="ignore-list-container">
-                            {% if ignore_list %}
-                                {% for t in ignore_list %}
-                                <div class="ignore-item" data-name="{{ t.name }}">
-                                    {% if t.logo %}
-                                    <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';">
-                                    {% else %}
-                                    <div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>
-                                    {% endif %}
-                                    <span class="ignore-item-name" title="{{ t.name }}">{{ t.name }}</span>
-                                    <button class="ignore-remove-btn" data-name="{{ t.name }}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
-                                </div>
-                                {% endfor %}
-                            {% else %}
-                                <p class="ignore-empty">No tournaments ignored.</p>
-                            {% endif %}
-                        </div>
+                <div class="modal-section">
+                    <h3>Data Backup</h3>
+                    <p class="modal-section-desc">Backup and restore your match data in case of accidental sync with fewer pages.</p>
+                    <div class="backup-actions">
+                        <button id="backup-btn" class="backup-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                            Backup Now
+                        </button>
+                        <button id="restore-btn" class="backup-btn restore">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                            Restore from Backup
+                        </button>
                     </div>
                 </div>
             </div>

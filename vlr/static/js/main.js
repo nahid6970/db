@@ -550,11 +550,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsBtn = document.getElementById("settings-btn");
     const settingsModal = document.getElementById("settings-modal");
     const settingsCloseBtn = document.getElementById("settings-close-btn");
-    const toggleIgnoreBtn = document.getElementById("toggle-ignore-btn");
-    const ignoreListSection = document.getElementById("ignore-list-section");
 
     settingsBtn?.addEventListener("click", () => {
-        if (ignoreListSection) ignoreListSection.style.display = "none";
         settingsModal.style.display = "flex";
     });
     settingsCloseBtn?.addEventListener("click", () => {
@@ -562,10 +559,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     settingsModal?.addEventListener("click", (e) => {
         if (e.target === settingsModal) settingsModal.style.display = "none";
-    });
-    toggleIgnoreBtn?.addEventListener("click", () => {
-        const visible = ignoreListSection.style.display !== "none";
-        ignoreListSection.style.display = visible ? "none" : "block";
     });
 
     // Remove from ignore list
