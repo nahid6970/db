@@ -403,12 +403,24 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
-    padding: 0 10px;
+    margin-bottom: 8px;
+    padding: 0 4px;
 }
 
 .tourney-group-header h3 {
     margin-bottom: 0;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#tourney-count {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.7;
+    letter-spacing: 0;
+    text-transform: none;
 }
 
 .tourney-actions {
@@ -449,8 +461,8 @@ body {
 .tourney-item {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px;
+    gap: 8px;
+    padding: 5px 6px;
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid transparent;
     border-radius: var(--border-radius-sm);
