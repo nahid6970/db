@@ -977,14 +977,25 @@ body {
 
 /* Responsiveness */
 @media (max-width: 992px) {
+    .app-container {
+        height: auto;
+        min-height: 100vh;
+    }
     .main-layout {
         flex-direction: column;
+        overflow: visible;
+        flex: none;
     }
     .sidebar {
         width: 100%;
         border-right: none;
         border-bottom: 1px solid var(--card-border);
         max-height: none;
+        overflow-y: visible;
+        position: static;
+        height: auto;
+    }
+    .content-area {
         overflow-y: visible;
     }
     .tourney-list {
