@@ -63,6 +63,7 @@ def index():
     # Load user settings
     settings = load_settings()
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
+    results_pages = settings.get("results_pages", 5)
     
     # Get unique tournaments for the filter checklist
     tournaments = set()
@@ -80,14 +81,19 @@ def index():
         "index.html", 
         matches=matches, 
         tournaments=sorted_tournaments,
-        unchecked_tournaments=unchecked_tournaments
+        unchecked_tournaments=unchecked_tournaments,
+        results_pages=results_pages
     )
 
 @app.route("/api/matches")
 def api_matches():
-    # Force update from VLR.gg when user requests it via refresh button
-    scraper.fetch_and_update_matches()
-    # Return matches as JSON
+    pages = request.args.get("pages", 5, type=int)
+    pages = max(1, min(pages, 50))  # clamp 1-50
+    # Save pages to settings
+    settings = load_settings()
+    settings["results_pages"] = pages
+    save_settings(settings)
+    scraper.fetch_and_update_matches(pages=pages)
     matches = scraper.get_matches_for_display()
     return jsonify(matches)
 

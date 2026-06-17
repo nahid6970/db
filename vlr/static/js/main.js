@@ -274,7 +274,9 @@ document.addEventListener("DOMContentLoaded", () => {
             refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> Syncing...`;
             
             try {
-                const response = await fetch("/api/matches");
+                const pagesInput = document.getElementById("results-pages");
+                const pages = pagesInput ? parseInt(pagesInput.value) || 5 : 5;
+                const response = await fetch(`/api/matches?pages=${pages}`);
                 if (!response.ok) throw new Error("Sync failed");
                 const matches = await response.json();
                 

@@ -560,6 +560,48 @@ body {
     color: var(--accent-red);
 }
 
+.sync-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pages-input-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    padding: 6px 10px;
+}
+
+.pages-input-group label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.pages-input-group input[type="number"] {
+    width: 36px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    -moz-appearance: textfield;
+}
+
+.pages-input-group input[type="number"]::-webkit-inner-spin-button,
+.pages-input-group input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .refresh-btn {
     background: rgba(255, 70, 85, 0.1);
     border: 1px solid var(--accent-red);
