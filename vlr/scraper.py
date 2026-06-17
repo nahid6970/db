@@ -395,6 +395,8 @@ def _upsert_matches_to_db(db, scraped_matches):
     return db
 
 
+RESULTS_PAGES = 5  # Number of result pages to fetch (each page ~20 matches)
+
 def fetch_and_update_matches():
     """Fetch upcoming/live matches AND recent completed results from VLR.gg."""
     # Acquire sync lock to prevent concurrent main page fetches
@@ -414,14 +416,16 @@ def fetch_and_update_matches():
         else:
             print("Warning: Could not fetch upcoming matches page")
         
-        # 2. Fetch completed results from /matches/results
-        soup_results = _fetch_page("https://www.vlr.gg/matches/results")
-        if soup_results:
-            completed_matches = _parse_matches_from_soup(soup_results, force_status="Completed")
-            all_scraped.extend(completed_matches)
-            print(f"Scraped {len(completed_matches)} completed matches from /matches/results")
-        else:
-            print("Warning: Could not fetch results page")
+        # 2. Fetch multiple pages of completed results from /matches/results
+        for page in range(1, RESULTS_PAGES + 1):
+            url = f"https://www.vlr.gg/matches/results?page={page}"
+            soup_results = _fetch_page(url)
+            if soup_results:
+                completed_matches = _parse_matches_from_soup(soup_results, force_status="Completed")
+                all_scraped.extend(completed_matches)
+                print(f"Scraped {len(completed_matches)} completed matches from /matches/results?page={page}")
+            else:
+                print(f"Warning: Could not fetch results page {page}")
         
         if not all_scraped:
             print("No matches scraped from either page.")
