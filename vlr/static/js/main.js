@@ -503,4 +503,81 @@ document.addEventListener("DOMContentLoaded", () => {
         
         checkedTournaments = newChecked;
     }
+
+    // Settings modal
+    const settingsBtn = document.getElementById("settings-btn");
+    const settingsModal = document.getElementById("settings-modal");
+    const settingsCloseBtn = document.getElementById("settings-close-btn");
+
+    settingsBtn?.addEventListener("click", () => {
+        settingsModal.style.display = "flex";
+    });
+    settingsCloseBtn?.addEventListener("click", () => {
+        settingsModal.style.display = "none";
+    });
+    settingsModal?.addEventListener("click", (e) => {
+        if (e.target === settingsModal) settingsModal.style.display = "none";
+    });
+
+    // Remove from ignore list
+    function bindIgnoreRemoveBtns() {
+        document.querySelectorAll(".ignore-remove-btn").forEach(btn => {
+            btn.addEventListener("click", async () => {
+                const name = btn.getAttribute("data-name");
+                const res = await fetch("/api/ignorelist/remove", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tournament: name })
+                });
+                const data = await res.json();
+                renderIgnoreList(data.ignorelist);
+            });
+        });
+    }
+
+    function renderIgnoreList(list) {
+        const container = document.getElementById("ignore-list-container");
+        if (!container) return;
+        if (!list.length) {
+            container.innerHTML = `<p class="ignore-empty">No tournaments ignored.</p>`;
+            return;
+        }
+        container.innerHTML = list.map(t => `
+            <div class="ignore-item" data-name="${t}">
+                <span class="ignore-item-name" title="${t}">${t}</span>
+                <button class="ignore-remove-btn" data-name="${t}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+        `).join("");
+        bindIgnoreRemoveBtns();
+    }
+
+    bindIgnoreRemoveBtns();
+
+    // Ignore unchecked button
+    const ignoreUncheckedBtn = document.getElementById("btn-ignore-unchecked");
+    ignoreUncheckedBtn?.addEventListener("click", async () => {
+        const unchecked = [];
+        document.querySelectorAll(".tourney-checkbox").forEach(cb => {
+            if (!cb.checked) unchecked.push(cb.value);
+        });
+        if (!unchecked.length) return;
+        const res = await fetch("/api/ignorelist/add", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(unchecked)
+        });
+        const data = await res.json();
+        renderIgnoreList(data.ignorelist);
+        // Remove ignored tournament rows from sidebar
+        unchecked.forEach(name => {
+            document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(name)}"]`)?.remove();
+            checkedTournaments.delete(name);
+        });
+        // Hide matching match cards
+        document.querySelectorAll(".match-card").forEach(card => {
+            if (unchecked.includes(card.getAttribute("data-tournament"))) {
+                card.style.display = "none";
+            }
+        });
+    });
 });
