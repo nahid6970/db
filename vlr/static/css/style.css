@@ -299,15 +299,36 @@ body {
     padding: 24px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    overflow-y: auto;
+    gap: 16px;
+    overflow: hidden;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    flex-shrink: 0;
+    box-sizing: border-box;
+    height: 100%;
     position: sticky;
     top: 0;
-    height: 100%;
-    flex-shrink: 0;
+    align-self: stretch;
 }
+
+.tourney-group {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tourney-list {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-right: 4px;
+}
+
 
 .sidebar-header h2 {
     font-family: var(--font-heading);
@@ -453,8 +474,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 400px;
-    overflow-y: auto;
     padding-right: 4px;
 }
 
@@ -1063,7 +1082,6 @@ body {
         overflow-y: visible;
     }
     .tourney-list {
-        max-height: 250px;
     }
 }
 
@@ -1109,7 +1127,7 @@ body {
 /* ===== Ignore Unchecked Button ===== */
 .ignore-unchecked-btn {
     width: 100%;
-    margin-top: 10px;
+    flex-shrink: 0;
     padding: 8px 12px;
     background: rgba(255, 70, 85, 0.08);
     border: 1px dashed var(--accent-red);
