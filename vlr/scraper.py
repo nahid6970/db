@@ -2,6 +2,7 @@ import os
 import re
 import json
 import requests
+import threading
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import zoneinfo
@@ -12,6 +13,10 @@ IMAGE_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "stat
 
 # Ensure image cache directory exists
 os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
+
+# Locks to prevent concurrent sync issues
+sync_lock = threading.Lock()
+details_lock = threading.Lock()
 
 def load_json_matches():
     if not os.path.exists(JSON_PATH):
@@ -24,15 +29,26 @@ def load_json_matches():
         return {}
 
 def save_json_matches(matches):
+    tmp_path = JSON_PATH + ".tmp"
     try:
-        with open(JSON_PATH, "w", encoding="utf-8") as f:
+        with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(matches, f, indent=4, ensure_ascii=False)
+        # Atomic rename
+        os.replace(tmp_path, JSON_PATH)
     except Exception as e:
         print(f"Error saving JSON: {e}")
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except:
+                pass
 
 def download_image(url):
     if not url:
         return ""
+    
+    # Ensure directory exists in case it was deleted by user while server is running
+    os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
     
     # Get image filename from URL
     filename = url.split("/")[-1]
@@ -139,7 +155,73 @@ def fetch_match_detail_page(href):
         print(f"Error fetching detail page {url}: {e}")
         return None
 
+def fetch_details_in_background(scraped_matches):
+    # Acquire details lock to prevent concurrent details fetching threads
+    if not details_lock.acquire(blocking=False):
+        print("Details fetch already in progress. Skipping concurrent run.")
+        return
+        
+    try:
+        print("Background details thread started...")
+        db = load_json_matches()
+        
+        # Check which matches need detailed info (logos and exact timestamps)
+        pending_ids = []
+        for m in scraped_matches:
+            mid = m["id"]
+            
+            # Helper to check if a cached image URL points to a file that actually exists
+            def file_exists(local_url):
+                if not local_url or not local_url.startswith("/static/images_cache/"):
+                    return False
+                filename = local_url.split("/")[-1]
+                path = os.path.join(IMAGE_CACHE_DIR, filename)
+                return os.path.exists(path)
+                
+            t1_logo = db.get(mid, {}).get("team1_logo", "")
+            t2_logo = db.get(mid, {}).get("team2_logo", "")
+            unix_ts = db.get(mid, {}).get("unix_timestamp")
+            
+            has_details = t1_logo and t2_logo and unix_ts
+            files_exist = file_exists(t1_logo) and file_exists(t2_logo)
+            
+            if not has_details or not files_exist:
+                pending_ids.append((mid, m["href"]))
+                
+        # Fetch detailed info in parallel
+        if pending_ids:
+            print(f"Background Sync: Fetching offline details for {len(pending_ids)} new matches...")
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending_ids}
+                for future in as_completed(future_to_id):
+                    mid = future_to_id[future]
+                    try:
+                        details = future.result()
+                        if details:
+                            # Reload latest db state to prevent overwriting other concurrent writes
+                            current_db = load_json_matches()
+                            if mid in current_db:
+                                current_db[mid]["team1_logo"] = details["team1_logo"]
+                                current_db[mid]["team2_logo"] = details["team2_logo"]
+                                current_db[mid]["unix_timestamp"] = details["unix_timestamp"]
+                                current_db[mid]["bst_time"] = details["bst_time"]
+                                current_db[mid]["last_updated"] = int(datetime.now().timestamp())
+                                save_json_matches(current_db)
+                                # update local db ref for log output print
+                                db = current_db
+                                print(f"Background Sync: Updated details/logos for match {mid}")
+                    except Exception as e:
+                        print(f"Background Sync: Exception fetching details for match {mid}: {e}")
+        print("Background details thread finished.")
+    finally:
+        details_lock.release()
+
 def fetch_and_update_matches():
+    # Acquire sync lock to prevent concurrent main page fetches
+    if not sync_lock.acquire(blocking=False):
+        print("Sync already in progress. Skipping.")
+        return False
+        
     url = "https://www.vlr.gg/matches"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
@@ -289,56 +371,20 @@ def fetch_and_update_matches():
                 db[mid]["score2"] = m["score2"]
                 db[mid]["last_updated"] = int(datetime.now().timestamp())
                 
-        # Check which matches need detailed info (logos and exact timestamps)
-        pending_ids = []
-        for m in scraped_matches:
-            mid = m["id"]
-            
-            # Helper to check if a cached image URL points to a file that actually exists
-            def file_exists(local_url):
-                if not local_url or not local_url.startswith("/static/images_cache/"):
-                    return False
-                filename = local_url.split("/")[-1]
-                path = os.path.join(IMAGE_CACHE_DIR, filename)
-                return os.path.exists(path)
-                
-            t1_logo = db[mid].get("team1_logo", "")
-            t2_logo = db[mid].get("team2_logo", "")
-            
-            has_details = t1_logo and t2_logo and db[mid].get("unix_timestamp")
-            files_exist = file_exists(t1_logo) and file_exists(t2_logo)
-            
-            if not has_details or not files_exist:
-                pending_ids.append((mid, m["href"]))
-                
-        # Fetch detailed info in parallel
-        if pending_ids:
-            print(f"Fetching offline details for {len(pending_ids)} new matches...")
-            with ThreadPoolExecutor(max_workers=5) as executor:
-                future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending_ids}
-                for future in as_completed(future_to_id):
-                    mid = future_to_id[future]
-                    try:
-                        details = future.result()
-                        if details:
-                            db[mid]["team1_logo"] = details["team1_logo"]
-                            db[mid]["team2_logo"] = details["team2_logo"]
-                            db[mid]["unix_timestamp"] = details["unix_timestamp"]
-                            db[mid]["bst_time"] = details["bst_time"]
-                            db[mid]["last_updated"] = int(datetime.now().timestamp())
-                            print(f"Updated offline details and images for match {mid}")
-                    except Exception as e:
-                        print(f"Exception fetching offline details for match {mid}: {e}")
-                        
+        # Save basic info IMMEDIATELY (takes ~150-200ms) to ensure instant web responses
         save_json_matches(db)
+        
+        # Dispatch slow detail fetches and image downloads to a separate background thread
+        threading.Thread(target=fetch_details_in_background, args=(scraped_matches,), daemon=True).start()
         return True
     except Exception as e:
         print(f"Offline sync failed: {e}")
-        # If internet fetch fails, we still return True so we can fall back to existing JSON cache!
         return False
+    finally:
+        sync_lock.release()
 
 def get_matches_for_display():
-    # Read from local JSON cache
+    # Read directly from local JSON cache (super fast, non-blocking)
     db = load_json_matches()
     
     # Sort matches
@@ -356,10 +402,7 @@ def get_matches_for_display():
             
         unix_ts = m.get("unix_timestamp", 0) or 0
         
-        # For completed matches, we want descending order (most recent first)
-        # So we negate it if completed. But sorting is single key asc, so we adjust
         if status_order == 3:
-            # Shift completed matches to be sorted after upcoming
             return (status_order, -unix_ts)
         else:
             return (status_order, unix_ts)

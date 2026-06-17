@@ -401,7 +401,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
         
-        const sortedTourneys = Array.from(tourneys.entries()).sort((a, b) => a[0].localeCompare(b[0]));
+        const sortedTourneys = Array.from(tourneys.entries()).sort((a, b) => {
+            const aChecked = checkedTournaments.has(a[0]);
+            const bChecked = checkedTournaments.has(b[0]);
+            if (aChecked && !bChecked) return -1;
+            if (!aChecked && bChecked) return 1;
+            return a[0].localeCompare(b[0]);
+        });
         
         // We will keep checked status for existing tournaments, default check for new ones
         const newChecked = new Set();

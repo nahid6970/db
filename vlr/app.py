@@ -19,11 +19,19 @@ def load_settings():
         return {"unchecked_tournaments": []}
 
 def save_settings(settings):
+    tmp_path = SETTINGS_PATH + ".tmp"
     try:
-        with open(SETTINGS_PATH, "w", encoding="utf-8") as f:
+        with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(settings, f, indent=4, ensure_ascii=False)
+        # Atomic rename
+        os.replace(tmp_path, SETTINGS_PATH)
     except Exception as e:
         print(f"Error saving settings: {e}")
+        if os.path.exists(tmp_path):
+            try:
+                os.remove(tmp_path)
+            except:
+                pass
 
 def start_background_sync():
     def sync_loop():
@@ -62,8 +70,11 @@ def index():
         if m.get("tournament"):
             tournaments.add((m["tournament"], m.get("tournament_logo", "")))
             
-    # Sort tournaments by name
-    sorted_tournaments = sorted(list(tournaments), key=lambda x: x[0])
+    # Sort tournaments: checked first (not in unchecked_tournaments), then alphabetically
+    sorted_tournaments = sorted(
+        list(tournaments), 
+        key=lambda x: (x[0] in unchecked_tournaments, x[0])
+    )
     
     return render_template(
         "index.html", 
