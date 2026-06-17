@@ -1,120 +1,490 @@
 [
-    "Predator League 2026: Singapore",
-    "Predator League 2026: Thailand",
-    "Predator League 2026: Vietnam",
-    "Project Blender 2025",
-    "Project Blender 2025: Spotlight",
-    "Shanghai Esports Masters 2025",
-    "Spotlight Series 2025: Americas",
-    "Spotlight Series 2025: Pacific x GES Asia",
-    "TEN Global Invitational 2025",
-    "Tixinha & Sacy Invitational 2 By Bonoxs",
-    "Vtuber Saikyo Tournament Act 2",
-    "BRAZA: Open Series by Elgin",
-    "CCCE City Cup 2025",
-    "INZONE London Clash",
-    "Monsters Reloaded 2025",
-    "Monsters Reloaded 2025: EMEA Qualifier",
-    "NRG Neon Dream Invitational 2025",
-    "Predator League 2026: Asia-Pacific",
-    "Predator League 2026: Indonesia",
-    "Predator League 2026: Japan",
-    "Predator League 2026: Korea",
-    "Predator League 2026: Malaysia",
-    "Predator League 2026: Oceania",
-    "Predator League 2026: Philippines",
-    "Challengers 2025: Brazil Gamers Club Last Chance Qualifier",
-    "Challengers 2025: EMEA Stage 3",
-    "Challengers 2025: France Revolution Up and Down",
-    "Challengers 2025: Korea & Japan Showdown",
-    "Challengers 2025: Korea WDG Road to Ascension",
-    "Challengers 2025: Latin America Finals",
-    "Challengers 2025: North America ACE Stage 3",
-    "Challengers 2025: Southeast Asia Stage 3",
-    "Challengers 2025: Türkiye Birlik Promotion/Relegation",
-    "Challengers 2026: Brazil Gamers Club Stage 1",
-    "Challengers 2026: Brazil Gamers Club Stage 2",
-    "Challengers 2026: DACH Evolution - VCL EMEA Qualifier",
-    "Challengers 2026: DACH Evolution Stage 1",
-    "Challengers 2026: DACH Evolution Stage 2",
-    "Challengers 2026: EMEA Stage 1",
-    "Challengers 2026: EMEA Stage 2",
-    "Challengers 2026: EMEA Stage 3",
-    "Challengers 2026: France Revolution Stage 1",
-    "Challengers 2026: France Revolution Stage 2",
-    "Challengers 2026: Japan Split 1",
-    "Challengers 2026: Japan Split 2",
-    "Challengers 2026: Korea WDG Split 1",
-    "Challengers 2026: Korea WDG Split 2",
-    "Challengers 2026: LATAM North ACE Masters",
-    "Challengers 2026: LATAM North ACE Stage 1",
-    "Challengers 2026: LATAM North ACE Stage 2",
-    "Challengers 2026: LATAM South ACE Masters",
-    "Challengers 2026: LATAM South ACE Stage 1",
-    "Challengers 2026: LATAM South ACE Stage 2",
-    "Challengers 2026: MENA Resilience - Middle East Kickoff",
-    "Challengers 2026: MENA Resilience - North Africa Kickoff",
-    "Challengers 2026: MENA Resilience Kickoff Promotion/Relegation",
-    "Challengers 2026: MENA Resilience Pulse Stage - Middle East",
-    "Challengers 2026: MENA Resilience Pulse Stage - North Africa",
-    "Challengers 2026: NORTH//EAST Kickoff",
-    "Challengers 2026: NORTH//EAST Stage 2",
-    "Challengers 2026: North America ACE Stage 1",
-    "Challengers 2026: North America ACE Stage 2",
-    "Challengers 2026: North America ACE Stage 3",
-    "Challengers 2026: SEA Split 1 - Indonesia Qualifier",
-    "Challengers 2026: SEA Split 1 - Philippines Qualifier",
-    "Challengers 2026: SEA Split 1 - Rest of SEA Qualifier",
-    "Challengers 2026: SEA Split 1 - Thailand Qualifier",
-    "Challengers 2026: SEA Split 1 - Vietnam Qualifier",
-    "Challengers 2026: SEA Split 2 - Indonesia Qualifier",
-    "Challengers 2026: SEA Split 2 - Philippines Qualifier",
-    "Challengers 2026: SEA Split 2 - Rest of SEA Qualifier",
-    "Challengers 2026: SEA Split 2 - Thailand Qualifier",
-    "Challengers 2026: SEA Split 2 - Vietnam Qualifier",
-    "Challengers 2026: South Asia Split 1",
-    "Challengers 2026: South Asia Split 2",
-    "Challengers 2026: Southeast Asia Split 1",
-    "Challengers 2026: Southeast Asia Split 2",
-    "Challengers 2026: Spain Rising Stage 1",
-    "Challengers 2026: Spain Rising Stage 3",
-    "Challengers 2026: Türkiye Birlik Kickoff",
-    "Challengers 2026: Türkiye Birlik Stage 2",
-    "China Esports Festival Super Champions Cup",
-    "China Evolution Series 2026: Act 1",
-    "China Evolution Series 2026: Act 2",
-    "China Evolution Series: Act 3",
-    "China Evolution Series: Epilogue",
-    "College VALORANT 2025-2026: Esports Collegiate Conference",
-    "College VALORANT 2025-2026: Peach Belt Conference",
-    "EMEA Clash 2026",
-    "El Olimpo 2025",
-    "FunhaverGG: Back to Basics 10",
-    "For Those Who Dare 2025",
-    "Fortress (touch)Grassroots Esports 2026: Regional Finals",
-    "Game Changers 2025: Americas Last Chance Qualifier",
-    "Game Changers 2025: Brazil Finals",
-    "Game Changers 2025: Championship Seoul",
-    "Game Changers 2025: China Stage 2",
-    "Game Changers 2025: EMEA Stage 3",
-    "Game Changers 2025: LATAM Main Event",
-    "Game Changers 2025: North America Stage 2",
-    "Game Changers 2025: Pacific",
-    "Game Changers 2026: Brazil Kickoff",
-    "Game Changers 2026: Brazil Stage 1",
-    "Game Changers 2026: Brazil Stage 2",
-    "Game Changers 2026: EMEA Stage 1",
-    "Game Changers 2026: EMEA Stage 2",
-    "Game Changers 2026: Japan Split 1",
-    "Game Changers 2026: Korea Split 1",
-    "Game Changers 2026: LATAM Kickoff",
-    "Game Changers 2026: LATAM North Stage 1",
-    "Game Changers 2026: LATAM North Stage 2",
-    "Game Changers 2026: LATAM South Stage 1",
-    "Game Changers 2026: LATAM South Stage 2",
-    "Game Changers 2026: North America Kickoff",
-    "Game Changers 2026: North America Stage 1",
-    "Game Changers 2026: Oceania Split 1",
-    "Game Changers 2026: South Asia Split 1",
-    "Game Changers 2026: Southeast Asia Split 1"
+    {
+        "name": "Predator League 2026: Singapore",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Thailand",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Vietnam",
+        "logo": ""
+    },
+    {
+        "name": "Project Blender 2025",
+        "logo": ""
+    },
+    {
+        "name": "Project Blender 2025: Spotlight",
+        "logo": ""
+    },
+    {
+        "name": "Shanghai Esports Masters 2025",
+        "logo": ""
+    },
+    {
+        "name": "Spotlight Series 2025: Americas",
+        "logo": ""
+    },
+    {
+        "name": "Spotlight Series 2025: Pacific x GES Asia",
+        "logo": ""
+    },
+    {
+        "name": "TEN Global Invitational 2025",
+        "logo": ""
+    },
+    {
+        "name": "Tixinha & Sacy Invitational 2 By Bonoxs",
+        "logo": ""
+    },
+    {
+        "name": "Vtuber Saikyo Tournament Act 2",
+        "logo": ""
+    },
+    {
+        "name": "BRAZA: Open Series by Elgin",
+        "logo": ""
+    },
+    {
+        "name": "CCCE City Cup 2025",
+        "logo": ""
+    },
+    {
+        "name": "INZONE London Clash",
+        "logo": ""
+    },
+    {
+        "name": "Monsters Reloaded 2025",
+        "logo": ""
+    },
+    {
+        "name": "Monsters Reloaded 2025: EMEA Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "NRG Neon Dream Invitational 2025",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Asia-Pacific",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Indonesia",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Japan",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Korea",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Malaysia",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Oceania",
+        "logo": ""
+    },
+    {
+        "name": "Predator League 2026: Philippines",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Brazil Gamers Club Last Chance Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: EMEA Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: France Revolution Up and Down",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Korea & Japan Showdown",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Korea WDG Road to Ascension",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Latin America Finals",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: North America ACE Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Southeast Asia Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2025: Türkiye Birlik Promotion/Relegation",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Brazil Gamers Club Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Brazil Gamers Club Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: DACH Evolution - VCL EMEA Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: DACH Evolution Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: DACH Evolution Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: EMEA Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: EMEA Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: EMEA Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: France Revolution Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: France Revolution Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Japan Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Japan Split 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Korea WDG Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Korea WDG Split 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM North ACE Masters",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM North ACE Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM North ACE Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM South ACE Masters",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM South ACE Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: LATAM South ACE Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: MENA Resilience - Middle East Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: MENA Resilience - North Africa Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: MENA Resilience Kickoff Promotion/Relegation",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: MENA Resilience Pulse Stage - Middle East",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: MENA Resilience Pulse Stage - North Africa",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: NORTH//EAST Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: NORTH//EAST Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: North America ACE Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: North America ACE Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: North America ACE Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 1 - Indonesia Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 1 - Philippines Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 1 - Rest of SEA Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 1 - Thailand Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 1 - Vietnam Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 2 - Indonesia Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 2 - Philippines Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 2 - Rest of SEA Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 2 - Thailand Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: SEA Split 2 - Vietnam Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: South Asia Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: South Asia Split 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Southeast Asia Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Southeast Asia Split 2",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Spain Rising Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Spain Rising Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Türkiye Birlik Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Challengers 2026: Türkiye Birlik Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "China Esports Festival Super Champions Cup",
+        "logo": ""
+    },
+    {
+        "name": "China Evolution Series 2026: Act 1",
+        "logo": ""
+    },
+    {
+        "name": "China Evolution Series 2026: Act 2",
+        "logo": ""
+    },
+    {
+        "name": "China Evolution Series: Act 3",
+        "logo": ""
+    },
+    {
+        "name": "China Evolution Series: Epilogue",
+        "logo": ""
+    },
+    {
+        "name": "College VALORANT 2025-2026: Esports Collegiate Conference",
+        "logo": ""
+    },
+    {
+        "name": "College VALORANT 2025-2026: Peach Belt Conference",
+        "logo": ""
+    },
+    {
+        "name": "EMEA Clash 2026",
+        "logo": ""
+    },
+    {
+        "name": "El Olimpo 2025",
+        "logo": ""
+    },
+    {
+        "name": "FunhaverGG: Back to Basics 10",
+        "logo": ""
+    },
+    {
+        "name": "For Those Who Dare 2025",
+        "logo": ""
+    },
+    {
+        "name": "Fortress (touch)Grassroots Esports 2026: Regional Finals",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: Americas Last Chance Qualifier",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: Brazil Finals",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: Championship Seoul",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: China Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: EMEA Stage 3",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: LATAM Main Event",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: North America Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2025: Pacific",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Brazil Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Brazil Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Brazil Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: EMEA Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: EMEA Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Japan Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Korea Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: LATAM Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: LATAM North Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: LATAM North Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: LATAM South Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: LATAM South Stage 2",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: North America Kickoff",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: North America Stage 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Oceania Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: South Asia Split 1",
+        "logo": ""
+    },
+    {
+        "name": "Game Changers 2026: Southeast Asia Split 1",
+        "logo": ""
+    },
+    {
+        "name": "VCT 2025: Americas Ascension",
+        "logo": ""
+    },
+    {
+        "name": "VCT 2025: China Ascension",
+        "logo": ""
+    },
+    {
+        "name": "VCT 2025: EMEA Ascension",
+        "logo": ""
+    },
+    {
+        "name": "VCT 2025: Pacific Ascension",
+        "logo": ""
+    }
 ]

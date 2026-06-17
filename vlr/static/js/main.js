@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Extract unique tournaments
         const tourneys = new Map();
         matches.forEach(m => {
-            if (m.tournament && !IGNORE_LIST.includes(m.tournament)) {
+            if (m.tournament && !IGNORE_LIST.find(t => t.name === m.tournament)) {
                 tourneys.set(m.tournament, m.tournament_logo || "");
             }
         });
@@ -532,7 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify({ tournament: name })
                 });
                 const data = await res.json();
-                const idx = IGNORE_LIST.indexOf(name);
+                const idx = IGNORE_LIST.findIndex(i => i.name === name);
                 if (idx !== -1) IGNORE_LIST.splice(idx, 1);
                 renderIgnoreList(data.ignorelist);
             });
@@ -547,9 +547,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         container.innerHTML = list.map(t => `
-            <div class="ignore-item" data-name="${t}">
-                <span class="ignore-item-name" title="${t}">${t}</span>
-                <button class="ignore-remove-btn" data-name="${t}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
+            <div class="ignore-item" data-name="${t.name}">
+                ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                <span class="ignore-item-name" title="${t.name}">${t.name}</span>
+                <button class="ignore-remove-btn" data-name="${t.name}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
         `).join("");
         bindIgnoreRemoveBtns();
@@ -562,7 +563,11 @@ document.addEventListener("DOMContentLoaded", () => {
     ignoreUncheckedBtn?.addEventListener("click", async () => {
         const unchecked = [];
         document.querySelectorAll(".tourney-checkbox").forEach(cb => {
-            if (!cb.checked) unchecked.push(cb.value);
+            if (!cb.checked) {
+                const label = cb.closest(".tourney-item");
+                const logo = label?.querySelector(".sidebar-tourney-logo")?.src || "";
+                unchecked.push({ name: cb.value, logo });
+            }
         });
         if (!unchecked.length) return;
         const res = await fetch("/api/ignorelist/add", {
@@ -571,18 +576,19 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(unchecked)
         });
         const data = await res.json();
-        unchecked.forEach(name => { if (!IGNORE_LIST.includes(name)) IGNORE_LIST.push(name); });
+        unchecked.forEach(t => { if (!IGNORE_LIST.find(i => i.name === t.name)) IGNORE_LIST.push(t); });
         renderIgnoreList(data.ignorelist);
         // Remove ignored tournament rows from sidebar
-        unchecked.forEach(name => {
-            document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(name)}"]`)?.remove();
-            checkedTournaments.delete(name);
+        unchecked.forEach(t => {
+            document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(t.name)}"]`)?.remove();
+            checkedTournaments.delete(t.name);
         });
         const countEl = document.getElementById("tourney-count");
         if (countEl) countEl.textContent = `(${document.querySelectorAll(".tourney-item").length})`;
         // Hide matching match cards
+        const names = unchecked.map(t => t.name);
         document.querySelectorAll(".match-card").forEach(card => {
-            if (unchecked.includes(card.getAttribute("data-tournament"))) {
+            if (names.includes(card.getAttribute("data-tournament"))) {
                 card.style.display = "none";
             }
         });

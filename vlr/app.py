@@ -84,7 +84,8 @@ def index():
     theme = settings.get("theme", "dark")
 
     # Filter out ignored tournaments
-    matches = [m for m in matches if m.get("tournament") not in ignore_list]
+    ignore_names = {t["name"] for t in ignore_list}
+    matches = [m for m in matches if m.get("tournament") not in ignore_names]
 
     tournaments = set()
     for m in matches:
@@ -116,7 +117,8 @@ def api_matches():
     save_settings(settings)
     scraper.fetch_and_update_matches(pages=pages)
     ignore_list = load_ignorelist()
-    matches = [m for m in scraper.get_matches_for_display() if m.get("tournament") not in ignore_list]
+    ignore_names = {t["name"] for t in ignore_list}
+    matches = [m for m in scraper.get_matches_for_display() if m.get("tournament") not in ignore_names]
     return jsonify(matches)
 
 @app.route("/api/settings", methods=["GET", "POST"])
@@ -134,19 +136,20 @@ def api_ignorelist_get():
 
 @app.route("/api/ignorelist/add", methods=["POST"])
 def api_ignorelist_add():
-    tournaments = request.json or []
+    tournaments = request.json or []  # [{name, logo}, ...]
     lst = load_ignorelist()
+    existing_names = {t["name"] for t in lst}
     for t in tournaments:
-        if t and t not in lst:
-            lst.append(t)
+        if t.get("name") and t["name"] not in existing_names:
+            lst.append({"name": t["name"], "logo": t.get("logo", "")})
+            existing_names.add(t["name"])
     save_ignorelist(lst)
     return jsonify({"status": "success", "ignorelist": lst})
 
 @app.route("/api/ignorelist/remove", methods=["POST"])
 def api_ignorelist_remove():
     tournament = (request.json or {}).get("tournament", "")
-    lst = load_ignorelist()
-    lst = [t for t in lst if t != tournament]
+    lst = [t for t in load_ignorelist() if t["name"] != tournament]
     save_ignorelist(lst)
     return jsonify({"status": "success", "ignorelist": lst})
 

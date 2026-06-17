@@ -223,9 +223,14 @@
                     <div id="ignore-list-container">
                         {% if ignore_list %}
                             {% for t in ignore_list %}
-                            <div class="ignore-item" data-name="{{ t }}">
-                                <span class="ignore-item-name" title="{{ t }}">{{ t }}</span>
-                                <button class="ignore-remove-btn" data-name="{{ t }}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
+                            <div class="ignore-item" data-name="{{ t.name }}">
+                                {% if t.logo %}
+                                <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';">
+                                {% else %}
+                                <div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>
+                                {% endif %}
+                                <span class="ignore-item-name" title="{{ t.name }}">{{ t.name }}</span>
+                                <button class="ignore-remove-btn" data-name="{{ t.name }}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
                             </div>
                             {% endfor %}
                         {% else %}
@@ -238,7 +243,7 @@
     </div>
 
     <!-- Custom Script File -->
-    <script>const IGNORE_LIST = {{ ignore_list | tojson }};</script>
+    <script>const IGNORE_LIST = {{ ignore_list | tojson }};  // [{name, logo}, ...]</script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

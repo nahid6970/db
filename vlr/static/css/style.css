@@ -1119,7 +1119,7 @@ body {
     justify-content: center;
 }
 .modal-box {
-    background: var(--sidebar-bg);
+    background: var(--bg-dark);
     border: 1px solid var(--card-border);
     border-radius: var(--border-radius-lg);
     width: min(480px, 92vw);
@@ -1183,6 +1183,23 @@ body {
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     margin-bottom: 6px;
+}
+.ignore-item-logo {
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+    flex-shrink: 0;
+    border-radius: 4px;
+}
+.ignore-item-logo-placeholder {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    flex-shrink: 0;
 }
 .ignore-item-name {
     font-size: 13px;
