@@ -144,7 +144,11 @@ body.light .tracker-time {
 }
 
 body.light .countdown-timer {
-    color: #e0192a;
+    color: #2563eb;
+}
+
+body.light .score-num.winner {
+    color: #16a34a;
 }
 
 /* Reset and Global Styles */
