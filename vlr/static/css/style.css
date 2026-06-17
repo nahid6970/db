@@ -81,6 +81,19 @@ body.light .status-btn {
     color: var(--text-secondary);
 }
 
+body.light .status-btn:hover {
+    background: rgba(255,70,85,0.08);
+    border-color: rgba(255,70,85,0.4);
+    color: #d42f3c;
+}
+
+body.light .status-btn.active {
+    background: #ff4655;
+    border-color: #ff4655;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(255,70,85,0.35);
+}
+
 body.light .tourney-item {
     background: rgba(0,0,0,0.03);
 }
@@ -131,7 +144,7 @@ body.light .tracker-time {
 }
 
 body.light .countdown-timer {
-    color: #d42f3c;
+    color: #e0192a;
 }
 
 /* Reset and Global Styles */
