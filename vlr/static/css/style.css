@@ -1310,6 +1310,32 @@ body {
     margin-top: 8px;
 }
 
+.settings-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.settings-action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 20px;
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    min-width: 90px;
+}
+.settings-action-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
+.settings-action-btn svg { transition: stroke var(--transition-fast); }
+
 .backup-btn {
     display: flex;
     align-items: center;
