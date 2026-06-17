@@ -90,6 +90,12 @@ body.light .tourney-item:hover {
     border-color: var(--card-border);
 }
 
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
 #theme-toggle-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
@@ -118,6 +124,14 @@ body.light #theme-toggle-btn {
 
 body.light #theme-toggle-btn:hover {
     background: rgba(0,0,0,0.12);
+}
+
+body.light .tracker-time {
+    color: #009e6a;
+}
+
+body.light .countdown-timer {
+    color: #d42f3c;
 }
 
 /* Reset and Global Styles */
