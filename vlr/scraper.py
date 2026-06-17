@@ -18,6 +18,10 @@ os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
 sync_lock = threading.Lock()
 details_lock = threading.Lock()
 
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+
 def load_json_matches():
     if not os.path.exists(JSON_PATH):
         return {}
@@ -47,6 +51,10 @@ def download_image(url):
     if not url:
         return ""
     
+    # Handle relative URLs (e.g. /img/vlr/tmp/vlr.png)
+    if url.startswith("/") and not url.startswith("//"):
+        url = "https://www.vlr.gg" + url
+    
     # Ensure directory exists in case it was deleted by user while server is running
     os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
     
@@ -61,11 +69,8 @@ def download_image(url):
     if os.path.exists(local_path):
         return local_url
         
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=HEADERS, timeout=10)
         if response.status_code == 200:
             with open(local_path, "wb") as f:
                 f.write(response.content)
@@ -77,12 +82,9 @@ def download_image(url):
 
 def fetch_match_detail_page(href):
     url = f"https://www.vlr.gg{href}"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
     
     try:
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=HEADERS, timeout=10)
         response.encoding = 'utf-8'
         if response.status_code != 200:
             return None
@@ -216,166 +218,226 @@ def fetch_details_in_background(scraped_matches):
     finally:
         details_lock.release()
 
+
+def _parse_matches_from_soup(soup, force_status=None):
+    """Parse match items from a BeautifulSoup page object.
+    
+    Works for both /matches (upcoming/live) and /matches/results (completed).
+    The HTML structure is identical on both pages.
+    
+    Args:
+        soup: BeautifulSoup object of the page
+        force_status: If set (e.g. "Completed"), override detected status for all matches.
+                      Used for the results page where all matches are completed.
+    
+    Returns:
+        List of match dicts with keys: id, href, date, time, team1, team2, 
+        score1, score2, tournament, series, tournament_logo, eta, status
+    """
+    container = soup.find("div", class_="col")
+    if not container:
+        container = soup
+        
+    elements = container.find_all(class_=["wf-label", "wf-card"])
+    
+    current_date = "Unknown Date"
+    parsed_matches = []
+    
+    for elem in elements:
+        classes = elem.get("class", [])
+        if "wf-label" in classes and "mod-large" in classes:
+            current_date = elem.text.strip()
+            current_date = " ".join(current_date.split())
+        elif "wf-card" in classes:
+            match_items = elem.find_all("a", class_="match-item")
+            for match in match_items:
+                href = match.get("href")
+                match_id = re.search(r"/(\d+)/", href)
+                if not match_id:
+                    continue
+                match_id = match_id.group(1)
+                
+                time_div = match.find("div", class_="match-item-time")
+                time_text = time_div.text.strip() if time_div else "N/A"
+                
+                teams_divs = match.find_all("div", class_="match-item-vs-team")
+                team_names = []
+                team_scores = []
+                for t_div in teams_divs:
+                    name_div = t_div.find("div", class_="match-item-vs-team-name")
+                    name = name_div.text.strip() if name_div else "TBD"
+                    name = " ".join(name.split())
+                    team_names.append(name)
+                    
+                    score_div = t_div.find("div", class_="match-item-vs-team-score")
+                    score = score_div.text.strip() if score_div else ""
+                    team_scores.append(score)
+                
+                tourney_div = match.find("div", class_="match-item-event")
+                tourney_name = ""
+                tourney_series = ""
+                if tourney_div:
+                    series_div = tourney_div.find("div", class_="match-item-event-series")
+                    if series_div:
+                        tourney_series = series_div.text.strip()
+                        series_text = series_div.text
+                        event_text = tourney_div.text
+                        tourney_name = event_text.replace(series_text, "").strip()
+                    else:
+                        tourney_name = tourney_div.text.strip()
+                
+                tourney_name = " ".join(tourney_name.split())
+                tourney_series = " ".join(tourney_series.split())
+                
+                logo_div = match.find("div", class_="match-item-icon")
+                tourney_logo = ""
+                if logo_div:
+                    img = logo_div.find("img")
+                    if img:
+                        tourney_logo = img.get("src") or img.get("data-src") or ""
+                        if tourney_logo.startswith("//"):
+                            tourney_logo = "https:" + tourney_logo
+                
+                eta_div = match.find("div", class_="ml-eta")
+                eta_text = eta_div.text.strip() if eta_div else ""
+                
+                status_div = match.find("div", class_="ml-status")
+                status_text = status_div.text.strip() if status_div else ""
+                
+                # Determine status
+                if force_status:
+                    status = force_status
+                elif "live" in eta_text.lower() or "live" in status_text.lower():
+                    status = "Live"
+                elif "completed" in status_text.lower():
+                    status = "Completed"
+                elif "upcoming" in status_text.lower():
+                    status = "Upcoming"
+                else:
+                    status = "Completed" if not eta_text else "Upcoming"
+                
+                parsed_matches.append({
+                    "id": match_id,
+                    "href": href,
+                    "date": current_date,
+                    "time": time_text,
+                    "team1": team_names[0] if len(team_names) > 0 else "TBD",
+                    "team2": team_names[1] if len(team_names) > 1 else "TBD",
+                    "score1": team_scores[0] if len(team_scores) > 0 else "",
+                    "score2": team_scores[1] if len(team_scores) > 1 else "",
+                    "tournament": tourney_name,
+                    "series": tourney_series,
+                    "tournament_logo": tourney_logo,
+                    "eta": eta_text,
+                    "status": status
+                })
+                
+    return parsed_matches
+
+
+def _fetch_page(url):
+    """Fetch a page and return a BeautifulSoup object, or None on failure."""
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=10)
+        response.encoding = 'utf-8'
+        if response.status_code != 200:
+            print(f"Failed to fetch {url}. Server returned status: {response.status_code}")
+            return None
+        return BeautifulSoup(response.text, "html.parser")
+    except Exception as e:
+        print(f"Error fetching {url}: {e}")
+        return None
+
+
+def _upsert_matches_to_db(db, scraped_matches):
+    """Insert or update scraped matches into the database dict.
+    Downloads tournament logos and sets basic match info.
+    Returns the updated db dict."""
+    
+    # Download tournament logos locally
+    for m in scraped_matches:
+        if m["tournament_logo"]:
+            m["tournament_logo"] = download_image(m["tournament_logo"])
+            
+    # Insert/Update basic info for each scraped match
+    for m in scraped_matches:
+        mid = m["id"]
+        if mid not in db:
+            db[mid] = {
+                "id": mid,
+                "href": m["href"],
+                "team1": m["team1"],
+                "team2": m["team2"],
+                "team1_logo": "",
+                "team2_logo": "",
+                "tournament": m["tournament"],
+                "tournament_logo": m["tournament_logo"],
+                "series": m["series"],
+                "unix_timestamp": 0,
+                "bst_time": "",
+                "status": m["status"],
+                "score1": m["score1"],
+                "score2": m["score2"],
+                "last_updated": int(datetime.now().timestamp())
+            }
+        else:
+            # Update variable data from matches list
+            db[mid]["team1"] = m["team1"]
+            db[mid]["team2"] = m["team2"]
+            db[mid]["tournament"] = m["tournament"]
+            db[mid]["tournament_logo"] = m["tournament_logo"]
+            db[mid]["series"] = m["series"]
+            db[mid]["status"] = m["status"]
+            db[mid]["score1"] = m["score1"]
+            db[mid]["score2"] = m["score2"]
+            db[mid]["last_updated"] = int(datetime.now().timestamp())
+    
+    return db
+
+
 def fetch_and_update_matches():
+    """Fetch upcoming/live matches AND recent completed results from VLR.gg."""
     # Acquire sync lock to prevent concurrent main page fetches
     if not sync_lock.acquire(blocking=False):
         print("Sync already in progress. Skipping.")
         return False
-        
-    url = "https://www.vlr.gg/matches"
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
-    }
     
     try:
-        response = requests.get(url, headers=headers, timeout=10)
-        response.encoding = 'utf-8'
-        if response.status_code != 200:
-            print(f"Failed to fetch matches from vlr.gg. Server returned status: {response.status_code}")
+        all_scraped = []
+        
+        # 1. Fetch upcoming/live matches from /matches
+        soup_upcoming = _fetch_page("https://www.vlr.gg/matches")
+        if soup_upcoming:
+            upcoming_matches = _parse_matches_from_soup(soup_upcoming)
+            all_scraped.extend(upcoming_matches)
+            print(f"Scraped {len(upcoming_matches)} upcoming/live matches from /matches")
+        else:
+            print("Warning: Could not fetch upcoming matches page")
+        
+        # 2. Fetch completed results from /matches/results
+        soup_results = _fetch_page("https://www.vlr.gg/matches/results")
+        if soup_results:
+            completed_matches = _parse_matches_from_soup(soup_results, force_status="Completed")
+            all_scraped.extend(completed_matches)
+            print(f"Scraped {len(completed_matches)} completed matches from /matches/results")
+        else:
+            print("Warning: Could not fetch results page")
+        
+        if not all_scraped:
+            print("No matches scraped from either page.")
             return False
-            
-        soup = BeautifulSoup(response.text, "html.parser")
         
-        container = soup.find("div", class_="col")
-        if not container:
-            container = soup
-            
-        elements = container.find_all(class_=["wf-label", "wf-card"])
-        
-        current_date = "Unknown Date"
-        scraped_matches = []
-        
-        for elem in elements:
-            classes = elem.get("class", [])
-            if "wf-label" in classes and "mod-large" in classes:
-                current_date = elem.text.strip()
-                current_date = " ".join(current_date.split())
-            elif "wf-card" in classes:
-                match_items = elem.find_all("a", class_="match-item")
-                for match in match_items:
-                    href = match.get("href")
-                    match_id = re.search(r"/(\d+)/", href)
-                    if not match_id:
-                        continue
-                    match_id = match_id.group(1)
-                    
-                    time_div = match.find("div", class_="match-item-time")
-                    time_text = time_div.text.strip() if time_div else "N/A"
-                    
-                    teams_divs = match.find_all("div", class_="match-item-vs-team")
-                    team_names = []
-                    team_scores = []
-                    for t_div in teams_divs:
-                        name_div = t_div.find("div", class_="match-item-vs-team-name")
-                        name = name_div.text.strip() if name_div else "TBD"
-                        name = " ".join(name.split())
-                        team_names.append(name)
-                        
-                        score_div = t_div.find("div", class_="match-item-vs-team-score")
-                        score = score_div.text.strip() if score_div else ""
-                        team_scores.append(score)
-                    
-                    tourney_div = match.find("div", class_="match-item-event")
-                    tourney_name = ""
-                    tourney_series = ""
-                    if tourney_div:
-                        series_div = tourney_div.find("div", class_="match-item-event-series")
-                        if series_div:
-                            tourney_series = series_div.text.strip()
-                            series_text = series_div.text
-                            event_text = tourney_div.text
-                            tourney_name = event_text.replace(series_text, "").strip()
-                        else:
-                            tourney_name = tourney_div.text.strip()
-                    
-                    tourney_name = " ".join(tourney_name.split())
-                    tourney_series = " ".join(tourney_series.split())
-                    
-                    logo_div = match.find("div", class_="match-item-icon")
-                    tourney_logo = ""
-                    if logo_div:
-                        img = logo_div.find("img")
-                        if img:
-                            tourney_logo = img.get("src") or img.get("data-src") or ""
-                            if tourney_logo.startswith("//"):
-                                tourney_logo = "https:" + tourney_logo
-                    
-                    eta_div = match.find("div", class_="ml-eta")
-                    eta_text = eta_div.text.strip() if eta_div else ""
-                    
-                    status_div = match.find("div", class_="ml-status")
-                    status_text = status_div.text.strip() if status_div else ""
-                    
-                    is_live = False
-                    if "live" in eta_text.lower() or "live" in status_text.lower():
-                        status = "Live"
-                    elif "upcoming" in status_text.lower():
-                        status = "Upcoming"
-                    else:
-                        status = "Completed" if not eta_text else "Upcoming"
-                    
-                    scraped_matches.append({
-                        "id": match_id,
-                        "href": href,
-                        "date": current_date,
-                        "time": time_text,
-                        "team1": team_names[0] if len(team_names) > 0 else "TBD",
-                        "team2": team_names[1] if len(team_names) > 1 else "TBD",
-                        "score1": team_scores[0] if len(team_scores) > 0 else "",
-                        "score2": team_scores[1] if len(team_scores) > 1 else "",
-                        "tournament": tourney_name,
-                        "series": tourney_series,
-                        "tournament_logo": tourney_logo,
-                        "eta": eta_text,
-                        "status": status
-                    })
-                    
         # Load existing matches from JSON cache
         db = load_json_matches()
         
-        # Download tournament logos locally
-        for m in scraped_matches:
-            if m["tournament_logo"]:
-                m["tournament_logo"] = download_image(m["tournament_logo"])
-                
-        # Insert/Update basic info for each scraped match
-        for m in scraped_matches:
-            mid = m["id"]
-            if mid not in db:
-                db[mid] = {
-                    "id": mid,
-                    "href": m["href"],
-                    "team1": m["team1"],
-                    "team2": m["team2"],
-                    "team1_logo": "",
-                    "team2_logo": "",
-                    "tournament": m["tournament"],
-                    "tournament_logo": m["tournament_logo"],
-                    "series": m["series"],
-                    "unix_timestamp": 0,
-                    "bst_time": "",
-                    "status": m["status"],
-                    "score1": m["score1"],
-                    "score2": m["score2"],
-                    "last_updated": int(datetime.now().timestamp())
-                }
-            else:
-                # Update variable data from matches list
-                db[mid]["team1"] = m["team1"]
-                db[mid]["team2"] = m["team2"]
-                db[mid]["tournament"] = m["tournament"]
-                db[mid]["tournament_logo"] = m["tournament_logo"]
-                db[mid]["series"] = m["series"]
-                db[mid]["status"] = m["status"]
-                db[mid]["score1"] = m["score1"]
-                db[mid]["score2"] = m["score2"]
-                db[mid]["last_updated"] = int(datetime.now().timestamp())
+        # Upsert all scraped matches into db
+        db = _upsert_matches_to_db(db, all_scraped)
                 
         # Save basic info IMMEDIATELY (takes ~150-200ms) to ensure instant web responses
         save_json_matches(db)
         
         # Dispatch slow detail fetches and image downloads to a separate background thread
-        threading.Thread(target=fetch_details_in_background, args=(scraped_matches,), daemon=True).start()
+        threading.Thread(target=fetch_details_in_background, args=(all_scraped,), daemon=True).start()
         return True
     except Exception as e:
         print(f"Offline sync failed: {e}")
