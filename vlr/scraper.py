@@ -193,6 +193,7 @@ def fetch_details_in_background(scraped_matches):
         # Fetch detailed info in parallel
         if pending_ids:
             print(f"Background Sync: Fetching offline details for {len(pending_ids)} new matches...")
+            results = {}
             with ThreadPoolExecutor(max_workers=5) as executor:
                 future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending_ids}
                 for future in as_completed(future_to_id):
@@ -200,20 +201,22 @@ def fetch_details_in_background(scraped_matches):
                     try:
                         details = future.result()
                         if details:
-                            # Reload latest db state to prevent overwriting other concurrent writes
-                            current_db = load_json_matches()
-                            if mid in current_db:
-                                current_db[mid]["team1_logo"] = details["team1_logo"]
-                                current_db[mid]["team2_logo"] = details["team2_logo"]
-                                current_db[mid]["unix_timestamp"] = details["unix_timestamp"]
-                                current_db[mid]["bst_time"] = details["bst_time"]
-                                current_db[mid]["last_updated"] = int(datetime.now().timestamp())
-                                save_json_matches(current_db)
-                                # update local db ref for log output print
-                                db = current_db
-                                print(f"Background Sync: Updated details/logos for match {mid}")
+                            results[mid] = details
+                            print(f"Background Sync: Updated details/logos for match {mid}")
                     except Exception as e:
                         print(f"Background Sync: Exception fetching details for match {mid}: {e}")
+
+            # Single save after all fetches complete
+            if results:
+                current_db = load_json_matches()
+                for mid, details in results.items():
+                    if mid in current_db:
+                        current_db[mid]["team1_logo"] = details["team1_logo"]
+                        current_db[mid]["team2_logo"] = details["team2_logo"]
+                        current_db[mid]["unix_timestamp"] = details["unix_timestamp"]
+                        current_db[mid]["bst_time"] = details["bst_time"]
+                        current_db[mid]["last_updated"] = int(datetime.now().timestamp())
+                save_json_matches(current_db)
         print("Background details thread finished.")
     finally:
         details_lock.release()
