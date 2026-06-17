@@ -38,7 +38,7 @@ body.light {
 body.light {
     background-color: var(--bg-dark);
     background-image: none;
-    scrollbar-color: rgba(255, 70, 85, 0.4) var(--bg-darker);
+    scrollbar-color: var(--accent-red) var(--bg-darker);
 }
 
 body.light ::-webkit-scrollbar-track { background: var(--bg-darker); }
@@ -163,7 +163,7 @@ body.light .score-num.winner {
     padding: 0;
     box-sizing: border-box;
     scrollbar-width: thin;
-    scrollbar-color: rgba(255, 70, 85, 0.3) var(--bg-darker);
+    scrollbar-color: rgba(255, 70, 85, 0.45) var(--bg-darker);
 }
 
 /* Custom Webkit Scrollbar */
@@ -175,11 +175,17 @@ body.light .score-num.winner {
     background: var(--bg-darker);
 }
 ::-webkit-scrollbar-thumb {
-    background: rgba(255, 70, 85, 0.3);
+    background: var(--accent-red);
     border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--accent-red);
+    background: var(--accent-red-hover);
+}
+body.light ::-webkit-scrollbar-thumb {
+    background: rgba(255, 70, 85, 0.45);
+}
+body.light ::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 70, 85, 0.7);
 }
 
 body {
