@@ -98,7 +98,7 @@
 
                 <div class="matches-grid" id="matches-grid-container">
                     {% for m in matches %}
-                    <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}">
+                    <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}" data-href="{{ m.href }}" style="cursor:pointer">
                         <div class="match-card-header">
                             <div class="tournament-info">
                                 {% if m.tournament_logo %}

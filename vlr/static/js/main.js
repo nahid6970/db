@@ -33,6 +33,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // Apply initial filters based on saved settings
     applyFilters();
 
+    // Open VLR.gg page on card click
+    if (matchesGrid) {
+        matchesGrid.addEventListener("click", e => {
+            const card = e.target.closest(".match-card");
+            if (!card) return;
+            const href = card.getAttribute("data-href");
+            if (href) window.open("https://www.vlr.gg" + href, "_blank");
+        });
+    }
+
     // Save tournament settings to backend
     async function saveTournamentSettings() {
         const unchecked = [];
@@ -301,6 +311,8 @@ document.addEventListener("DOMContentLoaded", () => {
             card.setAttribute("data-tournament", m.tournament);
             card.setAttribute("data-status", (m.status || "").toLowerCase());
             card.setAttribute("data-id", m.id);
+            card.setAttribute("data-href", m.href);
+            card.style.cursor = "pointer";
             
             // Create status badge inner HTML
             let statusBadgeHTML = "";
