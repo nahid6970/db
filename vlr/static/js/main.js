@@ -280,8 +280,9 @@ document.addEventListener("DOMContentLoaded", () => {
             
             try {
                 const pagesInput = document.getElementById("results-pages");
-                const pages = pagesInput ? parseInt(pagesInput.value) || 5 : 5;
-                const response = await fetch(`/api/matches?pages=${pages}`);
+                const pages = pagesInput ? (parseInt(pagesInput.value) || null) : null;
+                const url = pages ? `/api/matches?pages=${pages}` : `/api/matches`;
+                const response = await fetch(url);
                 if (!response.ok) throw new Error("Sync failed");
                 const matches = await response.json();
                 

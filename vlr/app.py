@@ -124,12 +124,9 @@ def index():
 
 @app.route("/api/matches")
 def api_matches():
-    pages = request.args.get("pages", 5, type=int)
+    saved_pages = load_settings().get("results_pages", 5)
+    pages = request.args.get("pages", saved_pages, type=int)
     pages = max(1, pages)
-    # Save pages to settings
-    settings = load_settings()
-    settings["results_pages"] = pages
-    save_settings(settings)
     scraper.fetch_and_update_matches(pages=pages)
     ignore_list = load_ignorelist()
     ignore_names = {t["name"] for t in ignore_list}
