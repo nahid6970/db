@@ -1303,27 +1303,3 @@ body {
     text-align: center;
     padding: 16px 0;
 }
-
-.backup-actions {
-    display: flex;
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.backup-btn {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    border-radius: var(--border-radius-sm);
-    border: 1px solid var(--card-border);
-    background: var(--card-bg);
-    color: var(--text-primary);
-    font-family: var(--font-main);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all var(--transition-fast);
-}
-.backup-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
-.backup-btn.restore:hover { border-color: var(--accent-green); color: var(--accent-green); }

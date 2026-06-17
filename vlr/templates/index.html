@@ -42,6 +42,8 @@
                 <button class="refresh-btn" id="refresh-data-btn" title="Refresh matches data">
                     <i class="fa-solid fa-arrows-rotate"></i> Sync Live Data
                 </button>
+                <button class="header-icon-btn" id="backup-btn" title="Backup matches data"><i class="fa-solid fa-download"></i></button>
+                <button class="header-icon-btn" id="restore-btn" title="Restore from backup"><i class="fa-solid fa-upload"></i></button>
                 <div class="header-divider"></div>
                 <div class="time-tracker">
                     <span class="tracker-label"><i class="fa-solid fa-clock-rotate-left"></i> Current Bangladesh Time</span>
@@ -229,20 +231,6 @@
                         {% else %}
                             <p class="ignore-empty">No tournaments ignored.</p>
                         {% endif %}
-                    </div>
-                </div>
-                <div class="modal-section">
-                    <h3>Data Backup</h3>
-                    <p class="modal-section-desc">Backup and restore your match data in case of accidental sync with fewer pages.</p>
-                    <div class="backup-actions">
-                        <button id="backup-btn" class="backup-btn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            Backup Now
-                        </button>
-                        <button id="restore-btn" class="backup-btn restore">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                            Restore from Backup
-                        </button>
                     </div>
                 </div>
             </div>
