@@ -283,15 +283,19 @@ function goalBadge(goal) {
   const scorers = (goal.athletesInvolved || []).map(a => a.displayName).filter(Boolean);
   const scorerText = scorers.length ? scorers.join(', ') : (goal.shortText || goal.text || '');
   const typeText = goal.type?.text || '';
-  const isYellow = /yellow/i.test(typeText);
-  const isRed = /red/i.test(typeText);
-  const isYR = /yellow.*red|second.*yellow/i.test(typeText);
+  const isGoal = goal.scoringPlay === true || /goal/i.test(typeText);
+  const isPenalty = /penalty/i.test(typeText) || goal.penaltyKick === true;
+  const isYellow = !isGoal && /yellow/i.test(typeText);
+  const isRed = !isGoal && /\bred\s*card\b/i.test(typeText);
+  const isYR = !isGoal && /yellow.*red|second.*yellow/i.test(typeText);
   let icon;
-  if (isYR)     icon = `<span class="card-yr"></span>`;
+  if (isGoal)        icon = `<span class="goal-icon"></span>`;
+  else if (isYR)     icon = `<span class="card-yr"></span>`;
   else if (isYellow) icon = `<span class="card-y"></span>`;
   else if (isRed)    icon = `<span class="card-r"></span>`;
   else               icon = `<span class="goal-icon"></span>`;
-  const label = goal.ownGoal ? `OG · ${scorerText}` : scorerText;
+  const suffix = isPenalty && isGoal ? ' (P)' : goal.ownGoal ? '' : '';
+  const label = goal.ownGoal ? `OG · ${scorerText}` : `${scorerText}${suffix}`;
   return `<div class="goal-item"><span>${label} <span class="goal-min">${min}</span></span>${icon}</div>`;
 }
 
@@ -320,8 +324,9 @@ async function fetchMatches() {
         const [home, away] = comp.competitors;
         const st = comp.status;
         const isLive = st.type.state === 'in';
-        const homeGoals = (comp.details || []).filter(g => goalSide(comp, g) === 'home');
-        const awayGoals = (comp.details || []).filter(g => goalSide(comp, g) === 'away');
+        const isGoalEvent = g => g.scoringPlay === true || /goal/i.test(g.type?.text || '');
+        const homeGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'home');
+        const awayGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'away');
         html += `
         <div class="match-card${isLive?' card-live':''}">
           <div class="team team-panel">
