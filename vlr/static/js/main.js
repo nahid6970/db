@@ -56,7 +56,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const timeString = bst.toLocaleTimeString('en-US', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit',
             hour12: true
         });
         
@@ -111,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 let countdownStr = "";
                 if (d > 0) countdownStr += `${d}d `;
                 if (h > 0 || d > 0) countdownStr += `${h}h `;
-                countdownStr += `${m}m ${s}s`;
+                countdownStr += `${m}m`;
                 
                 timerSpan.textContent = countdownStr;
             }
