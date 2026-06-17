@@ -50,17 +50,6 @@
                     <input type="text" id="team-search" placeholder="Search teams...">
                 </div>
 
-                <!-- Match Status Quick Filter -->
-                <div class="filter-group">
-                    <h3>Match Status</h3>
-                    <div class="status-filters">
-                        <button class="status-btn active" data-status="all">All</button>
-                        <button class="status-btn" data-status="live">🔴 Live</button>
-                        <button class="status-btn" data-status="upcoming">Upcoming</button>
-                        <button class="status-btn" data-status="completed">Completed</button>
-                    </div>
-                </div>
-
                 <!-- Tournament List -->
                 <div class="filter-group tourney-group">
                     <div class="tourney-group-header">
@@ -97,7 +86,12 @@
             <!-- Matches Grid Content -->
             <main class="content-area">
                 <div class="matches-header">
-                    <h2><i class="fa-solid fa-calendar-days"></i> Scheduled Matches</h2>
+                    <div class="status-filters">
+                        <button class="status-btn active" data-status="all">All</button>
+                        <button class="status-btn" data-status="live">🔴 Live</button>
+                        <button class="status-btn" data-status="upcoming">Upcoming</button>
+                        <button class="status-btn" data-status="completed">Completed</button>
+                    </div>
                     <div class="sync-controls">
                         <div class="pages-input-group">
                             <label for="results-pages">Result Pages</label>

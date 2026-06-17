@@ -365,8 +365,8 @@ body {
 }
 
 .status-filters {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: row;
     gap: 8px;
 }
 
@@ -545,19 +545,8 @@ body {
     align-items: center;
     border-bottom: 2px solid var(--card-border);
     padding-bottom: 16px;
-}
-
-.matches-header h2 {
-    font-family: var(--font-heading);
-    font-size: 26px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
+    flex-wrap: wrap;
     gap: 12px;
-}
-
-.matches-header h2 i {
-    color: var(--accent-red);
 }
 
 .sync-controls {
