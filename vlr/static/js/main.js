@@ -1,6 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const bstClock = document.getElementById("current-bst-clock");
+
+    // Restore scroll position on page load
+    const savedScroll = sessionStorage.getItem("scrollY");
+    if (savedScroll) { window.scrollTo(0, parseInt(savedScroll)); sessionStorage.removeItem("scrollY"); }
+    window.addEventListener("beforeunload", () => sessionStorage.setItem("scrollY", window.scrollY));
     const searchInput = document.getElementById("team-search");
     const statusBtns = document.querySelectorAll(".status-btn");
     const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
@@ -10,7 +15,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const matchesGrid = document.getElementById("matches-grid-container");
     
     // Global filter state
-    let activeStatus = "all";
+    let activeStatus = sessionStorage.getItem("activeStatus") || "all";
+
+    // Restore active status button
+    statusBtns.forEach(btn => {
+        if (btn.getAttribute("data-status") === activeStatus) btn.classList.add("active");
+        else btn.classList.remove("active");
+    });
     let searchQuery = "";
     let checkedTournaments = new Set();
     
@@ -189,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             statusBtns.forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             activeStatus = btn.getAttribute("data-status");
+            sessionStorage.setItem("activeStatus", activeStatus);
             applyFilters();
         });
     });
@@ -243,6 +255,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) throw new Error("Sync failed");
                 const matches = await response.json();
                 
+                const scrollY = window.scrollY;
+
                 // Re-render matches grid
                 renderMatchesGrid(matches);
                 
@@ -251,6 +265,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // Re-apply filters with new elements
                 applyFilters();
+
+                window.scrollTo(0, scrollY);
             } catch (err) {
                 console.error("Error syncing data:", err);
                 alert("Failed to sync live data from VLR.gg. Please try again later.");
