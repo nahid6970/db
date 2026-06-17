@@ -22,3 +22,9 @@ ENV/
 *.njsproj
 *.sln
 *.swp
+
+# Offline data caches and user settings
+static/images_cache/
+matches.json
+settings.json
+
