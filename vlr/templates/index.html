@@ -31,6 +31,21 @@
                     <span class="tracker-label"><i class="fa-solid fa-clock-rotate-left"></i> Current Bangladesh Time</span>
                     <span id="current-bst-clock" class="tracker-time">--:--:-- --</span>
                 </div>
+                <div class="status-filters">
+                    <button class="status-btn active" data-status="all">All</button>
+                    <button class="status-btn" data-status="live">🔴 Live</button>
+                    <button class="status-btn" data-status="upcoming">Upcoming</button>
+                    <button class="status-btn" data-status="completed">Completed</button>
+                </div>
+                <div class="header-divider"></div>
+                <div class="pages-input-group">
+                    <label for="results-pages">Result Pages</label>
+                    <input type="number" id="results-pages" min="1" max="50" value="{{ results_pages }}" title="Number of result pages to fetch">
+                </div>
+                <button class="refresh-btn" id="refresh-data-btn" title="Refresh matches data">
+                    <i class="fa-solid fa-arrows-rotate"></i> Sync Live Data
+                </button>
+                <div class="header-divider"></div>
                 <button id="theme-toggle-btn" title="Toggle theme"><i class="fa-solid fa-moon"></i></button>
                 <button id="settings-btn" title="Settings"><i class="fa-solid fa-gear"></i></button>
             </div>
@@ -85,27 +100,6 @@
 
             <!-- Matches Grid Content -->
             <main class="content-area">
-                <div class="matches-header">
-                    <div class="matches-header-left">
-                        <h2><i class="fa-solid fa-calendar-days"></i> Scheduled Matches</h2>
-                        <div class="status-filters">
-                            <button class="status-btn active" data-status="all">All</button>
-                            <button class="status-btn" data-status="live">🔴 Live</button>
-                            <button class="status-btn" data-status="upcoming">Upcoming</button>
-                            <button class="status-btn" data-status="completed">Completed</button>
-                        </div>
-                    </div>
-                    <div class="sync-controls">
-                        <div class="pages-input-group">
-                            <label for="results-pages">Result Pages</label>
-                            <input type="number" id="results-pages" min="1" max="50" value="{{ results_pages }}" title="Number of result pages to fetch (~20 matches each)">
-                        </div>
-                        <button class="refresh-btn" id="refresh-data-btn" title="Refresh matches data">
-                            <i class="fa-solid fa-arrows-rotate"></i> Sync Live Data
-                        </button>
-                    </div>
-                </div>
-
                 <div class="matches-grid" id="matches-grid-container">
                     {% for m in matches %}
                     <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}" data-href="{{ m.href }}" style="cursor:pointer">
