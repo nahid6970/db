@@ -293,7 +293,22 @@ def fetch_and_update_matches():
         pending_ids = []
         for m in scraped_matches:
             mid = m["id"]
-            if not db[mid].get("team1_logo") or not db[mid].get("unix_timestamp"):
+            
+            # Helper to check if a cached image URL points to a file that actually exists
+            def file_exists(local_url):
+                if not local_url or not local_url.startswith("/static/images_cache/"):
+                    return False
+                filename = local_url.split("/")[-1]
+                path = os.path.join(IMAGE_CACHE_DIR, filename)
+                return os.path.exists(path)
+                
+            t1_logo = db[mid].get("team1_logo", "")
+            t2_logo = db[mid].get("team2_logo", "")
+            
+            has_details = t1_logo and t2_logo and db[mid].get("unix_timestamp")
+            files_exist = file_exists(t1_logo) and file_exists(t2_logo)
+            
+            if not has_details or not files_exist:
                 pending_ids.append((mid, m["href"]))
                 
         # Fetch detailed info in parallel
