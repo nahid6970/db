@@ -1,13 +1,60 @@
-from flask import Flask, render_template, jsonify
+import os
+import json
+import threading
+import time
+from flask import Flask, render_template, jsonify, request
 import scraper
 
 app = Flask(__name__)
 
+SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.json")
+
+def load_settings():
+    if not os.path.exists(SETTINGS_PATH):
+        return {"unchecked_tournaments": []}
+    try:
+        with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {"unchecked_tournaments": []}
+
+def save_settings(settings):
+    try:
+        with open(SETTINGS_PATH, "w", encoding="utf-8") as f:
+            json.dump(settings, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(f"Error saving settings: {e}")
+
+def start_background_sync():
+    def sync_loop():
+        print("Background sync thread started...")
+        # Initial sync on startup if JSON is empty or doesn't exist
+        db = scraper.load_json_matches()
+        if not db:
+            print("No cached matches found. Performing initial sync from VLR.gg...")
+            scraper.fetch_and_update_matches()
+            print("Initial sync complete.")
+        
+        while True:
+            # Sync every 5 minutes (300 seconds)
+            time.sleep(300)
+            print("Background sync: Syncing from VLR.gg...")
+            scraper.fetch_and_update_matches()
+            print("Background sync: Sync complete.")
+            
+    # Prevent running twice in Flask debug reloader mode
+    if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or not app.debug:
+        t = threading.Thread(target=sync_loop, daemon=True)
+        t.start()
+
 @app.route("/")
 def index():
-    # Render the matches template
-    # We will fetch matches on load. Since scraper caches them, it will be fast
+    # Load matches (reads from matches.json cache)
     matches = scraper.get_matches_for_display()
+    
+    # Load user settings
+    settings = load_settings()
+    unchecked_tournaments = settings.get("unchecked_tournaments", [])
     
     # Get unique tournaments for the filter checklist
     tournaments = set()
@@ -18,16 +65,32 @@ def index():
     # Sort tournaments by name
     sorted_tournaments = sorted(list(tournaments), key=lambda x: x[0])
     
-    return render_template("index.html", matches=matches, tournaments=sorted_tournaments)
+    return render_template(
+        "index.html", 
+        matches=matches, 
+        tournaments=sorted_tournaments,
+        unchecked_tournaments=unchecked_tournaments
+    )
 
 @app.route("/api/matches")
 def api_matches():
-    # Return matches as JSON for AJAX refresh
+    # Force update from VLR.gg when user requests it via refresh button
+    scraper.fetch_and_update_matches()
+    # Return matches as JSON
     matches = scraper.get_matches_for_display()
     return jsonify(matches)
 
+@app.route("/api/settings", methods=["GET", "POST"])
+def api_settings():
+    if request.method == "POST":
+        data = request.json or {}
+        save_settings(data)
+        return jsonify({"status": "success", "settings": data})
+    else:
+        return jsonify(load_settings())
+
 if __name__ == "__main__":
-    # Ensure database is initialized
-    scraper.init_db()
-    # Run server
+    # Start the background sync thread
+    start_background_sync()
+    # Run server on port 5025
     app.run(host="0.0.0.0", port=5025, debug=True)

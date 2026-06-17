@@ -1,108 +1,63 @@
 import os
 import re
-import sqlite3
+import json
 import requests
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import zoneinfo
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "vlr_cache.db")
+JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "matches.json")
+IMAGE_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "images_cache")
 
-def init_db():
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS matches (
-            id TEXT PRIMARY KEY,
-            href TEXT,
-            team1 TEXT,
-            team2 TEXT,
-            team1_logo TEXT,
-            team2_logo TEXT,
-            tournament TEXT,
-            tournament_logo TEXT,
-            series TEXT,
-            unix_timestamp INTEGER,
-            bst_time TEXT,
-            status TEXT,
-            score1 TEXT,
-            score2 TEXT,
-            last_updated INTEGER
-        )
-    """)
-    conn.commit()
-    conn.close()
+# Ensure image cache directory exists
+os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
 
-def get_cached_matches():
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    cursor.execute("SELECT * FROM matches")
-    rows = cursor.fetchall()
-    conn.close()
-    return {row["id"]: dict(row) for row in rows}
+def load_json_matches():
+    if not os.path.exists(JSON_PATH):
+        return {}
+    try:
+        with open(JSON_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except Exception as e:
+        print(f"Error loading JSON: {e}")
+        return {}
 
-def save_match_details(match_id, details):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    cursor.execute("""
-        UPDATE matches 
-        SET team1_logo = ?, team2_logo = ?, unix_timestamp = ?, bst_time = ?, last_updated = ?
-        WHERE id = ?
-    """, (
-        details["team1_logo"],
-        details["team2_logo"],
-        details["unix_timestamp"],
-        details["bst_time"],
-        int(datetime.now().timestamp()),
-        match_id
-    ))
-    conn.commit()
-    conn.close()
+def save_json_matches(matches):
+    try:
+        with open(JSON_PATH, "w", encoding="utf-8") as f:
+            json.dump(matches, f, indent=4, ensure_ascii=False)
+    except Exception as e:
+        print(f"Error saving JSON: {e}")
 
-def insert_or_update_basic_match(match):
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
+def download_image(url):
+    if not url:
+        return ""
     
-    # We use INSERT OR IGNORE, then UPDATE the fields that change from the main page
-    cursor.execute("""
-        INSERT OR IGNORE INTO matches (
-            id, href, team1, team2, tournament, tournament_logo, series, status, score1, score2, last_updated
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    """, (
-        match["id"],
-        match["href"],
-        match["team1"],
-        match["team2"],
-        match["tournament"],
-        match["tournament_logo"],
-        match["series"],
-        match["status"],
-        match["score1"],
-        match["score2"],
-        int(datetime.now().timestamp())
-    ))
+    # Get image filename from URL
+    filename = url.split("/")[-1]
+    if not filename:
+        return url
+        
+    local_path = os.path.join(IMAGE_CACHE_DIR, filename)
+    local_url = f"/static/images_cache/{filename}"
     
-    # Update status, scores, series, tournament, team names, tournament_logo in case they change
-    cursor.execute("""
-        UPDATE matches
-        SET team1 = ?, team2 = ?, tournament = ?, tournament_logo = ?, series = ?, status = ?, score1 = ?, score2 = ?
-        WHERE id = ?
-    """, (
-        match["team1"],
-        match["team2"],
-        match["tournament"],
-        match["tournament_logo"],
-        match["series"],
-        match["status"],
-        match["score1"],
-        match["score2"],
-        match["id"]
-    ))
-    
-    conn.commit()
-    conn.close()
+    if os.path.exists(local_path):
+        return local_url
+        
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    }
+    try:
+        response = requests.get(url, headers=headers, timeout=10)
+        if response.status_code == 200:
+            with open(local_path, "wb") as f:
+                f.write(response.content)
+            return local_url
+    except Exception as e:
+        print(f"Failed to download image {url}: {e}")
+        
+    return url
 
 def fetch_match_detail_page(href):
     url = f"https://www.vlr.gg{href}"
@@ -170,9 +125,13 @@ def fetch_match_detail_page(href):
             except Exception as e:
                 print(f"Error parsing date {data_utc_ts}: {e}")
                 
+        # Download team logos locally
+        local_team1_logo = download_image(team1_logo) if team1_logo else ""
+        local_team2_logo = download_image(team2_logo) if team2_logo else ""
+                
         return {
-            "team1_logo": team1_logo,
-            "team2_logo": team2_logo,
+            "team1_logo": local_team1_logo,
+            "team2_logo": local_team2_logo,
             "unix_timestamp": unix_timestamp,
             "bst_time": bst_time_str
         }
@@ -190,7 +149,7 @@ def fetch_and_update_matches():
         response = requests.get(url, headers=headers, timeout=10)
         response.encoding = 'utf-8'
         if response.status_code != 200:
-            print(f"Failed to fetch matches. Status code: {response.status_code}")
+            print(f"Failed to fetch matches from vlr.gg. Server returned status: {response.status_code}")
             return False
             
         soup = BeautifulSoup(response.text, "html.parser")
@@ -288,22 +247,58 @@ def fetch_and_update_matches():
                         "eta": eta_text,
                         "status": status
                     })
+                    
+        # Load existing matches from JSON cache
+        db = load_json_matches()
         
-        # Save basic details into the database
+        # Download tournament logos locally
         for m in scraped_matches:
-            insert_or_update_basic_match(m)
-            
+            if m["tournament_logo"]:
+                m["tournament_logo"] = download_image(m["tournament_logo"])
+                
+        # Insert/Update basic info for each scraped match
+        for m in scraped_matches:
+            mid = m["id"]
+            if mid not in db:
+                db[mid] = {
+                    "id": mid,
+                    "href": m["href"],
+                    "team1": m["team1"],
+                    "team2": m["team2"],
+                    "team1_logo": "",
+                    "team2_logo": "",
+                    "tournament": m["tournament"],
+                    "tournament_logo": m["tournament_logo"],
+                    "series": m["series"],
+                    "unix_timestamp": 0,
+                    "bst_time": "",
+                    "status": m["status"],
+                    "score1": m["score1"],
+                    "score2": m["score2"],
+                    "last_updated": int(datetime.now().timestamp())
+                }
+            else:
+                # Update variable data from matches list
+                db[mid]["team1"] = m["team1"]
+                db[mid]["team2"] = m["team2"]
+                db[mid]["tournament"] = m["tournament"]
+                db[mid]["tournament_logo"] = m["tournament_logo"]
+                db[mid]["series"] = m["series"]
+                db[mid]["status"] = m["status"]
+                db[mid]["score1"] = m["score1"]
+                db[mid]["score2"] = m["score2"]
+                db[mid]["last_updated"] = int(datetime.now().timestamp())
+                
         # Check which matches need detailed info (logos and exact timestamps)
-        cached = get_cached_matches()
         pending_ids = []
         for m in scraped_matches:
-            c_match = cached.get(m["id"])
-            if not c_match or not c_match.get("team1_logo") or not c_match.get("unix_timestamp"):
-                pending_ids.append((m["id"], m["href"]))
-        
-        # Fetch detailed info in parallel if there are any
+            mid = m["id"]
+            if not db[mid].get("team1_logo") or not db[mid].get("unix_timestamp"):
+                pending_ids.append((mid, m["href"]))
+                
+        # Fetch detailed info in parallel
         if pending_ids:
-            print(f"Fetching details for {len(pending_ids)} new matches...")
+            print(f"Fetching offline details for {len(pending_ids)} new matches...")
             with ThreadPoolExecutor(max_workers=5) as executor:
                 future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending_ids}
                 for future in as_completed(future_to_id):
@@ -311,58 +306,60 @@ def fetch_and_update_matches():
                     try:
                         details = future.result()
                         if details:
-                            save_match_details(mid, details)
-                            print(f"Updated details for match {mid}")
+                            db[mid]["team1_logo"] = details["team1_logo"]
+                            db[mid]["team2_logo"] = details["team2_logo"]
+                            db[mid]["unix_timestamp"] = details["unix_timestamp"]
+                            db[mid]["bst_time"] = details["bst_time"]
+                            db[mid]["last_updated"] = int(datetime.now().timestamp())
+                            print(f"Updated offline details and images for match {mid}")
                     except Exception as e:
-                        print(f"Exception fetching details for match {mid}: {e}")
-        
+                        print(f"Exception fetching offline details for match {mid}: {e}")
+                        
+        save_json_matches(db)
         return True
     except Exception as e:
-        print(f"Error in fetch_and_update_matches: {e}")
+        print(f"Offline sync failed: {e}")
+        # If internet fetch fails, we still return True so we can fall back to existing JSON cache!
         return False
 
 def get_matches_for_display():
-    # Fetch latest list from VLR.gg (updates basic status/scores)
-    # Then pull details from local cache
-    # First, run the updater
-    fetch_and_update_matches()
+    # Read from local JSON cache
+    db = load_json_matches()
     
-    # Load all matches from cache
-    conn = sqlite3.connect(DB_PATH)
-    conn.row_factory = sqlite3.Row
-    cursor = conn.cursor()
-    # We can filter to get only recent matches or all matches.
-    # Usually, we want upcoming matches first, then live, then completed of today.
-    # Sorting: Live matches first, then Upcoming matches (by unix_timestamp asc), then Completed matches (by unix_timestamp desc).
-    cursor.execute("""
-        SELECT * FROM matches 
-        ORDER BY 
-            CASE status 
-                WHEN 'Live' THEN 1 
-                WHEN 'Upcoming' THEN 2 
-                ELSE 3 
-            END ASC,
-            unix_timestamp ASC
-    """)
-    rows = cursor.fetchall()
-    conn.close()
+    # Sort matches
+    matches_list = list(db.values())
     
-    # Convert to list of dicts
-    matches_list = []
-    for r in rows:
-        m = dict(r)
-        # Add human readable bst string if unix_timestamp is present
-        if m["unix_timestamp"]:
+    # Sort: Live matches first, then Upcoming matches (by unix_timestamp asc), then Completed matches (by unix_timestamp desc).
+    def sort_key(m):
+        status = m.get("status", "Upcoming")
+        if status == "Live":
+            status_order = 1
+        elif status == "Upcoming":
+            status_order = 2
+        else:
+            status_order = 3
+            
+        unix_ts = m.get("unix_timestamp", 0) or 0
+        
+        # For completed matches, we want descending order (most recent first)
+        # So we negate it if completed. But sorting is single key asc, so we adjust
+        if status_order == 3:
+            # Shift completed matches to be sorted after upcoming
+            return (status_order, -unix_ts)
+        else:
+            return (status_order, unix_ts)
+            
+    matches_list.sort(key=sort_key)
+    
+    # Process for template rendering
+    for m in matches_list:
+        if m.get("unix_timestamp"):
             bst_tz = timezone(timedelta(hours=6))
             dt_bst = datetime.fromtimestamp(m["unix_timestamp"], tz=timezone.utc).astimezone(bst_tz)
             m["formatted_bst"] = dt_bst.strftime("%b %d, %Y - %I:%M %p")
-            m["js_timestamp"] = m["unix_timestamp"] * 1000 # JS expects milliseconds
+            m["js_timestamp"] = m["unix_timestamp"] * 1000
         else:
             m["formatted_bst"] = "N/A"
             m["js_timestamp"] = 0
-        matches_list.append(m)
-        
+            
     return matches_list
-
-# Initialize DB when this module is imported
-init_db()

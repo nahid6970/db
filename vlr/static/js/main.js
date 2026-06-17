@@ -19,6 +19,34 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cb.checked) checkedTournaments.add(cb.value);
     });
 
+    // Apply initial filters based on saved settings
+    applyFilters();
+
+    // Save tournament settings to backend
+    async function saveTournamentSettings() {
+        const unchecked = [];
+        const checkboxes = document.querySelectorAll(".tourney-checkbox");
+        checkboxes.forEach(cb => {
+            if (!cb.checked) {
+                unchecked.push(cb.value);
+            }
+        });
+        
+        try {
+            await fetch("/api/settings", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    unchecked_tournaments: unchecked
+                })
+            });
+        } catch (err) {
+            console.error("Failed to save settings:", err);
+        }
+    }
+
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
         const now = new Date();
@@ -175,6 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.delete(cb.value);
             }
             applyFilters();
+            saveTournamentSettings();
         });
     });
 
@@ -186,6 +215,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.add(cb.value);
             });
             applyFilters();
+            saveTournamentSettings();
         });
     }
 
@@ -197,6 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.delete(cb.value);
             });
             applyFilters();
+            saveTournamentSettings();
         });
     }
 
@@ -413,6 +444,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     checkedTournaments.delete(cb.value);
                 }
                 applyFilters();
+                saveTournamentSettings();
             });
         });
         

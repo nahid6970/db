@@ -69,7 +69,7 @@
                     <div class="tourney-list" id="tournament-checklist">
                         {% for tourney, logo in tournaments %}
                         <label class="tourney-item" data-tourney-name="{{ tourney }}">
-                            <input type="checkbox" checked class="tourney-checkbox" value="{{ tourney }}">
+                            <input type="checkbox" {% if tourney not in unchecked_tournaments %}checked{% endif %} class="tourney-checkbox" value="{{ tourney }}">
                             <span class="custom-checkbox"></span>
                             {% if logo %}
                             <img src="{{ logo }}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';">
