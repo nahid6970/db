@@ -76,16 +76,32 @@ def start_background_sync():
 
 @app.route("/")
 def index():
-    matches = scraper.get_matches_for_display()
+    all_matches = scraper.get_matches_for_display()
     settings = load_settings()
     ignore_list = load_ignorelist()
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
     results_pages = settings.get("results_pages", 5)
     theme = settings.get("theme", "dark")
 
+    # Build logo lookup from all matches
+    logo_lookup = {}
+    for m in all_matches:
+        t = m.get("tournament")
+        if t and t not in logo_lookup and m.get("tournament_logo"):
+            logo_lookup[t] = m["tournament_logo"]
+
+    # Enrich ignore list entries that are missing logos and persist if any updated
+    updated = False
+    for entry in ignore_list:
+        if not entry.get("logo") and entry["name"] in logo_lookup:
+            entry["logo"] = logo_lookup[entry["name"]]
+            updated = True
+    if updated:
+        save_ignorelist(ignore_list)
+
     # Filter out ignored tournaments
     ignore_names = {t["name"] for t in ignore_list}
-    matches = [m for m in matches if m.get("tournament") not in ignore_names]
+    matches = [m for m in all_matches if m.get("tournament") not in ignore_names]
 
     tournaments = set()
     for m in matches:
