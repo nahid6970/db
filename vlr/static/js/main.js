@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const bstClock = document.getElementById("current-bst-clock");
 
+    // Theme toggle
+    const themeBtn = document.getElementById("theme-toggle-btn");
+    const themeIcon = themeBtn?.querySelector("i");
+    if (localStorage.getItem("theme") === "light") {
+        document.body.classList.add("light");
+        if (themeIcon) { themeIcon.className = "fa-solid fa-sun"; }
+    }
+    themeBtn?.addEventListener("click", () => {
+        const isLight = document.body.classList.toggle("light");
+        localStorage.setItem("theme", isLight ? "light" : "dark");
+        if (themeIcon) themeIcon.className = isLight ? "fa-solid fa-sun" : "fa-solid fa-moon";
+    });
+
     // Restore scroll position on page load
     const savedScroll = sessionStorage.getItem("scrollY");
     if (savedScroll) { window.scrollTo(0, parseInt(savedScroll)); sessionStorage.removeItem("scrollY"); }
