@@ -322,6 +322,32 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const backupBtn = document.getElementById("backup-btn");
+    const restoreBtn = document.getElementById("restore-btn");
+
+    if (backupBtn) {
+        backupBtn.addEventListener("click", async () => {
+            const r = await fetch("/api/backup", { method: "POST" });
+            const d = await r.json();
+            if (d.status === "success") {
+                backupBtn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                setTimeout(() => { backupBtn.innerHTML = '<i class="fa-solid fa-download"></i>'; }, 1500);
+            } else alert("Backup failed: " + d.message);
+        });
+    }
+
+    if (restoreBtn) {
+        restoreBtn.addEventListener("click", async () => {
+            const exists = await fetch("/api/backup/exists").then(r => r.json());
+            if (!exists.exists) return alert("No backup found.");
+            if (!confirm("Restore matches from backup? Current data will be overwritten.")) return;
+            const r = await fetch("/api/restore", { method: "POST" });
+            const d = await r.json();
+            if (d.status === "success") location.reload();
+            else alert("Restore failed: " + d.message);
+        });
+    }
+
     function renderMatchesGrid(matches) {
         if (!matchesGrid) return;
         

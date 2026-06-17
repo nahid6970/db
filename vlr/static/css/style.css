@@ -115,6 +115,22 @@ body.light .tourney-item:hover {
     background: var(--card-border);
 }
 
+.header-icon-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: var(--text-secondary);
+    width: 34px;
+    height: 34px;
+    border-radius: var(--border-radius-sm);
+    cursor: pointer;
+    font-size: 13px;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header-icon-btn:hover { color: var(--accent-red); border-color: var(--accent-red); }
+
 #theme-toggle-btn {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.12);
