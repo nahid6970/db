@@ -655,6 +655,17 @@ body {
     margin: 0;
 }
 
+#save-pages-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0 2px;
+    font-size: 13px;
+    transition: color var(--transition-fast);
+}
+#save-pages-btn:hover { color: var(--accent-red); }
+
 .refresh-btn {
     background: rgba(255, 70, 85, 0.1);
     border: 1px solid var(--accent-red);

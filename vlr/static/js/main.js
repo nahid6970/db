@@ -308,6 +308,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    const resultsPagesInput = document.getElementById("results-pages");
+    const savePagesBtnEl = document.getElementById("save-pages-btn");
+    if (savePagesBtnEl) {
+        savePagesBtnEl.addEventListener("click", async () => {
+            const pages = parseInt(resultsPagesInput.value) || 5;
+            resultsPagesInput.value = pages;
+            const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+            await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({...cur, results_pages: pages}) });
+            savePagesBtnEl.innerHTML = '<i class="fa-solid fa-check"></i>';
+            setTimeout(() => { savePagesBtnEl.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>'; }, 1500);
+        });
+    }
+
     function renderMatchesGrid(matches) {
         if (!matchesGrid) return;
         

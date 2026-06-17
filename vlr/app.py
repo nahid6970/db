@@ -55,18 +55,17 @@ def save_settings(settings):
 def start_background_sync():
     def sync_loop():
         print("Background sync thread started...")
-        # Initial sync on startup if JSON is empty or doesn't exist
         db = scraper.load_json_matches()
         if not db:
             print("No cached matches found. Performing initial sync from VLR.gg...")
-            scraper.fetch_and_update_matches()
+            scraper.fetch_and_update_matches(load_settings().get("results_pages", 5))
             print("Initial sync complete.")
         
         while True:
-            # Sync every 5 minutes (300 seconds)
             time.sleep(300)
+            pages = load_settings().get("results_pages", 5)
             print("Background sync: Syncing from VLR.gg...")
-            scraper.fetch_and_update_matches()
+            scraper.fetch_and_update_matches(pages)
             print("Background sync: Sync complete.")
             
     # Prevent running twice in Flask debug reloader mode
@@ -126,7 +125,7 @@ def index():
 @app.route("/api/matches")
 def api_matches():
     pages = request.args.get("pages", 5, type=int)
-    pages = max(1, min(pages, 50))  # clamp 1-50
+    pages = max(1, pages)
     # Save pages to settings
     settings = load_settings()
     settings["results_pages"] = pages

@@ -36,7 +36,8 @@
                 <div class="header-divider"></div>
                 <div class="pages-input-group">
                     <label for="results-pages">Result Pages</label>
-                    <input type="number" id="results-pages" min="1" max="50" value="{{ results_pages }}" title="Number of result pages to fetch">
+                    <input type="number" id="results-pages" min="1" value="{{ results_pages }}" title="Number of result pages to fetch">
+                    <button id="save-pages-btn" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
                 </div>
                 <button class="refresh-btn" id="refresh-data-btn" title="Refresh matches data">
                     <i class="fa-solid fa-arrows-rotate"></i> Sync Live Data
