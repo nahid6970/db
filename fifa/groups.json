@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-16T14:19:23.788968+00:00",
+  "updated_at": "2026-06-17T03:00:33.500566+00:00",
   "groups": [
     {
       "name": "Group A",
@@ -367,41 +367,41 @@
         {
           "name": "Norway",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/nor.png",
-          "P": "0",
-          "W": "0",
+          "P": "1",
+          "W": "1",
           "D": "0",
           "L": "0",
-          "GD": "0",
-          "Pts": "0"
+          "GD": "+3",
+          "Pts": "3"
         },
         {
           "name": "France",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/fra.png",
-          "P": "0",
-          "W": "0",
+          "P": "1",
+          "W": "1",
           "D": "0",
           "L": "0",
-          "GD": "0",
-          "Pts": "0"
+          "GD": "+2",
+          "Pts": "3"
         },
         {
           "name": "Senegal",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sen.png",
-          "P": "0",
+          "P": "1",
           "W": "0",
           "D": "0",
-          "L": "0",
-          "GD": "0",
+          "L": "1",
+          "GD": "-2",
           "Pts": "0"
         },
         {
           "name": "Iraq",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/irq.png",
-          "P": "0",
+          "P": "1",
           "W": "0",
           "D": "0",
-          "L": "0",
-          "GD": "0",
+          "L": "1",
+          "GD": "-3",
           "Pts": "0"
         }
       ]

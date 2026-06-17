@@ -313,7 +313,7 @@ async function fetchMatches() {
     });
 
     let html = '';
-    for (const [date, matches] of Object.entries(byDate)) {
+    for (const [date, matches] of Object.entries(byDate).sort((a,b) => new Date(b[0]) - new Date(a[0]))) {
       const hasLive = matches.some(m => m.comp.status.type.state === 'in');
       html += `<div class="date-header">${hasLive ? '&#128994; ' : '&#128197; '}${date}</div>`;
       for (const {ev, comp} of matches) {
