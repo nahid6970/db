@@ -502,6 +502,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         checkedTournaments = newChecked;
+        const countEl = document.getElementById("tourney-count");
+        if (countEl) countEl.textContent = `(${sortedTourneys.length})`;
     }
 
     // Settings modal
@@ -573,6 +575,8 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(name)}"]`)?.remove();
             checkedTournaments.delete(name);
         });
+        const countEl = document.getElementById("tourney-count");
+        if (countEl) countEl.textContent = `(${document.querySelectorAll(".tourney-item").length})`;
         // Hide matching match cards
         document.querySelectorAll(".match-card").forEach(card => {
             if (unchecked.includes(card.getAttribute("data-tournament"))) {
