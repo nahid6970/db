@@ -443,7 +443,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Extract unique tournaments
         const tourneys = new Map();
         matches.forEach(m => {
-            if (m.tournament) {
+            if (m.tournament && !IGNORE_LIST.includes(m.tournament)) {
                 tourneys.set(m.tournament, m.tournament_logo || "");
             }
         });
@@ -532,6 +532,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     body: JSON.stringify({ tournament: name })
                 });
                 const data = await res.json();
+                const idx = IGNORE_LIST.indexOf(name);
+                if (idx !== -1) IGNORE_LIST.splice(idx, 1);
                 renderIgnoreList(data.ignorelist);
             });
         });
@@ -569,6 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
             body: JSON.stringify(unchecked)
         });
         const data = await res.json();
+        unchecked.forEach(name => { if (!IGNORE_LIST.includes(name)) IGNORE_LIST.push(name); });
         renderIgnoreList(data.ignorelist);
         // Remove ignored tournament rows from sidebar
         unchecked.forEach(name => {

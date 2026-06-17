@@ -238,6 +238,7 @@
     </div>
 
     <!-- Custom Script File -->
+    <script>const IGNORE_LIST = {{ ignore_list | tojson }};</script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

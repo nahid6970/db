@@ -115,7 +115,8 @@ def api_matches():
     settings["results_pages"] = pages
     save_settings(settings)
     scraper.fetch_and_update_matches(pages=pages)
-    matches = scraper.get_matches_for_display()
+    ignore_list = load_ignorelist()
+    matches = [m for m in scraper.get_matches_for_display() if m.get("tournament") not in ignore_list]
     return jsonify(matches)
 
 @app.route("/api/settings", methods=["GET", "POST"])
