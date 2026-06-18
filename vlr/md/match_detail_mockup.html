@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Match Detail Mockup</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1116; color: #e5e7eb; font-family: 'Segoe UI', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+
+  /* Fake match card */
+  .match-card {
+    background: #1a1d26; border: 1px solid #2d2f3d; border-radius: 10px;
+    padding: 16px 20px; cursor: pointer; width: 340px;
+    transition: border-color .15s;
+  }
+  .match-card:hover { border-color: #e5383b; }
+  .card-tourney { font-size: 11px; color: #9ca3af; margin-bottom: 10px; }
+  .card-teams { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card-team { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+  .card-team img { width: 36px; height: 36px; object-fit: contain; }
+  .card-team-name { font-size: 13px; font-weight: 600; }
+  .card-score { font-size: 22px; font-weight: 700; color: #e5383b; min-width: 60px; text-align: center; }
+  .card-status { font-size: 11px; color: #9ca3af; text-align: center; margin-top: 10px; }
+
+  /* Modal overlay */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.65); z-index: 100; align-items: center; justify-content: center; padding: 16px; }
+  .overlay.open { display: flex; }
+
+  /* Modal */
+  .modal {
+    background: #1a1d26; border: 1px solid #2d2f3d; border-radius: 14px;
+    width: 100%; max-width: 780px; max-height: 90vh; overflow-y: auto;
+    padding: 24px;
+  }
+
+  /* Modal header */
+  .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+  .modal-tourney { font-size: 12px; color: #9ca3af; }
+  .modal-actions { display: flex; align-items: center; gap: 10px; }
+  .btn-vlr {
+    background: #e5383b; color: #fff; border: none; border-radius: 6px;
+    padding: 6px 14px; font-size: 12px; cursor: pointer; text-decoration: none;
+    font-family: inherit;
+  }
+  .btn-vlr:hover { background: #c82b2e; }
+  .btn-close { background: none; border: none; color: #9ca3af; font-size: 20px; cursor: pointer; line-height: 1; }
+  .btn-close:hover { color: #fff; }
+
+  /* Teams scoreline */
+  .modal-scoreline {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #0f1116; border-radius: 10px; padding: 20px 24px; margin-bottom: 20px;
+  }
+  .ms-team { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .ms-team.right { flex-direction: row-reverse; }
+  .ms-team img { width: 52px; height: 52px; object-fit: contain; }
+  .ms-team-name { font-size: 18px; font-weight: 700; }
+  .ms-score { font-size: 36px; font-weight: 800; color: #e5383b; padding: 0 20px; }
+  .ms-score .winner { color: #22c55e; }
+  .ms-score .loser { color: #6b7280; font-size: 28px; }
+
+  /* Maps */
+  .section-title { font-size: 12px; font-weight: 600; color: #9ca3af; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
+  .maps { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .map-card {
+    background: #0f1116; border: 1px solid #2d2f3d; border-radius: 8px;
+    padding: 10px 14px; flex: 1; min-width: 120px; text-align: center;
+  }
+  .map-card.won { border-color: #22c55e33; }
+  .map-card.lost { border-color: #e5383b33; }
+  .map-name { font-size: 12px; color: #9ca3af; margin-bottom: 6px; }
+  .map-score { font-size: 18px; font-weight: 700; }
+  .map-score .w { color: #22c55e; }
+  .map-score .l { color: #e5383b; }
+
+  /* Stats table */
+  .stats-block { margin-bottom: 20px; }
+  .stats-team-label { font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #e5e7eb; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { color: #6b7280; font-weight: 500; padding: 6px 10px; text-align: left; border-bottom: 1px solid #2d2f3d; }
+  th.num, td.num { text-align: right; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1e2030; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: #1e2030; }
+  .player-cell { display: flex; align-items: center; gap: 8px; }
+  .player-cell img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: #2d2f3d; }
+  .player-name { font-weight: 600; }
+  .agent-icon { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; }
+  .acs-high { color: #fbbf24; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- Fake match card -->
+<div class="match-card" onclick="document.querySelector('.overlay').classList.add('open')">
+  <div class="card-tourney">VCT 2025 — Champions Seoul · Grand Final</div>
+  <div class="card-teams">
+    <div class="card-team">
+      <img src="https://owcdn.net/img/6424f67baa0b6.png" onerror="this.src=''" alt="Sentinels">
+      <div class="card-team-name">Sentinels</div>
+    </div>
+    <div class="card-score">2 – 0</div>
+    <div class="card-team">
+      <img src="https://owcdn.net/img/63e4bde4b2365.png" onerror="this.src=''" alt="NRG">
+      <div class="card-team-name">NRG</div>
+    </div>
+  </div>
+  <div class="card-status">Completed · Click for details</div>
+</div>
+
+<!-- Detail modal -->
+<div class="overlay" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="modal">
+
+    <!-- Header -->
+    <div class="modal-header">
+      <div class="modal-tourney">VCT 2025 — Champions Seoul &nbsp;·&nbsp; Grand Final</div>
+      <div class="modal-actions">
+        <a class="btn-vlr" href="https://vlr.gg" target="_blank">View on VLR.gg ↗</a>
+        <button class="btn-close" onclick="document.querySelector('.overlay').classList.remove('open')">×</button>
+      </div>
+    </div>
+
+    <!-- Scoreline -->
+    <div class="modal-scoreline">
+      <div class="ms-team">
+        <img src="https://owcdn.net/img/6424f67baa0b6.png" onerror="this.style.display='none'" alt="">
+        <div class="ms-team-name">Sentinels</div>
+      </div>
+      <div class="ms-score">
+        <span class="winner">2</span> – <span class="loser">0</span>
+      </div>
+      <div class="ms-team right">
+        <img src="https://owcdn.net/img/63e4bde4b2365.png" onerror="this.style.display='none'" alt="">
+        <div class="ms-team-name">NRG</div>
+      </div>
+    </div>
+
+    <!-- Maps -->
+    <div class="section-title">Maps</div>
+    <div class="maps">
+      <div class="map-card won">
+        <div class="map-name">Bind</div>
+        <div class="map-score"><span class="w">13</span> – <span class="l">9</span></div>
+      </div>
+      <div class="map-card won">
+        <div class="map-name">Ascent</div>
+        <div class="map-score"><span class="w">13</span> – <span class="l">7</span></div>
+      </div>
+    </div>
+
+    <!-- Player stats -->
+    <div class="stats-block">
+      <div class="section-title">Player Stats</div>
+      <div class="stats-team-label">Sentinels</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th><th>Agent</th>
+            <th class="num">ACS</th><th class="num">K</th><th class="num">D</th><th class="num">A</th>
+            <th class="num">HS%</th><th class="num">ADR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="player-cell"><img src="https://owcdn.net/img/62e6a23f3d2fc.png" onerror="this.style.background='#2d2f3d'"><span class="player-name">TenZ</span></div></td>
+            <td><img class="agent-icon" src="https://owcdn.net/img/62b03c55b06b0.png" onerror="this.style.display='none'" title="Jett"></td>
+            <td class="num acs-high">312</td><td class="num">28</td><td class="num">18</td><td class="num">6</td>
+            <td class="num">34%</td><td class="num">178</td>
+          </tr>
+          <tr>
+            <td><div class="player-cell"><img src="" onerror="this.style.background='#2d2f3d'"><span class="player-name">Zekken</span></div></td>
+            <td><img class="agent-icon" src="" onerror="this.style.display='none'" title="Neon"></td>
+            <td class="num">244</td><td class="num">22</td><td class="num">20</td><td class="num">9</td>
+            <td class="num">28%</td><td class="num">152</td>
+          </tr>
+          <tr>
+            <td><div class="player-cell"><img src="" onerror="this.style.background='#2d2f3d'"><span class="player-name">Sacy</span></div></td>
+            <td></td>
+            <td class="num">198</td><td class="num">18</td><td class="num">19</td><td class="num">12</td>
+            <td class="num">22%</td><td class="num">134</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stats-block">
+      <div class="stats-team-label">NRG</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Player</th><th>Agent</th>
+            <th class="num">ACS</th><th class="num">K</th><th class="num">D</th><th class="num">A</th>
+            <th class="num">HS%</th><th class="num">ADR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="player-cell"><img src="" onerror="this.style.background='#2d2f3d'"><span class="player-name">crashies</span></div></td>
+            <td></td>
+            <td class="num acs-high">241</td><td class="num">21</td><td class="num">22</td><td class="num">11</td>
+            <td class="num">26%</td><td class="num">148</td>
+          </tr>
+          <tr>
+            <td><div class="player-cell"><img src="" onerror="this.style.background='#2d2f3d'"><span class="player-name">Victor</span></div></td>
+            <td></td>
+            <td class="num">208</td><td class="num">19</td><td class="num">24</td><td class="num">7</td>
+            <td class="num">31%</td><td class="num">139</td>
+          </tr>
+          <tr>
+            <td><div class="player-cell"><img src="" onerror="this.style.background='#2d2f3d'"><span class="player-name">s0m</span></div></td>
+            <td></td>
+            <td class="num">187</td><td class="num">17</td><td class="num">23</td><td class="num">14</td>
+            <td class="num">19%</td><td class="num">128</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
