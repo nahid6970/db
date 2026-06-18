@@ -152,7 +152,14 @@ def api_match_detail(match_id):
     players = match.get("players", {})
     old_format = isinstance(players, dict) and ("team1" in players or "team2" in players) and "all" not in players and "0" not in players
     missing_all = isinstance(players, dict) and "all" not in players
-    if (not match.get("maps") or old_format or missing_all) and match.get("href"):
+    # Check if any player is missing a photo
+    missing_photos = any(
+        not p.get("photo")
+        for map_data in players.values() if isinstance(map_data, dict)
+        for team in ("team1", "team2")
+        for p in map_data.get(team, [])
+    )
+    if (not match.get("maps") or old_format or missing_all or missing_photos) and match.get("href"):
         details = scraper.fetch_match_detail_page(match["href"])
         if details:
             match.update(details)

@@ -155,6 +155,28 @@ def fetch_match_detail_page(href):
         game_divs = soup.find_all("div", class_="vm-stats-game")
         map_index = 0
 
+        def fetch_player_photo(player_href):
+            """Fetch and cache a player's profile photo. Returns local URL or ''."""
+            if not player_href:
+                return ""
+            try:
+                r = requests.get(f"https://www.vlr.gg{player_href}", headers=HEADERS, timeout=8)
+                if r.status_code != 200:
+                    return ""
+                ps = BeautifulSoup(r.text, "html.parser")
+                avatar = ps.find("div", class_="wf-avatar")
+                if not avatar:
+                    return ""
+                img = avatar.find("img")
+                if not img:
+                    return ""
+                src = img.get("src", "")
+                if src.startswith("//"): src = "https:" + src
+                elif src.startswith("/"): src = "https://www.vlr.gg" + src
+                return download_image(src) if src else ""
+            except Exception:
+                return ""
+
         def parse_player_tables(game_div):
             result = {"team1": [], "team2": []}
             tables = game_div.find_all("table")
@@ -187,6 +209,7 @@ def fetch_match_detail_page(href):
                     result[team_key].append({
                         "name": player_name,
                         "href": player_href,
+                        "photo": "",  # filled in after parallel fetch
                         "agents": agents,
                         "acs": stat(tds[3]),
                         "k": stat(tds[4]),
@@ -234,6 +257,28 @@ def fetch_match_detail_page(href):
             players_by_map[str(map_index)] = parse_player_tables(game_div)
             map_index += 1
 
+        # Collect unique player hrefs across all map keys
+        unique_players = {}  # href -> list of player dicts that need photo filled
+        for map_data in players_by_map.values():
+            for team_key in ("team1", "team2"):
+                for p in map_data.get(team_key, []):
+                    if p["href"] and not p.get("photo"):
+                        unique_players.setdefault(p["href"], []).append(p)
+
+        # Fetch photos in parallel (max 5 workers)
+        if unique_players:
+            with ThreadPoolExecutor(max_workers=5) as executor:
+                future_to_href = {executor.submit(fetch_player_photo, href): href
+                                  for href in unique_players}
+                for future in as_completed(future_to_href):
+                    href = future_to_href[future]
+                    try:
+                        photo = future.result()
+                        for p in unique_players[href]:
+                            p["photo"] = photo
+                    except Exception:
+                        pass
+
         return {
             "team1_logo": local_team1_logo,
             "team2_logo": local_team2_logo,
@@ -278,7 +323,13 @@ def fetch_details_in_background(scraped_matches):
             existing_players = db.get(mid, {}).get("players", {})
             old_format = isinstance(existing_players, dict) and ("team1" in existing_players or "team2" in existing_players) and "all" not in existing_players and "0" not in existing_players
             missing_all = isinstance(existing_players, dict) and "all" not in existing_players
-            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all
+            missing_photos = any(
+                not p.get("photo")
+                for map_data in existing_players.values() if isinstance(map_data, dict)
+                for team in ("team1", "team2")
+                for p in map_data.get(team, [])
+            )
+            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all and not missing_photos
 
             if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))

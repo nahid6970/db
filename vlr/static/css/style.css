@@ -1478,6 +1478,10 @@ body {
 .mdm-stats-table tr:last-child td { border-bottom: none; }
 .mdm-stats-table tr:hover td { background: rgba(255,255,255,.03); }
 .mdm-player-cell { display: flex; align-items: center; gap: 8px; }
+.mdm-player-photo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--bg-darker); flex-shrink: 0; }
+.mdm-player-photo-placeholder { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-darker); flex-shrink: 0; }
+.mdm-player-photo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--bg-darker); flex-shrink: 0; }
+.mdm-player-photo-placeholder { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-darker); flex-shrink: 0; }
 .mdm-agent-icon { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; }
 .mdm-acs-top { color: #fbbf24; font-weight: 700; }
 body.light .mdm-acs-top { color: #b45309; }

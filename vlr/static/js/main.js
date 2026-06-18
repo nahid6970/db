@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!plist?.length) return "";
             const topAcs = maxAcs(plist);
             const rows = plist.map(p => `<tr>
-                <td><div class="mdm-player-cell"><span>${p.name}</span></div></td>
+                <td><div class="mdm-player-cell">${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
                 <td class="r">${renderAgents(p.agents)}</td>
                 <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
                 <td class="r">${p.k}</td><td class="r">${p.d}</td><td class="r">${p.a}</td>
