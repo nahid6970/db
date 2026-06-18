@@ -1100,6 +1100,10 @@ body {
     align-items: center;
     font-size: 12px;
 }
+.match-card[data-elimination="1"] .match-card-footer {
+    background: rgba(255, 70, 85, 0.15);
+    border-top-color: rgba(255, 70, 85, 0.3);
+}
 
 .time-info {
     display: flex;
