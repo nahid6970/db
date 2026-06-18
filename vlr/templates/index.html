@@ -22,6 +22,11 @@
             <div class="logo-area">
                 <div class="vlr-logo-glow"></div>
                 <i class="fa-solid fa-crosshairs logo-icon"></i>
+                <select id="sort-tourney-order" class="sidebar-select sort-tourney-select" title="Sort tournaments by first match date">
+                    <option value="none">Pin order</option>
+                    <option value="asc">Date ↑</option>
+                    <option value="desc">Date ↓</option>
+                </select>
             </div>
             <div class="header-right">
                 <div class="status-filters">
@@ -81,11 +86,6 @@
                     <div class="series-filter-group">
                         <input type="text" id="filter-series-input" class="ignore-search-input" placeholder="Filter series...">
                     </div>
-                    <select id="sort-tourney-order" class="sidebar-select" title="Sort tournaments by first match date">
-                        <option value="none">Pin order</option>
-                        <option value="asc">Date ↑</option>
-                        <option value="desc">Date ↓</option>
-                    </select>
                 </div>
                 <div id="custom-series-tags" class="custom-series-tags"></div>
 
