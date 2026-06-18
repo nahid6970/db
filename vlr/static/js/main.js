@@ -117,8 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
         applyTourneyFilters();
     });
 
-    filterYear?.addEventListener("change", () => { applyTourneyFilters(); saveSidebarFilters(); });
-    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); saveSidebarFilters(); });
+    filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
+    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
 
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
@@ -210,13 +210,21 @@ document.addEventListener("DOMContentLoaded", () => {
             
             // Check tournament match
             const tournamentMatches = checkedTournaments.has(tournament);
+
+            // Check year filter
+            const yearVal = filterYear ? filterYear.value : "all";
+            const yearMatches = yearVal === "all" || tournament.includes(yearVal);
+
+            // Check series filter
+            const seriesVal = filterSeries ? filterSeries.value : "all";
+            const seriesMatches = seriesVal === "all" || tournament.toUpperCase().includes(seriesVal.toUpperCase());
             
             // Check search query match
             const searchMatches = searchQuery === "" || 
                                   team1Name.includes(searchQuery) || 
                                   team2Name.includes(searchQuery);
             
-            if (statusMatches && tournamentMatches && searchMatches) {
+            if (statusMatches && tournamentMatches && searchMatches && yearMatches && seriesMatches) {
                 card.style.display = "flex";
                 card.style.animation = "fadeIn 0.3s ease forwards";
                 visibleCount++;
