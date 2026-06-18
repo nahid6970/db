@@ -594,9 +594,6 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
                 
         # Save basic info IMMEDIATELY (takes ~150-200ms) to ensure instant web responses
         save_json_matches(db)
-        
-        # Dispatch slow detail fetches and image downloads to a separate background thread
-        threading.Thread(target=fetch_details_in_background, args=(all_scraped,), daemon=True).start()
         return True
     except Exception as e:
         print(f"Offline sync failed: {e}")
