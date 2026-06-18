@@ -1,5 +1,19 @@
 # Recent Development Log
 
+## [2026-06-19 00:33] - Reverted Pagination
+
+Removed all pagination-related changes (server-side page slicing, Prev/Next bar, tournament reload on check/uncheck). Back to original: matches sliced by `per_page` setting, tournament check/uncheck saves and filters client-side instantly via `applyFilters()` — no page reload.
+
+See `md/PAGINATION_IMPROVEMENT.md` for the full spec if it's ever wanted again.
+
+**Files reverted:**
+- `app.py` — removed page/total_pages vars, unchecked_tournaments filter, back to `matches[:render_limit]`
+- `templates/index.html` — removed Jinja pagination block
+- `static/js/main.js` — removed `window.location.href = "/"` from `saveTournamentSettings`
+- `static/css/style.css` — removed `.pagination`, `.page-btn`, `.page-info` CSS
+
+---
+
 ## [2026-06-18 21:00] - Player Photos + UI Polish
 
 **What We Accomplished:**
