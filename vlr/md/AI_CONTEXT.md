@@ -28,8 +28,8 @@ A Flask web app that scrapes VLR.gg for Valorant match schedules and displays th
   "scrape_end": 5,
   "unchecked_tournaments": [],
   "filter_year": "all",
-  "filter_series": "all",
-  "filter_custom_series": []
+  "filter_custom_series": [],
+  "tournament_order": {"Tournament Name": 1}
 }
 ```
 
@@ -44,6 +44,13 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - All JSON saves use atomic write (`.tmp` → `os.replace()`)
 - `sync_lock` and `details_lock` are module-level threading locks in `scraper.py`
 - Theme applied server-side on `<body class="light">` — no flash
+
+## Tournament Pin Order
+- Right-click sidebar item → context menu → set position number
+- `tournament_order: {name: pos}` in `settings.json`
+- Sort key in `app.py`: `(tournament_order.get(name, 9999), unchecked, name)`
+- JS `setPinOrder`: removes old pos (closes gap) → shifts ≥ newPos up → inserts at newPos
+- Pin badge `#N` rendered on item; `×` removes pin
 
 ## Sidebar Filters
 - Year dropdown + Series text input (live filter, not persisted) + custom tag chips (persisted)

@@ -1,5 +1,24 @@
 # Recent Development Log
 
+## [2026-06-18 12:45] - Tournament Pin Order
+
+**What We Accomplished:**
+- Right-click any tournament item → context menu with number input to set sort position
+- `setPinOrder(name, pos)` removes old position first (closes gap), then shifts ≥ newPos up, inserts at newPos — no gaps on reorder
+- Pinned order saved to `settings.json` as `tournament_order: {name: pos}`
+- Pin badge `#N` shown on pinned items in sidebar (server-rendered + dynamic)
+- `×` button removes pin; Enter key confirms
+- Context menu closes on outside click or Escape
+- Removed number input spinner arrows via CSS
+
+**Files Modified:**
+- `static/js/main.js`
+- `static/css/style.css`
+- `templates/index.html`
+- `app.py`
+
+---
+
 ## [2026-06-18 12:30] - Series Filter Refinement
 
 **What We Accomplished:**
