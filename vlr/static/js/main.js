@@ -90,14 +90,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Sidebar tournament visibility filters (year + series)
+    let customSeriesFilters = [];
     function applyTourneyFilters() {
         const year = filterYear ? filterYear.value : "all";
         const series = filterSeries ? filterSeries.value : "all";
         document.querySelectorAll(".tourney-item").forEach(item => {
             const name = item.getAttribute("data-tourney-name") || "";
+            const nameUpper = name.toUpperCase();
             const yearMatch = year === "all" || name.includes(year);
-            const seriesMatch = series === "all" || name.toUpperCase().includes(series.toUpperCase());
-            item.style.display = (yearMatch && seriesMatch) ? "" : "none";
+            const seriesMatch = series === "all" || nameUpper.includes(series.toUpperCase());
+            const customMatch = customSeriesFilters.length === 0 || customSeriesFilters.some(t => nameUpper.includes(t));
+            item.style.display = (yearMatch && seriesMatch && customMatch) ? "" : "none";
         });
         const toureyCount = document.querySelectorAll(".tourney-item:not([style*='display: none'])").length;
         const countEl = document.getElementById("tourney-count");
@@ -108,6 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
         cur.filter_year = filterYear ? filterYear.value : "all";
         cur.filter_series = filterSeries ? filterSeries.value : "all";
+        cur.filter_custom_series = customSeriesFilters;
         await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
     }
 
@@ -115,11 +119,49 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/api/settings").then(r => r.json()).then(s => {
         if (filterYear && s.filter_year) filterYear.value = s.filter_year;
         if (filterSeries && s.filter_series) filterSeries.value = s.filter_series;
+        if (s.filter_custom_series) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
         applyTourneyFilters();
     });
 
     filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
     filterSeries?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
+
+    // Custom series text filters (tags)
+    const customTagsContainer = document.getElementById("custom-series-tags");
+    const addSeriesBtn = document.getElementById("add-series-filter-btn");
+
+    function renderSeriesTags() {
+        if (!customTagsContainer) return;
+        customTagsContainer.innerHTML = "";
+        customSeriesFilters.forEach((tag, i) => {
+            const el = document.createElement("span");
+            el.className = "series-tag";
+            el.innerHTML = `${tag}<button class="series-tag-remove" data-i="${i}">×</button>`;
+            customTagsContainer.appendChild(el);
+        });
+        customTagsContainer.querySelectorAll(".series-tag-remove").forEach(btn => {
+            btn.addEventListener("click", () => {
+                customSeriesFilters.splice(parseInt(btn.dataset.i), 1);
+                renderSeriesTags();
+                applyTourneyFilters();
+                applyFilters();
+                saveSidebarFilters();
+            });
+        });
+    }
+
+    addSeriesBtn?.addEventListener("click", () => {
+        const val = prompt("Add text filter (e.g. VALORANT, Champions):");
+        if (!val || !val.trim()) return;
+        const tag = val.trim().toUpperCase();
+        if (!customSeriesFilters.includes(tag)) {
+            customSeriesFilters.push(tag);
+            renderSeriesTags();
+            applyTourneyFilters();
+            applyFilters();
+            saveSidebarFilters();
+        }
+    });
 
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
@@ -218,7 +260,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Check series filter
             const seriesVal = filterSeries ? filterSeries.value : "all";
-            const seriesMatches = seriesVal === "all" || tournament.toUpperCase().includes(seriesVal.toUpperCase());
+            const seriesMatches = (seriesVal === "all" || tournament.toUpperCase().includes(seriesVal.toUpperCase())) &&
+                (customSeriesFilters.length === 0 || customSeriesFilters.some(t => tournament.toUpperCase().includes(t)));
             
             // Check search query match
             const searchMatches = searchQuery === "" || 
@@ -627,10 +670,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsCloseBtn = document.getElementById("settings-close-btn");
 
     settingsBtn?.addEventListener("click", () => {
-        settingsModal.style.display = "flex";
+        if (settingsModal) settingsModal.style.display = "flex";
     });
     settingsCloseBtn?.addEventListener("click", () => {
-        settingsModal.style.display = "none";
+        if (settingsModal) settingsModal.style.display = "none";
     });
     settingsModal?.addEventListener("click", (e) => {
         if (e.target === settingsModal) settingsModal.style.display = "none";
@@ -657,11 +700,14 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderIgnoreList(list) {
         const container = document.getElementById("ignore-list-container");
         if (!container) return;
+        const countEl = document.getElementById("ignore-count");
+        if (countEl) countEl.textContent = `(${list.length})`;
         if (!list.length) {
             container.innerHTML = `<p class="ignore-empty">No tournaments ignored.</p>`;
             return;
         }
-        container.innerHTML = list.map(t => `
+        const reversed = [...list].reverse();
+        container.innerHTML = reversed.map(t => `
             <div class="ignore-item" data-name="${t.name}">
                 ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                 <span class="ignore-item-name" title="${t.name}">${t.name}</span>

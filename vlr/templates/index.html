@@ -78,11 +78,15 @@
                         <option value="{{ y }}">{{ y }}</option>
                         {% endfor %}
                     </select>
-                    <select id="filter-series" class="sidebar-select">
-                        <option value="all">All Series</option>
-                        <option value="VCT">VCT</option>
-                    </select>
+                    <div class="series-filter-group">
+                        <select id="filter-series" class="sidebar-select">
+                            <option value="all">All Series</option>
+                            <option value="VCT">VCT</option>
+                        </select>
+                        <button id="add-series-filter-btn" class="add-filter-btn" title="Add custom text filter">+</button>
+                    </div>
                 </div>
+                <div id="custom-series-tags" class="custom-series-tags"></div>
 
                 <!-- Search Bar -->
                 <div class="search-box">
@@ -234,11 +238,11 @@
             </div>
             <div class="modal-body">
                 <div class="modal-section">
-                    <h3>Ignore List</h3>
-                    <p class="modal-section-desc">Tournaments in this list are completely hidden from matches and the sidebar.</p>
+                    <h3>Ignore List <span id="ignore-count">({{ ignore_list|length }})</span></h3>
+                    <p class="modal-section-desc">Tournaments hidden from matches and sidebar. Most recent first.</p>
                     <div id="ignore-list-container">
                         {% if ignore_list %}
-                            {% for t in ignore_list %}
+                            {% for t in ignore_list|reverse %}
                             <div class="ignore-item" data-name="{{ t.name }}">
                                 {% if t.logo %}
                                 <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';">
