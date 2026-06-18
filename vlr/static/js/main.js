@@ -47,6 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     let searchQuery = "";
     let checkedTournaments = new Set();
+    let customSeriesFilters = [];
     
     // Initialize checked tournaments
     tourneyCheckboxes.forEach(cb => {
@@ -90,43 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Sidebar tournament visibility filters (year + series)
-    let customSeriesFilters = [];
-    function applyTourneyFilters() {
-        const year = filterYear ? filterYear.value : "all";
-        const series = filterSeries ? filterSeries.value : "all";
-        document.querySelectorAll(".tourney-item").forEach(item => {
-            const name = item.getAttribute("data-tourney-name") || "";
-            const nameUpper = name.toUpperCase();
-            const yearMatch = year === "all" || name.includes(year);
-            const seriesMatch = series === "all" || nameUpper.includes(series.toUpperCase());
-            const customMatch = customSeriesFilters.length === 0 || customSeriesFilters.some(t => nameUpper.includes(t));
-            item.style.display = (yearMatch && seriesMatch && customMatch) ? "" : "none";
-        });
-        const toureyCount = document.querySelectorAll(".tourney-item:not([style*='display: none'])").length;
-        const countEl = document.getElementById("tourney-count");
-        if (countEl) countEl.textContent = `(${toureyCount})`;
-    }
-
-    async function saveSidebarFilters() {
-        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
-        cur.filter_year = filterYear ? filterYear.value : "all";
-        cur.filter_series = filterSeries ? filterSeries.value : "all";
-        cur.filter_custom_series = customSeriesFilters;
-        await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
-    }
-
-    // Init filter values from settings
-    fetch("/api/settings").then(r => r.json()).then(s => {
-        if (filterYear && s.filter_year) filterYear.value = s.filter_year;
-        if (filterSeries && s.filter_series) filterSeries.value = s.filter_series;
-        if (s.filter_custom_series) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
-        applyTourneyFilters();
-    });
-
-    filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
-    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
-
-    // Custom series text filters (tags)
     const customTagsContainer = document.getElementById("custom-series-tags");
     const addSeriesBtn = document.getElementById("add-series-filter-btn");
 
@@ -142,26 +106,55 @@ document.addEventListener("DOMContentLoaded", () => {
         customTagsContainer.querySelectorAll(".series-tag-remove").forEach(btn => {
             btn.addEventListener("click", () => {
                 customSeriesFilters.splice(parseInt(btn.dataset.i), 1);
-                renderSeriesTags();
-                applyTourneyFilters();
-                applyFilters();
-                saveSidebarFilters();
+                renderSeriesTags(); applyTourneyFilters(); applyFilters(); saveSidebarFilters();
             });
         });
     }
 
     addSeriesBtn?.addEventListener("click", () => {
         const val = prompt("Add text filter (e.g. VALORANT, Champions):");
-        if (!val || !val.trim()) return;
+        if (!val?.trim()) return;
         const tag = val.trim().toUpperCase();
         if (!customSeriesFilters.includes(tag)) {
             customSeriesFilters.push(tag);
-            renderSeriesTags();
-            applyTourneyFilters();
-            applyFilters();
-            saveSidebarFilters();
+            renderSeriesTags(); applyTourneyFilters(); applyFilters(); saveSidebarFilters();
         }
     });
+
+    function applyTourneyFilters() {
+        const year = filterYear ? filterYear.value : "all";
+        const series = filterSeries ? filterSeries.value : "all";
+        document.querySelectorAll(".tourney-item").forEach(item => {
+            const name = item.getAttribute("data-tourney-name") || "";
+            const nameUpper = name.toUpperCase();
+            const yearMatch = year === "all" || name.includes(year);
+            const seriesMatch = series === "all" || nameUpper.includes(series.toUpperCase());
+            const customMatch = customSeriesFilters.length === 0 || customSeriesFilters.some(t => nameUpper.includes(t));
+            item.style.display = (yearMatch && seriesMatch && customMatch) ? "" : "none";
+        });
+        const visible = document.querySelectorAll(".tourney-item:not([style*='display: none'])").length;
+        const countEl = document.getElementById("tourney-count");
+        if (countEl) countEl.textContent = `(${visible})`;
+    }
+
+    async function saveSidebarFilters() {
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        cur.filter_year = filterYear ? filterYear.value : "all";
+        cur.filter_series = filterSeries ? filterSeries.value : "all";
+        cur.filter_custom_series = customSeriesFilters;
+        await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
+    }
+
+    // Init filter values from settings
+    fetch("/api/settings").then(r => r.json()).then(s => {
+        if (filterYear && s.filter_year) filterYear.value = s.filter_year;
+        if (filterSeries && s.filter_series) filterSeries.value = s.filter_series;
+        if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
+        applyTourneyFilters();
+    });
+
+    filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
+    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
 
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
@@ -670,10 +663,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const settingsCloseBtn = document.getElementById("settings-close-btn");
 
     settingsBtn?.addEventListener("click", () => {
-        if (settingsModal) settingsModal.style.display = "flex";
+        settingsModal.style.display = "flex";
     });
     settingsCloseBtn?.addEventListener("click", () => {
-        if (settingsModal) settingsModal.style.display = "none";
+        settingsModal.style.display = "none";
     });
     settingsModal?.addEventListener("click", (e) => {
         if (e.target === settingsModal) settingsModal.style.display = "none";
@@ -706,8 +699,7 @@ document.addEventListener("DOMContentLoaded", () => {
             container.innerHTML = `<p class="ignore-empty">No tournaments ignored.</p>`;
             return;
         }
-        const reversed = [...list].reverse();
-        container.innerHTML = reversed.map(t => `
+        container.innerHTML = [...list].reverse().map(t => `
             <div class="ignore-item" data-name="${t.name}">
                 ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                 <span class="ignore-item-name" title="${t.name}">${t.name}</span>
