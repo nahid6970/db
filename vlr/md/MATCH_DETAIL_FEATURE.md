@@ -41,6 +41,29 @@ We already GET `/12345/team-a-vs-team-b`. Just parse more from the same response
 
 ---
 
+## UI Style (follow `match_detail_mockup.html`)
+
+**Modal layout (top → bottom):**
+1. **Header bar** — tournament name (left) · "View on VLR.gg ↗" red button + × close (right)
+2. **Scoreline block** — dark bg (`#0f1116`), team logo + name left, `WINNER – LOSER` score centre (winner green, loser grey smaller), team logo + name right
+3. **Maps row** — small cards per map, border tinted green (win) or red (loss), map name + `W–L` score
+4. **Player stats** — one table per team, columns: Player (photo + name) · Agent icon · ACS (gold if top) · K · D · A · HS% · ADR
+   - Player photo: circular, 28px, fallback grey circle
+   - Agent icon: 20px rounded square
+
+**Colours (reuse existing CSS vars where possible):**
+- Modal bg: `var(--card-bg)` / `var(--bg-darker)` for inner blocks
+- Winner score: `#22c55e` · Loser score: `var(--text-muted)`
+- Map win border: `#22c55e33` · Map loss border: `var(--accent-red)33`
+- Top ACS highlight: `#fbbf24`
+
+**Interaction:**
+- Click outside modal → close
+- Esc key → close
+- Card click → fetch `/api/match/<id>` → populate modal → open overlay
+
+---
+
 ## Frontend Changes
 
 **`main.js`**
