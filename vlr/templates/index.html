@@ -140,7 +140,7 @@
             <main class="content-area">
                 <div class="matches-grid" id="matches-grid-container">
                     {% for m in matches %}
-                    <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}" data-href="{{ m.href }}" data-score1="{{ m.score1 }}" data-score2="{{ m.score2 }}" {% set s = m.series|lower %}{% if 'lower' in s or 'elimination' in s or 'decider' in s or 'loser' in s %}data-elimination="1"{% elif 'grand final' in s or 'upper final' in s %}data-final="1"{% endif %} style="cursor:pointer">
+                    <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}" data-href="{{ m.href }}" data-score1="{{ m.score1 }}" data-score2="{{ m.score2 }}" {% set s = m.series|lower %}{% if 'lower' in s or 'elimination' in s or 'decider' in s or 'loser' in s %}data-elimination="1"{% elif 'grand final' in s %}data-final="1"{% endif %} style="cursor:pointer">
                         <div class="match-card-header">
                             <div class="tournament-info">
                                 {% if m.tournament_logo %}
