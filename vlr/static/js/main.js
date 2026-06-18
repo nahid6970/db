@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (savedScroll) { window.scrollTo(0, parseInt(savedScroll)); sessionStorage.removeItem("scrollY"); }
     window.addEventListener("beforeunload", () => sessionStorage.setItem("scrollY", window.scrollY));
     const searchInput = document.getElementById("team-search");
+    const filterYear = document.getElementById("filter-year");
+    const filterSeries = document.getElementById("filter-series");
     const statusBtns = document.querySelectorAll(".status-btn");
     const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
@@ -85,6 +87,38 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Failed to save settings:", err);
         }
     }
+
+    // Sidebar tournament visibility filters (year + series)
+    function applyTourneyFilters() {
+        const year = filterYear ? filterYear.value : "all";
+        const series = filterSeries ? filterSeries.value : "all";
+        document.querySelectorAll(".tourney-item").forEach(item => {
+            const name = item.getAttribute("data-tourney-name") || "";
+            const yearMatch = year === "all" || name.includes(year);
+            const seriesMatch = series === "all" || name.toUpperCase().includes(series.toUpperCase());
+            item.style.display = (yearMatch && seriesMatch) ? "" : "none";
+        });
+        const toureyCount = document.querySelectorAll(".tourney-item:not([style*='display: none'])").length;
+        const countEl = document.getElementById("tourney-count");
+        if (countEl) countEl.textContent = `(${toureyCount})`;
+    }
+
+    async function saveSidebarFilters() {
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        cur.filter_year = filterYear ? filterYear.value : "all";
+        cur.filter_series = filterSeries ? filterSeries.value : "all";
+        await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
+    }
+
+    // Init filter values from settings
+    fetch("/api/settings").then(r => r.json()).then(s => {
+        if (filterYear && s.filter_year) filterYear.value = s.filter_year;
+        if (filterSeries && s.filter_series) filterSeries.value = s.filter_series;
+        applyTourneyFilters();
+    });
+
+    filterYear?.addEventListener("change", () => { applyTourneyFilters(); saveSidebarFilters(); });
+    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); saveSidebarFilters(); });
 
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
@@ -544,6 +578,7 @@ document.addEventListener("DOMContentLoaded", () => {
         checkedTournaments = newChecked;
         const countEl = document.getElementById("tourney-count");
         if (countEl) countEl.textContent = `(${sortedTourneys.length})`;
+        applyTourneyFilters();
     }
 
     // Settings modal

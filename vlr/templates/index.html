@@ -64,6 +64,20 @@
                     <h2><i class="fa-solid fa-sliders"></i> Filters & Tournaments</h2>
                 </div>
                 
+                <!-- Sidebar Filters -->
+                <div class="sidebar-filters">
+                    <select id="filter-year" class="sidebar-select">
+                        <option value="all">All Years</option>
+                        {% for y in range(2026, 2019, -1) %}
+                        <option value="{{ y }}">{{ y }}</option>
+                        {% endfor %}
+                    </select>
+                    <select id="filter-series" class="sidebar-select">
+                        <option value="all">All Series</option>
+                        <option value="VCT">VCT</option>
+                    </select>
+                </div>
+
                 <!-- Search Bar -->
                 <div class="search-box">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>

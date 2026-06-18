@@ -372,6 +372,25 @@ body {
     color: var(--accent-red);
 }
 
+.sidebar-filters {
+    display: flex;
+    gap: 8px;
+}
+
+.sidebar-select {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 12px;
+    padding: 6px 8px;
+    cursor: pointer;
+    outline: none;
+}
+.sidebar-select:focus { border-color: var(--accent-red); }
+
 .search-box {
     position: relative;
     width: 100%;

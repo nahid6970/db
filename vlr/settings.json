@@ -1,4 +1,6 @@
 {
+    "filter_series": "VCT",
+    "filter_year": "all",
     "results_pages": 100,
     "theme": "light",
     "unchecked_tournaments": []
