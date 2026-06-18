@@ -2,9 +2,9 @@
     "filter_custom_series": [],
     "filter_series": "",
     "filter_year": "all",
-    "per_page": "200",
+    "per_page": "all",
     "results_pages": 200,
-    "scrape_end": 10,
+    "scrape_end": 2,
     "scrape_start": 1,
     "theme": "light",
     "tournament_order": {
