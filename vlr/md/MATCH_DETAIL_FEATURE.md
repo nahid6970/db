@@ -21,7 +21,7 @@ We already GET `/12345/team-a-vs-team-b`. Just parse more from the same response
 - Map name, team scores per map, winner
 
 **Player stats per map (or overall)**
-- Player name, agent(s), ACS, K/D/A, HS%, KAST, ADR, FK/FD
+- Player name, player photo (cached locally like team logos), agent(s), ACS, K/D/A, HS%, KAST, ADR, FK/FD
 
 **Only available for Completed matches.** Upcoming/Live have no stats yet.
 
