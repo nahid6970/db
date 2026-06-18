@@ -84,16 +84,12 @@ def index():
 
     # Filter out ignored tournaments
     ignore_names = {t["name"] for t in ignore_list}
-    all_visible = [m for m in all_matches if m.get("tournament") not in ignore_names]
+    matches = [m for m in all_matches if m.get("tournament") not in ignore_names]
 
-    # Build tournament sidebar list from all non-ignored matches
     tournaments = set()
-    for m in all_visible:
+    for m in matches:
         if m.get("tournament"):
             tournaments.add((m["tournament"], m.get("tournament_logo", "")))
-
-    # Filter matches for display: exclude unchecked tournaments
-    matches = [m for m in all_visible if m.get("tournament") not in unchecked_tournaments]
 
     tournament_order = settings.get("tournament_order", {})
     sorted_tournaments = sorted(
@@ -104,22 +100,13 @@ def index():
     # Limit matches for initial render based on per_page setting
     try:
         render_limit = int(per_page)
-        page = request.args.get("page", 1, type=int)
-        page = max(1, page)
-        total = len(matches)
-        total_pages = max(1, (total + render_limit - 1) // render_limit)
-        page = min(page, total_pages)
-        offset = (page - 1) * render_limit
-        display_matches = matches[offset:offset + render_limit]
+        display_matches = matches[:render_limit]
     except (ValueError, TypeError):
         display_matches = matches  # "all"
-        page = 1
-        total_pages = 1
-        total = len(matches)
 
     # Earliest match timestamp per tournament (for sidebar sort)
     tournament_first_match = {}
-    for m in all_visible:
+    for m in matches:
         t = m.get("tournament")
         ts = m.get("unix_timestamp") or 0
         if t and ts:
@@ -136,10 +123,7 @@ def index():
         ignore_list=ignore_list,
         settings=settings,
         per_page=per_page,
-        tournament_first_match=tournament_first_match,
-        page=page,
-        total_pages=total_pages,
-        total_matches=total
+        tournament_first_match=tournament_first_match
     )
 
 @app.route("/api/match/<match_id>")

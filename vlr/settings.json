@@ -2,7 +2,7 @@
     "filter_custom_series": [],
     "filter_series": "",
     "filter_year": "all",
-    "per_page": "all",
+    "per_page": "50",
     "results_pages": 200,
     "scrape_end": 2,
     "scrape_start": 1,
@@ -12,7 +12,6 @@
     },
     "tourney_sort_order": "desc",
     "unchecked_tournaments": [
-        "Valorant Masters London 2026",
         "Esports World Cup 2026: Americas Qualifier",
         "Esports World Cup 2026: EMEA Qualifier",
         "Esports World Cup 2026: Pacific Qualifier",
@@ -86,6 +85,8 @@
         "Champions Tour EMEA Stage 2: Challengers",
         "Champions Tour North America Stage 2: Challengers",
         "Valorant Champions Tour Stage 1: Masters Reykjavík",
-        "Champions Tour Stage 1: EMEA Challengers"
+        "Champions Tour Asia-Pacific Stage 1: Challengers Playoffs",
+        "Champions Tour Stage 1: EMEA Challengers",
+        "Champions Tour North America Stage 1: Challengers"
     ]
 }
