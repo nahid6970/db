@@ -216,6 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(current)
             });
+            window.location.href = "/";
         } catch (err) {
             console.error("Failed to save settings:", err);
         }

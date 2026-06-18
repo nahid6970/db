@@ -81,6 +81,20 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - Text input filters sidebar and match cards live; custom tags apply OR logic on top
 - `custom-series-tags:empty` hidden via CSS to avoid blank space
 
+## Pagination
+- Server-side: `/?page=N`, slices `matches` after filtering by `unchecked_tournaments`
+- `per_page` from settings controls slice size; "all" shows everything
+- Jinja renders `← Prev / Page N of M / Next →` bar at bottom of grid when `total_pages > 1`
+- Checking/unchecking a tournament saves settings + `window.location.href = "/"` (full reload to page 1)
+- See `md/PAGINATION_IMPROVEMENT.md` for planned client-side pagination (no-reload) approach
+- Atomic file writes (tmp → rename) for all JSON files
+- `sync_lock` and `details_lock` threading guards
+- `WERKZEUG_RUN_MAIN` guard prevents double thread start in debug mode
+- Match `href` field used for VLR.gg modal link
+- `customSeriesFilters` must be declared before `applyFilters()` is called on init (TDZ risk)
+- `players` format check: re-fetch if `"all"` key missing or old `{team1, team2}` format
+
+
 ## What Not to Break
 - Atomic file writes (tmp → rename) for all JSON files
 - `sync_lock` and `details_lock` threading guards
@@ -88,3 +102,5 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - Match `href` field used for VLR.gg modal link
 - `customSeriesFilters` must be declared before `applyFilters()` is called on init (TDZ risk)
 - `players` format check: re-fetch if `"all"` key missing or old `{team1, team2}` format
+- Server filters `unchecked_tournaments` before pagination — sidebar tournament list still uses `all_visible` so unchecked items still show in sidebar
+- Tournament check/uncheck triggers `window.location.href = "/"` — intentional full reload for server-side filter

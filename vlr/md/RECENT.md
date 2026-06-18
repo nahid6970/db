@@ -1,5 +1,25 @@
 # Recent Development Log
 
+## [2026-06-18 20:37] - Pagination + Performance
+
+**What We Accomplished:**
+- **Server-side pagination** — `/?page=N` with Prev/Next bar at bottom of matches grid
+- **Server-side tournament filtering** — `unchecked_tournaments` applied before paginating so page count is correct for selected tournaments
+- Sidebar tournament list built from all non-ignored matches (pre-unchecked-filter) so unchecked items still appear
+- Checking/unchecking a tournament saves settings + `window.location.href = "/"` (full reload to page 1)
+- Light theme top-ACS color changed from yellow `#fbbf24` to dark amber `#b45309`
+- Created `md/PAGINATION_IMPROVEMENT.md` — future client-side pagination spec (no-reload approach)
+
+**Files Modified:**
+- `app.py`
+- `static/js/main.js`
+- `static/css/style.css`
+- `md/AI_CONTEXT.md`
+- `md/RECENT.md`
+- `md/PAGINATION_IMPROVEMENT.md` (new)
+
+---
+
 ## [2026-06-18 19:51] - Match Detail Modal + Tournament UX
 
 **What We Accomplished:**
