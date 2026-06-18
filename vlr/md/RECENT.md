@@ -1,5 +1,20 @@
 # Recent Development Log
 
+## [2026-06-18 12:30] - Series Filter Refinement
+
+**What We Accomplished:**
+- Replaced series dropdown with plain text input (`filter-series-input`) — filters live on `input` event, not persisted to settings
+- Removed `+` button from sidebar series filter group
+- `filter_series` no longer saved/restored from `settings.json`
+- Added `.custom-series-tags:empty { display: none }` to remove blank space when no tags exist
+
+**Files Modified:**
+- `templates/index.html`
+- `static/js/main.js`
+- `static/css/style.css`
+
+---
+
 ## [2026-06-18 12:00] - Feature & Bugfix Session
 
 **What We Accomplished:**

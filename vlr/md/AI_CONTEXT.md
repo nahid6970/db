@@ -46,9 +46,10 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - Theme applied server-side on `<body class="light">` — no flash
 
 ## Sidebar Filters
-- Year dropdown + Series dropdown + `+` button for custom text tags
+- Year dropdown + Series text input (live filter, not persisted) + custom tag chips (persisted)
 - Custom tags saved to `settings.json` as `filter_custom_series: []`
-- Filters apply to both sidebar tournament list and match cards (OR logic with series dropdown)
+- Text input filters sidebar and match cards live; custom tags apply OR logic on top
+- `custom-series-tags:empty` hidden via CSS to avoid blank space
 
 ## What Not to Break
 - Atomic file writes (tmp → rename) for all JSON files
