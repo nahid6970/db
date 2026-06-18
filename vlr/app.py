@@ -84,12 +84,16 @@ def index():
 
     # Filter out ignored tournaments
     ignore_names = {t["name"] for t in ignore_list}
-    matches = [m for m in all_matches if m.get("tournament") not in ignore_names]
+    all_visible = [m for m in all_matches if m.get("tournament") not in ignore_names]
 
+    # Build tournament sidebar list from all non-ignored matches
     tournaments = set()
-    for m in matches:
+    for m in all_visible:
         if m.get("tournament"):
             tournaments.add((m["tournament"], m.get("tournament_logo", "")))
+
+    # Filter matches for display: exclude unchecked tournaments
+    matches = [m for m in all_visible if m.get("tournament") not in unchecked_tournaments]
 
     tournament_order = settings.get("tournament_order", {})
     sorted_tournaments = sorted(
@@ -115,7 +119,7 @@ def index():
 
     # Earliest match timestamp per tournament (for sidebar sort)
     tournament_first_match = {}
-    for m in matches:
+    for m in all_visible:
         t = m.get("tournament")
         ts = m.get("unix_timestamp") or 0
         if t and ts:
