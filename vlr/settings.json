@@ -1,7 +1,9 @@
 {
-    "filter_series": "VCT",
-    "filter_year": "2025",
-    "results_pages": 100,
+    "filter_series": "all",
+    "filter_year": "all",
+    "results_pages": 200,
+    "scrape_end": 150,
+    "scrape_start": 101,
     "theme": "light",
     "unchecked_tournaments": []
 }

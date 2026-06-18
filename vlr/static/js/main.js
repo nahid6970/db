@@ -321,9 +321,9 @@ document.addEventListener("DOMContentLoaded", () => {
             refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> Syncing...`;
             
             try {
-                const pagesInput = document.getElementById("results-pages");
-                const pages = pagesInput ? (parseInt(pagesInput.value) || null) : null;
-                const url = pages ? `/api/matches?pages=${pages}` : `/api/matches`;
+                const start = scrapeStart ? (parseInt(scrapeStart.value) || null) : null;
+                const end = scrapeEnd ? (parseInt(scrapeEnd.value) || null) : null;
+                const url = (start && end) ? `/api/matches?start=${start}&end=${end}` : `/api/matches`;
                 const response = await fetch(url);
                 if (!response.ok) throw new Error("Sync failed");
                 const matches = await response.json();
@@ -351,14 +351,17 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    const resultsPagesInput = document.getElementById("results-pages");
+    const scrapeStart = document.getElementById("scrape-start");
+    const scrapeEnd = document.getElementById("scrape-end");
     const savePagesBtnEl = document.getElementById("save-pages-btn");
     if (savePagesBtnEl) {
         savePagesBtnEl.addEventListener("click", async () => {
-            const pages = parseInt(resultsPagesInput.value) || 5;
-            resultsPagesInput.value = pages;
+            const start = Math.max(1, parseInt(scrapeStart?.value) || 1);
+            const end = Math.max(start, parseInt(scrapeEnd?.value) || start);
+            if (scrapeStart) scrapeStart.value = start;
+            if (scrapeEnd) scrapeEnd.value = end;
             const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
-            await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({...cur, results_pages: pages}) });
+            await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({...cur, scrape_start: start, scrape_end: end}) });
             savePagesBtnEl.innerHTML = '<i class="fa-solid fa-check"></i>';
             setTimeout(() => { savePagesBtnEl.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>'; }, 1500);
         });

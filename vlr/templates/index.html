@@ -32,8 +32,10 @@
                 </div>
                 <div class="header-divider"></div>
                 <div class="pages-input-group">
-                    <label for="results-pages">Scrape</label>
-                    <input type="number" id="results-pages" min="1" value="{{ results_pages }}" title="Number of result pages to fetch">
+                    <label>Scrape</label>
+                    <input type="number" id="scrape-start" min="1" value="{{ settings.get('scrape_start', 1) }}" title="Start page">
+                    <span style="color:var(--text-muted)">–</span>
+                    <input type="number" id="scrape-end" min="1" value="{{ settings.get('scrape_end', 5) }}" title="End page">
                     <button id="save-pages-btn" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
                 </div>
                 <button class="refresh-btn" id="refresh-data-btn" title="Sync matches data">

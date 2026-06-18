@@ -102,15 +102,20 @@ def index():
         unchecked_tournaments=unchecked_tournaments,
         results_pages=results_pages,
         theme=theme,
-        ignore_list=ignore_list
+        ignore_list=ignore_list,
+        settings=settings
     )
 
 @app.route("/api/matches")
 def api_matches():
-    saved_pages = load_settings().get("results_pages", 5)
-    pages = request.args.get("pages", saved_pages, type=int)
-    pages = max(1, pages)
-    scraper.fetch_and_update_matches(pages=pages)
+    settings = load_settings()
+    saved_start = settings.get("scrape_start", 1)
+    saved_end = settings.get("scrape_end", 5)
+    start_page = request.args.get("start", saved_start, type=int)
+    end_page = request.args.get("end", saved_end, type=int)
+    start_page = max(1, start_page)
+    end_page = max(start_page, end_page)
+    scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
     ignore_list = load_ignorelist()
     ignore_names = {t["name"] for t in ignore_list}
     matches = [m for m in scraper.get_matches_for_display() if m.get("tournament") not in ignore_names]
