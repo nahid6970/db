@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.addEventListener("beforeunload", () => sessionStorage.setItem("scrollY", window.scrollY));
     const searchInput = document.getElementById("team-search");
     const filterYear = document.getElementById("filter-year");
-    const filterSeries = document.getElementById("filter-series");
+    const filterSeries = document.getElementById("filter-series-input");
     const perPageSelect = document.getElementById("per-page-select");
     const statusBtns = document.querySelectorAll(".status-btn");
     const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
@@ -92,7 +92,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Sidebar tournament visibility filters (year + series)
     const customTagsContainer = document.getElementById("custom-series-tags");
-    const addSeriesBtn = document.getElementById("add-series-filter-btn");
 
     function renderSeriesTags() {
         if (!customTagsContainer) return;
@@ -111,24 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    addSeriesBtn?.addEventListener("click", () => {
-        const val = prompt("Add text filter (e.g. VALORANT, Champions):");
-        if (!val?.trim()) return;
-        const tag = val.trim().toUpperCase();
-        if (!customSeriesFilters.includes(tag)) {
-            customSeriesFilters.push(tag);
-            renderSeriesTags(); applyTourneyFilters(); applyFilters(); saveSidebarFilters();
-        }
-    });
-
     function applyTourneyFilters() {
         const year = filterYear ? filterYear.value : "all";
-        const series = filterSeries ? filterSeries.value : "all";
+        const series = filterSeries ? filterSeries.value.trim().toUpperCase() : "";
         document.querySelectorAll(".tourney-item").forEach(item => {
             const name = item.getAttribute("data-tourney-name") || "";
             const nameUpper = name.toUpperCase();
             const yearMatch = year === "all" || name.includes(year);
-            const seriesMatch = series === "all" || nameUpper.includes(series.toUpperCase());
+            const seriesMatch = !series || nameUpper.includes(series);
             const customMatch = customSeriesFilters.length === 0 || customSeriesFilters.some(t => nameUpper.includes(t));
             item.style.display = (yearMatch && seriesMatch && customMatch) ? "" : "none";
         });
@@ -140,7 +129,6 @@ document.addEventListener("DOMContentLoaded", () => {
     async function saveSidebarFilters() {
         const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
         cur.filter_year = filterYear ? filterYear.value : "all";
-        cur.filter_series = filterSeries ? filterSeries.value : "all";
         cur.filter_custom_series = customSeriesFilters;
         await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
     }
@@ -148,13 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Init filter values from settings
     fetch("/api/settings").then(r => r.json()).then(s => {
         if (filterYear && s.filter_year) filterYear.value = s.filter_year;
-        if (filterSeries && s.filter_series) filterSeries.value = s.filter_series;
         if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
         applyTourneyFilters();
     });
 
     filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
-    filterSeries?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
+    filterSeries?.addEventListener("input", () => { applyTourneyFilters(); applyFilters(); });
 
     // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
     function updateBSTClock() {
@@ -252,8 +239,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const yearMatches = yearVal === "all" || tournament.includes(yearVal);
 
             // Check series filter
-            const seriesVal = filterSeries ? filterSeries.value : "all";
-            const seriesMatches = (seriesVal === "all" || tournament.toUpperCase().includes(seriesVal.toUpperCase())) &&
+            const seriesVal = filterSeries ? filterSeries.value.trim().toUpperCase() : "";
+            const seriesMatches = (!seriesVal || tournament.toUpperCase().includes(seriesVal)) &&
                 (customSeriesFilters.length === 0 || customSeriesFilters.some(t => tournament.toUpperCase().includes(t)));
             
             // Check search query match
