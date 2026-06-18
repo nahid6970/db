@@ -1,5 +1,44 @@
 # Recent Development Log
 
+## [2026-06-18 19:51] - Match Detail Modal + Tournament UX
+
+**What We Accomplished:**
+- **Match detail modal** — clicking a card now opens in-app modal instead of VLR.gg tab
+  - Scoreline with team logos, map-by-map breakdown (green/red borders), player stats tables
+  - Map tabs: "All Maps" (default) + per-map; clicking switches stats
+  - Multiple agents per player shown as icons in "All Maps" tab
+  - Top ACS highlighted gold; "VLR.gg ↗" button on same row as map tabs
+  - Close via ×, outside click, or Escape
+- **Scraper extended** — `fetch_match_detail_page` now parses `vm-stats-game` divs:
+  - Maps: name, scores, winner
+  - Players: per-map + combined "all" stats — ACS, K/D/A, KAST, ADR, HS%, agent icons
+  - Stores as `players: {"all": {...}, "0": {...}, "1": {...}}`
+- **Lazy fetch** — `/api/match/<id>` re-fetches detail page if stats missing or old format
+- **Old format migration** — detects old `{team1, team2}` player format and re-fetches automatically
+- **Ignore Checked button** — added beside Ignore Unchecked; both operate on visible items only
+- **Tournament sort dropdown** — beside crosshairs icon: Pin order / Date ↑ / Date ↓
+  - Sorts by earliest match timestamp (`TOURNEY_FIRST_MATCH` from app.py)
+  - Pinned items always first; saved as `tourney_sort_order` in `settings.json`
+- **MATCH_DETAIL_FEATURE.md** — created spec + mockup HTML (`match_detail_mockup.html`)
+
+**Bugs Fixed:**
+- `game_id == "all"` check was after `if not header: continue` — all-maps div has no header, so it was skipped; moved check before the guard
+- Map tabs wiped by `showMapStats` because tabs and stats shared `#mdm-stats` — split into `#mdm-map-tabs-container` + `#mdm-stats`
+- Old-format `players` not re-fetched — added `missing_all` detection in both endpoint and background thread
+
+**Files Modified:**
+- `scraper.py`
+- `app.py`
+- `static/js/main.js`
+- `static/css/style.css`
+- `templates/index.html`
+- `md/AI_CONTEXT.md`
+- `md/RECENT.md`
+- `md/MATCH_DETAIL_FEATURE.md` (new)
+- `md/match_detail_mockup.html` (new)
+
+---
+
 ## [2026-06-18 12:45] - Tournament Pin Order
 
 **What We Accomplished:**

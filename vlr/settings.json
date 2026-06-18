@@ -2,7 +2,7 @@
     "filter_custom_series": [],
     "filter_series": "",
     "filter_year": "all",
-    "per_page": "all",
+    "per_page": "100",
     "results_pages": 200,
     "scrape_end": 2,
     "scrape_start": 1,

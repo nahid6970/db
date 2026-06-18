@@ -14,6 +14,7 @@ A Flask web app that scrapes VLR.gg for Valorant match schedules and displays th
 - `scraper.py` — `fetch_and_update_matches(start_page, end_page)` is the main sync function
 - `GET /` — renders index with match data (server-side limited by `per_page`)
 - `GET /api/matches?start=N&end=M` — triggers sync for page range, returns JSON
+- `GET /api/match/<match_id>` — returns full match detail (lazy-fetches stats if missing)
 - `GET/POST /api/settings` — read/write all user preferences to `settings.json`
 - `POST /api/ignorelist/add` — add `[{name, logo}]` to `ignorelist.json`
 - `POST /api/ignorelist/remove` — remove by name
@@ -29,7 +30,8 @@ A Flask web app that scrapes VLR.gg for Valorant match schedules and displays th
   "unchecked_tournaments": [],
   "filter_year": "all",
   "filter_custom_series": [],
-  "tournament_order": {"Tournament Name": 1}
+  "tournament_order": {"Tournament Name": 1},
+  "tourney_sort_order": "none"
 }
 ```
 
@@ -45,12 +47,33 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - `sync_lock` and `details_lock` are module-level threading locks in `scraper.py`
 - Theme applied server-side on `<body class="light">` — no flash
 
+## Match Detail Modal
+- Click any match card → opens in-app modal (no longer opens VLR.gg tab)
+- Modal shows: tournament name, team logos + scoreline, map cards, player stats tabs
+- **Map tabs:** "All Maps" (default) + one per map — click to switch stats view
+- **Player stats:** ACS, K/D/A, KAST, ADR, HS%, agent icons (multiple per player for All Maps), top ACS highlighted gold
+- **VLR.gg ↗** button on same row as map tabs
+- Stats fetched lazily on first click if not yet in cache; background sync also fills them
+- `matches.json` stores `maps: []` and `players: {"all": {team1,team2}, "0": {...}, "1": {...}}`
+- Re-fetch triggered if `"all"` key missing (old format detection)
+
 ## Tournament Pin Order
 - Right-click sidebar item → context menu → set position number
 - `tournament_order: {name: pos}` in `settings.json`
 - Sort key in `app.py`: `(tournament_order.get(name, 9999), unchecked, name)`
 - JS `setPinOrder`: removes old pos (closes gap) → shifts ≥ newPos up → inserts at newPos
 - Pin badge `#N` rendered on item; `×` removes pin
+
+## Tournament Sort
+- Dropdown beside crosshairs logo icon: "Pin order" / "Date ↑" / "Date ↓"
+- Sorts by earliest match timestamp per tournament (`TOURNEY_FIRST_MATCH` injected from app.py)
+- Pinned items always sort first by pin number; non-pinned sorted by date
+- Saved as `tourney_sort_order` in `settings.json`
+
+## Ignore Buttons
+- **Ignore Unchecked** — adds visible (non-filtered) unchecked tournaments to ignore list
+- **Ignore Checked** — adds visible checked tournaments to ignore list
+- Both respect active filter (only operate on visible sidebar items)
 
 ## Sidebar Filters
 - Year dropdown + Series text input (live filter, not persisted) + custom tag chips (persisted)
@@ -62,5 +85,6 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - Atomic file writes (tmp → rename) for all JSON files
 - `sync_lock` and `details_lock` threading guards
 - `WERKZEUG_RUN_MAIN` guard prevents double thread start in debug mode
-- Match `href` field used for VLR.gg card click links
+- Match `href` field used for VLR.gg modal link
 - `customSeriesFilters` must be declared before `applyFilters()` is called on init (TDZ risk)
+- `players` format check: re-fetch if `"all"` key missing or old `{team1, team2}` format
