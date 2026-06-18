@@ -110,6 +110,9 @@
                             <div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>
                             {% endif %}
                             <span class="tourney-label-text" title="{{ tourney }}">{{ tourney }}</span>
+                            {% if tourney in (settings.tournament_order or {}) %}
+                            <span class="tourney-pin-badge">#{{ settings.tournament_order[tourney] }}</span>
+                            {% endif %}
                         </label>
                         {% else %}
                         <div class="no-tournaments-fallback">
@@ -264,6 +267,16 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Tournament pin context menu -->
+    <div id="tourney-ctx-menu" class="tourney-ctx-menu" style="display:none;">
+        <span class="ctx-menu-label">Set position</span>
+        <div class="ctx-menu-row">
+            <input type="number" id="ctx-order-input" class="ctx-order-input" min="1" placeholder="#">
+            <button id="ctx-order-confirm" class="ctx-order-btn">Pin</button>
+            <button id="ctx-order-clear" class="ctx-order-btn ctx-order-clear">×</button>
         </div>
     </div>
 

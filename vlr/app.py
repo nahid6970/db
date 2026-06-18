@@ -91,9 +91,10 @@ def index():
         if m.get("tournament"):
             tournaments.add((m["tournament"], m.get("tournament_logo", "")))
 
+    tournament_order = settings.get("tournament_order", {})
     sorted_tournaments = sorted(
         list(tournaments),
-        key=lambda x: (x[0] in unchecked_tournaments, x[0])
+        key=lambda x: (tournament_order.get(x[0], 9999), x[0] in unchecked_tournaments, x[0])
     )
 
     # Limit matches for initial render based on per_page setting

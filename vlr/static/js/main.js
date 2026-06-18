@@ -48,6 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let searchQuery = "";
     let checkedTournaments = new Set();
     let customSeriesFilters = [];
+    let tournamentOrder = {}; // {name: position}
     
     // Initialize checked tournaments
     tourneyCheckboxes.forEach(cb => {
@@ -137,8 +138,87 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("/api/settings").then(r => r.json()).then(s => {
         if (filterYear && s.filter_year) filterYear.value = s.filter_year;
         if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
+        if (s.tournament_order) tournamentOrder = s.tournament_order;
         applyTourneyFilters();
     });
+
+    // Tournament pin context menu
+    const ctxMenu = document.getElementById("tourney-ctx-menu");
+    const ctxInput = document.getElementById("ctx-order-input");
+    const ctxConfirm = document.getElementById("ctx-order-confirm");
+    const ctxClear = document.getElementById("ctx-order-clear");
+    let ctxTarget = null;
+
+    async function saveTournamentOrder() {
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        cur.tournament_order = tournamentOrder;
+        await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
+    }
+
+    function setPinOrder(name, pos) {
+        // Shift existing entries >= pos up by 1
+        Object.keys(tournamentOrder).forEach(k => {
+            if (k !== name && tournamentOrder[k] >= pos) tournamentOrder[k]++;
+        });
+        tournamentOrder[name] = pos;
+    }
+
+    function hideCtxMenu() { if (ctxMenu) ctxMenu.style.display = "none"; ctxTarget = null; }
+
+    document.addEventListener("contextmenu", e => {
+        const item = e.target.closest(".tourney-item");
+        if (!item) { hideCtxMenu(); return; }
+        e.preventDefault();
+        ctxTarget = item.getAttribute("data-tourney-name");
+        if (ctxInput) ctxInput.value = tournamentOrder[ctxTarget] ?? "";
+        if (ctxMenu) {
+            ctxMenu.style.display = "block";
+            ctxMenu.style.left = Math.min(e.clientX, window.innerWidth - 180) + "px";
+            ctxMenu.style.top = Math.min(e.clientY, window.innerHeight - 100) + "px";
+        }
+    });
+
+    ctxConfirm?.addEventListener("click", () => {
+        const pos = parseInt(ctxInput?.value);
+        if (!ctxTarget || isNaN(pos) || pos < 1) return;
+        setPinOrder(ctxTarget, pos);
+        saveTournamentOrder();
+        hideCtxMenu();
+        // Re-sort visible items
+        const checklist = document.getElementById("tournament-checklist");
+        if (checklist) {
+            const items = Array.from(checklist.querySelectorAll(".tourney-item"));
+            items.sort((a, b) => {
+                const aPin = tournamentOrder[a.dataset.tourneyName] ?? 9999;
+                const bPin = tournamentOrder[b.dataset.tourneyName] ?? 9999;
+                return aPin !== bPin ? aPin - bPin : (a.dataset.tourneyName || "").localeCompare(b.dataset.tourneyName || "");
+            });
+            items.forEach(el => {
+                // Update badge
+                let badge = el.querySelector(".tourney-pin-badge");
+                const name = el.dataset.tourneyName;
+                const order = tournamentOrder[name];
+                if (order != null) {
+                    if (!badge) { badge = document.createElement("span"); badge.className = "tourney-pin-badge"; el.appendChild(badge); }
+                    badge.textContent = `#${order}`;
+                } else if (badge) badge.remove();
+                checklist.appendChild(el);
+            });
+        }
+        applyTourneyFilters();
+    });
+
+    ctxClear?.addEventListener("click", () => {
+        if (!ctxTarget) return;
+        delete tournamentOrder[ctxTarget];
+        saveTournamentOrder();
+        const item = document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(ctxTarget)}"]`);
+        item?.querySelector(".tourney-pin-badge")?.remove();
+        hideCtxMenu();
+    });
+
+    ctxInput?.addEventListener("keydown", e => { if (e.key === "Enter") ctxConfirm?.click(); if (e.key === "Escape") hideCtxMenu(); });
+    document.addEventListener("click", e => { if (ctxMenu && !ctxMenu.contains(e.target)) hideCtxMenu(); });
 
     filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
     filterSeries?.addEventListener("input", () => { applyTourneyFilters(); applyFilters(); });
@@ -586,6 +666,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         
         const sortedTourneys = Array.from(tourneys.entries()).sort((a, b) => {
+            const aPin = tournamentOrder[a[0]] ?? 9999;
+            const bPin = tournamentOrder[b[0]] ?? 9999;
+            if (aPin !== bPin) return aPin - bPin;
             const aChecked = checkedTournaments.has(a[0]);
             const bChecked = checkedTournaments.has(b[0]);
             if (aChecked && !bChecked) return -1;
@@ -621,6 +704,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="custom-checkbox"></span>
                 ${logo ? `<img src="${logo}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';">` : '<div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                 <span class="tourney-label-text" title="${name}">${name}</span>
+                ${tournamentOrder[name] != null ? `<span class="tourney-pin-badge">#${tournamentOrder[name]}</span>` : ''}
             `;
             
             checklist.appendChild(label);
