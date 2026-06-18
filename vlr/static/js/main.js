@@ -132,6 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
         cur.filter_year = filterYear ? filterYear.value : "all";
         cur.filter_custom_series = customSeriesFilters;
+        cur.tourney_sort_order = sortTourneyOrder ? sortTourneyOrder.value : "none";
         await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
     }
 
@@ -155,14 +156,16 @@ document.addEventListener("DOMContentLoaded", () => {
         items.forEach(el => checklist.appendChild(el));
     }
 
-    sortTourneyOrder?.addEventListener("change", sortTourneyByDate);
+    sortTourneyOrder?.addEventListener("change", () => { sortTourneyByDate(); saveSidebarFilters(); });
 
     // Init filter values from settings
     fetch("/api/settings").then(r => r.json()).then(s => {
         if (filterYear && s.filter_year) filterYear.value = s.filter_year;
+        if (sortTourneyOrder && s.tourney_sort_order) sortTourneyOrder.value = s.tourney_sort_order;
         if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
         if (s.tournament_order) tournamentOrder = s.tournament_order;
         applyTourneyFilters();
+        sortTourneyByDate();
     });
 
     // Tournament pin context menu
