@@ -1,27 +1,15 @@
 {
     "filter_custom_series": [],
     "filter_series": "",
-    "filter_year": "2022",
+    "filter_year": "all",
     "per_page": "all",
     "results_pages": 200,
-    "scrape_end": 300,
-    "scrape_start": 200,
+    "scrape_end": 350,
+    "scrape_start": 311,
     "theme": "light",
     "tournament_order": {
         "Valorant Masters London 2026": 1,
         "Valorant Masters Santiago 2026": 2
     },
-    "unchecked_tournaments": [
-        "32nd Southeast Asian Games",
-        "AfreecaTV Valorant SEA Invitational",
-        "Aim Lab Frostbite Series",
-        "Asia Esports Championship 2023",
-        "Asia Esports Festival 2023",
-        "Astral Clash 2023",
-        "BEACON Open Split 2: Finals",
-        "BoomTV VALORANT Select",
-        "Campeonato de Elite Cup - Stage 2",
-        "Challengers 2023 France: Revolution Coupe de France",
-        "Challengers League MENA Resilience: Split 2"
-    ]
+    "unchecked_tournaments": []
 }
