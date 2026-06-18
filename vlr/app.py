@@ -126,6 +126,21 @@ def index():
         tournament_first_match=tournament_first_match
     )
 
+@app.route("/api/match/<match_id>")
+def api_match_detail(match_id):
+    db = scraper.load_json_matches()
+    match = db.get(match_id)
+    if not match:
+        return jsonify({"error": "not found"}), 404
+    # If stats not yet fetched, trigger lazy fetch synchronously
+    if not match.get("maps") and match.get("href"):
+        details = scraper.fetch_match_detail_page(match["href"])
+        if details:
+            match.update(details)
+            db[match_id] = match
+            scraper.save_json_matches(db)
+    return jsonify(match)
+
 @app.route("/api/matches")
 def api_matches():
     settings = load_settings()

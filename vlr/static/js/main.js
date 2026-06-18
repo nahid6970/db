@@ -64,9 +64,129 @@ document.addEventListener("DOMContentLoaded", () => {
         matchesGrid.addEventListener("click", e => {
             const card = e.target.closest(".match-card");
             if (!card) return;
-            const href = card.getAttribute("data-href");
-            if (href) window.open("https://www.vlr.gg" + href, "_blank");
+            const mid = card.getAttribute("data-id");
+            if (mid) openMatchDetail(mid, card);
         });
+    }
+
+    // Match detail modal
+    const detailOverlay = document.getElementById("match-detail-overlay");
+    document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
+    detailOverlay?.addEventListener("click", e => { if (e.target === detailOverlay) closeMatchDetail(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeMatchDetail(); });
+
+    function closeMatchDetail() {
+        if (detailOverlay) detailOverlay.style.display = "none";
+    }
+
+    async function openMatchDetail(mid, card) {
+        // Pre-fill from card data immediately
+        const href = card.getAttribute("data-href") || "";
+        document.getElementById("mdm-tourney").textContent = card.getAttribute("data-tournament") || "";
+        document.getElementById("mdm-vlr-link").href = "https://www.vlr.gg" + href;
+        document.getElementById("mdm-name1").textContent = card.querySelector(".team-1 .team-name")?.textContent.trim() || "";
+        document.getElementById("mdm-name2").textContent = card.querySelector(".team-2 .team-name")?.textContent.trim() || "";
+        const logo1 = card.querySelector(".team-1 .team-logo")?.src || "";
+        const logo2 = card.querySelector(".team-2 .team-logo")?.src || "";
+        const img1 = document.getElementById("mdm-logo1");
+        const img2 = document.getElementById("mdm-logo2");
+        img1.src = logo1; img1.style.display = logo1 ? "" : "none";
+        img2.src = logo2; img2.style.display = logo2 ? "" : "none";
+
+        // Score from card
+        const s1 = card.getAttribute("data-score1") || "";
+        const s2 = card.getAttribute("data-score2") || "";
+        const scoreEl = document.getElementById("mdm-score");
+        if (s1 !== "" && s2 !== "") {
+            const n1 = parseInt(s1), n2 = parseInt(s2);
+            scoreEl.innerHTML = `<span class="${n1 > n2 ? 'mdm-win' : (n1 < n2 ? 'mdm-lose' : '')}">${s1}</span> – <span class="${n2 > n1 ? 'mdm-win' : (n2 < n1 ? 'mdm-lose' : '')}">${s2}</span>`;
+        } else {
+            scoreEl.textContent = "vs";
+        }
+
+        document.getElementById("mdm-maps").innerHTML = "";
+        document.getElementById("mdm-stats").innerHTML = "";
+        document.getElementById("mdm-maps-section").style.display = "none";
+        document.getElementById("mdm-stats-section").style.display = "none";
+        document.getElementById("mdm-no-stats").style.display = "none";
+        detailOverlay.style.display = "flex";
+
+        // Fetch full data
+        try {
+            const data = await fetch(`/api/match/${mid}`).then(r => r.json());
+            renderMatchDetail(data, s1, s2);
+        } catch(e) {
+            document.getElementById("mdm-no-stats").style.display = "";
+        }
+    }
+
+    function renderMatchDetail(data, fallbackS1, fallbackS2) {
+        // Update score if data has better info
+        const s1 = data.score1 || fallbackS1 || "";
+        const s2 = data.score2 || fallbackS2 || "";
+        const scoreEl = document.getElementById("mdm-score");
+        if (s1 !== "" && s2 !== "") {
+            const n1 = parseInt(s1), n2 = parseInt(s2);
+            scoreEl.innerHTML = `<span class="${n1 > n2 ? 'mdm-win' : (n1 < n2 ? 'mdm-lose' : '')}">${s1}</span> – <span class="${n2 > n1 ? 'mdm-win' : (n2 < n1 ? 'mdm-lose' : '')}">${s2}</span>`;
+        }
+
+        const maps = data.maps || [];
+        const players = data.players || {};
+        const hasStats = maps.length > 0 || (players.team1?.length || players.team2?.length);
+
+        if (!hasStats) {
+            document.getElementById("mdm-no-stats").style.display = "";
+            return;
+        }
+
+        // Maps
+        if (maps.length) {
+            document.getElementById("mdm-maps-section").style.display = "";
+            const mapsEl = document.getElementById("mdm-maps");
+            mapsEl.innerHTML = maps.map(m => {
+                const winCls = m.winner === 0 ? "mdm-map-win" : (m.winner === 1 ? "mdm-map-lose" : "");
+                const s1cls = m.winner === 0 ? "mdm-win" : "mdm-lose";
+                const s2cls = m.winner === 1 ? "mdm-win" : "mdm-lose";
+                return `<div class="mdm-map-card ${winCls}">
+                    <div class="mdm-map-name">${m.name}</div>
+                    <div class="mdm-map-score"><span class="${s1cls}">${m.score1}</span> – <span class="${s2cls}">${m.score2}</span></div>
+                </div>`;
+            }).join("");
+        }
+
+        // Player stats
+        const t1 = players.team1 || [];
+        const t2 = players.team2 || [];
+        if (t1.length || t2.length) {
+            document.getElementById("mdm-stats-section").style.display = "";
+            const statsEl = document.getElementById("mdm-stats");
+            const maxAcs = (arr) => Math.max(...arr.map(p => parseInt(p.acs) || 0));
+            const renderTable = (plist, label) => {
+                if (!plist.length) return "";
+                const topAcs = maxAcs(plist);
+                const rows = plist.map(p => {
+                    const acsCls = (parseInt(p.acs) || 0) === topAcs ? "mdm-acs-top" : "";
+                    const agent = p.agent_icon ? `<img class="mdm-agent-icon" src="${p.agent_icon}" alt="${p.agent}" title="${p.agent}">` : (p.agent || "");
+                    return `<tr>
+                        <td><div class="mdm-player-cell"><span>${p.name}</span></div></td>
+                        <td class="r">${agent}</td>
+                        <td class="r ${acsCls}">${p.acs}</td>
+                        <td class="r">${p.k}</td><td class="r">${p.d}</td><td class="r">${p.a}</td>
+                        <td class="r">${p.kast}</td><td class="r">${p.adr}</td><td class="r">${p.hs}</td>
+                    </tr>`;
+                }).join("");
+                return `<div class="mdm-stats-team">${label}</div>
+                <table class="mdm-stats-table">
+                    <thead><tr>
+                        <th>Player</th><th class="r">Agent</th>
+                        <th class="r">ACS</th><th class="r">K</th><th class="r">D</th><th class="r">A</th>
+                        <th class="r">KAST</th><th class="r">ADR</th><th class="r">HS%</th>
+                    </tr></thead>
+                    <tbody>${rows}</tbody>
+                </table>`;
+            };
+            statsEl.innerHTML = renderTable(t1, data.team1 || "Team 1") + renderTable(t2, data.team2 || "Team 2");
+        }
     }
 
     // Save tournament settings to backend
@@ -582,6 +702,8 @@ document.addEventListener("DOMContentLoaded", () => {
             card.setAttribute("data-status", (m.status || "").toLowerCase());
             card.setAttribute("data-id", m.id);
             card.setAttribute("data-href", m.href);
+            card.setAttribute("data-score1", m.score1 || "");
+            card.setAttribute("data-score2", m.score2 || "");
             card.style.cursor = "pointer";
             
             // Create status badge inner HTML

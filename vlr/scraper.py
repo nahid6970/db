@@ -146,12 +146,106 @@ def fetch_match_detail_page(href):
         # Download team logos locally
         local_team1_logo = download_image(team1_logo) if team1_logo else ""
         local_team2_logo = download_image(team2_logo) if team2_logo else ""
-                
+
+        # Parse maps and player stats (completed matches only)
+        maps = []
+        players = {"team1": [], "team2": []}
+
+        game_divs = soup.find_all("div", class_="vm-stats-game")
+        for game_div in game_divs:
+            game_id = game_div.get("data-game-id", "")
+            if game_id == "all":
+                continue
+
+            header = game_div.find("div", class_="vm-stats-game-header")
+            if not header:
+                continue
+
+            map_div = header.find("div", class_="map")
+            map_name = ""
+            if map_div:
+                span = map_div.find("span")
+                map_name = span.text.strip() if span else ""
+
+            team_divs = header.find_all("div", class_="team")
+            map_scores = []
+            map_winner = None
+            for i, td in enumerate(team_divs):
+                score_div = td.find("div", class_="score")
+                score = score_div.text.strip() if score_div else "0"
+                won = "mod-win" in (score_div.get("class", []) if score_div else [])
+                map_scores.append(score)
+                if won:
+                    map_winner = i  # 0 = team1, 1 = team2
+
+            maps.append({
+                "name": map_name,
+                "score1": map_scores[0] if len(map_scores) > 0 else "0",
+                "score2": map_scores[1] if len(map_scores) > 1 else "0",
+                "winner": map_winner  # 0, 1, or None
+            })
+
+            # Parse player rows — two tables per map (team1, team2)
+            tables = game_div.find_all("table")
+            if len(maps) == 1:  # Only parse players from first map (overall stats)
+                for t_idx, table in enumerate(tables[:2]):
+                    team_key = "team1" if t_idx == 0 else "team2"
+                    if players[team_key]:  # already populated
+                        continue
+                    for row in table.find_all("tr")[1:]:  # skip header
+                        tds = row.find_all("td")
+                        if len(tds) < 10:
+                            continue
+
+                        # Player name and href
+                        player_td = tds[0]
+                        a_tag = player_td.find("a")
+                        player_name = ""
+                        player_href = ""
+                        if a_tag:
+                            player_href = a_tag.get("href", "")
+                            name_div = a_tag.find("div", class_="text-of")
+                            player_name = name_div.text.strip() if name_div else a_tag.text.strip()
+
+                        # Agent icon
+                        agent_td = tds[1]
+                        agent_img = agent_td.find("img")
+                        agent_name = ""
+                        agent_icon = ""
+                        if agent_img:
+                            agent_name = agent_img.get("alt", "")
+                            src = agent_img.get("src", "")
+                            if src.startswith("//"):
+                                src = "https:" + src
+                            elif src.startswith("/"):
+                                src = "https://www.vlr.gg" + src
+                            agent_icon = download_image(src) if src else ""
+
+                        def stat(td): 
+                            s = td.find("span", class_="mod-both")
+                            return s.text.strip() if s else ""
+
+                        players[team_key].append({
+                            "name": player_name,
+                            "href": player_href,
+                            "agent": agent_name,
+                            "agent_icon": agent_icon,
+                            "acs": stat(tds[3]),
+                            "k": stat(tds[4]),
+                            "d": stat(tds[5]),
+                            "a": stat(tds[6]),
+                            "kast": stat(tds[8]),
+                            "adr": stat(tds[9]),
+                            "hs": stat(tds[10]),
+                        })
+
         return {
             "team1_logo": local_team1_logo,
             "team2_logo": local_team2_logo,
             "unix_timestamp": unix_timestamp,
-            "bst_time": bst_time_str
+            "bst_time": bst_time_str,
+            "maps": maps,
+            "players": players
         }
     except Exception as e:
         print(f"Error fetching detail page {url}: {e}")
@@ -186,8 +280,9 @@ def fetch_details_in_background(scraped_matches):
             
             has_details = t1_logo and t2_logo and unix_ts
             files_exist = file_exists(t1_logo) and file_exists(t2_logo)
-            
-            if not has_details or not files_exist:
+            has_stats = bool(db.get(mid, {}).get("maps"))
+
+            if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))
                 
         # Fetch detailed info in parallel
@@ -215,6 +310,8 @@ def fetch_details_in_background(scraped_matches):
                         current_db[mid]["team2_logo"] = details["team2_logo"]
                         current_db[mid]["unix_timestamp"] = details["unix_timestamp"]
                         current_db[mid]["bst_time"] = details["bst_time"]
+                        current_db[mid]["maps"] = details.get("maps", [])
+                        current_db[mid]["players"] = details.get("players", {"team1": [], "team2": []})
                         current_db[mid]["last_updated"] = int(datetime.now().timestamp())
                 save_json_matches(current_db)
         print("Background details thread finished.")
