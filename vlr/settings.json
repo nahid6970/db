@@ -7,7 +7,9 @@
     "scrape_end": 2,
     "scrape_start": 1,
     "theme": "light",
-    "tournament_order": {},
+    "tournament_order": {
+        "Valorant Masters London 2026": 1
+    },
     "tourney_sort_order": "desc",
     "unchecked_tournaments": [
         "Esports World Cup 2026: Americas Qualifier",

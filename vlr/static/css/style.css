@@ -1486,3 +1486,12 @@ body {
 .mdm-agent-icon { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; }
 .mdm-acs-top { color: #fbbf24; font-weight: 700; }
 .mdm-no-stats { color: var(--text-muted); font-size: 13px; padding: 12px 0; text-align: center; }
+
+.mdm-map-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.mdm-map-tab {
+    background: var(--bg-darker); border: 1px solid var(--card-border); color: var(--text-muted);
+    border-radius: 6px; padding: 5px 12px; font-size: 12px; cursor: pointer; font-family: var(--font-main);
+    transition: var(--transition-fast);
+}
+.mdm-map-tab:hover { color: var(--text-primary); border-color: var(--text-muted); }
+.mdm-map-tab.active { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }

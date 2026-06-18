@@ -106,6 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("mdm-maps").innerHTML = "";
         document.getElementById("mdm-stats").innerHTML = "";
+        document.getElementById("mdm-map-tabs-container").innerHTML = "";
         document.getElementById("mdm-maps-section").style.display = "none";
         document.getElementById("mdm-stats-section").style.display = "none";
         document.getElementById("mdm-no-stats").style.display = "none";
@@ -121,7 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderMatchDetail(data, fallbackS1, fallbackS2) {
-        // Update score if data has better info
         const s1 = data.score1 || fallbackS1 || "";
         const s2 = data.score2 || fallbackS2 || "";
         const scoreEl = document.getElementById("mdm-score");
@@ -131,19 +131,15 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const maps = data.maps || [];
-        const players = data.players || {};
-        const hasStats = maps.length > 0 || (players.team1?.length || players.team2?.length);
+        const playersByMap = data.players || {};
+        const hasStats = maps.length > 0 || Object.keys(playersByMap).length > 0;
 
-        if (!hasStats) {
-            document.getElementById("mdm-no-stats").style.display = "";
-            return;
-        }
+        if (!hasStats) { document.getElementById("mdm-no-stats").style.display = ""; return; }
 
-        // Maps
+        // Maps row
         if (maps.length) {
             document.getElementById("mdm-maps-section").style.display = "";
-            const mapsEl = document.getElementById("mdm-maps");
-            mapsEl.innerHTML = maps.map(m => {
+            document.getElementById("mdm-maps").innerHTML = maps.map(m => {
                 const winCls = m.winner === 0 ? "mdm-map-win" : (m.winner === 1 ? "mdm-map-lose" : "");
                 const s1cls = m.winner === 0 ? "mdm-win" : "mdm-lose";
                 const s2cls = m.winner === 1 ? "mdm-win" : "mdm-lose";
@@ -154,38 +150,51 @@ document.addEventListener("DOMContentLoaded", () => {
             }).join("");
         }
 
-        // Player stats
-        const t1 = players.team1 || [];
-        const t2 = players.team2 || [];
-        if (t1.length || t2.length) {
+        // Player stats with map tabs
+        const statsEl = document.getElementById("mdm-stats");
+        const tabsContainer = document.getElementById("mdm-map-tabs-container");
+        const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
+
+        const renderAgents = agents => (agents || []).map(a =>
+            a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
+        ).join("");
+
+        const renderTable = (plist, label) => {
+            if (!plist?.length) return "";
+            const topAcs = maxAcs(plist);
+            const rows = plist.map(p => `<tr>
+                <td><div class="mdm-player-cell"><span>${p.name}</span></div></td>
+                <td class="r">${renderAgents(p.agents)}</td>
+                <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
+                <td class="r">${p.k}</td><td class="r">${p.d}</td><td class="r">${p.a}</td>
+                <td class="r">${p.kast}</td><td class="r">${p.adr}</td><td class="r">${p.hs}</td>
+            </tr>`).join("");
+            return `<div class="mdm-stats-team">${label}</div>
+            <table class="mdm-stats-table"><thead><tr>
+                <th>Player</th><th class="r">Agent</th>
+                <th class="r">ACS</th><th class="r">K</th><th class="r">D</th><th class="r">A</th>
+                <th class="r">KAST</th><th class="r">ADR</th><th class="r">HS%</th>
+            </tr></thead><tbody>${rows}</tbody></table>`;
+        };
+
+        const showMapStats = (key) => {
+            const pd = playersByMap[key] || {};
+            statsEl.innerHTML = renderTable(pd.team1, data.team1 || "Team 1") + renderTable(pd.team2, data.team2 || "Team 2");
+            tabsContainer.querySelectorAll(".mdm-map-tab").forEach(t => t.classList.toggle("active", t.dataset.key === key));
+        };
+
+        const tabs = [{ key: "all", label: "All Maps" }, ...maps.map((m, i) => ({ key: String(i), label: m.name }))];
+        const hasTabs = Object.keys(playersByMap).length > 0;
+
+        if (hasTabs) {
             document.getElementById("mdm-stats-section").style.display = "";
-            const statsEl = document.getElementById("mdm-stats");
-            const maxAcs = (arr) => Math.max(...arr.map(p => parseInt(p.acs) || 0));
-            const renderTable = (plist, label) => {
-                if (!plist.length) return "";
-                const topAcs = maxAcs(plist);
-                const rows = plist.map(p => {
-                    const acsCls = (parseInt(p.acs) || 0) === topAcs ? "mdm-acs-top" : "";
-                    const agent = p.agent_icon ? `<img class="mdm-agent-icon" src="${p.agent_icon}" alt="${p.agent}" title="${p.agent}">` : (p.agent || "");
-                    return `<tr>
-                        <td><div class="mdm-player-cell"><span>${p.name}</span></div></td>
-                        <td class="r">${agent}</td>
-                        <td class="r ${acsCls}">${p.acs}</td>
-                        <td class="r">${p.k}</td><td class="r">${p.d}</td><td class="r">${p.a}</td>
-                        <td class="r">${p.kast}</td><td class="r">${p.adr}</td><td class="r">${p.hs}</td>
-                    </tr>`;
-                }).join("");
-                return `<div class="mdm-stats-team">${label}</div>
-                <table class="mdm-stats-table">
-                    <thead><tr>
-                        <th>Player</th><th class="r">Agent</th>
-                        <th class="r">ACS</th><th class="r">K</th><th class="r">D</th><th class="r">A</th>
-                        <th class="r">KAST</th><th class="r">ADR</th><th class="r">HS%</th>
-                    </tr></thead>
-                    <tbody>${rows}</tbody>
-                </table>`;
-            };
-            statsEl.innerHTML = renderTable(t1, data.team1 || "Team 1") + renderTable(t2, data.team2 || "Team 2");
+            tabsContainer.innerHTML = `<div class="mdm-map-tabs">${tabs.map(t =>
+                `<button class="mdm-map-tab" data-key="${t.key}">${t.label}</button>`
+            ).join("")}</div>`;
+            tabsContainer.querySelectorAll(".mdm-map-tab").forEach(btn => {
+                btn.addEventListener("click", () => showMapStats(btn.dataset.key));
+            });
+            showMapStats(playersByMap["all"] ? "all" : "0");
         }
     }
 
