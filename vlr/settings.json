@@ -4,14 +4,14 @@
     "filter_year": "all",
     "per_page": "all",
     "results_pages": 200,
-    "scrape_end": 350,
-    "scrape_start": 311,
+    "scrape_end": 400,
+    "scrape_start": 351,
     "theme": "light",
     "tournament_order": {
         "Valorant Masters London 2026": 1,
         "Valorant Masters Santiago 2026": 2
     },
     "unchecked_tournaments": [
-        "BLEED Summer Open"
+        "Valorant Conquerors Championship"
     ]
 }
