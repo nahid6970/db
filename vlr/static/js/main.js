@@ -155,12 +155,19 @@ document.addEventListener("DOMContentLoaded", () => {
         await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
     }
 
-    function setPinOrder(name, pos) {
-        // Shift existing entries >= pos up by 1
+    function setPinOrder(name, newPos) {
+        const oldPos = tournamentOrder[name];
+        // Remove from old position and close the gap
+        if (oldPos != null) {
+            Object.keys(tournamentOrder).forEach(k => {
+                if (k !== name && tournamentOrder[k] > oldPos) tournamentOrder[k]--;
+            });
+        }
+        // Shift items at >= newPos up to make room
         Object.keys(tournamentOrder).forEach(k => {
-            if (k !== name && tournamentOrder[k] >= pos) tournamentOrder[k]++;
+            if (k !== name && tournamentOrder[k] >= newPos) tournamentOrder[k]++;
         });
-        tournamentOrder[name] = pos;
+        tournamentOrder[name] = newPos;
     }
 
     function hideCtxMenu() { if (ctxMenu) ctxMenu.style.display = "none"; ctxTarget = null; }

@@ -439,6 +439,9 @@ body {
     outline: none;
 }
 .ctx-order-input:focus { border-color: var(--accent-red); }
+.ctx-order-input::-webkit-outer-spin-button,
+.ctx-order-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.ctx-order-input[type=number] { -moz-appearance: textfield; }
 .ctx-order-btn {
     background: var(--accent-red);
     border: none;
