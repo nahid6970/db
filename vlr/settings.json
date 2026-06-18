@@ -1,4 +1,5 @@
 {
+    "filter_custom_series": [],
     "filter_series": "all",
     "filter_year": "all",
     "per_page": "all",
@@ -6,5 +7,7 @@
     "scrape_end": 150,
     "scrape_start": 101,
     "theme": "light",
-    "unchecked_tournaments": []
+    "unchecked_tournaments": [
+        "SEA Kings Clash"
+    ]
 }
