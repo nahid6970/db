@@ -81,6 +81,11 @@
                     <div class="series-filter-group">
                         <input type="text" id="filter-series-input" class="ignore-search-input" placeholder="Filter series...">
                     </div>
+                    <select id="sort-tourney-order" class="sidebar-select" title="Sort tournaments by first match date">
+                        <option value="none">Pin order</option>
+                        <option value="asc">Date ↑</option>
+                        <option value="desc">Date ↓</option>
+                    </select>
                 </div>
                 <div id="custom-series-tags" class="custom-series-tags"></div>
 
@@ -286,7 +291,9 @@
     </div>
 
     <!-- Custom Script File -->
-    <script>const IGNORE_LIST = {{ ignore_list | tojson }};  // [{name, logo}, ...]</script>
+    <script>const IGNORE_LIST = {{ ignore_list | tojson }};  // [{name, logo}, ...]
+    const TOURNEY_FIRST_MATCH = {{ tournament_first_match | tojson }}; // {name: unix_timestamp}
+    </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>

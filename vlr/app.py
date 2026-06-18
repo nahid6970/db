@@ -104,6 +104,15 @@ def index():
     except (ValueError, TypeError):
         display_matches = matches  # "all"
 
+    # Earliest match timestamp per tournament (for sidebar sort)
+    tournament_first_match = {}
+    for m in matches:
+        t = m.get("tournament")
+        ts = m.get("unix_timestamp") or 0
+        if t and ts:
+            if t not in tournament_first_match or ts < tournament_first_match[t]:
+                tournament_first_match[t] = ts
+
     return render_template(
         "index.html",
         matches=display_matches,
@@ -113,7 +122,8 @@ def index():
         theme=theme,
         ignore_list=ignore_list,
         settings=settings,
-        per_page=per_page
+        per_page=per_page,
+        tournament_first_match=tournament_first_match
     )
 
 @app.route("/api/matches")

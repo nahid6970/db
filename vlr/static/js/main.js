@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("team-search");
     const filterYear = document.getElementById("filter-year");
     const filterSeries = document.getElementById("filter-series-input");
+    const sortTourneyOrder = document.getElementById("sort-tourney-order");
     const perPageSelect = document.getElementById("per-page-select");
     const statusBtns = document.querySelectorAll(".status-btn");
     const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
@@ -133,6 +134,28 @@ document.addEventListener("DOMContentLoaded", () => {
         cur.filter_custom_series = customSeriesFilters;
         await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
     }
+
+    function sortTourneyByDate() {
+        const order = sortTourneyOrder ? sortTourneyOrder.value : "none";
+        const checklist = document.getElementById("tournament-checklist");
+        if (!checklist || order === "none") return;
+        const items = Array.from(checklist.querySelectorAll(".tourney-item"));
+        items.sort((a, b) => {
+            const aPin = tournamentOrder[a.dataset.tourneyName] ?? null;
+            const bPin = tournamentOrder[b.dataset.tourneyName] ?? null;
+            // Pinned items always come first, sorted by pin number
+            if (aPin !== null && bPin !== null) return aPin - bPin;
+            if (aPin !== null) return -1;
+            if (bPin !== null) return 1;
+            // Non-pinned: sort by first match date
+            const aTs = (typeof TOURNEY_FIRST_MATCH !== "undefined" && TOURNEY_FIRST_MATCH[a.dataset.tourneyName]) || 0;
+            const bTs = (typeof TOURNEY_FIRST_MATCH !== "undefined" && TOURNEY_FIRST_MATCH[b.dataset.tourneyName]) || 0;
+            return order === "asc" ? aTs - bTs : bTs - aTs;
+        });
+        items.forEach(el => checklist.appendChild(el));
+    }
+
+    sortTourneyOrder?.addEventListener("change", sortTourneyByDate);
 
     // Init filter values from settings
     fetch("/api/settings").then(r => r.json()).then(s => {
@@ -733,6 +756,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const countEl = document.getElementById("tourney-count");
         if (countEl) countEl.textContent = `(${sortedTourneys.length})`;
         applyTourneyFilters();
+        sortTourneyByDate();
     }
 
     // Settings modal
