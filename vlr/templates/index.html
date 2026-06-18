@@ -284,12 +284,9 @@
     <!-- Match Detail Modal -->
     <div id="match-detail-overlay" class="match-detail-overlay" style="display:none;">
         <div id="match-detail-modal" class="match-detail-modal">
-            <div class="mdm-header">
+            <div class="mdm-top-row">
                 <div class="mdm-tourney" id="mdm-tourney"></div>
-                <div class="mdm-header-actions">
-                    <a id="mdm-vlr-link" href="#" target="_blank" class="mdm-vlr-btn">View on VLR.gg ↗</a>
-                    <button class="mdm-close-btn" id="mdm-close">×</button>
-                </div>
+                <button class="mdm-close-btn" id="mdm-close">×</button>
             </div>
             <div class="mdm-scoreline">
                 <div class="mdm-team" id="mdm-team1">
@@ -304,12 +301,14 @@
             </div>
             <div id="mdm-maps-section">
                 <div class="mdm-section-title">Maps</div>
-                <div class="mdm-maps" id="mdm-maps"></div>
+                <div class="mdm-maps-row">
+                    <div class="mdm-maps" id="mdm-maps"></div>
+                    <a id="mdm-vlr-link" href="#" target="_blank" class="mdm-vlr-btn">VLR.gg ↗</a>
+                </div>
             </div>
             <div id="mdm-stats-section">
                 <div class="mdm-section-title">Player Stats</div>
                 <div id="mdm-map-tabs-container"></div>
-                <div id="mdm-stats"></div>
                 <div id="mdm-stats"></div>
             </div>
             <div id="mdm-no-stats" class="mdm-no-stats" style="display:none;">Stats not available yet for this match.</div>
