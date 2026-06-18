@@ -402,6 +402,7 @@ body {
 }
 .add-filter-btn:hover { border-color: var(--accent-red); color: var(--accent-red); }
 .custom-series-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.custom-series-tags:empty { display: none; }
 .series-tag {
     display: flex; align-items: center; gap: 4px;
     background: rgba(255,70,85,0.1); border: 1px solid rgba(255,70,85,0.3);
