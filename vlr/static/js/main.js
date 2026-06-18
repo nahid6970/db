@@ -803,38 +803,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Ignore unchecked button
-    const ignoreUncheckedBtn = document.getElementById("btn-ignore-unchecked");
-    ignoreUncheckedBtn?.addEventListener("click", async () => {
-        const unchecked = [];
-        document.querySelectorAll(".tourney-checkbox").forEach(cb => {
-            if (!cb.checked) {
-                const label = cb.closest(".tourney-item");
-                const logo = label?.querySelector(".sidebar-tourney-logo")?.src || "";
-                unchecked.push({ name: cb.value, logo });
+    async function ignoreVisible(wantChecked) {
+        const targets = [];
+        document.querySelectorAll(".tourney-item").forEach(label => {
+            if (label.style.display === "none") return; // skip filtered-out
+            const cb = label.querySelector(".tourney-checkbox");
+            if (!cb) return;
+            if (cb.checked === wantChecked) {
+                const logo = label.querySelector(".sidebar-tourney-logo")?.src || "";
+                targets.push({ name: cb.value, logo });
             }
         });
-        if (!unchecked.length) return;
+        if (!targets.length) return;
         const res = await fetch("/api/ignorelist/add", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(unchecked)
+            body: JSON.stringify(targets)
         });
         const data = await res.json();
-        unchecked.forEach(t => { if (!IGNORE_LIST.find(i => i.name === t.name)) IGNORE_LIST.push(t); });
+        targets.forEach(t => { if (!IGNORE_LIST.find(i => i.name === t.name)) IGNORE_LIST.push(t); });
         renderIgnoreList(data.ignorelist);
-        // Remove ignored tournament rows from sidebar
-        unchecked.forEach(t => {
+        targets.forEach(t => {
             document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(t.name)}"]`)?.remove();
             checkedTournaments.delete(t.name);
         });
         const countEl = document.getElementById("tourney-count");
         if (countEl) countEl.textContent = `(${document.querySelectorAll(".tourney-item").length})`;
-        // Hide matching match cards
-        const names = unchecked.map(t => t.name);
+        const names = targets.map(t => t.name);
         document.querySelectorAll(".match-card").forEach(card => {
-            if (names.includes(card.getAttribute("data-tournament"))) {
-                card.style.display = "none";
-            }
+            if (names.includes(card.getAttribute("data-tournament"))) card.style.display = "none";
         });
-    });
+    }
+
+    document.getElementById("btn-ignore-unchecked")?.addEventListener("click", () => ignoreVisible(false));
+    document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
 });

@@ -121,9 +121,14 @@
                         {% endfor %}
                     </div>
                 </div>
-                <button id="btn-ignore-unchecked" class="ignore-unchecked-btn" title="Move all unchecked tournaments to ignore list">
-                    <i class="fa-solid fa-eye-slash"></i> Ignore Unchecked
-                </button>
+                <div class="ignore-btns-row">
+                    <button id="btn-ignore-unchecked" class="ignore-unchecked-btn" title="Move visible unchecked tournaments to ignore list">
+                        <i class="fa-solid fa-eye-slash"></i> Ignore Unchecked
+                    </button>
+                    <button id="btn-ignore-checked" class="ignore-unchecked-btn" title="Move visible checked tournaments to ignore list">
+                        <i class="fa-solid fa-eye-slash"></i> Ignore Checked
+                    </button>
+                </div>
             </aside>
 
             <!-- Matches Grid Content -->

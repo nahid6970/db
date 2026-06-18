@@ -1269,9 +1269,9 @@ body {
 }
 
 /* ===== Ignore Unchecked Button ===== */
+.ignore-btns-row { display: flex; gap: 6px; flex-shrink: 0; }
 .ignore-unchecked-btn {
-    width: 100%;
-    flex-shrink: 0;
+    flex: 1;
     padding: 8px 12px;
     background: rgba(255, 70, 85, 0.08);
     border: 1px dashed var(--accent-red);
