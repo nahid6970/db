@@ -1,5 +1,26 @@
 # Recent Development Log
 
+## [2026-06-18 21:00] - Player Photos + UI Polish
+
+**What We Accomplished:**
+- **Player photos** in match detail modal — 28px circle before player name
+  - Fetched from `/player/<id>` profile pages during `fetch_match_detail_page`
+  - Fetched in parallel (max 5 workers) for unique players across all map tabs
+  - Cached locally in `images_cache/` like team logos
+  - Grey circle placeholder if no photo available
+  - Re-fetch triggered if any player missing photo (lazy on click + background sync)
+- **Square UI** — removed `border-radius` from match cards, modal, scoreline block, map cards
+- **Modal header removed** — `.mdm-top-row` hidden; `×` close button now floats `position:absolute` top-right
+- **Light theme ACS color** — top scorer changed from yellow `#fbbf24` to dark amber `#b45309`
+
+**Files Modified:**
+- `scraper.py`
+- `app.py`
+- `static/js/main.js`
+- `static/css/style.css`
+
+---
+
 ## [2026-06-18 20:37] - Pagination + Performance
 
 **What We Accomplished:**

@@ -49,13 +49,15 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 
 ## Match Detail Modal
 - Click any match card → opens in-app modal (no longer opens VLR.gg tab)
-- Modal shows: tournament name, team logos + scoreline, map cards, player stats tabs
+- Modal: square corners, no header — `×` floats `position:absolute` top-right
+- Shows: team logos + scoreline, map cards, player stats tabs, VLR.gg ↗ button
 - **Map tabs:** "All Maps" (default) + one per map — click to switch stats view
-- **Player stats:** ACS, K/D/A, KAST, ADR, HS%, agent icons (multiple per player for All Maps), top ACS highlighted gold
-- **VLR.gg ↗** button on same row as map tabs
+- **Player stats:** photo (28px circle) · player name · agent icons (multiple) · ACS (top=gold/dark amber in light) · K/D/A · KAST · ADR · HS%
+- **Player photos:** fetched from `/player/<id>` profile pages in parallel during detail fetch; cached locally; re-fetched if missing
+- VLR.gg ↗ button (red) on same row as map tabs
 - Stats fetched lazily on first click if not yet in cache; background sync also fills them
 - `matches.json` stores `maps: []` and `players: {"all": {team1,team2}, "0": {...}, "1": {...}}`
-- Re-fetch triggered if `"all"` key missing (old format detection)
+- Re-fetch triggered if `"all"` key missing, old format, or any player missing photo
 
 ## Tournament Pin Order
 - Right-click sidebar item → context menu → set position number
