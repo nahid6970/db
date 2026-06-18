@@ -26,5 +26,11 @@ ENV/
 # Offline data caches and user settings
 static/images_cache/
 matches.json
+matches.backup.json
 settings.json
 
+# Atomic write temp files
+*.tmp
+
+# Logs
+*.log
