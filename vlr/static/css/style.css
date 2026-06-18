@@ -1457,9 +1457,12 @@ body {
 .mdm-team-right { flex-direction: row-reverse; }
 .mdm-team img { width: 52px; height: 52px; object-fit: contain; }
 .mdm-team-name { font-size: 18px; font-weight: 700; }
-.mdm-score { font-size: 36px; font-weight: 800; padding: 0 20px; white-space: nowrap; }
+.mdm-score { display: flex; align-items: center; gap: 8px; padding: 0 20px; white-space: nowrap; }
+.mdm-score .score-num { font-family: var(--font-heading); font-size: 32px; font-weight: 700; color: var(--text-secondary); }
+.mdm-score .score-num.winner { color: var(--accent-green); text-shadow: 0 0 10px var(--accent-green-glow); }
+.mdm-score .score-divider { font-size: 18px; color: var(--text-muted); }
 .mdm-score .mdm-win { color: #22c55e; }
-.mdm-score .mdm-lose { color: var(--text-muted); font-size: 28px; }
+.mdm-score .mdm-lose { color: var(--text-muted); }
 .mdm-section-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 10px; }
 .mdm-maps { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
 .mdm-map-card {

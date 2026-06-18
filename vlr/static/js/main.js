@@ -99,7 +99,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const scoreEl = document.getElementById("mdm-score");
         if (s1 !== "" && s2 !== "") {
             const n1 = parseInt(s1), n2 = parseInt(s2);
-            scoreEl.innerHTML = `<span class="${n1 > n2 ? 'mdm-win' : (n1 < n2 ? 'mdm-lose' : '')}">${s1}</span> – <span class="${n2 > n1 ? 'mdm-win' : (n2 < n1 ? 'mdm-lose' : '')}">${s2}</span>`;
+            scoreEl.innerHTML = `<span class="score-num ${n1 > n2 ? 'winner' : ''}">${s1}</span><span class="score-divider">-</span><span class="score-num ${n2 > n1 ? 'winner' : ''}">${s2}</span>`;
         } else {
             scoreEl.textContent = "vs";
         }
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const scoreEl = document.getElementById("mdm-score");
         if (s1 !== "" && s2 !== "") {
             const n1 = parseInt(s1), n2 = parseInt(s2);
-            scoreEl.innerHTML = `<span class="${n1 > n2 ? 'mdm-win' : (n1 < n2 ? 'mdm-lose' : '')}">${s1}</span> – <span class="${n2 > n1 ? 'mdm-win' : (n2 < n1 ? 'mdm-lose' : '')}">${s2}</span>`;
+            scoreEl.innerHTML = `<span class="score-num ${n1 > n2 ? 'winner' : ''}">${s1}</span><span class="score-divider">-</span><span class="score-num ${n2 > n1 ? 'winner' : ''}">${s2}</span>`;
         }
 
         const maps = data.maps || [];
