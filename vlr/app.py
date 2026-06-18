@@ -64,6 +64,7 @@ def index():
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
     results_pages = settings.get("results_pages", 5)
     theme = settings.get("theme", "dark")
+    per_page = settings.get("per_page", "50")
 
     # Build logo lookup from all matches
     logo_lookup = {}
@@ -95,15 +96,23 @@ def index():
         key=lambda x: (x[0] in unchecked_tournaments, x[0])
     )
 
+    # Limit matches for initial render based on per_page setting
+    try:
+        render_limit = int(per_page)
+        display_matches = matches[:render_limit]
+    except (ValueError, TypeError):
+        display_matches = matches  # "all"
+
     return render_template(
         "index.html",
-        matches=matches,
+        matches=display_matches,
         tournaments=sorted_tournaments,
         unchecked_tournaments=unchecked_tournaments,
         results_pages=results_pages,
         theme=theme,
         ignore_list=ignore_list,
-        settings=settings
+        settings=settings,
+        per_page=per_page
     )
 
 @app.route("/api/matches")

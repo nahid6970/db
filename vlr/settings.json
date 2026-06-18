@@ -1,6 +1,7 @@
 {
     "filter_series": "all",
     "filter_year": "all",
+    "per_page": "all",
     "results_pages": 200,
     "scrape_end": 150,
     "scrape_start": 101,

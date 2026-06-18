@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("team-search");
     const filterYear = document.getElementById("filter-year");
     const filterSeries = document.getElementById("filter-series");
+    const perPageSelect = document.getElementById("per-page-select");
     const statusBtns = document.querySelectorAll(".status-btn");
     const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
@@ -253,7 +254,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 fallback.style.display = "none";
             }
         }
+
+        applyPagination();
     }
+
+    function applyPagination() {
+        const perPage = perPageSelect ? perPageSelect.value : "all";
+        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(c => c.style.display !== "none");
+
+        // Update "All" option label with count
+        if (perPageSelect) {
+            const allOpt = perPageSelect.querySelector('option[value="all"]');
+            if (allOpt) allOpt.textContent = `All (${visibleCards.length})`;
+        }
+
+        if (perPage === "all") return; // show everything
+
+        const limit = parseInt(perPage);
+        visibleCards.forEach((card, i) => {
+            card.style.display = i < limit ? "flex" : "none";
+        });
+    }
+
+    perPageSelect?.addEventListener("change", () => {
+        applyFilters();
+        fetch("/api/settings").then(r => r.json()).then(s => {
+            s.per_page = perPageSelect.value;
+            fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(s) });
+        });
+    });
 
     // 4. Input Listeners
     // Search input

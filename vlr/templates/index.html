@@ -30,6 +30,14 @@
                     <button class="status-btn" data-status="upcoming">Upcoming</button>
                     <button class="status-btn" data-status="completed">Completed</button>
                 </div>
+                <select id="per-page-select" class="per-page-select" title="Matches per page">
+                    <option value="10" {% if per_page == '10' %}selected{% endif %}>10</option>
+                    <option value="20" {% if per_page == '20' %}selected{% endif %}>20</option>
+                    <option value="50" {% if per_page == '50' or not per_page %}selected{% endif %}>50</option>
+                    <option value="100" {% if per_page == '100' %}selected{% endif %}>100</option>
+                    <option value="200" {% if per_page == '200' %}selected{% endif %}>200</option>
+                    <option value="all" {% if per_page == 'all' %}selected{% endif %}>All</option>
+                </select>
                 <div class="header-divider"></div>
                 <div class="pages-input-group">
                     <label>Scrape</label>
