@@ -54,25 +54,7 @@ def save_settings(settings):
                 pass
 
 def start_background_sync():
-    def sync_loop():
-        print("Background sync thread started...")
-        db = scraper.load_json_matches()
-        if not db:
-            print("No cached matches found. Performing initial sync from VLR.gg...")
-            scraper.fetch_and_update_matches(load_settings().get("results_pages", 5))
-            print("Initial sync complete.")
-        
-        while True:
-            time.sleep(300)
-            pages = load_settings().get("results_pages", 5)
-            print("Background sync: Syncing from VLR.gg...")
-            scraper.fetch_and_update_matches(pages)
-            print("Background sync: Sync complete.")
-            
-    # Prevent running twice in Flask debug reloader mode
-    if os.environ.get("WERKZEUG_RUN_MAIN") == "true" or not app.debug:
-        t = threading.Thread(target=sync_loop, daemon=True)
-        t.start()
+    pass  # Auto-sync disabled — sync only on manual button click
 
 @app.route("/")
 def index():

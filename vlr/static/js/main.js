@@ -304,7 +304,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } finally {
                 if (icon) icon.classList.remove("spinning");
                 refreshBtn.disabled = false;
-                refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> Sync Live Data`;
+                refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> SYNC`;
             }
         });
     }
