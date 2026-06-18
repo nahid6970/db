@@ -1104,6 +1104,10 @@ body {
     background: rgba(255, 70, 85, 0.35);
     border-top-color: rgba(255, 70, 85, 0.8);
 }
+.match-card[data-final="1"] .match-card-footer {
+    background: rgba(59, 130, 246, 0.35);
+    border-top-color: rgba(59, 130, 246, 0.8);
+}
 
 .time-info {
     display: flex;
