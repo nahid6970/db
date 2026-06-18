@@ -200,12 +200,12 @@ def fetch_match_detail_page(href):
 
         for game_div in game_divs:
             game_id = game_div.get("data-game-id", "")
-            header = game_div.find("div", class_="vm-stats-game-header")
-            if not header:
-                continue
-
             if game_id == "all":
                 players_by_map["all"] = parse_player_tables(game_div)
+                continue
+
+            header = game_div.find("div", class_="vm-stats-game-header")
+            if not header:
                 continue
 
             map_div = header.find("div", class_="map")
@@ -277,7 +277,8 @@ def fetch_details_in_background(scraped_matches):
             files_exist = file_exists(t1_logo) and file_exists(t2_logo)
             existing_players = db.get(mid, {}).get("players", {})
             old_format = isinstance(existing_players, dict) and ("team1" in existing_players or "team2" in existing_players) and "all" not in existing_players and "0" not in existing_players
-            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format
+            missing_all = isinstance(existing_players, dict) and "all" not in existing_players
+            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all
 
             if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))

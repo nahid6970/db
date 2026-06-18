@@ -135,7 +135,8 @@ def api_match_detail(match_id):
     # Re-fetch if no stats, or if players is old format (has team1/team2 keys directly)
     players = match.get("players", {})
     old_format = isinstance(players, dict) and ("team1" in players or "team2" in players) and "all" not in players and "0" not in players
-    if (not match.get("maps") or old_format) and match.get("href"):
+    missing_all = isinstance(players, dict) and "all" not in players
+    if (not match.get("maps") or old_format or missing_all) and match.get("href"):
         details = scraper.fetch_match_detail_page(match["href"])
         if details:
             match.update(details)
