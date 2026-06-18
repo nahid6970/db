@@ -100,9 +100,18 @@ def index():
     # Limit matches for initial render based on per_page setting
     try:
         render_limit = int(per_page)
-        display_matches = matches[:render_limit]
+        page = request.args.get("page", 1, type=int)
+        page = max(1, page)
+        total = len(matches)
+        total_pages = max(1, (total + render_limit - 1) // render_limit)
+        page = min(page, total_pages)
+        offset = (page - 1) * render_limit
+        display_matches = matches[offset:offset + render_limit]
     except (ValueError, TypeError):
         display_matches = matches  # "all"
+        page = 1
+        total_pages = 1
+        total = len(matches)
 
     # Earliest match timestamp per tournament (for sidebar sort)
     tournament_first_match = {}
@@ -123,7 +132,10 @@ def index():
         ignore_list=ignore_list,
         settings=settings,
         per_page=per_page,
-        tournament_first_match=tournament_first_match
+        tournament_first_match=tournament_first_match,
+        page=page,
+        total_pages=total_pages,
+        total_matches=total
     )
 
 @app.route("/api/match/<match_id>")

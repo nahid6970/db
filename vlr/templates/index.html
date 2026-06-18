@@ -234,6 +234,21 @@
                     </div>
                     {% endfor %}
                 </div>
+                {% if total_pages > 1 %}
+                <div class="pagination" id="pagination">
+                    {% if page > 1 %}
+                    <a href="/?page={{ page - 1 }}" class="page-btn">← Prev</a>
+                    {% else %}
+                    <span class="page-btn disabled">← Prev</span>
+                    {% endif %}
+                    <span class="page-info">Page {{ page }} of {{ total_pages }}</span>
+                    {% if page < total_pages %}
+                    <a href="/?page={{ page + 1 }}" class="page-btn">Next →</a>
+                    {% else %}
+                    <span class="page-btn disabled">Next →</span>
+                    {% endif %}
+                </div>
+                {% endif %}
             </main>
         </div>
     </div>
