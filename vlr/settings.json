@@ -4,13 +4,17 @@
     "filter_year": "all",
     "per_page": "all",
     "results_pages": 200,
-    "scrape_end": 200,
-    "scrape_start": 100,
+    "scrape_end": 300,
+    "scrape_start": 200,
     "theme": "light",
     "tournament_order": {
-        "Champions Tour 2024 China: Ascension": 3,
         "Valorant Masters London 2026": 1,
         "Valorant Masters Santiago 2026": 2
     },
-    "unchecked_tournaments": []
+    "unchecked_tournaments": [
+        "Champions Tour 2024 China: Ascension",
+        "Champions Tour 2024 Americas: Ascension",
+        "Champions Tour 2024 EMEA: Ascension",
+        "Champions Tour 2024 Pacific: Ascension"
+    ]
 }
