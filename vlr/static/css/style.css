@@ -1101,8 +1101,8 @@ body {
     font-size: 12px;
 }
 .match-card[data-elimination="1"] .match-card-footer {
-    background: rgba(255, 70, 85, 0.15);
-    border-top-color: rgba(255, 70, 85, 0.3);
+    background: rgba(255, 70, 85, 0.35);
+    border-top-color: rgba(255, 70, 85, 0.8);
 }
 
 .time-info {
