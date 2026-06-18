@@ -240,6 +240,15 @@
                 <div class="modal-section">
                     <h3>Ignore List <span id="ignore-count">({{ ignore_list|length }})</span></h3>
                     <p class="modal-section-desc">Tournaments hidden from matches and sidebar. Most recent first.</p>
+                    <div class="ignore-filters">
+                        <select id="ignore-filter-year" class="sidebar-select">
+                            <option value="all">All Years</option>
+                            {% for y in range(2026, 2019, -1) %}
+                            <option value="{{ y }}">{{ y }}</option>
+                            {% endfor %}
+                        </select>
+                        <input type="text" id="ignore-filter-search" class="ignore-search-input" placeholder="Search...">
+                    </div>
                     <div id="ignore-list-container">
                         {% if ignore_list %}
                             {% for t in ignore_list|reverse %}

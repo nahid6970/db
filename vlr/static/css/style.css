@@ -1308,6 +1308,25 @@ body {
     color: var(--text-secondary);
     margin-bottom: 12px;
 }
+.ignore-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+.ignore-filters .sidebar-select { flex: 0 0 auto; }
+.ignore-search-input {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-sm);
+    color: var(--text-primary);
+    padding: 6px 10px;
+    font-size: 12px;
+    font-family: var(--font-main);
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+.ignore-search-input:focus { border-color: var(--accent-red); }
 .ignore-item {
     display: flex;
     align-items: center;

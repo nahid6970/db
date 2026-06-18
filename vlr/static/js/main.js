@@ -672,6 +672,20 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === settingsModal) settingsModal.style.display = "none";
     });
 
+    // Ignore list modal filters
+    function applyIgnoreFilters() {
+        const year = document.getElementById("ignore-filter-year")?.value || "all";
+        const search = (document.getElementById("ignore-filter-search")?.value || "").toLowerCase();
+        document.querySelectorAll("#ignore-list-container .ignore-item").forEach(item => {
+            const name = (item.dataset.name || "").toLowerCase();
+            const yearMatch = year === "all" || name.includes(year);
+            const searchMatch = !search || name.includes(search);
+            item.style.display = (yearMatch && searchMatch) ? "" : "none";
+        });
+    }
+    document.getElementById("ignore-filter-year")?.addEventListener("change", applyIgnoreFilters);
+    document.getElementById("ignore-filter-search")?.addEventListener("input", applyIgnoreFilters);
+
     // Remove from ignore list
     function bindIgnoreRemoveBtns() {
         document.querySelectorAll(".ignore-remove-btn").forEach(btn => {
@@ -707,9 +721,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `).join("");
         bindIgnoreRemoveBtns();
+        applyIgnoreFilters();
     }
-
-    bindIgnoreRemoveBtns();
 
     // Ignore unchecked button
     const ignoreUncheckedBtn = document.getElementById("btn-ignore-unchecked");
