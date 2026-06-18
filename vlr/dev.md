@@ -10,27 +10,29 @@ python app.py
 ## Project Structure
 ```
 vlr/
-├── app.py                  # Flask server + background sync
+├── app.py                  # Flask server
 ├── scraper.py              # VLR.gg scraper + data pipeline
-├── matches.json            # Match cache (auto-generated)
-├── settings.json           # User tournament filter preferences
+├── matches.json            # Match cache (gitignored)
+├── matches.backup.json     # Manual backup (gitignored)
+├── settings.json           # User preferences (gitignored)
+├── ignorelist.json         # Ignored tournaments [{name, logo}]
 ├── templates/index.html    # Jinja2 template
 ├── static/
 │   ├── css/style.css
 │   ├── js/main.js
-│   └── images_cache/       # Downloaded logos
+│   └── images_cache/       # Downloaded logos (gitignored)
 └── md/
-    ├── AI_CONTEXT.md       # Stable project brief for AI handoff
-    ├── RECENT.md           # Dev session log (full history)
+    ├── AI_CONTEXT.md
+    ├── RECENT.md
     ├── PROBLEMS_AND_FIXES.md
-    └── (this file) dev.md
+    └── dev.md              # (this file)
 ```
 
 ## Data Flow
-1. `scraper.fetch_and_update_matches()` scrapes VLR.gg → upserts `matches.json`
-2. Detail pages (team logos, exact timestamps) fetched in background thread
-3. `app.get_matches_for_display()` reads cache, sorts, adds `js_timestamp`
-4. Template renders server-side; JS handles live countdowns, filters, sync
+1. User clicks SYNC → `GET /api/matches?start=N&end=M` → `fetch_and_update_matches(start_page, end_page)`
+2. Scraper upserts `matches.json`; detail pages (logos, timestamps) fetched in background thread
+3. `GET /` renders template with server-side filtered + paginated matches
+4. JS handles live countdowns, sidebar filters (year/series/custom tags), checkbox state, theme
 
 ## Key Files
 - #[[file:md/AI_CONTEXT.md]]
