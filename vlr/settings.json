@@ -4,8 +4,8 @@
     "filter_year": "all",
     "per_page": "all",
     "results_pages": 200,
-    "scrape_end": 500,
-    "scrape_start": 500,
+    "scrape_end": 1,
+    "scrape_start": 1,
     "theme": "dark",
     "tournament_order": {
         "Valorant Masters London 2026": 1

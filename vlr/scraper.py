@@ -54,8 +54,15 @@ def save_json_matches(matches):
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(matches, f, indent=4, ensure_ascii=False)
-        # Atomic rename
-        os.replace(tmp_path, JSON_PATH)
+        # Atomic rename with retries for transient locks (common on Windows)
+        for attempt in range(5):
+            try:
+                os.replace(tmp_path, JSON_PATH)
+                break
+            except PermissionError:
+                time.sleep(0.1)
+        else:
+            os.replace(tmp_path, JSON_PATH)
     except Exception as e:
         print(f"Error saving JSON: {e}")
         if os.path.exists(tmp_path):

@@ -40,7 +40,15 @@ def save_ignorelist(lst):
     try:
         with open(tmp, "w", encoding="utf-8") as f:
             json.dump(lst, f, indent=4, ensure_ascii=False)
-        os.replace(tmp, IGNORELIST_PATH)
+        # Atomic rename with retries for transient locks (Windows lock issues)
+        for attempt in range(5):
+            try:
+                os.replace(tmp, IGNORELIST_PATH)
+                break
+            except PermissionError:
+                time.sleep(0.1)
+        else:
+            os.replace(tmp, IGNORELIST_PATH)
     except Exception as e:
         print(f"Error saving ignorelist: {e}")
 
@@ -69,8 +77,15 @@ def save_settings(settings):
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
             json.dump(settings, f, indent=4, ensure_ascii=False)
-        # Atomic rename
-        os.replace(tmp_path, SETTINGS_PATH)
+        # Atomic rename with retries for transient locks (Windows lock issues)
+        for attempt in range(5):
+            try:
+                os.replace(tmp_path, SETTINGS_PATH)
+                break
+            except PermissionError:
+                time.sleep(0.1)
+        else:
+            os.replace(tmp_path, SETTINGS_PATH)
     except Exception as e:
         print(f"Error saving settings: {e}")
         if os.path.exists(tmp_path):
