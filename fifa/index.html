@@ -122,6 +122,23 @@
   .card-yr::before { content:''; position:absolute; left:0; width:8px; height:11px; background:#f9ca24; border-radius:1px; }
   .card-yr::after  { content:''; position:absolute; left:4px; width:8px; height:11px; background:#e74c3c; border-radius:1px; }
   .team-panel .goal-list { margin-top: 2px; }
+
+  /* Scorers styles */
+  .scorers-list {
+    background: #12122a; border-radius: 12px; border: 1px solid #1e3799;
+    max-width: 600px; margin: 20px auto 0; overflow: hidden;
+  }
+  .scorer-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 20px; border-bottom: 1px solid #1a1a3a;
+  }
+  .scorer-row:last-child { border-bottom: none; }
+  .scorer-rank { font-weight: 700; color: #888; width: 45px; }
+  .scorer-info { display: flex; align-items: center; gap: 10px; flex: 1; }
+  .scorer-name { font-weight: 700; color: #fff; }
+  .scorer-team { font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .scorer-goals { font-size: 1.1rem; font-weight: 900; color: #f9ca24; }
+
 </style>
 </head>
 <body>
@@ -135,6 +152,7 @@
   <button class="active" onclick="show('results',this)">&#127942; Results</button>
   <button onclick="show('schedule',this)">&#128197; Schedule</button>
   <button onclick="show('groups',this)">&#128202; Groups</button>
+  <button onclick="show('scorers',this)">⚽ Scorers</button>
   <button onclick="show('knockout',this)">&#129354; Knockout</button>
   <button onclick="show('teams',this)">&#127758; Teams</button>
 </nav>
@@ -158,6 +176,14 @@
   <div id="groups-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
   <div class="groups-grid" id="groupsGrid"><div style="text-align:center;padding:40px;color:#666">Loading standings...</div></div>
   <p style="color:#555;font-size:0.78rem;margin-top:14px;text-align:center">Top 2 + best 8 third-placed teams advance</p>
+</section>
+
+<!-- ===== SCORERS ===== -->
+<section id="scorers">
+  <div id="scorers-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
+  <div class="scorers-container" id="scorersContainer">
+    <div style="text-align:center;padding:40px;color:#666">Loading scorers...</div>
+  </div>
 </section>
 
 <!-- ===== KNOCKOUT ===== -->
@@ -448,6 +474,105 @@ async function fetchGroups() {
 
 fetchGroups();
 setInterval(fetchGroups, 60000);
+
+async function fetchScorers() {
+  try {
+    const r = await fetch(ESPN);
+    const data = await r.json();
+    const events = data.events || [];
+
+    const scorersMap = {};
+
+    events.forEach(ev => {
+      const comp = ev.competitions[0];
+      const details = comp.details || [];
+      const homeTeam = comp.competitors?.[0]?.team;
+      const awayTeam = comp.competitors?.[1]?.team;
+
+      details.forEach(goal => {
+        if (goal.scoringPlay === true && goal.ownGoal !== true) {
+          let scorerName = '';
+          if (goal.athletesInvolved && goal.athletesInvolved.length > 0) {
+            scorerName = goal.athletesInvolved[0].displayName || goal.athletesInvolved[0].shortName || '';
+          }
+          if (!scorerName) {
+            scorerName = goal.shortText || goal.text || '';
+            scorerName = scorerName.replace(/\s*\d+['+]*\s*$/, '').trim();
+          }
+
+          if (scorerName) {
+            const side = goalSide(comp, goal);
+            const team = side === 'home' ? homeTeam : side === 'away' ? awayTeam : null;
+            const teamName = team ? team.displayName : 'Unknown';
+            const teamLogo = team ? team.logo : '';
+
+            const key = `${scorerName}__${teamName}`;
+            if (!scorersMap[key]) {
+              scorersMap[key] = {
+                name: scorerName,
+                teamName: teamName,
+                teamLogo: teamLogo,
+                goals: 0
+              };
+            }
+            scorersMap[key].goals += 1;
+          }
+        }
+      });
+    });
+
+    const sortedScorers = Object.values(scorersMap).sort((a, b) => {
+      if (b.goals !== a.goals) {
+        return b.goals - a.goals;
+      }
+      return a.name.localeCompare(b.name);
+    });
+
+    let html = '';
+    if (sortedScorers.length === 0) {
+      html = '<p style="color:#666;padding:30px;text-align:center">No goals scored yet. Check back once matches begin!</p>';
+    } else {
+      html = '<div class="scorers-list">';
+      let rank = 0;
+      let prevGoals = -1;
+      let displayRank = 0;
+
+      sortedScorers.forEach((scorer, idx) => {
+        rank++;
+        if (scorer.goals !== prevGoals) {
+          displayRank = rank;
+          prevGoals = scorer.goals;
+        }
+
+        html += `
+        <div class="scorer-row">
+          <div class="scorer-rank">#${displayRank}</div>
+          <div class="scorer-info">
+            <div>
+              <div class="scorer-name">${scorer.name}</div>
+              <div class="scorer-team">
+                <img class="flag-sm" src="${scorer.teamLogo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${scorer.teamName}">
+                <span>${scorer.teamName}</span>
+              </div>
+            </div>
+          </div>
+          <div class="scorer-goals">${scorer.goals} ${scorer.goals === 1 ? 'Goal' : 'Goals'}</div>
+        </div>`;
+      });
+      html += '</div>';
+    }
+
+    document.getElementById('scorersContainer').innerHTML = html;
+    const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
+    document.getElementById('scorers-status').textContent = `Updated: ${t} BD`;
+  } catch(e) {
+    document.getElementById('scorersContainer').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load top scorers.</p>';
+  }
+}
+
+fetchScorers();
+setInterval(fetchScorers, 30000);
+
 
 function show(id, btn) {
   document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
