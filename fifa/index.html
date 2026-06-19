@@ -110,6 +110,11 @@
   .badge-pre  { color:#888;    font-size:0.78rem; }
   .card-live  { border-color:#e74c3c !important; box-shadow:0 0 12px rgba(231,76,60,0.3); }
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
+  .score-winner { color: #2ecc71 !important; }
+  .score-loser { color: #e74c3c !important; }
+  .score-draw { color: #ffffff !important; }
+  .score-dash { color: #888888; }
+
   .live-score.ht { color:#f39c12; }
   .goal-list  { display:flex; flex-direction:column; gap:3px; }
   .goal-item  { display:flex; align-items:center; gap:5px; font-size:0.72rem; line-height:1.25; color:#b8c4ea; }
@@ -284,6 +289,20 @@ function scoreOrTime(comp) {
   const [home, away] = comp.competitors;
   if (st.type.state === 'pre') {
     return `<div class="kick-time">${bdTime(comp.date)}</div>${countdown(comp.date)}`;
+  }
+  if (st.type.state === 'post') {
+    const homeScore = parseInt(home.score, 10) || 0;
+    const awayScore = parseInt(away.score, 10) || 0;
+    let homeClass = 'score-draw';
+    let awayClass = 'score-draw';
+    if (homeScore > awayScore) {
+      homeClass = 'score-winner';
+      awayClass = 'score-loser';
+    } else if (awayScore > homeScore) {
+      homeClass = 'score-loser';
+      awayClass = 'score-winner';
+    }
+    return `<div class="live-score"><span class="${homeClass}">${home.score}</span><span class="score-dash"> &ndash; </span><span class="${awayClass}">${away.score}</span></div>`;
   }
   const ht = st.type.name === 'STATUS_HALFTIME';
   return `<div class="live-score ${ht?'ht':''}">${home.score} &ndash; ${away.score}</div>`;
