@@ -17,22 +17,39 @@ os.makedirs(IMAGE_CACHE_DIR, exist_ok=True)
 # Locks to prevent concurrent sync issues
 sync_lock = threading.Lock()
 details_lock = threading.Lock()
+_cache_lock = threading.Lock()
+_cached_matches = None
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
-def load_json_matches():
-    if not os.path.exists(JSON_PATH):
-        return {}
-    try:
-        with open(JSON_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except Exception as e:
-        print(f"Error loading JSON: {e}")
-        return {}
+def load_json_matches(force_reload=False):
+    global _cached_matches
+    if _cached_matches is not None and not force_reload:
+        return _cached_matches
+        
+    with _cache_lock:
+        if _cached_matches is not None and not force_reload:
+            return _cached_matches
+            
+        if not os.path.exists(JSON_PATH):
+            _cached_matches = {}
+            return _cached_matches
+        try:
+            with open(JSON_PATH, "r", encoding="utf-8") as f:
+                _cached_matches = json.load(f)
+        except Exception as e:
+            print(f"Error loading JSON: {e}")
+            _cached_matches = {}
+            
+    return _cached_matches
 
 def save_json_matches(matches):
+    global _cached_matches
+    with _cache_lock:
+        _cached_matches = matches
+        
     tmp_path = JSON_PATH + ".tmp"
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:

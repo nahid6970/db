@@ -56,6 +56,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cb.checked) checkedTournaments.add(cb.value);
     });
 
+    // Render initial matches client-side
+    if (typeof INITIAL_MATCHES !== "undefined") {
+        renderMatchesGrid(INITIAL_MATCHES);
+    }
+
     // Apply initial filters based on saved settings
     applyFilters();
 
@@ -738,6 +743,13 @@ document.addEventListener("DOMContentLoaded", () => {
             card.setAttribute("data-score1", m.score1 || "");
             card.setAttribute("data-score2", m.score2 || "");
             card.style.cursor = "pointer";
+
+            const s = (m.series || "").toLowerCase();
+            if (s.includes("lower") || s.includes("elimination") || s.includes("decider") || s.includes("loser")) {
+                card.setAttribute("data-elimination", "1");
+            } else if (s.includes("grand final")) {
+                card.setAttribute("data-final", "1");
+            }
             
             // Create status badge inner HTML
             let statusBadgeHTML = "";

@@ -2,7 +2,7 @@
     "filter_custom_series": [],
     "filter_series": "",
     "filter_year": "all",
-    "per_page": "10",
+    "per_page": "100",
     "results_pages": 200,
     "scrape_end": 500,
     "scrape_start": 500,
@@ -12,7 +12,6 @@
     },
     "tourney_sort_order": "desc",
     "unchecked_tournaments": [
-        "Valorant Masters London 2026",
         "Esports World Cup 2026: Americas Qualifier",
         "Esports World Cup 2026: EMEA Qualifier",
         "Esports World Cup 2026: Pacific Qualifier",
@@ -41,6 +40,7 @@
         "Valorant Masters Bangkok 2025",
         "VCT 2025: Pacific Kickoff",
         "VCT 2025: Americas Kickoff",
+        "VCT 2025: EMEA Kickoff",
         "VCT 2025: China Kickoff",
         "Riot Games ONE 2024",
         "SOOP Valorant League 2024",
@@ -88,6 +88,7 @@
         "Champions Tour Asia-Pacific Stage 1: Challengers Playoffs",
         "Champions Tour Stage 1: EMEA Challengers",
         "Champions Tour North America Stage 1: Challengers",
+        "Rooter Rise of Legends",
         "AORUS x AMD Pro Series Valorant",
         "Circuito de Elite - Round #1",
         "Copa Rakin: Season 1",
@@ -96,7 +97,6 @@
         "Lethal Esports Invitational - Season 1",
         "Penta Esports Invitational",
         "Protocolo: Gêneses 2021",
-        "Rooter Rise of Legends",
         "SteelSeries Prime Tournament: Vietnam",
         "VALORANT UK & I Skirmish"
     ]

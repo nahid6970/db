@@ -11,16 +11,32 @@ SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settin
 IGNORELIST_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ignorelist.json")
 MATCHES_BACKUP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "matches.backup.json")
 
-def load_ignorelist():
-    if not os.path.exists(IGNORELIST_PATH):
-        return []
-    try:
-        with open(IGNORELIST_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
-        return []
+_cached_settings = None
+_cached_ignorelist = None
+_settings_lock = threading.Lock()
+_ignorelist_lock = threading.Lock()
+
+def load_ignorelist(force_reload=False):
+    global _cached_ignorelist
+    if _cached_ignorelist is not None and not force_reload:
+        return _cached_ignorelist
+    with _ignorelist_lock:
+        if _cached_ignorelist is not None and not force_reload:
+            return _cached_ignorelist
+        if not os.path.exists(IGNORELIST_PATH):
+            _cached_ignorelist = []
+            return _cached_ignorelist
+        try:
+            with open(IGNORELIST_PATH, "r", encoding="utf-8") as f:
+                _cached_ignorelist = json.load(f)
+        except:
+            _cached_ignorelist = []
+    return _cached_ignorelist
 
 def save_ignorelist(lst):
+    global _cached_ignorelist
+    with _ignorelist_lock:
+        _cached_ignorelist = lst
     tmp = IGNORELIST_PATH + ".tmp"
     try:
         with open(tmp, "w", encoding="utf-8") as f:
@@ -29,16 +45,27 @@ def save_ignorelist(lst):
     except Exception as e:
         print(f"Error saving ignorelist: {e}")
 
-def load_settings():
-    if not os.path.exists(SETTINGS_PATH):
-        return {"unchecked_tournaments": []}
-    try:
-        with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
-    except:
-        return {"unchecked_tournaments": []}
+def load_settings(force_reload=False):
+    global _cached_settings
+    if _cached_settings is not None and not force_reload:
+        return _cached_settings
+    with _settings_lock:
+        if _cached_settings is not None and not force_reload:
+            return _cached_settings
+        if not os.path.exists(SETTINGS_PATH):
+            _cached_settings = {"unchecked_tournaments": []}
+            return _cached_settings
+        try:
+            with open(SETTINGS_PATH, "r", encoding="utf-8") as f:
+                _cached_settings = json.load(f)
+        except:
+            _cached_settings = {"unchecked_tournaments": []}
+    return _cached_settings
 
 def save_settings(settings):
+    global _cached_settings
+    with _settings_lock:
+        _cached_settings = settings
     tmp_path = SETTINGS_PATH + ".tmp"
     try:
         with open(tmp_path, "w", encoding="utf-8") as f:
@@ -208,6 +235,8 @@ def api_restore():
     import shutil
     if os.path.exists(MATCHES_BACKUP_PATH):
         shutil.copy2(MATCHES_BACKUP_PATH, scraper.JSON_PATH)
+        # Force cache reload after restore
+        scraper.load_json_matches(force_reload=True)
         return jsonify({"status": "success"})
     return jsonify({"status": "error", "message": "No backup found"}), 404
 

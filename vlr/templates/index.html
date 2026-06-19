@@ -147,100 +147,11 @@
             <!-- Matches Grid Content -->
             <main class="content-area">
                 <div class="matches-grid" id="matches-grid-container">
-                    {% for m in matches %}
-                    <div class="match-card" data-tournament="{{ m.tournament }}" data-status="{{ m.status|lower }}" data-id="{{ m.id }}" data-href="{{ m.href }}" data-score1="{{ m.score1 }}" data-score2="{{ m.score2 }}" {% set s = m.series|lower %}{% if 'lower' in s or 'elimination' in s or 'decider' in s or 'loser' in s %}data-elimination="1"{% elif 'grand final' in s %}data-final="1"{% endif %} style="cursor:pointer">
-                        <div class="match-card-header">
-                            <div class="tournament-info">
-                                {% if m.tournament_logo %}
-                                <img src="{{ m.tournament_logo }}" class="tournament-logo" onerror="this.src='https://placehold.co/32x32/ff4655/ffffff?text=VLR';">
-                                {% else %}
-                                <div class="tournament-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>
-                                {% endif %}
-                                <div class="tournament-name-container">
-                                    <span class="tournament-name" title="{{ m.tournament }}">{{ m.tournament }}</span>
-                                    <span class="tournament-series" title="{{ m.series }}">{{ m.series or 'Main Event' }}</span>
-                                </div>
-                            </div>
-                            <div class="match-status-badge status-{{ m.status|lower }}">
-                                {% if m.status == 'Live' %}
-                                    <span class="live-dot"></span> LIVE
-                                {% else %}
-                                    {{ m.status }}
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="match-card-body">
-                            <!-- Team 1 -->
-                            <div class="team-container team-1">
-                                <div class="logo-wrapper">
-                                    {% if m.team1_logo %}
-                                    <img src="{{ m.team1_logo }}" class="team-logo" alt="{{ m.team1 }} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    {% else %}
-                                    <div class="team-logo" style="display:none;"></div>
-                                    {% endif %}
-                                    <div class="team-initial" style="display:{% if m.team1_logo %}none{% else %}flex{% endif %};">{{ m.team1[0]|upper if m.team1 else 'T' }}</div>
-                                </div>
-                                <span class="team-name" title="{{ m.team1 }}">{{ m.team1 }}</span>
-                            </div>
-
-                            <!-- VS / Score -->
-                            <div class="match-vs-score">
-                                {% if m.status == 'Upcoming' %}
-                                    <span class="vs-label">VS</span>
-                                {% else %}
-                                    <div class="score-display">
-                                        <span class="score-num {% if m.score1|int > m.score2|int and m.status == 'Completed' %}winner{% endif %}">{{ m.score1 or '0' }}</span>
-                                        <span class="score-divider">-</span>
-                                        <span class="score-num {% if m.score2|int > m.score1|int and m.status == 'Completed' %}winner{% endif %}">{{ m.score2 or '0' }}</span>
-                                    </div>
-                                {% endif %}
-                            </div>
-
-                            <!-- Team 2 -->
-                            <div class="team-container team-2">
-                                <span class="team-name" title="{{ m.team2 }}">{{ m.team2 }}</span>
-                                <div class="logo-wrapper">
-                                    {% if m.team2_logo %}
-                                    <img src="{{ m.team2_logo }}" class="team-logo" alt="{{ m.team2 }} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                                    {% else %}
-                                    <div class="team-logo" style="display:none;"></div>
-                                    {% endif %}
-                                    <div class="team-initial" style="display:{% if m.team2_logo %}none{% else %}flex{% endif %};">{{ m.team2[0]|upper if m.team2 else 'T' }}</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="match-card-footer">
-                            <div class="time-info">
-                                <i class="fa-regular fa-clock clock-icon"></i>
-                                <span class="bst-time" title="Bangladesh Standard Time">{{ m.formatted_bst }} BST</span>
-                            </div>
-                            
-                            {% if m.status == 'Upcoming' %}
-                            <div class="countdown-container" data-timestamp="{{ m.js_timestamp }}">
-                                <span class="countdown-label">Starts In:</span>
-                                <span class="countdown-timer">--d --h --m</span>
-                            </div>
-                            {% elif m.status == 'Live' %}
-                            <div class="countdown-container status-live-container">
-                                <span class="live-pulse-indicator"></span>
-                                <span class="live-countdown-text">In Progress</span>
-                            </div>
-                            {% else %}
-                            <div class="countdown-container status-completed-container">
-                                <span class="completed-text">Final Match</span>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% else %}
                     <div class="no-matches-fallback">
                         <i class="fa-solid fa-gamepad fallback-icon"></i>
                         <h3>No Schedules Found</h3>
                         <p>We couldn't retrieve any match schedules at this time. Click 'Sync Live Data' to force-refresh from source.</p>
                     </div>
-                    {% endfor %}
                 </div>
             </main>
         </div>
@@ -336,6 +247,7 @@
     <!-- Custom Script File -->
     <script>const IGNORE_LIST = {{ ignore_list | tojson }};  // [{name, logo}, ...]
     const TOURNEY_FIRST_MATCH = {{ tournament_first_match | tojson }}; // {name: unix_timestamp}
+    const INITIAL_MATCHES = {{ matches | tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
