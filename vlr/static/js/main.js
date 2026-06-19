@@ -71,15 +71,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Match detail modal
     const detailOverlay = document.getElementById("match-detail-overlay");
+    let currentDetailId = null;
+    let currentS1 = "";
+    let currentS2 = "";
+
     document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
     detailOverlay?.addEventListener("click", e => { if (e.target === detailOverlay) closeMatchDetail(); });
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeMatchDetail(); });
+
+    const mdmRefreshBtn = document.getElementById("mdm-refresh-btn");
+    mdmRefreshBtn?.addEventListener("click", async () => {
+        if (!currentDetailId) return;
+        const icon = mdmRefreshBtn.querySelector("i");
+        if (icon) icon.classList.add("fa-spin");
+        mdmRefreshBtn.disabled = true;
+        try {
+            const data = await fetch(`/api/match/${currentDetailId}?refresh=true`).then(r => r.json());
+            renderMatchDetail(data, currentS1, currentS2);
+        } catch(e) {
+            console.error("Failed to refresh stats:", e);
+        } finally {
+            if (icon) icon.classList.remove("fa-spin");
+            mdmRefreshBtn.disabled = false;
+        }
+    });
 
     function closeMatchDetail() {
         if (detailOverlay) detailOverlay.style.display = "none";
     }
 
     async function openMatchDetail(mid, card) {
+        currentDetailId = mid;
+        currentS1 = card.getAttribute("data-score1") || "";
+        currentS2 = card.getAttribute("data-score2") || "";
         // Pre-fill from card data immediately
         const href = card.getAttribute("data-href") || "";
         document.getElementById("mdm-tourney").textContent = card.getAttribute("data-tournament") || "";

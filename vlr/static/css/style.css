@@ -1456,6 +1456,8 @@ body {
 .mdm-vlr-inline:hover { text-decoration: underline; }
 .mdm-vlr-btn { background: var(--accent-red); color: #fff; border: none; border-radius: 6px; padding: 6px 14px; font-size: 12px; cursor: pointer; text-decoration: none; font-family: var(--font-main); white-space: nowrap; align-self: center; flex-shrink: 0; }
 .mdm-vlr-btn:hover { background: var(--accent-red-hover); }
+.mdm-refresh-btn { background: var(--accent-green); color: #080e14; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
+.mdm-refresh-btn:hover { background: #1bfca4; }
 .mdm-scoreline {
     display: flex; align-items: center; justify-content: space-between;
     background: var(--bg-darker); border-radius: 0; padding: 14px 20px; margin-bottom: 14px;

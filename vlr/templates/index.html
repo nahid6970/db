@@ -41,6 +41,14 @@
                     <option value="50" {% if per_page == '50' or not per_page %}selected{% endif %}>50</option>
                     <option value="100" {% if per_page == '100' %}selected{% endif %}>100</option>
                     <option value="200" {% if per_page == '200' %}selected{% endif %}>200</option>
+                    <option value="300" {% if per_page == '300' %}selected{% endif %}>300</option>
+                    <option value="400" {% if per_page == '400' %}selected{% endif %}>400</option>
+                    <option value="500" {% if per_page == '500' %}selected{% endif %}>500</option>
+                    <option value="600" {% if per_page == '600' %}selected{% endif %}>600</option>
+                    <option value="700" {% if per_page == '700' %}selected{% endif %}>700</option>
+                    <option value="800" {% if per_page == '800' %}selected{% endif %}>800</option>
+                    <option value="900" {% if per_page == '900' %}selected{% endif %}>900</option>
+                    <option value="1000" {% if per_page == '1000' %}selected{% endif %}>1000</option>
                     <option value="all" {% if per_page == 'all' %}selected{% endif %}>All</option>
                 </select>
                 <div class="header-divider"></div>
@@ -307,6 +315,7 @@
                 <div class="mdm-section-title">Player Stats</div>
                 <div class="mdm-tabs-row">
                     <div id="mdm-map-tabs-container"></div>
+                    <button id="mdm-refresh-btn" class="mdm-vlr-btn mdm-refresh-btn" title="Refresh stats"><i class="fa-solid fa-arrows-rotate"></i> Reload</button>
                     <a id="mdm-vlr-link" href="#" target="_blank" class="mdm-vlr-btn">VLR.gg ↗</a>
                 </div>
                 <div id="mdm-stats"></div>

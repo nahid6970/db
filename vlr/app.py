@@ -132,6 +132,9 @@ def api_match_detail(match_id):
     match = db.get(match_id)
     if not match:
         return jsonify({"error": "not found"}), 404
+    
+    force_refresh = request.args.get("refresh") == "true"
+    
     # Re-fetch if no stats, or if players is old format (has team1/team2 keys directly)
     players = match.get("players", {})
     old_format = isinstance(players, dict) and ("team1" in players or "team2" in players) and "all" not in players and "0" not in players
@@ -143,7 +146,7 @@ def api_match_detail(match_id):
         for team in ("team1", "team2")
         for p in map_data.get(team, [])
     )
-    if (not match.get("maps") or old_format or missing_all or missing_photos) and match.get("href"):
+    if (force_refresh or not match.get("maps") or old_format or missing_all or missing_photos) and match.get("href"):
         details = scraper.fetch_match_detail_page(match["href"])
         if details:
             match.update(details)
