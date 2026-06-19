@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-18T10:43:36.960773+00:00",
+  "updated_at": "2026-06-19T08:40:39.374454+00:00",
   "groups": [
     {
       "name": "Group A",
@@ -7,42 +7,42 @@
         {
           "name": "Mexico",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/mex.png",
-          "P": "1",
-          "W": "1",
+          "P": "2",
+          "W": "2",
           "D": "0",
           "L": "0",
-          "GD": "+2",
-          "Pts": "3"
+          "GD": "+3",
+          "Pts": "6"
         },
         {
           "name": "Czechia",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/cze.png",
-          "P": "1",
+          "P": "2",
           "W": "0",
-          "D": "0",
+          "D": "1",
           "L": "1",
           "GD": "-1",
-          "Pts": "0"
+          "Pts": "1"
         },
         {
           "name": "South Korea",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/kors.png",
-          "P": "1",
+          "P": "2",
           "W": "1",
           "D": "0",
-          "L": "0",
-          "GD": "+1",
+          "L": "1",
+          "GD": "0",
           "Pts": "3"
         },
         {
           "name": "South Africa",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/rsa.png",
-          "P": "1",
+          "P": "2",
           "W": "0",
-          "D": "0",
+          "D": "1",
           "L": "1",
           "GD": "-2",
-          "Pts": "0"
+          "Pts": "1"
         }
       ]
     },
@@ -52,41 +52,41 @@
         {
           "name": "Canada",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/can.png",
-          "P": "1",
-          "W": "0",
+          "P": "2",
+          "W": "1",
           "D": "1",
           "L": "0",
-          "GD": "0",
-          "Pts": "1"
+          "GD": "+6",
+          "Pts": "4"
         },
         {
           "name": "Bosnia-Herzegovina",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/bih.png",
-          "P": "1",
+          "P": "2",
           "W": "0",
           "D": "1",
-          "L": "0",
-          "GD": "0",
+          "L": "1",
+          "GD": "-3",
           "Pts": "1"
         },
         {
           "name": "Switzerland",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/sui.png",
-          "P": "1",
-          "W": "0",
+          "P": "2",
+          "W": "1",
           "D": "1",
           "L": "0",
-          "GD": "0",
-          "Pts": "1"
+          "GD": "+3",
+          "Pts": "4"
         },
         {
           "name": "Qatar",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/qat.png",
-          "P": "1",
+          "P": "2",
           "W": "0",
           "D": "1",
-          "L": "0",
-          "GD": "0",
+          "L": "1",
+          "GD": "-6",
           "Pts": "1"
         }
       ]
