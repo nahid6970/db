@@ -97,13 +97,6 @@ def index():
         key=lambda x: (tournament_order.get(x[0], 9999), x[0] in unchecked_tournaments, x[0])
     )
 
-    # Limit matches for initial render based on per_page setting
-    try:
-        render_limit = int(per_page)
-        display_matches = matches[:render_limit]
-    except (ValueError, TypeError):
-        display_matches = matches  # "all"
-
     # Earliest match timestamp per tournament (for sidebar sort)
     tournament_first_match = {}
     for m in matches:
@@ -115,7 +108,7 @@ def index():
 
     return render_template(
         "index.html",
-        matches=display_matches,
+        matches=matches,
         tournaments=sorted_tournaments,
         unchecked_tournaments=unchecked_tournaments,
         results_pages=results_pages,
