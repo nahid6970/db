@@ -9,7 +9,6 @@ app = Flask(__name__)
 
 SETTINGS_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "settings.json")
 IGNORELIST_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ignorelist.json")
-MATCHES_BACKUP_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "matches.backup.json")
 
 _cached_settings = None
 _cached_ignorelist = None
@@ -221,32 +220,6 @@ def api_ignorelist_remove():
     save_ignorelist(lst)
     return jsonify({"status": "success", "ignorelist": lst})
 
-@app.route("/api/backup", methods=["POST"])
-def api_backup():
-    import shutil
-    if os.path.exists(scraper.JSON_PATH):
-        shutil.copy2(scraper.JSON_PATH, MATCHES_BACKUP_PATH)
-        size = os.path.getsize(MATCHES_BACKUP_PATH)
-        return jsonify({"status": "success", "size": size})
-    return jsonify({"status": "error", "message": "No matches.json found"}), 404
-
-@app.route("/api/restore", methods=["POST"])
-def api_restore():
-    import shutil
-    if os.path.exists(MATCHES_BACKUP_PATH):
-        shutil.copy2(MATCHES_BACKUP_PATH, scraper.JSON_PATH)
-        # Force cache reload after restore
-        scraper.load_json_matches(force_reload=True)
-        return jsonify({"status": "success"})
-    return jsonify({"status": "error", "message": "No backup found"}), 404
-
-@app.route("/api/backup/exists")
-def api_backup_exists():
-    if os.path.exists(MATCHES_BACKUP_PATH):
-        size = os.path.getsize(MATCHES_BACKUP_PATH)
-        mtime = os.path.getmtime(MATCHES_BACKUP_PATH)
-        return jsonify({"exists": True, "size": size, "mtime": mtime})
-    return jsonify({"exists": False})
 
 if __name__ == "__main__":
     # Start the background sync thread
