@@ -2,10 +2,10 @@
     "filter_custom_series": [],
     "filter_series": "",
     "filter_year": "all",
-    "per_page": "all",
+    "per_page": "100",
     "results_pages": 200,
-    "scrape_end": 2,
-    "scrape_start": 1,
+    "scrape_end": 500,
+    "scrape_start": 500,
     "theme": "light",
     "tournament_order": {
         "Valorant Masters London 2026": 1
@@ -87,6 +87,17 @@
         "Valorant Champions Tour Stage 1: Masters Reykjavík",
         "Champions Tour Asia-Pacific Stage 1: Challengers Playoffs",
         "Champions Tour Stage 1: EMEA Challengers",
-        "Champions Tour North America Stage 1: Challengers"
+        "Champions Tour North America Stage 1: Challengers",
+        "AORUS x AMD Pro Series Valorant",
+        "Circuito de Elite - Round #1",
+        "Copa Rakin: Season 1",
+        "Huya FMWH PangHu Cup: Summer",
+        "LVP Rising Series #2",
+        "Lethal Esports Invitational - Season 1",
+        "Penta Esports Invitational",
+        "Protocolo: Gêneses 2021",
+        "Rooter Rise of Legends",
+        "SteelSeries Prime Tournament: Vietnam",
+        "VALORANT UK & I Skirmish"
     ]
 }
