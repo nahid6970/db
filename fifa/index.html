@@ -40,7 +40,7 @@
     text-transform: uppercase; letter-spacing: 1px;
   }
   .match-card {
-    background: #12122a; border-radius: 12px; padding: 16px 20px;
+    background: #12122a; border-radius: 0; padding: 16px 20px;
     margin-bottom: 10px; display: flex; align-items: center;
     justify-content: space-between; border: 1px solid #1e3799;
     gap: 10px; flex-wrap: wrap;
@@ -76,7 +76,7 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
   .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
-  .group-card { background: #12122a; border-radius: 12px; border: 1px solid #1e3799; overflow: hidden; }
+  .group-card { background: #12122a; border-radius: 0; border: 1px solid #1e3799; overflow: hidden; }
   .group-title { background: #1e3799; padding: 10px 16px; font-weight: 800; font-size: 1rem; color: #f9ca24; }
   .group-table { width: 100%; border-collapse: collapse; }
   .group-table th { background: #0d0d20; color: #888; font-size: 0.7rem; padding: 6px 8px; text-align: center; }
@@ -87,11 +87,11 @@
   .tf { display: flex; align-items: center; gap: 7px; }
 
   .round-label { font-size: 1.1rem; font-weight: 800; color: #f9ca24; margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #1e3799; padding-bottom: 6px; }
-  .info-box { background: #12122a; border-radius: 10px; padding: 16px; border: 1px solid #1e3799; color: #aaa; font-size: 0.9rem; line-height: 1.8; }
+  .info-box { background: #12122a; border-radius: 0; padding: 16px; border: 1px solid #1e3799; color: #aaa; font-size: 0.9rem; line-height: 1.8; }
   .info-box span { color: #f9ca24; font-weight: 700; }
 
   .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
-  .team-card { background: #12122a; border-radius: 10px; padding: 14px; text-align: center; border: 1px solid #1e3799; transition: border-color 0.2s; }
+  .team-card { background: #12122a; border-radius: 0; padding: 14px; text-align: center; border: 1px solid #1e3799; transition: border-color 0.2s; }
   .team-card:hover { border-color: #f9ca24; }
   .team-card .tname { font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
   .team-card .tgroup { font-size: 0.72rem; color: #888; margin-top: 3px; }
@@ -132,7 +132,7 @@
 
   /* Scorers styles */
   .scorers-list {
-    background: #12122a; border-radius: 12px; border: 1px solid #1e3799;
+    background: #12122a; border-radius: 0; border: 1px solid #1e3799;
     max-width: 600px; margin: 20px auto 0; overflow: hidden;
   }
   .scorer-row {
