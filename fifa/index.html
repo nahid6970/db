@@ -280,7 +280,7 @@ function statusBadge(st, clock) {
     if (name === 'STATUS_HALFTIME') return `<span class="badge-ht">HT</span>`;
     return `<span class="badge-live">&#9679; LIVE ${min}</span>`;
   }
-  if (s === 'post') return `<span class="badge-ft">FT</span>`;
+  if (s === 'post') return '';
   return `<span class="badge-pre">${st.type.shortDetail||'Upcoming'}</span>`;
 }
 
