@@ -184,6 +184,8 @@ def api_match_detail(match_id):
         details = scraper.fetch_match_detail_page(match["href"])
         if details:
             match.update(details)
+            if details.get("status"):
+                match["status"] = details["status"]
             db[match_id] = match
             scraper.save_json_matches(db)
     return jsonify(match)

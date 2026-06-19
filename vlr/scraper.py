@@ -303,13 +303,55 @@ def fetch_match_detail_page(href):
                     except Exception:
                         pass
 
+        # Parse overall scores from match header
+        overall_score1 = ""
+        overall_score2 = ""
+        vs_score_div = soup.find(class_="match-header-vs-score")
+        if vs_score_div:
+            score_spans = vs_score_div.find_all("span")
+            if len(score_spans) >= 2:
+                overall_score1 = score_spans[0].text.strip()
+                overall_score2 = score_spans[1].text.strip()
+            else:
+                txt = vs_score_div.text.strip()
+                parts = [p.strip() for p in re.split(r'[-\s–:\n]+', txt) if p.strip().isdigit()]
+                if len(parts) >= 2:
+                    overall_score1 = parts[0]
+                    overall_score2 = parts[1]
+
+        # Fall back to map wins if scores not found
+        if (not overall_score1 or not overall_score2) and maps:
+            s1 = 0
+            s2 = 0
+            for mp in maps:
+                if mp.get("winner") == 0:
+                    s1 += 1
+                elif mp.get("winner") == 1:
+                    s2 += 1
+            overall_score1 = str(s1)
+            overall_score2 = str(s2)
+
+        # Determine status
+        status = None
+        vs_note = soup.find(class_="match-header-vs-note")
+        vs_note_text = vs_note.text.strip().lower() if vs_note else ""
+        if "live" in vs_note_text or soup.find(class_="match-header-vs-note-live"):
+            status = "Live"
+        elif "upcoming" in vs_note_text:
+            status = "Upcoming"
+        elif vs_score_div:
+            status = "Completed"
+
         return {
             "team1_logo": local_team1_logo,
             "team2_logo": local_team2_logo,
             "unix_timestamp": unix_timestamp,
             "bst_time": bst_time_str,
             "maps": maps,
-            "players": players_by_map
+            "players": players_by_map,
+            "score1": overall_score1,
+            "score2": overall_score2,
+            "status": status
         }
     except Exception as e:
         print(f"Error fetching detail page {url}: {e}")

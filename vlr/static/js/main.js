@@ -159,6 +159,59 @@ document.addEventListener("DOMContentLoaded", () => {
             scoreEl.innerHTML = `<span class="score-num ${n1 > n2 ? 'winner' : ''}">${s1}</span><span class="score-divider">-</span><span class="score-num ${n2 > n1 ? 'winner' : ''}">${s2}</span>`;
         }
 
+        // Synchronize the updated score and status onto the dashboard card
+        if (data.id) {
+            const card = document.querySelector(`.match-card[data-id="${data.id}"]`);
+            if (card) {
+                card.setAttribute("data-score1", s1);
+                card.setAttribute("data-score2", s2);
+                if (data.status) {
+                    card.setAttribute("data-status", data.status.toLowerCase());
+                    const statusBadge = card.querySelector(".match-status-badge");
+                    if (statusBadge) {
+                        statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
+                        if (data.status === "Live") {
+                            statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
+                        } else {
+                            statusBadge.textContent = data.status;
+                        }
+                    }
+                }
+                const vsScoreContainer = card.querySelector(".match-vs-score");
+                if (vsScoreContainer) {
+                    if (data.status === "Upcoming") {
+                        vsScoreContainer.innerHTML = '<span class="vs-label">VS</span>';
+                    } else {
+                        const n1 = parseInt(s1) || 0;
+                        const n2 = parseInt(s2) || 0;
+                        const completed = data.status === "Completed";
+                        vsScoreContainer.innerHTML = `
+                            <div class="score-display">
+                                <span class="score-num ${completed && n1 > n2 ? 'winner' : ''}">${s1 || '0'}</span>
+                                <span class="score-divider">-</span>
+                                <span class="score-num ${completed && n2 > n1 ? 'winner' : ''}">${s2 || '0'}</span>
+                            </div>
+                        `;
+                    }
+                }
+                const countdownContainer = card.querySelector(".countdown-container");
+                if (countdownContainer) {
+                    if (data.status === "Live") {
+                        countdownContainer.className = "countdown-container status-live-container";
+                        countdownContainer.innerHTML = `
+                            <span class="live-pulse-indicator"></span>
+                            <span class="live-countdown-text">In Progress</span>
+                        `;
+                    } else if (data.status === "Completed") {
+                        countdownContainer.className = "countdown-container status-completed-container";
+                        countdownContainer.innerHTML = `
+                            <span class="completed-text">Final Match</span>
+                        `;
+                    }
+                }
+            }
+        }
+
         const maps = data.maps || [];
         const playersByMap = data.players || {};
         const hasStats = maps.length > 0 || Object.keys(playersByMap).length > 0;
