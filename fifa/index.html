@@ -276,8 +276,13 @@ function statusBadge(st, clock) {
   const s = st.type.state;
   const name = st.type.name;
   if (s === 'in') {
-    const min = clock > 0 ? Math.floor(clock) + "'" : '';
     if (name === 'STATUS_HALFTIME') return `<span class="badge-ht">HT</span>`;
+    let min = '';
+    if (clock > 0) {
+      const m = Math.floor(clock / 60);
+      const sec = Math.floor(clock % 60);
+      min = `${m}:${String(sec).padStart(2, '0')}`;
+    }
     return `<span class="badge-live">&#9679; LIVE ${min}</span>`;
   }
   if (s === 'post') return '';
