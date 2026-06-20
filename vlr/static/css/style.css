@@ -1595,10 +1595,10 @@ body.light .grid-separator-line {
     border-left-color: var(--accent-red);
 }
 .mdm-map-card[data-key="all"].active {
-    background: rgba(255, 70, 85, 0.08);
-    border-color: var(--accent-red) !important;
-    border-left-color: var(--accent-red) !important;
-    box-shadow: 0 0 10px var(--accent-red-glow);
+    background: rgba(0, 245, 155, 0.08);
+    border-color: var(--accent-green) !important;
+    border-left-color: var(--accent-green) !important;
+    box-shadow: 0 0 10px var(--accent-green-glow);
 }
 
 body.light .mdm-map-card[data-key="all"] {
@@ -1607,9 +1607,9 @@ body.light .mdm-map-card[data-key="all"] {
     border-left: 3px solid var(--text-muted);
 }
 body.light .mdm-map-card[data-key="all"].active {
-    background: rgba(255, 70, 85, 0.05);
-    border-color: #ff4655 !important;
-    border-left-color: #ff4655 !important;
+    background: rgba(22, 163, 74, 0.05);
+    border-color: #16a34a !important;
+    border-left-color: #16a34a !important;
 }
 
 body.light .mdm-map-card.active {
