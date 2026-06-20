@@ -345,8 +345,9 @@ def fetch_match_detail_page(href):
                     s1 += 1
                 elif mp.get("winner") == 1:
                     s2 += 1
-            overall_score1 = str(s1)
-            overall_score2 = str(s2)
+            if s1 > 0 or s2 > 0:
+                overall_score1 = str(s1)
+                overall_score2 = str(s2)
 
         # Determine status
         status = "Upcoming"
@@ -355,7 +356,13 @@ def fetch_match_detail_page(href):
         if "live" in vs_note_text or soup.find(class_="match-header-vs-note-live"):
             status = "Live"
         elif overall_score1.isdigit() and overall_score2.isdigit():
-            status = "Completed"
+            # If both scores are 0 and no maps are actually won, the match is upcoming
+            if overall_score1 == "0" and overall_score2 == "0" and not any(mp.get("winner") is not None for mp in maps):
+                status = "Upcoming"
+            else:
+                status = "Completed"
+        else:
+            status = "Upcoming"
 
         return {
             "team1_logo": local_team1_logo,
