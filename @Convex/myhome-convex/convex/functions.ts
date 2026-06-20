@@ -357,3 +357,28 @@ export const updateAllSidebarButtons = mutation({
     }
   },
 });
+
+export const resetAllYouTubeTracking = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const links = await ctx.db.query("links").collect();
+    for (const link of links) {
+      if (link.youtube_channel_id) {
+        await ctx.db.patch(link._id, {
+          youtube_last_video_id: "",
+          youtube_new_video_count: 0,
+        });
+      }
+    }
+
+    const buttons = await ctx.db.query("sidebar_buttons").collect();
+    for (const btn of buttons) {
+      if (btn.youtube_channel_id) {
+        await ctx.db.patch(btn._id, {
+          youtube_last_video_id: "",
+          youtube_new_video_count: 0,
+        });
+      }
+    }
+  },
+});

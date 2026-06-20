@@ -2872,3 +2872,27 @@ function updateFolderChipColor(pathInputId, chipId) {
   if (el) el.addEventListener('input', () => updateFolderChipColor(pathId, chipId));
 });
 
+window.resetAllYouTubeTracking = async () => {
+  const btn = document.getElementById('reset-all-youtube-btn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Resetting...';
+  }
+  try {
+    await window.convexMutation("functions:resetAllYouTubeTracking");
+    window.showNotification("YouTube tracking reset! Fresh baselines will be set on next check.", "success");
+    await loadLinks();
+    if (typeof loadSidebarButtons === 'function') {
+      await loadSidebarButtons();
+    }
+  } catch (error) {
+    console.error("Failed to reset YouTube tracking:", error);
+    window.showNotification("Failed to reset tracking", "error");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Reset YouTube Tracking (Fresh Count)';
+    }
+  }
+};
+
