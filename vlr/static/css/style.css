@@ -1731,6 +1731,90 @@ body.light #leaderboard-btn {
     border-color: #16a34a !important;
     color: #16a34a !important;
 }
+body.light #team-history-btn {
+    background: rgba(59, 130, 246, 0.1) !important;
+    border-color: #2563eb !important;
+    color: #2563eb !important;
+}
+
+/* Team Past Match Results Rows */
+.team-history-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    margin-bottom: 8px;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+}
+.team-history-row:hover {
+    border-color: rgba(255, 70, 85, 0.25);
+    background: rgba(255, 255, 255, 0.02);
+    transform: translateY(-2px);
+}
+.thr-tourney {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 30%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.thr-logo {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+.thr-name {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+.thr-teams {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 50%;
+    font-weight: 700;
+}
+.thr-score {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    color: var(--text-primary);
+    background: var(--bg-darker);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+.thr-status {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    width: 70px;
+    text-align: center;
+}
+.thr-status.win {
+    background: rgba(0, 245, 155, 0.1);
+    color: var(--accent-green);
+}
+.thr-status.loss {
+    background: rgba(255, 70, 85, 0.1);
+    color: var(--accent-red);
+}
+.thr-status.draw {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-muted);
+}
+body.light .thr-score {
+    background: var(--bg-darker);
+    color: #fff;
+}
+
 
 /* Modal Left/Right Navigation Buttons */
 .mdm-nav-btn {

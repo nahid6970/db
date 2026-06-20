@@ -173,26 +173,46 @@ document.addEventListener("DOMContentLoaded", () => {
         if (detailOverlay) detailOverlay.style.display = "none";
     }
 
-    async function openMatchDetail(mid, card) {
+    async function openMatchDetail(mid, cardOrObj) {
         currentDetailId = mid;
-        currentS1 = card.getAttribute("data-score1") || "";
-        currentS2 = card.getAttribute("data-score2") || "";
-        // Pre-fill from card data immediately
-        const href = card.getAttribute("data-href") || "";
-        document.getElementById("mdm-tourney").textContent = card.getAttribute("data-tournament") || "";
+        
+        const isDom = cardOrObj instanceof HTMLElement;
+        let s1, s2, href, tournament, name1, name2, logo1, logo2;
+
+        if (isDom) {
+            s1 = cardOrObj.getAttribute("data-score1") || "";
+            s2 = cardOrObj.getAttribute("data-score2") || "";
+            href = cardOrObj.getAttribute("data-href") || "";
+            tournament = cardOrObj.getAttribute("data-tournament") || "";
+            name1 = cardOrObj.querySelector(".team-1 .team-name")?.textContent.trim() || "";
+            name2 = cardOrObj.querySelector(".team-2 .team-name")?.textContent.trim() || "";
+            logo1 = cardOrObj.querySelector(".team-1 .team-logo")?.src || "";
+            logo2 = cardOrObj.querySelector(".team-2 .team-logo")?.src || "";
+        } else {
+            const m = cardOrObj || (typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES.find(item => item.id === mid) : {}) || {};
+            s1 = m.score1 || "";
+            s2 = m.score2 || "";
+            href = m.href || "";
+            tournament = m.tournament || "";
+            name1 = m.team1 || "";
+            name2 = m.team2 || "";
+            logo1 = m.team1_logo || "";
+            logo2 = m.team2_logo || "";
+        }
+
+        currentS1 = s1;
+        currentS2 = s2;
+
+        document.getElementById("mdm-tourney").textContent = tournament;
         document.getElementById("mdm-vlr-link").href = "https://www.vlr.gg" + href;
-        document.getElementById("mdm-name1").textContent = card.querySelector(".team-1 .team-name")?.textContent.trim() || "";
-        document.getElementById("mdm-name2").textContent = card.querySelector(".team-2 .team-name")?.textContent.trim() || "";
-        const logo1 = card.querySelector(".team-1 .team-logo")?.src || "";
-        const logo2 = card.querySelector(".team-2 .team-logo")?.src || "";
+        document.getElementById("mdm-name1").textContent = name1;
+        document.getElementById("mdm-name2").textContent = name2;
+        
         const img1 = document.getElementById("mdm-logo1");
         const img2 = document.getElementById("mdm-logo2");
         img1.src = logo1; img1.style.display = logo1 ? "" : "none";
         img2.src = logo2; img2.style.display = logo2 ? "" : "none";
 
-        // Score from card
-        const s1 = card.getAttribute("data-score1") || "";
-        const s2 = card.getAttribute("data-score2") || "";
         const scoreEl = document.getElementById("mdm-score");
         if (s1 !== "" && s2 !== "") {
             const n1 = parseInt(s1), n2 = parseInt(s2);
@@ -1467,6 +1487,116 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     leaderboardModal?.addEventListener("click", (e) => {
         if (e.target === leaderboardModal) leaderboardModal.style.display = "none";
+    });
+
+    // Team history modal trigger & helper functions
+    function populateTeamDropdown() {
+        const select = document.getElementById("team-history-select");
+        if (!select) return;
+
+        const currentVal = select.value;
+        select.innerHTML = '<option value="">-- Select a Team --</option>';
+
+        const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+        const teams = new Set();
+        matches.forEach(m => {
+            if (m.team1 && m.team1 !== "TBD") teams.add(m.team1);
+            if (m.team2 && m.team2 !== "TBD") teams.add(m.team2);
+        });
+
+        const sortedTeams = Array.from(teams).sort((a, b) => a.localeCompare(b));
+        sortedTeams.forEach(t => {
+            const opt = document.createElement("option");
+            opt.value = t;
+            opt.textContent = t;
+            select.appendChild(opt);
+        });
+
+        if (currentVal && teams.has(currentVal)) {
+            select.value = currentVal;
+        }
+    }
+
+    function renderTeamHistory(teamName) {
+        const resultsContainer = document.getElementById("team-history-results");
+        if (!resultsContainer) return;
+
+        if (!teamName) {
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown to view past match results.</p>';
+            return;
+        }
+
+        const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+        const teamMatches = matches.filter(m => {
+            return (m.team1 === teamName || m.team2 === teamName) && m.status === "Completed";
+        });
+
+        if (teamMatches.length === 0) {
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">No completed matches found in local database for this team.</p>';
+            return;
+        }
+
+        resultsContainer.innerHTML = teamMatches.map(m => {
+            const isTeam1 = m.team1 === teamName;
+            const score1 = parseInt(m.score1) || 0;
+            const score2 = parseInt(m.score2) || 0;
+            
+            let statusText = "Draw";
+            let statusClass = "draw";
+
+            if (score1 > score2) {
+                statusText = isTeam1 ? "Win" : "Loss";
+                statusClass = isTeam1 ? "win" : "loss";
+            } else if (score2 > score1) {
+                statusText = isTeam1 ? "Loss" : "Win";
+                statusClass = isTeam1 ? "loss" : "win";
+            }
+
+            return `
+                <div class="team-history-row" data-id="${m.id}">
+                    <div class="thr-tourney">
+                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
+                        <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
+                    </div>
+                    <div class="thr-teams">
+                        <span class="thr-t1" style="color: ${isTeam1 ? 'var(--accent-red)' : 'var(--text-secondary)'};">${m.team1}</span>
+                        <span class="thr-score">${m.score1 || '0'} – ${m.score2 || '0'}</span>
+                        <span class="thr-t2" style="color: ${!isTeam1 ? 'var(--accent-red)' : 'var(--text-secondary)'};">${m.team2}</span>
+                    </div>
+                    <span class="thr-status ${statusClass}">${statusText}</span>
+                </div>
+            `;
+        }).join("");
+
+        resultsContainer.querySelectorAll(".team-history-row").forEach(row => {
+            row.addEventListener("click", () => {
+                const mid = row.getAttribute("data-id");
+                const mObj = matches.find(item => item.id === mid);
+                if (mid && mObj) {
+                    document.getElementById("team-history-modal").style.display = "none";
+                    openMatchDetail(mid, mObj);
+                }
+            });
+        });
+    }
+
+    const teamHistoryBtn = document.getElementById("team-history-btn");
+    const teamHistoryModal = document.getElementById("team-history-modal");
+    const teamHistoryClose = document.getElementById("team-history-close");
+    const teamHistorySelect = document.getElementById("team-history-select");
+
+    teamHistoryBtn?.addEventListener("click", () => {
+        populateTeamDropdown();
+        if (teamHistoryModal) teamHistoryModal.style.display = "flex";
+    });
+    teamHistoryClose?.addEventListener("click", () => {
+        if (teamHistoryModal) teamHistoryModal.style.display = "none";
+    });
+    teamHistoryModal?.addEventListener("click", (e) => {
+        if (e.target === teamHistoryModal) teamHistoryModal.style.display = "none";
+    });
+    teamHistorySelect?.addEventListener("change", (e) => {
+        renderTeamHistory(e.target.value);
     });
 
     // Leaderboard table click sorting
