@@ -1841,6 +1841,114 @@ body.light .thr-status.loss {
     color: #dc2626 !important;
 }
 
+/* Custom Integrated Search Dropdown List */
+.custom-search-dropdown-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--card-border);
+    background: var(--bg-darker);
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    margin-bottom: 0;
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    flex-shrink: 0;
+}
+.csd-search-wrapper {
+    position: relative;
+    border-bottom: 1px solid var(--card-border);
+}
+.csd-search-icon {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+.csd-search-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    font-size: 13px;
+    padding: 10px 12px 10px 34px;
+    outline: none;
+    box-sizing: border-box;
+}
+.csd-search-input:focus {
+    box-shadow: inset 0 0 4px var(--accent-red-glow);
+}
+.csd-options-list {
+    height: 350px;
+    max-height: 350px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+.csd-option-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+.csd-option-item:hover {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+}
+.csd-option-item.active {
+    background: #3b82f6 !important;
+    color: #ffffff !important;
+    font-weight: 600;
+}
+body.light .csd-option-item.active {
+    background: #2563eb !important;
+}
+.csd-option-logo {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+}
+.csd-option-placeholder {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--text-muted);
+}
+.csd-empty-msg {
+    padding: 12px;
+    font-size: 12px;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #team-history-modal .modal-body {
+        flex-direction: column !important;
+        gap: 12px !important;
+    }
+    .custom-search-dropdown-container {
+        max-width: 100% !important;
+        width: 100% !important;
+        min-width: 100% !important;
+    }
+    .csd-options-list {
+        height: 150px !important;
+        max-height: 150px !important;
+    }
+}
+
+
 
 /* Modal Left/Right Navigation Buttons */
 .mdm-nav-btn {

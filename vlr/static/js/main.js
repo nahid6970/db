@@ -1424,35 +1424,65 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Team history modal trigger & helper functions
-    function populateTeamDropdown(searchKeyword = "") {
-        const select = document.getElementById("team-history-select");
-        if (!select) return;
+    let selectedTeamHistoryName = "";
 
-        const currentVal = select.value;
-        select.innerHTML = '<option value="">-- Select a Team --</option>';
+    function populateTeamDropdown(searchKeyword = "") {
+        const dropdown = document.getElementById("team-history-custom-dropdown");
+        if (!dropdown) return;
+
+        dropdown.innerHTML = "";
 
         const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
-        const teams = new Set();
+        const teamsMap = new Map();
         matches.forEach(m => {
-            if (m.team1 && m.team1 !== "TBD") teams.add(m.team1);
-            if (m.team2 && m.team2 !== "TBD") teams.add(m.team2);
+            if (m.team1 && m.team1 !== "TBD") {
+                if (!teamsMap.has(m.team1)) teamsMap.set(m.team1, m.team1_logo || "");
+            }
+            if (m.team2 && m.team2 !== "TBD") {
+                if (!teamsMap.has(m.team2)) teamsMap.set(m.team2, m.team2_logo || "");
+            }
         });
 
-        const sortedTeams = Array.from(teams).sort((a, b) => a.localeCompare(b));
+        const sortedTeams = Array.from(teamsMap.entries()).sort((a, b) => a[0].localeCompare(b[0]));
         
-        const filteredTeams = sortedTeams.filter(t => 
-            t.toLowerCase().includes(searchKeyword.toLowerCase())
+        const filteredTeams = sortedTeams.filter(([name]) => 
+            name.toLowerCase().includes(searchKeyword.toLowerCase())
         );
 
-        filteredTeams.forEach(t => {
-            const opt = document.createElement("option");
-            opt.value = t;
-            opt.textContent = t;
-            select.appendChild(opt);
+        if (filteredTeams.length === 0) {
+            dropdown.innerHTML = '<div class="csd-empty-msg">No teams match search</div>';
+            return;
+        }
+
+        filteredTeams.forEach(([name, logo]) => {
+            const item = document.createElement("div");
+            const isActive = name === selectedTeamHistoryName;
+            item.className = `csd-option-item ${isActive ? 'active' : ''}`;
+            item.setAttribute("data-team", name);
+            
+            item.innerHTML = `
+                ${logo ? `<img class="csd-option-logo" src="${logo}" onerror="this.style.display='none';">` : '<div class="csd-option-placeholder"><i class="fa-solid fa-people-group"></i></div>'}
+                <span>${name}</span>
+            `;
+
+            item.addEventListener("click", () => {
+                selectedTeamHistoryName = name;
+                dropdown.querySelectorAll(".csd-option-item").forEach(el => el.classList.remove("active"));
+                item.classList.add("active");
+                renderTeamHistory(name);
+            });
+
+            dropdown.appendChild(item);
         });
 
-        if (currentVal && filteredTeams.includes(currentVal)) {
-            select.value = currentVal;
+        if (searchKeyword && filteredTeams.length === 1) {
+            const singleTeamName = filteredTeams[0][0];
+            if (selectedTeamHistoryName !== singleTeamName) {
+                selectedTeamHistoryName = singleTeamName;
+                const activeItem = dropdown.querySelector(`.csd-option-item[data-team="${CSS.escape(singleTeamName)}"]`);
+                if (activeItem) activeItem.classList.add("active");
+                renderTeamHistory(singleTeamName);
+            }
         }
     }
 
@@ -1461,7 +1491,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!resultsContainer) return;
 
         if (!teamName) {
-            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown to view past match results.</p>';
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the list to view past match results.</p>';
             return;
         }
 
@@ -1522,13 +1552,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const teamHistoryBtn = document.getElementById("team-history-btn");
     const teamHistoryModal = document.getElementById("team-history-modal");
     const teamHistoryClose = document.getElementById("team-history-close");
-    const teamHistorySelect = document.getElementById("team-history-select");
     const teamHistorySearch = document.getElementById("team-history-search");
 
     teamHistoryBtn?.addEventListener("click", () => {
+        selectedTeamHistoryName = "";
         if (teamHistorySearch) teamHistorySearch.value = "";
         populateTeamDropdown();
+        renderTeamHistory("");
         if (teamHistoryModal) teamHistoryModal.style.display = "flex";
+        setTimeout(() => teamHistorySearch?.focus(), 80);
     });
     teamHistoryClose?.addEventListener("click", () => {
         if (teamHistoryModal) teamHistoryModal.style.display = "none";
@@ -1539,16 +1571,8 @@ document.addEventListener("DOMContentLoaded", () => {
             teamHistoryModal.style.display = "none";
         }
     });
-    teamHistorySelect?.addEventListener("change", (e) => {
-        renderTeamHistory(e.target.value);
-    });
     teamHistorySearch?.addEventListener("input", (e) => {
         populateTeamDropdown(e.target.value);
-        const select = document.getElementById("team-history-select");
-        if (select && select.options.length === 2) {
-            select.selectedIndex = 1;
-            renderTeamHistory(select.value);
-        }
     });
 
     // Leaderboard table click sorting
