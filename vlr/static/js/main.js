@@ -153,7 +153,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.getElementById("mdm-maps").innerHTML = "";
         document.getElementById("mdm-stats").innerHTML = "";
-        document.getElementById("mdm-map-tabs-container").innerHTML = "";
         document.getElementById("mdm-maps-section").style.display = "none";
         document.getElementById("mdm-stats-section").style.display = "none";
         document.getElementById("mdm-no-stats").style.display = "none";
@@ -238,23 +237,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!hasStats) { document.getElementById("mdm-no-stats").style.display = ""; return; }
 
-        // Maps row
-        if (maps.length) {
-            document.getElementById("mdm-maps-section").style.display = "";
-            document.getElementById("mdm-maps").innerHTML = maps.map(m => {
-                const winCls = m.winner === 0 ? "mdm-map-win" : (m.winner === 1 ? "mdm-map-lose" : "");
-                const s1cls = m.winner === 0 ? "mdm-win" : "mdm-lose";
-                const s2cls = m.winner === 1 ? "mdm-win" : "mdm-lose";
-                return `<div class="mdm-map-card ${winCls}">
+        // Render combined Maps row acting as tabs
+        document.getElementById("mdm-maps-section").style.display = "";
+        const mapsHtml = [];
+        // Add "All Maps" card first
+        mapsHtml.push(`
+            <div class="mdm-map-card" data-key="all">
+                <div class="mdm-map-name">All Maps</div>
+                <div class="mdm-map-score">${s1 !== "" && s2 !== "" ? `<span>${s1}</span> – <span>${s2}</span>` : "vs"}</div>
+            </div>
+        `);
+        // Add individual map cards
+        maps.forEach((m, i) => {
+            const winCls = m.winner === 0 ? "mdm-map-win" : (m.winner === 1 ? "mdm-map-lose" : "");
+            const s1cls = m.winner === 0 ? "mdm-win" : "mdm-lose";
+            const s2cls = m.winner === 1 ? "mdm-win" : "mdm-lose";
+            mapsHtml.push(`
+                <div class="mdm-map-card ${winCls}" data-key="${i}">
                     <div class="mdm-map-name">${m.name}</div>
                     <div class="mdm-map-score"><span class="${s1cls}">${m.score1}</span> – <span class="${s2cls}">${m.score2}</span></div>
-                </div>`;
-            }).join("");
-        }
+                </div>
+            `);
+        });
+        document.getElementById("mdm-maps").innerHTML = mapsHtml.join("");
 
-        // Player stats with map tabs
         const statsEl = document.getElementById("mdm-stats");
-        const tabsContainer = document.getElementById("mdm-map-tabs-container");
         const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
 
         const renderTable = (plist, label) => {
@@ -302,19 +309,19 @@ document.addEventListener("DOMContentLoaded", () => {
         const showMapStats = (key) => {
             const pd = playersByMap[key] || {};
             statsEl.innerHTML = renderTable(pd.team1, data.team1 || "Team 1") + renderTable(pd.team2, data.team2 || "Team 2");
-            tabsContainer.querySelectorAll(".mdm-map-tab").forEach(t => t.classList.toggle("active", t.dataset.key === key));
+            document.querySelectorAll("#mdm-maps .mdm-map-card").forEach(c => {
+                c.classList.toggle("active", c.getAttribute("data-key") === key);
+            });
         };
 
-        const tabs = [{ key: "all", label: "All Maps" }, ...maps.map((m, i) => ({ key: String(i), label: m.name }))];
         const hasTabs = Object.keys(playersByMap).length > 0;
-
         if (hasTabs) {
             document.getElementById("mdm-stats-section").style.display = "";
-            tabsContainer.innerHTML = `<div class="mdm-map-tabs">${tabs.map(t =>
-                `<button class="mdm-map-tab" data-key="${t.key}">${t.label}</button>`
-            ).join("")}</div>`;
-            tabsContainer.querySelectorAll(".mdm-map-tab").forEach(btn => {
-                btn.addEventListener("click", () => showMapStats(btn.dataset.key));
+            const mapCards = document.querySelectorAll("#mdm-maps .mdm-map-card");
+            mapCards.forEach(card => {
+                card.addEventListener("click", () => {
+                    showMapStats(card.getAttribute("data-key"));
+                });
             });
             showMapStats(playersByMap["all"] ? "all" : "0");
         }
