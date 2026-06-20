@@ -1841,6 +1841,31 @@ body.light .thr-status.loss {
     color: #dc2626 !important;
 }
 
+/* Specific text coloring for Team History win/loss */
+.thr-win-text {
+    color: var(--accent-green) !important;
+    font-weight: 700;
+}
+body.light .thr-win-text {
+    color: #16a34a !important;
+}
+.thr-loss-text {
+    color: var(--accent-red) !important;
+    font-weight: 500;
+}
+body.light .thr-loss-text {
+    color: #dc2626 !important;
+}
+.thr-neutral {
+    color: var(--text-secondary);
+}
+
+/* Let the dropdown overlay popover spill beautifully outside the modal box boundaries */
+#team-history-modal .match-detail-modal {
+    overflow: visible !important;
+}
+
+
 /* Custom Integrated Search Dropdown List (Floating Popover Panel) */
 .custom-search-dropdown-container {
     display: flex;

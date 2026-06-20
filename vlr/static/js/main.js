@@ -1518,18 +1518,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
         resultsContainer.innerHTML = teamMatches.map(m => {
             const isTeam1 = m.team1 === teamName;
-            const score1 = parseInt(m.score1) || 0;
-            const score2 = parseInt(m.score2) || 0;
             
+            // Selected team is always mapped to the left (myTeam), opponent is mapped to the right (oppTeam)
+            const myTeam = teamName;
+            const oppTeam = isTeam1 ? m.team2 : m.team1;
+            
+            const myScore = isTeam1 ? (m.score1 || '0') : (m.score2 || '0');
+            const oppScore = isTeam1 ? (m.score2 || '0') : (m.score1 || '0');
+
+            const myScoreNum = parseInt(myScore) || 0;
+            const oppScoreNum = parseInt(oppScore) || 0;
+
             let statusText = "Draw";
             let statusClass = "draw";
+            let myColorClass = "thr-neutral";
+            let oppColorClass = "thr-neutral";
 
-            if (score1 > score2) {
-                statusText = isTeam1 ? "Win" : "Loss";
-                statusClass = isTeam1 ? "win" : "loss";
-            } else if (score2 > score1) {
-                statusText = isTeam1 ? "Loss" : "Win";
-                statusClass = isTeam1 ? "loss" : "win";
+            if (myScoreNum > oppScoreNum) {
+                statusText = "Win";
+                statusClass = "win";
+                myColorClass = "thr-win-text";
+                oppColorClass = "thr-loss-text";
+            } else if (oppScoreNum > myScoreNum) {
+                statusText = "Loss";
+                statusClass = "loss";
+                myColorClass = "thr-loss-text";
+                oppColorClass = "thr-win-text";
             }
 
             return `
@@ -1539,9 +1553,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
                     </div>
                     <div class="thr-teams">
-                        <span class="thr-t1" style="color: ${isTeam1 ? 'var(--accent-red)' : 'var(--text-secondary)'};">${m.team1}</span>
-                        <span class="thr-score">${m.score1 || '0'} – ${m.score2 || '0'}</span>
-                        <span class="thr-t2" style="color: ${!isTeam1 ? 'var(--accent-red)' : 'var(--text-secondary)'};">${m.team2}</span>
+                        <span class="thr-t1 ${myColorClass}">${myTeam}</span>
+                        <span class="thr-score">${myScore} – ${oppScore}</span>
+                        <span class="thr-t2 ${oppColorClass}">${oppTeam}</span>
                     </div>
                     <span class="thr-status ${statusClass}">${statusText}</span>
                 </div>
