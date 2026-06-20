@@ -34,10 +34,55 @@
   img.flag-sm { width: 24px; height: 16px; object-fit: cover; border-radius: 2px; border: 1px solid #333; flex-shrink: 0; vertical-align: middle; margin-right: 6px; }
   img.flag-lg { width: 52px; height: 35px; object-fit: cover; border-radius: 4px; border: 1px solid #333; display: block; margin: 0 auto 6px; }
 
-  .date-header {
-    margin: 20px 0 10px; font-size: 1rem; font-weight: 700; color: #f9ca24;
-    border-left: 4px solid #f9ca24; padding-left: 10px;
-    text-transform: uppercase; letter-spacing: 1px;
+  /* Day Group Layout Styles */
+  .day-group {
+    background: #0f0f26;
+    border: 1px solid #1e3799;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  .day-header {
+    background: #161638;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e3799;
+  }
+  .day-title {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #f9ca24;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-count {
+    font-size: 0.72rem;
+    color: #7eb8ff;
+    background: #090918;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    border: 1px solid #1e3799;
+  }
+  .day-matches {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .day-matches .match-card {
+    margin-bottom: 0;
+    border-radius: 6px;
+  }
+  .status-live-dot {
+    animation: pulse 1.2s infinite;
+    display: inline-block;
   }
   .match-card {
     background: #12122a; border-radius: 0; padding: 16px 20px;
@@ -395,7 +440,18 @@ async function fetchMatches() {
     let html = '';
     for (const [date, matches] of Object.entries(byDate).sort((a,b) => new Date(b[0]) - new Date(a[0]))) {
       const hasLive = matches.some(m => m.comp.status.type.state === 'in');
-      html += `<div class="date-header">${hasLive ? '&#128994; ' : '&#128197; '}${date}</div>`;
+      const matchCount = matches.length;
+      
+      html += `
+      <div class="day-group">
+        <div class="day-header">
+          <div class="day-title">
+            ${hasLive ? '<span class="status-live-dot">&#128994;</span>' : '&#128197;'} ${date}
+          </div>
+          <span class="day-count">${matchCount} ${matchCount === 1 ? 'Match' : 'Matches'}</span>
+        </div>
+        <div class="day-matches">`;
+
       for (const {ev, comp} of matches.sort((a,b) => new Date(b.comp.date) - new Date(a.comp.date))) {
         const [home, away] = comp.competitors;
         const st = comp.status;
@@ -443,6 +499,10 @@ async function fetchMatches() {
           </div>
         </div>`;
       }
+
+      html += `
+        </div>
+      </div>`;
     }
 
     document.getElementById('matches-container').innerHTML = html || '<p style="color:#666;padding:30px;text-align:center">No live or finished matches yet. Check the Schedule tab for upcoming games.</p>';
@@ -474,7 +534,15 @@ async function fetchSchedule() {
 
     let html = '';
     for (const [date, matches] of Object.entries(byDate)) {
-      html += `<div class="date-header">&#128197; ${date}</div>`;
+      const matchCount = matches.length;
+      html += `
+      <div class="day-group">
+        <div class="day-header">
+          <div class="day-title">&#128197; ${date}</div>
+          <span class="day-count">${matchCount} ${matchCount === 1 ? 'Match' : 'Matches'}</span>
+        </div>
+        <div class="day-matches">`;
+
       for (const {ev, comp} of matches) {
         const [home, away] = comp.competitors;
         html += `
@@ -493,6 +561,10 @@ async function fetchSchedule() {
           </div>
         </div>`;
       }
+
+      html += `
+        </div>
+      </div>`;
     }
 
     document.getElementById('schedule-container').innerHTML = html || '<p style="color:#666;padding:30px;text-align:center">No upcoming matches.</p>';
