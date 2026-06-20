@@ -211,20 +211,33 @@
                 <h2><i class="fa-solid fa-people-group"></i> Team Match History & Results</h2>
                 <button id="team-history-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
             </div>
-            <div class="modal-body" style="padding: 0; display: flex; gap: 20px;">
-                <!-- Left Side: Custom Autocomplete List Picker -->
-                <div class="custom-search-dropdown-container">
-                    <div class="csd-search-wrapper">
-                        <i class="fa-solid fa-magnifying-glass csd-search-icon"></i>
-                        <input type="text" id="team-history-search" class="csd-search-input" placeholder="Search team..." autocomplete="off">
-                    </div>
-                    <div id="team-history-custom-dropdown" class="csd-options-list">
+            <div class="modal-body" style="padding: 0; position: relative;">
+                <div class="thr-controls-row">
+                    <!-- Floating Dropdown Trigger Wrapper -->
+                    <div class="thr-dropdown-popover-wrapper">
+                        <button id="thr-popover-trigger" class="thr-trigger-btn">
+                            <span style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fa-solid fa-people-group"></i> 
+                                <span id="thr-selected-team-label">Select Team</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down thr-trigger-arrow"></i>
+                        </button>
+                        
+                        <!-- Floating Over-the-Window Panel Dropdown -->
+                        <div id="team-history-popover-panel" class="custom-search-dropdown-container popover-panel" style="display: none;">
+                            <div class="csd-search-wrapper">
+                                <i class="fa-solid fa-magnifying-glass csd-search-icon"></i>
+                                <input type="text" id="team-history-search" class="csd-search-input" placeholder="Search team..." autocomplete="off">
+                            </div>
+                            <div id="team-history-custom-dropdown" class="csd-options-list">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Right Side: Match results list -->
-                <div id="team-history-results" style="flex: 1; max-height: 55vh; overflow-y: auto; padding-right: 4px;">
-                    <p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the list to view past match results.</p>
+                <!-- Match results list -->
+                <div id="team-history-results" style="max-height: 55vh; overflow-y: auto; padding-right: 4px;">
+                    <p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Click the button above to select a team and view match results.</p>
                 </div>
             </div>
         </div>

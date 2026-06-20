@@ -1467,8 +1467,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
             item.addEventListener("click", () => {
                 selectedTeamHistoryName = name;
-                dropdown.querySelectorAll(".csd-option-item").forEach(el => el.classList.remove("active"));
-                item.classList.add("active");
+                
+                const label = document.getElementById("thr-selected-team-label");
+                if (label) label.textContent = name;
+
+                const panel = document.getElementById("team-history-popover-panel");
+                const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
+                if (panel) panel.style.display = "none";
+                if (wrapper) wrapper.classList.remove("active");
+
                 renderTeamHistory(name);
             });
 
@@ -1479,8 +1486,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const singleTeamName = filteredTeams[0][0];
             if (selectedTeamHistoryName !== singleTeamName) {
                 selectedTeamHistoryName = singleTeamName;
-                const activeItem = dropdown.querySelector(`.csd-option-item[data-team="${CSS.escape(singleTeamName)}"]`);
-                if (activeItem) activeItem.classList.add("active");
+                const label = document.getElementById("thr-selected-team-label");
+                if (label) label.textContent = singleTeamName;
+                const panel = document.getElementById("team-history-popover-panel");
+                const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
+                if (panel) panel.style.display = "none";
+                if (wrapper) wrapper.classList.remove("active");
                 renderTeamHistory(singleTeamName);
             }
         }
@@ -1491,7 +1502,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!resultsContainer) return;
 
         if (!teamName) {
-            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the list to view past match results.</p>';
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Click the button above to select a team and view match results.</p>';
             return;
         }
 
@@ -1553,14 +1564,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const teamHistoryModal = document.getElementById("team-history-modal");
     const teamHistoryClose = document.getElementById("team-history-close");
     const teamHistorySearch = document.getElementById("team-history-search");
+    const popoverTrigger = document.getElementById("thr-popover-trigger");
+    const popoverPanel = document.getElementById("team-history-popover-panel");
+    const popoverWrapper = document.querySelector(".thr-dropdown-popover-wrapper");
 
     teamHistoryBtn?.addEventListener("click", () => {
         selectedTeamHistoryName = "";
+        const label = document.getElementById("thr-selected-team-label");
+        if (label) label.textContent = "Select Team";
         if (teamHistorySearch) teamHistorySearch.value = "";
+        if (popoverPanel) popoverPanel.style.display = "none";
+        if (popoverWrapper) popoverWrapper.classList.remove("active");
         populateTeamDropdown();
         renderTeamHistory("");
         if (teamHistoryModal) teamHistoryModal.style.display = "flex";
-        setTimeout(() => teamHistorySearch?.focus(), 80);
     });
     teamHistoryClose?.addEventListener("click", () => {
         if (teamHistoryModal) teamHistoryModal.style.display = "none";
@@ -1571,8 +1588,32 @@ document.addEventListener("DOMContentLoaded", () => {
             teamHistoryModal.style.display = "none";
         }
     });
+    popoverTrigger?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = popoverPanel && popoverPanel.style.display === "block";
+        if (isOpen) {
+            if (popoverPanel) popoverPanel.style.display = "none";
+            if (popoverWrapper) popoverWrapper.classList.remove("active");
+        } else {
+            if (popoverPanel) popoverPanel.style.display = "block";
+            if (popoverWrapper) popoverWrapper.classList.add("active");
+            if (teamHistorySearch) teamHistorySearch.value = "";
+            populateTeamDropdown();
+            setTimeout(() => teamHistorySearch?.focus(), 50);
+        }
+    });
     teamHistorySearch?.addEventListener("input", (e) => {
         populateTeamDropdown(e.target.value);
+    });
+    document.addEventListener("click", (e) => {
+        const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
+        const panel = document.getElementById("team-history-popover-panel");
+        if (panel && panel.style.display === "block") {
+            if (wrapper && !wrapper.contains(e.target)) {
+                panel.style.display = "none";
+                wrapper.classList.remove("active");
+            }
+        }
     });
 
     // Leaderboard table click sorting
