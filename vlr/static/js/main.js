@@ -273,19 +273,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="mdm-stats-team-sidebar">${label}</div>
                 <div class="mdm-stats-table-wrapper">
                     <table class="mdm-stats-table"><thead><tr>
-                        <th>Player</th><th class="r">Agent</th>
-                        <th class="r">R</th>
-                        <th class="r">ACS</th>
-                        <th class="r">K</th>
-                        <th class="r">D</th>
-                        <th class="r">A</th>
-                        <th class="r">+/-</th>
-                        <th class="r">KAST</th>
-                        <th class="r">ADR</th>
-                        <th class="r">HS%</th>
-                        <th class="r">FK</th>
-                        <th class="r">FD</th>
-                        <th class="r">+/-</th>
+                        <th><span>Player</span></th>
+                        <th class="r"><span>Agent</span></th>
+                        <th class="r"><span>R</span></th>
+                        <th class="r"><span>ACS</span></th>
+                        <th class="r"><span>K</span></th>
+                        <th class="r"><span>D</span></th>
+                        <th class="r"><span>A</span></th>
+                        <th class="r"><span>+/-</span></th>
+                        <th class="r"><span>KAST</span></th>
+                        <th class="r"><span>ADR</span></th>
+                        <th class="r"><span>HS%</span></th>
+                        <th class="r"><span>FK</span></th>
+                        <th class="r"><span>FD</span></th>
+                        <th class="r"><span>+/-</span></th>
                     </tr></thead><tbody>${rows}</tbody></table>
                 </div>
             </div>`;

@@ -1671,25 +1671,28 @@ body.light .diff-negative {
 .mdm-stats-table th {
     cursor: pointer;
     user-select: none;
-    border-bottom: 2px solid var(--card-border) !important;
-    padding-bottom: 4px !important;
+}
+.mdm-stats-table th span {
+    display: inline-block;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
     transition: border-color var(--transition-fast), color var(--transition-fast);
 }
-.mdm-stats-table th:hover {
+.mdm-stats-table th:hover span {
     color: var(--text-primary) !important;
 }
-.mdm-stats-table th.th-sort-desc {
+.mdm-stats-table th.th-sort-desc span {
     color: var(--text-primary) !important;
     border-bottom: 2px solid var(--accent-green) !important;
 }
-body.light .mdm-stats-table th.th-sort-desc {
+body.light .mdm-stats-table th.th-sort-desc span {
     border-bottom-color: #16a34a !important;
 }
-.mdm-stats-table th.th-sort-asc {
+.mdm-stats-table th.th-sort-asc span {
     color: var(--text-primary) !important;
     border-bottom: 2px solid var(--accent-red) !important;
 }
-body.light .mdm-stats-table th.th-sort-asc {
+body.light .mdm-stats-table th.th-sort-asc span {
     border-bottom-color: #dc2626 !important;
 }
 
