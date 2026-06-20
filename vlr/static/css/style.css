@@ -1889,7 +1889,7 @@ body.light #team-history-btn {
     display: flex;
     align-items: center;
     gap: 8px;
-    width: 30%;
+    width: 22%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -1907,29 +1907,38 @@ body.light #team-history-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50%;
+    width: 62%;
     font-weight: 700;
     gap: 0;
+    min-width: 0;
 }
 .thr-t1 {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    white-space: nowrap;
+    gap: 8px;
+    min-width: 0;
+}
+.thr-t1 > span {
     overflow: hidden;
     text-overflow: ellipsis;
-    gap: 8px;
+    white-space: nowrap;
+    text-align: right;
 }
 .thr-t2 {
     flex: 1;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    white-space: nowrap;
+    gap: 8px;
+    min-width: 0;
+}
+.thr-t2 > span {
     overflow: hidden;
     text-overflow: ellipsis;
-    gap: 8px;
+    white-space: nowrap;
+    text-align: left;
 }
 .thr-team-logo {
     width: 18px;
