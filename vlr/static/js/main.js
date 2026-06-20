@@ -1471,6 +1471,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 const label = document.getElementById("thr-selected-team-label");
                 if (label) label.textContent = name;
 
+                const iconContainer = document.getElementById("thr-selected-team-icon-container");
+                if (iconContainer) {
+                    if (logo) {
+                        iconContainer.innerHTML = `<img src="${logo}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; border-radius: 4px;">`;
+                    } else {
+                        iconContainer.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+                    }
+                }
+
                 const panel = document.getElementById("team-history-popover-panel");
                 const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
                 if (panel) panel.style.display = "none";
@@ -1484,10 +1493,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (searchKeyword && filteredTeams.length === 1) {
             const singleTeamName = filteredTeams[0][0];
+            const singleTeamLogo = filteredTeams[0][1];
             if (selectedTeamHistoryName !== singleTeamName) {
                 selectedTeamHistoryName = singleTeamName;
                 const label = document.getElementById("thr-selected-team-label");
                 if (label) label.textContent = singleTeamName;
+                
+                const iconContainer = document.getElementById("thr-selected-team-icon-container");
+                if (iconContainer) {
+                    if (singleTeamLogo) {
+                        iconContainer.innerHTML = `<img src="${singleTeamLogo}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; border-radius: 4px;">`;
+                    } else {
+                        iconContainer.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+                    }
+                }
+
                 const panel = document.getElementById("team-history-popover-panel");
                 const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
                 if (panel) panel.style.display = "none";
@@ -1523,6 +1543,9 @@ document.addEventListener("DOMContentLoaded", () => {
             const myTeam = teamName;
             const oppTeam = isTeam1 ? m.team2 : m.team1;
             
+            const myLogo = isTeam1 ? (m.team1_logo || "") : (m.team2_logo || "");
+            const oppLogo = isTeam1 ? (m.team2_logo || "") : (m.team1_logo || "");
+
             const myScore = isTeam1 ? (m.score1 || '0') : (m.score2 || '0');
             const oppScore = isTeam1 ? (m.score2 || '0') : (m.score1 || '0');
 
@@ -1553,9 +1576,15 @@ document.addEventListener("DOMContentLoaded", () => {
                         <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
                     </div>
                     <div class="thr-teams">
-                        <span class="thr-t1 ${myColorClass}">${myTeam}</span>
+                        <span class="thr-t1 ${myColorClass}">
+                            <span>${myTeam}</span>
+                            ${myLogo ? `<img class="thr-team-logo" src="${myLogo}" onerror="this.style.display='none';">` : ''}
+                        </span>
                         <span class="thr-score">${myScore} – ${oppScore}</span>
-                        <span class="thr-t2 ${oppColorClass}">${oppTeam}</span>
+                        <span class="thr-t2 ${oppColorClass}">
+                            ${oppLogo ? `<img class="thr-team-logo" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
+                            <span>${oppTeam}</span>
+                        </span>
                     </div>
                     <span class="thr-status ${statusClass}">${statusText}</span>
                 </div>
@@ -1586,6 +1615,10 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedTeamHistoryName = "";
         const label = document.getElementById("thr-selected-team-label");
         if (label) label.textContent = "Select Team";
+        
+        const iconContainer = document.getElementById("thr-selected-team-icon-container");
+        if (iconContainer) iconContainer.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+
         if (teamHistorySearch) teamHistorySearch.value = "";
         if (popoverPanel) popoverPanel.style.display = "none";
         if (popoverWrapper) popoverWrapper.classList.remove("active");

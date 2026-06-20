@@ -1782,17 +1782,29 @@ body.light #team-history-btn {
 }
 .thr-t1 {
     flex: 1;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    gap: 8px;
 }
 .thr-t2 {
     flex: 1;
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    gap: 8px;
+}
+.thr-team-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    flex-shrink: 0;
 }
 .thr-score {
     flex-shrink: 0;
