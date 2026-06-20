@@ -1262,6 +1262,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const teams = ["team1", "team2"];
                     teams.forEach(tKey => {
                         const playersList = m.players.all[tKey];
+                        const currentTeamLogo = (tKey === "team1") ? (m.team1_logo || "") : (m.team2_logo || "");
                         if (Array.isArray(playersList)) {
                             playersList.forEach(p => {
                                 if (!p || !p.name) return;
@@ -1270,6 +1271,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                     playersMap[p.name] = {
                                         name: p.name,
                                         photo: p.photo || "",
+                                        teamLogo: currentTeamLogo,
                                         agents: {}, // name -> { icon, count }
                                         matchesPlayed: 0,
                                         ratingsList: [],
@@ -1289,6 +1291,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 agg.matchesPlayed++;
                                 
                                 if (!agg.photo && p.photo) agg.photo = p.photo;
+                                if (!agg.teamLogo && currentTeamLogo) agg.teamLogo = currentTeamLogo;
 
                                 if (Array.isArray(p.agents)) {
                                     p.agents.forEach(a => {
@@ -1357,6 +1360,7 @@ document.addEventListener("DOMContentLoaded", () => {
             return {
                 name: agg.name,
                 photo: agg.photo,
+                teamLogo: agg.teamLogo,
                 agents: sortedAgents,
                 matchesPlayed: agg.matchesPlayed,
                 rating: avgRating ? avgRating.toFixed(2) : "N/A",
@@ -1422,7 +1426,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const topAcs = maxAcs(aggregates);
 
             tbody.innerHTML = aggregates.map(p => `<tr>
-                <td><div class="mdm-player-cell">${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
+                <td><div class="mdm-player-cell">${p.teamLogo ? `<img class="mdm-player-team-logo" src="${p.teamLogo}" alt="" title="Team Logo">` : ''}${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
                 <td class="r">${renderAgents(p.agents)}</td>
                 <td class="r">${p.matchesPlayed}</td>
                 <td class="r">${p.rating}</td>

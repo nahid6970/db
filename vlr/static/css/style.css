@@ -1677,12 +1677,25 @@ body.light .diff-negative {
 .mdm-stats-table th {
     cursor: pointer;
     user-select: none;
+    text-align: center !important;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-dark) !important;
+    z-index: 10;
+    border-bottom: 2px solid var(--card-border) !important;
+}
+.mdm-stats-table th:first-child {
+    text-align: left !important;
 }
 .mdm-stats-table th span {
     display: inline-block;
     border-bottom: 2px solid transparent;
     padding-bottom: 2px;
+    text-align: center;
     transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.mdm-stats-table th:first-child span {
+    text-align: left;
 }
 .mdm-stats-table th:hover span {
     color: var(--text-primary) !important;
@@ -1700,6 +1713,18 @@ body.light .mdm-stats-table th.th-sort-desc span {
 }
 body.light .mdm-stats-table th.th-sort-asc span {
     border-bottom-color: #dc2626 !important;
+}
+
+/* Player Team Logo in Leaderboard */
+.mdm-player-team-logo {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1px;
+    margin-right: 6px;
+    flex-shrink: 0;
 }
 body.light #leaderboard-btn {
     background: rgba(0, 245, 155, 0.1) !important;
