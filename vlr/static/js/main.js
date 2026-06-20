@@ -1713,9 +1713,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Leaderboard table click sorting
-    document.getElementById("leaderboard-table")?.addEventListener("click", (e) => {
-        const th = e.target.closest("th");
+    // Delegated click sorting for all stats tables (both in match detail and leaderboard modals)
+    document.addEventListener("click", (e) => {
+        const th = e.target.closest(".mdm-stats-table th");
         if (!th) return;
         const table = th.closest("table");
         if (!table) return;
@@ -1744,18 +1744,14 @@ document.addEventListener("DOMContentLoaded", () => {
             let valA = cellA ? cellA.textContent.trim() : "";
             let valB = cellB ? cellB.textContent.trim() : "";
 
-            if (index === 9 || index === 11) {
-                valA = valA.replace("%", "");
-                valB = valB.replace("%", "");
-            }
-
             const isNumeric = index >= 2;
             if (isNumeric) {
-                let numA = parseFloat(valA);
-                let numB = parseFloat(valB);
-                if (isNaN(numA)) numA = dir === "asc" ? Infinity : -Infinity;
-                if (isNaN(numB)) numB = dir === "asc" ? Infinity : -Infinity;
-                return dir === "asc" ? numA - numB : numB - numA;
+                const parseNum = (val) => {
+                    const cleaned = val.replace(/[%+]/g, "").trim();
+                    const num = parseFloat(cleaned);
+                    return isNaN(num) ? (dir === "asc" ? Infinity : -Infinity) : num;
+                };
+                return dir === "asc" ? parseNum(valA) - parseNum(valB) : parseNum(valB) - parseNum(valA);
             } else {
                 return dir === "asc" ? valA.localeCompare(valB) : valB.localeCompare(valA);
             }
