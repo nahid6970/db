@@ -52,13 +52,6 @@
                     <option value="all" {% if per_page == 'all' %}selected{% endif %}>All</option>
                 </select>
                 <div class="header-divider"></div>
-                <div class="pages-input-group">
-                    <label>Scrape</label>
-                    <input type="number" id="scrape-start" min="1" value="{{ settings.get('scrape_start', 1) }}" title="Start page">
-                    <span style="color:var(--text-muted)">–</span>
-                    <input type="number" id="scrape-end" min="1" value="{{ settings.get('scrape_end', 5) }}" title="End page">
-                    <button id="save-pages-btn" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
-                </div>
                 <button class="refresh-btn" id="leaderboard-btn" title="Player Stats Leaderboard" style="background: rgba(0, 245, 155, 0.1); border-color: var(--accent-green); color: var(--accent-green);">
                     <i class="fa-solid fa-chart-simple"></i> STATS
                 </button>
@@ -168,20 +161,29 @@
                 <h2><i class="fa-solid fa-gear"></i> Settings</h2>
                 <button id="settings-close-btn" class="modal-close-btn"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body">
-                <div class="modal-section">
-                    <h3>Ignore List <span id="ignore-count">({{ ignore_list|length }})</span></h3>
-                    <p class="modal-section-desc">Tournaments hidden from matches and sidebar. Most recent first.</p>
-                    <div class="ignore-filters">
-                        <select id="ignore-filter-year" class="sidebar-select">
-                            <option value="all">All Years</option>
-                            {% for y in range(2026, 2019, -1) %}
-                            <option value="{{ y }}">{{ y }}</option>
-                            {% endfor %}
-                        </select>
-                        <input type="text" id="ignore-filter-search" class="ignore-search-input" placeholder="Search...">
+            
+            <div class="modal-tabs">
+                <button class="modal-tab-btn active" id="tab-btn-ignore"><i class="fa-solid fa-eye-slash"></i> IGNORE List</button>
+                <button class="modal-tab-btn" id="tab-btn-scrape"><i class="fa-solid fa-arrows-rotate"></i> SCRAPE</button>
+            </div>
+
+            <div class="modal-body" style="padding: 0; display: flex; flex-direction: column;">
+                <!-- Tab Contents: Ignore List -->
+                <div id="modal-content-ignore" class="modal-tab-content">
+                    <div class="ignore-header-pinned">
+                        <h3>Ignore List <span id="ignore-count">({{ ignore_list|length }})</span></h3>
+                        <p class="modal-section-desc">Tournaments hidden from matches and sidebar. Most recent first.</p>
+                        <div class="ignore-filters">
+                            <select id="ignore-filter-year" class="sidebar-select">
+                                <option value="all">All Years</option>
+                                {% for y in range(2026, 2019, -1) %}
+                                <option value="{{ y }}">{{ y }}</option>
+                                {% endfor %}
+                            </select>
+                            <input type="text" id="ignore-filter-search" class="ignore-search-input" placeholder="Search ignored...">
+                        </div>
                     </div>
-                    <div id="ignore-list-container">
+                    <div id="ignore-list-container" style="max-height: 40vh; overflow-y: auto; padding: 12px 20px;">
                         {% if ignore_list %}
                             {% for t in ignore_list|reverse %}
                             <div class="ignore-item" data-name="{{ t.name }}">
@@ -197,6 +199,21 @@
                         {% else %}
                             <p class="ignore-empty">No tournaments ignored.</p>
                         {% endif %}
+                    </div>
+                </div>
+
+                <!-- Tab Contents: Scrape Range -->
+                <div id="modal-content-scrape" class="modal-tab-content" style="display: none; padding: 20px;">
+                    <div class="modal-section">
+                        <h3>Scrape Range</h3>
+                        <p class="modal-section-desc">Set the page range to sync completed match results from VLR.gg.</p>
+                        <div class="pages-input-group" style="display: inline-flex; border: 1px solid var(--card-border); background: var(--bg-darker); border-radius: var(--border-radius-md); padding: 8px 12px; gap: 8px; align-items: center;">
+                            <label style="font-size: 13px; font-weight: 700; color: var(--text-secondary);">Page Range:</label>
+                            <input type="number" id="scrape-start" min="1" value="{{ settings.get('scrape_start', 1) }}" title="Start page" style="width: 48px; background: transparent; border: none; color: var(--text-primary); text-align: center; font-size: 14px; font-weight: 700; outline: none; box-sizing: border-box;">
+                            <span style="color: var(--text-muted); font-weight: bold;">–</span>
+                            <input type="number" id="scrape-end" min="1" value="{{ settings.get('scrape_end', 5) }}" title="End page" style="width: 48px; background: transparent; border: none; color: var(--text-primary); text-align: center; font-size: 14px; font-weight: 700; outline: none; box-sizing: border-box;">
+                            <button id="save-pages-btn" title="Save Scrape Range" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0 4px; font-size: 14px; transition: color var(--transition-fast);"><i class="fa-solid fa-floppy-disk"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>

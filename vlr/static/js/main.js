@@ -1043,19 +1043,42 @@ document.addEventListener("DOMContentLoaded", () => {
         sortTourneyByDate();
     }
 
-    // Settings modal
+    // Settings modal & Tab navigation
     const settingsBtn = document.getElementById("settings-btn");
     const settingsModal = document.getElementById("settings-modal");
     const settingsCloseBtn = document.getElementById("settings-close-btn");
+    
+    const tabBtnIgnore = document.getElementById("tab-btn-ignore");
+    const tabBtnScrape = document.getElementById("tab-btn-scrape");
+    const contentIgnore = document.getElementById("modal-content-ignore");
+    const contentScrape = document.getElementById("modal-content-scrape");
 
     settingsBtn?.addEventListener("click", () => {
+        tabBtnIgnore?.click(); // reset to ignore tab by default when opened
         settingsModal.style.display = "flex";
     });
     settingsCloseBtn?.addEventListener("click", () => {
         settingsModal.style.display = "none";
     });
     settingsModal?.addEventListener("click", (e) => {
-        if (e.target === settingsModal) settingsModal.style.display = "none";
+        const modalBox = settingsModal.querySelector(".modal-box");
+        if (modalBox && !modalBox.contains(e.target)) {
+            settingsModal.style.display = "none";
+        }
+    });
+
+    tabBtnIgnore?.addEventListener("click", () => {
+        tabBtnIgnore.classList.add("active");
+        tabBtnScrape?.classList.remove("active");
+        if (contentIgnore) contentIgnore.style.display = "block";
+        if (contentScrape) contentScrape.style.display = "none";
+    });
+
+    tabBtnScrape?.addEventListener("click", () => {
+        tabBtnScrape.classList.add("active");
+        tabBtnIgnore?.classList.remove("active");
+        if (contentScrape) contentScrape.style.display = "block";
+        if (contentIgnore) contentIgnore.style.display = "none";
     });
 
     // Ignore list modal filters

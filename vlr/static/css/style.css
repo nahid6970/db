@@ -1731,6 +1731,60 @@ body.light #leaderboard-btn {
     border-color: #16a34a !important;
     color: #16a34a !important;
 }
+body.light .modal-box {
+    background: #ffffff !important;
+}
+body.light .modal-tab-btn.active {
+    color: #d42f3c !important;
+    border-bottom-color: #d42f3c !important;
+}
+body.light .ignore-header-pinned {
+    background: #ffffff !important;
+}
+
+/* Settings Modal Tabbed Navigation */
+.modal-tabs {
+    display: flex;
+    border-bottom: 1px solid var(--card-border);
+    background: rgba(0, 0, 0, 0.05);
+}
+.modal-tab-btn {
+    flex: 1;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-main);
+    font-size: 13px;
+    font-weight: 700;
+    padding: 12px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-fast);
+}
+.modal-tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.02);
+}
+.modal-tab-btn.active {
+    color: var(--accent-red);
+    border-bottom-color: var(--accent-red);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+/* Pinned Ignore Header inside Modal view */
+.ignore-header-pinned {
+    position: sticky;
+    top: 0;
+    background: var(--bg-dark);
+    z-index: 20;
+    padding: 18px 20px 12px 20px;
+    border-bottom: 1px solid var(--card-border);
+}
+
 body.light #team-history-btn {
     background: rgba(59, 130, 246, 0.1) !important;
     border-color: #2563eb !important;
