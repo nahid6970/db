@@ -1583,6 +1583,10 @@ body.light .grid-separator-line {
 }
 .mdm-map-card.mdm-map-win { border-color: rgba(34,197,94,.3); }
 .mdm-map-card.mdm-map-lose { border-color: rgba(229,56,59,.3); }
+.mdm-map-card[data-key="all"] {
+    flex: 0 0 110px;
+}
+
 body.light .mdm-map-card.active {
     background: rgba(255, 70, 85, 0.08);
     border-color: #ff4655 !important;
