@@ -6,9 +6,49 @@
 <title>FIFA World Cup 2026</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Segoe UI', sans-serif; background: #0a0a1a; color: #eee; }
+  :root {
+    --bg-primary: #0a0a1a;
+    --bg-card: #12122a;
+    --bg-nav: #111;
+    --border-color: #1e3799;
+    --text-primary: #eee;
+    --text-secondary: #aaa;
+    --text-muted: #666;
+    --bg-day-group: #0f0f26;
+    --bg-day-header: #161638;
+    --day-count-bg: #090918;
+    --bg-header: linear-gradient(135deg, #0a3d62, #1e3799);
+    --border-nav: #222;
+    --card-past-bg: #080815;
+    --card-past-border: #1c2d5a;
+    --card-past-border-left: #2858b5;
+    --card-past-hover-bg: #0a0a1a;
+    --scorer-row-border: #1a1a3a;
+  }
+
+  .light-theme {
+    --bg-primary: #f5f6fa;
+    --bg-card: #ffffff;
+    --bg-nav: #ffffff;
+    --border-color: #dcdde1;
+    --text-primary: #2f3640;
+    --text-secondary: #718093;
+    --text-muted: #95a5a6;
+    --bg-day-group: #f1f2f6;
+    --bg-day-header: #e4e7eb;
+    --day-count-bg: #ffffff;
+    --bg-header: linear-gradient(135deg, #1e3799, #0a3d62);
+    --border-nav: #dcdde1;
+    --card-past-bg: #ffffff;
+    --card-past-border: #dcdde1;
+    --card-past-border-left: #1e3799;
+    --card-past-hover-bg: #f5f6fa;
+    --scorer-row-border: #f1f2f6;
+  }
+
+  body { font-family: 'Segoe UI', sans-serif; background: var(--bg-primary); color: var(--text-primary); transition: background 0.25s, color 0.25s; }
   header {
-    background: linear-gradient(135deg, #0a3d62, #1e3799);
+    background: var(--bg-header);
     padding: 24px 20px; text-align: center;
     border-bottom: 3px solid #f9ca24;
   }
@@ -16,9 +56,9 @@
   header p { color: #aad4f5; margin-top: 6px; font-size: 0.9rem; }
   nav {
     display: flex; gap: 10px; justify-content: center;
-    padding: 14px; background: #111; flex-wrap: wrap;
+    padding: 14px; background: var(--bg-nav); flex-wrap: wrap;
     position: sticky; top: 0; z-index: 1000;
-    border-bottom: 1px solid #222;
+    border-bottom: 1px solid var(--border-nav);
   }
   nav button {
     padding: 8px 20px; border: none; border-radius: 20px;
@@ -36,20 +76,20 @@
 
   /* Day Group Layout Styles */
   .day-group {
-    background: #0f0f26;
-    border: 1px solid #1e3799;
+    background: var(--bg-day-group);
+    border: 1px solid var(--border-color);
     border-radius: 8px;
     margin-bottom: 24px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   }
   .day-header {
-    background: #161638;
+    background: var(--bg-day-header);
     padding: 12px 16px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #1e3799;
+    border-bottom: 1px solid var(--border-color);
   }
   .day-title {
     font-size: 0.88rem;
@@ -64,11 +104,11 @@
   .day-count {
     font-size: 0.72rem;
     color: #7eb8ff;
-    background: #090918;
+    background: var(--day-count-bg);
     padding: 3px 10px;
     border-radius: 20px;
     font-weight: 600;
-    border: 1px solid #1e3799;
+    border: 1px solid var(--border-color);
   }
   .day-matches {
     padding: 12px;
@@ -85,9 +125,9 @@
     display: inline-block;
   }
   .match-card {
-    background: #12122a; border-radius: 0; padding: 16px 20px;
+    background: var(--bg-card); border-radius: 0; padding: 16px 20px;
     margin-bottom: 10px; display: flex; align-items: center;
-    justify-content: space-between; border: 1px solid #1e3799;
+    justify-content: space-between; border: 1px solid var(--border-color);
     gap: 10px; flex-wrap: wrap;
   }
   .match-card:hover { border-color: #f9ca24; }
@@ -121,22 +161,22 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
   .groups-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 20px; }
-  .group-card { background: #12122a; border-radius: 0; border: 1px solid #1e3799; overflow: hidden; }
+  .group-card { background: var(--bg-card); border-radius: 0; border: 1px solid var(--border-color); overflow: hidden; }
   .group-title { background: #1e3799; padding: 10px 16px; font-weight: 800; font-size: 1rem; color: #f9ca24; }
   .group-table { width: 100%; border-collapse: collapse; }
-  .group-table th { background: #0d0d20; color: #888; font-size: 0.7rem; padding: 6px 8px; text-align: center; }
+  .group-table th { background: var(--bg-day-group); color: var(--text-secondary); font-size: 0.7rem; padding: 6px 8px; text-align: center; }
   .group-table th:first-child { text-align: left; padding-left: 14px; }
-  .group-table td { padding: 8px 8px; font-size: 0.85rem; text-align: center; border-top: 1px solid #1a1a3a; }
+  .group-table td { padding: 8px 8px; font-size: 0.85rem; text-align: center; border-top: 1px solid var(--scorer-row-border); color: var(--text-primary); }
   .group-table td:first-child { text-align: left; padding-left: 14px; }
   .group-table tr:nth-child(1) td, .group-table tr:nth-child(2) td { color: #2ecc71; }
   .tf { display: flex; align-items: center; gap: 7px; }
 
-  .round-label { font-size: 1.1rem; font-weight: 800; color: #f9ca24; margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid #1e3799; padding-bottom: 6px; }
-  .info-box { background: #12122a; border-radius: 0; padding: 16px; border: 1px solid #1e3799; color: #aaa; font-size: 0.9rem; line-height: 1.8; }
+  .round-label { font-size: 1.1rem; font-weight: 800; color: #f9ca24; margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 2px; border-bottom: 2px solid var(--border-color); padding-bottom: 6px; }
+  .info-box { background: var(--bg-card); border-radius: 0; padding: 16px; border: 1px solid var(--border-color); color: var(--text-secondary); font-size: 0.9rem; line-height: 1.8; }
   .info-box span { color: #f9ca24; font-weight: 700; }
 
   .teams-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }
-  .team-card { background: #12122a; border-radius: 0; padding: 14px; text-align: center; border: 1px solid #1e3799; transition: border-color 0.2s; }
+  .team-card { background: var(--bg-card); border-radius: 0; padding: 14px; text-align: center; border: 1px solid var(--border-color); transition: border-color 0.2s; }
   .team-card:hover { border-color: #f9ca24; }
   .team-card .tname { font-weight: 700; font-size: 0.9rem; margin-top: 8px; }
   .team-card .tgroup { font-size: 0.72rem; color: #888; margin-top: 3px; }
@@ -165,19 +205,19 @@
     box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
   }
   .card-past {
-    border: 1px solid #1c2d5a !important;
-    border-left: 5px solid #2858b5 !important;
-    background: #080815 !important;
+    border: 1px solid var(--card-past-border) !important;
+    border-left: 5px solid var(--card-past-border-left) !important;
+    background: var(--card-past-bg) !important;
     opacity: 0.95;
   }
   .card-past:hover {
-    border-color: #2858b5 !important;
-    background: #0a0a1a !important;
+    border-color: var(--card-past-border-left) !important;
+    background: var(--card-past-hover-bg) !important;
   }
   
   /* Winner & Loser styles for past games */
-  .team.winner .team-name { color: #ffffff; font-weight: 800; }
-  .team.loser .team-name { color: #7f8c8d; font-weight: 500; }
+  .team.winner .team-name { color: var(--text-primary); font-weight: 800; }
+  .team.loser .team-name { color: var(--text-secondary); font-weight: 500; }
   .team.loser img.flag { opacity: 0.5; filter: grayscale(30%); }
 
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
@@ -203,18 +243,18 @@
 
   /* Scorers styles */
   .scorers-list {
-    background: #12122a; border-radius: 0; border: 1px solid #1e3799;
+    background: var(--bg-card); border-radius: 0; border: 1px solid var(--border-color);
     max-width: 600px; margin: 20px auto 0; overflow: hidden;
   }
   .scorer-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 20px; border-bottom: 1px solid #1a1a3a;
+    padding: 12px 20px; border-bottom: 1px solid var(--scorer-row-border);
   }
   .scorer-row:last-child { border-bottom: none; }
-  .scorer-rank { font-weight: 700; color: #888; width: 45px; }
+  .scorer-rank { font-weight: 700; color: var(--text-secondary); width: 45px; }
   .scorer-info { display: flex; align-items: center; gap: 10px; flex: 1; }
-  .scorer-name { font-weight: 700; color: #fff; }
-  .scorer-team { font-size: 0.8rem; color: #888; display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .scorer-name { font-weight: 700; color: var(--text-primary); }
+  .scorer-team { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
   .scorer-goals { font-size: 1.1rem; font-weight: 900; color: #f9ca24; }
 
 </style>
@@ -233,6 +273,7 @@
   <button onclick="show('scorers',this)">⚽ Scorers</button>
   <button onclick="show('knockout',this)">&#129354; Knockout</button>
   <button onclick="show('teams',this)">&#127758; Teams</button>
+  <button id="theme-toggle" onclick="toggleTheme()" style="background:#4a5568;margin-left:auto;">🌓 Theme</button>
 </nav>
 
 <div class="container">
@@ -747,6 +788,17 @@ const saved = localStorage.getItem('tab');
 if (saved) {
   const btn = document.querySelector(`nav button[onclick*="'${saved}'"]`);
   if (btn) show(saved, btn);
+}
+
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+}
+
+// Restore last theme on load
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'light') {
+  document.body.classList.add('light-theme');
 }
 
 function fi(code, cls) {
