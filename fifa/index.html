@@ -476,7 +476,26 @@ async function fetchGroups() {
     const gg = document.getElementById('groupsGrid');
     let html = '';
     for (const grp of data.groups || []) {
-      const rows = (grp.teams || []).map(team => {
+      const sortedTeams = [...(grp.teams || [])].sort((a, b) => {
+        const ptsA = parseInt(a.Pts, 10) || 0;
+        const ptsB = parseInt(b.Pts, 10) || 0;
+        if (ptsB !== ptsA) {
+          return ptsB - ptsA;
+        }
+        const gdA = parseInt(a.GD, 10) || 0;
+        const gdB = parseInt(b.GD, 10) || 0;
+        if (gdB !== gdA) {
+          return gdB - gdA;
+        }
+        const wA = parseInt(a.W, 10) || 0;
+        const wB = parseInt(b.W, 10) || 0;
+        if (wB !== wA) {
+          return wB - wA;
+        }
+        return a.name.localeCompare(b.name);
+      });
+
+      const rows = sortedTeams.map(team => {
         return `<tr>
           <td><div class="tf"><img class="flag-sm" src="${team.logo||''}" onerror="this.style.display='none'" alt="">${team.name}</div></td>
           <td>${team.P ?? '0'}</td><td>${team.W ?? '0'}</td><td>${team.D ?? '0'}</td><td>${team.L ?? '0'}</td>
