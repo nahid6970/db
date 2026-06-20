@@ -59,6 +59,9 @@
                     <input type="number" id="scrape-end" min="1" value="{{ settings.get('scrape_end', 5) }}" title="End page">
                     <button id="save-pages-btn" title="Save"><i class="fa-solid fa-floppy-disk"></i></button>
                 </div>
+                <button class="refresh-btn" id="leaderboard-btn" title="Player Stats Leaderboard" style="background: rgba(0, 245, 155, 0.1); border-color: var(--accent-green); color: var(--accent-green);">
+                    <i class="fa-solid fa-chart-simple"></i> STATS
+                </button>
                 <button class="refresh-btn" id="refresh-data-btn" title="Sync matches data">
                     <i class="fa-solid fa-arrows-rotate"></i> SYNC
                 </button>
@@ -198,6 +201,44 @@
     </div>
 
     <!-- Tournament pin context menu -->
+    <!-- Player Stats / Leaderboard Modal -->
+    <div id="player-leaderboard-modal" class="match-detail-overlay" style="display:none;">
+        <div class="match-detail-modal" style="max-width: 950px;">
+            <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0;">
+                <h2><i class="fa-solid fa-chart-simple"></i> Player Aggregated Statistics</h2>
+                <button id="leaderboard-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
+            </div>
+            <div id="leaderboard-stats-section" style="margin-top: 0;">
+                <div class="mdm-stats-table-wrapper" style="max-height: 70vh; overflow-y: auto;">
+                    <table class="mdm-stats-table" id="leaderboard-table">
+                        <thead>
+                            <tr>
+                                <th><span>Player</span></th>
+                                <th class="r"><span>Played Agents</span></th>
+                                <th class="r"><span>Matches</span></th>
+                                <th class="r"><span>Avg R</span></th>
+                                <th class="r"><span>Avg ACS</span></th>
+                                <th class="r"><span>K</span></th>
+                                <th class="r"><span>D</span></th>
+                                <th class="r"><span>A</span></th>
+                                <th class="r"><span>+/-</span></th>
+                                <th class="r"><span>Avg KAST</span></th>
+                                <th class="r"><span>Avg ADR</span></th>
+                                <th class="r"><span>Avg HS%</span></th>
+                                <th class="r"><span>FK</span></th>
+                                <th class="r"><span>FD</span></th>
+                                <th class="r"><span>+/-</span></th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-tbody">
+                            <!-- filled in dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Match Detail Modal -->
     <div id="match-detail-overlay" class="match-detail-overlay" style="display:none;">
         <div id="match-detail-modal" class="match-detail-modal">
@@ -243,7 +284,7 @@
     <!-- Custom Script File -->
     <script>const IGNORE_LIST = {{ ignore_list | tojson }};  // [{name, logo}, ...]
     const TOURNEY_FIRST_MATCH = {{ tournament_first_match | tojson }}; // {name: unix_timestamp}
-    const INITIAL_MATCHES = {{ matches | tojson }};
+    let INITIAL_MATCHES = {{ matches | tojson }};
     </script>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>

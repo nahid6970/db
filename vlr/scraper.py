@@ -324,7 +324,8 @@ def fetch_match_detail_page(href):
         overall_score2 = ""
         vs_score_div = soup.find(class_="match-header-vs-score")
         if vs_score_div:
-            score_spans = vs_score_div.find_all("span")
+            # Filter spans to only those containing actual digits to bypass separator dashes/spans
+            score_spans = [s for s in vs_score_div.find_all("span") if s.text.strip().isdigit()]
             if len(score_spans) >= 2:
                 overall_score1 = score_spans[0].text.strip()
                 overall_score2 = score_spans[1].text.strip()

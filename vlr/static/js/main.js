@@ -2,6 +2,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const bstClock = document.getElementById("current-bst-clock");
 
+    // Global utility helpers
+    const formatDiff = (diff) => {
+        if (!diff) return "";
+        const val = parseInt(diff);
+        if (isNaN(val)) return diff;
+        if (val > 0) return `<span class="diff-positive">+${val}</span>`;
+        if (val < 0) return `<span class="diff-negative">${val}</span>`;
+        return `<span class="diff-neutral">0</span>`;
+    };
+
+    const renderAgents = agents => (agents || []).map(a =>
+        a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
+    ).join("");
+
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
     const themeIcon = themeBtn?.querySelector("i");
@@ -236,19 +250,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const statsEl = document.getElementById("mdm-stats");
         const tabsContainer = document.getElementById("mdm-map-tabs-container");
         const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
-
-        const renderAgents = agents => (agents || []).map(a =>
-            a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
-        ).join("");
-
-        const formatDiff = (diff) => {
-            if (!diff) return "";
-            const val = parseInt(diff);
-            if (isNaN(val)) return diff;
-            if (val > 0) return `<span class="diff-positive">+${val}</span>`;
-            if (val < 0) return `<span class="diff-negative">${val}</span>`;
-            return `<span class="diff-neutral">0</span>`;
-        };
 
         const renderTable = (plist, label) => {
             if (!plist?.length) return "";
@@ -763,6 +764,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (!response.ok) throw new Error("Sync failed");
                 const matches = await response.json();
                 
+                // Keep the in-memory leaderboard dataset updated
+                INITIAL_MATCHES = matches;
+
                 const scrollY = window.scrollY;
 
                 // Re-render matches grid
@@ -1189,4 +1193,237 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById("btn-ignore-unchecked")?.addEventListener("click", () => ignoreVisible(false));
     document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
+
+    // Player Aggregated Stats / Leaderboard Functions
+    function calculatePlayerAggregates(matches) {
+        const playersMap = {};
+
+        if (!Array.isArray(matches)) return [];
+
+        matches.forEach(m => {
+            if (m && m.players && typeof m.players === "object" && m.players.all && typeof m.players.all === "object") {
+                const teams = ["team1", "team2"];
+                teams.forEach(tKey => {
+                    const playersList = m.players.all[tKey];
+                    if (Array.isArray(playersList)) {
+                        playersList.forEach(p => {
+                            if (!p || !p.name) return;
+                            
+                            if (!playersMap[p.name]) {
+                                playersMap[p.name] = {
+                                    name: p.name,
+                                    photo: p.photo || "",
+                                    agents: {}, // name -> { icon, count }
+                                    matchesPlayed: 0,
+                                    ratingsList: [],
+                                    acsList: [],
+                                    kills: 0,
+                                    deaths: 0,
+                                    assists: 0,
+                                    kastList: [],
+                                    adrList: [],
+                                    hsList: [],
+                                    fk: 0,
+                                    fd: 0
+                                };
+                            }
+
+                            const agg = playersMap[p.name];
+                            agg.matchesPlayed++;
+                            
+                            if (!agg.photo && p.photo) agg.photo = p.photo;
+
+                            if (Array.isArray(p.agents)) {
+                                p.agents.forEach(a => {
+                                    if (a && a.name) {
+                                        if (!agg.agents[a.name]) {
+                                            agg.agents[a.name] = { icon: a.icon || "", count: 0 };
+                                        }
+                                        agg.agents[a.name].count++;
+                                    }
+                                });
+                            }
+
+                            const ratingVal = parseFloat(p.rating);
+                            if (!isNaN(ratingVal)) agg.ratingsList.push(ratingVal);
+
+                            const acsVal = parseFloat(p.acs);
+                            if (!isNaN(acsVal)) agg.acsList.push(acsVal);
+
+                            const kVal = parseInt(p.k);
+                            if (!isNaN(kVal)) agg.kills += kVal;
+
+                            const dVal = parseInt(p.d);
+                            if (!isNaN(dVal)) agg.deaths += dVal;
+
+                            const aVal = parseInt(p.a);
+                            if (!isNaN(aVal)) agg.assists += aVal;
+
+                            if (p.kast && typeof p.kast === "string") {
+                                const kastVal = parseFloat(p.kast.replace("%", ""));
+                                if (!isNaN(kastVal)) agg.kastList.push(kastVal);
+                            }
+
+                            const adrVal = parseFloat(p.adr);
+                            if (!isNaN(adrVal)) agg.adrList.push(adrVal);
+
+                            if (p.hs && typeof p.hs === "string") {
+                                const hsVal = parseFloat(p.hs.replace("%", ""));
+                                if (!isNaN(hsVal)) agg.hsList.push(hsVal);
+                            }
+
+                            const fkVal = parseInt(p.fk);
+                            if (!isNaN(fkVal)) agg.fk += fkVal;
+
+                            const fdVal = parseInt(p.fd);
+                            if (!isNaN(fdVal)) agg.fd += fdVal;
+                        });
+                    }
+                });
+            }
+        });
+
+        return Object.values(playersMap).map(agg => {
+            const avg = list => list.length ? (list.reduce((sum, val) => sum + val, 0) / list.length) : 0;
+            
+            const avgRating = avg(agg.ratingsList);
+            const avgAcs = avg(agg.acsList);
+            const avgKast = avg(agg.kastList);
+            const avgAdr = avg(agg.adrList);
+            const avgHs = avg(agg.hsList);
+
+            const sortedAgents = Object.entries(agg.agents)
+                .sort((a, b) => b[1].count - a[1].count)
+                .map(([name, data]) => ({ name, icon: data.icon }));
+
+            return {
+                name: agg.name,
+                photo: agg.photo,
+                agents: sortedAgents,
+                matchesPlayed: agg.matchesPlayed,
+                rating: avgRating ? avgRating.toFixed(2) : "N/A",
+                acs: avgAcs ? Math.round(avgAcs) : "N/A",
+                k: agg.kills,
+                d: agg.deaths,
+                a: agg.assists,
+                kd_diff: agg.kills - agg.deaths,
+                kast: avgKast ? Math.round(avgKast) + "%" : "N/A",
+                adr: avgAdr ? Math.round(avgAdr) : "N/A",
+                hs: avgHs ? Math.round(avgHs) + "%" : "N/A",
+                fk: agg.fk,
+                fd: agg.fd,
+                fk_diff: agg.fk - agg.fd
+            };
+        });
+    }
+
+    function openLeaderboard() {
+        try {
+            const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+            const aggregates = calculatePlayerAggregates(matches);
+
+            const tbody = document.getElementById("leaderboard-tbody");
+            if (!tbody) {
+                console.error("leaderboard-tbody element not found");
+                return;
+            }
+
+            if (aggregates.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="15" style="text-align:center; padding: 30px; color: var(--text-muted); font-size: 14px;">No player statistics available. Please load match details first.</td></tr>`;
+                const modal = document.getElementById("player-leaderboard-modal");
+                if (modal) modal.style.display = "flex";
+                return;
+            }
+
+            const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
+            const topAcs = maxAcs(aggregates);
+
+            tbody.innerHTML = aggregates.map(p => `<tr>
+                <td><div class="mdm-player-cell">${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
+                <td class="r">${renderAgents(p.agents)}</td>
+                <td class="r">${p.matchesPlayed}</td>
+                <td class="r">${p.rating}</td>
+                <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
+                <td class="r">${p.k}</td>
+                <td class="r">${p.d}</td>
+                <td class="r">${p.a}</td>
+                <td class="r">${formatDiff(p.kd_diff)}</td>
+                <td class="r">${p.kast}</td>
+                <td class="r">${p.adr}</td>
+                <td class="r">${p.hs}</td>
+                <td class="r">${p.fk}</td>
+                <td class="r">${p.fd}</td>
+                <td class="r">${formatDiff(p.fk_diff)}</td>
+            </tr>`).join("");
+
+            const modal = document.getElementById("player-leaderboard-modal");
+            if (modal) modal.style.display = "flex";
+        } catch (err) {
+            console.error("Failed to render player aggregates leaderboard:", err);
+        }
+    }
+
+    // Leaderboard trigger
+    const leaderboardBtn = document.getElementById("leaderboard-btn");
+    const leaderboardModal = document.getElementById("player-leaderboard-modal");
+    const leaderboardClose = document.getElementById("leaderboard-close");
+
+    leaderboardBtn?.addEventListener("click", openLeaderboard);
+    leaderboardClose?.addEventListener("click", () => {
+        if (leaderboardModal) leaderboardModal.style.display = "none";
+    });
+    leaderboardModal?.addEventListener("click", (e) => {
+        if (e.target === leaderboardModal) leaderboardModal.style.display = "none";
+    });
+
+    // Leaderboard table click sorting
+    document.getElementById("leaderboard-table")?.addEventListener("click", (e) => {
+        const th = e.target.closest("th");
+        if (!th) return;
+        const table = th.closest("table");
+        if (!table) return;
+        const tbody = table.querySelector("tbody");
+        if (!tbody) return;
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        if (!rows.length) return;
+
+        const index = Array.from(th.parentNode.children).indexOf(th);
+        let dir = th.getAttribute("data-sort-dir") === "desc" ? "asc" : "desc";
+
+        table.querySelectorAll("th").forEach(h => {
+            if (h !== th) {
+                h.removeAttribute("data-sort-dir");
+                h.classList.remove("th-sort-asc", "th-sort-desc");
+            }
+        });
+
+        th.setAttribute("data-sort-dir", dir);
+        th.classList.toggle("th-sort-asc", dir === "asc");
+        th.classList.toggle("th-sort-desc", dir === "desc");
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.children[index];
+            const cellB = rowB.children[index];
+            let valA = cellA ? cellA.textContent.trim() : "";
+            let valB = cellB ? cellB.textContent.trim() : "";
+
+            if (index === 9 || index === 11) {
+                valA = valA.replace("%", "");
+                valB = valB.replace("%", "");
+            }
+
+            const isNumeric = index >= 2;
+            if (isNumeric) {
+                let numA = parseFloat(valA);
+                let numB = parseFloat(valB);
+                if (isNaN(numA)) numA = dir === "asc" ? Infinity : -Infinity;
+                if (isNaN(numB)) numB = dir === "asc" ? Infinity : -Infinity;
+                return dir === "asc" ? numA - numB : numB - numA;
+            } else {
+                return dir === "asc" ? valA.localeCompare(valB) : valB.localeCompare(valA);
+            }
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+    });
 });

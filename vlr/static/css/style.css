@@ -1701,6 +1701,12 @@ body.light .mdm-stats-table th.th-sort-desc span {
 body.light .mdm-stats-table th.th-sort-asc span {
     border-bottom-color: #dc2626 !important;
 }
+body.light #leaderboard-btn {
+    background: rgba(0, 245, 155, 0.1) !important;
+    border-color: #16a34a !important;
+    color: #16a34a !important;
+}
+
 
 
 
