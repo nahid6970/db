@@ -1,0 +1,458 @@
+I just created a new product using AI
+and a problem that I wanted to solve for
+a long time. And in this video, I want
+to give you a breakthrough of what this
+product is, how you can use this and how
+does it work technically as an overall
+architecture as well as some internals
+inside the product in order for you to
+understand better what this product is
+about. And the product I'm talking about
+is monitoryoutube.com,
+which would be available on
+monitoryt.com. You will find the link
+for this in the description. But the
+idea with this product is that it's
+basically a watch list for YouTube
+channels that you can add and monitor
+what's going on. It's super simple. It
+just does one thing and it does it
+right. And let me show you how this
+works. So if you open this app, it'll
+take you to sort of to this feed
+structure that you're seeing right now
+because I you are logged into my
+account. You are seeing my account right
+now. But you can go ahead and create an
+account on your own. It's free to start
+with. You can use your Google account.
+But the idea here is that there are just
+three things. feed, channels, and
+billing. And let me tell you everything
+about this. So channels is basically
+where you would start once you create an
+account for the first time. And you add
+a bunch of channels that you feel like
+are people who are creating sort of
+similar content in your niche, right? So
+as an example, I just added a bunch of
+these channels in the tech niche which
+are creating some sort of AI content or
+generally programming content. So the is
+of course there, Primogen is there. I
+just found WebDev simplified channel as
+well in my subscription list. So I added
+him. Fire ship obviously everyone knows.
+And AI Jason this is also a good
+channel. You should check it out. The
+content is really good and you can add
+like a bunch of channels here. So on the
+pro plan which I am on right now you can
+add up to 100 channels. And on the free
+plan which you start with you can add
+two channels right now. So once you add
+the channels over here you will be
+presented with a feed which is a
+chronological feed. So you will see that
+over here if you look at these timeline
+windows you will see that this happened
+6 minutes ago and again like 6 minutes
+ago and then 50 minutes ago basically
+these are events on what's happening
+right so primogen for example changed a
+video's title and chances are that he
+has not changed this it's an AB test
+which apparently would the system would
+realize at some point that it's testing
+an video title as an AB test instead of
+just changing the title the thing is
+that in YouTube you can't really check
+if you are getting AB tested on the
+title as an external person, right? You
+can only know that if you are the owner
+of the channel. So, this software uses
+smart techniques to figure out like if
+this is getting AB tested or you know if
+actually the title has changed and
+sometimes it will suggest that the title
+has changed but other times it'll
+actually catch that it is indeed an AB
+test. For example, I added my own
+channel as well which has these two
+titles over here just the difference
+between chat GBD and OpenAI just to
+figure out you know what people are
+doing. And of course, not only this,
+it'll also show you the stats based on
+like for example views, likes, comments
+as well. That's coming soon. Subscriber
+milestones as well if somebody's
+leveling up their subscribers, what's
+going on, and even AB test on
+thumbnails. That is also something that
+is there. Plus, of course, you can
+filter it out by new videos. For
+example, if you just want to see who
+uploaded what video, or if you want to
+just see title changes, you can select
+that. Or if you just want to see who's
+AB testing what, you can also do that.
+So you have these bunch of kind filters
+that are there. And you can also
+simplify or, you know, just search by
+channels. For example, fireship uploaded
+a video 8 days ago. So I mean, frankly
+speaking, this is much more useful for
+you if you are a content creator. But if
+you also want to just keep a tabs on
+what people are doing, feel free to use
+this tool. Now, because this is a tech
+channel and I like discussing tech, what
+I want to tell you guys is how did I
+build this in the first place and
+everything that this involves. So, let's
+get into that a little bit. So, first of
+all, this this monitor YouTube, it's
+surprisingly not an AI product, right?
+So, this is something which can be
+solved without AI use in production.
+But, of course, I used AI to build this,
+but under heavy supervision. And this is
+probably the first product end to end
+that I have created and shipped where
+most of the code was written by AI and
+this was a fresh product, right? So this
+was not something that I had already
+built. So this was the first thing that
+is actually useful. That's something
+that I've shipped and I'm sharing with
+you guys. So this is definitely built
+using AI mostly using cloud code and
+opus 4.8. But trust me when I say this,
+this is actually very like it's it's
+very tiring to just continuously steer
+Claude in the right direction. It would
+just go ahead and start making a lot of
+new explorations or mistakes or
+patterns. And you know at some point
+when you are at 600,000 tokens deep, you
+want to restart a session because the
+session is too slow. It's not working
+properly. And when you do that, the new
+session actually loses context on what's
+going on. they're not really following
+cloud.mmd properly to the word readme
+are out ofd. So a lot of things actually
+go wrong when you are building software
+end to end using AI. That means that
+it's very important for you to also
+understand how to build software in the
+first place so that you can steer these
+models properly. So anyway coming back
+to the software itself I mean if you see
+the software you will see that it's
+pretty simple. There is not a lot going
+on over here. So monitor or you know
+let's just call this app and let's just
+restore the title. So this app obviously
+consists of a front end and a back end
+and both of them are actually on
+cloudflare workers right. So I'm using
+cloudflare workers here and the third
+thing is of course database and in case
+of database I initially thought that I
+should go with SQLite but then by the
+end I just you know couldn't give up on
+Postgress. So I just chose Postgress and
+this is on planet scale and this is
+connected through backend which is on
+workers using hyperdrive. So hyperdrive
+is a cloudflare product again which
+allows you to sort of like pull the
+connections so that your workers does
+not exhaust the you know limited
+postgress capacity of connections. Now
+inside the workers of course there is
+backend logic for you know stuff like
+adding channels payments and you know
+user management and all of that stuff
+but what is an interesting part because
+all of this is like typical these are
+like typical crowd operations. What is
+interesting in this is the YouTube
+monitoring and interestingly there are
+actually two ways to do that rather
+three. The first one is using something
+known as RSS feeds. The second one is
+using the API that YouTube provides. And
+the third one is actually like browser
+based checks. And if you actually look
+at RSS feeds, this is mostly useless for
+monitoring any sort of in-depth
+statistic because this just gives you
+like an overall picture of channel and
+so on. API is also more or less useless
+because it does not give you some
+insights on events like AB testing for
+example, right? And plus this also comes
+with a lot of kota restrictions and you
+have to get that elevated and so on and
+so forth. Browser based is interesting
+because it works obviously like because
+you know browser can access YouTube. But
+the problem here is that as you start
+implementing this you will see that you
+are getting rate limited plus you are
+getting blocked because of data center
+IP addresses. So this is very common
+when you're using browser based checks
+and that is where surprisingly today's
+sponsor also comes into play which is
+decodo and this is something that I
+ended up using anyway in my product
+because when they reached out to me I
+was figuring out a solution for this and
+when they said that they have the
+solution it seemed like a great fit for
+me to introduce them through a proper
+product that I have created in the first
+place. So, Decodo is a platform that is
+an AI ready proxy and scraping system
+which allows you to use web scraping
+API, residential proxies, and even AI
+integrations built into their platform
+in order to get data from the web. And
+once you log into Decoders platform,
+you're going to see that you have the
+ability to create these proxies and
+their credentials very easily. In my
+case, for example, I'm using the data
+center proxies by rotating them so that
+YouTube allows me to keep scraping the
+publicly available data. And the way
+this works is that over here I have a
+Chrome browser which is proxied through
+decodo and then it visits YouTube
+because if you remove this proxy chances
+are that your script would work but
+it'll stop working after some time
+because YouTube will say that hey you're
+sending a lot of requests our way and
+probably this is an automated action. So
+we would want you to use the API but the
+problem with API is that it's not giving
+everything that I want. For example AB
+test and title changes and so on and so
+forth. So you need like an actual
+monitor which is like visiting
+youtube.com itself. And let me show you
+how simple this is. If I continue to
+check out and if I use my existing
+balance to pay you can see very easily I
+can have hundreds of proxies and IP
+addresses which I can select in a
+rotating fashion and either you can use
+like an HTTPS proxy agent something like
+this or if you go ahead and select sock
+5 over here you would be able to use
+this proxy directly with the chrome
+browser that I just showed you. So this
+proxied through decoder, this instance
+actually uses sock 5 on Chrome to route
+the traffic only for the specific Chrome
+browser. So it's not a VPN. You're not
+just transmitting every single piece of
+information on your computer through
+decodo, just the applications that you
+choose to be, which in this case could
+be just a Chrome browser. And either you
+can have a list of IP addresses or
+proxies, or you can just select a
+rotating session type and your IP just
+keeps on rotating or a fixed interval.
+Decode also offers something they call
+as a web scraping API which I came to
+know about which is basically a
+pre-built set of templates that you can
+choose against either like all of the
+web or specific platforms like YouTube.
+Let me show you how. So let's say I
+select this YouTube metadata which is
+exactly what we want to do and I add the
+YouTube video link which I want to fetch
+for it or at least the ID for now. So
+this is one of my videos and as you can
+see the moment I click on this send
+request button that is here on the
+bottom right and you're going to see
+once we get the response back it
+basically includes everything from the
+description that I had in the video to
+the tags that I used for the video the
+likes even the thumbnails that are
+running at in AB test right and then the
+title uploader information and views as
+well. So this basically gives you
+everything parsed with the help of AI.
+So that is what the scraping API and web
+scraping API is and there are many
+templates that you can run them against.
+So this web scraping API product is
+super interesting also because it
+handles a lot of things on its own like
+IP rotation antibbot infrastructure and
+unblocking you when firewalls like
+Cloudflare could potentially block your
+access. Also an interesting way to look
+at decoder's web scraping API is with
+this table that I have where the web
+scraping API itself handles a bunch of
+things like JavaScript rendering,
+rotating IP address, browsing that
+bypasses anti-bot infrastructure and
+it's basically sort of like a managed
+service, right? Where you just don't
+worry about what's happening under the
+hood. If you're using a simple IP proxy
+system, all of this is still possible,
+but then you have to use services on
+your own. For example, this JavaScript
+rendering would require browser
+rendering on your side, right? So you
+have to make sure of that for antibot
+infrastructure you'll have to use things
+like puppeteer stealth or you know some
+some weird things like you know using
+actual chrome browser not just chromium
+and plus of course like managing the IP
+rotations and 100 different things which
+comes with staying hidden when you are
+doing any sort of scraping. So do check
+out decodo their pricing is super
+affordable to start with all the links
+are in the description for you to check
+them out. And now back to the video. Now
+the bigger challenge is that once you
+have created this pipeline how do you
+run this in the first place? Of course,
+there needs to be a crown system that's
+not only just visiting the channel for
+new videos or new data or whatever new
+is that getting generated, but you also
+have to refresh the old data, right?
+Because videos get more views, titles
+change, thumbnails get updated. So,
+whatever the people are doing, you need
+to refresh those things and you need to
+store them in snapshots because if you
+don't store snapshots, then you will not
+be able to tell that this happened from
+that specific thing. Second is that
+channels has to be decoupled from users
+because if you think about it let's say
+I added four channels my own channel
+let's say some other channel let's say a
+few more channels over here right so
+it's possible that this channel or this
+channel is added by some other person as
+well in the first place right let's say
+this is user two this is you who are
+using the product you have added the
+same channel for theos right so the work
+that has already been done in order to
+extract this information is not unique
+because this is all public data right so
+the AB test for example that he's
+running or the video information the
+metadata that is available publicly this
+is all public information so you don't
+have to redo that so the architecture
+has to be designed in such a way that
+channels are decoupled from the actual
+users which are adding that and then
+finally you know the speed of
+revalidation this has been my biggest
+concern so this is something that I have
+not solved yet like what will happen if
+there are a lot of people who will start
+using it the thing is that right now
+there's a cron system that runs once
+every 15 or 30 minutes I'll have to
+check it in the code but every single
+every slot of 15 to 30 minutes this
+whole revalidation would happen again
+and again on a maximum of 50 channels
+right so as as time goes by and as we
+exceed this count there are a couple of
+ways to actually fix this first would be
+obviously like doing parallel crons plus
+browsers in order to [snorts] you know
+get more channels is getting the work
+done. But again like it increases cost
+because you have to pay for more proxies
+and you have to pay for more compute.
+The second one is obviously like
+speeding up the scraping part right
+because spinning up a browser and then
+you know going to a website and
+navigating all of that is like it takes
+time. So even if you are able to you
+know reduce it from let's say 2 seconds
+to 1 second per video scrape or per
+channel scrape that's like 50% of the
+time reduced. So again I'll get to this
+when we exceed like a few hundred
+channels where this starts to be a
+problem but otherwise it'll just be like
+that instead of 50 channels getting
+updated real time if we have let's say
+100 channels that set of channel will
+get a new update or fresh updates once
+every 30 minutes and of course like I
+can also reduce the chron time to be
+just once every minute but again that
+also brings the question that you know
+it's basically the same thing as like
+parallelizing stuff in order to increase
+the throughput. So all in all there were
+a lot of system design decisions that I
+had to take in building an app which
+looks like this but it was super fun and
+most importantly this UI and everything
+that you see this has been done mostly
+by Opus I'm not going to lie I'm not a
+huge UI person and that's why you will
+see like a few cracks here and there for
+example on about page the eyes are not
+following my my cursor right but on
+other pages it does so I think like
+something got missed there so there
+would be a couple of things here and
+there which would be not on track but I
+suggest you you give this a shot. You
+can loging in with a free account and
+for now you'll be able to add up to two
+channels, but you can upgrade to a pro
+account for $10 a month. All the billing
+is handled by Stripe. So, this is all
+secure and easy for you to use and it
+allows you to add up to 100 channels for
+now. If you need more channels, let me
+know. The support for this you can get
+easily from anywhere where I'm socially
+active, that is on, you know, X or
+LinkedIn or YouTube. You can just
+comment down or you can even email me if
+you want for any feature request or
+anything that you are facing any issue
+with and I'll take a look. So yeah,
+that's pretty much it for this video.
+Hopefully you liked it. Do let me know
+what you think about the product. I'm
+going to see you in the next video very
+soon. If you're still watching, make
+sure you leave a comment. I watched till
+the end below to tell me that you were
+still here and let me know what do you
+think about the video.
+[music]

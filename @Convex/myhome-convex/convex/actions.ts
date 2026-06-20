@@ -325,18 +325,16 @@ export const checkYouTubeUpdates = action({
   args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
   handler: async (ctx, args) => {
     try {
-      // Fetch the channel's videos page and extract video IDs from embedded JSON
-      const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
-      const response = await fetch(channelUrl, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept-Language': 'en-US,en;q=0.9',
-        }
-      });
+      // Fetch the channel's XML RSS feed instead of web scraping
+      const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
+      const response = await fetch(rssUrl);
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      const html = await response.text();
-      const videoIds = extractYouTubeUploadsVideoIds(html);
+      const xml = await response.text();
+      
+      // Extract video IDs from standard <yt:videoId> XML elements
+      const matches = [...xml.matchAll(/<yt:videoId>([a-zA-Z0-9_-]{11})<\/yt:videoId>/g)];
+      const videoIds = matches.map(match => match[1]);
 
       if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
 
@@ -346,7 +344,10 @@ export const checkYouTubeUpdates = action({
       if (latestVideoId === args.lastVideoId) return { count: 0, latestVideoId };
 
       const lastIndex = videoIds.indexOf(args.lastVideoId);
-      const count = lastIndex === -1 ? videoIds.length : lastIndex;
+      
+      // If the last tracked video is no longer in the feed (pushed off the 15-item feed limit or deleted),
+      // cap the notification count to 1 as a safety measure to prevent massive false positive spikes.
+      const count = lastIndex === -1 ? 1 : lastIndex;
 
       return { count, latestVideoId };
     } catch (error) {
