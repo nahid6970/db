@@ -1171,6 +1171,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === detailOverlay) closeMatchDetail(); 
     });
 
+    const mdmRefreshBtn = document.getElementById("mdm-refresh-btn");
+    mdmRefreshBtn?.addEventListener("click", async () => {
+        if (!currentDetailId) return;
+        mdmRefreshBtn.disabled = true;
+        const originalHTML = mdmRefreshBtn.innerHTML;
+        mdmRefreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate fa-spin"></i> Loading...`;
+        try {
+            const data = await fetch(`/api/match/${currentDetailId}?refresh=true`).then(r => r.json());
+            renderMatchDetail(data, currentS1, currentS2);
+            mdmRefreshBtn.innerHTML = `<i class="fa-solid fa-check"></i> Updated!`;
+            setTimeout(() => { mdmRefreshBtn.innerHTML = originalHTML; }, 1500);
+        } catch(e) {
+            console.error("Failed to refresh stats:", e);
+            mdmRefreshBtn.innerHTML = `<i class="fa-solid fa-circle-xmark"></i> Failed`;
+            setTimeout(() => { mdmRefreshBtn.innerHTML = originalHTML; }, 1500);
+        } finally {
+            mdmRefreshBtn.disabled = false;
+        }
+    });
+
     function updateMdmNavButtons() {
         const prevBtn = document.getElementById("mdm-nav-prev");
         const nextBtn = document.getElementById("mdm-nav-next");
