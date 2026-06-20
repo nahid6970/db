@@ -760,7 +760,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const icon = refreshBtn.querySelector("i");
             if (icon) icon.classList.add("spinning");
             refreshBtn.disabled = true;
-            refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> Syncing...`;
+            refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> SYNC`;
             
             try {
                 const start = scrapeStart ? (parseInt(scrapeStart.value) || null) : null;
