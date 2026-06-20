@@ -109,6 +109,8 @@
   .badge-ft   { color:#2ecc71; font-weight:700; font-size:0.85rem; }
   .badge-pre  { color:#888;    font-size:0.78rem; }
   .card-live  { border-color:#e74c3c !important; box-shadow:0 0 12px rgba(231,76,60,0.3); }
+  .card-past  { border-color:#1c2d5a !important; background:#0d0d1e; opacity:0.85; }
+  .card-past:hover { border-color:#1e3799 !important; }
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
   .score-winner { color: #2ecc71 !important; }
   .score-loser { color: #e74c3c !important; }
@@ -374,11 +376,12 @@ async function fetchMatches() {
         const [home, away] = comp.competitors;
         const st = comp.status;
         const isLive = st.type.state === 'in';
+        const cardClass = isLive ? ' card-live' : ' card-past';
         const isGoalEvent = g => g.scoringPlay || g.redCard || g.yellowCard;
         const homeGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'home');
         const awayGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'away');
         html += `
-        <div class="match-card${isLive?' card-live':''}">
+        <div class="match-card${cardClass}">
           <div class="team team-panel">
             <div class="team-head">
               <img class="flag" src="${home.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${home.team.displayName}">
