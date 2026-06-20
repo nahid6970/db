@@ -95,8 +95,62 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentS2 = "";
 
     document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
-    detailOverlay?.addEventListener("click", e => { if (e.target === detailOverlay) closeMatchDetail(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") closeMatchDetail(); });
+    detailOverlay?.addEventListener("click", e => { 
+        if (e.target === detailOverlay) closeMatchDetail(); 
+    });
+
+    function updateMdmNavButtons() {
+        const prevBtn = document.getElementById("mdm-nav-prev");
+        const nextBtn = document.getElementById("mdm-nav-next");
+        if (!prevBtn || !nextBtn) return;
+
+        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
+        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
+
+        if (currentIndex === -1) {
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return;
+        }
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === visibleCards.length - 1;
+    }
+
+    function navigateMatchDetail(direction) {
+        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
+        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
+
+        if (currentIndex === -1) return;
+
+        let targetIndex = currentIndex + direction;
+        if (targetIndex >= 0 && targetIndex < visibleCards.length) {
+            const targetCard = visibleCards[targetIndex];
+            openMatchDetail(targetCard.getAttribute("data-id"), targetCard);
+        }
+    }
+
+    document.getElementById("mdm-nav-prev")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigateMatchDetail(-1);
+    });
+
+    document.getElementById("mdm-nav-next")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigateMatchDetail(1);
+    });
+
+    document.addEventListener("keydown", e => { 
+        if (detailOverlay && detailOverlay.style.display === "flex") {
+            if (e.key === "Escape") {
+                closeMatchDetail();
+            } else if (e.key === "ArrowLeft") {
+                navigateMatchDetail(-1);
+            } else if (e.key === "ArrowRight") {
+                navigateMatchDetail(1);
+            }
+        }
+    });
 
     const mdmRefreshBtn = document.getElementById("mdm-refresh-btn");
     mdmRefreshBtn?.addEventListener("click", async () => {
@@ -154,11 +208,13 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("mdm-stats-section").style.display = "none";
         document.getElementById("mdm-no-stats").style.display = "none";
         detailOverlay.style.display = "flex";
+        updateMdmNavButtons();
 
         // Fetch full data
         try {
             const data = await fetch(`/api/match/${mid}`).then(r => r.json());
             renderMatchDetail(data, s1, s2);
+            updateMdmNavButtons();
         } catch(e) {
             document.getElementById("mdm-no-stats").style.display = "";
         }
