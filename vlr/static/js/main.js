@@ -1195,91 +1195,93 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
 
     // Player Aggregated Stats / Leaderboard Functions
-    function calculatePlayerAggregates(matches) {
+    function calculatePlayerAggregates(matches, selectedTourneys) {
         const playersMap = {};
 
         if (!Array.isArray(matches)) return [];
 
         matches.forEach(m => {
-            if (m && m.players && typeof m.players === "object" && m.players.all && typeof m.players.all === "object") {
-                const teams = ["team1", "team2"];
-                teams.forEach(tKey => {
-                    const playersList = m.players.all[tKey];
-                    if (Array.isArray(playersList)) {
-                        playersList.forEach(p => {
-                            if (!p || !p.name) return;
-                            
-                            if (!playersMap[p.name]) {
-                                playersMap[p.name] = {
-                                    name: p.name,
-                                    photo: p.photo || "",
-                                    agents: {}, // name -> { icon, count }
-                                    matchesPlayed: 0,
-                                    ratingsList: [],
-                                    acsList: [],
-                                    kills: 0,
-                                    deaths: 0,
-                                    assists: 0,
-                                    kastList: [],
-                                    adrList: [],
-                                    hsList: [],
-                                    fk: 0,
-                                    fd: 0
-                                };
-                            }
+            if (m && m.tournament && selectedTourneys && selectedTourneys.has(m.tournament)) {
+                if (m.players && typeof m.players === "object" && m.players.all && typeof m.players.all === "object") {
+                    const teams = ["team1", "team2"];
+                    teams.forEach(tKey => {
+                        const playersList = m.players.all[tKey];
+                        if (Array.isArray(playersList)) {
+                            playersList.forEach(p => {
+                                if (!p || !p.name) return;
+                                
+                                if (!playersMap[p.name]) {
+                                    playersMap[p.name] = {
+                                        name: p.name,
+                                        photo: p.photo || "",
+                                        agents: {}, // name -> { icon, count }
+                                        matchesPlayed: 0,
+                                        ratingsList: [],
+                                        acsList: [],
+                                        kills: 0,
+                                        deaths: 0,
+                                        assists: 0,
+                                        kastList: [],
+                                        adrList: [],
+                                        hsList: [],
+                                        fk: 0,
+                                        fd: 0
+                                    };
+                                }
 
-                            const agg = playersMap[p.name];
-                            agg.matchesPlayed++;
-                            
-                            if (!agg.photo && p.photo) agg.photo = p.photo;
+                                const agg = playersMap[p.name];
+                                agg.matchesPlayed++;
+                                
+                                if (!agg.photo && p.photo) agg.photo = p.photo;
 
-                            if (Array.isArray(p.agents)) {
-                                p.agents.forEach(a => {
-                                    if (a && a.name) {
-                                        if (!agg.agents[a.name]) {
-                                            agg.agents[a.name] = { icon: a.icon || "", count: 0 };
+                                if (Array.isArray(p.agents)) {
+                                    p.agents.forEach(a => {
+                                        if (a && a.name) {
+                                            if (!agg.agents[a.name]) {
+                                                agg.agents[a.name] = { icon: a.icon || "", count: 0 };
+                                            }
+                                            agg.agents[a.name].count++;
                                         }
-                                        agg.agents[a.name].count++;
-                                    }
-                                });
-                            }
+                                    });
+                                }
 
-                            const ratingVal = parseFloat(p.rating);
-                            if (!isNaN(ratingVal)) agg.ratingsList.push(ratingVal);
+                                const ratingVal = parseFloat(p.rating);
+                                if (!isNaN(ratingVal)) agg.ratingsList.push(ratingVal);
 
-                            const acsVal = parseFloat(p.acs);
-                            if (!isNaN(acsVal)) agg.acsList.push(acsVal);
+                                const acsVal = parseFloat(p.acs);
+                                if (!isNaN(acsVal)) agg.acsList.push(acsVal);
 
-                            const kVal = parseInt(p.k);
-                            if (!isNaN(kVal)) agg.kills += kVal;
+                                const kVal = parseInt(p.k);
+                                if (!isNaN(kVal)) agg.kills += kVal;
 
-                            const dVal = parseInt(p.d);
-                            if (!isNaN(dVal)) agg.deaths += dVal;
+                                const dVal = parseInt(p.d);
+                                if (!isNaN(dVal)) agg.deaths += dVal;
 
-                            const aVal = parseInt(p.a);
-                            if (!isNaN(aVal)) agg.assists += aVal;
+                                const aVal = parseInt(p.a);
+                                if (!isNaN(aVal)) agg.assists += aVal;
 
-                            if (p.kast && typeof p.kast === "string") {
-                                const kastVal = parseFloat(p.kast.replace("%", ""));
-                                if (!isNaN(kastVal)) agg.kastList.push(kastVal);
-                            }
+                                if (p.kast && typeof p.kast === "string") {
+                                    const kastVal = parseFloat(p.kast.replace("%", ""));
+                                    if (!isNaN(kastVal)) agg.kastList.push(kastVal);
+                                }
 
-                            const adrVal = parseFloat(p.adr);
-                            if (!isNaN(adrVal)) agg.adrList.push(adrVal);
+                                const adrVal = parseFloat(p.adr);
+                                if (!isNaN(adrVal)) agg.adrList.push(adrVal);
 
-                            if (p.hs && typeof p.hs === "string") {
-                                const hsVal = parseFloat(p.hs.replace("%", ""));
-                                if (!isNaN(hsVal)) agg.hsList.push(hsVal);
-                            }
+                                if (p.hs && typeof p.hs === "string") {
+                                    const hsVal = parseFloat(p.hs.replace("%", ""));
+                                    if (!isNaN(hsVal)) agg.hsList.push(hsVal);
+                                }
 
-                            const fkVal = parseInt(p.fk);
-                            if (!isNaN(fkVal)) agg.fk += fkVal;
+                                const fkVal = parseInt(p.fk);
+                                if (!isNaN(fkVal)) agg.fk += fkVal;
 
-                            const fdVal = parseInt(p.fd);
-                            if (!isNaN(fdVal)) agg.fd += fdVal;
-                        });
-                    }
-                });
+                                const fdVal = parseInt(p.fd);
+                                if (!isNaN(fdVal)) agg.fd += fdVal;
+                            });
+                        }
+                    });
+                }
             }
         });
 
@@ -1320,7 +1322,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function openLeaderboard() {
         try {
             const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
-            const aggregates = calculatePlayerAggregates(matches);
+            const selectedTourneys = typeof checkedTournaments !== "undefined" ? checkedTournaments : new Set();
+            const aggregates = calculatePlayerAggregates(matches, selectedTourneys);
 
             const tbody = document.getElementById("leaderboard-tbody");
             if (!tbody) {
