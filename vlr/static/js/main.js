@@ -269,22 +269,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td class="r">${p.fd || ""}</td>
                 <td class="r">${formatDiff(p.fk_diff)}</td>
             </tr>`).join("");
-            return `<div class="mdm-stats-team">${label}</div>
-            <table class="mdm-stats-table"><thead><tr>
-                <th>Player</th><th class="r">Agent</th>
-                <th class="r">R</th>
-                <th class="r">ACS</th>
-                <th class="r">K</th>
-                <th class="r">D</th>
-                <th class="r">A</th>
-                <th class="r">+/-</th>
-                <th class="r">KAST</th>
-                <th class="r">ADR</th>
-                <th class="r">HS%</th>
-                <th class="r">FK</th>
-                <th class="r">FD</th>
-                <th class="r">+/-</th>
-            </tr></thead><tbody>${rows}</tbody></table>`;
+            return `<div class="mdm-stats-row">
+                <div class="mdm-stats-team-sidebar">${label}</div>
+                <div class="mdm-stats-table-wrapper">
+                    <table class="mdm-stats-table"><thead><tr>
+                        <th>Player</th><th class="r">Agent</th>
+                        <th class="r">R</th>
+                        <th class="r">ACS</th>
+                        <th class="r">K</th>
+                        <th class="r">D</th>
+                        <th class="r">A</th>
+                        <th class="r">+/-</th>
+                        <th class="r">KAST</th>
+                        <th class="r">ADR</th>
+                        <th class="r">HS%</th>
+                        <th class="r">FK</th>
+                        <th class="r">FD</th>
+                        <th class="r">+/-</th>
+                    </tr></thead><tbody>${rows}</tbody></table>
+                </div>
+            </div>`;
         };
 
         const showMapStats = (key) => {
