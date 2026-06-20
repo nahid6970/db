@@ -1776,11 +1776,29 @@ body.light #team-history-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
     width: 50%;
     font-weight: 700;
+    gap: 0;
+}
+.thr-t1 {
+    flex: 1;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.thr-t2 {
+    flex: 1;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .thr-score {
+    flex-shrink: 0;
+    min-width: 56px;
+    text-align: center;
+    margin: 0 16px;
     font-family: var(--font-heading);
     font-size: 16px;
     color: var(--text-primary);
@@ -1811,8 +1829,16 @@ body.light #team-history-btn {
     color: var(--text-muted);
 }
 body.light .thr-score {
-    background: var(--bg-darker);
-    color: #fff;
+    background: #1e293b !important;
+    color: #ffffff !important;
+}
+body.light .thr-status.win {
+    background: rgba(22, 163, 74, 0.1) !important;
+    color: #16a34a !important;
+}
+body.light .thr-status.loss {
+    background: rgba(220, 38, 38, 0.1) !important;
+    color: #dc2626 !important;
 }
 
 

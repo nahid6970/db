@@ -212,11 +212,12 @@
                 <button id="team-history-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
             </div>
             <div class="modal-body" style="padding: 0;">
-                <div style="margin-bottom: 20px; display: flex; gap: 12px; align-items: center;">
+                <div style="margin-bottom: 20px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
                     <label for="team-history-select" style="font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Select Team:</label>
                     <select id="team-history-select" class="sidebar-select" style="max-width: 250px;">
                         <option value="">-- Select a Team --</option>
                     </select>
+                    <input type="text" id="team-history-search" class="ignore-search-input" placeholder="Search team..." style="max-width: 200px;">
                 </div>
                 <div id="team-history-results" style="max-height: 55vh; overflow-y: auto; padding-right: 4px;">
                     <p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown to view past match results.</p>

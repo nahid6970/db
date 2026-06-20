@@ -2,20 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
     const bstClock = document.getElementById("current-bst-clock");
 
-    // Global utility helpers
-    const formatDiff = (diff) => {
-        if (!diff) return "";
-        const val = parseInt(diff);
-        if (isNaN(val)) return diff;
-        if (val > 0) return `<span class="diff-positive">+${val}</span>`;
-        if (val < 0) return `<span class="diff-negative">${val}</span>`;
-        return `<span class="diff-neutral">0</span>`;
-    };
-
-    const renderAgents = agents => (agents || []).map(a =>
-        a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
-    ).join("");
-
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
     const themeIcon = themeBtn?.querySelector("i");
@@ -99,79 +85,23 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target === detailOverlay) closeMatchDetail(); 
     });
 
-    function updateMdmNavButtons() {
-        const prevBtn = document.getElementById("mdm-nav-prev");
-        const nextBtn = document.getElementById("mdm-nav-next");
-        if (!prevBtn || !nextBtn) return;
-
-        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
-        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
-
-        if (currentIndex === -1) {
-            prevBtn.disabled = true;
-            nextBtn.disabled = true;
-            return;
-        }
-
-        prevBtn.disabled = currentIndex === 0;
-        nextBtn.disabled = currentIndex === visibleCards.length - 1;
-    }
-
-    function navigateMatchDetail(direction) {
-        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
-        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
-
-        if (currentIndex === -1) return;
-
-        let targetIndex = currentIndex + direction;
-        if (targetIndex >= 0 && targetIndex < visibleCards.length) {
-            const targetCard = visibleCards[targetIndex];
-            openMatchDetail(targetCard.getAttribute("data-id"), targetCard);
-        }
-    }
-
-    document.getElementById("mdm-nav-prev")?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigateMatchDetail(-1);
-    });
-
-    document.getElementById("mdm-nav-next")?.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigateMatchDetail(1);
-    });
-
-    document.addEventListener("keydown", e => { 
-        if (detailOverlay && detailOverlay.style.display === "flex") {
-            if (e.key === "Escape") {
-                closeMatchDetail();
-            } else if (e.key === "ArrowLeft") {
-                navigateMatchDetail(-1);
-            } else if (e.key === "ArrowRight") {
-                navigateMatchDetail(1);
-            }
-        }
-    });
-
-    const mdmRefreshBtn = document.getElementById("mdm-refresh-btn");
-    mdmRefreshBtn?.addEventListener("click", async () => {
-        if (!currentDetailId) return;
-        const icon = mdmRefreshBtn.querySelector("i");
-        if (icon) icon.classList.add("fa-spin");
-        mdmRefreshBtn.disabled = true;
-        try {
-            const data = await fetch(`/api/match/${currentDetailId}?refresh=true`).then(r => r.json());
-            renderMatchDetail(data, currentS1, currentS2);
-        } catch(e) {
-            console.error("Failed to refresh stats:", e);
-        } finally {
-            if (icon) icon.classList.remove("fa-spin");
-            mdmRefreshBtn.disabled = false;
-        }
-    });
-
     function closeMatchDetail() {
         if (detailOverlay) detailOverlay.style.display = "none";
     }
+
+    // Global utility helpers
+    const formatDiff = (diff) => {
+        if (!diff) return "";
+        const val = parseInt(diff);
+        if (isNaN(val)) return diff;
+        if (val > 0) return `<span class="diff-positive">+${val}</span>`;
+        if (val < 0) return `<span class="diff-negative">${val}</span>`;
+        return `<span class="diff-neutral">0</span>`;
+    };
+
+    const renderAgents = agents => (agents || []).map(a =>
+        a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
+    ).join("");
 
     async function openMatchDetail(mid, cardOrObj) {
         currentDetailId = mid;
@@ -1213,62 +1143,63 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Interactive player stats sorting
-    document.getElementById("mdm-stats")?.addEventListener("click", (e) => {
-        const th = e.target.closest("th");
-        if (!th) return;
-        const table = th.closest("table");
-        if (!table) return;
-        const tbody = table.querySelector("tbody");
-        if (!tbody) return;
-        const rows = Array.from(tbody.querySelectorAll("tr"));
-        if (!rows.length) return;
-
-        const index = Array.from(th.parentNode.children).indexOf(th);
-        
-        // Default to descending (highest first) on the first click, then toggle
-        let dir = th.getAttribute("data-sort-dir") === "desc" ? "asc" : "desc";
-
-        table.querySelectorAll("th").forEach(h => {
-            if (h !== th) {
-                h.removeAttribute("data-sort-dir");
-                h.classList.remove("th-sort-asc", "th-sort-desc");
-            }
-        });
-
-        th.setAttribute("data-sort-dir", dir);
-        th.classList.toggle("th-sort-asc", dir === "asc");
-        th.classList.toggle("th-sort-desc", dir === "desc");
-
-        rows.sort((rowA, rowB) => {
-            const cellA = rowA.children[index];
-            const cellB = rowB.children[index];
-            let valA = cellA ? cellA.textContent.trim() : "";
-            let valB = cellB ? cellB.textContent.trim() : "";
-
-            // Strip percentage signs for KAST or HS% columns
-            if (index === 8 || index === 10) {
-                valA = valA.replace("%", "");
-                valB = valB.replace("%", "");
-            }
-
-            const isNumeric = index >= 2;
-            if (isNumeric) {
-                let numA = parseFloat(valA);
-                let numB = parseFloat(valB);
-                if (isNaN(numA)) numA = dir === "asc" ? Infinity : -Infinity;
-                if (isNaN(numB)) numB = dir === "asc" ? Infinity : -Infinity;
-                return dir === "asc" ? numA - numB : numB - numA;
-            } else {
-                return dir === "asc" ? valA.localeCompare(valB) : valB.localeCompare(valA);
-            }
-        });
-
-        rows.forEach(row => tbody.appendChild(row));
+    document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
+    detailOverlay?.addEventListener("click", e => { 
+        if (e.target === detailOverlay) closeMatchDetail(); 
     });
 
-    document.getElementById("btn-ignore-unchecked")?.addEventListener("click", () => ignoreVisible(false));
-    document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
+    function updateMdmNavButtons() {
+        const prevBtn = document.getElementById("mdm-nav-prev");
+        const nextBtn = document.getElementById("mdm-nav-next");
+        if (!prevBtn || !nextBtn) return;
+
+        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
+        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
+
+        if (currentIndex === -1) {
+            prevBtn.disabled = true;
+            nextBtn.disabled = true;
+            return;
+        }
+
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === visibleCards.length - 1;
+    }
+
+    function navigateMatchDetail(direction) {
+        const visibleCards = Array.from(document.querySelectorAll(".match-card")).filter(card => card.style.display !== "none");
+        const currentIndex = visibleCards.findIndex(card => card.getAttribute("data-id") === currentDetailId);
+
+        if (currentIndex === -1) return;
+
+        let targetIndex = currentIndex + direction;
+        if (targetIndex >= 0 && targetIndex < visibleCards.length) {
+            const targetCard = visibleCards[targetIndex];
+            openMatchDetail(targetCard.getAttribute("data-id"), targetCard);
+        }
+    }
+
+    document.getElementById("mdm-nav-prev")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigateMatchDetail(-1);
+    });
+
+    document.getElementById("mdm-nav-next")?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        navigateMatchDetail(1);
+    });
+
+    document.addEventListener("keydown", e => { 
+        if (detailOverlay && detailOverlay.style.display === "flex") {
+            if (e.key === "Escape") {
+                closeMatchDetail();
+            } else if (e.key === "ArrowLeft") {
+                navigateMatchDetail(-1);
+            } else if (e.key === "ArrowRight") {
+                navigateMatchDetail(1);
+            }
+        }
+    });
 
     // Player Aggregated Stats / Leaderboard Functions
     function calculatePlayerAggregates(matches, selectedTourneys) {
@@ -1486,11 +1417,14 @@ document.addEventListener("DOMContentLoaded", () => {
         if (leaderboardModal) leaderboardModal.style.display = "none";
     });
     leaderboardModal?.addEventListener("click", (e) => {
-        if (e.target === leaderboardModal) leaderboardModal.style.display = "none";
+        const modalBox = leaderboardModal.querySelector(".match-detail-modal");
+        if (modalBox && !modalBox.contains(e.target)) {
+            leaderboardModal.style.display = "none";
+        }
     });
 
     // Team history modal trigger & helper functions
-    function populateTeamDropdown() {
+    function populateTeamDropdown(searchKeyword = "") {
         const select = document.getElementById("team-history-select");
         if (!select) return;
 
@@ -1505,14 +1439,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const sortedTeams = Array.from(teams).sort((a, b) => a.localeCompare(b));
-        sortedTeams.forEach(t => {
+        
+        const filteredTeams = sortedTeams.filter(t => 
+            t.toLowerCase().includes(searchKeyword.toLowerCase())
+        );
+
+        filteredTeams.forEach(t => {
             const opt = document.createElement("option");
             opt.value = t;
             opt.textContent = t;
             select.appendChild(opt);
         });
 
-        if (currentVal && teams.has(currentVal)) {
+        if (currentVal && filteredTeams.includes(currentVal)) {
             select.value = currentVal;
         }
     }
@@ -1584,8 +1523,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const teamHistoryModal = document.getElementById("team-history-modal");
     const teamHistoryClose = document.getElementById("team-history-close");
     const teamHistorySelect = document.getElementById("team-history-select");
+    const teamHistorySearch = document.getElementById("team-history-search");
 
     teamHistoryBtn?.addEventListener("click", () => {
+        if (teamHistorySearch) teamHistorySearch.value = "";
         populateTeamDropdown();
         if (teamHistoryModal) teamHistoryModal.style.display = "flex";
     });
@@ -1593,10 +1534,21 @@ document.addEventListener("DOMContentLoaded", () => {
         if (teamHistoryModal) teamHistoryModal.style.display = "none";
     });
     teamHistoryModal?.addEventListener("click", (e) => {
-        if (e.target === teamHistoryModal) teamHistoryModal.style.display = "none";
+        const modalBox = teamHistoryModal.querySelector(".match-detail-modal");
+        if (modalBox && !modalBox.contains(e.target)) {
+            teamHistoryModal.style.display = "none";
+        }
     });
     teamHistorySelect?.addEventListener("change", (e) => {
         renderTeamHistory(e.target.value);
+    });
+    teamHistorySearch?.addEventListener("input", (e) => {
+        populateTeamDropdown(e.target.value);
+        const select = document.getElementById("team-history-select");
+        if (select && select.options.length === 2) {
+            select.selectedIndex = 1;
+            renderTeamHistory(select.value);
+        }
     });
 
     // Leaderboard table click sorting
