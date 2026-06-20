@@ -1335,6 +1335,30 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            // Default sort: Average Rating (Avg R) Descending
+            aggregates.sort((a, b) => {
+                const numA = parseFloat(a.rating);
+                const numB = parseFloat(b.rating);
+                const rA = isNaN(numA) ? -Infinity : numA;
+                const rB = isNaN(numB) ? -Infinity : numB;
+                return rB - rA;
+            });
+
+            // Set visual active sort indicator on the "Avg R" header (Index 3)
+            const table = document.getElementById("leaderboard-table");
+            if (table) {
+                table.querySelectorAll("th").forEach((h, idx) => {
+                    if (idx === 3) {
+                        h.setAttribute("data-sort-dir", "desc");
+                        h.classList.add("th-sort-desc");
+                        h.classList.remove("th-sort-asc");
+                    } else {
+                        h.removeAttribute("data-sort-dir");
+                        h.classList.remove("th-sort-asc", "th-sort-desc");
+                    }
+                });
+            }
+
             const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
             const topAcs = maxAcs(aggregates);
 
