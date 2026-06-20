@@ -180,7 +180,13 @@ def api_match_detail(match_id):
         for team in ("team1", "team2")
         for p in map_data.get(team, [])
     )
-    if (force_refresh or not match.get("maps") or old_format or missing_all or missing_photos) and match.get("href"):
+    missing_new_stats = any(
+        "kd_diff" not in p
+        for map_data in players.values() if isinstance(map_data, dict)
+        for team in ("team1", "team2")
+        for p in map_data.get(team, [])
+    )
+    if (force_refresh or not match.get("maps") or old_format or missing_all or missing_photos or missing_new_stats) and match.get("href"):
         details = scraper.fetch_match_detail_page(match["href"])
         if details:
             match.update(details)

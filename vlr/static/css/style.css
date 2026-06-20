@@ -1601,3 +1601,26 @@ body.light .mdm-acs-top { color: #b45309; }
 .mdm-map-tab:hover { color: var(--text-primary); border-color: var(--text-muted); }
 .mdm-map-tab.active { background: var(--accent-red); border-color: var(--accent-red); color: #fff; }
 
+/* +/- Diff stats styles */
+.diff-positive {
+    color: var(--accent-green) !important;
+    font-weight: 600;
+}
+body.light .diff-positive {
+    color: #16a34a !important;
+}
+.diff-negative {
+    color: var(--accent-red) !important;
+    font-weight: 600;
+}
+body.light .diff-negative {
+    color: #dc2626 !important;
+}
+.diff-neutral {
+    color: var(--text-muted);
+}
+#mdm-stats {
+    overflow-x: auto;
+}
+
+

@@ -241,21 +241,49 @@ document.addEventListener("DOMContentLoaded", () => {
             a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
         ).join("");
 
+        const formatDiff = (diff) => {
+            if (!diff) return "";
+            const val = parseInt(diff);
+            if (isNaN(val)) return diff;
+            if (val > 0) return `<span class="diff-positive">+${val}</span>`;
+            if (val < 0) return `<span class="diff-negative">${val}</span>`;
+            return `<span class="diff-neutral">0</span>`;
+        };
+
         const renderTable = (plist, label) => {
             if (!plist?.length) return "";
             const topAcs = maxAcs(plist);
             const rows = plist.map(p => `<tr>
                 <td><div class="mdm-player-cell">${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
                 <td class="r">${renderAgents(p.agents)}</td>
+                <td class="r">${p.rating || ""}</td>
                 <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
-                <td class="r">${p.k}</td><td class="r">${p.d}</td><td class="r">${p.a}</td>
-                <td class="r">${p.kast}</td><td class="r">${p.adr}</td><td class="r">${p.hs}</td>
+                <td class="r">${p.k}</td>
+                <td class="r">${p.d}</td>
+                <td class="r">${p.a}</td>
+                <td class="r">${formatDiff(p.kd_diff)}</td>
+                <td class="r">${p.kast}</td>
+                <td class="r">${p.adr}</td>
+                <td class="r">${p.hs}</td>
+                <td class="r">${p.fk || ""}</td>
+                <td class="r">${p.fd || ""}</td>
+                <td class="r">${formatDiff(p.fk_diff)}</td>
             </tr>`).join("");
             return `<div class="mdm-stats-team">${label}</div>
             <table class="mdm-stats-table"><thead><tr>
                 <th>Player</th><th class="r">Agent</th>
-                <th class="r">ACS</th><th class="r">K</th><th class="r">D</th><th class="r">A</th>
-                <th class="r">KAST</th><th class="r">ADR</th><th class="r">HS%</th>
+                <th class="r">R</th>
+                <th class="r">ACS</th>
+                <th class="r">K</th>
+                <th class="r">D</th>
+                <th class="r">A</th>
+                <th class="r">+/-</th>
+                <th class="r">KAST</th>
+                <th class="r">ADR</th>
+                <th class="r">HS%</th>
+                <th class="r">FK</th>
+                <th class="r">FD</th>
+                <th class="r">+/-</th>
             </tr></thead><tbody>${rows}</tbody></table>`;
         };
 

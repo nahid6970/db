@@ -228,20 +228,36 @@ def fetch_match_detail_page(href):
                         elif src.startswith("/"): src = "https://www.vlr.gg" + src
                         agents.append({"name": aname, "icon": download_image(src) if src else ""})
                     def stat(td):
+                        if not td:
+                            return ""
                         s = td.find("span", class_="mod-both")
-                        return s.text.strip() if s else ""
+                        if s:
+                            return s.text.strip()
+                        return td.text.strip()
+                    
+                    rating = stat(tds[2]) if len(tds) > 2 else ""
+                    kd_diff = stat(tds[7]) if len(tds) > 7 else ""
+                    fk = stat(tds[11]) if len(tds) > 11 else ""
+                    fd = stat(tds[12]) if len(tds) > 12 else ""
+                    fk_diff = stat(tds[13]) if len(tds) > 13 else ""
+
                     result[team_key].append({
                         "name": player_name,
                         "href": player_href,
                         "photo": "",  # filled in after parallel fetch
                         "agents": agents,
+                        "rating": rating,
                         "acs": stat(tds[3]),
                         "k": stat(tds[4]),
                         "d": stat(tds[5]),
                         "a": stat(tds[6]),
+                        "kd_diff": kd_diff,
                         "kast": stat(tds[8]),
                         "adr": stat(tds[9]),
                         "hs": stat(tds[10]),
+                        "fk": fk,
+                        "fd": fd,
+                        "fk_diff": fk_diff,
                     })
             return result
 
@@ -393,7 +409,13 @@ def fetch_details_in_background(scraped_matches):
                 for team in ("team1", "team2")
                 for p in map_data.get(team, [])
             )
-            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all and not missing_photos
+            missing_new_stats = any(
+                "kd_diff" not in p
+                for map_data in existing_players.values() if isinstance(map_data, dict)
+                for team in ("team1", "team2")
+                for p in map_data.get(team, [])
+            )
+            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all and not missing_photos and not missing_new_stats
 
             if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))
@@ -425,6 +447,7 @@ def fetch_details_in_background(scraped_matches):
                         current_db[mid]["bst_time"] = details["bst_time"]
                         current_db[mid]["maps"] = details.get("maps", [])
                         current_db[mid]["players"] = details.get("players", {})
+                        current_db[mid]["status"] = details.get("status", current_db[mid].get("status", "Completed"))
                         current_db[mid]["last_updated"] = int(datetime.now().timestamp())
                 save_json_matches(current_db)
         print("Background details thread finished.")
