@@ -108,9 +108,33 @@
   .badge-ht   { color:#f39c12; font-weight:700; font-size:0.85rem; }
   .badge-ft   { color:#2ecc71; font-weight:700; font-size:0.85rem; }
   .badge-pre  { color:#888;    font-size:0.78rem; }
-  .card-live  { border-color:#e74c3c !important; box-shadow:0 0 12px rgba(231,76,60,0.3); }
-  .card-past  { border-color:#1c2d5a !important; background:#0d0d1e; opacity:0.85; }
-  .card-past:hover { border-color:#1e3799 !important; }
+  
+  /* Live & Past Game Card Styles */
+  .card-live {
+    border: 1px solid #e74c3c !important;
+    border-left: 5px solid #e74c3c !important;
+    background: linear-gradient(135deg, #180d19, #0d0d22) !important;
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.15);
+  }
+  .card-live:hover {
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.3);
+  }
+  .card-past {
+    border: 1px solid #1c2d5a !important;
+    border-left: 5px solid #2858b5 !important;
+    background: #080815 !important;
+    opacity: 0.95;
+  }
+  .card-past:hover {
+    border-color: #2858b5 !important;
+    background: #0a0a1a !important;
+  }
+  
+  /* Winner & Loser styles for past games */
+  .team.winner .team-name { color: #ffffff; font-weight: 800; }
+  .team.loser .team-name { color: #7f8c8d; font-weight: 500; }
+  .team.loser img.flag { opacity: 0.5; filter: grayscale(30%); }
+
   .live-score { font-size:1.8rem; font-weight:900; letter-spacing:4px; color:#f9ca24; }
   .score-winner { color: #2ecc71 !important; }
   .score-loser { color: #e74c3c !important; }
@@ -287,7 +311,7 @@ function statusBadge(st, clock) {
     }
     return `<span class="badge-live">&#9679; LIVE ${min}</span>`;
   }
-  if (s === 'post') return '';
+  if (s === 'post') return `<span class="badge-ft">FT</span>`;
   return `<span class="badge-pre">${st.type.shortDetail||'Upcoming'}</span>`;
 }
 
@@ -380,9 +404,25 @@ async function fetchMatches() {
         const isGoalEvent = g => g.scoringPlay || g.redCard || g.yellowCard;
         const homeGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'home');
         const awayGoals = (comp.details || []).filter(g => isGoalEvent(g) && goalSide(comp, g) === 'away');
+
+        // Identify winner and loser classes for ended matches
+        const homeScore = parseInt(home.score, 10) || 0;
+        const awayScore = parseInt(away.score, 10) || 0;
+        let homeWinnerClass = '';
+        let awayWinnerClass = '';
+        if (st.type.state === 'post') {
+          if (homeScore > awayScore) {
+            homeWinnerClass = ' winner';
+            awayWinnerClass = ' loser';
+          } else if (awayScore > homeScore) {
+            homeWinnerClass = ' loser';
+            awayWinnerClass = ' winner';
+          }
+        }
+
         html += `
         <div class="match-card${cardClass}">
-          <div class="team team-panel">
+          <div class="team team-panel${homeWinnerClass}">
             <div class="team-head">
               <img class="flag" src="${home.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${home.team.displayName}">
               <span class="team-name">${home.team.displayName}</span>
@@ -394,7 +434,7 @@ async function fetchMatches() {
             <div class="match-meta">${statusBadge(st, st.clock)}</div>
             <div class="match-meta">${[comp.venue?.address?.country, comp.venue?.displayName].filter(Boolean).join(' · ')}</div>
           </div>
-          <div class="team team-panel right">
+          <div class="team team-panel right${awayWinnerClass}">
             <div class="team-head">
               <img class="flag" src="${away.team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${away.team.displayName}">
               <span class="team-name">${away.team.displayName}</span>
