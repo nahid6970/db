@@ -1585,6 +1585,31 @@ body.light .grid-separator-line {
 .mdm-map-card.mdm-map-lose { border-color: rgba(229,56,59,.3); }
 .mdm-map-card[data-key="all"] {
     flex: 0 0 110px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-left: 3px solid var(--text-muted);
+}
+.mdm-map-card[data-key="all"]:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--accent-red);
+    border-left-color: var(--accent-red);
+}
+.mdm-map-card[data-key="all"].active {
+    background: rgba(255, 70, 85, 0.08);
+    border-color: var(--accent-red) !important;
+    border-left-color: var(--accent-red) !important;
+    box-shadow: 0 0 10px var(--accent-red-glow);
+}
+
+body.light .mdm-map-card[data-key="all"] {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.12);
+    border-left: 3px solid var(--text-muted);
+}
+body.light .mdm-map-card[data-key="all"].active {
+    background: rgba(255, 70, 85, 0.05);
+    border-color: #ff4655 !important;
+    border-left-color: #ff4655 !important;
 }
 
 body.light .mdm-map-card.active {
