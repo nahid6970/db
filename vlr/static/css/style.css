@@ -1841,6 +1841,14 @@ body.light .thr-status.loss {
     color: #dc2626 !important;
 }
 
+/* Ensure the Team History Modal container and body are fully visible and don't clip absolute children */
+#team-history-modal .match-detail-modal,
+#team-history-modal .modal-body {
+    overflow: visible !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+}
+
 /* Specific text coloring for Team History win/loss */
 .thr-win-text {
     color: var(--accent-green) !important;
@@ -1863,6 +1871,8 @@ body.light .thr-loss-text {
 /* Let the dropdown overlay popover spill beautifully outside the modal box boundaries */
 #team-history-modal .match-detail-modal {
     overflow: visible !important;
+    max-height: none !important;
+    overflow-y: visible !important;
 }
 
 
@@ -1883,11 +1893,11 @@ body.light .thr-loss-text {
 }
 .csd-search-icon {
     position: absolute;
-    left: 12px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
     color: var(--text-muted);
-    font-size: 13px;
+    font-size: 14px;
 }
 .csd-search-input {
     width: 100%;
@@ -1895,8 +1905,8 @@ body.light .thr-loss-text {
     border: none;
     color: var(--text-primary);
     font-family: var(--font-main);
-    font-size: 13px;
-    padding: 10px 12px 10px 34px;
+    font-size: 14px;
+    padding: 12px 14px 12px 38px;
     outline: none;
     box-sizing: border-box;
 }
@@ -1904,8 +1914,8 @@ body.light .thr-loss-text {
     box-shadow: inset 0 0 4px var(--accent-red-glow);
 }
 .csd-options-list {
-    height: 250px;
-    max-height: 250px;
+    height: 400px;
+    max-height: 400px;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -1913,9 +1923,9 @@ body.light .thr-loss-text {
 .csd-option-item {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 12px;
-    font-size: 13px;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
     color: var(--text-secondary);
     cursor: pointer;
     transition: background var(--transition-fast), color var(--transition-fast);
@@ -1934,22 +1944,22 @@ body.light .csd-option-item.active {
     background: #2563eb !important;
 }
 .csd-option-logo {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
 }
 .csd-option-placeholder {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 10px;
+    font-size: 11px;
     color: var(--text-muted);
 }
 .csd-empty-msg {
-    padding: 12px;
-    font-size: 12px;
+    padding: 16px;
+    font-size: 13px;
     color: var(--text-muted);
     text-align: center;
 }
@@ -2005,12 +2015,13 @@ body.light .thr-trigger-btn:hover {
     top: calc(100% + 6px);
     left: 0;
     z-index: 300;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.55);
+    box-shadow: 0 10px 45px rgba(0, 0, 0, 0.4);
     border-radius: var(--border-radius-md);
     background: var(--bg-dark);
     border: 1px solid var(--card-border);
-    min-width: 260px;
-    width: 260px;
+    width: 450px;
+    min-width: 450px;
+    max-width: 450px;
 }
 body.light .custom-search-dropdown-container.popover-panel {
     background: #ffffff;
