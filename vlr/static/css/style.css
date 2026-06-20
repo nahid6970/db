@@ -1625,9 +1625,8 @@ body.light .grid-separator-line {
 }
 .mdm-stats-table th:nth-child(2),
 .mdm-stats-table td:nth-child(2) {
-    width: 60px;
-    min-width: 60px;
     text-align: right;
+    white-space: nowrap;
 }
 .mdm-stats-table th.r, .mdm-stats-table td.r { text-align: right; }
 .mdm-stats-table td { padding: 7px 8px; border-bottom: 1px solid rgba(255,255,255,.04); }
@@ -1638,7 +1637,14 @@ body.light .grid-separator-line {
 .mdm-player-photo-placeholder { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-darker); flex-shrink: 0; }
 .mdm-player-photo { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; background: var(--bg-darker); flex-shrink: 0; }
 .mdm-player-photo-placeholder { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-darker); flex-shrink: 0; }
-.mdm-agent-icon { width: 20px; height: 20px; border-radius: 4px; object-fit: cover; }
+.mdm-agent-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    object-fit: cover;
+    margin-left: 2px;
+    vertical-align: middle;
+}
 .mdm-acs-top { color: #fbbf24; font-weight: 700; }
 body.light .mdm-acs-top { color: #b45309; }
 .mdm-no-stats { color: var(--text-muted); font-size: 13px; padding: 12px 0; text-align: center; }
