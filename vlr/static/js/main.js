@@ -1132,6 +1132,60 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // Interactive player stats sorting
+    document.getElementById("mdm-stats")?.addEventListener("click", (e) => {
+        const th = e.target.closest("th");
+        if (!th) return;
+        const table = th.closest("table");
+        if (!table) return;
+        const tbody = table.querySelector("tbody");
+        if (!tbody) return;
+        const rows = Array.from(tbody.querySelectorAll("tr"));
+        if (!rows.length) return;
+
+        const index = Array.from(th.parentNode.children).indexOf(th);
+        
+        // Default to descending (highest first) on the first click, then toggle
+        let dir = th.getAttribute("data-sort-dir") === "desc" ? "asc" : "desc";
+
+        table.querySelectorAll("th").forEach(h => {
+            if (h !== th) {
+                h.removeAttribute("data-sort-dir");
+                h.classList.remove("th-sort-asc", "th-sort-desc");
+            }
+        });
+
+        th.setAttribute("data-sort-dir", dir);
+        th.classList.toggle("th-sort-asc", dir === "asc");
+        th.classList.toggle("th-sort-desc", dir === "desc");
+
+        rows.sort((rowA, rowB) => {
+            const cellA = rowA.children[index];
+            const cellB = rowB.children[index];
+            let valA = cellA ? cellA.textContent.trim() : "";
+            let valB = cellB ? cellB.textContent.trim() : "";
+
+            // Strip percentage signs for KAST or HS% columns
+            if (index === 8 || index === 10) {
+                valA = valA.replace("%", "");
+                valB = valB.replace("%", "");
+            }
+
+            const isNumeric = index >= 2;
+            if (isNumeric) {
+                let numA = parseFloat(valA);
+                let numB = parseFloat(valB);
+                if (isNaN(numA)) numA = dir === "asc" ? Infinity : -Infinity;
+                if (isNaN(numB)) numB = dir === "asc" ? Infinity : -Infinity;
+                return dir === "asc" ? numA - numB : numB - numA;
+            } else {
+                return dir === "asc" ? valA.localeCompare(valB) : valB.localeCompare(valA);
+            }
+        });
+
+        rows.forEach(row => tbody.appendChild(row));
+    });
+
     document.getElementById("btn-ignore-unchecked")?.addEventListener("click", () => ignoreVisible(false));
     document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
 });

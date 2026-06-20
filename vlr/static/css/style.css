@@ -1667,4 +1667,31 @@ body.light .diff-negative {
     color: var(--text-muted);
 }
 
+/* Stats Table Sorting Controls */
+.mdm-stats-table th {
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 2px solid var(--card-border) !important;
+    padding-bottom: 4px !important;
+    transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+.mdm-stats-table th:hover {
+    color: var(--text-primary) !important;
+}
+.mdm-stats-table th.th-sort-desc {
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--accent-green) !important;
+}
+body.light .mdm-stats-table th.th-sort-desc {
+    border-bottom-color: #16a34a !important;
+}
+.mdm-stats-table th.th-sort-asc {
+    color: var(--text-primary) !important;
+    border-bottom: 2px solid var(--accent-red) !important;
+}
+body.light .mdm-stats-table th.th-sort-asc {
+    border-bottom-color: #dc2626 !important;
+}
+
+
 
