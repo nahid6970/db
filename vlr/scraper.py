@@ -332,14 +332,12 @@ def fetch_match_detail_page(href):
             overall_score2 = str(s2)
 
         # Determine status
-        status = None
+        status = "Upcoming"
         vs_note = soup.find(class_="match-header-vs-note")
         vs_note_text = vs_note.text.strip().lower() if vs_note else ""
         if "live" in vs_note_text or soup.find(class_="match-header-vs-note-live"):
             status = "Live"
-        elif "upcoming" in vs_note_text:
-            status = "Upcoming"
-        elif vs_score_div:
+        elif overall_score1.isdigit() and overall_score2.isdigit():
             status = "Completed"
 
         return {
