@@ -1216,6 +1216,41 @@ body {
     color: var(--text-muted);
 }
 
+/* Grid Separator for Past/Completed Matches */
+.grid-separator {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0 12px 0;
+    width: 100%;
+    user-select: none;
+}
+.grid-separator-line {
+    flex: 1;
+    height: 1px;
+    background: var(--card-border);
+}
+.grid-separator-text {
+    font-family: var(--font-heading);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.grid-separator-text i {
+    color: var(--accent-red);
+    font-size: 14px;
+}
+body.light .grid-separator-line {
+    background: rgba(0, 0, 0, 0.12);
+}
+
 /* Responsiveness */
 @media (max-width: 1280px) {
     .time-tracker,

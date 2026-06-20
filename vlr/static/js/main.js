@@ -615,12 +615,38 @@ document.addEventListener("DOMContentLoaded", () => {
             if (allOpt) allOpt.textContent = `All (${visibleCards.length})`;
         }
 
-        if (perPage === "all") return; // show everything
+        if (perPage !== "all") {
+            const limit = parseInt(perPage);
+            visibleCards.forEach((card, i) => {
+                card.style.display = i < limit ? "flex" : "none";
+            });
+        }
 
-        const limit = parseInt(perPage);
-        visibleCards.forEach((card, i) => {
-            card.style.display = i < limit ? "flex" : "none";
-        });
+        // Toggle visibility of the "Past Matches" grid separator dynamically
+        const separator = document.querySelector(".grid-separator");
+        if (separator) {
+            if (activeStatus !== "all") {
+                separator.style.display = "none";
+            } else {
+                let hasVisibleBefore = false;
+                let hasVisibleAfter = false;
+                let passedSeparator = false;
+                
+                const children = Array.from(matchesGrid.children);
+                children.forEach(child => {
+                    if (child === separator) {
+                        passedSeparator = true;
+                    } else if (child.classList.contains("match-card") && child.style.display !== "none") {
+                        if (!passedSeparator) {
+                            hasVisibleBefore = true;
+                        } else {
+                            hasVisibleAfter = true;
+                        }
+                    }
+                });
+                separator.style.display = (hasVisibleBefore && hasVisibleAfter) ? "flex" : "none";
+            }
+        }
     }
 
     perPageSelect?.addEventListener("change", () => {
@@ -761,7 +787,24 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
         
+        const hasActive = matches.some(m => m.status === "Live" || m.status === "Upcoming");
+        let renderedCompletedSep = false;
+        
         matches.forEach(m => {
+            const isCompleted = (m.status || "").toLowerCase() === "completed";
+            
+            if (isCompleted && hasActive && !renderedCompletedSep) {
+                const sep = document.createElement("div");
+                sep.className = "grid-separator";
+                sep.innerHTML = `
+                    <div class="grid-separator-line"></div>
+                    <span class="grid-separator-text"><i class="fa-solid fa-clock-rotate-left"></i> Past Matches</span>
+                    <div class="grid-separator-line"></div>
+                `;
+                matchesGrid.appendChild(sep);
+                renderedCompletedSep = true;
+            }
+
             const card = document.createElement("div");
             card.className = "match-card";
             card.setAttribute("data-tournament", m.tournament);
