@@ -1676,8 +1676,22 @@ body.light .mdm-map-card.active {
     height: 20px;
     border-radius: 4px;
     object-fit: cover;
-    margin-left: 2px;
     vertical-align: middle;
+}
+
+.mdm-agents-container {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.mdm-stats-table th:nth-child(2),
+.mdm-stats-table td:nth-child(2) {
+    text-align: left !important;
+    white-space: nowrap;
+    width: 100px;
+    min-width: 100px;
 }
 .mdm-acs-top { color: #fbbf24; font-weight: 700; }
 body.light .mdm-acs-top { color: #b45309; }

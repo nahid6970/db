@@ -99,9 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<span class="diff-neutral">0</span>`;
     };
 
-    const renderAgents = agents => (agents || []).map(a =>
-        a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : a.name
-    ).join("");
+    const renderAgents = agents => {
+        if (!agents || !agents.length) return "";
+        const icons = agents.map(a =>
+            a.icon ? `<img class="mdm-agent-icon" src="${a.icon}" alt="${a.name}" title="${a.name}">` : `<span>${a.name}</span>`
+        ).join("");
+        return `<div class="mdm-agents-container">${icons}</div>`;
+    };
 
     async function openMatchDetail(mid, cardOrObj) {
         currentDetailId = mid;
@@ -269,7 +273,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const topAcs = maxAcs(plist);
             const rows = plist.map(p => `<tr>
                 <td><div class="mdm-player-cell">${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
-                <td class="r">${renderAgents(p.agents)}</td>
+                <td>${renderAgents(p.agents)}</td>
                 <td class="r">${p.rating || ""}</td>
                 <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
                 <td class="r">${p.k}</td>
@@ -288,7 +292,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="mdm-stats-table-wrapper">
                     <table class="mdm-stats-table"><thead><tr>
                         <th><span>Player</span></th>
-                        <th class="r"><span>Agent</span></th>
+                        <th><span>Agent</span></th>
                         <th class="r"><span>R</span></th>
                         <th class="r"><span>ACS</span></th>
                         <th class="r"><span>K</span></th>
@@ -1434,7 +1438,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             tbody.innerHTML = aggregates.map(p => `<tr>
                 <td><div class="mdm-player-cell">${p.teamLogo ? `<img class="mdm-player-team-logo" src="${p.teamLogo}" alt="" title="${p.teamName || 'Team Logo'}">` : ''}${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
-                <td class="r">${renderAgents(p.agents)}</td>
+                <td>${renderAgents(p.agents)}</td>
                 <td class="r">${p.matchesPlayed}</td>
                 <td class="r">${p.rating}</td>
                 <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
