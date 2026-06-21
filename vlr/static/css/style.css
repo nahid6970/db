@@ -736,6 +736,15 @@ body.light #leaderboard-search {
     background: rgba(0,0,0,0.05);
 }
 
+.stats-loaded-check {
+    color: var(--accent-green);
+    font-size: 11px;
+}
+body.light .stats-loaded-check {
+    color: #16a34a;
+}
+
+
 #leaderboard-table.hide-agents-column th:nth-child(2),
 #leaderboard-table.hide-agents-column td:nth-child(2) {
     display: none !important;

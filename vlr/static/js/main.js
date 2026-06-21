@@ -195,6 +195,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
                         if (data.status === "Live") {
                             statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
+                        } else if (data.status === "Completed") {
+                            const hasStats = data.maps && data.maps.length > 0;
+                            if (hasStats) {
+                                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
+                            } else {
+                                statusBadge.textContent = "COMPLETED";
+                            }
                         } else {
                             statusBadge.textContent = data.status;
                         }
@@ -898,6 +905,13 @@ document.addEventListener("DOMContentLoaded", () => {
             let statusBadgeHTML = "";
             if (m.status === "Live") {
                 statusBadgeHTML = '<span class="live-dot"></span> LIVE';
+            } else if (m.status === "Completed") {
+                const hasStats = m.maps && m.maps.length > 0;
+                if (hasStats) {
+                    statusBadgeHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
+                } else {
+                    statusBadgeHTML = 'COMPLETED';
+                }
             } else {
                 statusBadgeHTML = m.status;
             }
