@@ -3,6 +3,7 @@ import re
 import json
 import requests
 import threading
+import time
 from bs4 import BeautifulSoup
 from datetime import datetime, timezone, timedelta
 import zoneinfo
@@ -689,6 +690,13 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
                 
         # Save basic info IMMEDIATELY (takes ~150-200ms) to ensure instant web responses
         save_json_matches(db)
+
+        # Fetch slow match details and team logos in the background, like the older flow
+        threading.Thread(
+            target=fetch_details_in_background,
+            args=(all_scraped,),
+            daemon=True,
+        ).start()
         return True
     except Exception as e:
         print(f"Offline sync failed: {e}")
