@@ -34,21 +34,21 @@ def load_ignorelist(force_reload=False):
 
 def save_ignorelist(lst):
     global _cached_ignorelist
-    with _ignorelist_lock:
-        _cached_ignorelist = lst
-    tmp = IGNORELIST_PATH + ".tmp"
     try:
-        with open(tmp, "w", encoding="utf-8") as f:
-            json.dump(lst, f, indent=4, ensure_ascii=False)
-        # Atomic rename with retries for transient locks (Windows lock issues)
-        for attempt in range(5):
-            try:
+        with _ignorelist_lock:
+            _cached_ignorelist = lst
+            tmp = IGNORELIST_PATH + ".tmp"
+            with open(tmp, "w", encoding="utf-8") as f:
+                json.dump(lst, f, indent=4, ensure_ascii=False)
+            # Atomic rename with retries for transient locks (Windows lock issues)
+            for attempt in range(5):
+                try:
+                    os.replace(tmp, IGNORELIST_PATH)
+                    break
+                except PermissionError:
+                    time.sleep(0.1)
+            else:
                 os.replace(tmp, IGNORELIST_PATH)
-                break
-            except PermissionError:
-                time.sleep(0.1)
-        else:
-            os.replace(tmp, IGNORELIST_PATH)
     except Exception as e:
         print(f"Error saving ignorelist: {e}")
 
@@ -71,26 +71,26 @@ def load_settings(force_reload=False):
 
 def save_settings(settings):
     global _cached_settings
-    with _settings_lock:
-        _cached_settings = settings
-    tmp_path = SETTINGS_PATH + ".tmp"
     try:
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            json.dump(settings, f, indent=4, ensure_ascii=False)
-        # Atomic rename with retries for transient locks (Windows lock issues)
-        for attempt in range(5):
-            try:
+        with _settings_lock:
+            _cached_settings = settings
+            tmp_path = SETTINGS_PATH + ".tmp"
+            with open(tmp_path, "w", encoding="utf-8") as f:
+                json.dump(settings, f, indent=4, ensure_ascii=False)
+            # Atomic rename with retries for transient locks (Windows lock issues)
+            for attempt in range(5):
+                try:
+                    os.replace(tmp_path, SETTINGS_PATH)
+                    break
+                except PermissionError:
+                    time.sleep(0.1)
+            else:
                 os.replace(tmp_path, SETTINGS_PATH)
-                break
-            except PermissionError:
-                time.sleep(0.1)
-        else:
-            os.replace(tmp_path, SETTINGS_PATH)
     except Exception as e:
         print(f"Error saving settings: {e}")
-        if os.path.exists(tmp_path):
+        if os.path.exists(SETTINGS_PATH + ".tmp"):
             try:
-                os.remove(tmp_path)
+                os.remove(SETTINGS_PATH + ".tmp")
             except:
                 pass
 

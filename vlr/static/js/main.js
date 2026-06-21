@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Open VLR.gg page on card click
     if (matchesGrid) {
-        matchesGrid.addEventListener("click", e => {
+    matchesGrid.addEventListener("click", e => {
             const card = e.target.closest(".match-card");
             if (!card) return;
             const mid = card.getAttribute("data-id");
-            if (mid) openMatchDetail(mid, card);
+            if (mid) openMatchDetail(mid, card, { refresh: true });
         });
     }
 
@@ -107,8 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
         return `<div class="mdm-agents-container">${icons}</div>`;
     };
 
-    async function openMatchDetail(mid, cardOrObj) {
+    async function openMatchDetail(mid, cardOrObj, options = {}) {
         currentDetailId = mid;
+        const forceRefresh = Boolean(options.refresh);
         
         const isDom = cardOrObj instanceof HTMLElement;
         let s1, s2, href, tournament, name1, name2, logo1, logo2;
@@ -165,7 +166,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Fetch full data
         try {
-            const data = await fetch(`/api/match/${mid}`).then(r => r.json());
+            const detailUrl = forceRefresh ? `/api/match/${mid}?refresh=true` : `/api/match/${mid}`;
+            const data = await fetch(detailUrl).then(r => r.json());
             renderMatchDetail(data, s1, s2);
             updateMdmNavButtons();
         } catch(e) {
@@ -1232,6 +1234,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (names.includes(card.getAttribute("data-tournament"))) card.style.display = "none";
         });
     }
+
+    document.getElementById("btn-ignore-unchecked")?.addEventListener("click", () => ignoreVisible(false));
+    document.getElementById("btn-ignore-checked")?.addEventListener("click", () => ignoreVisible(true));
 
     document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
     detailOverlay?.addEventListener("click", e => { 
