@@ -1531,6 +1531,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const leaderboardModal = document.getElementById("player-leaderboard-modal");
     const leaderboardClose = document.getElementById("leaderboard-close");
     const teamSplitCheckbox = document.getElementById("setting-team-split-stats");
+    const hideAgentsCheckbox = document.getElementById("setting-hide-agents");
     const leaderboardSearchInput = document.getElementById("leaderboard-search");
 
     // Restore saved split by team setting
@@ -1539,6 +1540,24 @@ document.addEventListener("DOMContentLoaded", () => {
         teamSplitCheckbox.addEventListener("change", () => {
             localStorage.setItem("leaderboardTeamSplit", teamSplitCheckbox.checked);
             openLeaderboard();
+        });
+    }
+
+    // Restore saved hide agents setting
+    if (hideAgentsCheckbox) {
+        const savedHide = localStorage.getItem("leaderboardHideAgents") === "true";
+        hideAgentsCheckbox.checked = savedHide;
+        const table = document.getElementById("leaderboard-table");
+        if (table) {
+            table.classList.toggle("hide-agents-column", savedHide);
+        }
+        hideAgentsCheckbox.addEventListener("change", () => {
+            const isChecked = hideAgentsCheckbox.checked;
+            localStorage.setItem("leaderboardHideAgents", isChecked);
+            const tableEl = document.getElementById("leaderboard-table");
+            if (tableEl) {
+                tableEl.classList.toggle("hide-agents-column", isChecked);
+            }
         });
     }
 

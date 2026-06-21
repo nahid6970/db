@@ -736,6 +736,12 @@ body.light #leaderboard-search {
     background: rgba(0,0,0,0.05);
 }
 
+#leaderboard-table.hide-agents-column th:nth-child(2),
+#leaderboard-table.hide-agents-column td:nth-child(2) {
+    display: none !important;
+}
+
+
 
 
 /* Content Area */
