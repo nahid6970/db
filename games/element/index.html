@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Sand Physics Sandbox</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap');
+
+        :root {
+            --bg-dark: #0f0f11;
+            --panel-bg: #16161a;
+            --border-color: #232329;
+            --text-primary: #f1f1f3;
+            --text-secondary: #a0a0ab;
+            
+            /* Material Colors */
+            --color-empty: #1e1e24;
+            --color-sand: #e9c46a;
+            --color-water: #457b9d;
+            --color-wall: #6c757d;
+            --color-acid: #55ff33;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-y: auto;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            background: linear-gradient(135deg, #fff 0%, #a0a0ab 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        /* Material Selectors */
+        .materials-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .material-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1e1e24;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 12px 16px;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-align: left;
+        }
+
+        .material-btn:hover {
+            background: #25252d;
+            color: var(--text-primary);
+        }
+
+        .material-btn.active {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.03);
+            border-color: var(--active-color);
+            box-shadow: 0 0 12px rgba(var(--active-rgb), 0.2);
+        }
+
+        .material-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .color-preview {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .material-desc {
+            font-size: 0.75rem;
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* Controls */
+        .control-group {
+            margin-bottom: 24px;
+        }
+
+        .slider-container {
+            background: #1e1e24;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-bottom: 12px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: #f1f1f3;
+            cursor: pointer;
+        }
+
+        .btn-action {
+            width: 100%;
+            background: #25252d;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            margin-bottom: 8px;
+        }
+
+        .btn-action:hover {
+            background: #2e2e38;
+            border-color: #3f3f4e;
+        }
+
+        .btn-action.danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .btn-action.danger:hover {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: rgba(239, 68, 68, 0.4);
+        }
+
+        /* Stats Panel */
+        .stats-panel {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .stat-row:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Main Workspace */
+        .workspace {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--bg-dark);
+            position: relative;
+        }
+
+        .canvas-container {
+            position: relative;
+            background-color: var(--color-empty);
+            border-radius: 16px;
+            padding: 12px;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+            display: inline-block;
+        }
+
+        canvas {
+            display: block;
+            width: 400px;
+            height: 400px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            border-radius: 8px;
+            cursor: crosshair;
+            background-color: var(--color-empty);
+        }
+
+        .hint {
+            margin-top: 16px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Highlight elements specifically on active */
+        #btn-sand.active { --active-color: var(--color-sand); --active-rgb: 233, 196, 106; }
+        #btn-water.active { --active-color: var(--color-water); --active-rgb: 69, 123, 157; }
+        #btn-wall.active { --active-color: var(--color-wall); --active-rgb: 108, 117, 125; }
+        #btn-acid.active { --active-color: var(--color-acid); --active-rgb: 85, 255, 51; }
+        #btn-eraser.active { --active-color: #ef4444; --active-rgb: 239, 68, 68; }
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        <!-- Sidebar Controls -->
+        <div class="sidebar">
+            <div class="top-section">
+                <div class="header">
+                    <h1>Sand Engine</h1>
+                    <p>Low-Level Physics Sandbox</p>
+                </div>
+
+                <div class="section-title">Elements</div>
+                <div class="materials-grid">
+                    <button class="material-btn active" id="btn-sand" onclick="selectMaterial(2)">
+                        <div class="material-info">
+                            <div class="color-preview" style="background-color: var(--color-sand);"></div>
+                            <span>Sand</span>
+                        </div>
+                        <span class="material-desc">Falls & Slides</span>
+                    </button>
+                    <button class="material-btn" id="btn-water" onclick="selectMaterial(3)">
+                        <div class="material-info">
+                            <div class="color-preview" style="background-color: var(--color-water);"></div>
+                            <span>Water</span>
+                        </div>
+                        <span class="material-desc">Liquid Flow</span>
+                    </button>
+                    <button class="material-btn" id="btn-wall" onclick="selectMaterial(1)">
+                        <div class="material-info">
+                            <div class="color-preview" style="background-color: var(--color-wall);"></div>
+                            <span>Wall</span>
+                        </div>
+                        <span class="material-desc">Impassable</span>
+                    </button>
+                    <button class="material-btn" id="btn-acid" onclick="selectMaterial(4)">
+                        <div class="material-info">
+                            <div class="color-preview" style="background-color: var(--color-acid);"></div>
+                            <span>Acid</span>
+                        </div>
+                        <span class="material-desc">Corrosive</span>
+                    </button>
+                    <button class="material-btn" id="btn-eraser" onclick="selectMaterial(0)">
+                        <div class="material-info">
+                            <div class="color-preview" style="background-color: transparent; border: 1.5px dashed #ef4444;"></div>
+                            <span>Eraser</span>
+                        </div>
+                        <span class="material-desc">Clear Pixels</span>
+                    </button>
+                </div>
+
+                <div class="section-title">Brush & Environment</div>
+                <div class="control-group">
+                    <div class="slider-container">
+                        <div class="slider-header">
+                            <span>Brush Size</span>
+                            <span id="brush-size-display">4 px</span>
+                        </div>
+                        <input type="range" id="brush-size" min="1" max="15" value="4" oninput="updateBrushSize(this.value)">
+                    </div>
+                    
+                    <button class="btn-action" onclick="loadPreset('hourglass')">Load Hourglass Preset</button>
+                    <button class="btn-action" onclick="loadPreset('acid-bath')">Load Acid Bath Preset</button>
+                    <button class="btn-action danger" onclick="clearSimulation()">Clear Canvas</button>
+                </div>
+            </div>
+
+            <!-- Metadata Stats -->
+            <div class="stats-panel">
+                <div class="stat-row">
+                    <span>Engine Status:</span>
+                    <span style="color: #10b981; font-weight: 600;">Active</span>
+                </div>
+                <div class="stat-row">
+                    <span>Performance:</span>
+                    <span id="fps-counter">60 FPS</span>
+                </div>
+                <div class="stat-row">
+                    <span>Particles:</span>
+                    <span id="particle-counter">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Grid Size:</span>
+                    <span>150 × 150</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Central Sandbox Workspace -->
+        <div class="workspace">
+            <div class="canvas-container">
+                <canvas id="simCanvas" width="150" height="150"></canvas>
+            </div>
+            <div class="hint">Click and drag to stream elements into the sandbox</div>
+        </div>
+    </div>
+
+    <script>
+        // --- Core Configuration ---
+        const COLS = 150;
+        const ROWS = 150;
+        const canvas = document.getElementById('simCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // --- Grid Storage ---
+        // Uint8Array for efficiency
+        const grid = new Uint8Array(COLS * ROWS);
+        const updated = new Uint8Array(COLS * ROWS);
+        // Store color variation offset per cell to add nice textures
+        const colorNoise = new Int8Array(COLS * ROWS);
+
+        // --- Material Enums ---
+        const EMPTY = 0;
+        const WALL = 1;
+        const SAND = 2;
+        const WATER = 3;
+        const ACID = 4;
+
+        // --- Render Color Mapping ---
+        const COLOR_PALETTE = {
+            [EMPTY]: [30, 30, 36],     // Deep charcoal
+            [WALL]: [108, 117, 125],   // Slate Gray
+            [SAND]: [233, 196, 106],   // Rich Gold/Yellow
+            [WATER]: [69, 123, 157],   // Vibrant Blue
+            [ACID]: [85, 255, 51]      // Neon Green
+        };
+
+        // --- Runtime State ---
+        let selectedElement = SAND;
+        let brushSize = 4;
+        let isDrawing = false;
+        let lastMouseX = null;
+        let lastMouseY = null;
+
+        // FPS and Stats Tracking
+        let fps = 0;
+        let lastFrameTime = performance.now();
+        let frameCount = 0;
+
+        // --- Safe Cell Accessors ---
+        function getIndex(x, y) {
+            return y * COLS + x;
+        }
+
+        function inBounds(x, y) {
+            return x >= 0 && x < COLS && y >= 0 && y < ROWS;
+        }
+
+        function getType(x, y) {
+            if (!inBounds(x, y)) return -1; // Out of bounds treated as immutable barrier
+            return grid[y * COLS + x];
+        }
+
+        function setCell(x, y, type) {
+            if (!inBounds(x, y)) return;
+            const idx = y * COLS + x;
+            grid[idx] = type;
+            updated[idx] = 1;
+            if (type !== EMPTY) {
+                // Initialize slight noise variant
+                colorNoise[idx] = Math.floor(Math.random() * 24) - 12;
+            } else {
+                colorNoise[idx] = 0;
+            }
+        }
+
+        function moveCell(x1, y1, x2, y2) {
+            const idx1 = y1 * COLS + x1;
+            const idx2 = y2 * COLS + x2;
+            grid[idx2] = grid[idx1];
+            colorNoise[idx2] = colorNoise[idx1];
+            grid[idx1] = EMPTY;
+            colorNoise[idx1] = 0;
+            updated[idx2] = 1;
+            updated[idx1] = 1;
+        }
+
+        function swapCells(x1, y1, x2, y2) {
+            const idx1 = y1 * COLS + x1;
+            const idx2 = y2 * COLS + x2;
+            
+            const tempType = grid[idx1];
+            const tempNoise = colorNoise[idx1];
+            
+            grid[idx1] = grid[idx2];
+            colorNoise[idx1] = colorNoise[idx2];
+            
+            grid[idx2] = tempType;
+            colorNoise[idx2] = tempNoise;
+            
+            updated[idx1] = 1;
+            updated[idx2] = 1;
+        }
+
+        // --- Simulation Physics Engine ---
+        function updateSimulation() {
+            // Reset frame update map
+            updated.fill(0);
+
+            // Alternating scan direction to avoid directional scanning drift
+            const leftToRight = Math.random() > 0.5;
+
+            // Strict bottom-to-top frame-by-frame processing
+            for (let y = ROWS - 1; y >= 0; y--) {
+                if (leftToRight) {
+                    for (let x = 0; x < COLS; x++) {
+                        processCell(x, y);
+                    }
+                } else {
+                    for (let x = COLS - 1; x >= 0; x--) {
+                        processCell(x, y);
+                    }
+                }
+            }
+        }
+
+        function processCell(x, y) {
+            const idx = y * COLS + x;
+            const type = grid[idx];
+
+            if (type === EMPTY || updated[idx]) return;
+
+            if (type === WALL) return; // Wall is completely static
+
+            if (type === SAND) {
+                // Check directly below
+                const belowType = getType(x, y + 1);
+                if (belowType === EMPTY) {
+                    moveCell(x, y, x, y + 1);
+                    return;
+                } else if (belowType === WATER || belowType === ACID) {
+                    swapCells(x, y, x, y + 1); // Displace liquids upward
+                    return;
+                }
+
+                // Check diagonal paths (prioritize empty space first)
+                const dir = Math.random() < 0.5 ? -1 : 1;
+                if (getType(x + dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x + dir, y + 1);
+                    return;
+                }
+                if (getType(x - dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x - dir, y + 1);
+                    return;
+                }
+
+                // If no empty space, check if it can displace liquid diagonally
+                if (getType(x + dir, y + 1) === WATER || getType(x + dir, y + 1) === ACID) {
+                    swapCells(x, y, x + dir, y + 1);
+                    return;
+                }
+                if (getType(x - dir, y + 1) === WATER || getType(x - dir, y + 1) === ACID) {
+                    swapCells(x, y, x - dir, y + 1);
+                    return;
+                }
+            }
+
+            else if (type === WATER) {
+                // Check directly below
+                if (getType(x, y + 1) === EMPTY) {
+                    moveCell(x, y, x, y + 1);
+                    return;
+                }
+
+                // Check diagonal flow
+                const dir = Math.random() < 0.5 ? -1 : 1;
+                if (getType(x + dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x + dir, y + 1);
+                    return;
+                }
+                if (getType(x - dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x - dir, y + 1);
+                    return;
+                }
+
+                // Check horizontal spreading
+                if (getType(x + dir, y) === EMPTY) {
+                    moveCell(x, y, x + dir, y);
+                    return;
+                }
+                if (getType(x - dir, y) === EMPTY) {
+                    moveCell(x, y, x - dir, y);
+                    return;
+                }
+            }
+
+            else if (type === ACID) {
+                // Check direct contact dissolving properties (Top, Bottom, Sides)
+                const neighbors = [
+                    { x: x, y: y - 1 }, // Top
+                    { x: x, y: y + 1 }, // Bottom
+                    { x: x - 1, y: y }, // Left
+                    { x: x + 1, y: y }  // Right
+                ];
+
+                // Shuffle checked neighbors to prevent directional melting bias
+                for (let i = neighbors.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    const temp = neighbors[i];
+                    neighbors[i] = neighbors[j];
+                    neighbors[j] = temp;
+                }
+
+                for (let n of neighbors) {
+                    const nType = getType(n.x, n.y);
+                    if (nType === SAND || nType === WALL) {
+                        // Dissolve both acid and target cell
+                        setCell(n.x, n.y, EMPTY);
+                        setCell(x, y, EMPTY);
+                        return;
+                    }
+                }
+
+                // Standard Liquid flow behaviors (exactly identical to Water)
+                if (getType(x, y + 1) === EMPTY) {
+                    moveCell(x, y, x, y + 1);
+                    return;
+                }
+
+                const dir = Math.random() < 0.5 ? -1 : 1;
+                if (getType(x + dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x + dir, y + 1);
+                    return;
+                }
+                if (getType(x - dir, y + 1) === EMPTY) {
+                    moveCell(x, y, x - dir, y + 1);
+                    return;
+                }
+
+                if (getType(x + dir, y) === EMPTY) {
+                    moveCell(x, y, x + dir, y);
+                    return;
+                }
+                if (getType(x - dir, y) === EMPTY) {
+                    moveCell(x, y, x - dir, y);
+                    return;
+                }
+            }
+        }
+
+        // --- Rendering Loop ---
+        function draw() {
+            const imgData = ctx.createImageData(COLS, ROWS);
+            const data = imgData.data;
+            let activeParticles = 0;
+
+            for (let i = 0; i < COLS * ROWS; i++) {
+                const type = grid[i];
+                const noise = colorNoise[i];
+                const baseColor = COLOR_PALETTE[type];
+
+                if (type !== EMPTY) {
+                    activeParticles++;
+                }
+
+                // Apply randomized visual noise dynamically per non-empty element
+                const r = Math.min(255, Math.max(0, baseColor[0] + noise));
+                const g = Math.min(255, Math.max(0, baseColor[1] + noise));
+                const b = Math.min(255, Math.max(0, baseColor[2] + noise));
+
+                const pIdx = i * 4;
+                data[pIdx] = r;
+                data[pIdx + 1] = g;
+                data[pIdx + 2] = b;
+                data[pIdx + 3] = 255; // Alpha
+            }
+
+            ctx.putImageData(imgData, 0, 0);
+            document.getElementById('particle-counter').textContent = activeParticles;
+        }
+
+        // --- Core Application Loop ---
+        function loop() {
+            updateSimulation();
+            draw();
+
+            // Track Framerate
+            frameCount++;
+            const currentTime = performance.now();
+            if (currentTime - lastFrameTime >= 1000) {
+                fps = frameCount;
+                frameCount = 0;
+                lastFrameTime = currentTime;
+                document.getElementById('fps-counter').textContent = `${fps} FPS`;
+            }
+
+            requestAnimationFrame(loop);
+        }
+
+        // --- Interactive Mouse/Touch Brush Painting ---
+        function getCoordinates(e) {
+            const rect = canvas.getBoundingClientRect();
+            let clientX, clientY;
+
+            if (e.touches && e.touches.length > 0) {
+                clientX = e.touches[0].clientX;
+                clientY = e.touches[0].clientY;
+            } else {
+                clientX = e.clientX;
+                clientY = e.clientY;
+            }
+
+            const x = Math.floor(((clientX - rect.left) / rect.width) * COLS);
+            const y = Math.floor(((clientY - rect.top) / rect.height) * ROWS);
+            return { x, y };
+        }
+
+        function paint(cx, cy, radius, type) {
+            for (let dy = -radius; dy <= radius; dy++) {
+                for (let dx = -radius; dx <= radius; dx++) {
+                    if (dx * dx + dy * dy <= radius * radius) {
+                        const px = cx + dx;
+                        const py = cy + dy;
+                        if (inBounds(px, py)) {
+                            const idx = getIndex(px, py);
+                            const current = grid[idx];
+
+                            if (type === EMPTY) {
+                                setCell(px, py, EMPTY);
+                            } else if (type === WALL) {
+                                setCell(px, py, WALL);
+                            } else {
+                                // Fluids & sand only populate empty spaces to prevent rewriting Walls
+                                if (current === EMPTY) {
+                                    setCell(px, py, type);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Continuous drawing using Bresenham's line generation
+        function drawLine(x0, y0, x1, y1, radius, type) {
+            const dx = Math.abs(x1 - x0);
+            const dy = Math.abs(y1 - y0);
+            const sx = (x0 < x1) ? 1 : -1;
+            const sy = (y0 < y1) ? 1 : -1;
+            let err = dx - dy;
+
+            while (true) {
+                paint(x0, y0, radius, type);
+                if (x0 === x1 && y0 === y1) break;
+                const e2 = 2 * err;
+                if (e2 > -dy) {
+                    err -= dy;
+                    x0 += sx;
+                }
+                if (e2 < dx) {
+                    err += dx;
+                    y0 += sy;
+                }
+            }
+        }
+
+        // Event Setup
+        function handleStart(e) {
+            isDrawing = true;
+            const coords = getCoordinates(e);
+            lastMouseX = coords.x;
+            lastMouseY = coords.y;
+            paint(coords.x, coords.y, brushSize, selectedElement);
+            e.preventDefault();
+        }
+
+        function handleMove(e) {
+            if (!isDrawing) return;
+            const coords = getCoordinates(e);
+            if (lastMouseX !== null && lastMouseY !== null) {
+                drawLine(lastMouseX, lastMouseY, coords.x, coords.y, brushSize, selectedElement);
+            } else {
+                paint(coords.x, coords.y, brushSize, selectedElement);
+            }
+            lastMouseX = coords.x;
+            lastMouseY = coords.y;
+            e.preventDefault();
+        }
+
+        function handleEnd() {
+            isDrawing = false;
+            lastMouseX = null;
+            lastMouseY = null;
+        }
+
+        canvas.addEventListener('mousedown', handleStart);
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('mouseup', handleEnd);
+
+        canvas.addEventListener('touchstart', handleStart, { passive: false });
+        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchend', handleEnd);
+
+        // --- Controls & UI Bindings ---
+        function selectMaterial(type) {
+            selectedElement = type;
+            document.querySelectorAll('.material-btn').forEach(btn => btn.classList.remove('active'));
+            
+            const btnIds = {
+                [SAND]: 'btn-sand',
+                [WATER]: 'btn-water',
+                [WALL]: 'btn-wall',
+                [ACID]: 'btn-acid',
+                [EMPTY]: 'btn-eraser'
+            };
+            document.getElementById(btnIds[type]).classList.add('active');
+        }
+
+        function updateBrushSize(val) {
+            brushSize = parseInt(val);
+            document.getElementById('brush-size-display').textContent = `${brushSize} px`;
+        }
+
+        function clearSimulation() {
+            grid.fill(EMPTY);
+            colorNoise.fill(0);
+        }
+
+        // --- Custom Physics Presets ---
+        function loadPreset(name) {
+            clearSimulation();
+
+            if (name === 'hourglass') {
+                // Drawing dynamic glass funnel structures
+                for (let y = 0; y < ROWS; y++) {
+                    for (let x = 0; x < COLS; x++) {
+                        // Hourglass walls
+                        if (y > 40 && y < 100) {
+                            const distFromCenter = Math.abs(x - COLS / 2);
+                            const width = (y < 70) ? (y - 40) * 1.1 : (100 - y) * 1.1;
+                            if (distFromCenter > width - 2 && distFromCenter < width + 2 && distFromCenter > 5) {
+                                setCell(x, y, WALL);
+                            }
+                        }
+                        // Bottom container border
+                        if (y === ROWS - 8 && (x > 20 && x < COLS - 20)) {
+                            setCell(x, y, WALL);
+                        }
+                        if ((x === 20 || x === COLS - 21) && y > 99 && y < ROWS - 7) {
+                            setCell(x, y, WALL);
+                        }
+                        // Fill upper basin with Sand
+                        if (y > 15 && y <= 45) {
+                            const distFromCenter = Math.abs(x - COLS / 2);
+                            if (distFromCenter < 25 && Math.random() < 0.85) {
+                                setCell(x, y, SAND);
+                            }
+                        }
+                    }
+                }
+            } 
+            
+            else if (name === 'acid-bath') {
+                // Generates a reservoir with platforms and acid dripping on top of structures
+                for (let y = 0; y < ROWS; y++) {
+                    for (let x = 0; x < COLS; x++) {
+                        // Bottom pool enclosure
+                        if (y === ROWS - 15 && (x < 45 || x > COLS - 45)) {
+                            setCell(x, y, WALL);
+                        }
+                        if (y >= ROWS - 14 && y < ROWS - 5) {
+                            if (x === 44 || x === COLS - 45) {
+                                setCell(x, y, WALL);
+                            } else if (x > 44 && x < COLS - 45) {
+                                setCell(x, y, WATER);
+                            }
+                        }
+                        // Static support structural pillars
+                        if ((x === 30 || x === 75 || x === 120) && (y > 40 && y < 85)) {
+                            setCell(x, y, WALL);
+                        }
+                        if ((y === 40 || y === 65) && (x > 20 && x < 130)) {
+                            setCell(x, y, WALL);
+                        }
+                        // Top load elements (Sand & Acid)
+                        if (y > 5 && y < 25) {
+                            if (x > 15 && x < 65 && Math.random() < 0.7) {
+                                setCell(x, y, SAND);
+                            }
+                            if (x > 85 && x < 135 && Math.random() < 0.5) {
+                                setCell(x, y, ACID);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // Launch simulation engine
+        requestAnimationFrame(loop);
+    </script>
+</body>
+</html>

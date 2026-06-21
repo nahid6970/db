@@ -2695,7 +2695,7 @@
             {
                 "id": 30,
                 "title": "WWE SmackDown - 2026-06-19 - SmackDown 1400 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-06-20T19:58:29.475860",
                 "notify": "seen"
             },
@@ -4635,6 +4635,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 23,
+                "title": "Wistoria - Wand and Sword - S02E11 - A Roar of Ice and Lightning WEBDL-1080p",
+                "watched": false,
+                "added_date": "2026-06-21T15:32:39.271176",
+                "notify": "seen"
+            },
             {
                 "id": 22,
                 "title": "Wistoria - Wand and Sword - S02E10 - Hoping, Blooming, Thundering WEBDL-1080p",
