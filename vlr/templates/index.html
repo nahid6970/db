@@ -276,9 +276,16 @@
     <!-- Player Stats / Leaderboard Modal -->
     <div id="player-leaderboard-modal" class="match-detail-overlay" style="display:none;">
         <div class="match-detail-modal" style="max-width: 950px;">
-            <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0;">
-                <h2><i class="fa-solid fa-chart-simple"></i> Player Aggregated Statistics</h2>
-                <button id="leaderboard-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
+            <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+                <h2 style="display: flex; align-items: center; gap: 10px; margin: 0;"><i class="fa-solid fa-chart-simple"></i> Player Aggregated Statistics</h2>
+                <div style="display: flex; align-items: center; gap: 14px;">
+                    <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none;">
+                        <input type="checkbox" id="setting-team-split-stats" class="setting-checkbox">
+                        <span class="custom-checkbox"></span>
+                        <span style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Split by Team</span>
+                    </label>
+                    <button id="leaderboard-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted); padding: 0 4px; border: none; background: none; line-height: 1; cursor: pointer;">&times;</button>
+                </div>
             </div>
             <div id="leaderboard-stats-section" style="margin-top: 0;">
                 <div class="mdm-stats-table-wrapper" style="max-height: 70vh; overflow-y: auto;">

@@ -1298,7 +1298,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Player Aggregated Stats / Leaderboard Functions
-    function calculatePlayerAggregates(matches, selectedTourneys) {
+    function calculatePlayerAggregates(matches, selectedTourneys, splitByTeam = false) {
         const playersMap = {};
 
         if (!Array.isArray(matches)) return [];
@@ -1315,12 +1315,14 @@ document.addEventListener("DOMContentLoaded", () => {
                             playersList.forEach(p => {
                                 if (!p || !p.name) return;
                                 
-                                if (!playersMap[p.name]) {
-                                    playersMap[p.name] = {
+                                const key = splitByTeam ? `${p.name}||${currentTeamName}` : p.name;
+                                
+                                if (!playersMap[key]) {
+                                    playersMap[key] = {
                                         name: p.name,
                                         photo: p.photo || "",
-                                        teamLogo: currentTeamLogo,
-                                        teamName: currentTeamName,
+                                        teamLogo: splitByTeam ? currentTeamLogo : "",
+                                        teamName: splitByTeam ? currentTeamName : "",
                                         agents: {}, // name -> { icon, count }
                                         matchesPlayed: 0,
                                         ratingsList: [],
@@ -1336,13 +1338,13 @@ document.addEventListener("DOMContentLoaded", () => {
                                     };
                                 }
 
-                                const agg = playersMap[p.name];
+                                const agg = playersMap[key];
                                 agg.matchesPlayed++;
                                 
                                 if (!agg.photo && p.photo) agg.photo = p.photo;
-                                if (!agg.teamLogo && currentTeamLogo) {
-                                    agg.teamLogo = currentTeamLogo;
-                                    agg.teamName = currentTeamName;
+                                if (splitByTeam) {
+                                    if (!agg.teamLogo && currentTeamLogo) agg.teamLogo = currentTeamLogo;
+                                    if (!agg.teamName && currentTeamName) agg.teamName = currentTeamName;
                                 }
 
                                 if (Array.isArray(p.agents)) {
@@ -1436,7 +1438,12 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
             const selectedTourneys = typeof checkedTournaments !== "undefined" ? checkedTournaments : new Set();
-            const aggregates = calculatePlayerAggregates(matches, selectedTourneys);
+            
+            // Read split statistics toggle state
+            const teamSplitCheckbox = document.getElementById("setting-team-split-stats");
+            const splitByTeam = teamSplitCheckbox ? teamSplitCheckbox.checked : false;
+
+            const aggregates = calculatePlayerAggregates(matches, selectedTourneys, splitByTeam);
 
             const tbody = document.getElementById("leaderboard-tbody");
             if (!tbody) {
@@ -1507,6 +1514,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const leaderboardBtn = document.getElementById("leaderboard-btn");
     const leaderboardModal = document.getElementById("player-leaderboard-modal");
     const leaderboardClose = document.getElementById("leaderboard-close");
+    const teamSplitCheckbox = document.getElementById("setting-team-split-stats");
+
+    // Restore saved split by team setting
+    if (teamSplitCheckbox) {
+        teamSplitCheckbox.checked = localStorage.getItem("leaderboardTeamSplit") === "true";
+        teamSplitCheckbox.addEventListener("change", () => {
+            localStorage.setItem("leaderboardTeamSplit", teamSplitCheckbox.checked);
+            openLeaderboard();
+        });
+    }
 
     leaderboardBtn?.addEventListener("click", openLeaderboard);
     leaderboardClose?.addEventListener("click", () => {
