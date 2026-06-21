@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const sortTourneyOrder = document.getElementById("sort-tourney-order");
     const perPageSelect = document.getElementById("per-page-select");
     const statusBtns = document.querySelectorAll(".status-btn");
-    const tourneyCheckboxes = document.querySelectorAll(".tourney-checkbox");
+    const tourneyCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
     const deselectAllBtn = document.getElementById("btn-deselect-all");
     const refreshBtn = document.getElementById("refresh-data-btn");
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Save tournament settings to backend
     async function saveTournamentSettings() {
         const unchecked = [];
-        const checkboxes = document.querySelectorAll(".tourney-checkbox");
+        const checkboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
         checkboxes.forEach(cb => {
             if (!cb.checked) {
                 unchecked.push(cb.value);
@@ -744,7 +744,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Select all tournaments
     if (selectAllBtn) {
         selectAllBtn.addEventListener("click", () => {
-            tourneyCheckboxes.forEach(cb => {
+            const currentCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
+            currentCheckboxes.forEach(cb => {
                 cb.checked = true;
                 checkedTournaments.add(cb.value);
             });
@@ -756,7 +757,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Deselect all tournaments
     if (deselectAllBtn) {
         deselectAllBtn.addEventListener("click", () => {
-            tourneyCheckboxes.forEach(cb => {
+            const currentCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
+            currentCheckboxes.forEach(cb => {
                 cb.checked = false;
                 checkedTournaments.delete(cb.value);
             });
@@ -822,6 +824,22 @@ document.addEventListener("DOMContentLoaded", () => {
             setTimeout(() => { savePagesBtnEl.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>'; }, 1500);
         });
     }
+
+    const highlightLoadedCheckbox = document.getElementById("setting-highlight-loaded");
+    highlightLoadedCheckbox?.addEventListener("change", async () => {
+        const isChecked = highlightLoadedCheckbox.checked;
+        const checklist = document.getElementById("tournament-checklist");
+        if (checklist) {
+            checklist.classList.toggle("highlight-tournaments", isChecked);
+        }
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        await fetch("/api/settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...cur, highlight_loaded_tournaments: isChecked })
+        });
+    });
+
 
 
     function renderMatchesGrid(matches) {
@@ -989,6 +1007,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 tourneys.set(m.tournament, m.tournament_logo || "");
             }
         });
+
+        // Group matches by tournament to check if stats are fully loaded
+        const tourneyMatchesMap = new Map();
+        matches.forEach(m => {
+            if (m.tournament) {
+                if (!tourneyMatchesMap.has(m.tournament)) {
+                    tourneyMatchesMap.set(m.tournament, []);
+                }
+                tourneyMatchesMap.get(m.tournament).push(m);
+            }
+        });
         
         const sortedTourneys = Array.from(tourneys.entries()).sort((a, b) => {
             const aPin = tournamentOrder[a[0]] ?? 9999;
@@ -1020,8 +1049,21 @@ document.addEventListener("DOMContentLoaded", () => {
             const isChecked = checkedTournaments.has(name) || !checkedTournaments.size; // check by default if set is empty
             if (isChecked) newChecked.add(name);
             
+            // Check if tournament is fully loaded
+            let isFullyLoaded = true;
+            const mList = tourneyMatchesMap.get(name) || [];
+            for (const m of mList) {
+                const isCompleted = (m.status || "").toLowerCase() === "completed";
+                const hasStats = m.maps && m.maps.length > 0;
+                if (isCompleted && !hasStats) {
+                    isFullyLoaded = false;
+                    break;
+                }
+            }
+            const loadClass = isFullyLoaded ? "tourney-fully-loaded" : "tourney-not-loaded";
+
             const label = document.createElement("label");
-            label.className = "tourney-item";
+            label.className = `tourney-item ${loadClass}`;
             label.setAttribute("data-tourney-name", name);
             
             label.innerHTML = `

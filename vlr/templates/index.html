@@ -109,9 +109,9 @@
                             <button id="btn-deselect-all" class="text-btn">Clear</button>
                         </div>
                     </div>
-                    <div class="tourney-list" id="tournament-checklist">
+                    <div class="tourney-list {% if settings.get('highlight_loaded_tournaments') %}highlight-tournaments{% endif %}" id="tournament-checklist">
                         {% for tourney, logo in tournaments %}
-                        <label class="tourney-item" data-tourney-name="{{ tourney }}">
+                        <label class="tourney-item {% if fully_loaded_tournaments.get(tourney) %}tourney-fully-loaded{% else %}tourney-not-loaded{% endif %}" data-tourney-name="{{ tourney }}">
                             <input type="checkbox" {% if tourney not in unchecked_tournaments %}checked{% endif %} class="tourney-checkbox" value="{{ tourney }}">
                             <span class="custom-checkbox"></span>
                             {% if logo %}
@@ -204,7 +204,7 @@
 
                 <!-- Tab Contents: Scrape Range -->
                 <div id="modal-content-scrape" class="modal-tab-content" style="display: none; padding: 20px;">
-                    <div class="modal-section">
+                    <div class="modal-section" style="margin-bottom: 24px;">
                         <h3>Scrape Range</h3>
                         <p class="modal-section-desc">Set the page range to sync completed match results from VLR.gg.</p>
                         <div class="pages-input-group" style="display: inline-flex; border: 1px solid var(--card-border); background: var(--bg-darker); border-radius: var(--border-radius-md); padding: 8px 12px; gap: 8px; align-items: center;">
@@ -213,6 +213,17 @@
                             <span style="color: var(--text-muted); font-weight: bold;">–</span>
                             <input type="number" id="scrape-end" min="1" value="{{ settings.get('scrape_end', 5) }}" title="End page" style="width: 48px; background: transparent; border: none; color: var(--text-primary); text-align: center; font-size: 14px; font-weight: 700; outline: none; box-sizing: border-box;">
                             <button id="save-pages-btn" title="Save Scrape Range" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0 4px; font-size: 14px; transition: color var(--transition-fast);"><i class="fa-solid fa-floppy-disk"></i></button>
+                        </div>
+                    </div>
+                    <div class="modal-section">
+                        <h3>Visual Preferences</h3>
+                        <p class="modal-section-desc">Customize user interface highlighting.</p>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="setting-highlight-loaded" class="setting-checkbox" {% if settings.get('highlight_loaded_tournaments') %}checked{% endif %}>
+                                <span class="custom-checkbox"></span>
+                                <span style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Highlight stats-loaded tournaments</span>
+                            </label>
                         </div>
                     </div>
                 </div>

@@ -147,6 +147,24 @@ def index():
             if t not in tournament_first_match or ts < tournament_first_match[t]:
                 tournament_first_match[t] = ts
 
+    # Determine which tournaments have stats fully loaded
+    tourney_matches = {}
+    for m in matches:
+        t = m.get("tournament")
+        if t:
+            tourney_matches.setdefault(t, []).append(m)
+            
+    fully_loaded_tournaments = {}
+    for t, m_list in tourney_matches.items():
+        is_loaded = True
+        for m in m_list:
+            is_completed = (m.get("status") or "").lower() == "completed"
+            has_stats = bool(m.get("maps") and len(m.get("maps")) > 0)
+            if is_completed and not has_stats:
+                is_loaded = False
+                break
+        fully_loaded_tournaments[t] = is_loaded
+
     return render_template(
         "index.html",
         matches=matches,
@@ -157,7 +175,8 @@ def index():
         ignore_list=ignore_list,
         settings=settings,
         per_page=per_page,
-        tournament_first_match=tournament_first_match
+        tournament_first_match=tournament_first_match,
+        fully_loaded_tournaments=fully_loaded_tournaments
     )
 
 @app.route("/api/match/<match_id>")

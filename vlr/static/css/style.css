@@ -634,7 +634,7 @@ body {
     border-color: var(--card-border);
 }
 
-.tourney-checkbox {
+.tourney-checkbox, .setting-checkbox {
     display: none;
 }
 
@@ -649,12 +649,14 @@ body {
     transition: var(--transition-fast);
 }
 
-.tourney-checkbox:checked + .custom-checkbox {
+.tourney-checkbox:checked + .custom-checkbox,
+.setting-checkbox:checked + .custom-checkbox {
     background: var(--accent-red);
     border-color: var(--accent-red);
 }
 
-.tourney-checkbox:checked + .custom-checkbox::after {
+.tourney-checkbox:checked + .custom-checkbox::after,
+.setting-checkbox:checked + .custom-checkbox::after {
     content: '\f00c';
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -698,6 +700,22 @@ body {
 .tourney-checkbox:checked ~ .tourney-label-text {
     color: var(--text-primary);
 }
+
+#tournament-checklist.highlight-tournaments .tourney-item.tourney-fully-loaded .tourney-label-text {
+    color: var(--accent-green) !important;
+    font-weight: 600;
+}
+#tournament-checklist.highlight-tournaments .tourney-item.tourney-not-loaded .tourney-label-text {
+    color: var(--accent-red) !important;
+    font-weight: 600;
+}
+body.light #tournament-checklist.highlight-tournaments .tourney-item.tourney-fully-loaded .tourney-label-text {
+    color: #16a34a !important;
+}
+body.light #tournament-checklist.highlight-tournaments .tourney-item.tourney-not-loaded .tourney-label-text {
+    color: #dc2626 !important;
+}
+
 
 /* Content Area */
 .content-area {
