@@ -1503,6 +1503,22 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td class="r">${formatDiff(p.fk_diff)}</td>
             </tr>`).join("");
 
+            // Apply current search query if any
+            const searchInput = document.getElementById("leaderboard-search");
+            if (searchInput && searchInput.value) {
+                const query = searchInput.value.toLowerCase().trim();
+                const rows = tbody.querySelectorAll("tr");
+                rows.forEach(row => {
+                    const nameEl = row.querySelector(".mdm-player-cell span");
+                    const name = nameEl ? nameEl.textContent.toLowerCase() : "";
+                    if (name.includes(query)) {
+                        row.style.display = "";
+                    } else {
+                        row.style.display = "none";
+                    }
+                });
+            }
+
             const modal = document.getElementById("player-leaderboard-modal");
             if (modal) modal.style.display = "flex";
         } catch (err) {
@@ -1515,6 +1531,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const leaderboardModal = document.getElementById("player-leaderboard-modal");
     const leaderboardClose = document.getElementById("leaderboard-close");
     const teamSplitCheckbox = document.getElementById("setting-team-split-stats");
+    const leaderboardSearchInput = document.getElementById("leaderboard-search");
 
     // Restore saved split by team setting
     if (teamSplitCheckbox) {
@@ -1524,6 +1541,21 @@ document.addEventListener("DOMContentLoaded", () => {
             openLeaderboard();
         });
     }
+
+    // Listen to leaderboard search input changes
+    leaderboardSearchInput?.addEventListener("input", (e) => {
+        const query = e.target.value.toLowerCase().trim();
+        const rows = document.querySelectorAll("#leaderboard-tbody tr");
+        rows.forEach(row => {
+            const nameEl = row.querySelector(".mdm-player-cell span");
+            const name = nameEl ? nameEl.textContent.toLowerCase() : "";
+            if (name.includes(query)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    });
 
     leaderboardBtn?.addEventListener("click", openLeaderboard);
     leaderboardClose?.addEventListener("click", () => {

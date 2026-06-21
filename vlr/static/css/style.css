@@ -716,6 +716,27 @@ body.light #tournament-checklist.highlight-tournaments .tourney-item.tourney-not
     color: #dc2626 !important;
 }
 
+#leaderboard-search {
+    background: var(--bg-darker);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    color: var(--text-primary);
+    padding: 8px 12px 8px 32px;
+    font-size: 13px;
+    font-family: var(--font-main);
+    width: 100%;
+    outline: none;
+    transition: var(--transition-fast);
+}
+#leaderboard-search:focus {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red-glow);
+}
+body.light #leaderboard-search {
+    background: rgba(0,0,0,0.05);
+}
+
+
 
 /* Content Area */
 .content-area {
