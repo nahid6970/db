@@ -34,3 +34,6 @@ settings.json
 
 # Logs
 *.log
+
+# JSON files
+*.json
