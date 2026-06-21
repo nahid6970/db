@@ -738,7 +738,9 @@ body.light #leaderboard-search {
 
 .stats-loaded-check {
     color: var(--accent-green);
-    font-size: 11px;
+    font-size: 14px;
+    line-height: 1;
+    transform: translateY(1px);
 }
 body.light .stats-loaded-check {
     color: #16a34a;

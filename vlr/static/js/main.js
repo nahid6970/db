@@ -229,6 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const countdownContainer = card.querySelector(".countdown-container");
                 if (countdownContainer) {
                     if (data.status === "Live") {
+                        countdownContainer.style.display = "";
                         countdownContainer.className = "countdown-container status-live-container";
                         countdownContainer.innerHTML = `
                             <span class="live-pulse-indicator"></span>
@@ -236,9 +237,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         `;
                     } else if (data.status === "Completed") {
                         countdownContainer.className = "countdown-container status-completed-container";
-                        countdownContainer.innerHTML = `
-                            <span class="completed-text">Final Match</span>
-                        `;
+                        countdownContainer.innerHTML = "";
+                        countdownContainer.removeAttribute("data-timestamp");
+                        countdownContainer.style.display = "none";
+                    } else {
+                        countdownContainer.style.display = "";
                     }
                 }
             }
@@ -953,11 +956,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 `;
             } else {
-                countdownHTML = `
-                    <div class="countdown-container status-completed-container">
-                        <span class="completed-text">Final Match</span>
-                    </div>
-                `;
+                countdownHTML = "";
             }
             
             card.innerHTML = `
