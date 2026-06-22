@@ -11,7 +11,7 @@
                 "title": "One Piece - s23e12 - [1167] - Shamrock Appears - Commander of the Knights of God WEBDL-1080p - [ToonsHub]",
                 "watched": false,
                 "added_date": "2026-06-21T22:32:39.257350",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 38,
@@ -4985,5 +4985,23 @@
             }
         ],
         "sonarr_url": ""
+    },
+    {
+        "id": 52,
+        "title": "House of the Dragon",
+        "year": "",
+        "cover_image": "",
+        "directory_path": "D:\\Downloads\\@Sonarr\\House of the Dragon",
+        "rating": null,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "id": 1,
+                "title": "House of the Dragon - S03E01 - Salt and Sea, Fire and Blood WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2026-06-22T12:39:07.295269",
+                "notify": "unseen"
+            }
+        ]
     }
 ]
