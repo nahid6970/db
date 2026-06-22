@@ -212,7 +212,7 @@
 - **Per-Item Toggle:** Tracking is enabled or disabled per saved item, not globally per channel.
 - **Auto-Detection:** Resolves `youtube_channel_id` from YouTube URLs using multiple HTML and URL fallback patterns.
 - **Baseline Initialization:** When tracking is enabled, the current latest upload is stored as the baseline so older videos are not counted as new.
-- **Backend Action:** `checkYouTubeUpdates` scrapes the channel's `/videos` page and extracts video IDs from embedded JSON (RSS feed was shut down by YouTube).
+- **Backend Action:** `checkYouTubeUpdates` uses the YouTube RSS feed first, then falls back to the channel's `/videos` page and extracts video IDs from embedded JSON.
 - **Background Check:** Runs 3s after page load, then every 30 minutes while the tab is open.
 - **Parallel Fetching:** Up to 5 channels checked simultaneously; duplicate channel+lastVideoId pairs share one request.
 - **Reset Logic:** Clicking the link to visit the channel resets the count to 0 via `updateYouTubeStatus` mutation.

@@ -38,7 +38,7 @@
   - Red bottom-left badge shows how many new videos were uploaded since the last visit
   - Yellow dot shows tracking is enabled but there are no unseen videos
   - Clicking the tracked channel resets the count for that item
-  - Checks run once per page load, about 3 seconds after links load, using YouTube RSS through a Convex action
+  - Checks run once per page load, about 3 seconds after links load, using YouTube RSS first and the channel `/videos` page as a fallback through a Convex action
 
 ✅ **Link Management:**
   - Add, edit, delete, copy, hide/show

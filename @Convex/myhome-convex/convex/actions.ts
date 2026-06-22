@@ -83,6 +83,7 @@ export const fetchPageTitle = action({
     const domain = urlObj.hostname.replace('www.', '');
     let oembedTitle: string | null = null;
     let oembedThumbnail: string | null = null;
+    let title: string | null = null;
     
     try {
       // 1. Try oEmbed for YouTube (best for titles and thumbnails)
@@ -148,7 +149,7 @@ export const fetchPageTitle = action({
       
       // Extract title from HTML
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
-      const title = titleMatch ? titleMatch[1].trim() : null;
+      title = titleMatch ? titleMatch[1].trim() : null;
       
       const ogImageMatch =
         html.match(/<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i) ||
@@ -324,17 +325,53 @@ export const fetchPageTitle = action({
 export const checkYouTubeUpdates = action({
   args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
   handler: async (ctx, args) => {
-    try {
-      // Fetch the channel's XML RSS feed instead of web scraping
+    const fetchVideoIdsFromRss = async () => {
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
       const response = await fetch(rssUrl);
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      if (!response.ok) {
+        console.warn(`YouTube RSS feed fetch failed with HTTP ${response.status} for channel ${args.channelId}`);
+        return [] as string[];
+      }
 
       const xml = await response.text();
-      
-      // Extract video IDs from standard <yt:videoId> XML elements
       const matches = [...xml.matchAll(/<yt:videoId>([a-zA-Z0-9_-]{11})<\/yt:videoId>/g)];
-      const videoIds = matches.map(match => match[1]);
+      const seen = new Set<string>();
+      const videoIds: string[] = [];
+
+      for (const match of matches) {
+        const videoId = match[1];
+        if (seen.has(videoId)) continue;
+        seen.add(videoId);
+        videoIds.push(videoId);
+      }
+
+      return videoIds;
+    };
+
+    const fetchVideoIdsFromChannelPage = async () => {
+      const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
+      const response = await fetch(channelUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept-Language': 'en-US,en;q=0.9',
+        }
+      });
+
+      if (!response.ok) {
+        console.warn(`YouTube channel page fetch failed with HTTP ${response.status} for channel ${args.channelId}`);
+        return [] as string[];
+      }
+
+      const html = await response.text();
+      return extractYouTubeUploadsVideoIds(html);
+    };
+
+    try {
+      // RSS is the fast path; fall back to the channel page when YouTube omits or breaks the feed.
+      let videoIds = await fetchVideoIdsFromRss();
+      if (videoIds.length === 0) {
+        videoIds = await fetchVideoIdsFromChannelPage();
+      }
 
       if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
 
@@ -345,9 +382,9 @@ export const checkYouTubeUpdates = action({
 
       const lastIndex = videoIds.indexOf(args.lastVideoId);
       
-      // If the last tracked video is no longer in the feed (pushed off the 15-item feed limit or deleted),
-      // cap the notification count to 1 as a safety measure to prevent massive false positive spikes.
-      const count = lastIndex === -1 ? 1 : lastIndex;
+      // If the stored baseline is no longer present, everything we fetched is newer than the last seen item.
+      // This is a lower bound when the feed/page window is shorter than the backlog of unseen uploads.
+      const count = lastIndex === -1 ? videoIds.length : lastIndex;
 
       return { count, latestVideoId };
     } catch (error) {
