@@ -246,6 +246,25 @@ function formatClickTrackingBadge(lastClickedAt) {
   };
 }
 
+function formatTimeAgo(timestamp) {
+  if (!timestamp) return '';
+  const diffMs = Date.now() - timestamp;
+  if (diffMs < 0) return 'just now';
+  const totalMinutes = Math.floor(diffMs / 60000);
+  if (totalMinutes < 1) return 'just now';
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) {
+    return hours > 0 ? `${days}d ${hours}h ago` : `${days}d ago`;
+  }
+  if (hours > 0) {
+    return minutes > 0 ? `${hours}h ${minutes}m ago` : `${hours}h ago`;
+  }
+  return `${minutes}m ago`;
+}
+
 function normalizeUrl(rawUrl) {
   if (!rawUrl) return '';
 
@@ -943,15 +962,18 @@ async function checkAllYouTubeUpdates() {
     if (result.latestVideoId !== item.youtube_last_video_id) {
       console.log(`📺 ${item.name}: ${result.count} new video(s)`);
       const newCount = (item.youtube_new_video_count || 0) + result.count;
+      const startedAt = item.youtube_notification_started_at || Date.now();
       await window.convexMutation("functions:updateYouTubeStatus", {
         id: item._id, table: item.table,
         youtube_last_video_id: result.latestVideoId,
-        youtube_new_video_count: newCount
+        youtube_new_video_count: newCount,
+        youtube_notification_started_at: startedAt
       });
       const localLink = links.find(l => l._id === item._id);
       if (localLink) {
         localLink.youtube_last_video_id = result.latestVideoId;
         localLink.youtube_new_video_count = newCount;
+        localLink.youtube_notification_started_at = startedAt;
       }
       hasUpdates = true;
     }
@@ -1475,7 +1497,10 @@ function createLinkItem(link, index) {
     const youtubeBadge = document.createElement('span');
     youtubeBadge.className = 'link-badge-count';
     youtubeBadge.textContent = link.youtube_new_video_count;
-    youtubeBadge.title = `${link.youtube_new_video_count} new video${link.youtube_new_video_count > 1 ? 's' : ''}`;
+    const timeAgoStr = link.youtube_notification_started_at 
+      ? ` (first update ${formatTimeAgo(link.youtube_notification_started_at)})` 
+      : '';
+    youtubeBadge.title = `${link.youtube_new_video_count} new video${link.youtube_new_video_count > 1 ? 's' : ''}${timeAgoStr}`;
     li.appendChild(youtubeBadge);
   } else if (link.youtube_channel_id) {
     // Show a small yellow dot if enabled but no new videos
@@ -1621,9 +1646,11 @@ function createLinkItem(link, index) {
           id: link._id,
           table: "links",
           youtube_last_video_id: link.youtube_last_video_id, // persist latest so next check doesn't re-count
-          youtube_new_video_count: 0
+          youtube_new_video_count: 0,
+          youtube_notification_started_at: 0
         });
         link.youtube_new_video_count = 0;
+        link.youtube_notification_started_at = 0;
         renderLinks(); // Re-render to clear badge
       } catch (error) {
         console.error('Error resetting YouTube count:', error);
@@ -2153,6 +2180,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
       updatedLink.youtube_channel_id = originalLink.youtube_channel_id;
       updatedLink.youtube_last_video_id = originalLink.youtube_last_video_id;
       updatedLink.youtube_new_video_count = originalLink.youtube_new_video_count;
+      updatedLink.youtube_notification_started_at = originalLink.youtube_notification_started_at || 0;
     }
   } else {
     // Clear tracking

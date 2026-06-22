@@ -72,6 +72,7 @@ export default defineSchema({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
@@ -101,5 +102,6 @@ export default defineSchema({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
   }),
 });

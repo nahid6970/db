@@ -19,6 +19,25 @@ function formatClickTrackingBadge(lastClickedAt) {
   };
 }
 
+function formatTimeAgo(timestamp) {
+  if (!timestamp) return '';
+  const diffMs = Date.now() - timestamp;
+  if (diffMs < 0) return 'just now';
+  const totalMinutes = Math.floor(diffMs / 60000);
+  if (totalMinutes < 1) return 'just now';
+  const days = Math.floor(totalMinutes / 1440);
+  const hours = Math.floor((totalMinutes % 1440) / 60);
+  const minutes = totalMinutes % 60;
+
+  if (days > 0) {
+    return hours > 0 ? `${days}d ${hours}h ago` : `${days}d ago`;
+  }
+  if (hours > 0) {
+    return minutes > 0 ? `${hours}h ${minutes}m ago` : `${hours}h ago`;
+  }
+  return `${minutes}m ago`;
+}
+
 async function initializeSidebarYouTubeTrackingForUrl(url, existingChannelId) {
   const trackingState = {
     youtube_channel_id: undefined,
@@ -188,6 +207,10 @@ function createSidebarButton(button, index) {
     youtubeBadge.textContent = button.youtube_new_video_count;
     youtubeBadge.style.bottom = '-5px';
     youtubeBadge.style.left = '-5px';
+    const timeAgoStr = button.youtube_notification_started_at 
+      ? ` (first update ${formatTimeAgo(button.youtube_notification_started_at)})` 
+      : '';
+    youtubeBadge.title = `${button.youtube_new_video_count} new video${button.youtube_new_video_count > 1 ? 's' : ''}${timeAgoStr}`;
     btn.appendChild(youtubeBadge);
   } else if (button.youtube_channel_id) {
     const enabledBadge = document.createElement('span');
@@ -269,9 +292,11 @@ function createSidebarButton(button, index) {
         await window.convexMutation("functions:updateYouTubeStatus", {
           id: button._id,
           table: "sidebar_buttons",
-          youtube_new_video_count: 0
+          youtube_new_video_count: 0,
+          youtube_notification_started_at: 0
         });
         button.youtube_new_video_count = 0;
+        button.youtube_notification_started_at = 0;
         renderSidebarButtons(); // Re-render to clear badge
       } catch (error) {
         console.error('Error resetting YouTube count (sidebar):', error);
@@ -710,16 +735,19 @@ document.getElementById('edit-sidebar-button-form').addEventListener('submit', a
         updatedButton.youtube_channel_id = trackingState.youtube_channel_id;
         updatedButton.youtube_last_video_id = trackingState.youtube_last_video_id || "";
         updatedButton.youtube_new_video_count = button.youtube_new_video_count || 0;
+        updatedButton.youtube_notification_started_at = button.youtube_notification_started_at || undefined;
       } else {
         updatedButton.youtube_channel_id = undefined;
         updatedButton.youtube_last_video_id = undefined;
         updatedButton.youtube_new_video_count = 0;
+        updatedButton.youtube_notification_started_at = undefined;
       }
     } catch (error) {
       console.error('Error initializing sidebar YouTube tracking during save:', error);
       updatedButton.youtube_channel_id = undefined;
       updatedButton.youtube_last_video_id = undefined;
       updatedButton.youtube_new_video_count = 0;
+      updatedButton.youtube_notification_started_at = undefined;
     }
   } else {
     updatedButton.click_tracking_enabled = false;

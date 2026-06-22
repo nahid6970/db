@@ -87,6 +87,7 @@ export const addLink = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
@@ -168,6 +169,7 @@ export const updateLink = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
     note: v.optional(v.string()),
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
@@ -188,6 +190,7 @@ export const updateYouTubeStatus = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { id, table, ...data } = args;
@@ -283,6 +286,7 @@ export const addSidebarButton = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("sidebar_buttons", args);
@@ -314,6 +318,7 @@ export const updateSidebarButton = mutation({
     youtube_channel_id: v.optional(v.string()),
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
+    youtube_notification_started_at: v.optional(v.number()),
   },
   handler: async (ctx, args) => {
     const { dbId, ...data } = args;
@@ -367,6 +372,7 @@ export const resetAllYouTubeTracking = mutation({
         await ctx.db.patch(link._id, {
           youtube_last_video_id: "",
           youtube_new_video_count: 0,
+          youtube_notification_started_at: 0,
         });
       }
     }
@@ -377,6 +383,7 @@ export const resetAllYouTubeTracking = mutation({
         await ctx.db.patch(btn._id, {
           youtube_last_video_id: "",
           youtube_new_video_count: 0,
+          youtube_notification_started_at: 0,
         });
       }
     }
