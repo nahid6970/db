@@ -249,22 +249,32 @@
 
   /* Scorers styles */
   .scorers-list {
-    background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);
+    background: var(--bg-card); border-radius: 8px;
     max-width: 700px; margin: 20px auto 0; overflow: hidden;
     box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   }
   .scorer-row {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 20px; border-bottom: 1px solid var(--scorer-row-border);
+    padding: 12px 20px;
     transition: background 0.15s;
+    border-left: 1px solid var(--border-color);
+    border-right: 1px solid var(--border-color);
   }
+  .scorer-row + .scorer-row { border-top: 1px solid var(--scorer-row-border); }
   .scorer-row:hover { background: var(--bg-day-group); }
-  .scorer-row:last-child { border-bottom: none; }
+  .scorer-row:first-child {
+    border-top: 1px solid var(--border-color);
+    border-radius: 8px 8px 0 0;
+  }
+  .scorer-row:last-child {
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
+  }
   .scorer-row-header {
     background: var(--bg-day-header) !important;
     cursor: default !important;
     padding: 10px 20px;
-    border-bottom: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color) !important;
   }
   .scorer-row-header:hover { background: var(--bg-day-header) !important; }
   .scorer-rank { font-weight: 700; color: var(--text-secondary); width: 45px; font-size: 0.9rem; }
