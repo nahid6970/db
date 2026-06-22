@@ -273,6 +273,7 @@
   <button onclick="show('scorers',this)">⚽ Scorers</button>
   <button onclick="show('knockout',this)">&#129354; Knockout</button>
   <button onclick="show('teams',this)">&#127758; Teams</button>
+  <button onclick="show('wins',this)">🏆 Wins</button>
   <button id="theme-toggle" onclick="toggleTheme()" style="background:#4a5568;margin-left:auto;">🌓 Theme</button>
 </nav>
 
@@ -351,6 +352,14 @@
 <section id="teams">
   <div style="color:#666;font-size:0.85rem;margin-bottom:10px">48 teams &bull; 12 groups &bull; 3 host nations</div>
   <div class="teams-grid" id="teamsGrid"></div>
+</section>
+
+<!-- ===== WINS ===== -->
+<section id="wins">
+  <div id="wins-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
+  <div class="scorers-list" id="winsContainer">
+    <div style="text-align:center;padding:40px;color:#666">Loading wins...</div>
+  </div>
 </section>
 
 </div>
@@ -800,6 +809,57 @@ const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'light') {
   document.body.classList.add('light-theme');
 }
+
+async function fetchWins() {
+  try {
+    const r = await fetch('/api/wins');
+    const data = await r.json();
+    const teams = data.teams || [];
+
+    if (teams.length === 0) {
+      document.getElementById('winsContainer').innerHTML = '<p style="color:#666;padding:30px;text-align:center">No match results available yet.</p>';
+      return;
+    }
+
+    let html = '<div class="scorers-list">';
+    let rank = 0;
+    let prevWins = -1;
+    let displayRank = 0;
+
+    teams.forEach((team, idx) => {
+      rank++;
+      if (team.wins !== prevWins) {
+        displayRank = rank;
+        prevWins = team.wins;
+      }
+
+      html += `
+      <div class="scorer-row">
+        <div class="scorer-rank">#${displayRank}</div>
+        <div class="scorer-info">
+          <div>
+            <div class="scorer-name">${team.name}</div>
+            <div class="scorer-team">
+              <img class="flag-sm" src="${team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${team.name}">
+              <span>Group ${team.group || 'N/A'} · ${team.played} Played · ${team.draws} Draws · ${team.losses} Losses</span>
+            </div>
+          </div>
+        </div>
+        <div class="scorer-goals">${team.wins} ${team.wins === 1 ? 'Win' : 'Wins'}</div>
+      </div>`;
+    });
+    html += '</div>';
+
+    document.getElementById('winsContainer').innerHTML = html;
+    const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
+    document.getElementById('wins-status').textContent = `Updated: ${t} BD`;
+  } catch(e) {
+    document.getElementById('winsContainer').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load wins data.</p>';
+  }
+}
+
+fetchWins();
+setInterval(fetchWins, 60000);
 
 function fi(code, cls) {
   return `<img class="${cls||'flag'}" src="https://flagcdn.com/w40/${code}.png" alt="${code}">`;

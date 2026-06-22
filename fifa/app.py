@@ -132,6 +132,31 @@ def api_groups() -> Response:
     return groups_json()
 
 
+@app.route("/api/wins")
+def api_wins() -> Response:
+    payload = _get_groups()
+    teams = []
+    for grp in payload.get("groups", []):
+        for team in grp.get("teams", []):
+            teams.append(
+                {
+                    "name": team.get("name", "Unknown"),
+                    "logo": team.get("logo", ""),
+                    "group": grp.get("name", "").replace("Group ", ""),
+                    "played": int(team.get("P", "0") or 0),
+                    "wins": int(team.get("W", "0") or 0),
+                    "draws": int(team.get("D", "0") or 0),
+                    "losses": int(team.get("L", "0") or 0),
+                    "gd": int(team.get("GD", "0") or 0),
+                    "pts": int(team.get("Pts", "0") or 0),
+                }
+            )
+    teams.sort(key=lambda t: (-t["wins"], -t["gd"], -t["pts"], t["name"]))
+    response = jsonify({"teams": teams, "updated_at": payload.get("updated_at")})
+    response.headers["Cache-Control"] = "no-store"
+    return response
+
+
 def main() -> None:
     try:
         _get_groups(force=True)
