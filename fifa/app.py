@@ -157,6 +157,7 @@ def api_wins() -> Response:
     return response
 
 
+
 def main() -> None:
     try:
         _get_groups(force=True)

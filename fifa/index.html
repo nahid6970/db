@@ -273,7 +273,7 @@
   <button onclick="show('scorers',this)">⚽ Scorers</button>
   <button onclick="show('knockout',this)">&#129354; Knockout</button>
   <button onclick="show('teams',this)">&#127758; Teams</button>
-  <button onclick="show('wins',this)">🏆 Wins</button>
+  <button onclick="show('winslosses',this)">🏆 Wins & Losses</button>
   <button id="theme-toggle" onclick="toggleTheme()" style="background:#4a5568;margin-left:auto;">🌓 Theme</button>
 </nav>
 
@@ -354,11 +354,11 @@
   <div class="teams-grid" id="teamsGrid"></div>
 </section>
 
-<!-- ===== WINS ===== -->
-<section id="wins">
-  <div id="wins-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
-  <div class="scorers-list" id="winsContainer">
-    <div style="text-align:center;padding:40px;color:#666">Loading wins...</div>
+<!-- ===== WINS & LOSSES ===== -->
+<section id="winslosses">
+  <div id="winslosses-status" style="font-size:0.75rem;color:#555;margin-bottom:8px;text-align:right"></div>
+  <div class="scorers-list" id="winslossesContainer">
+    <div style="text-align:center;padding:40px;color:#666">Loading wins & losses...</div>
   </div>
 </section>
 
@@ -810,56 +810,86 @@ if (savedTheme === 'light') {
   document.body.classList.add('light-theme');
 }
 
-async function fetchWins() {
+let winsLossesSortBy = 'wins'; // 'wins' or 'losses'
+
+function renderWinsLosses(teams) {
+  if (teams.length === 0) {
+    document.getElementById('winslossesContainer').innerHTML = '<p style="color:#666;padding:30px;text-align:center">No match results available yet.</p>';
+    return;
+  }
+
+  let html = '<div class="scorers-list">';
+  // Header with sort buttons
+  html += `
+  <div class="scorer-row" style="background:var(--bg-day-header);cursor:default;">
+    <div class="scorer-rank" style="color:var(--text-secondary);">Rank</div>
+    <div class="scorer-info" style="color:var(--text-secondary);font-weight:700;">Team</div>
+    <div style="display:flex;gap:20px;align-items:center;">
+      <span style="cursor:pointer;color:${winsLossesSortBy==='wins'?'#f9ca24':'var(--text-secondary)'};font-weight:${winsLossesSortBy==='wins'?'800':'600'};" onclick="winsLossesSortBy='wins';fetchWinsLosses();">Wins</span>
+      <span style="cursor:pointer;color:${winsLossesSortBy==='losses'?'#f9ca24':'var(--text-secondary)'};font-weight:${winsLossesSortBy==='losses'?'800':'600'};" onclick="winsLossesSortBy='losses';fetchWinsLosses();">Losses</span>
+    </div>
+  </div>`;
+
+  let rank = 0;
+  let prevVal = -1;
+  let displayRank = 0;
+
+  teams.forEach((team, idx) => {
+    const val = winsLossesSortBy === 'wins' ? team.wins : team.losses;
+    rank++;
+    if (val !== prevVal) {
+      displayRank = rank;
+      prevVal = val;
+    }
+
+    html += `
+    <div class="scorer-row">
+      <div class="scorer-rank">#${displayRank}</div>
+      <div class="scorer-info">
+        <div>
+          <div class="scorer-name">${team.name}</div>
+          <div class="scorer-team">
+            <img class="flag-sm" src="${team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${team.name}">
+            <span>Group ${team.group || 'N/A'} · ${team.played} Played · ${team.draws} Draws</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;gap:20px;align-items:center;min-width:90px;justify-content:flex-end;">
+        <span style="color:${winsLossesSortBy==='wins'?'#f9ca24':'var(--text-secondary)'};font-weight:700;">${team.wins}</span>
+        <span style="color:${winsLossesSortBy==='losses'?'#e74c3c':'var(--text-secondary)'};font-weight:700;">${team.losses}</span>
+      </div>
+    </div>`;
+  });
+  html += '</div>';
+
+  document.getElementById('winslossesContainer').innerHTML = html;
+}
+
+async function fetchWinsLosses() {
   try {
     const r = await fetch('/api/wins');
     const data = await r.json();
-    const teams = data.teams || [];
+    let teams = data.teams || [];
 
-    if (teams.length === 0) {
-      document.getElementById('winsContainer').innerHTML = '<p style="color:#666;padding:30px;text-align:center">No match results available yet.</p>';
-      return;
+    if (winsLossesSortBy === 'losses') {
+      teams.sort((a, b) => {
+        if (b.losses !== a.losses) return b.losses - a.losses;
+        if (a.gd !== b.gd) return a.gd - b.gd; // fewer GD first when sorting by losses
+        if (a.pts !== b.pts) return a.pts - b.pts;
+        return a.name.localeCompare(b.name);
+      });
     }
 
-    let html = '<div class="scorers-list">';
-    let rank = 0;
-    let prevWins = -1;
-    let displayRank = 0;
-
-    teams.forEach((team, idx) => {
-      rank++;
-      if (team.wins !== prevWins) {
-        displayRank = rank;
-        prevWins = team.wins;
-      }
-
-      html += `
-      <div class="scorer-row">
-        <div class="scorer-rank">#${displayRank}</div>
-        <div class="scorer-info">
-          <div>
-            <div class="scorer-name">${team.name}</div>
-            <div class="scorer-team">
-              <img class="flag-sm" src="${team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${team.name}">
-              <span>Group ${team.group || 'N/A'} · ${team.played} Played · ${team.draws} Draws · ${team.losses} Losses</span>
-            </div>
-          </div>
-        </div>
-        <div class="scorer-goals">${team.wins} ${team.wins === 1 ? 'Win' : 'Wins'}</div>
-      </div>`;
-    });
-    html += '</div>';
-
-    document.getElementById('winsContainer').innerHTML = html;
+    renderWinsLosses(teams);
     const t = new Date().toLocaleTimeString('en-BD', {timeZone:'Asia/Dhaka'});
-    document.getElementById('wins-status').textContent = `Updated: ${t} BD`;
+    document.getElementById('winslosses-status').textContent = `Updated: ${t} BD · Click column headers to sort`;
   } catch(e) {
-    document.getElementById('winsContainer').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load wins data.</p>';
+    document.getElementById('winslossesContainer').innerHTML = '<p style="color:#e74c3c;padding:20px">Failed to load data.</p>';
   }
 }
 
-fetchWins();
-setInterval(fetchWins, 60000);
+fetchWinsLosses();
+setInterval(fetchWinsLosses, 60000);
 
 function fi(code, cls) {
   return `<img class="${cls||'flag'}" src="https://flagcdn.com/w40/${code}.png" alt="${code}">`;
