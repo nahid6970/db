@@ -55,17 +55,23 @@
   header h1 { font-size: 2rem; color: #f9ca24; letter-spacing: 2px; }
   header p { color: #aad4f5; margin-top: 6px; font-size: 0.9rem; }
   nav {
-    display: flex; gap: 10px; justify-content: center;
-    padding: 14px; background: var(--bg-nav); flex-wrap: wrap;
+    display: flex; gap: 6px; justify-content: center;
+    padding: 10px 12px; background: var(--bg-nav); flex-wrap: nowrap;
     position: sticky; top: 0; z-index: 1000;
     border-bottom: 1px solid var(--border-nav);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  nav::-webkit-scrollbar { display: none; }
   nav button {
-    padding: 8px 20px; border: none; border-radius: 20px;
-    cursor: pointer; font-size: 0.9rem; font-weight: 600;
-    background: #1e3799; color: #fff; transition: background 0.2s;
+    padding: 7px 14px; border: none; border-radius: 20px;
+    cursor: pointer; font-size: 0.82rem; font-weight: 600;
+    background: #1e3799; color: #fff; transition: all 0.2s;
+    white-space: nowrap; flex-shrink: 0;
   }
   nav button.active, nav button:hover { background: #f9ca24; color: #111; }
+  nav button#theme-toggle { padding: 7px 12px; font-size: 0.9rem; }
   .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
   section { display: none; }
   section.active { display: block; }
@@ -243,19 +249,48 @@
 
   /* Scorers styles */
   .scorers-list {
-    background: var(--bg-card); border-radius: 0; border: 1px solid var(--border-color);
-    max-width: 600px; margin: 20px auto 0; overflow: hidden;
+    background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border-color);
+    max-width: 700px; margin: 20px auto 0; overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   }
   .scorer-row {
     display: flex; align-items: center; justify-content: space-between;
     padding: 12px 20px; border-bottom: 1px solid var(--scorer-row-border);
+    transition: background 0.15s;
   }
+  .scorer-row:hover { background: var(--bg-day-group); }
   .scorer-row:last-child { border-bottom: none; }
-  .scorer-rank { font-weight: 700; color: var(--text-secondary); width: 45px; }
-  .scorer-info { display: flex; align-items: center; gap: 10px; flex: 1; }
-  .scorer-name { font-weight: 700; color: var(--text-primary); }
-  .scorer-team { font-size: 0.8rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-top: 2px; }
+  .scorer-row-header {
+    background: var(--bg-day-header) !important;
+    cursor: default !important;
+    padding: 10px 20px;
+    border-bottom: 2px solid var(--border-color);
+  }
+  .scorer-row-header:hover { background: var(--bg-day-header) !important; }
+  .scorer-rank { font-weight: 700; color: var(--text-secondary); width: 45px; font-size: 0.9rem; }
+  .scorer-info { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+  .scorer-name { font-weight: 700; color: var(--text-primary); font-size: 0.95rem; }
+  .scorer-team { font-size: 0.78rem; color: var(--text-secondary); display: flex; align-items: center; gap: 6px; margin-top: 3px; }
   .scorer-goals { font-size: 1.1rem; font-weight: 900; color: #f9ca24; }
+  
+  .wl-header-cell {
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .wl-header-cell:hover { background: rgba(249,202,36,0.15); }
+  .wl-header-cell.active { color: #f9ca24; font-weight: 800; }
+  .wl-header-cell .arrow { font-size: 0.7rem; margin-left: 3px; }
+  .wl-value { font-weight: 700; font-size: 1rem; width: 40px; text-align: center; }
+  .wl-value.wins { color: #2ecc71; }
+  .wl-value.losses { color: #e74c3c; }
+  .wl-bar { 
+    height: 4px; border-radius: 2px; margin-top: 4px;
+    background: linear-gradient(90deg, #2ecc71 var(--w-pct,0%), #e74c3c var(--w-pct,0%));
+    opacity: 0.6;
+  }
 
 </style>
 </head>
@@ -273,8 +308,8 @@
   <button onclick="show('scorers',this)">⚽ Scorers</button>
   <button onclick="show('knockout',this)">&#129354; Knockout</button>
   <button onclick="show('teams',this)">&#127758; Teams</button>
-  <button onclick="show('winslosses',this)">🏆 Wins & Losses</button>
-  <button id="theme-toggle" onclick="toggleTheme()" style="background:#4a5568;margin-left:auto;">🌓 Theme</button>
+  <button onclick="show('winslosses',this)">🏆 W/L</button>
+  <button id="theme-toggle" onclick="toggleTheme()" style="background:#4a5568;margin-left:auto;">🌓</button>
 </nav>
 
 <div class="container">
@@ -819,20 +854,25 @@ function renderWinsLosses(teams) {
   }
 
   let html = '<div class="scorers-list">';
-  // Header with sort buttons
+  // Header
   html += `
-  <div class="scorer-row" style="background:var(--bg-day-header);cursor:default;">
-    <div class="scorer-rank" style="color:var(--text-secondary);">Rank</div>
-    <div class="scorer-info" style="color:var(--text-secondary);font-weight:700;">Team</div>
-    <div style="display:flex;gap:20px;align-items:center;">
-      <span style="cursor:pointer;color:${winsLossesSortBy==='wins'?'#f9ca24':'var(--text-secondary)'};font-weight:${winsLossesSortBy==='wins'?'800':'600'};" onclick="winsLossesSortBy='wins';fetchWinsLosses();">Wins</span>
-      <span style="cursor:pointer;color:${winsLossesSortBy==='losses'?'#f9ca24':'var(--text-secondary)'};font-weight:${winsLossesSortBy==='losses'?'800':'600'};" onclick="winsLossesSortBy='losses';fetchWinsLosses();">Losses</span>
+  <div class="scorer-row scorer-row-header">
+    <div class="scorer-rank">#</div>
+    <div class="scorer-info">Team</div>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <span class="wl-header-cell ${winsLossesSortBy==='wins'?'active':''}" onclick="winsLossesSortBy='wins';fetchWinsLosses();">
+        Wins ${winsLossesSortBy==='wins'?'▼':''}
+      </span>
+      <span class="wl-header-cell ${winsLossesSortBy==='losses'?'active':''}" onclick="winsLossesSortBy='losses';fetchWinsLosses();">
+        Losses ${winsLossesSortBy==='losses'?'▼':''}
+      </span>
     </div>
   </div>`;
 
   let rank = 0;
   let prevVal = -1;
   let displayRank = 0;
+  const maxPlayed = Math.max(...teams.map(t => t.played), 1);
 
   teams.forEach((team, idx) => {
     const val = winsLossesSortBy === 'wins' ? team.wins : team.losses;
@@ -841,22 +881,24 @@ function renderWinsLosses(teams) {
       displayRank = rank;
       prevVal = val;
     }
+    const wPct = team.played > 0 ? (team.wins / team.played * 100) : 0;
 
     html += `
     <div class="scorer-row">
       <div class="scorer-rank">#${displayRank}</div>
-      <div class="scorer-info">
-        <div>
+      <div class="scorer-info" style="min-width:0;">
+        <div style="overflow:hidden;">
           <div class="scorer-name">${team.name}</div>
           <div class="scorer-team">
             <img class="flag-sm" src="${team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${team.name}">
-            <span>Group ${team.group || 'N/A'} · ${team.played} Played · ${team.draws} Draws</span>
+            <span>Grp ${team.group || 'N/A'} · ${team.played}P · ${team.draws}D · ${team.gd>0?'+':''}${team.gd} GD</span>
           </div>
+          <div class="wl-bar" style="--w-pct:${wPct}%;width:100%;max-width:180px;"></div>
         </div>
       </div>
-      <div style="display:flex;gap:20px;align-items:center;min-width:90px;justify-content:flex-end;">
-        <span style="color:${winsLossesSortBy==='wins'?'#f9ca24':'var(--text-secondary)'};font-weight:700;">${team.wins}</span>
-        <span style="color:${winsLossesSortBy==='losses'?'#e74c3c':'var(--text-secondary)'};font-weight:700;">${team.losses}</span>
+      <div style="display:flex;gap:16px;align-items:center;">
+        <span class="wl-value wins">${team.wins}</span>
+        <span class="wl-value losses">${team.losses}</span>
       </div>
     </div>`;
   });
