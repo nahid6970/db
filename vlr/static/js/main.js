@@ -66,11 +66,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Open VLR.gg page on card click
     if (matchesGrid) {
-    matchesGrid.addEventListener("click", e => {
+        matchesGrid.addEventListener("click", e => {
             const card = e.target.closest(".match-card");
             if (!card) return;
             const mid = card.getAttribute("data-id");
-            if (mid) openMatchDetail(mid, card, { refresh: true });
+            if (mid) openMatchDetail(mid, card);
         });
     }
 
