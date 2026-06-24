@@ -1,6 +1,41 @@
 import { query, mutation } from "./_generated/server";
 import { v } from "convex/values";
 
+export const getAppSettings = query({
+  args: {},
+  handler: async (ctx) => {
+    return await ctx.db
+      .query("app_settings")
+      .filter((q) => q.eq(q.field("key"), "global"))
+      .first();
+  },
+});
+
+export const upsertAppSettings = mutation({
+  args: {
+    key: v.string(),
+    hideGroupNames: v.optional(v.boolean()),
+    openSameTab: v.optional(v.boolean()),
+    autoFitScaleMinPercent: v.optional(v.number()),
+    autoFitScaleMaxPercent: v.optional(v.number()),
+    autoFitScaleDefaultPercent: v.optional(v.number()),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("app_settings")
+      .filter((q) => q.eq(q.field("key"), args.key))
+      .first();
+
+    if (existing) {
+      const { key: _, ...data } = args;
+      await ctx.db.patch(existing._id, data);
+      return existing._id;
+    }
+
+    return await ctx.db.insert("app_settings", args);
+  },
+});
+
 // Links queries and mutations
 export const getLinks = query({
   args: {},

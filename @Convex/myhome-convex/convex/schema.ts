@@ -2,6 +2,15 @@ import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 export default defineSchema({
+  app_settings: defineTable({
+    key: v.string(),
+    hideGroupNames: v.optional(v.boolean()),
+    openSameTab: v.optional(v.boolean()),
+    autoFitScaleMinPercent: v.optional(v.number()),
+    autoFitScaleMaxPercent: v.optional(v.number()),
+    autoFitScaleDefaultPercent: v.optional(v.number()),
+  }),
+
   links: defineTable({
     name: v.optional(v.string()),
     group: v.optional(v.string()),

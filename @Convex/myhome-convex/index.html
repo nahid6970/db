@@ -1063,12 +1063,31 @@
         return Number.isFinite(parsed) ? Math.max(1, Math.round(parsed)) : fallback;
       }
 
-      function loadAutoFitSettingsIntoForm() {
-        var s = loadSettings();
+      function writeSettingsToForm(s) {
         var defaults = window.getAutoFitScaleSettings ? window.getAutoFitScaleSettings() : { minPercent: 70, maxPercent: 135, defaultPercent: 100 };
         document.getElementById('setting-auto-fit-scale-min').value = normalizeAutoFitPercent(s.autoFitScaleMinPercent, defaults.minPercent);
         document.getElementById('setting-auto-fit-scale-max').value = normalizeAutoFitPercent(s.autoFitScaleMaxPercent, defaults.maxPercent);
         document.getElementById('setting-auto-fit-scale-default').value = normalizeAutoFitPercent(s.autoFitScaleDefaultPercent, defaults.defaultPercent);
+        document.getElementById('setting-hide-group-names').checked = !!s.hideGroupNames;
+        document.getElementById('setting-open-same-tab').checked = !!s.openSameTab;
+        document.body.classList.toggle('hide-group-names', !!s.hideGroupNames);
+      }
+
+      async function syncSettingsFromServer() {
+        var localSettings = loadSettings();
+        if (!window.convexQuery) {
+          writeSettingsToForm(localSettings);
+          return;
+        }
+        try {
+          var remote = await window.convexQuery('functions:getAppSettings', {});
+          var merged = remote ? Object.assign({}, localSettings, remote) : localSettings;
+          saveSettings(merged);
+          writeSettingsToForm(merged);
+        } catch (error) {
+          console.warn('Could not load settings from server:', error);
+          writeSettingsToForm(localSettings);
+        }
       }
 
       window.applySettings = async function() {
@@ -1087,18 +1106,26 @@
         saveSettings(s);
         // Toggle CSS class on body
         document.body.classList.toggle('hide-group-names', hideNames);
-        if (window.convexMutation) {
-          try {
+        try {
+          if (window.convexMutation) {
+            await window.convexMutation('functions:upsertAppSettings', {
+              key: 'global',
+              hideGroupNames: hideNames,
+              openSameTab: document.getElementById('setting-open-same-tab').checked,
+              autoFitScaleMinPercent: minPercent,
+              autoFitScaleMaxPercent: maxPercent,
+              autoFitScaleDefaultPercent: defaultPercent,
+            });
             await window.convexMutation('functions:updateAllLinksAutoFitScale', {
               li_auto_fit_scale: defaultPercent / 100,
             });
             if (typeof window.loadLinks === 'function') {
               await window.loadLinks();
             }
-          } catch (error) {
-            console.error('Could not apply auto-fit scale to all links:', error);
-            window.showNotification('Saved settings, but failed to update all links.', 'error');
           }
+        } catch (error) {
+          console.error('Could not save settings to server:', error);
+          window.showNotification('Saved locally, but failed to sync settings to other devices.', 'error');
         }
         if (window.refreshAutoFitScaleControls) {
           window.refreshAutoFitScaleControls({ resetAddToDefault: true });
@@ -1106,16 +1133,14 @@
       };
 
       // Init on load
-      document.addEventListener('DOMContentLoaded', function() {
-        var s = loadSettings();
-        if (s.hideGroupNames) {
-          document.getElementById('setting-hide-group-names').checked = true;
-          document.body.classList.add('hide-group-names');
+      document.addEventListener('DOMContentLoaded', async function() {
+        writeSettingsToForm(loadSettings());
+        if (window.convexClient) {
+          await syncSettingsFromServer();
         }
-        if (s.openSameTab) {
-          document.getElementById('setting-open-same-tab').checked = true;
-        }
-        loadAutoFitSettingsIntoForm();
+      });
+      document.addEventListener('convexClientReady', function() {
+        syncSettingsFromServer();
       });
     })();
   </script>

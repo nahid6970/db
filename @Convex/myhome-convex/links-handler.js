@@ -59,6 +59,7 @@ if (!window.convexClient) {
     const { ConvexHttpClient } = module;
     window.convexClient = new ConvexHttpClient("https://lovable-wildcat-595.convex.cloud");
     console.log('✅ Convex client initialized!');
+    document.dispatchEvent(new CustomEvent('convexClientReady'));
 
     // Now load links
     if (typeof loadLinks === 'function') {
