@@ -677,6 +677,24 @@ function updateAutoFitScaleVisual(range, display, scale) {
   display.textContent = `${formatAutoFitScale(scale)}%`;
 }
 
+function setAutoFitScaleInputVisibility(prefix) {
+  const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
+  const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
+  if (!row || !checkbox) return;
+  const expanded = row.dataset.expanded === 'true';
+  row.style.display = checkbox.checked && expanded ? 'flex' : 'none';
+}
+
+function toggleAutoFitScaleInput(prefix) {
+  const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
+  const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
+  if (!row || !checkbox) return;
+  row.dataset.expanded = row.dataset.expanded === 'true' ? 'false' : 'true';
+  setAutoFitScaleInputVisibility(prefix);
+}
+
+window.toggleAutoFitScaleInput = toggleAutoFitScaleInput;
+
 function applyAutoFitScaleSettingsToControl(prefix, options = {}) {
   const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
   const range = document.getElementById(`${prefix}-li-auto-fit-scale`);
@@ -698,7 +716,10 @@ function applyAutoFitScaleSettingsToControl(prefix, options = {}) {
     range.dataset.autoFitTouched = '';
   }
   updateAutoFitScaleVisual(range, display, currentScale);
-  row.style.display = checkbox.checked ? 'flex' : 'none';
+  if (typeof row.dataset.expanded === 'undefined') {
+    row.dataset.expanded = 'false';
+  }
+  setAutoFitScaleInputVisibility(prefix);
 }
 
 function scaleCssSize(sizeValue, scale, fallbackValue) {
@@ -737,7 +758,10 @@ function syncAutoFitScaleControls(prefix) {
     updateAutoFitScaleVisual(range, document.getElementById(`${prefix}-li-auto-fit-scale-value`), scale);
   };
   const updateVisibility = () => {
-    row.style.display = checkbox.checked ? 'flex' : 'none';
+    if (!checkbox.checked) {
+      row.dataset.expanded = 'false';
+    }
+    setAutoFitScaleInputVisibility(prefix);
   };
 
   range.addEventListener('input', updateFromRange);

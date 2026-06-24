@@ -274,7 +274,7 @@
                   <path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4h-4v2h6v-6h-2z" fill="currentColor"></path>
                 </svg>
               </span>
-              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-li-auto-fit-scale-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
+              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();window.toggleAutoFitScaleInput('link');"></span>
             </label>
             <label class="option-chip" title="Folder Picker" style="position:relative;">
               <input type="checkbox" id="link-folder-picker" aria-label="Folder Picker">
@@ -427,7 +427,7 @@
                   <path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4h-4v2h6v-6h-2z" fill="currentColor"></path>
                 </svg>
               </span>
-              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-li-auto-fit-scale-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
+              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();window.toggleAutoFitScaleInput('edit-link');"></span>
             </label>
             <label class="option-chip" title="YouTube Tracking">
               <input type="checkbox" id="edit-link-youtube-tracking" aria-label="YouTube Tracking">
