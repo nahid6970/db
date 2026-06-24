@@ -50,52 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let checkedTournaments = new Set();
     let customSeriesFilters = [];
     let tournamentOrder = {}; // {name: position}
-
-    function showSyncToast(message) {
-        let host = document.getElementById("sync-toast-host");
-        if (!host) {
-            host = document.createElement("div");
-            host.id = "sync-toast-host";
-            host.className = "sync-toast-host";
-            document.body.appendChild(host);
-        }
-
-        const toast = document.createElement("div");
-        toast.className = "sync-toast";
-        toast.textContent = message;
-        host.appendChild(toast);
-
-        requestAnimationFrame(() => toast.classList.add("show"));
-        setTimeout(() => {
-            toast.classList.remove("show");
-            setTimeout(() => toast.remove(), 220);
-        }, 3200);
-    }
-
-    async function notifySyncComplete(summary) {
-        const title = "Sync complete";
-        const body = summary || "Match loops finished.";
-
-        if ("Notification" in window) {
-            if (Notification.permission === "granted") {
-                new Notification(title, { body });
-                return;
-            }
-            if (Notification.permission === "default") {
-                try {
-                    const perm = await Notification.requestPermission();
-                    if (perm === "granted") {
-                        new Notification(title, { body });
-                        return;
-                    }
-                } catch (err) {
-                    // fall through to toast
-                }
-            }
-        }
-
-        showSyncToast(`${title}: ${body}`);
-    }
     
     // Initialize checked tournaments
     tourneyCheckboxes.forEach(cb => {
@@ -893,8 +847,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 applyFilters();
 
                 window.scrollTo(0, scrollY);
-                const pageSummary = (start && end) ? `Finished ${end - start + 1} page loops (${start}-${end}).` : "Finished the configured page loops.";
-                await notifySyncComplete(pageSummary);
             } catch (err) {
                 console.error("Error syncing data:", err);
                 alert("Failed to sync live data from VLR.gg. Please try again later.");

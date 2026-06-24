@@ -6,6 +6,8 @@ __pycache__/
 
 # Databases
 *.db
+*.db-shm
+*.db-wal
 
 # Environments
 .env
@@ -28,6 +30,9 @@ static/images_cache/
 matches.json
 matches.backup.json
 settings.json
+
+# Runtime / history data
+history/
 
 # Atomic write temp files
 *.tmp
