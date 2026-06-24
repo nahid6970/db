@@ -1439,13 +1439,9 @@ async function handleUrlOpening(url) {
   if (url.startsWith('chrome://') || url.startsWith('edge://')) {
     copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
   } else if (url.startsWith('file:///')) {
-    if (window.location.protocol === 'file:') {
-      window.location.href = url;
-    } else {
-      // Convert file:///C:/path to openfile:C:\path
-      const path = url.replace('file:///', '').replace(/\//g, '\\');
-      window.location.href = 'openfile:' + path;
-    }
+    // Convert file:///C:/path to openfile:C:\path
+    const path = url.replace('file:///', '').replace(/\//g, '\\');
+    window.location.href = 'openfile:' + path;
   } else {
     window.open(url, target);
   }
@@ -2552,7 +2548,7 @@ function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirs
   const toggleWrapper = document.createElement('label');
   toggleWrapper.className = 'run-hidden-toggle-label';
   toggleWrapper.title = 'Run Hidden (pythonw for python files, etc.)';
-  toggleWrapper.style.display = 'none';
+  toggleWrapper.style.display = 'inline-flex';
   toggleWrapper.style.alignItems = 'center';
   toggleWrapper.style.gap = '3px';
   toggleWrapper.style.cursor = 'pointer';
@@ -2575,18 +2571,6 @@ function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirs
 
   toggleWrapper.appendChild(checkbox);
   toggleWrapper.appendChild(labelSpan);
-
-  function updateToggleVisibility() {
-    const val = input.value.trim().toLowerCase();
-    if (val.startsWith('file:///')) {
-      toggleWrapper.style.display = 'inline-flex';
-    } else {
-      toggleWrapper.style.display = 'none';
-    }
-  }
-
-  input.addEventListener('input', updateToggleVisibility);
-  updateToggleVisibility();
 
   group.appendChild(input);
   group.appendChild(toggleWrapper);

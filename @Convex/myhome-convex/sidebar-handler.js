@@ -343,13 +343,9 @@ function createSidebarButton(button, index) {
     if (url.startsWith('chrome://') || url.startsWith('edge://')) {
       copyToClipboard(url, 'URL copied! (Paste in new tab to open)');
     } else if (url.startsWith('file:///')) {
-      if (window.location.protocol === 'file:') {
-        window.location.href = url;
-      } else {
-        // Convert file:///C:/path to openfile:C:\path
-        const path = url.replace('file:///', '').replace(/\//g, '\\');
-        window.location.href = 'openfile:' + path;
-      }
+      // Convert file:///C:/path to openfile:C:\path
+      const path = url.replace('file:///', '').replace(/\//g, '\\');
+      window.location.href = 'openfile:' + path;
     } else {
       window.open(url, '_blank');
     }
