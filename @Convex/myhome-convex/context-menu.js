@@ -2,9 +2,7 @@ let contextMenu = null;
 
 function getAnchorRect(trigger, options) {
   const anchor = options.anchorElement
-    || (trigger && typeof trigger.getBoundingClientRect === 'function' ? trigger : null)
-    || (trigger && trigger.currentTarget && typeof trigger.currentTarget.getBoundingClientRect === 'function' ? trigger.currentTarget : null)
-    || (trigger && trigger.target && typeof trigger.target.getBoundingClientRect === 'function' ? trigger.target : null);
+    || (trigger && trigger.nodeType === 1 && typeof trigger.getBoundingClientRect === 'function' ? trigger : null);
 
   return anchor ? anchor.getBoundingClientRect() : null;
 }
