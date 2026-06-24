@@ -242,6 +242,20 @@ export const updateAllLinks = mutation({
   },
 });
 
+export const updateAllLinksAutoFitScale = mutation({
+  args: {
+    li_auto_fit_scale: v.number(),
+  },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db.query("links").collect();
+    for (const link of existing) {
+      await ctx.db.patch(link._id, {
+        li_auto_fit_scale: args.li_auto_fit_scale,
+      });
+    }
+  },
+});
+
 export const updateGroupOrder = mutation({
   args: { groupOrder: v.array(v.object({ name: v.string(), order: v.number() })) },
   handler: async (ctx, args) => {

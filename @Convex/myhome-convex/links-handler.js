@@ -748,9 +748,11 @@ function syncAutoFitScaleControls(prefix) {
   row.dataset.bound = 'true';
 }
 
-function refreshAutoFitScaleControls() {
+function refreshAutoFitScaleControls(options = {}) {
   ['link', 'edit-link'].forEach((prefix) => {
-    applyAutoFitScaleSettingsToControl(prefix);
+    applyAutoFitScaleSettingsToControl(prefix, {
+      resetToDefault: prefix === 'link' && options.resetAddToDefault,
+    });
   });
 }
 

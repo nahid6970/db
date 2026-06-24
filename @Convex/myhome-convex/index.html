@@ -40,11 +40,11 @@
       <span onclick="document.getElementById('settings-panel').classList.add('hidden')" style="cursor:pointer;color:#aaa;font-size:18px;">&times;</span>
     </div>
     <label style="display:flex;align-items:center;gap:8px;color:#ccc;cursor:pointer;">
-      <input type="checkbox" id="setting-hide-group-names" onchange="window.applySettings()">
+      <input type="checkbox" id="setting-hide-group-names">
       Hide group names
     </label>
     <label style="display:flex;align-items:center;gap:8px;color:#ccc;cursor:pointer;margin-top:8px;">
-      <input type="checkbox" id="setting-open-same-tab" onchange="window.applySettings()">
+      <input type="checkbox" id="setting-open-same-tab">
       Open links in same tab
     </label>
     <div style="margin-top:12px;padding-top:10px;border-top:1px solid #444;display:flex;flex-direction:column;gap:8px;">
@@ -55,11 +55,14 @@
         <div>Highest (%)</div>
       </div>
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
-        <input type="number" id="setting-auto-fit-scale-min" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
-        <input type="number" id="setting-auto-fit-scale-default" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
-        <input type="number" id="setting-auto-fit-scale-max" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
+        <input type="number" id="setting-auto-fit-scale-min" min="1" step="1" style="width:100%;box-sizing:border-box;">
+        <input type="number" id="setting-auto-fit-scale-default" min="1" step="1" style="width:100%;box-sizing:border-box;">
+        <input type="number" id="setting-auto-fit-scale-max" min="1" step="1" style="width:100%;box-sizing:border-box;">
       </div>
     </div>
+    <button id="apply-settings-btn" onclick="window.applySettings()" style="background:#4caf50;color:#000;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;margin-top:12px;width:100%;font-weight:bold;font-size:12px;transition:all 0.2s;">
+      Apply Settings
+    </button>
     <button id="reset-all-youtube-btn" onclick="window.resetAllYouTubeTracking()" style="background:#ff9800;color:#000;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;margin-top:12px;width:100%;font-weight:bold;font-size:12px;transition:all 0.2s;">
       Reset YouTube Tracking (Fresh Count)
     </button>
@@ -1068,7 +1071,7 @@
         document.getElementById('setting-auto-fit-scale-default').value = normalizeAutoFitPercent(s.autoFitScaleDefaultPercent, defaults.defaultPercent);
       }
 
-      window.applySettings = function() {
+      window.applySettings = async function() {
         var s = loadSettings();
         var hideNames = document.getElementById('setting-hide-group-names').checked;
         var minPercent = normalizeAutoFitPercent(document.getElementById('setting-auto-fit-scale-min').value, 70);
@@ -1084,8 +1087,21 @@
         saveSettings(s);
         // Toggle CSS class on body
         document.body.classList.toggle('hide-group-names', hideNames);
+        if (window.convexMutation) {
+          try {
+            await window.convexMutation('functions:updateAllLinksAutoFitScale', {
+              li_auto_fit_scale: defaultPercent / 100,
+            });
+            if (typeof window.loadLinks === 'function') {
+              await window.loadLinks();
+            }
+          } catch (error) {
+            console.error('Could not apply auto-fit scale to all links:', error);
+            window.showNotification('Saved settings, but failed to update all links.', 'error');
+          }
+        }
         if (window.refreshAutoFitScaleControls) {
-          window.refreshAutoFitScaleControls();
+          window.refreshAutoFitScaleControls({ resetAddToDefault: true });
         }
       };
 
