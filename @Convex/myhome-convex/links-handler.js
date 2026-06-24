@@ -737,35 +737,67 @@ function refreshOpenPopup() {
 
 loadLinksFromCache();
 
-// Show group picker context menu
-window.toggleGroupPicker = function (event, inputId) {
-  event.preventDefault();
-  event.stopPropagation();
-
-  const input = document.getElementById(inputId);
-  if (!input) return;
-
-  // Get unique group names from links
-  const groups = [...new Set(links.map(link => link.group || 'Ungrouped'))];
+function getUniqueGroups() {
+  const groups = [...new Set(links.map(link => (link.group || 'Ungrouped').trim()).filter(Boolean))];
   groups.sort((a, b) => a.localeCompare(b));
+  return groups;
+}
 
-  // Create menu items
-  const items = groups.map(group => ({
+function buildGroupPickerItems(input, query = '') {
+  const normalizedQuery = query.trim().toLowerCase();
+  const groups = getUniqueGroups();
+  const filteredGroups = normalizedQuery
+    ? groups.filter(group => group.toLowerCase().includes(normalizedQuery))
+    : groups;
+
+  if (!filteredGroups.length) {
+    return [{
+      label: 'No matching groups',
+      className: 'context-menu-empty',
+      disabled: true
+    }];
+  }
+
+  return filteredGroups.map(group => ({
     label: group,
     icon: '📁',
     action: () => {
       input.value = group;
-      // Trigger input event for any listeners
       input.dispatchEvent(new Event('input', { bubbles: true }));
       input.dispatchEvent(new Event('change', { bubbles: true }));
     }
   }));
+}
 
-  // Show context menu at the button's position
-  if (typeof window.showContextMenu === 'function') {
-    window.showContextMenu(event, items, { layout: 'list' });
-  }
+function showGroupPicker(input, triggerEvent) {
+  if (!input || typeof window.showContextMenu !== 'function') return;
+
+  const items = buildGroupPickerItems(input, input.value);
+  window.showContextMenu(triggerEvent || input, items, {
+    layout: 'list',
+    anchorElement: input
+  });
+}
+
+// Show group picker context menu
+window.toggleGroupPicker = function (event, inputId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+
+  showGroupPicker(input, event);
 };
+
+document.addEventListener('focusin', (event) => {
+  const input = event.target;
+  if (!input || !input.matches || !input.matches('.group-input-container input')) return;
+  showGroupPicker(input, input);
+});
+
+document.addEventListener('input', (event) => {
+  const input = event.target;
+  if (!input || !input.matches || !input.matches('.group-input-container input')) return;
+  showGroupPicker(input, input);
+});
 
 // Render links
 function renderLinks() {

@@ -1145,6 +1145,17 @@ details[open] summary {
   color: #ffffff !important;
 }
 
+.context-menu.list-layout .context-menu-item:disabled {
+  cursor: default;
+  color: #9ca3af !important;
+  opacity: 0.9;
+}
+
+.context-menu.list-layout .context-menu-item:disabled:hover {
+  background: transparent !important;
+  color: #9ca3af !important;
+}
+
 .context-menu-item:hover {
   background: #f1f5f9;
 }
