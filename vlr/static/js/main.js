@@ -388,6 +388,21 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    async function reloadMatchesFromView() {
+        try {
+            const response = await fetch("/api/matches/view");
+            if (!response.ok) throw new Error("Failed to load matches view");
+            const matches = await response.json();
+            INITIAL_MATCHES = matches;
+            renderMatchesGrid(matches);
+            applyFilters();
+            return matches;
+        } catch (err) {
+            console.error("Failed to refresh matches view:", err);
+            return null;
+        }
+    }
+
     // Sidebar tournament visibility filters (year + series)
     const customTagsContainer = document.getElementById("custom-series-tags");
 
@@ -764,40 +779,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Tournament checklist item change
     tourneyCheckboxes.forEach(cb => {
-        cb.addEventListener("change", () => {
+        cb.addEventListener("change", async () => {
             if (cb.checked) {
                 checkedTournaments.add(cb.value);
             } else {
                 checkedTournaments.delete(cb.value);
             }
-            applyFilters();
-            saveTournamentSettings();
+            await saveTournamentSettings();
+            await reloadMatchesFromView();
         });
     });
 
     // Select all tournaments
     if (selectAllBtn) {
-        selectAllBtn.addEventListener("click", () => {
+        selectAllBtn.addEventListener("click", async () => {
             const currentCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
             currentCheckboxes.forEach(cb => {
                 cb.checked = true;
                 checkedTournaments.add(cb.value);
             });
-            applyFilters();
-            saveTournamentSettings();
+            await saveTournamentSettings();
+            await reloadMatchesFromView();
         });
     }
 
     // Deselect all tournaments
     if (deselectAllBtn) {
-        deselectAllBtn.addEventListener("click", () => {
+        deselectAllBtn.addEventListener("click", async () => {
             const currentCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
             currentCheckboxes.forEach(cb => {
                 cb.checked = false;
                 checkedTournaments.delete(cb.value);
             });
-            applyFilters();
-            saveTournamentSettings();
+            await saveTournamentSettings();
+            await reloadMatchesFromView();
         });
     }
 

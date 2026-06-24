@@ -97,15 +97,11 @@ def save_settings(settings):
 def start_background_sync():
     pass  # Auto-sync disabled — sync only on manual button click
 
-@app.route("/")
-def index():
+def _get_visible_matches():
     settings = load_settings()
     ignore_list = load_ignorelist()
-    unchecked_tournaments = settings.get("unchecked_tournaments", [])
-    results_pages = settings.get("results_pages", 5)
-    theme = settings.get("theme", "dark")
-    per_page = settings.get("per_page", "50")
     ignore_names = {t["name"] for t in ignore_list}
+    unchecked_tournaments = settings.get("unchecked_tournaments", [])
 
     all_tournament_rows = scraper.load_tournament_overview()
     tournament_rows = [row for row in all_tournament_rows if row["tournament"] not in ignore_names]
@@ -118,11 +114,20 @@ def index():
     matches = scraper.get_matches_for_display(
         tournament_names=visible_tournaments if visible_tournaments else [],
     )
+    return settings, ignore_list, tournament_rows, matches
+
+@app.route("/")
+def index():
+    settings, ignore_list, tournament_rows, matches = _get_visible_matches()
+    unchecked_tournaments = settings.get("unchecked_tournaments", [])
+    results_pages = settings.get("results_pages", 5)
+    theme = settings.get("theme", "dark")
+    per_page = settings.get("per_page", "50")
 
     # Build logo lookup from tournament summary rows
     logo_lookup = {
         row["tournament"]: row["tournament_logo"]
-        for row in all_tournament_rows
+        for row in scraper.load_tournament_overview()
         if row.get("tournament") and row.get("tournament_logo")
     }
 
@@ -225,6 +230,24 @@ def api_matches():
     matches = scraper.get_matches_for_display(
         tournament_names=visible_tournaments if visible_tournaments else [],
         exclude_tournaments=ignore_names
+    )
+    return jsonify(matches)
+
+@app.route("/api/matches/view")
+def api_matches_view():
+    settings = load_settings()
+    ignore_list = load_ignorelist()
+    ignore_names = {t["name"] for t in ignore_list}
+    unchecked_tournaments = settings.get("unchecked_tournaments", [])
+    tournament_rows = scraper.load_tournament_overview()
+    tournament_rows = [row for row in tournament_rows if row["tournament"] not in ignore_names]
+    tournament_names = [row["tournament"] for row in tournament_rows]
+    if unchecked_tournaments:
+        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
+    else:
+        visible_tournaments = tournament_names
+    matches = scraper.get_matches_for_display(
+        tournament_names=visible_tournaments if visible_tournaments else [],
     )
     return jsonify(matches)
 
