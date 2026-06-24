@@ -7,7 +7,7 @@ let currentReminderDraft = null;
 let reminderRefreshTimer = null;
 const LINKS_CACHE_KEY = 'myhome-links-cache-v1';
 let lastLinksSignature = '';
-const DEFAULT_AUTO_FIT_SCALE = 0.75;
+const DEFAULT_AUTO_FIT_SCALE = 1.0;
 
 // Initialize edit mode
 if (typeof window.editMode === 'undefined') {

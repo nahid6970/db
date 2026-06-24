@@ -21,7 +21,7 @@
       -moz-osx-font-smoothing: grayscale;
     }
   </style>
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 
 <body>
@@ -270,8 +270,8 @@
           </div>
           <div id="link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
             <div class="auto-fit-scale-label">Auto Fit Size</div>
-            <input type="range" id="link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="0.75">
-            <input type="number" id="link-li-auto-fit-scale-value" min="70" max="135" step="5" value="75">
+            <input type="range" id="link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="1.00">
+            <input type="number" id="link-li-auto-fit-scale-value" min="70" max="135" step="5" value="100">
           </div>
           <div id="link-folder-path-input" style="display:none;">
             <input type="text" id="link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">
@@ -443,8 +443,8 @@
           </div>
           <div id="edit-link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
             <div class="auto-fit-scale-label">Auto Fit Size</div>
-            <input type="range" id="edit-link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="0.75">
-            <input type="number" id="edit-link-li-auto-fit-scale-value" min="70" max="135" step="5" value="75">
+            <input type="range" id="edit-link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="1.00">
+            <input type="number" id="edit-link-li-auto-fit-scale-value" min="70" max="135" step="5" value="100">
           </div>
           <div id="edit-link-folder-path-input" style="display:none;">
             <input type="text" id="edit-link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">
@@ -759,12 +759,12 @@
   <div id="copy-notification" class="copy-notification"></div>
 
   <!-- Load regular scripts first -->
-  <script src="context-menu.js"></script>
-  <script src="links-handler.js"></script>
-  <script src="sidebar-handler.js"></script>
+  <script src="context-menu.js?v=3"></script>
+  <script src="links-handler.js?v=3"></script>
+  <script src="sidebar-handler.js?v=3"></script>
 
   <!-- Then load app.js as module which will initialize everything -->
-  <script type="module" src="app.js"></script>
+  <script type="module" src="app.js?v=3"></script>
 
 
 
