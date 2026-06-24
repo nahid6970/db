@@ -27,7 +27,7 @@
 <body>
   <div class="topbar" id="topbar">
     <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;flex-shrink:0;border-right:1px solid #555;padding-right:8px;margin-right:4px;height:40px;">
-      <div id="version-badge" style="background:#555;color:#ccc;padding:1px 5px;border-radius:3px;font-size:10px;line-height:1.4;">v5</div>
+      <div id="version-badge" style="background:#555;color:#ccc;padding:1px 5px;border-radius:3px;font-size:10px;line-height:1.4;">VX</div>
       <button id="settings-btn" title="Settings" onclick="document.getElementById('settings-panel').classList.toggle('hidden')" style="background:none;border:none;color:#fff;cursor:pointer;font-size:14px;padding:0;line-height:1;">⚙️</button>
     </div>
     <div class="top-center-controls" id="sidebar-buttons-container"></div>
@@ -251,6 +251,15 @@
               </span>
               <span class="note-edit-toggle-btn" title="Edit note" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-note-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
+            <label class="option-chip" title="Auto Fit" style="position:relative;">
+              <input type="checkbox" id="link-li-auto-fit" aria-label="Auto Fit">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4h-4v2h6v-6h-2z" fill="currentColor"></path>
+                </svg>
+              </span>
+              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-li-auto-fit-scale-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
+            </label>
             <label class="option-chip" title="Folder Picker" style="position:relative;">
               <input type="checkbox" id="link-folder-picker" aria-label="Folder Picker">
               <span class="option-chip-body">
@@ -258,6 +267,11 @@
               </span>
               <span class="note-edit-toggle-btn" title="Set folder path" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-folder-path-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
+          </div>
+          <div id="link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
+            <div class="auto-fit-scale-label">Auto Fit Size</div>
+            <input type="range" id="link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="1.00">
+            <input type="number" id="link-li-auto-fit-scale-value" min="70" max="135" step="5" value="100">
           </div>
           <div id="link-folder-path-input" style="display:none;">
             <input type="text" id="link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">
@@ -387,13 +401,14 @@
                 </svg>
               </span>
             </label>
-            <label class="option-chip" title="Auto Fit">
+            <label class="option-chip" title="Auto Fit" style="position:relative;">
               <input type="checkbox" id="edit-link-li-auto-fit" aria-label="Auto Fit">
               <span class="option-chip-body">
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M4 4h6v2H6v4H4zm10 0h6v6h-2V6h-4zM4 14h2v4h4v2H4zm14 4h-4v2h6v-6h-2z" fill="currentColor"></path>
                 </svg>
               </span>
+              <span class="note-edit-toggle-btn" title="Adjust auto-fit size" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-li-auto-fit-scale-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
             <label class="option-chip" title="YouTube Tracking">
               <input type="checkbox" id="edit-link-youtube-tracking" aria-label="YouTube Tracking">
@@ -425,6 +440,11 @@
               </span>
               <span class="note-edit-toggle-btn" title="Set folder path" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-folder-path-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
+          </div>
+          <div id="edit-link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
+            <div class="auto-fit-scale-label">Auto Fit Size</div>
+            <input type="range" id="edit-link-li-auto-fit-scale" min="0.70" max="1.35" step="0.05" value="1.00">
+            <input type="number" id="edit-link-li-auto-fit-scale-value" min="70" max="135" step="5" value="100">
           </div>
           <div id="edit-link-folder-path-input" style="display:none;">
             <input type="text" id="edit-link-folder-path" placeholder="Folder path (e.g. C:\projects\gallery)" style="width:100%;box-sizing:border-box;">

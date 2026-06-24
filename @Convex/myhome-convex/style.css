@@ -875,6 +875,35 @@ button[type="button"]:hover {
   outline-offset: 2px;
 }
 
+.auto-fit-scale-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 4px;
+  margin-bottom: 2px;
+}
+
+.auto-fit-scale-label {
+  flex: 0 0 auto;
+  min-width: 82px;
+  color: #c7d2e0;
+  font-size: 13px;
+}
+
+.auto-fit-scale-row input[type="range"] {
+  flex: 1 1 auto;
+  min-width: 140px;
+}
+
+.auto-fit-scale-row input[type="number"] {
+  flex: 0 0 72px;
+  min-width: 72px;
+  padding-left: 8px;
+  padding-right: 8px;
+  font-size: 13px;
+}
+
 .compact-size-row {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

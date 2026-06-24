@@ -611,6 +611,69 @@ function compactObject(value) {
   );
 }
 
+function parseAutoFitScale(value) {
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+}
+
+function formatAutoFitScale(scale) {
+  return String(Math.round(scale * 100));
+}
+
+function scaleCssSize(sizeValue, scale, fallbackValue) {
+  const source = (sizeValue || fallbackValue || '').toString().trim();
+  if (!source || !Number.isFinite(scale) || scale <= 0 || scale === 1) {
+    return source;
+  }
+
+  const match = source.match(/^(-?\d*\.?\d+)(px|rem|em|pt|%)?$/i);
+  if (!match) return source;
+
+  const numeric = Number.parseFloat(match[1]);
+  if (!Number.isFinite(numeric)) return source;
+
+  const unit = match[2] || 'px';
+  const scaled = Math.max(0, Math.round(numeric * scale * 100) / 100);
+  return `${scaled}${unit}`;
+}
+
+function getAutoFitScaleValue(prefix) {
+  const scaleInput = document.getElementById(`${prefix}-li-auto-fit-scale`);
+  return scaleInput ? parseAutoFitScale(scaleInput.value) : 1;
+}
+
+function syncAutoFitScaleControls(prefix) {
+  const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
+  const range = document.getElementById(`${prefix}-li-auto-fit-scale`);
+  const value = document.getElementById(`${prefix}-li-auto-fit-scale-value`);
+  const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
+  if (!row || !range || !value || !checkbox || row.dataset.bound === 'true') return;
+
+  const clamp = (scale) => Math.min(1.35, Math.max(0.70, scale));
+  const updateFromRange = () => {
+    const scale = clamp(parseAutoFitScale(range.value));
+    range.value = scale.toFixed(2);
+    value.value = formatAutoFitScale(scale);
+  };
+  const updateFromValue = () => {
+    const raw = Number.parseFloat(value.value);
+    const scale = clamp(Number.isFinite(raw) ? raw / 100 : 1);
+    range.value = scale.toFixed(2);
+    value.value = formatAutoFitScale(scale);
+  };
+  const updateVisibility = () => {
+    row.style.display = checkbox.checked ? 'flex' : 'none';
+  };
+
+  range.addEventListener('input', updateFromRange);
+  value.addEventListener('input', updateFromValue);
+  checkbox.addEventListener('change', updateVisibility);
+
+  updateFromRange();
+  updateVisibility();
+  row.dataset.bound = 'true';
+}
+
 function openReminderPopup() {
   populateReminderPopup(currentReminderDraft || {});
   document.getElementById('reminder-popup').classList.remove('hidden');
@@ -1591,23 +1654,26 @@ function createLinkItem(link, index) {
   
   a.target = (function() { try { var s = JSON.parse(localStorage.getItem('myhome-settings') || '{}'); return s.openSameTab ? '_self' : '_blank'; } catch(e) { return '_blank'; } })();
   a.title = link.title || link.name || link.url || ''; // Prefer custom tooltip over raw URL
+  const autoFitScale = link.li_auto_fit ? parseAutoFitScale(link.li_auto_fit_scale) : 1;
 
   // Render content based on type
   if (link.default_type === 'nerd-font' && link.icon_class) {
     const icon = document.createElement('i');
     icon.className = link.icon_class;
     icon.style.fontFamily = 'jetbrainsmono nfp, monospace';
-    icon.style.fontSize = link.font_size || '24px';
+    icon.style.fontSize = link.li_auto_fit
+      ? scaleCssSize(link.font_size, autoFitScale, '24px')
+      : (link.font_size || '24px');
     icon.style.display = 'inline-block';
     a.appendChild(icon);
   } else if (link.default_type === 'img' && link.img_src) {
     const img = document.createElement('img');
     img.src = window.resolveRuntimeUrl ? window.resolveRuntimeUrl(link.img_src) : link.img_src;
-    if (link.width) img.style.width = link.width.includes('px') ? link.width : link.width + 'px';
-    if (link.height) img.style.height = link.height.includes('px') ? link.height : link.height + 'px';
+    if (link.width) img.style.width = link.li_auto_fit ? scaleCssSize(link.width, autoFitScale, link.width) : (link.width.includes('px') ? link.width : link.width + 'px');
+    if (link.height) img.style.height = link.li_auto_fit ? scaleCssSize(link.height, autoFitScale, link.height) : (link.height.includes('px') ? link.height : link.height + 'px');
     if (!link.width && !link.height) {
-      img.style.width = '50px';
-      img.style.height = '50px';
+      img.style.width = link.li_auto_fit ? scaleCssSize('50px', autoFitScale, '50px') : '50px';
+      img.style.height = link.li_auto_fit ? scaleCssSize('50px', autoFitScale, '50px') : '50px';
     }
     a.appendChild(img);
   } else if (link.default_type === 'svg' && link.svg_code) {
@@ -1615,10 +1681,10 @@ function createLinkItem(link, index) {
     temp.innerHTML = link.svg_code;
     const svg = temp.querySelector('svg');
     if (svg) {
-      if (!svg.style.width && link.width) svg.style.width = link.width;
-      if (!svg.style.height && link.height) svg.style.height = link.height;
-      if (!svg.style.width) svg.style.width = '50px';
-      if (!svg.style.height) svg.style.height = '50px';
+      if (!svg.style.width && link.width) svg.style.width = link.li_auto_fit ? scaleCssSize(link.width, autoFitScale, link.width) : link.width;
+      if (!svg.style.height && link.height) svg.style.height = link.li_auto_fit ? scaleCssSize(link.height, autoFitScale, link.height) : link.height;
+      if (!svg.style.width) svg.style.width = link.li_auto_fit ? scaleCssSize('50px', autoFitScale, '50px') : '50px';
+      if (!svg.style.height) svg.style.height = link.li_auto_fit ? scaleCssSize('50px', autoFitScale, '50px') : '50px';
       svg.style.fill = link.color || 'currentColor';
       a.appendChild(svg);
     } else {
@@ -1626,15 +1692,18 @@ function createLinkItem(link, index) {
     }
   } else {
     a.textContent = link.text || link.name || 'Link';
+    if (link.li_auto_fit) {
+      a.style.fontSize = scaleCssSize(link.font_size, autoFitScale, '16px');
+    }
   }
 
   // Apply styling
   if (link.color) a.style.color = link.color;
   if (link.background_color) a.style.backgroundColor = link.background_color;
   if (link.font_family) a.style.fontFamily = link.font_family;
-  if (link.font_size) a.style.fontSize = link.font_size;
-  if (link.width) a.style.width = link.width;
-  if (link.height) a.style.height = link.height;
+  if (link.font_size && !link.li_auto_fit) a.style.fontSize = link.font_size;
+  if (link.width) a.style.width = link.li_auto_fit ? scaleCssSize(link.width, autoFitScale, link.width) : link.width;
+  if (link.height) a.style.height = link.li_auto_fit ? scaleCssSize(link.height, autoFitScale, link.height) : link.height;
   if (link.border_radius) a.style.borderRadius = link.border_radius;
 
   if (link.li_bg_color) li.style.backgroundColor = link.li_bg_color;
@@ -1642,7 +1711,13 @@ function createLinkItem(link, index) {
   if (link.li_border_radius) li.style.borderRadius = link.li_border_radius;
   if (link.li_width) li.style.minWidth = link.li_width;
   if (link.li_height) li.style.minHeight = link.li_height;
-  if (link.li_auto_fit) { li.style.minWidth = '0'; li.style.minHeight = '0'; li.style.padding = '0'; li.style.width = 'fit-content'; li.style.height = 'fit-content'; }
+  if (link.li_auto_fit) {
+    li.style.minWidth = '0';
+    li.style.minHeight = '0';
+    li.style.padding = '0';
+    li.style.width = 'fit-content';
+    li.style.height = 'fit-content';
+  }
 
   if (link.li_hover_color) {
     li.addEventListener('mouseenter', () => li.style.backgroundColor = link.li_hover_color);
@@ -1967,6 +2042,9 @@ document.getElementById('link-click-tracking').addEventListener('change', (e) =>
   }
 });
 
+syncAutoFitScaleControls('link');
+syncAutoFitScaleControls('edit-link');
+
 
 document.getElementById('add-link-form').addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -2005,6 +2083,8 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     title: document.getElementById('link-title').value,
     hidden: document.getElementById('link-hidden').checked,
     start_new_line: document.getElementById('link-start-new-line').checked,
+    li_auto_fit: document.getElementById('link-li-auto-fit').checked,
+    li_auto_fit_scale: getAutoFitScaleValue('link'),
     reminder_enabled: false,
     note: document.getElementById('link-note').value,
     note_enabled: document.getElementById('link-note-chip').checked,
@@ -2080,6 +2160,8 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-hidden').checked = link.hidden || false;
   document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
   document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
+  document.getElementById('edit-link-li-auto-fit-scale').value = parseAutoFitScale(link.li_auto_fit_scale).toFixed(2);
+  document.getElementById('edit-link-li-auto-fit-scale-value').value = formatAutoFitScale(parseAutoFitScale(link.li_auto_fit_scale));
   document.getElementById('edit-link-youtube-tracking').checked = !!link.youtube_channel_id;
   document.getElementById('edit-link-click-tracking').checked = !!link.click_tracking_enabled;
   const noteChip = document.getElementById('edit-link-note-chip');
@@ -2098,6 +2180,7 @@ function openEditLinkPopup(link, index) {
 
   const svgTextarea = document.getElementById('edit-link-svg-code');
   svgTextarea.style.display = link.default_type === 'svg' ? 'block' : 'none';
+  syncAutoFitScaleControls('edit-link');
 
   updateEditReminderSummary();
   document.getElementById('edit-link-popup').classList.remove('hidden');
@@ -2160,6 +2243,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     hidden: document.getElementById('edit-link-hidden').checked,
     start_new_line: document.getElementById('edit-link-start-new-line').checked,
     li_auto_fit: document.getElementById('edit-link-li-auto-fit').checked,
+    li_auto_fit_scale: getAutoFitScaleValue('edit-link'),
     note: document.getElementById('edit-link-note').value,
     note_enabled: document.getElementById('edit-link-note-chip').checked,
     folder_picker: document.getElementById('edit-link-folder-picker').checked,

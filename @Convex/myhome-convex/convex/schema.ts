@@ -39,6 +39,7 @@ export default defineSchema({
     password_protect: v.optional(v.boolean()),
     group_password: v.optional(v.string()),
     li_auto_fit: v.optional(v.boolean()),
+    li_auto_fit_scale: v.optional(v.number()),
     top_name: v.optional(v.string()),
     top_bg_color: v.optional(v.string()),
     top_text_color: v.optional(v.string()),
