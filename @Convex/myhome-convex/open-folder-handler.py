@@ -78,8 +78,34 @@ def open_folder(uri):
 
 def open_file(uri):
     path = _decode_uri_path(uri, PROTOCOL_FILE)
+    run_hidden = False
+    
+    if "?" in path:
+        parts = path.split("?", 1)
+        path = parts[0]
+        params = parts[1]
+        if "run_hidden=true" in params:
+            run_hidden = True
+
     if os.path.exists(path):
-        os.startfile(path)
+        if run_hidden:
+            ext = os.path.splitext(path)[1].lower()
+            if ext in ('.py', '.pyw'):
+                CREATE_NO_WINDOW = 0x08000000
+                subprocess.Popen([PYTHON_EXE, path], creationflags=CREATE_NO_WINDOW)
+            elif ext in ('.bat', '.cmd'):
+                CREATE_NO_WINDOW = 0x08000000
+                subprocess.Popen(['cmd.exe', '/c', path], creationflags=CREATE_NO_WINDOW)
+            elif ext == '.ps1':
+                CREATE_NO_WINDOW = 0x08000000
+                subprocess.Popen(['powershell.exe', '-WindowStyle', 'Hidden', '-File', path], creationflags=CREATE_NO_WINDOW)
+            elif ext == '.exe':
+                CREATE_NO_WINDOW = 0x08000000
+                subprocess.Popen([path], creationflags=CREATE_NO_WINDOW)
+            else:
+                os.startfile(path)
+        else:
+            os.startfile(path)
 
 
 if __name__ == "__main__":

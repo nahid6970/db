@@ -2534,52 +2534,117 @@ document.querySelectorAll('input[name="edit-link-type"]').forEach(radio => {
 });
 
 // URL field management
-window.addUrlField = () => {
-  const container = document.getElementById('urls-container');
+function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirst = false) {
   const group = document.createElement('div');
   group.className = 'url-input-group';
+  group.style.display = 'flex';
+  group.style.alignItems = 'center';
+  group.style.gap = '5px';
 
   const input = document.createElement('input');
   input.type = 'url';
   input.className = 'url-input';
   input.placeholder = 'URL';
+  input.value = url;
+  input.style.flex = '1';
+  if (isFirst) input.required = true;
 
-  const removeBtn = document.createElement('button');
-  removeBtn.type = 'button';
-  removeBtn.className = 'remove-btn';
-  removeBtn.textContent = '−';
-  removeBtn.onclick = () => group.remove();
+  const toggleWrapper = document.createElement('label');
+  toggleWrapper.className = 'run-hidden-toggle-label';
+  toggleWrapper.title = 'Run Hidden (pythonw for python files, etc.)';
+  toggleWrapper.style.display = 'none';
+  toggleWrapper.style.alignItems = 'center';
+  toggleWrapper.style.gap = '3px';
+  toggleWrapper.style.cursor = 'pointer';
+  toggleWrapper.style.userSelect = 'none';
+  toggleWrapper.style.fontSize = '12px';
+  toggleWrapper.style.color = '#888';
+
+  const checkbox = document.createElement('input');
+  checkbox.type = 'checkbox';
+  checkbox.className = 'run-hidden-checkbox';
+  checkbox.checked = runHidden;
+  checkbox.style.margin = '0';
+  checkbox.style.width = '14px';
+  checkbox.style.height = '14px';
+  checkbox.style.cursor = 'pointer';
+
+  const labelSpan = document.createElement('span');
+  labelSpan.textContent = '🕶️';
+  labelSpan.style.fontSize = '14px';
+
+  toggleWrapper.appendChild(checkbox);
+  toggleWrapper.appendChild(labelSpan);
+
+  function updateToggleVisibility() {
+    const val = input.value.trim().toLowerCase();
+    if (val.startsWith('file:///')) {
+      toggleWrapper.style.display = 'inline-flex';
+    } else {
+      toggleWrapper.style.display = 'none';
+    }
+  }
+
+  input.addEventListener('input', updateToggleVisibility);
+  updateToggleVisibility();
 
   group.appendChild(input);
-  group.appendChild(removeBtn);
+  group.appendChild(toggleWrapper);
+
+  if (isFirst) {
+    const addBtn = document.createElement('button');
+    addBtn.type = 'button';
+    addBtn.textContent = '+';
+    addBtn.onclick = isEdit ? window.addEditUrlField : window.addUrlField;
+    group.appendChild(addBtn);
+  } else {
+    const removeBtn = document.createElement('button');
+    removeBtn.type = 'button';
+    removeBtn.className = 'remove-btn';
+    removeBtn.textContent = '−';
+    removeBtn.onclick = () => group.remove();
+    group.appendChild(removeBtn);
+  }
+
+  return group;
+}
+
+window.addUrlField = () => {
+  const container = document.getElementById('urls-container');
+  const group = createUrlInputGroup('', false, false, false);
   container.appendChild(group);
 };
 
 window.addEditUrlField = () => {
   const container = document.getElementById('edit-urls-container');
-  const group = document.createElement('div');
-  group.className = 'url-input-group';
-
-  const input = document.createElement('input');
-  input.type = 'url';
-  input.className = 'url-input';
-  input.placeholder = 'URL';
-
-  const removeBtn = document.createElement('button');
-  removeBtn.type = 'button';
-  removeBtn.className = 'remove-btn';
-  removeBtn.textContent = '−';
-  removeBtn.onclick = () => group.remove();
-
-  group.appendChild(input);
-  group.appendChild(removeBtn);
+  const group = createUrlInputGroup('', false, true, false);
   container.appendChild(group);
 };
 
 function getAllUrls(isEdit = false) {
   const container = document.getElementById(isEdit ? 'edit-urls-container' : 'urls-container');
-  const inputs = container.querySelectorAll('.url-input');
-  return Array.from(inputs).map(input => input.value).filter(url => url.trim());
+  const groups = container.querySelectorAll('.url-input-group');
+  return Array.from(groups).map(group => {
+    const input = group.querySelector('.url-input');
+    if (!input) return null;
+    let val = input.value.trim();
+    if (!val) return null;
+    const checkbox = group.querySelector('.run-hidden-checkbox');
+    if (checkbox && checkbox.checked) {
+      try {
+        const urlObj = new URL(val);
+        urlObj.searchParams.set('run_hidden', 'true');
+        val = urlObj.toString();
+      } catch (e) {
+        if (val.includes('?')) {
+          val += '&run_hidden=true';
+        } else {
+          val += '?run_hidden=true';
+        }
+      }
+    }
+    return val;
+  }).filter(Boolean);
 }
 
 function populateUrlFields(urls, isEdit = false) {
@@ -2589,34 +2654,29 @@ function populateUrlFields(urls, isEdit = false) {
   if (!urls || urls.length === 0) urls = [''];
 
   urls.forEach((url, index) => {
-    const group = document.createElement('div');
-    group.className = 'url-input-group';
-
-    const input = document.createElement('input');
-    input.type = 'url';
-    input.className = 'url-input';
-    input.placeholder = 'URL';
-    input.value = url;
-    if (index === 0) input.required = true;
-
-    const addBtn = document.createElement('button');
-    addBtn.type = 'button';
-    addBtn.textContent = '+';
-    addBtn.onclick = isEdit ? window.addEditUrlField : window.addUrlField;
-
-    group.appendChild(input);
-
-    if (index > 0) {
-      const removeBtn = document.createElement('button');
-      removeBtn.type = 'button';
-      removeBtn.className = 'remove-btn';
-      removeBtn.textContent = '−';
-      removeBtn.onclick = () => group.remove();
-      group.appendChild(removeBtn);
-    } else {
-      group.appendChild(addBtn);
+    let baseUrl = url;
+    let runHidden = false;
+    
+    if (url) {
+      try {
+        const urlObj = new URL(url);
+        if (urlObj.searchParams.get('run_hidden') === 'true') {
+          runHidden = true;
+          urlObj.searchParams.delete('run_hidden');
+          baseUrl = urlObj.toString();
+          if (baseUrl.endsWith('?')) {
+            baseUrl = baseUrl.slice(0, -1);
+          }
+        }
+      } catch (e) {
+        if (url.includes('run_hidden=true')) {
+          runHidden = true;
+          baseUrl = url.replace(/[?&]run_hidden=true/, '');
+        }
+      }
     }
 
+    const group = createUrlInputGroup(baseUrl, runHidden, isEdit, index === 0);
     container.appendChild(group);
   });
 }

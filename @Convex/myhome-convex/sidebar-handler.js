@@ -346,8 +346,9 @@ function createSidebarButton(button, index) {
       if (window.location.protocol === 'file:') {
         window.location.href = url;
       } else {
-        copyToClipboard(url, 'Local file URL copied! Open a new tab and paste (Ctrl+V)');
-        window.open('about:blank', '_blank');
+        // Convert file:///C:/path to openfile:C:\path
+        const path = url.replace('file:///', '').replace(/\//g, '\\');
+        window.location.href = 'openfile:' + path;
       }
     } else {
       window.open(url, '_blank');
