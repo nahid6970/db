@@ -1,81 +1,6 @@
 import { action } from "./_generated/server";
 import { v } from "convex/values";
 
-function isYouTubeVideoId(value: unknown): value is string {
-  return typeof value === "string" && /^[a-zA-Z0-9_-]{11}$/.test(value);
-}
-
-function extractYouTubeInitialData(html: string) {
-  const patterns = [
-    /var ytInitialData = ([\s\S]*?);<\/script>/,
-    /window\["ytInitialData"\] = ([\s\S]*?);<\/script>/,
-  ];
-
-  for (const pattern of patterns) {
-    const match = html.match(pattern);
-    if (!match) continue;
-
-    try {
-      return JSON.parse(match[1]);
-    } catch (error) {
-      console.warn("Failed to parse ytInitialData", error);
-    }
-  }
-
-  return null;
-}
-
-function extractYouTubeUploadsVideoIds(html: string) {
-  const initialData = extractYouTubeInitialData(html);
-  const seen = new Set<string>();
-  const videoIds: string[] = [];
-
-  const addVideoId = (value: unknown) => {
-    if (!isYouTubeVideoId(value) || seen.has(value)) return;
-    seen.add(value);
-    videoIds.push(value);
-  };
-
-  const richGridContents =
-    initialData?.contents?.twoColumnBrowseResultsRenderer?.tabs?.find((tab: any) => {
-      const renderer = tab?.tabRenderer;
-      if (!renderer) return false;
-
-      const title = typeof renderer.title === "string" ? renderer.title.toLowerCase() : "";
-      const url = renderer.endpoint?.commandMetadata?.webCommandMetadata?.url || "";
-      return title === "videos" || url.includes("/videos");
-    })?.tabRenderer?.content?.richGridRenderer?.contents || [];
-
-  for (const item of richGridContents) {
-    const content = item?.richItemRenderer?.content;
-    const lockup = content?.lockupViewModel;
-
-    if (lockup?.contentType && lockup.contentType !== "LOCKUP_CONTENT_TYPE_VIDEO") {
-      continue;
-    }
-
-    addVideoId(lockup?.contentId);
-    addVideoId(content?.videoRenderer?.videoId);
-    addVideoId(content?.reelItemRenderer?.videoId);
-
-    if (videoIds.length >= 50) break;
-  }
-
-  if (videoIds.length > 0) {
-    return videoIds;
-  }
-
-  // Fallback for unexpected page layouts.
-  const fallbackRegex = /"(?:videoId|contentId)":"([a-zA-Z0-9_-]{11})"/g;
-  let match: RegExpExecArray | null;
-  while ((match = fallbackRegex.exec(html)) !== null) {
-    addVideoId(match[1]);
-    if (videoIds.length >= 50) break;
-  }
-
-  return videoIds;
-}
-
 export const fetchPageTitle = action({
   args: { url: v.string() },
   handler: async (ctx, args) => {
@@ -325,53 +250,17 @@ export const fetchPageTitle = action({
 export const checkYouTubeUpdates = action({
   args: { channelId: v.string(), lastVideoId: v.optional(v.string()) },
   handler: async (ctx, args) => {
-    const fetchVideoIdsFromRss = async () => {
+    try {
+      // Fetch the channel's XML RSS feed instead of web scraping
       const rssUrl = `https://www.youtube.com/feeds/videos.xml?channel_id=${args.channelId}`;
       const response = await fetch(rssUrl);
-      if (!response.ok) {
-        console.warn(`YouTube RSS feed fetch failed with HTTP ${response.status} for channel ${args.channelId}`);
-        return [] as string[];
-      }
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
       const xml = await response.text();
+      
+      // Extract video IDs from standard <yt:videoId> XML elements
       const matches = [...xml.matchAll(/<yt:videoId>([a-zA-Z0-9_-]{11})<\/yt:videoId>/g)];
-      const seen = new Set<string>();
-      const videoIds: string[] = [];
-
-      for (const match of matches) {
-        const videoId = match[1];
-        if (seen.has(videoId)) continue;
-        seen.add(videoId);
-        videoIds.push(videoId);
-      }
-
-      return videoIds;
-    };
-
-    const fetchVideoIdsFromChannelPage = async () => {
-      const channelUrl = `https://www.youtube.com/channel/${args.channelId}/videos`;
-      const response = await fetch(channelUrl, {
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-          'Accept-Language': 'en-US,en;q=0.9',
-        }
-      });
-
-      if (!response.ok) {
-        console.warn(`YouTube channel page fetch failed with HTTP ${response.status} for channel ${args.channelId}`);
-        return [] as string[];
-      }
-
-      const html = await response.text();
-      return extractYouTubeUploadsVideoIds(html);
-    };
-
-    try {
-      // RSS is the fast path; fall back to the channel page when YouTube omits or breaks the feed.
-      let videoIds = await fetchVideoIdsFromRss();
-      if (videoIds.length === 0) {
-        videoIds = await fetchVideoIdsFromChannelPage();
-      }
+      const videoIds = matches.map(match => match[1]);
 
       if (videoIds.length === 0) return { count: 0, latestVideoId: args.lastVideoId || null };
 
@@ -382,9 +271,9 @@ export const checkYouTubeUpdates = action({
 
       const lastIndex = videoIds.indexOf(args.lastVideoId);
       
-      // If the stored baseline is no longer present, everything we fetched is newer than the last seen item.
-      // This is a lower bound when the feed/page window is shorter than the backlog of unseen uploads.
-      const count = lastIndex === -1 ? videoIds.length : lastIndex;
+      // If the last tracked video is no longer in the feed (pushed off the 15-item feed limit or deleted),
+      // cap the notification count to 1 as a safety measure to prevent massive false positive spikes.
+      const count = lastIndex === -1 ? 1 : lastIndex;
 
       return { count, latestVideoId };
     } catch (error) {
