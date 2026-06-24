@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentDetailId = null;
     let currentS1 = "";
     let currentS2 = "";
+    const tourneyMatchCountEl = document.getElementById("mdm-tourney-match-count");
 
     document.getElementById("mdm-close")?.addEventListener("click", closeMatchDetail);
     detailOverlay?.addEventListener("click", e => { 
@@ -142,6 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("mdm-vlr-link").href = "https://www.vlr.gg" + href;
         document.getElementById("mdm-name1").textContent = name1;
         document.getElementById("mdm-name2").textContent = name2;
+        updateTournamentMatchCount(mid, tournament);
         
         const img1 = document.getElementById("mdm-logo1");
         const img2 = document.getElementById("mdm-logo2");
@@ -246,6 +248,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
         }
+        updateTournamentMatchCount(data.id || currentDetailId, data.tournament || "");
 
         const maps = data.maps || [];
         const playersByMap = data.players || {};
@@ -341,6 +344,25 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             showMapStats(playersByMap["all"] ? "all" : "0");
         }
+    }
+
+    function updateTournamentMatchCount(matchId, tournamentName) {
+        if (!tourneyMatchCountEl) return;
+        if (!matchId || !tournamentName || typeof INITIAL_MATCHES === "undefined" || !Array.isArray(INITIAL_MATCHES)) {
+            tourneyMatchCountEl.textContent = "";
+            return;
+        }
+
+        const tournamentMatches = INITIAL_MATCHES.filter(m => m && m.tournament === tournamentName);
+        if (!tournamentMatches.length) {
+            tourneyMatchCountEl.textContent = "";
+            return;
+        }
+
+        const targetId = String(matchId);
+        const index = tournamentMatches.findIndex(m => String(m.id) === targetId);
+        const current = index >= 0 ? index + 1 : "";
+        tourneyMatchCountEl.textContent = current ? `${current}/${tournamentMatches.length}` : `1/${tournamentMatches.length}`;
     }
 
     // Save tournament settings to backend

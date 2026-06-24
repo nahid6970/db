@@ -1677,10 +1677,27 @@ body.light .mdm-map-card.active {
 .mdm-footer {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 12px;
     margin-top: 18px;
     border-top: 1px solid var(--card-border);
     padding-top: 14px;
+}
+.mdm-tourney-match-count {
+    margin-right: auto;
+    padding: 5px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+body.light .mdm-tourney-match-count {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.08);
 }
 .mdm-map-name { font-size: 11px; color: var(--text-muted); margin-bottom: 5px; }
 .mdm-map-score { font-size: 16px; font-weight: 700; }
