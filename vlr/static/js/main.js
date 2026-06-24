@@ -467,6 +467,29 @@ document.addEventListener("DOMContentLoaded", () => {
         items.forEach(el => checklist.appendChild(el));
     }
 
+    function sortTourneyByPinAndSelection() {
+        const checklist = document.getElementById("tournament-checklist");
+        if (!checklist) return;
+
+        const items = Array.from(checklist.querySelectorAll(".tourney-item"));
+        items.sort((a, b) => {
+            const aName = a.dataset.tourneyName || "";
+            const bName = b.dataset.tourneyName || "";
+            const aPin = tournamentOrder[aName] ?? 9999;
+            const bPin = tournamentOrder[bName] ?? 9999;
+            if (aPin !== bPin) return aPin - bPin;
+
+            const aChecked = checkedTournaments.has(aName);
+            const bChecked = checkedTournaments.has(bName);
+            if (aChecked && !bChecked) return -1;
+            if (!aChecked && bChecked) return 1;
+
+            return aName.localeCompare(bName);
+        });
+
+        items.forEach(el => checklist.appendChild(el));
+    }
+
     sortTourneyOrder?.addEventListener("change", () => { sortTourneyByDate(); saveSidebarFilters(); });
 
     // Init filter values from settings
@@ -476,6 +499,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
         if (s.tournament_order) tournamentOrder = s.tournament_order;
         applyTourneyFilters();
+        sortTourneyByPinAndSelection();
         sortTourneyByDate();
     });
 
@@ -786,6 +810,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.delete(cb.value);
             }
             await saveTournamentSettings();
+            sortTourneyByPinAndSelection();
             await reloadMatchesFromView();
         });
     });
@@ -799,6 +824,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.add(cb.value);
             });
             await saveTournamentSettings();
+            sortTourneyByPinAndSelection();
             await reloadMatchesFromView();
         });
     }
@@ -812,6 +838,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 checkedTournaments.delete(cb.value);
             });
             await saveTournamentSettings();
+            sortTourneyByPinAndSelection();
             await reloadMatchesFromView();
         });
     }
