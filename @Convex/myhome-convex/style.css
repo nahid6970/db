@@ -991,6 +991,7 @@ button[type="button"]:hover {
 #setting-auto-fit-scale-default,
 #setting-auto-fit-scale-max {
   -moz-appearance: textfield;
+  text-align: center;
 }
 
 #setting-auto-fit-scale-min::-webkit-inner-spin-button,
