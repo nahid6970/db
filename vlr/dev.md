@@ -12,7 +12,8 @@ python app.py
 vlr/
 ├── app.py                  # Flask server
 ├── scraper.py              # VLR.gg scraper + data pipeline
-├── matches.json            # Match cache (gitignored)
+├── matches.db              # SQLite match cache (gitignored)
+├── matches.json            # Legacy export/backup cache (gitignored)
 ├── matches.backup.json     # Manual backup (gitignored)
 ├── settings.json           # User preferences (gitignored)
 ├── ignorelist.json         # Ignored tournaments [{name, logo}]
@@ -30,8 +31,8 @@ vlr/
 
 ## Data Flow
 1. User clicks SYNC → `GET /api/matches?start=N&end=M` → `fetch_and_update_matches(start_page, end_page)`
-2. Scraper upserts `matches.json`; detail pages (logos, timestamps) fetched in background thread
-3. `GET /` renders template with server-side filtered + paginated matches
+2. Scraper upserts `matches.db`; detail pages (logos, timestamps) are fetched lazily on match open
+3. `GET /` queries only the visible tournaments from SQLite and renders the filtered matches
 4. JS handles live countdowns, sidebar filters (year/series/custom tags), checkbox state, theme
 
 ## Key Files

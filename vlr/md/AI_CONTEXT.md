@@ -5,7 +5,7 @@ A Flask web app that scrapes VLR.gg for Valorant match schedules and displays th
 
 ## Stack
 - **Backend:** Python + Flask (`app.py`)
-- **Scraper:** BeautifulSoup (`scraper.py`) — scrapes VLR.gg, caches to `matches.json`
+- **Scraper:** BeautifulSoup (`scraper.py`) — scrapes VLR.gg, caches to `matches.db` with JSON fallback/export
 - **Frontend:** Vanilla JS (`static/js/main.js`), CSS (`static/css/style.css`), Jinja2 template (`templates/index.html`)
 - **Images:** Cached locally in `static/images_cache/`
 
@@ -39,7 +39,7 @@ A Flask web app that scrapes VLR.gg for Valorant match schedules and displays th
 Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinja `|reverse`).
 
 ## Key Invariants
-- Match data stored as dict keyed by match ID in `matches.json`
+- Match data stored in SQLite (`matches.db`) keyed by match ID
 - **No auto-sync** — sync only on manual SYNC button click
 - Team/tournament logos cached locally; paths stored as `/static/images_cache/<hash>.png`
 - `js_timestamp` = `unix_timestamp * 1000` (milliseconds for JS)
@@ -56,7 +56,7 @@ Array of `{name, logo}` objects, oldest-first (newest rendered first via JS/Jinj
 - **Player photos:** fetched from `/player/<id>` profile pages in parallel during detail fetch; cached locally; re-fetched if missing
 - VLR.gg ↗ button (red) on same row as map tabs
 - Stats fetched lazily on first click if not yet in cache; background sync also fills them
-- `matches.json` stores `maps: []` and `players: {"all": {team1,team2}, "0": {...}, "1": {...}}`
+- `matches.db` stores `maps` and `players` as JSON blobs per match row
 - Re-fetch triggered if `"all"` key missing, old format, or any player missing photo
 
 ## Tournament Pin Order

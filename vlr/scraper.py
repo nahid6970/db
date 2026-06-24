@@ -1,6 +1,7 @@
 import os
 import re
 import json
+import sqlite3
 import requests
 import threading
 import time
@@ -9,7 +10,9 @@ from datetime import datetime, timezone, timedelta
 import zoneinfo
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
-JSON_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "matches.json")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+JSON_PATH = os.path.join(BASE_DIR, "matches.json")
+DB_PATH = os.path.join(BASE_DIR, "matches.db")
 IMAGE_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "images_cache")
 
 # Ensure image cache directory exists
@@ -20,10 +23,193 @@ sync_lock = threading.Lock()
 details_lock = threading.Lock()
 _cache_lock = threading.Lock()
 _cached_matches = None
+_db_init_lock = threading.Lock()
+_db_initialized = False
+
+MATCH_COLUMNS = [
+    "id",
+    "href",
+    "date",
+    "time",
+    "team1",
+    "team2",
+    "score1",
+    "score2",
+    "tournament",
+    "series",
+    "tournament_logo",
+    "eta",
+    "status",
+    "team1_logo",
+    "team2_logo",
+    "unix_timestamp",
+    "bst_time",
+    "maps_json",
+    "players_json",
+    "last_updated",
+]
 
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
+
+def _get_conn():
+    conn = sqlite3.connect(DB_PATH, timeout=30)
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA synchronous=NORMAL")
+    return conn
+
+def _ensure_db():
+    global _db_initialized
+    if _db_initialized:
+        return
+    with _db_init_lock:
+        if _db_initialized:
+            return
+        with _get_conn() as conn:
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS matches (
+                    id TEXT PRIMARY KEY,
+                    href TEXT,
+                    date TEXT,
+                    time TEXT,
+                    team1 TEXT,
+                    team2 TEXT,
+                    score1 TEXT,
+                    score2 TEXT,
+                    tournament TEXT,
+                    series TEXT,
+                    tournament_logo TEXT,
+                    eta TEXT,
+                    status TEXT,
+                    team1_logo TEXT,
+                    team2_logo TEXT,
+                    unix_timestamp INTEGER,
+                    bst_time TEXT,
+                    maps_json TEXT,
+                    players_json TEXT,
+                    last_updated INTEGER
+                )
+                """
+            )
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_tournament ON matches(tournament)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_status ON matches(status)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_unix_timestamp ON matches(unix_timestamp)")
+            conn.commit()
+        _migrate_json_to_sqlite()
+        _db_initialized = True
+
+def _migrate_json_to_sqlite():
+    if not os.path.exists(JSON_PATH):
+        return
+    with _get_conn() as conn:
+        cur = conn.execute("SELECT COUNT(*) AS count FROM matches")
+        row = cur.fetchone()
+        if row and row["count"]:
+            return
+        try:
+            with open(JSON_PATH, "r", encoding="utf-8") as f:
+                raw = json.load(f)
+        except Exception as e:
+            print(f"Error migrating JSON to SQLite: {e}")
+            return
+        if not isinstance(raw, dict) or not raw:
+            return
+        rows = []
+        for mid, m in raw.items():
+            if not isinstance(m, dict):
+                continue
+            rows.append(_match_to_row_dict(m, fallback_id=mid))
+        if rows:
+            _bulk_upsert_rows(conn, rows)
+            print(f"Migrated {len(rows)} matches from JSON to SQLite.")
+
+def _json_dumps(value):
+    return json.dumps(value if value is not None else {}, ensure_ascii=False)
+
+def _json_loads(value, default):
+    if not value:
+        return default
+    try:
+        return json.loads(value)
+    except Exception:
+        return default
+
+def _match_to_row_dict(match, fallback_id=None):
+    mid = str(match.get("id") or fallback_id or "")
+    if not mid:
+        return None
+    return {
+        "id": mid,
+        "href": match.get("href", ""),
+        "date": match.get("date", ""),
+        "time": match.get("time", ""),
+        "team1": match.get("team1", ""),
+        "team2": match.get("team2", ""),
+        "score1": match.get("score1", ""),
+        "score2": match.get("score2", ""),
+        "tournament": match.get("tournament", ""),
+        "series": match.get("series", ""),
+        "tournament_logo": match.get("tournament_logo", ""),
+        "eta": match.get("eta", ""),
+        "status": match.get("status", ""),
+        "team1_logo": match.get("team1_logo", ""),
+        "team2_logo": match.get("team2_logo", ""),
+        "unix_timestamp": int(match.get("unix_timestamp") or 0),
+        "bst_time": match.get("bst_time", ""),
+        "maps_json": _json_dumps(match.get("maps", [])),
+        "players_json": _json_dumps(match.get("players", {})),
+        "last_updated": int(match.get("last_updated") or int(datetime.now().timestamp())),
+    }
+
+def _row_to_match(row):
+    match = dict(row)
+    match["unix_timestamp"] = int(match.get("unix_timestamp") or 0)
+    match["last_updated"] = int(match.get("last_updated") or 0)
+    match["maps"] = _json_loads(match.pop("maps_json", ""), [])
+    match["players"] = _json_loads(match.pop("players_json", ""), {})
+    return match
+
+def _bulk_upsert_rows(conn, rows):
+    if not rows:
+        return 0
+    conn.executemany(
+        """
+        INSERT INTO matches (
+            id, href, date, time, team1, team2, score1, score2, tournament, series,
+            tournament_logo, eta, status, team1_logo, team2_logo, unix_timestamp,
+            bst_time, maps_json, players_json, last_updated
+        ) VALUES (
+            :id, :href, :date, :time, :team1, :team2, :score1, :score2, :tournament, :series,
+            :tournament_logo, :eta, :status, :team1_logo, :team2_logo, :unix_timestamp,
+            :bst_time, :maps_json, :players_json, :last_updated
+        )
+        ON CONFLICT(id) DO UPDATE SET
+            href=excluded.href,
+            date=excluded.date,
+            time=excluded.time,
+            team1=excluded.team1,
+            team2=excluded.team2,
+            score1=excluded.score1,
+            score2=excluded.score2,
+            tournament=excluded.tournament,
+            series=excluded.series,
+            tournament_logo=excluded.tournament_logo,
+            eta=excluded.eta,
+            status=excluded.status,
+            team1_logo=excluded.team1_logo,
+            team2_logo=excluded.team2_logo,
+            unix_timestamp=excluded.unix_timestamp,
+            bst_time=excluded.bst_time,
+            maps_json=excluded.maps_json,
+            players_json=excluded.players_json,
+            last_updated=excluded.last_updated
+        """,
+        rows,
+    )
+    return len(rows)
 
 def load_json_matches(force_reload=False):
     global _cached_matches
@@ -33,44 +219,109 @@ def load_json_matches(force_reload=False):
     with _cache_lock:
         if _cached_matches is not None and not force_reload:
             return _cached_matches
-            
-        if not os.path.exists(JSON_PATH):
-            _cached_matches = {}
-            return _cached_matches
         try:
-            with open(JSON_PATH, "r", encoding="utf-8") as f:
-                _cached_matches = json.load(f)
+            _ensure_db()
+            with _get_conn() as conn:
+                rows = conn.execute("SELECT * FROM matches").fetchall()
+                _cached_matches = {row["id"]: _row_to_match(row) for row in rows}
         except Exception as e:
-            print(f"Error loading JSON: {e}")
+            print(f"Error loading matches DB: {e}")
             _cached_matches = {}
             
     return _cached_matches
 
 def save_json_matches(matches):
     global _cached_matches
-    with _cache_lock:
-        _cached_matches = matches
-        
-    tmp_path = JSON_PATH + ".tmp"
     try:
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            json.dump(matches, f, indent=4, ensure_ascii=False)
-        # Atomic rename with retries for transient locks (common on Windows)
-        for attempt in range(5):
-            try:
-                os.replace(tmp_path, JSON_PATH)
-                break
-            except PermissionError:
-                time.sleep(0.1)
+        _ensure_db()
+        if isinstance(matches, dict) and ("id" in matches or "href" in matches):
+            rows = [_match_to_row_dict(matches)]
+        elif isinstance(matches, dict):
+            rows = []
+            for mid, match in matches.items():
+                if isinstance(match, dict):
+                    rows.append(_match_to_row_dict(match, fallback_id=mid))
+        elif isinstance(matches, list):
+            rows = [_match_to_row_dict(match) for match in matches if isinstance(match, dict)]
         else:
-            os.replace(tmp_path, JSON_PATH)
+            rows = []
+
+        rows = [r for r in rows if r]
+        with _get_conn() as conn:
+            _bulk_upsert_rows(conn, rows)
+            conn.commit()
+        with _cache_lock:
+            _cached_matches = None
     except Exception as e:
-        print(f"Error saving JSON: {e}")
-        if os.path.exists(tmp_path):
-            try:
-                os.remove(tmp_path)
-            except:
-                pass
+        print(f"Error saving matches DB: {e}")
+
+def upsert_match(match):
+    save_json_matches(match)
+
+def load_match(match_id):
+    _ensure_db()
+    with _get_conn() as conn:
+        row = conn.execute("SELECT * FROM matches WHERE id = ?", (str(match_id),)).fetchone()
+        return _row_to_match(row) if row else None
+
+def load_matches(tournament_names=None, exclude_tournaments=None):
+    _ensure_db()
+    clauses = []
+    params = []
+    if tournament_names is not None:
+        names = [str(t) for t in tournament_names if t]
+        if names:
+            placeholders = ",".join("?" for _ in names)
+            clauses.append(f"tournament IN ({placeholders})")
+            params.extend(names)
+        else:
+            return []
+    if exclude_tournaments:
+        names = [str(t) for t in exclude_tournaments if t]
+        if names:
+            placeholders = ",".join("?" for _ in names)
+            clauses.append(f"tournament NOT IN ({placeholders})")
+            params.extend(names)
+    where_sql = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    query = f"SELECT * FROM matches {where_sql}"
+    with _get_conn() as conn:
+        rows = conn.execute(query, params).fetchall()
+    return [_row_to_match(row) for row in rows]
+
+def load_tournament_overview(exclude_tournaments=None):
+    _ensure_db()
+    clauses = []
+    params = []
+    if exclude_tournaments:
+        names = [str(t) for t in exclude_tournaments if t]
+        if names:
+            placeholders = ",".join("?" for _ in names)
+            clauses.append(f"tournament NOT IN ({placeholders})")
+            params.extend(names)
+    where_sql = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    query = f"""
+        SELECT
+            tournament,
+            MAX(tournament_logo) AS tournament_logo,
+            MIN(unix_timestamp) AS first_match,
+            SUM(CASE WHEN LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]') THEN 1 ELSE 0 END) AS missing_stats
+        FROM matches
+        {where_sql}
+        GROUP BY tournament
+        ORDER BY tournament
+    """
+    with _get_conn() as conn:
+        rows = conn.execute(query, params).fetchall()
+    return [
+        {
+            "tournament": row["tournament"],
+            "tournament_logo": row["tournament_logo"] or "",
+            "first_match": int(row["first_match"] or 0),
+            "fully_loaded": int(row["missing_stats"] or 0) == 0,
+        }
+        for row in rows
+        if row["tournament"]
+    ]
 
 def download_image(url):
     if not url:
@@ -388,8 +639,6 @@ def fetch_details_in_background(scraped_matches):
         
     try:
         print("Background details thread started...")
-        db = load_json_matches()
-        
         # Check which matches need detailed info (logos and exact timestamps)
         pending_ids = []
         for m in scraped_matches:
@@ -403,13 +652,14 @@ def fetch_details_in_background(scraped_matches):
                 path = os.path.join(IMAGE_CACHE_DIR, filename)
                 return os.path.exists(path)
                 
-            t1_logo = db.get(mid, {}).get("team1_logo", "")
-            t2_logo = db.get(mid, {}).get("team2_logo", "")
-            unix_ts = db.get(mid, {}).get("unix_timestamp")
+            current = load_match(mid) or {}
+            t1_logo = current.get("team1_logo", "")
+            t2_logo = current.get("team2_logo", "")
+            unix_ts = current.get("unix_timestamp")
             
             has_details = t1_logo and t2_logo and unix_ts
             files_exist = file_exists(t1_logo) and file_exists(t2_logo)
-            existing_players = db.get(mid, {}).get("players", {})
+            existing_players = current.get("players", {})
             old_format = isinstance(existing_players, dict) and ("team1" in existing_players or "team2" in existing_players) and "all" not in existing_players and "0" not in existing_players
             missing_all = isinstance(existing_players, dict) and "all" not in existing_players
             missing_photos = any(
@@ -447,18 +697,12 @@ def fetch_details_in_background(scraped_matches):
 
             # Single save after all fetches complete
             if results:
-                current_db = load_json_matches()
                 for mid, details in results.items():
-                    if mid in current_db:
-                        current_db[mid]["team1_logo"] = details["team1_logo"]
-                        current_db[mid]["team2_logo"] = details["team2_logo"]
-                        current_db[mid]["unix_timestamp"] = details["unix_timestamp"]
-                        current_db[mid]["bst_time"] = details["bst_time"]
-                        current_db[mid]["maps"] = details.get("maps", [])
-                        current_db[mid]["players"] = details.get("players", {})
-                        current_db[mid]["status"] = details.get("status", current_db[mid].get("status", "Completed"))
-                        current_db[mid]["last_updated"] = int(datetime.now().timestamp())
-                save_json_matches(current_db)
+                    current = load_match(mid) or {"id": mid}
+                    current.update(details)
+                    current["id"] = mid
+                    current["last_updated"] = int(datetime.now().timestamp())
+                    upsert_match(current)
         print("Background details thread finished.")
     finally:
         details_lock.release()
@@ -594,50 +838,44 @@ def _fetch_page(url):
         return None
 
 
-def _upsert_matches_to_db(db, scraped_matches):
-    """Insert or update scraped matches into the database dict.
-    Downloads tournament logos and sets basic match info.
-    Returns the updated db dict."""
+def _upsert_matches_to_db(scraped_matches):
+    """Insert or update scraped matches into SQLite."""
     
     # Download tournament logos locally
     for m in scraped_matches:
         if m["tournament_logo"]:
             m["tournament_logo"] = download_image(m["tournament_logo"])
-            
-    # Insert/Update basic info for each scraped match
+
+    rows = []
+    now_ts = int(datetime.now().timestamp())
     for m in scraped_matches:
-        mid = m["id"]
-        if mid not in db:
-            db[mid] = {
-                "id": mid,
-                "href": m["href"],
-                "team1": m["team1"],
-                "team2": m["team2"],
-                "team1_logo": "",
-                "team2_logo": "",
-                "tournament": m["tournament"],
-                "tournament_logo": m["tournament_logo"],
-                "series": m["series"],
-                "unix_timestamp": 0,
-                "bst_time": "",
-                "status": m["status"],
-                "score1": m["score1"],
-                "score2": m["score2"],
-                "last_updated": int(datetime.now().timestamp())
-            }
-        else:
-            # Update variable data from matches list
-            db[mid]["team1"] = m["team1"]
-            db[mid]["team2"] = m["team2"]
-            db[mid]["tournament"] = m["tournament"]
-            db[mid]["tournament_logo"] = m["tournament_logo"]
-            db[mid]["series"] = m["series"]
-            db[mid]["status"] = m["status"]
-            db[mid]["score1"] = m["score1"]
-            db[mid]["score2"] = m["score2"]
-            db[mid]["last_updated"] = int(datetime.now().timestamp())
-    
-    return db
+        rows.append({
+            "id": m["id"],
+            "href": m["href"],
+            "date": m.get("date", ""),
+            "time": m.get("time", ""),
+            "team1": m.get("team1", ""),
+            "team2": m.get("team2", ""),
+            "score1": m.get("score1", ""),
+            "score2": m.get("score2", ""),
+            "tournament": m.get("tournament", ""),
+            "series": m.get("series", ""),
+            "tournament_logo": m.get("tournament_logo", ""),
+            "eta": m.get("eta", ""),
+            "status": m.get("status", ""),
+            "team1_logo": "",
+            "team2_logo": "",
+            "unix_timestamp": 0,
+            "bst_time": "",
+            "maps_json": _json_dumps([]),
+            "players_json": _json_dumps({}),
+            "last_updated": now_ts,
+        })
+
+    _ensure_db()
+    with _get_conn() as conn:
+        _bulk_upsert_rows(conn, rows)
+        conn.commit()
 
 
 RESULTS_PAGES = 5  # Default number of result pages to fetch (each page ~20 matches)
@@ -682,14 +920,8 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
             print("No matches scraped from either page.")
             return False
         
-        # Load existing matches from JSON cache
-        db = load_json_matches()
-        
-        # Upsert all scraped matches into db
-        db = _upsert_matches_to_db(db, all_scraped)
-                
-        # Save basic info IMMEDIATELY (takes ~150-200ms) to ensure instant web responses
-        save_json_matches(db)
+        # Upsert all scraped matches into SQLite
+        _upsert_matches_to_db(all_scraped)
 
         return True
     except Exception as e:
@@ -698,12 +930,8 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
     finally:
         sync_lock.release()
 
-def get_matches_for_display():
-    # Read directly from local JSON cache (super fast, non-blocking)
-    db = load_json_matches()
-    
-    # Sort matches
-    matches_list = list(db.values())
+def get_matches_for_display(tournament_names=None, exclude_tournaments=None):
+    matches_list = load_matches(tournament_names=tournament_names, exclude_tournaments=exclude_tournaments)
     
     # Sort: Live matches first, then Upcoming matches (by unix_timestamp asc), then Completed matches (by unix_timestamp desc).
     def sort_key(m):

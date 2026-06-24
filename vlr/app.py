@@ -99,20 +99,32 @@ def start_background_sync():
 
 @app.route("/")
 def index():
-    all_matches = scraper.get_matches_for_display()
     settings = load_settings()
     ignore_list = load_ignorelist()
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
     results_pages = settings.get("results_pages", 5)
     theme = settings.get("theme", "dark")
     per_page = settings.get("per_page", "50")
+    ignore_names = {t["name"] for t in ignore_list}
 
-    # Build logo lookup from all matches
-    logo_lookup = {}
-    for m in all_matches:
-        t = m.get("tournament")
-        if t and t not in logo_lookup and m.get("tournament_logo"):
-            logo_lookup[t] = m["tournament_logo"]
+    all_tournament_rows = scraper.load_tournament_overview()
+    tournament_rows = [row for row in all_tournament_rows if row["tournament"] not in ignore_names]
+    tournament_names = [row["tournament"] for row in tournament_rows]
+    if unchecked_tournaments:
+        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
+    else:
+        visible_tournaments = tournament_names
+
+    matches = scraper.get_matches_for_display(
+        tournament_names=visible_tournaments if visible_tournaments else [],
+    )
+
+    # Build logo lookup from tournament summary rows
+    logo_lookup = {
+        row["tournament"]: row["tournament_logo"]
+        for row in all_tournament_rows
+        if row.get("tournament") and row.get("tournament_logo")
+    }
 
     # Enrich ignore list entries that are missing logos and persist if any updated
     updated = False
@@ -123,47 +135,25 @@ def index():
     if updated:
         save_ignorelist(ignore_list)
 
-    # Filter out ignored tournaments
-    ignore_names = {t["name"] for t in ignore_list}
-    matches = [m for m in all_matches if m.get("tournament") not in ignore_names]
-
-    tournaments = set()
-    for m in matches:
-        if m.get("tournament"):
-            tournaments.add((m["tournament"], m.get("tournament_logo", "")))
-
     tournament_order = settings.get("tournament_order", {})
     sorted_tournaments = sorted(
-        list(tournaments),
+        [(row["tournament"], row["tournament_logo"]) for row in tournament_rows],
         key=lambda x: (tournament_order.get(x[0], 9999), x[0] in unchecked_tournaments, x[0])
     )
 
     # Earliest match timestamp per tournament (for sidebar sort)
-    tournament_first_match = {}
-    for m in matches:
-        t = m.get("tournament")
-        ts = m.get("unix_timestamp") or 0
-        if t and ts:
-            if t not in tournament_first_match or ts < tournament_first_match[t]:
-                tournament_first_match[t] = ts
+    tournament_first_match = {
+        row["tournament"]: row["first_match"]
+        for row in tournament_rows
+        if row.get("tournament")
+    }
 
     # Determine which tournaments have stats fully loaded
-    tourney_matches = {}
-    for m in matches:
-        t = m.get("tournament")
-        if t:
-            tourney_matches.setdefault(t, []).append(m)
-            
-    fully_loaded_tournaments = {}
-    for t, m_list in tourney_matches.items():
-        is_loaded = True
-        for m in m_list:
-            is_completed = (m.get("status") or "").lower() == "completed"
-            has_stats = bool(m.get("maps") and len(m.get("maps")) > 0)
-            if is_completed and not has_stats:
-                is_loaded = False
-                break
-        fully_loaded_tournaments[t] = is_loaded
+    fully_loaded_tournaments = {
+        row["tournament"]: row["fully_loaded"]
+        for row in tournament_rows
+        if row.get("tournament")
+    }
 
     return render_template(
         "index.html",
@@ -181,8 +171,7 @@ def index():
 
 @app.route("/api/match/<match_id>")
 def api_match_detail(match_id):
-    db = scraper.load_json_matches()
-    match = db.get(match_id)
+    match = scraper.load_match(match_id)
     if not match:
         return jsonify({"error": "not found"}), 404
     
@@ -211,13 +200,14 @@ def api_match_detail(match_id):
             match.update(details)
             if details.get("status"):
                 match["status"] = details["status"]
-            db[match_id] = match
-            scraper.save_json_matches(db)
+            scraper.upsert_match(match)
     return jsonify(match)
 
 @app.route("/api/matches")
 def api_matches():
     settings = load_settings()
+    ignore_list = load_ignorelist()
+    ignore_names = {t["name"] for t in ignore_list}
     saved_start = settings.get("scrape_start", 1)
     saved_end = settings.get("scrape_end", 5)
     start_page = request.args.get("start", saved_start, type=int)
@@ -225,9 +215,17 @@ def api_matches():
     start_page = max(1, start_page)
     end_page = max(start_page, end_page)
     scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
-    ignore_list = load_ignorelist()
-    ignore_names = {t["name"] for t in ignore_list}
-    matches = [m for m in scraper.get_matches_for_display() if m.get("tournament") not in ignore_names]
+    unchecked_tournaments = settings.get("unchecked_tournaments", [])
+    tournament_rows = scraper.load_tournament_overview(exclude_tournaments=ignore_names)
+    tournament_names = [row["tournament"] for row in tournament_rows]
+    if unchecked_tournaments:
+        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
+    else:
+        visible_tournaments = tournament_names
+    matches = scraper.get_matches_for_display(
+        tournament_names=visible_tournaments if visible_tournaments else [],
+        exclude_tournaments=ignore_names
+    )
     return jsonify(matches)
 
 @app.route("/api/settings", methods=["GET", "POST"])
