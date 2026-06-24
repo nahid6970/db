@@ -2550,27 +2550,19 @@ function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirs
   toggleWrapper.title = 'Run Hidden (pythonw for python files, etc.)';
   toggleWrapper.style.display = 'inline-flex';
   toggleWrapper.style.alignItems = 'center';
-  toggleWrapper.style.gap = '3px';
   toggleWrapper.style.cursor = 'pointer';
   toggleWrapper.style.userSelect = 'none';
-  toggleWrapper.style.fontSize = '12px';
-  toggleWrapper.style.color = '#888';
 
   const checkbox = document.createElement('input');
   checkbox.type = 'checkbox';
   checkbox.className = 'run-hidden-checkbox';
   checkbox.checked = runHidden;
   checkbox.style.margin = '0';
-  checkbox.style.width = '14px';
-  checkbox.style.height = '14px';
+  checkbox.style.width = '16px';
+  checkbox.style.height = '16px';
   checkbox.style.cursor = 'pointer';
 
-  const labelSpan = document.createElement('span');
-  labelSpan.textContent = '🕶️';
-  labelSpan.style.fontSize = '14px';
-
   toggleWrapper.appendChild(checkbox);
-  toggleWrapper.appendChild(labelSpan);
 
   group.appendChild(input);
   group.appendChild(toggleWrapper);
