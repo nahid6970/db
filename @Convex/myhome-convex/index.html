@@ -49,18 +49,16 @@
     </label>
     <div style="margin-top:12px;padding-top:10px;border-top:1px solid #444;display:flex;flex-direction:column;gap:8px;">
       <strong style="color:#fff;font-size:12px;">Auto Fit Size Settings</strong>
-      <label style="display:flex;align-items:center;justify-content:space-between;gap:10px;color:#ccc;font-size:12px;">
-        <span>Lowest (%)</span>
-        <input type="number" id="setting-auto-fit-scale-min" min="1" step="1" onchange="window.applySettings()" style="width:84px;box-sizing:border-box;">
-      </label>
-      <label style="display:flex;align-items:center;justify-content:space-between;gap:10px;color:#ccc;font-size:12px;">
-        <span>Highest (%)</span>
-        <input type="number" id="setting-auto-fit-scale-max" min="1" step="1" onchange="window.applySettings()" style="width:84px;box-sizing:border-box;">
-      </label>
-      <label style="display:flex;align-items:center;justify-content:space-between;gap:10px;color:#ccc;font-size:12px;">
-        <span>Default (%)</span>
-        <input type="number" id="setting-auto-fit-scale-default" min="1" step="1" onchange="window.applySettings()" style="width:84px;box-sizing:border-box;">
-      </label>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;color:#ccc;font-size:12px;text-align:center;">
+        <div>Lowest (%)</div>
+        <div>Default (%)</div>
+        <div>Highest (%)</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+        <input type="number" id="setting-auto-fit-scale-min" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
+        <input type="number" id="setting-auto-fit-scale-default" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
+        <input type="number" id="setting-auto-fit-scale-max" min="1" step="1" onchange="window.applySettings()" style="width:100%;box-sizing:border-box;">
+      </div>
     </div>
     <button id="reset-all-youtube-btn" onclick="window.resetAllYouTubeTracking()" style="background:#ff9800;color:#000;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;margin-top:12px;width:100%;font-weight:bold;font-size:12px;transition:all 0.2s;">
       Reset YouTube Tracking (Fresh Count)
