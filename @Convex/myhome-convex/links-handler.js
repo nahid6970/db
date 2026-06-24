@@ -629,6 +629,11 @@ function updateAutoFitScaleVisual(range, display, scale) {
     : 0;
   const progress = Math.min(100, Math.max(0, ratio * 100));
   range.style.setProperty('--auto-fit-scale-progress', `${progress}%`);
+  const slider = range.closest('.auto-fit-scale-slider');
+  const fill = slider ? slider.querySelector('.auto-fit-scale-track-fill') : null;
+  if (fill) {
+    fill.style.width = `${progress}%`;
+  }
   display.textContent = `${formatAutoFitScale(scale)}%`;
 }
 

@@ -891,30 +891,53 @@ button[type="button"]:hover {
   font-size: 13px;
 }
 
-.auto-fit-scale-row input[type="range"] {
+.auto-fit-scale-slider {
   flex: 1 1 auto;
+  position: relative;
   min-width: 140px;
   width: 100%;
-  margin: 0;
   height: 18px;
+}
+
+.auto-fit-scale-track {
+  position: absolute;
+  inset: 50% 0 auto 0;
+  transform: translateY(-50%);
+  height: 10px;
+  border-radius: 999px;
+  background: #3b424b;
+  overflow: hidden;
+}
+
+.auto-fit-scale-track-fill {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: #2f80ff;
+  transition: width 0.08s linear;
+}
+
+.auto-fit-scale-slider input[type="range"] {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
   appearance: none;
   -webkit-appearance: none;
-  background: linear-gradient(90deg,
-    #2f80ff 0%,
-    #2f80ff var(--auto-fit-scale-progress, 0%),
-    #3b424b var(--auto-fit-scale-progress, 0%),
-    #3b424b 100%);
-  border-radius: 999px;
   outline: none;
 }
 
-.auto-fit-scale-row input[type="range"]::-webkit-slider-runnable-track {
-  height: 8px;
+.auto-fit-scale-slider input[type="range"]::-webkit-slider-runnable-track {
+  height: 100%;
   background: transparent;
-  border-radius: 999px;
+  border: 0;
 }
 
-.auto-fit-scale-row input[type="range"]::-webkit-slider-thumb {
+.auto-fit-scale-slider input[type="range"]::-webkit-slider-thumb {
   appearance: none;
   -webkit-appearance: none;
   width: 16px;
@@ -923,23 +946,21 @@ button[type="button"]:hover {
   border: 2px solid #dce8ff;
   background: #f5f8ff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
-  margin-top: -4px;
+  margin-top: 0;
 }
 
-.auto-fit-scale-row input[type="range"]::-moz-range-track {
-  height: 8px;
-  background: #3b424b;
+.auto-fit-scale-slider input[type="range"]::-moz-range-track {
+  height: 100%;
+  background: transparent;
   border: none;
-  border-radius: 999px;
 }
 
-.auto-fit-scale-row input[type="range"]::-moz-range-progress {
-  height: 8px;
-  background: #2f80ff;
-  border-radius: 999px;
+.auto-fit-scale-slider input[type="range"]::-moz-range-progress {
+  height: 100%;
+  background: transparent;
 }
 
-.auto-fit-scale-row input[type="range"]::-moz-range-thumb {
+.auto-fit-scale-slider input[type="range"]::-moz-range-thumb {
   width: 16px;
   height: 16px;
   border-radius: 50%;
@@ -948,7 +969,7 @@ button[type="button"]:hover {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
-.auto-fit-scale-row input[type="range"]:focus-visible {
+.auto-fit-scale-slider input[type="range"]:focus-visible {
   outline: 2px solid #7cc8ff;
   outline-offset: 2px;
 }
