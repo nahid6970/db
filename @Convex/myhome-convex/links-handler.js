@@ -621,6 +621,17 @@ function formatAutoFitScale(scale) {
   return String(Math.round(scale * 100));
 }
 
+function updateAutoFitScaleVisual(range, display, scale) {
+  const min = Number.parseFloat(range.min);
+  const max = Number.parseFloat(range.max);
+  const ratio = Number.isFinite(min) && Number.isFinite(max) && max > min
+    ? (scale - min) / (max - min)
+    : 0;
+  const progress = Math.min(100, Math.max(0, ratio * 100));
+  range.style.setProperty('--auto-fit-scale-progress', `${progress}%`);
+  display.textContent = `${formatAutoFitScale(scale)}%`;
+}
+
 function scaleCssSize(sizeValue, scale, fallbackValue) {
   const source = (sizeValue || fallbackValue || '').toString().trim();
   if (!source || !Number.isFinite(scale) || scale <= 0 || scale === 1) {
@@ -646,28 +657,21 @@ function getAutoFitScaleValue(prefix) {
 function syncAutoFitScaleControls(prefix) {
   const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
   const range = document.getElementById(`${prefix}-li-auto-fit-scale`);
-  const value = document.getElementById(`${prefix}-li-auto-fit-scale-value`);
+  const display = document.getElementById(`${prefix}-li-auto-fit-scale-value`);
   const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
-  if (!row || !range || !value || !checkbox || row.dataset.bound === 'true') return;
+  if (!row || !range || !display || !checkbox || row.dataset.bound === 'true') return;
 
   const clamp = (scale) => Math.min(1.35, Math.max(0.70, scale));
   const updateFromRange = () => {
     const scale = clamp(parseAutoFitScale(range.value));
     range.value = scale.toFixed(2);
-    value.value = formatAutoFitScale(scale);
-  };
-  const updateFromValue = () => {
-    const raw = Number.parseFloat(value.value);
-    const scale = clamp(Number.isFinite(raw) ? raw / 100 : DEFAULT_AUTO_FIT_SCALE);
-    range.value = scale.toFixed(2);
-    value.value = formatAutoFitScale(scale);
+    updateAutoFitScaleVisual(range, display, scale);
   };
   const updateVisibility = () => {
     row.style.display = checkbox.checked ? 'flex' : 'none';
   };
 
   range.addEventListener('input', updateFromRange);
-  value.addEventListener('input', updateFromValue);
   checkbox.addEventListener('change', updateVisibility);
 
   updateFromRange();
@@ -2161,8 +2165,13 @@ function openEditLinkPopup(link, index) {
   document.getElementById('edit-link-hidden').checked = link.hidden || false;
   document.getElementById('edit-link-start-new-line').checked = link.start_new_line || false;
   document.getElementById('edit-link-li-auto-fit').checked = link.li_auto_fit || false;
-  document.getElementById('edit-link-li-auto-fit-scale').value = parseAutoFitScale(link.li_auto_fit_scale).toFixed(2);
-  document.getElementById('edit-link-li-auto-fit-scale-value').value = formatAutoFitScale(parseAutoFitScale(link.li_auto_fit_scale));
+  {
+    const autoFitScale = parseAutoFitScale(link.li_auto_fit_scale);
+    const range = document.getElementById('edit-link-li-auto-fit-scale');
+    const display = document.getElementById('edit-link-li-auto-fit-scale-value');
+    range.value = autoFitScale.toFixed(2);
+    updateAutoFitScaleVisual(range, display, autoFitScale);
+  }
   document.getElementById('edit-link-youtube-tracking').checked = !!link.youtube_channel_id;
   document.getElementById('edit-link-click-tracking').checked = !!link.click_tracking_enabled;
   const noteChip = document.getElementById('edit-link-note-chip');
