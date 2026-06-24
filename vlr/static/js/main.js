@@ -822,7 +822,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const icon = refreshBtn.querySelector("i");
             if (icon) icon.classList.add("spinning");
             refreshBtn.disabled = true;
-            refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i> SYNC`;
+            refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate spinning"></i>`;
             
             try {
                 const start = scrapeStart ? (parseInt(scrapeStart.value) || null) : null;
@@ -853,7 +853,7 @@ document.addEventListener("DOMContentLoaded", () => {
             } finally {
                 if (icon) icon.classList.remove("spinning");
                 refreshBtn.disabled = false;
-                refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i> SYNC`;
+                refreshBtn.innerHTML = `<i class="fa-solid fa-arrows-rotate"></i>`;
             }
         });
     }
