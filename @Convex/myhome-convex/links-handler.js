@@ -8,6 +8,11 @@ let reminderRefreshTimer = null;
 const LINKS_CACHE_KEY = 'myhome-links-cache-v1';
 let lastLinksSignature = '';
 const DEFAULT_AUTO_FIT_SCALE = 1.0;
+const DEFAULT_AUTO_FIT_SCALE_SETTINGS = Object.freeze({
+  minPercent: 70,
+  maxPercent: 135,
+  defaultPercent: 100,
+});
 
 // Initialize edit mode
 if (typeof window.editMode === 'undefined') {
@@ -621,6 +626,41 @@ function formatAutoFitScale(scale) {
   return String(Math.round(scale * 100));
 }
 
+function parseAutoFitScalePercent(value, fallback) {
+  const parsed = Number.parseFloat(value);
+  return Number.isFinite(parsed) ? Math.max(1, Math.round(parsed)) : fallback;
+}
+
+function getAutoFitScaleSettings() {
+  let settings = {};
+  try {
+    settings = JSON.parse(localStorage.getItem('myhome-settings') || '{}');
+  } catch (error) {
+    console.warn('Could not load auto-fit scale settings:', error);
+  }
+
+  let minPercent = parseAutoFitScalePercent(settings.autoFitScaleMinPercent, DEFAULT_AUTO_FIT_SCALE_SETTINGS.minPercent);
+  let maxPercent = parseAutoFitScalePercent(settings.autoFitScaleMaxPercent, DEFAULT_AUTO_FIT_SCALE_SETTINGS.maxPercent);
+  let defaultPercent = parseAutoFitScalePercent(settings.autoFitScaleDefaultPercent, DEFAULT_AUTO_FIT_SCALE_SETTINGS.defaultPercent);
+
+  if (maxPercent <= minPercent) {
+    maxPercent = minPercent + 1;
+  }
+
+  defaultPercent = Math.min(maxPercent, Math.max(minPercent, defaultPercent));
+
+  return {
+    minPercent,
+    maxPercent,
+    defaultPercent,
+    minScale: minPercent / 100,
+    maxScale: maxPercent / 100,
+    defaultScale: defaultPercent / 100,
+  };
+}
+
+window.getAutoFitScaleSettings = getAutoFitScaleSettings;
+
 function updateAutoFitScaleVisual(range, display, scale) {
   const min = Number.parseFloat(range.min);
   const max = Number.parseFloat(range.max);
@@ -635,6 +675,30 @@ function updateAutoFitScaleVisual(range, display, scale) {
     fill.style.width = `${progress}%`;
   }
   display.textContent = `${formatAutoFitScale(scale)}%`;
+}
+
+function applyAutoFitScaleSettingsToControl(prefix, options = {}) {
+  const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
+  const range = document.getElementById(`${prefix}-li-auto-fit-scale`);
+  const display = document.getElementById(`${prefix}-li-auto-fit-scale-value`);
+  const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
+  if (!row || !range || !display || !checkbox) return;
+
+  const settings = getAutoFitScaleSettings();
+  const clampToSettings = (scale) => Math.min(settings.maxScale, Math.max(settings.minScale, scale));
+  const useDefault = options.resetToDefault || (prefix === 'link' && !range.dataset.autoFitTouched);
+  const currentScale = useDefault ? settings.defaultScale : clampToSettings(parseAutoFitScale(range.value));
+
+  range.min = settings.minScale.toFixed(2);
+  range.max = settings.maxScale.toFixed(2);
+  range.step = '0.05';
+  range.defaultValue = settings.defaultScale.toFixed(2);
+  range.value = currentScale.toFixed(2);
+  if (useDefault) {
+    range.dataset.autoFitTouched = '';
+  }
+  updateAutoFitScaleVisual(range, display, currentScale);
+  row.style.display = checkbox.checked ? 'flex' : 'none';
 }
 
 function scaleCssSize(sizeValue, scale, fallbackValue) {
@@ -662,15 +726,15 @@ function getAutoFitScaleValue(prefix) {
 function syncAutoFitScaleControls(prefix) {
   const row = document.getElementById(`${prefix}-li-auto-fit-scale-input`);
   const range = document.getElementById(`${prefix}-li-auto-fit-scale`);
-  const display = document.getElementById(`${prefix}-li-auto-fit-scale-value`);
   const checkbox = document.getElementById(`${prefix}-li-auto-fit`);
-  if (!row || !range || !display || !checkbox || row.dataset.bound === 'true') return;
+  if (!row || !range || !checkbox || row.dataset.bound === 'true') return;
 
-  const clamp = (scale) => Math.min(1.35, Math.max(0.70, scale));
   const updateFromRange = () => {
-    const scale = clamp(parseAutoFitScale(range.value));
+    range.dataset.autoFitTouched = 'true';
+    const settings = getAutoFitScaleSettings();
+    const scale = Math.min(settings.maxScale, Math.max(settings.minScale, parseAutoFitScale(range.value)));
     range.value = scale.toFixed(2);
-    updateAutoFitScaleVisual(range, display, scale);
+    updateAutoFitScaleVisual(range, document.getElementById(`${prefix}-li-auto-fit-scale-value`), scale);
   };
   const updateVisibility = () => {
     row.style.display = checkbox.checked ? 'flex' : 'none';
@@ -679,10 +743,18 @@ function syncAutoFitScaleControls(prefix) {
   range.addEventListener('input', updateFromRange);
   checkbox.addEventListener('change', updateVisibility);
 
-  updateFromRange();
+  applyAutoFitScaleSettingsToControl(prefix, { resetToDefault: prefix === 'link' });
   updateVisibility();
   row.dataset.bound = 'true';
 }
+
+function refreshAutoFitScaleControls() {
+  ['link', 'edit-link'].forEach((prefix) => {
+    applyAutoFitScaleSettingsToControl(prefix);
+  });
+}
+
+window.refreshAutoFitScaleControls = refreshAutoFitScaleControls;
 
 function openReminderPopup() {
   populateReminderPopup(currentReminderDraft || {});
@@ -2127,6 +2199,11 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     await window.convexMutation("functions:addLink", newLink);
     document.getElementById('add-link-popup').classList.add('hidden');
     document.getElementById('add-link-form').reset();
+    const addAutoFitRange = document.getElementById('link-li-auto-fit-scale');
+    if (addAutoFitRange) {
+      addAutoFitRange.dataset.autoFitTouched = '';
+    }
+    applyAutoFitScaleSettingsToControl('link', { resetToDefault: true });
     await loadLinks();
     if (duplicateMatch) {
       window.showNotification(`Duplicate link added. Also exists in ${duplicateMatch.group || 'Ungrouped'}.`, 'error');
