@@ -1055,19 +1055,17 @@ details[open] summary {
 }
 
 .context-menu.list-layout {
-  width: 160px;
+  min-width: 180px;
+  max-width: 280px;
+  max-height: 260px;
   padding: 6px;
   flex-direction: column;
-}
-
-/* Restore the group picker dropdown to the older dark menu style */
-.context-menu.list-layout {
-  min-width: 150px;
-  background: #000000 !important;
-  border: 1px solid #3a3a3a;
-  border-radius: 0;
-  padding: 5px 0;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.45);
+  gap: 4px;
+  overflow-y: auto;
+  background: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.28);
 }
 
 .context-menu.visible {
@@ -1126,21 +1124,25 @@ details[open] summary {
 
 .context-menu.list-layout .context-menu-item {
   width: 100%;
+  min-height: 34px;
   padding: 8px 12px;
-  border-radius: 0;
+  border-radius: 8px;
   text-align: left;
   font-size: 14px;
   display: block;
-  color: #fff !important;
+  color: #e5e7eb !important;
   background: transparent !important;
   border: 0 !important;
   outline: none !important;
   appearance: none;
   -webkit-appearance: none;
+  box-sizing: border-box;
+  line-height: 1.2;
 }
 
 .context-menu.list-layout .context-menu-item:hover {
-  background: #1e1e1e !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ffffff !important;
 }
 
 .context-menu-item:hover {
