@@ -353,16 +353,19 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const tournamentMatches = INITIAL_MATCHES.filter(m => m && m.tournament === tournamentName);
-        if (!tournamentMatches.length) {
+        const selectedTourneys = checkedTournaments.size
+            ? checkedTournaments
+            : new Set(INITIAL_MATCHES.map(m => m && m.tournament).filter(Boolean));
+        const selectedMatches = INITIAL_MATCHES.filter(m => m && m.tournament && selectedTourneys.has(m.tournament));
+        if (!selectedMatches.length) {
             tourneyMatchCountEl.textContent = "";
             return;
         }
 
         const targetId = String(matchId);
-        const index = tournamentMatches.findIndex(m => String(m.id) === targetId);
+        const index = selectedMatches.findIndex(m => String(m.id) === targetId);
         const current = index >= 0 ? index + 1 : "";
-        tourneyMatchCountEl.textContent = current ? `${current}/${tournamentMatches.length}` : `1/${tournamentMatches.length}`;
+        tourneyMatchCountEl.textContent = current ? `${current}/${selectedMatches.length}` : `1/${selectedMatches.length}`;
     }
 
     // Save tournament settings to backend
