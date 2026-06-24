@@ -7,6 +7,7 @@ let currentReminderDraft = null;
 let reminderRefreshTimer = null;
 const LINKS_CACHE_KEY = 'myhome-links-cache-v1';
 let lastLinksSignature = '';
+const DEFAULT_AUTO_FIT_SCALE = 0.90;
 
 // Initialize edit mode
 if (typeof window.editMode === 'undefined') {
@@ -613,7 +614,7 @@ function compactObject(value) {
 
 function parseAutoFitScale(value) {
   const parsed = Number.parseFloat(value);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
+  return Number.isFinite(parsed) && parsed > 0 ? parsed : DEFAULT_AUTO_FIT_SCALE;
 }
 
 function formatAutoFitScale(scale) {
@@ -639,7 +640,7 @@ function scaleCssSize(sizeValue, scale, fallbackValue) {
 
 function getAutoFitScaleValue(prefix) {
   const scaleInput = document.getElementById(`${prefix}-li-auto-fit-scale`);
-  return scaleInput ? parseAutoFitScale(scaleInput.value) : 1;
+  return scaleInput ? parseAutoFitScale(scaleInput.value) : DEFAULT_AUTO_FIT_SCALE;
 }
 
 function syncAutoFitScaleControls(prefix) {
@@ -657,7 +658,7 @@ function syncAutoFitScaleControls(prefix) {
   };
   const updateFromValue = () => {
     const raw = Number.parseFloat(value.value);
-    const scale = clamp(Number.isFinite(raw) ? raw / 100 : 1);
+    const scale = clamp(Number.isFinite(raw) ? raw / 100 : DEFAULT_AUTO_FIT_SCALE);
     range.value = scale.toFixed(2);
     value.value = formatAutoFitScale(scale);
   };
