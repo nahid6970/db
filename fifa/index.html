@@ -609,21 +609,21 @@
   .wl-value {
     font-weight: 800;
     font-size: 1rem;
-    width: 36px;
+    width: 40px;
     text-align: center;
     font-family: var(--font-mono);
   }
   .wl-value.wins { color: var(--green); }
+  .wl-value.draws { color: var(--blue); }
   .wl-value.losses { color: var(--red); }
   .wl-bar {
-    height: 3px;
-    border-radius: 2px;
-    margin-top: 5px;
-    background: linear-gradient(90deg, var(--green) var(--w-pct,0%), var(--red) var(--w-pct,0%));
-    opacity: 0.5;
+    height: 5px;
+    border-radius: 2.5px;
+    margin-top: 6px;
+    opacity: 0.85;
     transition: opacity var(--transition);
   }
-  .scorer-row:hover .wl-bar { opacity: 0.8; }
+  .scorer-row:hover .wl-bar { opacity: 1; }
 
   /* ── STATUS LINE ── */
   #live-status, #schedule-status, #groups-status, #scorers-status, #winslosses-status {
@@ -1217,7 +1217,7 @@ if (savedTheme === 'light') {
   document.body.classList.add('light-theme');
 }
 
-let winsLossesSortBy = 'wins'; // 'wins' or 'losses'
+let winsLossesSortBy = 'wins'; // 'wins', 'draws', or 'losses'
 
 function renderWinsLosses(teams) {
   if (teams.length === 0) {
@@ -1226,17 +1226,20 @@ function renderWinsLosses(teams) {
   }
 
   let html = '<div class="scorers-list">';
-  // Header
+  // Header with aligned widths matching the data cells below
   html += `
   <div class="scorer-row scorer-row-header">
     <div class="scorer-rank">#</div>
     <div class="scorer-info">Team</div>
-    <div style="display:flex;gap:8px;align-items:center;">
-      <span class="wl-header-cell ${winsLossesSortBy==='wins'?'active':''}" onclick="winsLossesSortBy='wins';fetchWinsLosses();">
-        Wins ${winsLossesSortBy==='wins'?'▼':''}
+    <div style="display:flex;gap:12px;align-items:center;">
+      <span class="wl-header-cell ${winsLossesSortBy==='wins'?'active':''}" style="width:40px;text-align:center;padding:5px 0;" onclick="winsLossesSortBy='wins';fetchWinsLosses();" title="Wins">
+        W${winsLossesSortBy==='wins'?'▼':''}
       </span>
-      <span class="wl-header-cell ${winsLossesSortBy==='losses'?'active':''}" onclick="winsLossesSortBy='losses';fetchWinsLosses();">
-        Losses ${winsLossesSortBy==='losses'?'▼':''}
+      <span class="wl-header-cell ${winsLossesSortBy==='draws'?'active':''}" style="width:40px;text-align:center;padding:5px 0;" onclick="winsLossesSortBy='draws';fetchWinsLosses();" title="Draws">
+        D${winsLossesSortBy==='draws'?'▼':''}
+      </span>
+      <span class="wl-header-cell ${winsLossesSortBy==='losses'?'active':''}" style="width:40px;text-align:center;padding:5px 0;" onclick="winsLossesSortBy='losses';fetchWinsLosses();" title="Losses">
+        L${winsLossesSortBy==='losses'?'▼':''}
       </span>
     </div>
   </div>`;
@@ -1244,16 +1247,27 @@ function renderWinsLosses(teams) {
   let rank = 0;
   let prevVal = -1;
   let displayRank = 0;
-  const maxPlayed = Math.max(...teams.map(t => t.played), 1);
 
   teams.forEach((team, idx) => {
-    const val = winsLossesSortBy === 'wins' ? team.wins : team.losses;
+    const val = winsLossesSortBy === 'wins' ? team.wins : (winsLossesSortBy === 'draws' ? team.draws : team.losses);
     rank++;
     if (val !== prevVal) {
       displayRank = rank;
       prevVal = val;
     }
-    const wPct = team.played > 0 ? (team.wins / team.played * 100) : 0;
+    
+    // Calculate tri-color bar proportions: Wins (Green), Draws (Blue), Losses (Red)
+    const played = team.played || 0;
+    let gradient = '';
+    if (played > 0) {
+      const winPct = (team.wins / played) * 100;
+      const drawPct = (team.draws / played) * 100;
+      const winEnd = winPct;
+      const drawEnd = winPct + drawPct;
+      gradient = `linear-gradient(90deg, var(--green) 0%, var(--green) ${winEnd}%, var(--blue) ${winEnd}%, var(--blue) ${drawEnd}%, var(--red) ${drawEnd}%, var(--red) 100%)`;
+    } else {
+      gradient = 'var(--border-default)';
+    }
 
     html += `
     <div class="scorer-row">
@@ -1265,11 +1279,12 @@ function renderWinsLosses(teams) {
             <img class="flag-sm" src="${team.logo}" onerror="this.src='https://flagcdn.com/w40/un.png'" alt="${team.name}">
             <span>Grp ${team.group || 'N/A'} · ${team.played}P · ${team.draws}D · ${team.gd>0?'+':''}${team.gd} GD</span>
           </div>
-          <div class="wl-bar" style="--w-pct:${wPct}%;width:100%;max-width:180px;"></div>
+          <div class="wl-bar" style="background:${gradient};width:100%;max-width:180px;"></div>
         </div>
       </div>
-      <div style="display:flex;gap:16px;align-items:center;">
+      <div style="display:flex;gap:12px;align-items:center;">
         <span class="wl-value wins">${team.wins}</span>
+        <span class="wl-value draws">${team.draws}</span>
         <span class="wl-value losses">${team.losses}</span>
       </div>
     </div>`;
@@ -1290,6 +1305,20 @@ async function fetchWinsLosses() {
         if (b.losses !== a.losses) return b.losses - a.losses;
         if (a.gd !== b.gd) return a.gd - b.gd; // fewer GD first when sorting by losses
         if (a.pts !== b.pts) return a.pts - b.pts;
+        return a.name.localeCompare(b.name);
+      });
+    } else if (winsLossesSortBy === 'draws') {
+      teams.sort((a, b) => {
+        if (b.draws !== a.draws) return b.draws - a.draws;
+        if (b.pts !== a.pts) return b.pts - a.pts;
+        if (b.gd !== a.gd) return b.gd - a.gd;
+        return a.name.localeCompare(b.name);
+      });
+    } else { // default or 'wins'
+      teams.sort((a, b) => {
+        if (b.wins !== a.wins) return b.wins - a.wins;
+        if (b.gd !== a.gd) return b.gd - a.gd;
+        if (b.pts !== a.pts) return b.pts - a.pts;
         return a.name.localeCompare(b.name);
       });
     }
