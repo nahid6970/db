@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-25T04:03:10.404050+00:00",
+  "updated_at": "2026-06-26T14:48:19.226703+00:00",
   "groups": [
     {
       "name": "Group A",
@@ -142,41 +142,41 @@
         {
           "name": "Paraguay",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/par.png",
-          "P": "2",
+          "P": "3",
           "W": "1",
-          "D": "0",
+          "D": "1",
           "L": "1",
           "GD": "-2",
-          "Pts": "3"
+          "Pts": "4"
         },
         {
           "name": "T\u00fcrkiye",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tur.png",
-          "P": "2",
-          "W": "0",
+          "P": "3",
+          "W": "1",
           "D": "0",
           "L": "2",
-          "GD": "-3",
-          "Pts": "0"
+          "GD": "-2",
+          "Pts": "3"
         },
         {
           "name": "Australia",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/aus.png",
-          "P": "2",
+          "P": "3",
           "W": "1",
-          "D": "0",
+          "D": "1",
           "L": "1",
           "GD": "0",
-          "Pts": "3"
+          "Pts": "4"
         },
         {
           "name": "United States",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/usa.png",
-          "P": "2",
+          "P": "3",
           "W": "2",
           "D": "0",
-          "L": "0",
-          "GD": "+5",
+          "L": "1",
+          "GD": "+4",
           "Pts": "6"
         }
       ]
@@ -187,41 +187,41 @@
         {
           "name": "Ecuador",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ecu.png",
-          "P": "2",
-          "W": "0",
+          "P": "3",
+          "W": "1",
           "D": "1",
           "L": "1",
-          "GD": "-1",
-          "Pts": "1"
+          "GD": "0",
+          "Pts": "4"
         },
         {
           "name": "Germany",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ger.png",
-          "P": "2",
+          "P": "3",
           "W": "2",
           "D": "0",
-          "L": "0",
-          "GD": "+7",
+          "L": "1",
+          "GD": "+6",
           "Pts": "6"
         },
         {
           "name": "Ivory Coast",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/civ.png",
-          "P": "2",
-          "W": "1",
+          "P": "3",
+          "W": "2",
           "D": "0",
           "L": "1",
-          "GD": "0",
-          "Pts": "3"
+          "GD": "+2",
+          "Pts": "6"
         },
         {
           "name": "Cura\u00e7ao",
           "logo": "https://a.espncdn.com/i/teamlogos/soccer/500/11678.png",
-          "P": "2",
+          "P": "3",
           "W": "0",
           "D": "1",
-          "L": "1",
-          "GD": "-6",
+          "L": "2",
+          "GD": "-8",
           "Pts": "1"
         }
       ]
@@ -232,41 +232,41 @@
         {
           "name": "Netherlands",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/ned.png",
-          "P": "2",
-          "W": "1",
+          "P": "3",
+          "W": "2",
           "D": "1",
           "L": "0",
-          "GD": "+4",
-          "Pts": "4"
+          "GD": "+6",
+          "Pts": "7"
         },
         {
           "name": "Sweden",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/swe.png",
-          "P": "2",
+          "P": "3",
           "W": "1",
-          "D": "0",
+          "D": "1",
           "L": "1",
           "GD": "0",
-          "Pts": "3"
+          "Pts": "4"
         },
         {
           "name": "Japan",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/jpn.png",
-          "P": "2",
+          "P": "3",
           "W": "1",
-          "D": "1",
+          "D": "2",
           "L": "0",
           "GD": "+4",
-          "Pts": "4"
+          "Pts": "5"
         },
         {
           "name": "Tunisia",
           "logo": "https://a.espncdn.com/i/teamlogos/countries/500/tun.png",
-          "P": "2",
+          "P": "3",
           "W": "0",
           "D": "0",
-          "L": "2",
-          "GD": "-8",
+          "L": "3",
+          "GD": "-10",
           "Pts": "0"
         }
       ]

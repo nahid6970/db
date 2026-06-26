@@ -1075,6 +1075,13 @@
         "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
         "episodes": [
             {
+                "id": 22,
+                "title": "Dr. STONE - s04e37 - [95] - Ushers of an Exhilarating Future HDTV-1080p - [SubsPlease]",
+                "watched": true,
+                "added_date": "2026-06-26T17:51:47.456929",
+                "notify": "unseen"
+            },
+            {
                 "id": 21,
                 "title": "Dr. STONE - s04e36 - [94] - WHY-MAN HDTV-1080p - [SubsPlease]",
                 "watched": true,
@@ -1222,7 +1229,7 @@
             }
         ],
         "rating": "5",
-        "status": "Continuing",
+        "status": "Ended",
         "sonarr_url": "http://192.168.0.101:8989/series/dr-stone"
     },
     {
