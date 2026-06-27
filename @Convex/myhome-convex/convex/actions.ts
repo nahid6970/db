@@ -38,23 +38,13 @@ export const fetchPageTitle = action({
       
       let response;
       try {
-        if (domain.includes('facebook.com')) {
-          // For Facebook, use the crawler User-Agent to bypass login/consent redirection
-          response = await fetch(targetUrl, {
-            headers: {
-              'User-Agent': 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_aged.php)',
-              'Accept': '*/*'
-            }
-          });
-        } else {
-          // Try with browser headers first
-          response = await fetch(targetUrl, {
-            headers: {
-              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-              'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-            }
-          });
-        }
+        // Try with browser headers first
+        response = await fetch(targetUrl, {
+          headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+          }
+        });
 
         // If we get a 400 or other error, try one more time WITHOUT special headers
         // Some servers (like Facebook's edge) reject requests if headers look "suspicious"
@@ -67,6 +57,7 @@ export const fetchPageTitle = action({
         response = await fetch(targetUrl);
       }
       
+      let html = '';
       if (!response.ok) {
         const errorBody = await response.text().catch(() => 'No body');
         console.error(`Fetch failed with ${response.status}: ${errorBody.substring(0, 200)}`);
@@ -78,17 +69,15 @@ export const fetchPageTitle = action({
             youtubeChannelId: null
           };
         }
-        throw new Error(`HTTP ${response.status}`);
+        
+        // Don't throw for Facebook, allow fallback URL parsing to proceed
+        if (!domain.includes('facebook.com')) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        html = errorBody; // Use error body just in case it has some info
+      } else {
+        html = await response.text();
       }
-      const html = await response.text();
-      const canonicalMatch = html.match(/<link[^>]*rel=["']canonical["'][^>]*href=["']([^"']+)["']/i) ||
-                             html.match(/<link[^>]*href=["']([^"']+)["'][^>]*rel=["']canonical["']/i);
-      const canonical = canonicalMatch ? canonicalMatch[1] : 'none';
-      const fbIdMatch = html.match(/fb:\/\/(?:profile|page|group)\/(\d+)/i) ||
-                        html.match(/fb:\/\/page\/\?id=(\d+)/i) ||
-                        html.match(/"target_id":"(\d+)"/i) ||
-                        html.match(/"entity_id":"(\d+)"/i);
-      console.log("FETCH RESULTS - Status:", response.status, "Canonical:", canonical, "fbIdFound:", fbIdMatch ? fbIdMatch[1] : 'none');
       
       // Extract title from HTML
       const titleMatch = html.match(/<title[^>]*>([^<]+)<\/title>/i);
@@ -154,24 +143,33 @@ export const fetchPageTitle = action({
 
       // Facebook specific handling (SVG, Profiles, and JSON patterns)
       if (!channelIcon && domain.includes('facebook.com')) {
-        const pathSegments = urlObj.pathname.split('/').filter(Boolean);
-        let fbIdentifier: string | null = null;
-        
-        if (urlObj.searchParams.has('id')) {
-          fbIdentifier = urlObj.searchParams.get('id');
-        } else if (pathSegments[0] === 'people' && pathSegments[2]) {
-          fbIdentifier = pathSegments[2];
-        } else if (pathSegments[0] === 'groups' && pathSegments[1]) {
-          fbIdentifier = pathSegments[1];
-        } else if (pathSegments[0] && !['login', 'r.php', 'sharer', 'dialog', 'plugins'].includes(pathSegments[0])) {
-          fbIdentifier = pathSegments[0];
+        // 1. FIRST try to extract video thumbnails/images from HTML
+        const fbPatterns = [
+          // Meta tags as fallback for FB (often contains the video thumbnail)
+          /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
+          /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i,
+          // SVG image tag (common for profile pics in newer FB UI)
+          /<image[^>]*xlink:href=["']([^"']+)["']/i,
+          /<image[^>]*href=["']([^"']+)["']/i,
+          // JSON patterns (common in script tags)
+          /"profile_pic":\{"uri":"([^"]+)"/,
+          /"group_icon":\{"uri":"([^"]+)"/,
+          /"image":\{"uri":"([^"]+)"/,
+          /"Thumbnail":\{"uri":"([^"]+)"/
+        ];
+
+        for (const pattern of fbPatterns) {
+          const match = html.match(pattern);
+          if (match && match[1]) {
+            const unescaped = match[1].replace(/\\/g, '').replace(/&amp;/g, '&');
+            if (!unescaped.includes('facebook.com/images/fb_icon')) {
+              channelIcon = unescaped;
+              break;
+            }
+          }
         }
 
-        if (fbIdentifier) {
-          channelIcon = `https://graph.facebook.com/${fbIdentifier}/picture?type=large`;
-        }
-
-        // Fallback to HTML scraping regexes if the URL identifier extraction wasn't enough/possible
+        // 2. Fallback to HTML scraping regexes for profile ID
         if (!channelIcon) {
           const fbIdMatch = html.match(/fb:\/\/(?:profile|page|group)\/(\d+)/i) ||
                             html.match(/fb:\/\/page\/\?id=(\d+)/i) ||
@@ -182,27 +180,23 @@ export const fetchPageTitle = action({
           }
         }
 
+        // 3. Fallback to URL identifier extraction if HTML yielded nothing
         if (!channelIcon) {
-          const fbPatterns = [
-            // SVG image tag (common for profile pics in newer FB UI)
-            /<image[^>]*xlink:href=["']([^"']+)["']/i,
-            /<image[^>]*href=["']([^"']+)["']/i,
-            // JSON patterns (common in script tags)
-            /"profile_pic":\{"uri":"([^"]+)"/,
-            /"group_icon":\{"uri":"([^"]+)"/,
-            /"image":\{"uri":"([^"]+)"/,
-            /"Thumbnail":\{"uri":"([^"]+)"/,
-            // Meta tags as fallback for FB
-            /<meta[^>]*property=["']og:image["'][^>]*content=["']([^"']+)["']/i,
-            /<meta[^>]*content=["']([^"']+)["'][^>]*property=["']og:image["']/i
-          ];
+          const pathSegments = urlObj.pathname.split('/').filter(Boolean);
+          let fbIdentifier: string | null = null;
+          
+          if (urlObj.searchParams.has('id')) {
+            fbIdentifier = urlObj.searchParams.get('id');
+          } else if (pathSegments[0] === 'people' && pathSegments[2]) {
+            fbIdentifier = pathSegments[2];
+          } else if (pathSegments[0] === 'groups' && pathSegments[1]) {
+            fbIdentifier = pathSegments[1];
+          } else if (pathSegments[0] && !['login', 'r.php', 'sharer', 'dialog', 'plugins', 'share', 'videos', 'watch', 'reel', 'reels', 'story.php'].includes(pathSegments[0].toLowerCase())) {
+            fbIdentifier = pathSegments[0];
+          }
 
-          for (const pattern of fbPatterns) {
-            const match = html.match(pattern);
-            if (match && match[1]) {
-              channelIcon = match[1].replace(/\\/g, '').replace(/&amp;/g, '&');
-              break;
-            }
+          if (fbIdentifier) {
+            channelIcon = `https://graph.facebook.com/${fbIdentifier}/picture?type=large`;
           }
         }
       }
