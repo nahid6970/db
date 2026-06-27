@@ -2584,8 +2584,24 @@
     };
 
     window.deleteImage = async function(id) {
-      if (!await showConfirm('Delete this image?', true)) return;
-      await client.mutation(api.images.remove, { id });
+      if (selectedImageIds.size > 1 && selectedImageIds.has(id)) {
+        await window.deleteSelectedImages();
+      } else {
+        if (!await showConfirm('Delete this image?', true)) return;
+        await client.mutation(api.images.remove, { id });
+      }
+    };
+
+    window.deleteSelectedImages = async function() {
+      if (!selectedImageIds.size) return;
+      if (!await showConfirm(`Delete ${selectedImageIds.size} selected image(s)?`, true)) return;
+      await Promise.all(
+        Array.from(selectedImageIds).map(id =>
+          client.mutation(api.images.remove, { id })
+        )
+      );
+      selectedImageIds.clear();
+      renderSelectionState();
     };
 
     // ── Storage Picker ──────────────────────────────────────────────
