@@ -578,6 +578,7 @@ document.getElementById('add-sidebar-button-form').addEventListener('submit', as
     has_notification: document.getElementById('sidebar-button-notification').checked,
     notification_api: document.getElementById('sidebar-button-notification-api').value || '',
     mark_seen_api: document.getElementById('sidebar-button-mark-seen-api').value || '',
+    thumbnail_refresh_enabled: document.getElementById('sidebar-button-thumbnail-refresh-enabled').checked
   };
 
   const youtubeTrackingEnabled = document.getElementById('sidebar-button-youtube-tracking').checked;
@@ -644,6 +645,7 @@ function openEditSidebarButtonPopup(button, index) {
   document.getElementById('edit-notification-settings').style.display = hasNotif ? 'flex' : 'none';
   document.getElementById('edit-sidebar-button-notification-api').value = button.notification_api || '';
   document.getElementById('edit-sidebar-button-mark-seen-api').value = button.mark_seen_api || '';
+  document.getElementById('edit-sidebar-button-thumbnail-refresh-enabled').checked = !!button.thumbnail_refresh_enabled;
 
   const iconInput = document.getElementById('edit-sidebar-button-icon');
   const imgInput = document.getElementById('edit-sidebar-button-img-src-container');
@@ -713,6 +715,7 @@ document.getElementById('edit-sidebar-button-form').addEventListener('submit', a
     has_notification: document.getElementById('edit-sidebar-button-notification').checked,
     notification_api: document.getElementById('edit-sidebar-button-notification-api').value || '',
     mark_seen_api: document.getElementById('edit-sidebar-button-mark-seen-api').value || '',
+    thumbnail_refresh_enabled: document.getElementById('edit-sidebar-button-thumbnail-refresh-enabled').checked
   };
 
   const youtubeTrackingEnabled = document.getElementById('edit-sidebar-button-youtube-tracking').checked;

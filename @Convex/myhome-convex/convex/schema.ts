@@ -76,6 +76,7 @@ export default defineSchema({
     reminder_interval_days: v.optional(v.number()),
     reminder_datetime: v.optional(v.string()),
     reminder_next_trigger_at: v.optional(v.number()),
+
     reminder_last_triggered_at: v.optional(v.number()),
     click_tracking_enabled: v.optional(v.boolean()),
     click_tracking_last_clicked_at: v.optional(v.number()),
@@ -87,6 +88,7 @@ export default defineSchema({
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
     folder_path: v.optional(v.string()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   }),
 
   sidebar_buttons: defineTable({
@@ -113,5 +115,6 @@ export default defineSchema({
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
     youtube_notification_started_at: v.optional(v.number()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   }),
 });

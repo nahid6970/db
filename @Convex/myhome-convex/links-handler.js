@@ -2198,7 +2198,8 @@ document.getElementById('add-link-form').addEventListener('submit', async (e) =>
     note: document.getElementById('link-note').value,
     note_enabled: document.getElementById('link-note-chip').checked,
     folder_picker: document.getElementById('link-folder-picker').checked,
-    folder_path: document.getElementById('link-folder-path').value
+    folder_path: document.getElementById('link-folder-path').value,
+    thumbnail_refresh_enabled: document.getElementById('link-thumbnail-refresh-enabled').checked
   };
 
   try {
@@ -2293,6 +2294,7 @@ function openEditLinkPopup(link, index) {
   folderPathInput.style.display = 'none';
   document.getElementById('edit-link-folder-path').value = link.folder_path || '';
   updateFolderChipColor('edit-link-folder-path', 'edit-link-folder-picker');
+  document.getElementById('edit-link-thumbnail-refresh-enabled').checked = !!link.thumbnail_refresh_enabled;
 
   const typeRadios = document.querySelectorAll('input[name="edit-link-type"]');
   typeRadios.forEach(r => r.checked = r.value === link.default_type);
@@ -2367,6 +2369,7 @@ document.getElementById('edit-link-form').addEventListener('submit', async (e) =
     note_enabled: document.getElementById('edit-link-note-chip').checked,
     folder_picker: document.getElementById('edit-link-folder-picker').checked,
     folder_path: document.getElementById('edit-link-folder-path').value,
+    thumbnail_refresh_enabled: document.getElementById('edit-link-thumbnail-refresh-enabled').checked,
     ...compactObject(reminderDraft)
   };
 
@@ -3191,6 +3194,83 @@ window.resetAllYouTubeTracking = async () => {
     if (btn) {
       btn.disabled = false;
       btn.textContent = 'Reset YouTube Tracking (Fresh Count)';
+    }
+  }
+};
+
+window.refreshEnabledThumbnails = async () => {
+  const btn = document.getElementById('refresh-enabled-thumbnails-btn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Refreshing... ⏳';
+  }
+  try {
+    const enabledLinks = links.filter(l => l.thumbnail_refresh_enabled && l.url);
+    const enabledSidebarButtons = (window.sidebarButtons || []).filter(b => b.thumbnail_refresh_enabled && b.url);
+
+    const total = enabledLinks.length + enabledSidebarButtons.length;
+    if (total === 0) {
+      window.showNotification("No items have thumbnail refresh enabled.", "warning");
+      return;
+    }
+
+    console.log(`🔄 Refreshing ${total} enabled thumbnails...`);
+    let successCount = 0;
+
+    const batchSize = 3;
+    const allItems = [
+      ...enabledLinks.map(l => ({ id: l._id, url: l.url, table: 'links' })),
+      ...enabledSidebarButtons.map(b => ({ id: b._id, url: b.url, table: 'sidebar_buttons' }))
+    ];
+
+    for (let i = 0; i < allItems.length; i += batchSize) {
+      const batch = allItems.slice(i, i + batchSize);
+      await Promise.all(batch.map(async item => {
+        try {
+          const urlObj = new URL(item.url);
+          const domain = urlObj.hostname.replace('www.', '');
+          
+          let iconToSet = null;
+          let foundSpecificIcon = false;
+
+          try {
+            const result = await window.convexClient.action("actions:fetchPageTitle", { url: item.url });
+            if (result.channelIcon) {
+              iconToSet = result.channelIcon;
+              foundSpecificIcon = true;
+            }
+          } catch (err) {
+            console.warn(`Could not fetch page title/icon for ${item.url}:`, err);
+          }
+
+          if (!foundSpecificIcon) {
+            iconToSet = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+          }
+
+          await window.convexMutation("functions:updateItemImage", {
+            id: item.id,
+            table: item.table,
+            img_src: iconToSet
+          });
+          successCount++;
+        } catch (err) {
+          console.error(`Error refreshing thumbnail for ${item.url}:`, err);
+        }
+      }));
+    }
+
+    window.showNotification(`Refreshed ${successCount} of ${total} thumbnails successfully!`, "success");
+    await loadLinks();
+    if (typeof loadSidebarButtons === 'function') {
+      await loadSidebarButtons();
+    }
+  } catch (error) {
+    console.error("Failed to refresh thumbnails:", error);
+    window.showNotification("Failed to refresh thumbnails", "error");
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Refresh Enabled Thumbnails 🔄';
     }
   }
 };

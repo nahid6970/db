@@ -128,6 +128,7 @@ export const addLink = mutation({
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
     folder_path: v.optional(v.string()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("links", args);
@@ -211,6 +212,7 @@ export const updateLink = mutation({
     note_enabled: v.optional(v.boolean()),
     folder_picker: v.optional(v.boolean()),
     folder_path: v.optional(v.string()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const { id, ...data } = args;
@@ -338,6 +340,7 @@ export const addSidebarButton = mutation({
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
     youtube_notification_started_at: v.optional(v.number()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     await ctx.db.insert("sidebar_buttons", args);
@@ -370,6 +373,7 @@ export const updateSidebarButton = mutation({
     youtube_last_video_id: v.optional(v.string()),
     youtube_new_video_count: v.optional(v.number()),
     youtube_notification_started_at: v.optional(v.number()),
+    thumbnail_refresh_enabled: v.optional(v.boolean()),
   },
   handler: async (ctx, args) => {
     const { dbId, ...data } = args;
@@ -437,6 +441,22 @@ export const resetAllYouTubeTracking = mutation({
           youtube_notification_started_at: 0,
         });
       }
+    }
+  },
+});
+
+export const updateItemImage = mutation({
+  args: {
+    id: v.union(v.id("links"), v.id("sidebar_buttons")),
+    table: v.string(), // "links" or "sidebar_buttons"
+    img_src: v.optional(v.string()),
+  },
+  handler: async (ctx, args) => {
+    const { id, table, img_src } = args;
+    if (table === "links") {
+      await ctx.db.patch(id as any, { img_src });
+    } else if (table === "sidebar_buttons") {
+      await ctx.db.patch(id as any, { img_src });
     }
   },
 });
