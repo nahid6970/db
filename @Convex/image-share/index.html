@@ -1639,6 +1639,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
 
   <script type="module">
@@ -1656,6 +1657,7 @@
     const DEFAULT_PAGE_TITLE = document.title;
     const api = anyApi;
     window._convexApi = api;
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
 
     let storageType = "cloudinary";
     let pdfStorageType = "cloudinary";
@@ -2894,7 +2896,7 @@
       document.getElementById('lbCounter').textContent = `${_lbIndex + 1} / ${sorted.length}`;
       document.getElementById('lbPrev').style.visibility = _lbIndex > 0 ? '' : 'hidden';
       document.getElementById('lbNext').style.visibility = _lbIndex < sorted.length - 1 ? '' : 'hidden';
-      document.getElementById('lbPaint').style.display = (img.storageId && !isPdf) ? '' : 'none';
+      document.getElementById('lbPaint').style.display = img.storageId ? '' : 'none';
       lb.classList.remove('hidden');
     }
 
@@ -4378,18 +4380,66 @@
       document.getElementById('paintZoom').value = 100;
       document.getElementById('paintZoomVal').textContent = '100%';
       modal().classList.remove('hidden');
-      const blob = await fetch(url).then(r => r.blob());
-      const blobUrl = URL.createObjectURL(blob);
-      const img = new Image();
-      img.onload = () => {
-        const c = canvas();
-        c.width = img.naturalWidth; c.height = img.naturalHeight;
-        c.style.width = '100%'; c.style.height = 'auto';
-        ctx().drawImage(img, 0, 0);
-        _history = [];
-        URL.revokeObjectURL(blobUrl);
-      };
-      img.src = blobUrl;
+      const isPdf = filename.toLowerCase().endsWith('.pdf');
+      try {
+        if (isPdf) {
+          const loadingTask = pdfjsLib.getDocument(url);
+          const pdf = await loadingTask.promise;
+          const numPages = pdf.numPages;
+          const pages = [];
+          let totalHeight = 0;
+          let maxWidth = 0;
+          for (let i = 1; i <= numPages; i++) {
+            const page = await pdf.getPage(i);
+            const viewport = page.getViewport({ scale: 1.5 });
+            pages.push({ page, viewport });
+            totalHeight += viewport.height;
+            if (viewport.width > maxWidth) {
+              maxWidth = viewport.width;
+            }
+          }
+          const c = canvas();
+          c.width = maxWidth;
+          c.height = totalHeight;
+          c.style.width = '100%';
+          c.style.height = 'auto';
+          const context = ctx();
+          context.fillStyle = '#ffffff';
+          context.fillRect(0, 0, c.width, c.height);
+          let currentY = 0;
+          for (const { page, viewport } of pages) {
+            context.save();
+            const offsetX = (maxWidth - viewport.width) / 2;
+            context.translate(offsetX, currentY);
+            const renderContext = {
+              canvasContext: context,
+              viewport: viewport
+            };
+            await page.render(renderContext).promise;
+            context.restore();
+            currentY += viewport.height;
+          }
+          _history = [];
+          c.dataset.pageHeights = JSON.stringify(pages.map(p => p.viewport.height));
+          c.dataset.pageWidths = JSON.stringify(pages.map(p => p.viewport.width));
+        } else {
+          const blob = await fetch(url).then(r => r.blob());
+          const blobUrl = URL.createObjectURL(blob);
+          const img = new Image();
+          img.onload = () => {
+            const c = canvas();
+            c.width = img.naturalWidth; c.height = img.naturalHeight;
+            c.style.width = '100%'; c.style.height = 'auto';
+            ctx().drawImage(img, 0, 0);
+            _history = [];
+            URL.revokeObjectURL(blobUrl);
+          };
+          img.src = blobUrl;
+        }
+      } catch (err) {
+        alert('Failed to load file in editor: ' + err.message);
+        closePaintEditor();
+      }
     };
 
     window.closePaintEditor = function() {
@@ -4602,23 +4652,69 @@
 
     window.savePaint = async function() {
       const c = canvas();
-      const flat = document.createElement('canvas');
-      flat.width = c.width; flat.height = c.height;
-      const fx = flat.getContext('2d');
-      fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height);
-      fx.drawImage(c, 0, 0);
-      flat.toBlob(async blob => {
-        try {
-          const cl = window._convexClient;
-          const api = window._convexApi;
-          const uploadUrl = await cl.mutation(api.images.generateUploadUrl);
-          const res = await fetch(uploadUrl, { method: 'POST', headers: { 'Content-Type': 'image/jpeg' }, body: blob });
-          const { storageId } = await res.json();
-          await cl.mutation(api.images.saveStorageImage, { storageId, filename: _paintFilename, folderId: _paintFolderId || undefined });
-          await cl.mutation(api.images.remove, { id: _paintId });
-          closePaintEditor();
-        } catch(err) { alert('Save failed: ' + err.message); }
-      }, 'image/jpeg', 0.92);
+      const isPdf = _paintFilename.toLowerCase().endsWith('.pdf');
+      
+      let blob;
+      let mimeType;
+      
+      try {
+        if (isPdf) {
+          const { jsPDF } = window.jspdf;
+          const pageHeights = JSON.parse(c.dataset.pageHeights || '[]');
+          const pageWidths = JSON.parse(c.dataset.pageWidths || '[]');
+          
+          let pdf;
+          let currentY = 0;
+          for (let i = 0; i < pageHeights.length; i++) {
+            const w = pageWidths[i] || c.width;
+            const h = pageHeights[i] || c.height;
+            
+            const sliceCanvas = document.createElement('canvas');
+            sliceCanvas.width = w;
+            sliceCanvas.height = h;
+            const sCtx = sliceCanvas.getContext('2d');
+            const offsetX = (c.width - w) / 2;
+            sCtx.drawImage(c, offsetX, currentY, w, h, 0, 0, w, h);
+            
+            const imgData = sliceCanvas.toDataURL('image/jpeg', 0.90);
+            
+            if (i === 0) {
+              pdf = new jsPDF({
+                orientation: w > h ? 'l' : 'p',
+                unit: 'px',
+                format: [w, h],
+                hotfixes: ["px_scaling"]
+              });
+            } else {
+              pdf.addPage([w, h], w > h ? 'l' : 'p');
+            }
+            pdf.addImage(imgData, 'JPEG', 0, 0, w, h);
+            currentY += h;
+          }
+          blob = pdf.output('blob');
+          mimeType = 'application/pdf';
+        } else {
+          const flat = document.createElement('canvas');
+          flat.width = c.width; flat.height = c.height;
+          const fx = flat.getContext('2d');
+          fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height);
+          fx.drawImage(c, 0, 0);
+          
+          blob = await new Promise(resolve => flat.toBlob(resolve, 'image/jpeg', 0.92));
+          mimeType = 'image/jpeg';
+        }
+
+        const cl = window._convexClient;
+        const api = window._convexApi;
+        const uploadUrl = await cl.mutation(api.images.generateUploadUrl);
+        const res = await fetch(uploadUrl, { method: 'POST', headers: { 'Content-Type': mimeType }, body: blob });
+        const { storageId } = await res.json();
+        await cl.mutation(api.images.saveStorageImage, { storageId, filename: _paintFilename, folderId: _paintFolderId || undefined });
+        await cl.mutation(api.images.remove, { id: _paintId });
+        closePaintEditor();
+      } catch (err) {
+        alert('Save failed: ' + err.message);
+      }
     };
   })();
   </script>
