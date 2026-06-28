@@ -1479,13 +1479,14 @@
         <label style="color:#ccc;font-size:12px;margin-left:8px;">Zoom:</label>
         <input type="range" id="paintZoom" min="20" max="300" value="100" step="10" style="width:80px;" oninput="applyPaintZoom(this.value)">
         <span id="paintZoomVal" style="color:#ccc;font-size:12px;min-width:30px;">100%</span>
+        <span id="paintPageVal" style="color:#ccc;font-size:12px;margin-left:10px;display:none;background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;"></span>
         <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
           <button onclick="paintUndo()" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">↩ Undo</button>
           <button onclick="savePaint()" style="background:#22c55e;border-radius:4px;padding:3px 14px;font-size:12px;font-weight:600;">Save</button>
           <button onclick="closePaintEditor()" style="background:none;border:none;color:#aaa;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>
         </div>
       </div>
-      <div style="flex:1;overflow:auto;background:#111;display:flex;justify-content:center;align-items:flex-start;">
+      <div id="paintScrollArea" style="flex:1;overflow:auto;background:#111;display:flex;justify-content:center;align-items:flex-start;">
         <div id="paintCanvasContainer" style="position:relative;display:inline-block;max-width:100%;">
           <canvas id="paintBgCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
           <canvas id="paintCanvas" style="position:relative;display:block;cursor:crosshair;touch-action:none;width:100%;height:auto;z-index:2;background:transparent;"></canvas>
@@ -4376,6 +4377,48 @@
       }
     });
 
+    function updatePageIndicator() {
+      const scrollArea = document.getElementById('paintScrollArea');
+      const c = canvas();
+      const pageIndicator = document.getElementById('paintPageVal');
+      
+      if (!c || !c.dataset.pageHeights || !_paintFilename || !_paintFilename.toLowerCase().endsWith('.pdf')) {
+        if (pageIndicator) pageIndicator.style.display = 'none';
+        return;
+      }
+      
+      const pageHeights = JSON.parse(c.dataset.pageHeights || '[]');
+      if (pageHeights.length === 0) {
+        if (pageIndicator) pageIndicator.style.display = 'none';
+        return;
+      }
+      
+      const container = document.getElementById('paintCanvasContainer');
+      if (!container || !scrollArea) return;
+      
+      const scale = container.offsetWidth / c.width;
+      const scrollTop = scrollArea.scrollTop;
+      const viewportHeight = scrollArea.clientHeight;
+      const scrollCenter = scrollTop + viewportHeight / 2;
+      
+      let currentHeightSum = 0;
+      let currentPage = 1;
+      
+      for (let i = 0; i < pageHeights.length; i++) {
+        const scaledHeight = pageHeights[i] * scale;
+        if (scrollCenter >= currentHeightSum && scrollCenter < currentHeightSum + scaledHeight) {
+          currentPage = i + 1;
+          break;
+        }
+        currentHeightSum += scaledHeight;
+      }
+      
+      if (pageIndicator) {
+        pageIndicator.textContent = `${currentPage} / ${pageHeights.length}`;
+        pageIndicator.style.display = '';
+      }
+    }
+
     window.applyPaintZoom = function(val) {
       document.getElementById('paintZoomVal').textContent = val + '%';
       const container = document.getElementById('paintCanvasContainer');
@@ -4383,6 +4426,7 @@
         container.style.width = val + '%';
         container.style.height = 'auto';
       }
+      setTimeout(updatePageIndicator, 50);
     };
 
     window.openPaintEditor = async function(id, url, filename, folderId) {
@@ -4452,6 +4496,9 @@
           _history = []; _redoHistory = [];
           c.dataset.pageHeights = JSON.stringify(pages.map(p => p.viewport.height));
           c.dataset.pageWidths = JSON.stringify(pages.map(p => p.viewport.width));
+          const scrollArea = document.getElementById('paintScrollArea');
+          if (scrollArea) scrollArea.scrollTop = 0;
+          setTimeout(updatePageIndicator, 100);
         } else {
           const blob = await fetch(url).then(r => r.blob());
           const blobUrl = URL.createObjectURL(blob);
@@ -4478,6 +4525,8 @@
     window.closePaintEditor = function() {
       modal().classList.add('hidden');
       _paintId = null; _history = []; _redoHistory = [];
+      const pageIndicator = document.getElementById('paintPageVal');
+      if (pageIndicator) pageIndicator.style.display = 'none';
     };
 
     function saveHistory() {
@@ -4712,6 +4761,11 @@
         window.paintRedo();
       }
     });
+
+    const scrollArea = document.getElementById('paintScrollArea');
+    if (scrollArea) {
+      scrollArea.addEventListener('scroll', updatePageIndicator);
+    }
 
     window.savePaint = async function() {
       const c = canvas();
