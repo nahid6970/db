@@ -1446,6 +1446,7 @@
             <button title="Line" onclick="selectShape('line')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">╱</button>
             <button title="Rectangle" onclick="selectShape('rect')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">▭</button>
             <button title="Filled Rectangle" onclick="selectShape('rectFill')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">▬</button>
+            <button title="Highlighter" onclick="selectShape('highlighter')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;color:#ffeb3b;">▒</button>
             <button title="Rounded Rectangle" onclick="selectShape('rectRound')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;">▢</button>
             <button title="Filled Rounded Rect" onclick="selectShape('rectRoundFill')" style="background:#333;border-radius:4px;font-size:13px;width:34px;height:34px;border-radius:6px;">■</button>
             <button title="Circle" onclick="selectShape('circle')" style="background:#333;border-radius:4px;font-size:15px;width:34px;height:34px;">○</button>
@@ -4350,7 +4351,7 @@
       document.getElementById('paintToolShapeBtn').style.background = '#444';
     };
 
-    const SHAPE_ICONS = { line:'╱', rect:'▭', rectFill:'▬', rectRound:'▢', rectRoundFill:'■', circle:'○', circleFill:'●', ring:'◎', triangle:'△', triangleFill:'▲', rightTri:'◺', diamond:'◇', diamondFill:'◆', pentagon:'⬠', hexagon:'⬡', star:'☆', starFill:'★', arrow:'→', arrowDouble:'↔', arrowCurved:'↩', cross:'✚', heart:'♥', smiley:'☺', bubble:'💬', text:'T' };
+    const SHAPE_ICONS = { line:'╱', rect:'▭', rectFill:'▬', highlighter:'▒', rectRound:'▢', rectRoundFill:'■', circle:'○', circleFill:'●', ring:'◎', triangle:'△', triangleFill:'▲', rightTri:'◺', diamond:'◇', diamondFill:'◆', pentagon:'⬠', hexagon:'⬡', star:'☆', starFill:'★', arrow:'→', arrowDouble:'↔', arrowCurved:'↩', cross:'✚', heart:'♥', smiley:'☺', bubble:'💬', text:'T' };
 
     window.toggleShapePicker = function() {
       const p = document.getElementById('paintShapePicker');
@@ -4561,6 +4562,11 @@
         x.strokeRect(sx, sy, w, h);
       } else if (_shape === 'rectFill') {
         x.fillRect(sx, sy, w, h);
+      } else if (_shape === 'highlighter') {
+        x.save();
+        x.globalAlpha = 0.45;
+        x.fillRect(sx, sy, w, h);
+        x.restore();
       } else if (_shape === 'rectRound') {
         const r = Math.min(Math.abs(w),Math.abs(h))*0.15;
         x.roundRect(sx, sy, w, h, r); x.stroke();
