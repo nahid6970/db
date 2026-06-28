@@ -4331,6 +4331,7 @@
     let _paintOriginalPdfBytes = null;
     let _tool = 'brush', _drawing = false;
     let _history = [];
+    let _redoHistory = [];
     let _shape = null; // current shape type
     let _shapeStart = null; // {x,y} where shape drag began
     let _snapShot = null; // imageData snapshot before shape preview
@@ -4448,7 +4449,7 @@
             bgContext.restore();
             currentY += viewport.height;
           }
-          _history = [];
+          _history = []; _redoHistory = [];
           c.dataset.pageHeights = JSON.stringify(pages.map(p => p.viewport.height));
           c.dataset.pageWidths = JSON.stringify(pages.map(p => p.viewport.width));
         } else {
@@ -4463,7 +4464,7 @@
             bgContext.clearRect(0, 0, bgC.width, bgC.height);
             bgContext.drawImage(img, 0, 0);
             
-            _history = [];
+            _history = []; _redoHistory = [];
             URL.revokeObjectURL(blobUrl);
           };
           img.src = blobUrl;
@@ -4476,17 +4477,30 @@
 
     window.closePaintEditor = function() {
       modal().classList.add('hidden');
-      _paintId = null; _history = [];
+      _paintId = null; _history = []; _redoHistory = [];
     };
 
     function saveHistory() {
       const c = canvas();
       _history.push(ctx().getImageData(0, 0, c.width, c.height));
       if (_history.length > MAX_UNDO) _history.shift();
+      _redoHistory = []; // Clear redo stack on new action
     }
 
     window.paintUndo = function() {
-      if (_history.length) ctx().putImageData(_history.pop(), 0, 0);
+      if (_history.length) {
+        const c = canvas();
+        _redoHistory.push(ctx().getImageData(0, 0, c.width, c.height));
+        ctx().putImageData(_history.pop(), 0, 0);
+      }
+    };
+
+    window.paintRedo = function() {
+      if (_redoHistory.length) {
+        const c = canvas();
+        _history.push(ctx().getImageData(0, 0, c.width, c.height));
+        ctx().putImageData(_redoHistory.pop(), 0, 0);
+      }
     };
 
     const getPos = (e, c) => {
@@ -4686,6 +4700,18 @@
     canvas().addEventListener('touchstart', startDraw, { passive: false });
     canvas().addEventListener('touchmove', moveDraw, { passive: false });
     canvas().addEventListener('touchend', endDraw);
+
+    window.addEventListener('keydown', e => {
+      if (modal().classList.contains('hidden')) return;
+      
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        window.paintUndo();
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'y') {
+        e.preventDefault();
+        window.paintRedo();
+      }
+    });
 
     window.savePaint = async function() {
       const c = canvas();
