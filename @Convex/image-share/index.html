@@ -1485,7 +1485,10 @@
         </div>
       </div>
       <div style="flex:1;overflow:auto;background:#111;display:flex;justify-content:center;align-items:flex-start;">
-        <canvas id="paintCanvas" style="display:block;cursor:crosshair;touch-action:none;max-width:100%;height:auto;"></canvas>
+        <div id="paintCanvasContainer" style="position:relative;display:inline-block;max-width:100%;">
+          <canvas id="paintBgCanvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none;"></canvas>
+          <canvas id="paintCanvas" style="position:relative;display:block;cursor:crosshair;touch-action:none;max-width:100%;height:auto;z-index:2;background:transparent;"></canvas>
+        </div>
       </div>
     </div>
   </div>
@@ -1640,6 +1643,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
   <script src="https://unpkg.com/megajs@1/dist/main.browser-umd.js"></script>
 
   <script type="module">
@@ -4323,6 +4327,7 @@
   // ── Paint Editor ────────────────────────────────────────────────────────
   (() => {
     let _paintId = null, _paintFilename = null, _paintFolderId = null;
+    let _paintOriginalPdfBytes = null;
     let _tool = 'brush', _drawing = false;
     let _history = [];
     let _shape = null; // current shape type
@@ -4371,19 +4376,41 @@
 
     window.applyPaintZoom = function(val) {
       document.getElementById('paintZoomVal').textContent = val + '%';
-      canvas().style.width = val + '%';
-      canvas().style.height = 'auto';
+      const container = document.getElementById('paintCanvasContainer');
+      if (container) {
+        container.style.width = val + '%';
+        container.style.height = 'auto';
+      }
     };
 
     window.openPaintEditor = async function(id, url, filename, folderId) {
       _paintId = id; _paintFilename = filename; _paintFolderId = folderId || null;
+      _paintOriginalPdfBytes = null;
       document.getElementById('paintZoom').value = 100;
       document.getElementById('paintZoomVal').textContent = '100%';
+      
+      const container = document.getElementById('paintCanvasContainer');
+      if (container) {
+        container.style.width = '100%';
+        container.style.height = 'auto';
+      }
+      
       modal().classList.remove('hidden');
       const isPdf = filename.toLowerCase().endsWith('.pdf');
+      const c = canvas();
+      const bgC = document.getElementById('paintBgCanvas');
+      const context = ctx();
+      const bgContext = bgC.getContext('2d');
+      
       try {
         if (isPdf) {
-          const loadingTask = pdfjsLib.getDocument(url);
+          const response = await fetch(url);
+          const bytes = await response.arrayBuffer();
+          _paintOriginalPdfBytes = bytes;
+          
+          // Pass a copy to pdf.js so the original arrayBuffer is not detached
+          const bytesCopy = bytes.slice(0);
+          const loadingTask = pdfjsLib.getDocument({ data: bytesCopy });
           const pdf = await loadingTask.promise;
           const numPages = pdf.numPages;
           const pages = [];
@@ -4398,25 +4425,26 @@
               maxWidth = viewport.width;
             }
           }
-          const c = canvas();
           c.width = maxWidth;
           c.height = totalHeight;
-          c.style.width = '100%';
-          c.style.height = 'auto';
-          const context = ctx();
-          context.fillStyle = '#ffffff';
-          context.fillRect(0, 0, c.width, c.height);
+          bgC.width = maxWidth;
+          bgC.height = totalHeight;
+          
+          context.clearRect(0, 0, c.width, c.height);
+          bgContext.fillStyle = '#ffffff';
+          bgContext.fillRect(0, 0, bgC.width, bgC.height);
+          
           let currentY = 0;
           for (const { page, viewport } of pages) {
-            context.save();
+            bgContext.save();
             const offsetX = (maxWidth - viewport.width) / 2;
-            context.translate(offsetX, currentY);
+            bgContext.translate(offsetX, currentY);
             const renderContext = {
-              canvasContext: context,
+              canvasContext: bgContext,
               viewport: viewport
             };
             await page.render(renderContext).promise;
-            context.restore();
+            bgContext.restore();
             currentY += viewport.height;
           }
           _history = [];
@@ -4427,10 +4455,13 @@
           const blobUrl = URL.createObjectURL(blob);
           const img = new Image();
           img.onload = () => {
-            const c = canvas();
             c.width = img.naturalWidth; c.height = img.naturalHeight;
-            c.style.width = '100%'; c.style.height = 'auto';
-            ctx().drawImage(img, 0, 0);
+            bgC.width = img.naturalWidth; bgC.height = img.naturalHeight;
+            
+            context.clearRect(0, 0, c.width, c.height);
+            bgContext.clearRect(0, 0, bgC.width, bgC.height);
+            bgContext.drawImage(img, 0, 0);
+            
             _history = [];
             URL.revokeObjectURL(blobUrl);
           };
@@ -4652,6 +4683,7 @@
 
     window.savePaint = async function() {
       const c = canvas();
+      const bgC = document.getElementById('paintBgCanvas');
       const isPdf = _paintFilename.toLowerCase().endsWith('.pdf');
       
       let blob;
@@ -4659,12 +4691,18 @@
       
       try {
         if (isPdf) {
-          const { jsPDF } = window.jspdf;
+          if (!_paintOriginalPdfBytes) throw new Error("Original PDF data not found.");
+          
           const pageHeights = JSON.parse(c.dataset.pageHeights || '[]');
           const pageWidths = JSON.parse(c.dataset.pageWidths || '[]');
           
-          let pdf;
+          const { PDFDocument } = window.PDFLib;
+          const pdfDoc = await PDFDocument.load(_paintOriginalPdfBytes);
+          const pages = pdfDoc.getPages();
+          
           let currentY = 0;
+          let hasAnyChanges = false;
+          
           for (let i = 0; i < pageHeights.length; i++) {
             const w = pageWidths[i] || c.width;
             const h = pageHeights[i] || c.height;
@@ -4676,28 +4714,44 @@
             const offsetX = (c.width - w) / 2;
             sCtx.drawImage(c, offsetX, currentY, w, h, 0, 0, w, h);
             
-            const imgData = sliceCanvas.toDataURL('image/jpeg', 0.90);
+            const imgData = sCtx.getImageData(0, 0, w, h);
+            const hasDrawings = imgData.data.some((val, idx) => idx % 4 === 3 && val > 0);
             
-            if (i === 0) {
-              pdf = new jsPDF({
-                orientation: w > h ? 'l' : 'p',
-                unit: 'px',
-                format: [w, h],
-                hotfixes: ["px_scaling"]
-              });
-            } else {
-              pdf.addPage([w, h], w > h ? 'l' : 'p');
+            if (hasDrawings) {
+              hasAnyChanges = true;
+              const pngDataUrl = sliceCanvas.toDataURL('image/png');
+              const response = await fetch(pngDataUrl);
+              const pngBuffer = await response.arrayBuffer();
+              const pngImage = await pdfDoc.embedPng(pngBuffer);
+              
+              const page = pages[i];
+              if (page) {
+                const { width, height } = page.getSize();
+                page.drawImage(pngImage, {
+                  x: 0,
+                  y: 0,
+                  width: width,
+                  height: height
+                });
+              }
             }
-            pdf.addImage(imgData, 'JPEG', 0, 0, w, h);
             currentY += h;
           }
-          blob = pdf.output('blob');
+          
+          if (!hasAnyChanges) {
+            alert("No changes made to save!");
+            return;
+          }
+          
+          const pdfBytes = await pdfDoc.save();
+          blob = new Blob([pdfBytes], { type: 'application/pdf' });
           mimeType = 'application/pdf';
         } else {
           const flat = document.createElement('canvas');
           flat.width = c.width; flat.height = c.height;
           const fx = flat.getContext('2d');
           fx.fillStyle = '#fff'; fx.fillRect(0, 0, flat.width, flat.height);
+          fx.drawImage(bgC, 0, 0);
           fx.drawImage(c, 0, 0);
           
           blob = await new Promise(resolve => flat.toBlob(resolve, 'image/jpeg', 0.92));
