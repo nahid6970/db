@@ -4643,10 +4643,10 @@
       if (pageIndicator) {
         pageIndicator.textContent = `${currentPage} / ${pageHeights.length}`;
         pageIndicator.style.display = '';
-        if (_paintId) {
-          localStorage.setItem('image-share.pdfLastPage.' + _paintId, currentPage);
+        if (_paintFilename) {
+          localStorage.setItem('image-share.pdfLastPage.' + _paintFilename, currentPage);
           if (container.offsetHeight > 0) {
-            localStorage.setItem('image-share.pdfLastScrollRatio.' + _paintId, scrollTop / container.offsetHeight);
+            localStorage.setItem('image-share.pdfLastScrollRatio.' + _paintFilename, scrollTop / container.offsetHeight);
           }
         }
       }
@@ -4781,7 +4781,7 @@
           c.dataset.pageWidths = JSON.stringify(pages.map(p => p.viewport.width));
           const scrollArea = document.getElementById('paintScrollArea');
           if (scrollArea) {
-            const lastSavedRatio = parseFloat(localStorage.getItem('image-share.pdfLastScrollRatio.' + id)) || 0;
+            const lastSavedRatio = parseFloat(localStorage.getItem('image-share.pdfLastScrollRatio.' + filename) || localStorage.getItem('image-share.pdfLastScrollRatio.' + id)) || 0;
             if (lastSavedRatio > 0) {
               const scale = container.offsetWidth / maxWidth;
               scrollArea.scrollTop = lastSavedRatio * (totalHeight * scale);
@@ -5633,6 +5633,9 @@
     }
 
     window.savePaint = async function(isSaveAs = false) {
+      if (window.activePaintTextCommit) {
+        window.activePaintTextCommit();
+      }
       const c = canvas();
       const bgC = document.getElementById('paintBgCanvas');
       const isPdf = _paintFilename.toLowerCase().endsWith('.pdf');

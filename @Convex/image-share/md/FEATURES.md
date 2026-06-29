@@ -36,7 +36,7 @@
 - Canvases draw at full image resolution; zoom acts as a CSS-transform on display container to prevent aspect ratio distortion.
 - Supports both images and PDF files (with transparent drawing canvas layered on top to preserve original PDF selectable text using `pdf-lib` overlay slice stitching).
 - Dynamic page indicator (`currentPage / totalPages`) scroll-aware tracking.
-- Remembers exact vertical scroll ratio (`scrollTop / totalHeight`) per document in `localStorage` and automatically restores it to preserve pixel-perfect viewport alignment.
+- Remembers exact vertical scroll ratio (`scrollTop / totalHeight`) per document keyed by filename in `localStorage` and automatically restores it to preserve pixel-perfect viewport alignment across sessions and saves.
 - Remembers last used zoom value via `localStorage`.
 - Includes Undo/Redo stack with global keyboard shortcuts (`Ctrl + Z` / `Ctrl + Y`).
 - Custom dropdown color chooser with 20 preselected swatches and custom picker fallback (compact `24x20px` button in toolbar, "Color:" text label removed). Includes a `transparent` option to perform region-based text recoloring without drawing/filling background shapes.

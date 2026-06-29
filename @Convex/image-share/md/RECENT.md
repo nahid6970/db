@@ -47,6 +47,8 @@ All sessions recorded here — no archiving, full history in one place.
 - Added a blue "Save As" button next to "Save" in the Paint Editor toolbar.
 - "Save As" uploads and inserts a new separate copy of the drawing (appending `_edited` to the filename before the extension), preserving the original file.
 - "Save" continues to perform the default overwrite action (uploading and registering the drawing, and then removing the original file).
+- Resolved a save timing race condition by immediately invoking the active textbox's `commitText` synchronously at the start of `savePaint()`. This guarantees any open textbox text is fully rendered onto the canvas before export/slicing (fixing missing text in saved JPG/PNG/PDF images).
+- Swapped `localStorage` PDF scroll ratio and page indicator keying from Convex `_id` to `_paintFilename`. Since overwriting/saving creates a new storage ID, keying by filename preserves scroll coordinates and page positions perfectly across document edits and saves.
 
 ## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
 
