@@ -31,6 +31,11 @@ All sessions recorded here — no archiving, full history in one place.
 - Scans background pixels inside drawn highlighter/filled rect boxes and swaps text colors in a single pass on mouse release.
 - Persists all recolor rules (swatch inputs, checkboxes, tolerances) and the active state in the Convex DB `settings` table (`paintRecolorRules` and `paintRecolorActive` fields) with local storage cache fallback, ensuring settings are synced globally and remembered across page reloads/refreshes.
 
+### Save Options
+- Added a blue "Save As" button next to "Save" in the Paint Editor toolbar.
+- "Save As" uploads and inserts a new separate copy of the drawing (appending `_edited` to the filename before the extension), preserving the original file.
+- "Save" continues to perform the default overwrite action (uploading and registering the drawing, and then removing the original file).
+
 ## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
 
 ### Move Storage Button

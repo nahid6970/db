@@ -1504,7 +1504,8 @@
         <span id="paintPageVal" style="color:#ccc;font-size:12px;margin-left:10px;display:none;background:rgba(255,255,255,0.1);padding:2px 6px;border-radius:4px;"></span>
         <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
           <button onclick="paintUndo()" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;">↩ Undo</button>
-          <button onclick="savePaint()" style="background:#22c55e;border-radius:4px;padding:3px 14px;font-size:12px;font-weight:600;">Save</button>
+          <button onclick="savePaint(true)" style="background:#3b82f6;border-radius:4px;padding:3px 12px;font-size:12px;font-weight:600;" title="Save as a new copy">Save As</button>
+          <button onclick="savePaint(false)" style="background:#22c55e;border-radius:4px;padding:3px 14px;font-size:12px;font-weight:600;" title="Save and replace current file">Save</button>
           <button onclick="closePaintEditor()" style="background:none;border:none;color:#aaa;font-size:20px;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>
         </div>
       </div>
@@ -5124,7 +5125,7 @@
       });
     }
 
-    window.savePaint = async function() {
+    window.savePaint = async function(isSaveAs = false) {
       const c = canvas();
       const bgC = document.getElementById('paintBgCanvas');
       const isPdf = _paintFilename.toLowerCase().endsWith('.pdf');
@@ -5206,8 +5207,19 @@
         const uploadUrl = await cl.mutation(api.images.generateUploadUrl);
         const res = await fetch(uploadUrl, { method: 'POST', headers: { 'Content-Type': mimeType }, body: blob });
         const { storageId } = await res.json();
-        await cl.mutation(api.images.saveStorageImage, { storageId, filename: _paintFilename, folderId: _paintFolderId || undefined });
-        await cl.mutation(api.images.remove, { id: _paintId });
+        let filenameToSave = _paintFilename;
+        if (isSaveAs) {
+          const dotIdx = _paintFilename.lastIndexOf('.');
+          if (dotIdx !== -1) {
+            filenameToSave = _paintFilename.slice(0, dotIdx) + '_edited' + _paintFilename.slice(dotIdx);
+          } else {
+            filenameToSave = _paintFilename + '_edited';
+          }
+        }
+        await cl.mutation(api.images.saveStorageImage, { storageId, filename: filenameToSave, folderId: _paintFolderId || undefined });
+        if (!isSaveAs) {
+          await cl.mutation(api.images.remove, { id: _paintId });
+        }
         closePaintEditor();
       } catch (err) {
         alert('Save failed: ' + err.message);
