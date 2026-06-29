@@ -4617,6 +4617,9 @@
         pageIndicator.style.display = '';
         if (_paintId) {
           localStorage.setItem('image-share.pdfLastPage.' + _paintId, currentPage);
+          if (container.offsetHeight > 0) {
+            localStorage.setItem('image-share.pdfLastScrollRatio.' + _paintId, scrollTop / container.offsetHeight);
+          }
         }
       }
     }
@@ -4750,14 +4753,10 @@
           c.dataset.pageWidths = JSON.stringify(pages.map(p => p.viewport.width));
           const scrollArea = document.getElementById('paintScrollArea');
           if (scrollArea) {
-            const lastSavedPage = parseInt(localStorage.getItem('image-share.pdfLastPage.' + id)) || 1;
-            if (lastSavedPage > 1 && lastSavedPage <= pages.length) {
+            const lastSavedRatio = parseFloat(localStorage.getItem('image-share.pdfLastScrollRatio.' + id)) || 0;
+            if (lastSavedRatio > 0) {
               const scale = container.offsetWidth / maxWidth;
-              let targetScrollTop = 0;
-              for (let i = 0; i < lastSavedPage - 1; i++) {
-                targetScrollTop += pages[i].viewport.height * scale;
-              }
-              scrollArea.scrollTop = targetScrollTop;
+              scrollArea.scrollTop = lastSavedRatio * (totalHeight * scale);
             } else {
               scrollArea.scrollTop = 0;
             }
