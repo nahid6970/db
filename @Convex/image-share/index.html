@@ -4418,6 +4418,22 @@
       if (p) p.style.display = 'none';
     };
 
+    const RECOLOR_RULES_KEY = "image-share.paintRecolorRules";
+    const RECOLOR_ACTIVE_KEY = "image-share.paintRecolorActive";
+
+    window.saveRecolorRulesToStorage = function() {
+      const rows = document.querySelectorAll('.recolor-rule-row');
+      const rules = [];
+      rows.forEach(row => {
+        const enabled = row.querySelector('.rule-enabled-checkbox').checked;
+        const scanColor = row.querySelector('.scan-color-input').value;
+        const targetColor = row.querySelector('.target-color-input').value;
+        const tolerance = parseInt(row.querySelector('.tolerance-input').value) || 60;
+        rules.push({ enabled, scanColor, targetColor, tolerance });
+      });
+      localStorage.setItem(RECOLOR_RULES_KEY, JSON.stringify(rules));
+    };
+
     window.toggleRecolorRulesPopup = function() {
       const p = document.getElementById('paintRecolorRulesPopup');
       if (!p) return;
@@ -4427,7 +4443,7 @@
       // If visible and list is empty, add a default rule
       const list = document.getElementById('paintRecolorRulesList');
       if (!isVisible && list && list.children.length === 0) {
-        window.addRecolorRuleRow('#000000', '#ffffff');
+        window.addRecolorRuleRow('#000000', '#ffffff', 60, true);
       }
     };
 
@@ -4438,13 +4454,15 @@
         btn.style.background = active ? '#22c55e' : '#444';
         btn.style.color = active ? '#fff' : '#ccc';
       }
+      localStorage.setItem(RECOLOR_ACTIVE_KEY, active ? 'true' : 'false');
+      
       const list = document.getElementById('paintRecolorRulesList');
       if (active && list && list.children.length === 0) {
-        window.addRecolorRuleRow('#000000', '#ffffff');
+        window.addRecolorRuleRow('#000000', '#ffffff', 60, true);
       }
     };
 
-    window.addRecolorRuleRow = function(scanColor = '#000000', targetColor = '#ffffff', tolerance = 60) {
+    window.addRecolorRuleRow = function(scanColor = '#000000', targetColor = '#ffffff', tolerance = 60, saveToStorage = true) {
       const list = document.getElementById('paintRecolorRulesList');
       if (!list) return;
       
@@ -4471,6 +4489,7 @@
         const eyeDropper = new EyeDropper();
         eyeDropper.open().then(result => {
           row.querySelector('.scan-color-input').value = result.sRGBHex;
+          window.saveRecolorRulesToStorage();
         }).catch(err => {
           console.log('EyeDropper cancelled or failed', err);
         });
@@ -4478,9 +4497,13 @@
       
       row.querySelector('.delete-rule-btn').onclick = () => {
         row.remove();
+        window.saveRecolorRulesToStorage();
       };
       
       list.appendChild(row);
+      if (saveToStorage) {
+        window.saveRecolorRulesToStorage();
+      }
     };
 
     function hexToRgb(hex) {
@@ -4602,6 +4625,39 @@
       if (container) {
         container.style.width = savedZoom + '%';
         container.style.height = 'auto';
+      }
+      
+      // Load recolor settings from storage
+      const active = localStorage.getItem(RECOLOR_ACTIVE_KEY) === 'true';
+      const activeToggle = document.getElementById('paintRecolorActiveToggle');
+      if (activeToggle) activeToggle.checked = active;
+      
+      const btn = document.getElementById('paintRecolorToggleBtn');
+      if (btn) {
+        btn.dataset.checked = active ? 'true' : 'false';
+        btn.style.background = active ? '#22c55e' : '#444';
+        btn.style.color = active ? '#fff' : '#ccc';
+      }
+      
+      const list = document.getElementById('paintRecolorRulesList');
+      if (list) {
+        list.innerHTML = '';
+        const savedRulesStr = localStorage.getItem(RECOLOR_RULES_KEY);
+        if (savedRulesStr) {
+          try {
+            const rules = JSON.parse(savedRulesStr);
+            rules.forEach(r => {
+              window.addRecolorRuleRow(r.scanColor, r.targetColor, r.tolerance, false);
+              const lastRow = list.lastElementChild;
+              if (lastRow) {
+                const chk = lastRow.querySelector('.rule-enabled-checkbox');
+                if (chk) chk.checked = !!r.enabled;
+              }
+            });
+          } catch (e) {
+            console.error('Failed to parse recolor rules', e);
+          }
+        }
       }
       
       modal().classList.remove('hidden');
@@ -5015,6 +5071,13 @@
     const scrollArea = document.getElementById('paintScrollArea');
     if (scrollArea) {
       scrollArea.addEventListener('scroll', updatePageIndicator);
+    }
+
+    const rulesList = document.getElementById('paintRecolorRulesList');
+    if (rulesList) {
+      rulesList.addEventListener('change', () => {
+        window.saveRecolorRulesToStorage();
+      });
     }
 
     window.savePaint = async function() {
