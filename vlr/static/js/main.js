@@ -650,6 +650,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const missing = getMissingStatsMatches();
         if (missing.length === 0) return;
 
+        // Request notification permission if not already determined
+        if (typeof Notification !== "undefined" && Notification.permission === "default") {
+            Notification.requestPermission();
+        }
+
         loadMissingStatsBtn.disabled = true;
         loadMissingStatsBtn.setAttribute("data-fetching", "true");
         
@@ -737,6 +742,17 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.disabled = false;
         loadMissingStatsBtn.removeAttribute("data-fetching");
         updateMissingStatsLoaderButton();
+
+        // Send completion notification
+        const msg = `Successfully loaded stats for all ${total} matches.`;
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+            new Notification("Stats Collection Completed", {
+                body: msg,
+                icon: "/static/images_cache/63cbac52cf906.png"
+            });
+        } else {
+            alert("Stats Collection Completed: " + msg);
+        }
     });
 
     // 3. Filter Application Logic
