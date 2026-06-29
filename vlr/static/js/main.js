@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
-    const bstClock = document.getElementById("current-bst-clock");
 
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
@@ -572,31 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
     filterYear?.addEventListener("change", () => { applyTourneyFilters(); applyFilters(); saveSidebarFilters(); });
     filterSeries?.addEventListener("input", () => { applyTourneyFilters(); applyFilters(); });
 
-    // 1. Bangladesh Standard Time (BST) Live Clock (UTC + 6)
-    function updateBSTClock() {
-        const now = new Date();
-        const utc = now.getTime() + (now.getTimezoneOffset() * 60000);
-        const bst = new Date(utc + (3600000 * 6)); // UTC+6
-        
-        const timeString = bst.toLocaleTimeString('en-US', {
-            hour: '2-digit',
-            minute: '2-digit',
-            hour12: true
-        });
-        
-        const dateString = bst.toLocaleDateString('en-US', {
-            weekday: 'short',
-            month: 'short',
-            day: 'numeric',
-            year: 'numeric'
-        });
-        
-        if (bstClock) {
-            bstClock.innerHTML = `<span class="date">${dateString}</span> | <span class="time">${timeString}</span>`;
-        }
-    }
-    setInterval(updateBSTClock, 1000);
-    updateBSTClock();
+
 
     // 2. Live Countdown Timers
     function updateCountdowns() {
