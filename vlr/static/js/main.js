@@ -41,6 +41,32 @@ document.addEventListener("DOMContentLoaded", () => {
     const refreshBtn = document.getElementById("refresh-data-btn");
     const matchesGrid = document.getElementById("matches-grid-container");
     
+    function updateLoadMissingStatsButton() {
+        if (loadMissingStatsBtn) {
+            const hasNotLoaded = document.querySelector(".tourney-not-loaded") !== null;
+            loadMissingStatsBtn.style.display = hasNotLoaded ? "" : "none";
+        }
+    }
+    
+    if (loadMissingStatsBtn) {
+        loadMissingStatsBtn.addEventListener("click", async () => {
+            if (loadMissingStatsProgress) loadMissingStatsProgress.textContent = " Syncing...";
+            loadMissingStatsBtn.disabled = true;
+            try {
+                const start = document.getElementById("scrape-start") ? (parseInt(document.getElementById("scrape-start").value) || null) : null;
+                const end = document.getElementById("scrape-end") ? (parseInt(document.getElementById("scrape-end").value) || null) : null;
+                const url = (start && end) ? `/api/matches?start=${start}&end=${end}` : `/api/matches`;
+                await fetch(url);
+                await reloadMatchesFromView();
+            } catch (err) {
+                console.error(err);
+            } finally {
+                if (loadMissingStatsProgress) loadMissingStatsProgress.textContent = "";
+                loadMissingStatsBtn.disabled = false;
+            }
+        });
+    }
+    
     // Global filter state
     let activeStatus = sessionStorage.getItem("activeStatus") || "all";
 
@@ -67,6 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Apply initial filters based on saved settings
     applyFilters();
+    updateLoadMissingStatsButton();
 
     // Open VLR.gg page on card click
     if (matchesGrid) {
@@ -410,6 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
             INITIAL_MATCHES = matches;
             renderMatchesGrid(matches);
             applyFilters();
+            updateLoadMissingStatsButton();
             return matches;
         } catch (err) {
             console.error("Failed to refresh matches view:", err);

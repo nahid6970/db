@@ -304,7 +304,7 @@ def load_tournament_overview(exclude_tournaments=None):
             tournament,
             MAX(tournament_logo) AS tournament_logo,
             MIN(unix_timestamp) AS first_match,
-            SUM(CASE WHEN LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]') THEN 1 ELSE 0 END) AS missing_stats
+            SUM(CASE WHEN (LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]')) OR LOWER(status) IN ('upcoming', 'live') THEN 1 ELSE 0 END) AS missing_stats
         FROM matches
         {where_sql}
         GROUP BY tournament
