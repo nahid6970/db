@@ -1,6 +1,38 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
 
+    function showToast(message, type = "success") {
+        let container = document.getElementById("toast-container");
+        if (!container) {
+            container = document.createElement("div");
+            container.id = "toast-container";
+            container.className = "toast-container";
+            document.body.appendChild(container);
+        }
+        
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        
+        const iconClass = type === "success" ? "fa-solid fa-circle-check" : "fa-solid fa-triangle-exclamation";
+        toast.innerHTML = `
+            <i class="${iconClass} toast-icon"></i>
+            <div class="toast-message">${message}</div>
+        `;
+        
+        container.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.classList.add("show");
+        }, 50);
+        
+        setTimeout(() => {
+            toast.classList.remove("show");
+            setTimeout(() => {
+                toast.remove();
+            }, 300);
+        }, 4000);
+    }
+
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
     const themeIcon = themeBtn?.querySelector("i");
@@ -650,11 +682,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const missing = getMissingStatsMatches();
         if (missing.length === 0) return;
 
-        // Request notification permission if not already determined
-        if (typeof Notification !== "undefined" && Notification.permission === "default") {
-            Notification.requestPermission();
-        }
-
         loadMissingStatsBtn.disabled = true;
         loadMissingStatsBtn.setAttribute("data-fetching", "true");
         
@@ -743,16 +770,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.removeAttribute("data-fetching");
         updateMissingStatsLoaderButton();
 
-        // Send completion notification
-        const msg = `Successfully loaded stats for all ${total} matches.`;
-        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
-            new Notification("Stats Collection Completed", {
-                body: msg,
-                icon: "/static/images_cache/63cbac52cf906.png"
-            });
-        } else {
-            alert("Stats Collection Completed: " + msg);
-        }
+        // Send completion notification toast
+        showToast(`Successfully loaded stats for all ${total} matches.`);
     });
 
     // 3. Filter Application Logic
@@ -1301,6 +1320,10 @@ document.addEventListener("DOMContentLoaded", () => {
         tabBtnIgnore?.classList.remove("active");
         if (contentScrape) contentScrape.style.display = "block";
         if (contentIgnore) contentIgnore.style.display = "none";
+    });
+
+    document.getElementById("btn-test-notification")?.addEventListener("click", () => {
+        showToast("This is a preview of the bottom-right corner notification!");
     });
 
     // Ignore list modal filters

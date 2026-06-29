@@ -222,6 +222,13 @@
                             </label>
                         </div>
                     </div>
+                    <div class="modal-section" style="margin-top: 24px;">
+                        <h3>Notifications</h3>
+                        <p class="modal-section-desc">Test the Windows/Chrome desktop notification system.</p>
+                        <button id="btn-test-notification" class="status-btn" style="margin-top: 10px; font-size: 11px; padding: 6px 14px; text-transform: uppercase;">
+                            <i class="fa-solid fa-bell"></i> Send Test Notification
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -374,6 +381,7 @@
     const TOURNEY_FIRST_MATCH = {{ tournament_first_match | tojson }}; // {name: unix_timestamp}
     let INITIAL_MATCHES = {{ matches | tojson }};
     </script>
+    <div id="toast-container" class="toast-container"></div>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 </body>
 </html>
