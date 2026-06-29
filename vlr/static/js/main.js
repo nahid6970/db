@@ -626,9 +626,16 @@ document.addEventListener("DOMContentLoaded", () => {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
         return INITIAL_MATCHES.filter(m => {
             const isChecked = checkedTournaments.has(m.tournament);
-            const isCompleted = (m.status || "").toLowerCase() === "completed";
-            const hasStats = m.maps && m.maps.length > 0;
-            return isChecked && isCompleted && !hasStats;
+            if (!isChecked) return false;
+            
+            const status = (m.status || "").toLowerCase();
+            if (status === "completed") {
+                const hasStats = m.maps && m.maps.length > 0;
+                return !hasStats;
+            } else {
+                const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
+                return !hasTime;
+            }
         });
     }
 
@@ -717,9 +724,19 @@ document.addEventListener("DOMContentLoaded", () => {
                             const tourneyMatches = INITIAL_MATCHES.filter(m => m.tournament === data.tournament);
                             let isFullyLoaded = true;
                             for (const m of tourneyMatches) {
-                                if ((m.status || "").toLowerCase() === "completed" && (!m.maps || m.maps.length === 0)) {
-                                    isFullyLoaded = false;
-                                    break;
+                                const status = (m.status || "").toLowerCase();
+                                if (status === "completed") {
+                                    const hasStats = m.maps && m.maps.length > 0;
+                                    if (!hasStats) {
+                                        isFullyLoaded = false;
+                                        break;
+                                    }
+                                } else {
+                                    const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
+                                    if (!hasTime) {
+                                        isFullyLoaded = false;
+                                        break;
+                                    }
                                 }
                             }
                             if (isFullyLoaded) {
@@ -1219,15 +1236,23 @@ document.addEventListener("DOMContentLoaded", () => {
             const isChecked = checkedTournaments.has(name) || !checkedTournaments.size; // check by default if set is empty
             if (isChecked) newChecked.add(name);
             
-            // Check if tournament is fully loaded
+            // Check if tournament is fully loaded (completed matches have stats, upcoming matches have times)
             let isFullyLoaded = true;
             const mList = tourneyMatchesMap.get(name) || [];
             for (const m of mList) {
-                const isCompleted = (m.status || "").toLowerCase() === "completed";
-                const hasStats = m.maps && m.maps.length > 0;
-                if (isCompleted && !hasStats) {
-                    isFullyLoaded = false;
-                    break;
+                const status = (m.status || "").toLowerCase();
+                if (status === "completed") {
+                    const hasStats = m.maps && m.maps.length > 0;
+                    if (!hasStats) {
+                        isFullyLoaded = false;
+                        break;
+                    }
+                } else {
+                    const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
+                    if (!hasTime) {
+                        isFullyLoaded = false;
+                        break;
+                    }
                 }
             }
             const loadClass = isFullyLoaded ? "tourney-fully-loaded" : "tourney-not-loaded";
