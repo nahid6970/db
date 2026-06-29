@@ -12,6 +12,7 @@ All sessions recorded here — no archiving, full history in one place.
 - Integrated `pdf-lib` via CDN to allow saving drawings back to original PDF pages as overlayed transparent PNG slices, preserving selectable text layers.
 - Wrapped paint canvases inside a container (`#paintCanvasContainer`) scaling uniformly on zoom (`width: 100%`) to prevent stretching.
 - Added dynamic page indicator (`# / total`) that computes current centered page by comparing scroll viewport offset with zoomed page dimensions. Updates on scroll and zoom.
+- Persists the last viewed/scrolled page index individually for *every* PDF file (using localStorage keyed by file ID `_paintId`), automatically restoring scroll position and alignment when reopened.
 
 ### Zoom Persistence
 - Persists and restores last zoom level from `localStorage` (`image-share.paintZoom`).
