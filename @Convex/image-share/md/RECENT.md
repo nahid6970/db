@@ -25,11 +25,11 @@ All sessions recorded here — no archiving, full history in one place.
 - Added a `transparent` color swatch option (rendered as a dark-mode checkerboard pattern). Selecting this mode enables "Highlight-only Recoloring" where drawing bounding boxes displays a temporary dashed drag outline and recolors matching text internally without altering the document background at all.
 
 ### Text Tool Improvements
-- Upgraded the text shape tool to replace the basic native `prompt()` dialog with an absolute `<textarea>` overlay positioned directly on the canvas at the click location.
-- Added a floating text style formatting toolbar containing independent font size selection (decoupled from brush size), Bold (B), Italic (I), and Underline (U) formatting controls.
-- Enabled horizontal resizing on the input textarea, supporting auto-wrapping of sentences.
-- Built a canvas-based string wrapping algorithm that measures text widths and renders the multi-line paragraphs onto the drawing canvas preserving WYSIWYG wrapping structure, styles, and alignments.
-- Intercepts mousedown events on style buttons to prevent text losing focus, committing multiline text blocks on blur or `Ctrl + Enter` (and discarding on `Escape`).
+- Upgraded the text shape tool to replace the basic native `prompt()` dialog with a canvas-positioned absolute `contenteditable` rich-text editor overlay.
+- Added touch-event coordinate fallback (`e.touches[0]` client extractors) to guarantee the editor box displays reliably on both mouse clicks and touch screens.
+- Replaced the font size numeric input in the floating toolbar with **A-** and **A+** decrease/increase size buttons for seamless size adjustments (toggles overall editor scale when empty or selection size when text is highlighted).
+- Integrated SVG `foreignObject` rendering to project and flatten styled rich HTML directly onto the drawing canvas on blur or `Ctrl + Enter` (preserving character-level typography formatting, horizontal wraps, and styles).
+- Restructured toolbar focus lock-in (`onmousedown` target filtering) and active focus check fallback to allow seamless size editing and formatting without prematurely committing text.
 
 ### Multi-Rule Text Recolor (▭T)
 - Replaced inline color inputs with a rule manager popup panel (`#paintRecolorRulesPopup`) toggled by a `▭T` button in the toolbar.
