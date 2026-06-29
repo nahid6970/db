@@ -1481,27 +1481,18 @@
           </div>
         </div>
         
-        <div style="display:flex;align-items:center;gap:6px;margin-left:12px;border-left:1px solid #444;padding-left:12px;">
-          <button id="paintRecolorToggleBtn" onclick="toggleRecolorBtn()" data-checked="false" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;color:#ccc;cursor:pointer;border:none;font-weight:600;" title="Recolor Text">▭T</button>
-          <div id="paintRecolorSection" style="display:none;align-items:center;gap:6px;margin-left:4px;">
-            <label style="color:#aaa;font-size:11px;margin-left:2px;">Scan:</label>
-            <div style="position:relative;display:inline-block;line-height:1;">
-              <button id="paintScanColorBtn" onclick="toggleScanColorPicker()" style="width:24px;height:20px;padding:0;border:1px solid #555;background:#000000;cursor:pointer;border-radius:4px;" title="Scan Color"></button>
-              <div id="paintScanColorPickerPopup" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:8px;z-index:100;width:180px;box-shadow:0 10px 25px rgba(0,0,0,0.5);">
-                <div class="paint-swatch-grid" data-type="scan" style="display:grid;grid-template-columns:repeat(5,28px);gap:6px;margin-bottom:8px;"></div>
-                <button onclick="triggerNativeScanColorPicker()" style="width:100%;background:#333;border:1px solid #555;color:#ccc;font-size:12px;padding:6px;border-radius:4px;cursor:pointer;font-weight:600;line-height:1.2;text-align:center;">Custom...</button>
-                <input type="color" id="paintScanColor" value="#000000" style="display:none;" onchange="onNativeScanColorChange(this.value)">
+        <div style="position:relative;display:inline-block;margin-left:12px;border-left:1px solid #444;padding-left:12px;line-height:1;">
+          <button id="paintRecolorToggleBtn" onclick="toggleRecolorRulesPopup()" data-checked="false" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;color:#ccc;cursor:pointer;border:none;font-weight:600;" title="Recolor Text">▭T</button>
+          <div id="paintRecolorRulesPopup" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:12px;z-index:200;width:220px;box-shadow:0 10px 25px rgba(0,0,0,0.5);">
+            <div style="font-weight:600;font-size:12px;color:#ccc;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+              <div style="display:flex;align-items:center;gap:4px;">
+                <input type="checkbox" id="paintRecolorActiveToggle" onchange="onRecolorActiveChange(this.checked)" style="cursor:pointer;">
+                <span style="font-size:11px;user-select:none;">Recolor Text</span>
               </div>
+              <button onclick="addRecolorRuleRow()" style="background:#333;border:1px solid #555;color:#22c55e;border-radius:4px;padding:2px 6px;font-size:10px;cursor:pointer;font-weight:600;">+ Add</button>
             </div>
-            
-            <label style="color:#aaa;font-size:11px;margin-left:2px;">To:</label>
-            <div style="position:relative;display:inline-block;line-height:1;">
-              <button id="paintTargetColorBtn" onclick="toggleTargetColorPicker()" style="width:24px;height:20px;padding:0;border:1px solid #555;background:#ffffff;cursor:pointer;border-radius:4px;" title="Target Color"></button>
-              <div id="paintTargetColorPickerPopup" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:8px;z-index:100;width:180px;box-shadow:0 10px 25px rgba(0,0,0,0.5);">
-                <div class="paint-swatch-grid" data-type="target" style="display:grid;grid-template-columns:repeat(5,28px);gap:6px;margin-bottom:8px;"></div>
-                <button onclick="triggerNativeTargetColorPicker()" style="width:100%;background:#333;border:1px solid #555;color:#ccc;font-size:12px;padding:6px;border-radius:4px;cursor:pointer;font-weight:600;line-height:1.2;text-align:center;">Custom...</button>
-                <input type="color" id="paintTargetColor" value="#ffffff" style="display:none;" onchange="onNativeTargetColorChange(this.value)">
-              </div>
+            <div id="paintRecolorRulesList" style="display:flex;flex-direction:column;gap:6px;max-height:180px;overflow-y:auto;margin-bottom:6px;padding-right:4px;">
+              <!-- Rows dynamically generated -->
             </div>
           </div>
         </div>
@@ -4427,71 +4418,52 @@
       if (p) p.style.display = 'none';
     };
 
-    window.toggleRecolorSection = function(show) {
-      const sec = document.getElementById('paintRecolorSection');
-      if (sec) sec.style.display = show ? 'flex' : 'none';
+    window.toggleRecolorRulesPopup = function() {
+      const p = document.getElementById('paintRecolorRulesPopup');
+      if (!p) return;
+      const isVisible = p.style.display === 'block';
+      p.style.display = isVisible ? 'none' : 'block';
+      
+      // If visible and list is empty, add a default rule
+      const list = document.getElementById('paintRecolorRulesList');
+      if (!isVisible && list && list.children.length === 0) {
+        window.addRecolorRuleRow('#000000', '#ffffff');
+      }
     };
 
-    window.toggleRecolorBtn = function() {
+    window.onRecolorActiveChange = function(active) {
       const btn = document.getElementById('paintRecolorToggleBtn');
-      const isChecked = btn.dataset.checked === 'true';
-      const newVal = !isChecked;
-      btn.dataset.checked = newVal ? 'true' : 'false';
-      btn.style.background = newVal ? '#22c55e' : '#444';
-      btn.style.color = newVal ? '#fff' : '#ccc';
-      toggleRecolorSection(newVal);
+      if (btn) {
+        btn.dataset.checked = active ? 'true' : 'false';
+        btn.style.background = active ? '#22c55e' : '#444';
+        btn.style.color = active ? '#fff' : '#ccc';
+      }
+      const list = document.getElementById('paintRecolorRulesList');
+      if (active && list && list.children.length === 0) {
+        window.addRecolorRuleRow('#000000', '#ffffff');
+      }
     };
 
-    window.toggleScanColorPicker = function() {
-      const p = document.getElementById('paintScanColorPickerPopup');
-      if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    };
-
-    window.selectScanColor = function(color) {
-      const input = document.getElementById('paintScanColor');
-      const btn = document.getElementById('paintScanColorBtn');
-      if (input) input.value = color;
-      if (btn) btn.style.background = color;
-      const p = document.getElementById('paintScanColorPickerPopup');
-      if (p) p.style.display = 'none';
-    };
-
-    window.triggerNativeScanColorPicker = function() {
-      const input = document.getElementById('paintScanColor');
-      if (input) input.click();
-    };
-
-    window.onNativeScanColorChange = function(color) {
-      const btn = document.getElementById('paintScanColorBtn');
-      if (btn) btn.style.background = color;
-      const p = document.getElementById('paintScanColorPickerPopup');
-      if (p) p.style.display = 'none';
-    };
-
-    window.toggleTargetColorPicker = function() {
-      const p = document.getElementById('paintTargetColorPickerPopup');
-      if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
-    };
-
-    window.selectTargetColor = function(color) {
-      const input = document.getElementById('paintTargetColor');
-      const btn = document.getElementById('paintTargetColorBtn');
-      if (input) input.value = color;
-      if (btn) btn.style.background = color;
-      const p = document.getElementById('paintTargetColorPickerPopup');
-      if (p) p.style.display = 'none';
-    };
-
-    window.triggerNativeTargetColorPicker = function() {
-      const input = document.getElementById('paintTargetColor');
-      if (input) input.click();
-    };
-
-    window.onNativeTargetColorChange = function(color) {
-      const btn = document.getElementById('paintTargetColorBtn');
-      if (btn) btn.style.background = color;
-      const p = document.getElementById('paintTargetColorPickerPopup');
-      if (p) p.style.display = 'none';
+    window.addRecolorRuleRow = function(scanColor = '#000000', targetColor = '#ffffff') {
+      const list = document.getElementById('paintRecolorRulesList');
+      if (!list) return;
+      
+      const row = document.createElement('div');
+      row.className = 'recolor-rule-row';
+      row.style = 'display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.03);padding:4px 6px;border-radius:4px;border:1px solid rgba(255,255,255,0.05);';
+      
+      row.innerHTML = `
+        <input type="color" class="scan-color-input" value="${scanColor}" style="width:32px;height:22px;border:1px solid #555;border-radius:3px;cursor:pointer;padding:0;background:none;" title="Scan Color">
+        <span style="color:#888;font-size:12px;user-select:none;">➔</span>
+        <input type="color" class="target-color-input" value="${targetColor}" style="width:32px;height:22px;border:1px solid #555;border-radius:3px;cursor:pointer;padding:0;background:none;" title="Target Color">
+        <button class="delete-rule-btn" style="margin-left:auto;background:none;border:none;color:#ef4444;cursor:pointer;font-size:14px;padding:0 4px;font-weight:600;line-height:1;">&times;</button>
+      `;
+      
+      row.querySelector('.delete-rule-btn').onclick = () => {
+        row.remove();
+      };
+      
+      list.appendChild(row);
     };
 
     function hexToRgb(hex) {
@@ -4524,8 +4496,6 @@
           div.style.border = '1px solid rgba(255,255,255,0.15)';
           div.onclick = () => {
             if (type === 'main') selectPaintColor(c);
-            else if (type === 'scan') selectScanColor(c);
-            else if (type === 'target') selectTargetColor(c);
           };
           grid.appendChild(div);
         });
@@ -4542,12 +4512,8 @@
         const p = document.getElementById('paintColorPickerPopup');
         if (p) p.style.display = 'none';
       }
-      if (!e.target.closest('#paintScanColorPickerPopup') && !e.target.closest('#paintScanColorBtn')) {
-        const p = document.getElementById('paintScanColorPickerPopup');
-        if (p) p.style.display = 'none';
-      }
-      if (!e.target.closest('#paintTargetColorPickerPopup') && !e.target.closest('#paintTargetColorBtn')) {
-        const p = document.getElementById('paintTargetColorPickerPopup');
+      if (!e.target.closest('#paintRecolorRulesPopup') && !e.target.closest('#paintRecolorToggleBtn')) {
+        const p = document.getElementById('paintRecolorRulesPopup');
         if (p) p.style.display = 'none';
       }
     });
@@ -4707,13 +4673,21 @@
       _paintId = null; _history = []; _redoHistory = [];
       const pageIndicator = document.getElementById('paintPageVal');
       if (pageIndicator) pageIndicator.style.display = 'none';
+      
       const btn = document.getElementById('paintRecolorToggleBtn');
       if (btn) {
         btn.dataset.checked = 'false';
         btn.style.background = '#444';
         btn.style.color = '#ccc';
-        toggleRecolorSection(false);
       }
+      const activeToggle = document.getElementById('paintRecolorActiveToggle');
+      if (activeToggle) activeToggle.checked = false;
+      
+      const p = document.getElementById('paintRecolorRulesPopup');
+      if (p) p.style.display = 'none';
+      
+      const list = document.getElementById('paintRecolorRulesList');
+      if (list) list.innerHTML = '';
     };
 
     function saveHistory() {
@@ -4802,11 +4776,17 @@
       const offData = offCtx.createImageData(boxW, boxH);
       const offPixels = offData.data;
       
-      const scanColorHex = document.getElementById('paintScanColor').value || '#000000';
-      const targetColorHex = document.getElementById('paintTargetColor').value || '#ffffff';
+      const rows = document.querySelectorAll('.recolor-rule-row');
+      const rules = [];
+      rows.forEach(row => {
+        const scan = row.querySelector('.scan-color-input').value;
+        const target = row.querySelector('.target-color-input').value;
+        const [sr, sg, sb] = hexToRgb(scan);
+        const [tr, tg, tb] = hexToRgb(target);
+        rules.push({ sr, sg, sb, tr, tg, tb });
+      });
       
-      const [sr, sg, sb] = hexToRgb(scanColorHex);
-      const [tr, tg, tb] = hexToRgb(targetColorHex);
+      if (rules.length === 0) return;
       
       const threshold = 400; // L1 distance threshold
       
@@ -4818,13 +4798,16 @@
         
         if (a === 0) continue;
         
-        const dist = Math.abs(r - sr) + Math.abs(g - sg) + Math.abs(b - sb);
-        if (dist < threshold) {
-          const factor = (threshold - dist) / threshold;
-          offPixels[i] = tr;
-          offPixels[i+1] = tg;
-          offPixels[i+2] = tb;
-          offPixels[i+3] = Math.round(factor * 255);
+        for (const rule of rules) {
+          const dist = Math.abs(r - rule.sr) + Math.abs(g - rule.sg) + Math.abs(b - rule.sb);
+          if (dist < threshold) {
+            const factor = (threshold - dist) / threshold;
+            offPixels[i] = rule.tr;
+            offPixels[i+1] = rule.tg;
+            offPixels[i+2] = rule.tb;
+            offPixels[i+3] = Math.round(factor * 255);
+            break;
+          }
         }
       }
       
