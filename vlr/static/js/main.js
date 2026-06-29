@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let checkedTournaments = new Set();
     let customSeriesFilters = [];
     let tournamentOrder = {}; // {name: position}
+    let whiteLogoTeams = new Set();
     
     // Initialize checked tournaments
     tourneyCheckboxes.forEach(cb => {
@@ -152,6 +153,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const img2 = document.getElementById("mdm-logo2");
         img1.src = logo1; img1.style.display = logo1 ? "" : "none";
         img2.src = logo2; img2.style.display = logo2 ? "" : "none";
+        img1.classList.toggle("white-bg-logo", whiteLogoTeams.has(name1));
+        img2.classList.toggle("white-bg-logo", whiteLogoTeams.has(name2));
 
         const scoreEl = document.getElementById("mdm-score");
         if (s1 !== "" && s2 !== "") {
@@ -181,6 +184,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function renderMatchDetail(data, fallbackS1, fallbackS2) {
+        const mdmImg1 = document.getElementById("mdm-logo1");
+        const mdmImg2 = document.getElementById("mdm-logo2");
+        if (mdmImg1) mdmImg1.classList.toggle("white-bg-logo", whiteLogoTeams.has(data.team1));
+        if (mdmImg2) mdmImg2.classList.toggle("white-bg-logo", whiteLogoTeams.has(data.team2));
+
         const s1 = data.score1 || fallbackS1 || "";
         const s2 = data.score2 || fallbackS2 || "";
         const scoreEl = document.getElementById("mdm-score");
@@ -481,6 +489,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (sortTourneyOrder && s.tourney_sort_order) sortTourneyOrder.value = s.tourney_sort_order;
         if (s.filter_custom_series?.length) { customSeriesFilters = s.filter_custom_series; renderSeriesTags(); }
         if (s.tournament_order) tournamentOrder = s.tournament_order;
+        if (s.white_logo_teams) {
+            whiteLogoTeams = new Set(s.white_logo_teams);
+            renderWhiteLogoTeamsList();
+            applyWhiteLogoStylesToCurrentCards();
+        }
         applyTourneyFilters();
         sortTourneyByDate();
     });
@@ -1131,6 +1144,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 countdownHTML = "";
             }
             
+            const t1WhiteClass = whiteLogoTeams.has(m.team1) ? "white-bg-logo" : "";
+            const t2WhiteClass = whiteLogoTeams.has(m.team2) ? "white-bg-logo" : "";
+
             card.innerHTML = `
                 <div class="match-card-header">
                     <div class="tournament-info">
@@ -1147,7 +1163,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <div class="match-card-body">
                     <div class="team-container team-1">
-                        <div class="logo-wrapper">
+                        <div class="logo-wrapper ${t1WhiteClass}">
                             ${m.team1_logo ? `<img src="${m.team1_logo}" class="team-logo" alt="${m.team1} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
                             <div class="team-initial" style="display:${m.team1_logo ? 'none' : 'flex'};">${m.team1 ? m.team1[0].toUpperCase() : 'T'}</div>
                         </div>
@@ -1160,7 +1176,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     <div class="team-container team-2">
                         <span class="team-name" title="${m.team2}">${m.team2}</span>
-                        <div class="logo-wrapper">
+                        <div class="logo-wrapper ${t2WhiteClass}">
                             ${m.team2_logo ? `<img src="${m.team2_logo}" class="team-logo" alt="${m.team2} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
                             <div class="team-initial" style="display:${m.team2_logo ? 'none' : 'flex'};">${m.team2 ? m.team2[0].toUpperCase() : 'T'}</div>
                         </div>
@@ -1298,8 +1314,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const tabBtnIgnore = document.getElementById("tab-btn-ignore");
     const tabBtnScrape = document.getElementById("tab-btn-scrape");
+    const tabBtnWhiteLogos = document.getElementById("tab-btn-white-logos");
     const contentIgnore = document.getElementById("modal-content-ignore");
     const contentScrape = document.getElementById("modal-content-scrape");
+    const contentWhiteLogos = document.getElementById("modal-content-white-logos");
 
     settingsBtn?.addEventListener("click", () => {
         tabBtnIgnore?.click(); // reset to ignore tab by default when opened
@@ -1318,15 +1336,28 @@ document.addEventListener("DOMContentLoaded", () => {
     tabBtnIgnore?.addEventListener("click", () => {
         tabBtnIgnore.classList.add("active");
         tabBtnScrape?.classList.remove("active");
+        tabBtnWhiteLogos?.classList.remove("active");
         if (contentIgnore) contentIgnore.style.display = "block";
         if (contentScrape) contentScrape.style.display = "none";
+        if (contentWhiteLogos) contentWhiteLogos.style.display = "none";
     });
 
     tabBtnScrape?.addEventListener("click", () => {
         tabBtnScrape.classList.add("active");
         tabBtnIgnore?.classList.remove("active");
+        tabBtnWhiteLogos?.classList.remove("active");
         if (contentScrape) contentScrape.style.display = "block";
         if (contentIgnore) contentIgnore.style.display = "none";
+        if (contentWhiteLogos) contentWhiteLogos.style.display = "none";
+    });
+
+    tabBtnWhiteLogos?.addEventListener("click", () => {
+        tabBtnWhiteLogos.classList.add("active");
+        tabBtnIgnore?.classList.remove("active");
+        tabBtnScrape?.classList.remove("active");
+        if (contentWhiteLogos) contentWhiteLogos.style.display = "block";
+        if (contentIgnore) contentIgnore.style.display = "none";
+        if (contentScrape) contentScrape.style.display = "none";
     });
 
     document.getElementById("btn-test-notification")?.addEventListener("click", async () => {
@@ -1347,6 +1378,80 @@ document.addEventListener("DOMContentLoaded", () => {
         new Notification("VLR Stats Manager", {
             body: "This is a preview of the Windows/Chrome desktop notification! It works successfully."
         });
+    });
+
+    // White Logo Teams Settings Logic
+    function renderWhiteLogoTeamsList() {
+        const container = document.getElementById("white-logo-teams-container");
+        if (!container) return;
+        container.innerHTML = "";
+        if (whiteLogoTeams.size === 0) {
+            container.innerHTML = `<div style="text-align: center; color: var(--text-muted); font-size: 13px; padding: 20px;">No teams added yet.</div>`;
+            return;
+        }
+        
+        Array.from(whiteLogoTeams).sort().forEach(name => {
+            const div = document.createElement("div");
+            div.className = "white-logo-item";
+            div.innerHTML = `
+                <span>${name}</span>
+                <button class="btn-remove-white-logo" data-name="${name}"><i class="fa-solid fa-trash-can"></i></button>
+            `;
+            container.appendChild(div);
+        });
+        
+        container.querySelectorAll(".btn-remove-white-logo").forEach(btn => {
+            btn.addEventListener("click", () => {
+                const name = btn.getAttribute("data-name");
+                whiteLogoTeams.delete(name);
+                renderWhiteLogoTeamsList();
+                saveWhiteLogoTeams();
+            });
+        });
+    }
+
+    async function saveWhiteLogoTeams() {
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        cur.white_logo_teams = Array.from(whiteLogoTeams);
+        await fetch("/api/settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cur)
+        });
+        applyWhiteLogoStylesToCurrentCards();
+    }
+
+    function applyWhiteLogoStylesToCurrentCards() {
+        document.querySelectorAll(".match-card").forEach(card => {
+            const team1El = card.querySelector(".team-1 .logo-wrapper");
+            const team2El = card.querySelector(".team-2 .logo-wrapper");
+            if (team1El) {
+                const team1Name = card.querySelector(".team-1 .team-name")?.textContent || "";
+                team1El.classList.toggle("white-bg-logo", whiteLogoTeams.has(team1Name));
+            }
+            if (team2El) {
+                const team2Name = card.querySelector(".team-2 .team-name")?.textContent || "";
+                team2El.classList.toggle("white-bg-logo", whiteLogoTeams.has(team2Name));
+            }
+        });
+    }
+
+    const whiteLogoInput = document.getElementById("white-logo-team-input");
+    const whiteLogoAddBtn = document.getElementById("btn-add-white-logo-team");
+
+    function addWhiteLogoTeam() {
+        if (!whiteLogoInput) return;
+        const name = whiteLogoInput.value.trim();
+        if (!name) return;
+        whiteLogoTeams.add(name);
+        whiteLogoInput.value = "";
+        renderWhiteLogoTeamsList();
+        saveWhiteLogoTeams();
+    }
+
+    whiteLogoAddBtn?.addEventListener("click", addWhiteLogoTeam);
+    whiteLogoInput?.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") addWhiteLogoTeam();
     });
 
     // Ignore list modal filters
@@ -1703,23 +1808,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
             const topAcs = maxAcs(aggregates);
 
-            tbody.innerHTML = aggregates.map(p => `<tr>
-                <td><div class="mdm-player-cell">${p.teamLogo ? `<img class="mdm-player-team-logo" src="${p.teamLogo}" alt="" title="${p.teamName || 'Team Logo'}">` : ''}${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
-                <td>${renderAgents(p.agents)}</td>
-                <td class="r">${p.matchesPlayed}</td>
-                <td class="r">${p.rating}</td>
-                <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
-                <td class="r">${p.k}</td>
-                <td class="r">${p.d}</td>
-                <td class="r">${p.a}</td>
-                <td class="r">${formatDiff(p.kd_diff)}</td>
-                <td class="r">${p.kast}</td>
-                <td class="r">${p.adr}</td>
-                <td class="r">${p.hs}</td>
-                <td class="r">${p.fk}</td>
-                <td class="r">${p.fd}</td>
-                <td class="r">${formatDiff(p.fk_diff)}</td>
-            </tr>`).join("");
+            tbody.innerHTML = aggregates.map(p => {
+                const teamWhite = whiteLogoTeams.has(p.teamName);
+                return `<tr>
+                    <td><div class="mdm-player-cell">${p.teamLogo ? `<img class="mdm-player-team-logo ${teamWhite ? 'white-bg-logo' : ''}" src="${p.teamLogo}" alt="" title="${p.teamName || 'Team Logo'}">` : ''}${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
+                    <td>${renderAgents(p.agents)}</td>
+                    <td class="r">${p.matchesPlayed}</td>
+                    <td class="r">${p.rating}</td>
+                    <td class="r ${(parseInt(p.acs)||0) === topAcs ? 'mdm-acs-top' : ''}">${p.acs}</td>
+                    <td class="r">${p.k}</td>
+                    <td class="r">${p.d}</td>
+                    <td class="r">${p.a}</td>
+                    <td class="r">${formatDiff(p.kd_diff)}</td>
+                    <td class="r">${p.kast}</td>
+                    <td class="r">${p.adr}</td>
+                    <td class="r">${p.hs}</td>
+                    <td class="r">${p.fk}</td>
+                    <td class="r">${p.fd}</td>
+                    <td class="r">${formatDiff(p.fk_diff)}</td>
+                </tr>`;
+            }).join("");
 
             // Apply current search query if any
             const searchInput = document.getElementById("leaderboard-search");
@@ -1951,6 +2059,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 oppColorClass = "thr-win-text";
             }
 
+            const myWhite = whiteLogoTeams.has(myTeam) ? "white-bg-logo" : "";
+            const oppWhite = whiteLogoTeams.has(oppTeam) ? "white-bg-logo" : "";
+
             return `
                 <div class="team-history-row" data-id="${m.id}">
                     <div class="thr-tourney">
@@ -1960,11 +2071,11 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="thr-teams">
                         <span class="thr-t1 ${myColorClass}">
                             <span>${myTeam}</span>
-                            ${myLogo ? `<img class="thr-team-logo" src="${myLogo}" onerror="this.style.display='none';">` : ''}
+                            ${myLogo ? `<img class="thr-team-logo ${myWhite}" src="${myLogo}" onerror="this.style.display='none';">` : ''}
                         </span>
                         <span class="thr-score">${myScore} – ${oppScore}</span>
                         <span class="thr-t2 ${oppColorClass}">
-                            ${oppLogo ? `<img class="thr-team-logo" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
+                            ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
                             <span>${oppTeam}</span>
                         </span>
                     </div>

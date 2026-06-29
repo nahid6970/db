@@ -2417,6 +2417,42 @@ body.light .mdm-nav-btn:hover:not(:disabled) {
     .mdm-nav-btn.prev { left: 8px; }
     .mdm-nav-btn.next { right: 8px; }
 }
+/* White logo styles */
+.white-bg-logo {
+    background: #ffffff !important;
+    padding: 4px !important;
+}
+
+.white-logo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: var(--bg-dark);
+    border: 1px solid var(--card-border);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+body.light .white-logo-item {
+    background: #ffffff;
+}
+
+.btn-remove-white-logo {
+    background: transparent;
+    border: none;
+    color: var(--accent-red);
+    cursor: pointer;
+    font-size: 14px;
+    padding: 2px 8px;
+    transition: var(--transition-fast);
+}
+
+.btn-remove-white-logo:hover {
+    color: #ff2d3d;
+    transform: scale(1.1);
+}
+
 @media (max-width: 600px) {
     .mdm-nav-btn {
         display: none !important;

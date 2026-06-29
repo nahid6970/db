@@ -161,6 +161,7 @@
             <div class="modal-tabs">
                 <button class="modal-tab-btn active" id="tab-btn-ignore"><i class="fa-solid fa-eye-slash"></i> IGNORE List</button>
                 <button class="modal-tab-btn" id="tab-btn-scrape"><i class="fa-solid fa-arrows-rotate"></i> SCRAPE</button>
+                <button class="modal-tab-btn" id="tab-btn-white-logos"><i class="fa-solid fa-palette"></i> Team Logos</button>
             </div>
 
             <div class="modal-body" style="padding: 0; display: flex; flex-direction: column;">
@@ -228,6 +229,22 @@
                         <button id="btn-test-notification" class="status-btn" style="margin-top: 10px; font-size: 11px; padding: 6px 14px; text-transform: uppercase;">
                             <i class="fa-solid fa-bell"></i> Send Test Notification
                         </button>
+                    </div>
+                </div>
+                <!-- Tab Contents: White Logo Teams -->
+                <div id="modal-content-white-logos" class="modal-tab-content" style="display: none; padding: 20px;">
+                    <div class="modal-section" style="margin-bottom: 24px;">
+                        <h3>White Background Team Logos</h3>
+                        <p class="modal-section-desc">Add team names whose logos should be displayed with a white background on the dark theme to make them readable.</p>
+                        
+                        <div style="display: flex; gap: 8px; margin-top: 16px; margin-bottom: 16px;">
+                            <input type="text" id="white-logo-team-input" class="sidebar-select" style="flex-grow: 1; padding: 8px 12px; height: 36px;" placeholder="Enter team name exactly...">
+                            <button id="btn-add-white-logo-team" class="status-btn" style="height: 36px; padding: 0 16px; text-transform: uppercase;">Add</button>
+                        </div>
+                        
+                        <div id="white-logo-teams-container" style="display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; border: 1px solid var(--card-border); padding: 10px; background: var(--bg-darker);">
+                            <!-- List of teams -->
+                        </div>
                     </div>
                 </div>
             </div>
