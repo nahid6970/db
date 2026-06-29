@@ -21,6 +21,7 @@ All sessions recorded here — no archiving, full history in one place.
 - Replaced basic native color input with a custom dropdown grid showing 20 pre-selected swatches.
 - Contains a "Custom Color..." button at the bottom to trigger the native picker on demand.
 - Automatically closes picker when clicking outside.
+- Resized the color button in the toolbar to a compact `24px` by `20px` to match the general height of text actions, and removed the "Color:" text label to declutter the toolbar.
 
 ### Multi-Rule Text Recolor (▭T)
 - Replaced inline color inputs with a rule manager popup panel (`#paintRecolorRulesPopup`) toggled by a `▭T` button in the toolbar.
