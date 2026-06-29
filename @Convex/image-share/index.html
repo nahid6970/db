@@ -4477,6 +4477,8 @@
       }
     }
 
+    const PAINT_ZOOM_KEY = "image-share.paintZoom";
+
     window.applyPaintZoom = function(val) {
       document.getElementById('paintZoomVal').textContent = val + '%';
       const container = document.getElementById('paintCanvasContainer');
@@ -4484,18 +4486,21 @@
         container.style.width = val + '%';
         container.style.height = 'auto';
       }
+      localStorage.setItem(PAINT_ZOOM_KEY, val);
       setTimeout(updatePageIndicator, 50);
     };
 
     window.openPaintEditor = async function(id, url, filename, folderId) {
       _paintId = id; _paintFilename = filename; _paintFolderId = folderId || null;
       _paintOriginalPdfBytes = null;
-      document.getElementById('paintZoom').value = 100;
-      document.getElementById('paintZoomVal').textContent = '100%';
+      
+      const savedZoom = localStorage.getItem(PAINT_ZOOM_KEY) || '100';
+      document.getElementById('paintZoom').value = savedZoom;
+      document.getElementById('paintZoomVal').textContent = savedZoom + '%';
       
       const container = document.getElementById('paintCanvasContainer');
       if (container) {
-        container.style.width = '100%';
+        container.style.width = savedZoom + '%';
         container.style.height = 'auto';
       }
       
