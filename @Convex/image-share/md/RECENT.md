@@ -1,6 +1,34 @@
 # Recent Development Log
 All sessions recorded here — no archiving, full history in one place.
 
+## [2026-06-29 08:30] - Paint Editor Enhancements: Redo, Shortcuts, PDF Page Indicator, Dynamic Color Palette, EyeDropper & Multi-rule Text Recolor Tool
+
+### Redo Capabilities & Shortcuts
+- Created a `_redoHistory` stack to track undone canvas actions.
+- Draw actions clear the redo stack; undo moves the canvas state to the redo stack.
+- Global key listeners inside Paint Editor: `Ctrl + Z` for Undo and `Ctrl + Y` for Redo.
+
+### PDF Editing
+- Integrated `pdf-lib` via CDN to allow saving drawings back to original PDF pages as overlayed transparent PNG slices, preserving selectable text layers.
+- Wrapped paint canvases inside a container (`#paintCanvasContainer`) scaling uniformly on zoom (`width: 100%`) to prevent stretching.
+- Added dynamic page indicator (`# / total`) that computes current centered page by comparing scroll viewport offset with zoomed page dimensions. Updates on scroll and zoom.
+
+### Zoom Persistence
+- Persists and restores last zoom level from `localStorage` (`image-share.paintZoom`).
+
+### Dynamic Color Palette
+- Replaced basic native color input with a custom dropdown grid showing 20 pre-selected swatches.
+- Contains a "Custom Color..." button at the bottom to trigger the native picker on demand.
+- Automatically closes picker when clicking outside.
+
+### Multi-Rule Text Recolor (▭T)
+- Replaced inline color inputs with a rule manager popup panel (`#paintRecolorRulesPopup`) toggled by a `▭T` button in the toolbar.
+- Active toggle (`Recolor Text` checkbox) highlights the `▭T` button in green (`#22c55e`) when enabled.
+- Dynamically add rules as rows with individual active toggle checkboxes, a Scan color picker, a Target color picker, and a Tolerance ratio (Tol %) number input.
+- Tolerance ratio matches lower and higher shades of a text color to cleanly capture anti-aliased borders (scaled L1 distance matching).
+- Integrates browser-native EyeDropper API (`🎯` button) to capture scan colors directly from any pixel on the document or screen.
+- Scans background pixels inside drawn highlighter/filled rect boxes and swaps text colors in a single pass on mouse release.
+
 ## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
 
 ### Move Storage Button

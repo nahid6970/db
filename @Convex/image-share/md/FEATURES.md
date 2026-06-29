@@ -30,12 +30,18 @@
 
 ## Paint Editor
 **Status:** ✅ Complete
-**Description:** Full-screen paint/annotation editor for Convex-stored images, opened from the lightbox.
+**Description:** Full-screen paint/annotation editor for Convex-stored images and PDFs, opened from the lightbox.
 **Implementation:**
-- Toolbar: Brush, Eraser, Color picker, Size slider, Zoom slider (20–300%), Undo, Save, Close — all in one row.
-- Canvas draws at full image resolution; zoom only affects display size.
-- Save: flattens to white background, uploads as JPEG, preserves original folder, deletes original image.
-- Only available for Convex-stored images (not MEGA/Cloudinary/PDFs).
+- Toolbar: Brush, Eraser, Shape Picker (Line, Rectangle, Filled Rectangle, Highlighter, Rounded Rectangle, Curved Arrow, Smilies, Text, etc.), Size, Zoom, Undo, Save, Close.
+- Canvases draw at full image resolution; zoom acts as a CSS-transform on display container to prevent aspect ratio distortion.
+- Supports both images and PDF files (with transparent drawing canvas layered on top to preserve original PDF selectable text using `pdf-lib` overlay slice stitching).
+- Dynamic page indicator (`currentPage / totalPages`) scroll-aware tracking.
+- Remembers last used zoom value via `localStorage`.
+- Includes Undo/Redo stack with global keyboard shortcuts (`Ctrl + Z` / `Ctrl + Y`).
+- Custom dropdown color chooser with 20 preselected swatches and custom picker fallback.
+- Multi-rule Text Recolor tool (`▭T` toggle button in toolbar) to scan and replace text colors inside highlighted regions using L1 color distance with custom tolerances.
+- Integrates EyeDropper tool (`🎯` button) for picking scan colors from document pixels.
+- Save: uploads as PDF (for PDF files) or JPEG (for images), preserves original folder, deletes original image.
 **Files Involved:** `index.html`
 
 ## Folder Style Customization
