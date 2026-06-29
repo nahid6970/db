@@ -28,7 +28,7 @@ All sessions recorded here — no archiving, full history in one place.
 - Tolerance ratio matches lower and higher shades of a text color to cleanly capture anti-aliased borders (scaled L1 distance matching).
 - Integrates browser-native EyeDropper API (`🎯` button) to capture scan colors directly from any pixel on the document or screen.
 - Scans background pixels inside drawn highlighter/filled rect boxes and swaps text colors in a single pass on mouse release.
-- Persists all recolor rules (swatch inputs, checkboxes, tolerances) and the active state in `localStorage` (`image-share.paintRecolorRules` and `image-share.paintRecolorActive`) so choices are remembered across reloads and refreshes.
+- Persists all recolor rules (swatch inputs, checkboxes, tolerances) and the active state in the Convex DB `settings` table (`paintRecolorRules` and `paintRecolorActive` fields) with local storage cache fallback, ensuring settings are synced globally and remembered across page reloads/refreshes.
 
 ## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
 

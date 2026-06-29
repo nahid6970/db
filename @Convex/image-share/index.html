@@ -4421,7 +4421,7 @@
     const RECOLOR_RULES_KEY = "image-share.paintRecolorRules";
     const RECOLOR_ACTIVE_KEY = "image-share.paintRecolorActive";
 
-    window.saveRecolorRulesToStorage = function() {
+    window.saveRecolorRulesToStorage = async function() {
       const rows = document.querySelectorAll('.recolor-rule-row');
       const rules = [];
       rows.forEach(row => {
@@ -4431,7 +4431,25 @@
         const tolerance = parseInt(row.querySelector('.tolerance-input').value) || 60;
         rules.push({ enabled, scanColor, targetColor, tolerance });
       });
-      localStorage.setItem(RECOLOR_RULES_KEY, JSON.stringify(rules));
+      const rulesStr = JSON.stringify(rules);
+      const active = document.getElementById('paintRecolorActiveToggle')?.checked || false;
+
+      // Save locally as cache fallback
+      localStorage.setItem(RECOLOR_RULES_KEY, rulesStr);
+      localStorage.setItem(RECOLOR_ACTIVE_KEY, active ? 'true' : 'false');
+
+      try {
+        const cl = window._convexClient;
+        const api = window._convexApi;
+        const settings = await cl.query(api.images.getSettings);
+        await cl.mutation(api.images.updateSettings, {
+          storageType: settings.storageType || 'cloudinary',
+          paintRecolorActive: active,
+          paintRecolorRules: rulesStr
+        });
+      } catch (err) {
+        console.error('Failed to save recolor settings to Convex', err);
+      }
     };
 
     window.toggleRecolorRulesPopup = function() {
@@ -4627,8 +4645,21 @@
         container.style.height = 'auto';
       }
       
-      // Load recolor settings from storage
-      const active = localStorage.getItem(RECOLOR_ACTIVE_KEY) === 'true';
+      // Load recolor settings from Convex with LocalStorage cache fallback
+      let active = false;
+      let savedRulesStr = null;
+      try {
+        const cl = window._convexClient;
+        const api = window._convexApi;
+        const settings = await cl.query(api.images.getSettings);
+        active = !!settings.paintRecolorActive;
+        savedRulesStr = settings.paintRecolorRules || null;
+      } catch (err) {
+        console.error('Failed to load recolor settings from Convex, loading cache', err);
+        active = localStorage.getItem(RECOLOR_ACTIVE_KEY) === 'true';
+        savedRulesStr = localStorage.getItem(RECOLOR_RULES_KEY);
+      }
+
       const activeToggle = document.getElementById('paintRecolorActiveToggle');
       if (activeToggle) activeToggle.checked = active;
       
@@ -4642,7 +4673,6 @@
       const list = document.getElementById('paintRecolorRulesList');
       if (list) {
         list.innerHTML = '';
-        const savedRulesStr = localStorage.getItem(RECOLOR_RULES_KEY);
         if (savedRulesStr) {
           try {
             const rules = JSON.parse(savedRulesStr);

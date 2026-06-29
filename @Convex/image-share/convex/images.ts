@@ -353,6 +353,8 @@ export const updateSettings = mutation({
       convex: v.string(),
       mega: v.string(),
     })),
+    paintRecolorActive: v.optional(v.boolean()),
+    paintRecolorRules: v.optional(v.string()),
   },
   handler: async (ctx, args) => {
     const settings = await ctx.db.query("settings").unique();
@@ -366,6 +368,8 @@ export const updateSettings = mutation({
     if (args.sortOrder !== undefined) data.sortOrder = args.sortOrder;
     if (args.currentFolderId !== undefined) data.currentFolderId = args.currentFolderId;
     if (args.colors !== undefined) data.colors = args.colors;
+    if (args.paintRecolorActive !== undefined) data.paintRecolorActive = args.paintRecolorActive;
+    if (args.paintRecolorRules !== undefined) data.paintRecolorRules = args.paintRecolorRules;
 
     if (settings) {
       await ctx.db.patch(settings._id, data);
@@ -378,7 +382,9 @@ export const updateSettings = mutation({
         megaSubfolder: args.megaSubfolder || "",
         sortOrder: args.sortOrder || "newest",
         currentFolderId: args.currentFolderId ?? null,
-        colors: args.colors,
+        colors: args.colors || { cloudinary: "#0369a1", convex: "#ec4899", mega: "#ef4444" },
+        paintRecolorActive: args.paintRecolorActive ?? false,
+        paintRecolorRules: args.paintRecolorRules ?? "[]",
       });
     }
   },
