@@ -4764,7 +4764,8 @@
           bgContext.fillRect(0, 0, bgC.width, bgC.height);
           
           let currentY = 0;
-          for (const { page, viewport } of pages) {
+          for (let i = 0; i < pages.length; i++) {
+            const { page, viewport } = pages[i];
             bgContext.save();
             const offsetX = (maxWidth - viewport.width) / 2;
             bgContext.translate(offsetX, currentY);
@@ -4775,6 +4776,10 @@
             await page.render(renderContext).promise;
             bgContext.restore();
             currentY += viewport.height;
+            if (i < pages.length - 1) {
+              bgContext.fillStyle = '#cbd5e1';
+              bgContext.fillRect(0, currentY, bgC.width, 2);
+            }
           }
           _history = []; _redoHistory = [];
           c.dataset.pageHeights = JSON.stringify(pages.map(p => p.viewport.height));
@@ -4900,9 +4905,12 @@
           
           const activeColor = window._paintColorIsTransparent ? '#38bdf8' : document.getElementById('paintColor').value;
           const displayScale = rect.width / c.width;
+          let clickCanvasX = clickX / displayScale;
+          let clickCanvasY = clickY / displayScale;
 
           // Default initial style options
           let textFontSize = 16;
+          let textLineGap = 1.25;
           let committed = false;
           let savedRange = null;
 
@@ -4932,15 +4940,20 @@
             restoreSelection();
             document.execCommand('fontSize', false, '7');
             const fonts = editor.querySelectorAll('font[size="7"]');
+            const cr = c.getBoundingClientRect();
+            const sc = (cr && cr.width > 0 && c.width > 0) ? (cr.width / c.width) : 1;
             if (fonts.length > 0) {
               fonts.forEach(f => {
                 f.removeAttribute('size');
+                f.style.setProperty('--canvas-font-size', sz + 'px');
                 f.dataset.canvasSize = sz;
-                f.style.fontSize = (sz * displayScale) + 'px';
+                f.style.fontSize = (sz * sc) + 'px';
               });
             } else {
+              textFontSize = sz;
+              editor.style.setProperty('--canvas-font-size', sz + 'px');
               editor.dataset.canvasSize = sz;
-              editor.style.fontSize = (sz * displayScale) + 'px';
+              editor.style.fontSize = (sz * sc) + 'px';
             }
             saveSelection();
             editor.focus();
@@ -5145,7 +5158,7 @@
                   currentX += xCtx.measureText(item.text).width;
                 });
                 
-                currentY += maxFontSize * 1.25;
+                currentY += maxFontSize * textLineGap;
               });
               xCtx.restore();
             }
@@ -5198,6 +5211,33 @@
           };
           toolbar.appendChild(increaseBtn);
 
+          const gapLabel = document.createElement('span');
+          gapLabel.textContent = 'Gap:';
+          gapLabel.style.cssText = 'color:#ccc;font-size:10px;font-family:sans-serif;font-weight:600;margin-left:4px;';
+          toolbar.appendChild(gapLabel);
+
+          const decLineBtn = document.createElement('button');
+          decLineBtn.textContent = 'L-';
+          decLineBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 6px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;';
+          decLineBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            textLineGap = Math.max(0.8, Math.round((textLineGap - 0.1) * 100) / 100);
+            editor.style.lineHeight = textLineGap;
+            editor.focus();
+          };
+          toolbar.appendChild(decLineBtn);
+
+          const incLineBtn = document.createElement('button');
+          incLineBtn.textContent = 'L+';
+          incLineBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 6px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;';
+          incLineBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            textLineGap = Math.min(2.5, Math.round((textLineGap + 0.1) * 100) / 100);
+            editor.style.lineHeight = textLineGap;
+            editor.focus();
+          };
+          toolbar.appendChild(incLineBtn);
+
           const boldBtn = document.createElement('button');
           boldBtn.textContent = 'B';
           boldBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;';
@@ -5234,25 +5274,46 @@
           };
           toolbar.appendChild(underlineBtn);
 
+          const resizeObserver = new ResizeObserver(entries => {
+            for (let entry of entries) {
+              const cr = c.getBoundingClientRect();
+              if (!cr || cr.width <= 0 || c.width <= 0) continue;
+              const sc = cr.width / c.width;
+              if (sc > 0 && !isNaN(sc)) {
+                const calculatedW = entry.contentRect.width / sc;
+                if (!isNaN(calculatedW) && calculatedW > 0) {
+                  canvasWidth = calculatedW;
+                }
+              }
+            }
+          });
+
+          const cleanup = () => {
+            resizeObserver.disconnect();
+            window.activePaintTextCommit = null;
+            window.updateActivePaintTextPosition = null;
+            toolbar.remove();
+            editor.remove();
+          };
+
           const closeBtn = document.createElement('button');
           closeBtn.textContent = 'X';
           closeBtn.style.cssText = 'background:#ef4444;color:#fff;border:1px solid #7f1d1d;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;margin-left:6px;';
           closeBtn.onclick = (ev) => {
             ev.stopPropagation();
             committed = true;
-            window.activePaintTextCommit = null;
-            toolbar.remove();
-            editor.remove();
+            cleanup();
           };
           toolbar.appendChild(closeBtn);
+
+          let canvasWidth = 200;
 
           // Setup styles and properties of Editor
           editor.contentEditable = 'true';
           editor.style.position = 'absolute';
-          editor.style.left = clickX + 'px';
-          editor.style.top = clickY + 'px';
-          editor.style.fontSize = (textFontSize * displayScale) + 'px';
+          editor.style.setProperty('--canvas-font-size', textFontSize + 'px');
           editor.dataset.canvasSize = textFontSize;
+          editor.style.lineHeight = textLineGap;
           editor.style.color = activeColor;
           editor.style.fontFamily = 'sans-serif';
           editor.style.background = 'rgba(255, 255, 255, 0.08)';
@@ -5269,6 +5330,34 @@
           editor.style.minWidth = '50px';
           editor.style.minHeight = '30px';
           editor.innerHTML = 'Type text...';
+
+          resizeObserver.observe(editor);
+
+          const updatePos = () => {
+            const cr = c.getBoundingClientRect();
+            if (!cr || cr.width <= 0 || c.width <= 0) return;
+            const sc = cr.width / c.width;
+            if (isNaN(sc) || sc <= 0) return;
+
+            const sx = clickCanvasX * sc;
+            const sy = clickCanvasY * sc;
+            editor.style.left = sx + 'px';
+            editor.style.top = sy + 'px';
+            editor.style.width = (canvasWidth * sc) + 'px';
+            editor.style.fontSize = (textFontSize * sc) + 'px';
+
+            editor.querySelectorAll('font, span').forEach(el => {
+              const canvasSz = el.style.getPropertyValue('--canvas-font-size') || el.dataset.canvasSize;
+              if (canvasSz) {
+                el.style.fontSize = (parseInt(canvasSz) * sc) + 'px';
+              }
+            });
+
+            toolbar.style.left = sx + 'px';
+            toolbar.style.top = Math.max(5, sy - 35) + 'px';
+          };
+          window.updateActivePaintTextPosition = updatePos;
+          updatePos();
 
           editor.onfocus = () => {
             if (editor.innerHTML === 'Type text...') {
@@ -5294,9 +5383,7 @@
               commitText();
             } else if (ev.key === 'Escape') {
               committed = true;
-              window.activePaintTextCommit = null;
-              toolbar.remove();
-              editor.remove();
+              cleanup();
             }
           };
 
