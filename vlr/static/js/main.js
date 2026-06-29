@@ -1,37 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
 
-    function showToast(message, type = "success") {
-        let container = document.getElementById("toast-container");
-        if (!container) {
-            container = document.createElement("div");
-            container.id = "toast-container";
-            container.className = "toast-container";
-            document.body.appendChild(container);
-        }
-        
-        const toast = document.createElement("div");
-        toast.className = `toast ${type}`;
-        
-        const iconClass = type === "success" ? "fa-solid fa-circle-check" : "fa-solid fa-triangle-exclamation";
-        toast.innerHTML = `
-            <i class="${iconClass} toast-icon"></i>
-            <div class="toast-message">${message}</div>
-        `;
-        
-        container.appendChild(toast);
-        
-        setTimeout(() => {
-            toast.classList.add("show");
-        }, 50);
-        
-        setTimeout(() => {
-            toast.classList.remove("show");
-            setTimeout(() => {
-                toast.remove();
-            }, 300);
-        }, 4000);
-    }
+
 
     // Theme toggle
     const themeBtn = document.getElementById("theme-toggle-btn");
@@ -682,6 +652,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const missing = getMissingStatsMatches();
         if (missing.length === 0) return;
 
+        // Request notification permission if not already determined
+        if (typeof Notification !== "undefined" && Notification.permission === "default") {
+            await Notification.requestPermission();
+        }
+
         loadMissingStatsBtn.disabled = true;
         loadMissingStatsBtn.setAttribute("data-fetching", "true");
         
@@ -770,8 +745,15 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.removeAttribute("data-fetching");
         updateMissingStatsLoaderButton();
 
-        // Send completion notification toast
-        showToast(`Successfully loaded stats for all ${total} matches.`);
+        // Send completion notification
+        const msg = `Successfully loaded stats for all ${total} matches.`;
+        if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+            new Notification("Stats Collection Completed", {
+                body: msg
+            });
+        } else {
+            alert("Stats Collection Completed: " + msg);
+        }
     });
 
     // 3. Filter Application Logic
@@ -1322,8 +1304,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (contentIgnore) contentIgnore.style.display = "none";
     });
 
-    document.getElementById("btn-test-notification")?.addEventListener("click", () => {
-        showToast("This is a preview of the bottom-right corner notification!");
+    document.getElementById("btn-test-notification")?.addEventListener("click", async () => {
+        if (typeof Notification === "undefined") {
+            alert("Desktop notifications are not supported by this browser.");
+            return;
+        }
+        if (Notification.permission === "default") {
+            const permission = await Notification.requestPermission();
+            if (permission !== "granted") {
+                alert("Permission denied. Enable notifications in your browser settings (click the lock icon next to the URL) to test.");
+                return;
+            }
+        } else if (Notification.permission === "denied") {
+            alert("Notifications are blocked in your browser settings. Please click the lock icon next to the URL in the address bar, change Notifications to 'Allow', and try again.");
+            return;
+        }
+        new Notification("VLR Stats Manager", {
+            body: "This is a preview of the Windows/Chrome desktop notification! It works successfully."
+        });
     });
 
     // Ignore list modal filters
