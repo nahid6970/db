@@ -114,7 +114,7 @@ export const saveStorageImage = mutation({
     const url = await ctx.storage.getUrl(args.storageId);
     if (!url) throw new Error("Failed to get storage URL");
     
-    await ctx.db.insert("images", { 
+    return await ctx.db.insert("images", { 
       url,
       storageId: args.storageId,
       filename: args.filename,

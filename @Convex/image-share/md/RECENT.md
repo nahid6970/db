@@ -28,7 +28,8 @@ All sessions recorded here — no archiving, full history in one place.
 - Upgraded the text shape tool to replace the basic native `prompt()` dialog with a canvas-positioned absolute `contenteditable` rich-text editor overlay.
 - Added touch-event coordinate fallback (`e.touches[0]` client extractors) to guarantee the editor box displays reliably on both mouse clicks and touch screens.
 - Replaced the font size numeric input in the floating toolbar with **A-** and **A+** decrease/increase size buttons for seamless size adjustments (toggles overall editor scale when empty or selection size when text is highlighted).
-- Implemented **synchronous DOM chunk rendering** to replace SVG `foreignObject` projection. Traversing the text DOM nodes and wrapping text blocks dynamically using canvas measurements prevents browser canvas security errors (tainting), ensuring text renders and embeds correctly inside exported PDFs.
+- Implemented **scale-aware font datasets** to fix size mismatches: selections are saved in `data-canvas-size` with canvas-unscaled values, while `style.fontSize` is set to the screen-scaled values (`size * displayScale`). This guarantees font sizes display accurately on screen and draw at perfect scale on the canvas.
+- Reimplemented text layout parsing with a **recursive block-line DOM extractor** (`getLinesFromEditor`). It maps block structures (`<div>`, `<p>`, `<br>`, `<li>`) to distinct lines and flushes carriage returns and empty rows correctly, resolving lines spacing and vertical gaps issues.
 - Added **drag-to-move support** on the floating styling toolbar. Clicking and dragging the toolbar (via mouse or touch) shifts both the toolbar and text editor box synchronously, automatically recalculating canvas coordinates on release.
 - Added a red **X** close button in the floating styles toolbar to discard the textbox instantly on click.
 - Implemented a single-editor instance lock-in (`window.activePaintTextCommit`) that intercepts new canvas clicks when an editor is active and forces it to commit synchronously before new elements can be created. This prevents double-spawning and selection-range conflicts.
@@ -49,6 +50,9 @@ All sessions recorded here — no archiving, full history in one place.
 - "Save" continues to perform the default overwrite action (uploading and registering the drawing, and then removing the original file).
 - Resolved a save timing race condition by immediately invoking the active textbox's `commitText` synchronously at the start of `savePaint()`. This guarantees any open textbox text is fully rendered onto the canvas before export/slicing (fixing missing text in saved JPG/PNG/PDF images).
 - Swapped `localStorage` PDF scroll ratio and page indicator keying from Convex `_id` to `_paintFilename`. Since overwriting/saving creates a new storage ID, keying by filename preserves scroll coordinates and page positions perfectly across document edits and saves.
+- Enabled **in-place active session updates** on save: the editor remains open and transitions its state metadata (`_paintId`, `_paintFilename`, `_paintOriginalPdfBytes`) to the newly saved record, allowing continuous edits without closing.
+- Passed `fileSize: blob.size` to the `saveStorageImage` Convex mutation, fixing a bug where edited and saved documents showed size as `N/A` in the gallery.
+- Added a floating green success toast (`showSaveToast`) with checkmark icon and custom animations to give instant saved feedback to the user.
 
 ## [2026-06-16 22:00] - Move Storage Feature, Dedup Upload, Convex Call Optimizations
 

@@ -4935,9 +4935,11 @@
             if (fonts.length > 0) {
               fonts.forEach(f => {
                 f.removeAttribute('size');
-                f.style.fontSize = sz + 'px';
+                f.dataset.canvasSize = sz;
+                f.style.fontSize = (sz * displayScale) + 'px';
               });
             } else {
+              editor.dataset.canvasSize = sz;
               editor.style.fontSize = (sz * displayScale) + 'px';
             }
             saveSelection();
@@ -4954,89 +4956,105 @@
             if (hasText) {
               saveHistory();
               
-              const traverse = (node, currentStyles) => {
-                const chunks = [];
-                if (node.nodeType === Node.TEXT_NODE) {
-                  if (node.nodeValue) {
-                    chunks.push({
-                      text: node.nodeValue,
-                      ...currentStyles
-                    });
-                  }
-                  return chunks;
-                }
+              // Helper: recursively extract styled lines from contenteditable DOM structures
+              const getLinesFromEditor = (editorElem) => {
+                const lines = [];
+                let currentLine = [];
                 
-                if (node.nodeType === Node.ELEMENT_NODE) {
-                  const tag = node.tagName.toLowerCase();
-                  if (tag === 'br') {
-                    chunks.push({ isLineBreak: true });
-                    return chunks;
+                const defaultStyles = {
+                  bold: false,
+                  italic: false,
+                  underline: false,
+                  size: textFontSize,
+                  color: activeColor
+                };
+
+                const flushLine = (forceEmpty = false) => {
+                  if (currentLine.length > 0) {
+                    lines.push(currentLine);
+                    currentLine = [];
+                  } else if (forceEmpty) {
+                    lines.push([{ text: '', ...defaultStyles }]);
+                  }
+                };
+                
+                const traverse = (node, currentStyles) => {
+                  if (node.nodeType === Node.TEXT_NODE) {
+                    if (node.nodeValue) {
+                      currentLine.push({
+                        text: node.nodeValue,
+                        ...currentStyles
+                      });
+                    }
+                    return;
                   }
                   
-                  const newStyles = { ...currentStyles };
-                  if (tag === 'b' || tag === 'strong') {
-                    newStyles.bold = true;
-                  } else if (tag === 'i' || tag === 'em') {
-                    newStyles.italic = true;
-                  } else if (tag === 'u') {
-                    newStyles.underline = true;
-                  } else if (tag === 'font') {
-                    if (node.hasAttribute('color')) {
+                  if (node.nodeType === Node.ELEMENT_NODE) {
+                    const tag = node.tagName.toLowerCase();
+                    
+                    if (tag === 'br') {
+                      flushLine(true);
+                      return;
+                    }
+                    
+                    const newStyles = { ...currentStyles };
+                    if (tag === 'b' || tag === 'strong') {
+                      newStyles.bold = true;
+                    } else if (tag === 'i' || tag === 'em') {
+                      newStyles.italic = true;
+                    } else if (tag === 'u') {
+                      newStyles.underline = true;
+                    }
+                    
+                    if (node.dataset && node.dataset.canvasSize) {
+                      newStyles.size = parseInt(node.dataset.canvasSize) || currentStyles.size;
+                    } else if (node.style.fontSize) {
+                      newStyles.size = parseInt(node.style.fontSize) || currentStyles.size;
+                    }
+                    
+                    if (node.style.color) {
+                      newStyles.color = node.style.color;
+                    } else if (node.hasAttribute('color')) {
                       newStyles.color = node.getAttribute('color');
                     }
+                    
+                    if (node.style.fontWeight === 'bold') {
+                      newStyles.bold = true;
+                    }
+                    if (node.style.fontStyle === 'italic') {
+                      newStyles.italic = true;
+                    }
+                    if (node.style.textDecoration.includes('underline')) {
+                      newStyles.underline = true;
+                    }
+                    
+                    const isBlock = (tag === 'div' || tag === 'p' || tag === 'li');
+                    
+                    if (isBlock && node !== editorElem) {
+                      flushLine();
+                    }
+                    
+                    for (let i = 0; i < node.childNodes.length; i++) {
+                      traverse(node.childNodes[i], newStyles);
+                    }
+                    
+                    if (isBlock && node !== editorElem) {
+                      flushLine();
+                    }
                   }
-                  
-                  if (node.style.fontSize) {
-                    newStyles.size = parseInt(node.style.fontSize) || currentStyles.size;
-                  }
-                  if (node.style.color) {
-                    newStyles.color = node.style.color;
-                  }
-                  if (node.style.fontWeight === 'bold') {
-                    newStyles.bold = true;
-                  }
-                  if (node.style.fontStyle === 'italic') {
-                    newStyles.italic = true;
-                  }
-                  if (node.style.textDecoration.includes('underline')) {
-                    newStyles.underline = true;
-                  }
-                  
-                  const isBlock = (tag === 'div' || tag === 'p');
-                  if (isBlock && node !== editor) {
-                    chunks.push({ isLineBreak: true });
-                  }
-                  
-                  for (let i = 0; i < node.childNodes.length; i++) {
-                    chunks.push(...traverse(node.childNodes[i], newStyles));
-                  }
-                  return chunks;
+                };
+                
+                traverse(editorElem, defaultStyles);
+                flushLine();
+                
+                if (lines.length === 0) {
+                  lines.push([{ text: '', ...defaultStyles }]);
                 }
-                return chunks;
+                
+                return lines;
               };
               
-              const defaultStyles = {
-                bold: false,
-                italic: false,
-                underline: false,
-                size: textFontSize,
-                color: activeColor
-              };
-              
-              const rawChunks = traverse(editor, defaultStyles);
-              
-              const paragraphs = [];
-              let currentParagraph = [];
-              rawChunks.forEach(chunk => {
-                if (chunk.isLineBreak) {
-                  paragraphs.push(currentParagraph);
-                  currentParagraph = [];
-                } else {
-                  currentParagraph.push(chunk);
-                }
-              });
-              paragraphs.push(currentParagraph);
-              
+              const rawLines = getLinesFromEditor(editor);
               const maxWidth = editor.offsetWidth / displayScale;
               const allWrappedLines = [];
               
@@ -5081,10 +5099,14 @@
               const xCtx = x;
               xCtx.save();
               
-              paragraphs.forEach(p => {
-                const wrapped = wrapChunks(xCtx, p, maxWidth);
+              rawLines.forEach(lineChunks => {
+                const wrapped = wrapChunks(xCtx, lineChunks, maxWidth);
                 if (wrapped.length === 0) {
-                  allWrappedLines.push([{ text: '', size: textFontSize }]);
+                  let lineSize = textFontSize;
+                  if (lineChunks.length > 0) {
+                    lineChunks.forEach(item => { if (item.size > lineSize) lineSize = item.size; });
+                  }
+                  allWrappedLines.push([{ text: '', size: lineSize }]);
                 } else {
                   allWrappedLines.push(...wrapped);
                 }
@@ -5230,6 +5252,7 @@
           editor.style.left = clickX + 'px';
           editor.style.top = clickY + 'px';
           editor.style.fontSize = (textFontSize * displayScale) + 'px';
+          editor.dataset.canvasSize = textFontSize;
           editor.style.color = activeColor;
           editor.style.fontFamily = 'sans-serif';
           editor.style.background = 'rgba(255, 255, 255, 0.08)';
@@ -5632,6 +5655,48 @@
       });
     }
 
+    function showSaveToast(message) {
+      const toast = document.createElement('div');
+      toast.innerHTML = `
+        <span style="font-size:16px;">✓</span>
+        <span>${message}</span>
+      `;
+      toast.style.cssText = `
+        position: fixed;
+        top: 24px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px);
+        background: linear-gradient(135deg, #22c55e, #15803d);
+        color: #fff;
+        padding: 10px 24px;
+        border-radius: 50px;
+        font-family: sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        box-shadow: 0 10px 25px rgba(34, 197, 94, 0.45);
+        opacity: 0;
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 10000;
+      `;
+      document.body.appendChild(toast);
+      
+      setTimeout(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(-50%) translateY(0)';
+      }, 50);
+      
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(-20px)';
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 2500);
+    }
+
     window.savePaint = async function(isSaveAs = false) {
       if (window.activePaintTextCommit) {
         window.activePaintTextCommit();
@@ -5725,12 +5790,33 @@
           } else {
             filenameToSave = _paintFilename + '_edited';
           }
+          // Copy scroll positions in localStorage for the new filename
+          const oldScroll = localStorage.getItem('image-share.pdfLastScrollRatio.' + _paintFilename);
+          const oldPage = localStorage.getItem('image-share.pdfLastPage.' + _paintFilename);
+          if (oldScroll) localStorage.setItem('image-share.pdfLastScrollRatio.' + filenameToSave, oldScroll);
+          if (oldPage) localStorage.setItem('image-share.pdfLastPage.' + filenameToSave, oldPage);
         }
-        await cl.mutation(api.images.saveStorageImage, { storageId, filename: filenameToSave, folderId: _paintFolderId || undefined });
+        
+        // Pass blob.size to fileSize mutation argument to prevent it from displaying as N/A in the gallery!
+        const newId = await cl.mutation(api.images.saveStorageImage, { 
+          storageId, 
+          filename: filenameToSave, 
+          fileSize: blob.size, 
+          folderId: _paintFolderId || undefined 
+        });
+        
         if (!isSaveAs) {
           await cl.mutation(api.images.remove, { id: _paintId });
         }
-        closePaintEditor();
+        
+        // Update active editor session variables so that subsequent operations save to the new record
+        _paintId = newId;
+        _paintFilename = filenameToSave;
+        if (isPdf && typeof pdfBytes !== 'undefined') {
+          _paintOriginalPdfBytes = pdfBytes;
+        }
+        
+        showSaveToast(isSaveAs ? "Saved As Copy Successfully!" : "Saved Successfully!");
       } catch (err) {
         alert('Save failed: ' + err.message);
       }
