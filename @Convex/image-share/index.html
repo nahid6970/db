@@ -4893,15 +4893,94 @@
           const clickX = e.clientX - rect.left;
           const clickY = e.clientY - rect.top;
           
-          const fontSize = parseInt(document.getElementById('paintSize').value) * 3 + 10;
           const activeColor = window._paintColorIsTransparent ? '#38bdf8' : document.getElementById('paintColor').value;
           const displayScale = rect.width / c.width;
 
+          // Style options state
+          let isBold = false;
+          let isItalic = false;
+          let isUnderline = false;
+          let textFontSize = 16; // default custom text font size (independent of brush size)
+
+          // Floating Style Toolbar
+          const toolbar = document.createElement('div');
+          toolbar.style.position = 'absolute';
+          toolbar.style.left = clickX + 'px';
+          toolbar.style.top = Math.max(5, clickY - 35) + 'px';
+          toolbar.style.background = '#1a1a2e';
+          toolbar.style.border = '1px solid #444';
+          toolbar.style.borderRadius = '4px';
+          toolbar.style.padding = '3px 6px';
+          toolbar.style.display = 'flex';
+          toolbar.style.gap = '6px';
+          toolbar.style.alignItems = 'center';
+          toolbar.style.zIndex = '60';
+          toolbar.style.boxShadow = '0 4px 10px rgba(0,0,0,0.5)';
+          toolbar.style.userSelect = 'none';
+
+          toolbar.onmousedown = (ev) => ev.preventDefault();
+
+          const sizeLabel = document.createElement('span');
+          sizeLabel.textContent = 'Size:';
+          sizeLabel.style.cssText = 'color:#ccc;font-size:10px;font-family:sans-serif;font-weight:600;';
+          toolbar.appendChild(sizeLabel);
+
+          const sizeInput = document.createElement('input');
+          sizeInput.type = 'number';
+          sizeInput.value = textFontSize;
+          sizeInput.min = '6';
+          sizeInput.max = '120';
+          sizeInput.style.cssText = 'width:42px;background:#333;color:#fff;border:1px solid #555;border-radius:3px;font-size:10px;padding:2px;text-align:center;outline:none;';
+          sizeInput.oninput = (ev) => {
+            textFontSize = parseInt(ev.target.value) || 16;
+            textarea.style.fontSize = (textFontSize * displayScale) + 'px';
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+          };
+          toolbar.appendChild(sizeInput);
+
+          const boldBtn = document.createElement('button');
+          boldBtn.textContent = 'B';
+          boldBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;';
+          boldBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            isBold = !isBold;
+            boldBtn.style.background = isBold ? '#3b82f6' : '#333';
+            textarea.style.fontWeight = isBold ? 'bold' : 'normal';
+            textarea.focus();
+          };
+          toolbar.appendChild(boldBtn);
+
+          const italicBtn = document.createElement('button');
+          italicBtn.textContent = 'I';
+          italicBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 8px;font-size:10px;font-style:italic;cursor:pointer;line-height:1.2;outline:none;';
+          italicBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            isItalic = !isItalic;
+            italicBtn.style.background = isItalic ? '#3b82f6' : '#333';
+            textarea.style.fontStyle = isItalic ? 'italic' : 'normal';
+            textarea.focus();
+          };
+          toolbar.appendChild(italicBtn);
+
+          const underlineBtn = document.createElement('button');
+          underlineBtn.textContent = 'U';
+          underlineBtn.style.cssText = 'background:#333;color:#fff;border:1px solid #555;border-radius:3px;padding:2px 8px;font-size:10px;text-decoration:underline;cursor:pointer;line-height:1.2;outline:none;';
+          underlineBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            isUnderline = !isUnderline;
+            underlineBtn.style.background = isUnderline ? '#3b82f6' : '#333';
+            textarea.style.textDecoration = isUnderline ? 'underline' : 'none';
+            textarea.focus();
+          };
+          toolbar.appendChild(underlineBtn);
+
+          // Textarea
           const textarea = document.createElement('textarea');
           textarea.style.position = 'absolute';
           textarea.style.left = clickX + 'px';
           textarea.style.top = clickY + 'px';
-          textarea.style.fontSize = (fontSize * displayScale) + 'px';
+          textarea.style.fontSize = (textFontSize * displayScale) + 'px';
           textarea.style.color = activeColor;
           textarea.style.fontFamily = 'sans-serif';
           textarea.style.background = 'rgba(255, 255, 255, 0.08)';
@@ -4911,8 +4990,11 @@
           textarea.style.padding = '4px';
           textarea.style.margin = '0';
           textarea.style.overflow = 'hidden';
-          textarea.style.resize = 'none';
+          textarea.style.resize = 'horizontal';
+          textarea.style.wordBreak = 'break-word';
+          textarea.style.whiteSpace = 'pre-wrap';
           textarea.style.width = '200px';
+          textarea.style.minWidth = '50px';
           textarea.style.height = 'auto';
           textarea.rows = 1;
           textarea.placeholder = 'Type text...';
@@ -4920,12 +5002,11 @@
           textarea.oninput = () => {
             textarea.style.height = 'auto';
             textarea.style.height = textarea.scrollHeight + 'px';
-            textarea.style.width = 'auto';
-            textarea.style.width = Math.max(200, textarea.scrollWidth + 10) + 'px';
           };
 
           const container = document.getElementById('paintCanvasContainer');
           if (container) {
+            container.appendChild(toolbar);
             container.appendChild(textarea);
             textarea.focus();
           }
@@ -4940,17 +5021,60 @@
               x.save();
               x.globalCompositeOperation = 'source-over';
               x.fillStyle = activeColor;
-              x.font = `${fontSize}px sans-serif`;
+              
+              let fontStyleStr = '';
+              if (isItalic) fontStyleStr += 'italic ';
+              if (isBold) fontStyleStr += 'bold ';
+              x.font = `${fontStyleStr}${textFontSize}px sans-serif`;
               x.textBaseline = 'top';
               
-              const lines = val.split('\n');
-              const lineHeight = fontSize * 1.25;
+              const maxWidth = textarea.offsetWidth / displayScale;
+              
+              // Helper: wrap text based on measureText
+              const wrapText = (context, text, maxW) => {
+                const lines = [];
+                const paragraphs = text.split('\n');
+                for (const paragraph of paragraphs) {
+                  const words = paragraph.split(' ');
+                  let currentLine = '';
+                  for (const word of words) {
+                    const testLine = currentLine ? currentLine + ' ' + word : word;
+                    const metrics = context.measureText(testLine);
+                    const testWidth = metrics.width;
+                    if (testWidth > maxW && currentLine) {
+                      lines.push(currentLine);
+                      currentLine = word;
+                    } else {
+                      currentLine = testLine;
+                    }
+                  }
+                  if (currentLine) {
+                    lines.push(currentLine);
+                  }
+                }
+                return lines;
+              };
+              
+              const lines = wrapText(x, val, maxWidth);
+              const lineHeight = textFontSize * 1.25;
               
               lines.forEach((line, idx) => {
-                x.fillText(line, px, py + idx * lineHeight);
+                const lineY = py + idx * lineHeight;
+                x.fillText(line, px, lineY);
+                
+                if (isUnderline) {
+                  const textWidth = x.measureText(line).width;
+                  x.beginPath();
+                  x.moveTo(px, lineY + textFontSize + 1);
+                  x.lineTo(px + textWidth, lineY + textFontSize + 1);
+                  x.lineWidth = Math.max(1, textFontSize / 16);
+                  x.strokeStyle = activeColor;
+                  x.stroke();
+                }
               });
               x.restore();
             }
+            toolbar.remove();
             textarea.remove();
           };
 
@@ -4961,6 +5085,7 @@
               commitText();
             } else if (ev.key === 'Escape') {
               committed = true;
+              toolbar.remove();
               textarea.remove();
             }
           };

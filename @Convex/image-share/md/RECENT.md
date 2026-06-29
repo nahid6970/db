@@ -26,8 +26,10 @@ All sessions recorded here — no archiving, full history in one place.
 
 ### Text Tool Improvements
 - Upgraded the text shape tool to replace the basic native `prompt()` dialog with an absolute `<textarea>` overlay positioned directly on the canvas at the click location.
-- Textarea dynamically resizes to accommodate multiline text inputs and matches the selected font size, zoom scale, and active drawing color on screen.
-- Commits multiline text blocks on blur or `Ctrl + Enter` (calculating line heights automatically to write multiple clean rows on the canvas), and discards on `Escape`.
+- Added a floating text style formatting toolbar containing independent font size selection (decoupled from brush size), Bold (B), Italic (I), and Underline (U) formatting controls.
+- Enabled horizontal resizing on the input textarea, supporting auto-wrapping of sentences.
+- Built a canvas-based string wrapping algorithm that measures text widths and renders the multi-line paragraphs onto the drawing canvas preserving WYSIWYG wrapping structure, styles, and alignments.
+- Intercepts mousedown events on style buttons to prevent text losing focus, committing multiline text blocks on blur or `Ctrl + Enter` (and discarding on `Escape`).
 
 ### Multi-Rule Text Recolor (▭T)
 - Replaced inline color inputs with a rule manager popup panel (`#paintRecolorRulesPopup`) toggled by a `▭T` button in the toolbar.
