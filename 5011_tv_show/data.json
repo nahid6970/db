@@ -5103,6 +5103,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 2,
+                "title": "House of the Dragon - S03E02 - Queen's Landing WEBDL-1080p Proper",
+                "watched": false,
+                "added_date": "2026-06-29T20:45:31.300055",
+                "notify": "unseen"
+            },
+            {
                 "id": 1,
                 "title": "House of the Dragon - S03E01 - Salt and Sea, Fire and Blood WEBDL-1080p Proper",
                 "watched": false,
