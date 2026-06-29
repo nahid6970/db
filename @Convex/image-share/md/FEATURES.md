@@ -32,7 +32,7 @@
 **Status:** ✅ Complete
 **Description:** Full-screen paint/annotation editor for Convex-stored images and PDFs, opened from the lightbox.
 **Implementation:**
-- Toolbar: Brush, Eraser, Shape Picker (Line, Rectangle, Filled Rectangle, Highlighter, Rounded Rectangle, Curved Arrow, Smilies, Text, etc. -- Text tool opens a canvas-positioned horizontal resizable `contenteditable` rich-text editor with a floating styles toolbar supporting selection-level formatting: Bold, Italic, Underline, and size increase/decrease A-/A+ buttons, projected to canvas via SVG `foreignObject`), Size, Zoom, Undo, Save, Close.
+- Toolbar: Brush, Eraser, Shape Picker (Line, Rectangle, Filled Rectangle, Highlighter, Rounded Rectangle, Curved Arrow, Smilies, Text, etc. -- Text tool opens a canvas-positioned horizontal resizable `contenteditable` rich-text editor with a drag-to-move floating styles toolbar supporting selection-level formatting: Bold, Italic, Underline, and size increase/decrease A-/A+ buttons, close/delete X button, and synchronous chunk-based canvas text rendering to prevent security taints), Size, Zoom, Undo, Save, Close.
 - Canvases draw at full image resolution; zoom acts as a CSS-transform on display container to prevent aspect ratio distortion.
 - Supports both images and PDF files (with transparent drawing canvas layered on top to preserve original PDF selectable text using `pdf-lib` overlay slice stitching).
 - Dynamic page indicator (`currentPage / totalPages`) scroll-aware tracking.

@@ -4879,7 +4879,11 @@
 
     function startDraw(e) {
       e.preventDefault();
-      const c = canvas(), x = ctx(), [px, py] = getPos(e, c);
+      if (window.activePaintTextCommit) {
+        window.activePaintTextCommit();
+        return;
+      }
+      let c = canvas(), x = ctx(), [px, py] = getPos(e, c);
       if (_tool === 'shape') {
         saveHistory();
         _shapeStart = { x: px, y: py };
@@ -4899,40 +4903,17 @@
 
           // Default initial style options
           let textFontSize = 16;
-
-          // Style Toolbar
-          const toolbar = document.createElement('div');
-          toolbar.style.position = 'absolute';
-          toolbar.style.left = clickX + 'px';
-          toolbar.style.top = Math.max(5, clickY - 35) + 'px';
-          toolbar.style.background = '#1a1a2e';
-          toolbar.style.border = '1px solid #444';
-          toolbar.style.borderRadius = '4px';
-          toolbar.style.padding = '3px 6px';
-          toolbar.style.display = 'flex';
-          toolbar.style.gap = '6px';
-          toolbar.style.alignItems = 'center';
-          toolbar.style.zIndex = '60';
-          toolbar.style.boxShadow = '0 4px 10px rgba(0,0,0,0.5)';
-          toolbar.style.userSelect = 'none';
-
-          // Prevent editor losing focus on button clicks
-          toolbar.onmousedown = (ev) => {
-            ev.preventDefault();
-          };
-
-          const sizeLabel = document.createElement('span');
-          sizeLabel.textContent = 'Size:';
-          sizeLabel.style.cssText = 'color:#ccc;font-size:10px;font-family:sans-serif;font-weight:600;';
-          toolbar.appendChild(sizeLabel);
-
-          // Selection tracking
+          let committed = false;
           let savedRange = null;
+
+          // Pre-create editor and toolbar elements to avoid TDZ / ReferenceErrors in closures
+          const toolbar = document.createElement('div');
+          const editor = document.createElement('div');
+
           const saveSelection = () => {
             const sel = window.getSelection();
             if (sel.rangeCount > 0) {
               const range = sel.getRangeAt(0);
-              // Ensure selection is inside our editor
               if (editor.contains(range.commonAncestorContainer)) {
                 savedRange = range;
               }
@@ -4949,8 +4930,6 @@
 
           const applyFontSize = (sz) => {
             restoreSelection();
-            
-            // Format selected text size using custom font span replacement
             document.execCommand('fontSize', false, '7');
             const fonts = editor.querySelectorAll('font[size="7"]');
             if (fonts.length > 0) {
@@ -4959,13 +4938,223 @@
                 f.style.fontSize = sz + 'px';
               });
             } else {
-              // If nothing selected, change overall editor font scale
               editor.style.fontSize = (sz * displayScale) + 'px';
             }
-            
             saveSelection();
             editor.focus();
           };
+
+          const commitText = () => {
+            if (committed) return;
+            committed = true;
+            
+            const textVal = editor.innerText.trim();
+            const hasText = textVal.length > 0 && textVal !== 'Type text...';
+            
+            if (hasText) {
+              saveHistory();
+              
+              const traverse = (node, currentStyles) => {
+                const chunks = [];
+                if (node.nodeType === Node.TEXT_NODE) {
+                  if (node.nodeValue) {
+                    chunks.push({
+                      text: node.nodeValue,
+                      ...currentStyles
+                    });
+                  }
+                  return chunks;
+                }
+                
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                  const tag = node.tagName.toLowerCase();
+                  if (tag === 'br') {
+                    chunks.push({ isLineBreak: true });
+                    return chunks;
+                  }
+                  
+                  const newStyles = { ...currentStyles };
+                  if (tag === 'b' || tag === 'strong') {
+                    newStyles.bold = true;
+                  } else if (tag === 'i' || tag === 'em') {
+                    newStyles.italic = true;
+                  } else if (tag === 'u') {
+                    newStyles.underline = true;
+                  } else if (tag === 'font') {
+                    if (node.hasAttribute('color')) {
+                      newStyles.color = node.getAttribute('color');
+                    }
+                  }
+                  
+                  if (node.style.fontSize) {
+                    newStyles.size = parseInt(node.style.fontSize) || currentStyles.size;
+                  }
+                  if (node.style.color) {
+                    newStyles.color = node.style.color;
+                  }
+                  if (node.style.fontWeight === 'bold') {
+                    newStyles.bold = true;
+                  }
+                  if (node.style.fontStyle === 'italic') {
+                    newStyles.italic = true;
+                  }
+                  if (node.style.textDecoration.includes('underline')) {
+                    newStyles.underline = true;
+                  }
+                  
+                  const isBlock = (tag === 'div' || tag === 'p');
+                  if (isBlock && node !== editor) {
+                    chunks.push({ isLineBreak: true });
+                  }
+                  
+                  for (let i = 0; i < node.childNodes.length; i++) {
+                    chunks.push(...traverse(node.childNodes[i], newStyles));
+                  }
+                  return chunks;
+                }
+                return chunks;
+              };
+              
+              const defaultStyles = {
+                bold: false,
+                italic: false,
+                underline: false,
+                size: textFontSize,
+                color: activeColor
+              };
+              
+              const rawChunks = traverse(editor, defaultStyles);
+              
+              const paragraphs = [];
+              let currentParagraph = [];
+              rawChunks.forEach(chunk => {
+                if (chunk.isLineBreak) {
+                  paragraphs.push(currentParagraph);
+                  currentParagraph = [];
+                } else {
+                  currentParagraph.push(chunk);
+                }
+              });
+              paragraphs.push(currentParagraph);
+              
+              const maxWidth = editor.offsetWidth / displayScale;
+              const allWrappedLines = [];
+              
+              const wrapChunks = (context, inlineChunks, maxW) => {
+                const lines = [];
+                let currentLine = [];
+                let currentLineWidth = 0;
+                
+                for (const chunk of inlineChunks) {
+                  const words = chunk.text.split(/(\s+)/);
+                  for (const word of words) {
+                    if (!word) continue;
+                    
+                    let fontStyleStr = '';
+                    if (chunk.italic) fontStyleStr += 'italic ';
+                    if (chunk.bold) fontStyleStr += 'bold ';
+                    context.font = `${fontStyleStr}${chunk.size}px sans-serif`;
+                    
+                    const wordWidth = context.measureText(word).width;
+                    if (currentLineWidth + wordWidth > maxW && currentLine.length > 0 && word.trim()) {
+                      lines.push(currentLine);
+                      currentLine = [];
+                      currentLineWidth = 0;
+                    }
+                    currentLine.push({
+                      text: word,
+                      bold: chunk.bold,
+                      italic: chunk.italic,
+                      underline: chunk.underline,
+                      size: chunk.size,
+                      color: chunk.color
+                    });
+                    currentLineWidth += wordWidth;
+                  }
+                }
+                if (currentLine.length > 0) {
+                  lines.push(currentLine);
+                }
+                return lines;
+              };
+              
+              const xCtx = x;
+              xCtx.save();
+              
+              paragraphs.forEach(p => {
+                const wrapped = wrapChunks(xCtx, p, maxWidth);
+                if (wrapped.length === 0) {
+                  allWrappedLines.push([{ text: '', size: textFontSize }]);
+                } else {
+                  allWrappedLines.push(...wrapped);
+                }
+              });
+              
+              xCtx.globalCompositeOperation = 'source-over';
+              xCtx.textBaseline = 'top';
+              
+              let currentY = py;
+              allWrappedLines.forEach(line => {
+                let maxFontSize = 12;
+                line.forEach(item => {
+                  if (item.size > maxFontSize) maxFontSize = item.size;
+                });
+                
+                let currentX = px;
+                line.forEach(item => {
+                  if (!item.text) return;
+                  
+                  let fontStyleStr = '';
+                  if (item.italic) fontStyleStr += 'italic ';
+                  if (item.bold) fontStyleStr += 'bold ';
+                  xCtx.font = `${fontStyleStr}${item.size}px sans-serif`;
+                  xCtx.fillStyle = item.color;
+                  xCtx.fillText(item.text, currentX, currentY);
+                  
+                  if (item.underline) {
+                    const textWidth = xCtx.measureText(item.text).width;
+                    xCtx.beginPath();
+                    xCtx.moveTo(currentX, currentY + item.size + 1);
+                    xCtx.lineTo(currentX + textWidth, currentY + item.size + 1);
+                    xCtx.lineWidth = Math.max(1, item.size / 16);
+                    xCtx.strokeStyle = item.color;
+                    xCtx.stroke();
+                  }
+                  currentX += xCtx.measureText(item.text).width;
+                });
+                
+                currentY += maxFontSize * 1.25;
+              });
+              xCtx.restore();
+            }
+            window.activePaintTextCommit = null;
+            toolbar.remove();
+            editor.remove();
+          };
+
+          // Setup styles and properties of Toolbar
+          toolbar.style.position = 'absolute';
+          toolbar.style.left = clickX + 'px';
+          toolbar.style.top = Math.max(5, clickY - 35) + 'px';
+          toolbar.style.background = '#1a1a2e';
+          toolbar.style.border = '1px solid #444';
+          toolbar.style.borderRadius = '4px';
+          toolbar.style.padding = '3px 6px';
+          toolbar.style.display = 'flex';
+          toolbar.style.gap = '6px';
+          toolbar.style.alignItems = 'center';
+          toolbar.style.zIndex = '60';
+          toolbar.style.boxShadow = '0 4px 10px rgba(0,0,0,0.5)';
+          toolbar.style.userSelect = 'none';
+
+          toolbar.onmousedown = (ev) => {
+            ev.preventDefault();
+          };
+
+          const sizeLabel = document.createElement('span');
+          sizeLabel.textContent = 'Size:';
+          sizeLabel.style.cssText = 'color:#ccc;font-size:10px;font-family:sans-serif;font-weight:600;cursor:move;';
+          toolbar.appendChild(sizeLabel);
 
           const decreaseBtn = document.createElement('button');
           decreaseBtn.textContent = 'A-';
@@ -5023,8 +5212,19 @@
           };
           toolbar.appendChild(underlineBtn);
 
-          // ContentEditable Div Editor
-          const editor = document.createElement('div');
+          const closeBtn = document.createElement('button');
+          closeBtn.textContent = 'X';
+          closeBtn.style.cssText = 'background:#ef4444;color:#fff;border:1px solid #7f1d1d;border-radius:3px;padding:2px 8px;font-size:10px;font-weight:bold;cursor:pointer;line-height:1.2;outline:none;margin-left:6px;';
+          closeBtn.onclick = (ev) => {
+            ev.stopPropagation();
+            committed = true;
+            window.activePaintTextCommit = null;
+            toolbar.remove();
+            editor.remove();
+          };
+          toolbar.appendChild(closeBtn);
+
+          // Setup styles and properties of Editor
           editor.contentEditable = 'true';
           editor.style.position = 'absolute';
           editor.style.left = clickX + 'px';
@@ -5056,63 +5256,6 @@
           editor.onkeyup = saveSelection;
           editor.onmouseup = saveSelection;
 
-          const container = document.getElementById('paintCanvasContainer');
-          if (container) {
-            container.appendChild(toolbar);
-            container.appendChild(editor);
-            editor.focus();
-          }
-
-          let committed = false;
-          const commitText = () => {
-            if (committed) return;
-            committed = true;
-            
-            const rawHtml = editor.innerHTML;
-            const textVal = editor.innerText.trim();
-            const hasText = textVal.length > 0 && textVal !== 'Type text...';
-            
-            if (hasText) {
-              saveHistory();
-              const w = editor.offsetWidth;
-              const h = editor.offsetHeight;
-              const unscaledW = w / displayScale;
-              const unscaledH = h / displayScale;
-              
-              // Ensure SVG-compliant self-closed tags
-              let cleanHtml = rawHtml
-                .replace(/&nbsp;/g, ' ')
-                .replace(/<br>/g, '<br/>')
-                .replace(/<br\s*>/g, '<br/>');
-                
-              const svgString = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="${unscaledW}" height="${unscaledH}">
-                  <foreignObject width="100%" height="100%">
-                    <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:sans-serif;color:${activeColor};font-size:${textFontSize}px;line-height:1.25;white-space:pre-wrap;word-break:break-word;margin:0;padding:4px;width:100%;height:100%;box-sizing:border-box;">
-                      ${cleanHtml}
-                    </div>
-                  </foreignObject>
-                </svg>
-              `;
-              
-              const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-              const url = URL.createObjectURL(svgBlob);
-              const img = new Image();
-              
-              img.onload = () => {
-                const xCtx = x;
-                xCtx.save();
-                xCtx.globalCompositeOperation = 'source-over';
-                xCtx.drawImage(img, px, py, unscaledW, unscaledH);
-                xCtx.restore();
-                URL.revokeObjectURL(url);
-              };
-              img.src = url;
-            }
-            toolbar.remove();
-            editor.remove();
-          };
-
           editor.onblur = () => {
             setTimeout(() => {
               if (document.activeElement === editor || toolbar.contains(document.activeElement)) {
@@ -5128,10 +5271,93 @@
               commitText();
             } else if (ev.key === 'Escape') {
               committed = true;
+              window.activePaintTextCommit = null;
               toolbar.remove();
               editor.remove();
             }
           };
+
+          // Drag-to-Move Logic
+          let isDragging = false;
+          let dragStartX, dragStartY;
+          let originalToolbarLeft, originalToolbarTop;
+          let originalEditorLeft, originalEditorTop;
+          
+          const dragStart = (clientX, clientY) => {
+            isDragging = true;
+            dragStartX = clientX;
+            dragStartY = clientY;
+            originalToolbarLeft = parseFloat(toolbar.style.left) || 0;
+            originalToolbarTop = parseFloat(toolbar.style.top) || 0;
+            originalEditorLeft = parseFloat(editor.style.left) || 0;
+            originalEditorTop = parseFloat(editor.style.top) || 0;
+          };
+
+          const dragMove = (clientX, clientY) => {
+            if (!isDragging) return;
+            const dx = clientX - dragStartX;
+            const dy = clientY - dragStartY;
+            
+            toolbar.style.left = (originalToolbarLeft + dx) + 'px';
+            toolbar.style.top = (originalToolbarTop + dy) + 'px';
+            editor.style.left = (originalEditorLeft + dx) + 'px';
+            editor.style.top = (originalEditorTop + dy) + 'px';
+          };
+
+          const dragEnd = () => {
+            if (isDragging) {
+              isDragging = false;
+              const canvasRect = c.getBoundingClientRect();
+              const scale = c.width / canvasRect.width;
+              px = parseFloat(editor.style.left) * scale;
+              py = parseFloat(editor.style.top) * scale;
+            }
+          };
+
+          // Bind Drag on toolbar background and "Size:" label
+          toolbar.onmousedown = (ev) => {
+            if (ev.target.tagName === 'BUTTON' || ev.target.tagName === 'INPUT') return;
+            ev.preventDefault();
+            dragStart(ev.clientX, ev.clientY);
+            
+            const mouseMoveHandler = (e2) => dragMove(e2.clientX, e2.clientY);
+            const mouseUpHandler = () => {
+              dragEnd();
+              document.removeEventListener('mousemove', mouseMoveHandler);
+              document.removeEventListener('mouseup', mouseUpHandler);
+            };
+            document.addEventListener('mousemove', mouseMoveHandler);
+            document.addEventListener('mouseup', mouseUpHandler);
+          };
+
+          toolbar.ontouchstart = (ev) => {
+            if (ev.target.tagName === 'BUTTON' || ev.target.tagName === 'INPUT') return;
+            const touch = ev.touches[0];
+            dragStart(touch.clientX, touch.clientY);
+            
+            const touchMoveHandler = (e2) => {
+              if (isDragging) {
+                dragMove(e2.touches[0].clientX, e2.touches[0].clientY);
+                e2.preventDefault();
+              }
+            };
+            const touchEndHandler = () => {
+              dragEnd();
+              document.removeEventListener('touchmove', touchMoveHandler);
+              document.removeEventListener('touchend', touchEndHandler);
+            };
+            document.addEventListener('touchmove', touchMoveHandler, { passive: false });
+            document.addEventListener('touchend', touchEndHandler);
+          };
+
+          // Append elements to DOM and activate lock
+          const container = document.getElementById('paintCanvasContainer');
+          if (container) {
+            container.appendChild(toolbar);
+            container.appendChild(editor);
+            editor.focus();
+            window.activePaintTextCommit = commitText;
+          }
         }
         return;
       }

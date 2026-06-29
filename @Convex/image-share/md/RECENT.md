@@ -28,7 +28,10 @@ All sessions recorded here — no archiving, full history in one place.
 - Upgraded the text shape tool to replace the basic native `prompt()` dialog with a canvas-positioned absolute `contenteditable` rich-text editor overlay.
 - Added touch-event coordinate fallback (`e.touches[0]` client extractors) to guarantee the editor box displays reliably on both mouse clicks and touch screens.
 - Replaced the font size numeric input in the floating toolbar with **A-** and **A+** decrease/increase size buttons for seamless size adjustments (toggles overall editor scale when empty or selection size when text is highlighted).
-- Integrated SVG `foreignObject` rendering to project and flatten styled rich HTML directly onto the drawing canvas on blur or `Ctrl + Enter` (preserving character-level typography formatting, horizontal wraps, and styles).
+- Implemented **synchronous DOM chunk rendering** to replace SVG `foreignObject` projection. Traversing the text DOM nodes and wrapping text blocks dynamically using canvas measurements prevents browser canvas security errors (tainting), ensuring text renders and embeds correctly inside exported PDFs.
+- Added **drag-to-move support** on the floating styling toolbar. Clicking and dragging the toolbar (via mouse or touch) shifts both the toolbar and text editor box synchronously, automatically recalculating canvas coordinates on release.
+- Added a red **X** close button in the floating styles toolbar to discard the textbox instantly on click.
+- Implemented a single-editor instance lock-in (`window.activePaintTextCommit`) that intercepts new canvas clicks when an editor is active and forces it to commit synchronously before new elements can be created. This prevents double-spawning and selection-range conflicts.
 - Restructured toolbar focus lock-in (`onmousedown` target filtering) and active focus check fallback to allow seamless size editing and formatting without prematurely committing text.
 
 ### Multi-Rule Text Recolor (▭T)
