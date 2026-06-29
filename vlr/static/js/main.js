@@ -494,6 +494,12 @@ document.addEventListener("DOMContentLoaded", () => {
             renderWhiteLogoTeamsList();
             applyWhiteLogoStylesToCurrentCards();
         }
+        const color = s.white_logo_bg_color || "#eef1f6";
+        document.documentElement.style.setProperty('--white-logo-bg-color', color);
+        const picker = document.getElementById("white-logo-bg-color-picker");
+        const text = document.getElementById("white-logo-bg-color-text");
+        if (picker) picker.value = color;
+        if (text) text.value = color;
         applyTourneyFilters();
         sortTourneyByDate();
     });
@@ -1009,6 +1015,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scrapeStart = document.getElementById("scrape-start");
     const scrapeEnd = document.getElementById("scrape-end");
     const savePagesBtnEl = document.getElementById("save-pages-btn");
+    const advancePagesBtnEl = document.getElementById("advance-pages-btn");
     if (savePagesBtnEl) {
         savePagesBtnEl.addEventListener("click", async () => {
             const start = Math.max(1, parseInt(scrapeStart?.value) || 1);
@@ -1019,6 +1026,25 @@ document.addEventListener("DOMContentLoaded", () => {
             await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({...cur, scrape_start: start, scrape_end: end}) });
             savePagesBtnEl.innerHTML = '<i class="fa-solid fa-check"></i>';
             setTimeout(() => { savePagesBtnEl.innerHTML = '<i class="fa-solid fa-floppy-disk"></i>'; }, 1500);
+        });
+    }
+    
+    if (advancePagesBtnEl) {
+        advancePagesBtnEl.addEventListener("click", async () => {
+            const start = Math.max(1, parseInt(scrapeStart?.value) || 1);
+            const end = Math.max(start, parseInt(scrapeEnd?.value) || start);
+            const diff = end - start;
+            const newStart = end;
+            const newEnd = newStart + diff;
+            
+            if (scrapeStart) scrapeStart.value = newStart;
+            if (scrapeEnd) scrapeEnd.value = newEnd;
+            
+            const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+            await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify({...cur, scrape_start: newStart, scrape_end: newEnd}) });
+            
+            advancePagesBtnEl.innerHTML = '<i class="fa-solid fa-check"></i>';
+            setTimeout(() => { advancePagesBtnEl.innerHTML = '<i class="fa-solid fa-arrow-right"></i>'; }, 1500);
         });
     }
 
@@ -1452,6 +1478,46 @@ document.addEventListener("DOMContentLoaded", () => {
     whiteLogoAddBtn?.addEventListener("click", addWhiteLogoTeam);
     whiteLogoInput?.addEventListener("keydown", (e) => {
         if (e.key === "Enter") addWhiteLogoTeam();
+    });
+
+    const whiteLogoBgColorPicker = document.getElementById("white-logo-bg-color-picker");
+    const whiteLogoBgColorText = document.getElementById("white-logo-bg-color-text");
+
+    async function updateWhiteLogoBgColor(color) {
+        if (!color) return;
+        document.documentElement.style.setProperty('--white-logo-bg-color', color);
+        if (whiteLogoBgColorPicker) whiteLogoBgColorPicker.value = color;
+        if (whiteLogoBgColorText) whiteLogoBgColorText.value = color;
+        
+        // Save to settings
+        const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+        cur.white_logo_bg_color = color;
+        await fetch("/api/settings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(cur)
+        });
+    }
+
+    whiteLogoBgColorPicker?.addEventListener("input", (e) => {
+        updateWhiteLogoBgColor(e.target.value);
+    });
+
+    whiteLogoBgColorText?.addEventListener("change", (e) => {
+        let val = e.target.value.trim();
+        if (!val.startsWith("#")) {
+            val = "#" + val;
+        }
+        // Basic hex regex validation
+        if (/^#[0-9A-F]{6}$/i.test(val) || /^#[0-9A-F]{3}$/i.test(val)) {
+            updateWhiteLogoBgColor(val);
+        } else {
+            // Restore current setting value
+            fetch("/api/settings").then(r => r.json()).then(s => {
+                const color = s.white_logo_bg_color || "#eef1f6";
+                whiteLogoBgColorText.value = color;
+            });
+        }
     });
 
     // Ignore list modal filters
