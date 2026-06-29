@@ -677,10 +677,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         loadMissingStatsBtn.disabled = true;
         loadMissingStatsBtn.setAttribute("data-fetching", "true");
-        const icon = loadMissingStatsBtn.querySelector("i");
-        if (icon) {
-            icon.className = "fa-solid fa-spinner fa-spin";
-        }
+        
+        // Dynamically create and prepend spinner icon while fetching
+        const spinner = document.createElement("i");
+        spinner.className = "fa-solid fa-spinner fa-spin";
+        spinner.style.marginRight = "6px";
+        loadMissingStatsBtn.prepend(spinner);
 
         const total = missing.length;
         for (let i = 0; i < total; i++) {
@@ -755,11 +757,10 @@ document.addEventListener("DOMContentLoaded", () => {
             await new Promise(r => setTimeout(r, 450));
         }
 
+        // Clean up spinner
+        spinner.remove();
         loadMissingStatsBtn.disabled = false;
         loadMissingStatsBtn.removeAttribute("data-fetching");
-        if (icon) {
-            icon.className = "fa-solid fa-cloud-arrow-down";
-        }
         updateMissingStatsLoaderButton();
     });
 
