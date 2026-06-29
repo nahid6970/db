@@ -1471,9 +1471,8 @@
             <button title="Text" onclick="selectShape('text')" style="background:#333;border-radius:4px;font-size:13px;font-weight:700;width:34px;height:34px;">T</button>
           </div>
         </div>
-        <label style="color:#ccc;font-size:12px;margin-left:8px;">Color:</label>
-        <div style="position:relative;display:inline-block;line-height:1;">
-          <button id="paintColorBtn" onclick="toggleColorPicker()" style="width:32px;height:28px;padding:0;border:1px solid #555;background:#ff0000;cursor:pointer;border-radius:4px;" title="Choose color"></button>
+        <div style="position:relative;display:inline-block;line-height:1;margin-left:12px;vertical-align:middle;">
+          <button id="paintColorBtn" onclick="toggleColorPicker()" style="width:24px;height:20px;padding:0;border:1px solid #555;background:#ff0000;cursor:pointer;border-radius:4px;vertical-align:middle;" title="Choose color"></button>
           <div id="paintColorPickerPopup" style="display:none;position:absolute;top:110%;left:0;background:#1a1a2e;border:1px solid #444;border-radius:6px;padding:8px;z-index:100;width:180px;box-shadow:0 10px 25px rgba(0,0,0,0.5);">
             <div class="paint-swatch-grid" data-type="main" style="display:grid;grid-template-columns:repeat(5,28px);gap:6px;margin-bottom:8px;"></div>
             <button onclick="triggerNativeColorPicker()" style="width:100%;background:#333;border:1px solid #555;color:#ccc;font-size:12px;padding:6px;border-radius:4px;cursor:pointer;font-weight:600;line-height:1.2;text-align:center;">Custom Color...</button>
