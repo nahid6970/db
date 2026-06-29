@@ -1482,8 +1482,7 @@
         </div>
         
         <div style="display:flex;align-items:center;gap:6px;margin-left:12px;border-left:1px solid #444;padding-left:12px;">
-          <input type="checkbox" id="paintRecolorToggle" onchange="toggleRecolorSection(this.checked)" style="cursor:pointer;">
-          <label for="paintRecolorToggle" style="color:#ccc;font-size:12px;cursor:pointer;user-select:none;">Recolor Text</label>
+          <button id="paintRecolorToggleBtn" onclick="toggleRecolorBtn()" data-checked="false" style="background:#444;border-radius:4px;padding:3px 10px;font-size:12px;color:#ccc;cursor:pointer;border:none;font-weight:600;" title="Recolor Text">▭T</button>
           <div id="paintRecolorSection" style="display:none;align-items:center;gap:6px;margin-left:4px;">
             <label style="color:#aaa;font-size:11px;margin-left:2px;">Scan:</label>
             <div style="position:relative;display:inline-block;line-height:1;">
@@ -4433,6 +4432,16 @@
       if (sec) sec.style.display = show ? 'flex' : 'none';
     };
 
+    window.toggleRecolorBtn = function() {
+      const btn = document.getElementById('paintRecolorToggleBtn');
+      const isChecked = btn.dataset.checked === 'true';
+      const newVal = !isChecked;
+      btn.dataset.checked = newVal ? 'true' : 'false';
+      btn.style.background = newVal ? '#22c55e' : '#444';
+      btn.style.color = newVal ? '#fff' : '#ccc';
+      toggleRecolorSection(newVal);
+    };
+
     window.toggleScanColorPicker = function() {
       const p = document.getElementById('paintScanColorPickerPopup');
       if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
@@ -4698,9 +4707,11 @@
       _paintId = null; _history = []; _redoHistory = [];
       const pageIndicator = document.getElementById('paintPageVal');
       if (pageIndicator) pageIndicator.style.display = 'none';
-      const toggle = document.getElementById('paintRecolorToggle');
-      if (toggle) {
-        toggle.checked = false;
+      const btn = document.getElementById('paintRecolorToggleBtn');
+      if (btn) {
+        btn.dataset.checked = 'false';
+        btn.style.background = '#444';
+        btn.style.color = '#ccc';
         toggleRecolorSection(false);
       }
     };
@@ -4851,7 +4862,7 @@
         x.strokeRect(sx, sy, w, h);
       } else if (_shape === 'rectFill') {
         x.fillRect(sx, sy, w, h);
-        if (isFinal && document.getElementById('paintRecolorToggle').checked) {
+        if (isFinal && document.getElementById('paintRecolorToggleBtn')?.dataset.checked === 'true') {
           recolorTextInBox(x, sx, sy, ex, ey);
         }
       } else if (_shape === 'highlighter') {
@@ -4859,7 +4870,7 @@
         x.globalAlpha = 0.45;
         x.fillRect(sx, sy, w, h);
         x.restore();
-        if (isFinal && document.getElementById('paintRecolorToggle').checked) {
+        if (isFinal && document.getElementById('paintRecolorToggleBtn')?.dataset.checked === 'true') {
           recolorTextInBox(x, sx, sy, ex, ey);
         }
       } else if (_shape === 'rectRound') {
