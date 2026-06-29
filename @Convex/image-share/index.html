@@ -4887,14 +4887,83 @@
         _drawing = true;
         if (_shape === 'text') {
           _drawing = false;
-          const txt = prompt('Enter text:');
-          if (txt) {
-            x.globalCompositeOperation = 'source-over';
-            x.fillStyle = document.getElementById('paintColor').value;
-            x.font = `${parseInt(document.getElementById('paintSize').value) * 3 + 10}px sans-serif`;
-            x.fillText(txt, px, py);
-          }
           _shapeStart = null; _snapShot = null;
+
+          const rect = c.getBoundingClientRect();
+          const clickX = e.clientX - rect.left;
+          const clickY = e.clientY - rect.top;
+          
+          const fontSize = parseInt(document.getElementById('paintSize').value) * 3 + 10;
+          const activeColor = window._paintColorIsTransparent ? '#38bdf8' : document.getElementById('paintColor').value;
+          const displayScale = rect.width / c.width;
+
+          const textarea = document.createElement('textarea');
+          textarea.style.position = 'absolute';
+          textarea.style.left = clickX + 'px';
+          textarea.style.top = clickY + 'px';
+          textarea.style.fontSize = (fontSize * displayScale) + 'px';
+          textarea.style.color = activeColor;
+          textarea.style.fontFamily = 'sans-serif';
+          textarea.style.background = 'rgba(255, 255, 255, 0.08)';
+          textarea.style.border = '1px dashed #38bdf8';
+          textarea.style.outline = 'none';
+          textarea.style.zIndex = '50';
+          textarea.style.padding = '4px';
+          textarea.style.margin = '0';
+          textarea.style.overflow = 'hidden';
+          textarea.style.resize = 'none';
+          textarea.style.width = '200px';
+          textarea.style.height = 'auto';
+          textarea.rows = 1;
+          textarea.placeholder = 'Type text...';
+
+          textarea.oninput = () => {
+            textarea.style.height = 'auto';
+            textarea.style.height = textarea.scrollHeight + 'px';
+            textarea.style.width = 'auto';
+            textarea.style.width = Math.max(200, textarea.scrollWidth + 10) + 'px';
+          };
+
+          const container = document.getElementById('paintCanvasContainer');
+          if (container) {
+            container.appendChild(textarea);
+            textarea.focus();
+          }
+
+          let committed = false;
+          const commitText = () => {
+            if (committed) return;
+            committed = true;
+            const val = textarea.value.trim();
+            if (val) {
+              saveHistory();
+              x.save();
+              x.globalCompositeOperation = 'source-over';
+              x.fillStyle = activeColor;
+              x.font = `${fontSize}px sans-serif`;
+              x.textBaseline = 'top';
+              
+              const lines = val.split('\n');
+              const lineHeight = fontSize * 1.25;
+              
+              lines.forEach((line, idx) => {
+                x.fillText(line, px, py + idx * lineHeight);
+              });
+              x.restore();
+            }
+            textarea.remove();
+          };
+
+          textarea.onblur = commitText;
+          textarea.onkeydown = (ev) => {
+            if (ev.key === 'Enter' && (ev.ctrlKey || ev.metaKey)) {
+              ev.preventDefault();
+              commitText();
+            } else if (ev.key === 'Escape') {
+              committed = true;
+              textarea.remove();
+            }
+          };
         }
         return;
       }

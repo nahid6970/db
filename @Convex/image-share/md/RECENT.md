@@ -24,6 +24,11 @@ All sessions recorded here — no archiving, full history in one place.
 - Resized the color button in the toolbar to a compact `24px` by `20px` to match the general height of text actions, and removed the "Color:" text label to declutter the toolbar.
 - Added a `transparent` color swatch option (rendered as a dark-mode checkerboard pattern). Selecting this mode enables "Highlight-only Recoloring" where drawing bounding boxes displays a temporary dashed drag outline and recolors matching text internally without altering the document background at all.
 
+### Text Tool Improvements
+- Upgraded the text shape tool to replace the basic native `prompt()` dialog with an absolute `<textarea>` overlay positioned directly on the canvas at the click location.
+- Textarea dynamically resizes to accommodate multiline text inputs and matches the selected font size, zoom scale, and active drawing color on screen.
+- Commits multiline text blocks on blur or `Ctrl + Enter` (calculating line heights automatically to write multiple clean rows on the canvas), and discards on `Escape`.
+
 ### Multi-Rule Text Recolor (▭T)
 - Replaced inline color inputs with a rule manager popup panel (`#paintRecolorRulesPopup`) toggled by a `▭T` button in the toolbar.
 - Active toggle (`Recolor Text` checkbox) highlights the `▭T` button in green (`#22c55e`) when enabled.
