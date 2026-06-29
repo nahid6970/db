@@ -199,12 +199,12 @@ def _bulk_upsert_rows(conn, rows):
             tournament_logo=excluded.tournament_logo,
             eta=excluded.eta,
             status=excluded.status,
-            team1_logo=excluded.team1_logo,
-            team2_logo=excluded.team2_logo,
-            unix_timestamp=excluded.unix_timestamp,
-            bst_time=excluded.bst_time,
-            maps_json=excluded.maps_json,
-            players_json=excluded.players_json,
+            team1_logo=CASE WHEN COALESCE(excluded.team1_logo, '') != '' THEN excluded.team1_logo ELSE matches.team1_logo END,
+            team2_logo=CASE WHEN COALESCE(excluded.team2_logo, '') != '' THEN excluded.team2_logo ELSE matches.team2_logo END,
+            unix_timestamp=CASE WHEN excluded.unix_timestamp != 0 THEN excluded.unix_timestamp ELSE matches.unix_timestamp END,
+            bst_time=CASE WHEN COALESCE(excluded.bst_time, '') != '' THEN excluded.bst_time ELSE matches.bst_time END,
+            maps_json=CASE WHEN COALESCE(excluded.maps_json, '[]') != '[]' AND COALESCE(excluded.maps_json, '') != '' THEN excluded.maps_json ELSE matches.maps_json END,
+            players_json=CASE WHEN COALESCE(excluded.players_json, '{}') != '{}' AND COALESCE(excluded.players_json, '') != '' THEN excluded.players_json ELSE matches.players_json END,
             last_updated=excluded.last_updated
         """,
         rows,
@@ -674,7 +674,7 @@ def fetch_details_in_background(scraped_matches):
                 for team in ("team1", "team2")
                 for p in map_data.get(team, [])
             )
-            has_stats = bool(db.get(mid, {}).get("maps")) and not old_format and not missing_all and not missing_photos and not missing_new_stats
+            has_stats = bool(current.get("maps")) and not old_format and not missing_all and not missing_photos and not missing_new_stats
 
             if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))

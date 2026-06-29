@@ -35,6 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const tourneyCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
     const deselectAllBtn = document.getElementById("btn-deselect-all");
+    const loadMissingStatsBtn = document.getElementById("btn-load-missing-stats");
+    const loadMissingStatsProgress = document.getElementById("load-missing-stats-progress");
     const refreshBtn = document.getElementById("refresh-data-btn");
     const matchesGrid = document.getElementById("matches-grid-container");
     
@@ -642,6 +644,134 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(updateCountdowns, 1000);
     updateCountdowns();
 
+    // 2b. Missing Stats Loader Logic
+    function getMissingStatsMatches() {
+        if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) {
+            console.log("getMissingStatsMatches: INITIAL_MATCHES is undefined/null");
+            return [];
+        }
+        const res = INITIAL_MATCHES.filter(m => {
+            const isChecked = checkedTournaments.has(m.tournament);
+            const isCompleted = (m.status || "").toLowerCase() === "completed";
+            const hasStats = m.maps && m.maps.length > 0;
+            return isChecked && isCompleted && !hasStats;
+        });
+        console.log("getMissingStatsMatches: checkedTournaments =", Array.from(checkedTournaments), "total INITIAL_MATCHES =", INITIAL_MATCHES.length, "missing =", res.length);
+        return res;
+    }
+
+    function updateMissingStatsLoaderButton() {
+        if (!loadMissingStatsBtn) {
+            console.log("updateMissingStatsLoaderButton: loadMissingStatsBtn element not found");
+            return;
+        }
+        if (loadMissingStatsBtn.disabled && loadMissingStatsBtn.getAttribute("data-fetching") === "true") {
+            console.log("updateMissingStatsLoaderButton: button is currently fetching");
+            return;
+        }
+        const missing = getMissingStatsMatches();
+        if (missing.length > 0) {
+            loadMissingStatsBtn.style.display = "";
+            if (loadMissingStatsProgress) {
+                loadMissingStatsProgress.textContent = ` ${missing.length}`;
+            }
+        } else {
+            loadMissingStatsBtn.style.display = "none";
+        }
+    }
+
+    loadMissingStatsBtn?.addEventListener("click", async () => {
+        const missing = getMissingStatsMatches();
+        if (missing.length === 0) return;
+
+        loadMissingStatsBtn.disabled = true;
+        loadMissingStatsBtn.setAttribute("data-fetching", "true");
+        const icon = loadMissingStatsBtn.querySelector("i");
+        if (icon) {
+            icon.className = "fa-solid fa-spinner fa-spin";
+        }
+
+        const total = missing.length;
+        for (let i = 0; i < total; i++) {
+            const match = missing[i];
+            if (loadMissingStatsProgress) {
+                loadMissingStatsProgress.textContent = ` ${i + 1}/${total}`;
+            }
+
+            try {
+                const data = await fetch(`/api/match/${match.id}`).then(r => r.json());
+                if (data && !data.error) {
+                    const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
+                    if (idx !== -1) {
+                        INITIAL_MATCHES[idx] = data;
+                    }
+                    
+                    const card = document.querySelector(`.match-card[data-id="${data.id}"]`);
+                    if (card) {
+                        card.setAttribute("data-score1", data.score1 || "");
+                        card.setAttribute("data-score2", data.score2 || "");
+                        
+                        const statusBadge = card.querySelector(".match-status-badge");
+                        if (statusBadge && data.status) {
+                            statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
+                            const hasStats = data.maps && data.maps.length > 0;
+                            if (hasStats) {
+                                statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
+                            } else {
+                                statusBadge.textContent = data.status.toUpperCase();
+                            }
+                        }
+
+                        const vsScoreContainer = card.querySelector(".match-vs-score");
+                        if (vsScoreContainer) {
+                            const s1 = parseInt(data.score1) || 0;
+                            const s2 = parseInt(data.score2) || 0;
+                            vsScoreContainer.innerHTML = `
+                                <div class="score-display">
+                                    <span class="score-num ${s1 > s2 ? 'winner' : ''}">${data.score1 || '0'}</span>
+                                    <span class="score-divider">-</span>
+                                    <span class="score-num ${s2 > s1 ? 'winner' : ''}">${data.score2 || '0'}</span>
+                                </div>
+                            `;
+                        }
+                    }
+
+                    if (data.tournament) {
+                        const label = document.querySelector(`#tournament-checklist .tourney-item[data-tourney-name="${CSS.escape(data.tournament)}"]`);
+                        if (label) {
+                            const tourneyMatches = INITIAL_MATCHES.filter(m => m.tournament === data.tournament);
+                            let isFullyLoaded = true;
+                            for (const m of tourneyMatches) {
+                                if ((m.status || "").toLowerCase() === "completed" && (!m.maps || m.maps.length === 0)) {
+                                    isFullyLoaded = false;
+                                    break;
+                                }
+                            }
+                            if (isFullyLoaded) {
+                                label.classList.remove("tourney-not-loaded");
+                                label.classList.add("tourney-fully-loaded");
+                            } else {
+                                label.classList.remove("tourney-fully-loaded");
+                                label.classList.add("tourney-not-loaded");
+                            }
+                        }
+                    }
+                }
+            } catch (err) {
+                console.error(`Failed to load details for match ${match.id}:`, err);
+            }
+
+            await new Promise(r => setTimeout(r, 450));
+        }
+
+        loadMissingStatsBtn.disabled = false;
+        loadMissingStatsBtn.removeAttribute("data-fetching");
+        if (icon) {
+            icon.className = "fa-solid fa-cloud-arrow-down";
+        }
+        updateMissingStatsLoaderButton();
+    });
+
     // 3. Filter Application Logic
     function applyFilters() {
         const matchCards = document.querySelectorAll(".match-card");
@@ -706,6 +836,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         applyPagination();
+        updateMissingStatsLoaderButton();
     }
 
     function applyPagination() {
