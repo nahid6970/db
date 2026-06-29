@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterSeries = document.getElementById("filter-series-input");
     const sortTourneyOrder = document.getElementById("sort-tourney-order");
     const perPageSelect = document.getElementById("per-page-select");
-    const statusBtns = document.querySelectorAll(".status-btn");
+    const statusBtns = document.querySelectorAll(".status-btn[data-status]");
     const tourneyCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
     const deselectAllBtn = document.getElementById("btn-deselect-all");
@@ -646,27 +646,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2b. Missing Stats Loader Logic
     function getMissingStatsMatches() {
-        if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) {
-            console.log("getMissingStatsMatches: INITIAL_MATCHES is undefined/null");
-            return [];
-        }
-        const res = INITIAL_MATCHES.filter(m => {
+        if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
+        return INITIAL_MATCHES.filter(m => {
             const isChecked = checkedTournaments.has(m.tournament);
             const isCompleted = (m.status || "").toLowerCase() === "completed";
             const hasStats = m.maps && m.maps.length > 0;
             return isChecked && isCompleted && !hasStats;
         });
-        console.log("getMissingStatsMatches: checkedTournaments =", Array.from(checkedTournaments), "total INITIAL_MATCHES =", INITIAL_MATCHES.length, "missing =", res.length);
-        return res;
     }
 
     function updateMissingStatsLoaderButton() {
-        if (!loadMissingStatsBtn) {
-            console.log("updateMissingStatsLoaderButton: loadMissingStatsBtn element not found");
-            return;
-        }
+        if (!loadMissingStatsBtn) return;
         if (loadMissingStatsBtn.disabled && loadMissingStatsBtn.getAttribute("data-fetching") === "true") {
-            console.log("updateMissingStatsLoaderButton: button is currently fetching");
             return;
         }
         const missing = getMissingStatsMatches();
