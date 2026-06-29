@@ -39,7 +39,7 @@
 - Remembers exact vertical scroll ratio (`scrollTop / totalHeight`) per document in `localStorage` and automatically restores it to preserve pixel-perfect viewport alignment.
 - Remembers last used zoom value via `localStorage`.
 - Includes Undo/Redo stack with global keyboard shortcuts (`Ctrl + Z` / `Ctrl + Y`).
-- Custom dropdown color chooser with 20 preselected swatches and custom picker fallback (compact `24x20px` button in toolbar, "Color:" text label removed).
+- Custom dropdown color chooser with 20 preselected swatches and custom picker fallback (compact `24x20px` button in toolbar, "Color:" text label removed). Includes a `transparent` option to perform region-based text recoloring without drawing/filling background shapes.
 - Multi-rule Text Recolor tool (`▭T` toggle button in toolbar) to scan and replace text colors inside highlighted regions using L1 color distance with custom tolerances.
 - Integrates EyeDropper tool (`🎯` button) for picking scan colors from document pixels.
 - Persists all recolor rules (active state, row toggles, colors, and tolerances) in the Convex DB `settings` table (with local storage cache fallback) to retain setup across reloads/devices.

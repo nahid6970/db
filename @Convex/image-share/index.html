@@ -4397,11 +4397,27 @@
       if (p) p.style.display = p.style.display === 'block' ? 'none' : 'block';
     };
 
+    window._paintColorIsTransparent = false;
+
     window.selectPaintColor = function(color) {
       const input = document.getElementById('paintColor');
       const btn = document.getElementById('paintColorBtn');
-      if (input) input.value = color;
-      if (btn) btn.style.background = color;
+      if (color === 'transparent') {
+        window._paintColorIsTransparent = true;
+        if (input) input.value = '#000000'; // dummy value
+        if (btn) {
+          btn.style.background = 'linear-gradient(45deg, #555 25%, transparent 25%, transparent 75%, #555 75%, #555), linear-gradient(45deg, #555 25%, #333 25%, #333 75%, #555 75%, #555)';
+          btn.style.backgroundSize = '8px 8px';
+          btn.style.backgroundPosition = '0 0, 4px 4px';
+        }
+      } else {
+        window._paintColorIsTransparent = false;
+        if (input) input.value = color;
+        if (btn) {
+          btn.style.background = color;
+          btn.style.backgroundImage = 'none';
+        }
+      }
       const p = document.getElementById('paintColorPickerPopup');
       if (p) p.style.display = 'none';
     };
@@ -4412,8 +4428,12 @@
     };
 
     window.onNativeColorChange = function(color) {
+      window._paintColorIsTransparent = false;
       const btn = document.getElementById('paintColorBtn');
-      if (btn) btn.style.background = color;
+      if (btn) {
+        btn.style.background = color;
+        btn.style.backgroundImage = 'none';
+      }
       const p = document.getElementById('paintColorPickerPopup');
       if (p) p.style.display = 'none';
     };
@@ -4538,7 +4558,7 @@
         '#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#008000',
         '#00ffff', '#38bdf8', '#0000ff', '#8b00ff', '#ff007f',
         '#000000', '#4b5563', '#9ca3af', '#e5e7eb', '#ffffff',
-        '#964b00', '#ff7f50', '#008080', '#000080', '#ffd700'
+        '#964b00', '#ff7f50', '#008080', '#000080', 'transparent'
       ];
       const grids = document.querySelectorAll('.paint-swatch-grid');
       grids.forEach(grid => {
@@ -4546,7 +4566,15 @@
         const type = grid.dataset.type;
         colors.forEach(c => {
           const div = document.createElement('div');
-          div.style.background = c;
+          if (c === 'transparent') {
+            div.style.backgroundImage = 'linear-gradient(45deg, #555 25%, transparent 25%, transparent 75%, #555 75%, #555), linear-gradient(45deg, #555 25%, #333 25%, #333 75%, #555 75%, #555)';
+            div.style.backgroundSize = '8px 8px';
+            div.style.backgroundPosition = '0 0, 4px 4px';
+            div.title = 'Transparent (Color text only)';
+          } else {
+            div.style.background = c;
+            div.title = c;
+          }
           div.style.width = '28px';
           div.style.height = '28px';
           div.style.borderRadius = '4px';
@@ -4805,6 +4833,7 @@
       
       const list = document.getElementById('paintRecolorRulesList');
       if (list) list.innerHTML = '';
+      window._paintColorIsTransparent = false;
     };
 
     function saveHistory() {
@@ -4940,6 +4969,22 @@
     }
 
     function drawShape(x, sx, sy, ex, ey, isFinal = false) {
+      if (window._paintColorIsTransparent) {
+        if (!isFinal) {
+          x.save();
+          x.strokeStyle = '#38bdf8';
+          x.setLineDash([4, 4]);
+          x.lineWidth = 1.5;
+          x.strokeRect(sx, sy, ex - sx, ey - sy);
+          x.restore();
+        } else {
+          if (document.getElementById('paintRecolorToggleBtn')?.dataset.checked === 'true') {
+            recolorTextInBox(x, sx, sy, ex, ey);
+          }
+        }
+        return;
+      }
+
       const color = document.getElementById('paintColor').value;
       const lw = parseInt(document.getElementById('paintSize').value);
       x.globalCompositeOperation = 'source-over';
