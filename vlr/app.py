@@ -273,6 +273,7 @@ def api_ignorelist_add():
         if t.get("name") and t["name"] not in existing_names:
             lst.append({"name": t["name"], "logo": t.get("logo", "")})
             existing_names.add(t["name"])
+            scraper.move_tournament_to_ignored(t["name"])
     save_ignorelist(lst)
     return jsonify({"status": "success", "ignorelist": lst})
 
@@ -281,6 +282,7 @@ def api_ignorelist_remove():
     tournament = (request.json or {}).get("tournament", "")
     lst = [t for t in load_ignorelist() if t["name"] != tournament]
     save_ignorelist(lst)
+    scraper.move_tournament_from_ignored(tournament)
     return jsonify({"status": "success", "ignorelist": lst})
 
 

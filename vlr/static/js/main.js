@@ -1204,7 +1204,7 @@ document.addEventListener("DOMContentLoaded", () => {
             card.innerHTML = `
                 <div class="match-card-header">
                     <div class="tournament-info">
-                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="tournament-logo" onerror="this.src='https://placehold.co/32x32/ff4655/ffffff?text=VLR';">` : '<div class="tournament-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="tournament-logo" onerror="this.src='https://placehold.co/32x32/ff4655/ffffff?text=VLR';" loading="lazy">` : '<div class="tournament-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                         <div class="tournament-name-container">
                             <span class="tournament-name" title="${m.tournament}">${m.tournament}</span>
                             <span class="tournament-series" title="${m.series}">${m.series || 'Main Event'}</span>
@@ -1218,7 +1218,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="match-card-body">
                     <div class="team-container team-1">
                         <div class="logo-wrapper ${t1WhiteClass}">
-                            ${m.team1_logo ? `<img src="${m.team1_logo}" class="team-logo" alt="${m.team1} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
+                            ${m.team1_logo ? `<img src="${m.team1_logo}" class="team-logo" alt="${m.team1} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" loading="lazy">` : '<div class="team-logo" style="display:none;"></div>'}
                             <div class="team-initial" style="display:${m.team1_logo ? 'none' : 'flex'};">${m.team1 ? m.team1[0].toUpperCase() : 'T'}</div>
                         </div>
                         <span class="team-name" title="${m.team1}">${m.team1}</span>
@@ -1231,7 +1231,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="team-container team-2">
                         <span class="team-name" title="${m.team2}">${m.team2}</span>
                         <div class="logo-wrapper ${t2WhiteClass}">
-                            ${m.team2_logo ? `<img src="${m.team2_logo}" class="team-logo" alt="${m.team2} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">` : '<div class="team-logo" style="display:none;"></div>'}
+                            ${m.team2_logo ? `<img src="${m.team2_logo}" class="team-logo" alt="${m.team2} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" loading="lazy">` : '<div class="team-logo" style="display:none;"></div>'}
                             <div class="team-initial" style="display:${m.team2_logo ? 'none' : 'flex'};">${m.team2 ? m.team2[0].toUpperCase() : 'T'}</div>
                         </div>
                     </div>
@@ -1334,7 +1334,7 @@ document.addEventListener("DOMContentLoaded", () => {
             label.innerHTML = `
                 <input type="checkbox" ${isChecked ? 'checked' : ''} class="tourney-checkbox" value="${name}">
                 <span class="custom-checkbox"></span>
-                ${logo ? `<img src="${logo}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';">` : '<div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                ${logo ? `<img src="${logo}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';" loading="lazy">` : '<div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                 <span class="tourney-label-text" title="${name}">${name}</span>
                 ${tournamentOrder[name] != null ? `<span class="tourney-pin-badge">#${tournamentOrder[name]}</span>` : ''}
             `;
@@ -1591,7 +1591,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         container.innerHTML = [...list].reverse().map(t => `
             <div class="ignore-item" data-name="${t.name}">
-                ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';" loading="lazy">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
                 <span class="ignore-item-name" title="${t.name}">${t.name}</span>
                 <button class="ignore-remove-btn" data-name="${t.name}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>

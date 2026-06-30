@@ -111,7 +111,7 @@
                             <input type="checkbox" {% if tourney not in unchecked_tournaments %}checked{% endif %} class="tourney-checkbox" value="{{ tourney }}">
                             <span class="custom-checkbox"></span>
                             {% if logo %}
-                            <img src="{{ logo }}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';">
+                            <img src="{{ logo }}" alt="" class="sidebar-tourney-logo" onerror="this.style.display='none';" loading="lazy">
                             {% else %}
                             <div class="sidebar-tourney-placeholder"><i class="fa-solid fa-trophy"></i></div>
                             {% endif %}
@@ -185,7 +185,7 @@
                             {% for t in ignore_list|reverse %}
                             <div class="ignore-item" data-name="{{ t.name }}">
                                 {% if t.logo %}
-                                <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';">
+                                <img src="{{ t.logo }}" class="ignore-item-logo" onerror="this.style.display='none';" loading="lazy">
                                 {% else %}
                                 <div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>
                                 {% endif %}

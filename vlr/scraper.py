@@ -13,6 +13,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 JSON_PATH = os.path.join(BASE_DIR, "matches.json")
 DB_PATH = os.path.join(BASE_DIR, "matches.db")
+IGNORED_DB_PATH = os.path.join(BASE_DIR, "ignored_matches.db")
 IMAGE_CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static", "images_cache")
 
 # Ensure image cache directory exists
@@ -99,7 +100,122 @@ def _ensure_db():
             conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_unix_timestamp ON matches(unix_timestamp)")
             conn.commit()
         _migrate_json_to_sqlite()
+        _migrate_ignored_tournaments_to_db()
         _db_initialized = True
+
+_ignored_db_initialized = False
+_ignored_db_init_lock = threading.Lock()
+IGNORELIST_PATH = os.path.join(BASE_DIR, "ignorelist.json")
+
+def _ensure_ignored_db():
+    global _ignored_db_initialized
+    if _ignored_db_initialized:
+        return
+    with _ignored_db_init_lock:
+        if _ignored_db_initialized:
+            return
+        with sqlite3.connect(IGNORED_DB_PATH, timeout=30) as conn:
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA synchronous=NORMAL")
+            conn.execute(
+                """
+                CREATE TABLE IF NOT EXISTS matches (
+                    id TEXT PRIMARY KEY,
+                    href TEXT,
+                    date TEXT,
+                    time TEXT,
+                    team1 TEXT,
+                    team2 TEXT,
+                    score1 TEXT,
+                    score2 TEXT,
+                    tournament TEXT,
+                    series TEXT,
+                    tournament_logo TEXT,
+                    eta TEXT,
+                    status TEXT,
+                    team1_logo TEXT,
+                    team2_logo TEXT,
+                    unix_timestamp INTEGER,
+                    bst_time TEXT,
+                    maps_json TEXT,
+                    players_json TEXT,
+                    last_updated INTEGER
+                )
+                """
+            )
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_tournament ON matches(tournament)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_status ON matches(status)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_matches_unix_timestamp ON matches(unix_timestamp)")
+            conn.commit()
+        _ignored_db_initialized = True
+
+def _load_ignore_names():
+    if not os.path.exists(IGNORELIST_PATH):
+        return set()
+    try:
+        with open(IGNORELIST_PATH, "r", encoding="utf-8") as f:
+            lst = json.load(f)
+            return {t["name"] for t in lst if isinstance(t, dict) and "name" in t}
+    except Exception:
+        return set()
+
+def move_tournament_to_ignored(tournament_name):
+    _ensure_db()
+    _ensure_ignored_db()
+    with _get_conn() as conn:
+        conn.execute("ATTACH DATABASE ? AS ignored_db", (IGNORED_DB_PATH,))
+        # Move matches to ignored DB
+        conn.execute("""
+            INSERT OR REPLACE INTO ignored_db.matches
+            SELECT * FROM main.matches WHERE tournament = ?
+        """, (tournament_name,))
+        # Delete from main DB
+        conn.execute("DELETE FROM main.matches WHERE tournament = ?", (tournament_name,))
+        conn.commit()
+    with _get_conn() as conn:
+        conn.execute("VACUUM")
+
+def move_tournament_from_ignored(tournament_name):
+    _ensure_db()
+    _ensure_ignored_db()
+    with _get_conn() as conn:
+        conn.execute("ATTACH DATABASE ? AS ignored_db", (IGNORED_DB_PATH,))
+        # Move matches to main DB
+        conn.execute("""
+            INSERT OR REPLACE INTO main.matches
+            SELECT * FROM ignored_db.matches WHERE tournament = ?
+        """, (tournament_name,))
+        # Delete from ignored DB
+        conn.execute("DELETE FROM ignored_db.matches WHERE tournament = ?", (tournament_name,))
+        conn.commit()
+    with sqlite3.connect(IGNORED_DB_PATH, timeout=30) as conn:
+        conn.execute("VACUUM")
+
+def _migrate_ignored_tournaments_to_db():
+    ignore_names = _load_ignore_names()
+    if not ignore_names:
+        return
+    _ensure_ignored_db()
+    migrated = False
+    with _get_conn() as conn:
+        placeholders = ",".join("?" for _ in ignore_names)
+        cur = conn.execute(f"SELECT COUNT(*) AS count FROM matches WHERE tournament IN ({placeholders})", list(ignore_names))
+        row = cur.fetchone()
+        if row and row["count"] > 0:
+            print(f"Migrating {row['count']} matches of ignored tournaments to ignored DB...")
+            conn.execute("ATTACH DATABASE ? AS ignored_db", (IGNORED_DB_PATH,))
+            conn.execute(f"""
+                INSERT OR REPLACE INTO ignored_db.matches
+                SELECT * FROM main.matches WHERE tournament IN ({placeholders})
+            """, list(ignore_names))
+            conn.execute(f"DELETE FROM main.matches WHERE tournament IN ({placeholders})", list(ignore_names))
+            conn.commit()
+            migrated = True
+    if migrated:
+        with _get_conn() as conn:
+            conn.execute("VACUUM")
+
+
 
 def _migrate_json_to_sqlite():
     if not os.path.exists(JSON_PATH):
@@ -846,10 +962,14 @@ def _upsert_matches_to_db(scraped_matches):
         if m["tournament_logo"]:
             m["tournament_logo"] = download_image(m["tournament_logo"])
 
-    rows = []
+    # Load ignore list
+    ignore_names = _load_ignore_names()
+
+    main_rows = []
+    ignored_rows = []
     now_ts = int(datetime.now().timestamp())
     for m in scraped_matches:
-        rows.append({
+        row = {
             "id": m["id"],
             "href": m["href"],
             "date": m.get("date", ""),
@@ -870,12 +990,25 @@ def _upsert_matches_to_db(scraped_matches):
             "maps_json": _json_dumps([]),
             "players_json": _json_dumps({}),
             "last_updated": now_ts,
-        })
+        }
+        if m.get("tournament") in ignore_names:
+            ignored_rows.append(row)
+        else:
+            main_rows.append(row)
 
     _ensure_db()
-    with _get_conn() as conn:
-        _bulk_upsert_rows(conn, rows)
-        conn.commit()
+    if main_rows:
+        with _get_conn() as conn:
+            _bulk_upsert_rows(conn, main_rows)
+            conn.commit()
+
+    if ignored_rows:
+        _ensure_ignored_db()
+        with sqlite3.connect(IGNORED_DB_PATH, timeout=30) as conn:
+            conn.execute("PRAGMA journal_mode=WAL")
+            conn.execute("PRAGMA synchronous=NORMAL")
+            _bulk_upsert_rows(conn, ignored_rows)
+            conn.commit()
 
 
 RESULTS_PAGES = 5  # Default number of result pages to fetch (each page ~20 matches)
