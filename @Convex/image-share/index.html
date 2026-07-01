@@ -4496,8 +4496,9 @@
       
       const list = document.getElementById('paintRecolorRulesList');
       if (active && list && list.children.length === 0) {
-        window.addRecolorRuleRow('#000000', '#ffffff', 60, true);
+        window.addRecolorRuleRow('#000000', '#ffffff', 60, false);
       }
+      window.saveRecolorRulesToStorage();
     };
 
     window.addRecolorRuleRow = function(scanColor = '#000000', targetColor = '#ffffff', tolerance = 60, saveToStorage = true) {
@@ -4519,6 +4520,11 @@
         <button class="delete-rule-btn" style="background:none;border:none;color:#ef4444;cursor:pointer;font-size:14px;padding:0 4px;font-weight:600;line-height:1;margin-left:4px;">&times;</button>
       `;
       
+      row.querySelector('.rule-enabled-checkbox').onchange = () => window.saveRecolorRulesToStorage();
+      row.querySelector('.scan-color-input').onchange = () => window.saveRecolorRulesToStorage();
+      row.querySelector('.target-color-input').onchange = () => window.saveRecolorRulesToStorage();
+      row.querySelector('.tolerance-input').onchange = () => window.saveRecolorRulesToStorage();
+
       row.querySelector('.pick-color-btn').onclick = () => {
         if (!window.EyeDropper) {
           alert('Eye Dropper is not supported in this browser.');
