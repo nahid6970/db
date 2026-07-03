@@ -767,7 +767,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             try {
-                const data = await fetch(`/api/match/${match.id}`).then(r => r.json());
+                const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
                 if (data && !data.error) {
                     const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
                     if (idx !== -1) {
