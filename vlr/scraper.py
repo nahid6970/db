@@ -415,19 +415,30 @@ def load_tournament_overview(exclude_tournaments=None):
             clauses.append(f"tournament NOT IN ({placeholders})")
             params.extend(names)
     where_sql = f"WHERE {' AND '.join(clauses)}" if clauses else ""
+    import time as _time
+    now_ts = int(_time.time())
     query = f"""
         SELECT
             tournament,
             MAX(tournament_logo) AS tournament_logo,
             MIN(unix_timestamp) AS first_match,
-            SUM(CASE WHEN (LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]')) OR LOWER(status) IN ('upcoming', 'live') THEN 1 ELSE 0 END) AS missing_stats
+            SUM(CASE
+                -- Completed matches with no map data are truly missing stats
+                WHEN LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]') THEN 1
+                -- Non-completed matches whose scheduled time has already passed need a re-scan
+                WHEN LOWER(status) IN ('upcoming', 'live') AND unix_timestamp IS NOT NULL AND unix_timestamp > 0 AND unix_timestamp <= ? THEN 1
+                -- Non-completed matches with no timestamp at all need a scan too
+                WHEN LOWER(status) IN ('upcoming', 'live') AND (unix_timestamp IS NULL OR unix_timestamp = 0) THEN 1
+                ELSE 0
+            END) AS missing_stats
         FROM matches
         {where_sql}
         GROUP BY tournament
         ORDER BY tournament
     """
+    params_with_ts = [now_ts] + params
     with _get_conn() as conn:
-        rows = conn.execute(query, params).fetchall()
+        rows = conn.execute(query, params_with_ts).fetchall()
     return [
         {
             "tournament": row["tournament"],

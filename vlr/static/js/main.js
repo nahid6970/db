@@ -677,11 +677,15 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const status = (m.status || "").toLowerCase();
             if (status === "completed") {
+                // Completed matches without map stats need fetching
                 const hasStats = m.maps && m.maps.length > 0;
                 return !hasStats;
             } else {
-                const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
-                return !hasTime;
+                // Upcoming/live matches are always considered pending:
+                // - If their time has passed, they may now have results to fetch
+                // - If their time is in the future, they will need fetching later
+                // Either way, count them so the button stays visible for future scans
+                return true;
             }
         });
     }
@@ -727,6 +731,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadMissingStatsProgress.textContent = ` ${i + 1}/${total}`;
             }
 
+            // Skip upcoming matches whose scheduled time is still in the future —
+            // they haven't been played yet so there are no stats to fetch.
+            // They stay in the count so the button remains visible for future scans.
+            const matchStatus = (match.status || "").toLowerCase();
+            const matchTimestamp = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
+            const nowMs = Date.now();
+            if (matchStatus !== "completed" && matchTimestamp > nowMs) {
+                continue;
+            }
+
             try {
                 const data = await fetch(`/api/match/${match.id}`).then(r => r.json());
                 if (data && !data.error) {
@@ -769,21 +783,27 @@ document.addEventListener("DOMContentLoaded", () => {
                         const label = document.querySelector(`#tournament-checklist .tourney-item[data-tourney-name="${CSS.escape(data.tournament)}"]`);
                         if (label) {
                             const tourneyMatches = INITIAL_MATCHES.filter(m => m.tournament === data.tournament);
+                            const nowMs = Date.now();
                             let isFullyLoaded = true;
                             for (const m of tourneyMatches) {
                                 const status = (m.status || "").toLowerCase();
                                 if (status === "completed") {
+                                    // Completed matches must have stats
                                     const hasStats = m.maps && m.maps.length > 0;
                                     if (!hasStats) {
                                         isFullyLoaded = false;
                                         break;
                                     }
                                 } else {
-                                    const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
-                                    if (!hasTime) {
+                                    // Non-completed (upcoming/live): if the match time has passed
+                                    // but it still isn't completed with stats, it needs a fetch
+                                    const matchTs = m.unix_timestamp ? m.unix_timestamp * 1000 : 0;
+                                    if (matchTs > 0 && matchTs <= nowMs) {
+                                        // Time has passed but still not completed with stats → not loaded
                                         isFullyLoaded = false;
                                         break;
                                     }
+                                    // If time is in the future (or unknown), it's genuinely pending — don't block fully-loaded
                                 }
                             }
                             if (isFullyLoaded) {
