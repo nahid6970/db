@@ -693,18 +693,51 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(updateCountdowns, 1000);
     updateCountdowns();
 
+    // Shared helper: true if a match has player stats (actual values) loaded for at least one map
+    function matchHasPlayerStats(m) {
+        const players = m.players;
+        if (!players || typeof players !== "object") return false;
+
+        function hasRealStats(mapData) {
+            if (!mapData) return false;
+            for (const teamKey of ["team1", "team2"]) {
+                const team = mapData[teamKey];
+                if (!team || !team.length) continue;
+                // Check at least one player has a non-empty stat value
+                for (const p of team) {
+                    if (p.rating || p.acs || p.k || p.d || p.a) return true;
+                }
+            }
+            return false;
+        }
+
+        // Check the aggregate "all" key first
+        if (hasRealStats(players["all"])) return true;
+
+        // Also check per-map keys (0, 1, 2...)
+        for (const key of Object.keys(players)) {
+            if (key === "all") continue;
+            if (hasRealStats(players[key])) return true;
+        }
+        return false;
+    }
+
     // 2b. Missing Stats Loader Logic
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
         return INITIAL_MATCHES.filter(m => {
             const isChecked = checkedTournaments.has(m.tournament);
             if (!isChecked) return false;
-            
+
+            // Explicitly flagged by the analyze button — always include
+            if (m._needs_refetch) return true;
+
             const status = (m.status || "").toLowerCase();
             if (status === "completed") {
-                // Completed matches without map stats need fetching
-                const hasStats = m.maps && m.maps.length > 0;
-                return !hasStats;
+                // Need fetching if: no maps at all, OR maps exist but no player stats loaded
+                const hasMaps = m.maps && m.maps.length > 0;
+                if (!hasMaps) return true;
+                return !matchHasPlayerStats(m);
             } else {
                 // Upcoming/live matches are always considered pending:
                 // - If their time has passed, they may now have results to fetch
@@ -730,6 +763,67 @@ document.addEventListener("DOMContentLoaded", () => {
             loadMissingStatsBtn.style.display = "none";
         }
     }
+
+    // Analyze button — scans scored matches missing player stats and flags them for collection
+    const analyzeBtn = document.getElementById("btn-analyze-stats");
+    analyzeBtn?.addEventListener("click", () => {
+        if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return;
+
+        let flagged = 0;
+        INITIAL_MATCHES.forEach(m => {
+            if (!checkedTournaments.has(m.tournament)) return;
+
+            // A match has a score if both score1 and score2 are non-empty digits
+            const hasScore = m.score1 !== "" && m.score1 !== null && m.score1 !== undefined &&
+                             m.score2 !== "" && m.score2 !== null && m.score2 !== undefined &&
+                             !isNaN(parseInt(m.score1)) && !isNaN(parseInt(m.score2));
+            if (!hasScore) return;
+
+            // Check if player stats are missing
+            const hasPlayerStats = matchHasPlayerStats(m);
+
+            if (!hasPlayerStats) {
+                // Flag for collection — force status to completed so getMissingStatsMatches picks it up
+                m._needs_refetch = true;
+                if ((m.status || "").toLowerCase() !== "completed") {
+                    m.status = "Completed";
+                }
+                // Clear maps so the no-player-stats branch triggers
+                if (!m.maps || m.maps.length === 0) {
+                    m.maps = [];
+                }
+                flagged++;
+            }
+        });
+
+        // Update the load button to reflect newly flagged matches
+        updateMissingStatsLoaderButton();
+
+        // Visual feedback on analyze button
+        const icon = analyzeBtn.querySelector("i");
+        if (flagged > 0) {
+            analyzeBtn.title = `Found ${flagged} scored match${flagged > 1 ? "es" : ""} missing player stats — click Collect to load them`;
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${flagged} Flagged`;
+            analyzeBtn.style.color = "var(--accent-red)";
+            analyzeBtn.style.borderColor = "rgba(255,70,85,0.4)";
+            analyzeBtn.style.background = "rgba(255,70,85,0.08)";
+        } else {
+            analyzeBtn.title = "All scored matches have player stats";
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> All Good`;
+            analyzeBtn.style.color = "var(--accent-green)";
+            analyzeBtn.style.borderColor = "rgba(0,245,155,0.3)";
+            analyzeBtn.style.background = "rgba(0,245,155,0.05)";
+        }
+
+        // Reset analyze button appearance after 5 seconds
+        setTimeout(() => {
+            analyzeBtn.title = "Scan scored matches for missing player stats";
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> Analyze`;
+            analyzeBtn.style.color = "var(--accent-yellow, #f5c518)";
+            analyzeBtn.style.borderColor = "rgba(245,197,24,0.3)";
+            analyzeBtn.style.background = "rgba(245,197,24,0.05)";
+        }, 5000);
+    });
 
     loadMissingStatsBtn?.addEventListener("click", async () => {
         const missing = getMissingStatsMatches();
@@ -772,6 +866,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
                     if (idx !== -1) {
                         INITIAL_MATCHES[idx] = data;
+                        delete INITIAL_MATCHES[idx]._needs_refetch; // clear analyze flag
                     }
                     
                     const card = document.querySelector(`.match-card[data-id="${data.id}"]`);

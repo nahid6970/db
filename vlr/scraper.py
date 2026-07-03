@@ -423,8 +423,11 @@ def load_tournament_overview(exclude_tournaments=None):
             MAX(tournament_logo) AS tournament_logo,
             MIN(unix_timestamp) AS first_match,
             SUM(CASE
-                -- Completed matches with no map data are truly missing stats
+                -- Completed matches with no map data are missing stats
                 WHEN LOWER(status) = 'completed' AND (maps_json IS NULL OR maps_json = '[]') THEN 1
+                -- Completed matches with maps but no player stats (players_json has no "all" key data)
+                WHEN LOWER(status) = 'completed' AND maps_json IS NOT NULL AND maps_json != '[]'
+                     AND (players_json IS NULL OR players_json = '{{}}' OR players_json NOT LIKE '%"all"%') THEN 1
                 -- Non-completed matches whose scheduled time has already passed need a re-scan
                 WHEN LOWER(status) IN ('upcoming', 'live') AND unix_timestamp IS NOT NULL AND unix_timestamp > 0 AND unix_timestamp <= ? THEN 1
                 -- Non-completed matches with no timestamp at all need a scan too
