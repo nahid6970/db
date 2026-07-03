@@ -282,7 +282,10 @@ def api_ignorelist_remove():
     tournament = (request.json or {}).get("tournament", "")
     lst = [t for t in load_ignorelist() if t["name"] != tournament]
     save_ignorelist(lst)
-    scraper.move_tournament_from_ignored(tournament)
+    try:
+        scraper.move_tournament_from_ignored(tournament)
+    except Exception as e:
+        print(f"Warning: move_tournament_from_ignored failed for '{tournament}': {e}")
     return jsonify({"status": "success", "ignorelist": lst})
 
 

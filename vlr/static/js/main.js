@@ -1495,6 +1495,7 @@ document.addEventListener("DOMContentLoaded", () => {
     settingsBtn?.addEventListener("click", () => {
         tabBtnIgnore?.click(); // reset to ignore tab by default when opened
         settingsModal.style.display = "flex";
+        bindIgnoreRemoveBtns(); // attach handlers to server-rendered X buttons
     });
     settingsCloseBtn?.addEventListener("click", () => {
         settingsModal.style.display = "none";
@@ -1708,13 +1709,15 @@ document.addEventListener("DOMContentLoaded", () => {
             container.innerHTML = `<p class="ignore-empty">No tournaments ignored.</p>`;
             return;
         }
-        container.innerHTML = [...list].reverse().map(t => `
-            <div class="ignore-item" data-name="${t.name}">
+        container.innerHTML = [...list].reverse().map(t => {
+            const safeName = t.name.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            return `
+            <div class="ignore-item" data-name="${safeName}">
                 ${t.logo ? `<img src="${t.logo}" class="ignore-item-logo" onerror="this.style.display='none';" loading="lazy">` : '<div class="ignore-item-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
-                <span class="ignore-item-name" title="${t.name}">${t.name}</span>
-                <button class="ignore-remove-btn" data-name="${t.name}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
+                <span class="ignore-item-name" title="${safeName}">${safeName}</span>
+                <button class="ignore-remove-btn" data-name="${safeName}" title="Remove from ignore list"><i class="fa-solid fa-circle-xmark"></i></button>
             </div>
-        `).join("");
+        `}).join("");
         bindIgnoreRemoveBtns();
         applyIgnoreFilters();
     }
