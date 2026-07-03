@@ -777,6 +777,50 @@ document.addEventListener("DOMContentLoaded", () => {
                                 </div>
                             `;
                         }
+
+                        // Update team 1 name and logo if it was previously TBD and is now resolved
+                        const t1NameEl = card.querySelector(".team-1 .team-name");
+                        const t1LogoWrapper = card.querySelector(".team-1 .logo-wrapper");
+                        if (t1NameEl && data.team1 && data.team1 !== "TBD") {
+                            t1NameEl.textContent = data.team1;
+                            t1NameEl.title = data.team1;
+                            if (t1LogoWrapper && data.team1_logo) {
+                                const existingImg = t1LogoWrapper.querySelector(".team-logo");
+                                const initialDiv = t1LogoWrapper.querySelector(".team-initial");
+                                if (existingImg) {
+                                    existingImg.src = data.team1_logo;
+                                    existingImg.alt = `${data.team1} logo`;
+                                    existingImg.style.display = "";
+                                    existingImg.onerror = function() { this.style.display = "none"; if (initialDiv) initialDiv.style.display = "flex"; };
+                                }
+                                if (initialDiv) {
+                                    initialDiv.style.display = "none";
+                                    initialDiv.textContent = data.team1[0].toUpperCase();
+                                }
+                            }
+                        }
+
+                        // Update team 2 name and logo if it was previously TBD and is now resolved
+                        const t2NameEl = card.querySelector(".team-2 .team-name");
+                        const t2LogoWrapper = card.querySelector(".team-2 .logo-wrapper");
+                        if (t2NameEl && data.team2 && data.team2 !== "TBD") {
+                            t2NameEl.textContent = data.team2;
+                            t2NameEl.title = data.team2;
+                            if (t2LogoWrapper && data.team2_logo) {
+                                const existingImg = t2LogoWrapper.querySelector(".team-logo");
+                                const initialDiv = t2LogoWrapper.querySelector(".team-initial");
+                                if (existingImg) {
+                                    existingImg.src = data.team2_logo;
+                                    existingImg.alt = `${data.team2} logo`;
+                                    existingImg.style.display = "";
+                                    existingImg.onerror = function() { this.style.display = "none"; if (initialDiv) initialDiv.style.display = "flex"; };
+                                }
+                                if (initialDiv) {
+                                    initialDiv.style.display = "none";
+                                    initialDiv.textContent = data.team2[0].toUpperCase();
+                                }
+                            }
+                        }
                     }
 
                     if (data.tournament) {
