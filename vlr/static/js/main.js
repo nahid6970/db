@@ -40,6 +40,31 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadMissingStatsProgress = document.getElementById("load-missing-stats-progress");
     const refreshBtn = document.getElementById("refresh-data-btn");
     const matchesGrid = document.getElementById("matches-grid-container");
+
+    // Sidebar collapse / expand
+    const filterSidebar = document.getElementById("filter-sidebar");
+    const collapseBtn = document.getElementById("btn-collapse-sidebar");
+    const expandBtn = document.getElementById("btn-expand-sidebar");
+
+    function setSidebarCollapsed(collapsed) {
+        if (!filterSidebar) return;
+        if (collapsed) {
+            filterSidebar.classList.add("sidebar-collapsed");
+            if (expandBtn) expandBtn.classList.add("visible");
+        } else {
+            filterSidebar.classList.remove("sidebar-collapsed");
+            if (expandBtn) expandBtn.classList.remove("visible");
+        }
+        sessionStorage.setItem("sidebarCollapsed", collapsed ? "1" : "0");
+    }
+
+    // Restore saved state
+    if (sessionStorage.getItem("sidebarCollapsed") === "1") {
+        setSidebarCollapsed(true);
+    }
+
+    collapseBtn?.addEventListener("click", () => setSidebarCollapsed(true));
+    expandBtn?.addEventListener("click", () => setSidebarCollapsed(false));
     
     function updateLoadMissingStatsButton() {
         if (loadMissingStatsBtn) {
