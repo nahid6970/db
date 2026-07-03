@@ -803,13 +803,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const icon = analyzeBtn.querySelector("i");
         if (flagged > 0) {
             analyzeBtn.title = `Found ${flagged} scored match${flagged > 1 ? "es" : ""} missing player stats — click Collect to load them`;
-            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i> ${flagged} Flagged`;
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-exclamation"></i>`;
             analyzeBtn.style.color = "var(--accent-red)";
             analyzeBtn.style.borderColor = "rgba(255,70,85,0.4)";
             analyzeBtn.style.background = "rgba(255,70,85,0.08)";
         } else {
             analyzeBtn.title = "All scored matches have player stats";
-            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i> All Good`;
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-circle-check"></i>`;
             analyzeBtn.style.color = "var(--accent-green)";
             analyzeBtn.style.borderColor = "rgba(0,245,155,0.3)";
             analyzeBtn.style.background = "rgba(0,245,155,0.05)";
@@ -818,7 +818,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Reset analyze button appearance after 5 seconds
         setTimeout(() => {
             analyzeBtn.title = "Scan scored matches for missing player stats";
-            analyzeBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i> Analyze`;
+            analyzeBtn.innerHTML = `<i class="fa-solid fa-magnifying-glass-chart"></i>`;
             analyzeBtn.style.color = "var(--accent-yellow, #f5c518)";
             analyzeBtn.style.borderColor = "rgba(245,197,24,0.3)";
             analyzeBtn.style.background = "rgba(245,197,24,0.05)";
