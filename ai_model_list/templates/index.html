@@ -561,11 +561,12 @@
             </a>
             <!-- Sidebar Navigation Links generated dynamically -->
             {% for section in sections %}
+                {% set section_index = loop.index0 %}
                 {% if section.categories %}
                     <div class="nav-section-title">{{ section.name }}</div>
                     {% for cat in section.categories %}
                         {% if cat['items'] %}
-                            <a href="#cat-{{ loop.parent.index0 }}-{{ loop.index0 }}" class="nav-link">
+                            <a href="#cat-{{ section_index }}-{{ loop.index0 }}" class="nav-link">
                                 {% if 'Chat' in cat.name %}
                                     <i class="fa-regular fa-comment-dots"></i>
                                 {% elif 'Media' in cat.name %}
@@ -609,6 +610,7 @@
         <!-- Render parsed checklists in compact tables -->
         <div class="workspace">
             {% for section in sections %}
+                {% set section_index = loop.index0 %}
                 {% if section.categories %}
                     <div class="section-group" data-section="{{ section.name }}">
                         <div class="section-header">
@@ -624,7 +626,7 @@
 
                         {% for cat in section.categories %}
                             {% if cat['items'] %}
-                                <div class="category-group" id="cat-{{ loop.parent.index0 }}-{{ loop.index0 }}">
+                                <div class="category-group" id="cat-{{ section_index }}-{{ loop.index0 }}">
                                     <div class="category-header">
                                         {% if 'Chat' in cat.name %}
                                             <i class="fa-regular fa-comment-dots"></i>
