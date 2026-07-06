@@ -101,7 +101,7 @@ def parse_md():
                 name = link_cell.replace('`', '').strip()
                 url = name if name.startswith('http') else ''
 
-            if not name:
+            if not name or not url or url.startswith('#'):
                 continue
 
             # Get remaining columns

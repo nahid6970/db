@@ -13,9 +13,10 @@
     
     <style>
         :root {
-            --bg-primary: #0b0f19;
-            --bg-secondary: #111827;
-            --bg-card: #1f2937;
+            --bg-primary: #080b11;
+            --bg-secondary: #0f131a;
+            --bg-card: #151b26;
+            --bg-card-hover: #1c2433;
             --accent-purple: #8b5cf6;
             --accent-blue: #3b82f6;
             --accent-green: #10b981;
@@ -23,8 +24,8 @@
             --accent-yellow: #f59e0b;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --border-color: #374151;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --border-color: #242f41;
+            --transition: all 0.25s ease;
         }
 
         * {
@@ -37,442 +38,487 @@
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-main);
-            line-height: 1.6;
-            padding-bottom: 60px;
-        }
-
-        h1, h2, h3, h4 {
-            font-family: 'Outfit', sans-serif;
-            font-weight: 700;
-        }
-
-        header {
-            background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 1px solid var(--border-color);
-            position: relative;
+            display: flex;
+            height: 100vh;
             overflow: hidden;
         }
 
-        header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.1) 0%, transparent 60%);
-            pointer-events: none;
+        /* Sidebar Styling */
+        aside {
+            width: 320px;
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 10;
         }
 
-        .header-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--border-color);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
         }
 
         .logo {
-            font-size: 2.5rem;
-            background: linear-gradient(to right, #a78bfa, #60a5fa);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #c084fc, #6366f1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
         }
 
-        .subtitle {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Stats Grid */
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .stat-card {
-            background: rgba(31, 41, 55, 0.6);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 15px;
-            backdrop-filter: blur(10px);
-            transition: var(--transition);
-        }
-
-        .stat-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--accent-purple);
-        }
-
-        .stat-val {
-            font-size: 1.8rem;
-            font-weight: 700;
-            font-family: 'Outfit', sans-serif;
-            color: #fff;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
+        .logo-sub {
+            font-size: 0.75rem;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        /* Main Container */
-        .container {
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
+        .sidebar-stats {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
         }
 
-        /* Toolbar / Filters */
-        .toolbar {
-            background: var(--bg-secondary);
+        .stat-box {
+            background: rgba(255, 255, 255, 0.02);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 30px;
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-box:hover {
+            border-color: var(--accent-purple);
+            background: rgba(139, 92, 246, 0.05);
+        }
+
+        .stat-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .sidebar-nav {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+
+        .nav-section-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.8rem;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin: 15px 10px 8px 10px;
+            font-weight: 600;
+        }
+
+        .nav-link {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-link.active {
+            border-left: 3px solid var(--accent-purple);
+            border-radius: 0 8px 8px 0;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        /* Main Content Container */
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-primary);
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* Top Toolbar */
+        .toolbar {
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 30px;
+            display: flex;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .search-wrapper {
-            position: relative;
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .search-wrapper i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .search-input {
-            width: 100%;
-            background: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            padding: 12px 15px 12px 45px;
-            border-radius: 10px;
-            color: var(--text-main);
-            font-family: inherit;
-            outline: none;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            border-color: var(--accent-purple);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--transition);
-        }
-
-        .filter-btn:hover, .filter-btn.active {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
-            color: #fff;
-        }
-
-        /* Section Layout */
-        .section-block {
-            margin-bottom: 50px;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border-left: 4px solid var(--accent-blue);
-            padding-left: 15px;
-        }
-
-        .category-block {
-            margin-bottom: 30px;
-            background: rgba(17, 24, 39, 0.4);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(55, 65, 81, 0.5);
-        }
-
-        .category-title {
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            color: #93c5fd;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
 
-        /* Item Card */
-        .item-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+        .search-container {
             position: relative;
+            width: 350px;
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .search-bar {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 12px 10px 38px;
+            color: #fff;
+            outline: none;
+            font-family: inherit;
+            font-size: 0.85rem;
             transition: var(--transition);
         }
 
-        .item-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
-            border-color: rgba(139, 92, 246, 0.4);
+        .search-bar:focus {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
         }
 
-        /* Border indicator based on status */
-        .item-card.status-working {
-            border-left: 4px solid var(--accent-green);
-        }
-        .item-card.status-broken {
-            border-left: 4px solid var(--accent-red);
-        }
-        .item-card.status-untested {
-            border-left: 4px solid var(--text-muted);
-        }
-
-        .card-header {
+        .filter-tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            gap: 10px;
+            gap: 8px;
+            background: var(--bg-primary);
+            padding: 4px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
         }
 
-        .card-title-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-title {
-            font-size: 1.15rem;
+        .filter-tab {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            font-size: 0.8rem;
             font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .filter-tab:hover {
             color: #fff;
-            text-decoration: none;
+        }
+
+        .filter-tab.active {
+            background: var(--bg-card);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-tab.active[data-filter="working"] { color: var(--accent-green); }
+        .filter-tab.active[data-filter="broken"] { color: var(--accent-red); }
+        .filter-tab.active[data-filter="favorites"] { color: var(--accent-yellow); }
+
+        /* Data Workspace / Table view */
+        .workspace {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .section-header {
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .category-group {
+            margin-bottom: 35px;
+        }
+
+        .category-header {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
             gap: 8px;
+        }
+
+        /* Modern Table Styling */
+        .table-wrapper {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.85rem;
+        }
+
+        th {
+            background: rgba(255, 255, 255, 0.01);
+            color: var(--text-muted);
+            font-weight: 600;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--border-color);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr {
             transition: var(--transition);
         }
 
-        .card-title:hover {
-            color: var(--accent-blue);
+        tr:hover {
+            background: var(--bg-card-hover);
         }
 
-        .favorite-btn {
+        /* Favorite Star in table */
+        .fav-cell {
+            width: 50px;
+            text-align: center;
+        }
+
+        .fav-star {
             background: none;
             border: none;
             color: var(--text-muted);
             cursor: pointer;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             transition: var(--transition);
         }
 
-        .favorite-btn.active {
+        .fav-star:hover {
+            transform: scale(1.15);
+        }
+
+        .fav-star.active {
             color: var(--accent-yellow);
         }
 
-        .favorite-btn:hover {
-            transform: scale(1.2);
+        /* Status Badge in table */
+        .status-cell {
+            width: 120px;
         }
 
-        /* Badges */
-        .badge-list {
-            display: flex;
-            flex-wrap: wrap;
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
             gap: 5px;
-            margin-bottom: 15px;
-        }
-
-        .badge {
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 500;
+            font-weight: 600;
             text-transform: uppercase;
         }
 
-        .badge-status {
-            background: #374151;
-            color: var(--text-main);
+        .status-pill.untested {
+            background: rgba(156, 163, 175, 0.1);
+            color: var(--text-muted);
         }
 
-        .badge-status.working {
-            background: rgba(16, 185, 129, 0.2);
+        .status-pill.working {
+            background: rgba(16, 185, 129, 0.1);
             color: var(--accent-green);
         }
 
-        .badge-status.broken {
-            background: rgba(239, 68, 68, 0.2);
+        .status-pill.broken {
+            background: rgba(239, 68, 68, 0.15);
             color: var(--accent-red);
         }
 
-        .badge-extra {
-            background: rgba(59, 130, 246, 0.15);
+        /* Name / URL Column */
+        .name-cell {
+            font-weight: 600;
+            color: #fff;
+            min-width: 200px;
+        }
+
+        .name-link {
+            color: #fff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+
+        .name-link:hover {
+            color: var(--accent-blue);
+        }
+
+        /* Details / Meta Column */
+        .details-cell {
+            max-width: 350px;
+        }
+
+        .meta-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .meta-tag {
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.15);
             color: #93c5fd;
-            max-width: 100%;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            max-width: 250px;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space: nowrap;
         }
 
-        /* Details list inside card */
-        .card-details {
-            margin-bottom: 15px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            flex-grow: 1;
+        /* Notes Column */
+        .notes-cell {
+            min-width: 200px;
         }
 
-        .detail-row {
-            margin-bottom: 6px;
-            display: flex;
-            flex-direction: column;
+        .note-input-wrapper {
+            position: relative;
         }
 
-        .detail-label {
-            font-weight: 600;
-            color: #9ca3af;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-        }
-
-        .detail-val {
-            color: #d1d5db;
-        }
-
-        /* Note section */
-        .notes-section {
-            margin-top: 15px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 12px;
-        }
-
-        .notes-input {
+        .note-input {
             width: 100%;
-            background: rgba(17, 24, 39, 0.5);
+            background: rgba(0, 0, 0, 0.2);
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-main);
             font-family: inherit;
             font-size: 0.8rem;
-            padding: 8px;
-            resize: vertical;
-            min-height: 40px;
+            padding: 8px 12px;
             outline: none;
             transition: var(--transition);
         }
 
-        .notes-input:focus {
+        .note-input:focus {
             border-color: var(--accent-purple);
+            background: rgba(0, 0, 0, 0.4);
         }
 
-        /* Action Buttons */
-        .action-bar {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
+        /* Actions Column */
+        .actions-cell {
+            width: 160px;
+            text-align: right;
         }
 
-        .action-btn {
-            flex: 1;
-            padding: 8px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
+        .action-buttons {
+            display: inline-flex;
+            gap: 6px;
+        }
+
+        .btn-action {
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid var(--border-color);
-            background: transparent;
-            color: var(--text-main);
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
             transition: var(--transition);
         }
 
-        .action-btn.btn-working:hover, .action-btn.btn-working.active {
-            background: var(--accent-green);
+        .btn-action:hover {
+            background: var(--bg-card-hover);
+            color: #fff;
+        }
+
+        .btn-action.active-work, .btn-action.btn-work:hover {
+            background: rgba(16, 185, 129, 0.1);
             border-color: var(--accent-green);
-            color: #fff;
+            color: var(--accent-green);
         }
 
-        .action-btn.btn-broken:hover, .action-btn.btn-broken.active {
-            background: var(--accent-red);
+        .btn-action.active-broken, .btn-action.btn-broken:hover {
+            background: rgba(239, 68, 68, 0.1);
             border-color: var(--accent-red);
-            color: #fff;
+            color: var(--accent-red);
         }
 
-        .action-btn.btn-untest:hover {
-            background: var(--text-muted);
+        .btn-action.btn-reset:hover {
+            background: rgba(156, 163, 175, 0.1);
             border-color: var(--text-muted);
             color: #fff;
         }
 
-        /* Toast notification */
+        /* Toast notifications */
         .toast {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 24px;
+            right: 24px;
             background: var(--bg-card);
+            border: 1px solid var(--border-color);
             border-left: 4px solid var(--accent-purple);
             color: #fff;
-            padding: 15px 25px;
+            padding: 16px 24px;
             border-radius: 8px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 1000;
+            font-size: 0.85rem;
         }
 
         .toast.show {
@@ -483,164 +529,215 @@
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <h1 class="logo"><i class="fa-solid fa-wand-magic-sparkles"></i> Spend $0 on AI Models</h1>
-            <p class="subtitle">A dynamic directory parsed from markdown to let you test, verify, bookmark, and review the best free AI resources.</p>
-            
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-total">0</div>
-                    <div class="stat-label">Total Tools</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-working" style="color: var(--accent-green);">0</div>
-                    <div class="stat-label">Working</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-broken" style="color: var(--accent-red);">0</div>
-                    <div class="stat-label">Broken</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-val" id="stat-favorites" style="color: var(--accent-yellow);">0</div>
-                    <div class="stat-label">Favorites</div>
-                </div>
-            </div>
+    <!-- Sidebar Section -->
+    <aside>
+        <div class="sidebar-header">
+            <h1 class="logo"><i class="fa-solid fa-cube"></i> Spend $0 AI</h1>
+            <div class="logo-sub">Directory Checklist</div>
         </div>
-    </header>
 
-    <div class="container">
-        <!-- Toolbar Filters -->
-        <div class="toolbar">
-            <div class="search-wrapper">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search-bar" class="search-input" placeholder="Search by name, models, limits...">
+        <div class="sidebar-stats">
+            <div class="stat-box">
+                <div class="stat-value" id="stat-total">0</div>
+                <div class="stat-label">Total</div>
             </div>
-            
-            <div class="filter-group">
-                <button class="filter-btn active" data-filter="all">
-                    <i class="fa-solid fa-list"></i> All
-                </button>
-                <button class="filter-btn" data-filter="working">
-                    <i class="fa-solid fa-circle-check"></i> Working
-                </button>
-                <button class="filter-btn" data-filter="broken">
-                    <i class="fa-solid fa-circle-xmark"></i> Broken
-                </button>
-                <button class="filter-btn" data-filter="favorites">
-                    <i class="fa-solid fa-star"></i> Favorites
-                </button>
-                <button class="filter-btn" data-filter="untested">
-                    <i class="fa-solid fa-circle-question"></i> Untested
-                </button>
+            <div class="stat-box">
+                <div class="stat-value" id="stat-working" style="color: var(--accent-green);">0</div>
+                <div class="stat-label">Working</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="stat-broken" style="color: var(--accent-red);">0</div>
+                <div class="stat-label">Broken</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-value" id="stat-favorites" style="color: var(--accent-yellow);">0</div>
+                <div class="stat-label">Starred</div>
             </div>
         </div>
 
-        <!-- Render parsed content -->
-        {% for section in sections %}
-            {% if section.categories %}
-                <div class="section-block" data-section="{{ section.name }}">
-                    <h2 class="section-title">
-                        {% if 'No Signup' in section.name %}
-                            <i class="fa-solid fa-user-slash" style="color: var(--accent-green);"></i>
-                        {% else %}
-                            <i class="fa-solid fa-user-lock" style="color: var(--accent-red);"></i>
-                        {% endif %}
-                        {{ section.name }}
-                    </h2>
-
+        <div class="sidebar-nav">
+            <!-- Sidebar Navigation Links generated dynamically -->
+            {% for section in sections %}
+                {% if section.categories %}
+                    <div class="nav-section-title">{{ section.name }}</div>
                     {% for cat in section.categories %}
                         {% if cat['items'] %}
-                            <div class="category-block" data-category="{{ cat.name }}">
-                                <h3 class="category-title">
-                                    {% if 'Chat' in cat.name %}
-                                        <i class="fa-regular fa-comment-dots"></i>
-                                    {% elif 'Media' in cat.name %}
-                                        <i class="fa-regular fa-image"></i>
-                                    {% elif 'Voice' in cat.name %}
-                                        <i class="fa-solid fa-microphone-lines"></i>
-                                    {% elif 'APIs' in cat.name %}
-                                        <i class="fa-solid fa-code"></i>
-                                    {% elif 'IDE' in cat.name %}
-                                        <i class="fa-solid fa-laptop-code"></i>
-                                    {% else %}
-                                        <i class="fa-solid fa-layer-group"></i>
-                                    {% endif %}
-                                    {{ cat.name }}
-                                </h3>
-
-                                <div class="cards-grid">
-                                    {% for item in cat['items'] %}
-                                        <div class="item-card status-{{ item.status }}" 
-                                             data-name="{{ item.name|lower }}" 
-                                             data-url="{{ item.url|lower }}" 
-                                             data-status="{{ item.status }}" 
-                                             data-favorite="{{ 'true' if item.favorite else 'false' }}"
-                                             data-details="{% for key, val in item.extra.items() %}{{ val|lower }} {% endfor %}">
-                                            
-                                            <div>
-                                                <div class="card-header">
-                                                    <div class="card-title-group">
-                                                        <a href="{{ item.url }}" target="_blank" class="card-title">
-                                                            {{ item.name }} <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.8rem;"></i>
-                                                        </a>
-                                                    </div>
-                                                    <button class="favorite-btn {{ 'active' if item.favorite }}" onclick="toggleFavorite(this, '{{ item.name }}', '{{ item.url }}')">
-                                                        <i class="fa-solid fa-star"></i>
-                                                    </button>
-                                                </div>
-
-                                                <div class="badge-list">
-                                                    <span class="badge badge-status {{ item.status }}">{{ item.status }}</span>
-                                                    {% for key, val in item.extra.items() %}
-                                                        {% if val %}
-                                                            <span class="badge badge-extra" title="{{ key }}: {{ val }}">{{ val }}</span>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-
-                                                <div class="card-details">
-                                                    {% for key, val in item.extra.items() %}
-                                                        {% if val %}
-                                                            <div class="detail-row">
-                                                                <span class="detail-label">{{ key }}</span>
-                                                                <span class="detail-val">{{ val }}</span>
-                                                            </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <!-- Notes Area -->
-                                                <div class="notes-section">
-                                                    <textarea class="notes-input" placeholder="Add custom notes..." onblur="updateNotes('{{ item.name }}', '{{ item.url }}', this.value)">{{ item.notes }}</textarea>
-                                                </div>
-
-                                                <!-- Status Action Buttons -->
-                                                <div class="action-bar">
-                                                    <button class="action-btn btn-working {{ 'active' if item.status == 'working' }}" onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'working')">
-                                                        <i class="fa-solid fa-check"></i> Work
-                                                    </button>
-                                                    <button class="action-btn btn-broken {{ 'active' if item.status == 'broken' }}" onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'broken')">
-                                                        <i class="fa-solid fa-xmark"></i> Broken
-                                                    </button>
-                                                    <button class="action-btn btn-untest" onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'untested')">
-                                                        Reset
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                            <a href="#cat-{{ loop.index0 }}" class="nav-link">
+                                {% if 'Chat' in cat.name %}
+                                    <i class="fa-regular fa-comment-dots"></i>
+                                {% elif 'Media' in cat.name %}
+                                    <i class="fa-regular fa-image"></i>
+                                {% elif 'Voice' in cat.name %}
+                                    <i class="fa-solid fa-microphone-lines"></i>
+                                {% elif 'APIs' in cat.name %}
+                                    <i class="fa-solid fa-code"></i>
+                                {% elif 'IDE' in cat.name %}
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-layer-group"></i>
+                                {% endif %}
+                                {{ cat.name }}
+                            </a>
                         {% endif %}
                     {% endfor %}
-                </div>
-            {% endif %}
-        {% endfor %}
-    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main>
+        <!-- Top Toolbar with search & tabs -->
+        <div class="toolbar">
+            <div class="search-container">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="search-input" class="search-bar" placeholder="Search by model name or limit metrics...">
+            </div>
+
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Items</button>
+                <button class="filter-tab" data-filter="working"><i class="fa-solid fa-circle-check"></i> Working</button>
+                <button class="filter-tab" data-filter="broken"><i class="fa-solid fa-circle-xmark"></i> Broken</button>
+                <button class="filter-tab" data-filter="favorites"><i class="fa-solid fa-star"></i> Starred</button>
+                <button class="filter-tab" data-filter="untested"><i class="fa-solid fa-circle-question"></i> Untested</button>
+            </div>
+        </div>
+
+        <!-- Render parsed checklists in compact tables -->
+        <div class="workspace">
+            {% for section in sections %}
+                {% if section.categories %}
+                    <div class="section-group" data-section="{{ section.name }}">
+                        <div class="section-header">
+                            <h2>
+                                {% if 'No Signup' in section.name %}
+                                    <i class="fa-solid fa-user-slash" style="color: var(--accent-green); font-size: 1.2rem;"></i>
+                                {% else %}
+                                    <i class="fa-solid fa-user-lock" style="color: var(--accent-red); font-size: 1.2rem;"></i>
+                                {% endif %}
+                                {{ section.name }}
+                            </h2>
+                        </div>
+
+                        {% for cat in section.categories %}
+                            {% if cat['items'] %}
+                                <div class="category-group" id="cat-{{ loop.index0 }}">
+                                    <div class="category-header">
+                                        {% if 'Chat' in cat.name %}
+                                            <i class="fa-regular fa-comment-dots"></i>
+                                        {% elif 'Media' in cat.name %}
+                                            <i class="fa-regular fa-image"></i>
+                                        {% elif 'Voice' in cat.name %}
+                                            <i class="fa-solid fa-microphone-lines"></i>
+                                        {% elif 'APIs' in cat.name %}
+                                            <i class="fa-solid fa-code"></i>
+                                        {% elif 'IDE' in cat.name %}
+                                            <i class="fa-solid fa-laptop-code"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-layer-group"></i>
+                                        {% endif %}
+                                        {{ cat.name }}
+                                    </div>
+
+                                    <div class="table-wrapper">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th class="fav-cell"><i class="fa-regular fa-star"></i></th>
+                                                    <th class="status-cell">Status</th>
+                                                    <th class="name-cell">Name</th>
+                                                    <th class="details-cell">Details / Limits</th>
+                                                    <th class="notes-cell">Notes</th>
+                                                    <th class="actions-cell">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in cat['items'] %}
+                                                    <tr class="table-row status-{{ item.status }}"
+                                                        data-name="{{ item.name|lower }}" 
+                                                        data-url="{{ item.url|lower }}" 
+                                                        data-status="{{ item.status }}" 
+                                                        data-favorite="{{ 'true' if item.favorite else 'false' }}"
+                                                        data-details="{% for key, val in item.extra.items() %}{{ val|lower }} {% endfor %}">
+                                                        
+                                                        <!-- Favorite Column -->
+                                                        <td class="fav-cell">
+                                                            <button class="fav-star {{ 'active' if item.favorite }}" 
+                                                                    onclick="toggleFavorite(this, '{{ item.name }}', '{{ item.url }}')">
+                                                                <i class="fa-solid fa-star"></i>
+                                                            </button>
+                                                        </td>
+
+                                                        <!-- Status Badge -->
+                                                        <td class="status-cell">
+                                                            <span class="status-pill {{ item.status }}">
+                                                                {{ item.status }}
+                                                            </span>
+                                                        </td>
+
+                                                        <!-- Tool Name & Link -->
+                                                        <td class="name-cell">
+                                                            <a href="{{ item.url }}" target="_blank" class="name-link">
+                                                                {{ item.name }} <i class="fa-solid fa-up-right-from-square" style="font-size: 0.7rem; opacity: 0.6;"></i>
+                                                            </a>
+                                                        </td>
+
+                                                        <!-- Details Column -->
+                                                        <td class="details-cell">
+                                                            <div class="meta-tags">
+                                                                {% for key, val in item.extra.items() %}
+                                                                    {% if val %}
+                                                                        <span class="meta-tag" title="{{ key }}: {{ val }}">
+                                                                            <strong>{{ key }}:</strong> {{ val }}
+                                                                        </span>
+                                                                    {% endif %}
+                                                                {% endfor %}
+                                                            </div>
+                                                        </td>
+
+                                                        <!-- Custom Notes -->
+                                                        <td class="notes-cell">
+                                                            <div class="note-input-wrapper">
+                                                                <input type="text" class="note-input" placeholder="Add custom notes..." 
+                                                                       value="{{ item.notes }}" 
+                                                                       onblur="updateNotes('{{ item.name }}', '{{ item.url }}', this.value)">
+                                                            </div>
+                                                        </td>
+
+                                                        <!-- Actions -->
+                                                        <td class="actions-cell">
+                                                            <div class="action-buttons">
+                                                                <button class="btn-action btn-work {{ 'active-work' if item.status == 'working' }}" 
+                                                                        title="Mark Working"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'working')">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>
+                                                                <button class="btn-action btn-broken {{ 'active-broken' if item.status == 'broken' }}" 
+                                                                        title="Mark Broken"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'broken')">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                                <button class="btn-action btn-reset" 
+                                                                        title="Reset Status"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'untested')">
+                                                                    <i class="fa-solid fa-rotate-left"></i>
+                                                                </button>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
 
     <!-- Toast Notification Element -->
     <div id="toast" class="toast">
@@ -656,7 +753,7 @@
             toast.classList.add('show');
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 3000);
+            }, 2500);
         }
 
         // Send updates to Flask API
@@ -682,13 +779,13 @@
 
         // Toggle Favorite status
         async function toggleFavorite(btn, name, url) {
-            const card = btn.closest('.item-card');
-            const isFav = card.dataset.favorite === 'true';
+            const row = btn.closest('tr');
+            const isFav = row.dataset.favorite === 'true';
             const newFav = !isFav;
             
             const ok = await updateAPI(name, url, { favorite: newFav });
             if (ok) {
-                card.dataset.favorite = newFav ? 'true' : 'false';
+                row.dataset.favorite = newFav ? 'true' : 'false';
                 btn.classList.toggle('active', newFav);
                 showToast(newFav ? `Added ${name} to favorites` : `Removed ${name} from favorites`);
             }
@@ -696,26 +793,28 @@
 
         // Set status (working/broken/untested)
         async function setStatus(btn, name, url, status) {
-            const card = btn.closest('.item-card');
+            const row = btn.closest('tr');
             const ok = await updateAPI(name, url, { status: status });
             if (ok) {
                 // Update CSS classes and data attribute
-                card.className = `item-card status-${status}`;
-                card.dataset.status = status;
+                row.className = `table-row status-${status}`;
+                row.dataset.status = status;
 
                 // Update badge text and classes
-                const statusBadge = card.querySelector('.badge-status');
-                statusBadge.className = `badge badge-status ${status}`;
-                statusBadge.innerText = status;
+                const statusPill = row.querySelector('.status-pill');
+                statusPill.className = `status-pill ${status}`;
+                statusPill.innerText = status;
 
                 // Reset active states on current action buttons
-                const actionBar = btn.closest('.action-bar');
-                actionBar.querySelectorAll('.action-btn').forEach(b => b.classList.remove('active'));
+                const btnContainer = btn.closest('.action-buttons');
+                btnContainer.querySelectorAll('.btn-action').forEach(b => {
+                    b.classList.remove('active-work', 'active-broken');
+                });
                 
                 if (status === 'working') {
-                    actionBar.querySelector('.btn-working').classList.add('active');
+                    btnContainer.querySelector('.btn-work').classList.add('active-work');
                 } else if (status === 'broken') {
-                    actionBar.querySelector('.btn-broken').classList.add('active');
+                    btnContainer.querySelector('.btn-broken').classList.add('active-broken');
                 }
 
                 showToast(`Marked ${name} as ${status}`);
@@ -732,15 +831,15 @@
 
         // Calculate and update dashboard stats
         function calculateStats() {
-            const cards = document.querySelectorAll('.item-card');
-            let total = cards.length;
+            const rows = document.querySelectorAll('.table-row');
+            let total = rows.length;
             let working = 0;
             let broken = 0;
             let favorites = 0;
 
-            cards.forEach(card => {
-                const status = card.dataset.status;
-                const isFav = card.dataset.favorite === 'true';
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                const isFav = row.dataset.favorite === 'true';
 
                 if (status === 'working') working++;
                 if (status === 'broken') broken++;
@@ -754,19 +853,19 @@
         }
 
         // Search & Filter functionality
-        const searchInput = document.getElementById('search-bar');
-        const filterBtns = document.querySelectorAll('.filter-btn');
+        const searchInput = document.getElementById('search-input');
+        const filterBtns = document.querySelectorAll('.filter-tab');
         let currentFilter = 'all';
 
         function filterItems() {
             const query = searchInput.value.toLowerCase();
-            const cards = document.querySelectorAll('.item-card');
+            const rows = document.querySelectorAll('.table-row');
 
-            cards.forEach(card => {
-                const name = card.dataset.name;
-                const details = card.dataset.details;
-                const status = card.dataset.status;
-                const isFav = card.dataset.favorite === 'true';
+            rows.forEach(row => {
+                const name = row.dataset.name;
+                const details = row.dataset.details;
+                const status = row.dataset.status;
+                const isFav = row.dataset.favorite === 'true';
 
                 const matchesSearch = name.includes(query) || details.includes(query);
                 
@@ -778,24 +877,24 @@
                 else if (currentFilter === 'favorites' && isFav) matchesFilter = true;
 
                 if (matchesSearch && matchesFilter) {
-                    card.style.display = 'flex';
+                    row.style.display = '';
                 } else {
-                    card.style.display = 'none';
+                    row.style.display = 'none';
                 }
             });
 
-            // Hide empty category or section blocks
-            document.querySelectorAll('.category-block').forEach(catBlock => {
-                const visibleCards = catBlock.querySelectorAll('.item-card[style="display: flex;"]');
-                if (visibleCards.length === 0) {
+            // Hide empty tables/category groups or sections
+            document.querySelectorAll('.category-group').forEach(catBlock => {
+                const visibleRows = catBlock.querySelectorAll('.table-row:not([style*="display: none"])');
+                if (visibleRows.length === 0) {
                     catBlock.style.display = 'none';
                 } else {
                     catBlock.style.display = 'block';
                 }
             });
 
-            document.querySelectorAll('.section-block').forEach(secBlock => {
-                const visibleCats = secBlock.querySelectorAll('.category-block[style="display: block;"]');
+            document.querySelectorAll('.section-group').forEach(secBlock => {
+                const visibleCats = secBlock.querySelectorAll('.category-group:not([style*="display: none"])');
                 if (visibleCats.length === 0) {
                     secBlock.style.display = 'none';
                 } else {
@@ -818,6 +917,15 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             calculateStats();
+            
+            // Highlight sidebar nav link based on scroll / active section
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                });
+            });
         });
     </script>
 </body>

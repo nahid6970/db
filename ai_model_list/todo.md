@@ -14,3 +14,5 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Add search, filter, and statistics components on the frontend.
 - [x] Run and test the application to ensure it works correctly.
 - [x] Fix Jinja2 TypeError: 'builtin_function_or_method' object is not iterable on cat.items.
+- [x] Filter out internal anchor links (starting with `#`) from being parsed as items.
+- [x] Redesign layout to a high-density sidebar + table dashboard layout.
