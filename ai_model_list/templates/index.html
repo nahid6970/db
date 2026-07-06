@@ -83,6 +83,63 @@
             border-color: var(--accent-purple);
         }
 
+        /* Settings Dropdown */
+        .settings-wrapper {
+            position: relative;
+        }
+
+        .settings-dropdown {
+            position: absolute;
+            top: 48px;
+            right: 0;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 16px;
+            width: 220px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 100;
+        }
+
+        .settings-dropdown.show {
+            display: block;
+        }
+
+        .settings-title {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 6px;
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .toggle-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: var(--text-main);
+        }
+
+        .toggle-label input {
+            cursor: pointer;
+        }
+
+        /* Hide Notes Column dynamic rule */
+        .workspace.hide-notes .notes-cell {
+            display: none !important;
+        }
+
         .sidebar-header {
             padding: 24px;
             border-bottom: 1px solid var(--border-color);
@@ -630,12 +687,30 @@
                 <input type="text" id="search-input" class="search-bar" placeholder="Search by model name or limit metrics...">
             </div>
 
-            <div class="filter-tabs">
-                <button class="filter-tab active" data-filter="all">All Items</button>
-                <button class="filter-tab" data-filter="working"><i class="fa-solid fa-circle-check"></i> Working</button>
-                <button class="filter-tab" data-filter="broken"><i class="fa-solid fa-circle-xmark"></i> Broken</button>
-                <button class="filter-tab" data-filter="favorites"><i class="fa-solid fa-star"></i> Starred</button>
-                <button class="filter-tab" data-filter="untested"><i class="fa-solid fa-circle-question"></i> Untested</button>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All Items</button>
+                    <button class="filter-tab" data-filter="working"><i class="fa-solid fa-circle-check"></i> Working</button>
+                    <button class="filter-tab" data-filter="broken"><i class="fa-solid fa-circle-xmark"></i> Broken</button>
+                    <button class="filter-tab" data-filter="favorites"><i class="fa-solid fa-star"></i> Starred</button>
+                    <button class="filter-tab" data-filter="untested"><i class="fa-solid fa-circle-question"></i> Untested</button>
+                </div>
+
+                <!-- Settings Dropdown Button -->
+                <div class="settings-wrapper">
+                    <button id="settings-btn" class="btn-toggle" title="Settings">
+                        <i class="fa-solid fa-gear"></i>
+                    </button>
+                    <div id="settings-dropdown" class="settings-dropdown">
+                        <div class="settings-title">Display Settings</div>
+                        <div class="setting-item">
+                            <label class="toggle-label">
+                                <input type="checkbox" id="toggle-notes" checked>
+                                <span>Show Notes Column</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -969,6 +1044,41 @@
             if (savedCategory) {
                 activeCategory = savedCategory;
             }
+
+            // Load notes visibility state from localStorage
+            const showNotes = localStorage.getItem('showNotesColumn') !== 'false'; // defaults to true
+            const toggleNotesInput = document.getElementById('toggle-notes');
+            const workspace = document.querySelector('.workspace');
+            toggleNotesInput.checked = showNotes;
+            if (!showNotes) {
+                workspace.classList.add('hide-notes');
+            }
+
+            // Toggle Notes visibility listener
+            toggleNotesInput.addEventListener('change', () => {
+                const isChecked = toggleNotesInput.checked;
+                localStorage.setItem('showNotesColumn', isChecked);
+                if (isChecked) {
+                    workspace.classList.remove('hide-notes');
+                } else {
+                    workspace.classList.add('hide-notes');
+                }
+            });
+
+            // Toggle Settings dropdown visibility
+            const settingsBtn = document.getElementById('settings-btn');
+            const settingsDropdown = document.getElementById('settings-dropdown');
+            settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                settingsDropdown.classList.toggle('show');
+            });
+
+            // Close settings dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.settings-wrapper')) {
+                    settingsDropdown.classList.remove('show');
+                }
+            });
 
             // Sidebar Toggle
             const toggleBtn = document.getElementById('sidebar-toggle');
