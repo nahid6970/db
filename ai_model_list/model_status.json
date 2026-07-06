@@ -1,0 +1,20 @@
+{
+    "💬 Chat|#chat-interfaces": {
+        "notes": "",
+        "favorite": false
+    },
+    "Topic|": {
+        "notes": ""
+    },
+    "openrouter.ai/rankings|https://openrouter.ai/rankings": {
+        "notes": "",
+        "favorite": false,
+        "status": "untested"
+    },
+    "yupp.ai/leaderboard|https://yupp.ai/leaderboard": {
+        "notes": ""
+    },
+    "lmarena.ai|https://lmarena.ai/": {
+        "status": "untested"
+    }
+}
