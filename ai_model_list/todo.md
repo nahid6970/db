@@ -23,3 +23,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Add settings dropdown with Notes column visibility toggle (persisted).
 - [x] Merge Actions and Status columns into a single column with active button indicator.
 - [x] Remove reset button and implement toggling back to untested when clicking an active status button again.
+- [x] Rename the All Items filter button to All.
