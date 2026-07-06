@@ -13,3 +13,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Implement backend API endpoints to update statuses (working/broken/favorite/notes) via fetch/AJAX.
 - [x] Add search, filter, and statistics components on the frontend.
 - [x] Run and test the application to ensure it works correctly.
+- [x] Fix Jinja2 TypeError: 'builtin_function_or_method' object is not iterable on cat.items.
