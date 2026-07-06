@@ -556,13 +556,16 @@
         </div>
 
         <div class="sidebar-nav">
+            <a href="#all" class="nav-link active" id="nav-all">
+                <i class="fa-solid fa-border-all"></i> Show All Categories
+            </a>
             <!-- Sidebar Navigation Links generated dynamically -->
             {% for section in sections %}
                 {% if section.categories %}
                     <div class="nav-section-title">{{ section.name }}</div>
                     {% for cat in section.categories %}
                         {% if cat['items'] %}
-                            <a href="#cat-{{ loop.index0 }}" class="nav-link">
+                            <a href="#cat-{{ loop.parent.index0 }}-{{ loop.index0 }}" class="nav-link">
                                 {% if 'Chat' in cat.name %}
                                     <i class="fa-regular fa-comment-dots"></i>
                                 {% elif 'Media' in cat.name %}
@@ -621,7 +624,7 @@
 
                         {% for cat in section.categories %}
                             {% if cat['items'] %}
-                                <div class="category-group" id="cat-{{ loop.index0 }}">
+                                <div class="category-group" id="cat-{{ loop.parent.index0 }}-{{ loop.index0 }}">
                                     <div class="category-header">
                                         {% if 'Chat' in cat.name %}
                                             <i class="fa-regular fa-comment-dots"></i>
@@ -856,6 +859,7 @@
         const searchInput = document.getElementById('search-input');
         const filterBtns = document.querySelectorAll('.filter-tab');
         let currentFilter = 'all';
+        let activeCategory = 'all';
 
         function filterItems() {
             const query = searchInput.value.toLowerCase();
@@ -883,10 +887,12 @@
                 }
             });
 
-            // Hide empty tables/category groups or sections
+            // Hide empty tables/category groups or sections based on active category
             document.querySelectorAll('.category-group').forEach(catBlock => {
                 const visibleRows = catBlock.querySelectorAll('.table-row:not([style*="display: none"])');
-                if (visibleRows.length === 0) {
+                const isTargetCategory = activeCategory === 'all' || catBlock.id === activeCategory;
+
+                if (visibleRows.length === 0 || !isTargetCategory) {
                     catBlock.style.display = 'none';
                 } else {
                     catBlock.style.display = 'block';
@@ -918,12 +924,21 @@
         document.addEventListener('DOMContentLoaded', () => {
             calculateStats();
             
-            // Highlight sidebar nav link based on scroll / active section
+            // Highlight sidebar nav link and filter categories
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
+                    e.preventDefault();
                     navLinks.forEach(l => l.classList.remove('active'));
                     link.classList.add('active');
+                    
+                    const href = link.getAttribute('href');
+                    if (href === '#all') {
+                        activeCategory = 'all';
+                    } else {
+                        activeCategory = href.substring(1);
+                    }
+                    filterItems();
                 });
             });
         });
