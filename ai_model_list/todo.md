@@ -21,3 +21,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Implement sidebar collapse/toggle (show/hide left panel).
 - [x] Persist sidebar collapsed status and selected category tab in localStorage across refreshes.
 - [x] Add settings dropdown with Notes column visibility toggle (persisted).
+- [x] Merge Actions and Status columns into a single column with active button indicator.

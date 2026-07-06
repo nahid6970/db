@@ -760,7 +760,6 @@
                                                     <th class="name-cell">Name</th>
                                                     <th class="details-cell">Details / Limits</th>
                                                     <th class="notes-cell">Notes</th>
-                                                    <th class="actions-cell">Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -780,11 +779,25 @@
                                                             </button>
                                                         </td>
 
-                                                        <!-- Status Badge -->
+                                                        <!-- Status Column with integrated action buttons -->
                                                         <td class="status-cell">
-                                                            <span class="status-pill {{ item.status }}">
-                                                                {{ item.status }}
-                                                            </span>
+                                                            <div class="action-buttons">
+                                                                <button class="btn-action btn-work {{ 'active-work' if item.status == 'working' }}" 
+                                                                        title="Mark Working"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'working')">
+                                                                    <i class="fa-solid fa-check"></i>
+                                                                </button>
+                                                                <button class="btn-action btn-broken {{ 'active-broken' if item.status == 'broken' }}" 
+                                                                        title="Mark Broken"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'broken')">
+                                                                    <i class="fa-solid fa-xmark"></i>
+                                                                </button>
+                                                                <button class="btn-action btn-reset" 
+                                                                        title="Reset Status"
+                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'untested')">
+                                                                    <i class="fa-solid fa-rotate-left"></i>
+                                                                </button>
+                                                            </div>
                                                         </td>
 
                                                         <!-- Tool Name & Link -->
@@ -813,27 +826,6 @@
                                                                 <input type="text" class="note-input" placeholder="Add custom notes..." 
                                                                        value="{{ item.notes }}" 
                                                                        onblur="updateNotes('{{ item.name }}', '{{ item.url }}', this.value)">
-                                                            </div>
-                                                        </td>
-
-                                                        <!-- Actions -->
-                                                        <td class="actions-cell">
-                                                            <div class="action-buttons">
-                                                                <button class="btn-action btn-work {{ 'active-work' if item.status == 'working' }}" 
-                                                                        title="Mark Working"
-                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'working')">
-                                                                    <i class="fa-solid fa-check"></i>
-                                                                </button>
-                                                                <button class="btn-action btn-broken {{ 'active-broken' if item.status == 'broken' }}" 
-                                                                        title="Mark Broken"
-                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'broken')">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </button>
-                                                                <button class="btn-action btn-reset" 
-                                                                        title="Reset Status"
-                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'untested')">
-                                                                    <i class="fa-solid fa-rotate-left"></i>
-                                                                </button>
                                                             </div>
                                                         </td>
 
@@ -911,11 +903,6 @@
                 // Update CSS classes and data attribute
                 row.className = `table-row status-${status}`;
                 row.dataset.status = status;
-
-                // Update badge text and classes
-                const statusPill = row.querySelector('.status-pill');
-                statusPill.className = `status-pill ${status}`;
-                statusPill.innerText = status;
 
                 // Reset active states on current action buttons
                 const btnContainer = btn.closest('.action-buttons');
