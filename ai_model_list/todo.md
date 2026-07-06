@@ -24,3 +24,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Merge Actions and Status columns into a single column with active button indicator.
 - [x] Remove reset button and implement toggling back to untested when clicking an active status button again.
 - [x] Rename the All Items filter button to All.
+- [x] Inject new suggested free AI tools into appropriate sections in ai_models.md.

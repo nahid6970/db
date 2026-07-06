@@ -94,6 +94,8 @@
 | [gemini.google.com](https://gemini.google.com) | `gemini-2.5-fast` | `32,000 tokens`, `5-10 prompts` per day, No Image-File-Audio-Generation |
 | [copilot.microsoft.com](https://copilot.microsoft.com) | `gpt-5` | Unlimited, `1` image per day|
 | [theoldllm.vercel.app](https://theoldllm.vercel.app/) | Unknown | Unknown |
+| [duckduckgo.com/chat](https://duckduckgo.com/chat) | `Claude 3.5 Haiku`, `Llama 3 70B`, `Mixtral 8x7B`, `GPT-4o-mini` | Unlimited (rate-limited by demand) |
+| [blackbox.ai](https://blackbox.ai/) | Blackbox Chat & Coding Assistant | Unlimited basic queries |
 
 
 
@@ -147,6 +149,7 @@
 | [gemini.google.com](https://gemini.google.com) | `gemini-3-fast`, `gemini-3-thinking`, `gemini-3-nano-banana-standard`| `128,000 tokens`, `100 images` per day, `5 reports` per month (fast), `20 audio overviews` per day, `10 files` (`100 MB` file size, `2 GB` for videos) |
 | [copilot.microsoft.com](https://copilot.microsoft.com) | `gpt-5.1` | Unlimited, 1 image per day, with Deep Research enabled and `10+ Group Chats`|
 | [chat.deepseek.com](https://chat.deepseek.com) | `deepseek-v3.2`, `deepseek-r1`, `deepseek-coder-v2` | `20k-30k tokens`, Politically Biased |
+| [huggingface.co/chat](https://huggingface.co/chat) | `Llama 3`, `Command R+`, `Qwen 2.5 Coder`, `Phi-3` etc. | Unlimited (rate limited by demand) |
 
 ### Media Generation
 #### (Image‑/Video‑/Multimodal)
@@ -163,6 +166,7 @@
 | [app.pixverse.ai](https://app.pixverse.ai) | PixVerse video | 50-60 per day, 540p or 750p output, with Watermark |
 | [ideogram.ai](https://ideogram.ai) | `ideogram-3.0`, `ideogram-3.0-turbo` | 10 credits per week (40 images per week), with Watermark |
 | [genmo.ai](https://www.genmo.ai) | `mochi-1` | 50 credits per month, with Watermark |
+| [seaart.ai](https://seaart.ai/) | SDXL, Flux.1, various SD checkpoints | Daily free credits |
 
 ### Voice & Music
 | Link | Free Models | Limits |
@@ -197,6 +201,8 @@
 | [pollinations.ai](https://pollinations.ai/) |**Text:** `amazon-nova-micro`, `gemini-2.5-flash-lite`, `mistral`, `qwen-coder`, `openai`, `openai-fast`, `openai-large`, `gemini-3-flash`, `deepseek-v3`, `claude-haiku-4.5`, `claude-sonnet-4.5`, `claude-opus-4.5`, `perplexity-sonar`, `kimi-k2-thinking`, `glm-4.7`, `minimax-m2.1` **Image:** `flux`, `zimage`, `turbo`, `gptimage`, `kontext`, `seedream`, `nanobanana`, `nanobanana-pro` **Video:** `seedance`, `veo`|1-20 pollen/day free (tier-based).
 | [llm7.io](https://llm7.io/) |`bidara`, `codestral-2405`, `codestral-2501`, `deepseek-r1-0528`, `elixposearch`, `gpt-4.1-nano-2025-04-14`, `gpt-4o-mini-2024-07-18`, `gpt-o3-2025-04-16`, `grok-3-mini-high`, `llama-3.1-8b-instruct-fp8`, `llama-4-scout-17b-16e-instruct`, `llama-fast-roblox`, `mistral-3b-2410`, `mistral-8b-2410`, `mirexa`, `mistral-large-2402`, `mistral-large-2407`, `mistral-large-2411`, `mistral-medium`, `mistral-nemo-roblox`, `mistral-saba-2502`, `mistral-small-2402`, `mistral-small-2409`, `mistral-small-2501`, `mistral-small-2503`, `mistral-small-3.1-24b`, `mistral-small-3.1-24b-instruct-2503`, `open-mistral-7b`, `open-mistral-nemo`, `open-mixtral-8x22b`, `open-mixtral-8x7b`, `phi-4-multimodal-instruct`, `pixtral-12b-2409`, `pixtral-large-2411`, `qwen2.5-coder-32b-instruct`, `rtist`|Max rate 150 per min |
 | [developer.puter.com](https://developer.puter.com/tutorials/free-unlimited-ai-api/) also [introduction](https://docs.puter.com/introduction/)|Too many to list..|None usage is account based|
+| [github.com/marketplace/models](https://github.com/marketplace/models) | `GPT-4o`, `Claude 3.5 Sonnet`, `Llama 3.1`, `Mistral Large` | Free developer tier / rate limited |
+| [huggingface.co/docs/api-inference](https://huggingface.co/docs/api-inference) | 1000s of open-source models | Free serverless API tier |
 
 ---
 
