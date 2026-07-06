@@ -257,10 +257,16 @@
             background-color: var(--bg-secondary);
             border-bottom: 1px solid var(--border-color);
             padding: 16px 30px;
+        }
+
+        .toolbar-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
             gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .search-container {
@@ -338,6 +344,12 @@
             flex-grow: 1;
             overflow-y: auto;
             padding: 30px;
+        }
+
+        .workspace-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
         }
 
         .section-header {
@@ -470,7 +482,8 @@
         .name-cell {
             font-weight: 600;
             color: #fff;
-            min-width: 200px;
+            width: 25%;
+            min-width: 220px;
         }
 
         .name-link {
@@ -488,7 +501,7 @@
 
         /* Details / Meta Column */
         .details-cell {
-            max-width: 350px;
+            width: 45%;
         }
 
         .meta-tags {
@@ -504,15 +517,14 @@
             padding: 2px 8px;
             border-radius: 6px;
             font-size: 0.75rem;
-            white-space: nowrap;
-            max-width: 250px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            white-space: normal;
+            word-break: break-word;
         }
 
         /* Notes Column */
         .notes-cell {
-            min-width: 200px;
+            width: 30%;
+            min-width: 250px;
         }
 
         .note-input-wrapper {
@@ -679,35 +691,37 @@
     <main>
         <!-- Top Toolbar with search & tabs -->
         <div class="toolbar">
-            <button id="sidebar-toggle" class="btn-toggle" title="Toggle Sidebar">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-            <div class="search-container">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="search-input" class="search-bar" placeholder="Search by model name or limit metrics...">
-            </div>
-
-            <div style="display: flex; gap: 10px; align-items: center;">
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All</button>
-                    <button class="filter-tab" data-filter="working"><i class="fa-solid fa-circle-check"></i> Working</button>
-                    <button class="filter-tab" data-filter="broken"><i class="fa-solid fa-circle-xmark"></i> Broken</button>
-                    <button class="filter-tab" data-filter="favorites"><i class="fa-solid fa-star"></i> Starred</button>
-                    <button class="filter-tab" data-filter="untested"><i class="fa-solid fa-circle-question"></i> Untested</button>
+            <div class="toolbar-content">
+                <button id="sidebar-toggle" class="btn-toggle" title="Toggle Sidebar">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="search-container">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="search-input" class="search-bar" placeholder="Search by model name or limit metrics...">
                 </div>
 
-                <!-- Settings Dropdown Button -->
-                <div class="settings-wrapper">
-                    <button id="settings-btn" class="btn-toggle" title="Settings">
-                        <i class="fa-solid fa-gear"></i>
-                    </button>
-                    <div id="settings-dropdown" class="settings-dropdown">
-                        <div class="settings-title">Display Settings</div>
-                        <div class="setting-item">
-                            <label class="toggle-label">
-                                <input type="checkbox" id="toggle-notes" checked>
-                                <span>Show Notes Column</span>
-                            </label>
+                <div style="display: flex; gap: 10px; align-items: center;">
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="all">All</button>
+                        <button class="filter-tab" data-filter="working"><i class="fa-solid fa-circle-check"></i> Working</button>
+                        <button class="filter-tab" data-filter="broken"><i class="fa-solid fa-circle-xmark"></i> Broken</button>
+                        <button class="filter-tab" data-filter="favorites"><i class="fa-solid fa-star"></i> Starred</button>
+                        <button class="filter-tab" data-filter="untested"><i class="fa-solid fa-circle-question"></i> Untested</button>
+                    </div>
+
+                    <!-- Settings Dropdown Button -->
+                    <div class="settings-wrapper">
+                        <button id="settings-btn" class="btn-toggle" title="Settings">
+                            <i class="fa-solid fa-gear"></i>
+                        </button>
+                        <div id="settings-dropdown" class="settings-dropdown">
+                            <div class="settings-title">Display Settings</div>
+                            <div class="setting-item">
+                                <label class="toggle-label">
+                                    <input type="checkbox" id="toggle-notes" checked>
+                                    <span>Show Notes Column</span>
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -716,6 +730,7 @@
 
         <!-- Render parsed checklists in compact tables -->
         <div class="workspace">
+            <div class="workspace-content">
             {% for section in sections %}
                 {% set section_index = loop.index0 %}
                 {% if section.categories %}
@@ -835,6 +850,7 @@
                     </div>
                 {% endif %}
             {% endfor %}
+            </div>
         </div>
     </main>
 

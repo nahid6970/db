@@ -25,3 +25,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Remove reset button and implement toggling back to untested when clicking an active status button again.
 - [x] Rename the All Items filter button to All.
 - [x] Inject new suggested free AI tools into appropriate sections in ai_models.md.
+- [x] Align and constrain dashboard layout to prevent stretching on large monitors (add max-width wrapper, fix details column layout).
