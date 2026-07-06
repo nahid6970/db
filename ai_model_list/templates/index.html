@@ -792,11 +792,6 @@
                                                                         onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'broken')">
                                                                     <i class="fa-solid fa-xmark"></i>
                                                                 </button>
-                                                                <button class="btn-action btn-reset" 
-                                                                        title="Reset Status"
-                                                                        onclick="setStatus(this, '{{ item.name }}', '{{ item.url }}', 'untested')">
-                                                                    <i class="fa-solid fa-rotate-left"></i>
-                                                                </button>
                                                             </div>
                                                         </td>
 
@@ -898,11 +893,19 @@
         // Set status (working/broken/untested)
         async function setStatus(btn, name, url, status) {
             const row = btn.closest('tr');
-            const ok = await updateAPI(name, url, { status: status });
+            const currentStatus = row.dataset.status;
+
+            // Toggle back to untested if the clicked status is already active
+            let targetStatus = status;
+            if (currentStatus === status) {
+                targetStatus = 'untested';
+            }
+
+            const ok = await updateAPI(name, url, { status: targetStatus });
             if (ok) {
                 // Update CSS classes and data attribute
-                row.className = `table-row status-${status}`;
-                row.dataset.status = status;
+                row.className = `table-row status-${targetStatus}`;
+                row.dataset.status = targetStatus;
 
                 // Reset active states on current action buttons
                 const btnContainer = btn.closest('.action-buttons');
@@ -910,13 +913,13 @@
                     b.classList.remove('active-work', 'active-broken');
                 });
                 
-                if (status === 'working') {
+                if (targetStatus === 'working') {
                     btnContainer.querySelector('.btn-work').classList.add('active-work');
-                } else if (status === 'broken') {
+                } else if (targetStatus === 'broken') {
                     btnContainer.querySelector('.btn-broken').classList.add('active-broken');
                 }
 
-                showToast(`Marked ${name} as ${status}`);
+                showToast(`Marked ${name} as ${targetStatus}`);
             }
         }
 
