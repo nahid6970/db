@@ -18,3 +18,4 @@ We need to create a Flask-based application that parses the `ai_models.md` file,
 - [x] Redesign layout to a high-density sidebar + table dashboard layout.
 - [x] Implement category-based view switching (hide other categories instead of scrolling).
 - [x] Fix Jinja2 UndefinedError: LoopContext object has no attribute parent.
+- [x] Implement sidebar collapse/toggle (show/hide left panel).
