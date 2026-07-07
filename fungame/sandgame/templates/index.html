@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Sand - Particle Physics Sandbox</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div id="sandbox-container">
+        <!-- Interactive Canvas -->
+        <canvas id="sand-canvas"></canvas>
+        
+        <!-- Controls panel on top left -->
+        <div class="control-panel">
+            <div class="panel-header">
+                <h1>QUANTUM SAND</h1>
+                <span class="subtitle">2D Particle Physics Engine</span>
+            </div>
+
+            <!-- Brush settings -->
+            <div class="control-group">
+                <label for="brush-size">
+                    <span>Brush Size</span>
+                    <span class="value-display" id="brush-val">4</span>
+                </label>
+                <input type="range" id="brush-size" min="1" max="15" value="4">
+            </div>
+
+            <!-- Gravity direction -->
+            <div class="control-group">
+                <label for="gravity-select">Gravity Direction</label>
+                <select id="gravity-select">
+                    <option value="down">Down (Normal)</option>
+                    <option value="up">Up (Anti-Gravity)</option>
+                    <option value="left">Left</option>
+                    <option value="right">Right</option>
+                </select>
+            </div>
+
+            <!-- Active elements palette -->
+            <div class="palette-section">
+                <span class="section-title">Select Element</span>
+                <div class="element-grid">
+                    <button class="el-btn active" data-element="sand" style="--glow-color: #eab308;">
+                        <span class="color-dot" style="background: #eab308;"></span> Sand
+                    </button>
+                    <button class="el-btn" data-element="water" style="--glow-color: #3b82f6;">
+                        <span class="color-dot" style="background: #3b82f6;"></span> Water
+                    </button>
+                    <button class="el-btn" data-element="wood" style="--glow-color: #854d0e;">
+                        <span class="color-dot" style="background: #854d0e;"></span> Wood
+                    </button>
+                    <button class="el-btn" data-element="fire" style="--glow-color: #ef4444;">
+                        <span class="color-dot" style="background: #ef4444;"></span> Fire
+                    </button>
+                    <button class="el-btn" data-element="oil" style="--glow-color: #64748b;">
+                        <span class="color-dot" style="background: #64748b;"></span> Oil
+                    </button>
+                    <button class="el-btn" data-element="acid" style="--glow-color: #22c55e;">
+                        <span class="color-dot" style="background: #22c55e;"></span> Acid
+                    </button>
+                    <button class="el-btn" data-element="wall" style="--glow-color: #cbd5e1;">
+                        <span class="color-dot" style="background: #cbd5e1;"></span> Bedrock
+                    </button>
+                    <button class="el-btn danger" data-element="air" style="--glow-color: #ef4444;">
+                        <span class="color-dot" style="background: transparent; border: 1px dashed #ef4444;"></span> Eraser
+                    </button>
+                </div>
+            </div>
+
+            <!-- Run/Clear buttons -->
+            <div class="button-group">
+                <button id="btn-pause" class="btn secondary">Pause</button>
+                <button id="btn-clear" class="btn danger">Clear Grid</button>
+            </div>
+            
+            <!-- FPS / Statistics info -->
+            <div class="stats-panel">
+                <div class="stat-item">
+                    <span class="stat-label">Performance</span>
+                    <span class="stat-value text-glow" id="stat-fps">60 FPS</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Active Particles</span>
+                    <span class="stat-value" id="stat-particles">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Help overlay on bottom right -->
+        <div id="instructions">
+            <p><span class="key">Left Click + Drag</span> to draw particles</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
