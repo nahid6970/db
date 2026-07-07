@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nebula Growth - Cybernetic Box Branching Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Canvas container with instructions and status -->
+    <div id="canvas-container">
+        <canvas id="simulation-canvas"></canvas>
+        
+        <div id="instructions">
+            <p><span class="key">L-Click + Drag</span> to Pan | <span class="key">Scroll / Double-Click</span> to Zoom</p>
+        </div>
+    </div>
+
+    <!-- Top Left Glassmorphic Settings Panel -->
+    <div class="control-panel">
+        <div class="panel-header">
+            <h1>NEBULA GROWTH</h1>
+            <span class="subtitle">Procedural Branching Engine</span>
+        </div>
+
+        <div class="control-group">
+            <label for="steps-input">
+                <span>Simulation Steps</span>
+                <span class="value-display" id="steps-val">5</span>
+            </label>
+            <input type="range" id="steps-input" min="1" max="30" value="5">
+        </div>
+
+        <div class="control-row">
+            <div class="control-group half">
+                <label for="min-boxes">
+                    <span>Min Boxes</span>
+                    <span class="value-display" id="min-val">1</span>
+                </label>
+                <input type="range" id="min-boxes" min="1" max="10" value="1">
+            </div>
+            <div class="control-group half">
+                <label for="max-boxes">
+                    <span>Max Boxes</span>
+                    <span class="value-display" id="max-val">4</span>
+                </label>
+                <input type="range" id="max-boxes" min="1" max="10" value="4">
+            </div>
+        </div>
+
+        <div class="control-row">
+            <div class="control-group half">
+                <label for="box-size">
+                    <span>Box Size (px)</span>
+                    <span class="value-display" id="size-val">20</span>
+                </label>
+                <input type="range" id="box-size" min="5" max="50" value="20">
+            </div>
+            <div class="control-group half">
+                <label for="speed-input">
+                    <span>Interval (ms)</span>
+                    <span class="value-display" id="speed-val">300</span>
+                </label>
+                <input type="range" id="speed-input" min="50" max="1500" step="50" value="300">
+            </div>
+        </div>
+
+        <div class="control-group">
+            <label for="theme-select">Color Theme</label>
+            <select id="theme-select">
+                <option value="cyberpunk">Cyberpunk Pink & Purple</option>
+                <option value="matrix">Toxic Matrix Green</option>
+                <option value="glacier">Glacier Blue & Cyan</option>
+                <option value="monochrome">Monochrome Slate</option>
+                <option value="rainbow">Spectrum Rainbow</option>
+            </select>
+        </div>
+
+        <div class="button-group">
+            <button id="btn-run" class="btn primary">Start Growth</button>
+            <button id="btn-pause" class="btn secondary" disabled>Pause</button>
+            <button id="btn-reset" class="btn danger">Reset</button>
+        </div>
+
+        <div class="stats-panel">
+            <div class="stat-item">
+                <span class="stat-label">Current Step</span>
+                <span class="stat-value" id="stat-step">0 / 0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Total Boxes</span>
+                <span class="stat-value text-glow" id="stat-boxes">1</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Zoom & Pan HUD Overlay -->
+    <div class="hud-overlay">
+        <button id="btn-zoom-in" class="hud-btn" title="Zoom In">+</button>
+        <button id="btn-zoom-out" class="hud-btn" title="Zoom Out">-</button>
+        <button id="btn-zoom-reset" class="hud-btn" title="Recenter View">⌖</button>
+    </div>
+
+    <!-- Script loading -->
+    <script src="{{ url_for('static', filename='js/game.js') }}"></script>
+</body>
+</html>
