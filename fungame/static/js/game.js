@@ -370,8 +370,8 @@ function runNextStep() {
                 state.totalBoxes++;
             }
             
-            // If the branch succeeded in placing at least one box, its end becomes a new active endpoint
-            if (actualBranchLength > 0) {
+            // If the branch succeeded in placing all planned boxes without collision, its end becomes a new active endpoint
+            if (actualBranchLength > 0 && actualBranchLength === branchLen) {
                 nextEndpoints.push({
                     x: currentX,
                     y: currentY,
