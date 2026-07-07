@@ -4351,7 +4351,7 @@
 
   // ── Paint Editor ────────────────────────────────────────────────────────
   (() => {
-    let _paintId = null, _paintFilename = null, _paintFolderId = null;
+    let _paintId = null, _paintFilename = null, _paintFolderId = null, _paintUrl = null;
     let _paintOriginalPdfBytes = null;
     let _tool = 'brush', _drawing = false;
     let _history = [];
@@ -4673,6 +4673,7 @@
 
     window.openPaintEditor = async function(id, url, filename, folderId) {
       _paintId = id; _paintFilename = filename; _paintFolderId = folderId || null;
+      _paintUrl = url;
       _paintOriginalPdfBytes = null;
       
       const savedZoom = localStorage.getItem(PAINT_ZOOM_KEY) || '100';
@@ -4739,27 +4740,47 @@
       
       try {
         if (isPdf) {
-          const response = await fetch(url);
-          const bytes = await response.arrayBuffer();
-          _paintOriginalPdfBytes = bytes;
-          
-          // Pass a copy to pdf.js so the original arrayBuffer is not detached
-          const bytesCopy = bytes.slice(0);
-          const loadingTask = pdfjsLib.getDocument({ data: bytesCopy });
+          const loadingTask = pdfjsLib.getDocument(url);
           const pdf = await loadingTask.promise;
           const numPages = pdf.numPages;
           const pages = [];
-          let totalHeight = 0;
-          let maxWidth = 0;
+          
+          let rawWidth = 0;
+          const rawViewports = [];
+          
           for (let i = 1; i <= numPages; i++) {
             const page = await pdf.getPage(i);
-            const viewport = page.getViewport({ scale: 1.5 });
+            const vp = page.getViewport({ scale: 1.0 });
+            rawViewports.push({ page, vp });
+            if (vp.width > rawWidth) {
+              rawWidth = vp.width;
+            }
+          }
+          
+          let scale = 1.5;
+          const MAX_CANVAS_DIM = 32000;
+          
+          // Only scale down if a *single page* is wider than max dimension
+          if (rawWidth * scale > MAX_CANVAS_DIM) {
+            scale = MAX_CANVAS_DIM / rawWidth;
+          }
+          
+          let totalHeight = 0;
+          let maxWidth = 0;
+          for (let i = 0; i < rawViewports.length; i++) {
+            const { page, vp } = rawViewports[i];
+            const viewport = page.getViewport({ scale: scale });
+            if (totalHeight + viewport.height > MAX_CANVAS_DIM || viewport.width > MAX_CANVAS_DIM) {
+              console.warn("PDF is too large for canvas, truncating to " + i + " pages.");
+              break;
+            }
             pages.push({ page, viewport });
             totalHeight += viewport.height;
             if (viewport.width > maxWidth) {
               maxWidth = viewport.width;
             }
           }
+          
           c.width = maxWidth;
           c.height = totalHeight;
           bgC.width = maxWidth;
@@ -5803,7 +5824,11 @@
       
       try {
         if (isPdf) {
-          if (!_paintOriginalPdfBytes) throw new Error("Original PDF data not found.");
+          if (!_paintOriginalPdfBytes) {
+            if (!_paintUrl) throw new Error("Original PDF URL not found.");
+            const response = await fetch(_paintUrl);
+            _paintOriginalPdfBytes = await response.arrayBuffer();
+          }
           
           const pageHeights = JSON.parse(c.dataset.pageHeights || '[]');
           const pageWidths = JSON.parse(c.dataset.pageWidths || '[]');
