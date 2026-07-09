@@ -2,6 +2,9 @@
 sync.py — Download Convex gallery images to local backup folder
 Source : https://modest-goose-860.convex.cloud (Convex DB)
 Dest   : C:\\@delta\\msBackups\\@JOB\\Management
+
+Run directly:  python sync.py
+Or triggered via runsync: URI scheme through sync_handler.py
 """
 
 import sys, os, json, re, time, requests
@@ -20,7 +23,7 @@ DEST       = Path(r"C:\@delta\msBackups\@JOB\Management")
 STATE_FILE = Path(r"C:\@delta\db\@Convex\image-share\sync_state.json")
 LOCK_FILE  = Path(r"C:\@delta\db\@Convex\image-share\sync.lock")
 
-# ── ANSI ──────────────────────────────────────────────────────
+# ── ANSI colors (Windows 10+ supports these in terminal) ──────
 
 GRN  = "\033[92m"
 CYN  = "\033[96m"
@@ -28,7 +31,6 @@ YEL  = "\033[93m"
 RED  = "\033[91m"
 MAG  = "\033[95m"
 DIM  = "\033[2m"
-BLD  = "\033[1m"
 RST  = "\033[0m"
 
 # ── Helpers ───────────────────────────────────────────────────
@@ -36,6 +38,7 @@ RST  = "\033[0m"
 def safe_filename(name: str) -> str:
     if not name or not name.strip():
         return "untitled"
+    # Replace Windows-invalid filename chars (keep Unicode)
     clean = re.sub(r'[/:*?"<>|\\]', '_', name).strip('. ')
     return clean or "untitled"
 
@@ -59,36 +62,8 @@ def convex_query(path: str, args: dict = {}) -> list:
     resp.raise_for_status()
     return resp.json()["value"]
 
-def file_type_icon(filename: str) -> str:
-    ext = Path(filename).suffix.lower()
-    icons = {
-        ".pdf": "📄", ".png": "🖼", ".jpg": "🖼", ".jpeg": "🖼",
-        ".gif": "🖼", ".webp": "🖼", ".svg": "🖼", ".bmp": "🖼",
-        ".mp4": "🎬", ".mp3": "🎵", ".zip": "📦", ".docx": "📝",
-        ".xlsx": "📊", ".txt": "📃",
-    }
-    return icons.get(ext, "📁")
-
-def size_str(n: int) -> str:
-    if n < 1024:        return f"{n}B"
-    if n < 1024**2:     return f"{n/1024:.0f}KB"
-    if n < 1024**3:     return f"{n/1024**2:.1f}MB"
-    return f"{n/1024**3:.2f}GB"
-
-def print_progress(done: int, total: int, current: str, skipped: int = 0, errors: int = 0):
-    pct    = done / total if total else 0
-    width  = 32
-    filled = int(width * pct)
-    bar    = "█" * filled + "░" * (width - filled)
-    name   = current[-38:] if len(current) > 38 else current
-    extras = ""
-    if skipped: extras += f"  {DIM}skip:{skipped}{RST}"
-    if errors:  extras += f"  {RED}err:{errors}{RST}"
-    line = f"\r  {GRN}[{bar}]{RST} {GRN}{done}/{total}{RST} {DIM}({pct*100:.0f}%){RST}{extras}  {DIM}{name:<40}{RST}"
-    sys.stdout.write(line)
-    sys.stdout.flush()
-
 def download_file(url: str, dest: Path) -> int:
+    """Download url to dest, return bytes written. Raises on error."""
     with requests.get(url, stream=True, timeout=60) as r:
         r.raise_for_status()
         dest.parent.mkdir(parents=True, exist_ok=True)
@@ -97,6 +72,7 @@ def download_file(url: str, dest: Path) -> int:
             with open(tmp, "wb") as f:
                 for chunk in r.iter_content(chunk_size=65536):
                     f.write(chunk)
+            # Atomic rename — avoids partial files
             if dest.exists():
                 dest.unlink()
             tmp.rename(dest)
@@ -107,6 +83,7 @@ def download_file(url: str, dest: Path) -> int:
             raise
 
 def build_folder_map(folders: list) -> dict:
+    """Returns {folder_id: "path\\to\\folder"} with parent nesting."""
     parent_map = {f["_id"]: f for f in folders}
     result = {}
     for f in folders:
@@ -121,14 +98,16 @@ def build_folder_map(folders: list) -> dict:
 # ── Main ──────────────────────────────────────────────────────
 
 def main():
-    os.system("")  # enable ANSI on Windows
+    # Enable ANSI in Windows terminal
+    os.system("")
 
+    # Lock to prevent duplicate runs
     if LOCK_FILE.exists():
-        print(f"\n{RED}[ABORT] Another sync is already running.")
-        print(f"Delete {LOCK_FILE} if stuck.{RST}\n")
+        print(f"{RED}[ABORT] Another sync is already running. Delete {LOCK_FILE} if stuck.{RST}")
         sys.exit(1)
 
     LOCK_FILE.write_text("running")
+
     try:
         _run()
     finally:
@@ -139,14 +118,14 @@ def _run():
     DEST.mkdir(parents=True, exist_ok=True)
 
     print()
-    print(f"{GRN}{'='*52}{RST}")
-    print(f"{GRN}{BLD}   CONVEX GALLERY  ->  LOCAL BACKUP SYNC{RST}")
-    print(f"{GRN}{'='*52}{RST}")
-    print(f"{GRN}   Dest  : {DEST}{RST}")
+    print(f"{CYN}{'='*50}{RST}")
+    print(f"{CYN}   CONVEX GALLERY  ->  LOCAL BACKUP SYNC{RST}")
+    print(f"{CYN}{'='*50}{RST}")
+    print(f"   Dest : {DEST}")
     print()
 
-    state      = load_state()
-    new_state  = {}
+    state     = load_state()
+    new_state = {}
     downloaded = 0
     skipped    = 0
     deleted    = 0
@@ -154,62 +133,37 @@ def _run():
     start      = time.time()
 
     # ── Fetch folders ─────────────────────────────────────────
-    print(f"{GRN}  Fetching folders...{RST}")
+    print(f"{DIM}  Fetching folders...{RST}")
     try:
         folders    = convex_query("images:listFolders")
         folder_map = build_folder_map(folders)
-        print(f"{GRN}  Found {len(folders)} folder(s){RST}")
+        print(f"{DIM}  Found {len(folders)} folder(s){RST}")
     except Exception as e:
         print(f"{RED}  [ERROR] Could not fetch folders: {e}{RST}")
         folder_map = {}
 
     # ── Fetch images ──────────────────────────────────────────
-    print(f"{GRN}  Fetching file list...{RST}")
+    print(f"{DIM}  Fetching image list...{RST}")
     try:
         all_images = convex_query("images:list")
     except Exception as e:
-        print(f"{RED}  [ERROR] Could not fetch files: {e}{RST}")
+        print(f"{RED}  [ERROR] Could not fetch images: {e}{RST}")
         return
 
+    # Only Convex-stored images
     convex_images = [
         img for img in all_images
         if img.get("storageId")
         and img.get("url")
-        and "mega.nz"    not in img["url"]
+        and "mega.nz" not in img["url"]
         and "cloudinary" not in img["url"]
     ]
-
-    total = len(convex_images)
-    print(f"{GRN}  Found {total} file(s) in Convex storage (of {len(all_images)} total){RST}")
-    print()
-
-    # Figure out how many actually need downloading
-    to_download = []
-    to_skip     = []
-    for img in convex_images:
-        img_id    = img["_id"]
-        raw_name  = img.get("filename") or f"file_{img_id}"
-        filename  = safe_filename(raw_name)
-        timestamp = str(img.get("timestamp", ""))
-        folder_id = img.get("folderId")
-        subfolder = folder_map.get(folder_id, "_unfiled") if folder_id else "_unfiled"
-        rel_path  = f"{subfolder}\\{filename}"
-        dest_file = DEST / subfolder / filename
-        prev      = state.get(img_id, {})
-        prev_sig  = prev.get("sig") if isinstance(prev, dict) else str(prev)
-        if prev_sig == timestamp and dest_file.exists():
-            to_skip.append(img)
-        else:
-            to_download.append(img)
-
-    print(f"{GRN}  To download : {len(to_download)}   Skipping (unchanged) : {len(to_skip)}{RST}")
+    print(f"{DIM}  Found {len(convex_images)} Convex image(s) of {len(all_images)} total{RST}")
     print()
 
     # ── Download loop ─────────────────────────────────────────
-    done = 0
-
-    # Print initial progress bar
-    print_progress(done, total, "", skipped, errors)
+    total = len(convex_images)
+    done  = 0
 
     for img in convex_images:
         img_id    = img["_id"]
@@ -217,62 +171,70 @@ def _run():
         filename  = safe_filename(raw_name)
         timestamp = str(img.get("timestamp", ""))
         url       = img["url"]
+
         folder_id = img.get("folderId")
-        subfolder = folder_map.get(folder_id, "_unfiled") if folder_id else "_unfiled"
+        if folder_id and folder_id in folder_map:
+            subfolder = folder_map[folder_id]
+        else:
+            subfolder = "_unfiled"
+
         rel_path  = f"{subfolder}\\{filename}"
         dest_file = DEST / subfolder / filename
-        icon      = file_type_icon(filename)
 
         new_state[img_id] = {"sig": timestamp, "path": rel_path}
 
-        prev      = state.get(img_id, {})
-        prev_sig  = prev.get("sig") if isinstance(prev, dict) else str(prev)
-        prev_path = prev.get("path") if isinstance(prev, dict) else None
+        prev       = state.get(img_id, {})
+        prev_sig   = prev.get("sig") if isinstance(prev, dict) else str(prev)
+        prev_path  = prev.get("path") if isinstance(prev, dict) else None
 
-        # Handle moved file — print above progress bar
+        # Handle move: file was in a different folder before
         if prev_path and prev_path != rel_path:
             old_file = DEST / prev_path
             if old_file.is_file():
                 old_file.unlink(missing_ok=True)
-                sys.stdout.write("\r" + " " * 100 + "\r")
-                print(f"{MAG}  [MOVED]    {icon} {prev_path}{RST}")
-                print(f"{MAG}         ->     {rel_path}{RST}")
-                print_progress(done, total, filename, skipped, errors)
+                print(f"{MAG}  [MOVED]    {prev_path}{RST}")
+                print(f"{MAG}         ->  {rel_path}{RST}")
 
-        # Skip unchanged
+        # Skip if unchanged and file already exists
         if prev_sig == timestamp and dest_file.exists():
             skipped += 1
             done += 1
-            print_progress(done, total, filename, skipped, errors)
+            pct = int(done / total * 100)
+            sys.stdout.write(f"\r  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            sys.stdout.flush()
             continue
 
         # Download
         try:
-            sz   = download_file(url, dest_file)
+            size = download_file(url, dest_file)
+            size_str_val = f"{size/1024:.0f}KB" if size < 1024*1024 else f"{size/1024/1024:.1f}MB"
             done += 1
-            tag  = "[NEW]    " if not prev_sig else "[UPDATED]"
-            col  = GRN if not prev_sig else CYN
-            sys.stdout.write("\r" + " " * 100 + "\r")
-            print(f"{col}  {tag} {icon} {rel_path}  {DIM}({size_str(sz)}){RST}")
-            print_progress(done, total, filename, skipped, errors)
+            pct = int(done / total * 100)
+            sys.stdout.write(f"\r  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            sys.stdout.flush()
+            if not prev_sig:
+                print(f"\n{GRN}  [NEW]      {rel_path}  ({size_str_val}){RST}", end="")
+            else:
+                print(f"\n{CYN}  [UPDATED]  {rel_path}  ({size_str_val}){RST}", end="")
+            sys.stdout.write(f"\n  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            sys.stdout.flush()
             downloaded += 1
         except Exception as e:
             done += 1
-            sys.stdout.write("\r" + " " * 100 + "\r")
-            print(f"{RED}  [ERROR]   {icon} {rel_path}  -> {e}{RST}")
-            print_progress(done, total, filename, skipped, errors)
+            pct = int(done / total * 100)
+            print(f"\n{RED}  [ERROR]    {rel_path}  ->  {e}{RST}", end="")
+            sys.stdout.write(f"\n  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            sys.stdout.flush()
             errors += 1
 
-    # Clear final progress bar line
-    sys.stdout.write("\r" + " " * 100 + "\r")
-    sys.stdout.flush()
+    print()  # newline after final progress line
 
     # ── Remove deleted images ─────────────────────────────────
     current_ids = {img["_id"] for img in convex_images}
     for old_id, old_entry in state.items():
         if old_id not in current_ids:
             old_path = old_entry.get("path") if isinstance(old_entry, dict) else None
-            if old_path and Path(old_path).name:
+            if old_path:
                 old_file = DEST / old_path
                 if old_file.is_file():
                     old_file.unlink(missing_ok=True)
@@ -284,21 +246,22 @@ def _run():
         if folder.is_dir() and not any(folder.iterdir()):
             folder.rmdir()
 
+    # ── Save state ────────────────────────────────────────────
     save_state(new_state)
 
     elapsed = round(time.time() - start, 1)
 
     print()
-    print(f"{GRN}{'='*52}{RST}")
-    print(f"{GRN}{BLD}  DONE  ({elapsed}s){RST}")
-    print(f"{DIM}  {'─'*48}{RST}")
+    print(f"{CYN}{'='*50}{RST}")
+    print(f"{GRN}  DONE  ({elapsed}s){RST}")
+    print(f"{DIM}  {'─'*46}{RST}")
     print(f"{GRN}  Downloaded / Updated : {downloaded}{RST}")
     print(f"{DIM}  Skipped (no change)  : {skipped}{RST}")
     if deleted:
         print(f"{YEL}  Deleted from dest   : {deleted}{RST}")
     if errors:
-        print(f"{RED}  Errors              : {errors}{RST}")
-    print(f"{GRN}{'='*52}{RST}")
+        print(f"{RED}  Errors               : {errors}{RST}")
+    print(f"{CYN}{'='*50}{RST}")
     print()
 
 if __name__ == "__main__":
