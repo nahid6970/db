@@ -158,7 +158,7 @@ def _run():
         and "mega.nz" not in img["url"]
         and "cloudinary" not in img["url"]
     ]
-    print(f"{DIM}  Found {len(convex_images)} Convex image(s) of {len(all_images)} total{RST}")
+    print(f"{DIM}  Found {len(convex_images)} Convex file(s) of {len(all_images)} total{RST}")
     print()
 
     # ── Download loop ─────────────────────────────────────────
