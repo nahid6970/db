@@ -210,20 +210,19 @@ def _run():
             size_str_val = f"{size/1024:.0f}KB" if size < 1024*1024 else f"{size/1024/1024:.1f}MB"
             done += 1
             pct = int(done / total * 100)
-            sys.stdout.write(f"\r  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
-            sys.stdout.flush()
-            if not prev_sig:
-                print(f"\n{GRN}  [NEW]      {rel_path}  ({size_str_val}){RST}", end="")
-            else:
-                print(f"\n{CYN}  [UPDATED]  {rel_path}  ({size_str_val}){RST}", end="")
-            sys.stdout.write(f"\n  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            tag = "[NEW]    " if not prev_sig else "[UPDATED]"
+            col = GRN if not prev_sig else CYN
+            sys.stdout.write("\r" + " " * 60 + "\r")
+            print(f"{col}  {tag} {rel_path}  ({size_str_val}){RST}")
+            sys.stdout.write(f"  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
             sys.stdout.flush()
             downloaded += 1
         except Exception as e:
             done += 1
             pct = int(done / total * 100)
-            print(f"\n{RED}  [ERROR]    {rel_path}  ->  {e}{RST}", end="")
-            sys.stdout.write(f"\n  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
+            sys.stdout.write("\r" + " " * 60 + "\r")
+            print(f"{RED}  [ERROR]    {rel_path}  ->  {e}{RST}")
+            sys.stdout.write(f"  {GRN}{pct}% {done}/{total}{RST}  {DIM}Skipped ({skipped}){RST}   ")
             sys.stdout.flush()
             errors += 1
 
