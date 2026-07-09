@@ -75,17 +75,16 @@ def size_str(n: int) -> str:
     if n < 1024**3:     return f"{n/1024**2:.1f}MB"
     return f"{n/1024**3:.2f}GB"
 
-def progress_bar(done: int, total: int, width: int = 36) -> str:
-    pct   = done / total if total else 0
+def print_progress(done: int, total: int, current: str, skipped: int = 0, errors: int = 0):
+    pct    = done / total if total else 0
+    width  = 32
     filled = int(width * pct)
-    bar   = "█" * filled + "░" * (width - filled)
-    return f"{GRN}[{bar}]{RST} {GRN}{done}/{total}{RST} {DIM}({pct*100:.0f}%){RST}"
-
-def print_progress(done: int, total: int, current: str):
-    bar  = progress_bar(done, total)
-    # Truncate long filename for the status line
-    name = current[-42:] if len(current) > 42 else current
-    line = f"\r  {bar}  {DIM}{name:<44}{RST}"
+    bar    = "█" * filled + "░" * (width - filled)
+    name   = current[-38:] if len(current) > 38 else current
+    extras = ""
+    if skipped: extras += f"  {DIM}skip:{skipped}{RST}"
+    if errors:  extras += f"  {RED}err:{errors}{RST}"
+    line = f"\r  {GRN}[{bar}]{RST} {GRN}{done}/{total}{RST} {DIM}({pct*100:.0f}%){RST}{extras}  {DIM}{name:<40}{RST}"
     sys.stdout.write(line)
     sys.stdout.flush()
 
@@ -210,7 +209,7 @@ def _run():
     done = 0
 
     # Print initial progress bar
-    print_progress(done, total, "")
+    print_progress(done, total, "", skipped, errors)
 
     for img in convex_images:
         img_id    = img["_id"]
@@ -235,16 +234,16 @@ def _run():
             old_file = DEST / prev_path
             if old_file.is_file():
                 old_file.unlink(missing_ok=True)
-                sys.stdout.write("\r" + " " * 90 + "\r")
+                sys.stdout.write("\r" + " " * 100 + "\r")
                 print(f"{MAG}  [MOVED]    {icon} {prev_path}{RST}")
                 print(f"{MAG}         ->     {rel_path}{RST}")
-                print_progress(done, total, filename)
+                print_progress(done, total, filename, skipped, errors)
 
         # Skip unchanged
         if prev_sig == timestamp and dest_file.exists():
             skipped += 1
             done += 1
-            print_progress(done, total, filename)
+            print_progress(done, total, filename, skipped, errors)
             continue
 
         # Download
@@ -253,20 +252,19 @@ def _run():
             done += 1
             tag  = "[NEW]    " if not prev_sig else "[UPDATED]"
             col  = GRN if not prev_sig else CYN
-            # Clear progress line, print file result, redraw progress bar below
-            sys.stdout.write("\r" + " " * 90 + "\r")
+            sys.stdout.write("\r" + " " * 100 + "\r")
             print(f"{col}  {tag} {icon} {rel_path}  {DIM}({size_str(sz)}){RST}")
-            print_progress(done, total, filename)
+            print_progress(done, total, filename, skipped, errors)
             downloaded += 1
         except Exception as e:
             done += 1
-            sys.stdout.write("\r" + " " * 90 + "\r")
+            sys.stdout.write("\r" + " " * 100 + "\r")
             print(f"{RED}  [ERROR]   {icon} {rel_path}  -> {e}{RST}")
-            print_progress(done, total, filename)
+            print_progress(done, total, filename, skipped, errors)
             errors += 1
 
     # Clear final progress bar line
-    sys.stdout.write("\r" + " " * 90 + "\r")
+    sys.stdout.write("\r" + " " * 100 + "\r")
     sys.stdout.flush()
 
     # ── Remove deleted images ─────────────────────────────────
