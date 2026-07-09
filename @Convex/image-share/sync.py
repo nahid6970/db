@@ -208,7 +208,9 @@ def _run():
 
     # ── Download loop ─────────────────────────────────────────
     done = 0
-    log_lines = []  # collect per-file results to print after progress bar
+
+    # Print initial progress bar
+    print_progress(done, total, "")
 
     for img in convex_images:
         img_id    = img["_id"]
@@ -228,12 +230,15 @@ def _run():
         prev_sig  = prev.get("sig") if isinstance(prev, dict) else str(prev)
         prev_path = prev.get("path") if isinstance(prev, dict) else None
 
-        # Handle moved file
+        # Handle moved file — print above progress bar
         if prev_path and prev_path != rel_path:
             old_file = DEST / prev_path
             if old_file.is_file():
                 old_file.unlink(missing_ok=True)
-                log_lines.append(f"{MAG}  [MOVED]  {icon} {prev_path} -> {rel_path}{RST}")
+                sys.stdout.write("\r" + " " * 90 + "\r")
+                print(f"{MAG}  [MOVED]    {icon} {prev_path}{RST}")
+                print(f"{MAG}         ->     {rel_path}{RST}")
+                print_progress(done, total, filename)
 
         # Skip unchanged
         if prev_sig == timestamp and dest_file.exists():
@@ -242,28 +247,27 @@ def _run():
             print_progress(done, total, filename)
             continue
 
-        # Show progress bar before download
-        print_progress(done, total, filename)
-
+        # Download
         try:
             sz   = download_file(url, dest_file)
             done += 1
-            print_progress(done, total, filename)
             tag  = "[NEW]    " if not prev_sig else "[UPDATED]"
             col  = GRN if not prev_sig else CYN
-            log_lines.append(f"{col}  {tag} {icon} {rel_path}  {DIM}({size_str(sz)}){RST}")
+            # Clear progress line, print file result, redraw progress bar below
+            sys.stdout.write("\r" + " " * 90 + "\r")
+            print(f"{col}  {tag} {icon} {rel_path}  {DIM}({size_str(sz)}){RST}")
+            print_progress(done, total, filename)
             downloaded += 1
         except Exception as e:
             done += 1
+            sys.stdout.write("\r" + " " * 90 + "\r")
+            print(f"{RED}  [ERROR]   {icon} {rel_path}  -> {e}{RST}")
             print_progress(done, total, filename)
-            log_lines.append(f"{RED}  [ERROR]   {icon} {rel_path}  -> {e}{RST}")
             errors += 1
 
-    # Clear progress line, print file log
+    # Clear final progress bar line
     sys.stdout.write("\r" + " " * 90 + "\r")
     sys.stdout.flush()
-    for line in log_lines:
-        print(line)
 
     # ── Remove deleted images ─────────────────────────────────
     current_ids = {img["_id"] for img in convex_images}
