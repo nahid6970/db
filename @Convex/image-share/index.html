@@ -6,6 +6,7 @@
   <title>Gallery</title>
   <link rel="icon" href="https://play-lh.googleusercontent.com/UQ-CoA-zMl9azJcm1UWcVPG1BzfL0UvGeysak43Wl5jRJvbPfLjgdNiyx-daRnT2oA1N">
   <link rel="stylesheet" href="https://www.nerdfonts.com/assets/css/webfont.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: system-ui; background: #f5f5f5; }
@@ -31,9 +32,8 @@
 
     .folder-bar {
       display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 4px;
+      flex-direction: column;
+      gap: 2px;
       align-items: stretch;
       padding: 6px;
       overflow-x: hidden;
@@ -43,11 +43,10 @@
     }
 
     .folder-chip {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      justify-content: center;
       gap: 5px;
-      flex: 1 0 auto;
+      width: 100%;
       padding: 5px 8px;
       border: 1px solid #d6dbe1;
       border-radius: 0;
@@ -55,18 +54,22 @@
       color: #334155;
       cursor: pointer;
       font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
       line-height: 1.4;
-      text-align: center;
-      overflow: visible;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
       transition: background-color 0.16s ease, border-color 0.16s ease, color 0.16s ease;
     }
 
     .folder-chip > span {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
       gap: 4px;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .content-shell {
@@ -3144,9 +3147,6 @@
           // Only show top-level folders in the sidebar
           const topLevel = folders.filter(f => !f.parentId);
           return topLevel.map((folder, index) => {
-            const customStyle = folder.bgColor && activeFolderId !== folder._id
-              ? `background:${folder.bgColor};${folder.borderColor ? `border-color:${folder.borderColor};` : ''}color:${folder.fgColor || '#334155'};${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`
-              : `${folder.borderColor && activeFolderId !== folder._id ? `border-color:${folder.borderColor};` : ''}${folder.fontBold ? 'font-weight:700;' : ''}${folder.fontItalic ? 'font-style:italic;' : ''}${folder.fontSize ? `font-size:${folder.fontSize}px;` : ''}`;
             return `
               <button
                 class="folder-chip ${activeFolderId === folder._id ? 'active' : ''}"
@@ -3160,7 +3160,7 @@
                 ondragend="onFolderDragEnd(event)"
                 data-index="${index}"
                 title="${folder.hideFromAll ? 'Hidden from All view' : ''}"
-                ${customStyle ? `style="${customStyle}${folder.hideFromAll ? 'opacity:0.45;' : ''}"` : folder.hideFromAll ? 'style="opacity:0.45;"' : ''}
+                ${folder.hideFromAll ? 'style="opacity:0.45;"' : ''}
               >
                 <span>${escapeHtml(folder.name)}${folder.password ? `<svg class="folder-lock" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 9h-1V7a4 4 0 1 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-6 7.73V18a1 1 0 1 0 2 0v-1.27a2 2 0 1 0-2 0ZM10 9V7a2 2 0 1 1 4 0v2h-4Z"></path></svg>` : ''}</span>
               </button>
@@ -3175,25 +3175,8 @@
       document.getElementById('bulkMoveStorageBtn').style.display = selectionCount ? '' : 'none';
       folderBar.innerHTML = chips.join('');
       requestAnimationFrame(() => {
-        if (folderPanel) {
-          const ctx = document.createElement('canvas').getContext('2d');
-          if (ctx) {
-            const styles = getComputedStyle(folderBar.querySelector('.folder-chip') || folderBar);
-            const baseFontSize = parseFloat(styles.fontSize);
-            const widest = [
-              ...baseFolders.map(f => ({ name: f.name, fontSize: baseFontSize, extra: 0 })),
-              ...folders.map(f => ({ name: f.name, fontSize: f.fontSize || baseFontSize, extra: (f.password ? 20 : 0) + (f.hideFromAll ? 14 : 0) })),
-              { name: '+ Folder', fontSize: baseFontSize, extra: 0 },
-            ].reduce((max, f) => {
-              ctx.font = `${styles.fontWeight} ${f.fontSize}px ${styles.fontFamily}`;
-              return Math.max(max, ctx.measureText(f.name).width + f.extra);
-            }, 0);
-            folderPanel.style.width = `${Math.min(320, Math.max(120, Math.ceil(widest + 34)))}px`;
-          }
-        }
         const activeChip = folderBar.querySelector('.folder-chip.active');
         if (!activeChip || folderBar.scrollHeight <= folderBar.clientHeight) return;
-
         const targetTop = activeChip.offsetTop - (folderBar.clientHeight - activeChip.offsetHeight) / 2;
         folderBar.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
       });
