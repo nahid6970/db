@@ -3,3 +3,8 @@ node_modules/
 package-lock.json
 
 .env.local
+
+# Sync tool
+sync_state.json
+sync.lock
+*.tmp

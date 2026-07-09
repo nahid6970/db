@@ -5942,5 +5942,74 @@
     initColorSwatches();
   })();
   </script>
+
+  <!-- ── Floating Sync Button ────────────────────────────── -->
+  <style>
+    #floatSyncBtn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 16px;
+      background: #1e293b;
+      color: #a5b4fc;
+      border: 1px solid #334155;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 600;
+      font-family: system-ui;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.35);
+      transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.12s;
+      user-select: none;
+      text-decoration: none;
+    }
+    #floatSyncBtn:hover {
+      background: #6366f1;
+      color: #fff;
+      border-color: #818cf8;
+      transform: translateY(-2px);
+    }
+    #floatSyncBtn:active { transform: scale(0.96); }
+    #floatSyncBtn .sync-spin { display: inline-block; font-size: 15px; transition: transform 0.3s; }
+    #floatSyncBtn.syncing .sync-spin { animation: _fspin 0.7s linear infinite; }
+    #floatSyncBtn.synced { background: #14532d; color: #86efac; border-color: #22c55e; }
+    @keyframes _fspin { to { transform: rotate(360deg); } }
+  </style>
+
+  <button id="floatSyncBtn" title="Sync project to backup folder" onclick="triggerSync()">
+    <span class="sync-spin">⟳</span>
+    <span id="floatSyncLabel">Sync</span>
+  </button>
+
+  <script>
+    function triggerSync() {
+      const btn   = document.getElementById('floatSyncBtn');
+      const label = document.getElementById('floatSyncLabel');
+      if (btn.classList.contains('syncing')) return;
+
+      btn.classList.add('syncing');
+      btn.classList.remove('synced');
+      label.textContent = 'Syncing…';
+
+      // Trigger the runsync: custom URI scheme — opens PowerShell terminal with sync.ps1
+      window.location.href = 'runsync:';
+
+      // Reset button after a moment
+      setTimeout(() => {
+        btn.classList.remove('syncing');
+        btn.classList.add('synced');
+        label.textContent = 'Synced ✓';
+        setTimeout(() => {
+          btn.classList.remove('synced');
+          label.textContent = 'Sync';
+        }, 3000);
+      }, 2000);
+    }
+  </script>
+  <!-- ── End Floating Sync Button ─────────────────────────── -->
 </body>
 </html>
