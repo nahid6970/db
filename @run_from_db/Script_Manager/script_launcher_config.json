@@ -2503,7 +2503,7 @@
             "border_width": 0,
             "col_span": 1,
             "corner_radius": 0,
-            "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\Testing\\mklink\\mklink.py",
+            "ctrl_left_cmd": "explorer \"{dir}\"",
             "ctrl_right_cmd": "",
             "font_family": "JetBrainsMono Nerd Font Propo",
             "font_size": 14,
@@ -2529,7 +2529,8 @@
             "svg_content": "",
             "text_color": "#55aaff",
             "use_inline": false,
-            "width": 0
+            "width": 0,
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
