@@ -45,7 +45,7 @@ CP_SUBTEXT = "#808080"      # Sub Text
 CP_GREEN = "#00ff21"        # Success Green
 CP_ORANGE = "#ff934b"       # Warning Orange
 
-CONFIG_FILE = r"C:\@delta\output\script_manager\script_launcher_config.json"
+CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script_launcher_config.json")
 CONVEX_URL = "https://different-gnat-734.convex.cloud"  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
 SCRIPT_NAME = "script_manager"  # Unique key for this script
 
@@ -1975,6 +1975,7 @@ class MainWindow(QMainWindow):
         
         self.setup_ui()
         self.refresh_grid()
+        QTimer.singleShot(100, self.auto_load_from_convex)
 
     def setup_icon(self):
         # We use a shared utility to ensure the icon is set from a file source
@@ -2039,6 +2040,7 @@ class MainWindow(QMainWindow):
             
     def save_config(self):
         try:
+            os.makedirs(os.path.dirname(CONFIG_FILE), exist_ok=True)
             with open(CONFIG_FILE, "w", encoding='utf-8') as f:
                 json.dump(self.config, f, indent=4)
             self.refresh_grid()
@@ -2062,7 +2064,8 @@ class MainWindow(QMainWindow):
 
             self.show()
             
-        except: pass
+        except Exception as e:
+            print(f"Error saving config: {e}")
 
     def setup_ui(self):
         central = QWidget()
@@ -2190,9 +2193,35 @@ class MainWindow(QMainWindow):
         if dlg.exec() == QDialog.DialogCode.Accepted and dlg.selected_id:
             data = self._convex_call("query", {"path": "functions:get", "args": {"id": dlg.selected_id}}).get("value")
             if data:
+                self.view_stack = []  # Reset navigation stack to root on restore
                 self.config = self._fix_floats(data)
+                if not isinstance(self.config, dict):
+                    self.config = {"scripts": []}
+                elif "scripts" not in self.config:
+                    self.config["scripts"] = []
                 self.save_config()
                 QMessageBox.information(self, "RESTORE", "Config restored successfully.")
+
+    def auto_load_from_convex(self):
+        if not CONVEX_URL:
+            return
+        if not self.config or not self.config.get("scripts"):
+            try:
+                result = self._convex_call("query", {"path": "functions:list", "args": {"scriptName": SCRIPT_NAME}})
+                backups = result.get("value", [])
+                if backups:
+                    latest = max(backups, key=lambda b: b["createdAt"])
+                    data = self._convex_call("query", {"path": "functions:get", "args": {"id": latest["id"]}}).get("value")
+                    if data:
+                        self.view_stack = []
+                        self.config = self._fix_floats(data)
+                        if not isinstance(self.config, dict):
+                            self.config = {"scripts": []}
+                        elif "scripts" not in self.config:
+                            self.config["scripts"] = []
+                        self.save_config()
+            except Exception as e:
+                print(f"Auto-load from Convex failed: {e}")
 
     def show_grid_context_menu(self, pos):
         menu = QMenu(self)
