@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import os
 import json
@@ -20,6 +21,30 @@ from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIco
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtCore import QUrl
 import ctypes
+
+# -----------------------------------------------------------------------------
+# CROSS-PLATFORM PATH NORMALIZATION HELPER
+# -----------------------------------------------------------------------------
+def normalize_path(path_str):
+    if not isinstance(path_str, str) or not path_str:
+        return path_str
+    
+    if os.name != 'nt':
+        # Replace backslashes with forward slashes
+        p = path_str.replace('\\', '/')
+        
+        # Translate Windows user directories (like C:/Users/nahid/...) to Linux home directory
+        home = os.path.expanduser('~').replace('\\', '/')
+        p_new = re.sub(r'^[a-zA-Z]:/[Uu]sers/[^/]+', home, p)
+        if p_new == p:
+            # Match C:/ or D:/ etc. at the start of the path and map to home
+            p_new = re.sub(r'^[a-zA-Z]:/', home + '/', p)
+        
+        # Collapse multiple slashes
+        p_new = re.sub(r'//+', '/', p_new)
+        return p_new
+    
+    return path_str
 
 # -----------------------------------------------------------------------------
 # WINDOWS TASKBAR FIX: Register App ID early (before any UI creation)
@@ -294,7 +319,7 @@ class CyberButton(QPushButton):
                 cmd = self.script.get("ctrl_left_cmd", "").strip()
                 if not cmd:
                     # Default: open folder directory of the script path!
-                    script_path = self.script.get("path", "")
+                    script_path = normalize_path(self.script.get("path", ""))
                     if script_path:
                         expanded_path = os.path.expandvars(script_path)
                         clean_path = expanded_path.strip('"').strip("'")
@@ -365,7 +390,7 @@ class CyberButton(QPushButton):
             cmd = os.path.expandvars(cmd)
             
             # Resolve dynamic templates
-            script_path = self.script.get("path", "")
+            script_path = normalize_path(self.script.get("path", ""))
             script_dir = ""
             if script_path:
                 expanded_path = os.path.expandvars(script_path)
@@ -379,21 +404,38 @@ class CyberButton(QPushButton):
             cmd_lower = cmd.lower().strip()
             
             # Handle 'explorer' commands specially
-            if cmd_lower.startswith("explorer "):
-                path = cmd[9:].strip()  # Remove "explorer " prefix
+            if cmd_lower.startswith("explorer ") or cmd_lower == "explorer":
+                path = cmd[9:].strip() if cmd_lower.startswith("explorer ") else ""
                 
                 # Clean enclosing quotes if any
                 path_clean = path.strip('"').strip("'")
+                path_clean = normalize_path(path_clean)
+                if not path_clean:
+                    path_clean = script_dir or os.path.dirname(os.path.abspath(__file__))
                 
-                # If it's a file, use /select to highlight it in folder
-                if os.path.isfile(path_clean):
-                    subprocess.Popen(f'explorer /select,"{path_clean}"')
-                # If it's a directory, open it normally
-                elif os.path.isdir(path_clean):
-                    subprocess.Popen(f'explorer "{path_clean}"')
+                if os.name == 'nt':
+                    # If it's a file, use /select to highlight it in folder
+                    if os.path.isfile(path_clean):
+                        subprocess.Popen(f'explorer /select,"{path_clean}"')
+                    # If it's a directory, open it normally
+                    elif os.path.isdir(path_clean):
+                        subprocess.Popen(f'explorer "{path_clean}"')
+                    else:
+                        subprocess.Popen(f'explorer "{path_clean}"' if " " in path_clean else f'explorer {path_clean}')
                 else:
-                    # Path doesn't exist, try anyway (might be a special folder)
-                    subprocess.Popen(f'explorer "{path_clean}"' if " " in path_clean else f'explorer {path_clean}')
+                    # Linux / Cross-platform alternative
+                    if hasattr(os, 'startfile'):
+                        try:
+                            os.startfile(path_clean)
+                        except Exception:
+                            dir_to_open = os.path.dirname(path_clean) if os.path.isfile(path_clean) else path_clean
+                            QDesktopServices.openUrl(QUrl.fromLocalFile(dir_to_open))
+                    else:
+                        dir_to_open = os.path.dirname(path_clean) if os.path.isfile(path_clean) else path_clean
+                        if os.path.exists(dir_to_open):
+                            QDesktopServices.openUrl(QUrl.fromLocalFile(dir_to_open))
+                        else:
+                            subprocess.Popen(["xdg-open", dir_to_open])
                 return
             
             # Handle URLs (http, https, mailto, etc.)
@@ -402,9 +444,12 @@ class CyberButton(QPushButton):
                 return
             
             # For other commands, use cmd.exe
-            import ctypes
-            # SW_SHOWNORMAL = 1
-            res = ctypes.windll.shell32.ShellExecuteW(None, None, "cmd.exe", f'/c {cmd}', None, 1)
+            if os.name == 'nt':
+                import ctypes
+                # SW_SHOWNORMAL = 1
+                res = ctypes.windll.shell32.ShellExecuteW(None, None, "cmd.exe", f'/c {cmd}', None, 1)
+            else:
+                subprocess.Popen(["/bin/bash", "-c", cmd])
             if res <= 32:
                 QMessageBox.warning(self, "Command Error", f"Failed to execute command (Code {res}):\n{cmd}")
         except Exception as e:
@@ -451,8 +496,9 @@ class CyberButton(QPushButton):
         
         try:
             # Priority 1: Image Path
-            if icon_path and os.path.exists(icon_path):
-                icon_pixmap = QPixmap(icon_path)
+            icon_path_norm = normalize_path(icon_path)
+            if icon_path_norm and os.path.exists(icon_path_norm):
+                icon_pixmap = QPixmap(icon_path_norm)
             
             # Priority 2: Raw SVG Content
             elif svg_content and svg_content.strip():
@@ -825,7 +871,7 @@ class EditDialog(QDialog):
         
         if self.script.get("type") != "folder":
             path_box = QHBoxLayout()
-            self.inp_path = QLineEdit(self.script.get("path", ""))
+            self.inp_path = QLineEdit(normalize_path(self.script.get("path", "")))
             btn_browse = QPushButton("...")
             btn_browse.setFixedWidth(30)
             btn_browse.clicked.connect(self.browse_path)
@@ -835,7 +881,7 @@ class EditDialog(QDialog):
         
         # Icon path (for all items)
         icon_box = QHBoxLayout()
-        self.inp_icon = QLineEdit(self.script.get("icon_path", ""))
+        self.inp_icon = QLineEdit(normalize_path(self.script.get("icon_path", "")))
         self.inp_icon.setPlaceholderText("Optional .ico or .png")
         btn_browse_icon = QPushButton("...")
         btn_browse_icon.setFixedWidth(30)
@@ -2585,16 +2631,86 @@ class MainWindow(QMainWindow):
             self.launch_script(script)
 
     def _run_shell(self, executable, params=None, work_dir=None, admin=False, hide=False):
-        # Centralized helper for robust Windows process launching
-        verb = "runas" if admin else None
-        show = 0 if hide else 1 # SW_HIDE=0, SW_SHOWNORMAL=1
-        try:
-            # ShellExecuteW handles path quoting and working directories natively
-            res = ctypes.windll.shell32.ShellExecuteW(None, verb, str(executable), params, str(work_dir or ""), show)
-            if res <= 32:
-                 QMessageBox.warning(self, "Launch Error", f"ShellExecute failed (Code {res}) for:\n{executable}")
-        except Exception as e:
-            QMessageBox.critical(self, "System Error", f"Failed to execute {executable}:\n{str(e)}")
+        # Centralized helper for robust Windows / Linux process launching
+        if os.name == 'nt':
+            verb = "runas" if admin else None
+            show = 0 if hide else 1 # SW_HIDE=0, SW_SHOWNORMAL=1
+            try:
+                # ShellExecuteW handles path quoting and working directories natively
+                res = ctypes.windll.shell32.ShellExecuteW(None, verb, str(executable), params, str(work_dir or ""), show)
+                if res <= 32:
+                     QMessageBox.warning(self, "Launch Error", f"ShellExecute failed (Code {res}) for:\n{executable}")
+            except Exception as e:
+                QMessageBox.critical(self, "System Error", f"Failed to execute {executable}:\n{str(e)}")
+        else:
+            try:
+                exec_normalized = normalize_path(executable)
+                work_dir_normalized = normalize_path(work_dir) if work_dir else None
+                
+                # Check if we should host in bash/terminal
+                if exec_normalized == "cmd.exe" or exec_normalized.endswith(".bat") or exec_normalized.endswith(".cmd"):
+                    # Translate Windows command processor to bash
+                    cleaned_params = params or ""
+                    keep_open = False
+                    if cleaned_params.startswith("/k ") or cleaned_params.startswith("/k"):
+                        keep_open = True
+                        cleaned_params = cleaned_params[3:].strip()
+                    elif cleaned_params.startswith("/c ") or cleaned_params.startswith("/c"):
+                        cleaned_params = cleaned_params[3:].strip()
+                    
+                    # Normalize any Windows-style paths in the parameters
+                    def replace_paths_in_str(match):
+                        return normalize_path(match.group(0))
+                    cleaned_params = re.sub(r'[a-zA-Z]:\\[^"]+|[a-zA-Z]:/[^"]+', replace_paths_in_str, cleaned_params)
+                    
+                    bash_cmd = cleaned_params
+                    if not bash_cmd:
+                        bash_cmd = exec_normalized
+                    
+                    if keep_open:
+                        terminal_emulators = ["x-terminal-emulator", "gnome-terminal", "konsole", "xfce4-terminal", "xterm"]
+                        term_exe = None
+                        for te in terminal_emulators:
+                            if shutil.which(te):
+                                term_exe = te
+                                break
+                        
+                        if term_exe:
+                            if term_exe == "gnome-terminal":
+                                subprocess.Popen([term_exe, "--", "bash", "-c", f"{bash_cmd}; read -p 'Press Enter to exit...'"], cwd=work_dir_normalized)
+                            else:
+                                subprocess.Popen([term_exe, "-e", f"bash -c \"{bash_cmd}; read -p 'Press Enter to exit...'\""], cwd=work_dir_normalized)
+                        else:
+                            subprocess.Popen(["/bin/bash", "-c", bash_cmd], cwd=work_dir_normalized)
+                    else:
+                        subprocess.Popen(["/bin/bash", "-c", bash_cmd], cwd=work_dir_normalized)
+                
+                else:
+                    # Non-cmd launch: e.g. python or direct file execution
+                    cmd_list = []
+                    if exec_normalized in ["python", "pythonw"]:
+                        cmd_list.append(sys.executable)
+                    else:
+                        cmd_list.append(exec_normalized)
+                    
+                    if params:
+                        import shlex
+                        parsed_params = shlex.split(params)
+                        normalized_params = [normalize_path(p) for p in parsed_params]
+                        cmd_list.extend(normalized_params)
+                    
+                    if os.path.isdir(exec_normalized):
+                        if hasattr(os, 'startfile'):
+                            try:
+                                os.startfile(exec_normalized)
+                            except Exception:
+                                QDesktopServices.openUrl(QUrl.fromLocalFile(exec_normalized))
+                        else:
+                            QDesktopServices.openUrl(QUrl.fromLocalFile(exec_normalized))
+                    else:
+                        subprocess.Popen(cmd_list, cwd=work_dir_normalized)
+            except Exception as e:
+                QMessageBox.critical(self, "System Error", f"Failed to execute {executable}:\n{str(e)}")
 
     def launch_script(self, script):
         # Handle Inline
@@ -2603,7 +2719,7 @@ class MainWindow(QMainWindow):
             if script.get("kill_window"): self.close()
             return
 
-        path = os.path.expandvars(script.get("path", ""))
+        path = normalize_path(os.path.expandvars(script.get("path", "")))
         hide = script.get("hide_terminal", False)
         
         if not path: return
