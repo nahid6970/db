@@ -49,6 +49,12 @@ CONFIG_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "script_l
 CONVEX_URL = "https://different-gnat-734.convex.cloud"  # Set after: npx convex dev  e.g. "https://xxx.convex.cloud"
 SCRIPT_NAME = "script_manager"  # Unique key for this script
 
+# Preset modules for Ctrl+Click actions (easy to expand in the future)
+CTRL_COMMAND_MODULES = [
+    {"name": "Explorer (Open Folder)", "cmd": 'explorer "{dir}"'},
+]
+
+
 # -----------------------------------------------------------------------------
 # WIDGETS
 # -----------------------------------------------------------------------------
@@ -286,6 +292,40 @@ class CyberButton(QPushButton):
         if modifiers == Qt.KeyboardModifier.ControlModifier:
             if event.button() == Qt.MouseButton.LeftButton:
                 cmd = self.script.get("ctrl_left_cmd", "").strip()
+                if not cmd:
+                    # Default: open folder directory of the script path!
+                    script_path = self.script.get("path", "")
+                    if script_path:
+                        expanded_path = os.path.expandvars(script_path)
+                        clean_path = expanded_path.strip('"').strip("'")
+                        try:
+                            abs_path = os.path.abspath(clean_path)
+                            if os.path.exists(abs_path):
+                                if os.path.isdir(abs_path):
+                                    cmd = f'explorer "{abs_path}"'
+                                else:
+                                    cmd = f'explorer "{os.path.dirname(abs_path)}"'
+                            else:
+                                # Try splitting to isolate base file/path if args exist
+                                parts = clean_path.split(" ")
+                                resolved = False
+                                for i in range(len(parts), 0, -1):
+                                    candidate = " ".join(parts[:i])
+                                    if os.path.exists(candidate):
+                                        abs_candidate = os.path.abspath(candidate)
+                                        if os.path.isdir(abs_candidate):
+                                            cmd = f'explorer "{abs_candidate}"'
+                                        else:
+                                            cmd = f'explorer "{os.path.dirname(abs_candidate)}"'
+                                        resolved = True
+                                        break
+                                if not resolved:
+                                    cmd = f'explorer "{os.path.dirname(os.path.abspath(__file__))}"'
+                        except Exception:
+                            cmd = f'explorer "{os.path.dirname(os.path.abspath(__file__))}"'
+                    else:
+                        cmd = f'explorer "{os.path.dirname(os.path.abspath(__file__))}"'
+                
                 if cmd:
                     if self.script.get("require_password"):
                         if PasswordDialog(self).exec() != QDialog.DialogCode.Accepted:
@@ -324,6 +364,17 @@ class CyberButton(QPushButton):
             # Expand environment variables
             cmd = os.path.expandvars(cmd)
             
+            # Resolve dynamic templates
+            script_path = self.script.get("path", "")
+            script_dir = ""
+            if script_path:
+                expanded_path = os.path.expandvars(script_path)
+                abs_path = os.path.abspath(expanded_path.strip('"').strip("'"))
+                script_dir = os.path.dirname(abs_path)
+                cmd = cmd.replace("{path}", abs_path).replace("{dir}", script_dir)
+            else:
+                cmd = cmd.replace("{path}", "").replace("{dir}", os.path.dirname(os.path.abspath(__file__)))
+            
             # Parse command to detect special cases
             cmd_lower = cmd.lower().strip()
             
@@ -331,15 +382,18 @@ class CyberButton(QPushButton):
             if cmd_lower.startswith("explorer "):
                 path = cmd[9:].strip()  # Remove "explorer " prefix
                 
+                # Clean enclosing quotes if any
+                path_clean = path.strip('"').strip("'")
+                
                 # If it's a file, use /select to highlight it in folder
-                if os.path.isfile(path):
-                    subprocess.Popen(f'explorer /select,"{path}"')
+                if os.path.isfile(path_clean):
+                    subprocess.Popen(f'explorer /select,"{path_clean}"')
                 # If it's a directory, open it normally
-                elif os.path.isdir(path):
-                    subprocess.Popen(f'explorer "{path}"')
+                elif os.path.isdir(path_clean):
+                    subprocess.Popen(f'explorer "{path_clean}"')
                 else:
                     # Path doesn't exist, try anyway (might be a special folder)
-                    subprocess.Popen(f'explorer {path}')
+                    subprocess.Popen(f'explorer "{path_clean}"' if " " in path_clean else f'explorer {path_clean}')
                 return
             
             # Handle URLs (http, https, mailto, etc.)
@@ -864,10 +918,51 @@ class EditDialog(QDialog):
 
         if self.script.get("type") != "folder":
             l_sc = QFormLayout()
+            
+            # Ctrl+Left row layout
+            layout_ctrl_left = QHBoxLayout()
             self.inp_ctrl_left = QLineEdit(self.script.get("ctrl_left_cmd", ""))
+            layout_ctrl_left.addWidget(self.inp_ctrl_left)
+            
+            btn_ctrl_left_preset = QPushButton("▼")
+            btn_ctrl_left_preset.setFixedWidth(28)
+            btn_ctrl_left_preset.setStyleSheet(f"background-color: {CP_PANEL}; border: 1px solid {CP_DIM}; color: {CP_CYAN};")
+            
+            menu_ctrl_left = QMenu(self)
+            menu_ctrl_left.setStyleSheet(f"""
+                QMenu {{ background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_DIM}; }}
+                QMenu::item:selected {{ background-color: {CP_CYAN}; color: black; }}
+            """)
+            for module in CTRL_COMMAND_MODULES:
+                act = QAction(module["name"], self)
+                act.triggered.connect(lambda checked, c=module["cmd"]: self.inp_ctrl_left.setText(c))
+                menu_ctrl_left.addAction(act)
+            btn_ctrl_left_preset.setMenu(menu_ctrl_left)
+            layout_ctrl_left.addWidget(btn_ctrl_left_preset)
+            
+            # Ctrl+Right row layout
+            layout_ctrl_right = QHBoxLayout()
             self.inp_ctrl_right = QLineEdit(self.script.get("ctrl_right_cmd", ""))
-            l_sc.addRow("Ctrl+Left:", self.inp_ctrl_left)
-            l_sc.addRow("Ctrl+Right:", self.inp_ctrl_right)
+            layout_ctrl_right.addWidget(self.inp_ctrl_right)
+            
+            btn_ctrl_right_preset = QPushButton("▼")
+            btn_ctrl_right_preset.setFixedWidth(28)
+            btn_ctrl_right_preset.setStyleSheet(f"background-color: {CP_PANEL}; border: 1px solid {CP_DIM}; color: {CP_CYAN};")
+            
+            menu_ctrl_right = QMenu(self)
+            menu_ctrl_right.setStyleSheet(f"""
+                QMenu {{ background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_DIM}; }}
+                QMenu::item:selected {{ background-color: {CP_CYAN}; color: black; }}
+            """)
+            for module in CTRL_COMMAND_MODULES:
+                act = QAction(module["name"], self)
+                act.triggered.connect(lambda checked, c=module["cmd"]: self.inp_ctrl_right.setText(c))
+                menu_ctrl_right.addAction(act)
+            btn_ctrl_right_preset.setMenu(menu_ctrl_right)
+            layout_ctrl_right.addWidget(btn_ctrl_right_preset)
+            
+            l_sc.addRow("Ctrl+Left:", layout_ctrl_left)
+            l_sc.addRow("Ctrl+Right:", layout_ctrl_right)
             l_exec.addLayout(l_sc)
             
         grp_exec.setLayout(l_exec)
