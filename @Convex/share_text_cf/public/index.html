@@ -343,6 +343,20 @@
         document.getElementById('addNoteBtn').innerHTML = ICONS.plus;
         document.getElementById('openSettingsBtn').innerHTML = ICONS.settings;
 
+        function preprocessLists(text) {
+            if (!text) return '';
+            return text.split('\n').map(line => {
+                const match = line.match(/^(\-{2,5})\s+(.*)$/);
+                if (match) {
+                    const level = match[1].length;
+                    const content = match[2];
+                    const spaces = '  '.repeat(level - 1);
+                    return `${spaces}- ${content}`;
+                }
+                return line;
+            }).join('\n');
+        }
+
         function parseCustomColors(text) {
             let out = text;
             customSyntaxes.forEach(syntax => {
@@ -446,7 +460,8 @@
                 logsList.innerHTML = currentLogs.map((log, index) => {
                     const date = new Date(log.timestamp);
                     const timestamp = date.toLocaleString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: true });
-                    const parts = log.text.split(/>>>>>+/);
+                    const processedText = preprocessLists(log.text);
+                    const parts = processedText.split(/>>>>>+/);
                     let renderedContent = '';
                     if (parts.length > 1) {
                         const preview = marked.parse(parseCustomColors(parts[0]));
@@ -461,7 +476,7 @@
                                 ${details}
                             </div>`;
                     } else {
-                        renderedContent = marked.parse(parseCustomColors(log.text));
+                        renderedContent = marked.parse(parseCustomColors(processedText));
                     }
                     const fgStyle = log.color ? `color:${log.color};` : '';
                     const bgStyle = log.bgColor ? `background-color:${log.bgColor};border-color:${log.bgColor};` : '';
