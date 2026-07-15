@@ -3288,7 +3288,7 @@
             "_runtime_height": 100,
             "_runtime_is_bold": true,
             "_runtime_is_italic": false,
-            "border_width": 0,
+            "border_width": 1,
             "col_span": 1,
             "corner_radius": 0,
             "ctrl_left_cmd": "",
@@ -3317,7 +3317,10 @@
             "run_admin": false,
             "type": "script",
             "use_inline": false,
-            "width": 0
+            "width": 0,
+            "color": "#000000",
+            "text_color": "#ffffff",
+            "border_color": "#ffff00"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font",
@@ -3512,7 +3515,8 @@
             "svg_content": "",
             "use_inline": false,
             "width": 0,
-            "require_password": false
+            "require_password": false,
+            "text_color": "#00aaff"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
