@@ -21,6 +21,10 @@
         <header class="app-header" id="app-header-main">
             <div class="logo-area">
                 <div class="vlr-logo-glow"></div>
+                <div class="sidebar-toggles">
+                    <button id="btn-collapse-sidebar" class="sidebar-toggle-btn" title="Hide sidebar"><i class="fa-solid fa-angles-left"></i></button>
+                    <button id="btn-expand-sidebar" class="sidebar-toggle-btn hidden" title="Show sidebar"><i class="fa-solid fa-angles-right"></i></button>
+                </div>
                 <i class="fa-solid fa-crosshairs logo-icon"></i>
                 <select id="sort-tourney-order" class="sidebar-select sort-tourney-select" title="Sort tournaments by first match date">
                     <option value="none">Pin order</option>
@@ -74,7 +78,6 @@
             <aside class="sidebar" id="filter-sidebar">
                 <div class="sidebar-header">
                     <h2><i class="fa-solid fa-sliders"></i> Filters & Tournaments</h2>
-                    <button id="btn-collapse-sidebar" title="Hide panel" style="background:none;border:none;cursor:pointer;color:var(--text-secondary);font-size:14px;padding:4px 6px;border-radius:4px;line-height:1;flex-shrink:0;" onmouseover="this.style.color='var(--text-primary)'" onmouseout="this.style.color='var(--text-secondary)'"><i class="fa-solid fa-angles-left"></i></button>
                 </div>
                 
                 <!-- Sidebar Filters -->
@@ -140,8 +143,6 @@
 
             <!-- Matches Grid Content -->
             <main class="content-area">
-                <!-- Expand sidebar tab (only visible when sidebar is collapsed) -->
-                <button id="btn-expand-sidebar" title="Show panel"><i class="fa-solid fa-angles-right"></i></button>
                 <div class="matches-grid" id="matches-grid-container">
                     <div class="no-matches-fallback">
                         <i class="fa-solid fa-gamepad fallback-icon"></i>

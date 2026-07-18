@@ -50,10 +50,12 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!filterSidebar) return;
         if (collapsed) {
             filterSidebar.classList.add("sidebar-collapsed");
-            if (expandBtn) expandBtn.classList.add("visible");
+            if (collapseBtn) collapseBtn.classList.add("hidden");
+            if (expandBtn) expandBtn.classList.remove("hidden");
         } else {
             filterSidebar.classList.remove("sidebar-collapsed");
-            if (expandBtn) expandBtn.classList.remove("visible");
+            if (collapseBtn) collapseBtn.classList.remove("hidden");
+            if (expandBtn) expandBtn.classList.add("hidden");
         }
         sessionStorage.setItem("sidebarCollapsed", collapsed ? "1" : "0");
     }
