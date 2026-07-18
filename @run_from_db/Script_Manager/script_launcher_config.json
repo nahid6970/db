@@ -2068,7 +2068,7 @@
                     "ctrl_right_cmd": "",
                     "use_inline": true,
                     "inline_type": "pwsh",
-                    "inline_script": "# cd C:\\Users\\nahid\n# open qbittorrent -> view -> search engine -> Go To search engine tab \n# search plugin -> check for updates -> now nova3 folder will be added\n# Start Jackett and add the necessary indexes to th list\n# Copy jacket api from webui to jackett.json\nStart-Process \"C:\\Users\\nahid\\AppData\\Local\\qBittorrent\\nova3\\engines\"",
+                    "inline_script": "# cd C:\\Users\\nahid\n# open qbittorrent -> view -> search engine -> Go To search engine tab \n# search plugin -> check for updates -> now nova3 folder will be added\n# Start Jackett and add the necessary indexes to th list\n# Copy jacket api from webui to jackett.json\nStart-Process \"C:\\Users\\nahid\\AppData\\Local\\qBittorrent\\nova3\\engines\"\nStart-Process \"C:\\Users\\nahid\\scoop\\apps\\qbittorrent\\current\\profile\\qBittorrent\\data\\nova3\\engines\"",
                     "require_password": false,
                     "font_family": "JetBrainsMono Nerd Font Propo",
                     "font_size": 14,
