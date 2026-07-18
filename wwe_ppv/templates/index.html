@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WWE PPV Schedule</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="top-nav">
+            <div class="nav-left">
+                <i class="fa-solid fa-calendar-days logo-icon"></i>
+                <h1 class="logo-text">WWE Schedule Tracker</h1>
+            </div>
+            <div class="nav-right">
+                <button id="btn-refresh" class="btn-primary"><i class="fa-solid fa-arrows-rotate"></i> Sync Data</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="filters">
+                <div class="filter-group">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="upcoming">Upcoming</button>
+                    <button class="filter-btn" data-filter="completed">Completed</button>
+                    <button class="filter-btn" data-filter="unseen">Unseen</button>
+                </div>
+            </div>
+
+            <div id="events-grid" class="events-grid">
+                <!-- Cards injected here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
