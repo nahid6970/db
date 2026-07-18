@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle)
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize
 from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIcon, QPainter, 
-                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase)
+                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat)
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtCore import QUrl
 import ctypes
@@ -792,6 +792,98 @@ class CyberButton(QPushButton):
 # -----------------------------------------------------------------------------
 # SELECTION DIALOG
 # -----------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
+# CODE HIGHLIGHTER FOR INLINE SCRIPTS
+# -----------------------------------------------------------------------------
+class CodeHighlighter(QSyntaxHighlighter):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.language = "cmd"
+        self._rules = []
+        self.setup_rules()
+
+    def set_language(self, lang):
+        self.language = lang.lower()
+        self.setup_rules()
+        self.rehighlight()
+
+    def setup_rules(self):
+        self._rules = []
+        
+        # Colors matching the cyberpunk aesthetics
+        keyword_format = QTextCharFormat()
+        keyword_format.setForeground(QColor("#00F0FF")) # Neon Cyan
+        keyword_format.setFontWeight(QFont.Weight.Bold)
+
+        string_format = QTextCharFormat()
+        string_format.setForeground(QColor("#ff934b")) # Neon Orange
+
+        comment_format = QTextCharFormat()
+        comment_format.setForeground(QColor("#808080")) # Gray for comments
+
+        number_format = QTextCharFormat()
+        number_format.setForeground(QColor("#FCEE0A")) # Cyber Yellow
+
+        builtin_format = QTextCharFormat()
+        builtin_format.setForeground(QColor("#FF003C")) # Neon Red
+        
+        if self.language in ["powershell", "pwsh"]:
+            keywords = [
+                r"\bbegin\b", r"\bbreak\b", r"\bcatch\b", r"\bclass\b", r"\bcontinue\b",
+                r"\bdata\b", r"\bdefine\b", r"\bdo\b", r"\bdynamicparam\b", r"\belse\b",
+                r"\belseif\b", r"\bend\b", r"\bexit\b", r"\bfilter\b", r"\bfinally\b",
+                r"\bfor\b", r"\bforeach\b", r"\bfrom\b", r"\bfunction\b", r"\bif\b",
+                r"\bin\b", r"\binlinescript\b", r"\bparallel\b", r"\bparam\b", r"\bprocess\b",
+                r"\breturn\b", r"\bsequence\b", r"\bswitch\b", r"\bthrow\b", r"\btrap\b",
+                r"\btry\b", r"\buntil\b", r"\busing\b", r"\bwhile\b", r"\bworkflow\b"
+            ]
+            self._rules.append((re.compile(r"\$[a-zA-Z0-9_:]+"), builtin_format))
+            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
+            self._rules.append((re.compile(r"'[^'\\]*(?:\\.[^'\\]*)*'"), string_format))
+            for kw in keywords:
+                self._rules.append((re.compile(kw, re.IGNORECASE), keyword_format))
+            self._rules.append((re.compile(r"#.*"), comment_format))
+            self._rules.append((re.compile(r"\b\d+\b"), number_format))
+
+        elif self.language == "python":
+            keywords = [
+                r"\band\b", r"\bas\b", r"\bassert\b", r"\bbreak\b", r"\bclass\b",
+                r"\bcontinue\b", r"\bdef\b", r"\bdel\b", r"\belif\b", r"\belse\b",
+                r"\bexcept\b", r"\bexec\b", r"\bfinally\b", r"\bfor\b", r"\bfrom\b",
+                r"\bglobal\b", r"\bif\b", r"\bimport\b", r"\bin\b", r"\bis\b",
+                r"\blambda\b", r"\bnot\b", r"\bor\b", r"\bpass\b", r"\bprint\b",
+                r"\braise\b", r"\breturn\b", r"\btry\b", r"\bwhile\b", r"\bwith\b",
+                r"\byield\b", r"\bNone\b", r"\bTrue\b", r"\bFalse\b"
+            ]
+            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
+            self._rules.append((re.compile(r"'[^'\\]*(?:\\.[^'\\]*)*'"), string_format))
+            for kw in keywords:
+                self._rules.append((re.compile(kw), keyword_format))
+            self._rules.append((re.compile(r"\bself\b"), builtin_format))
+            self._rules.append((re.compile(r"#.*"), comment_format))
+            self._rules.append((re.compile(r"\b\d+\b"), number_format))
+            
+        else: # cmd
+            keywords = [
+                r"\b@echo\b", r"\becho\b", r"\bset\b", r"\bif\b", r"\belse\b",
+                r"\bfor\b", r"\bin\b", r"\bdo\b", r"\bgoto\b", r"\bcall\b",
+                r"\bexit\b", r"\bpause\b", r"\brem\b", r"\bshift\b", r"\bcls\b"
+            ]
+            self._rules.append((re.compile(r"%[a-zA-Z0-9_]+%"), builtin_format))
+            self._rules.append((re.compile(r"![a-zA-Z0-9_]+!"), builtin_format))
+            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
+            for kw in keywords:
+                self._rules.append((re.compile(kw, re.IGNORECASE), keyword_format))
+            self._rules.append((re.compile(r"\bREM\b.*", re.IGNORECASE), comment_format))
+            self._rules.append((re.compile(r"::.*"), comment_format))
+            self._rules.append((re.compile(r"\b\d+\b"), number_format))
+
+    def highlightBlock(self, text):
+        for pattern, format_ in self._rules:
+            for match in pattern.finditer(text):
+                start, end = match.span()
+                self.setFormat(start, end - start, format_)
+
 # FULL EDIT DIALOG
 # -----------------------------------------------------------------------------
 class EditDialog(QDialog):
@@ -1149,6 +1241,9 @@ class EditDialog(QDialog):
             self.txt_inline = QPlainTextEdit()
             self.txt_inline.setPlainText(self.script.get("inline_script", ""))
             self.txt_inline.setFont(QFont("Consolas", 10))
+            self.highlighter = CodeHighlighter(self.txt_inline.document())
+            self.highlighter.set_language(self.cmb_type.currentText())
+            self.cmb_type.currentTextChanged.connect(self.highlighter.set_language)
             r_lay.addWidget(self.txt_inline)
             
             right_grp.setLayout(r_lay)
