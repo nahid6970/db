@@ -1,9 +1,7 @@
 import urllib.request
 from bs4 import BeautifulSoup
 import sqlite3
-import re
 from datetime import datetime
-import os
 
 DB_PATH = 'wwe.db'
 

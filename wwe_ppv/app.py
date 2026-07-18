@@ -1,5 +1,4 @@
 from flask import Flask, render_template, jsonify, request
-import sqlite3
 from pathlib import Path
 import scraper
 
