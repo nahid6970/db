@@ -2230,6 +2230,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const profileLogoWrapper = document.getElementById("thr-profile-logo-wrapper");
         const profileName = document.getElementById("thr-profile-name");
         const profileStats = document.getElementById("thr-profile-stats");
+        const profileActions = document.getElementById("thr-profile-actions");
+        const toggleWhiteLogo = document.getElementById("thr-toggle-white-logo");
         const statWinrate = document.getElementById("thr-stat-winrate");
         const statWins = document.getElementById("thr-stat-wins");
         const statLosses = document.getElementById("thr-stat-losses");
@@ -2238,6 +2240,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (profileName) profileName.textContent = "Select a Team";
             if (profileLogoWrapper) profileLogoWrapper.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
             if (profileStats) profileStats.style.display = "none";
+            if (profileActions) profileActions.style.display = "none";
             resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown above to view match results.</p>';
             return;
         }
@@ -2280,6 +2283,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         if (profileStats) profileStats.style.display = "flex";
+        if (profileActions) profileActions.style.display = "block";
+        if (toggleWhiteLogo) {
+            toggleWhiteLogo.classList.toggle("active", whiteLogoTeams.has(teamName));
+        }
         if (statWinrate) statWinrate.textContent = `${winrate}%`;
         if (statWins) statWins.textContent = wins;
         if (statLosses) statLosses.textContent = losses;
@@ -2453,6 +2460,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     teamHistorySearch?.addEventListener("input", (e) => {
         populateTeamDropdown(e.target.value);
+    });
+    document.getElementById("thr-toggle-white-logo")?.addEventListener("click", async () => {
+        if (!selectedTeamHistoryName) return;
+        const isActive = whiteLogoTeams.has(selectedTeamHistoryName);
+        if (!isActive) {
+            whiteLogoTeams.add(selectedTeamHistoryName);
+        } else {
+            whiteLogoTeams.delete(selectedTeamHistoryName);
+        }
+        await saveWhiteLogoTeams();
+        renderTeamHistory(selectedTeamHistoryName);
+        renderWhiteLogoTeamsList();
     });
     document.addEventListener("click", (e) => {
         const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");
