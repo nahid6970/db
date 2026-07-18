@@ -2357,19 +2357,23 @@ document.addEventListener("DOMContentLoaded", () => {
 
             return `
                 <div class="team-history-row" data-id="${m.id}">
-                    <div class="thr-tourney">
-                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
-                        <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
+                    <div class="thr-row-top">
+                        <div class="thr-tourney">
+                            ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
+                            <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
+                        </div>
                     </div>
-                    <div class="thr-opponent">
-                        <span class="thr-vs-label">VS</span>
-                        ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
-                        <span class="thr-opp-name" title="${oppTeam}">${oppTeam}</span>
+                    <div class="thr-row-bottom">
+                        <div class="thr-opponent">
+                            <span class="thr-vs-label">VS</span>
+                            ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
+                            <span class="thr-opp-name" title="${oppTeam}">${oppTeam}</span>
+                        </div>
+                        <div class="thr-score-container">
+                            <span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>
+                        </div>
+                        <span class="thr-status ${statusClass}">${statusText}</span>
                     </div>
-                    <div class="thr-score-container">
-                        <span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>
-                    </div>
-                    <span class="thr-status ${statusClass}">${statusText}</span>
                 </div>
             `;
         }).join("");
