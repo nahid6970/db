@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import sqlite3
+from pathlib import Path
 import scraper
 
 app = Flask(__name__)
@@ -7,6 +8,14 @@ app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/api/export-static', methods=['POST'])
+def api_export_static():
+    events = scraper.get_events()
+    output_path = Path(__file__).resolve().parent / 'index.html'
+    html = render_template('index.html', static_events=events)
+    output_path.write_text('<!DOCTYPE html>\n' + html, encoding='utf-8')
+    return jsonify({'status': 'success', 'path': str(output_path)})
 
 @app.route('/api/events')
 def api_events():

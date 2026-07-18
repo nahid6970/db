@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WWE PPV Schedule</title>
-    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="./static/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
@@ -16,6 +16,7 @@
                 <h1 class="logo-text">WWE Schedule Tracker</h1>
             </div>
             <div class="nav-right">
+                <button id="btn-export" class="btn-secondary"><i class="fa-solid fa-file-export"></i> Export Static</button>
                 <button id="btn-refresh" class="btn-primary"><i class="fa-solid fa-arrows-rotate"></i> Sync Data</button>
             </div>
         </header>
@@ -37,6 +38,9 @@
         </main>
     </div>
 
-    <script src="/static/js/main.js"></script>
+    {% if static_events is defined %}
+    <script>window.STATIC_EVENTS = {{ static_events | tojson }};</script>
+    {% endif %}
+    <script src="./static/js/main.js"></script>
 </body>
 </html>

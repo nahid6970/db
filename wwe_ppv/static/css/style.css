@@ -75,6 +75,23 @@ body {
 }
 .btn-primary:hover { background: var(--accent-red-hover); }
 
+.btn-secondary {
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--card-border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-secondary:hover { color: var(--text-primary); border-color: rgba(255,255,255,0.2); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
 /* Filters */
 .filters {
     margin-bottom: 24px;

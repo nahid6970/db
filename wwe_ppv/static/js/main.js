@@ -1,7 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('events-grid');
     const refreshBtn = document.getElementById('btn-refresh');
+    const exportBtn = document.getElementById('btn-export');
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const staticEvents = Array.isArray(window.STATIC_EVENTS) ? window.STATIC_EVENTS : null;
+    const isStatic = staticEvents !== null;
     
     let events = [];
     let activeFilter = localStorage.getItem('wwe_active_filter') || 'all';
@@ -16,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     async function loadEvents() {
+        if (isStatic) {
+            events = staticEvents;
+            render();
+            return;
+        }
+
         try {
             const res = await fetch('/api/events');
             events = await res.json();
@@ -101,11 +110,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (evObj) evObj.seen = seen ? 1 : 0;
                 
                 try {
-                    await fetch(`/api/events/${id}/toggle`, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({seen})
-                    });
+                    if (!isStatic) {
+                        await fetch(`/api/events/${id}/toggle`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({seen})
+                        });
+                    }
                     if (activeFilter === 'unseen') render();
                 } catch (err) {
                     console.error(err);
@@ -121,11 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (evObj) evObj.hidden = hidden ? 1 : 0;
                 
                 try {
-                    await fetch(`/api/events/${id}/toggle_hidden`, {
-                        method: 'POST',
-                        headers: {'Content-Type': 'application/json'},
-                        body: JSON.stringify({hidden})
-                    });
+                    if (!isStatic) {
+                        await fetch(`/api/events/${id}/toggle_hidden`, {
+                            method: 'POST',
+                            headers: {'Content-Type': 'application/json'},
+                            body: JSON.stringify({hidden})
+                        });
+                    }
                     // Re-render immediately so it disappears from 'All' or 'Hidden' tab when toggled
                     render();
                 } catch (err) {
@@ -145,6 +158,43 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    exportBtn.addEventListener('click', () => {
+        if (!isStatic) {
+            exportBtn.disabled = true;
+            exportBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Exporting...';
+            fetch('/api/export-static', {method: 'POST'})
+                .then(res => {
+                    if (!res.ok) throw new Error('Static export failed');
+                    exportBtn.innerHTML = '<i class="fa-solid fa-check"></i> Saved to project';
+                    setTimeout(() => {
+                        exportBtn.disabled = false;
+                        exportBtn.innerHTML = '<i class="fa-solid fa-file-export"></i> Export Static';
+                    }, 1800);
+                })
+                .catch(err => {
+                    console.error(err);
+                    exportBtn.disabled = false;
+                    exportBtn.innerHTML = '<i class="fa-solid fa-file-export"></i> Export Static';
+                });
+            return;
+        }
+
+        const snapshot = JSON.stringify(events)
+            .replace(/</g, '\\u003c')
+            .replace(/>/g, '\\u003e')
+            .replace(/&/g, '\\u0026');
+        const html = document.documentElement.outerHTML.replace(
+            '<script src="./static/js/main.js"></script>',
+            `<script>window.STATIC_EVENTS = ${snapshot};</script>\n    <script src="./static/js/main.js"></script>`
+        );
+        const blob = new Blob([`<!DOCTYPE html>\n${html}`], {type: 'text/html'});
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'index.html';
+        link.click();
+        URL.revokeObjectURL(link.href);
+    });
+
     refreshBtn.addEventListener('click', async () => {
         refreshBtn.disabled = true;
         refreshBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Syncing...';
@@ -157,6 +207,12 @@ document.addEventListener('DOMContentLoaded', () => {
         refreshBtn.disabled = false;
         refreshBtn.innerHTML = '<i class="fa-solid fa-arrows-rotate"></i> Sync Data';
     });
+
+    if (isStatic) {
+        refreshBtn.disabled = true;
+        refreshBtn.title = 'Sync is available when running Flask';
+        refreshBtn.innerHTML = '<i class="fa-solid fa-lock"></i> Static Snapshot';
+    }
 
     loadEvents();
 });
