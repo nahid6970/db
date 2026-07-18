@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
             
             card.innerHTML = `
                 <div class="card-poster">
-                    ${e.logo_url ? `<img src="${e.logo_url}" alt="${e.name}">` : ''}
+                    ${e.logo_url ? `<img src="${e.logo_url}" alt="${e.name}" referrerpolicy="no-referrer">` : ''}
                     <div class="poster-overlay"></div>
                     <span class="card-status ${statusClass}">${e.status}</span>
                 </div>
