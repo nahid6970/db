@@ -264,7 +264,7 @@
     <!-- Tournament pin context menu -->
     <!-- Team Match History Modal -->
     <div id="team-history-modal" class="match-detail-overlay" style="display:none;">
-        <div class="match-detail-modal" style="max-width: 800px;">
+        <div class="match-detail-modal" style="max-width: 900px;">
             <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0;">
                 <h2><i class="fa-solid fa-people-group"></i> Team Match History & Results</h2>
                 <button id="team-history-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
@@ -295,9 +295,38 @@
                     </div>
                 </div>
 
-                <!-- Match results list -->
-                <div id="team-history-results" style="max-height: 55vh; overflow-y: auto; padding-right: 4px;">
-                    <p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Click the button above to select a team and view match results.</p>
+                <!-- Split Layout Container -->
+                <div class="thr-split-container">
+                    <!-- Left profile panel -->
+                    <div class="thr-left-profile" id="thr-left-profile">
+                        <div class="thr-profile-card">
+                            <div class="thr-profile-logo-wrapper" id="thr-profile-logo-wrapper">
+                                <i class="fa-solid fa-people-group"></i>
+                            </div>
+                            <h3 class="thr-profile-name" id="thr-profile-name">Select a Team</h3>
+                            <div class="thr-profile-stats" id="thr-profile-stats" style="display: none;">
+                                <div class="thr-stat-item">
+                                    <div class="thr-stat-value" id="thr-stat-winrate">0%</div>
+                                    <div class="thr-stat-label">Win Rate</div>
+                                </div>
+                                <div class="thr-stat-item">
+                                    <div class="thr-stat-value" id="thr-stat-wins">0</div>
+                                    <div class="thr-stat-label">Wins</div>
+                                </div>
+                                <div class="thr-stat-item">
+                                    <div class="thr-stat-value" id="thr-stat-losses">0</div>
+                                    <div class="thr-stat-label">Losses</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right match history list -->
+                    <div class="thr-right-history">
+                        <div id="team-history-results">
+                            <p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown above to view match results.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -2227,8 +2227,18 @@ document.addEventListener("DOMContentLoaded", () => {
         const resultsContainer = document.getElementById("team-history-results");
         if (!resultsContainer) return;
 
+        const profileLogoWrapper = document.getElementById("thr-profile-logo-wrapper");
+        const profileName = document.getElementById("thr-profile-name");
+        const profileStats = document.getElementById("thr-profile-stats");
+        const statWinrate = document.getElementById("thr-stat-winrate");
+        const statWins = document.getElementById("thr-stat-wins");
+        const statLosses = document.getElementById("thr-stat-losses");
+
         if (!teamName) {
-            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Click the button above to select a team and view match results.</p>';
+            if (profileName) profileName.textContent = "Select a Team";
+            if (profileLogoWrapper) profileLogoWrapper.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+            if (profileStats) profileStats.style.display = "none";
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">Select a team from the dropdown above to view match results.</p>';
             return;
         }
 
@@ -2236,6 +2246,43 @@ document.addEventListener("DOMContentLoaded", () => {
         const teamMatches = matches.filter(m => {
             return (m.team1 === teamName || m.team2 === teamName) && m.status === "Completed";
         });
+
+        // Calculate Win Rate / Wins / Losses
+        let wins = 0;
+        let losses = 0;
+        let draws = 0;
+        let foundLogo = "";
+
+        teamMatches.forEach(m => {
+            const isTeam1 = m.team1 === teamName;
+            const myScore = parseInt(isTeam1 ? m.score1 : m.score2) || 0;
+            const oppScore = parseInt(isTeam1 ? m.score2 : m.score1) || 0;
+
+            if (myScore > oppScore) wins++;
+            else if (oppScore > myScore) losses++;
+            else draws++;
+
+            if (isTeam1 && m.team1_logo) foundLogo = m.team1_logo;
+            if (!isTeam1 && m.team2_logo) foundLogo = m.team2_logo;
+        });
+
+        const total = wins + losses + draws;
+        const winrate = total > 0 ? Math.round((wins / total) * 100) : 0;
+
+        // Update Left Profile Card
+        if (profileName) profileName.textContent = teamName;
+        if (profileLogoWrapper) {
+            if (foundLogo) {
+                const isWhite = whiteLogoTeams.has(teamName) ? "white-bg-logo" : "";
+                profileLogoWrapper.innerHTML = `<img src="${foundLogo}" class="${isWhite}" alt="${teamName}">`;
+            } else {
+                profileLogoWrapper.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+            }
+        }
+        if (profileStats) profileStats.style.display = "flex";
+        if (statWinrate) statWinrate.textContent = `${winrate}%`;
+        if (statWins) statWins.textContent = wins;
+        if (statLosses) statLosses.textContent = losses;
 
         if (teamMatches.length === 0) {
             resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">No completed matches found in local database for this team.</p>';
@@ -2245,11 +2292,9 @@ document.addEventListener("DOMContentLoaded", () => {
         resultsContainer.innerHTML = teamMatches.map(m => {
             const isTeam1 = m.team1 === teamName;
             
-            // Selected team is always mapped to the left (myTeam), opponent is mapped to the right (oppTeam)
             const myTeam = teamName;
             const oppTeam = isTeam1 ? m.team2 : m.team1;
             
-            const myLogo = isTeam1 ? (m.team1_logo || "") : (m.team2_logo || "");
             const oppLogo = isTeam1 ? (m.team2_logo || "") : (m.team1_logo || "");
 
             const myScore = isTeam1 ? (m.score1 || '0') : (m.score2 || '0');
@@ -2261,21 +2306,17 @@ document.addEventListener("DOMContentLoaded", () => {
             let statusText = "Draw";
             let statusClass = "draw";
             let myColorClass = "thr-neutral";
-            let oppColorClass = "thr-neutral";
 
             if (myScoreNum > oppScoreNum) {
                 statusText = "Win";
                 statusClass = "win";
                 myColorClass = "thr-win-text";
-                oppColorClass = "thr-loss-text";
             } else if (oppScoreNum > myScoreNum) {
                 statusText = "Loss";
                 statusClass = "loss";
                 myColorClass = "thr-loss-text";
-                oppColorClass = "thr-win-text";
             }
 
-            const myWhite = whiteLogoTeams.has(myTeam) ? "white-bg-logo" : "";
             const oppWhite = whiteLogoTeams.has(oppTeam) ? "white-bg-logo" : "";
 
             return `
@@ -2284,16 +2325,13 @@ document.addEventListener("DOMContentLoaded", () => {
                         ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
                         <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
                     </div>
-                    <div class="thr-teams">
-                        <span class="thr-t1 ${myColorClass}">
-                            <span>${myTeam}</span>
-                            ${myLogo ? `<img class="thr-team-logo ${myWhite}" src="${myLogo}" onerror="this.style.display='none';">` : ''}
-                        </span>
-                        <span class="thr-score">${myScore} – ${oppScore}</span>
-                        <span class="thr-t2 ${oppColorClass}">
-                            ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
-                            <span>${oppTeam}</span>
-                        </span>
+                    <div class="thr-opponent">
+                        <span class="thr-vs-label">VS</span>
+                        ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
+                        <span class="thr-opp-name" title="${oppTeam}">${oppTeam}</span>
+                    </div>
+                    <div class="thr-score-container">
+                        <span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>
                     </div>
                     <span class="thr-status ${statusClass}">${statusText}</span>
                 </div>
@@ -2311,6 +2349,61 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+
+    function showTeamHistory(teamName) {
+        selectedTeamHistoryName = teamName;
+        const label = document.getElementById("thr-selected-team-label");
+        if (label) label.textContent = teamName;
+
+        const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+        let foundLogo = "";
+        for (const m of matches) {
+            if (m.team1 === teamName && m.team1_logo) {
+                foundLogo = m.team1_logo;
+                break;
+            }
+            if (m.team2 === teamName && m.team2_logo) {
+                foundLogo = m.team2_logo;
+                break;
+            }
+        }
+
+        const iconContainer = document.getElementById("thr-selected-team-icon-container");
+        if (iconContainer) {
+            if (foundLogo) {
+                iconContainer.innerHTML = `<img src="${foundLogo}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; border-radius: 4px;">`;
+            } else {
+                iconContainer.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
+            }
+        }
+
+        const historySearch = document.getElementById("team-history-search");
+        const historyPopoverPanel = document.getElementById("team-history-popover-panel");
+        const historyPopoverWrapper = document.querySelector(".thr-dropdown-popover-wrapper");
+
+        if (historySearch) historySearch.value = "";
+        if (historyPopoverPanel) historyPopoverPanel.style.display = "none";
+        if (historyPopoverWrapper) historyPopoverWrapper.classList.remove("active");
+
+        populateTeamDropdown();
+        renderTeamHistory(teamName);
+
+        // Close the match detail modal if open
+        closeMatchDetail();
+
+        const historyModal = document.getElementById("team-history-modal");
+        if (historyModal) historyModal.style.display = "flex";
+    }
+
+    document.getElementById("mdm-team1")?.addEventListener("click", () => {
+        const teamName = document.getElementById("mdm-name1")?.textContent.trim();
+        if (teamName) showTeamHistory(teamName);
+    });
+
+    document.getElementById("mdm-team2")?.addEventListener("click", () => {
+        const teamName = document.getElementById("mdm-name2")?.textContent.trim();
+        if (teamName) showTeamHistory(teamName);
+    });
 
     const teamHistoryBtn = document.getElementById("team-history-btn");
     const teamHistoryModal = document.getElementById("team-history-modal");
