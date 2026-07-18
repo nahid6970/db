@@ -19,9 +19,15 @@ def init_db():
                 notes TEXT,
                 status TEXT,
                 logo_url TEXT,
-                seen INTEGER DEFAULT 0
+                seen INTEGER DEFAULT 0,
+                hidden INTEGER DEFAULT 0
             )
         ''')
+        # Try to add hidden column if it doesn't exist (for migration)
+        try:
+            conn.execute('ALTER TABLE events ADD COLUMN hidden INTEGER DEFAULT 0')
+        except sqlite3.OperationalError:
+            pass
         conn.commit()
 
 def scrape_events():
@@ -117,6 +123,11 @@ def get_events():
 def toggle_seen(event_id, seen_val):
     with sqlite3.connect(DB_PATH) as conn:
         conn.execute('UPDATE events SET seen = ? WHERE id = ?', (seen_val, event_id))
+        conn.commit()
+
+def toggle_hidden(event_id, hidden_val):
+    with sqlite3.connect(DB_PATH) as conn:
+        conn.execute('UPDATE events SET hidden = ? WHERE id = ?', (hidden_val, event_id))
         conn.commit()
 
 if __name__ == '__main__':

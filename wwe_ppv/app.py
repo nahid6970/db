@@ -21,6 +21,13 @@ def api_toggle_seen(event_id):
     scraper.toggle_seen(event_id, seen)
     return jsonify({'status': 'success', 'seen': seen})
 
+@app.route('/api/events/<event_id>/toggle_hidden', methods=['POST'])
+def api_toggle_hidden(event_id):
+    data = request.json
+    hidden = 1 if data.get('hidden') else 0
+    scraper.toggle_hidden(event_id, hidden)
+    return jsonify({'status': 'success', 'hidden': hidden})
+
 @app.route('/api/scrape', methods=['POST'])
 def api_scrape():
     scraper.scrape_events()
