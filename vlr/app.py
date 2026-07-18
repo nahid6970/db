@@ -264,6 +264,19 @@ def api_matches_view():
     )
     return jsonify(matches)
 
+@app.route("/api/matches/all")
+def api_matches_all():
+    """Return ALL matches from DB (excluding ignored tournaments only)."""
+    ignore_list = load_ignorelist()
+    ignore_names = {t["name"] for t in ignore_list}
+    tournament_rows = scraper.load_tournament_overview()
+    tournament_rows = [row for row in tournament_rows if row["tournament"] not in ignore_names]
+    tournament_names = [row["tournament"] for row in tournament_rows]
+    matches = scraper.get_matches_for_display(
+        tournament_names=tournament_names if tournament_names else [],
+    )
+    return jsonify(matches)
+
 @app.route("/api/settings", methods=["GET", "POST"])
 def api_settings():
     if request.method == "POST":

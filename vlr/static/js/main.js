@@ -547,6 +547,12 @@ document.addEventListener("DOMContentLoaded", () => {
             renderWhiteLogoTeamsList();
             applyWhiteLogoStylesToCurrentCards();
         }
+        // Restore "Team History: Show all tournaments" setting
+        // Note: thrFilterSelectedTourneys = true means "filter to checked only"
+        // The setting thr_show_all_tournaments = true means "show all" = thrFilterSelectedTourneys = false
+        if (s.thr_show_all_tournaments !== undefined) {
+            thrFilterSelectedTourneys = !s.thr_show_all_tournaments;
+        }
         const color = s.white_logo_bg_color || "#eef1f6";
         document.documentElement.style.setProperty('--white-logo-bg-color', color);
         const picker = document.getElementById("white-logo-bg-color-picker");
@@ -2131,6 +2137,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Team history modal trigger & helper functions
     let selectedTeamHistoryName = "";
+    let thrFilterSelectedTourneys = true;
 
     function populateTeamDropdown(searchKeyword = "") {
         const dropdown = document.getElementById("team-history-custom-dropdown");
@@ -2223,7 +2230,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    function renderTeamHistory(teamName) {
+    async function renderTeamHistory(teamName) {
         const resultsContainer = document.getElementById("team-history-results");
         if (!resultsContainer) return;
 
@@ -2245,10 +2252,31 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
-        const teamMatches = matches.filter(m => {
+        // Determine data source based on toggle
+        let allMatches;
+        if (thrFilterSelectedTourneys) {
+            // ON: filter to only checked sidebar tournaments from INITIAL_MATCHES
+            allMatches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+        } else {
+            // OFF: fetch ALL matches from every tournament in the DB
+            try {
+                allMatches = await fetch("/api/matches/all").then(r => r.json());
+            } catch (err) {
+                console.error("Failed to fetch all matches:", err);
+                allMatches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+            }
+        }
+
+        let teamMatches = allMatches.filter(m => {
             return (m.team1 === teamName || m.team2 === teamName) && m.status === "Completed";
         });
+
+        if (thrFilterSelectedTourneys) {
+            const checkedT = new Set(
+                Array.from(document.querySelectorAll("#tournament-checklist .tourney-checkbox:checked")).map(cb => cb.value)
+            );
+            teamMatches = teamMatches.filter(m => checkedT.has(m.tournament));
+        }
 
         // Calculate Win Rate / Wins / Losses
         let wins = 0;
@@ -2283,10 +2311,11 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
         if (profileStats) profileStats.style.display = "flex";
-        if (profileActions) profileActions.style.display = "block";
+        if (profileActions) profileActions.style.display = "flex";
         if (toggleWhiteLogo) {
             toggleWhiteLogo.classList.toggle("active", whiteLogoTeams.has(teamName));
         }
+
         if (statWinrate) statWinrate.textContent = `${winrate}%`;
         if (statWins) statWins.textContent = wins;
         if (statLosses) statLosses.textContent = losses;
@@ -2472,6 +2501,18 @@ document.addEventListener("DOMContentLoaded", () => {
         await saveWhiteLogoTeams();
         renderTeamHistory(selectedTeamHistoryName);
         renderWhiteLogoTeamsList();
+    });
+    document.getElementById("setting-thr-all-tourneys")?.addEventListener("change", async (e) => {
+        const showAll = e.target.checked;
+        thrFilterSelectedTourneys = !showAll;
+        // Persist to settings
+        try {
+            const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+            cur.thr_show_all_tournaments = showAll;
+            await fetch("/api/settings", { method: "POST", headers: {"Content-Type":"application/json"}, body: JSON.stringify(cur) });
+        } catch (err) { console.error("Failed to save thr setting:", err); }
+        // Re-render if modal is open
+        if (selectedTeamHistoryName) renderTeamHistory(selectedTeamHistoryName);
     });
     document.addEventListener("click", (e) => {
         const wrapper = document.querySelector(".thr-dropdown-popover-wrapper");

@@ -219,11 +219,16 @@
                     <div class="modal-section">
                         <h3>Visual Preferences</h3>
                         <p class="modal-section-desc">Customize user interface highlighting.</p>
-                        <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
+                        <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 10px;">
                             <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
                                 <input type="checkbox" id="setting-highlight-loaded" class="setting-checkbox" {% if settings.get('highlight_loaded_tournaments') %}checked{% endif %}>
                                 <span class="custom-checkbox"></span>
                                 <span style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Highlight stats-loaded tournaments</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                <input type="checkbox" id="setting-thr-all-tourneys" class="setting-checkbox" {% if settings.get('thr_show_all_tournaments') %}checked{% endif %}>
+                                <span class="custom-checkbox"></span>
+                                <span style="font-size: 13px; font-weight: 500; color: var(--text-primary);">Team History: Show all tournaments</span>
                             </label>
                         </div>
                     </div>
@@ -270,7 +275,7 @@
                 <button id="team-history-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
             </div>
             <div class="modal-body" style="padding: 0; position: relative;">
-                <div class="thr-controls-row">
+                <div class="thr-controls-row" style="display: flex; justify-content: space-between; align-items: center; padding-right: 20px;">
                     <!-- Floating Dropdown Trigger Wrapper -->
                     <div class="thr-dropdown-popover-wrapper">
                         <button id="thr-popover-trigger" class="thr-trigger-btn">
@@ -292,6 +297,15 @@
                             <div id="team-history-custom-dropdown" class="csd-options-list">
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Actions (toggles) on the right -->
+                    <div class="thr-profile-actions" id="thr-profile-actions" style="display: none; align-items: center; gap: 12px;">
+                        <button id="thr-toggle-white-logo" class="thr-action-btn" title="Toggle White Logo Background">
+                            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                                <path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18v-16a8 8 0 0 1 0 16z"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -317,13 +331,6 @@
                                     <div class="thr-stat-value" id="thr-stat-losses">0</div>
                                     <div class="thr-stat-label">Losses</div>
                                 </div>
-                            </div>
-                            <div class="thr-profile-actions" id="thr-profile-actions" style="display: none; margin-top: 20px; width: 100%; border-top: 1px solid var(--card-border); padding-top: 15px; display: flex; justify-content: center;">
-                                <button id="thr-toggle-white-logo" class="thr-action-btn" title="Toggle White Logo Background">
-                                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
-                                        <path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2zm0 18v-16a8 8 0 0 1 0 16z"/>
-                                    </svg>
-                                </button>
                             </div>
                         </div>
                     </div>
