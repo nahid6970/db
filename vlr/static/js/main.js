@@ -2393,9 +2393,8 @@ document.addEventListener("DOMContentLoaded", () => {
             row.addEventListener("click", () => {
                 const mid = row.getAttribute("data-id");
                 const mObj = allMatches.find(item => item.id === mid);
-                if (mid && mObj) {
-                    document.getElementById("team-history-modal").style.display = "none";
-                    openMatchDetail(mid, mObj);
+                if (mObj && mObj.href) {
+                    window.open("https://www.vlr.gg" + mObj.href, "_blank");
                 }
             });
         });
