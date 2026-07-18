@@ -2015,10 +2015,33 @@ body.light #team-history-btn {
     cursor: pointer;
 }
 .thr-row-top {
+    display: none; /* Hide the old top row since we moved it to the header */
+}
+.thr-tourney-group-header {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    padding-bottom: 6px;
+    gap: 12px;
+    padding: 20px 12px 10px;
+    margin-top: 10px;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 12px;
+}
+.thr-tourney-group-header:first-child {
+    padding-top: 8px;
+    margin-top: 0;
+}
+.thr-tourney-group-header .thr-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+.thr-tourney-group-header .thr-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .thr-row-bottom {
     display: flex;

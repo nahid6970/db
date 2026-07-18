@@ -2327,7 +2327,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        resultsContainer.innerHTML = teamMatches.map(m => {
+        let html = "";
+        let currentTournament = null;
+        
+        teamMatches.forEach(m => {
             const isTeam1 = m.team1 === teamName;
             
             const myTeam = teamName;
@@ -2357,14 +2360,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const oppWhite = whiteLogoTeams.has(oppTeam) ? "white-bg-logo" : "";
 
-            return `
-                <div class="team-history-row" data-id="${m.id}">
-                    <div class="thr-row-top">
-                        <div class="thr-tourney">
-                            ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
-                            <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
-                        </div>
+            if (m.tournament !== currentTournament) {
+                currentTournament = m.tournament;
+                html += `
+                    <div class="thr-tourney-group-header">
+                        ${m.tournament_logo ? `<img src="${m.tournament_logo}" class="thr-logo" onerror="this.style.display='none';">` : ''}
+                        <span class="thr-name" title="${m.tournament}">${m.tournament}</span>
                     </div>
+                `;
+            }
+
+            html += `
+                <div class="team-history-row" data-id="${m.id}">
                     <div class="thr-row-bottom">
                         <div class="thr-opponent">
                             <span class="thr-vs-label">VS</span>
@@ -2378,12 +2385,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                 </div>
             `;
-        }).join("");
+        });
+        
+        resultsContainer.innerHTML = html;
 
         resultsContainer.querySelectorAll(".team-history-row").forEach(row => {
             row.addEventListener("click", () => {
                 const mid = row.getAttribute("data-id");
-                const mObj = matches.find(item => item.id === mid);
+                const mObj = allMatches.find(item => item.id === mid);
                 if (mid && mObj) {
                     document.getElementById("team-history-modal").style.display = "none";
                     openMatchDetail(mid, mObj);
