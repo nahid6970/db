@@ -4,7 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterBtns = document.querySelectorAll('.filter-btn');
     
     let events = [];
-    let activeFilter = 'all';
+    let activeFilter = localStorage.getItem('wwe_active_filter') || 'all';
+
+    // Set initial active class on filter buttons
+    filterBtns.forEach(b => {
+        if (b.getAttribute('data-filter') === activeFilter) {
+            b.classList.add('active');
+        } else {
+            b.classList.remove('active');
+        }
+    });
 
     async function loadEvents() {
         try {
@@ -100,6 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             filterBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             activeFilter = btn.getAttribute('data-filter');
+            localStorage.setItem('wwe_active_filter', activeFilter);
             render();
         });
     });
