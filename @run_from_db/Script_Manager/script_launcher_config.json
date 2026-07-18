@@ -3737,10 +3737,10 @@
             "height": 0,
             "hide_terminal": true,
             "icon_gap": 2,
-            "icon_height": 0,
+            "icon_height": 50,
             "icon_path": "",
-            "icon_position": "top",
-            "icon_width": 0,
+            "icon_position": "center",
+            "icon_width": 50,
             "inline_script": "shutdown /s /f /t 0",
             "inline_type": "cmd",
             "is_bold": true,
@@ -3754,7 +3754,7 @@
             "require_password": true,
             "row_span": 1,
             "run_admin": false,
-            "svg_content": "<svg viewBox=\"0 0 32 32\" xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path stroke=\"#FFFFFF\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M22.5 4.742a13 13 0 11-13 0M16 3v10\"></path> </g></svg>",
+            "svg_content": "<svg viewBox=\"0 -0.5 21 21\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" fill=\"#FF0000\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <title>shut_down [#1431]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\"> <g id=\"Dribbble-Light-Preview\" transform=\"translate(-419.000000, -560.000000)\" fill=\"#FF0000\"> <g id=\"icons\" transform=\"translate(56.000000, 160.000000)\"> <path d=\"M378.381271,401.145 C377.596921,400.752 376.64982,401.278 376.64982,402.123 C376.64982,402.552 376.91862,402.925 377.316571,403.126 C380.236622,404.602 382.110873,407.716 381.575372,411.174 C381.046172,414.602 378.050521,417.343 374.434319,417.728 C369.515067,418.251 365.333966,414.581 365.333966,410 C365.333966,407.004 367.121066,404.4 369.733467,403.101 C370.102018,402.918 370.349818,402.572 370.349818,402.176 L370.349818,402.084 C370.349818,401.256 369.423717,400.745 368.651967,401.129 C364.951765,402.966 362.545164,406.841 363.072265,411.191 C363.624565,415.742 367.515866,419.43 372.296519,419.936 C378.634321,420.607 383.999823,415.9 383.999823,410 C383.999823,406.155 381.722372,402.818 378.381271,401.145 M372.449819,409 L372.449819,401 C372.449819,400.447 372.920219,400 373.499819,400 C374.080469,400 374.549819,400.447 374.549819,401 L374.549819,409 C374.549819,409.552 374.080469,410 373.499819,410 C372.920219,410 372.449819,409.552 372.449819,409\" id=\"shut_down-[#1431]\"> </path> </g> </g> </g> </g></svg>",
             "svg_hover_map": {
                 "#FFFFFF": "#FF5500"
             },
@@ -3778,10 +3778,10 @@
             "height": 0,
             "hide_terminal": true,
             "icon_gap": 2,
-            "icon_height": 0,
+            "icon_height": 50,
             "icon_path": "",
-            "icon_position": "top",
-            "icon_width": 0,
+            "icon_position": "center",
+            "icon_width": 50,
             "inline_script": "",
             "inline_type": "cmd",
             "is_bold": true,
@@ -3797,7 +3797,9 @@
             "run_admin": false,
             "type": "script",
             "use_inline": false,
-            "width": 0
+            "width": 0,
+            "svg_hover_map": {},
+            "svg_content": "<svg viewBox=\"-2 0 30 30\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\" fill=\"#FFFFFF\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <title>timer</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"> <g id=\"Icon-Set-Filled\" sketch:type=\"MSLayerGroup\" transform=\"translate(-521.000000, -362.000000)\" fill=\"#FFFFFF\"> <path d=\"M534,382 C532.343,382 531,380.657 531,379 C531,377.695 531.838,376.597 533,376.184 L533,371 C533,370.448 533.447,370 534,370 C534.553,370 535,370.448 535,371 L535,376.184 C536.162,376.597 537,377.695 537,379 C537,380.657 535.657,382 534,382 L534,382 Z M534.99,366.05 L535,364 L539,364 C539.553,364 540,363.553 540,363 C540,362.447 539.553,362 539,362 L529,362 C528.447,362 528,362.447 528,363 C528,363.553 528.447,364 529,364 L533,364 L533,366 L533.01,366.05 C526.295,366.558 521,372.154 521,379 C521,386.18 526.82,392 534,392 C541.18,392 547,386.18 547,379 C547,372.154 541.705,366.558 534.99,366.05 L534.99,366.05 Z\" id=\"timer\" sketch:type=\"MSShapeGroup\"> </path> </g> </g> </g></svg>"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
