@@ -36,9 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const statusClass = e.status === 'Upcoming' ? 'status-upcoming' : 'status-completed';
             
             card.innerHTML = `
-                <div class="card-header">
-                    ${e.logo_url ? `<img src="${e.logo_url}" class="card-logo" alt="${e.name}">` : `<span style="font-weight:800;">${e.name}</span>`}
+                <div class="card-poster">
+                    ${e.logo_url ? `<img src="${e.logo_url}" alt="${e.name}">` : ''}
+                    <div class="poster-overlay"></div>
                     <span class="card-status ${statusClass}">${e.status}</span>
+                </div>
+                <div class="card-header">
+                    <h3 class="event-title">${e.name}</h3>
                 </div>
                 <div class="card-body">
                     <div class="info-row">
@@ -48,18 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
                             ${e.date_str}
                         </div>
                     </div>
+                    ${e.venue ? `
                     <div class="info-row">
-                        <i class="fa-solid fa-location-dot info-icon"></i>
+                        <i class="fa-solid fa-building info-icon"></i>
                         <div class="info-text">
-                            <strong>Location</strong>
-                            ${e.venue}<br>${e.location}
-                        </div>
-                    </div>
-                    ${e.notes ? `
-                    <div class="info-row">
-                        <i class="fa-solid fa-circle-info info-icon"></i>
-                        <div class="info-text" style="font-style: italic;">
-                            ${e.notes}
+                            <strong>Venue</strong>
+                            ${e.venue}
                         </div>
                     </div>
                     ` : ''}
