@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const start = document.getElementById("scrape-start") ? (parseInt(document.getElementById("scrape-start").value) || null) : null;
                 const end = document.getElementById("scrape-end") ? (parseInt(document.getElementById("scrape-end").value) || null) : null;
-                const url = (start && end) ? `/api/matches?start=${start}&end=${end}` : `/api/matches`;
+                const url = (start && end) ? `/api/matches?start=${start}&end=${end}&load_missing=true` : `/api/matches?load_missing=true`;
                 await fetch(url);
                 await reloadMatchesFromView();
             } catch (err) {

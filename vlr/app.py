@@ -1,3 +1,11 @@
+# Type1: Global
+import sys, os
+UTILITY_PATH = r"C:\@delta\ms1"
+if UTILITY_PATH not in sys.path: sys.path.append(UTILITY_PATH)
+import install_deps
+install_deps.bootstrap(__file__)
+
+
 import os
 import json
 import threading
@@ -220,6 +228,11 @@ def api_matches():
     start_page = max(1, start_page)
     end_page = max(start_page, end_page)
     scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
+    
+    # Load missing stats for completed matches if requested
+    if request.args.get("load_missing") == "true":
+        scraper.load_missing_stats()
+        
     unchecked_tournaments = settings.get("unchecked_tournaments", [])
     tournament_rows = scraper.load_tournament_overview(exclude_tournaments=ignore_names)
     tournament_names = [row["tournament"] for row in tournament_rows]

@@ -1,3 +1,11 @@
+# Type1: Global
+import sys, os
+UTILITY_PATH = r"C:\@delta\ms1"
+if UTILITY_PATH not in sys.path: sys.path.append(UTILITY_PATH)
+import install_deps
+install_deps.bootstrap(__file__)
+
+
 import os
 import re
 import json
@@ -585,30 +593,31 @@ def fetch_match_detail_page(href):
 
         def parse_player_tables(game_div):
             result = {"team1": [], "team2": []}
-            tables = game_div.find_all("table")
+            # Find the new ovw-table divs first, fallback to tables if any
+            tables = game_div.find_all("div", class_="ovw-table")
+            is_div_table = True
+            if not tables:
+                tables = game_div.find_all("table")
+                is_div_table = False
+                
             for t_idx, table in enumerate(tables[:2]):
                 team_key = "team1" if t_idx == 0 else "team2"
-                for row in table.find_all("tr")[1:]:
-                    tds = row.find_all("td")
-                    if len(tds) < 10:
+                
+                if is_div_table:
+                    rows = table.find_all("div", class_="ovw-row")
+                    data_rows = [r for r in rows if "mod-head" not in r.get("class", [])]
+                else:
+                    data_rows = table.find_all("tr")[1:]
+                    
+                for row in data_rows:
+                    if is_div_table:
+                        tds = row.find_all("div", class_="ovw-cell")
+                    else:
+                        tds = row.find_all("td")
+                        
+                    if not tds:
                         continue
-                    player_td = tds[0]
-                    a_tag = player_td.find("a")
-                    player_name = ""
-                    player_href = ""
-                    if a_tag:
-                        player_href = a_tag.get("href", "")
-                        name_div = a_tag.find("div", class_="text-of")
-                        player_name = name_div.text.strip() if name_div else a_tag.text.strip()
-                    # Multiple agents
-                    agent_td = tds[1]
-                    agents = []
-                    for img in agent_td.find_all("img"):
-                        aname = img.get("alt", "")
-                        src = img.get("src", "")
-                        if src.startswith("//"): src = "https:" + src
-                        elif src.startswith("/"): src = "https://www.vlr.gg" + src
-                        agents.append({"name": aname, "icon": download_image(src) if src else ""})
+                        
                     def stat(td):
                         if not td:
                             return ""
@@ -616,27 +625,122 @@ def fetch_match_detail_page(href):
                         if s:
                             return s.text.strip()
                         return td.text.strip()
-                    
-                    rating = stat(tds[2]) if len(tds) > 2 else ""
-                    kd_diff = stat(tds[7]) if len(tds) > 7 else ""
-                    fk = stat(tds[11]) if len(tds) > 11 else ""
-                    fd = stat(tds[12]) if len(tds) > 12 else ""
-                    fk_diff = stat(tds[13]) if len(tds) > 13 else ""
+                        
+                    if is_div_table:
+                        player_td = tds[0]
+                        a_tag = player_td.find("a")
+                        player_name = ""
+                        player_href = ""
+                        if a_tag:
+                            player_href = a_tag.get("href", "")
+                            name_div = a_tag.find("div", class_="ovw-player-name")
+                            if not name_div:
+                                name_div = a_tag.find("div", class_="text-of")
+                            player_name = name_div.text.strip() if name_div else a_tag.text.strip()
+                        
+                        agents = []
+                        agents_container = player_td.find("div", class_="ovw-agents")
+                        if agents_container:
+                            for img in agents_container.find_all("img"):
+                                aname = img.get("alt", "")
+                                src = img.get("src", "")
+                                if src.startswith("//"): src = "https:" + src
+                                elif src.startswith("/"): src = "https://www.vlr.gg" + src
+                                agents.append({"name": aname, "icon": download_image(src) if src else ""})
+                        
+                        def get_by_col(col_name, default_idx):
+                            for cell in tds:
+                                if cell.get("data-col") == col_name:
+                                    return stat(cell)
+                            if default_idx < len(tds):
+                                return stat(tds[default_idx])
+                            return ""
+                            
+                        rating = get_by_col("rating2", 1)
+                        acs = get_by_col("acs", 2)
+                        
+                        k = ""
+                        d = ""
+                        a = ""
+                        kda_cell = None
+                        for cell in tds:
+                            if "mod-kda" in cell.get("class", []):
+                                kda_cell = cell
+                                break
+                        if not kda_cell and len(tds) > 3:
+                            kda_cell = tds[3]
+                            
+                        if kda_cell:
+                            kills_span = kda_cell.find("span", {"data-col": "kills"})
+                            if kills_span:
+                                k = stat(kills_span)
+                            deaths_span = kda_cell.find("span", {"data-col": "deaths"})
+                            if deaths_span:
+                                d = stat(deaths_span)
+                            assists_span = kda_cell.find("span", {"data-col": "assists"})
+                            if assists_span:
+                                a = stat(assists_span)
+                            
+                            if not k or not d or not a:
+                                parts = [p.strip() for p in kda_cell.text.split("/") if p.strip()]
+                                if len(parts) >= 3:
+                                    k, d, a = parts[0], parts[1], parts[2]
+                                    
+                        kd_diff = get_by_col("kd-diff", 4)
+                        kast = get_by_col("kast", 5)
+                        adr = get_by_col("adr", 6)
+                        hs = get_by_col("hsp", 7)
+                        fk = get_by_col("fb", 8)
+                        fd = get_by_col("fd", 9)
+                        fk_diff = get_by_col("fk-diff", 10)
+                    else:
+                        if len(tds) < 10:
+                            continue
+                        player_td = tds[0]
+                        a_tag = player_td.find("a")
+                        player_name = ""
+                        player_href = ""
+                        if a_tag:
+                            player_href = a_tag.get("href", "")
+                            name_div = a_tag.find("div", class_="text-of")
+                            player_name = name_div.text.strip() if name_div else a_tag.text.strip()
+                        
+                        agent_td = tds[1]
+                        agents = []
+                        for img in agent_td.find_all("img"):
+                            aname = img.get("alt", "")
+                            src = img.get("src", "")
+                            if src.startswith("//"): src = "https:" + src
+                            elif src.startswith("/"): src = "https://www.vlr.gg" + src
+                            agents.append({"name": aname, "icon": download_image(src) if src else ""})
+                            
+                        rating = stat(tds[2]) if len(tds) > 2 else ""
+                        acs = stat(tds[3]) if len(tds) > 3 else ""
+                        k = stat(tds[4]) if len(tds) > 4 else ""
+                        d = stat(tds[5]) if len(tds) > 5 else ""
+                        a = stat(tds[6]) if len(tds) > 6 else ""
+                        kd_diff = stat(tds[7]) if len(tds) > 7 else ""
+                        kast = stat(tds[8]) if len(tds) > 8 else ""
+                        adr = stat(tds[9]) if len(tds) > 9 else ""
+                        hs = stat(tds[10]) if len(tds) > 10 else ""
+                        fk = stat(tds[11]) if len(tds) > 11 else ""
+                        fd = stat(tds[12]) if len(tds) > 12 else ""
+                        fk_diff = stat(tds[13]) if len(tds) > 13 else ""
 
                     result[team_key].append({
                         "name": player_name,
                         "href": player_href,
-                        "photo": "",  # filled in after parallel fetch
+                        "photo": "",
                         "agents": agents,
                         "rating": rating,
-                        "acs": stat(tds[3]),
-                        "k": stat(tds[4]),
-                        "d": stat(tds[5]),
-                        "a": stat(tds[6]),
+                        "acs": acs,
+                        "k": k,
+                        "d": d,
+                        "a": a,
                         "kd_diff": kd_diff,
-                        "kast": stat(tds[8]),
-                        "adr": stat(tds[9]),
-                        "hs": stat(tds[10]),
+                        "kast": kast,
+                        "adr": adr,
+                        "hs": hs,
                         "fk": fk,
                         "fd": fd,
                         "fk_diff": fk_diff,
@@ -1111,3 +1215,57 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None):
             m["js_timestamp"] = 0
             
     return matches_list
+
+
+def load_missing_stats():
+    """Find all completed matches that are missing stats, and load their details."""
+    _ensure_db()
+    # Query completed matches with missing maps or players stats
+    query = """
+        SELECT id, href FROM matches 
+        WHERE LOWER(status) = 'completed' 
+          AND (
+            maps_json IS NULL OR maps_json = '[]' OR maps_json = ''
+            OR players_json IS NULL OR players_json = '{}' OR players_json = '' OR players_json NOT LIKE '%"all"%'
+          )
+    """
+    with _get_conn() as conn:
+        rows = conn.execute(query).fetchall()
+    
+    if not rows:
+        print("No completed matches missing stats.")
+        return
+        
+    pending = [(row["id"], row["href"]) for row in rows if row["href"]]
+    if not pending:
+        return
+        
+    print(f"Loading missing stats for {len(pending)} completed matches...")
+    results = {}
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending}
+        for future in as_completed(future_to_id):
+            mid = future_to_id[future]
+            try:
+                details = future.result()
+                if details:
+                    results[mid] = details
+                    print(f"Loaded missing stats for match {mid}")
+            except Exception as e:
+                print(f"Exception loading missing stats for match {mid}: {e}")
+
+    if results:
+        with _get_conn() as conn:
+            for mid, details in results.items():
+                current = load_match(mid) or {"id": mid}
+                current.update(details)
+                current["id"] = mid
+                current["last_updated"] = int(datetime.now().timestamp())
+                row_dict = _match_to_row_dict(current)
+                if row_dict:
+                    _bulk_upsert_rows(conn, [row_dict])
+            conn.commit()
+        global _cached_matches
+        with _cache_lock:
+            _cached_matches = None
+
