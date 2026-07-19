@@ -1,32 +1,19 @@
 import urllib.request
 from bs4 import BeautifulSoup
-import sqlite3
 from datetime import datetime
+import os
+from convex import ConvexClient
 
-DB_PATH = 'wwe.db'
+CONVEX_URL = os.environ.get('CONVEX_URL')
+
+def get_client():
+    if not CONVEX_URL:
+        raise ValueError("CONVEX_URL environment variable is not set. Please set it in your environment or .env file.")
+    return ConvexClient(CONVEX_URL)
 
 def init_db():
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute('''
-            CREATE TABLE IF NOT EXISTS events (
-                id TEXT PRIMARY KEY,
-                name TEXT,
-                date_str TEXT,
-                venue TEXT,
-                location TEXT,
-                notes TEXT,
-                status TEXT,
-                logo_url TEXT,
-                seen INTEGER DEFAULT 0,
-                hidden INTEGER DEFAULT 0
-            )
-        ''')
-        # Try to add hidden column if it doesn't exist (for migration)
-        try:
-            conn.execute('ALTER TABLE events ADD COLUMN hidden INTEGER DEFAULT 0')
-        except sqlite3.OperationalError:
-            pass
-        conn.commit()
+    # Convex schema is defined in convex/schema.ts and managed by the Convex CLI.
+    pass
 
 def scrape_events():
     url = 'https://www.thesmackdownhotel.com/events-results/wwe-ppv-list-pay-per-views-special-events-schedule'
@@ -84,7 +71,7 @@ def scrape_events():
             pass
             
         events_data.append({
-            'id': f"{title}_{date_str}".replace(' ', '_').replace(',', ''),
+            'eventId': f"{title}_{date_str}".replace(' ', '_').replace(',', ''),
             'name': title,
             'date_str': date_str,
             'venue': venue,
@@ -94,40 +81,32 @@ def scrape_events():
             'logo_url': img_src
         })
             
-    with sqlite3.connect(DB_PATH) as conn:
-        for e in events_data:
-            conn.execute('''
-                INSERT INTO events (id, name, date_str, venue, location, notes, status, logo_url)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-                ON CONFLICT(id) DO UPDATE SET
-                    name=excluded.name,
-                    date_str=excluded.date_str,
-                    venue=excluded.venue,
-                    location=excluded.location,
-                    status=excluded.status,
-                    logo_url=excluded.logo_url
-            ''', (e['id'], e['name'], e['date_str'], e['venue'], e['location'], e['notes'], e['status'], e['logo_url']))
-        conn.commit()
+    client = get_client()
+    for e in events_data:
+        client.mutation("events:insertOrUpdate", {
+            "eventId": e['eventId'],
+            "name": e['name'],
+            "date_str": e['date_str'],
+            "venue": e['venue'],
+            "location": e['location'],
+            "notes": e['notes'],
+            "status": e['status'],
+            "logo_url": e['logo_url']
+        })
     
     return events_data
 
 def get_events():
-    init_db()
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.row_factory = sqlite3.Row
-        rows = conn.execute('SELECT * FROM events').fetchall()
-        return [dict(r) for r in rows]
+    client = get_client()
+    return client.query("events:get")
 
 def toggle_seen(event_id, seen_val):
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute('UPDATE events SET seen = ? WHERE id = ?', (seen_val, event_id))
-        conn.commit()
+    client = get_client()
+    client.mutation("events:toggleSeen", {"eventId": event_id, "seen": seen_val})
 
 def toggle_hidden(event_id, hidden_val):
-    with sqlite3.connect(DB_PATH) as conn:
-        conn.execute('UPDATE events SET hidden = ? WHERE id = ?', (hidden_val, event_id))
-        conn.commit()
+    client = get_client()
+    client.mutation("events:toggleHidden", {"eventId": event_id, "hidden": hidden_val})
 
 if __name__ == '__main__':
-    init_db()
     scrape_events()

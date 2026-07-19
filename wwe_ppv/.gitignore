@@ -4,3 +4,6 @@ __pycache__/
 .venv/
 env/
 venv/
+node_modules/
+.env
+convex/_generated/
