@@ -2396,7 +2396,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             <span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>
                         </div>
                         <div class="thr-opponent">
-                            <span class="thr-vs-label">VS</span>
                             ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
                             <span class="thr-opp-name" title="${oppTeam}">${oppTeam}</span>
                         </div>
