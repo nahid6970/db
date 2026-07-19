@@ -2046,7 +2046,8 @@ body.light #team-history-btn {
 .thr-row-bottom {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
 }
 .team-history-row:hover {
     border-color: rgba(255, 70, 85, 0.25);
@@ -2225,6 +2226,17 @@ body.light .thr-action-btn.active {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.thr-main-team {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    flex-shrink: 0;
+}
+.thr-team-logo-fallback {
+    font-size: 16px;
+    color: var(--text-muted);
+}
 .thr-team-logo {
     width: 20px;
     height: 20px;
@@ -2234,7 +2246,9 @@ body.light .thr-action-btn.active {
 .thr-score-container {
     display: flex;
     justify-content: center;
-    margin: 0 15px;
+    width: 70px;
+    flex-shrink: 0;
+    margin: 0;
 }
 .thr-score-val {
     font-family: var(--font-heading);
