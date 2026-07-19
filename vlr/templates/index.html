@@ -123,6 +123,7 @@
                             {% if tourney in (settings.tournament_order or {}) %}
                             <span class="tourney-pin-badge">#{{ settings.tournament_order[tourney] }}</span>
                             {% endif %}
+                            <input type="color" class="tourney-color-picker" title="Customize card color" data-tourney-name="{{ tourney }}" value="{{ (settings.get('tournament_colors', {})).get(tourney, '#1e293b') }}">
                         </label>
                         {% else %}
                         <div class="no-tournaments-fallback">

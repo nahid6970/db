@@ -675,6 +675,31 @@ body {
     user-select: none;
 }
 
+.tourney-color-picker {
+    border: none;
+    background: none;
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: 2px;
+    border: 1px solid var(--card-border);
+}
+.tourney-color-picker::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+.tourney-color-picker::-webkit-color-swatch {
+    border: none;
+    border-radius: 50%;
+}
+.tourney-color-picker:focus {
+    outline: none;
+}
+
 .tourney-item:hover {
     background: rgba(255, 255, 255, 0.04);
     border-color: var(--card-border);

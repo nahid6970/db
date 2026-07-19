@@ -107,6 +107,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let customSeriesFilters = [];
     let tournamentOrder = {}; // {name: position}
     let whiteLogoTeams = new Set();
+    let tournamentColors = {};
+
+    function applyTournamentColors() {
+        document.querySelectorAll(".match-card").forEach(card => {
+            const tourney = card.getAttribute("data-tournament");
+            const color = tournamentColors[tourney];
+            if (color && color !== "#1e293b") {
+                card.style.setProperty("--card-bg", color);
+            } else {
+                card.style.removeProperty("--card-bg");
+            }
+        });
+    }
     
     // Initialize checked tournaments
     tourneyCheckboxes.forEach(cb => {
@@ -575,6 +588,10 @@ document.addEventListener("DOMContentLoaded", () => {
         const text = document.getElementById("white-logo-bg-color-text");
         if (picker) picker.value = color;
         if (text) text.value = color;
+        if (s.tournament_colors) {
+            tournamentColors = s.tournament_colors;
+            applyTournamentColors();
+        }
         applyTourneyFilters();
         sortTourneyByDate();
     });
@@ -1392,6 +1409,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
         // Re-run countdown initializations
         updateCountdowns();
+        applyTournamentColors();
     }
 
     function updateTournamentList(matches) {
@@ -2571,6 +2589,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     teamHistorySearch?.addEventListener("input", (e) => {
         populateTeamDropdown(e.target.value);
+    });
+
+    document.getElementById("tournament-checklist")?.addEventListener("input", (e) => {
+        if (e.target.classList.contains("tourney-color-picker")) {
+            const tourney = e.target.getAttribute("data-tourney-name");
+            const color = e.target.value;
+            tournamentColors[tourney] = color;
+            applyTournamentColors();
+        }
+    });
+
+    document.getElementById("tournament-checklist")?.addEventListener("change", async (e) => {
+        if (e.target.classList.contains("tourney-color-picker")) {
+            const tourney = e.target.getAttribute("data-tourney-name");
+            const color = e.target.value;
+            tournamentColors[tourney] = color;
+            try {
+                const cur = await fetch("/api/settings").then(r => r.json()).catch(() => ({}));
+                cur.tournament_colors = tournamentColors;
+                await fetch("/api/settings", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(cur)
+                });
+            } catch (err) {
+                console.error("Failed to save tournament colors:", err);
+            }
+        }
     });
     document.getElementById("thr-toggle-future-matches")?.addEventListener("click", () => {
         thrShowFutureMatches = !thrShowFutureMatches;
