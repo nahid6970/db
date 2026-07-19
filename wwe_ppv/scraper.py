@@ -3,6 +3,10 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 import os
 from convex import ConvexClient
+from dotenv import load_dotenv
+
+# Load Convex environment variables from local env file
+load_dotenv('.env.local')
 
 CONVEX_URL = os.environ.get('CONVEX_URL')
 

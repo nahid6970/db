@@ -1,0 +1,12 @@
+{
+  "name": "wwe-ppv-tracker",
+  "version": "1.0.0",
+  "description": "WWE PPV Schedule Tracker",
+  "main": "app.py",
+  "scripts": {
+    "dev": "convex dev"
+  },
+  "dependencies": {
+    "convex": "^1.18.0"
+  }
+}
