@@ -122,6 +122,20 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilters();
     updateLoadMissingStatsButton();
 
+    // Check if we should auto-open a match modal based on URL query parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const matchIdParam = urlParams.get("match");
+    if (matchIdParam) {
+        fetch(`/api/match/${matchIdParam}`)
+            .then(r => r.json())
+            .then(matchObj => {
+                if (matchObj && !matchObj.error) {
+                    openMatchDetail(matchIdParam, matchObj);
+                }
+            })
+            .catch(err => console.error("Failed to auto-open match detail:", err));
+    }
+
     // Open VLR.gg page on card click
     if (matchesGrid) {
         matchesGrid.addEventListener("click", e => {
@@ -2392,9 +2406,8 @@ document.addEventListener("DOMContentLoaded", () => {
         resultsContainer.querySelectorAll(".team-history-row").forEach(row => {
             row.addEventListener("click", () => {
                 const mid = row.getAttribute("data-id");
-                const mObj = allMatches.find(item => item.id === mid);
-                if (mObj && mObj.href) {
-                    window.open("https://www.vlr.gg" + mObj.href, "_blank");
+                if (mid) {
+                    window.open("/?match=" + mid, "_blank");
                 }
             });
         });
