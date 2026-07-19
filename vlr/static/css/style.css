@@ -2298,6 +2298,26 @@ body.light .thr-action-btn.active {
     50% { opacity: 1; }
     100% { opacity: 0.8; }
 }
+.thr-time-ago {
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+}
+.thr-relative-past {
+    color: var(--accent-red);
+    opacity: 0.75;
+}
+.thr-relative-future {
+    color: #3b82f6;
+    opacity: 0.85;
+}
+body.light .thr-relative-past {
+    color: #dc2626;
+}
+body.light .thr-relative-future {
+    color: #2563eb;
+}
 body.light .thr-left-profile {
     background: #f8fafc;
 }

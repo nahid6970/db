@@ -2392,6 +2392,38 @@ document.addEventListener("DOMContentLoaded", () => {
             const myWhite = whiteLogoTeams.has(teamName) ? "white-bg-logo" : "";
             const oppWhite = whiteLogoTeams.has(oppTeam) ? "white-bg-logo" : "";
 
+            const now = Math.floor(Date.now() / 1000);
+            let timeAgoText = "";
+            let timeAgoClass = "thr-neutral";
+            
+            if (m.unix_timestamp) {
+                const diff = Math.abs(now - m.unix_timestamp);
+                const isFuture = m.unix_timestamp > now;
+                timeAgoClass = isFuture ? "thr-relative-future" : "thr-relative-past";
+                
+                const SECONDS_IN_HOUR = 3600;
+                const SECONDS_IN_DAY = 86400;
+                const SECONDS_IN_MONTH = 86400 * 30.44;
+                const SECONDS_IN_YEAR = 86400 * 365.2425;
+
+                let temp = diff;
+                const years = Math.floor(temp / SECONDS_IN_YEAR);
+                temp %= SECONDS_IN_YEAR;
+                const months = Math.floor(temp / SECONDS_IN_MONTH);
+                temp %= SECONDS_IN_MONTH;
+                const days = Math.floor(temp / SECONDS_IN_DAY);
+                temp %= SECONDS_IN_DAY;
+                const hours = Math.floor(temp / SECONDS_IN_HOUR);
+
+                const parts = [];
+                if (years > 0) parts.push(`${years}y`);
+                if (months > 0) parts.push(`${months}m`);
+                if (days > 0) parts.push(`${days}d`);
+                if (hours > 0 || parts.length === 0) parts.push(`${hours}h`);
+                
+                timeAgoText = parts.join("-");
+            }
+
             if (m.tournament !== currentTournament) {
                 currentTournament = m.tournament;
                 html += `
@@ -2415,7 +2447,10 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
                             <span class="thr-opp-name" title="${oppTeam}">${oppTeam}</span>
                         </div>
-                        <span class="thr-status ${statusClass}">${statusText}</span>
+                        <div class="thr-status-container" style="display: flex; align-items: center; gap: 8px;">
+                            ${timeAgoText ? `<span class="thr-time-ago ${timeAgoClass}">${timeAgoText}</span>` : ''}
+                            <span class="thr-status ${statusClass}">${statusText}</span>
+                        </div>
                     </div>
                 </div>
             `;
