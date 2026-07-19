@@ -2154,6 +2154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Team history modal trigger & helper functions
     let selectedTeamHistoryName = "";
     let thrFilterSelectedTourneys = true;
+    let thrShowFutureMatches = false;
 
     function populateTeamDropdown(searchKeyword = "") {
         const dropdown = document.getElementById("team-history-custom-dropdown");
@@ -2284,7 +2285,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         let teamMatches = allMatches.filter(m => {
-            return (m.team1 === teamName || m.team2 === teamName) && m.status === "Completed";
+            const isTeam = m.team1 === teamName || m.team2 === teamName;
+            if (!isTeam) return false;
+            return thrShowFutureMatches ? true : (m.status === "Completed");
         });
 
         if (thrFilterSelectedTourneys) {
@@ -2302,15 +2305,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         teamMatches.forEach(m => {
             const isTeam1 = m.team1 === teamName;
+            if (isTeam1 && m.team1_logo) foundLogo = m.team1_logo;
+            if (!isTeam1 && m.team2_logo) foundLogo = m.team2_logo;
+
+            if (m.status !== "Completed" && m.status) return; // skip upcoming/live matches for stats calculation
+
             const myScore = parseInt(isTeam1 ? m.score1 : m.score2) || 0;
             const oppScore = parseInt(isTeam1 ? m.score2 : m.score1) || 0;
 
             if (myScore > oppScore) wins++;
             else if (oppScore > myScore) losses++;
             else draws++;
-
-            if (isTeam1 && m.team1_logo) foundLogo = m.team1_logo;
-            if (!isTeam1 && m.team2_logo) foundLogo = m.team2_logo;
         });
 
         const total = wins + losses + draws;
@@ -2337,7 +2342,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (statLosses) statLosses.textContent = losses;
 
         if (teamMatches.length === 0) {
-            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">No completed matches found in local database for this team.</p>';
+            resultsContainer.innerHTML = '<p style="text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px;">No matches found in local database for this team.</p>';
             return;
         }
 
@@ -2358,18 +2363,29 @@ document.addEventListener("DOMContentLoaded", () => {
             const myScoreNum = parseInt(myScore) || 0;
             const oppScoreNum = parseInt(oppScore) || 0;
 
-            let statusText = "Draw";
-            let statusClass = "draw";
+            let statusText = m.status || "Completed";
+            let statusClass = (m.status || "Completed").toLowerCase();
             let myColorClass = "thr-neutral";
 
-            if (myScoreNum > oppScoreNum) {
-                statusText = "Win";
-                statusClass = "win";
-                myColorClass = "thr-win-text";
-            } else if (oppScoreNum > myScoreNum) {
-                statusText = "Loss";
-                statusClass = "loss";
-                myColorClass = "thr-loss-text";
+            if (!m.status || m.status === "Completed") {
+                if (myScoreNum > oppScoreNum) {
+                    statusText = "Win";
+                    statusClass = "win";
+                    myColorClass = "thr-win-text";
+                } else if (oppScoreNum > myScoreNum) {
+                    statusText = "Loss";
+                    statusClass = "loss";
+                    myColorClass = "thr-loss-text";
+                } else {
+                    statusText = "Draw";
+                    statusClass = "draw";
+                }
+            } else if (m.status === "Live") {
+                statusText = "Live";
+                statusClass = "live";
+            } else {
+                statusText = "Upcoming";
+                statusClass = "upcoming";
             }
 
             const myLogo = isTeam1 ? (m.team1_logo || "") : (m.team2_logo || "");
@@ -2393,7 +2409,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             ${myLogo ? `<img class="thr-team-logo ${myWhite}" src="${myLogo}" onerror="this.style.display='none';">` : `<i class="fa-solid fa-people-group thr-team-logo-fallback"></i>`}
                         </div>
                         <div class="thr-score-container">
-                            <span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>
+                            ${m.status === "Upcoming" ? `<span class="thr-score-val thr-neutral">vs</span>` : `<span class="thr-score-val ${myColorClass}">${myScore} – ${oppScore}</span>`}
                         </div>
                         <div class="thr-opponent">
                             ${oppLogo ? `<img class="thr-team-logo ${oppWhite}" src="${oppLogo}" onerror="this.style.display='none';">` : ''}
@@ -2521,6 +2537,12 @@ document.addEventListener("DOMContentLoaded", () => {
     teamHistorySearch?.addEventListener("input", (e) => {
         populateTeamDropdown(e.target.value);
     });
+    document.getElementById("thr-toggle-future-matches")?.addEventListener("click", () => {
+        thrShowFutureMatches = !thrShowFutureMatches;
+        document.getElementById("thr-toggle-future-matches")?.classList.toggle("active", thrShowFutureMatches);
+        if (selectedTeamHistoryName) renderTeamHistory(selectedTeamHistoryName);
+    });
+
     document.getElementById("thr-toggle-white-logo")?.addEventListener("click", async () => {
         if (!selectedTeamHistoryName) return;
         const isActive = whiteLogoTeams.has(selectedTeamHistoryName);
