@@ -21,6 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     async function loadEvents() {
         if (isStatic) {
             events = staticEvents;
+            const localSeen = JSON.parse(localStorage.getItem('wwe_seen_events') || '{}');
+            const localHidden = JSON.parse(localStorage.getItem('wwe_hidden_events') || '{}');
+            events.forEach(e => {
+                if (localSeen[e.id] !== undefined) e.seen = localSeen[e.id] ? 1 : 0;
+                if (localHidden[e.id] !== undefined) e.hidden = localHidden[e.id] ? 1 : 0;
+            });
             render();
             return;
         }
@@ -109,18 +115,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const evObj = events.find(x => x.id === id);
                 if (evObj) evObj.seen = seen ? 1 : 0;
                 
-                try {
-                    if (!isStatic) {
+                if (isStatic) {
+                    const localSeen = JSON.parse(localStorage.getItem('wwe_seen_events') || '{}');
+                    localSeen[id] = seen;
+                    localStorage.setItem('wwe_seen_events', JSON.stringify(localSeen));
+                } else {
+                    try {
                         await fetch(`/api/events/${id}/toggle`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify({seen})
                         });
+                    } catch (err) {
+                        console.error(err);
                     }
-                    if (activeFilter === 'unseen') render();
-                } catch (err) {
-                    console.error(err);
                 }
+                if (activeFilter === 'unseen') render();
             });
         });
 
@@ -131,19 +141,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const evObj = events.find(x => x.id === id);
                 if (evObj) evObj.hidden = hidden ? 1 : 0;
                 
-                try {
-                    if (!isStatic) {
+                if (isStatic) {
+                    const localHidden = JSON.parse(localStorage.getItem('wwe_hidden_events') || '{}');
+                    localHidden[id] = hidden;
+                    localStorage.setItem('wwe_hidden_events', JSON.stringify(localHidden));
+                } else {
+                    try {
                         await fetch(`/api/events/${id}/toggle_hidden`, {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json'},
                             body: JSON.stringify({hidden})
                         });
+                    } catch (err) {
+                        console.error(err);
                     }
-                    // Re-render immediately so it disappears from 'All' or 'Hidden' tab when toggled
-                    render();
-                } catch (err) {
-                    console.error(err);
                 }
+                render();
             });
         });
     }
