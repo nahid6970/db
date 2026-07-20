@@ -1628,6 +1628,42 @@ function fallbackCopy(text, successMsg) {
   document.body.removeChild(textArea);
 }
 
+async function isUrlReachable(url, timeoutMs = 5000) {
+  if (!url) return false;
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    return true;
+  }
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    // Use GET method instead of HEAD because some local development servers drop HEAD connections
+    await fetch(url, { mode: 'no-cors', signal: controller.signal });
+    clearTimeout(timeoutId);
+    return true;
+  } catch (err) {
+    console.warn(`Reachability check failed for ${url}:`, err);
+    clearTimeout(timeoutId);
+    return false;
+  }
+}
+
+async function handleFallbackUrls(urls) {
+  if (!urls || urls.length === 0) return;
+  for (let i = 0; i < urls.length; i++) {
+    const url = urls[i];
+    if (i === urls.length - 1) {
+      handleUrlOpening(url);
+      return;
+    }
+    const reachable = await isUrlReachable(url);
+    if (reachable) {
+      handleUrlOpening(url);
+      return;
+    }
+    console.log(`URL check failed for: ${url}. Trying next fallback...`);
+  }
+}
+
 async function handleUrlOpening(url) {
   if (!url) return;
 
@@ -1869,10 +1905,11 @@ function createLinkItem(link, index) {
       }
     }
 
-    if (link.urls && link.urls.length > 1) {
-      handleUrlOpening(link.urls[0]);
-    } else {
-      handleUrlOpening(link.url);
+    const urlsToTry = (link.urls && link.urls.length > 0) ? link.urls : [link.url].filter(Boolean);
+    if (urlsToTry.length > 1) {
+      await handleFallbackUrls(urlsToTry);
+    } else if (urlsToTry.length === 1) {
+      handleUrlOpening(urlsToTry[0]);
     }
   };
 
