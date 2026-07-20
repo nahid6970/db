@@ -2214,10 +2214,8 @@ syncAutoFitScaleControls('link');
 syncAutoFitScaleControls('edit-link');
 
 document.getElementById('link-fallback-chip').addEventListener('change', (e) => {
-  const inputDiv = document.getElementById('link-fallback-input');
-  if (e.target.checked) {
-    inputDiv.style.display = 'block';
-  } else {
+  if (!e.target.checked) {
+    const inputDiv = document.getElementById('link-fallback-input');
     inputDiv.style.display = 'none';
     const select = document.getElementById('link-fallback-select');
     if (select) select.value = '';
@@ -2225,10 +2223,8 @@ document.getElementById('link-fallback-chip').addEventListener('change', (e) => 
 });
 
 document.getElementById('edit-link-fallback-chip').addEventListener('change', (e) => {
-  const inputDiv = document.getElementById('edit-link-fallback-input');
-  if (e.target.checked) {
-    inputDiv.style.display = 'block';
-  } else {
+  if (!e.target.checked) {
+    const inputDiv = document.getElementById('edit-link-fallback-input');
     inputDiv.style.display = 'none';
     const select = document.getElementById('edit-link-fallback-select');
     if (select) select.value = '';
@@ -3063,7 +3059,7 @@ function populateUrlFields(urls, isEdit = false) {
   }
   const inputDiv = document.getElementById(isEdit ? 'edit-link-fallback-input' : 'link-fallback-input');
   if (inputDiv) {
-    inputDiv.style.display = (fallbackIndex !== "") ? 'block' : 'none';
+    inputDiv.style.display = 'none';
   }
 }
 
