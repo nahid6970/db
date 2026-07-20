@@ -222,6 +222,17 @@
 
 ---
 
+## Link Fallback Mechanism
+**Status:** ✅ Complete
+**Description:** Configure backup URLs (e.g. local scripts) to run if the primary URL (e.g. local Flask server) fails to load.
+**Implementation:** 
+- Checks reachability of the primary HTTP/HTTPS URL via a `fetch` request using `no-cors` mode and a 5-second timeout.
+- If reachable, opens it immediately. If unreachable or offline, opens the user-selected fallback URL candidate.
+- Configured via a "Fallback" option chip that displays a dropdown of backup URL choices in the add and edit forms.
+**Files Involved:** `index.html`, `links-handler.js`
+
+---
+
 ## Known Limitations
 
 - **Group Width with Line Breaks:** When items use "Start on New Line", the group border stays as wide as all items in a single row. CSS `fit-content` doesn't shrink correctly with flex line breaks. See `md/PROBLEMS_AND_FIXES.md` for investigation notes.

@@ -3,6 +3,20 @@ All sessions recorded here — no archiving, full history in one place.
 
 ---
 
+## [2026-07-20] - Link Thumbnail UI Polish & Link Fallback Mechanism
+
+**What We Accomplished:**
+- Removed the text label next to the thumbnail refresh checkbox in the edit form, leaving only the checkmark.
+- Implemented an automatic failover check for links with multiple URLs. When clicked, it attempts to open the primary URL first. If it is an HTTP/HTTPS URL and unreachable (based on a lightweight `fetch` check with a 5-second timeout), it falls back to the next available URL.
+- Added a "Fallback" option chip in the option-chip row next to Note and Folder Picker options.
+- The Fallback option chip shows/hides a dropdown containing candidates for the fallback URL (e.g. URL 2, URL 3).
+
+**Files Modified:**
+- `index.html` - Removed text label next to edit-link-thumbnail-refresh-enabled checkbox; added fallback option chip and input select container.
+- `links-handler.js` - Added reachability checking, fallback handling, fallback options dropdown synchronization, and chip event listeners.
+
+---
+
 ## [2026-06-12] - Folder/File Badge & Chip Improvements
 
 **What We Accomplished:**
