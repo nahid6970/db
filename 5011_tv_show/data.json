@@ -7,6 +7,27 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
             {
+                "id": 44,
+                "title": "One Piece - s23e15 - [1170] - Get the Key! Luffy vs. Scopper Gaban WEBRip-1080p - [GG]",
+                "watched": false,
+                "added_date": "2026-07-20T18:17:02.973192",
+                "notify": "unseen"
+            },
+            {
+                "id": 43,
+                "title": "One Piece - s23e14 - [1169] - The Legend Lurking in Elbaph - The Identity of the Mountain-Eater WEBDL-1080p - [GG]",
+                "watched": false,
+                "added_date": "2026-07-20T18:17:02.973187",
+                "notify": "unseen"
+            },
+            {
+                "id": 42,
+                "title": "One Piece - s23e13 - [1168] - Ancient History - The Harley Passed Down by Elbaph WEBDL-1080p - [GG]",
+                "watched": false,
+                "added_date": "2026-07-20T18:17:02.973168",
+                "notify": "unseen"
+            },
+            {
                 "id": 41,
                 "title": "One Piece - s23e15 - [1170] - Get the Key! Luffy vs. Scopper Gaban WEBRip-1080p - [Erai-raws]",
                 "watched": false,
@@ -5145,6 +5166,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 4,
+                "title": "House of the Dragon - S02E05 - Regent WEBRip-1080p",
+                "watched": false,
+                "added_date": "2026-07-20T18:17:02.983082",
+                "notify": "unseen"
+            },
+            {
                 "id": 3,
                 "title": "House of the Dragon - S03E03 - Rhaenyra Triumphant WEBDL-1080p",
                 "watched": false,
@@ -5179,17 +5207,17 @@
         "episodes": [
             {
                 "id": 3,
+                "title": "Silo S03E02 Its All Good 1080p ATVP WEB-DL DDP5 1 H 264-NTb[EZTVx.to]",
+                "watched": false,
+                "added_date": "2026-07-20T18:17:02.983318",
+                "notify": "unseen"
+            },
+            {
+                "id": 3,
                 "title": "Silo - S03E03 - A Dark Web HDTV-720p",
                 "watched": false,
                 "added_date": "2026-07-20T14:44:39.382856",
                 "notify": "unseen"
-            },
-            {
-                "id": 2,
-                "title": "Silo - S03E02 - It's All Good WEBDL-720p",
-                "watched": false,
-                "added_date": "2026-07-10T08:42:57.057848",
-                "notify": "seen"
             },
             {
                 "id": 1,
