@@ -4,8 +4,15 @@
         "title": "One Piece",
         "year": "1999",
         "cover_image": "https://m.media-amazon.com/images/M/MV5BMTNjNGU4NTUtYmVjMy00YjRiLTkxMWUtNzZkMDNiYjZhNmViXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\One Piece",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
+            {
+                "id": 41,
+                "title": "One Piece - s23e15 - [1170] - Get the Key! Luffy vs. Scopper Gaban WEBRip-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-07-20T14:44:39.373246",
+                "notify": "unseen"
+            },
             {
                 "id": 40,
                 "title": "One Piece - s23e13 - [1168] - Ancient History - The Harley Passed Down by Elbaph WEBDL-1080p - [ToonsHub]",
@@ -286,7 +293,7 @@
         "title": "Andor",
         "year": "2022",
         "cover_image": "https://images.static-bluray.com/movies/covers/357360_front.jpg?t=1710341290",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Andor",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Andor",
         "episodes": [
             {
                 "id": 12,
@@ -371,7 +378,7 @@
         "title": "Re: ZERO, Starting Life in Another World",
         "year": "2016",
         "cover_image": "https://cdn.europosters.eu/image/750/46586.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Re - ZERO, Starting Life in Another World",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Re - ZERO, Starting Life in Another World",
         "episodes": [
             {
                 "id": 43,
@@ -640,7 +647,7 @@
         "title": "Black Mirror",
         "year": "2011",
         "cover_image": "https://i.pinimg.com/736x/67/34/3e/67343e6d40c6ebbfa8fc2c54df771db4.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Black Mirror",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Black Mirror",
         "episodes": [
             {
                 "id": 4,
@@ -674,7 +681,7 @@
         "title": "Blood of Zeus",
         "year": "2020",
         "cover_image": "https://artworks.thetvdb.com/banners/series/361140/posters/5f9b1a73efeed.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Blood of Zeus",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Blood of Zeus",
         "episodes": [
             {
                 "id": 8,
@@ -791,7 +798,7 @@
         "title": "Cobra Kai",
         "year": "2018",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/332858-2.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Cobra Kai",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Cobra Kai",
         "episodes": [
             {
                 "id": 4,
@@ -827,7 +834,7 @@
         "title": "Daredevil: Born Again",
         "year": "2025",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/67be532c6fb77.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Daredevil - Born Again",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Daredevil - Born Again",
         "episodes": [
             {
                 "id": 17,
@@ -948,7 +955,7 @@
         "title": "Dragon Ball Daima",
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/440820/posters/669da50441a97.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Dragon Ball Daima",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Dragon Ball Daima",
         "episodes": [
             {
                 "id": 20,
@@ -1079,7 +1086,7 @@
         "title": "DrStone",
         "year": "2019",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/355774/posters/628ed4e8ef3c8.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\DrStone",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\DrStone",
         "episodes": [
             {
                 "id": 22,
@@ -1244,7 +1251,7 @@
         "title": "Invincible",
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/368207/posters/652a5ef981eab.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Invincible (2021)",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Invincible (2021)",
         "episodes": [
             {
                 "id": 16,
@@ -1361,7 +1368,7 @@
         "title": "Is It Wrong to Try to Pick Up Girls in a Dungeon!",
         "year": "2015",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/289882-1.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Is It Wrong to Try to Pick Up Girls in a Dungeon!",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Is It Wrong to Try to Pick Up Girls in a Dungeon!",
         "episodes": [
             {
                 "id": 15,
@@ -1463,7 +1470,7 @@
         "title": "Mirzapur",
         "year": "2018",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5c14ee8a9c3a8.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Mirzapur",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mirzapur",
         "episodes": [
             {
                 "id": 10,
@@ -1532,8 +1539,15 @@
         "title": "Mushoku Tensei: Jobless Reincarnation",
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/371310/posters/64903a85960eb.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Mushoku Tensei - Jobless Reincarnation",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mushoku Tensei - Jobless Reincarnation",
         "episodes": [
+            {
+                "id": 14,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e04 - [53] - A King-Class Water Mage WEBRip-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-07-20T14:44:39.375115",
+                "notify": "unseen"
+            },
             {
                 "id": 13,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s03e02 - [51] - Howl, Mad Dog WEBDL-1080p - [ToonsHub]",
@@ -1623,7 +1637,7 @@
         "title": "NieR:Automata Ver1.1a",
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/416998/posters/643bc9a7b6968.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\NieR-Automata Ver1.1a",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\NieR-Automata Ver1.1a",
         "episodes": [
             {
                 "id": 12,
@@ -1706,7 +1720,7 @@
         "title": "Reacher",
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/366924/posters/655131f48f1a3.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Reacher",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Reacher",
         "episodes": [
             {
                 "id": 8,
@@ -1766,7 +1780,7 @@
         "title": "Secret Level",
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/453280/posters/675c4b518d9da.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Secret Level",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Secret Level",
         "episodes": [
             {
                 "id": 15,
@@ -1865,7 +1879,7 @@
         "title": "Star Wars: Skeleton Crew",
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/420600/posters/6729448c25021.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Star Wars - Skeleton Crew",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Star Wars - Skeleton Crew",
         "episodes": [
             {
                 "id": 8,
@@ -1924,7 +1938,7 @@
         "title": "The Last of Us",
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/392256/posters/6362e8b41ca10.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Last of Us",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Last of Us",
         "episodes": [
             {
                 "id": 6,
@@ -1969,7 +1983,7 @@
         "title": "The Rookie",
         "year": "2018",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5d8a076567871.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Rookie",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Rookie",
         "episodes": [
             {
                 "id": 34,
@@ -2202,7 +2216,7 @@
         "title": "The Walking Dead: Dead City",
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/417549/posters/645e082b8d002.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Walking Dead - Dead City",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
                 "id": 6,
@@ -2266,7 +2280,7 @@
         "title": "The Wheel of Time",
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/355730/posters/68fe875b99a06.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Wheel of Time",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Wheel of Time",
         "episodes": [
             {
                 "id": 8,
@@ -2326,7 +2340,7 @@
         "title": "Uzumaki",
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/369026/posters/671df3714b021.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Uzumaki",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Uzumaki",
         "episodes": [
             {
                 "id": 4,
@@ -2361,7 +2375,7 @@
         "title": "What If?",
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/367147/posters/611436c5764d9.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\What If\u2026!",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\What If\u2026!",
         "episodes": [
             {
                 "id": 6,
@@ -2408,7 +2422,7 @@
         "title": "WWE Raw",
         "year": "1993",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5d99d81b72d97.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\WWE Raw",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE Raw",
         "rating": "3",
         "episodes": [
             {
@@ -2672,7 +2686,7 @@
         "title": "Wednesday",
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/397060/posters/6729521e6fe2c.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Wednesday",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Wednesday",
         "rating": "3",
         "episodes": [
             {
@@ -2738,7 +2752,7 @@
         "title": "WWE SmackDown",
         "year": "1999",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5d99dd4e50097.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\WWE SmackDown",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE SmackDown",
         "rating": "3",
         "episodes": [
             {
@@ -2969,7 +2983,7 @@
         "title": "Descendants of the Sun",
         "year": "2016",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/305327-5.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Descendants of the Sun",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Descendants of the Sun",
         "rating": null,
         "episodes": [
             {
@@ -3092,7 +3106,7 @@
         "title": "Alien: Earth",
         "year": "2025",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/458912/posters/6824741cf2136.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Alien - Earth",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Alien - Earth",
         "rating": "2",
         "status": "Continuing",
         "episodes": [
@@ -3160,7 +3174,7 @@
         "title": "Peacemaker",
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/391153/posters/6883da0cd5deb.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Peacemaker",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Peacemaker",
         "rating": "3",
         "status": "Continuing",
         "episodes": [
@@ -3228,7 +3242,7 @@
         "title": "Scissor Seven",
         "year": "2018",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5c494a49ae264.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Scissor Seven",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Scissor Seven",
         "rating": "5",
         "status": "Continuing",
         "episodes": [
@@ -3247,7 +3261,7 @@
         "title": "The Walking Dead - Daryl Dixon",
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/427464/posters/66e308a4e2c1b.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Walking Dead - Daryl Dixon",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Daryl Dixon",
         "rating": "4",
         "status": "Continuing",
         "episodes": [
@@ -3315,7 +3329,7 @@
         "title": "Gen V",
         "year": "2023",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/417909/posters/687fcb3525d62.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Gen V",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Gen V",
         "rating": "3",
         "status": "Continuing",
         "episodes": [
@@ -3383,7 +3397,7 @@
         "title": "Alice in Borderland (2020)",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/376472/posters/68d6b6fd02d08.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Alice in Borderland (2020)",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Alice in Borderland (2020)",
         "rating": "2",
         "status": "Continuing",
         "episodes": [
@@ -3437,7 +3451,7 @@
         "title": "Marvel Zombies",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/412428/posters/68cd9e6f1070a.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Marvel Zombies",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Marvel Zombies",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -3477,7 +3491,7 @@
         "title": "My Hero Academia",
         "year": "2016",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/305074-5.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\My Hero Academia",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\My Hero Academia",
         "rating": "4",
         "status": "Continuing",
         "episodes": [
@@ -3566,7 +3580,7 @@
         "title": "SPY x FAMILY",
         "year": "2022",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/405920/posters/622527d8f031d.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\SPY x FAMILY",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\SPY x FAMILY",
         "rating": "4",
         "status": "Continuing",
         "episodes": [
@@ -3669,7 +3683,7 @@
         "title": "To Your Eternity",
         "year": "2021",
         "cover_image": "https://artworks.thetvdb.com/banners/series/375271/posters/602a0fefa42e0.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\To Your Eternity",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\To Your Eternity",
         "rating": "5",
         "status": "Continuing",
         "episodes": [
@@ -3828,7 +3842,7 @@
         "title": "One-Punch Man",
         "year": "2015",
         "cover_image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTd0nKk7VsJBQfXEtw1Qz8IONmr5hIBxZB-XGJTsr0fpJKEDSDl&s",
-        "directory_path": "D:\\Downloads\\@Sonarr\\One-Punch Man",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One-Punch Man",
         "rating": "5",
         "status": "Continuing",
         "episodes": [
@@ -3924,7 +3938,7 @@
         "title": "Solo Leveling",
         "year": "2024",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/389597/posters/677a3a1d750ef.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Solo Leveling",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Solo Leveling",
         "rating": "4",
         "status": "Continuing",
         "episodes": [
@@ -3943,7 +3957,7 @@
         "title": "The Witcher",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/362696/posters/6447fd2e14bd2.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Witcher",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Witcher",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4011,7 +4025,7 @@
         "title": "Stranger Things",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/305288-4.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Stranger Things",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Stranger Things",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4079,7 +4093,7 @@
         "title": "Fallout",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/416744/posters/656c96bea0c11.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Fallout",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Fallout",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4147,7 +4161,7 @@
         "title": "Fate+strange Fake",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/436779/posters/6774f2c56ff96.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Fate+strange Fake",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Fate+strange Fake",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4252,7 +4266,7 @@
         "title": "Jujutsu Kaisen",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/series/377543/posters/5ecb7bcccc897.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Jujutsu Kaisen",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Jujutsu Kaisen",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4348,7 +4362,7 @@
         "title": "Frieren - Beyond Journey's End",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/68d6d5b36aa2f.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Frieren - Beyond Journey's End",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Frieren - Beyond Journey's End",
         "rating": "5",
         "status": "Continuing",
         "episodes": [
@@ -4432,7 +4446,7 @@
         "title": "Monarch - Legacy of Monsters",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/422598/posters/652989feed722.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Monarch - Legacy of Monsters",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Monarch - Legacy of Monsters",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4516,7 +4530,7 @@
         "title": "The Boys",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/5c5c402b075cc.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The Boys",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Boys",
         "rating": "5",
         "status": "Ended",
         "episodes": [
@@ -4584,7 +4598,7 @@
         "title": "Doctor Who (2005)",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/posters/78804-52.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Doctor Who (2005)",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Doctor Who (2005)",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4687,7 +4701,7 @@
         "title": "Wistoria - Wand and Sword",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/445829/posters/693a275d0bb65.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Wistoria - Wand and Sword",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Wistoria - Wand and Sword",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4869,7 +4883,7 @@
         "title": "The War Between the Land and the Sea",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/444613/posters/69368ce67f30c.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\The War Between the Land and the Sea",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The War Between the Land and the Sea",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -4916,7 +4930,7 @@
         "title": "Ling Cage",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/366841/posters/68c953b10d8a4.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Ling Cage",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Ling Cage",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -5126,7 +5140,7 @@
         "title": "House of the Dragon",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/371572/posters/6314b92a64a1f.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\House of the Dragon",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\House of the Dragon",
         "rating": null,
         "status": "Continuing",
         "episodes": [
@@ -5159,10 +5173,17 @@
         "title": "Silo",
         "year": "",
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg",
-        "directory_path": "D:\\Downloads\\@Sonarr\\Silo",
+        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Silo",
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 3,
+                "title": "Silo - S03E03 - A Dark Web HDTV-720p",
+                "watched": false,
+                "added_date": "2026-07-20T14:44:39.382856",
+                "notify": "unseen"
+            },
             {
                 "id": 2,
                 "title": "Silo - S03E02 - It's All Good WEBDL-720p",
