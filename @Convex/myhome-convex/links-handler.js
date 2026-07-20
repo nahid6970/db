@@ -1649,9 +1649,31 @@ async function isUrlReachable(url, timeoutMs = 5000) {
 
 async function handleFallbackUrls(urls) {
   if (!urls || urls.length === 0) return;
-  for (let i = 0; i < urls.length; i++) {
-    const url = urls[i];
-    if (i === urls.length - 1) {
+  
+  // 1. Check if the primary URL (urls[0]) is reachable
+  const primaryReachable = await isUrlReachable(urls[0]);
+  if (primaryReachable) {
+    handleUrlOpening(urls[0]);
+    return;
+  }
+  
+  // 2. If primary failed, proceed to fallback URLs
+  // Find URLs that are explicitly marked as fallback (skipping the first primary URL)
+  const fallbackUrls = urls.slice(1).filter(url => {
+    try {
+      const urlObj = new URL(url);
+      return urlObj.searchParams.get('fallback') === 'true';
+    } catch (e) {
+      return url.includes('fallback=true');
+    }
+  });
+
+  // If no URLs are marked as fallback, try all subsequent URLs in order
+  const candidateUrls = fallbackUrls.length > 0 ? fallbackUrls : urls.slice(1);
+
+  for (let i = 0; i < candidateUrls.length; i++) {
+    const url = candidateUrls[i];
+    if (i === candidateUrls.length - 1) {
       handleUrlOpening(url);
       return;
     }
@@ -1660,7 +1682,7 @@ async function handleFallbackUrls(urls) {
       handleUrlOpening(url);
       return;
     }
-    console.log(`URL check failed for: ${url}. Trying next fallback...`);
+    console.log(`Fallback URL check failed for: ${url}. Trying next candidate...`);
   }
 }
 
@@ -2190,6 +2212,28 @@ document.getElementById('link-click-tracking').addEventListener('change', (e) =>
 
 syncAutoFitScaleControls('link');
 syncAutoFitScaleControls('edit-link');
+
+document.getElementById('link-fallback-chip').addEventListener('change', (e) => {
+  const inputDiv = document.getElementById('link-fallback-input');
+  if (e.target.checked) {
+    inputDiv.style.display = 'block';
+  } else {
+    inputDiv.style.display = 'none';
+    const select = document.getElementById('link-fallback-select');
+    if (select) select.value = '';
+  }
+});
+
+document.getElementById('edit-link-fallback-chip').addEventListener('change', (e) => {
+  const inputDiv = document.getElementById('edit-link-fallback-input');
+  if (e.target.checked) {
+    inputDiv.style.display = 'block';
+  } else {
+    inputDiv.style.display = 'none';
+    const select = document.getElementById('edit-link-fallback-select');
+    if (select) select.value = '';
+  }
+});
 
 
 document.getElementById('add-link-form').addEventListener('submit', async (e) => {
@@ -2805,6 +2849,7 @@ document.querySelectorAll('input[name="edit-link-type"]').forEach(radio => {
 });
 
 // URL field management
+// URL field management
 function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirst = false) {
   const group = document.createElement('div');
   group.className = 'url-input-group';
@@ -2819,6 +2864,10 @@ function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirs
   input.value = url;
   input.style.flex = '1';
   if (isFirst) input.required = true;
+
+  input.addEventListener('input', () => {
+    updateFallbackDropdown(isEdit);
+  });
 
   const toggleWrapper = document.createElement('label');
   toggleWrapper.className = 'run-hidden-toggle-label';
@@ -2853,33 +2902,72 @@ function createUrlInputGroup(url = '', runHidden = false, isEdit = false, isFirs
     removeBtn.type = 'button';
     removeBtn.className = 'remove-btn';
     removeBtn.textContent = '−';
-    removeBtn.onclick = () => group.remove();
+    removeBtn.onclick = () => {
+      group.remove();
+      updateFallbackDropdown(isEdit);
+    };
     group.appendChild(removeBtn);
   }
 
   return group;
 }
 
+function updateFallbackDropdown(isEdit) {
+  const container = document.getElementById(isEdit ? 'edit-urls-container' : 'urls-container');
+  const select = document.getElementById(isEdit ? 'edit-link-fallback-select' : 'link-fallback-select');
+  if (!select) return;
+
+  const currentVal = select.value;
+  select.innerHTML = '<option value="">No Fallback</option>';
+
+  const groups = container.querySelectorAll('.url-input-group');
+  groups.forEach((group, index) => {
+    if (index === 0) return; // Skip primary URL
+    const input = group.querySelector('.url-input');
+    const labelText = input && input.value.trim() ? input.value.trim() : `URL ${index + 1}`;
+    
+    // Truncate label text to keep it neat
+    const truncatedLabel = labelText.length > 30 ? labelText.slice(0, 27) + '...' : labelText;
+
+    const option = document.createElement('option');
+    option.value = String(index);
+    option.textContent = `Run ${truncatedLabel} on fail`;
+    select.appendChild(option);
+  });
+
+  // Restore previous selection if still valid
+  if (Array.from(select.options).some(o => o.value === currentVal)) {
+    select.value = currentVal;
+  }
+}
+
 window.addUrlField = () => {
   const container = document.getElementById('urls-container');
   const group = createUrlInputGroup('', false, false, false);
   container.appendChild(group);
+  updateFallbackDropdown(false);
 };
 
 window.addEditUrlField = () => {
   const container = document.getElementById('edit-urls-container');
   const group = createUrlInputGroup('', false, true, false);
   container.appendChild(group);
+  updateFallbackDropdown(true);
 };
 
 function getAllUrls(isEdit = false) {
   const container = document.getElementById(isEdit ? 'edit-urls-container' : 'urls-container');
   const groups = container.querySelectorAll('.url-input-group');
-  return Array.from(groups).map(group => {
+  const select = document.getElementById(isEdit ? 'edit-link-fallback-select' : 'link-fallback-select');
+  const selectedFallbackIndex = select ? select.value : "";
+
+  return Array.from(groups).map((group, index) => {
     const input = group.querySelector('.url-input');
     if (!input) return null;
     let val = input.value.trim();
     if (!val) return null;
+    
+    // Process run_hidden checkbox
     const checkbox = group.querySelector('.run-hidden-checkbox');
     if (checkbox && checkbox.checked) {
       try {
@@ -2894,6 +2982,22 @@ function getAllUrls(isEdit = false) {
         }
       }
     }
+
+    // Process fallback
+    if (selectedFallbackIndex && String(index) === selectedFallbackIndex) {
+      try {
+        const urlObj = new URL(val);
+        urlObj.searchParams.set('fallback', 'true');
+        val = urlObj.toString();
+      } catch (e) {
+        if (val.includes('?')) {
+          val += '&fallback=true';
+        } else {
+          val += '?fallback=true';
+        }
+      }
+    }
+
     return val;
   }).filter(Boolean);
 }
@@ -2904,9 +3008,12 @@ function populateUrlFields(urls, isEdit = false) {
 
   if (!urls || urls.length === 0) urls = [''];
 
+  let fallbackIndex = "";
+
   urls.forEach((url, index) => {
     let baseUrl = url;
     let runHidden = false;
+    let isFallback = false;
     
     if (url) {
       try {
@@ -2914,22 +3021,50 @@ function populateUrlFields(urls, isEdit = false) {
         if (urlObj.searchParams.get('run_hidden') === 'true') {
           runHidden = true;
           urlObj.searchParams.delete('run_hidden');
-          baseUrl = urlObj.toString();
-          if (baseUrl.endsWith('?')) {
-            baseUrl = baseUrl.slice(0, -1);
-          }
+        }
+        if (urlObj.searchParams.get('fallback') === 'true') {
+          isFallback = true;
+          urlObj.searchParams.delete('fallback');
+        }
+        baseUrl = urlObj.toString();
+        if (baseUrl.endsWith('?')) {
+          baseUrl = baseUrl.slice(0, -1);
         }
       } catch (e) {
         if (url.includes('run_hidden=true')) {
           runHidden = true;
           baseUrl = url.replace(/[?&]run_hidden=true/, '');
         }
+        if (url.includes('fallback=true')) {
+          isFallback = true;
+          baseUrl = url.replace(/[?&]fallback=true/, '');
+        }
       }
+    }
+
+    if (isFallback) {
+      fallbackIndex = String(index);
     }
 
     const group = createUrlInputGroup(baseUrl, runHidden, isEdit, index === 0);
     container.appendChild(group);
   });
+
+  updateFallbackDropdown(isEdit);
+  
+  const select = document.getElementById(isEdit ? 'edit-link-fallback-select' : 'link-fallback-select');
+  if (select) {
+    select.value = fallbackIndex;
+  }
+  
+  const fallbackChip = document.getElementById(isEdit ? 'edit-link-fallback-chip' : 'link-fallback-chip');
+  if (fallbackChip) {
+    fallbackChip.checked = (fallbackIndex !== "");
+  }
+  const inputDiv = document.getElementById(isEdit ? 'edit-link-fallback-input' : 'link-fallback-input');
+  if (inputDiv) {
+    inputDiv.style.display = (fallbackIndex !== "") ? 'block' : 'none';
+  }
 }
 
 // Edit mode listener

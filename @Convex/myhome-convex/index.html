@@ -286,6 +286,16 @@
               </span>
               <span class="note-edit-toggle-btn" title="Set folder path" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-folder-path-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
+            <label class="option-chip" title="Fallback URL on Failure" style="position:relative;">
+              <input type="checkbox" id="link-fallback-chip" aria-label="Fallback URL on Failure">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"></path>
+                </svg>
+                <span>Fallback</span>
+              </span>
+              <span class="note-edit-toggle-btn" title="Choose fallback URL" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('link-fallback-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
+            </label>
           </div>
           <div id="link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
             <div class="auto-fit-scale-label">Auto Fit Size</div>
@@ -300,6 +310,11 @@
           </div>
           <div id="link-note-input" style="display:none;">
             <textarea id="link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>
+          </div>
+          <div id="link-fallback-input" style="display:none; margin-top: 5px;">
+            <select id="link-fallback-select" style="width:100%; padding: 6px; border-radius: 4px; background: #1a1a1a; color: #fff; border: 1px solid #333; outline: none;" title="Fallback URL to run if first one fails">
+              <option value="">No Fallback</option>
+            </select>
           </div>
           <div id="urls-container">
             <div class="url-input-group">
@@ -350,6 +365,9 @@
           <div style="display: flex; gap: 10px;">
             <input type="text" id="link-text" placeholder="Text" style="flex: 1;">
             <input type="text" id="link-icon-class" placeholder="Icon Class" style="flex: 1;">
+            <select id="link-fallback-select" style="flex: 1; padding: 6px; border-radius: 4px; background: #1a1a1a; color: #fff; border: 1px solid #333; outline: none;" title="Fallback URL to run if first one fails">
+              <option value="">No Fallback</option>
+            </select>
           </div>
           <div style="display: flex; align-items: center; gap: 5px; width: 100%;">
             <input type="url" id="link-img-src" placeholder="Image URL" style="flex: 1;">
@@ -465,6 +483,16 @@
               </span>
               <span class="note-edit-toggle-btn" title="Set folder path" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-folder-path-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
             </label>
+            <label class="option-chip" title="Fallback URL on Failure" style="position:relative;">
+              <input type="checkbox" id="edit-link-fallback-chip" aria-label="Fallback URL on Failure">
+              <span class="option-chip-body">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M19 15l-6 6-1.42-1.42L15.17 16H4V4h2v10h9.17l-3.59-3.58L13 9l6 6z" fill="currentColor"></path>
+                </svg>
+                <span>Fallback</span>
+              </span>
+              <span class="note-edit-toggle-btn" title="Choose fallback URL" onclick="event.preventDefault();event.stopPropagation();var d=document.getElementById('edit-link-fallback-input');d.style.display=d.style.display==='none'?'block':'none';"></span>
+            </label>
           </div>
           <div id="edit-link-li-auto-fit-scale-input" class="auto-fit-scale-row" style="display:none;">
             <div class="auto-fit-scale-label">Auto Fit Size</div>
@@ -479,6 +507,11 @@
           </div>
           <div id="edit-link-note-input" style="display:none;">
             <textarea id="edit-link-note" placeholder="Note..." style="width:100%;box-sizing:border-box;min-height:60px;resize:vertical;margin-top:2px;"></textarea>
+          </div>
+          <div id="edit-link-fallback-input" style="display:none; margin-top: 5px;">
+            <select id="edit-link-fallback-select" style="width:100%; padding: 6px; border-radius: 4px; background: #1a1a1a; color: #fff; border: 1px solid #333; outline: none;" title="Fallback URL to run if first one fails">
+              <option value="">No Fallback</option>
+            </select>
           </div>
           <div id="edit-urls-container">
             <div class="url-input-group">
@@ -529,6 +562,9 @@
           <div style="display: flex; gap: 10px;">
             <input type="text" id="edit-link-text" placeholder="Text" style="flex: 1;">
             <input type="text" id="edit-link-icon-class" placeholder="Icon Class" style="flex: 1;">
+            <select id="edit-link-fallback-select" style="flex: 1; padding: 6px; border-radius: 4px; background: #1a1a1a; color: #fff; border: 1px solid #333; outline: none;" title="Fallback URL to run if first one fails">
+              <option value="">No Fallback</option>
+            </select>
           </div>
           <div style="display: flex; align-items: center; gap: 5px; width: 100%;">
             <input type="url" id="edit-link-img-src" placeholder="Image URL" style="flex: 1;">
