@@ -2019,3 +2019,54 @@ input[type="radio"]:checked::before,
 input[type="checkbox"]:checked::before {
   transform: scale(1);
 }
+
+/* Custom inline chip toggle styling */
+.inline-chip {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px; /* Matches normal text inputs and buttons perfectly */
+  padding: 0 10px;
+  background: #1a1a20;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #888;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.inline-chip input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+}
+
+.inline-chip-body {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 11px;
+}
+
+.inline-chip:hover {
+  border-color: #00f3ff;
+  color: #fff;
+  box-shadow: 0 0 8px rgba(0, 243, 255, 0.2);
+}
+
+.inline-chip input[type="checkbox"]:checked + .inline-chip-body {
+  color: #00ff41;
+}
+
+.inline-chip:has(input[type="checkbox"]:checked) {
+  border-color: #00ff41;
+  background: rgba(0, 255, 65, 0.05);
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.25);
+}

@@ -370,8 +370,13 @@
           </div>
           <div style="display: flex; align-items: center; gap: 5px; width: 100%;">
             <input type="url" id="link-img-src" placeholder="Image URL" style="flex: 1;">
-            <label style="display: flex; align-items: center; gap: 4px; color: #ccc; font-size: 11px; cursor: pointer; user-select: none;" title="Enable thumbnail refresh in Settings">
-              <input type="checkbox" id="link-thumbnail-refresh-enabled"> Refresh
+            <label class="inline-chip" title="Enable thumbnail refresh in Settings">
+              <input type="checkbox" id="link-thumbnail-refresh-enabled">
+              <span class="inline-chip-body">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                </svg>
+              </span>
             </label>
             <button type="button" class="reload-icon-btn" onclick="reloadLinkIcon('urls-container', 'link-img-src')" title="Reload Icon">🔄</button>
           </div>
@@ -566,8 +571,13 @@
           </div>
           <div style="display: flex; align-items: center; gap: 5px; width: 100%;">
             <input type="url" id="edit-link-img-src" placeholder="Image URL" style="flex: 1;">
-            <label style="display: flex; align-items: center; gap: 4px; color: #ccc; font-size: 11px; cursor: pointer; user-select: none;" title="Enable thumbnail refresh in Settings">
+            <label class="inline-chip" title="Enable thumbnail refresh in Settings">
               <input type="checkbox" id="edit-link-thumbnail-refresh-enabled">
+              <span class="inline-chip-body">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                  <path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/>
+                </svg>
+              </span>
             </label>
             <button type="button" class="reload-icon-btn" onclick="reloadLinkIcon('edit-urls-container', 'edit-link-img-src')" title="Reload Icon">🔄</button>
           </div>
