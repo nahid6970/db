@@ -5166,6 +5166,20 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "House of the Dragon - S03E04 - Tumbleton",
+                "watched": false,
+                "added_date": "2026-07-21T06:01:44.458791",
+                "notify": "unseen"
+            },
+            {
+                "id": 5,
+                "title": "House of the Dragon - S03E01 - Salt and Sea, Fire and Blood",
+                "watched": false,
+                "added_date": "2026-07-21T06:01:44.458709",
+                "notify": "unseen"
+            },
+            {
                 "id": 4,
                 "title": "House of the Dragon - S02E05 - Regent WEBRip-1080p",
                 "watched": false,
@@ -5206,20 +5220,6 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 3,
-                "title": "Silo S03E02 Its All Good 1080p ATVP WEB-DL DDP5 1 H 264-NTb[EZTVx.to]",
-                "watched": false,
-                "added_date": "2026-07-20T18:17:02.983318",
-                "notify": "unseen"
-            },
-            {
-                "id": 3,
-                "title": "Silo - S03E03 - A Dark Web HDTV-720p",
-                "watched": false,
-                "added_date": "2026-07-20T14:44:39.382856",
-                "notify": "unseen"
-            },
-            {
                 "id": 1,
                 "title": "Silo - S03E01 - Who Are You WEBDL-1080p",
                 "watched": true,
@@ -5227,6 +5227,8 @@
                 "notify": "seen"
             }
         ],
-        "sonarr_url": ""
+        "sonarr_url": "",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
     }
 ]
