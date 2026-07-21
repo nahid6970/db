@@ -798,91 +798,73 @@ class CyberButton(QPushButton):
 class CodeHighlighter(QSyntaxHighlighter):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.language = "cmd"
-        self._rules = []
+        self.language = "bat"
+        self._format_map = {}
+        self._pygments_available = False
         self.setup_rules()
 
     def set_language(self, lang):
+        if lang.lower() == "cmd": lang = "bat"
+        elif lang.lower() == "pwsh": lang = "powershell"
         self.language = lang.lower()
         self.setup_rules()
         self.rehighlight()
 
     def setup_rules(self):
-        self._rules = []
-        
-        # Colors matching the cyberpunk aesthetics
-        keyword_format = QTextCharFormat()
-        keyword_format.setForeground(QColor("#00F0FF")) # Neon Cyan
-        keyword_format.setFontWeight(QFont.Weight.Bold)
-
-        string_format = QTextCharFormat()
-        string_format.setForeground(QColor("#ff934b")) # Neon Orange
-
-        comment_format = QTextCharFormat()
-        comment_format.setForeground(QColor("#808080")) # Gray for comments
-
-        number_format = QTextCharFormat()
-        number_format.setForeground(QColor("#FCEE0A")) # Cyber Yellow
-
-        builtin_format = QTextCharFormat()
-        builtin_format.setForeground(QColor("#FF003C")) # Neon Red
-        
-        if self.language in ["powershell", "pwsh"]:
-            keywords = [
-                r"\bbegin\b", r"\bbreak\b", r"\bcatch\b", r"\bclass\b", r"\bcontinue\b",
-                r"\bdata\b", r"\bdefine\b", r"\bdo\b", r"\bdynamicparam\b", r"\belse\b",
-                r"\belseif\b", r"\bend\b", r"\bexit\b", r"\bfilter\b", r"\bfinally\b",
-                r"\bfor\b", r"\bforeach\b", r"\bfrom\b", r"\bfunction\b", r"\bif\b",
-                r"\bin\b", r"\binlinescript\b", r"\bparallel\b", r"\bparam\b", r"\bprocess\b",
-                r"\breturn\b", r"\bsequence\b", r"\bswitch\b", r"\bthrow\b", r"\btrap\b",
-                r"\btry\b", r"\buntil\b", r"\busing\b", r"\bwhile\b", r"\bworkflow\b"
-            ]
-            self._rules.append((re.compile(r"\$[a-zA-Z0-9_:]+"), builtin_format))
-            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
-            self._rules.append((re.compile(r"'[^'\\]*(?:\\.[^'\\]*)*'"), string_format))
-            for kw in keywords:
-                self._rules.append((re.compile(kw, re.IGNORECASE), keyword_format))
-            self._rules.append((re.compile(r"#.*"), comment_format))
-            self._rules.append((re.compile(r"\b\d+\b"), number_format))
-
-        elif self.language == "python":
-            keywords = [
-                r"\band\b", r"\bas\b", r"\bassert\b", r"\bbreak\b", r"\bclass\b",
-                r"\bcontinue\b", r"\bdef\b", r"\bdel\b", r"\belif\b", r"\belse\b",
-                r"\bexcept\b", r"\bexec\b", r"\bfinally\b", r"\bfor\b", r"\bfrom\b",
-                r"\bglobal\b", r"\bif\b", r"\bimport\b", r"\bin\b", r"\bis\b",
-                r"\blambda\b", r"\bnot\b", r"\bor\b", r"\bpass\b", r"\bprint\b",
-                r"\braise\b", r"\breturn\b", r"\btry\b", r"\bwhile\b", r"\bwith\b",
-                r"\byield\b", r"\bNone\b", r"\bTrue\b", r"\bFalse\b"
-            ]
-            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
-            self._rules.append((re.compile(r"'[^'\\]*(?:\\.[^'\\]*)*'"), string_format))
-            for kw in keywords:
-                self._rules.append((re.compile(kw), keyword_format))
-            self._rules.append((re.compile(r"\bself\b"), builtin_format))
-            self._rules.append((re.compile(r"#.*"), comment_format))
-            self._rules.append((re.compile(r"\b\d+\b"), number_format))
+        try:
+            import pygments
+            from pygments.styles import get_style_by_name
+            self._pygments_available = True
             
-        else: # cmd
-            keywords = [
-                r"\b@echo\b", r"\becho\b", r"\bset\b", r"\bif\b", r"\belse\b",
-                r"\bfor\b", r"\bin\b", r"\bdo\b", r"\bgoto\b", r"\bcall\b",
-                r"\bexit\b", r"\bpause\b", r"\brem\b", r"\bshift\b", r"\bcls\b"
-            ]
-            self._rules.append((re.compile(r"%[a-zA-Z0-9_]+%"), builtin_format))
-            self._rules.append((re.compile(r"![a-zA-Z0-9_]+!"), builtin_format))
-            self._rules.append((re.compile(r'"[^"\\]*(?:\\.[^"\\]*)*"'), string_format))
-            for kw in keywords:
-                self._rules.append((re.compile(kw, re.IGNORECASE), keyword_format))
-            self._rules.append((re.compile(r"\bREM\b.*", re.IGNORECASE), comment_format))
-            self._rules.append((re.compile(r"::.*"), comment_format))
-            self._rules.append((re.compile(r"\b\d+\b"), number_format))
+            # Use 'monokai' as it looks great on dark backgrounds
+            style = get_style_by_name('monokai')
+            
+            self._format_map = {}
+            for token, style_def in style:
+                fmt = QTextCharFormat()
+                if style_def['color']:
+                    fmt.setForeground(QColor(f"#{style_def['color']}"))
+                if style_def['bgcolor']:
+                    fmt.setBackground(QColor(f"#{style_def['bgcolor']}"))
+                if style_def['bold']:
+                    fmt.setFontWeight(QFont.Weight.Bold)
+                if style_def['italic']:
+                    fmt.setFontItalic(True)
+                self._format_map[token] = fmt
+        except ImportError:
+            self._pygments_available = False
+            
+        # Optional: Add fallback regex rules here if pygments is not installed
+        # But we'll rely on pygments per user's request.
 
     def highlightBlock(self, text):
-        for pattern, format_ in self._rules:
-            for match in pattern.finditer(text):
-                start, end = match.span()
-                self.setFormat(start, end - start, format_)
+        if not self._pygments_available:
+            return
+            
+        try:
+            from pygments import lex
+            from pygments.lexers import get_lexer_by_name
+            # Pygments usually adds a newline to the text, so we strip it if present.
+            # highlightBlock gives us the exact text of the block without newline.
+            lexer = get_lexer_by_name(self.language, stripall=True)
+            
+            pos = 0
+            for token, val in lex(text, lexer):
+                fmt = None
+                t = token
+                while t is not None:
+                    if t in self._format_map:
+                        fmt = self._format_map[t]
+                        break
+                    t = t.parent
+                
+                if fmt is not None:
+                    # lex() may return chunks that span multiple lines, but QSyntaxHighlighter
+                    # feeds line by line. We handle exact length of 'val'.
+                    self.setFormat(pos, len(val), fmt)
+                pos += len(val)
+        except Exception:
+            pass
 
 # FULL EDIT DIALOG
 # -----------------------------------------------------------------------------
