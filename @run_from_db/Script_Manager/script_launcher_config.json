@@ -1501,7 +1501,7 @@
                     "border_width": 0,
                     "col_span": 1,
                     "corner_radius": 0,
-                    "ctrl_left_cmd": "",
+                    "ctrl_left_cmd": "explorer \"{dir}\"",
                     "ctrl_right_cmd": "",
                     "font_family": "JetBrainsMono Nerd Font Propo",
                     "font_size": 14,
