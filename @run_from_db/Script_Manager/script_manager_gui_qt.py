@@ -2736,6 +2736,16 @@ class MainWindow(QMainWindow):
             elif item.layout(): self.clear_layout(item.layout())
 
     def refresh_grid(self):
+        # Recursively clear temporary search runtime overrides
+        def clear_runtime_keys(items):
+            for item in items:
+                item.pop("_runtime_icon_w", None)
+                item.pop("_runtime_icon_h", None)
+                item.pop("_runtime_text_align", None)
+                if "scripts" in item:
+                    clear_runtime_keys(item["scripts"])
+        clear_runtime_keys(self.config.get("scripts", []))
+
         while self.grid.count():
             item = self.grid.takeAt(0)
             if item.widget(): item.widget().deleteLater()
