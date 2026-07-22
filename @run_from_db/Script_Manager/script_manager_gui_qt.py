@@ -880,6 +880,8 @@ class EditDialog(QDialog):
         super().__init__(parent)
         self.script = script_data
         self.config = parent.config if parent and hasattr(parent, 'config') else {}
+        self._batch_bg = None
+        self._batch_fg = None
         self.setWindowTitle(f"EDIT // {self.script.get('name', 'UNKNOWN')}")
         edit_w = self.config.get("edit_panel_width", 1150)
         edit_h = self.config.get("edit_panel_height", 750)
@@ -1195,6 +1197,19 @@ class EditDialog(QDialog):
             self.cmb_batch_align.addItems(["", "center", "left", "right"])
             self.cmb_batch_align.setToolTip("Apply text alignment to all items inside this folder on Save")
             l_fv.addWidget(self.cmb_batch_align, 1, 1, 1, 3)
+
+            l_fv.addWidget(QLabel("Batch Colors Inside:"), 2, 0)
+            self.btn_batch_bg = QPushButton("Pick BG")
+            self.btn_batch_bg.clicked.connect(self.pick_batch_bg)
+            l_fv.addWidget(self.btn_batch_bg, 2, 1)
+
+            self.btn_batch_fg = QPushButton("Pick FG")
+            self.btn_batch_fg.clicked.connect(self.pick_batch_fg)
+            l_fv.addWidget(self.btn_batch_fg, 2, 2)
+
+            self.btn_clear_batch_col = QPushButton("Clear")
+            self.btn_clear_batch_col.clicked.connect(self.clear_batch_colors)
+            l_fv.addWidget(self.btn_clear_batch_col, 2, 3)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
@@ -1472,6 +1487,28 @@ class EditDialog(QDialog):
             self.script[key] = h
             self.set_btn_color(btn, h)
 
+    def pick_batch_bg(self):
+        default_color = self.config.get("def_script_bg", "#FFFFFF")
+        c = QColorDialog.getColor(QColor(default_color), self)
+        if c.isValid():
+            self._batch_bg = c.name()
+            self.set_btn_color(self.btn_batch_bg, self._batch_bg)
+            
+    def pick_batch_fg(self):
+        default_color = self.config.get("def_script_fg", "#000000")
+        c = QColorDialog.getColor(QColor(default_color), self)
+        if c.isValid():
+            self._batch_fg = c.name()
+            self.set_btn_color(self.btn_batch_fg, self._batch_fg)
+            
+    def clear_batch_colors(self):
+        self._batch_bg = None
+        self._batch_fg = None
+        self.btn_batch_bg.setText("Pick BG")
+        self.btn_batch_bg.setStyleSheet("")
+        self.btn_batch_fg.setText("Pick FG")
+        self.btn_batch_fg.setStyleSheet("")
+
     def browse_path(self):
         f, _ = QFileDialog.getOpenFileName(self, "Select Executable")
         if f: self.inp_path.setText(f)
@@ -1563,6 +1600,18 @@ class EditDialog(QDialog):
                             apply_align_recursive(item["scripts"], alignment)
                 
                 apply_align_recursive(self.script.get("scripts", []), batch_align)
+
+            if self._batch_bg or self._batch_fg:
+                def apply_colors_recursive(items, bg, fg):
+                    for item in items:
+                        if bg:
+                            item["color"] = bg
+                        if fg:
+                            item["text_color"] = fg
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_colors_recursive(item["scripts"], bg, fg)
+                
+                apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg)
         
         self.accept()
 
