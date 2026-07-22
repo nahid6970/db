@@ -767,7 +767,7 @@ class CyberButton(QPushButton):
         self.setFont(f)
 
         # Base Style
-        bg_normal = color
+        bg_normal = "transparent" if self.script.get("transparent_bg") else color
         fg_normal = text_color
         
         # Override for folders is NOT needed anymore since we want them filled
@@ -1153,6 +1153,11 @@ class EditDialog(QDialog):
         l_colors.addWidget(self.btn_col_hbg, 1, 0)
         l_colors.addWidget(self.btn_col_hfg, 1, 1)
         l_colors.addWidget(self.btn_col_brd, 2, 0, 1, 2)
+        
+        self.chk_trans_bg = QCheckBox("Transparent BG")
+        self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
+        l_colors.addWidget(self.chk_trans_bg, 3, 0, 1, 2)
+        
         grp_colors.setLayout(l_colors)
         left_layout.addWidget(grp_colors)
         
@@ -1210,6 +1215,11 @@ class EditDialog(QDialog):
             self.btn_clear_batch_col = QPushButton("Clear")
             self.btn_clear_batch_col.clicked.connect(self.clear_batch_colors)
             l_fv.addWidget(self.btn_clear_batch_col, 2, 3)
+
+            self.chk_batch_trans = QCheckBox("Batch Transparent BG")
+            self.chk_batch_trans.setChecked(False)
+            self.chk_batch_trans.setToolTip("Set background to transparent for all items inside this folder on Save")
+            l_fv.addWidget(self.chk_batch_trans, 3, 0, 1, 4)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
@@ -1372,9 +1382,11 @@ class EditDialog(QDialog):
         self.chk_bold.setChecked(def_bold)
         self.chk_italic.setChecked(def_italic)
         self.cmb_align.setCurrentText("center")
+        self.chk_trans_bg.setChecked(False)
 
         # Reset Colors
         self.script.pop("color", None)
+        self.script.pop("transparent_bg", None)
         self.script.pop("text_color", None)
         self.script.pop("hover_color", None)
         self.script.pop("hover_text_color", None)
@@ -1580,6 +1592,7 @@ class EditDialog(QDialog):
         self.script["is_bold"] = self.chk_bold.isChecked()
         self.script["is_italic"] = self.chk_italic.isChecked()
         self.script["text_align"] = self.cmb_align.currentText()
+        self.script["transparent_bg"] = self.chk_trans_bg.isChecked()
         self.script["col_span"] = self.spn_cspan.value()
         self.script["row_span"] = self.spn_rspan.value()
         self.script["width"] = self.spn_width.value()
@@ -1612,6 +1625,14 @@ class EditDialog(QDialog):
                             apply_colors_recursive(item["scripts"], bg, fg)
                 
                 apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg)
+
+            if self.chk_batch_trans.isChecked():
+                def apply_trans_recursive(items):
+                    for item in items:
+                        item["transparent_bg"] = True
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_trans_recursive(item["scripts"])
+                apply_trans_recursive(self.script.get("scripts", []))
         
         self.accept()
 

@@ -1091,7 +1091,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5001 - share text",
@@ -1130,7 +1131,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5002 - upload files",
@@ -1169,7 +1171,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5003 - Browse_PC_Files",
@@ -1208,7 +1211,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5004 - Paint",
@@ -1247,7 +1251,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5005 - GameARR",
@@ -1285,8 +1290,9 @@
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
-                    "color": "#000000",
-                    "text_align": "left"
+                    "color": "#00557f",
+                    "text_align": "left",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5006 - Run Commands",
@@ -1325,7 +1331,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5007 - Android Controls PC",
@@ -1364,7 +1371,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5008 - Esports Match Schedule",
@@ -1403,7 +1411,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5009 - MCQ",
@@ -1442,7 +1451,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5010 - COC",
@@ -1481,7 +1491,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5011 - TV Shows",
@@ -1520,7 +1531,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5012 - Share Imgaes",
@@ -1559,7 +1571,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5013 - Movies",
@@ -1598,7 +1611,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5015 - Job Tracker",
@@ -1637,7 +1651,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5016 - Sync W Android",
@@ -1676,7 +1691,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5017 - Audio Stream",
@@ -1715,7 +1731,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5018 - mycell",
@@ -1754,7 +1771,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5019 - Word",
@@ -1793,7 +1811,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5020 - Whiteboard",
@@ -1832,7 +1851,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5021 - Active Windows Killer",
@@ -1871,7 +1891,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5151 - Gallery",
@@ -1910,7 +1931,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5555 - myTerminal",
@@ -1949,7 +1971,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "4421 - Bangla MCQ",
@@ -1988,7 +2011,8 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "text_align": "left",
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 },
                 {
                     "name": "5577 - Terminal TUI",
@@ -2027,7 +2051,8 @@
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
-                    "color": "#000000"
+                    "color": "#00557f",
+                    "transparent_bg": true
                 }
             ],
             "col_span": 2,
@@ -2054,7 +2079,8 @@
             "_runtime_font_family": "JetBrainsMono NFP",
             "_runtime_is_bold": true,
             "_runtime_is_italic": false,
-            "text_align": "center"
+            "text_align": "center",
+            "transparent_bg": false
         },
         {
             "name": "Convex <br> Projects",
