@@ -139,8 +139,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -212,8 +211,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -249,8 +247,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -322,8 +319,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -359,8 +355,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -396,8 +391,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -433,8 +427,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -506,8 +499,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -579,8 +571,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -616,8 +607,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -653,8 +643,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -726,8 +715,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -763,8 +751,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -836,8 +823,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -873,8 +859,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -910,8 +895,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -947,8 +931,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -1057,7 +1040,6 @@
                     "type": "script",
                     "use_inline": true,
                     "width": 0,
-                    "_runtime_text_align": "left",
                     "require_password": false,
                     "text_align": "center",
                     "transparent_bg": false,
@@ -1114,8 +1096,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5001 - share text",
@@ -1155,8 +1136,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5002 - upload files",
@@ -1196,8 +1176,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5003 - Browse_PC_Files",
@@ -1237,8 +1216,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5004 - Paint",
@@ -1318,8 +1296,7 @@
                     "_runtime_is_italic": false,
                     "color": "#00557f",
                     "text_align": "left",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5006 - Run Commands",
@@ -1359,8 +1336,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5007 - Android Controls PC",
@@ -1400,8 +1376,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5008 - Esports Match Schedule",
@@ -1441,8 +1416,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5009 - MCQ",
@@ -1482,8 +1456,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5010 - COC",
@@ -1603,8 +1576,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5013 - Movies",
@@ -1644,8 +1616,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5015 - Job Tracker",
@@ -1685,8 +1656,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5016 - Sync W Android",
@@ -1726,8 +1696,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5017 - Audio Stream",
@@ -1767,8 +1736,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5018 - mycell",
@@ -1808,8 +1776,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5019 - Word",
@@ -1849,8 +1816,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5020 - Whiteboard",
@@ -1890,8 +1856,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5021 - Active Windows Killer",
@@ -1931,8 +1896,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5151 - Gallery",
@@ -1972,8 +1936,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5555 - myTerminal",
@@ -2013,8 +1976,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "4421 - Bangla MCQ",
@@ -2054,8 +2016,7 @@
                     "_runtime_is_italic": false,
                     "text_align": "left",
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 },
                 {
                     "name": "5577 - Terminal TUI",
@@ -2095,8 +2056,7 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "color": "#00557f",
-                    "transparent_bg": true,
-                    "_runtime_text_align": "left"
+                    "transparent_bg": true
                 }
             ],
             "col_span": 2,
@@ -2243,9 +2203,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_icon_w": 80,
-                    "_runtime_icon_h": 80
+                    "width": 0
                 }
             ],
             "type": "folder",
@@ -2310,8 +2268,7 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false,
-                    "_runtime_text_align": "left"
+                    "_runtime_is_italic": false
                 }
             ],
             "type": "folder",
@@ -2366,8 +2323,7 @@
                     "row_span": 1,
                     "run_admin": false,
                     "type": "script",
-                    "use_inline": false,
-                    "_runtime_text_align": "left"
+                    "use_inline": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2389,8 +2345,7 @@
                     "row_span": 1,
                     "run_admin": false,
                     "type": "script",
-                    "use_inline": false,
-                    "_runtime_text_align": "left"
+                    "use_inline": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2403,8 +2358,7 @@
                     "name": "IMG-Dimension",
                     "path": "C:/@delta/ms1/scripts/ffmpeg/image_dimension.ps1",
                     "row_span": 1,
-                    "type": "script",
-                    "_runtime_text_align": "left"
+                    "type": "script"
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2416,8 +2370,7 @@
                     "name": "Merge",
                     "path": "C:/@delta/ms1/scripts/ffmpeg/merge.ps1",
                     "row_span": 1,
-                    "type": "script",
-                    "_runtime_text_align": "left"
+                    "type": "script"
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2429,8 +2382,7 @@
                     "name": "Trim",
                     "path": "C:/@delta/ms1/scripts/ffmpeg/trim.ps1",
                     "row_span": 1,
-                    "type": "script",
-                    "_runtime_text_align": "left"
+                    "type": "script"
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2443,8 +2395,7 @@
                     "name": "VID-Dimension",
                     "path": "C:/@delta/ms1/scripts/ffmpeg/vid_dim.ps1",
                     "row_span": 1,
-                    "type": "script",
-                    "_runtime_text_align": "left"
+                    "type": "script"
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2480,8 +2431,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2518,8 +2468,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2530,7 +2479,7 @@
                     "border_width": 0,
                     "col_span": 1,
                     "corner_radius": 0,
-                    "ctrl_left_cmd": "explorer C:\\@delta\\ms1\\TOOLS\\img-dimension-size\\file_converter_gui.py",
+                    "ctrl_left_cmd": "explorer \"{dir}\"",
                     "ctrl_right_cmd": "",
                     "font_family": "JetBrainsMono Nerd Font Propo",
                     "font_size": 14,
@@ -2557,7 +2506,8 @@
                     "type": "script",
                     "use_inline": false,
                     "width": 0,
-                    "_runtime_text_align": "left"
+                    "text_align": "center",
+                    "transparent_bg": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2594,8 +2544,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2632,8 +2581,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 }
             ],
             "type": "folder",
@@ -2701,8 +2649,7 @@
                     "use_inline": true,
                     "width": 0,
                     "require_password": false,
-                    "color": "#1d1d2b",
-                    "_runtime_text_align": "left"
+                    "color": "#1d1d2b"
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2740,8 +2687,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
-                    "_runtime_text_align": "left"
+                    "border_width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2779,8 +2725,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
-                    "_runtime_text_align": "left"
+                    "border_width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2818,8 +2763,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
-                    "_runtime_text_align": "left"
+                    "border_width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -2857,8 +2801,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
-                    "_runtime_text_align": "left"
+                    "border_width": 0
                 },
                 {
                     "_runtime_font_family": "Adwaita Mono",
@@ -2947,8 +2890,7 @@
                     "row_span": 1,
                     "run_admin": false,
                     "type": "script",
-                    "use_inline": true,
-                    "_runtime_text_align": "left"
+                    "use_inline": true
                 },
                 {
                     "_runtime_font_family": "Consolas",
@@ -2978,8 +2920,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3001,8 +2942,7 @@
                     "row_span": 1,
                     "run_admin": false,
                     "type": "script",
-                    "use_inline": true,
-                    "_runtime_text_align": "left"
+                    "use_inline": true
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3037,8 +2977,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3060,8 +2999,7 @@
                     "row_span": 1,
                     "run_admin": true,
                     "type": "script",
-                    "use_inline": true,
-                    "_runtime_text_align": "left"
+                    "use_inline": true
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3096,8 +3034,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": true,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 }
             ],
             "type": "folder",
@@ -3231,8 +3168,7 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false,
-                    "_runtime_text_align": "left"
+                    "_runtime_is_italic": false
                 }
             ],
             "svg_content": "",
@@ -3279,8 +3215,7 @@
                     "text_color": "#00aaff",
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3320,8 +3255,7 @@
                     "text_color": "#1881fd",
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3382,8 +3316,7 @@
                             "run_admin": false,
                             "type": "script",
                             "use_inline": false,
-                            "width": 0,
-                            "_runtime_text_align": "left"
+                            "width": 0
                         },
                         {
                             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3419,8 +3352,7 @@
                             "run_admin": false,
                             "type": "script",
                             "use_inline": false,
-                            "width": 0,
-                            "_runtime_text_align": "left"
+                            "width": 0
                         },
                         {
                             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3456,8 +3388,7 @@
                             "run_admin": false,
                             "type": "script",
                             "use_inline": false,
-                            "width": 0,
-                            "_runtime_text_align": "left"
+                            "width": 0
                         },
                         {
                             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3493,8 +3424,7 @@
                             "run_admin": false,
                             "type": "script",
                             "use_inline": false,
-                            "width": 0,
-                            "_runtime_text_align": "left"
+                            "width": 0
                         }
                     ],
                     "type": "folder",
@@ -3540,8 +3470,7 @@
                     "text_color": "#FFFFFF",
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3578,9 +3507,7 @@
                     "svg_content": "",
                     "text_color": "#55ff7f",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_icon_w": 80,
-                    "_runtime_icon_h": 80
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3621,9 +3548,7 @@
                     },
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_icon_w": 80,
-                    "_runtime_icon_h": 80
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3660,8 +3585,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3698,8 +3622,7 @@
                     "type": "script",
                     "use_inline": false,
                     "width": 0,
-                    "require_password": false,
-                    "_runtime_text_align": "left"
+                    "require_password": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3737,8 +3660,7 @@
                     "svg_content": "",
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3779,9 +3701,7 @@
                     },
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_icon_w": 80,
-                    "_runtime_icon_h": 80
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3819,9 +3739,7 @@
                     "type": "script",
                     "use_inline": false,
                     "width": 0,
-                    "require_password": false,
-                    "_runtime_icon_w": 80,
-                    "_runtime_icon_h": 80
+                    "require_password": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3858,8 +3776,7 @@
                     "type": "script",
                     "use_inline": false,
                     "width": 0,
-                    "require_password": false,
-                    "_runtime_text_align": "left"
+                    "require_password": false
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3896,8 +3813,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3934,8 +3850,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
-                    "_runtime_text_align": "left"
+                    "border_width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3972,8 +3887,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4010,8 +3924,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4048,8 +3961,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4085,8 +3997,7 @@
                     "run_admin": true,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4158,8 +4069,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 },
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4195,8 +4105,7 @@
                     "run_admin": false,
                     "type": "script",
                     "use_inline": false,
-                    "width": 0,
-                    "_runtime_text_align": "left"
+                    "width": 0
                 }
             ],
             "col_span": 1,
@@ -4224,9 +4133,7 @@
             "_runtime_is_bold": true,
             "_runtime_is_italic": false,
             "svg_hover_map": {},
-            "svg_content": "<svg viewBox=\"-3 0 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\" fill=\"#FF0000\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <title>trash</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"> <g id=\"Icon-Set-Filled\" sketch:type=\"MSLayerGroup\" transform=\"translate(-261.000000, -205.000000)\" fill=\"#FF0000\"> <path d=\"M268,220 C268,219.448 268.448,219 269,219 C269.552,219 270,219.448 270,220 L270,232 C270,232.553 269.552,233 269,233 C268.448,233 268,232.553 268,232 L268,220 L268,220 Z M273,220 C273,219.448 273.448,219 274,219 C274.552,219 275,219.448 275,220 L275,232 C275,232.553 274.552,233 274,233 C273.448,233 273,232.553 273,232 L273,220 L273,220 Z M278,220 C278,219.448 278.448,219 279,219 C279.552,219 280,219.448 280,220 L280,232 C280,232.553 279.552,233 279,233 C278.448,233 278,232.553 278,232 L278,220 L278,220 Z M263,233 C263,235.209 264.791,237 267,237 L281,237 C283.209,237 285,235.209 285,233 L285,217 L263,217 L263,233 L263,233 Z M277,209 L271,209 L271,208 C271,207.447 271.448,207 272,207 L276,207 C276.552,207 277,207.447 277,208 L277,209 L277,209 Z M285,209 L279,209 L279,207 C279,205.896 278.104,205 277,205 L271,205 C269.896,205 269,205.896 269,207 L269,209 L263,209 C261.896,209 261,209.896 261,211 L261,213 C261,214.104 261.895,214.999 262.999,215 L285.002,215 C286.105,214.999 287,214.104 287,213 L287,211 C287,209.896 286.104,209 285,209 L285,209 Z\" id=\"trash\" sketch:type=\"MSShapeGroup\"> </path> </g> </g> </g></svg>",
-            "_runtime_icon_w": 48,
-            "_runtime_icon_h": 48
+            "svg_content": "<svg viewBox=\"-3 0 32 32\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sketch=\"http://www.bohemiancoding.com/sketch/ns\" fill=\"#FF0000\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <title>trash</title> <desc>Created with Sketch Beta.</desc> <defs> </defs> <g id=\"Page-1\" stroke=\"none\" stroke-width=\"1\" fill=\"none\" fill-rule=\"evenodd\" sketch:type=\"MSPage\"> <g id=\"Icon-Set-Filled\" sketch:type=\"MSLayerGroup\" transform=\"translate(-261.000000, -205.000000)\" fill=\"#FF0000\"> <path d=\"M268,220 C268,219.448 268.448,219 269,219 C269.552,219 270,219.448 270,220 L270,232 C270,232.553 269.552,233 269,233 C268.448,233 268,232.553 268,232 L268,220 L268,220 Z M273,220 C273,219.448 273.448,219 274,219 C274.552,219 275,219.448 275,220 L275,232 C275,232.553 274.552,233 274,233 C273.448,233 273,232.553 273,232 L273,220 L273,220 Z M278,220 C278,219.448 278.448,219 279,219 C279.552,219 280,219.448 280,220 L280,232 C280,232.553 279.552,233 279,233 C278.448,233 278,232.553 278,232 L278,220 L278,220 Z M263,233 C263,235.209 264.791,237 267,237 L281,237 C283.209,237 285,235.209 285,233 L285,217 L263,217 L263,233 L263,233 Z M277,209 L271,209 L271,208 C271,207.447 271.448,207 272,207 L276,207 C276.552,207 277,207.447 277,208 L277,209 L277,209 Z M285,209 L279,209 L279,207 C279,205.896 278.104,205 277,205 L271,205 C269.896,205 269,205.896 269,207 L269,209 L263,209 C261.896,209 261,209.896 261,211 L261,213 C261,214.104 261.895,214.999 262.999,215 L285.002,215 C286.105,214.999 287,214.104 287,213 L287,211 C287,209.896 286.104,209 285,209 L285,209 Z\" id=\"trash\" sketch:type=\"MSShapeGroup\"> </path> </g> </g> </g></svg>"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4268,9 +4175,7 @@
             "text_color": "#ffffff",
             "border_color": "#55aaff",
             "svg_hover_map": {},
-            "svg_content": "<svg viewBox=\"0 0 48 48\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <rect width=\"48\" height=\"48\" fill=\"white\" fill-opacity=\"0.01\"></rect> <path d=\"M20 14V5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5V43C4 43.5523 4.44772 44 5 44H19C19.5523 44 20 43.5523 20 43V34\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M28 34V43C28 43.5523 28.4477 44 29 44H43C43.5523 44 44 43.5523 44 43V5C44 4.44772 43.5523 4 43 4H29C28.4477 4 28 4.44772 28 5V14\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M28 24H44\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M5 24H20\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M32.7485 28.8183L31.1575 27.2274L27.9756 24.0454L31.1575 20.8634L32.7485 19.2724\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M15.375 28.8183L16.966 27.2274L20.148 24.0454L16.966 20.8634L15.375 19.2724\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> </g></svg>",
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "svg_content": "<svg viewBox=\"0 0 48 48\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <rect width=\"48\" height=\"48\" fill=\"white\" fill-opacity=\"0.01\"></rect> <path d=\"M20 14V5C20 4.44772 19.5523 4 19 4H5C4.44772 4 4 4.44772 4 5V43C4 43.5523 4.44772 44 5 44H19C19.5523 44 20 43.5523 20 43V34\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M28 34V43C28 43.5523 28.4477 44 29 44H43C43.5523 44 44 43.5523 44 43V5C44 4.44772 43.5523 4 43 4H29C28.4477 4 28 4.44772 28 5V14\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M28 24H44\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M5 24H20\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\"></path> <path d=\"M32.7485 28.8183L31.1575 27.2274L27.9756 24.0454L31.1575 20.8634L32.7485 19.2724\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> <path d=\"M15.375 28.8183L16.966 27.2274L20.148 24.0454L16.966 20.8634L15.375 19.2724\" stroke=\"#FFFFFF\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></path> </g></svg>"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4307,9 +4212,7 @@
             "type": "script",
             "use_inline": false,
             "width": 0,
-            "require_password": false,
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font",
@@ -4348,9 +4251,7 @@
             "width": 0,
             "require_password": false,
             "svg_hover_map": {},
-            "svg_content": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 52 52\" enable-background=\"new 0 0 52 52\" xml:space=\"preserve\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M42.6,17.8c2.4,0,7.2-2,7.2-8.4c0-6.4-4.6-6.8-6.1-6.8c-2.8,0-5.6,2-8.1,6.3c-2.5,4.4-5.3,9.1-5.3,9.1 l-0.1,0c-0.6-3.1-1.1-5.6-1.3-6.7c-0.5-2.7-3.6-8.4-9.9-8.4c-6.4,0-12.2,3.7-12.2,3.7l0,0C5.8,7.3,5.1,8.5,5.1,9.9 c0,2.1,1.7,3.9,3.9,3.9c0.6,0,1.2-0.2,1.7-0.4l0,0c0,0,4.8-2.7,5.9,0c0.3,0.8,0.6,1.7,0.9,2.7c1.2,4.2,2.4,9.1,3.3,13.5l-4.2,6 c0,0-4.7-1.7-7.1-1.7s-7.2,2-7.2,8.4s4.6,6.8,6.1,6.8c2.8,0,5.6-2,8.1-6.3c2.5-4.4,5.3-9.1,5.3-9.1c0.8,4,1.5,7.1,1.9,8.5 c1.6,4.5,5.3,7.2,10.1,7.2c0,0,5,0,10.9-3.3c1.4-0.6,2.4-2,2.4-3.6c0-2.1-1.7-3.9-3.9-3.9c-0.6,0-1.2,0.2-1.7,0.4l0,0 c0,0-4.2,2.4-5.6,0.5c-1-2-1.9-4.6-2.6-7.8c-0.6-2.8-1.3-6.2-2-9.5l4.3-6.2C35.5,16.1,40.2,17.8,42.6,17.8z\"></path> </g></svg>",
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "svg_content": "<svg fill=\"#FFFFFF\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 52 52\" enable-background=\"new 0 0 52 52\" xml:space=\"preserve\"><g id=\"SVGRepo_bgCarrier\" stroke-width=\"0\"></g><g id=\"SVGRepo_tracerCarrier\" stroke-linecap=\"round\" stroke-linejoin=\"round\"></g><g id=\"SVGRepo_iconCarrier\"> <path d=\"M42.6,17.8c2.4,0,7.2-2,7.2-8.4c0-6.4-4.6-6.8-6.1-6.8c-2.8,0-5.6,2-8.1,6.3c-2.5,4.4-5.3,9.1-5.3,9.1 l-0.1,0c-0.6-3.1-1.1-5.6-1.3-6.7c-0.5-2.7-3.6-8.4-9.9-8.4c-6.4,0-12.2,3.7-12.2,3.7l0,0C5.8,7.3,5.1,8.5,5.1,9.9 c0,2.1,1.7,3.9,3.9,3.9c0.6,0,1.2-0.2,1.7-0.4l0,0c0,0,4.8-2.7,5.9,0c0.3,0.8,0.6,1.7,0.9,2.7c1.2,4.2,2.4,9.1,3.3,13.5l-4.2,6 c0,0-4.7-1.7-7.1-1.7s-7.2,2-7.2,8.4s4.6,6.8,6.1,6.8c2.8,0,5.6-2,8.1-6.3c2.5-4.4,5.3-9.1,5.3-9.1c0.8,4,1.5,7.1,1.9,8.5 c1.6,4.5,5.3,7.2,10.1,7.2c0,0,5,0,10.9-3.3c1.4-0.6,2.4-2,2.4-3.6c0-2.1-1.7-3.9-3.9-3.9c-0.6,0-1.2,0.2-1.7,0.4l0,0 c0,0-4.2,2.4-5.6,0.5c-1-2-1.9-4.6-2.6-7.8c-0.6-2.8-1.3-6.2-2-9.5l4.3-6.2C35.5,16.1,40.2,17.8,42.6,17.8z\"></path> </g></svg>"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4393,9 +4294,7 @@
             "text_color": "#000000",
             "hover_color": "#302326",
             "hover_text_color": "#FFFFFF",
-            "border_color": "#dff017",
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "border_color": "#dff017"
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4436,9 +4335,7 @@
             "require_password": false,
             "svg_hover_map": {
                 "#FFFFFF": "#000000"
-            },
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            }
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4476,9 +4373,7 @@
             "use_inline": false,
             "width": 0,
             "require_password": false,
-            "text_color": "#55ff7f",
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "text_color": "#55ff7f"
         },
         {
             "_runtime_font_family": "Arial",
@@ -4516,9 +4411,7 @@
             "type": "script",
             "use_inline": false,
             "width": 0,
-            "require_password": false,
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4555,9 +4448,7 @@
             "type": "script",
             "use_inline": false,
             "width": 0,
-            "require_password": false,
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4594,9 +4485,7 @@
             "type": "script",
             "use_inline": false,
             "width": 0,
-            "require_password": false,
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4635,9 +4524,7 @@
             "type": "script",
             "use_inline": false,
             "width": 0,
-            "require_password": false,
-            "_runtime_icon_w": 80,
-            "_runtime_icon_h": 80
+            "require_password": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4751,8 +4638,7 @@
             "run_admin": false,
             "type": "script",
             "use_inline": false,
-            "width": 0,
-            "_runtime_text_align": "left"
+            "width": 0
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -4945,8 +4831,7 @@
             "run_admin": false,
             "type": "script",
             "use_inline": false,
-            "width": 0,
-            "_runtime_text_align": "left"
+            "width": 0
         },
         {
             "name": "Espanso",
@@ -5135,8 +5020,7 @@
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false,
-            "_runtime_text_align": "left"
+            "_runtime_is_italic": false
         }
     ],
     "settings": {
@@ -5165,6 +5049,6 @@
     "search_box_columns": 9,
     "search_list_width": 500,
     "search_list_height": 40,
-    "search_list_columns": 3,
+    "search_list_columns": 4,
     "search_left_align": true
 }

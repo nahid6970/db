@@ -14,7 +14,7 @@ We implemented several key layout, alignment, and formatting options in the scri
 
 3. **Label Line Break Formatting & Text Elision**:
    - Stripped `<br>`, `<br/>`, and `<BR>` html line breaks and replaced them with spaces in search mode so that long titles are flattened to a single line.
-   - Added automatic width-based text elision with `...` (using `QFontMetrics.elidedText`) to prevent any overflow or clipping when the label text exceeds the button width.
+   - Disabled word wrap (`QTextOption.WrapMode.NoWrap`) on single-line text documents. This forces long labels containing spaces (e.g. `IMG Dimension Size` or `AppControl Manager`) to stay on a single line so they are accurately measured and elided with `...` (using `QFontMetrics.elidedText`) instead of wrapping off-screen.
 
 4. **Search Filters & Operations**:
    - Excluded folder items from matching/appearing in search results (only scripts are collected, though folders are still traversed recursively to find them).

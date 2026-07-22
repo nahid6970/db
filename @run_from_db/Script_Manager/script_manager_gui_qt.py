@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle)
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize
 from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIcon, QPainter, 
-                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat, QFontMetrics)
+                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat, QFontMetrics, QTextOption)
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtCore import QUrl
 import ctypes
@@ -651,13 +651,18 @@ class CyberButton(QPushButton):
             available_w = self.width() - (padding * 2) - icon_w - spacing
         available_w = max(10, available_w)
 
+        is_single_line = "<br/>" not in html
+
         # Measure width using a temporary QTextDocument
         temp_doc = QTextDocument()
         temp_doc.setDefaultFont(self.font())
+        if is_single_line:
+            opt = temp_doc.defaultTextOption()
+            opt.setWrapMode(QTextOption.WrapMode.NoWrap)
+            temp_doc.setDefaultTextOption(opt)
         temp_doc.setHtml(f"<div style='font-family: {self.font().family()};'>{html}</div>")
 
         # Elide text if single-line and too long
-        is_single_line = "<br/>" not in html
         if is_single_line and temp_doc.idealWidth() > available_w:
             plain_text = temp_doc.toPlainText()
             
@@ -681,6 +686,10 @@ class CyberButton(QPushButton):
 
         doc = QTextDocument()
         doc.setDefaultFont(self.font())
+        if is_single_line:
+            opt = doc.defaultTextOption()
+            opt.setWrapMode(QTextOption.WrapMode.NoWrap)
+            doc.setDefaultTextOption(opt)
         
         if icon_position == "center":
             if icon_pixmap:
