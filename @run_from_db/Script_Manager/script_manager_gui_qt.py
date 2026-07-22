@@ -545,8 +545,8 @@ class CyberButton(QPushButton):
                     pass
 
                 # Determine size for the generated icon
-                gen_w = self.script.get("icon_width", 0)
-                gen_h = self.script.get("icon_height", 0)
+                gen_w = self.script.get("_runtime_icon_w", self.script.get("icon_width", 0))
+                gen_h = self.script.get("_runtime_icon_h", self.script.get("icon_height", 0))
                 if gen_w <= 0: gen_w = 64
                 if gen_h <= 0: gen_h = 64
                 
