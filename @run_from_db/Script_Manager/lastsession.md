@@ -16,8 +16,9 @@ We implemented several key layout, alignment, and formatting options in the scri
    - Stripped `<br>`, `<br/>`, and `<BR>` html line breaks and replaced them with spaces in search mode so that long titles are flattened to a single line.
    - Added automatic width-based text elision with `...` (using `QFontMetrics.elidedText`) to prevent any overflow or clipping when the label text exceeds the button width.
 
-4. **Search Filters**:
+4. **Search Filters & Operations**:
    - Excluded folder items from matching/appearing in search results (only scripts are collected, though folders are still traversed recursively to find them).
+   - Added `find_parent_list` to recursively trace item parent lists. This resolves context menu actions (Edit, Duplicate, Cut, Delete) failing inside search results, allowing items to be manipulated directly from their parent folder structures.
 
 5. **Folder & Item Batch Updates**:
    - Supported batch foreground/background colors and transparent background options for folder contents recursively on save.

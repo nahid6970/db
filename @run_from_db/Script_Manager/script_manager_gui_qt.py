@@ -3273,18 +3273,33 @@ class MainWindow(QMainWindow):
         
         self.save_config()
 
+    def find_parent_list(self, current_list, target_item):
+        for item in current_list:
+            if item is target_item:
+                return current_list
+            if item.get("type") == "folder" and "scripts" in item:
+                res = self.find_parent_list(item["scripts"], target_item)
+                if res is not None:
+                    return res
+        return None
+
     def duplicate_item(self, script):
         import copy
         new_script = copy.deepcopy(script)
         if "name" in new_script: new_script["name"] += " (Copy)"
         
-        target_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
+        target_list = self.find_parent_list(self.config.get("scripts", []), script)
+        if target_list is None:
+            target_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
         target_list.append(new_script)
         self.save_config()
 
     def cut_item(self, script):
         self.clipboard_item = script
-        self.clipboard_source_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
+        target_list = self.find_parent_list(self.config.get("scripts", []), script)
+        if target_list is None:
+            target_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
+        self.clipboard_source_list = target_list
         # Visual feedback could be added here (e.g. ghosting the button)
         QApplication.beep()
 
@@ -3342,7 +3357,9 @@ class MainWindow(QMainWindow):
         layout.addLayout(btn_layout)
         
         if dlg.exec():
-            target_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
+            target_list = self.find_parent_list(self.config.get("scripts", []), script)
+            if target_list is None:
+                target_list = self.view_stack[-1]["scripts"] if self.view_stack else self.config["scripts"]
             if script in target_list:
                 target_list.remove(script)
                 self.save_config()
