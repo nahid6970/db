@@ -2449,14 +2449,14 @@
             {
                 "id": 37,
                 "title": "WWE Raw - 2026-07-20 - RAW 1730 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T18:33:41.307360",
                 "notify": "seen"
             },
             {
                 "id": 36,
                 "title": "WWE Raw - 2026-07-06 - RAW 1728 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-07T17:59:57.872318",
                 "notify": "seen"
             },
@@ -5175,43 +5175,36 @@
             {
                 "id": 6,
                 "title": "House of the Dragon - S03E05 - Unbowed and Unbent",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T07:16:03.167333",
                 "notify": "seen"
             },
             {
                 "id": 5,
                 "title": "House of the Dragon - S03E04 - Tumbleton",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T07:16:03.167329",
                 "notify": "seen"
             },
             {
                 "id": 4,
                 "title": "House of the Dragon - S03E03 - Rhaenyra Triumphant",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T07:16:03.167325",
                 "notify": "seen"
             },
             {
                 "id": 3,
                 "title": "House of the Dragon - S03E02 - Queen's Landing",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T07:16:03.167321",
                 "notify": "seen"
             },
             {
                 "id": 2,
                 "title": "House of the Dragon - S03E01 - Salt and Sea, Fire and Blood",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-07-21T07:16:03.167314",
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "House of the Dragon - S02E05 - Regent WEBRip-1080p",
-                "watched": false,
-                "added_date": "2026-07-21T07:16:03.167197",
                 "notify": "seen"
             }
         ],
