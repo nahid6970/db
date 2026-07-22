@@ -2801,10 +2801,7 @@ class MainWindow(QMainWindow):
                 # Force icons and heights overrides
                 script["_runtime_icon_w"] = box_icon_size
                 script["_runtime_icon_h"] = box_icon_size
-                if search_left_align:
-                    script["_runtime_text_align"] = "left"
-                else:
-                    script.pop("_runtime_text_align", None)
+                script.pop("_runtime_text_align", None)
                 
                 name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                 name = " ".join(name.split())
