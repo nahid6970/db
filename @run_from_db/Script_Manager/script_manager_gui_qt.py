@@ -2796,7 +2796,9 @@ class MainWindow(QMainWindow):
                 script["_runtime_icon_w"] = box_icon_size
                 script["_runtime_icon_h"] = box_icon_size
                 
-                btn = CyberButton(script.get("name", "Unnamed"), script_data=script, config=self.config)
+                name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
+                name = " ".join(name.split())
+                btn = CyberButton(name, script_data=script, config=self.config)
                 btn.setFixedSize(box_w, box_h)
                 
                 # Apply font
@@ -2822,7 +2824,9 @@ class MainWindow(QMainWindow):
                 script.pop("_runtime_icon_w", None)
                 script.pop("_runtime_icon_h", None)
                 
-                btn = CyberButton(script.get("name", "Unnamed"), script_data=script, config=self.config)
+                name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
+                name = " ".join(name.split())
+                btn = CyberButton(name, script_data=script, config=self.config)
                 btn.setFixedSize(list_w, list_h)
                 
                 # Apply font
