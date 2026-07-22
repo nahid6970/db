@@ -623,8 +623,9 @@ class CyberButton(QPushButton):
             icon_w = 0
             icon_h = 0
         
-        # Get icon position
+        # Get icon position and text alignment
         icon_position = self.script.get("icon_position", "top")
+        text_align = self.script.get("text_align", "center")
         
         # Prepare content
         color = self.fg_hover if is_hovered else self.fg_normal
@@ -652,8 +653,8 @@ class CyberButton(QPushButton):
                 icon_y = (self.height() - icon_h) / 2
                 painter.drawPixmap(int(icon_x), int(icon_y), icon_pixmap)
         elif icon_position in ["top", "bottom"]:
-            # Vertical layout: Text uses full width and is centered by HTML
-            doc.setHtml(f"<div style='color: {color}; text-align: center; font-family: {self.font().family()};'>{html}</div>")
+            # Vertical layout: Text uses full width and is aligned by HTML
+            doc.setHtml(f"<div style='color: {color}; text-align: {text_align}; font-family: {self.font().family()};'>{html}</div>")
             doc.setTextWidth(self.width() - (padding * 2))
             text_h = doc.size().height()
             total_h = icon_h + spacing + text_h
@@ -675,15 +676,21 @@ class CyberButton(QPushButton):
                     icon_y = y_start + text_h + spacing
                     painter.drawPixmap(int(icon_x), int(icon_y), icon_pixmap)
         else:
-            # Horizontal layout: We calculate exact text width to center the block
-            doc.setHtml(f"<div style='color: {color}; font-family: {self.font().family()};'>{html}</div>")
+            # Horizontal layout: We calculate alignment of the icon + text block
+            doc.setHtml(f"<div style='color: {color}; text-align: {text_align}; font-family: {self.font().family()};'>{html}</div>")
             available_w = self.width() - (padding * 2) - icon_w - spacing
             doc.setTextWidth(available_w)
             text_w = doc.idealWidth()
             text_h = doc.size().height()
             
             total_w = icon_w + spacing + text_w
-            x_start = (self.width() - total_w) / 2
+            
+            if text_align == "left":
+                x_start = padding
+            elif text_align == "right":
+                x_start = self.width() - padding - total_w
+            else:
+                x_start = (self.width() - total_w) / 2
             
             if icon_position == "left":
                 if icon_pixmap:
@@ -1121,6 +1128,13 @@ class EditDialog(QDialog):
         self.chk_italic = QCheckBox("Italic")
         self.chk_italic.setChecked(self.script.get("is_italic", default_italic))
         l_typo.addWidget(self.chk_italic, 1, 3)
+
+        l_typo.addWidget(QLabel("Align:"), 2, 0)
+        self.cmb_align = QComboBox()
+        self.cmb_align.addItems(["center", "left", "right"])
+        self.cmb_align.setCurrentText(self.script.get("text_align", "center"))
+        l_typo.addWidget(self.cmb_align, 2, 1, 1, 3)
+
         grp_typo.setLayout(l_typo)
         left_layout.addWidget(grp_typo)
         
@@ -1175,6 +1189,12 @@ class EditDialog(QDialog):
             self.spn_inner_h.setValue(self.script.get("grid_btn_height", 0)) # 0 means default
             self.spn_inner_h.setToolTip("0 = Inherit Global")
             l_fv.addWidget(self.spn_inner_h, 0, 3)
+
+            l_fv.addWidget(QLabel("Batch Align Inside:"), 1, 0)
+            self.cmb_batch_align = QComboBox()
+            self.cmb_batch_align.addItems(["", "center", "left", "right"])
+            self.cmb_batch_align.setToolTip("Apply text alignment to all items inside this folder on Save")
+            l_fv.addWidget(self.cmb_batch_align, 1, 1, 1, 3)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
@@ -1336,6 +1356,7 @@ class EditDialog(QDialog):
         self.spn_size.setValue(def_fs)
         self.chk_bold.setChecked(def_bold)
         self.chk_italic.setChecked(def_italic)
+        self.cmb_align.setCurrentText("center")
 
         # Reset Colors
         self.script.pop("color", None)
@@ -1521,6 +1542,7 @@ class EditDialog(QDialog):
         self.script["font_size"] = self.spn_size.value()
         self.script["is_bold"] = self.chk_bold.isChecked()
         self.script["is_italic"] = self.chk_italic.isChecked()
+        self.script["text_align"] = self.cmb_align.currentText()
         self.script["col_span"] = self.spn_cspan.value()
         self.script["row_span"] = self.spn_rspan.value()
         self.script["width"] = self.spn_width.value()
@@ -1531,6 +1553,16 @@ class EditDialog(QDialog):
         if self.script.get("type") == "folder":
             self.script["grid_columns"] = self.spn_inner_cols.value()
             self.script["grid_btn_height"] = self.spn_inner_h.value()
+            
+            batch_align = self.cmb_batch_align.currentText()
+            if batch_align:
+                def apply_align_recursive(items, alignment):
+                    for item in items:
+                        item["text_align"] = alignment
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_align_recursive(item["scripts"], alignment)
+                
+                apply_align_recursive(self.script.get("scripts", []), batch_align)
         
         self.accept()
 

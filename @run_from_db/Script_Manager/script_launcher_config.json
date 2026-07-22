@@ -1089,7 +1089,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5001 - share text",
@@ -1126,7 +1127,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5002 - upload files",
@@ -1163,7 +1165,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5003 - Browse_PC_Files",
@@ -1200,7 +1203,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5004 - Paint",
@@ -1237,7 +1241,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5005 - GameARR",
@@ -1275,7 +1280,8 @@
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
-                    "color": "#555500"
+                    "color": "#555500",
+                    "text_align": "left"
                 },
                 {
                     "name": "5006 - Run Commands",
@@ -1312,7 +1318,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5007 - Android Controls PC",
@@ -1349,7 +1356,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5008 - Esports Match Schedule",
@@ -1386,7 +1394,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5009 - MCQ",
@@ -1423,7 +1432,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5010 - COC",
@@ -1460,7 +1470,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5011 - TV Shows",
@@ -1497,7 +1508,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5012 - Share Imgaes",
@@ -1534,7 +1546,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5013 - Movies",
@@ -1571,7 +1584,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5015 - Job Tracker",
@@ -1608,7 +1622,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5016 - Sync W Android",
@@ -1645,7 +1660,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5017 - Audio Stream",
@@ -1682,7 +1698,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5018 - mycell",
@@ -1719,7 +1736,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5019 - Word",
@@ -1756,7 +1774,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5020 - Whiteboard",
@@ -1793,7 +1812,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5021 - Active Windows Killer",
@@ -1830,7 +1850,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5151 - Gallery",
@@ -1867,7 +1888,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5555 - myTerminal",
@@ -1904,7 +1926,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "4421 - Bangla MCQ",
@@ -1941,7 +1964,8 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "text_align": "left"
                 },
                 {
                     "name": "5577 - Terminal TUI",
@@ -1973,7 +1997,13 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0
+                    "border_width": 0,
+                    "text_align": "left",
+                    "_runtime_height": 35,
+                    "_runtime_font_size": 14,
+                    "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+                    "_runtime_is_bold": true,
+                    "_runtime_is_italic": false
                 }
             ],
             "col_span": 2,
@@ -1993,13 +2023,14 @@
             "height": 0,
             "corner_radius": 0,
             "border_width": 1,
-            "grid_columns": 1,
+            "grid_columns": 3,
             "grid_btn_height": 35,
             "_runtime_height": 100,
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono NFP",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false
+            "_runtime_is_italic": false,
+            "text_align": "center"
         },
         {
             "name": "Convex <br> Projects",
