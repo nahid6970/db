@@ -1692,6 +1692,11 @@ class SettingsDialog(QDialog):
         self.spn_cols.setRange(1, 20)
         self.spn_cols.setValue(self.config.get("columns", 5))
         l_grid.addRow("Columns:", self.spn_cols)
+
+        self.spn_search_cols = QSpinBox()
+        self.spn_search_cols.setRange(1, 20)
+        self.spn_search_cols.setValue(self.config.get("search_columns", 5))
+        l_grid.addRow("Search Columns:", self.spn_search_cols)
         
         self.spn_btn_h = QSpinBox()
         self.spn_btn_h.setRange(20, 9999)
@@ -1907,6 +1912,7 @@ class SettingsDialog(QDialog):
 
     def save(self):
         self.config["columns"] = self.spn_cols.value()
+        self.config["search_columns"] = self.spn_search_cols.value()
         self.config["default_btn_height"] = self.spn_btn_h.value()
         self.config["default_font_family"] = self.cmb_font.currentText()
         self.config["default_font_size"] = self.spn_font_size.value()
@@ -2671,7 +2677,7 @@ class MainWindow(QMainWindow):
             self.collect_all_items(self.config.get("scripts", []), scripts)
             
             # Global grid settings for search results
-            cols = self.config.get("columns", 5)
+            cols = self.config.get("search_columns", 5)
             def_h = self.config.get("default_btn_height", 40)
             
         else:
