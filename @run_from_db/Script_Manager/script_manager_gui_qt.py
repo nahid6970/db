@@ -594,8 +594,8 @@ class CyberButton(QPushButton):
             # Final processing of the pixmap (scaling if needed)
             if icon_pixmap and not icon_pixmap.isNull():
                 # Get custom size or use auto
-                custom_w = self.script.get("icon_width", 0)
-                custom_h = self.script.get("icon_height", 0)
+                custom_w = self.script.get("_runtime_icon_w", self.script.get("icon_width", 0))
+                custom_h = self.script.get("_runtime_icon_h", self.script.get("icon_height", 0))
                 
                 if custom_w > 0 and custom_h > 0:
                     icon_pixmap = icon_pixmap.scaled(custom_w, custom_h, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
@@ -1648,7 +1648,7 @@ class SettingsDialog(QDialog):
         super().__init__(parent)
         self.config = config
         self.setWindowTitle("GLOBAL CONFIG")
-        self.resize(600, 850)
+        self.resize(1100, 850)
         self.app_bg = self.config.get("app_bg", CP_BG)
         self.win_border = self.config.get("window_border_color", CP_YELLOW)
         self.cfg_color = self.config.get("cfg_btn_color", CP_DIM)
@@ -1679,9 +1679,17 @@ class SettingsDialog(QDialog):
         self.setup_ui()
 
     def setup_ui(self):
-        layout = QVBoxLayout(self)
+        main_layout = QVBoxLayout(self)
+        main_layout.setSpacing(15)
+        main_layout.setContentsMargins(30, 30, 30, 30)
+
+        panels_layout = QHBoxLayout()
+        panels_layout.setSpacing(25)
+
+        left_widget = QWidget()
+        layout = QVBoxLayout(left_widget)
+        layout.setContentsMargins(0, 0, 0, 0)
         layout.setSpacing(15)
-        layout.setContentsMargins(30, 30, 30, 30)
         
         # 1. Grid Settings
         grp_grid = QGroupBox("GRID")
@@ -1853,12 +1861,66 @@ class SettingsDialog(QDialog):
         grp_items.setLayout(l_items)
         layout.addWidget(grp_items)
 
-        # Save
+        # Create Right Panel for SEARCH CUSTOMIZATION
+        right_widget = QWidget()
+        right_panel = QVBoxLayout(right_widget)
+        right_panel.setContentsMargins(0, 0, 0, 0)
+        right_panel.setSpacing(15)
+
+        grp_search_custom = QGroupBox("SEARCH MODE LAYOUT")
+        grp_search_custom.setStyleSheet(f"QGroupBox {{ border: 1px solid {CP_DIM}; margin-top: 10px; padding-top: 10px; color: {CP_YELLOW}; font-weight: bold; }}")
+        l_search_custom = QFormLayout()
+
+        # Visual box properties
+        self.spn_search_box_w = QSpinBox()
+        self.spn_search_box_w.setRange(20, 1000)
+        self.spn_search_box_w.setValue(self.config.get("search_box_width", 150))
+        l_search_custom.addRow("Box Width:", self.spn_search_box_w)
+
+        self.spn_search_box_h = QSpinBox()
+        self.spn_search_box_h.setRange(20, 1000)
+        self.spn_search_box_h.setValue(self.config.get("search_box_height", 150))
+        l_search_custom.addRow("Box Height:", self.spn_search_box_h)
+
+        self.spn_search_box_icon_s = QSpinBox()
+        self.spn_search_box_icon_s.setRange(8, 256)
+        self.spn_search_box_icon_s.setValue(self.config.get("search_box_icon_size", 48))
+        l_search_custom.addRow("Box Icon Size:", self.spn_search_box_icon_s)
+
+        self.spn_search_box_cols = QSpinBox()
+        self.spn_search_box_cols.setRange(1, 20)
+        self.spn_search_box_cols.setValue(self.config.get("search_box_columns", 5))
+        l_search_custom.addRow("Box Columns:", self.spn_search_box_cols)
+
+        # List items properties
+        self.spn_search_list_w = QSpinBox()
+        self.spn_search_list_w.setRange(20, 2000)
+        self.spn_search_list_w.setValue(self.config.get("search_list_width", 250))
+        l_search_custom.addRow("List Item Width:", self.spn_search_list_w)
+
+        self.spn_search_list_h = QSpinBox()
+        self.spn_search_list_h.setRange(10, 500)
+        self.spn_search_list_h.setValue(self.config.get("search_list_height", 40))
+        l_search_custom.addRow("List Item Height:", self.spn_search_list_h)
+
+        self.spn_search_list_cols = QSpinBox()
+        self.spn_search_list_cols.setRange(1, 20)
+        self.spn_search_list_cols.setValue(self.config.get("search_list_columns", 3))
+        l_search_custom.addRow("List Columns:", self.spn_search_list_cols)
+
+        grp_search_custom.setLayout(l_search_custom)
+        right_panel.addWidget(grp_search_custom)
+        right_panel.addStretch()
+
+        panels_layout.addWidget(left_widget, stretch=1)
+        panels_layout.addWidget(right_widget, stretch=1)
+        main_layout.addLayout(panels_layout)
+
+        # Save in main_layout
         btn_save = QPushButton("SAVE CONFIG")
         btn_save.setStyleSheet(f"background-color: {CP_GREEN}; color: black;")
         btn_save.clicked.connect(self.save)
-        layout.addStretch()
-        layout.addWidget(btn_save)
+        main_layout.addWidget(btn_save)
 
     def update_color_btn_style(self, btn, color):
         lc = QColor(color).lightness()
@@ -1913,6 +1975,16 @@ class SettingsDialog(QDialog):
     def save(self):
         self.config["columns"] = self.spn_cols.value()
         self.config["search_columns"] = self.spn_search_cols.value()
+        
+        # Search Custom Layout Variables
+        self.config["search_box_width"] = self.spn_search_box_w.value()
+        self.config["search_box_height"] = self.spn_search_box_h.value()
+        self.config["search_box_icon_size"] = self.spn_search_box_icon_s.value()
+        self.config["search_box_columns"] = self.spn_search_box_cols.value()
+        self.config["search_list_width"] = self.spn_search_list_w.value()
+        self.config["search_list_height"] = self.spn_search_list_h.value()
+        self.config["search_list_columns"] = self.spn_search_list_cols.value()
+
         self.config["default_btn_height"] = self.spn_btn_h.value()
         self.config["default_font_family"] = self.cmb_font.currentText()
         self.config["default_font_size"] = self.spn_font_size.value()
@@ -2672,13 +2744,113 @@ class MainWindow(QMainWindow):
             lbl_search.setStyleSheet(f"color: {CP_CYAN}; font-family: 'Consolas'; font-size: 14pt; font-weight: bold;")
             self.breadcrumb_layout.addWidget(lbl_search)
             
-            # Flattened list
+            # Flattened list of matching items
             scripts = []
             self.collect_all_items(self.config.get("scripts", []), scripts)
             
-            # Global grid settings for search results
-            cols = self.config.get("search_columns", 5)
-            def_h = self.config.get("default_btn_height", 40)
+            # Partition matching scripts: visual box items vs text-only list items
+            visual_scripts = []
+            list_scripts = []
+            for s in scripts:
+                has_icon = bool(s.get("icon_path", "").strip() or s.get("svg_content", "").strip() or s.get("nf_char", "").strip())
+                if has_icon:
+                    visual_scripts.append(s)
+                else:
+                    list_scripts.append(s)
+                    
+            # Get default typography
+            def_fs = self.config.get("default_font_size", 10)
+            def_font = self.config.get("default_font_family", "Consolas")
+            def_bold = self.config.get("default_is_bold", True)
+            def_italic = self.config.get("default_is_italic", False)
+
+            # Get configuration settings
+            box_w = self.config.get("search_box_width", 150)
+            box_h = self.config.get("search_box_height", 150)
+            box_icon_size = self.config.get("search_box_icon_size", 48)
+            box_cols = self.config.get("search_box_columns", 5)
+
+            list_w = self.config.get("search_list_width", 250)
+            list_h = self.config.get("search_list_height", 40)
+            list_cols = self.config.get("search_list_columns", 3)
+
+            # 1. Create a widget for the visual boxes
+            visual_widget = QWidget()
+            visual_grid = QGridLayout(visual_widget)
+            visual_grid.setContentsMargins(0, 0, 0, 0)
+            visual_grid.setSpacing(10)
+            visual_grid.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+
+            # 2. Create a widget for the list items
+            list_widget = QWidget()
+            list_grid = QGridLayout(list_widget)
+            list_grid.setContentsMargins(0, 0, 0, 0)
+            list_grid.setSpacing(10)
+            list_grid.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+
+            r_v, c_v = 0, 0
+
+            # Render Visual Box scripts
+            for script in visual_scripts:
+                # Force icons and heights overrides
+                script["_runtime_icon_w"] = box_icon_size
+                script["_runtime_icon_h"] = box_icon_size
+                
+                btn = CyberButton(script.get("name", "Unnamed"), script_data=script, config=self.config)
+                btn.setFixedSize(box_w, box_h)
+                
+                # Apply font
+                f = QFont(script.get("font_family", def_font), script.get("font_size", def_fs))
+                f.setBold(script.get("is_bold", def_bold))
+                f.setItalic(script.get("is_italic", def_italic))
+                btn.setFont(f)
+
+                btn.clicked.connect(partial(self.handle_click, script))
+                btn.customContextMenuRequested.connect(partial(self.show_context_menu, btn, script))
+                visual_grid.addWidget(btn, r_v, c_v, 1, 1, Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+                
+                c_v += 1
+                if c_v >= box_cols:
+                    c_v = 0
+                    r_v += 1
+            
+            r_l, c_l = 0, 0
+
+            # Render Text-only List scripts
+            for script in list_scripts:
+                # Clear any runtime overrides to make sure they render clean
+                script.pop("_runtime_icon_w", None)
+                script.pop("_runtime_icon_h", None)
+                
+                btn = CyberButton(script.get("name", "Unnamed"), script_data=script, config=self.config)
+                btn.setFixedSize(list_w, list_h)
+                
+                # Apply font
+                f = QFont(script.get("font_family", def_font), script.get("font_size", def_fs))
+                f.setBold(script.get("is_bold", def_bold))
+                f.setItalic(script.get("is_italic", def_italic))
+                btn.setFont(f)
+
+                btn.clicked.connect(partial(self.handle_click, script))
+                btn.customContextMenuRequested.connect(partial(self.show_context_menu, btn, script))
+                list_grid.addWidget(btn, r_l, c_l, 1, 1, Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+
+                c_l += 1
+                if c_l >= list_cols:
+                    c_l = 0
+                    r_l += 1
+            
+            # Add sub-widgets to main grid layout
+            self.grid.addWidget(visual_widget, 0, 0, 1, 1)
+            if visual_scripts and list_scripts:
+                divider = QLabel("SCRIPTS & ACTIONS")
+                divider.setStyleSheet(f"color: {CP_DIM}; font-family: 'Consolas'; font-size: 11pt; font-weight: bold; margin-top: 15px; margin-bottom: 5px;")
+                self.grid.addWidget(divider, 1, 0, 1, 1)
+                self.grid.addWidget(list_widget, 2, 0, 1, 1)
+            else:
+                self.grid.addWidget(list_widget, 1, 0, 1, 1)
+            
+            return
             
         else:
             # NORMAL NAVIGATION

@@ -5094,5 +5094,13 @@
     "style_panel_width": 400,
     "window_border_color": "#1efc94",
     "window_height": 800,
-    "window_width": 1500
+    "window_width": 1500,
+    "search_columns": 5,
+    "search_box_width": 150,
+    "search_box_height": 150,
+    "search_box_icon_size": 48,
+    "search_box_columns": 5,
+    "search_list_width": 500,
+    "search_list_height": 40,
+    "search_list_columns": 3
 }
