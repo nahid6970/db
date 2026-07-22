@@ -12,8 +12,9 @@ We implemented several key layout, alignment, and formatting options in the scri
    - Configure text list width/height and list columns count.
    - Toggle setting **Left Align Text during search** to override text alignments to the left during search.
 
-3. **Label Line Break Formatting**:
+3. **Label Line Break Formatting & Text Elision**:
    - Stripped `<br>`, `<br/>`, and `<BR>` html line breaks and replaced them with spaces in search mode so that long titles are flattened to a single line.
+   - Added automatic width-based text elision with `...` (using `QFontMetrics.elidedText`) to prevent any overflow or clipping when the label text exceeds the button width.
 
 4. **Search Filters**:
    - Excluded folder items from matching/appearing in search results (only scripts are collected, though folders are still traversed recursively to find them).

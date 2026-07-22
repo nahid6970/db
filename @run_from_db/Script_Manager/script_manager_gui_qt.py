@@ -17,7 +17,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle)
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize
 from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIcon, QPainter, 
-                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat)
+                         QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat, QFontMetrics)
 from PyQt6.QtSvg import QSvgRenderer
 from PyQt6.QtCore import QUrl
 import ctypes
@@ -640,12 +640,47 @@ class CyberButton(QPushButton):
         html = re.sub(r"\{\{FS:(\d+)\}\}", r'<span style="font-size:\1pt">', html)
         html = html.replace("{{/FS}}", "</span>")
         
-        doc = QTextDocument()
-        doc.setDefaultFont(self.font())
-        
-        # Account for button padding (10px in QSS)
+        # Account for button padding (10px in QSS) and spacing
         padding = 10
         spacing = self.script.get("icon_gap", 2) if icon_pixmap else 0
+
+        # Calculate available width based on icon position
+        if icon_position in ["top", "bottom", "center"]:
+            available_w = self.width() - (padding * 2)
+        else:
+            available_w = self.width() - (padding * 2) - icon_w - spacing
+        available_w = max(10, available_w)
+
+        # Measure width using a temporary QTextDocument
+        temp_doc = QTextDocument()
+        temp_doc.setDefaultFont(self.font())
+        temp_doc.setHtml(f"<div style='font-family: {self.font().family()};'>{html}</div>")
+
+        # Elide text if single-line and too long
+        is_single_line = "<br/>" not in html
+        if is_single_line and temp_doc.idealWidth() > available_w:
+            plain_text = temp_doc.toPlainText()
+            
+            # Reconstruct the exact font to get accurate metrics
+            font_fam = self.script.get("font_family", self.config.get("default_font_family", "Consolas"))
+            fs_val = self.script.get("font_size", self.config.get("default_font_size", 10))
+            is_bold = self.script.get("is_bold", self.config.get("default_is_bold", True))
+            
+            test_font = QFont(font_fam, fs_val)
+            test_font.setBold(is_bold)
+            fm = QFontMetrics(test_font)
+            
+            # Elide text
+            elided = fm.elidedText(plain_text, Qt.TextElideMode.ElideRight, available_w)
+            
+            # Keep custom font-size if matched
+            fs_match = re.search(r'font-size:\s*(\d+pt)', html)
+            font_size_style = f"font-size:{fs_match.group(1)};" if fs_match else ""
+            
+            html = f"<span style='color: {color}; font-family: {self.font().family()}; {font_size_style}'>{elided}</span>"
+
+        doc = QTextDocument()
+        doc.setDefaultFont(self.font())
         
         if icon_position == "center":
             if icon_pixmap:
@@ -2806,17 +2841,19 @@ class MainWindow(QMainWindow):
                 name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                 name = " ".join(name.split())
                 btn = CyberButton(name, script_data=script, config=self.config)
-                btn.setFixedSize(box_w, box_h)
+                btn.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+                btn.setMaximumWidth(box_w)
+                btn.setFixedHeight(box_h)
+                btn.setMinimumWidth(50)
                 
                 # Apply font
                 f = QFont(script.get("font_family", def_font), script.get("font_size", def_fs))
                 f.setBold(script.get("is_bold", def_bold))
                 f.setItalic(script.get("is_italic", def_italic))
                 btn.setFont(f)
-
                 btn.clicked.connect(partial(self.handle_click, script))
                 btn.customContextMenuRequested.connect(partial(self.show_context_menu, btn, script))
-                visual_grid.addWidget(btn, r_v, c_v, 1, 1, Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+                visual_grid.addWidget(btn, r_v, c_v, 1, 1)
                 
                 c_v += 1
                 if c_v >= box_cols:
@@ -2838,7 +2875,10 @@ class MainWindow(QMainWindow):
                 name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                 name = " ".join(name.split())
                 btn = CyberButton(name, script_data=script, config=self.config)
-                btn.setFixedSize(list_w, list_h)
+                btn.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+                btn.setMaximumWidth(list_w)
+                btn.setFixedHeight(list_h)
+                btn.setMinimumWidth(50)
                 
                 # Apply font
                 f = QFont(script.get("font_family", def_font), script.get("font_size", def_fs))
@@ -2848,7 +2888,7 @@ class MainWindow(QMainWindow):
 
                 btn.clicked.connect(partial(self.handle_click, script))
                 btn.customContextMenuRequested.connect(partial(self.show_context_menu, btn, script))
-                list_grid.addWidget(btn, r_l, c_l, 1, 1, Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
+                list_grid.addWidget(btn, r_l, c_l, 1, 1)
 
                 c_l += 1
                 if c_l >= list_cols:
