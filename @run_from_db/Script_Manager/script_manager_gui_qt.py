@@ -625,7 +625,7 @@ class CyberButton(QPushButton):
         
         # Get icon position and text alignment
         icon_position = self.script.get("icon_position", "top")
-        text_align = self.script.get("text_align", "center")
+        text_align = self.script.get("_runtime_text_align", self.script.get("text_align", "center"))
         
         # Prepare content
         color = self.fg_hover if is_hovered else self.fg_normal
@@ -1908,6 +1908,10 @@ class SettingsDialog(QDialog):
         self.spn_search_list_cols.setValue(self.config.get("search_list_columns", 3))
         l_search_custom.addRow("List Columns:", self.spn_search_list_cols)
 
+        self.chk_search_left_align = QCheckBox("Left Align Text during search")
+        self.chk_search_left_align.setChecked(self.config.get("search_left_align", False))
+        l_search_custom.addRow("Text Alignment:", self.chk_search_left_align)
+
         grp_search_custom.setLayout(l_search_custom)
         right_panel.addWidget(grp_search_custom)
         right_panel.addStretch()
@@ -1984,6 +1988,7 @@ class SettingsDialog(QDialog):
         self.config["search_list_width"] = self.spn_search_list_w.value()
         self.config["search_list_height"] = self.spn_search_list_h.value()
         self.config["search_list_columns"] = self.spn_search_list_cols.value()
+        self.config["search_left_align"] = self.chk_search_left_align.isChecked()
 
         self.config["default_btn_height"] = self.spn_btn_h.value()
         self.config["default_font_family"] = self.cmb_font.currentText()
@@ -2789,12 +2794,17 @@ class MainWindow(QMainWindow):
             list_grid.setAlignment(Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft)
 
             r_v, c_v = 0, 0
+            search_left_align = self.config.get("search_left_align", False)
 
             # Render Visual Box scripts
             for script in visual_scripts:
                 # Force icons and heights overrides
                 script["_runtime_icon_w"] = box_icon_size
                 script["_runtime_icon_h"] = box_icon_size
+                if search_left_align:
+                    script["_runtime_text_align"] = "left"
+                else:
+                    script.pop("_runtime_text_align", None)
                 
                 name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                 name = " ".join(name.split())
@@ -2823,6 +2833,10 @@ class MainWindow(QMainWindow):
                 # Clear any runtime overrides to make sure they render clean
                 script.pop("_runtime_icon_w", None)
                 script.pop("_runtime_icon_h", None)
+                if search_left_align:
+                    script["_runtime_text_align"] = "left"
+                else:
+                    script.pop("_runtime_text_align", None)
                 
                 name = script.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                 name = " ".join(name.split())
