@@ -2684,7 +2684,7 @@ class MainWindow(QMainWindow):
         for item in item_list:
             # Check match (case insensitive)
             query = self.inp_search.text().lower()
-            if query in item.get("name", "").lower():
+            if item.get("type") != "folder" and query in item.get("name", "").lower():
                 results.append(item)
             
             # Recurse if folder
