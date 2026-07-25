@@ -5220,6 +5220,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 2,
+                "title": "Silo - S03E04 - Whatever You Do, Don't Go Home",
+                "watched": true,
+                "added_date": "2026-07-24T20:52:00.982745",
+                "notify": "seen"
+            },
+            {
                 "id": 1,
                 "title": "Silo - S03E01 - Who Are You WEBDL-1080p",
                 "watched": true,
