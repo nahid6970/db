@@ -3,31 +3,44 @@
 <head>
   <title>MyHome Link Adder</title>
   <style>
-    body { width: 300px; padding: 15px; font-family: sans-serif; background: #1a1a1a; color: white; }
-    h2 { margin-top: 0; color: #4CAF50; font-size: 1.2em; }
-    .form-group { margin-bottom: 10px; }
-    label { display: block; margin-bottom: 5px; font-size: 0.9em; }
-    input { width: 100%; box-sizing: border-box; padding: 8px; background: #2d2d2d; border: 1px solid #555; color: white; border-radius: 4px; }
-    button { width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; margin-top: 10px; }
-    button:hover { background: #45a049; }
-    #status { margin-top: 10px; text-align: center; font-size: 0.85em; }
-    .success { color: #4CAF50; }
-    .error { color: #f44336; }
+    body { width: 320px; padding: 16px; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #121212; color: #e0e0e0; box-sizing: border-box; margin: 0; }
+    h2 { margin-top: 0; margin-bottom: 14px; color: #4CAF50; font-size: 1.15em; font-weight: 600; text-align: center; }
+    .form-group { margin-bottom: 12px; }
+    label { display: block; margin-bottom: 4px; font-size: 0.85em; color: #b0b0b0; font-weight: 500; }
+    input[type="text"], input[type="url"] { width: 100%; box-sizing: border-box; padding: 8px 10px; background: #1e1e1e; border: 1px solid #333; color: #fff; border-radius: 6px; font-size: 0.9em; outline: none; transition: border-color 0.2s; }
+    input:focus { border-color: #4CAF50; }
+    
+    .group-selector { margin-bottom: 16px; }
+    .group-options { display: flex; gap: 8px; margin-top: 6px; }
+    .group-btn { flex: 1; padding: 8px 10px; background: #1e1e1e; border: 1px solid #333; color: #b0b0b0; border-radius: 6px; cursor: pointer; font-size: 0.85em; font-weight: 500; text-align: center; transition: all 0.2s; }
+    .group-btn:hover { background: #252525; color: #fff; border-color: #444; }
+    .group-btn.active { background: #2e7d32; color: #fff; border-color: #4CAF50; font-weight: 600; }
+
+    #add-btn { width: 100%; padding: 10px; background: #4CAF50; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 0.95em; transition: background 0.2s; margin-top: 4px; }
+    #add-btn:hover { background: #43a047; }
+    #add-btn:active { background: #388e3c; }
+
+    #status { margin-top: 12px; text-align: center; font-size: 0.85em; min-height: 18px; }
+    .success { color: #4CAF50; font-weight: 500; }
+    .error { color: #f44336; font-weight: 500; }
   </style>
 </head>
 <body>
   <h2>Add Link to MyHome</h2>
   <div class="form-group">
-    <label for="name">Name:</label>
+    <label for="name">Name</label>
     <input type="text" id="name" placeholder="Page Title">
   </div>
   <div class="form-group">
-    <label for="url">URL:</label>
+    <label for="url">URL</label>
     <input type="url" id="url" placeholder="https://example.com">
   </div>
-  <div class="form-group">
-    <label for="group">Group:</label>
-    <input type="text" id="group" placeholder="Optional">
+  <div class="group-selector">
+    <label>Group</label>
+    <div class="group-options">
+      <button type="button" class="group-btn active" data-group="">Ungrouped</button>
+      <button type="button" class="group-btn" data-group="XMIUI">XMIUI</button>
+    </div>
   </div>
   <button id="add-btn">Add to Dashboard</button>
   <div id="status"></div>

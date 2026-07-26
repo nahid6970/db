@@ -3,42 +3,56 @@ const CONVEX_URL = "https://lovable-wildcat-595.convex.cloud";
 document.addEventListener('DOMContentLoaded', () => {
   const nameInput = document.getElementById('name');
   const urlInput = document.getElementById('url');
-  const groupInput = document.getElementById('group');
+  const groupBtns = document.querySelectorAll('.group-btn');
   const addBtn = document.getElementById('add-btn');
   const statusDiv = document.getElementById('status');
 
   let currentFaviconUrl = "";
+  let selectedGroup = "";
+
+  // Group button selection handler
+  groupBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      groupBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedGroup = btn.getAttribute('data-group');
+    });
+  });
 
   // Fill in current tab info and fetch metadata
   chrome.tabs.query({ active: true, currentWindow: true }, async (tabs) => {
     if (tabs[0]) {
-      nameInput.value = tabs[0].title;
-      urlInput.value = tabs[0].url;
+      nameInput.value = tabs[0].title || "";
+      urlInput.value = tabs[0].url || "";
       const url = tabs[0].url;
-      const domain = new URL(url).hostname.replace('www.', '');
-      currentFaviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+      if (url && !url.startsWith('chrome://') && !url.startsWith('about:')) {
+        try {
+          const domain = new URL(url).hostname.replace('www.', '');
+          currentFaviconUrl = `https://www.google.com/s2/favicons?domain=${domain}&sz=64`;
+        } catch (e) {}
 
-      // Try to fetch accurate metadata from backend
-      try {
-        const actionUrl = `${CONVEX_URL}/api/action`;
-        const actionResponse = await fetch(actionUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            path: "actions:fetchPageTitle",
-            args: { url },
-            format: "json"
-          })
-        });
-        
-        if (actionResponse.ok) {
-          const json = await actionResponse.json();
-          const result = json.value || json;
-          if (result.title) nameInput.value = result.title;
-          if (result.channelIcon) currentFaviconUrl = result.channelIcon;
+        // Try to fetch accurate metadata from backend
+        try {
+          const actionUrl = `${CONVEX_URL}/api/action`;
+          const actionResponse = await fetch(actionUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              path: "actions:fetchPageTitle",
+              args: { url },
+              format: "json"
+            })
+          });
+          
+          if (actionResponse.ok) {
+            const json = await actionResponse.json();
+            const result = json.value || json;
+            if (result.title) nameInput.value = result.title;
+            if (result.channelIcon) currentFaviconUrl = result.channelIcon;
+          }
+        } catch (e) {
+          console.warn("Metadata fetch failed:", e);
         }
-      } catch (e) {
-        console.warn("Metadata fetch failed:", e);
       }
     }
   });
@@ -46,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
   addBtn.addEventListener('click', async () => {
     const name = nameInput.value.trim();
     const url = urlInput.value.trim();
-    const group = groupInput.value.trim();
 
     if (!name || !url) {
       statusDiv.textContent = 'Please provide name and URL.';
@@ -60,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const fullLinkData = {
         name: name,
-        group: group || '',
+        group: selectedGroup,
         urls: [url],
         url: url,
         default_type: 'img',
@@ -107,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (response.ok) {
         statusDiv.textContent = 'Successfully added!';
         statusDiv.className = 'success';
-        setTimeout(() => window.close(), 1500);
+        setTimeout(() => window.close(), 1200);
       } else {
         console.error(`Failed to add link (Status ${response.status}):`, responseText);
         
