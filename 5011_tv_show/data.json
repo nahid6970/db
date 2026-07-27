@@ -7,6 +7,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
             {
+                "id": 45,
+                "title": "One Piece - s23e16 - [1171] - The Heinous Sinner - Loki of the Underworld Freed!! WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-07-26T22:43:51.512252",
+                "notify": "unseen"
+            },
+            {
                 "id": 44,
                 "title": "One Piece - s23e15 - [1170] - Get the Key! Luffy vs. Scopper Gaban WEBRip-1080p - [GG]",
                 "watched": false,
@@ -1562,6 +1569,20 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/371310/posters/64903a85960eb.jpg",
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mushoku Tensei - Jobless Reincarnation",
         "episodes": [
+            {
+                "id": 16,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e03 - [52] - Life Back at Home WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-07-27T00:40:54.243040",
+                "notify": "unseen"
+            },
+            {
+                "id": 15,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e05 - [54] - Celebrations WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-07-26T21:43:51.515688",
+                "notify": "unseen"
+            },
             {
                 "id": 14,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s03e04 - [53] - A King-Class Water Mage WEBRip-1080p - [Erai-raws]",
@@ -5179,6 +5200,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 6,
+                "title": "House of the Dragon - S03E06 - Faceless Men",
+                "watched": false,
+                "added_date": "2026-07-27T10:44:31.188446",
+                "notify": "unseen"
+            },
             {
                 "id": 6,
                 "title": "House of the Dragon - S03E05 - Unbowed and Unbent",
