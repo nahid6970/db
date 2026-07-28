@@ -3129,7 +3129,7 @@
             "is_bold": true,
             "is_italic": false,
             "name": "Fix",
-            "nf_char": "",
+            "nf_char": "\uea83",
             "require_password": false,
             "row_span": 1,
             "scripts": [
@@ -3212,7 +3212,7 @@
                     "_runtime_is_italic": false
                 },
                 {
-                    "name": "Disable Hibernation + Fast startup for Wake on lan",
+                    "name": "Disable Hibernation + Fast startup for Wake on lan [fix]",
                     "path": "",
                     "type": "script",
                     "nf_char": "",
@@ -3294,7 +3294,10 @@
             "type": "folder",
             "width": 0,
             "text_align": "center",
-            "transparent_bg": false
+            "transparent_bg": true,
+            "text_color": "#ffff7f",
+            "hover_color": "#1d1d2b",
+            "hover_text_color": "#ff5500"
         },
         {
             "name": "TRASH",
