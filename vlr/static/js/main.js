@@ -2705,4 +2705,90 @@ document.addEventListener("DOMContentLoaded", () => {
 
         rows.forEach(row => tbody.appendChild(row));
     });
+
+    const tournamentStandingsBtn = document.getElementById("tournament-standings-btn");
+    const tournamentStandingsModal = document.getElementById("tournament-standings-modal");
+    const tournamentStandingsClose = document.getElementById("tournament-standings-close");
+    const tournamentStandingsContent = document.getElementById("tournament-standings-content");
+
+    tournamentStandingsBtn?.addEventListener("click", async () => {
+        try {
+            const response = await fetch("/api/matches/all");
+            const matches = await response.json();
+            
+            if (!matches || matches.length === 0) {
+                tournamentStandingsContent.innerHTML = `<p style="padding: 20px;">No match data found.</p>`;
+                tournamentStandingsModal.style.display = "flex";
+                return;
+            }
+            
+            const standings = {};
+            matches.forEach(m => {
+                // Check if match is completed and has scores
+                if (m.status?.toLowerCase() !== "completed" || m.score1 === null || m.score2 === null) return;
+                
+                if (!standings[m.tournament]) standings[m.tournament] = {};
+                if (!standings[m.tournament][m.team1]) standings[m.tournament][m.team1] = { w: 0, l: 0 };
+                if (!standings[m.tournament][m.team2]) standings[m.tournament][m.team2] = { w: 0, l: 0 };
+                
+                const s1 = parseInt(m.score1);
+                const s2 = parseInt(m.score2);
+                
+                if (!isNaN(s1) && !isNaN(s2)) {
+                    if (s1 > s2) {
+                        standings[m.tournament][m.team1].w++;
+                        standings[m.tournament][m.team2].l++;
+                    } else if (s2 > s1) {
+                        standings[m.tournament][m.team2].w++;
+                        standings[m.tournament][m.team1].l++;
+                    }
+                }
+            });
+
+            if (Object.keys(standings).length === 0) {
+                tournamentStandingsContent.innerHTML = `<p style="padding: 20px;">No completed matches found to calculate standings.</p>`;
+            } else {
+                let html = `<div style="color: var(--text-primary); font-family: 'Outfit', sans-serif;">`;
+                for (const [tourney, teams] of Object.entries(standings)) {
+                    html += `<h3 style="margin-top: 20px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-red); color: var(--accent-red); text-transform: uppercase; letter-spacing: 1px;">${tourney}</h3>`;
+                    html += `<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
+                                <thead>
+                                    <tr style="text-align: left; color: var(--text-secondary); font-size: 12px;">
+                                        <th style="padding: 8px;">Team</th>
+                                        <th style="padding: 8px; text-align: center;">W</th>
+                                        <th style="padding: 8px; text-align: center;">L</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`;
+                    
+                    const sortedTeams = Object.entries(teams).sort((a, b) => b[1].w - a[1].w);
+                    sortedTeams.forEach(([team, stats]) => {
+                        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 10px 8px; font-weight: 500;">${team}</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">${stats.w}</td>
+                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-red);">${stats.l}</td>
+                                 </tr>`;
+                    });
+                    html += `</tbody></table>`;
+                }
+                html += `</div>`;
+                tournamentStandingsContent.innerHTML = html;
+            }
+            tournamentStandingsModal.style.display = "flex";
+        } catch (err) {
+            console.error("Error fetching standings:", err);
+            tournamentStandingsContent.innerHTML = `<p style="padding: 20px; color: var(--accent-red);">Error loading standings.</p>`;
+            tournamentStandingsModal.style.display = "flex";
+        }
+    });
+
+    tournamentStandingsClose?.addEventListener("click", () => {
+        tournamentStandingsModal.style.display = "none";
+    });
+
+    tournamentStandingsModal?.addEventListener("click", (e) => {
+        if (e.target === tournamentStandingsModal) {
+            tournamentStandingsModal.style.display = "none";
+        }
+    });
 });

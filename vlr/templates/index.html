@@ -63,6 +63,9 @@
                 <button class="refresh-btn" id="team-history-btn" title="Team Match History" style="background: rgba(59, 130, 246, 0.1); border-color: #3b82f6; color: #3b82f6;">
                     <i class="fa-solid fa-people-group"></i>
                 </button>
+                <button class="refresh-btn" id="tournament-standings-btn" title="Tournament Standings" style="background: rgba(255, 165, 0, 0.1); border-color: orange; color: orange;">
+                    <i class="fa-solid fa-ranking-star"></i>
+                </button>
                 <button class="refresh-btn" id="refresh-data-btn" title="Sync matches data">
                     <i class="fa-solid fa-arrows-rotate"></i>
                 </button>
@@ -440,6 +443,19 @@
             </div>
         </div>
         <button id="mdm-nav-next" class="mdm-nav-btn next" title="Next Match"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Tournament Standings Modal -->
+    <div id="tournament-standings-modal" class="match-detail-overlay" style="display:none;">
+        <div class="match-detail-modal" style="max-width: 600px;">
+            <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0; display: flex; justify-content: space-between; align-items: center;">
+                <h2><i class="fa-solid fa-ranking-star"></i> Tournament Standings</h2>
+                <button id="tournament-standings-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted);">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 20px; max-height: 70vh; overflow-y: auto; color: var(--text-primary);">
+                <div id="tournament-standings-content"></div>
+            </div>
+        </div>
     </div>
 
     <div id="tourney-ctx-menu" class="tourney-ctx-menu" style="display:none;">

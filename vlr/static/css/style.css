@@ -2024,6 +2024,11 @@ body.light #team-history-btn {
     border-color: #2563eb !important;
     color: #2563eb !important;
 }
+body.light #tournament-standings-btn {
+    background: rgba(255, 165, 0, 0.1) !important;
+    border-color: #d97706 !important;
+    color: #d97706 !important;
+}
 
 /* Team Past Match Results Rows */
 .team-history-row {
