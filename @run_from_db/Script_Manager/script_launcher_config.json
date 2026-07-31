@@ -5193,7 +5193,18 @@
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "use_multi_block": true,
-                    "inline_blocks": []
+                    "inline_blocks": [
+                        {
+                            "comment": "asdasdad",
+                            "type": "cmd",
+                            "code": "as\nda\nsd\nasd\nas\nda\nd\nas\nd\nasd\na\nsd\nad\nas\ndas\nda\nsd\na"
+                        },
+                        {
+                            "comment": "adasdas",
+                            "type": "cmd",
+                            "code": "asdasdasd"
+                        }
+                    ]
                 }
             ],
             "col_span": 1,

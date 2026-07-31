@@ -926,7 +926,6 @@ class CodeBlockWidget(QWidget):
         self.run_callback = run_callback
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"CodeBlockWidget {{ border: 1px solid {CP_DIM}; background-color: {CP_PANEL}; border-radius: 4px; }}")
-        self.setFixedHeight(140)
         
         layout = QVBoxLayout(self)
         layout.setContentsMargins(4, 4, 4, 4)
@@ -970,7 +969,36 @@ class CodeBlockWidget(QWidget):
         self.txt_edit.setPlainText(code)
         self.txt_edit.setFont(QFont("Consolas", 10))
         self.txt_edit.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
-        self.txt_edit.setFixedHeight(100)
+        
+        # Cyberpunk Scrollbar Style
+        self.txt_edit.verticalScrollBar().setStyleSheet(f"""
+            QScrollBar:vertical {{
+                border: none;
+                background: {CP_BG};
+                width: 8px;
+                margin: 0px 0px 0px 0px;
+            }}
+            QScrollBar::handle:vertical {{
+                background: {CP_CYAN};
+                min-height: 20px;
+                border-radius: 4px;
+            }}
+            QScrollBar::handle:vertical:hover {{
+                background: {CP_YELLOW};
+            }}
+            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+                border: none;
+                background: none;
+                height: 0px;
+            }}
+            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {{
+                border: none;
+                background: none;
+            }}
+            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
+                background: none;
+            }}
+        """)
         
         # Syntax highlighter
         self.highlighter = CodeHighlighter(self.txt_edit.document())
@@ -980,6 +1008,19 @@ class CodeBlockWidget(QWidget):
         layout.addLayout(header_lay)
         layout.addWidget(self.txt_edit)
         
+        self.txt_edit.textChanged.connect(self.adjust_height)
+        QTimer.singleShot(0, self.adjust_height)
+        
+    def adjust_height(self):
+        doc = self.txt_edit.document()
+        height = int(doc.size().height())
+        # Add some padding for margins/borders/scrollbar
+        height += 12
+        # Set a minimum and maximum height to keep it reasonable
+        height = max(60, min(height, 500))
+        self.txt_edit.setFixedHeight(height)
+        self.setFixedHeight(height + 38)
+
     def run_code(self):
         if self.run_callback:
             self.run_callback(self.txt_edit.toPlainText(), self.type_cmb.currentText())
