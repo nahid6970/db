@@ -2355,6 +2355,10 @@ class SettingsDialog(QDialog):
         cfg_box.addWidget(self.btn_cfg_txt)
         l_app.addRow("CFG Button:", cfg_box)
 
+        self.chk_show_tags = QCheckBox("Show Tag Filter Bar")
+        self.chk_show_tags.setChecked(self.config.get("show_tags", True))
+        l_app.addRow("Tags:", self.chk_show_tags)
+
         grp_app.setLayout(l_app)
         layout.addWidget(grp_app)
 
@@ -2618,6 +2622,7 @@ class SettingsDialog(QDialog):
         self.config["edit_panel_width"] = self.spn_edit_w.value()
         self.config["edit_panel_height"] = self.spn_edit_h.value()
         self.config["always_on_top"] = self.chk_top.isChecked()
+        self.config["show_tags"] = self.chk_show_tags.isChecked()
         
         # Item Style Defaults
         self.config["def_script_bg"] = self.def_script_bg
@@ -2985,6 +2990,11 @@ class MainWindow(QMainWindow):
 
     def update_tag_bar(self):
         self.clear_layout(self.tag_bar_layout)
+
+        if not self.config.get("show_tags", True):
+            self.tag_bar_scroll.hide()
+            return
+
         tag_set = set()
         self.collect_all_tags(self.config.get("scripts", []), tag_set)
         
