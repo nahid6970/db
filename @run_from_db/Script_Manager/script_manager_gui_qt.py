@@ -924,23 +924,27 @@ class CodeBlockWidget(QWidget):
     def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code=""):
         super().__init__(parent)
         self.run_callback = run_callback
+        self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
+        self.setStyleSheet(f"CodeBlockWidget {{ border: 1px solid {CP_DIM}; background-color: {CP_PANEL}; border-radius: 4px; }}")
         
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(5, 5, 5, 5)
+        layout.setContentsMargins(4, 4, 4, 4)
+        layout.setSpacing(2)
         
         # Header layout
         header_lay = QHBoxLayout()
+        header_lay.setSpacing(4)
         
         self.comment_input = QLineEdit()
         self.comment_input.setPlaceholderText("Comment / Header")
         self.comment_input.setText(comment)
-        self.comment_input.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_YELLOW}; border: 1px solid {CP_DIM}; padding: 4px;")
+        self.comment_input.setStyleSheet(f"background-color: {CP_BG}; color: {CP_YELLOW}; border: 1px solid {CP_DIM}; padding: 4px;")
         
         self.type_cmb = QComboBox()
         self.type_cmb.addItems(["cmd", "powershell", "pwsh", "python"])
         self.type_cmb.setCurrentText(type_)
         self.type_cmb.setFixedWidth(100)
-        self.type_cmb.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 4px;")
+        self.type_cmb.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 4px;")
         
         btn_run = QPushButton("▶")
         btn_run.setFixedWidth(30)
@@ -963,7 +967,7 @@ class CodeBlockWidget(QWidget):
         self.txt_edit = QPlainTextEdit()
         self.txt_edit.setPlainText(code)
         self.txt_edit.setFont(QFont("Consolas", 10))
-        self.txt_edit.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
+        self.txt_edit.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
         self.txt_edit.setFixedHeight(100)
         
         # Syntax highlighter
@@ -1436,8 +1440,6 @@ class EditDialog(QDialog):
                     type_=block.get("type", "cmd"),
                     code=block.get("code", "")
                 )
-            if not blocks:
-                self.add_multi_block()
                 
             self.chk_multi_block.stateChanged.connect(self.toggle_multi_block_mode)
             self.toggle_multi_block_mode()
