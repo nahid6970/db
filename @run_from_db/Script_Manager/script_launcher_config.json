@@ -5173,7 +5173,7 @@
                     "ctrl_right_cmd": "",
                     "use_inline": true,
                     "inline_type": "powershell",
-                    "inline_script": "# install ai agent providers manager\n& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))\n\n# Start the server\nfcc-server\n\n# open the project github site\nstart https://github.com/alishahryar1/free-claude-code\n\n# Open the webpage\nstart http://127.0.0.1:8082/admin",
+                    "inline_script": "",
                     "require_password": false,
                     "font_family": "JetBrainsMono Nerd Font Propo",
                     "font_size": 14,
@@ -5195,19 +5195,24 @@
                     "use_multi_block": true,
                     "inline_blocks": [
                         {
-                            "comment": "ls",
+                            "comment": "Install AI Agent Providers Manager",
                             "type": "cmd",
-                            "code": "as\nda da asadas dssssssssssssssssssssssssssssssssssssssssssss ssssssssssssssssssssssssssssssssssssssssssssss asdasd asdasd ad asd asssssssssssssssssss sadsdasd asda da dasd ada sssssssssssssss\nasd\nas\nda\nsd\nasd\n\nsd\nasd\nas\nda\nd\nas\nd\nasd\na\nsd\nad\nas\ndas\nda\nsd\na"
+                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))"
                         },
                         {
-                            "comment": "adasdas",
+                            "comment": "Start the server",
                             "type": "cmd",
-                            "code": "asdasdasd"
+                            "code": "fcc-server"
                         },
                         {
-                            "comment": "",
+                            "comment": "Github Page Link",
                             "type": "cmd",
-                            "code": "sssssssssssdasdasd\nasd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nasd\na\nsd\nasd\nas\nda\nd"
+                            "code": "start https://github.com/alishahryar1/free-claude-code"
+                        },
+                        {
+                            "comment": "Dashboard",
+                            "type": "cmd",
+                            "code": "start http://127.0.0.1:8082/admin"
                         }
                     ],
                     "edit_on_click": true
