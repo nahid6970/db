@@ -15,7 +15,7 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QCheckBox, QColorDialog, QMenu, QTextEdit, QFormLayout,
                              QGroupBox, QSpinBox, QFileDialog, QFontComboBox, QPlainTextEdit,
                              QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle)
-from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize, QRect
 from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIcon, QPainter, 
                          QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat, QFontMetrics, QTextOption)
 from PyQt6.QtSvg import QSvgRenderer
@@ -920,9 +920,77 @@ class CodeHighlighter(QSyntaxHighlighter):
 # -----------------------------------------------------------------------------
 # MULTI-BLOCK CODE WIDGET
 # -----------------------------------------------------------------------------
-class NoScrollPlainTextEdit(QPlainTextEdit):
+class LineNumberArea(QWidget):
+    def __init__(self, editor):
+        super().__init__(editor)
+        self.codeEditor = editor
+
+    def sizeHint(self):
+        return QSize(self.codeEditor.lineNumberAreaWidth(), 0)
+
+    def paintEvent(self, event):
+        self.codeEditor.lineNumberAreaPaintEvent(event)
+
+class CodeEditor(QPlainTextEdit):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.line_number_area = LineNumberArea(self)
+        
+        self.blockCountChanged.connect(self.updateLineNumberAreaWidth)
+        self.updateRequest.connect(self.updateLineNumberArea)
+        
+        self.updateLineNumberAreaWidth(0)
+
     def wheelEvent(self, event):
         event.ignore()
+
+    def lineNumberAreaWidth(self):
+        digits = 1
+        max_val = max(1, self.blockCount())
+        while max_val >= 10:
+            max_val //= 10
+            digits += 1
+        space = 10 + self.fontMetrics().horizontalAdvance('9') * max(2, digits)
+        return space
+
+    def updateLineNumberAreaWidth(self, _):
+        self.setViewportMargins(self.lineNumberAreaWidth(), 0, 0, 0)
+
+    def updateLineNumberArea(self, rect, dy):
+        if dy:
+            self.line_number_area.scroll(0, dy)
+        else:
+            self.line_number_area.update(0, rect.y(), self.line_number_area.width(), rect.height())
+            
+        if rect.contains(self.viewport().rect()):
+            self.updateLineNumberAreaWidth(0)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        cr = self.contentsRect()
+        self.line_number_area.setGeometry(QRect(cr.left(), cr.top(), self.lineNumberAreaWidth(), cr.height()))
+
+    def lineNumberAreaPaintEvent(self, event):
+        painter = QPainter(self.line_number_area)
+        painter.fillRect(event.rect(), QColor(CP_PANEL))
+
+        block = self.firstVisibleBlock()
+        blockNumber = block.blockNumber()
+        top = int(self.blockBoundingGeometry(block).translated(self.contentOffset()).top())
+        bottom = top + int(self.blockBoundingRect(block).height())
+
+        while block.isValid() and top <= event.rect().bottom():
+            if block.isVisible() and bottom >= event.rect().top():
+                number = str(blockNumber + 1)
+                painter.setPen(QColor(CP_SUBTEXT))
+                painter.setFont(self.font())
+                line_h = self.fontMetrics().height()
+                painter.drawText(0, top, self.line_number_area.width() - 5, line_h, Qt.AlignmentFlag.AlignRight, number)
+
+            block = block.next()
+            top = bottom
+            bottom = top + int(self.blockBoundingRect(block).height())
+            blockNumber += 1
 
 class CodeBlockWidget(QWidget):
     def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code=""):
@@ -969,7 +1037,7 @@ class CodeBlockWidget(QWidget):
         header_lay.addWidget(btn_del)
         
         # Code editor
-        self.txt_edit = NoScrollPlainTextEdit()
+        self.txt_edit = CodeEditor()
         self.txt_edit.setPlainText(code)
         self.txt_edit.setFont(QFont("Consolas", 10))
         self.txt_edit.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
@@ -1433,9 +1501,10 @@ class EditDialog(QDialog):
             
             # Editor
             single_lay.addWidget(QLabel("Code:"))
-            self.txt_inline = QPlainTextEdit()
+            self.txt_inline = CodeEditor()
             self.txt_inline.setPlainText(self.script.get("inline_script", ""))
             self.txt_inline.setFont(QFont("Consolas", 10))
+            self.txt_inline.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
             self.highlighter = CodeHighlighter(self.txt_inline.document())
             self.highlighter.set_language(self.cmb_type.currentText())
             self.cmb_type.currentTextChanged.connect(self.highlighter.set_language)
