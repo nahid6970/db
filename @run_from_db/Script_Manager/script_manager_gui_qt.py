@@ -1474,16 +1474,16 @@ class EditDialog(QDialog):
                 QScrollBar:vertical {{
                     border: none;
                     background: {CP_BG};
-                    width: 8px;
+                    width: 4px;
                     margin: 0px 0px 0px 0px;
                 }}
                 QScrollBar::handle:vertical {{
-                    background: {CP_CYAN};
+                    background: #FFFFFF;
                     min-height: 20px;
-                    border-radius: 4px;
+                    border-radius: 2px;
                 }}
                 QScrollBar::handle:vertical:hover {{
-                    background: {CP_YELLOW};
+                    background: #FFFFFF;
                 }}
                 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
                     border: none;
