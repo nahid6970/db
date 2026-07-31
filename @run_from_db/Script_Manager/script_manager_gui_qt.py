@@ -2751,6 +2751,10 @@ class MainWindow(QMainWindow):
             if hasattr(self, 'btn_cfg'):
                 cfg_col = self.config.get("cfg_btn_color", CP_DIM)
                 self.btn_cfg.script["color"] = cfg_col
+                lc = QColor(cfg_col).lightness() if QColor(cfg_col).isValid() else 0
+                cfg_stroke = "#000000" if lc > 128 else "#FFFFFF"
+                SVG_CFG = f'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15A1.65 1.65 0 0 0 20 12A1.65 1.65 0 0 0 19.4 9L21 7.4L19 4.6L16.8 5.6A1.65 1.65 0 0 0 14.4 4.1L14 1.8H10L9.6 4.1A1.65 1.65 0 0 0 7.2 5.6L5 4.6L3 7.4L4.6 9A1.65 1.65 0 0 0 4 12A1.65 1.65 0 0 0 4.6 15L3 16.6L5 19.4L7.2 18.4A1.65 1.65 0 0 0 16.8 18.4L19 19.4L21 16.6L19.4 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+                self.btn_cfg.script["svg_content"] = SVG_CFG
                 self.btn_cfg.update_style()
 
             if self.config.get("always_on_top", False):
@@ -2790,12 +2794,25 @@ class MainWindow(QMainWindow):
         header.addStretch()
         
         # ADD BUTTONS - Script and Folder
-        self.btn_add_script = CyberButton("+S", script_data={"color": CP_GREEN, "type": "script", "text_color": "black"}, config=self.config)
-        self.btn_add_script.setFixedSize(45, 35) # Increased height
+        SVG_ADD_SCRIPT = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14 2H6C4.89543 2 4 2.89543 4 4V20C4 21.1046 4.89543 22 6 22H18C19.1046 22 20 21.1046 20 20V8L14 2Z" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 2V8H20" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 11V17" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 14H15" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        SVG_ADD_FOLDER = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M22 19V9C22 7.89543 21.1046 7 20 7H12L10 5H4C2.89543 5 2 5.89543 2 7V19C2 20.1046 2.89543 21 4 21H20C21.1046 21 22 20.1046 22 19Z" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 11V17" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M9 14H15" stroke="#000000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+        cfg_col = self.config.get("cfg_btn_color", CP_DIM)
+        cfg_txt = self.config.get("cfg_text_color", "white")
+        lc = QColor(cfg_col).lightness() if QColor(cfg_col).isValid() else 0
+        cfg_stroke = "#000000" if lc > 128 else "#FFFFFF"
+        
+        SVG_CFG = f'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15A1.65 1.65 0 0 0 20 12A1.65 1.65 0 0 0 19.4 9L21 7.4L19 4.6L16.8 5.6A1.65 1.65 0 0 0 14.4 4.1L14 1.8H10L9.6 4.1A1.65 1.65 0 0 0 7.2 5.6L5 4.6L3 7.4L4.6 9A1.65 1.65 0 0 0 4 12A1.65 1.65 0 0 0 4.6 15L3 16.6L5 19.4L7.2 18.4A1.65 1.65 0 0 0 9.6 19.9L10 22.2H14L14.4 19.9A1.65 1.65 0 0 0 16.8 18.4L19 19.4L21 16.6L19.4 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        SVG_CLOSE = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6L18 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+
+        self.btn_add_script = CyberButton("", script_data={"color": CP_GREEN, "type": "script", "text_color": "black", "svg_content": SVG_ADD_SCRIPT, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
+        self.btn_add_script.setFixedSize(45, 35)
+        self.btn_add_script.setToolTip("Add New Script (+S)")
         self.btn_add_script.clicked.connect(self.add_new_item)
         
-        self.btn_add_folder = CyberButton("+F", script_data={"color": CP_YELLOW, "type": "script", "text_color": "black"}, config=self.config)
-        self.btn_add_folder.setFixedSize(45, 35) # Increased height
+        self.btn_add_folder = CyberButton("", script_data={"color": CP_YELLOW, "type": "script", "text_color": "black", "svg_content": SVG_ADD_FOLDER, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
+        self.btn_add_folder.setFixedSize(45, 35)
+        self.btn_add_folder.setToolTip("Add New Folder (+F)")
         self.btn_add_folder.clicked.connect(self.add_new_folder)
         
         # Search Box
@@ -2814,15 +2831,15 @@ class MainWindow(QMainWindow):
             QLineEdit:focus {{ border: 1px solid {CP_CYAN}; }}
         """)
         self.inp_search.textChanged.connect(self.handle_search)
-        
-        cfg_col = self.config.get("cfg_btn_color", CP_DIM)
-        cfg_txt = self.config.get("cfg_text_color", "white")
-        self.btn_cfg = CyberButton("CFG", script_data={"color": cfg_col, "type": "script", "text_color": cfg_txt}, config=self.config)
-        self.btn_cfg.setFixedSize(55, 35) # Increased height
+
+        self.btn_cfg = CyberButton("", script_data={"color": cfg_col, "type": "script", "text_color": cfg_txt, "svg_content": SVG_CFG, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
+        self.btn_cfg.setFixedSize(45, 35)
+        self.btn_cfg.setToolTip("Global Configuration")
         self.btn_cfg.clicked.connect(self.open_global_settings)
 
-        self.btn_close = CyberButton("X", script_data={"color": CP_RED, "type": "script", "text_color": "white"}, config=self.config)
-        self.btn_close.setFixedSize(45, 35) # Increased height
+        self.btn_close = CyberButton("", script_data={"color": CP_RED, "type": "script", "text_color": "white", "svg_content": SVG_CLOSE, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
+        self.btn_close.setFixedSize(45, 35)
+        self.btn_close.setToolTip("Close Launcher")
         self.btn_close.clicked.connect(self.close)
 
         header.addWidget(self.inp_search) # Add search here
