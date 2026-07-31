@@ -2803,7 +2803,7 @@ class MainWindow(QMainWindow):
         cfg_stroke = "#000000" if lc > 128 else "#FFFFFF"
         
         SVG_CFG = f'<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19.4 15A1.65 1.65 0 0 0 20 12A1.65 1.65 0 0 0 19.4 9L21 7.4L19 4.6L16.8 5.6A1.65 1.65 0 0 0 14.4 4.1L14 1.8H10L9.6 4.1A1.65 1.65 0 0 0 7.2 5.6L5 4.6L3 7.4L4.6 9A1.65 1.65 0 0 0 4 12A1.65 1.65 0 0 0 4.6 15L3 16.6L5 19.4L7.2 18.4A1.65 1.65 0 0 0 9.6 19.9L10 22.2H14L14.4 19.9A1.65 1.65 0 0 0 16.8 18.4L19 19.4L21 16.6L19.4 15Z" stroke="{cfg_stroke}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
-        SVG_CLOSE = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M18 6L6 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 6L18 18" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+        SVG_CLOSE = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17 7L7 17M7 7L17 17" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>'
 
         self.btn_add_script = CyberButton("", script_data={"color": CP_GREEN, "type": "script", "text_color": "black", "svg_content": SVG_ADD_SCRIPT, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
         self.btn_add_script.setFixedSize(45, 35)
@@ -2837,7 +2837,19 @@ class MainWindow(QMainWindow):
         self.btn_cfg.setToolTip("Global Configuration")
         self.btn_cfg.clicked.connect(self.open_global_settings)
 
-        self.btn_close = CyberButton("", script_data={"color": CP_RED, "type": "script", "text_color": "white", "svg_content": SVG_CLOSE, "icon_width": 22, "icon_height": 22, "icon_position": "center"}, config=self.config)
+        self.btn_close = CyberButton("", script_data={
+            "color": "#d30f36",
+            "hover_color": "#ff003c",
+            "border_width": 1,
+            "border_color": "#ff2a55",
+            "corner_radius": 2,
+            "type": "script",
+            "text_color": "white",
+            "svg_content": SVG_CLOSE,
+            "icon_width": 18,
+            "icon_height": 18,
+            "icon_position": "center"
+        }, config=self.config)
         self.btn_close.setFixedSize(45, 35)
         self.btn_close.setToolTip("Close Launcher")
         self.btn_close.clicked.connect(self.close)

@@ -2113,7 +2113,11 @@
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMonoNL NFP",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false
+            "_runtime_is_italic": false,
+            "tags": [],
+            "edit_on_click": false,
+            "text_align": "center",
+            "transparent_bg": false
         },
         {
             "name": "Extension",
