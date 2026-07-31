@@ -969,36 +969,10 @@ class CodeBlockWidget(QWidget):
         self.txt_edit.setPlainText(code)
         self.txt_edit.setFont(QFont("Consolas", 10))
         self.txt_edit.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
-        
-        # Cyberpunk Scrollbar Style
-        self.txt_edit.verticalScrollBar().setStyleSheet(f"""
-            QScrollBar:vertical {{
-                border: none;
-                background: {CP_BG};
-                width: 8px;
-                margin: 0px 0px 0px 0px;
-            }}
-            QScrollBar::handle:vertical {{
-                background: {CP_CYAN};
-                min-height: 20px;
-                border-radius: 4px;
-            }}
-            QScrollBar::handle:vertical:hover {{
-                background: {CP_YELLOW};
-            }}
-            QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
-                border: none;
-                background: none;
-                height: 0px;
-            }}
-            QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {{
-                border: none;
-                background: none;
-            }}
-            QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
-                background: none;
-            }}
-        """)
+        self.txt_edit.setLineWrapMode(QPlainTextEdit.LineWrapMode.WidgetWidth)
+        self.txt_edit.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.txt_edit.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.txt_edit.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum)
         
         # Syntax highlighter
         self.highlighter = CodeHighlighter(self.txt_edit.document())
@@ -1010,21 +984,39 @@ class CodeBlockWidget(QWidget):
         
         self.txt_edit.textChanged.connect(self.adjust_height)
         QTimer.singleShot(0, self.adjust_height)
+        QTimer.singleShot(100, self.adjust_height)
         
+    def showEvent(self, event):
+        super().showEvent(event)
+        QTimer.singleShot(0, self.adjust_height)
+
+    def resizeEvent(self, event):
+        super().resizeEvent(event)
+        QTimer.singleShot(0, self.adjust_height)
+
     def adjust_height(self):
-        # Get the number of blocks (lines)
-        num_blocks = self.txt_edit.document().blockCount()
-        # Get the font metrics
+        doc = self.txt_edit.document()
         font_metrics = QFontMetrics(self.txt_edit.font())
         line_height = font_metrics.lineSpacing()
-        # Calculate height based on block count and line height
-        height = num_blocks * line_height
-        # Add some padding for margins/borders/scrollbar
-        height += 16
-        # Set a minimum and maximum height to keep it reasonable
-        height = max(60, min(height, 500))
-        self.txt_edit.setFixedHeight(height)
-        self.setFixedHeight(height + 38)
+        
+        total_lines = 0
+        block = doc.begin()
+        while block.isValid():
+            layout = block.layout()
+            if layout and layout.lineCount() > 0:
+                total_lines += layout.lineCount()
+            else:
+                total_lines += 1
+            block = block.next()
+            
+        total_lines = max(doc.blockCount(), total_lines)
+        
+        content_height = total_lines * line_height + 18
+        content_height = max(45, content_height)
+        
+        self.txt_edit.setFixedHeight(content_height)
+        self.setFixedHeight(content_height + 42)
+        self.updateGeometry()
 
     def run_code(self):
         if self.run_callback:
