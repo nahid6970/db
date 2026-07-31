@@ -926,6 +926,7 @@ class CodeBlockWidget(QWidget):
         self.run_callback = run_callback
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"CodeBlockWidget {{ border: 1px solid {CP_DIM}; background-color: {CP_PANEL}; border-radius: 4px; }}")
+        self.setFixedHeight(140)
         
         layout = QVBoxLayout(self)
         layout.setContentsMargins(4, 4, 4, 4)
@@ -933,6 +934,7 @@ class CodeBlockWidget(QWidget):
         
         # Header layout
         header_lay = QHBoxLayout()
+        header_lay.setContentsMargins(0, 0, 0, 0)
         header_lay.setSpacing(4)
         
         self.comment_input = QLineEdit()
