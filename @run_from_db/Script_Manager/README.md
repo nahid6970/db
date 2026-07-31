@@ -32,9 +32,6 @@ A state-of-the-art, feature-rich PyQt6 graphical script launcher and manager des
 - **Dynamic Command Resolution:** Use dynamic path wildcards like `{path}` (absolute path to script) and `{dir}` (parent folder).
 - **Preset Dropdown:** Select from modular presets (like **Explorer (Open Folder)**) directly inside the Edit Dialog.
 
-### 5. **Cloud Sync & Backups**
-- Integration with **Convex cloud backend** for sync checking, backup creation, diff comparison, and configuration restorations.
-
 ---
 
 ## 🛠️ Installation & Setup
