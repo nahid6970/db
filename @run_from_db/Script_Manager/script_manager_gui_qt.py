@@ -1285,16 +1285,6 @@ class EditDialog(QDialog):
         
         self.update_svg_preview(self.script.get("svg_content", ""))
         
-        if self.script.get("type") != "folder":
-            path_box = QHBoxLayout()
-            self.inp_path = QLineEdit(normalize_path(self.script.get("path", "")))
-            btn_browse = QPushButton("...")
-            btn_browse.setFixedWidth(30)
-            btn_browse.clicked.connect(self.browse_path)
-            path_box.addWidget(self.inp_path)
-            path_box.addWidget(btn_browse)
-            l_basic.addRow("Path:", path_box)
-        
         # Icon path (for all items)
         icon_box = QHBoxLayout()
         self.inp_icon = QLineEdit(normalize_path(self.script.get("icon_path", "")))
@@ -1569,7 +1559,7 @@ class EditDialog(QDialog):
         
         # === RIGHT PANEL ===
         if self.script.get("type") != "folder":
-            right_grp = QGroupBox("INLINE SCRIPT EDITOR")
+            right_grp = QGroupBox("SCRIPT EXECUTION TARGET")
             r_lay = QVBoxLayout()
             
             # Switch
@@ -1595,6 +1585,28 @@ class EditDialog(QDialog):
                 self.rb_file.setChecked(True)
             
             r_lay.addLayout(mode_box)
+            
+            # --- TARGET FILE CONTAINER ---
+            self.target_file_container = QWidget()
+            target_file_lay = QVBoxLayout(self.target_file_container)
+            target_file_lay.setContentsMargins(0, 10, 0, 0)
+            target_file_lay.setSpacing(8)
+            
+            target_file_lay.addWidget(QLabel("Target Executable / File Path:"))
+            
+            path_box = QHBoxLayout()
+            self.inp_path = QLineEdit(normalize_path(self.script.get("path", "")))
+            self.inp_path.setPlaceholderText("C:\\path\\to\\script.py or executable...")
+            btn_browse_path = QPushButton("Browse...")
+            btn_browse_path.setStyleSheet(f"background-color: {CP_DIM}; color: white; padding: 6px 12px;")
+            btn_browse_path.clicked.connect(self.browse_path)
+            path_box.addWidget(self.inp_path)
+            path_box.addWidget(btn_browse_path)
+            
+            target_file_lay.addLayout(path_box)
+            target_file_lay.addStretch()
+            
+            r_lay.addWidget(self.target_file_container)
             
             # --- SINGLE BLOCK CONTAINER ---
             self.single_block_container = QWidget()
@@ -1706,7 +1718,7 @@ class EditDialog(QDialog):
                     comment_color=block.get("comment_color")
                 )
                 
-            self.rb_multi.toggled.connect(self.toggle_mode)
+            self.grp_mode.buttonToggled.connect(lambda: self.toggle_mode())
             self.toggle_mode()
             
             right_grp.setLayout(r_lay)
@@ -1888,8 +1900,12 @@ class EditDialog(QDialog):
         return block
 
     def toggle_mode(self):
+        is_file = self.rb_file.isChecked()
+        is_inline = self.rb_inline.isChecked()
         is_multi = self.rb_multi.isChecked()
-        self.single_block_container.setVisible(not is_multi)
+        
+        self.target_file_container.setVisible(is_file)
+        self.single_block_container.setVisible(is_inline)
         self.multi_block_container.setVisible(is_multi)
 
     def reset_styles(self):
