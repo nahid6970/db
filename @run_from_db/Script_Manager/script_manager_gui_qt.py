@@ -2781,8 +2781,8 @@ class MainWindow(QMainWindow):
         self.main_frame.setStyleSheet(f"#MainFrame {{ border: 2px solid {win_border}; background-color: {app_bg}; }}")
         
         self.main_layout = QVBoxLayout(self.main_frame)
-        self.main_layout.setContentsMargins(20, 35, 20, 20) # Increased top margin
-        self.main_layout.setSpacing(15)
+        self.main_layout.setContentsMargins(20, 15, 20, 20)
+        self.main_layout.setSpacing(10)
         clayout.addWidget(self.main_frame)
 
         header = QHBoxLayout()
