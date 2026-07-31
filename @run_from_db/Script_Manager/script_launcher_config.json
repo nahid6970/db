@@ -5277,5 +5277,7 @@
     "search_list_width": 500,
     "search_list_height": 40,
     "search_list_columns": 3,
-    "search_left_align": true
+    "search_left_align": true,
+    "multiblock_comment_size": 14,
+    "multiblock_comment_color": "#FF5500"
 }

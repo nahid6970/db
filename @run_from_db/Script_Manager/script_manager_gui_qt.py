@@ -994,9 +994,16 @@ class CodeEditor(QPlainTextEdit):
             blockNumber += 1
 
 class CodeBlockWidget(QWidget):
-    def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code=""):
+    def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code="", comment_size=None, comment_color=None, config=None):
         super().__init__(parent)
         self.run_callback = run_callback
+        self.config = config or {}
+        
+        default_size = self.config.get("multiblock_comment_size", 10)
+        default_color = self.config.get("multiblock_comment_color", CP_YELLOW)
+        
+        self.comment_color = comment_color if comment_color is not None else default_color
+
         self.setAttribute(Qt.WidgetAttribute.WA_StyledBackground, True)
         self.setStyleSheet(f"CodeBlockWidget {{ border: 1px solid {CP_DIM}; background-color: {CP_PANEL}; border-radius: 4px; }}")
         
@@ -1012,8 +1019,22 @@ class CodeBlockWidget(QWidget):
         self.comment_input = QLineEdit()
         self.comment_input.setPlaceholderText("Comment / Header")
         self.comment_input.setText(comment)
-        self.comment_input.setStyleSheet(f"background-color: {CP_BG}; color: {CP_YELLOW}; border: 1px solid {CP_DIM}; padding: 4px;")
         
+        self.comment_size_spn = QSpinBox()
+        self.comment_size_spn.setRange(6, 40)
+        self.comment_size_spn.setValue(comment_size if comment_size is not None else default_size)
+        self.comment_size_spn.setFixedWidth(50)
+        self.comment_size_spn.setToolTip("Comment Font Size")
+        self.comment_size_spn.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px;")
+
+        self.btn_comment_color = QPushButton("A")
+        self.btn_comment_color.setFixedWidth(28)
+        self.btn_comment_color.setToolTip("Comment Font Color")
+        self.btn_comment_color.clicked.connect(self.pick_comment_color)
+
+        self.update_comment_style()
+        self.comment_size_spn.valueChanged.connect(self.update_comment_style)
+
         self.type_cmb = QComboBox()
         self.type_cmb.addItems(["cmd", "powershell", "pwsh", "python"])
         self.type_cmb.setCurrentText(type_)
@@ -1033,6 +1054,8 @@ class CodeBlockWidget(QWidget):
         btn_del.clicked.connect(self.delete_block)
         
         header_lay.addWidget(self.comment_input)
+        header_lay.addWidget(self.comment_size_spn)
+        header_lay.addWidget(self.btn_comment_color)
         header_lay.addWidget(self.type_cmb)
         header_lay.addWidget(btn_run)
         header_lay.addWidget(btn_del)
@@ -1090,6 +1113,21 @@ class CodeBlockWidget(QWidget):
         self.txt_edit.setFixedHeight(content_height)
         self.setFixedHeight(content_height + 42)
         self.updateGeometry()
+
+    def update_comment_style(self):
+        c = self.comment_color or CP_YELLOW
+        s = self.comment_size_spn.value()
+        self.comment_input.setStyleSheet(f"background-color: {CP_BG}; color: {c}; border: 1px solid {CP_DIM}; padding: 4px; font-size: {s}pt;")
+        lc = QColor(c).lightness() if QColor(c).isValid() else 255
+        fg = 'black' if lc > 128 else 'white'
+        self.btn_comment_color.setStyleSheet(f"background-color: {c}; color: {fg}; border: 1px solid {CP_DIM}; font-weight: bold; font-size: 9pt;")
+
+    def pick_comment_color(self):
+        curr = self.comment_color or CP_YELLOW
+        c = QColorDialog.getColor(QColor(curr), self, "Select Comment / Header Color")
+        if c.isValid():
+            self.comment_color = c.name().upper()
+            self.update_comment_style()
 
     def run_code(self):
         if self.run_callback:
@@ -1656,7 +1694,9 @@ class EditDialog(QDialog):
                 self.add_multi_block(
                     comment=block.get("comment", ""),
                     type_=block.get("type", "cmd"),
-                    code=block.get("code", "")
+                    code=block.get("code", ""),
+                    comment_size=block.get("comment_size"),
+                    comment_color=block.get("comment_color")
                 )
                 
             self.chk_multi_block.stateChanged.connect(self.toggle_multi_block_mode)
@@ -1827,8 +1867,16 @@ class EditDialog(QDialog):
     def run_individual_block(self, code, interpreter):
         self.run_code_block(code, interpreter)
 
-    def add_multi_block(self, comment="", type_="cmd", code=""):
-        block = CodeBlockWidget(run_callback=self.run_individual_block, comment=comment, type_=type_, code=code)
+    def add_multi_block(self, comment="", type_="cmd", code="", comment_size=None, comment_color=None):
+        block = CodeBlockWidget(
+            run_callback=self.run_individual_block,
+            comment=comment,
+            type_=type_,
+            code=code,
+            comment_size=comment_size,
+            comment_color=comment_color,
+            config=self.config
+        )
         self.blocks_layout.addWidget(block)
         return block
 
@@ -2087,7 +2135,9 @@ class EditDialog(QDialog):
                         blocks_data.append({
                             "comment": w.comment_input.text(),
                             "type": w.type_cmb.currentText(),
-                            "code": w.txt_edit.toPlainText()
+                            "code": w.txt_edit.toPlainText(),
+                            "comment_size": w.comment_size_spn.value(),
+                            "comment_color": w.comment_color
                         })
             self.script["inline_blocks"] = blocks_data
         
@@ -2420,6 +2470,26 @@ class SettingsDialog(QDialog):
 
         grp_search_custom.setLayout(l_search_custom)
         right_panel.addWidget(grp_search_custom)
+
+        # Multi-block comment defaults
+        grp_mb = QGroupBox("MULTI-BLOCK DEFAULTS")
+        grp_mb.setStyleSheet(f"QGroupBox {{ border: 1px solid {CP_DIM}; margin-top: 10px; padding-top: 10px; color: {CP_YELLOW}; font-weight: bold; }}")
+        l_mb = QFormLayout()
+
+        self.spn_mb_size = QSpinBox()
+        self.spn_mb_size.setRange(6, 40)
+        self.spn_mb_size.setValue(self.config.get("multiblock_comment_size", 10))
+        l_mb.addRow("Comment Font Size:", self.spn_mb_size)
+
+        self.btn_mb_color = QPushButton("Pick Comment Color")
+        self.mb_color = self.config.get("multiblock_comment_color", CP_YELLOW)
+        self.update_color_btn_style(self.btn_mb_color, self.mb_color)
+        self.btn_mb_color.clicked.connect(self.pick_mb_color)
+        l_mb.addRow("Comment Color:", self.btn_mb_color)
+
+        grp_mb.setLayout(l_mb)
+        right_panel.addWidget(grp_mb)
+
         right_panel.addStretch()
 
         panels_layout.addWidget(left_widget, stretch=1)
@@ -2461,6 +2531,12 @@ class SettingsDialog(QDialog):
         if c.isValid():
             self.cfg_text_color = c.name()
             self.update_color_btn_style(self.btn_cfg_txt, self.cfg_text_color)
+
+    def pick_mb_color(self):
+        c = QColorDialog.getColor(QColor(self.mb_color), self)
+        if c.isValid():
+            self.mb_color = c.name().upper()
+            self.update_color_btn_style(self.btn_mb_color, self.mb_color)
 
     def pick_config_color(self, attr_name, btn):
         current_color = getattr(self, attr_name)
@@ -2521,6 +2597,10 @@ class SettingsDialog(QDialog):
         self.config["def_folder_fg"] = self.def_folder_fg
         self.config["def_folder_hbg"] = self.def_folder_hbg
         self.config["def_folder_hfg"] = self.def_folder_hfg
+
+        # Multi-block Defaults
+        self.config["multiblock_comment_size"] = self.spn_mb_size.value()
+        self.config["multiblock_comment_color"] = self.mb_color
         
         self.accept()
 
