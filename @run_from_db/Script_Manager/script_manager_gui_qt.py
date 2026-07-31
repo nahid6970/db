@@ -1012,10 +1012,15 @@ class CodeBlockWidget(QWidget):
         QTimer.singleShot(0, self.adjust_height)
         
     def adjust_height(self):
-        doc = self.txt_edit.document()
-        height = int(doc.size().height())
+        # Get the number of blocks (lines)
+        num_blocks = self.txt_edit.document().blockCount()
+        # Get the font metrics
+        font_metrics = QFontMetrics(self.txt_edit.font())
+        line_height = font_metrics.lineSpacing()
+        # Calculate height based on block count and line height
+        height = num_blocks * line_height
         # Add some padding for margins/borders/scrollbar
-        height += 12
+        height += 16
         # Set a minimum and maximum height to keep it reasonable
         height = max(60, min(height, 500))
         self.txt_edit.setFixedHeight(height)
