@@ -5173,7 +5173,7 @@
                     "ctrl_right_cmd": "",
                     "use_inline": true,
                     "inline_type": "powershell",
-                    "inline_script": "# install ai agent providers manager\n& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))\n\n# Start the server\nfcc-server",
+                    "inline_script": "# install ai agent providers manager\n& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))\n\n# Start the server\nfcc-server\n\n# open the project github site\nstart https://github.com/alishahryar1/free-claude-code\n\n# Open the webpage\nstart http://127.0.0.1:8082/admin",
                     "require_password": false,
                     "font_family": "JetBrainsMono Nerd Font Propo",
                     "font_size": 14,
@@ -5191,7 +5191,9 @@
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
-                    "_runtime_is_italic": false
+                    "_runtime_is_italic": false,
+                    "use_multi_block": true,
+                    "inline_blocks": []
                 }
             ],
             "col_span": 1,

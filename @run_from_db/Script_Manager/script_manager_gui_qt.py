@@ -917,6 +917,71 @@ class CodeHighlighter(QSyntaxHighlighter):
         except Exception:
             pass
 
+# -----------------------------------------------------------------------------
+# MULTI-BLOCK CODE WIDGET
+# -----------------------------------------------------------------------------
+class CodeBlockWidget(QWidget):
+    def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code=""):
+        super().__init__(parent)
+        self.run_callback = run_callback
+        
+        layout = QVBoxLayout(self)
+        layout.setContentsMargins(5, 5, 5, 5)
+        
+        # Header layout
+        header_lay = QHBoxLayout()
+        
+        self.comment_input = QLineEdit()
+        self.comment_input.setPlaceholderText("Comment / Header")
+        self.comment_input.setText(comment)
+        self.comment_input.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_YELLOW}; border: 1px solid {CP_DIM}; padding: 4px;")
+        
+        self.type_cmb = QComboBox()
+        self.type_cmb.addItems(["cmd", "powershell", "pwsh", "python"])
+        self.type_cmb.setCurrentText(type_)
+        self.type_cmb.setFixedWidth(100)
+        self.type_cmb.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 4px;")
+        
+        btn_run = QPushButton("▶")
+        btn_run.setFixedWidth(30)
+        btn_run.setToolTip("Run this block individually")
+        btn_run.setStyleSheet(f"background-color: {CP_GREEN}; color: black; font-weight: bold; border: none;")
+        btn_run.clicked.connect(self.run_code)
+        
+        btn_del = QPushButton("×")
+        btn_del.setFixedWidth(30)
+        btn_del.setToolTip("Delete this block")
+        btn_del.setStyleSheet(f"background-color: {CP_RED}; color: white; font-weight: bold; border: none;")
+        btn_del.clicked.connect(self.delete_block)
+        
+        header_lay.addWidget(self.comment_input)
+        header_lay.addWidget(self.type_cmb)
+        header_lay.addWidget(btn_run)
+        header_lay.addWidget(btn_del)
+        
+        # Code editor
+        self.txt_edit = QPlainTextEdit()
+        self.txt_edit.setPlainText(code)
+        self.txt_edit.setFont(QFont("Consolas", 10))
+        self.txt_edit.setStyleSheet(f"background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
+        self.txt_edit.setFixedHeight(100)
+        
+        # Syntax highlighter
+        self.highlighter = CodeHighlighter(self.txt_edit.document())
+        self.highlighter.set_language(type_)
+        self.type_cmb.currentTextChanged.connect(self.highlighter.set_language)
+        
+        layout.addLayout(header_lay)
+        layout.addWidget(self.txt_edit)
+        
+    def run_code(self):
+        if self.run_callback:
+            self.run_callback(self.txt_edit.toPlainText(), self.type_cmb.currentText())
+            
+    def delete_block(self):
+        self.setParent(None)
+        self.deleteLater()
+
 # FULL EDIT DIALOG
 # -----------------------------------------------------------------------------
 class EditDialog(QDialog):
@@ -1287,7 +1352,18 @@ class EditDialog(QDialog):
             mode_box.addWidget(self.rb_file); mode_box.addWidget(self.rb_inline)
             if self.script.get("use_inline"): self.rb_inline.setChecked(True)
             else: self.rb_file.setChecked(True)
+            
+            # Multi-block toggle
+            self.chk_multi_block = QCheckBox("Enable Multi-Block")
+            self.chk_multi_block.setChecked(self.script.get("use_multi_block", False))
+            mode_box.addWidget(self.chk_multi_block)
+            
             r_lay.addLayout(mode_box)
+            
+            # --- SINGLE BLOCK CONTAINER ---
+            self.single_block_container = QWidget()
+            single_lay = QVBoxLayout(self.single_block_container)
+            single_lay.setContentsMargins(0, 0, 0, 0)
             
             # Interpreter
             interp_layout = QHBoxLayout()
@@ -1305,17 +1381,66 @@ class EditDialog(QDialog):
             btn_run_inline.clicked.connect(self.test_run_inline)
             interp_layout.addWidget(btn_run_inline)
             
-            r_lay.addLayout(interp_layout)
+            single_lay.addLayout(interp_layout)
             
             # Editor
-            r_lay.addWidget(QLabel("Code:"))
+            single_lay.addWidget(QLabel("Code:"))
             self.txt_inline = QPlainTextEdit()
             self.txt_inline.setPlainText(self.script.get("inline_script", ""))
             self.txt_inline.setFont(QFont("Consolas", 10))
             self.highlighter = CodeHighlighter(self.txt_inline.document())
             self.highlighter.set_language(self.cmb_type.currentText())
             self.cmb_type.currentTextChanged.connect(self.highlighter.set_language)
-            r_lay.addWidget(self.txt_inline)
+            single_lay.addWidget(self.txt_inline)
+            
+            r_lay.addWidget(self.single_block_container)
+            
+            # --- MULTI BLOCK CONTAINER ---
+            self.multi_block_container = QWidget()
+            multi_lay = QVBoxLayout(self.multi_block_container)
+            multi_lay.setContentsMargins(0, 0, 0, 0)
+            
+            # Header with "+" button
+            multi_header = QHBoxLayout()
+            multi_header.addWidget(QLabel("Multi-Block Scripts:"))
+            
+            btn_add_block = QPushButton("+ Add Block")
+            btn_add_block.setFixedWidth(100)
+            btn_add_block.setStyleSheet(f"background-color: {CP_CYAN}; color: black; font-weight: bold; border: none; padding: 4px;")
+            btn_add_block.clicked.connect(lambda: self.add_multi_block())
+            multi_header.addWidget(btn_add_block)
+            
+            multi_lay.addLayout(multi_header)
+            
+            # Scroll area for blocks
+            self.blocks_scroll = QScrollArea()
+            self.blocks_scroll.setWidgetResizable(True)
+            self.blocks_scroll.setStyleSheet(f"background-color: {CP_BG}; border: 1px solid {CP_DIM};")
+            
+            self.blocks_widget = QWidget()
+            self.blocks_widget.setStyleSheet(f"background-color: {CP_BG};")
+            self.blocks_layout = QVBoxLayout(self.blocks_widget)
+            self.blocks_layout.setContentsMargins(5, 5, 5, 5)
+            self.blocks_layout.setAlignment(Qt.AlignmentFlag.AlignTop)
+            
+            self.blocks_scroll.setWidget(self.blocks_widget)
+            multi_lay.addWidget(self.blocks_scroll)
+            
+            r_lay.addWidget(self.multi_block_container)
+            
+            # Load existing blocks
+            blocks = self.script.get("inline_blocks", [])
+            for block in blocks:
+                self.add_multi_block(
+                    comment=block.get("comment", ""),
+                    type_=block.get("type", "cmd"),
+                    code=block.get("code", "")
+                )
+            if not blocks:
+                self.add_multi_block()
+                
+            self.chk_multi_block.stateChanged.connect(self.toggle_multi_block_mode)
+            self.toggle_multi_block_mode()
             
             right_grp.setLayout(r_lay)
             hbox.addWidget(right_grp, stretch=6) # 60% split
@@ -1345,15 +1470,12 @@ class EditDialog(QDialog):
         btn_layout.addWidget(btn_cancel)
         vbox.addLayout(btn_layout)
 
-    def test_run_inline(self):
+    def run_code_block(self, code, interpreter):
         import tempfile
-        
-        code = self.txt_inline.toPlainText()
         if not code.strip(): return
         
-        it = self.cmb_type.currentText()
-        if it == "python": ext = ".py"
-        elif it in ["powershell", "pwsh"]: ext = ".ps1"
+        if interpreter == "python": ext = ".py"
+        elif interpreter in ["powershell", "pwsh"]: ext = ".ps1"
         else: ext = ".bat"
         
         try:
@@ -1364,7 +1486,6 @@ class EditDialog(QDialog):
             QMessageBox.critical(self, "Error", f"Temp file error: {e}")
             return
             
-        # For test run: always keep open to see output, default to current admin setting
         keep = True
         hide = False
         admin = self.chk_admin.isChecked()
@@ -1374,7 +1495,7 @@ class EditDialog(QDialog):
             cwd = os.getcwd()
             
             if ext == ".ps1":
-                ps_exe = it
+                ps_exe = interpreter
                 if ps_exe not in ["pwsh", "powershell"]:
                      ps_exe = "pwsh" if shutil.which("pwsh") else "powershell"
                 
@@ -1390,6 +1511,22 @@ class EditDialog(QDialog):
             else:
                 mode = "/k" if keep else "/c"
                 parent._run_shell("cmd.exe", f'{mode} "{tmp}"', cwd, admin=admin, hide=hide)
+
+    def test_run_inline(self):
+        self.run_code_block(self.txt_inline.toPlainText(), self.cmb_type.currentText())
+
+    def run_individual_block(self, code, interpreter):
+        self.run_code_block(code, interpreter)
+
+    def add_multi_block(self, comment="", type_="cmd", code=""):
+        block = CodeBlockWidget(run_callback=self.run_individual_block, comment=comment, type_=type_, code=code)
+        self.blocks_layout.addWidget(block)
+        return block
+
+    def toggle_multi_block_mode(self):
+        is_multi = self.chk_multi_block.isChecked()
+        self.single_block_container.setVisible(not is_multi)
+        self.multi_block_container.setVisible(is_multi)
 
     def reset_styles(self):
         # Determine defaults from global config
@@ -1629,6 +1766,21 @@ class EditDialog(QDialog):
             self.script["use_inline"] = self.rb_inline.isChecked()
             self.script["inline_type"] = self.cmb_type.currentText()
             self.script["inline_script"] = self.txt_inline.toPlainText()
+            
+            # Save multi-block settings
+            self.script["use_multi_block"] = self.chk_multi_block.isChecked()
+            blocks_data = []
+            for i in range(self.blocks_layout.count()):
+                item = self.blocks_layout.itemAt(i)
+                if item:
+                    w = item.widget()
+                    if isinstance(w, CodeBlockWidget):
+                        blocks_data.append({
+                            "comment": w.comment_input.text(),
+                            "type": w.type_cmb.currentText(),
+                            "code": w.txt_edit.toPlainText()
+                        })
+            self.script["inline_blocks"] = blocks_data
         
         self.script["require_password"] = self.chk_pass_lock.isChecked()
         self.script["font_family"] = self.cmb_font.currentText()
@@ -3198,6 +3350,48 @@ class MainWindow(QMainWindow):
 
     def launch_inline(self, script):
         import tempfile
+        
+        if script.get("use_multi_block"):
+            blocks = script.get("inline_blocks", [])
+            for block in blocks:
+                code = block.get("code", "")
+                if not code.strip():
+                    continue
+                it = block.get("type", "cmd")
+                if it == "python": ext = ".py"
+                elif it in ["powershell", "pwsh"]: ext = ".ps1"
+                else: ext = ".bat"
+                
+                with tempfile.NamedTemporaryFile(mode='w', suffix=ext, delete=False) as f:
+                    f.write(code)
+                    tmp = f.name
+                
+                hide = script.get("hide_terminal", False)
+                new_term = script.get("new_terminal", False)
+                keep = script.get("keep_open", False)
+                admin = script.get("run_admin", False)
+
+                if ext == ".ps1":
+                    ps_exe = it
+                    if ps_exe not in ["pwsh", "powershell"]:
+                         ps_exe = "pwsh" if shutil.which("pwsh") else "powershell"
+                    
+                    no_exit = "-NoExit" if keep else ""
+                    params = f'{no_exit} -File "{tmp}"'
+                    self._run_shell(ps_exe, params, os.getcwd(), admin=admin, hide=hide)
+                elif ext == ".py":
+                    mode = "/k" if keep else "/c"
+                    if keep or new_term or admin:
+                        params = f'{mode} python "{tmp}"'
+                        self._run_shell("cmd.exe", params, os.getcwd(), admin=admin, hide=hide)
+                    else:
+                        py_exe = "pythonw" if hide else "python"
+                        self._run_shell(py_exe, f'"{tmp}"', os.getcwd(), admin=admin, hide=hide)
+                else:
+                    mode = "/k" if keep else "/c"
+                    self._run_shell("cmd.exe", f'{mode} "{tmp}"', os.getcwd(), admin=admin, hide=hide)
+            return
+
         code = script.get("inline_script", "")
         # Very simple execution
         it = script.get("inline_type", "cmd")
