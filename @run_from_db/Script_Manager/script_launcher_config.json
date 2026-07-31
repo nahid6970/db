@@ -5209,7 +5209,8 @@
                             "type": "cmd",
                             "code": "sssssssssssdasdasd\nasd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nas\nda\nsd\nasd\na\nsd\nasd\nas\nda\nd"
                         }
-                    ]
+                    ],
+                    "edit_on_click": true
                 }
             ],
             "col_span": 1,

@@ -1264,6 +1264,11 @@ class EditDialog(QDialog):
         else:
             row2 = QHBoxLayout()
 
+        self.chk_edit_on_click = QCheckBox("Edit on Left Click")
+        self.chk_edit_on_click.setChecked(self.script.get("edit_on_click", False))
+        self.chk_edit_on_click.setToolTip("Left-clicking this item opens the Edit Dialog directly instead of launching it")
+        row2.addWidget(self.chk_edit_on_click)
+
         self.chk_pass_lock = QCheckBox("Password Lock")
         self.chk_pass_lock.setChecked(self.script.get("require_password", False))
         row2.addWidget(self.chk_pass_lock)
@@ -1927,6 +1932,7 @@ class EditDialog(QDialog):
                         })
             self.script["inline_blocks"] = blocks_data
         
+        self.script["edit_on_click"] = self.chk_edit_on_click.isChecked()
         self.script["require_password"] = self.chk_pass_lock.isChecked()
         self.script["font_family"] = self.cmb_font.currentText()
         self.script["font_size"] = self.spn_size.value()
@@ -3352,6 +3358,10 @@ class MainWindow(QMainWindow):
             if PasswordDialog(self).exec() != QDialog.DialogCode.Accepted:
                 return
                 
+        if script.get("edit_on_click"):
+            self.open_edit(script)
+            return
+
         if script.get("type") == "folder":
             self.view_stack.append(script)
             self.refresh_grid()
