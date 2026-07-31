@@ -14,7 +14,8 @@ from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout,
                              QProgressBar, QDialog, QLineEdit, QComboBox, 
                              QCheckBox, QColorDialog, QMenu, QTextEdit, QFormLayout,
                              QGroupBox, QSpinBox, QFileDialog, QFontComboBox, QPlainTextEdit,
-                             QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle)
+                             QRadioButton, QButtonGroup, QSplitter, QStyleOptionButton, QStyle,
+                             QListWidget, QListWidgetItem)
 from PyQt6.QtCore import Qt, QTimer, pyqtSignal, QPoint, QMimeData, QByteArray, QSize, QRect
 from PyQt6.QtGui import (QFont, QCursor, QColor, QDesktopServices, QAction, QIcon, QPainter, 
                          QBrush, QPixmap, QDrag, QTextDocument, QFontDatabase, QSyntaxHighlighter, QTextCharFormat, QFontMetrics, QTextOption)
@@ -1098,6 +1099,75 @@ class CodeBlockWidget(QWidget):
         self.setParent(None)
         self.deleteLater()
 
+# -----------------------------------------------------------------------------
+# COPY STYLE SEARCH DIALOG
+# -----------------------------------------------------------------------------
+class CopyStyleDialog(QDialog):
+    def __init__(self, all_items, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("COPY STYLE FROM ITEM / FOLDER")
+        self.resize(500, 450)
+        self.all_items = all_items
+        self.selected_style = None
+
+        self.setStyleSheet(f"""
+            QDialog {{ background-color: {CP_BG}; border: 2px solid {CP_CYAN}; }}
+            QLabel {{ color: {CP_YELLOW}; font-family: 'Consolas'; font-weight: bold; }}
+            QLineEdit {{ background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 6px; font-family: 'Consolas'; }}
+            QListWidget {{ background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_DIM}; font-family: 'Consolas'; font-size: 10pt; }}
+            QListWidget::item:selected {{ background-color: {CP_CYAN}; color: black; font-weight: bold; }}
+            QPushButton {{ background-color: {CP_DIM}; color: white; border: none; padding: 8px; font-family: 'Consolas'; font-weight: bold; }}
+            QPushButton:hover {{ border: 1px solid {CP_YELLOW}; }}
+        """)
+
+        layout = QVBoxLayout(self)
+        layout.setSpacing(10)
+
+        layout.addWidget(QLabel("SEARCH ITEM / FOLDER TO COPY STYLE FROM:"))
+        
+        self.inp_search = QLineEdit()
+        self.inp_search.setPlaceholderText("Type to filter...")
+        self.inp_search.textChanged.connect(self.filter_items)
+        layout.addWidget(self.inp_search)
+
+        self.list_widget = QListWidget()
+        self.list_widget.itemDoubleClicked.connect(self.accept_selection)
+        layout.addWidget(self.list_widget)
+
+        btn_box = QHBoxLayout()
+        btn_apply = QPushButton("COPY STYLE")
+        btn_apply.setStyleSheet(f"background-color: {CP_GREEN}; color: black; font-weight: bold;")
+        btn_apply.clicked.connect(self.accept_selection)
+
+        btn_cancel = QPushButton("CANCEL")
+        btn_cancel.clicked.connect(self.reject)
+
+        btn_box.addWidget(btn_apply)
+        btn_box.addWidget(btn_cancel)
+        layout.addLayout(btn_box)
+
+        self.populate_list(self.all_items)
+
+    def populate_list(self, items):
+        self.list_widget.clear()
+        for entry in items:
+            item_type = "[FOLDER]" if entry["data"].get("type") == "folder" else "[SCRIPT]"
+            label = f"{item_type} {entry['path']}"
+            lw_item = QListWidgetItem(label)
+            lw_item.setData(Qt.ItemDataRole.UserRole, entry["data"])
+            self.list_widget.addItem(lw_item)
+
+    def filter_items(self, text):
+        query = text.lower().strip()
+        filtered = [item for item in self.all_items if query in item["path"].lower()]
+        self.populate_list(filtered)
+
+    def accept_selection(self):
+        current_item = self.list_widget.currentItem()
+        if current_item:
+            self.selected_style = current_item.data(Qt.ItemDataRole.UserRole)
+            self.accept()
+
 # FULL EDIT DIALOG
 # -----------------------------------------------------------------------------
 class EditDialog(QDialog):
@@ -1606,6 +1676,10 @@ class EditDialog(QDialog):
         btn_random.setStyleSheet(f"background-color: {CP_CYAN}; color: black; padding: 10px;")
         btn_random.clicked.connect(self.randomize_colors)
         
+        btn_copy_style = QPushButton("COPY STYLE FROM...")
+        btn_copy_style.setStyleSheet(f"background-color: {CP_CYAN}; color: black; font-weight: bold; padding: 10px;")
+        btn_copy_style.clicked.connect(self.open_copy_style_dialog)
+
         btn_save = QPushButton("SAVE CHANGES"); 
         btn_save.setStyleSheet(f"background-color: {CP_YELLOW}; color: black; font-weight: bold; padding: 10px;")
         btn_save.clicked.connect(self.save)
@@ -1615,10 +1689,95 @@ class EditDialog(QDialog):
         
         btn_layout.addWidget(btn_reset)
         btn_layout.addWidget(btn_random)
+        btn_layout.addWidget(btn_copy_style)
         btn_layout.addStretch()
         btn_layout.addWidget(btn_save)
         btn_layout.addWidget(btn_cancel)
         vbox.addLayout(btn_layout)
+
+    def collect_all_style_candidates(self, item_list, current_path=""):
+        candidates = []
+        for item in item_list:
+            if item is self.script:
+                continue
+            name = item.get("name", "Unnamed").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
+            name = " ".join(name.split())
+            path_str = f"{current_path} > {name}" if current_path else name
+            
+            candidates.append({"path": path_str, "data": item})
+            
+            if item.get("type") == "folder" and "scripts" in item:
+                candidates.extend(self.collect_all_style_candidates(item["scripts"], path_str))
+        return candidates
+
+    def open_copy_style_dialog(self):
+        all_scripts = self.config.get("scripts", [])
+        candidates = self.collect_all_style_candidates(all_scripts)
+        if not candidates:
+            QMessageBox.information(self, "Copy Style", "No other items found in configuration.")
+            return
+
+        dlg = CopyStyleDialog(candidates, self)
+        if dlg.exec() and dlg.selected_style:
+            src = dlg.selected_style
+            style_keys = [
+                "color", "text_color", "hover_color", "hover_text_color",
+                "border_color", "border_width", "transparent_bg",
+                "font_family", "font_size", "is_bold", "is_italic", "text_align",
+                "corner_radius", "col_span", "row_span", "width", "height",
+                "icon_width", "icon_height", "icon_gap", "icon_position",
+                "grid_columns", "grid_btn_height"
+            ]
+            for key in style_keys:
+                if key in src:
+                    self.script[key] = src[key]
+                else:
+                    self.script.pop(key, None)
+
+            # Update dialog UI controls to reflect copied values
+            def_font = self.config.get("default_font_family", "Consolas")
+            def_fs = self.config.get("default_font_size", 10)
+            def_bold = self.config.get("default_is_bold", True)
+            def_italic = self.config.get("default_is_italic", False)
+
+            current_font = self.script.get("font_family", def_font)
+            idx = self.cmb_font.findText(current_font, Qt.MatchFlag.MatchExactly)
+            if idx >= 0: self.cmb_font.setCurrentIndex(idx)
+            
+            self.spn_size.setValue(self.script.get("font_size", def_fs))
+            self.chk_bold.setChecked(self.script.get("is_bold", def_bold))
+            self.chk_italic.setChecked(self.script.get("is_italic", def_italic))
+            self.cmb_align.setCurrentText(self.script.get("text_align", "center"))
+            self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
+
+            self.spn_cspan.setValue(self.script.get("col_span", 1))
+            self.spn_rspan.setValue(self.script.get("row_span", 1))
+            self.spn_width.setValue(self.script.get("width", 0))
+            self.spn_height.setValue(self.script.get("height", 0))
+            self.spn_radius.setValue(self.script.get("corner_radius", 0))
+            self.spn_border.setValue(self.script.get("border_width", 0))
+
+            self.spn_icon_w.setValue(self.script.get("icon_width", 0))
+            self.spn_icon_h.setValue(self.script.get("icon_height", 0))
+            self.spn_icon_gap.setValue(self.script.get("icon_gap", 2))
+            self.cmb_icon_pos.setCurrentText(self.script.get("icon_position", "top"))
+
+            # Update color picker buttons
+            is_folder = (self.script.get("type") == "folder")
+            def_sbg = self.config.get("def_folder_bg", CP_YELLOW) if is_folder else self.config.get("def_script_bg", "#FFFFFF")
+            def_sfg = self.config.get("def_folder_fg", "#000000") if is_folder else self.config.get("def_script_fg", "#000000")
+            def_shbg = self.config.get("def_folder_hbg", CP_BG) if is_folder else self.config.get("def_script_hbg", CP_BG)
+            def_shfg = self.config.get("def_folder_hfg", def_sbg) if is_folder else self.config.get("def_script_hfg", def_sbg)
+
+            self.set_btn_color(self.btn_col_bg, self.script.get("color", def_sbg))
+            self.set_btn_color(self.btn_col_fg, self.script.get("text_color", def_sfg))
+            self.set_btn_color(self.btn_col_hbg, self.script.get("hover_color", def_shbg))
+            self.set_btn_color(self.btn_col_hfg, self.script.get("hover_text_color", def_shfg))
+            self.set_btn_color(self.btn_col_brd, self.script.get("border_color", self.script.get("color", def_sbg)))
+
+            if is_folder:
+                self.spn_inner_cols.setValue(self.script.get("grid_columns", 0))
+                self.spn_inner_h.setValue(self.script.get("grid_btn_height", 0))
 
     def run_code_block(self, code, interpreter):
         import tempfile
