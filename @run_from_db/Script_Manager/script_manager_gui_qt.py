@@ -920,6 +920,10 @@ class CodeHighlighter(QSyntaxHighlighter):
 # -----------------------------------------------------------------------------
 # MULTI-BLOCK CODE WIDGET
 # -----------------------------------------------------------------------------
+class NoScrollPlainTextEdit(QPlainTextEdit):
+    def wheelEvent(self, event):
+        event.ignore()
+
 class CodeBlockWidget(QWidget):
     def __init__(self, parent=None, run_callback=None, comment="", type_="cmd", code=""):
         super().__init__(parent)
@@ -965,7 +969,7 @@ class CodeBlockWidget(QWidget):
         header_lay.addWidget(btn_del)
         
         # Code editor
-        self.txt_edit = QPlainTextEdit()
+        self.txt_edit = NoScrollPlainTextEdit()
         self.txt_edit.setPlainText(code)
         self.txt_edit.setFont(QFont("Consolas", 10))
         self.txt_edit.setStyleSheet(f"background-color: {CP_BG}; color: {CP_TEXT}; border: 1px solid {CP_DIM};")
