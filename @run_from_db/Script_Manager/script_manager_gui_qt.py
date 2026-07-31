@@ -1577,15 +1577,22 @@ class EditDialog(QDialog):
             self.grp_mode = QButtonGroup(self)
             self.rb_file = QRadioButton("Target File")
             self.rb_inline = QRadioButton("Inline Script")
-            self.grp_mode.addButton(self.rb_file); self.grp_mode.addButton(self.rb_inline)
-            mode_box.addWidget(self.rb_file); mode_box.addWidget(self.rb_inline)
-            if self.script.get("use_inline"): self.rb_inline.setChecked(True)
-            else: self.rb_file.setChecked(True)
+            self.rb_multi = QRadioButton("Multi-Block")
             
-            # Multi-block toggle
-            self.chk_multi_block = QCheckBox("Enable Multi-Block")
-            self.chk_multi_block.setChecked(self.script.get("use_multi_block", False))
-            mode_box.addWidget(self.chk_multi_block)
+            self.grp_mode.addButton(self.rb_file)
+            self.grp_mode.addButton(self.rb_inline)
+            self.grp_mode.addButton(self.rb_multi)
+            
+            mode_box.addWidget(self.rb_file)
+            mode_box.addWidget(self.rb_inline)
+            mode_box.addWidget(self.rb_multi)
+            
+            if self.script.get("use_multi_block"):
+                self.rb_multi.setChecked(True)
+            elif self.script.get("use_inline"):
+                self.rb_inline.setChecked(True)
+            else:
+                self.rb_file.setChecked(True)
             
             r_lay.addLayout(mode_box)
             
@@ -1699,8 +1706,8 @@ class EditDialog(QDialog):
                     comment_color=block.get("comment_color")
                 )
                 
-            self.chk_multi_block.stateChanged.connect(self.toggle_multi_block_mode)
-            self.toggle_multi_block_mode()
+            self.rb_multi.toggled.connect(self.toggle_mode)
+            self.toggle_mode()
             
             right_grp.setLayout(r_lay)
             hbox.addWidget(right_grp, stretch=6) # 60% split
@@ -1880,8 +1887,8 @@ class EditDialog(QDialog):
         self.blocks_layout.addWidget(block)
         return block
 
-    def toggle_multi_block_mode(self):
-        is_multi = self.chk_multi_block.isChecked()
+    def toggle_mode(self):
+        is_multi = self.rb_multi.isChecked()
         self.single_block_container.setVisible(not is_multi)
         self.multi_block_container.setVisible(is_multi)
 
@@ -2121,11 +2128,9 @@ class EditDialog(QDialog):
             self.script["ctrl_left_cmd"] = self.inp_ctrl_left.text()
             self.script["ctrl_right_cmd"] = self.inp_ctrl_right.text()
             self.script["use_inline"] = self.rb_inline.isChecked()
+            self.script["use_multi_block"] = self.rb_multi.isChecked()
             self.script["inline_type"] = self.cmb_type.currentText()
             self.script["inline_script"] = self.txt_inline.toPlainText()
-            
-            # Save multi-block settings
-            self.script["use_multi_block"] = self.chk_multi_block.isChecked()
             blocks_data = []
             for i in range(self.blocks_layout.count()):
                 item = self.blocks_layout.itemAt(i)
