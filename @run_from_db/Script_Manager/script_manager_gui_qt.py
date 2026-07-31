@@ -1469,6 +1469,36 @@ class EditDialog(QDialog):
             self.blocks_scroll.setWidgetResizable(True)
             self.blocks_scroll.setStyleSheet(f"background-color: {CP_BG}; border: 1px solid {CP_DIM};")
             
+            # Cyberpunk Scrollbar Style for outer scroll area
+            self.blocks_scroll.verticalScrollBar().setStyleSheet(f"""
+                QScrollBar:vertical {{
+                    border: none;
+                    background: {CP_BG};
+                    width: 8px;
+                    margin: 0px 0px 0px 0px;
+                }}
+                QScrollBar::handle:vertical {{
+                    background: {CP_CYAN};
+                    min-height: 20px;
+                    border-radius: 4px;
+                }}
+                QScrollBar::handle:vertical:hover {{
+                    background: {CP_YELLOW};
+                }}
+                QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {{
+                    border: none;
+                    background: none;
+                    height: 0px;
+                }}
+                QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {{
+                    border: none;
+                    background: none;
+                }}
+                QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {{
+                    background: none;
+                }}
+            """)
+            
             self.blocks_widget = QWidget()
             self.blocks_widget.setStyleSheet(f"background-color: {CP_BG};")
             self.blocks_layout = QVBoxLayout(self.blocks_widget)
