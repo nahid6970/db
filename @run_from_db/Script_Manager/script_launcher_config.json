@@ -4598,7 +4598,15 @@
             "use_inline": false,
             "width": 0,
             "require_password": false,
-            "text_color": "#55ff7f"
+            "text_color": "#55ff7f",
+            "tags": [
+                "dev"
+            ],
+            "use_multi_block": false,
+            "inline_blocks": [],
+            "edit_on_click": false,
+            "text_align": "center",
+            "transparent_bg": false
         },
         {
             "_runtime_font_family": "Arial",

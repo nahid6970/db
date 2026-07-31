@@ -1285,6 +1285,15 @@ class EditDialog(QDialog):
         
         self.update_svg_preview(self.script.get("svg_content", ""))
         
+        # Tags row
+        tags_box = QHBoxLayout()
+        current_tags = self.script.get("tags", [])
+        tags_str = ", ".join(current_tags) if isinstance(current_tags, list) else str(current_tags)
+        self.inp_tags = QLineEdit(tags_str)
+        self.inp_tags.setPlaceholderText("dev, python, admin (comma-separated)")
+        tags_box.addWidget(self.inp_tags)
+        l_basic.addRow("Tags:", tags_box)
+
         # Icon path (for all items)
         icon_box = QHBoxLayout()
         self.inp_icon = QLineEdit(normalize_path(self.script.get("icon_path", "")))
@@ -2127,6 +2136,8 @@ class EditDialog(QDialog):
         self.script["name"] = self.inp_name.text()
         self.script["nf_char"] = self.inp_nf_char.text()
         self.script["icon_path"] = self.inp_icon.text()
+        raw_tags = [t.strip().lstrip('#') for t in self.inp_tags.text().split(',') if t.strip()]
+        self.script["tags"] = raw_tags
         
         # Save SVG
         if hasattr(self, "_temp_svg_content"):
@@ -2965,6 +2976,7 @@ class MainWindow(QMainWindow):
         
         self.config = {}
         self.view_stack = [] 
+        self.active_tag_filter = None
         self.drag_pos = QPoint()
         
         self.load_config()
@@ -3156,6 +3168,23 @@ class MainWindow(QMainWindow):
         
         self.main_layout.addLayout(header)
 
+        # Tag Filter Bar
+        self.tag_bar_scroll = QScrollArea()
+        self.tag_bar_scroll.setWidgetResizable(True)
+        self.tag_bar_scroll.setFixedHeight(35)
+        self.tag_bar_scroll.setStyleSheet("background: transparent; border: none;")
+        self.tag_bar_scroll.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.tag_bar_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        
+        self.tag_bar_widget = QWidget()
+        self.tag_bar_layout = QHBoxLayout(self.tag_bar_widget)
+        self.tag_bar_layout.setContentsMargins(0, 0, 0, 0)
+        self.tag_bar_layout.setSpacing(6)
+        self.tag_bar_layout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        
+        self.tag_bar_scroll.setWidget(self.tag_bar_widget)
+        self.main_layout.addWidget(self.tag_bar_scroll)
+
         # Grid
         self.scroll = QScrollArea()
         self.scroll.setWidgetResizable(True)
@@ -3288,15 +3317,96 @@ class MainWindow(QMainWindow):
             self.save_config()
             event.acceptProposedAction()
 
-    def collect_all_items(self, item_list, results):
-        """Recursively collect all items matching search"""
+    def item_has_tag(self, item, target_tag):
+        if not target_tag: return True
+        tags = item.get("tags", [])
+        target = target_tag.lower().strip().lstrip('#')
+        if isinstance(tags, list):
+            return any(str(t).strip().lower().lstrip('#') == target for t in tags)
+        elif isinstance(tags, str):
+            return any(t.strip().lower().lstrip('#') == target for t in tags.split(','))
+        return False
+
+    def collect_all_tags(self, item_list, tag_set):
         for item in item_list:
-            # Check match (case insensitive)
-            query = self.inp_search.text().lower()
-            if item.get("type") != "folder" and query in item.get("name", "").lower():
-                results.append(item)
+            tags = item.get("tags", [])
+            if isinstance(tags, list):
+                for t in tags:
+                    if str(t).strip():
+                        tag_set.add(str(t).strip().lower().lstrip('#'))
+            elif isinstance(tags, str) and tags.strip():
+                for t in tags.split(','):
+                    if t.strip():
+                        tag_set.add(t.strip().lower().lstrip('#'))
+            if item.get("type") == "folder" and "scripts" in item:
+                self.collect_all_tags(item["scripts"], tag_set)
+
+    def set_tag_filter(self, tag):
+        self.active_tag_filter = tag
+        self.refresh_grid()
+
+    def update_tag_bar(self):
+        self.clear_layout(self.tag_bar_layout)
+        tag_set = set()
+        self.collect_all_tags(self.config.get("scripts", []), tag_set)
+        
+        if not tag_set:
+            self.tag_bar_scroll.hide()
+            return
             
-            # Recurse if folder
+        self.tag_bar_scroll.show()
+        
+        btn_all = QPushButton("ALL")
+        is_all = (self.active_tag_filter is None)
+        btn_all.setCursor(Qt.CursorShape.PointingHandCursor)
+        bg_all = CP_YELLOW if is_all else CP_PANEL
+        fg_all = "black" if is_all else CP_TEXT
+        btn_all.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {bg_all}; color: {fg_all};
+                border: 1px solid {CP_DIM}; border-radius: 12px;
+                padding: 3px 10px; font-family: 'Consolas'; font-size: 9pt; font-weight: bold;
+            }}
+            QPushButton:hover {{ border: 1px solid {CP_CYAN}; }}
+        """)
+        btn_all.clicked.connect(lambda: self.set_tag_filter(None))
+        self.tag_bar_layout.addWidget(btn_all)
+        
+        for tag in sorted(list(tag_set)):
+            is_active = (self.active_tag_filter == tag)
+            btn = QPushButton(f"#{tag}")
+            btn.setCursor(Qt.CursorShape.PointingHandCursor)
+            bg_c = CP_CYAN if is_active else CP_PANEL
+            fg_c = "black" if is_active else CP_TEXT
+            btn.setStyleSheet(f"""
+                QPushButton {{
+                    background-color: {bg_c}; color: {fg_c};
+                    border: 1px solid {CP_DIM}; border-radius: 12px;
+                    padding: 3px 10px; font-family: 'Consolas'; font-size: 9pt; font-weight: bold;
+                }}
+                QPushButton:hover {{ border: 1px solid {CP_YELLOW}; }}
+            """)
+            btn.clicked.connect(partial(self.set_tag_filter, None if is_active else tag))
+            self.tag_bar_layout.addWidget(btn)
+
+    def collect_all_items(self, item_list, results):
+        """Recursively collect all items matching search and tag filters"""
+        query = self.inp_search.text().lower().strip()
+        is_tag_query = query.startswith("#")
+        clean_q = query[1:] if is_tag_query else query
+
+        for item in item_list:
+            if item.get("type") != "folder":
+                name_match = (not is_tag_query) and (clean_q in item.get("name", "").lower())
+                tag_match = self.item_has_tag(item, clean_q)
+                
+                if name_match or tag_match or not clean_q:
+                    if self.active_tag_filter:
+                        if self.item_has_tag(item, self.active_tag_filter):
+                            results.append(item)
+                    else:
+                        results.append(item)
+            
             if item.get("type") == "folder" and "scripts" in item:
                 self.collect_all_items(item["scripts"], results)
 
@@ -3356,6 +3466,8 @@ class MainWindow(QMainWindow):
         
         root_btn = create_bc_btn("ROOT", lambda: navigate_to(-1))
         self.breadcrumb_layout.addWidget(root_btn)
+
+        self.update_tag_bar()
 
         # CHECK SEARCH STATE
         search_query = self.inp_search.text().strip()
@@ -3518,6 +3630,9 @@ class MainWindow(QMainWindow):
                 # Global settings
                 cols = self.config.get("columns", 5)
                 def_h = self.config.get("default_btn_height", 40)
+
+            if self.active_tag_filter:
+                scripts = [s for s in scripts if self.item_has_tag(s, self.active_tag_filter)]
 
         # Default typography
         def_fs = self.config.get("default_font_size", 10)
