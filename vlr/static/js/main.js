@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     applyFilters();
     updateLoadMissingStatsButton();
 
-    // Check if we should auto-open a match modal based on URL query parameters
+    // Check if we should auto-open a match or team history modal based on URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
     const matchIdParam = urlParams.get("match");
     if (matchIdParam) {
@@ -147,6 +147,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             })
             .catch(err => console.error("Failed to auto-open match detail:", err));
+    }
+
+    const teamParam = urlParams.get("team");
+    if (teamParam) {
+        // Delay slightly to ensure DOM elements are fully initialized
+        setTimeout(() => showTeamHistory(teamParam), 100);
     }
 
     // Open VLR.gg page on card click
@@ -2184,10 +2190,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const teamsMap = new Map();
         matches.forEach(m => {
             if (m.team1 && m.team1 !== "TBD") {
-                if (!teamsMap.has(m.team1)) teamsMap.set(m.team1, m.team1_logo || "");
+                if (!teamsMap.has(m.team1) || (!teamsMap.get(m.team1) && m.team1_logo)) {
+                    teamsMap.set(m.team1, m.team1_logo || "");
+                }
             }
             if (m.team2 && m.team2 !== "TBD") {
-                if (!teamsMap.has(m.team2)) teamsMap.set(m.team2, m.team2_logo || "");
+                if (!teamsMap.has(m.team2) || (!teamsMap.get(m.team2) && m.team2_logo)) {
+                    teamsMap.set(m.team2, m.team2_logo || "");
+                }
             }
         });
 
@@ -2315,16 +2325,26 @@ document.addEventListener("DOMContentLoaded", () => {
             teamMatches = teamMatches.filter(m => checkedT.has(m.tournament));
         }
 
+        // Find best logo across all available matches
+        let foundLogo = "";
+        for (const m of allMatches) {
+            if (m.team1 === teamName && m.team1_logo) { foundLogo = m.team1_logo; break; }
+            if (m.team2 === teamName && m.team2_logo) { foundLogo = m.team2_logo; break; }
+        }
+        if (!foundLogo && typeof INITIAL_MATCHES !== "undefined") {
+            for (const m of INITIAL_MATCHES) {
+                if (m.team1 === teamName && m.team1_logo) { foundLogo = m.team1_logo; break; }
+                if (m.team2 === teamName && m.team2_logo) { foundLogo = m.team2_logo; break; }
+            }
+        }
+
         // Calculate Win Rate / Wins / Losses
         let wins = 0;
         let losses = 0;
         let draws = 0;
-        let foundLogo = "";
 
         teamMatches.forEach(m => {
             const isTeam1 = m.team1 === teamName;
-            if (isTeam1 && m.team1_logo) foundLogo = m.team1_logo;
-            if (!isTeam1 && m.team2_logo) foundLogo = m.team2_logo;
 
             if (m.status !== "Completed" && m.status) return; // skip upcoming/live matches for stats calculation
 
@@ -2344,7 +2364,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (profileLogoWrapper) {
             if (foundLogo) {
                 const isWhite = whiteLogoTeams.has(teamName) ? "white-bg-logo" : "";
-                profileLogoWrapper.innerHTML = `<img src="${foundLogo}" class="${isWhite}" alt="${teamName}">`;
+                profileLogoWrapper.innerHTML = `<img src="${foundLogo}" class="${isWhite}" alt="${teamName}" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\\'fa-solid fa-people-group\\'></i>';">`;
             } else {
                 profileLogoWrapper.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
             }
@@ -2507,7 +2527,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const iconContainer = document.getElementById("thr-selected-team-icon-container");
         if (iconContainer) {
             if (foundLogo) {
-                iconContainer.innerHTML = `<img src="${foundLogo}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; border-radius: 4px;">`;
+                iconContainer.innerHTML = `<img src="${foundLogo}" style="width: 18px; height: 18px; object-fit: contain; vertical-align: middle; border-radius: 4px;" onerror="this.onerror=null; this.parentNode.innerHTML='<i class=\\'fa-solid fa-people-group\\'></i>';">`;
             } else {
                 iconContainer.innerHTML = `<i class="fa-solid fa-people-group"></i>`;
             }
@@ -2892,13 +2912,12 @@ document.addEventListener("DOMContentLoaded", () => {
             html += `</div>`;
             tournamentStandingsContent.innerHTML = html;
 
-            // Bind click handlers to team rows
+            // Bind click handlers to team rows to open team history in a new tab
             tournamentStandingsContent.querySelectorAll(".standings-team-row").forEach(row => {
                 row.addEventListener("click", () => {
                     const teamName = row.getAttribute("data-team");
                     if (teamName) {
-                        tournamentStandingsModal.style.display = "none";
-                        showTeamHistory(teamName);
+                        window.open("/?team=" + encodeURIComponent(teamName), "_blank");
                     }
                 });
             });
