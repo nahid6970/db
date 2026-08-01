@@ -2762,6 +2762,129 @@ body.light .white-logo-item {
     }
 }
 
+/* ===== Tournament Standings Overhaul Styling ===== */
+.standings-tourney-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: var(--transition-fast);
+}
+.standings-tourney-card:hover {
+    border-color: rgba(255, 70, 85, 0.25);
+}
+.standings-tourney-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: var(--bg-darker);
+    border-bottom: 1px solid var(--card-border);
+}
+.standings-tourney-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.standings-tourney-title {
+    font-family: var(--font-heading);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: 0.5px;
+}
+.standings-tourney-badge {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+    white-space: nowrap;
+}
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+.standings-table th {
+    background: rgba(8, 14, 20, 0.4);
+    padding: 10px 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--card-border);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+.standings-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    vertical-align: middle;
+}
+.standings-table tr:last-child td {
+    border-bottom: none;
+}
+.standings-team-row {
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+.standings-team-row:hover td {
+    background: rgba(255, 255, 255, 0.04);
+}
+.standings-rank {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 14px;
+    width: 36px;
+    text-align: center;
+    color: var(--text-muted);
+}
+.standings-rank.rank-1 {
+    color: #fbbf24;
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.3);
+}
+.standings-rank.rank-2 {
+    color: #94a3b8;
+}
+.standings-rank.rank-3 {
+    color: #d97706;
+}
+.standings-team-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.standings-team-logo {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+.standings-win-rate-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    background: rgba(0, 245, 155, 0.1);
+    color: var(--accent-green);
+}
+body.light .standings-win-rate-pill {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+}
+
+
 
 
 

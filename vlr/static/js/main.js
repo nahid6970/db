@@ -2710,76 +2710,203 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentStandingsModal = document.getElementById("tournament-standings-modal");
     const tournamentStandingsClose = document.getElementById("tournament-standings-close");
     const tournamentStandingsContent = document.getElementById("tournament-standings-content");
+    const standingsSearchInput = document.getElementById("standings-search");
 
-    tournamentStandingsBtn?.addEventListener("click", async () => {
+    let cachedStandingsMatches = null;
+
+    async function renderTournamentStandings() {
+        if (!tournamentStandingsContent) return;
+
         try {
-            const response = await fetch("/api/matches/all");
-            const matches = await response.json();
-            
+            if (!cachedStandingsMatches) {
+                const response = await fetch("/api/matches/all");
+                cachedStandingsMatches = await response.json();
+            }
+            const matches = cachedStandingsMatches || [];
+
             if (!matches || matches.length === 0) {
-                tournamentStandingsContent.innerHTML = `<p style="padding: 20px;">No match data found.</p>`;
-                tournamentStandingsModal.style.display = "flex";
+                tournamentStandingsContent.innerHTML = `<p style="padding: 30px; text-align: center; color: var(--text-muted);">No match data found.</p>`;
                 return;
             }
-            
-            const standings = {};
+
+            const standingsByTourney = {};
+            const tourneyLogos = {};
+            const teamLogos = {};
+
             matches.forEach(m => {
-                // Check if match is completed and has scores
                 if (m.status?.toLowerCase() !== "completed" || m.score1 === null || m.score2 === null) return;
-                
-                if (!standings[m.tournament]) standings[m.tournament] = {};
-                if (!standings[m.tournament][m.team1]) standings[m.tournament][m.team1] = { w: 0, l: 0 };
-                if (!standings[m.tournament][m.team2]) standings[m.tournament][m.team2] = { w: 0, l: 0 };
-                
+                const tourney = m.tournament;
+                if (!tourney) return;
+
                 const s1 = parseInt(m.score1);
                 const s2 = parseInt(m.score2);
-                
-                if (!isNaN(s1) && !isNaN(s2)) {
-                    if (s1 > s2) {
-                        standings[m.tournament][m.team1].w++;
-                        standings[m.tournament][m.team2].l++;
-                    } else if (s2 > s1) {
-                        standings[m.tournament][m.team2].w++;
-                        standings[m.tournament][m.team1].l++;
-                    }
+                if (isNaN(s1) || isNaN(s2)) return;
+
+                if (m.tournament_logo && !tourneyLogos[tourney]) tourneyLogos[tourney] = m.tournament_logo;
+                if (m.team1 && m.team1_logo && !teamLogos[m.team1]) teamLogos[m.team1] = m.team1_logo;
+                if (m.team2 && m.team2_logo && !teamLogos[m.team2]) teamLogos[m.team2] = m.team2_logo;
+
+                if (!standingsByTourney[tourney]) standingsByTourney[tourney] = { matchesCount: 0, teams: {} };
+                const tourneyData = standingsByTourney[tourney];
+                tourneyData.matchesCount++;
+
+                const t1 = m.team1 || "TBD";
+                const t2 = m.team2 || "TBD";
+
+                if (!tourneyData.teams[t1]) tourneyData.teams[t1] = { name: t1, w: 0, l: 0, mapW: 0, mapL: 0 };
+                if (!tourneyData.teams[t2]) tourneyData.teams[t2] = { name: t2, w: 0, l: 0, mapW: 0, mapL: 0 };
+
+                if (s1 > s2) {
+                    tourneyData.teams[t1].w++;
+                    tourneyData.teams[t2].l++;
+                } else if (s2 > s1) {
+                    tourneyData.teams[t2].w++;
+                    tourneyData.teams[t1].l++;
+                }
+
+                // Aggregate map scores
+                const maps = m.maps || [];
+                if (maps.length > 0) {
+                    maps.forEach(mp => {
+                        const ms1 = parseInt(mp.score1) || 0;
+                        const ms2 = parseInt(mp.score2) || 0;
+                        if (mp.winner === 0) {
+                            tourneyData.teams[t1].mapW++;
+                            tourneyData.teams[t2].mapL++;
+                        } else if (mp.winner === 1) {
+                            tourneyData.teams[t2].mapW++;
+                            tourneyData.teams[t1].mapL++;
+                        } else if (ms1 > ms2) {
+                            tourneyData.teams[t1].mapW++;
+                            tourneyData.teams[t2].mapL++;
+                        } else if (ms2 > ms1) {
+                            tourneyData.teams[t2].mapW++;
+                            tourneyData.teams[t1].mapL++;
+                        }
+                    });
+                } else {
+                    tourneyData.teams[t1].mapW += s1;
+                    tourneyData.teams[t1].mapL += s2;
+                    tourneyData.teams[t2].mapW += s2;
+                    tourneyData.teams[t2].mapL += s1;
                 }
             });
 
-            if (Object.keys(standings).length === 0) {
-                tournamentStandingsContent.innerHTML = `<p style="padding: 20px;">No completed matches found to calculate standings.</p>`;
-            } else {
-                let html = `<div style="color: var(--text-primary); font-family: 'Outfit', sans-serif;">`;
-                for (const [tourney, teams] of Object.entries(standings)) {
-                    html += `<h3 style="margin-top: 20px; padding-bottom: 8px; border-bottom: 2px solid var(--accent-red); color: var(--accent-red); text-transform: uppercase; letter-spacing: 1px;">${tourney}</h3>`;
-                    html += `<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">
-                                <thead>
-                                    <tr style="text-align: left; color: var(--text-secondary); font-size: 12px;">
-                                        <th style="padding: 8px;">Team</th>
-                                        <th style="padding: 8px; text-align: center;">W</th>
-                                        <th style="padding: 8px; text-align: center;">L</th>
-                                    </tr>
-                                </thead>
-                                <tbody>`;
-                    
-                    const sortedTeams = Object.entries(teams).sort((a, b) => b[1].w - a[1].w);
-                    sortedTeams.forEach(([team, stats]) => {
-                        html += `<tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                    <td style="padding: 10px 8px; font-weight: 500;">${team}</td>
-                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-green);">${stats.w}</td>
-                                    <td style="padding: 10px 8px; text-align: center; color: var(--accent-red);">${stats.l}</td>
-                                 </tr>`;
-                    });
-                    html += `</tbody></table>`;
-                }
-                html += `</div>`;
-                tournamentStandingsContent.innerHTML = html;
+            const query = (standingsSearchInput?.value || "").toLowerCase().trim();
+
+            const tourneyEntries = Object.entries(standingsByTourney).filter(([tourneyName, data]) => {
+                if (!query) return true;
+                if (tourneyName.toLowerCase().includes(query)) return true;
+                return Object.keys(data.teams).some(tName => tName.toLowerCase().includes(query));
+            });
+
+            if (tourneyEntries.length === 0) {
+                tournamentStandingsContent.innerHTML = `<p style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px;">No tournament or team matched your search.</p>`;
+                return;
             }
-            tournamentStandingsModal.style.display = "flex";
+
+            let html = `<div class="standings-container">`;
+
+            tourneyEntries.forEach(([tourneyName, data]) => {
+                const logo = tourneyLogos[tourneyName] || "";
+                let teamsList = Object.values(data.teams);
+
+                if (query && !tourneyName.toLowerCase().includes(query)) {
+                    teamsList = teamsList.filter(t => t.name.toLowerCase().includes(query));
+                }
+
+                // Default sorting: Wins desc, Series Losses asc, Map Diff desc
+                teamsList.sort((a, b) => {
+                    if (b.w !== a.w) return b.w - a.w;
+                    if (a.l !== b.l) return a.l - b.l;
+                    const diffA = a.mapW - a.mapL;
+                    const diffB = b.mapW - b.mapL;
+                    return diffB - diffA;
+                });
+
+                html += `
+                    <div class="standings-tourney-card">
+                        <div class="standings-tourney-header">
+                            ${logo ? `<img src="${logo}" class="standings-tourney-logo" onerror="this.style.display='none';">` : '<i class="fa-solid fa-trophy" style="color: var(--accent-red);"></i>'}
+                            <span class="standings-tourney-title">${tourneyName}</span>
+                            <span class="standings-tourney-badge">${data.matchesCount} Matches</span>
+                        </div>
+                        <table class="mdm-stats-table standings-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 45px; text-align: center;"><span>#</span></th>
+                                    <th><span>Team</span></th>
+                                    <th class="r"><span>Series (W-L)</span></th>
+                                    <th class="r"><span>Maps (W-L)</span></th>
+                                    <th class="r"><span>Map Diff</span></th>
+                                    <th class="r"><span>Win Rate</span></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                `;
+
+                teamsList.forEach((team, idx) => {
+                    const rank = idx + 1;
+                    const rankCls = rank === 1 ? "rank-1" : (rank === 2 ? "rank-2" : (rank === 3 ? "rank-3" : ""));
+                    const teamLogo = teamLogos[team.name] || "";
+                    const isWhiteLogo = whiteLogoTeams.has(team.name);
+                    const mp = team.w + team.l;
+                    const winRate = mp > 0 ? Math.round((team.w / mp) * 100) : 0;
+                    const mapDiff = team.mapW - team.mapL;
+
+                    html += `
+                        <tr class="standings-team-row" data-team="${team.name}">
+                            <td class="standings-rank ${rankCls}">${rank}</td>
+                            <td>
+                                <div class="standings-team-cell">
+                                    ${teamLogo ? `<img src="${teamLogo}" class="standings-team-logo ${isWhiteLogo ? 'white-bg-logo' : ''}" onerror="this.style.display='none';">` : '<i class="fa-solid fa-people-group" style="color: var(--text-muted); font-size: 14px;"></i>'}
+                                    <span>${team.name}</span>
+                                </div>
+                            </td>
+                            <td class="r" style="font-weight: 700;">${team.w} – ${team.l}</td>
+                            <td class="r">${team.mapW} – ${team.mapL}</td>
+                            <td class="r">${formatDiff(mapDiff)}</td>
+                            <td class="r"><span class="standings-win-rate-pill">${winRate}%</span></td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            });
+
+            html += `</div>`;
+            tournamentStandingsContent.innerHTML = html;
+
+            // Bind click handlers to team rows
+            tournamentStandingsContent.querySelectorAll(".standings-team-row").forEach(row => {
+                row.addEventListener("click", () => {
+                    const teamName = row.getAttribute("data-team");
+                    if (teamName) {
+                        tournamentStandingsModal.style.display = "none";
+                        showTeamHistory(teamName);
+                    }
+                });
+            });
+
         } catch (err) {
             console.error("Error fetching standings:", err);
-            tournamentStandingsContent.innerHTML = `<p style="padding: 20px; color: var(--accent-red);">Error loading standings.</p>`;
-            tournamentStandingsModal.style.display = "flex";
+            tournamentStandingsContent.innerHTML = `<p style="padding: 30px; text-align: center; color: var(--accent-red);">Error loading standings data.</p>`;
         }
+    }
+
+    tournamentStandingsBtn?.addEventListener("click", () => {
+        if (standingsSearchInput) standingsSearchInput.value = "";
+        cachedStandingsMatches = null; // force fresh data fetch on button click
+        renderTournamentStandings();
+        tournamentStandingsModal.style.display = "flex";
+    });
+
+    standingsSearchInput?.addEventListener("input", () => {
+        renderTournamentStandings();
     });
 
     tournamentStandingsClose?.addEventListener("click", () => {
@@ -2787,7 +2914,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     tournamentStandingsModal?.addEventListener("click", (e) => {
-        if (e.target === tournamentStandingsModal) {
+        const modalBox = tournamentStandingsModal.querySelector(".match-detail-modal");
+        if (modalBox && !modalBox.contains(e.target)) {
             tournamentStandingsModal.style.display = "none";
         }
     });
