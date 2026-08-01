@@ -2733,10 +2733,18 @@ document.addEventListener("DOMContentLoaded", () => {
             const tourneyLogos = {};
             const teamLogos = {};
 
+            const visibleCheckedItems = Array.from(document.querySelectorAll("#tournament-checklist .tourney-item"))
+                .filter(item => item.style.display !== "none")
+                .map(item => item.querySelector(".tourney-checkbox"))
+                .filter(cb => cb && cb.checked)
+                .map(cb => cb.value);
+
+            const activeTournaments = new Set(visibleCheckedItems);
+
             matches.forEach(m => {
                 if (m.status?.toLowerCase() !== "completed" || m.score1 === null || m.score2 === null) return;
                 const tourney = m.tournament;
-                if (!tourney) return;
+                if (!tourney || !activeTournaments.has(tourney)) return;
 
                 const s1 = parseInt(m.score1);
                 const s2 = parseInt(m.score2);
@@ -2801,7 +2809,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (tourneyEntries.length === 0) {
-                tournamentStandingsContent.innerHTML = `<p style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px;">No tournament or team matched your search.</p>`;
+                const msg = activeTournaments.size === 0 
+                    ? "No tournaments selected in sidebar filters."
+                    : "No tournament or team matched your search.";
+                tournamentStandingsContent.innerHTML = `<p style="padding: 40px; text-align: center; color: var(--text-muted); font-size: 14px;">${msg}</p>`;
                 return;
             }
 
