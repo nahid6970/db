@@ -2275,6 +2275,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
+                "id": 10,
+                "title": "The Walking Dead - Dead City - S03E02 - Haven",
+                "watched": false,
+                "added_date": "2026-08-03T17:11:15.199481",
+                "notify": "unseen"
+            },
+            {
                 "id": 9,
                 "title": "The Walking Dead - Dead City - S03E01 - Trillium",
                 "watched": false,
