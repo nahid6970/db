@@ -7,6 +7,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
             {
+                "id": 46,
+                "title": "One Piece - s23e17 - [1172] - Monsters Appear in Elbaph - 'What I Fear Most' WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-08-03T15:11:15.192252",
+                "notify": "unseen"
+            },
+            {
                 "id": 45,
                 "title": "One Piece - s23e16 - [1171] - The Heinous Sinner - Loki of the Underworld Freed!! WEBDL-1080p - [Erai-raws]",
                 "watched": false,
@@ -1570,6 +1577,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mushoku Tensei - Jobless Reincarnation",
         "episodes": [
             {
+                "id": 17,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e06 - [55] - Another Domestic Disaster WEBRip-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-08-03T15:11:15.195290",
+                "notify": "unseen"
+            },
+            {
                 "id": 16,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s03e03 - [52] - Life Back at Home WEBDL-1080p - [ToonsHub]",
                 "watched": false,
@@ -2811,6 +2825,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE SmackDown",
         "rating": "3",
         "episodes": [
+            {
+                "id": 32,
+                "title": "WWE SmackDown - 2026-07-31 - SmackDown 1406 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-08-01T22:59:08.535976",
+                "notify": "seen"
+            },
             {
                 "id": 31,
                 "title": "WWE SmackDown - 2026-06-26 - SmackDown 1401 WEBDL-1080p",
