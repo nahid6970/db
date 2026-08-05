@@ -1017,44 +1017,61 @@ class CodeBlockWidget(QWidget):
         self.comment_input = QLineEdit()
         self.comment_input.setPlaceholderText("Comment / Header")
         self.comment_input.setText(comment)
+        self.comment_input.setFixedHeight(26)
         
+        self.type_cmb = QComboBox()
+        self.type_cmb.addItems(["cmd", "powershell", "pwsh", "python"])
+        self.type_cmb.setCurrentText(type_)
+        self.type_cmb.setFixedWidth(95)
+        self.type_cmb.setFixedHeight(26)
+        self.type_cmb.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px 4px;")
+
         self.comment_size_spn = QSpinBox()
         self.comment_size_spn.setRange(6, 40)
         self.comment_size_spn.setValue(comment_size if comment_size is not None else default_size)
-        self.comment_size_spn.setFixedWidth(55)
+        self.comment_size_spn.setFixedWidth(50)
+        self.comment_size_spn.setFixedHeight(26)
         self.comment_size_spn.setToolTip("Comment Font Size")
-        self.comment_size_spn.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px 2px 2px 4px;")
+        self.comment_size_spn.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px;")
 
         self.btn_comment_color = QPushButton("A")
-        self.btn_comment_color.setFixedWidth(30)
+        self.btn_comment_color.setFixedSize(26, 26)
         self.btn_comment_color.setToolTip("Comment Font Color")
         self.btn_comment_color.clicked.connect(self.pick_comment_color)
 
         self.update_comment_style()
         self.comment_size_spn.valueChanged.connect(self.update_comment_style)
 
-        self.type_cmb = QComboBox()
-        self.type_cmb.addItems(["cmd", "powershell", "pwsh", "python"])
-        self.type_cmb.setCurrentText(type_)
-        self.type_cmb.setFixedWidth(100)
-        self.type_cmb.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 4px;")
-        
+        btn_up = QPushButton("▲")
+        btn_up.setFixedSize(26, 26)
+        btn_up.setToolTip("Move block up")
+        btn_up.setStyleSheet(f"QPushButton {{ background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; font-size: 8pt; font-weight: bold; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: {CP_DIM}; }}")
+        btn_up.clicked.connect(self.move_up)
+
+        btn_down = QPushButton("▼")
+        btn_down.setFixedSize(26, 26)
+        btn_down.setToolTip("Move block down")
+        btn_down.setStyleSheet(f"QPushButton {{ background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; font-size: 8pt; font-weight: bold; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: {CP_DIM}; }}")
+        btn_down.clicked.connect(self.move_down)
+
         btn_run = QPushButton("▶")
-        btn_run.setFixedWidth(30)
+        btn_run.setFixedSize(26, 26)
         btn_run.setToolTip("Run this block individually")
-        btn_run.setStyleSheet(f"background-color: {CP_GREEN}; color: black; font-weight: bold; border: none; padding: 0px; border-radius: 2px;")
+        btn_run.setStyleSheet(f"QPushButton {{ background-color: {CP_GREEN}; color: black; font-weight: bold; font-size: 8pt; border: none; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: #00cc1b; }}")
         btn_run.clicked.connect(self.run_code)
         
-        btn_del = QPushButton("×")
-        btn_del.setFixedWidth(30)
+        btn_del = QPushButton("✕")
+        btn_del.setFixedSize(26, 26)
         btn_del.setToolTip("Delete this block")
-        btn_del.setStyleSheet(f"background-color: {CP_RED}; color: white; font-weight: bold; border: none; padding: 0px; border-radius: 2px;")
+        btn_del.setStyleSheet(f"QPushButton {{ background-color: {CP_RED}; color: white; font-weight: bold; font-size: 10pt; border: none; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: #d30f36; }}")
         btn_del.clicked.connect(self.delete_block)
         
         header_lay.addWidget(self.comment_input)
         header_lay.addWidget(self.type_cmb)
         header_lay.addWidget(self.comment_size_spn)
         header_lay.addWidget(self.btn_comment_color)
+        header_lay.addWidget(btn_up)
+        header_lay.addWidget(btn_down)
         header_lay.addWidget(btn_run)
         header_lay.addWidget(btn_del)
         
@@ -1118,7 +1135,7 @@ class CodeBlockWidget(QWidget):
         self.comment_input.setStyleSheet(f"background-color: {CP_BG}; color: {c}; border: 1px solid {CP_DIM}; padding: 4px; font-size: {s}pt;")
         lc = QColor(c).lightness() if QColor(c).isValid() else 255
         fg = 'black' if lc > 128 else 'white'
-        self.btn_comment_color.setStyleSheet(f"background-color: {c}; color: {fg}; border: 1px solid {CP_DIM}; font-weight: bold; font-size: 10pt; padding: 0px; border-radius: 2px;")
+        self.btn_comment_color.setStyleSheet(f"background-color: {c}; color: {fg}; border: 1px solid {CP_DIM}; font-weight: bold; font-size: 10pt; padding: 0px; border-radius: 3px;")
 
     def pick_comment_color(self):
         curr = self.comment_color or CP_YELLOW
@@ -1126,6 +1143,24 @@ class CodeBlockWidget(QWidget):
         if c.isValid():
             self.comment_color = c.name().upper()
             self.update_comment_style()
+
+    def move_up(self):
+        parent_widget = self.parentWidget()
+        if parent_widget and parent_widget.layout():
+            layout = parent_widget.layout()
+            idx = layout.indexOf(self)
+            if idx > 0:
+                layout.removeWidget(self)
+                layout.insertWidget(idx - 1, self)
+
+    def move_down(self):
+        parent_widget = self.parentWidget()
+        if parent_widget and parent_widget.layout():
+            layout = parent_widget.layout()
+            idx = layout.indexOf(self)
+            if idx >= 0 and idx < layout.count() - 1:
+                layout.removeWidget(self)
+                layout.insertWidget(idx + 1, self)
 
     def run_code(self):
         if self.run_callback:
