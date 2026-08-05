@@ -1506,13 +1506,20 @@ class EditDialog(QDialog):
         l_colors.addWidget(self.btn_col_hfg, 1, 1)
         l_colors.addWidget(self.btn_col_brd, 2, 0, 1, 2)
         
+        trans_box = QHBoxLayout()
+        trans_box.setContentsMargins(0, 0, 0, 0)
+        trans_box.setSpacing(15)
+
         self.chk_trans_bg = QCheckBox("Transparent BG")
         self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
-        l_colors.addWidget(self.chk_trans_bg, 3, 0)
+        trans_box.addWidget(self.chk_trans_bg)
 
         self.chk_trans_hbg = QCheckBox("Transparent Hover BG")
         self.chk_trans_hbg.setChecked(self.script.get("hover_transparent_bg", False))
-        l_colors.addWidget(self.chk_trans_hbg, 3, 1)
+        trans_box.addWidget(self.chk_trans_hbg)
+        trans_box.addStretch()
+
+        l_colors.addLayout(trans_box, 3, 0, 1, 2)
         
         grp_colors.setLayout(l_colors)
         left_layout.addWidget(grp_colors)
