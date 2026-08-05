@@ -3193,7 +3193,9 @@
                         "ai"
                     ],
                     "border_color": "#ffaa7f",
-                    "hover_transparent_bg": true
+                    "hover_transparent_bg": true,
+                    "text_color": "#ff5500",
+                    "hover_text_color": "#55ff7f"
                 }
             ],
             "col_span": 1,
