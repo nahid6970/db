@@ -5132,7 +5132,7 @@
         },
         {
             "name": "diff",
-            "path": "C:/@delta/ms1/TOOLS/file_changes_diff/diff_scanner.py",
+            "path": "C:\\@delta\\ms1\\TOOLS\\file_changes\\scanner.py",
             "type": "script",
             "nf_char": "",
             "icon_path": "",
@@ -5165,7 +5165,14 @@
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false
+            "_runtime_is_italic": false,
+            "tags": [],
+            "use_multi_block": false,
+            "inline_blocks": [],
+            "edit_on_click": false,
+            "text_align": "center",
+            "transparent_bg": false,
+            "hover_transparent_bg": false
         },
         {
             "name": "UIA",
