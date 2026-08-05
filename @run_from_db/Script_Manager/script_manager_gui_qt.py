@@ -3381,6 +3381,8 @@ class MainWindow(QMainWindow):
                     name = folder.get("name", "???").replace("<br>", " ").replace("<br/>", " ").replace("<BR>", " ")
                     name = " ".join(name.split())
                     btn = create_bc_btn(name, partial(lambda idx: navigate_to(idx), i))
+                    btn.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+                    btn.customContextMenuRequested.connect(partial(self.show_breadcrumb_context_menu, btn, folder))
                     self.breadcrumb_layout.addWidget(btn)
 
             if self.view_stack:
@@ -3822,6 +3824,12 @@ class MainWindow(QMainWindow):
         self.clipboard_item = None
         self.clipboard_source_list = None
         self.save_config()
+
+    def show_breadcrumb_context_menu(self, btn, folder, pos):
+        menu = QMenu(self)
+        menu.setStyleSheet(f"QMenu {{ background-color: {CP_PANEL}; color: {CP_TEXT}; border: 1px solid {CP_CYAN}; }} QMenu::item:selected {{ background-color: {CP_CYAN}; color: {CP_BG}; }}")
+        menu.addAction("Edit Folder").triggered.connect(lambda: self.open_edit(folder))
+        menu.exec(btn.mapToGlobal(pos))
 
     def open_edit(self, script):
         if EditDialog(script, self).exec(): self.save_config()
