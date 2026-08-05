@@ -1506,9 +1506,11 @@ class EditDialog(QDialog):
         l_colors.addWidget(self.btn_col_hfg, 1, 1)
         l_colors.addWidget(self.btn_col_brd, 2, 0, 1, 2)
         
+        l_colors.addWidget(QLabel("Options:"), 3, 0)
+
         trans_box = QHBoxLayout()
         trans_box.setContentsMargins(0, 0, 0, 0)
-        trans_box.setSpacing(15)
+        trans_box.setSpacing(10)
 
         self.chk_trans_bg = QCheckBox("Transparent BG")
         self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
@@ -1519,7 +1521,7 @@ class EditDialog(QDialog):
         trans_box.addWidget(self.chk_trans_hbg)
         trans_box.addStretch()
 
-        l_colors.addLayout(trans_box, 3, 0, 1, 2)
+        l_colors.addLayout(trans_box, 3, 1)
         
         grp_colors.setLayout(l_colors)
         left_layout.addWidget(grp_colors)
