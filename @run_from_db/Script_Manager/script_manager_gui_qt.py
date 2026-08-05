@@ -1021,12 +1021,12 @@ class CodeBlockWidget(QWidget):
         self.comment_size_spn = QSpinBox()
         self.comment_size_spn.setRange(6, 40)
         self.comment_size_spn.setValue(comment_size if comment_size is not None else default_size)
-        self.comment_size_spn.setFixedWidth(50)
+        self.comment_size_spn.setFixedWidth(55)
         self.comment_size_spn.setToolTip("Comment Font Size")
-        self.comment_size_spn.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px;")
+        self.comment_size_spn.setStyleSheet(f"background-color: {CP_BG}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; padding: 2px 2px 2px 4px;")
 
         self.btn_comment_color = QPushButton("A")
-        self.btn_comment_color.setFixedWidth(28)
+        self.btn_comment_color.setFixedWidth(30)
         self.btn_comment_color.setToolTip("Comment Font Color")
         self.btn_comment_color.clicked.connect(self.pick_comment_color)
 
@@ -1042,13 +1042,13 @@ class CodeBlockWidget(QWidget):
         btn_run = QPushButton("▶")
         btn_run.setFixedWidth(30)
         btn_run.setToolTip("Run this block individually")
-        btn_run.setStyleSheet(f"background-color: {CP_GREEN}; color: black; font-weight: bold; border: none;")
+        btn_run.setStyleSheet(f"background-color: {CP_GREEN}; color: black; font-weight: bold; border: none; padding: 0px; border-radius: 2px;")
         btn_run.clicked.connect(self.run_code)
         
         btn_del = QPushButton("×")
         btn_del.setFixedWidth(30)
         btn_del.setToolTip("Delete this block")
-        btn_del.setStyleSheet(f"background-color: {CP_RED}; color: white; font-weight: bold; border: none;")
+        btn_del.setStyleSheet(f"background-color: {CP_RED}; color: white; font-weight: bold; border: none; padding: 0px; border-radius: 2px;")
         btn_del.clicked.connect(self.delete_block)
         
         header_lay.addWidget(self.comment_input)
@@ -1118,7 +1118,7 @@ class CodeBlockWidget(QWidget):
         self.comment_input.setStyleSheet(f"background-color: {CP_BG}; color: {c}; border: 1px solid {CP_DIM}; padding: 4px; font-size: {s}pt;")
         lc = QColor(c).lightness() if QColor(c).isValid() else 255
         fg = 'black' if lc > 128 else 'white'
-        self.btn_comment_color.setStyleSheet(f"background-color: {c}; color: {fg}; border: 1px solid {CP_DIM}; font-weight: bold; font-size: 9pt;")
+        self.btn_comment_color.setStyleSheet(f"background-color: {c}; color: {fg}; border: 1px solid {CP_DIM}; font-weight: bold; font-size: 10pt; padding: 0px; border-radius: 2px;")
 
     def pick_comment_color(self):
         curr = self.comment_color or CP_YELLOW
