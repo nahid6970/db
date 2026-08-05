@@ -1556,6 +1556,7 @@ class EditDialog(QDialog):
         if self.script.get("type") == "folder":
             grp_fview = QGroupBox("FOLDER VIEW SETTINGS")
             l_fv = QGridLayout()
+            l_fv.setSpacing(8)
             
             l_fv.addWidget(QLabel("Inner Columns:"), 0, 0)
             self.spn_inner_cols = QSpinBox(); self.spn_inner_cols.setRange(0, 20); 
@@ -1585,43 +1586,56 @@ class EditDialog(QDialog):
             self.spn_batch_border_width.setToolTip("Select value >= 0 to apply border width to all items inside on Save.")
             l_fv.addWidget(self.spn_batch_border_width, 1, 3)
 
-            l_fv.addWidget(QLabel("Batch Align Inside:"), 2, 0)
+            l_fv.addWidget(QLabel("Batch Align:"), 2, 0)
             self.cmb_batch_align = QComboBox()
             self.cmb_batch_align.addItems(["", "center", "left", "right"])
             self.cmb_batch_align.setToolTip("Apply text alignment to all items inside this folder on Save")
-            l_fv.addWidget(self.cmb_batch_align, 2, 1, 1, 3)
+            l_fv.addWidget(self.cmb_batch_align, 2, 1)
 
-            l_fv.addWidget(QLabel("Batch Colors Inside:"), 3, 0)
+            l_fv.addWidget(QLabel("Batch Colors:"), 3, 0)
             color_btn_lay = QHBoxLayout()
             color_btn_lay.setContentsMargins(0, 0, 0, 0)
+            color_btn_lay.setSpacing(4)
 
             self.btn_batch_bg = QPushButton("Pick BG")
+            self.btn_batch_bg.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             self.btn_batch_bg.clicked.connect(self.pick_batch_bg)
             color_btn_lay.addWidget(self.btn_batch_bg)
 
             self.btn_batch_fg = QPushButton("Pick FG")
+            self.btn_batch_fg.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             self.btn_batch_fg.clicked.connect(self.pick_batch_fg)
             color_btn_lay.addWidget(self.btn_batch_fg)
 
             self.btn_batch_border = QPushButton("Pick Border")
+            self.btn_batch_border.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             self.btn_batch_border.clicked.connect(self.pick_batch_border)
             color_btn_lay.addWidget(self.btn_batch_border)
 
             self.btn_clear_batch_col = QPushButton("Clear")
+            self.btn_clear_batch_col.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             self.btn_clear_batch_col.clicked.connect(self.clear_batch_colors)
             color_btn_lay.addWidget(self.btn_clear_batch_col)
 
             l_fv.addLayout(color_btn_lay, 3, 1, 1, 3)
 
+            l_fv.addWidget(QLabel("Batch Options:"), 4, 0)
+            trans_box = QHBoxLayout()
+            trans_box.setContentsMargins(0, 0, 0, 0)
+            trans_box.setSpacing(15)
+
             self.chk_batch_trans = QCheckBox("Batch Transparent BG")
             self.chk_batch_trans.setChecked(False)
             self.chk_batch_trans.setToolTip("Set background to transparent for all items inside this folder on Save")
-            l_fv.addWidget(self.chk_batch_trans, 4, 0, 1, 2)
+            trans_box.addWidget(self.chk_batch_trans)
 
             self.chk_batch_trans_hbg = QCheckBox("Batch Transparent Hover BG")
             self.chk_batch_trans_hbg.setChecked(False)
             self.chk_batch_trans_hbg.setToolTip("Set hover background to transparent for all items inside this folder on Save")
-            l_fv.addWidget(self.chk_batch_trans_hbg, 4, 2, 1, 2)
+            trans_box.addWidget(self.chk_batch_trans_hbg)
+            trans_box.addStretch()
+
+            l_fv.addLayout(trans_box, 4, 1, 1, 3)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
