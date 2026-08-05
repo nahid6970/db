@@ -1043,12 +1043,6 @@ class CodeBlockWidget(QWidget):
         btn_up.setStyleSheet(f"QPushButton {{ background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; font-size: 8pt; font-weight: bold; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: {CP_DIM}; }}")
         btn_up.clicked.connect(self.move_up)
 
-        btn_down = QPushButton("▼")
-        btn_down.setFixedSize(26, 26)
-        btn_down.setToolTip("Move block down")
-        btn_down.setStyleSheet(f"QPushButton {{ background-color: {CP_PANEL}; color: {CP_CYAN}; border: 1px solid {CP_DIM}; font-size: 8pt; font-weight: bold; padding: 0px; border-radius: 3px; }} QPushButton:hover {{ background-color: {CP_DIM}; }}")
-        btn_down.clicked.connect(self.move_down)
-
         btn_run = QPushButton("▶")
         btn_run.setFixedSize(26, 26)
         btn_run.setToolTip("Run this block individually")
@@ -1066,7 +1060,6 @@ class CodeBlockWidget(QWidget):
         header_lay.addWidget(self.comment_size_spn)
         header_lay.addWidget(self.btn_comment_color)
         header_lay.addWidget(btn_up)
-        header_lay.addWidget(btn_down)
         header_lay.addWidget(btn_run)
         header_lay.addWidget(btn_del)
         
@@ -1147,15 +1140,6 @@ class CodeBlockWidget(QWidget):
             if idx > 0:
                 layout.removeWidget(self)
                 layout.insertWidget(idx - 1, self)
-
-    def move_down(self):
-        parent_widget = self.parentWidget()
-        if parent_widget and parent_widget.layout():
-            layout = parent_widget.layout()
-            idx = layout.indexOf(self)
-            if idx >= 0 and idx < layout.count() - 1:
-                layout.removeWidget(self)
-                layout.insertWidget(idx + 1, self)
 
     def run_code(self):
         if self.run_callback:
