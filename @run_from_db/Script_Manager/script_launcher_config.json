@@ -3151,7 +3151,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
+                    "border_width": 1,
                     "_runtime_height": 250,
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3191,7 +3191,8 @@
                     "edit_on_click": true,
                     "tags": [
                         "ai"
-                    ]
+                    ],
+                    "border_color": "#ffaa7f"
                 },
                 {
                     "name": "FCC (Copy)",
@@ -3225,7 +3226,7 @@
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
-                    "border_width": 0,
+                    "border_width": 1,
                     "_runtime_height": 250,
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3265,7 +3266,8 @@
                     "edit_on_click": true,
                     "tags": [
                         "ai"
-                    ]
+                    ],
+                    "border_color": "#ffaa7f"
                 },
                 {
                     "name": "FCC (Copy) (Copy)",
@@ -3339,7 +3341,8 @@
                     "edit_on_click": true,
                     "tags": [
                         "ai"
-                    ]
+                    ],
+                    "border_color": "#ffaa7f"
                 },
                 {
                     "name": "FCC (Copy) (Copy) (Copy)",
@@ -3413,7 +3416,8 @@
                     "edit_on_click": true,
                     "tags": [
                         "ai"
-                    ]
+                    ],
+                    "border_color": "#ffaa7f"
                 }
             ],
             "col_span": 1,

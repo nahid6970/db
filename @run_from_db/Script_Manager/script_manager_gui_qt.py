@@ -1213,6 +1213,7 @@ class EditDialog(QDialog):
         self.config = parent.config if parent and hasattr(parent, 'config') else {}
         self._batch_bg = None
         self._batch_fg = None
+        self._batch_border = None
         self.setWindowTitle(f"EDIT // {self.script.get('name', 'UNKNOWN')}")
         edit_w = self.config.get("edit_panel_width", 1150)
         edit_h = self.config.get("edit_panel_height", 750)
@@ -1534,24 +1535,40 @@ class EditDialog(QDialog):
             self.spn_inner_h.setToolTip("0 = Inherit Global")
             l_fv.addWidget(self.spn_inner_h, 0, 3)
 
-            l_fv.addWidget(QLabel("Batch Align Inside:"), 1, 0)
+            l_fv.addWidget(QLabel("Batch Font Size:"), 1, 0)
+            self.spn_batch_font_size = QSpinBox()
+            self.spn_batch_font_size.setRange(0, 72)
+            self.spn_batch_font_size.setValue(0)
+            self.spn_batch_font_size.setToolTip("0 = Keep original. Value > 0 applies font size to all items inside on Save.")
+            l_fv.addWidget(self.spn_batch_font_size, 1, 1)
+
+            l_fv.addWidget(QLabel("Batch Align Inside:"), 1, 2)
             self.cmb_batch_align = QComboBox()
             self.cmb_batch_align.addItems(["", "center", "left", "right"])
             self.cmb_batch_align.setToolTip("Apply text alignment to all items inside this folder on Save")
-            l_fv.addWidget(self.cmb_batch_align, 1, 1, 1, 3)
+            l_fv.addWidget(self.cmb_batch_align, 1, 3)
 
             l_fv.addWidget(QLabel("Batch Colors Inside:"), 2, 0)
+            color_btn_lay = QHBoxLayout()
+            color_btn_lay.setContentsMargins(0, 0, 0, 0)
+
             self.btn_batch_bg = QPushButton("Pick BG")
             self.btn_batch_bg.clicked.connect(self.pick_batch_bg)
-            l_fv.addWidget(self.btn_batch_bg, 2, 1)
+            color_btn_lay.addWidget(self.btn_batch_bg)
 
             self.btn_batch_fg = QPushButton("Pick FG")
             self.btn_batch_fg.clicked.connect(self.pick_batch_fg)
-            l_fv.addWidget(self.btn_batch_fg, 2, 2)
+            color_btn_lay.addWidget(self.btn_batch_fg)
+
+            self.btn_batch_border = QPushButton("Pick Border")
+            self.btn_batch_border.clicked.connect(self.pick_batch_border)
+            color_btn_lay.addWidget(self.btn_batch_border)
 
             self.btn_clear_batch_col = QPushButton("Clear")
             self.btn_clear_batch_col.clicked.connect(self.clear_batch_colors)
-            l_fv.addWidget(self.btn_clear_batch_col, 2, 3)
+            color_btn_lay.addWidget(self.btn_clear_batch_col)
+
+            l_fv.addLayout(color_btn_lay, 2, 1, 1, 3)
 
             self.chk_batch_trans = QCheckBox("Batch Transparent BG")
             self.chk_batch_trans.setChecked(False)
@@ -2082,14 +2099,24 @@ class EditDialog(QDialog):
         if c.isValid():
             self._batch_fg = c.name()
             self.set_btn_color(self.btn_batch_fg, self._batch_fg)
+
+    def pick_batch_border(self):
+        default_color = self.config.get("window_border_color", CP_YELLOW)
+        c = QColorDialog.getColor(QColor(default_color), self)
+        if c.isValid():
+            self._batch_border = c.name()
+            self.set_btn_color(self.btn_batch_border, self._batch_border)
             
     def clear_batch_colors(self):
         self._batch_bg = None
         self._batch_fg = None
+        self._batch_border = None
         self.btn_batch_bg.setText("Pick BG")
         self.btn_batch_bg.setStyleSheet("")
         self.btn_batch_fg.setText("Pick FG")
         self.btn_batch_fg.setStyleSheet("")
+        self.btn_batch_border.setText("Pick Border")
+        self.btn_batch_border.setStyleSheet("")
 
     def browse_path(self):
         f, _ = QFileDialog.getOpenFileName(self, "Select Executable")
@@ -2192,6 +2219,15 @@ class EditDialog(QDialog):
             self.script["grid_columns"] = self.spn_inner_cols.value()
             self.script["grid_btn_height"] = self.spn_inner_h.value()
             
+            batch_fs = self.spn_batch_font_size.value()
+            if batch_fs > 0:
+                def apply_font_size_recursive(items, fs):
+                    for item in items:
+                        item["font_size"] = fs
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_font_size_recursive(item["scripts"], fs)
+                apply_font_size_recursive(self.script.get("scripts", []), batch_fs)
+
             batch_align = self.cmb_batch_align.currentText()
             if batch_align:
                 def apply_align_recursive(items, alignment):
@@ -2202,17 +2238,19 @@ class EditDialog(QDialog):
                 
                 apply_align_recursive(self.script.get("scripts", []), batch_align)
 
-            if self._batch_bg or self._batch_fg:
-                def apply_colors_recursive(items, bg, fg):
+            if self._batch_bg or self._batch_fg or self._batch_border:
+                def apply_colors_recursive(items, bg, fg, border):
                     for item in items:
                         if bg:
                             item["color"] = bg
                         if fg:
                             item["text_color"] = fg
+                        if border:
+                            item["border_color"] = border
                         if item.get("type") == "folder" and "scripts" in item:
-                            apply_colors_recursive(item["scripts"], bg, fg)
+                            apply_colors_recursive(item["scripts"], bg, fg, border)
                 
-                apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg)
+                apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg, self._batch_border)
 
             if self.chk_batch_trans.isChecked():
                 def apply_trans_recursive(items):
