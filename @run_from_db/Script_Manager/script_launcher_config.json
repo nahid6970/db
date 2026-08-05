@@ -2123,8 +2123,8 @@
             "name": "Extension",
             "type": "folder",
             "scripts": [],
-            "col_span": 2,
-            "row_span": 2,
+            "col_span": 1,
+            "row_span": 1,
             "nf_char": "",
             "icon_path": "",
             "icon_width": 0,
@@ -2146,7 +2146,11 @@
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
             "_runtime_is_bold": true,
-            "_runtime_is_italic": false
+            "_runtime_is_italic": false,
+            "tags": [],
+            "edit_on_click": false,
+            "text_align": "center",
+            "transparent_bg": false
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
