@@ -1539,16 +1539,25 @@ class EditDialog(QDialog):
             self.spn_batch_font_size = QSpinBox()
             self.spn_batch_font_size.setRange(0, 72)
             self.spn_batch_font_size.setValue(0)
-            self.spn_batch_font_size.setToolTip("0 = Keep original. Value > 0 applies font size to all items inside on Save.")
+            self.spn_batch_font_size.setSpecialValueText("Keep")
+            self.spn_batch_font_size.setToolTip("Select value > 0 to apply font size to all items inside on Save.")
             l_fv.addWidget(self.spn_batch_font_size, 1, 1)
 
-            l_fv.addWidget(QLabel("Batch Align Inside:"), 1, 2)
+            l_fv.addWidget(QLabel("Batch Border Width:"), 1, 2)
+            self.spn_batch_border_width = QSpinBox()
+            self.spn_batch_border_width.setRange(-1, 50)
+            self.spn_batch_border_width.setValue(-1)
+            self.spn_batch_border_width.setSpecialValueText("Keep")
+            self.spn_batch_border_width.setToolTip("Select value >= 0 to apply border width to all items inside on Save.")
+            l_fv.addWidget(self.spn_batch_border_width, 1, 3)
+
+            l_fv.addWidget(QLabel("Batch Align Inside:"), 2, 0)
             self.cmb_batch_align = QComboBox()
             self.cmb_batch_align.addItems(["", "center", "left", "right"])
             self.cmb_batch_align.setToolTip("Apply text alignment to all items inside this folder on Save")
-            l_fv.addWidget(self.cmb_batch_align, 1, 3)
+            l_fv.addWidget(self.cmb_batch_align, 2, 1, 1, 3)
 
-            l_fv.addWidget(QLabel("Batch Colors Inside:"), 2, 0)
+            l_fv.addWidget(QLabel("Batch Colors Inside:"), 3, 0)
             color_btn_lay = QHBoxLayout()
             color_btn_lay.setContentsMargins(0, 0, 0, 0)
 
@@ -1568,12 +1577,12 @@ class EditDialog(QDialog):
             self.btn_clear_batch_col.clicked.connect(self.clear_batch_colors)
             color_btn_lay.addWidget(self.btn_clear_batch_col)
 
-            l_fv.addLayout(color_btn_lay, 2, 1, 1, 3)
+            l_fv.addLayout(color_btn_lay, 3, 1, 1, 3)
 
             self.chk_batch_trans = QCheckBox("Batch Transparent BG")
             self.chk_batch_trans.setChecked(False)
             self.chk_batch_trans.setToolTip("Set background to transparent for all items inside this folder on Save")
-            l_fv.addWidget(self.chk_batch_trans, 3, 0, 1, 4)
+            l_fv.addWidget(self.chk_batch_trans, 4, 0, 1, 4)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
@@ -2227,6 +2236,15 @@ class EditDialog(QDialog):
                         if item.get("type") == "folder" and "scripts" in item:
                             apply_font_size_recursive(item["scripts"], fs)
                 apply_font_size_recursive(self.script.get("scripts", []), batch_fs)
+
+            batch_bw = self.spn_batch_border_width.value()
+            if batch_bw >= 0:
+                def apply_border_width_recursive(items, bw):
+                    for item in items:
+                        item["border_width"] = bw
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_border_width_recursive(item["scripts"], bw)
+                apply_border_width_recursive(self.script.get("scripts", []), batch_bw)
 
             batch_align = self.cmb_batch_align.currentText()
             if batch_align:
