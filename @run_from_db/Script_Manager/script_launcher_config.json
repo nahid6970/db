@@ -82,7 +82,7 @@
             "_runtime_height": 100,
             "_runtime_is_bold": true,
             "_runtime_is_italic": false,
-            "border_width": 0,
+            "border_width": 1,
             "col_span": 1,
             "color": "#1d1d2b",
             "corner_radius": 0,
@@ -96,7 +96,7 @@
             "icon_gap": 2,
             "icon_height": 50,
             "icon_path": "",
-            "icon_position": "top",
+            "icon_position": "center",
             "icon_width": 50,
             "is_bold": true,
             "is_italic": false,
@@ -1052,7 +1052,13 @@
             },
             "type": "folder",
             "width": 0,
-            "text_color": "#ffffff"
+            "text_color": "#ffffff",
+            "border_color": "#ffff7f",
+            "tags": [],
+            "edit_on_click": false,
+            "text_align": "center",
+            "transparent_bg": false,
+            "hover_transparent_bg": false
         },
         {
             "name": "Flask",
