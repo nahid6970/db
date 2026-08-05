@@ -812,14 +812,9 @@ class CyberButton(QPushButton):
         # Base Style
         bg_normal = "transparent" if self.script.get("transparent_bg") else color
         fg_normal = text_color
-        
-        # Override for folders is NOT needed anymore since we want them filled
-        # if self.is_folder:
-        #    bg_normal = CP_PANEL
-        #    fg_normal = color
             
-        # Hover Style defaults (swap)
-        bg_hover = hover_bg
+        # Hover Style defaults
+        bg_hover = "transparent" if self.script.get("hover_transparent_bg") else hover_bg
         fg_hover = hover_fg
 
         self.setStyleSheet(f"""
@@ -1529,7 +1524,11 @@ class EditDialog(QDialog):
         
         self.chk_trans_bg = QCheckBox("Transparent BG")
         self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
-        l_colors.addWidget(self.chk_trans_bg, 3, 0, 1, 2)
+        l_colors.addWidget(self.chk_trans_bg, 3, 0)
+
+        self.chk_trans_hbg = QCheckBox("Transparent Hover BG")
+        self.chk_trans_hbg.setChecked(self.script.get("hover_transparent_bg", False))
+        l_colors.addWidget(self.chk_trans_hbg, 3, 1)
         
         grp_colors.setLayout(l_colors)
         left_layout.addWidget(grp_colors)
@@ -1617,7 +1616,12 @@ class EditDialog(QDialog):
             self.chk_batch_trans = QCheckBox("Batch Transparent BG")
             self.chk_batch_trans.setChecked(False)
             self.chk_batch_trans.setToolTip("Set background to transparent for all items inside this folder on Save")
-            l_fv.addWidget(self.chk_batch_trans, 4, 0, 1, 4)
+            l_fv.addWidget(self.chk_batch_trans, 4, 0, 1, 2)
+
+            self.chk_batch_trans_hbg = QCheckBox("Batch Transparent Hover BG")
+            self.chk_batch_trans_hbg.setChecked(False)
+            self.chk_batch_trans_hbg.setToolTip("Set hover background to transparent for all items inside this folder on Save")
+            l_fv.addWidget(self.chk_batch_trans_hbg, 4, 2, 1, 2)
             
             grp_fview.setLayout(l_fv)
             left_layout.addWidget(grp_fview)
@@ -1851,7 +1855,7 @@ class EditDialog(QDialog):
             src = dlg.selected_style
             style_keys = [
                 "color", "text_color", "hover_color", "hover_text_color",
-                "border_color", "border_width", "transparent_bg",
+                "border_color", "border_width", "transparent_bg", "hover_transparent_bg",
                 "font_family", "font_size", "is_bold", "is_italic", "text_align",
                 "corner_radius", "col_span", "row_span", "width", "height",
                 "icon_width", "icon_height", "icon_gap", "icon_position",
@@ -1878,6 +1882,7 @@ class EditDialog(QDialog):
             self.chk_italic.setChecked(self.script.get("is_italic", def_italic))
             self.cmb_align.setCurrentText(self.script.get("text_align", "center"))
             self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
+            self.chk_trans_hbg.setChecked(self.script.get("hover_transparent_bg", False))
 
             self.spn_cspan.setValue(self.script.get("col_span", 1))
             self.spn_rspan.setValue(self.script.get("row_span", 1))
@@ -2014,10 +2019,12 @@ class EditDialog(QDialog):
         self.chk_italic.setChecked(def_italic)
         self.cmb_align.setCurrentText("center")
         self.chk_trans_bg.setChecked(False)
+        self.chk_trans_hbg.setChecked(False)
 
         # Reset Colors
         self.script.pop("color", None)
         self.script.pop("transparent_bg", None)
+        self.script.pop("hover_transparent_bg", None)
         self.script.pop("text_color", None)
         self.script.pop("hover_color", None)
         self.script.pop("hover_text_color", None)
@@ -2252,6 +2259,7 @@ class EditDialog(QDialog):
         self.script["is_italic"] = self.chk_italic.isChecked()
         self.script["text_align"] = self.cmb_align.currentText()
         self.script["transparent_bg"] = self.chk_trans_bg.isChecked()
+        self.script["hover_transparent_bg"] = self.chk_trans_hbg.isChecked()
         self.script["col_span"] = self.spn_cspan.value()
         self.script["row_span"] = self.spn_rspan.value()
         self.script["width"] = self.spn_width.value()
@@ -2312,6 +2320,14 @@ class EditDialog(QDialog):
                         if item.get("type") == "folder" and "scripts" in item:
                             apply_trans_recursive(item["scripts"])
                 apply_trans_recursive(self.script.get("scripts", []))
+
+            if self.chk_batch_trans_hbg.isChecked():
+                def apply_trans_hbg_recursive(items):
+                    for item in items:
+                        item["hover_transparent_bg"] = True
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_trans_hbg_recursive(item["scripts"])
+                apply_trans_hbg_recursive(self.script.get("scripts", []))
         
         self.accept()
 
