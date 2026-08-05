@@ -3120,7 +3120,7 @@
             "type": "folder",
             "scripts": [
                 {
-                    "name": "FCC [Use Claude Code, Codex, Pi, or their IDE extensions through your own provider-backed proxy.]",
+                    "name": "FCC",
                     "path": "",
                     "type": "script",
                     "nf_char": "",
@@ -3136,7 +3136,7 @@
                     "run_admin": false,
                     "ctrl_left_cmd": "",
                     "ctrl_right_cmd": "",
-                    "use_inline": true,
+                    "use_inline": false,
                     "inline_type": "powershell",
                     "inline_script": "",
                     "require_password": false,
@@ -3145,14 +3145,14 @@
                     "is_bold": true,
                     "is_italic": false,
                     "text_align": "center",
-                    "transparent_bg": false,
+                    "transparent_bg": true,
                     "col_span": 1,
                     "row_span": 1,
                     "width": 0,
                     "height": 0,
                     "corner_radius": 0,
                     "border_width": 0,
-                    "_runtime_height": 100,
+                    "_runtime_height": 250,
                     "_runtime_font_size": 14,
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_is_bold": true,
@@ -3162,25 +3162,258 @@
                         {
                             "comment": "Install AI Agent Providers Manager",
                             "type": "cmd",
-                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))"
+                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
                         },
                         {
                             "comment": "Start the server",
                             "type": "cmd",
-                            "code": "fcc-server"
+                            "code": "fcc-server",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
                         },
                         {
                             "comment": "Github Page Link",
                             "type": "cmd",
-                            "code": "start https://github.com/alishahryar1/free-claude-code"
+                            "code": "start https://github.com/alishahryar1/free-claude-code",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
                         },
                         {
                             "comment": "Dashboard",
                             "type": "cmd",
-                            "code": "start http://127.0.0.1:8082/admin"
+                            "code": "start http://127.0.0.1:8082/admin",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
                         }
                     ],
-                    "edit_on_click": true
+                    "edit_on_click": true,
+                    "tags": [
+                        "ai"
+                    ]
+                },
+                {
+                    "name": "FCC (Copy)",
+                    "path": "",
+                    "type": "script",
+                    "nf_char": "",
+                    "icon_path": "",
+                    "icon_width": 0,
+                    "icon_height": 0,
+                    "icon_gap": 2,
+                    "icon_position": "top",
+                    "hide_terminal": false,
+                    "keep_open": true,
+                    "kill_window": false,
+                    "new_terminal": true,
+                    "run_admin": false,
+                    "ctrl_left_cmd": "",
+                    "ctrl_right_cmd": "",
+                    "use_inline": false,
+                    "inline_type": "powershell",
+                    "inline_script": "",
+                    "require_password": false,
+                    "font_family": "JetBrainsMono Nerd Font Propo",
+                    "font_size": 14,
+                    "is_bold": true,
+                    "is_italic": false,
+                    "text_align": "center",
+                    "transparent_bg": true,
+                    "col_span": 1,
+                    "row_span": 1,
+                    "width": 0,
+                    "height": 0,
+                    "corner_radius": 0,
+                    "border_width": 0,
+                    "_runtime_height": 250,
+                    "_runtime_font_size": 14,
+                    "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+                    "_runtime_is_bold": true,
+                    "_runtime_is_italic": false,
+                    "use_multi_block": true,
+                    "inline_blocks": [
+                        {
+                            "comment": "Install AI Agent Providers Manager",
+                            "type": "cmd",
+                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Start the server",
+                            "type": "cmd",
+                            "code": "fcc-server",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Github Page Link",
+                            "type": "cmd",
+                            "code": "start https://github.com/alishahryar1/free-claude-code",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Dashboard",
+                            "type": "cmd",
+                            "code": "start http://127.0.0.1:8082/admin",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        }
+                    ],
+                    "edit_on_click": true,
+                    "tags": [
+                        "ai"
+                    ]
+                },
+                {
+                    "name": "FCC (Copy) (Copy)",
+                    "path": "",
+                    "type": "script",
+                    "nf_char": "",
+                    "icon_path": "",
+                    "icon_width": 0,
+                    "icon_height": 0,
+                    "icon_gap": 2,
+                    "icon_position": "top",
+                    "hide_terminal": false,
+                    "keep_open": true,
+                    "kill_window": false,
+                    "new_terminal": true,
+                    "run_admin": false,
+                    "ctrl_left_cmd": "",
+                    "ctrl_right_cmd": "",
+                    "use_inline": false,
+                    "inline_type": "powershell",
+                    "inline_script": "",
+                    "require_password": false,
+                    "font_family": "JetBrainsMono Nerd Font Propo",
+                    "font_size": 14,
+                    "is_bold": true,
+                    "is_italic": false,
+                    "text_align": "center",
+                    "transparent_bg": true,
+                    "col_span": 1,
+                    "row_span": 1,
+                    "width": 0,
+                    "height": 0,
+                    "corner_radius": 0,
+                    "border_width": 0,
+                    "_runtime_height": 250,
+                    "_runtime_font_size": 14,
+                    "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+                    "_runtime_is_bold": true,
+                    "_runtime_is_italic": false,
+                    "use_multi_block": true,
+                    "inline_blocks": [
+                        {
+                            "comment": "Install AI Agent Providers Manager",
+                            "type": "cmd",
+                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Start the server",
+                            "type": "cmd",
+                            "code": "fcc-server",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Github Page Link",
+                            "type": "cmd",
+                            "code": "start https://github.com/alishahryar1/free-claude-code",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Dashboard",
+                            "type": "cmd",
+                            "code": "start http://127.0.0.1:8082/admin",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        }
+                    ],
+                    "edit_on_click": true,
+                    "tags": [
+                        "ai"
+                    ]
+                },
+                {
+                    "name": "FCC (Copy) (Copy) (Copy)",
+                    "path": "",
+                    "type": "script",
+                    "nf_char": "",
+                    "icon_path": "",
+                    "icon_width": 0,
+                    "icon_height": 0,
+                    "icon_gap": 2,
+                    "icon_position": "top",
+                    "hide_terminal": false,
+                    "keep_open": true,
+                    "kill_window": false,
+                    "new_terminal": true,
+                    "run_admin": false,
+                    "ctrl_left_cmd": "",
+                    "ctrl_right_cmd": "",
+                    "use_inline": false,
+                    "inline_type": "powershell",
+                    "inline_script": "",
+                    "require_password": false,
+                    "font_family": "JetBrainsMono Nerd Font Propo",
+                    "font_size": 14,
+                    "is_bold": true,
+                    "is_italic": false,
+                    "text_align": "center",
+                    "transparent_bg": true,
+                    "col_span": 1,
+                    "row_span": 1,
+                    "width": 0,
+                    "height": 0,
+                    "corner_radius": 0,
+                    "border_width": 0,
+                    "_runtime_height": 250,
+                    "_runtime_font_size": 14,
+                    "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
+                    "_runtime_is_bold": true,
+                    "_runtime_is_italic": false,
+                    "use_multi_block": true,
+                    "inline_blocks": [
+                        {
+                            "comment": "Install AI Agent Providers Manager",
+                            "type": "cmd",
+                            "code": "& ([scriptblock]::Create((irm \"https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1\")))",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Start the server",
+                            "type": "cmd",
+                            "code": "fcc-server",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Github Page Link",
+                            "type": "cmd",
+                            "code": "start https://github.com/alishahryar1/free-claude-code",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        },
+                        {
+                            "comment": "Dashboard",
+                            "type": "cmd",
+                            "code": "start http://127.0.0.1:8082/admin",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
+                        }
+                    ],
+                    "edit_on_click": true,
+                    "tags": [
+                        "ai"
+                    ]
                 }
             ],
             "col_span": 1,
@@ -3202,8 +3435,8 @@
             "height": 0,
             "corner_radius": 0,
             "border_width": 1,
-            "grid_columns": 1,
-            "grid_btn_height": 35,
+            "grid_columns": 4,
+            "grid_btn_height": 250,
             "_runtime_height": 100,
             "_runtime_font_size": 14,
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -3212,7 +3445,8 @@
             "text_color": "#ffff7f",
             "hover_color": "#1d1d2b",
             "hover_text_color": "#ff5500",
-            "edit_on_click": false
+            "edit_on_click": false,
+            "tags": []
         },
         {
             "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
@@ -5292,15 +5526,15 @@
                     "comment": "Install oh-my-posh JetBrainsMono",
                     "type": "cmd",
                     "code": "oh-my-posh font install JetBrainsMono",
-                    "comment_size": 14,
-                    "comment_color": "#FF5500"
+                    "comment_size": 12,
+                    "comment_color": "#00FF7F"
                 },
                 {
                     "comment": "list fonts",
                     "type": "cmd",
                     "code": "oh-my-posh font list",
-                    "comment_size": 14,
-                    "comment_color": "#FF5500"
+                    "comment_size": 12,
+                    "comment_color": "#55FF00"
                 }
             ],
             "edit_on_click": true,
