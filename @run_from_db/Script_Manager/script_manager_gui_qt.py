@@ -1052,9 +1052,9 @@ class CodeBlockWidget(QWidget):
         btn_del.clicked.connect(self.delete_block)
         
         header_lay.addWidget(self.comment_input)
+        header_lay.addWidget(self.type_cmb)
         header_lay.addWidget(self.comment_size_spn)
         header_lay.addWidget(self.btn_comment_color)
-        header_lay.addWidget(self.type_cmb)
         header_lay.addWidget(btn_run)
         header_lay.addWidget(btn_del)
         
