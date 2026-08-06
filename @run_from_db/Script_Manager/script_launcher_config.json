@@ -88,7 +88,7 @@
             "corner_radius": 0,
             "font_family": "JetBrainsMono Nerd Font Propo",
             "font_size": 14,
-            "grid_btn_height": 35,
+            "grid_btn_height": 20,
             "grid_columns": 2,
             "height": 0,
             "hover_color": "#1d1d2b",
@@ -108,7 +108,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -154,7 +154,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -195,7 +195,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -236,7 +236,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -277,7 +277,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -318,7 +318,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -359,7 +359,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -400,7 +400,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -441,7 +441,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -482,7 +482,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -523,7 +523,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -564,7 +564,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -605,7 +605,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -651,7 +651,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -692,7 +692,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -733,7 +733,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -774,7 +774,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -820,7 +820,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -861,7 +861,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -907,7 +907,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -948,7 +948,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -994,7 +994,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1035,7 +1035,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1081,7 +1081,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1122,7 +1122,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1163,7 +1163,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1210,7 +1210,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1257,7 +1257,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
@@ -1304,7 +1304,7 @@
                 {
                     "_runtime_font_family": "JetBrainsMono Nerd Font Propo",
                     "_runtime_font_size": 14,
-                    "_runtime_height": 35,
+                    "_runtime_height": 25,
                     "_runtime_is_bold": true,
                     "_runtime_is_italic": false,
                     "border_width": 0,
