@@ -650,7 +650,8 @@ class CyberButton(QPushButton):
             available_w = self.width() - (padding * 2) - icon_w - spacing
         available_w = max(10, available_w)
 
-        is_single_line = "<br/>" not in html
+        auto_wrap = self.script.get("auto_wrap", self.config.get("default_auto_wrap", False))
+        is_single_line = ("<br/>" not in html) and (not auto_wrap)
 
         # Measure width using a temporary QTextDocument
         temp_doc = QTextDocument()
@@ -1487,7 +1488,12 @@ class EditDialog(QDialog):
         self.cmb_align = QComboBox()
         self.cmb_align.addItems(["center", "left", "right"])
         self.cmb_align.setCurrentText(self.script.get("text_align", "center"))
-        l_typo.addWidget(self.cmb_align, 2, 1, 1, 3)
+        l_typo.addWidget(self.cmb_align, 2, 1)
+
+        self.chk_auto_wrap = QCheckBox("Auto Word Wrap")
+        self.chk_auto_wrap.setChecked(self.script.get("auto_wrap", self.config.get("default_auto_wrap", False)))
+        self.chk_auto_wrap.setToolTip("Automatically wrap long button text into multiple lines without needing <br>")
+        l_typo.addWidget(self.chk_auto_wrap, 2, 2, 1, 2)
 
         grp_typo.setLayout(l_typo)
         left_layout.addWidget(grp_typo)
@@ -1626,6 +1632,11 @@ class EditDialog(QDialog):
             self.chk_batch_trans_hbg.setChecked(False)
             self.chk_batch_trans_hbg.setToolTip("Set hover background to transparent for all items inside this folder on Save")
             trans_box.addWidget(self.chk_batch_trans_hbg)
+
+            self.chk_batch_auto_wrap = QCheckBox("Batch Auto Word Wrap")
+            self.chk_batch_auto_wrap.setChecked(False)
+            self.chk_batch_auto_wrap.setToolTip("Enable automatic text word wrapping for all items inside this folder on Save")
+            trans_box.addWidget(self.chk_batch_auto_wrap)
             trans_box.addStretch()
 
             l_fv.addLayout(trans_box, 4, 1, 1, 3)
@@ -1863,7 +1874,7 @@ class EditDialog(QDialog):
             style_keys = [
                 "color", "text_color", "hover_color", "hover_text_color",
                 "border_color", "border_width", "transparent_bg", "hover_transparent_bg",
-                "font_family", "font_size", "is_bold", "is_italic", "text_align",
+                "font_family", "font_size", "is_bold", "is_italic", "text_align", "auto_wrap",
                 "corner_radius", "col_span", "row_span", "width", "height",
                 "icon_width", "icon_height", "icon_gap", "icon_position",
                 "grid_columns", "grid_btn_height"
@@ -1888,6 +1899,7 @@ class EditDialog(QDialog):
             self.chk_bold.setChecked(self.script.get("is_bold", def_bold))
             self.chk_italic.setChecked(self.script.get("is_italic", def_italic))
             self.cmb_align.setCurrentText(self.script.get("text_align", "center"))
+            self.chk_auto_wrap.setChecked(self.script.get("auto_wrap", self.config.get("default_auto_wrap", False)))
             self.chk_trans_bg.setChecked(self.script.get("transparent_bg", False))
             self.chk_trans_hbg.setChecked(self.script.get("hover_transparent_bg", False))
 
@@ -2025,6 +2037,7 @@ class EditDialog(QDialog):
         self.chk_bold.setChecked(def_bold)
         self.chk_italic.setChecked(def_italic)
         self.cmb_align.setCurrentText("center")
+        self.chk_auto_wrap.setChecked(self.config.get("default_auto_wrap", False))
         self.chk_trans_bg.setChecked(False)
         self.chk_trans_hbg.setChecked(False)
 
@@ -2032,6 +2045,7 @@ class EditDialog(QDialog):
         self.script.pop("color", None)
         self.script.pop("transparent_bg", None)
         self.script.pop("hover_transparent_bg", None)
+        self.script.pop("auto_wrap", None)
         self.script.pop("text_color", None)
         self.script.pop("hover_color", None)
         self.script.pop("hover_text_color", None)
@@ -2265,6 +2279,7 @@ class EditDialog(QDialog):
         self.script["is_bold"] = self.chk_bold.isChecked()
         self.script["is_italic"] = self.chk_italic.isChecked()
         self.script["text_align"] = self.cmb_align.currentText()
+        self.script["auto_wrap"] = self.chk_auto_wrap.isChecked()
         self.script["transparent_bg"] = self.chk_trans_bg.isChecked()
         self.script["hover_transparent_bg"] = self.chk_trans_hbg.isChecked()
         self.script["col_span"] = self.spn_cspan.value()
@@ -2335,6 +2350,14 @@ class EditDialog(QDialog):
                         if item.get("type") == "folder" and "scripts" in item:
                             apply_trans_hbg_recursive(item["scripts"])
                 apply_trans_hbg_recursive(self.script.get("scripts", []))
+
+            if self.chk_batch_auto_wrap.isChecked():
+                def apply_autowrap_recursive(items):
+                    for item in items:
+                        item["auto_wrap"] = True
+                        if item.get("type") == "folder" and "scripts" in item:
+                            apply_autowrap_recursive(item["scripts"])
+                apply_autowrap_recursive(self.script.get("scripts", []))
         
         self.accept()
 
@@ -2433,8 +2456,11 @@ class SettingsDialog(QDialog):
         self.chk_bold.setChecked(self.config.get("default_is_bold", True))
         self.chk_italic = QCheckBox("Italic")
         self.chk_italic.setChecked(self.config.get("default_is_italic", False))
+        self.chk_default_auto_wrap = QCheckBox("Auto Word Wrap")
+        self.chk_default_auto_wrap.setChecked(self.config.get("default_auto_wrap", False))
         font_style_box.addWidget(self.chk_bold)
         font_style_box.addWidget(self.chk_italic)
+        font_style_box.addWidget(self.chk_default_auto_wrap)
         font_style_box.addStretch()
         l_grid.addRow("Style:", font_style_box)
 
@@ -2727,6 +2753,7 @@ class SettingsDialog(QDialog):
         self.config["default_font_size"] = self.spn_font_size.value()
         self.config["default_is_bold"] = self.chk_bold.isChecked()
         self.config["default_is_italic"] = self.chk_italic.isChecked()
+        self.config["default_auto_wrap"] = self.chk_default_auto_wrap.isChecked()
         self.config["app_bg"] = self.app_bg
         self.config["window_border_color"] = self.win_border
         self.config["cfg_btn_color"] = self.cfg_color
