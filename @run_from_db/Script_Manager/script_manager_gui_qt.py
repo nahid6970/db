@@ -1228,6 +1228,8 @@ class EditDialog(QDialog):
         self.config = parent.config if parent and hasattr(parent, 'config') else {}
         self._batch_bg = None
         self._batch_fg = None
+        self._batch_hbg = None
+        self._batch_hfg = None
         self._batch_border = None
         self.setWindowTitle(f"EDIT // {self.script.get('name', 'UNKNOWN')}")
         edit_w = self.config.get("edit_panel_width", 1150)
@@ -1605,6 +1607,16 @@ class EditDialog(QDialog):
             self.btn_batch_fg.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
             self.btn_batch_fg.clicked.connect(self.pick_batch_fg)
             color_btn_lay.addWidget(self.btn_batch_fg)
+
+            self.btn_batch_hbg = QPushButton("Pick H-BG")
+            self.btn_batch_hbg.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+            self.btn_batch_hbg.clicked.connect(self.pick_batch_hbg)
+            color_btn_lay.addWidget(self.btn_batch_hbg)
+
+            self.btn_batch_hfg = QPushButton("Pick H-FG")
+            self.btn_batch_hfg.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
+            self.btn_batch_hfg.clicked.connect(self.pick_batch_hfg)
+            color_btn_lay.addWidget(self.btn_batch_hfg)
 
             self.btn_batch_border = QPushButton("Pick Border")
             self.btn_batch_border.setSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed)
@@ -2172,6 +2184,20 @@ class EditDialog(QDialog):
             self._batch_fg = c.name()
             self.set_btn_color(self.btn_batch_fg, self._batch_fg)
 
+    def pick_batch_hbg(self):
+        default_color = self.config.get("def_script_hbg", CP_BG)
+        c = QColorDialog.getColor(QColor(default_color), self)
+        if c.isValid():
+            self._batch_hbg = c.name()
+            self.set_btn_color(self.btn_batch_hbg, self._batch_hbg)
+
+    def pick_batch_hfg(self):
+        default_color = self.config.get("def_script_hfg", "#FFFFFF")
+        c = QColorDialog.getColor(QColor(default_color), self)
+        if c.isValid():
+            self._batch_hfg = c.name()
+            self.set_btn_color(self.btn_batch_hfg, self._batch_hfg)
+
     def pick_batch_border(self):
         default_color = self.config.get("window_border_color", CP_YELLOW)
         c = QColorDialog.getColor(QColor(default_color), self)
@@ -2182,11 +2208,17 @@ class EditDialog(QDialog):
     def clear_batch_colors(self):
         self._batch_bg = None
         self._batch_fg = None
+        self._batch_hbg = None
+        self._batch_hfg = None
         self._batch_border = None
         self.btn_batch_bg.setText("Pick BG")
         self.btn_batch_bg.setStyleSheet("")
         self.btn_batch_fg.setText("Pick FG")
         self.btn_batch_fg.setStyleSheet("")
+        self.btn_batch_hbg.setText("Pick H-BG")
+        self.btn_batch_hbg.setStyleSheet("")
+        self.btn_batch_hfg.setText("Pick H-FG")
+        self.btn_batch_hfg.setStyleSheet("")
         self.btn_batch_border.setText("Pick Border")
         self.btn_batch_border.setStyleSheet("")
 
@@ -2321,19 +2353,23 @@ class EditDialog(QDialog):
                 
                 apply_align_recursive(self.script.get("scripts", []), batch_align)
 
-            if self._batch_bg or self._batch_fg or self._batch_border:
-                def apply_colors_recursive(items, bg, fg, border):
+            if self._batch_bg or self._batch_fg or self._batch_hbg or self._batch_hfg or self._batch_border:
+                def apply_colors_recursive(items, bg, fg, hbg, hfg, border):
                     for item in items:
                         if bg:
                             item["color"] = bg
                         if fg:
                             item["text_color"] = fg
+                        if hbg:
+                            item["hover_color"] = hbg
+                        if hfg:
+                            item["hover_text_color"] = hfg
                         if border:
                             item["border_color"] = border
                         if item.get("type") == "folder" and "scripts" in item:
-                            apply_colors_recursive(item["scripts"], bg, fg, border)
+                            apply_colors_recursive(item["scripts"], bg, fg, hbg, hfg, border)
                 
-                apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg, self._batch_border)
+                apply_colors_recursive(self.script.get("scripts", []), self._batch_bg, self._batch_fg, self._batch_hbg, self._batch_hfg, self._batch_border)
 
             if self.chk_batch_trans.isChecked():
                 def apply_trans_recursive(items):
