@@ -3683,14 +3683,14 @@
                             "type": "cmd",
                             "code": "npm install -g freebuff",
                             "comment_size": 14,
-                            "comment_color": "#FF5500"
+                            "comment_color": "#00FF00"
                         },
                         {
                             "comment": "Download Desktop App",
                             "type": "cmd",
                             "code": "start https://freebuff.com/desktop",
                             "comment_size": 14,
-                            "comment_color": "#FF5500"
+                            "comment_color": "#00FF00"
                         }
                     ],
                     "edit_on_click": true,
