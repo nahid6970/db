@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "vercel-build": "npx convex deploy --cmd 'next build'",
+    "vercel-build": "npx convex codegen && npx convex deploy --cmd 'next build'",
     "start": "next start",
     "lint": "next lint"
   },
