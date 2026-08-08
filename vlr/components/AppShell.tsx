@@ -3,7 +3,7 @@
 import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { Match, Settings, IgnoreEntry, TournamentOverview } from "@/lib/types";
+import type { Match, Settings, IgnoreEntry, TournamentOverview, MapPlayers } from "@/lib/types";
 import { sortMatches, filterMatches, sortTournaments, formatBST } from "@/lib/utils";
 import Sidebar from "./Sidebar";
 import MatchCard from "./MatchCard";
@@ -33,6 +33,7 @@ export default function AppShell() {
   const [theme,            setTheme]            = useState("dark");
   const [syncing,          setSyncing]          = useState(false);
   const [loadingStats,     setLoadingStats]     = useState(false);
+  const [statsProgress,    setStatsProgress]    = useState("");
   const [syncError,        setSyncError]        = useState("");
   const [currentPage,      setCurrentPage]      = useState(1);
 
@@ -142,36 +143,89 @@ export default function AppShell() {
     }
   }, [settings]);
 
-  const hasMissingStats = useMemo(
-    () => sortedTournaments.some((t) => !t.fully_loaded),
-    [sortedTournaments]
-  );
+  const matchHasPlayerStats = useCallback((match: Match) => {
+    const players = match.players;
+    if (!players || typeof players !== "object") return false;
+
+    const hasRealStats = (mapData?: MapPlayers) => {
+      if (!mapData) return false;
+      for (const teamKey of ["team1", "team2"] as const) {
+        for (const player of mapData[teamKey] ?? []) {
+          if (player.rating || player.acs || player.k || player.d || player.a) return true;
+        }
+      }
+      return false;
+    };
+
+    if (hasRealStats(players.all)) return true;
+    return Object.keys(players).some((key) => key !== "all" && hasRealStats(players[key]));
+  }, []);
+
+  const missingStatsMatches = useMemo(() => {
+    if (!rawMatches) return [];
+    const visible = new Set(visibleTournaments);
+    return rawMatches.filter((match) => {
+      if (!visible.has(match.tournament) || ignoredNames.has(match.tournament)) return false;
+
+      const status = (match.status ?? "").toLowerCase();
+      if (status === "completed") {
+        const hasMaps = Array.isArray(match.maps) && match.maps.length > 0;
+        return !hasMaps || !matchHasPlayerStats(match);
+      }
+
+      return true;
+    });
+  }, [rawMatches, visibleTournaments, ignoredNames, matchHasPlayerStats]);
+
+  const hasMissingStats = missingStatsMatches.length > 0;
 
   const handleLoadStats = useCallback(async () => {
+    const missing = missingStatsMatches;
+    if (missing.length === 0) return;
+
+    if (typeof Notification !== "undefined" && Notification.permission === "default") {
+      await Notification.requestPermission();
+    }
+
     setLoadingStats(true);
     setSyncError("");
+    setStatsProgress(`0/${missing.length}`);
+
     try {
-      const res = await fetch("/api/sync", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          scrape_start: settings?.scrape_start ?? 1,
-          scrape_end:   settings?.scrape_end   ?? 5,
-          load_details: true,
-        }),
-      });
-      const j = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        setSyncError(j.error ?? "Stats load failed");
-      } else if (j.ok === false) {
-        setSyncError(j.error ?? "Stats load did not load any matches");
+      for (let i = 0; i < missing.length; i += 1) {
+        const match = missing[i];
+        setStatsProgress(`${i + 1}/${missing.length}`);
+
+        const status = (match.status ?? "").toLowerCase();
+        const matchMs = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
+        if (status !== "completed" && matchMs > Date.now()) {
+          continue;
+        }
+
+        const res = await fetch("/api/sync", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ match }),
+        });
+        const j = await res.json().catch(() => ({}));
+        if (!res.ok || j.ok === false) {
+          throw new Error(j.error ?? `Stats load failed for ${match.match_id}`);
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 450));
+      }
+
+      const msg = `Successfully loaded stats for ${missing.length} matches.`;
+      if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+        new Notification("Stats Collection Completed", { body: msg });
       }
     } catch (e) {
       setSyncError(String(e));
     } finally {
       setLoadingStats(false);
+      setStatsProgress("");
     }
-  }, [settings]);
+  }, [missingStatsMatches]);
 
   // Note: /api/sync is served by the Next route handler.
 
@@ -250,9 +304,9 @@ export default function AppShell() {
                 disabled={loadingStats}
               >
                 {loadingStats ? (
-                  <><i className="fa-solid fa-arrows-rotate spinning" /> Stats…</>
+                  <><i className="fa-solid fa-spinner spinning" /> {statsProgress}</>
                 ) : (
-                  <>Load Stats</>
+                  <>{missingStatsMatches.length}</>
                 )}
               </button>
             )}

@@ -437,8 +437,34 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "CONVEX_SITE_URL not configured" }, { status: 500 });
   }
 
-  let body: { scrape_start?: number; scrape_end?: number; load_details?: boolean } = {};
+  let body: {
+    scrape_start?: number;
+    scrape_end?: number;
+    load_details?: boolean;
+    match?: Record<string, unknown>;
+  } = {};
   try { body = await req.json(); } catch { /* no body fine */ }
+
+  if (body.match) {
+    const href = typeof body.match.href === "string" ? body.match.href : "";
+    const match_id = String(body.match.match_id ?? body.match.id ?? "");
+    if (!href || !match_id) {
+      return NextResponse.json({ ok: false, error: "match.href and match.match_id are required" }, { status: 400 });
+    }
+
+    try {
+      const html = await fetchHTML(`https://www.vlr.gg${href}`);
+      if (!html) {
+        return NextResponse.json({ ok: false, error: `Unable to fetch detail page for ${match_id}` }, { status: 502 });
+      }
+      const details = parseDetail(html);
+      await hydratePlayerPhotos(details.players);
+      await uploadSingle({ ...body.match, match_id, ...details });
+      return NextResponse.json({ ok: true, match_id, detailed: 1 });
+    } catch (e) {
+      return NextResponse.json({ ok: false, error: String(e), match_id }, { status: 500 });
+    }
+  }
 
   const scrapeStart = Number(body.scrape_start ?? 1);
   const scrapeEnd   = Number(body.scrape_end   ?? 5);
