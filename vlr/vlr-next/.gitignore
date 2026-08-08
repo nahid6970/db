@@ -25,7 +25,6 @@ __pycache__/
 *.db
 *.db-shm
 *.db-wal
-*.json
 !.env.example
 !convex/schema.ts
 
