@@ -69,6 +69,7 @@ This protects the `/ingest-matches` HTTP endpoint from unauthorized POSTs.
 | Variable | Value | Where to find |
 |----------|-------|---------------|
 | `NEXT_PUBLIC_CONVEX_URL` | `https://xxxx.convex.cloud` | Convex dashboard → Settings |
+| `CONVEX_DEPLOY_KEY` | `prod:...` | Convex dashboard → Settings → URL & Deploy Key |
 | `CONVEX_SITE_URL` | `https://xxxx.convex.site` | Convex dashboard → Settings |
 | `CONVEX_SECRET` | Same value from step 2 | You created this |
 
