@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "convex": "1.17.4",
-    "next": "15.3.6",
+    "next": "15.3.9",
     "react": "19.1.2",
     "react-dom": "19.1.2",
     "@octokit/core": "6.1.4"
