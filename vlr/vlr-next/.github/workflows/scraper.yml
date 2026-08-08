@@ -1,0 +1,43 @@
+name: VLR Scraper (Manual Fallback)
+
+on:
+  # Manual trigger only — no scheduled cron
+  # This is a fallback in case you want to run a deep scrape
+  # outside of the Vercel sync button (e.g. large page ranges)
+  workflow_dispatch:
+    inputs:
+      scrape_start:
+        description: "Start page (results)"
+        required: false
+        default: "1"
+      scrape_end:
+        description: "End page (results)"
+        required: false
+        default: "5"
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: scraper/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r scraper/requirements.txt
+
+      - name: Run scraper
+        env:
+          CONVEX_SITE_URL: ${{ secrets.CONVEX_SITE_URL }}
+          CONVEX_SECRET:   ${{ secrets.CONVEX_SECRET }}
+          SCRAPE_START:    ${{ github.event.inputs.scrape_start || '1' }}
+          SCRAPE_END:      ${{ github.event.inputs.scrape_end   || '5' }}
+        run: python scraper/scraper.py
