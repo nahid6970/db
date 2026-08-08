@@ -5283,6 +5283,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 3,
+                "title": "Silo - S03E06 - The Drive",
+                "watched": true,
+                "added_date": "2026-08-07T19:03:38.081525",
+                "notify": "unseen"
+            },
+            {
                 "id": 2,
                 "title": "Silo - S03E04 - Whatever You Do, Don't Go Home",
                 "watched": true,
