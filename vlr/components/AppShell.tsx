@@ -304,7 +304,7 @@ export default function AppShell() {
                 disabled={loadingStats}
               >
                 {loadingStats ? (
-                  <><i className="fa-solid fa-spinner spinning" /> {statsProgress}</>
+                  <>{statsProgress}</>
                 ) : (
                   <>{missingStatsMatches.length}</>
                 )}
