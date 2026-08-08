@@ -35,9 +35,14 @@ function isRetryableConvexFailure(output) {
   );
 }
 
-const codegenResult = await runCommand(["convex", "codegen"]);
-if (codegenResult.code !== 0) {
-  process.exit(codegenResult.code ?? 1);
+for (const args of [
+  ["convex", "codegen"],
+  ["next", "build"],
+]) {
+  const result = await runCommand(args);
+  if (result.code !== 0) {
+    process.exit(result.code ?? 1);
+  }
 }
 
 for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
@@ -45,7 +50,7 @@ for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
     console.log(`Retrying Convex deploy (${attempt}/${maxAttempts})...`);
   }
 
-  const result = await runCommand(["convex", "deploy", "--cmd", "next build"]);
+  const result = await runCommand(["convex", "deploy"]);
   if (result.code === 0) {
     process.exit(0);
   }
