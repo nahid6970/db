@@ -2,12 +2,12 @@ import { spawn } from "node:child_process";
 
 const maxAttempts = 3;
 const retryDelaysMs = [5_000, 15_000];
+const npxCommand = process.platform === "win32" ? "npx.cmd" : "npx";
 
-function runConvexDeploy() {
+function runCommand(args) {
   return new Promise((resolve) => {
     const output = [];
-    const command = process.platform === "win32" ? "npx.cmd" : "npx";
-    const child = spawn(command, ["convex", "deploy", "--cmd", "next build"], {
+    const child = spawn(npxCommand, args, {
       env: process.env,
       shell: false,
     });
@@ -35,12 +35,17 @@ function isRetryableConvexFailure(output) {
   );
 }
 
+const codegenResult = await runCommand(["convex", "codegen"]);
+if (codegenResult.code !== 0) {
+  process.exit(codegenResult.code ?? 1);
+}
+
 for (let attempt = 1; attempt <= maxAttempts; attempt += 1) {
   if (attempt > 1) {
     console.log(`Retrying Convex deploy (${attempt}/${maxAttempts})...`);
   }
 
-  const result = await runConvexDeploy();
+  const result = await runCommand(["convex", "deploy", "--cmd", "next build"]);
   if (result.code === 0) {
     process.exit(0);
   }
