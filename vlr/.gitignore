@@ -1,44 +1,35 @@
-# Byte-compiled / optimized / DLL files
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js build output
+.next/
+out/
+
+# Environment variables (NEVER commit real secrets)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Convex generated files (re-generated on deploy)
+convex/_generated/
+
+# Python
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
 
-# Databases
-*.db
-*.db-shm
-*.db-wal
-
-# Environments
-.env
-venv/
-.venv/
-env/
-ENV/
-
-# IDEs and Editors
-.vscode/
-.idea/
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.swp
-
-# Offline data caches and user settings
-static/images_cache/
-matches.json
-matches.backup.json
-settings.json
-
-# Runtime / history data
-history/
-
-# Atomic write temp files
-*.tmp
-
-# Logs
+# Misc
+.DS_Store
 *.log
+npm-debug.log*
+.vercel
 
-# JSON files
-*.json
+# Override parent repo's *.json ignore rule
+# These files MUST be tracked for Vercel to work
+!package.json
+!package-lock.json
+!tsconfig.json
+!vercel.json
