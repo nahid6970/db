@@ -119,7 +119,7 @@ export default function AppShell() {
     setSyncing(true);
     setSyncError("");
     try {
-      // POST directly to the Vercel Python function (api/sync.py → /api/sync)
+      // POST to the Vercel route handler.
       const res = await fetch("/api/sync", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -128,9 +128,11 @@ export default function AppShell() {
           scrape_end:   settings?.scrape_end   ?? 5,
         }),
       });
+      const j = await res.json().catch(() => ({}));
       if (!res.ok) {
-        const j = await res.json().catch(() => ({}));
         setSyncError(j.error ?? "Sync failed");
+      } else if (j.ok === false) {
+        setSyncError(j.error ?? "Sync did not load any matches");
       }
     } catch (e) {
       setSyncError(String(e));
@@ -139,8 +141,7 @@ export default function AppShell() {
     }
   }, [settings]);
 
-  // Note: /api/sync is served by api/sync.py (Vercel Python function).
-  // No GitHub Actions or external triggers needed — scraper runs on Vercel directly.
+  // Note: /api/sync is served by the Next route handler.
 
   const toggleTheme = useCallback(async () => {
     const next = theme === "dark" ? "light" : "dark";

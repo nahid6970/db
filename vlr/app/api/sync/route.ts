@@ -15,18 +15,19 @@ function convexHeaders() {
 }
 
 async function uploadMatches(matches: unknown[]) {
-  if (!matches.length || !CONVEX_SITE_URL) return;
+  if (!matches.length || !CONVEX_SITE_URL) return 0;
   const batchSize = 200;
+  let uploaded = 0;
   for (let i = 0; i < matches.length; i += batchSize) {
     const batch = matches.slice(i, i + batchSize);
-    try {
-      const r = await fetch(`${CONVEX_SITE_URL}/ingest-matches`, {
-        method: "POST", headers: convexHeaders(),
-        body: JSON.stringify({ matches: batch }),
-      });
-      if (!r.ok) console.error(`Convex ingest error ${r.status}: ${await r.text()}`);
-    } catch (e) { console.error("Upload error:", e); }
+    const r = await fetch(`${CONVEX_SITE_URL}/ingest-matches`, {
+      method: "POST", headers: convexHeaders(),
+      body: JSON.stringify({ matches: batch }),
+    });
+    if (!r.ok) throw new Error(`Convex ingest error ${r.status}: ${await r.text()}`);
+    uploaded += batch.length;
   }
+  return uploaded;
 }
 
 async function uploadSingle(match: unknown) {
@@ -49,6 +50,16 @@ function getText(el: Element | null): string {
 function getSrc(img: Element | null): string {
   const src = img?.getAttribute("src") ?? "";
   return src.startsWith("//") ? "https:" + src : src;
+}
+
+function cleanHtmlText(value: string | undefined): string {
+  return (value ?? "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&ndash;/g, "–")
+    .replace(/&amp;/g, "&")
+    .replace(/&nbsp;/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
 // ─── Match list parsing ────────────────────────────────────────────────────────
@@ -90,7 +101,6 @@ function parseMatches(html: string, forceStatus?: string) {
     const time_text = timeMatch ? timeMatch[1].trim().replace(/\s+/g, " ") : "N/A";
 
     // Teams
-    const teamRegex = /match-item-vs-team(?:-name)?[^>]*>([\s\S]*?)<\/div>/g;
     const teamNameRegex = /match-item-vs-team-name[^>]*>([\s\S]*?)<\/div>/g;
     const scoreRegex    = /match-item-vs-team-score[^>]*>([\s\S]*?)<\/div>/g;
 
@@ -98,25 +108,25 @@ function parseMatches(html: string, forceStatus?: string) {
     const teamScores: string[] = [];
     let tnm: RegExpExecArray | null;
     while ((tnm = teamNameRegex.exec(inner)) !== null) {
-      teamNames.push(tnm[1].trim().replace(/\s+/g, " ").replace(/<[^>]+>/g, ""));
+      teamNames.push(cleanHtmlText(tnm[1]));
     }
     let tsm: RegExpExecArray | null;
     while ((tsm = scoreRegex.exec(inner)) !== null) {
-      teamScores.push(tsm[1].trim().replace(/<[^>]+>/g, ""));
+      teamScores.push(cleanHtmlText(tsm[1]));
     }
 
     // Tournament
-    const eventMatch   = inner.match(/match-item-event[^>]*>([\s\S]*?)<\/div>\s*<\/div>/);
+    const eventMatch   = inner.match(/<div[^>]+class="[^"]*\bmatch-item-event\b[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*\bmatch-item-icon\b)/);
     const seriesMatch  = inner.match(/match-item-event-series[^>]*>([\s\S]*?)<\/div>/);
     let tourney_name   = "";
     let tourney_series = "";
     if (seriesMatch) {
-      tourney_series = seriesMatch[1].trim().replace(/\s+/g, " ").replace(/<[^>]+>/g, "");
+      tourney_series = cleanHtmlText(seriesMatch[1]);
       if (eventMatch) {
-        tourney_name = eventMatch[1].replace(seriesMatch[1], "").trim().replace(/\s+/g, " ").replace(/<[^>]+>/g, "");
+        tourney_name = cleanHtmlText(eventMatch[1]).replace(tourney_series, "").trim();
       }
     } else if (eventMatch) {
-      tourney_name = eventMatch[1].trim().replace(/\s+/g, " ").replace(/<[^>]+>/g, "");
+      tourney_name = cleanHtmlText(eventMatch[1]);
     }
 
     // Logo
@@ -325,7 +335,7 @@ async function fetchHTML(url: string): Promise<string | null> {
 
 // ─── Main scrape ───────────────────────────────────────────────────────────────
 
-async function runScrape(scrapeStart: number, scrapeEnd: number) {
+async function runScrape(scrapeStart: number, scrapeEnd: number, loadDetails: boolean) {
   const allScraped: Record<string, unknown>[] = [];
 
   const upcomingHtml = await fetchHTML("https://www.vlr.gg/matches");
@@ -347,7 +357,11 @@ async function runScrape(scrapeStart: number, scrapeEnd: number) {
   if (!allScraped.length) return { ok: false, error: "No matches scraped" };
 
   // Upload lightweight list first
-  await uploadMatches(allScraped);
+  const uploaded = await uploadMatches(allScraped);
+
+  if (!loadDetails) {
+    return { ok: true, scraped: allScraped.length, uploaded, detailed: 0 };
+  }
 
   // Fetch details in parallel (batches of 8)
   const batchSize = 8;
@@ -377,14 +391,14 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "CONVEX_SITE_URL not configured" }, { status: 500 });
   }
 
-  let body: { scrape_start?: number; scrape_end?: number } = {};
+  let body: { scrape_start?: number; scrape_end?: number; load_details?: boolean } = {};
   try { body = await req.json(); } catch { /* no body fine */ }
 
   const scrapeStart = Number(body.scrape_start ?? 1);
   const scrapeEnd   = Number(body.scrape_end   ?? 5);
 
   try {
-    const result = await runScrape(scrapeStart, scrapeEnd);
+    const result = await runScrape(scrapeStart, scrapeEnd, body.load_details === true);
     return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
