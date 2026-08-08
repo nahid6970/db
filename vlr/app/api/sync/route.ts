@@ -41,6 +41,51 @@ async function uploadSingle(match: unknown) {
   } catch (e) { console.error("Upsert error:", e); }
 }
 
+async function fetchPlayerPhoto(playerHref: string): Promise<string> {
+  if (!playerHref) return "";
+  const html = await fetchHTML(`https://www.vlr.gg${playerHref}`);
+  if (!html) return "";
+
+  const avatarMatch = html.match(/<div[^>]+class="[^"]*\bwf-avatar\b[^"]*"[\s\S]*?<img[^>]+src="([^"]+)"/);
+  let src = avatarMatch?.[1] ?? "";
+  if (src.startsWith("//")) src = "https:" + src;
+  else if (src.startsWith("/")) src = "https://www.vlr.gg" + src;
+  return src;
+}
+
+async function hydratePlayerPhotos(players: Record<string, unknown>) {
+  const refs = new Map<string, Record<string, unknown>[]>();
+
+  for (const mapData of Object.values(players)) {
+    if (!mapData || typeof mapData !== "object") continue;
+    const teams = mapData as { team1?: unknown[]; team2?: unknown[] };
+    for (const teamKey of ["team1", "team2"] as const) {
+      for (const player of teams[teamKey] ?? []) {
+        if (!player || typeof player !== "object") continue;
+        const p = player as Record<string, unknown>;
+        const href = typeof p.href === "string" ? p.href : "";
+        if (href && !p.photo) {
+          const list = refs.get(href) ?? [];
+          list.push(p);
+          refs.set(href, list);
+        }
+      }
+    }
+  }
+
+  const hrefs = [...refs.keys()];
+  const batchSize = 5;
+  for (let i = 0; i < hrefs.length; i += batchSize) {
+    const batch = hrefs.slice(i, i + batchSize);
+    await Promise.all(batch.map(async (href) => {
+      const photo = await fetchPlayerPhoto(href);
+      for (const player of refs.get(href) ?? []) {
+        player.photo = photo;
+      }
+    }));
+  }
+}
+
 // ─── HTML parsing helpers ──────────────────────────────────────────────────────
 
 function getText(el: Element | null): string {
@@ -375,6 +420,7 @@ async function runScrape(scrapeStart: number, scrapeEnd: number, loadDetails: bo
         const html = await fetchHTML(`https://www.vlr.gg${href}`);
         if (!html) return;
         const details = parseDetail(html);
+        await hydratePlayerPhotos(details.players);
         await uploadSingle({ ...m, ...details });
         detailed++;
       })

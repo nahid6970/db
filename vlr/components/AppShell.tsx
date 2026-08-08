@@ -32,6 +32,7 @@ export default function AppShell() {
   const [perPage,          setPerPage]          = useState("50");
   const [theme,            setTheme]            = useState("dark");
   const [syncing,          setSyncing]          = useState(false);
+  const [loadingStats,     setLoadingStats]     = useState(false);
   const [syncError,        setSyncError]        = useState("");
   const [currentPage,      setCurrentPage]      = useState(1);
 
@@ -141,6 +142,37 @@ export default function AppShell() {
     }
   }, [settings]);
 
+  const hasMissingStats = useMemo(
+    () => sortedTournaments.some((t) => !t.fully_loaded),
+    [sortedTournaments]
+  );
+
+  const handleLoadStats = useCallback(async () => {
+    setLoadingStats(true);
+    setSyncError("");
+    try {
+      const res = await fetch("/api/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          scrape_start: settings?.scrape_start ?? 1,
+          scrape_end:   settings?.scrape_end   ?? 5,
+          load_details: true,
+        }),
+      });
+      const j = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        setSyncError(j.error ?? "Stats load failed");
+      } else if (j.ok === false) {
+        setSyncError(j.error ?? "Stats load did not load any matches");
+      }
+    } catch (e) {
+      setSyncError(String(e));
+    } finally {
+      setLoadingStats(false);
+    }
+  }, [settings]);
+
   // Note: /api/sync is served by the Next route handler.
 
   const toggleTheme = useCallback(async () => {
@@ -209,6 +241,21 @@ export default function AppShell() {
 
         <div className="header-right">
           <div className="status-filters">
+            {hasMissingStats && (
+              <button
+                className="status-btn"
+                style={{ color: "var(--accent-green)", borderColor: "rgba(0,245,155,0.3)", background: "rgba(0,245,155,0.05)" }}
+                title="Load missing match and player stats"
+                onClick={handleLoadStats}
+                disabled={loadingStats}
+              >
+                {loadingStats ? (
+                  <><i className="fa-solid fa-arrows-rotate spinning" /> Stats…</>
+                ) : (
+                  <>Load Stats</>
+                )}
+              </button>
+            )}
             {(["all","live","upcoming","completed"] as const).map((s) => (
               <button
                 key={s}
