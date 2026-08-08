@@ -59,7 +59,7 @@ function parseMatches(html: string, forceStatus?: string) {
   const now = Math.floor(Date.now() / 1000);
 
   // Split by match-item links
-  const matchItemRegex = /<a[^>]+class="[^"]*match-item[^"]*"[^>]+href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g;
+  const matchItemRegex = /<a\b(?=[^>]*\bhref="([^"]+)")(?=[^>]*\bclass="[^"]*\bmatch-item\b[^"]*")[^>]*>([\s\S]*?)<\/a>/g;
   const dateLabelRegex = /<div[^>]+class="[^"]*wf-label[^"]*mod-large[^"]*"[^>]*>([\s\S]*?)<\/div>/g;
 
   // Extract dates in order
