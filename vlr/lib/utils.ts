@@ -35,12 +35,15 @@ export function sortMatches(matches: Match[]): Match[] {
 
 /** Compute countdown string from unix timestamp */
 export function getCountdown(unix: number): string {
+  if (!unix) return "TBD";
   const now = Date.now() / 1000;
   const diff = unix - now;
   if (diff <= 0) return "Starting soon";
-  const h = Math.floor(diff / 3600);
+  const d = Math.floor(diff / 86400);
+  const h = Math.floor((diff % 86400) / 3600);
   const m = Math.floor((diff % 3600) / 60);
   const s = Math.floor(diff % 60);
+  if (d > 0) return `${d}d ${h}h`;
   if (h > 0) return `${h}h ${m}m`;
   if (m > 0) return `${m}m ${s}s`;
   return `${s}s`;

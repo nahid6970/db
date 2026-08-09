@@ -109,6 +109,52 @@ function cleanHtmlText(value: string | undefined): string {
     .replace(/\s+/g, " ");
 }
 
+// ─── Timestamp helpers ─────────────────────────────────────────────────────────
+
+function parseEtaToUnix(etaText: string): number {
+  if (!etaText) return 0;
+  const now = Math.floor(Date.now() / 1000);
+  if (/live/i.test(etaText)) return now;
+
+  const inMatch = etaText.match(/in\s+(?:(\d+)d\s*)?(?:(\d+)h\s*)?(?:(\d+)m\s*)?/i)
+    || etaText.match(/(?:(\d+)d\s*)?(?:(\d+)h\s*)?(?:(\d+)m\s*)\s*from now/i);
+  if (inMatch) {
+    const d = Number(inMatch[1] ?? 0);
+    const h = Number(inMatch[2] ?? 0);
+    const m = Number(inMatch[3] ?? 0);
+    if (d || h || m) {
+      return now + d * 86400 + h * 3600 + m * 60;
+    }
+  }
+
+  const agoMatch = etaText.match(/(?:(\d+)d\s*)?(?:(\d+)h\s*)?(?:(\d+)m\s*)\s*ago/i);
+  if (agoMatch) {
+    const d = Number(agoMatch[1] ?? 0);
+    const h = Number(agoMatch[2] ?? 0);
+    const m = Number(agoMatch[3] ?? 0);
+    if (d || h || m) {
+      return now - (d * 86400 + h * 3600 + m * 60);
+    }
+  }
+
+  return 0;
+}
+
+function parseNewYorkTimeToUnix(tsStr: string): number {
+  if (!tsStr) return 0;
+  try {
+    const isoStr = tsStr.replace(" ", "T");
+    const dummyUtc = new Date(`${isoStr}.000Z`);
+    const nyStr = dummyUtc.toLocaleString("en-US", { timeZone: "America/New_York" });
+    const utcStr = dummyUtc.toLocaleString("en-US", { timeZone: "UTC" });
+    const offsetMs = new Date(utcStr).getTime() - new Date(nyStr).getTime();
+    const unix = Math.floor((dummyUtc.getTime() + offsetMs) / 1000);
+    return isNaN(unix) ? 0 : unix;
+  } catch {
+    return 0;
+  }
+}
+
 // ─── Match list parsing ────────────────────────────────────────────────────────
 
 function parseMatches(html: string, forceStatus?: string) {
@@ -201,6 +247,9 @@ function parseMatches(html: string, forceStatus?: string) {
       status = eta_text ? "Upcoming" : "Completed";
     }
 
+    const unix_ts = parseEtaToUnix(eta_text);
+    const bst_str = unix_ts ? (new Date((unix_ts + 6 * 3600) * 1000)).toISOString().replace("T", " ").slice(0, 16) : "";
+
     results.push({
       match_id,
       href,
@@ -215,6 +264,8 @@ function parseMatches(html: string, forceStatus?: string) {
       tournament_logo: tourney_logo,
       eta:             eta_text,
       status,
+      unix_timestamp:  unix_ts,
+      bst_time:        bst_str,
       last_updated:    now,
     });
   }
@@ -447,16 +498,11 @@ function parseDetail(html: string) {
   let unix_timestamp = 0, bst_time = "N/A";
   const tsMatch = html.match(/data-utc-ts="([^"]+)"/);
   if (tsMatch) {
-    try {
-      const raw = tsMatch[1];
-      const [datePart, timePart] = raw.split(" ");
-      const [y, mo, d] = datePart.split("-").map(Number);
-      const [h, mi, s] = timePart.split(":").map(Number);
-      const utcMs = Date.UTC(y, mo - 1, d, h + 5, mi, s);
-      unix_timestamp = Math.floor(utcMs / 1000);
-      const bstDate = new Date(utcMs + 6 * 3600 * 1000);
+    unix_timestamp = parseNewYorkTimeToUnix(tsMatch[1]);
+    if (unix_timestamp) {
+      const bstDate = new Date((unix_timestamp + 6 * 3600) * 1000);
       bst_time = bstDate.toISOString().replace("T", " ").slice(0, 16);
-    } catch { /* ignore */ }
+    }
   }
 
   const maps: { name: string; score1: string; score2: string; winner: number | null }[] = [];

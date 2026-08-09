@@ -160,10 +160,12 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
           </span>
         </div>
 
-        {isUpcoming && match.unix_timestamp && (
+        {isUpcoming && (
           <div className="countdown-container">
             <span className="countdown-label">Starts in</span>
-            <span className="countdown-timer">{countdown}</span>
+            <span className="countdown-timer">
+              {match.unix_timestamp ? countdown : match.eta || "TBD"}
+            </span>
           </div>
         )}
         {isLive && (
