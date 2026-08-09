@@ -4025,6 +4025,13 @@
                             "code": "npx omniroute",
                             "comment_size": 14,
                             "comment_color": "#55FF7F"
+                        },
+                        {
+                            "comment": "Go to Website",
+                            "type": "cmd",
+                            "code": "start http://localhost:20128",
+                            "comment_size": 14,
+                            "comment_color": "#FF5500"
                         }
                     ],
                     "edit_on_click": true,
