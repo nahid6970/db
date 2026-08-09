@@ -46,13 +46,11 @@ async function fetchPlayerPhoto(playerHref: string): Promise<string> {
   const html = await fetchHTML(`https://www.vlr.gg${playerHref}`);
   if (!html) return "";
 
-  const avatarMatch = html.match(/class="[^"]*wf-avatar[^"]*"[\s\S]*?<img[^>]+src="([^"]+)"/)
-    || html.match(/player-header[\s\S]*?<img[^>]+src="([^"]+)"/);
-  let src = avatarMatch?.[1] ?? "";
+  const photoMatch = html.match(/class="[^"]*wf-avatar[^"]*"[\s\S]*?<img[^>]+(?:src|data-src)="([^"]+)"/)
+    || html.match(/player-header[\s\S]*?<img[^>]+(?:src|data-src)="([^"]+)"/);
+  let src = photoMatch?.[1] ?? "";
   if (!src || src.includes("vlr.png") || src.includes("blank")) return "";
-  if (src.startsWith("//")) src = "https:" + src;
-  else if (src.startsWith("/")) src = "https://www.vlr.gg" + src;
-  return src;
+  return cleanImgUrl(src);
 }
 
 async function hydratePlayerPhotos(players: Record<string, unknown>) {
@@ -90,15 +88,6 @@ async function hydratePlayerPhotos(players: Record<string, unknown>) {
 
 // ─── HTML parsing helpers ──────────────────────────────────────────────────────
 
-function getText(el: Element | null): string {
-  return el?.textContent?.trim().replace(/\s+/g, " ") ?? "";
-}
-
-function getSrc(img: Element | null): string {
-  const src = img?.getAttribute("src") ?? "";
-  return src.startsWith("//") ? "https:" + src : src;
-}
-
 function cleanHtmlText(value: string | undefined): string {
   return (value ?? "")
     .replace(/<[^>]+>/g, " ")
@@ -107,6 +96,14 @@ function cleanHtmlText(value: string | undefined): string {
     .replace(/&nbsp;/g, " ")
     .trim()
     .replace(/\s+/g, " ");
+}
+
+function cleanImgUrl(src: string | undefined): string {
+  if (!src) return "";
+  let clean = src.trim();
+  if (clean.startsWith("//")) return "https:" + clean;
+  if (clean.startsWith("/")) return "https://www.vlr.gg" + clean;
+  return clean;
 }
 
 // ─── Timestamp helpers ─────────────────────────────────────────────────────────
@@ -158,15 +155,12 @@ function parseNewYorkTimeToUnix(tsStr: string): number {
 // ─── Match list parsing ────────────────────────────────────────────────────────
 
 function parseMatches(html: string, forceStatus?: string) {
-  // Use regex-based parsing — no DOM library needed in Node.js edge
   const results: Record<string, unknown>[] = [];
   const now = Math.floor(Date.now() / 1000);
 
-  // Split by match-item links
   const matchItemRegex = /<a\b(?=[^>]*\bhref="([^"]+)")(?=[^>]*\bclass="[^"]*\bmatch-item\b[^"]*")[^>]*>([\s\S]*?)<\/a>/g;
   const dateLabelRegex = /<div[^>]+class="[^"]*wf-label[^"]*mod-large[^"]*"[^>]*>([\s\S]*?)<\/div>/g;
 
-  // Extract dates in order
   const dates: { index: number; date: string }[] = [];
   let dm: RegExpExecArray | null;
   while ((dm = dateLabelRegex.exec(html)) !== null) {
@@ -179,7 +173,6 @@ function parseMatches(html: string, forceStatus?: string) {
     const inner   = mm[2];
     const matchAt = mm.index;
 
-    // Find the closest date label before this match
     let currentDate = "Unknown Date";
     for (const d of dates) {
       if (d.index < matchAt) currentDate = d.date;
@@ -189,11 +182,9 @@ function parseMatches(html: string, forceStatus?: string) {
     if (!idMatch) continue;
     const match_id = idMatch[1];
 
-    // Time
     const timeMatch = inner.match(/match-item-time[^>]*>([\s\S]*?)<\/div>/);
     const time_text = timeMatch ? timeMatch[1].trim().replace(/\s+/g, " ") : "N/A";
 
-    // Teams
     const teamNameRegex = /match-item-vs-team-name[^>]*>([\s\S]*?)<\/div>/g;
     const scoreRegex    = /match-item-vs-team-score[^>]*>([\s\S]*?)<\/div>/g;
 
@@ -208,7 +199,6 @@ function parseMatches(html: string, forceStatus?: string) {
       teamScores.push(cleanHtmlText(tsm[1]));
     }
 
-    // Tournament
     const eventMatch   = inner.match(/<div[^>]+class="[^"]*\bmatch-item-event\b[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*\bmatch-item-icon\b)/);
     const seriesMatch  = inner.match(/match-item-event-series[^>]*>([\s\S]*?)<\/div>/);
     let tourney_name   = "";
@@ -222,13 +212,9 @@ function parseMatches(html: string, forceStatus?: string) {
       tourney_name = cleanHtmlText(eventMatch[1]);
     }
 
-    // Logo
-    const iconMatch = inner.match(/match-item-icon[\s\S]*?<img[^>]+src="([^"]+)"/);
-    let tourney_logo = iconMatch ? iconMatch[1] : "";
-    if (tourney_logo.startsWith("//")) tourney_logo = "https:" + tourney_logo;
-    else if (tourney_logo.startsWith("/")) tourney_logo = "https://www.vlr.gg" + tourney_logo;
+    const iconMatch = inner.match(/match-item-icon[\s\S]*?<img[^>]+(?:src|data-src)="([^"]+)"/);
+    const tourney_logo = cleanImgUrl(iconMatch ? iconMatch[1] : "");
 
-    // Status
     const etaMatch    = inner.match(/ml-eta[^>]*>([\s\S]*?)<\/div>/);
     const statusMatch = inner.match(/ml-status[^>]*>([\s\S]*?)<\/div>/);
     const eta_text    = etaMatch   ? etaMatch[1].trim().replace(/<[^>]+>/g, "")    : "";
@@ -277,23 +263,17 @@ function parseMatches(html: string, forceStatus?: string) {
 function parseTeamLogos(html: string) {
   let team1_logo = "", team2_logo = "";
 
-  const t1Match = html.match(/class="[^"]*\bmod-1\b[^"]*"[\s\S]*?<img[^>]+src="([^"]+)"/)
-    || html.match(/match-header-vs-team[\s\S]*?mod-1[\s\S]*?<img[^>]+src="([^"]+)"/);
-  if (t1Match) {
-    let src = t1Match[1];
-    if (src.startsWith("//")) src = "https:" + src;
-    else if (src.startsWith("/")) src = "https://www.vlr.gg" + src;
-    team1_logo = src;
-  }
+  const headerDiv = html.match(/<div[^>]+class="[^"]*\bmatch-header\b[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/)?.[0] ?? html;
 
-  const t2Match = html.match(/class="[^"]*\bmod-2\b[^"]*"[\s\S]*?<img[^>]+src="([^"]+)"/)
-    || html.match(/match-header-vs-team[\s\S]*?mod-2[\s\S]*?<img[^>]+src="([^"]+)"/);
-  if (t2Match) {
-    let src = t2Match[1];
-    if (src.startsWith("//")) src = "https:" + src;
-    else if (src.startsWith("/")) src = "https://www.vlr.gg" + src;
-    team2_logo = src;
-  }
+  const t1Block = headerDiv.match(/class="[^"]*\bmod-1\b[^"]*"[\s\S]*?(?:<\/a>|<\/div>)/)?.[0] ?? "";
+  const t1Img = t1Block.match(/<img[^>]+(?:src|data-src)="([^"]+)"/)?.[1]
+    || headerDiv.match(/mod-1[\s\S]*?<img[^>]+(?:src|data-src)="([^"]+)"/)?.[1];
+  if (t1Img) team1_logo = cleanImgUrl(t1Img);
+
+  const t2Block = headerDiv.match(/class="[^"]*\bmod-2\b[^"]*"[\s\S]*?(?:<\/a>|<\/div>)/)?.[0] ?? "";
+  const t2Img = t2Block.match(/<img[^>]+(?:src|data-src)="([^"]+)"/)?.[1]
+    || headerDiv.match(/mod-2[\s\S]*?<img[^>]+(?:src|data-src)="([^"]+)"/)?.[1];
+  if (t2Img) team2_logo = cleanImgUrl(t2Img);
 
   return { team1_logo, team2_logo };
 }
@@ -344,12 +324,10 @@ function parsePlayerTables(gameBlockHtml: string) {
         const agentImgMatches = playerCell.matchAll(/<img[^>]+>/g);
         for (const im of agentImgMatches) {
           const imgTag = im[0];
-          const srcM = imgTag.match(/src="([^"]+)"/);
+          const srcM = imgTag.match(/(?:src|data-src)="([^"]+)"/);
           const altM = imgTag.match(/(?:alt|title)="([^"]+)"/);
           if (srcM) {
-            let icon = srcM[1];
-            if (icon.startsWith("//")) icon = "https:" + icon;
-            else if (icon.startsWith("/")) icon = "https://www.vlr.gg" + icon;
+            const icon = cleanImgUrl(srcM[1]);
             let agentName = altM ? altM[1] : "";
             if (!agentName) {
               const fn = icon.split("/").pop()?.split(".")[0] ?? "";
