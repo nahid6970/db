@@ -138,8 +138,20 @@ export const upsertOne = mutation({
       .withIndex("by_match_id", (q) => q.eq("match_id", id))
       .unique();
 
-    const payload = { ...match, match_id: id, last_updated: Math.floor(Date.now() / 1000) };
-    delete payload.id; // remove legacy key if present
+    const payload = {
+      ...existing,
+      ...match,
+      match_id: id,
+      team1_logo: match.team1_logo || existing?.team1_logo || "",
+      team2_logo: match.team2_logo || existing?.team2_logo || "",
+      tournament_logo: match.tournament_logo || existing?.tournament_logo || "",
+      maps: (Array.isArray(match.maps) && match.maps.length > 0) ? match.maps : (existing?.maps ?? []),
+      players: (match.players && typeof match.players === "object" && Object.keys(match.players).length > 0) ? match.players : (existing?.players ?? {}),
+      last_updated: Math.floor(Date.now() / 1000),
+    };
+    delete payload.id;
+    delete payload._id;
+    delete payload._creationTime;
 
     if (existing) {
       await ctx.db.patch(existing._id, payload);

@@ -99,23 +99,32 @@ export default function MatchDetailModal({
                   <tr key={i}>
                     <td>
                       <div className="mdm-player-cell">
-                        {p.photo
-                          ? <img
-                              src={p.photo}
-                              alt={p.name}
-                              className="mdm-player-photo"
-                              onError={(e) => { e.currentTarget.style.display = "none"; }}
-                            />
-                          : <div className="mdm-player-photo-placeholder" />
-                        }
+                        {p.photo ? (
+                          <img
+                            src={p.photo}
+                            alt={p.name}
+                            className="mdm-player-photo"
+                            onError={(e) => { e.currentTarget.style.display = "none"; }}
+                          />
+                        ) : (
+                          <div className="mdm-player-photo-placeholder">
+                            <i className="fa-solid fa-user" style={{ fontSize: "12px", color: "var(--text-muted)" }} />
+                          </div>
+                        )}
                         <span>{p.name}</span>
                       </div>
                     </td>
                     <td>
                       <div className="mdm-agents-container">
                         {p.agents?.map((a, ai) => (
-                          <img key={ai} src={a.icon} alt={a.name} className="mdm-agent-icon"
-                            onError={(e) => (e.currentTarget.style.display = "none")} />
+                          <img
+                            key={ai}
+                            src={a.icon}
+                            alt={a.name}
+                            title={a.name}
+                            className="mdm-agent-icon"
+                            onError={(e) => (e.currentTarget.style.display = "none")}
+                          />
                         ))}
                       </div>
                     </td>
@@ -154,7 +163,15 @@ export default function MatchDetailModal({
         {/* Score line */}
         <div className="mdm-scoreline">
           <div className="mdm-team">
-            {match.team1_logo && <img src={match.team1_logo} id="mdm-logo1" alt="" onError={(e) => (e.currentTarget.style.display="none")} />}
+            {match.team1_logo && (
+              <img
+                src={match.team1_logo}
+                id="mdm-logo1"
+                alt={match.team1}
+                className={whiteLogoTeams.has(match.team1) ? "white-bg-logo" : ""}
+                onError={(e) => (e.currentTarget.style.display = "none")}
+              />
+            )}
             <div className="mdm-team-name">{match.team1}</div>
           </div>
           <div className="mdm-score" id="mdm-score">
@@ -163,7 +180,15 @@ export default function MatchDetailModal({
             <span className={`score-num${t2Wins ? " winner" : ""}`}>{match.score2 || "–"}</span>
           </div>
           <div className="mdm-team mdm-team-right">
-            {match.team2_logo && <img src={match.team2_logo} id="mdm-logo2" alt="" onError={(e) => (e.currentTarget.style.display="none")} />}
+            {match.team2_logo && (
+              <img
+                src={match.team2_logo}
+                id="mdm-logo2"
+                alt={match.team2}
+                className={whiteLogoTeams.has(match.team2) ? "white-bg-logo" : ""}
+                onError={(e) => (e.currentTarget.style.display = "none")}
+              />
+            )}
             <div className="mdm-team-name">{match.team2}</div>
           </div>
         </div>
