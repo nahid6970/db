@@ -524,34 +524,26 @@ function parseDetail(html: string) {
     }
 
     // Isolate map header section so score divs are only read from header
-    const headerMatch = block.match(/<div[^>]+class="[^"]*\bvm-stats-game-header\b[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*(?:ovw-table|wf-table-mod-stats|mod-game|table)\b|$)/);
-    const headerHtml = headerMatch ? headerMatch[1] : block;
+    const headerMatch = block.match(/<div[^>]+class="[^"]*\bvm-stats-game-header\b[^"]*"[^>]*>([\s\S]*?)<\/div>\s*<\/div>/)
+      || block.match(/<div[^>]+class="[^"]*\bvm-stats-game-header\b[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*(?:ovw-table|wf-table-mod-stats|mod-game|table)\b|$)/);
+    const headerHtml = headerMatch ? headerMatch[0] : block;
 
     const mapNameMatch = headerHtml.match(/<div[^>]+class="[^"]*\bmap\b[^"]*"[^>]*>[\s\S]*?<span>([\s\S]*?)<\/span>/)
       || block.match(/class="map"[\s\S]*?<span>([\s\S]*?)<\/span>/);
     let map_name = mapNameMatch ? cleanHtmlText(mapNameMatch[1]) : "";
     if (map_name) {
-      map_name = map_name.replace(/\s*\(.*?\)/, "").trim();
+      map_name = map_name.replace(/\s*\(.*?\)/g, "").trim();
     }
 
-    const teamDivs = [...headerHtml.matchAll(/<div[^>]+class="[^"]*\bteam\b[^"]*"[^>]*>([\s\S]*?)<\/div\s*>/g)];
+    // Read team map scores directly from div.score inside vm-stats-game-header
+    const scoreMatches = [...headerHtml.matchAll(/<div[^>]+class="[^"]*\bscore\b([^"]*)"[^>]*>([\s\S]*?)<\/div>/g)];
     let score1 = "0", score2 = "0", winner: number | null = null;
 
-    const scores: { score: string; isWin: boolean }[] = [];
-    for (const td of teamDivs) {
-      const scoreMatch = td[1].match(/<div[^>]+class="[^"]*\bscore\b([^"]*)"[^>]*>([\s\S]*?)<\/div>/);
-      if (scoreMatch) {
-        const val = cleanHtmlText(scoreMatch[2]);
-        const isWin = scoreMatch[1].includes("mod-win");
-        scores.push({ score: val || "0", isWin });
-      }
-    }
-
-    if (scores.length >= 2) {
-      score1 = scores[0].score;
-      score2 = scores[1].score;
-      if (scores[0].isWin) winner = 0;
-      else if (scores[1].isWin) winner = 1;
+    if (scoreMatches.length >= 2) {
+      score1 = cleanHtmlText(scoreMatches[0][2]);
+      score2 = cleanHtmlText(scoreMatches[1][2]);
+      if (scoreMatches[0][1].includes("mod-win")) winner = 0;
+      else if (scoreMatches[1][1].includes("mod-win")) winner = 1;
     }
 
     const hasStats = playerData.team1.length > 0 || playerData.team2.length > 0;

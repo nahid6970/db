@@ -190,31 +190,38 @@ export default function AppShell() {
     setStatsProgress(`0/${missing.length}`);
 
     try {
-      for (let i = 0; i < missing.length; i += 1) {
-        const match = missing[i];
-        setStatsProgress(`${i + 1}/${missing.length}`);
+      const batchSize = 3;
+      let completedCount = 0;
 
-        const status = (match.status ?? "").toLowerCase();
-        const matchMs = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
-        if (status !== "completed" && matchMs > Date.now()) {
-          continue;
-        }
+      for (let i = 0; i < missing.length; i += batchSize) {
+        const batch = missing.slice(i, i + batchSize);
+        await Promise.all(
+          batch.map(async (match) => {
+            const status = (match.status ?? "").toLowerCase();
+            const matchMs = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
+            if (status !== "completed" && matchMs > Date.now()) {
+              return;
+            }
 
-        try {
-          const res = await fetch("/api/sync", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ match }),
-          });
-          const j = await res.json().catch(() => ({}));
-          if (!res.ok || j.ok === false) {
-            console.error(`Stats load failed for ${match.match_id}:`, j.error);
-          }
-        } catch (err) {
-          console.error(`Error loading stats for ${match.match_id}:`, err);
-        }
+            try {
+              const res = await fetch("/api/sync", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ match }),
+              });
+              const j = await res.json().catch(() => ({}));
+              if (!res.ok || j.ok === false) {
+                console.error(`Stats load failed for ${match.match_id}:`, j.error);
+              }
+            } catch (err) {
+              console.error(`Error loading stats for ${match.match_id}:`, err);
+            }
+          })
+        );
 
-        await new Promise((resolve) => setTimeout(resolve, 450));
+        completedCount += batch.length;
+        setStatsProgress(`${Math.min(completedCount, missing.length)}/${missing.length}`);
+        await new Promise((resolve) => setTimeout(resolve, 150));
       }
 
       const msg = `Finished processing stats for ${missing.length} matches.`;
