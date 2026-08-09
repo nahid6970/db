@@ -1,9 +1,0 @@
-{
-  "version": 2,
-  "rewrites": [
-    { "source": "/api/matches/view", "destination": "/api/matches?action=view" },
-    { "source": "/api/matches/all", "destination": "/api/matches?action=all" },
-    { "source": "/api/match/(.*)", "destination": "/api/match?id=$1" },
-    { "source": "/api/ignorelist/(.*)", "destination": "/api/ignorelist?action=$1" }
-  ]
-}
