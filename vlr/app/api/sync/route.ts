@@ -553,9 +553,10 @@ export async function POST(req: NextRequest) {
 
   const scrapeStart = Number(body.scrape_start ?? 1);
   const scrapeEnd   = Number(body.scrape_end   ?? 5);
+  const loadDetails = body.load_details !== false;
 
   try {
-    const result = await runScrape(scrapeStart, scrapeEnd, body.load_details === true);
+    const result = await runScrape(scrapeStart, scrapeEnd, loadDetails);
     return NextResponse.json(result);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
