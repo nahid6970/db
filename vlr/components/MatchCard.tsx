@@ -13,6 +13,15 @@ interface MatchCardProps {
 
 export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onClick }: MatchCardProps) {
   const [countdown, setCountdown] = useState("");
+  const [t1ImgError, setT1ImgError] = useState(false);
+  const [t2ImgError, setT2ImgError] = useState(false);
+  const [tourneyImgError, setTourneyImgError] = useState(false);
+
+  useEffect(() => {
+    setT1ImgError(false);
+    setT2ImgError(false);
+    setTourneyImgError(false);
+  }, [match.match_id]);
 
   useEffect(() => {
     if (match.status !== "Upcoming" || !match.unix_timestamp) return;
@@ -58,12 +67,12 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
       {/* Header */}
       <div className="match-card-header">
         <div className="tournament-info">
-          {match.tournament_logo ? (
+          {match.tournament_logo && !tourneyImgError ? (
             <img
               src={match.tournament_logo}
               alt=""
               className="tournament-logo"
-              onError={(e) => (e.currentTarget.style.display = "none")}
+              onError={() => setTourneyImgError(true)}
               loading="lazy"
             />
           ) : (
@@ -95,12 +104,12 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
         {/* Team 1 */}
         <div className="team-container">
           <div className={`logo-wrapper${t1White ? " white-bg-logo" : ""}`}>
-            {match.team1_logo ? (
+            {match.team1_logo && !t1ImgError ? (
               <img
                 src={match.team1_logo}
                 alt={match.team1}
                 className="team-logo"
-                onError={(e) => (e.currentTarget.style.display = "none")}
+                onError={() => setT1ImgError(true)}
                 loading="lazy"
               />
             ) : (
@@ -126,12 +135,12 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
         {/* Team 2 */}
         <div className="team-container">
           <div className={`logo-wrapper${t2White ? " white-bg-logo" : ""}`}>
-            {match.team2_logo ? (
+            {match.team2_logo && !t2ImgError ? (
               <img
                 src={match.team2_logo}
                 alt={match.team2}
                 className="team-logo"
-                onError={(e) => (e.currentTarget.style.display = "none")}
+                onError={() => setT2ImgError(true)}
                 loading="lazy"
               />
             ) : (

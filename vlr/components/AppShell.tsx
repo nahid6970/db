@@ -200,20 +200,24 @@ export default function AppShell() {
           continue;
         }
 
-        const res = await fetch("/api/sync", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ match }),
-        });
-        const j = await res.json().catch(() => ({}));
-        if (!res.ok || j.ok === false) {
-          throw new Error(j.error ?? `Stats load failed for ${match.match_id}`);
+        try {
+          const res = await fetch("/api/sync", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ match }),
+          });
+          const j = await res.json().catch(() => ({}));
+          if (!res.ok || j.ok === false) {
+            console.error(`Stats load failed for ${match.match_id}:`, j.error);
+          }
+        } catch (err) {
+          console.error(`Error loading stats for ${match.match_id}:`, err);
         }
 
         await new Promise((resolve) => setTimeout(resolve, 450));
       }
 
-      const msg = `Successfully loaded stats for ${missing.length} matches.`;
+      const msg = `Finished processing stats for ${missing.length} matches.`;
       if (typeof Notification !== "undefined" && Notification.permission === "granted") {
         new Notification("Stats Collection Completed", { body: msg });
       }
