@@ -4010,14 +4010,21 @@
                             "type": "cmd",
                             "code": "start https://github.com/diegosouzapw/OmniRoute",
                             "comment_size": 14,
-                            "comment_color": "#FF5500"
+                            "comment_color": "#55FF7F"
                         },
                         {
                             "comment": "install with npm",
                             "type": "cmd",
                             "code": "npm install -g omniroute",
                             "comment_size": 14,
-                            "comment_color": "#FF5500"
+                            "comment_color": "#55FF7F"
+                        },
+                        {
+                            "comment": "Launch Omniroute",
+                            "type": "cmd",
+                            "code": "npx omniroute",
+                            "comment_size": 14,
+                            "comment_color": "#55FF7F"
                         }
                     ],
                     "edit_on_click": true,
