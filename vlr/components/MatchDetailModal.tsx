@@ -100,7 +100,12 @@ export default function MatchDetailModal({
                     <td>
                       <div className="mdm-player-cell">
                         {p.photo
-                          ? <img src={p.photo} alt={p.name} className="mdm-player-photo" />
+                          ? <img
+                              src={p.photo}
+                              alt={p.name}
+                              className="mdm-player-photo"
+                              onError={(e) => { e.currentTarget.style.display = "none"; }}
+                            />
                           : <div className="mdm-player-photo-placeholder" />
                         }
                         <span>{p.name}</span>

@@ -266,27 +266,29 @@ function parseDetail(html: string) {
     const game_id  = gm[1];
     const game_html = gm[2];
 
-    // Parse player rows — extract name, stats from ovw-row divs
+    // Parse player rows — extract name, stats from ovw-row divs or tr elements
     const parsePlayerRows = (teamHtml: string) => {
       const players: unknown[] = [];
-      const rowRegex = /ovw-row(?![^"]*mod-head)[^>]*>([\s\S]*?)<\/div>\s*<\/div>/g;
+      const rowRegex = /<tr[^>]*>([\s\S]*?)<\/tr>/g;
       let rm: RegExpExecArray | null;
       while ((rm = rowRegex.exec(teamHtml)) !== null) {
         const row = rm[1];
-        const nameMatch   = row.match(/(?:ovw-player-name|text-of)[^>]*>([\s\S]*?)<\/div>/);
+        if (row.includes("mod-head") || !row.includes("mod-player")) continue;
+
+        const nameMatch   = row.match(/(?:text-of|mod-player)[^>]*>([\s\S]*?)<\/div>/) || row.match(/class="mod-player"[\s\S]*?<div>([\s\S]*?)<\/div>/);
         const hrefMatch   = row.match(/href="(\/[^"]+)"/);
-        const ratingMatch = row.match(/data-col="rating2"[^>]*>([\s\S]*?)<\/div>/);
-        const acsMatch    = row.match(/data-col="acs"[^>]*>([\s\S]*?)<\/div>/);
-        const killsMatch  = row.match(/data-col="kills"[^>]*>([\s\S]*?)<\/span>/);
-        const deathsMatch = row.match(/data-col="deaths"[^>]*>([\s\S]*?)<\/span>/);
-        const assistMatch = row.match(/data-col="assists"[^>]*>([\s\S]*?)<\/span>/);
-        const kdMatch     = row.match(/data-col="kd-diff"[^>]*>([\s\S]*?)<\/div>/);
-        const kastMatch   = row.match(/data-col="kast"[^>]*>([\s\S]*?)<\/div>/);
-        const adrMatch    = row.match(/data-col="adr"[^>]*>([\s\S]*?)<\/div>/);
-        const hsMatch     = row.match(/data-col="hsp"[^>]*>([\s\S]*?)<\/div>/);
-        const fkMatch     = row.match(/data-col="fb"[^>]*>([\s\S]*?)<\/div>/);
-        const fdMatch     = row.match(/data-col="fd"[^>]*>([\s\S]*?)<\/div>/);
-        const fkdMatch    = row.match(/data-col="fk-diff"[^>]*>([\s\S]*?)<\/div>/);
+        const ratingMatch = row.match(/data-col="rating2"[^>]*>([\s\S]*?)<\/td>/) || row.match(/mod-stat[^>]*>([\s\S]*?)<\/td>/);
+        const acsMatch    = row.match(/data-col="acs"[^>]*>([\s\S]*?)<\/td>/);
+        const killsMatch  = row.match(/data-col="kills"[^>]*>([\s\S]*?)<\/td>/);
+        const deathsMatch = row.match(/data-col="deaths"[^>]*>([\s\S]*?)<\/td>/);
+        const assistMatch = row.match(/data-col="assists"[^>]*>([\s\S]*?)<\/td>/);
+        const kdMatch     = row.match(/data-col="kd-diff"[^>]*>([\s\S]*?)<\/td>/);
+        const kastMatch   = row.match(/data-col="kast"[^>]*>([\s\S]*?)<\/td>/);
+        const adrMatch    = row.match(/data-col="adr"[^>]*>([\s\S]*?)<\/td>/);
+        const hsMatch     = row.match(/data-col="hsp"[^>]*>([\s\S]*?)<\/td>/);
+        const fkMatch     = row.match(/data-col="fb"[^>]*>([\s\S]*?)<\/td>/);
+        const fdMatch     = row.match(/data-col="fd"[^>]*>([\s\S]*?)<\/td>/);
+        const fkdMatch    = row.match(/data-col="fk-diff"[^>]*>([\s\S]*?)<\/td>/);
 
         const clean = (s: string | undefined) =>
           (s ?? "").replace(/<[^>]+>/g, "").trim().replace(/\s+/g, " ");
@@ -294,7 +296,7 @@ function parseDetail(html: string) {
         // Agents
         const agents: { name: string; icon: string }[] = [];
         const agentRegex = /<img[^>]+alt="([^"]*)"[^>]+src="([^"]+)"/g;
-        const agentsSection = row.match(/ovw-agents[\s\S]*?<\/div>/)?.[0] ?? "";
+        const agentsSection = row.match(/mod-agents[\s\S]*?<\/td>/)?.[0] ?? row;
         let am: RegExpExecArray | null;
         while ((am = agentRegex.exec(agentsSection)) !== null) {
           let icon = am[2];
@@ -326,7 +328,7 @@ function parseDetail(html: string) {
     };
 
     // Split game html into two team tables
-    const tableMatches = [...game_html.matchAll(/ovw-table[\s\S]*?(?=ovw-table|$)/g)];
+    const tableMatches = [...game_html.matchAll(/(?:wf-table-mod-stats|ovw-table)[\s\S]*?(?=(?:wf-table-mod-stats|ovw-table)|$)/g)];
     const team1_players = tableMatches[0] ? parsePlayerRows(tableMatches[0][0]) : [];
     const team2_players = tableMatches[1] ? parsePlayerRows(tableMatches[1][0]) : [];
     const playerData = { team1: team1_players, team2: team2_players };
