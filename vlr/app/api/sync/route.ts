@@ -380,11 +380,18 @@ function parseDetail(html: string) {
 // ─── Fetch helpers ─────────────────────────────────────────────────────────────
 
 async function fetchHTML(url: string): Promise<string | null> {
-  try {
-    const r = await fetch(url, { headers: SCRAPE_HEADERS });
-    if (!r.ok) { console.error(`Failed ${url}: ${r.status}`); return null; }
-    return await r.text();
-  } catch (e) { console.error(`Fetch error ${url}:`, e); return null; }
+  const target = url.startsWith("http") ? url : `https://www.vlr.gg${url.startsWith("/") ? "" : "/"}${url}`;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const r = await fetch(target, { headers: SCRAPE_HEADERS });
+      if (r.ok) return await r.text();
+      console.error(`Failed ${target}: status ${r.status} (attempt ${attempt})`);
+    } catch (e) {
+      console.error(`Fetch error ${target} (attempt ${attempt}):`, e);
+    }
+    if (attempt < 3) await new Promise((res) => setTimeout(res, 500 * attempt));
+  }
+  return null;
 }
 
 // ─── Main scrape ───────────────────────────────────────────────────────────────
@@ -426,7 +433,7 @@ async function runScrape(scrapeStart: number, scrapeEnd: number, loadDetails: bo
       batch.map(async (m) => {
         const href = m.href as string;
         if (!href) return;
-        const html = await fetchHTML(`https://www.vlr.gg${href}`);
+        const html = await fetchHTML(href);
         if (!html) return;
         const details = parseDetail(html);
         await hydratePlayerPhotos(details.players);
@@ -457,12 +464,14 @@ export async function POST(req: NextRequest) {
   if (body.match) {
     const href = typeof body.match.href === "string" ? body.match.href : "";
     const match_id = String(body.match.match_id ?? body.match.id ?? "");
-    if (!href || !match_id) {
-      return NextResponse.json({ ok: false, error: "match.href and match.match_id are required" }, { status: 400 });
+    if (!match_id) {
+      return NextResponse.json({ ok: false, error: "match.match_id is required" }, { status: 400 });
     }
 
+    const targetPath = href || `/${match_id}`;
+
     try {
-      const html = await fetchHTML(`https://www.vlr.gg${href}`);
+      const html = await fetchHTML(targetPath);
       if (!html) {
         return NextResponse.json({ ok: false, error: `Unable to fetch detail page for ${match_id}` }, { status: 502 });
       }
