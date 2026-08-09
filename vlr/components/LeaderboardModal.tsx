@@ -181,8 +181,8 @@ export default function LeaderboardModal({ matches, onClose }: LeaderboardModalP
                   <tr key={i}>
                     <td>
                       <div className="mdm-player-cell">
-                        {p.team_logo && <img src={p.team_logo} alt="" className="mdm-player-team-logo" onError={(e) => (e.currentTarget.style.display="none")} />}
-                        {p.photo ? <img src={p.photo} alt={p.name} className="mdm-player-photo" /> : <div className="mdm-player-photo-placeholder" />}
+                        {p.team_logo && <img src={p.team_logo} alt="" className="mdm-player-team-logo" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} />}
+                        {p.photo ? <img src={p.photo} alt={p.name} className="mdm-player-photo" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} /> : <div className="mdm-player-photo-placeholder" />}
                         <span>{p.name}</span>
                         {splitByTeam && <span style={{ fontSize:"11px", color:"var(--text-muted)", marginLeft:"4px" }}>({p.team})</span>}
                       </div>
@@ -190,7 +190,7 @@ export default function LeaderboardModal({ matches, onClose }: LeaderboardModalP
                     <td>
                       <div className="mdm-agents-container">
                         {p.agents?.slice(0,4).map((a, ai) => (
-                          <img key={ai} src={a.icon} alt={a.name} className="mdm-agent-icon" onError={(e) => (e.currentTarget.style.display="none")} />
+                          <img key={ai} src={a.icon} alt={a.name} className="mdm-agent-icon" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} />
                         ))}
                       </div>
                     </td>

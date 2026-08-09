@@ -119,6 +119,7 @@ export default function MatchDetailModal({
                             src={p.photo}
                             alt={p.name}
                             className="mdm-player-photo"
+                            referrerPolicy="no-referrer"
                             onError={(e) => { e.currentTarget.style.display = "none"; }}
                           />
                         ) : (
@@ -138,6 +139,7 @@ export default function MatchDetailModal({
                             alt={a.name}
                             title={a.name}
                             className="mdm-agent-icon"
+                            referrerPolicy="no-referrer"
                             onError={(e) => (e.currentTarget.style.display = "none")}
                           />
                         ))}
@@ -183,6 +185,7 @@ export default function MatchDetailModal({
                 src={match.team1_logo}
                 id="mdm-logo1"
                 alt={match.team1}
+                referrerPolicy="no-referrer"
                 className={whiteLogoTeams.has(match.team1) ? "white-bg-logo" : ""}
                 onError={(e) => (e.currentTarget.style.display = "none")}
               />
@@ -200,6 +203,7 @@ export default function MatchDetailModal({
                 src={match.team2_logo}
                 id="mdm-logo2"
                 alt={match.team2}
+                referrerPolicy="no-referrer"
                 className={whiteLogoTeams.has(match.team2) ? "white-bg-logo" : ""}
                 onError={(e) => (e.currentTarget.style.display = "none")}
               />

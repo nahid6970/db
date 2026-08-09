@@ -169,6 +169,7 @@ export default function Sidebar({
                       src={t.tournament_logo}
                       alt=""
                       className="sidebar-tourney-logo"
+                      referrerPolicy="no-referrer"
                       onError={(e) => (e.currentTarget.style.display = "none")}
                       loading="lazy"
                     />

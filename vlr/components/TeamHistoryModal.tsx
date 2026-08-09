@@ -113,7 +113,7 @@ export default function TeamHistoryModal({ matches, settings, whiteLogoTeams, on
               <button className="thr-trigger-btn" onClick={() => setShowDropdown((v) => !v)}>
                 <span style={{ display:"flex", alignItems:"center", gap:"8px" }}>
                   {selectedTeamData?.logo
-                    ? <img src={selectedTeamData.logo} className="thr-team-logo" alt="" onError={(e) => (e.currentTarget.style.display="none")} />
+                    ? <img src={selectedTeamData.logo} className="thr-team-logo" alt="" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} />
                     : <i className="fa-solid fa-people-group" />}
                   <span>{selectedTeam || "Select Team"}</span>
                 </span>

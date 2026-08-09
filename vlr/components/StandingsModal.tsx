@@ -103,7 +103,7 @@ export default function StandingsModal({ matches, onClose }: StandingsModalProps
             {filtered.map(({ tourney, logo, standings }) => (
               <div key={tourney} className="standings-tourney-card">
                 <div className="standings-tourney-header">
-                  {logo && <img src={logo} alt="" className="standings-tourney-logo" onError={(e) => (e.currentTarget.style.display="none")} />}
+                  {logo && <img src={logo} alt="" className="standings-tourney-logo" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} />}
                   <span className="standings-tourney-title">{tourney}</span>
                   <span className="standings-tourney-badge">{standings.length} teams</span>
                 </div>
@@ -125,7 +125,7 @@ export default function StandingsModal({ matches, onClose }: StandingsModalProps
                         <td className={`standings-rank${i < 3 ? ` rank-${i+1}` : ""}`}>{i + 1}</td>
                         <td>
                           <div className="standings-team-cell">
-                            {s.logo && <img src={s.logo} alt="" className="standings-team-logo" onError={(e) => (e.currentTarget.style.display="none")} />}
+                            {s.logo && <img src={s.logo} alt="" className="standings-team-logo" referrerPolicy="no-referrer" onError={(e) => (e.currentTarget.style.display="none")} />}
                             {s.team}
                           </div>
                         </td>

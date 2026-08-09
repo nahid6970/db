@@ -72,6 +72,7 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
               src={match.tournament_logo}
               alt=""
               className="tournament-logo"
+              referrerPolicy="no-referrer"
               onError={() => setTourneyImgError(true)}
               loading="lazy"
             />
@@ -109,6 +110,7 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
                 src={match.team1_logo}
                 alt={match.team1}
                 className="team-logo"
+                referrerPolicy="no-referrer"
                 onError={() => setT1ImgError(true)}
                 loading="lazy"
               />
@@ -140,6 +142,7 @@ export default function MatchCard({ match, tournamentColor, whiteLogoTeams, onCl
                 src={match.team2_logo}
                 alt={match.team2}
                 className="team-logo"
+                referrerPolicy="no-referrer"
                 onError={() => setT2ImgError(true)}
                 loading="lazy"
               />
