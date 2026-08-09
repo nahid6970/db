@@ -4,17 +4,26 @@ import { v } from "convex/values";
 export const getAll = query({
   args: {},
   handler: async (ctx) => {
-    return await ctx.db.query("matches").collect();
+    const docs = await ctx.db.query("matches").collect();
+    return docs.map((m) => ({
+      ...m,
+      id: m.id || m.match_id || "",
+    }));
   },
 });
 
 export const getById = query({
   args: { id: v.string() },
   handler: async (ctx, args) => {
-    return await ctx.db
+    const doc = await ctx.db
       .query("matches")
       .withIndex("by_match_id", (q) => q.eq("id", args.id))
       .first();
+    if (doc) return { ...doc, id: doc.id || doc.match_id || "" };
+
+    const all = await ctx.db.query("matches").collect();
+    const fallback = all.find((m) => (m.id || m.match_id) === args.id);
+    return fallback ? { ...fallback, id: fallback.id || fallback.match_id || "" } : null;
   },
 });
 
@@ -35,7 +44,6 @@ export const getDisplayMatches = query({
       return true;
     });
 
-    // Sort: Live first, Upcoming next (unix_timestamp asc), Completed last (unix_timestamp desc)
     filtered.sort((a, b) => {
       const getStatusOrder = (status?: string) => {
         if (status === "Live") return 1;
@@ -69,6 +77,7 @@ export const getDisplayMatches = query({
       }
       return {
         ...m,
+        id: m.id || m.match_id || "",
         formatted_bst,
         js_timestamp,
       };
@@ -80,15 +89,17 @@ export const bulkUpsert = mutation({
   args: { matches: v.array(v.any()) },
   handler: async (ctx, args) => {
     for (const match of args.matches) {
-      if (!match.id) continue;
-      const existing = await ctx.db
-        .query("matches")
-        .withIndex("by_match_id", (q) => q.eq("id", match.id))
-        .first();
+      const matchId = match.id || match.match_id;
+      if (!matchId) continue;
+
+      const all = await ctx.db.query("matches").collect();
+      const existing = all.find((m) => (m.id || m.match_id) === matchId);
 
       if (existing) {
         await ctx.db.patch(existing._id, {
           ...match,
+          id: matchId,
+          match_id: matchId,
           team1_logo: match.team1_logo || existing.team1_logo,
           team2_logo: match.team2_logo || existing.team2_logo,
           unix_timestamp: match.unix_timestamp || existing.unix_timestamp,
@@ -100,6 +111,8 @@ export const bulkUpsert = mutation({
       } else {
         await ctx.db.insert("matches", {
           ...match,
+          id: matchId,
+          match_id: matchId,
           last_updated: Math.floor(Date.now() / 1000),
         });
       }
@@ -111,15 +124,17 @@ export const internalBulkUpsert = internalMutation({
   args: { matches: v.array(v.any()) },
   handler: async (ctx, args) => {
     for (const match of args.matches) {
-      if (!match.id) continue;
-      const existing = await ctx.db
-        .query("matches")
-        .withIndex("by_match_id", (q) => q.eq("id", match.id))
-        .first();
+      const matchId = match.id || match.match_id;
+      if (!matchId) continue;
+
+      const all = await ctx.db.query("matches").collect();
+      const existing = all.find((m) => (m.id || m.match_id) === matchId);
 
       if (existing) {
         await ctx.db.patch(existing._id, {
           ...match,
+          id: matchId,
+          match_id: matchId,
           team1_logo: match.team1_logo || existing.team1_logo,
           team2_logo: match.team2_logo || existing.team2_logo,
           unix_timestamp: match.unix_timestamp || existing.unix_timestamp,
@@ -131,6 +146,8 @@ export const internalBulkUpsert = internalMutation({
       } else {
         await ctx.db.insert("matches", {
           ...match,
+          id: matchId,
+          match_id: matchId,
           last_updated: Math.floor(Date.now() / 1000),
         });
       }

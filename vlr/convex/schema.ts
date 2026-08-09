@@ -3,7 +3,8 @@ import { v } from "convex/values";
 
 export default defineSchema({
   matches: defineTable({
-    id: v.string(),
+    id: v.optional(v.string()),
+    match_id: v.optional(v.string()),
     href: v.string(),
     date: v.optional(v.string()),
     time: v.optional(v.string()),
