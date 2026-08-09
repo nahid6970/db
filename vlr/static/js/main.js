@@ -1,5 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
     // DOM Elements
+    // Initial data hydration from Convex backend via Vercel serverless functions
+    fetch("/api/settings").then(r => r.json()).then(s => {
+        if (s.theme === "light") {
+            document.body.classList.add("light");
+            const themeIcon = document.getElementById("theme-toggle-btn")?.querySelector("i");
+            if (themeIcon) themeIcon.className = "fa-solid fa-sun";
+        }
+        const scrapeStart = document.getElementById("scrape-start");
+        const scrapeEnd = document.getElementById("scrape-end");
+        if (scrapeStart && s.scrape_start) scrapeStart.value = s.scrape_start;
+        if (scrapeEnd && s.scrape_end) scrapeEnd.value = s.scrape_end;
+    });
+
+    fetch("/api/ignorelist").then(r => r.json()).then(list => {
+        if (Array.isArray(list)) {
+            IGNORE_LIST.length = 0;
+            IGNORE_LIST.push(...list);
+        }
+    });
+
+    reloadMatchesFromView();
+
 
 
 
