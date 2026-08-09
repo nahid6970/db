@@ -168,12 +168,10 @@ export default function AppShell() {
       if (!visible.has(match.tournament) || ignoredNames.has(match.tournament)) return false;
 
       const status = (match.status ?? "").toLowerCase();
-      if (status === "completed") {
-        const hasMaps = Array.isArray(match.maps) && match.maps.length > 0;
-        return !hasMaps || !matchHasPlayerStats(match);
-      }
+      if (status !== "completed") return false;
 
-      return true;
+      const hasMaps = Array.isArray(match.maps) && match.maps.length > 0;
+      return !hasMaps || !matchHasPlayerStats(match);
     });
   }, [rawMatches, visibleTournaments, ignoredNames, matchHasPlayerStats]);
 

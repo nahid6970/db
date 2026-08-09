@@ -178,6 +178,7 @@ function parseMatches(html: string, forceStatus?: string) {
     const iconMatch = inner.match(/match-item-icon[\s\S]*?<img[^>]+src="([^"]+)"/);
     let tourney_logo = iconMatch ? iconMatch[1] : "";
     if (tourney_logo.startsWith("//")) tourney_logo = "https:" + tourney_logo;
+    else if (tourney_logo.startsWith("/")) tourney_logo = "https://www.vlr.gg" + tourney_logo;
 
     // Status
     const etaMatch    = inner.match(/ml-eta[^>]*>([\s\S]*?)<\/div>/);
@@ -225,8 +226,16 @@ function parseDetail(html: string) {
   let team1_logo = "", team2_logo = "";
   const t1match = html.match(/mod-1[\s\S]{0,200}?<img[^>]+src="([^"]+)"/);
   const t2match = html.match(/mod-2[\s\S]{0,200}?<img[^>]+src="([^"]+)"/);
-  if (t1match) { team1_logo = t1match[1]; if (team1_logo.startsWith("//")) team1_logo = "https:" + team1_logo; }
-  if (t2match) { team2_logo = t2match[1]; if (team2_logo.startsWith("//")) team2_logo = "https:" + team2_logo; }
+  if (t1match) {
+    team1_logo = t1match[1];
+    if (team1_logo.startsWith("//")) team1_logo = "https:" + team1_logo;
+    else if (team1_logo.startsWith("/")) team1_logo = "https://www.vlr.gg" + team1_logo;
+  }
+  if (t2match) {
+    team2_logo = t2match[1];
+    if (team2_logo.startsWith("//")) team2_logo = "https:" + team2_logo;
+    else if (team2_logo.startsWith("/")) team2_logo = "https://www.vlr.gg" + team2_logo;
+  }
 
   // Timestamp
   let unix_timestamp = 0, bst_time = "N/A";
@@ -250,7 +259,7 @@ function parseDetail(html: string) {
   const players_by_map: Record<string, unknown> = {};
   let map_index = 0;
 
-  const gameRegex = /<div[^>]+class="[^"]*vm-stats-game[^"]*"[^>]+data-game-id="([^"]*)"[^>]*>([\s\S]*?)<\/div>\s*<\/div>\s*<\/div>/g;
+  const gameRegex = /<div[^>]+class="[^"]*\bvm-stats-game\b[^"]*"[^>]+data-game-id="([^"]*)"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*\bvm-stats-game\b[^"]*"|$)/g;
   let gm: RegExpExecArray | null;
 
   while ((gm = gameRegex.exec(html)) !== null) {
