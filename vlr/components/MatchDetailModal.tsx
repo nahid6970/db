@@ -38,6 +38,21 @@ export default function MatchDetailModal({
   const canPrev = idx > 0;
   const canNext = idx < allMatchIds.length - 1;
 
+  // Auto-fetch details if missing stats/maps when opening modal
+  useEffect(() => {
+    if (!match) return;
+    const hasMaps = Array.isArray(match.maps) && match.maps.length > 0;
+    const hasPlayers = match.players && typeof match.players === "object" && Object.keys(match.players).length > 0;
+    
+    if ((!hasMaps || !hasPlayers) && match.status === "Completed") {
+      fetch("/api/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ match }),
+      }).catch(console.error);
+    }
+  }, [match]);
+
   if (match === undefined) {
     return (
       <div className="match-detail-overlay" onClick={onClose}>

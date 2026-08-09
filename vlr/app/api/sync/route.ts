@@ -477,21 +477,45 @@ function parseDetail(html: string) {
       continue;
     }
 
-    const mapNameMatch = block.match(/class="map"[\s\S]*?<span>([\s\S]*?)<\/span>/)
-      || block.match(/<div[^>]+class="[^"]*\bmap\b[^"]*"[^>]*>[\s\S]*?<span>([\s\S]*?)<\/span>/);
-    const map_name = mapNameMatch ? cleanHtmlText(mapNameMatch[1]) : `Map ${mapIndex + 1}`;
+    // Isolate map header section so score divs are only read from header
+    const headerMatch = block.match(/<div[^>]+class="[^"]*\bvm-stats-game-header\b[^"]*"[^>]*>([\s\S]*?)(?=<div[^>]+class="[^"]*(?:ovw-table|wf-table-mod-stats|mod-game|table)\b|$)/);
+    const headerHtml = headerMatch ? headerMatch[1] : block;
 
-    const scoreDivs = [...block.matchAll(/<div[^>]+class="score([^"]*)"[^>]*>([\s\S]*?)<\/div>/g)];
-    let score1 = "0", score2 = "0", winner: number | null = null;
-
-    if (scoreDivs.length >= 2) {
-      score1 = cleanHtmlText(scoreDivs[0][2]);
-      score2 = cleanHtmlText(scoreDivs[1][2]);
-      if (scoreDivs[0][1].includes("mod-win")) winner = 0;
-      else if (scoreDivs[1][1].includes("mod-win")) winner = 1;
+    const mapNameMatch = headerHtml.match(/<div[^>]+class="[^"]*\bmap\b[^"]*"[^>]*>[\s\S]*?<span>([\s\S]*?)<\/span>/)
+      || block.match(/class="map"[\s\S]*?<span>([\s\S]*?)<\/span>/);
+    let map_name = mapNameMatch ? cleanHtmlText(mapNameMatch[1]) : "";
+    if (map_name) {
+      map_name = map_name.replace(/\s*\(.*?\)/, "").trim();
     }
 
-    maps.push({ name: map_name, score1, score2, winner });
+    const teamDivs = [...headerHtml.matchAll(/<div[^>]+class="[^"]*\bteam\b[^"]*"[^>]*>([\s\S]*?)<\/div\s*>/g)];
+    let score1 = "0", score2 = "0", winner: number | null = null;
+
+    const scores: { score: string; isWin: boolean }[] = [];
+    for (const td of teamDivs) {
+      const scoreMatch = td[1].match(/<div[^>]+class="[^"]*\bscore\b([^"]*)"[^>]*>([\s\S]*?)<\/div>/);
+      if (scoreMatch) {
+        const val = cleanHtmlText(scoreMatch[2]);
+        const isWin = scoreMatch[1].includes("mod-win");
+        scores.push({ score: val || "0", isWin });
+      }
+    }
+
+    if (scores.length >= 2) {
+      score1 = scores[0].score;
+      score2 = scores[1].score;
+      if (scores[0].isWin) winner = 0;
+      else if (scores[1].isWin) winner = 1;
+    }
+
+    const hasStats = playerData.team1.length > 0 || playerData.team2.length > 0;
+
+    // Filter out unplayed/banned/TBD maps with 0-0 score and no player stats
+    if (score1 === "0" && score2 === "0" && winner === null && !hasStats) {
+      continue;
+    }
+
+    maps.push({ name: map_name || `Map ${mapIndex + 1}`, score1, score2, winner });
     players_by_map[String(mapIndex)] = playerData;
     mapIndex++;
   }
@@ -640,7 +664,8 @@ export async function POST(req: NextRequest) {
 
   const scrapeStart = Number(body.scrape_start ?? 1);
   const scrapeEnd   = Number(body.scrape_end   ?? 5);
-  const loadDetails = body.load_details !== false;
+  // Bulk sync should be fast (match list only). Load details on-demand or when explicitly requested.
+  const loadDetails = body.load_details === true;
 
   try {
     const result = await runScrape(scrapeStart, scrapeEnd, loadDetails);
