@@ -3,18 +3,23 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.py[cod]
 
 # Databases
 *.db
 *.db-shm
 *.db-wal
+*.sqlite
+*.sqlite3
 
 # Environments
 .env
+.env.*
 venv/
 .venv/
 env/
 ENV/
+.python-version
 
 # IDEs and Editors
 .vscode/
@@ -24,12 +29,16 @@ ENV/
 *.njsproj
 *.sln
 *.swp
+.DS_Store
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
 
 # Offline data caches and user settings
 static/images_cache/
-matches.json
-matches.backup.json
-settings.json
 
 # Runtime / history data
 history/
@@ -40,5 +49,10 @@ history/
 # Logs
 *.log
 
-# JSON files
-*.json
+# Build artifacts
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/

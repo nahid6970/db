@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/match/(.*)", "destination": "/api/match?id=$1" },
+    { "source": "/api/ignorelist/(.*)", "destination": "/api/ignorelist?action=$1" }
+  ]
+}
