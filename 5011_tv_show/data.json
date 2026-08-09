@@ -2275,6 +2275,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
+                "id": 11,
+                "title": "The Walking Dead - Dead City - S03E03 - Emigrants",
+                "watched": false,
+                "added_date": "2026-08-09T14:15:38.715033",
+                "notify": "unseen"
+            },
+            {
                 "id": 10,
                 "title": "The Walking Dead - Dead City - S03E02 - Haven",
                 "watched": false,
