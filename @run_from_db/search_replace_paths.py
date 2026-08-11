@@ -417,33 +417,25 @@ class SearchReplacePaths(QMainWindow):
         
         main_layout.addWidget(search_replace_group)
         
-        # File extensions filter
+        # File filters (loaded from YAML config)
         filter_group = QGroupBox("FILE_FILTERS")
         filter_layout = QVBoxLayout(filter_group)
         
         filter_info_layout = QHBoxLayout()
-        filter_label = QLabel("EXTENSIONS:")
+        filter_label = QLabel("FILTERS:")
         filter_label.setObjectName("SectionLabel")
         filter_info_layout.addWidget(filter_label)
         
-        self.extensions_input = QLineEdit()
-        self.extensions_input.setPlaceholderText("e.g., .py, .txt, .json (leave empty for all files)")
-        filter_info_layout.addWidget(self.extensions_input)
+        self.yaml_info_label = QLabel("loading from search_replace_config.yml...")
+        self.yaml_info_label.setObjectName("StatusLabel")
+        filter_info_layout.addWidget(self.yaml_info_label, 1)
+        
+        self.open_yaml_btn = QPushButton("OPEN_YAML")
+        self.open_yaml_btn.setObjectName("BrowseButton")
+        self.open_yaml_btn.clicked.connect(self.open_yaml_config)
+        filter_info_layout.addWidget(self.open_yaml_btn)
         
         filter_layout.addLayout(filter_info_layout)
-        
-        # Ignore folders
-        ignore_layout = QHBoxLayout()
-        ignore_label = QLabel("IGNORE:")
-        ignore_label.setObjectName("SectionLabel")
-        ignore_label.setMinimumWidth(80)
-        ignore_layout.addWidget(ignore_label)
-        
-        self.ignore_input = QLineEdit()
-        self.ignore_input.setPlaceholderText("e.g., .git, node_modules, __pycache__")
-        ignore_layout.addWidget(self.ignore_input)
-        
-        filter_layout.addLayout(ignore_layout)
         
         # Search options
         options_layout = QHBoxLayout()
@@ -515,25 +507,26 @@ class SearchReplacePaths(QMainWindow):
                     self.folder_input.setText(config.get("last_folders", ""))
                     self.search_input.setText(config.get("last_search", ""))
                     self.replace_input.setText(config.get("last_replace", ""))
-                    self.ignore_input.setText(config.get("last_ignore", ".git, node_modules, __pycache__"))
                     self.status_label.setText("CONFIG_LOADED >> Last session restored")
         except Exception as e:
             print(f"Error loading config: {e}")
 
     def load_yml_config(self):
-        """Load extensions and ignore lists from YAML config file"""
+        """Load extensions and ignore lists from YAML config file into attributes"""
+        self.file_extensions = []
+        self.ignore_folders = []
         try:
             if os.path.exists(self.yml_file):
                 with open(self.yml_file, 'r', encoding='utf-8') as f:
                     yml_config = yaml.safe_load(f)
-                extensions = yml_config.get("extensions", []) or []
-                ignore = yml_config.get("ignore", []) or []
-                if extensions:
-                    self.extensions_input.setText(", ".join(extensions))
-                if ignore:
-                    self.ignore_input.setText(", ".join(ignore))
+                self.file_extensions = yml_config.get("extensions", []) or []
+                self.ignore_folders = yml_config.get("ignore", []) or []
+                self.yaml_info_label.setText(
+                    f"{len(self.file_extensions)} extensions · {len(self.ignore_folders)} ignored folders"
+                )
                 self.status_label.setText("YML_CONFIG_LOADED >> Filters loaded from search_replace_config.yml")
             else:
+                self.yaml_info_label.setText("search_replace_config.yml NOT FOUND")
                 self.status_label.setText("YML_MISSING >> search_replace_config.yml not found, using defaults")
         except Exception as e:
             print(f"Error loading yml config: {e}")
@@ -546,8 +539,7 @@ class SearchReplacePaths(QMainWindow):
             config = {
                 "last_folders": self.folder_input.text().strip(),
                 "last_search": self.search_input.text().strip(),
-                "last_replace": self.replace_input.text().strip(),
-                "last_ignore": self.ignore_input.text().strip()
+                "last_replace": self.replace_input.text().strip()
             }
             with open(self.config_file, 'w', encoding='utf-8') as f:
                 json.dump(config, f, indent=4)
@@ -582,6 +574,14 @@ class SearchReplacePaths(QMainWindow):
             self.status_label.setText(f"FOLDER_ADDED >> {folder}")
             self.log_output.append(f"<span style='color: {CP_CYAN};'>Added folder: {folder}</span>")
     
+    def open_yaml_config(self):
+        """Open the YAML config file in the default editor"""
+        try:
+            os.startfile(self.yml_file)
+            self.status_label.setText(f"OPENING_YAML >> {self.yml_file}")
+        except Exception as e:
+            QMessageBox.warning(self, "Open YAML", f"Could not open YAML config file:\n{str(e)}")
+
     def preview_matches(self):
         """Preview what will be found without making changes"""
         folder_text = self.folder_input.text().strip()
@@ -602,11 +602,8 @@ class SearchReplacePaths(QMainWindow):
             QMessageBox.warning(self, "Missing Input", "Please enter text to search for.")
             return
         
-        # Parse file extensions
-        extensions_text = self.extensions_input.text().strip()
-        file_extensions = []
-        if extensions_text:
-            file_extensions = [ext.strip() for ext in extensions_text.split(',') if ext.strip()]
+        # File extensions from YAML config
+        file_extensions = self.file_extensions
         
         # Clear previous results
         self.matches_list.clear()
@@ -626,11 +623,8 @@ class SearchReplacePaths(QMainWindow):
         self.execute_btn.setEnabled(False)
         self.status_label.setText("SCANNING >> Finding matches...")
         
-        # Parse ignore folders
-        ignore_text = self.ignore_input.text().strip()
-        ignore_folders = []
-        if ignore_text:
-            ignore_folders = [d.strip() for d in ignore_text.split(',') if d.strip()]
+        # Ignore folders from YAML config
+        ignore_folders = self.ignore_folders
         
         # Start worker thread in preview mode
         search_in_paths = self.search_paths_checkbox.isChecked()
@@ -681,11 +675,8 @@ class SearchReplacePaths(QMainWindow):
         if reply != QMessageBox.StandardButton.Yes:
             return
         
-        # Parse file extensions
-        extensions_text = self.extensions_input.text().strip()
-        file_extensions = []
-        if extensions_text:
-            file_extensions = [ext.strip() for ext in extensions_text.split(',') if ext.strip()]
+        # File extensions from YAML config
+        file_extensions = self.file_extensions
         
         # Clear log and show progress
         self.matches_list.clear()
@@ -705,11 +696,8 @@ class SearchReplacePaths(QMainWindow):
         self.execute_btn.setEnabled(False)
         self.status_label.setText("PROCESSING >> Searching and replacing...")
         
-        # Parse ignore folders
-        ignore_text = self.ignore_input.text().strip()
-        ignore_folders = []
-        if ignore_text:
-            ignore_folders = [d.strip() for d in ignore_text.split(',') if d.strip()]
+        # Ignore folders from YAML config
+        ignore_folders = self.ignore_folders
         
         # Start worker thread
         search_in_paths = self.search_paths_checkbox.isChecked()
