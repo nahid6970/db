@@ -1050,10 +1050,10 @@ def _parse_matches_from_soup(soup, force_status=None):
     return parsed_matches
 
 
-def _fetch_page(url):
+def _fetch_page(url, timeout=10):
     """Fetch a page and return a BeautifulSoup object, or None on failure."""
     try:
-        response = requests.get(url, headers=HEADERS, timeout=10)
+        response = requests.get(url, headers=HEADERS, timeout=timeout)
         response.encoding = 'utf-8'
         if response.status_code != 200:
             print(f"Failed to fetch {url}. Server returned status: {response.status_code}")
@@ -1272,4 +1272,191 @@ def load_missing_stats(delay=1.5):
         global _cached_matches
         with _cache_lock:
             _cached_matches = None
+
+
+# ============================================================================
+# Tournament Browser (browse VLR.gg tournaments and add them to the sidebar)
+# ============================================================================
+
+TOURNAMENTS_CACHE_PATH = os.path.join(BASE_DIR, "tournaments_cache.json")
+TOURNAMENTS_CACHE_TTL = 24 * 60 * 60  # seconds — re-fetch from VLR.gg at most once per day
+tournaments_cache_lock = threading.Lock()
+
+
+def _parse_tournament_items(soup):
+    """Parse tournament cards from the VLR.gg /tournaments page.
+
+    Resilient parser: looks for `a.wf-module-item.event-item` blocks and falls
+    back gracefully if the markup changes. Region is best-effort (from the
+    nearest `wf-card` header).
+    """
+    tournaments = []
+    seen = set()
+
+    for item in soup.find_all("a", class_="wf-module-item"):
+        classes = item.get("class", [])
+        if "event-item" not in classes:
+            continue
+        href = item.get("href", "")
+        m = re.search(r"/event/(\d+)/", href)
+        if not m:
+            continue
+        tid = m.group(1)
+        if tid in seen:
+            continue
+        seen.add(tid)
+
+        logo = ""
+        logo_div = item.find("div", class_="event-item-logo")
+        if logo_div:
+            img = logo_div.find("img")
+            if img:
+                logo = img.get("src") or img.get("data-src") or ""
+                if logo.startswith("//"):
+                    logo = "https:" + logo
+                elif logo.startswith("/"):
+                    logo = "https://www.vlr.gg" + logo
+
+        name = ""
+        info_div = item.find("div", class_="event-item-info")
+        if info_div:
+            name_div = info_div.find("div", class_="event-item-name")
+            if name_div:
+                name = name_div.text.strip()
+            if not name:
+                h4 = info_div.find("h4")
+                if h4:
+                    name = h4.text.strip()
+            if not name:
+                name = info_div.text.strip()
+        if not name:
+            name = item.text.strip()
+        name = " ".join(name.split())
+        if not name:
+            continue
+
+        desc = ""
+        if info_div:
+            desc_div = info_div.find("div", class_="event-item-desc")
+            if desc_div:
+                desc = " ".join(desc_div.text.strip().split())
+
+        status = ""
+        status_div = item.find("div", class_="event-item-status")
+        if status_div:
+            status_txt = status_div.find("span", class_="event-item-status-text")
+            raw = status_txt.text if status_txt else status_div.text
+            status = " ".join(raw.strip().split())
+
+        date = ""
+        date_div = item.find("div", class_="event-item-date")
+        if date_div:
+            date = " ".join(date_div.text.strip().split())
+
+        # Region: nearest enclosing wf-card header (best effort)
+        region = ""
+        card = item.find_parent("div", class_="wf-card")
+        if card:
+            header = card.find(class_="wf-card-header") or card.find(class_="wf-title") or card.find("h4")
+            if header:
+                region = " ".join(header.text.strip().split())
+
+        tournaments.append({
+            "id": tid,
+            "name": name,
+            "logo": logo,
+            "href": href,
+            "region": region,
+            "desc": desc,
+            "status": status,
+            "date": date,
+        })
+    return tournaments
+
+
+def get_tournaments(refresh=False):
+    """Return (list_of_tournaments, fetched_at).
+
+    The list is fetched from VLR.gg at most once per TOURNAMENTS_CACHE_TTL and
+    cached to tournaments_cache.json, so opening the browser window repeatedly
+    never re-scrapes the site. Pass refresh=True (the Refresh button) to force
+    a new fetch.
+    """
+    with tournaments_cache_lock:
+        cache = {}
+        if os.path.exists(TOURNAMENTS_CACHE_PATH):
+            try:
+                with open(TOURNAMENTS_CACHE_PATH, "r", encoding="utf-8") as f:
+                    cache = json.load(f)
+            except Exception:
+                cache = {}
+
+        fetched_at = int(cache.get("fetched_at") or 0)
+        cached_list = cache.get("tournaments") or []
+        now = int(time.time())
+
+        if not refresh and cached_list and (now - fetched_at) < TOURNAMENTS_CACHE_TTL:
+            return cached_list, fetched_at
+
+        soup = _fetch_page("https://www.vlr.gg/tournaments")
+        tournaments = _parse_tournament_items(soup) if soup else []
+
+        if tournaments:
+            try:
+                with open(TOURNAMENTS_CACHE_PATH, "w", encoding="utf-8") as f:
+                    json.dump({"fetched_at": now, "tournaments": tournaments}, f, ensure_ascii=False, indent=2)
+            except Exception as e:
+                print(f"Error saving tournaments cache: {e}")
+            return tournaments, now
+
+        if cached_list:
+            # Fetch failed (rate-limited?) — fall back to whatever we cached before
+            print("Could not fetch tournaments from VLR.gg; using cached list.")
+            return cached_list, fetched_at
+
+        return [], 0
+
+
+def get_known_tournament_names():
+    """Set of tournament names that already exist in the main matches DB."""
+    _ensure_db()
+    with _get_conn() as conn:
+        rows = conn.execute(
+            "SELECT DISTINCT tournament FROM matches WHERE tournament IS NOT NULL AND tournament != ''"
+        ).fetchall()
+    return {row["tournament"] for row in rows}
+
+
+def add_tournament(tournament):
+    """Fetch all matches of a tournament from its VLR.gg event page and upsert them.
+
+    `tournament` is one item from get_tournaments() (has href/name). Returns
+    (added_count, error_or_None). Uses the same lightweight listing parse as the
+    sync button — player stats are NOT fetched here.
+
+    Matches are stored under the FULL event name (e.g. "VCT 2026 — EMEA Stage 2")
+    rather than the page parser's series-stripped stage name, so the sidebar shows
+    the same name the user selected and the "added" badge / un-hide / un-ignore
+    logic all key off that name consistently.
+    """
+    href = (tournament or {}).get("href", "")
+    if not href:
+        return 0, "No event link for this tournament."
+    url = f"https://www.vlr.gg{href}" if href.startswith("/") else href
+    # Event pages can be large (100+ matches) — allow more time than the default 10s
+    soup = _fetch_page(url, timeout=25)
+    if soup is None:
+        print(f"Failed to fetch event page {url}")
+        return 0, "Could not reach the tournament page (vlr.gg may be rate-limiting)."
+    matches = _parse_matches_from_soup(soup)
+    if not matches:
+        print(f"No matches parsed from event page {url}")
+        return 0, "No matches found on the tournament page."
+    event_name = (tournament.get("name") or "").strip()
+    if event_name:
+        for m in matches:
+            m["tournament"] = event_name
+    _upsert_matches_to_db(matches)
+    print(f"Added {len(matches)} matches for tournament '{event_name}'")
+    return len(matches), None
 

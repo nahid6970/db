@@ -1236,6 +1236,187 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    // ── Tournament Browser (browse VLR.gg tournaments, add to sidebar) ──
+    const browseTournamentsBtn = document.getElementById("browse-tournaments-btn");
+    const tournamentBrowserModal = document.getElementById("tournament-browser-modal");
+    const tournamentBrowserClose = document.getElementById("tournament-browser-close");
+    const tournamentBrowserList = document.getElementById("tournament-browser-list");
+    const tournamentBrowserSearch = document.getElementById("tournament-browser-search");
+    const tournamentBrowserLimit = document.getElementById("tournament-browser-limit");
+    const tournamentBrowserRefresh = document.getElementById("tournament-browser-refresh");
+    const tournamentBrowserLoadMore = document.getElementById("tournament-browser-loadmore");
+    const tournamentBrowserStatus = document.getElementById("tournament-browser-status");
+    const tournamentBrowserAdd = document.getElementById("tournament-browser-add");
+    const tournamentBrowserSelectedCount = document.getElementById("tournament-browser-selected-count");
+
+    let tournamentBrowserData = [];              // full cached list from the server
+    let tournamentBrowserSelected = new Set();   // selected tournament ids
+    let tournamentBrowserVisible = 50;           // how many rows are currently shown
+    let tournamentBrowserLoading = false;
+    let tournamentBrowserAdding = false;
+
+    function escapeHtml(s) {
+        return String(s == null ? "" : s)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;");
+    }
+
+    function closeTournamentBrowser() {
+        if (tournamentBrowserModal) tournamentBrowserModal.style.display = "none";
+    }
+
+    function renderTournamentBrowser() {
+        if (!tournamentBrowserList) return;
+        const q = (tournamentBrowserSearch?.value || "").trim().toLowerCase();
+        const limitVal = tournamentBrowserLimit?.value || "50";
+        const filtered = tournamentBrowserData.filter(t =>
+            !q || (t.name || "").toLowerCase().includes(q)
+        );
+        const pageSize = limitVal === "all" ? filtered.length : Math.min(parseInt(limitVal) || 50, filtered.length);
+        const showCount = Math.max(pageSize, tournamentBrowserVisible);
+        const visible = filtered.slice(0, showCount);
+
+        tournamentBrowserList.innerHTML = visible.map(t => {
+            const isSelected = tournamentBrowserSelected.has(String(t.id));
+            const nameHtml = escapeHtml(t.name);
+            let badge = "";
+            if (t.added) badge = '<span class="tbr-badge tbr-added"><i class="fa-solid fa-circle-check"></i> Added</span>';
+            else if (t.ignored) badge = '<span class="tbr-badge tbr-ignored"><i class="fa-solid fa-eye-slash"></i> Ignored</span>';
+            return `
+                <label class="tbr-item ${t.added ? "is-added" : ""}" title="${escapeHtml(t.desc)}">
+                    <input type="checkbox" class="tbr-checkbox" value="${escapeHtml(t.id)}" ${isSelected ? "checked" : ""} ${t.added ? "disabled" : ""}>
+                    <span class="custom-checkbox"></span>
+                    ${t.logo ? `<img src="${escapeHtml(t.logo)}" class="tbr-logo" onerror="this.style.display='none';" loading="lazy">` : '<div class="tbr-logo-placeholder"><i class="fa-solid fa-trophy"></i></div>'}
+                    <span class="tbr-name" title="${nameHtml}">${nameHtml}</span>
+                    ${t.region ? `<span class="tbr-region">${escapeHtml(t.region)}</span>` : ""}
+                    ${t.status ? `<span class="tbr-status">${escapeHtml(t.status)}</span>` : ""}
+                    ${badge}
+                </label>
+            `;
+        }).join("");
+
+        if (visible.length === 0) {
+            tournamentBrowserList.innerHTML = `<p style="text-align:center; padding:30px; color:var(--text-muted); font-size:13px;">No tournaments found${q ? ` matching "${q}"` : ""}.</p>`;
+        }
+
+        const hasMore = filtered.length > showCount;
+        if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.style.display = hasMore ? "" : "none";
+        if (tournamentBrowserSelectedCount) tournamentBrowserSelectedCount.textContent = String(tournamentBrowserSelected.size);
+        if (tournamentBrowserAdd) tournamentBrowserAdd.disabled = tournamentBrowserSelected.size === 0 || tournamentBrowserAdding;
+    }
+
+    async function loadTournamentBrowser(refresh = false) {
+        if (tournamentBrowserLoading) return;
+        tournamentBrowserLoading = true;
+        if (tournamentBrowserStatus) {
+            tournamentBrowserStatus.textContent = refresh
+                ? " Fetching tournament list from VLR.gg (one-time)... this can take a moment."
+                : " Loading...";
+        }
+        try {
+            const url = refresh ? "/api/tournaments?refresh=true" : "/api/tournaments";
+            const data = await fetch(url).then(r => r.json());
+            tournamentBrowserData = data.tournaments || [];
+            tournamentBrowserSelected = new Set();
+            tournamentBrowserVisible = parseInt(tournamentBrowserLimit?.value) || 50;
+            renderTournamentBrowser();
+            if (tournamentBrowserStatus) {
+                tournamentBrowserStatus.textContent = tournamentBrowserData.length
+                    ? ` ${tournamentBrowserData.length} tournaments available. Select the ones you want to add.`
+                    : " No tournaments found. Try refreshing the list.";
+            }
+        } catch (err) {
+            console.error("Failed to load tournaments:", err);
+            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = " Failed to load tournaments: " + err.message;
+        } finally {
+            tournamentBrowserLoading = false;
+        }
+    }
+
+    browseTournamentsBtn?.addEventListener("click", () => {
+        if (tournamentBrowserModal) tournamentBrowserModal.style.display = "flex";
+        loadTournamentBrowser(false);
+    });
+    tournamentBrowserClose?.addEventListener("click", closeTournamentBrowser);
+    tournamentBrowserModal?.addEventListener("click", e => {
+        if (e.target === tournamentBrowserModal) closeTournamentBrowser();
+    });
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && tournamentBrowserModal && tournamentBrowserModal.style.display !== "none") closeTournamentBrowser();
+    });
+
+    tournamentBrowserSearch?.addEventListener("input", () => {
+        tournamentBrowserVisible = 50;
+        renderTournamentBrowser();
+    });
+    tournamentBrowserLimit?.addEventListener("change", () => {
+        tournamentBrowserVisible = tournamentBrowserLimit.value === "all" ? 999999 : (parseInt(tournamentBrowserLimit.value) || 50);
+        renderTournamentBrowser();
+    });
+    tournamentBrowserLoadMore?.addEventListener("click", () => {
+        tournamentBrowserVisible += 50;
+        renderTournamentBrowser();
+    });
+    tournamentBrowserRefresh?.addEventListener("click", () => {
+        if (!confirm("Re-fetch the tournament list from VLR.gg? The list is otherwise cached for 24 hours.")) return;
+        loadTournamentBrowser(true);
+    });
+
+    tournamentBrowserList?.addEventListener("change", e => {
+        if (e.target.classList.contains("tbr-checkbox")) {
+            const id = String(e.target.value);
+            if (e.target.checked) tournamentBrowserSelected.add(id);
+            else tournamentBrowserSelected.delete(id);
+            if (tournamentBrowserSelectedCount) tournamentBrowserSelectedCount.textContent = String(tournamentBrowserSelected.size);
+            if (tournamentBrowserAdd) tournamentBrowserAdd.disabled = tournamentBrowserSelected.size === 0 || tournamentBrowserAdding;
+        }
+    });
+
+    tournamentBrowserAdd?.addEventListener("click", async () => {
+        const selected = tournamentBrowserData.filter(t => tournamentBrowserSelected.has(String(t.id)));
+        if (selected.length === 0 || tournamentBrowserAdding) return;
+        tournamentBrowserAdding = true;
+        if (tournamentBrowserAdd) {
+            tournamentBrowserAdd.disabled = true;
+            tournamentBrowserAdd.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Adding...';
+        }
+        let totalAdded = 0;
+        const errors = [];
+        try {
+            for (let i = 0; i < selected.length; i++) {
+                if (tournamentBrowserStatus) {
+                    tournamentBrowserStatus.textContent = ` Adding "${selected[i].name}" — fetching its matches from VLR.gg (${i + 1}/${selected.length})...`;
+                }
+                const resp = await fetch("/api/tournaments/add", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tournament: { id: selected[i].id, name: selected[i].name, href: selected[i].href } })
+                });
+                const res = await resp.json();
+                totalAdded += (res.total_added || 0);
+                const itemRes = (res.results && res.results[0]) || {};
+                if (itemRes.error) errors.push(`${selected[i].name}: ${itemRes.error}`);
+                if (i < selected.length - 1) await new Promise(r => setTimeout(r, 1200));
+            }
+            let statusMsg = ` Done — ${totalAdded} match(es) added/updated across ${selected.length} tournament(s).`;
+            if (errors.length) statusMsg += ` ${errors.length} failed: ${errors.join("; ")}`;
+            statusMsg += " Reloading page...";
+            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = statusMsg;
+            setTimeout(() => window.location.reload(), 800);
+        } catch (err) {
+            console.error("Failed to add tournaments:", err);
+            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = " Error adding tournaments: " + err.message;
+            tournamentBrowserAdding = false;
+            if (tournamentBrowserAdd) {
+                tournamentBrowserAdd.innerHTML = '<i class="fa-solid fa-plus"></i> Add Selected';
+                tournamentBrowserAdd.disabled = tournamentBrowserSelected.size === 0;
+            }
+        }
+    });
+
     const scrapeStart = document.getElementById("scrape-start");
     const scrapeEnd = document.getElementById("scrape-end");
     const savePagesBtnEl = document.getElementById("save-pages-btn");

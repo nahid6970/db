@@ -269,6 +269,84 @@ def api_matches_all():
     )
     return jsonify(matches)
 
+def _name_matches(names, name):
+    """Loose tournament-name match: exact, or containment either direction.
+
+    The VLR.gg tournaments page and the match-list parser can name the same
+    event slightly differently (e.g. "VCT 2026 — EMEA Stage 2" vs "Stage 2 W3"),
+    so exact matches miss real hits. A minimum length avoids false positives
+    on short shared substrings.
+    """
+    if not name:
+        return False
+    nl = name.strip().lower()
+    for k in names:
+        kl = k.strip().lower()
+        if not kl:
+            continue
+        if kl == nl:
+            return True
+        if len(kl) >= 6 and len(nl) >= 6 and (kl in nl or nl in kl):
+            return True
+    return False
+
+@app.route("/api/tournaments")
+def api_tournaments():
+    """Return the cached tournament list (fetched from VLR.gg at most once/day).
+
+    ?refresh=true forces a re-fetch. Each item gets `added`/`ignored` flags so
+    the UI can mark tournaments that are already in the DB / ignore list.
+    """
+    refresh = request.args.get("refresh") == "true"
+    tournaments, fetched_at = scraper.get_tournaments(refresh=refresh)
+    known = scraper.get_known_tournament_names()
+    ignored = {t["name"] for t in load_ignorelist()}
+    for t in tournaments:
+        t["added"] = _name_matches(known, t["name"])
+        t["ignored"] = _name_matches(ignored, t["name"])
+    return jsonify({"tournaments": tournaments, "fetched_at": fetched_at})
+
+@app.route("/api/tournaments/add", methods=["POST"])
+def api_tournaments_add():
+    """Add one or more tournaments: un-ignore them, un-hide them, and fetch
+    their matches from the VLR.gg event page into the DB.
+
+    Accepts {"tournament": {...}} or {"tournaments": [{...}, ...]}. Items are
+    processed one at a time with a small delay to avoid rate limits.
+    """
+    data = request.json or {}
+    items = data.get("tournaments") or ([data["tournament"]] if data.get("tournament") else [])
+    items = [t for t in items if isinstance(t, dict) and t.get("href")]
+    if not items:
+        return jsonify({"status": "error", "message": "No tournaments provided."}), 400
+
+    results = []
+    for i, t in enumerate(items):
+        name = t.get("name", "")
+        # 1. Un-ignore (in case it was previously ignored) and restore matches to main DB
+        if name:
+            lst = load_ignorelist()
+            was_ignored = any(x["name"] == name for x in lst)
+            if was_ignored:
+                save_ignorelist([x for x in lst if x["name"] != name])
+                try:
+                    scraper.move_tournament_from_ignored(name)
+                except Exception as e:
+                    print(f"Warning: move_tournament_from_ignored failed for '{name}': {e}")
+            # 2. Un-hide (remove from unchecked_tournaments so it shows in the sidebar)
+            settings = load_settings()
+            unchecked = settings.get("unchecked_tournaments", [])
+            if name in unchecked:
+                settings["unchecked_tournaments"] = [u for u in unchecked if u != name]
+                save_settings(settings)
+        # 3. Fetch the event page matches (light listing only, no player stats)
+        added, error = scraper.add_tournament(t)
+        results.append({"name": name, "added": added, "error": error})
+        if i < len(items) - 1:
+            time.sleep(1.2)
+
+    return jsonify({"status": "success", "results": results, "total_added": sum(r["added"] for r in results)})
+
 @app.route("/api/settings", methods=["GET", "POST"])
 def api_settings():
     if request.method == "POST":
