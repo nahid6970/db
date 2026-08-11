@@ -75,24 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    if (loadMissingStatsBtn) {
-        loadMissingStatsBtn.addEventListener("click", async () => {
-            if (loadMissingStatsProgress) loadMissingStatsProgress.textContent = " Syncing...";
-            loadMissingStatsBtn.disabled = true;
-            try {
-                const start = document.getElementById("scrape-start") ? (parseInt(document.getElementById("scrape-start").value) || null) : null;
-                const end = document.getElementById("scrape-end") ? (parseInt(document.getElementById("scrape-end").value) || null) : null;
-                const url = (start && end) ? `/api/matches?start=${start}&end=${end}&load_missing=true` : `/api/matches?load_missing=true`;
-                await fetch(url);
-                await reloadMatchesFromView();
-            } catch (err) {
-                console.error(err);
-            } finally {
-                if (loadMissingStatsProgress) loadMissingStatsProgress.textContent = "";
-                loadMissingStatsBtn.disabled = false;
-            }
-        });
-    }
+    // NOTE: Missing-stats loading is handled by the one-by-one client-side loop below
+    // (in "2b. Missing Stats Loader Logic"). We intentionally do NOT trigger the
+    // server-side bulk scraper (load_missing_stats) from this button anymore —
+    // that fetched every match from vlr.gg in parallel and caused the site to
+    // rate-limit/block this IP (connection timeouts). Loading one match at a time
+    // with delays avoids the ban.
     
     // Global filter state
     let activeStatus = sessionStorage.getItem("activeStatus") || "all";
@@ -825,6 +813,16 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.prepend(spinner);
 
         const total = missing.length;
+        let loadedCount = 0;
+        let failedCount = 0;
+        let consecutiveFailures = 0;
+
+        // Gentler pacing: wait between matches so vlr.gg doesn't rate-limit/block us.
+        // After a failed fetch we wait much longer to give the site time to recover.
+        const DELAY_BETWEEN_OK_MS = 1500;
+        const DELAY_AFTER_FAIL_MS = 8000;
+        const MAX_CONSECUTIVE_FAILURES = 3;
+
         for (let i = 0; i < total; i++) {
             const match = missing[i];
             if (loadMissingStatsProgress) {
@@ -841,8 +839,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 continue;
             }
 
+            let loadedOk = false;
             try {
                 const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
+                // Only counts as a success if the server actually returned stats.
+                // When vlr.gg throttles us, the server-side fetch fails silently and
+                // we get back the cached match with no maps — treat that as a failure.
+                loadedOk = Boolean(data && !data.error && data.maps && data.maps.length > 0);
                 if (data && !data.error) {
                     const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
                     if (idx !== -1) {
@@ -964,7 +967,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(`Failed to load details for match ${match.id}:`, err);
             }
 
-            await new Promise(r => setTimeout(r, 450));
+            if (loadedOk) {
+                loadedCount++;
+                consecutiveFailures = 0;
+            } else if (matchStatus === "completed") {
+                // A completed match that returned no stats means the server-side fetch
+                // failed (e.g. vlr.gg rate-limiting) — count it as a failure.
+                failedCount++;
+                consecutiveFailures++;
+                console.warn(`Could not load stats for match ${match.id} — vlr.gg may be rate-limiting (${consecutiveFailures} consecutive failure${consecutiveFailures > 1 ? "s" : ""}).`);
+            } else {
+                // Live/upcoming match without stats yet (still in progress) — expected,
+                // not a rate-limit failure. Reset the counter so a few in-progress
+                // matches can't abort the whole run.
+                consecutiveFailures = 0;
+            }
+
+            // If vlr.gg is clearly blocking us, stop hammering it and let the user retry later
+            if (consecutiveFailures >= MAX_CONSECUTIVE_FAILURES) {
+                if (loadMissingStatsProgress) {
+                    loadMissingStatsProgress.textContent = " Rate-limited — wait a few minutes, then retry";
+                }
+                await new Promise(r => setTimeout(r, 1500));
+                break;
+            }
+
+            // Space out requests; back off harder after a genuine failure
+            const waitMs = (loadedOk || matchStatus !== "completed") ? DELAY_BETWEEN_OK_MS : DELAY_AFTER_FAIL_MS;
+            await new Promise(r => setTimeout(r, waitMs));
         }
 
         // Clean up spinner
@@ -974,7 +1004,9 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMissingStatsLoaderButton();
 
         // Send completion notification
-        const msg = `Successfully loaded stats for all ${total} matches.`;
+        const msg = failedCount > 0
+            ? `Loaded stats for ${loadedCount} match${loadedCount === 1 ? "" : "es"}${loadedCount > 0 ? " successfully" : ""}; ${failedCount} failed (vlr.gg may be rate-limiting). Wait a few minutes and click again to retry.`
+            : `Successfully loaded stats for all ${loadedCount} matches.`;
         if (typeof Notification !== "undefined" && Notification.permission === "granted") {
             new Notification("Stats Collection Completed", {
                 body: msg

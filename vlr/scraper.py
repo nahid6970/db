@@ -783,9 +783,9 @@ def fetch_match_detail_page(href):
                     if p["href"] and not p.get("photo"):
                         unique_players.setdefault(p["href"], []).append(p)
 
-        # Fetch photos in parallel (max 5 workers)
+        # Fetch photos in parallel (max 2 workers to avoid hammering vlr.gg)
         if unique_players:
-            with ThreadPoolExecutor(max_workers=5) as executor:
+            with ThreadPoolExecutor(max_workers=2) as executor:
                 future_to_href = {executor.submit(fetch_player_photo, href): href
                                   for href in unique_players}
                 for future in as_completed(future_to_href):
@@ -1209,8 +1209,15 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None):
     return matches_list
 
 
-def load_missing_stats():
-    """Find all completed matches that are missing stats, and load their details."""
+def load_missing_stats(delay=1.5):
+    """Find all completed matches that are missing stats, and load their details.
+
+    Fetches ONE match at a time with a small delay between requests instead of
+    fetching many in parallel. Fetching everything at once made vlr.gg rate-limit
+    / temporarily block this IP (connection timeouts). If several requests fail in
+    a row, we stop early — that usually means we're blocked — and the user can run
+    it again later.
+    """
     _ensure_db()
     # Query completed matches with missing maps or players stats
     query = """
@@ -1234,17 +1241,22 @@ def load_missing_stats():
         
     print(f"Loading missing stats for {len(pending)} completed matches...")
     results = {}
-    with ThreadPoolExecutor(max_workers=5) as executor:
-        future_to_id = {executor.submit(fetch_match_detail_page, href): mid for mid, href in pending}
-        for future in as_completed(future_to_id):
-            mid = future_to_id[future]
-            try:
-                details = future.result()
-                if details:
-                    results[mid] = details
-                    print(f"Loaded missing stats for match {mid}")
-            except Exception as e:
-                print(f"Exception loading missing stats for match {mid}: {e}")
+    consecutive_failures = 0
+    for mid, href in pending:
+        details = fetch_match_detail_page(href)
+        if details:
+            results[mid] = details
+            print(f"Loaded missing stats for match {mid}")
+            consecutive_failures = 0
+            time.sleep(delay)
+        else:
+            consecutive_failures += 1
+            print(f"Failed to load missing stats for match {mid} (consecutive failures: {consecutive_failures})")
+            if consecutive_failures >= 3:
+                print("Too many consecutive failures — vlr.gg may be rate-limiting. Stopping; run again later.")
+                break
+            # Back off longer after a failure to give vlr.gg time to recover
+            time.sleep(delay * 3)
 
     if results:
         with _get_conn() as conn:
