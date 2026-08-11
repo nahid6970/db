@@ -1462,9 +1462,13 @@ body.light .grid-separator-line {
     }
     .status-filters {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 4px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .status-filters .per-page-select {
+        flex: 1;
+        min-width: 120px;
     }
     .status-btn {
         padding: 6px 2px;

@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const filterSeries = document.getElementById("filter-series-input");
     const sortTourneyOrder = document.getElementById("sort-tourney-order");
     const perPageSelect = document.getElementById("per-page-select");
-    const statusBtns = document.querySelectorAll(".status-btn[data-status]");
+    const statusFilterSelect = document.getElementById("status-filter-select");
     const tourneyCheckboxes = document.querySelectorAll("#tournament-checklist .tourney-checkbox");
     const selectAllBtn = document.getElementById("btn-select-all");
     const deselectAllBtn = document.getElementById("btn-deselect-all");
@@ -85,11 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Global filter state
     let activeStatus = sessionStorage.getItem("activeStatus") || "all";
 
-    // Restore active status button
-    statusBtns.forEach(btn => {
-        if (btn.getAttribute("data-status") === activeStatus) btn.classList.add("active");
-        else btn.classList.remove("active");
-    });
+    // Restore active status filter in the dropdown
+    if (statusFilterSelect) statusFilterSelect.value = activeStatus;
     let searchQuery = "";
     let checkedTournaments = new Set();
     let customSeriesFilters = [];
@@ -1144,15 +1141,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Status filter buttons
-    statusBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            statusBtns.forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-            activeStatus = btn.getAttribute("data-status");
-            sessionStorage.setItem("activeStatus", activeStatus);
-            applyFilters();
-        });
+    // Status filter dropdown
+    statusFilterSelect?.addEventListener("change", () => {
+        activeStatus = statusFilterSelect.value;
+        sessionStorage.setItem("activeStatus", activeStatus);
+        applyFilters();
     });
 
     // Tournament checklist item change
