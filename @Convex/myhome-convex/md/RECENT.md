@@ -172,8 +172,8 @@ Chrome shows one-time "Open Python?" prompt — check "Always allow" and click O
 - `style.css` - notification badge CSS, cyberpunk popup styles
 - `index.html` - notification fields in add/edit sidebar popups, topbar version+settings grouping
 - `sidebar-handler.js` - badge rendering, click handler, `updateButtonNotifications`, `initNotificationBadges`, checkbox toggle wiring, form save/load
-- `C:\@delta\ms1\@Flask\5011_tv_show\app.py` - CORS header
-- `C:\@delta\ms1\@Flask\5013_movie_tracker\app.py` - CORS header + notification API routes
+- `C:\@delta\ms1\flask\5011_tv_show\app.py` - CORS header
+- `C:\@delta\ms1\flask\5013_movie_tracker\app.py` - CORS header + notification API routes
 
 ---
 
