@@ -787,7 +787,7 @@ body.light #tournament-checklist.highlight-tournaments .tourney-item.tourney-not
     color: #dc2626 !important;
 }
 
-#leaderboard-search, #standings-search {
+#leaderboard-search, #standings-search, #tournament-browser-search {
     background: var(--bg-darker);
     border: 1px solid var(--card-border);
     border-radius: var(--border-radius-md);
@@ -799,14 +799,18 @@ body.light #tournament-checklist.highlight-tournaments .tourney-item.tourney-not
     outline: none;
     transition: var(--transition-fast);
 }
-#leaderboard-search:focus, #standings-search:focus {
+#leaderboard-search:focus, #standings-search:focus, #tournament-browser-search:focus {
+    outline: none;
     border-color: var(--accent-red);
     box-shadow: 0 0 8px var(--accent-red-glow);
 }
-body.light #leaderboard-search, body.light #standings-search {
+body.light #leaderboard-search, body.light #standings-search, body.light #tournament-browser-search {
     background: rgba(0,0,0,0.05);
     border-color: rgba(0,0,0,0.12);
     color: var(--text-primary);
+}
+#tournament-browser-search::placeholder {
+    color: var(--text-muted);
 }
 
 .stats-loaded-check {
@@ -2911,6 +2915,167 @@ body.light .standings-win-rate-pill {
 }
 
 /* ===== Tournament Browser Modal ===== */
+.tbr-modal-header {
+    border-bottom: none;
+    padding: 4px 0 16px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+.tbr-title-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    flex: 1;
+    min-width: 320px;
+}
+.tbr-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    white-space: nowrap;
+    font-size: 18px;
+}
+.tbr-title i {
+    color: var(--accent-red);
+}
+.tbr-search-box {
+    width: 260px;
+    min-width: 190px;
+    max-width: 340px;
+    margin: 0;
+    flex: 1;
+}
+.tbr-search-box .search-icon {
+    font-size: 13px;
+    left: 12px;
+}
+.tbr-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.tbr-show-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+.tbr-limit-select {
+    width: 74px;
+    height: 32px;
+    padding: 0 8px;
+    flex: none;
+}
+.tbr-refresh-btn {
+    font-size: 11px;
+    padding: 7px 14px;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+.tbr-close-btn {
+    font-size: 24px;
+    color: var(--text-muted);
+    padding: 0 4px;
+    border: none;
+    background: none;
+    line-height: 1;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+.tbr-close-btn:hover {
+    color: var(--text-primary);
+}
+.tbr-status-bar {
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 0 2px 12px 2px;
+    min-height: 18px;
+}
+.tbr-status-bar.tbr-status-error {
+    color: var(--accent-red);
+}
+.tbr-body {
+    padding: 0 4px 10px 4px;
+    max-height: 56vh;
+    overflow-y: auto;
+    border: 1px solid var(--card-border);
+    border-radius: var(--border-radius-md);
+    background: rgba(0, 0, 0, 0.18);
+}
+body.light .tbr-body {
+    background: rgba(0, 0, 0, 0.03);
+}
+.tbr-loadmore-wrap {
+    text-align: center;
+    padding: 12px 0 6px 0;
+}
+.tbr-loadmore-btn {
+    font-size: 11px;
+    padding: 7px 20px;
+    text-transform: uppercase;
+}
+.tbr-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 0 2px 0;
+    border-top: 1px solid var(--card-border);
+    margin-top: 12px;
+}
+.tbr-hint {
+    font-size: 11px;
+    color: var(--text-muted);
+    flex: 1;
+    min-width: 0;
+    line-height: 1.45;
+}
+.tbr-add-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+    background: var(--accent-green);
+    border: 1px solid var(--accent-green);
+    border-radius: var(--border-radius-md);
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: var(--font-main);
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: filter var(--transition-fast), transform var(--transition-fast);
+}
+.tbr-add-btn:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+.tbr-add-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+.tbr-empty {
+    text-align: center;
+    padding: 42px 20px;
+    color: var(--text-muted);
+}
+.tbr-empty i {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 12px;
+    opacity: 0.55;
+}
+.tbr-empty p {
+    margin: 0;
+    font-size: 13px;
+}
 .tbr-item {
     display: flex;
     align-items: center;

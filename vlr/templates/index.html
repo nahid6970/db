@@ -471,18 +471,18 @@
 
     <!-- Tournament Browser Modal -->
     <div id="tournament-browser-modal" class="match-detail-overlay" style="display:none;">
-        <div class="match-detail-modal" style="max-width: 880px;">
-            <div class="modal-header" style="border-bottom: none; padding: 10px 0 18px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-                <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; flex: 1;">
-                    <h2 style="display: flex; align-items: center; gap: 10px; margin: 0; white-space: nowrap;"><i class="fa-solid fa-trophy"></i> Add Tournaments</h2>
-                    <div class="search-box" style="width: 260px; min-width: 180px; margin: 0;">
-                        <i class="fa-solid fa-magnifying-glass search-icon" style="font-size: 12px; left: 12px;"></i>
+        <div class="match-detail-modal tbr-modal" style="max-width: 880px;">
+            <div class="modal-header tbr-modal-header">
+                <div class="tbr-title-row">
+                    <h2 class="tbr-title"><i class="fa-solid fa-trophy"></i> Add Tournaments</h2>
+                    <div class="search-box tbr-search-box">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
                         <input type="text" id="tournament-browser-search" placeholder="Search tournaments..." autocomplete="off">
                     </div>
                 </div>
-                <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                    <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted);">Show
-                        <select id="tournament-browser-limit" class="sidebar-select" style="width: 72px; height: 30px; padding: 0 6px;">
+                <div class="tbr-controls">
+                    <label class="tbr-show-label">Show
+                        <select id="tournament-browser-limit" class="sidebar-select tbr-limit-select">
                             <option value="25">25</option>
                             <option value="50" selected>50</option>
                             <option value="100">100</option>
@@ -490,20 +490,20 @@
                             <option value="all">All</option>
                         </select>
                     </label>
-                    <button id="tournament-browser-refresh" class="status-btn" style="font-size: 11px; padding: 6px 12px; text-transform: uppercase;" title="Re-fetch the tournament list from VLR.gg (normally cached 24h)"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
-                    <button id="tournament-browser-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted); padding: 0 4px; border: none; background: none; line-height: 1; cursor: pointer;">&times;</button>
+                    <button id="tournament-browser-refresh" class="status-btn tbr-refresh-btn" title="Re-fetch the tournament list from VLR.gg (normally cached 24h)"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                    <button id="tournament-browser-close" class="modal-close-btn tbr-close-btn">&times;</button>
                 </div>
             </div>
-            <div id="tournament-browser-status" style="font-size: 12px; color: var(--text-muted); padding: 0 0 10px 0; min-height: 16px;"></div>
-            <div class="modal-body" style="padding: 0 4px 12px 4px; max-height: 60vh; overflow-y: auto;">
+            <div id="tournament-browser-status" class="tbr-status-bar"></div>
+            <div class="modal-body tbr-body">
                 <div id="tournament-browser-list"></div>
-                <div id="tournament-browser-loadmore-wrap" style="text-align: center; padding: 12px 0 4px 0;">
-                    <button id="tournament-browser-loadmore" class="status-btn" style="font-size: 11px; padding: 6px 18px; text-transform: uppercase;">Load more</button>
+                <div id="tournament-browser-loadmore-wrap" class="tbr-loadmore-wrap">
+                    <button id="tournament-browser-loadmore" class="status-btn tbr-loadmore-btn">Load more</button>
                 </div>
             </div>
-            <div class="modal-header" style="border-top: 1px solid var(--card-border); padding: 12px 0 4px 0; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
-                <span style="font-size: 12px; color: var(--text-muted);">Adding fetches that tournament's matches (no stats) from VLR.gg &mdash; paced to avoid rate limits.</span>
-                <button id="tournament-browser-add" class="status-btn" style="background: var(--accent-green); border-color: var(--accent-green); color: #000; font-weight: 700; text-transform: uppercase; font-size: 12px; padding: 8px 20px;">
+            <div class="tbr-footer">
+                <span class="tbr-hint">Adding fetches that tournament's matches (no stats) from VLR.gg &mdash; paced to avoid rate limits.</span>
+                <button id="tournament-browser-add" class="tbr-add-btn">
                     <i class="fa-solid fa-plus"></i> Add Selected (<span id="tournament-browser-selected-count">0</span>)
                 </button>
             </div>

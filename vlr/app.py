@@ -298,13 +298,13 @@ def api_tournaments():
     the UI can mark tournaments that are already in the DB / ignore list.
     """
     refresh = request.args.get("refresh") == "true"
-    tournaments, fetched_at = scraper.get_tournaments(refresh=refresh)
+    tournaments, fetched_at, error = scraper.get_tournaments(refresh=refresh)
     known = scraper.get_known_tournament_names()
     ignored = {t["name"] for t in load_ignorelist()}
     for t in tournaments:
         t["added"] = _name_matches(known, t["name"])
         t["ignored"] = _name_matches(ignored, t["name"])
-    return jsonify({"tournaments": tournaments, "fetched_at": fetched_at})
+    return jsonify({"tournaments": tournaments, "fetched_at": fetched_at, "error": error})
 
 @app.route("/api/tournaments/add", methods=["POST"])
 def api_tournaments_add():

@@ -1286,18 +1286,25 @@ tournaments_cache_lock = threading.Lock()
 def _parse_tournament_items(soup):
     """Parse tournament cards from the VLR.gg /tournaments page.
 
-    Resilient parser: looks for `a.wf-module-item.event-item` blocks and falls
-    back gracefully if the markup changes. Region is best-effort (from the
-    nearest `wf-card` header).
+    Resilient parser: accepts several item shapes (`a.event-item`, `div.event-item`,
+    or any anchor pointing at an /event/ page as a last resort) and has multiple
+    name/logo fallbacks, so minor markup changes don't break it. Region is
+    best-effort (from the nearest `wf-card` header).
     """
     tournaments = []
     seen = set()
 
-    for item in soup.find_all("a", class_="wf-module-item"):
-        classes = item.get("class", [])
-        if "event-item" not in classes:
+    items = soup.select("a.event-item, div.event-item")
+    if not items:
+        # Last resort: any anchor whose href points at an event page
+        items = [a for a in soup.find_all("a", href=True)
+                 if re.search(r"/event/\d+/", a.get("href", ""))]
+
+    for item in items:
+        a_tag = item if item.name == "a" else item.find("a", href=True)
+        if a_tag is None:
             continue
-        href = item.get("href", "")
+        href = a_tag.get("href", "") or ""
         m = re.search(r"/event/(\d+)/", href)
         if not m:
             continue
@@ -1306,52 +1313,53 @@ def _parse_tournament_items(soup):
             continue
         seen.add(tid)
 
+        # Logo (any img inside the item)
         logo = ""
-        logo_div = item.find("div", class_="event-item-logo")
-        if logo_div:
-            img = logo_div.find("img")
-            if img:
-                logo = img.get("src") or img.get("data-src") or ""
-                if logo.startswith("//"):
-                    logo = "https:" + logo
-                elif logo.startswith("/"):
-                    logo = "https://www.vlr.gg" + logo
+        img = item.find("img")
+        if img:
+            logo = img.get("src") or img.get("data-src") or ""
+            if logo.startswith("//"):
+                logo = "https:" + logo
+            elif logo.startswith("/"):
+                logo = "https://www.vlr.gg" + logo
 
+        # Name — multiple fallbacks
         name = ""
-        info_div = item.find("div", class_="event-item-info")
-        if info_div:
-            name_div = info_div.find("div", class_="event-item-name")
-            if name_div:
-                name = name_div.text.strip()
-            if not name:
-                h4 = info_div.find("h4")
-                if h4:
-                    name = h4.text.strip()
-            if not name:
-                name = info_div.text.strip()
+        name_div = item.find("div", class_="event-item-name")
+        if name_div:
+            name = name_div.get_text(" ", strip=True)
         if not name:
-            name = item.text.strip()
+            h4 = item.find("h4")
+            if h4:
+                name = h4.get_text(" ", strip=True)
+        if not name:
+            info_div = item.find("div", class_="event-item-info")
+            if info_div:
+                name = info_div.get_text(" ", strip=True)
+        if not name:
+            name = item.get("title") or item.get("aria-label") or ""
+        if not name and img:
+            name = img.get("alt") or ""
         name = " ".join(name.split())
         if not name:
             continue
 
         desc = ""
-        if info_div:
-            desc_div = info_div.find("div", class_="event-item-desc")
-            if desc_div:
-                desc = " ".join(desc_div.text.strip().split())
+        desc_div = item.find("div", class_="event-item-desc")
+        if desc_div:
+            desc = " ".join(desc_div.get_text(" ", strip=True).split())
 
         status = ""
         status_div = item.find("div", class_="event-item-status")
         if status_div:
             status_txt = status_div.find("span", class_="event-item-status-text")
-            raw = status_txt.text if status_txt else status_div.text
-            status = " ".join(raw.strip().split())
+            raw = status_txt.get_text(" ", strip=True) if status_txt else status_div.get_text(" ", strip=True)
+            status = " ".join(raw.split())
 
         date = ""
         date_div = item.find("div", class_="event-item-date")
         if date_div:
-            date = " ".join(date_div.text.strip().split())
+            date = " ".join(date_div.get_text(" ", strip=True).split())
 
         # Region: nearest enclosing wf-card header (best effort)
         region = ""
@@ -1359,7 +1367,7 @@ def _parse_tournament_items(soup):
         if card:
             header = card.find(class_="wf-card-header") or card.find(class_="wf-title") or card.find("h4")
             if header:
-                region = " ".join(header.text.strip().split())
+                region = " ".join(header.get_text(" ", strip=True).split())
 
         tournaments.append({
             "id": tid,
@@ -1375,7 +1383,11 @@ def _parse_tournament_items(soup):
 
 
 def get_tournaments(refresh=False):
-    """Return (list_of_tournaments, fetched_at).
+    """Return (list_of_tournaments, fetched_at, error).
+
+    error is None on success / cache hit; set to a user-facing message when the
+    live fetch fails or parses nothing (so the UI can explain why the list is
+    empty instead of just saying "no tournaments").
 
     The list is fetched from VLR.gg at most once per TOURNAMENTS_CACHE_TTL and
     cached to tournaments_cache.json, so opening the browser window repeatedly
@@ -1396,25 +1408,29 @@ def get_tournaments(refresh=False):
         now = int(time.time())
 
         if not refresh and cached_list and (now - fetched_at) < TOURNAMENTS_CACHE_TTL:
-            return cached_list, fetched_at
+            return cached_list, fetched_at, None
 
         soup = _fetch_page("https://www.vlr.gg/tournaments")
-        tournaments = _parse_tournament_items(soup) if soup else []
+        if soup is None:
+            if cached_list:
+                print("Could not fetch tournaments from VLR.gg; using cached list.")
+                return cached_list, fetched_at, "Couldn't reach VLR.gg (may be rate-limiting) — showing the cached list."
+            return [], 0, "Couldn't reach VLR.gg (may be rate-limiting)."
 
+        tournaments = _parse_tournament_items(soup)
         if tournaments:
             try:
                 with open(TOURNAMENTS_CACHE_PATH, "w", encoding="utf-8") as f:
                     json.dump({"fetched_at": now, "tournaments": tournaments}, f, ensure_ascii=False, indent=2)
             except Exception as e:
                 print(f"Error saving tournaments cache: {e}")
-            return tournaments, now
+            print(f"Parsed {len(tournaments)} tournaments from VLR.gg")
+            return tournaments, now, None
 
         if cached_list:
-            # Fetch failed (rate-limited?) — fall back to whatever we cached before
-            print("Could not fetch tournaments from VLR.gg; using cached list.")
-            return cached_list, fetched_at
-
-        return [], 0
+            print("No tournaments parsed from the page; using cached list.")
+            return cached_list, fetched_at, "No tournaments parsed from the page (markup may have changed) — showing the cached list."
+        return [], 0, "No tournaments parsed from the page (markup may have changed)."
 
 
 def get_known_tournament_names():

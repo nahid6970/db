@@ -1299,7 +1299,11 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
 
         if (visible.length === 0) {
-            tournamentBrowserList.innerHTML = `<p style="text-align:center; padding:30px; color:var(--text-muted); font-size:13px;">No tournaments found${q ? ` matching "${q}"` : ""}.</p>`;
+            tournamentBrowserList.innerHTML = `
+                <div class="tbr-empty">
+                    <i class="fa-solid fa-trophy"></i>
+                    <p>${q ? `No tournaments match "${escapeHtml(q)}".` : "No tournaments found."}</p>
+                </div>`;
         }
 
         const hasMore = filtered.length > showCount;
@@ -1324,13 +1328,23 @@ document.addEventListener("DOMContentLoaded", () => {
             tournamentBrowserVisible = parseInt(tournamentBrowserLimit?.value) || 50;
             renderTournamentBrowser();
             if (tournamentBrowserStatus) {
-                tournamentBrowserStatus.textContent = tournamentBrowserData.length
-                    ? ` ${tournamentBrowserData.length} tournaments available. Select the ones you want to add.`
-                    : " No tournaments found. Try refreshing the list.";
+                if (data.error) {
+                    tournamentBrowserStatus.textContent = " Couldn't load the list — " + data.error;
+                    tournamentBrowserStatus.classList.add("tbr-status-error");
+                } else if (tournamentBrowserData.length) {
+                    tournamentBrowserStatus.textContent = ` ${tournamentBrowserData.length} tournaments available. Select the ones you want to add.`;
+                    tournamentBrowserStatus.classList.remove("tbr-status-error");
+                } else {
+                    tournamentBrowserStatus.textContent = " No tournaments found on the list page. Click Refresh to re-fetch.";
+                    tournamentBrowserStatus.classList.remove("tbr-status-error");
+                }
             }
         } catch (err) {
             console.error("Failed to load tournaments:", err);
-            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = " Failed to load tournaments: " + err.message;
+            if (tournamentBrowserStatus) {
+                tournamentBrowserStatus.textContent = " Failed to load tournaments: " + err.message;
+                tournamentBrowserStatus.classList.add("tbr-status-error");
+            }
         } finally {
             tournamentBrowserLoading = false;
         }
