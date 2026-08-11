@@ -2,6 +2,7 @@ import sys
 import os
 import re
 import json
+import yaml
 from pathlib import Path
 from PyQt6.QtWidgets import (QApplication, QMainWindow, QWidget, QVBoxLayout, 
                              QHBoxLayout, QLabel, QLineEdit, QPushButton, 
@@ -195,6 +196,8 @@ class SearchReplacePaths(QMainWindow):
         self.setWindowTitle("SEARCH_REPLACE // CYBER_QT")
         self.setGeometry(100, 100, 1300, 560)
         self.config_file = r"C:\@delta\output\search_replace_path\search_replace_config.json"
+        # YAML config next to this script holds the extensions/ignore defaults
+        self.yml_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "search_replace_config.yml")
         
         # Apply cyberpunk theme
         self.setStyleSheet(f"""
@@ -325,6 +328,7 @@ class SearchReplacePaths(QMainWindow):
         self.matches = []  # Store preview matches
         self.setup_ui()
         self.load_config()
+        self.load_yml_config()
         
     def setup_ui(self):
         central = QWidget()
@@ -515,6 +519,24 @@ class SearchReplacePaths(QMainWindow):
                     self.status_label.setText("CONFIG_LOADED >> Last session restored")
         except Exception as e:
             print(f"Error loading config: {e}")
+
+    def load_yml_config(self):
+        """Load extensions and ignore lists from YAML config file"""
+        try:
+            if os.path.exists(self.yml_file):
+                with open(self.yml_file, 'r', encoding='utf-8') as f:
+                    yml_config = yaml.safe_load(f)
+                extensions = yml_config.get("extensions", []) or []
+                ignore = yml_config.get("ignore", []) or []
+                if extensions:
+                    self.extensions_input.setText(", ".join(extensions))
+                if ignore:
+                    self.ignore_input.setText(", ".join(ignore))
+                self.status_label.setText("YML_CONFIG_LOADED >> Filters loaded from search_replace_config.yml")
+            else:
+                self.status_label.setText("YML_MISSING >> search_replace_config.yml not found, using defaults")
+        except Exception as e:
+            print(f"Error loading yml config: {e}")
 
     def save_config(self):
         """Save current parameters to config file"""
