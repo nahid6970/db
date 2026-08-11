@@ -18,6 +18,7 @@ extensions:
   - ".xml"
   - ".sh"
   - ".cmd"
+  - ".ahk"
 
 # Folder names to skip while walking the directory tree
 ignore:
