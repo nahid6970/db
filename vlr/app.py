@@ -294,17 +294,29 @@ def _name_matches(names, name):
 def api_tournaments():
     """Return the cached tournament list (fetched from VLR.gg at most once/day).
 
-    ?refresh=true forces a re-fetch. Each item gets `added`/`ignored` flags so
-    the UI can mark tournaments that are already in the DB / ignore list.
+    ?refresh=true forces a re-fetch from page 1. ?pages=N makes N pages of the
+    /events listing available (missing pages are fetched on demand and cached).
+    Each item gets `added`/`ignored` flags so the UI can mark tournaments that
+    are already in the DB / ignore list.
     """
     refresh = request.args.get("refresh") == "true"
-    tournaments, fetched_at, error = scraper.get_tournaments(refresh=refresh)
+    try:
+        pages = max(1, int(request.args.get("pages") or 1))
+    except (TypeError, ValueError):
+        pages = 1
+    result = scraper.get_tournaments(refresh=refresh, pages=pages)
     known = scraper.get_known_tournament_names()
     ignored = {t["name"] for t in load_ignorelist()}
-    for t in tournaments:
+    for t in result["tournaments"]:
         t["added"] = _name_matches(known, t["name"])
         t["ignored"] = _name_matches(ignored, t["name"])
-    return jsonify({"tournaments": tournaments, "fetched_at": fetched_at, "error": error})
+    return jsonify({
+        "tournaments": result["tournaments"],
+        "fetched_at": result["fetched_at"],
+        "error": result["error"],
+        "total_pages": result["total_pages"],
+        "pages_fetched": result["pages_fetched"],
+    })
 
 @app.route("/api/tournaments/add", methods=["POST"])
 def api_tournaments_add():

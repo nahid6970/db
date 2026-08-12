@@ -1238,6 +1238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentBrowserLimit = document.getElementById("tournament-browser-limit");
     const tournamentBrowserRefresh = document.getElementById("tournament-browser-refresh");
     const tournamentBrowserLoadMore = document.getElementById("tournament-browser-loadmore");
+    const tournamentBrowserLoadMoreLabel = document.getElementById("tournament-browser-loadmore-label");
     const tournamentBrowserStatus = document.getElementById("tournament-browser-status");
     const tournamentBrowserAdd = document.getElementById("tournament-browser-add");
     const tournamentBrowserSelectedCount = document.getElementById("tournament-browser-selected-count");
@@ -1247,6 +1248,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let tournamentBrowserVisible = 50;           // how many rows are currently shown
     let tournamentBrowserLoading = false;
     let tournamentBrowserAdding = false;
+    let tournamentBrowserPagesFetched = 1;       // how many /events pages the server has loaded
+    let tournamentBrowserTotalPages = 1;         // total pages available on VLR.gg
+    const TOURNAMENT_PAGES_PER_LOAD = 3;         // pages fetched per "Load more" click
 
     function escapeHtml(s) {
         return String(s == null ? "" : s)
@@ -1299,8 +1303,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>`;
         }
 
-        const hasMore = filtered.length > showCount;
-        if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.style.display = hasMore ? "" : "none";
         if (tournamentBrowserSelectedCount) tournamentBrowserSelectedCount.textContent = String(tournamentBrowserSelected.size);
         if (tournamentBrowserAdd) tournamentBrowserAdd.disabled = tournamentBrowserSelected.size === 0 || tournamentBrowserAdding;
     }
@@ -1308,24 +1310,44 @@ document.addEventListener("DOMContentLoaded", () => {
     async function loadTournamentBrowser(refresh = false) {
         if (tournamentBrowserLoading) return;
         tournamentBrowserLoading = true;
+        const refreshIcon = tournamentBrowserRefresh ? tournamentBrowserRefresh.querySelector(".fa-arrows-rotate") : null;
+        if (tournamentBrowserRefresh) tournamentBrowserRefresh.disabled = true;
+        if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.disabled = true;
+        if (refreshIcon) refreshIcon.classList.add("spinning");
         if (tournamentBrowserStatus) {
-            tournamentBrowserStatus.textContent = refresh
-                ? " Fetching tournament list from VLR.gg (one-time)... this can take a moment."
-                : " Loading...";
+            tournamentBrowserStatus.classList.remove("tbr-status-error");
+            if (refresh) {
+                tournamentBrowserStatus.textContent = " Fetching the tournament list from VLR.gg (one-time)... this can take a moment.";
+            } else if (tournamentBrowserData.length) {
+                tournamentBrowserStatus.textContent = ` Loading more tournaments (fetching page ${Math.min(tournamentBrowserPagesFetched + 1, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages})...`;
+            } else {
+                tournamentBrowserStatus.textContent = " Loading...";
+            }
         }
         try {
-            const url = refresh ? "/api/tournaments?refresh=true" : "/api/tournaments";
+            // First open fetches just page 1; "Load more" fetches the next batch.
+            const targetPages = (refresh || tournamentBrowserData.length === 0)
+                ? 1
+                : tournamentBrowserPagesFetched + TOURNAMENT_PAGES_PER_LOAD;
+            const url = `/api/tournaments?pages=${targetPages}${refresh ? "&refresh=true" : ""}`;
             const data = await fetch(url).then(r => r.json());
             tournamentBrowserData = data.tournaments || [];
+            tournamentBrowserPagesFetched = data.pages_fetched || 1;
+            tournamentBrowserTotalPages = data.total_pages || 1;
             tournamentBrowserSelected = new Set();
-            tournamentBrowserVisible = parseInt(tournamentBrowserLimit?.value) || 50;
+            tournamentBrowserVisible = Math.max(tournamentBrowserVisible, tournamentBrowserPagesFetched * 50);
             renderTournamentBrowser();
             if (tournamentBrowserStatus) {
                 if (data.error) {
-                    tournamentBrowserStatus.textContent = " Couldn't load the list — " + data.error;
+                    tournamentBrowserStatus.textContent = " " + data.error;
                     tournamentBrowserStatus.classList.add("tbr-status-error");
                 } else if (tournamentBrowserData.length) {
-                    tournamentBrowserStatus.textContent = ` ${tournamentBrowserData.length} tournaments available. Select the ones you want to add.`;
+                    // total_pages of 1 means the server hasn't learned the real
+                    // page count yet — never treat that as "all loaded"
+                    const allLoaded = tournamentBrowserTotalPages > 1 && tournamentBrowserPagesFetched >= tournamentBrowserTotalPages;
+                    tournamentBrowserStatus.textContent = allLoaded
+                        ? ` ${tournamentBrowserData.length} tournaments available (all ${tournamentBrowserTotalPages} page${tournamentBrowserTotalPages === 1 ? "" : "s"}). Select the ones you want to add.`
+                        : ` ${tournamentBrowserData.length} tournaments loaded (page ${tournamentBrowserPagesFetched} of ${tournamentBrowserTotalPages}). Select the ones you want to add, or click Load more.`;
                     tournamentBrowserStatus.classList.remove("tbr-status-error");
                 } else {
                     tournamentBrowserStatus.textContent = " No tournaments found on the list page. Click Refresh to re-fetch.";
@@ -1340,6 +1362,18 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         } finally {
             tournamentBrowserLoading = false;
+            if (tournamentBrowserRefresh) tournamentBrowserRefresh.disabled = false;
+            if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.disabled = false;
+            if (refreshIcon) refreshIcon.classList.remove("spinning");
+            // "Load more" is hidden once every page is loaded (total_pages of 1
+            // means the count is unknown — keep the button available)
+            const allLoaded = tournamentBrowserTotalPages > 1 && tournamentBrowserPagesFetched >= tournamentBrowserTotalPages;
+            if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.style.display = allLoaded ? "none" : "";
+            if (tournamentBrowserLoadMoreLabel) {
+                tournamentBrowserLoadMoreLabel.textContent = allLoaded
+                    ? "Load more tournaments"
+                    : `Load more tournaments (page ${Math.min(tournamentBrowserPagesFetched + TOURNAMENT_PAGES_PER_LOAD, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages})`;
+            }
         }
     }
 
@@ -1356,7 +1390,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     tournamentBrowserSearch?.addEventListener("input", () => {
-        tournamentBrowserVisible = 50;
+        tournamentBrowserVisible = tournamentBrowserLimit.value === "all" ? 999999 : (parseInt(tournamentBrowserLimit.value) || 50);
         renderTournamentBrowser();
     });
     tournamentBrowserLimit?.addEventListener("change", () => {
@@ -1364,8 +1398,7 @@ document.addEventListener("DOMContentLoaded", () => {
         renderTournamentBrowser();
     });
     tournamentBrowserLoadMore?.addEventListener("click", () => {
-        tournamentBrowserVisible += 50;
-        renderTournamentBrowser();
+        loadTournamentBrowser(false);
     });
     tournamentBrowserRefresh?.addEventListener("click", () => {
         if (!confirm("Re-fetch the tournament list from VLR.gg? The list is otherwise cached for 24 hours.")) return;

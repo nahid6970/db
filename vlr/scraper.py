@@ -1418,18 +1418,26 @@ def _parse_tournament_items(soup):
     return tournaments
 
 
-def get_tournaments(refresh=False):
-    """Return (list_of_tournaments, fetched_at, error).
+def get_tournaments(refresh=False, pages=1):
+    """Return a dict with the VLR.gg tournament list and fetch metadata.
 
-    error is None on success / cache hit; set to a user-facing message when the
-    live fetch fails or parses nothing (so the UI can explain why the list is
-    empty instead of just saying "no tournaments").
+    The /events listing is paginated (~50 tournaments per page, ~59 pages
+    total). `pages` is how many pages should be available: a fresh cache that
+    already covers that many pages is returned untouched; otherwise only the
+    *missing* pages are fetched (page 1 is re-fetched only on refresh=True) and
+    merged into the cache. Fetching is sequential with a short pause between
+    pages so we never hammer vlr.gg.
 
-    The list is fetched from VLR.gg at most once per TOURNAMENTS_CACHE_TTL and
-    cached to tournaments_cache.json, so opening the browser window repeatedly
-    never re-scrapes the site. Pass refresh=True (the Refresh button) to force
-    a new fetch.
+    Returns {"tournaments": [...], "fetched_at": int, "error": str|None,
+             "total_pages": int, "pages_fetched": int}. `error` is None on a
+    clean load; set to a short user-facing message when something failed
+    (partial load, fallback to cache, etc.) so the UI can explain it.
     """
+    try:
+        pages = max(1, int(pages))
+    except (TypeError, ValueError):
+        pages = 1
+
     with tournaments_cache_lock:
         cache = {}
         if os.path.exists(TOURNAMENTS_CACHE_PATH):
@@ -1441,32 +1449,117 @@ def get_tournaments(refresh=False):
 
         fetched_at = int(cache.get("fetched_at") or 0)
         cached_list = cache.get("tournaments") or []
+        cached_pages = int(cache.get("pages") or (1 if cached_list else 0))
+        cached_total = int(cache.get("total_pages") or 1)
         now = int(time.time())
+        fresh = bool(cached_list) and (now - fetched_at) < TOURNAMENTS_CACHE_TTL
 
-        if not refresh and cached_list and (now - fetched_at) < TOURNAMENTS_CACHE_TTL:
-            return cached_list, fetched_at, None
+        if not refresh and fresh and cached_pages >= pages:
+            # Cache already covers the requested pages. If it was written before
+            # the total page count was known (old format), learn it from page 1
+            # once and store it so the UI can show "page X of Y".
+            if "total_pages" not in cache:
+                try:
+                    soup, _ = _fetch_tournaments_page(1)
+                    if soup is not None:
+                        cached_total = max(_get_total_pages(soup), cached_pages)
+                        cache["total_pages"] = cached_total
+                        with open(TOURNAMENTS_CACHE_PATH, "w", encoding="utf-8") as f:
+                            json.dump(cache, f, ensure_ascii=False, indent=2)
+                except Exception as e:
+                    print(f"Could not learn total tournament pages: {e}")
+            return {
+                "tournaments": cached_list,
+                "fetched_at": fetched_at,
+                "error": None,
+                "total_pages": cached_total,
+                "pages_fetched": cached_pages,
+            }
 
-        soup, fetch_error = _fetch_tournaments_page()
-        if soup is None:
-            if cached_list:
-                print(f"Could not fetch tournaments from VLR.gg ({fetch_error}); using cached list.")
-                return cached_list, fetched_at, f"Couldn't reach VLR.gg ({fetch_error}) — showing the cached list."
-            return [], 0, f"Couldn't reach VLR.gg ({fetch_error})."
+        if not refresh and fresh:
+            # Normal "load more": keep the cached list, fetch only missing pages
+            all_tournaments = list(cached_list)
+            seen = {t.get("id") for t in all_tournaments}
+            start_page = cached_pages + 1
+            total_pages = cached_total
+        else:
+            all_tournaments = []
+            seen = set()
+            start_page = 1
+            total_pages = 1
+            fetched_at = now
 
-        tournaments = _parse_tournament_items(soup)
-        if tournaments:
+        highest_ok = start_page - 1
+        last_error = None
+        for page in range(start_page, pages + 1):
+            soup, fetch_error = _fetch_tournaments_page(page)
+            if soup is None:
+                last_error = fetch_error
+                print(f"Could not fetch tournaments page {page} ({fetch_error}); stopping.")
+                break
+            if page == 1:
+                total_pages = _get_total_pages(soup)
+            parsed = _parse_tournament_items(soup)
+            added = 0
+            for t in parsed:
+                tid = t.get("id")
+                if tid and tid not in seen:
+                    seen.add(tid)
+                    all_tournaments.append(t)
+                    added += 1
+            highest_ok = page
+            if added == 0 and page > 1:
+                print(f"No new tournaments on page {page}; reached the end of the list.")
+                break
+            if page < pages:
+                time.sleep(1)  # gentle pacing between pages
+
+        if all_tournaments:
+            pages_loaded = highest_ok if refresh else max(highest_ok, cached_pages)
+            cache_total = max(total_pages, pages_loaded)
+            # Only reset the freshness clock when something new was actually
+            # loaded (a no-op load-more retry shouldn't extend the 24h TTL)
+            saved_at = now if (refresh or pages_loaded > cached_pages) else fetched_at
             try:
                 with open(TOURNAMENTS_CACHE_PATH, "w", encoding="utf-8") as f:
-                    json.dump({"fetched_at": now, "tournaments": tournaments}, f, ensure_ascii=False, indent=2)
+                    json.dump({
+                        "fetched_at": saved_at,
+                        "pages": pages_loaded,
+                        "total_pages": cache_total,
+                        "tournaments": all_tournaments,
+                    }, f, ensure_ascii=False, indent=2)
             except Exception as e:
                 print(f"Error saving tournaments cache: {e}")
-            print(f"Parsed {len(tournaments)} tournaments from VLR.gg")
-            return tournaments, now, None
+            if last_error:
+                msg = f"Loaded {pages_loaded} page(s); couldn't fetch more ({last_error})."
+            else:
+                msg = None
+            print(f"Loaded {len(all_tournaments)} tournaments ({pages_loaded} page(s)) from VLR.gg")
+            return {
+                "tournaments": all_tournaments,
+                "fetched_at": saved_at,
+                "error": msg,
+                "total_pages": cache_total,
+                "pages_fetched": pages_loaded,
+            }
 
+        # Nothing fetched/parsed — fall back to any cached list, then give up
         if cached_list:
-            print("No tournaments parsed from the page; using cached list.")
-            return cached_list, fetched_at, "No tournaments parsed from the page (markup may have changed) — showing the cached list."
-        return [], 0, "No tournaments parsed from the page (markup may have changed)."
+            print("Could not fetch tournaments; using cached list.")
+            return {
+                "tournaments": cached_list,
+                "fetched_at": fetched_at,
+                "error": f"Couldn't reach VLR.gg ({last_error or 'unknown error'}) — showing the cached list.",
+                "total_pages": cached_total,
+                "pages_fetched": cached_pages,
+            }
+        return {
+            "tournaments": [],
+            "fetched_at": 0,
+            "error": f"Couldn't reach VLR.gg ({last_error or 'unknown error'}).",
+            "total_pages": total_pages,
+            "pages_fetched": 0,
+        }
 
 
 def _fetch_with_retry(url, timeout=25, attempts=3):
@@ -1509,18 +1602,33 @@ def _fetch_with_retry(url, timeout=25, attempts=3):
     return None, last_error or "unknown error"
 
 
-def _fetch_tournaments_page():
-    """Fetch the VLR.gg /events page (the tournaments listing) with retries.
+def _fetch_tournaments_page(page=1):
+    """Fetch one page of the VLR.gg /events listing (the tournaments page).
 
-    The events page is one of the largest pages on the site (it lists every
-    tournament in the world across all regions), so it gets a much longer
-    timeout than the default 10s used for match listings, plus retries with
-    backoff. A single dropped/timeout request previously killed the whole
-    fetch and left the UI saying "couldn't reach VLR.gg".
+    The listing is paginated — roughly 50 tournaments per page, ~59 pages total.
+    Page 1 is the bare /events URL; later pages are /events/?page=N. Every page
+    is large, so each gets a long timeout plus retries with backoff; a single
+    dropped/timeout request must not kill the fetch (see _fetch_with_retry).
 
-    Returns (soup_or_None, error_detail_or_None); see _fetch_with_retry.
+    Returns (soup_or_None, error_detail_or_None).
     """
-    return _fetch_with_retry("https://www.vlr.gg/events")
+    url = "https://www.vlr.gg/events" if page <= 1 else f"https://www.vlr.gg/events/?page={page}"
+    return _fetch_with_retry(url)
+
+
+def _get_total_pages(soup):
+    """Best-effort count of /events listing pages from its pagination links."""
+    if soup is None:
+        return 1
+    try:
+        nums = []
+        for a in soup.find_all("a", href=True):
+            m = re.search(r"/events/?\?page=(\d+)", a.get("href", "") or "")
+            if m:
+                nums.append(int(m.group(1)))
+        return max(nums) if nums else 1
+    except Exception:
+        return 1
 
 
 def get_known_tournament_names():

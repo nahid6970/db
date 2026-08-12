@@ -492,7 +492,7 @@
                             <option value="all">All</option>
                         </select>
                     </label>
-                    <button id="tournament-browser-refresh" class="status-btn tbr-refresh-btn" title="Re-fetch the tournament list from VLR.gg (normally cached 24h)"><i class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                    <button id="tournament-browser-refresh" class="tbr-refresh-btn" title="Re-fetch the tournament list from VLR.gg (normally cached 24h)"><i class="fa-solid fa-arrows-rotate"></i><span>Refresh</span></button>
                     <button id="tournament-browser-close" class="modal-close-btn tbr-close-btn">&times;</button>
                 </div>
             </div>
@@ -500,11 +500,11 @@
             <div class="modal-body tbr-body">
                 <div id="tournament-browser-list"></div>
                 <div id="tournament-browser-loadmore-wrap" class="tbr-loadmore-wrap">
-                    <button id="tournament-browser-loadmore" class="status-btn tbr-loadmore-btn">Load more</button>
+                    <button id="tournament-browser-loadmore" class="tbr-loadmore-btn"><i class="fa-solid fa-angles-down"></i><span id="tournament-browser-loadmore-label">Load more tournaments</span></button>
                 </div>
             </div>
             <div class="tbr-footer">
-                <span class="tbr-hint">Adding fetches that tournament's matches (no stats) from VLR.gg &mdash; paced to avoid rate limits.</span>
+                <span class="tbr-hint">Adding fetches that tournament's matches (no stats) from VLR.gg &mdash; paced to avoid rate limits. &ldquo;Load more&rdquo; fetches the next pages of tournaments (~50 per page).</span>
                 <button id="tournament-browser-add" class="tbr-add-btn">
                     <i class="fa-solid fa-plus"></i> Add Selected (<span id="tournament-browser-selected-count">0</span>)
                 </button>

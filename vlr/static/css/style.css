@@ -2979,10 +2979,36 @@ body.light .standings-win-rate-pill {
     flex: none;
 }
 .tbr-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    font-family: var(--font-main);
     font-size: 11px;
-    padding: 7px 14px;
+    font-weight: 600;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    background: var(--bg-darker);
+    border: 1px solid var(--card-border);
+    border-radius: 999px;
+    padding: 7px 16px;
     white-space: nowrap;
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast), box-shadow var(--transition-fast);
+}
+.tbr-refresh-btn:hover:not(:disabled) {
+    color: var(--accent-red);
+    border-color: var(--accent-red);
+    background: rgba(255, 70, 85, 0.07);
+    box-shadow: 0 0 12px var(--accent-red-glow);
+}
+.tbr-refresh-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.tbr-refresh-btn i.spinning {
+    animation: spin 1s infinite linear;
 }
 .tbr-close-btn {
     font-size: 24px;
@@ -3022,9 +3048,32 @@ body.light .tbr-body {
     padding: 12px 0 6px 0;
 }
 .tbr-loadmore-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: var(--font-main);
     font-size: 11px;
-    padding: 7px 20px;
+    font-weight: 700;
     text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--accent-red);
+    background: rgba(255, 70, 85, 0.08);
+    border: 1px solid rgba(255, 70, 85, 0.35);
+    border-radius: 999px;
+    padding: 8px 24px;
+    cursor: pointer;
+    transition: background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+.tbr-loadmore-btn:hover:not(:disabled) {
+    background: rgba(255, 70, 85, 0.16);
+    border-color: var(--accent-red);
+    box-shadow: 0 0 14px var(--accent-red-glow);
+    transform: translateY(-1px);
+}
+.tbr-loadmore-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 .tbr-footer {
     display: flex;
