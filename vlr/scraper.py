@@ -1501,8 +1501,10 @@ def get_tournaments(refresh=False, pages=1):
                 last_error = fetch_error
                 print(f"Could not fetch tournaments page {page} ({fetch_error}); stopping.")
                 break
-            if page == 1:
-                total_pages = _get_total_pages(soup)
+            # Every /events page carries the pagination block, so ANY fetched
+            # page can report the (possibly grown) total — if VLR.gg adds a new
+            # page, the next "Load more" notices it without needing a refresh.
+            total_pages = max(total_pages, _get_total_pages(soup))
             parsed = _parse_tournament_items(soup)
             added = 0
             for t in parsed:
@@ -1511,10 +1513,10 @@ def get_tournaments(refresh=False, pages=1):
                     seen.add(tid)
                     all_tournaments.append(t)
                     added += 1
-            highest_ok = page
             if added == 0 and page > 1:
                 print(f"No new tournaments on page {page}; reached the end of the list.")
                 break
+            highest_ok = page
             if page < pages:
                 time.sleep(1)  # gentle pacing between pages
 
