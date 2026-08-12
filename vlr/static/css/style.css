@@ -3026,7 +3026,7 @@ body.light .standings-win-rate-pill {
 .tbr-status-bar {
     font-size: 12px;
     color: var(--text-muted);
-    padding: 0 2px 12px 2px;
+    padding: 0 4px 12px 4px;
     min-height: 18px;
 }
 .tbr-status-bar.tbr-status-error {

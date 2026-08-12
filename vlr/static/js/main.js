@@ -1318,11 +1318,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tournamentBrowserStatus) {
             tournamentBrowserStatus.classList.remove("tbr-status-error");
             if (refresh) {
-                tournamentBrowserStatus.textContent = ` Re-fetching ${Math.max(tournamentBrowserPagesFetched, 1)} page(s) of the tournament list from VLR.gg... this can take a moment.`;
+                tournamentBrowserStatus.textContent = `Refreshing ${Math.max(tournamentBrowserPagesFetched, 1)} page${Math.max(tournamentBrowserPagesFetched, 1) === 1 ? "" : "s"} from VLR.gg…`;
             } else if (tournamentBrowserData.length) {
-                tournamentBrowserStatus.textContent = ` Loading more tournaments (fetching page ${Math.min(tournamentBrowserPagesFetched + 1, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages})...`;
+                tournamentBrowserStatus.textContent = `Loading more — fetching page ${Math.min(tournamentBrowserPagesFetched + 1, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages}…`;
             } else {
-                tournamentBrowserStatus.textContent = " Loading...";
+                tournamentBrowserStatus.textContent = "Loading…";
             }
         }
         try {
@@ -1342,25 +1342,25 @@ document.addEventListener("DOMContentLoaded", () => {
             renderTournamentBrowser();
             if (tournamentBrowserStatus) {
                 if (data.error) {
-                    tournamentBrowserStatus.textContent = " " + data.error;
+                    tournamentBrowserStatus.textContent = data.error;
                     tournamentBrowserStatus.classList.add("tbr-status-error");
                 } else if (tournamentBrowserData.length) {
                     // total_pages of 1 means the server hasn't learned the real
                     // page count yet — never treat that as "all loaded"
                     const allLoaded = tournamentBrowserTotalPages > 1 && tournamentBrowserPagesFetched >= tournamentBrowserTotalPages;
                     tournamentBrowserStatus.textContent = allLoaded
-                        ? ` ${tournamentBrowserData.length} tournaments available (all ${tournamentBrowserTotalPages} page${tournamentBrowserTotalPages === 1 ? "" : "s"}). Select the ones you want to add.`
-                        : ` ${tournamentBrowserData.length} tournaments loaded (page ${tournamentBrowserPagesFetched} of ${tournamentBrowserTotalPages}). Select the ones you want to add, or click Load more.`;
+                        ? `${tournamentBrowserData.length} tournaments available — all ${tournamentBrowserTotalPages} page${tournamentBrowserTotalPages === 1 ? "" : "s"} loaded. Select the ones you want to add.`
+                        : `${tournamentBrowserData.length} tournaments loaded (page ${tournamentBrowserPagesFetched} of ${tournamentBrowserTotalPages}). Select the ones you want to add, or click Load more.`;
                     tournamentBrowserStatus.classList.remove("tbr-status-error");
                 } else {
-                    tournamentBrowserStatus.textContent = " No tournaments found on the list page. Click Refresh to re-fetch.";
+                    tournamentBrowserStatus.textContent = "No tournaments found. Click Refresh to fetch the list.";
                     tournamentBrowserStatus.classList.remove("tbr-status-error");
                 }
             }
         } catch (err) {
             console.error("Failed to load tournaments:", err);
             if (tournamentBrowserStatus) {
-                tournamentBrowserStatus.textContent = " Failed to load tournaments: " + err.message;
+                tournamentBrowserStatus.textContent = "Failed to load tournaments: " + err.message;
                 tournamentBrowserStatus.classList.add("tbr-status-error");
             }
         } finally {
@@ -1409,7 +1409,8 @@ document.addEventListener("DOMContentLoaded", () => {
         loadTournamentBrowser(false);
     });
     tournamentBrowserRefresh?.addEventListener("click", () => {
-        if (!confirm("Re-fetch the tournament list from VLR.gg? The list is cached locally and only updates when you click this.")) return;
+        // No confirm dialog — the button is already an explicit action, and the
+        // spinning icon + status text show the refresh is running.
         loadTournamentBrowser(true);
     });
 
@@ -1457,7 +1458,7 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
             for (let i = 0; i < selected.length; i++) {
                 if (tournamentBrowserStatus) {
-                    tournamentBrowserStatus.textContent = ` Adding "${selected[i].name}" — fetching its matches from VLR.gg (${i + 1}/${selected.length})...`;
+                    tournamentBrowserStatus.textContent = `Adding "${selected[i].name}" — fetching its matches from VLR.gg (${i + 1}/${selected.length})…`;
                 }
                 const resp = await fetch("/api/tournaments/add", {
                     method: "POST",
@@ -1470,14 +1471,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (itemRes.error) errors.push(`${selected[i].name}: ${itemRes.error}`);
                 if (i < selected.length - 1) await new Promise(r => setTimeout(r, 1200));
             }
-            let statusMsg = ` Done — ${totalAdded} match(es) added/updated across ${selected.length} tournament(s).`;
+            let statusMsg = `Done — ${totalAdded} match(es) added/updated across ${selected.length} tournament(s).`;
             if (errors.length) statusMsg += ` ${errors.length} failed: ${errors.join("; ")}`;
             statusMsg += " Reloading page...";
             if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = statusMsg;
             setTimeout(() => window.location.reload(), 800);
         } catch (err) {
             console.error("Failed to add tournaments:", err);
-            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = " Error adding tournaments: " + err.message;
+            if (tournamentBrowserStatus) tournamentBrowserStatus.textContent = "Error adding tournaments: " + err.message;
             tournamentBrowserAdding = false;
             if (tournamentBrowserAdd) {
                 tournamentBrowserAdd.innerHTML = '<i class="fa-solid fa-plus"></i> Add Selected';
