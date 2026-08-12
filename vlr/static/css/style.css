@@ -1362,7 +1362,7 @@ body.light .stats-loaded-check {
 .grid-separator-line {
     flex: 1;
     height: 1px;
-    background: var(--card-border);
+    background: rgba(88, 166, 255, 0.8);
 }
 .grid-separator-text {
     font-family: var(--font-heading);
@@ -1370,7 +1370,7 @@ body.light .stats-loaded-check {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: var(--text-muted);
+    color: var(--text-primary);
     white-space: nowrap;
     display: flex;
     align-items: center;
