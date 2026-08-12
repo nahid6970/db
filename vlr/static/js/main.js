@@ -1460,7 +1460,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const resp = await fetch("/api/tournaments/add", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ tournament: { id: selected[i].id, name: selected[i].name, href: selected[i].href } })
+                    body: JSON.stringify({ tournament: { id: selected[i].id, name: selected[i].name, href: selected[i].href, logo: selected[i].logo || "" } })
                 });
                 const res = await resp.json();
                 totalAdded += (res.total_added || 0);

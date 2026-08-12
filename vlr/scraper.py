@@ -1775,6 +1775,21 @@ def add_tournament(tournament):
     if event_name:
         for m in matches:
             m["tournament"] = event_name
+    # Event logo: prefer the one from the /events list item; fall back to the
+    # event page header so the sidebar shows a logo even for legacy callers
+    # that don't send one.
+    logo = (tournament.get("logo") or "").strip()
+    if not logo:
+        header_img = soup.select_one("div.event-header img")
+        if header_img:
+            logo = header_img.get("src") or header_img.get("data-src") or ""
+    if logo:
+        if logo.startswith("//"):
+            logo = "https:" + logo
+        elif logo.startswith("/"):
+            logo = "https://www.vlr.gg" + logo
+        for m in matches:
+            m["tournament_logo"] = logo
     _upsert_matches_to_db(matches)
     print(f"Added {len(matches)} matches for tournament '{event_name}'")
     return len(matches), None
