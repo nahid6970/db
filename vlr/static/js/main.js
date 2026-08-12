@@ -724,35 +724,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setInterval(updateCountdowns, 1000);
     updateCountdowns();
 
-    // Shared helper: true if a match has player stats (actual values) loaded for at least one map
-    function matchHasPlayerStats(m) {
-        const players = m.players;
-        if (!players || typeof players !== "object") return false;
-
-        function hasRealStats(mapData) {
-            if (!mapData) return false;
-            for (const teamKey of ["team1", "team2"]) {
-                const team = mapData[teamKey];
-                if (!team || !team.length) continue;
-                // Check at least one player has a non-empty stat value
-                for (const p of team) {
-                    if (p.rating || p.acs || p.k || p.d || p.a) return true;
-                }
-            }
-            return false;
-        }
-
-        // Check the aggregate "all" key first
-        if (hasRealStats(players["all"])) return true;
-
-        // Also check per-map keys (0, 1, 2...)
-        for (const key of Object.keys(players)) {
-            if (key === "all") continue;
-            if (hasRealStats(players[key])) return true;
-        }
-        return false;
-    }
-
     // 2b. Missing Stats Loader Logic
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
@@ -762,10 +733,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const status = (m.status || "").toLowerCase();
             if (status === "completed") {
-                // Need fetching if: no maps at all, OR maps exist but no player stats loaded
-                const hasMaps = m.maps && m.maps.length > 0;
-                if (!hasMaps) return true;
-                return !matchHasPlayerStats(m);
+                // Completed matches need fetching when stats haven't loaded yet
+                // (has_stats is computed server-side; list responses are slimmed)
+                return !m.has_stats;
             } else {
                 // Upcoming/live matches are always considered pending:
                 // - If their time has passed, they may now have results to fetch
@@ -934,7 +904,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 const status = (m.status || "").toLowerCase();
                                 if (status === "completed") {
                                     // Completed matches must have stats
-                                    const hasStats = m.maps && m.maps.length > 0;
+                                    const hasStats = !!m.has_stats;
                                     if (!hasStats) {
                                         isFullyLoaded = false;
                                         break;
@@ -1000,6 +970,9 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.disabled = false;
         loadMissingStatsBtn.removeAttribute("data-fetching");
         updateMissingStatsLoaderButton();
+
+        // Stats in the DB changed — the leaderboard/standings cache is stale
+        cachedAllMatches = null;
 
         // Send completion notification
         const msg = failedCount > 0
@@ -1206,6 +1179,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 // Keep the in-memory leaderboard dataset updated
                 INITIAL_MATCHES = matches;
+
+                // Full-stats dataset (leaderboard/standings) is now stale — refetch on next open
+                cachedAllMatches = null;
 
                 const scrollY = window.scrollY;
 
@@ -1633,7 +1609,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (m.status === "Live") {
                 statusBadgeHTML = '<span class="live-dot"></span> LIVE';
             } else if (m.status === "Completed") {
-                const hasStats = m.maps && m.maps.length > 0;
+                const hasStats = !!m.has_stats;
                 if (hasStats) {
                     statusBadgeHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                 } else {
@@ -1796,7 +1772,7 @@ document.addEventListener("DOMContentLoaded", () => {
             for (const m of mList) {
                 const status = (m.status || "").toLowerCase();
                 if (status === "completed") {
-                    const hasStats = m.maps && m.maps.length > 0;
+                    const hasStats = !!m.has_stats;
                     if (!hasStats) {
                         isFullyLoaded = false;
                         break;
@@ -2338,9 +2314,15 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    function openLeaderboard() {
+    async function openLeaderboard() {
         try {
-            const matches = typeof INITIAL_MATCHES !== "undefined" ? INITIAL_MATCHES : [];
+            // Leaderboard needs full player stats — fetch them on demand from
+            // /api/matches/all (the slim /api/matches list only carries has_stats).
+            // Share the cachedAllMatches dataset with the standings view.
+            if (!cachedAllMatches) {
+                cachedAllMatches = await fetch("/api/matches/all").then(r => r.json()).catch(() => null);
+            }
+            const matches = cachedAllMatches || [];
             const selectedTourneys = typeof checkedTournaments !== "undefined" ? checkedTournaments : new Set();
             
             // Read split statistics toggle state
@@ -3051,17 +3033,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentStandingsContent = document.getElementById("tournament-standings-content");
     const standingsSearchInput = document.getElementById("standings-search");
 
-    let cachedStandingsMatches = null;
+    // Full-stats dataset shared by the leaderboard and standings views.
+    // Fetched once from /api/matches/all and reused until the next Sync.
+    let cachedAllMatches = null;
 
     async function renderTournamentStandings() {
         if (!tournamentStandingsContent) return;
 
         try {
-            if (!cachedStandingsMatches) {
+            if (!cachedAllMatches) {
                 const response = await fetch("/api/matches/all");
-                cachedStandingsMatches = await response.json();
+                cachedAllMatches = await response.json();
             }
-            const matches = cachedStandingsMatches || [];
+            const matches = cachedAllMatches || [];
 
             if (!matches || matches.length === 0) {
                 tournamentStandingsContent.innerHTML = `<p style="padding: 30px; text-align: center; color: var(--text-muted);">No match data found.</p>`;
@@ -3249,7 +3233,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tournamentStandingsBtn?.addEventListener("click", () => {
         if (standingsSearchInput) standingsSearchInput.value = "";
-        cachedStandingsMatches = null; // force fresh data fetch on button click
         renderTournamentStandings();
         tournamentStandingsModal.style.display = "flex";
     });

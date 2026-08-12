@@ -264,7 +264,11 @@ def api_matches_view():
 
 @app.route("/api/matches/all")
 def api_matches_all():
-    """Return ALL matches from DB (excluding ignored tournaments only)."""
+    """Return ALL matches from DB WITH full stats (leaderboard/standings).
+
+    Heavier than /api/matches (slimmed list) — used only on demand by the
+    player leaderboard, tournament standings and team history panels.
+    """
     ignore_list = load_ignorelist()
     ignore_names = {t["name"] for t in ignore_list}
     tournament_rows = scraper.load_tournament_overview()
@@ -272,6 +276,7 @@ def api_matches_all():
     tournament_names = [row["tournament"] for row in tournament_rows]
     matches = scraper.get_matches_for_display(
         tournament_names=tournament_names if tournament_names else [],
+        include_stats=True,
     )
     return jsonify(matches)
 

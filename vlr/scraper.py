@@ -1173,7 +1173,7 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
     finally:
         sync_lock.release()
 
-def get_matches_for_display(tournament_names=None, exclude_tournaments=None):
+def get_matches_for_display(tournament_names=None, exclude_tournaments=None, include_stats=False):
     matches_list = load_matches(tournament_names=tournament_names, exclude_tournaments=exclude_tournaments)
     
     # Sort: Live matches first, then Upcoming matches (by unix_timestamp asc), then Completed matches (by unix_timestamp desc).
@@ -1205,7 +1205,18 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None):
         else:
             m["formatted_bst"] = "N/A"
             m["js_timestamp"] = 0
-            
+
+        # List responses don't need the heavy per-map player stats (they can be
+        # several MB across all matches) — the detail modal and on-demand panels
+        # (leaderboard / standings / team history) fetch them separately. Replace
+        # them with a cheap has_stats flag so the "stats loaded" badges still
+        # work. Matches the load_tournament_overview / load_missing_stats
+        # definition: stats exist when maps + an "all" key do.
+        if not include_stats:
+            m["has_stats"] = bool(m.get("maps")) and "all" in (m.get("players") or {})
+            m.pop("maps", None)
+            m.pop("players", None)
+
     return matches_list
 
 
