@@ -221,6 +221,12 @@ def api_matches():
     end_page = max(start_page, end_page)
     scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
     
+    # Fill logos for tournaments added before logos were stored (older adds)
+    try:
+        scraper.backfill_tournament_logos()
+    except Exception as e:
+        print(f"Error backfilling tournament logos: {e}")
+
     # Load missing stats for completed matches if requested
     if request.args.get("load_missing") == "true":
         scraper.load_missing_stats()

@@ -312,7 +312,7 @@ def _bulk_upsert_rows(conn, rows):
             score2=excluded.score2,
             tournament=excluded.tournament,
             series=excluded.series,
-            tournament_logo=excluded.tournament_logo,
+            tournament_logo=CASE WHEN COALESCE(excluded.tournament_logo, '') != '' THEN excluded.tournament_logo ELSE matches.tournament_logo END,
             eta=excluded.eta,
             status=excluded.status,
             team1_logo=CASE WHEN COALESCE(excluded.team1_logo, '') != '' THEN excluded.team1_logo ELSE matches.team1_logo END,
@@ -1793,4 +1793,78 @@ def add_tournament(tournament):
     _upsert_matches_to_db(matches)
     print(f"Added {len(matches)} matches for tournament '{event_name}'")
     return len(matches), None
+
+
+def _loose_name_match(a, b):
+    """Loose tournament-name match: exact, or containment either direction.
+
+    Names can differ slightly between the /events list and the DB (e.g. "VCT
+    2026: EMEA Stage 2" vs "Stage 2 W3"); a minimum length avoids false
+    positives on short shared substrings.
+    """
+    if not a or not b:
+        return False
+    a = a.strip().lower()
+    b = b.strip().lower()
+    if a == b:
+        return True
+    return len(a) >= 8 and len(b) >= 8 and (a in b or b in a)
+
+
+def backfill_tournament_logos():
+    """Fill empty tournament_logo values using the cached /events tournament list.
+
+    Tournaments added before logos were stored (or whose matches never carried
+    an icon) have an empty tournament_logo in the DB, so the sidebar shows a
+    placeholder instead of the real logo. This matches each such tournament
+    against the cached /events list and stores the logo locally, without
+    re-adding anything or hitting VLR.gg for every tournament.
+
+    Called after each sync so pressing the sync button eventually fills all
+    missing logos. Returns the number of tournaments filled.
+    """
+    _ensure_db()
+    with _get_conn() as conn:
+        rows = conn.execute(
+            """
+            SELECT tournament
+            FROM matches
+            WHERE tournament IS NOT NULL AND tournament != ''
+            GROUP BY tournament
+            HAVING MAX(CASE WHEN tournament_logo IS NOT NULL AND tournament_logo != '' THEN 1 ELSE 0 END) = 0
+            """
+        ).fetchall()
+    names = [r["tournament"] for r in rows]
+    if not names:
+        return 0
+
+    result = get_tournaments(pages=1)
+    tournaments = result["tournaments"]
+    if not tournaments:
+        return 0
+
+    # Prefer the most specific (longest) cache name so generic DB names like
+    # "VCT 2026" don't grab an arbitrary league's logo.
+    updates = []
+    for name in names:
+        hits = [t for t in tournaments if _loose_name_match(name, t.get("name", ""))]
+        if not hits:
+            continue
+        hit = max(hits, key=lambda t: len(t.get("name", "")))
+        if not hit.get("logo"):
+            continue
+        local = download_image(hit["logo"])
+        if not local or not local.startswith("/static/images_cache/"):
+            continue
+        updates.append((local, name))
+    if updates:
+        with _get_conn() as conn:
+            conn.executemany(
+                "UPDATE matches SET tournament_logo = ? WHERE tournament = ? AND (tournament_logo IS NULL OR tournament_logo = '')",
+                updates,
+            )
+            conn.commit()
+        for _, name in updates:
+            print(f"Backfilled tournament logo for '{name}'")
+    return len(updates)
 
