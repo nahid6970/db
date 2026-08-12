@@ -1095,7 +1095,7 @@ def _upsert_matches_to_db(scraped_matches):
             "status": m.get("status", ""),
             "team1_logo": "",
             "team2_logo": "",
-            "unix_timestamp": 0,
+            "unix_timestamp": int(m.get("unix_timestamp") or 0),
             "bst_time": "",
             "maps_json": _json_dumps([]),
             "players_json": _json_dumps({}),
@@ -1283,13 +1283,26 @@ TOURNAMENTS_CACHE_TTL = 24 * 60 * 60  # seconds — re-fetch from VLR.gg at most
 tournaments_cache_lock = threading.Lock()
 
 
-def _parse_tournament_items(soup):
-    """Parse tournament cards from the VLR.gg /tournaments page.
+# Flag codes used on the /events page's `mod-location` items, mapped to region names.
+# `un` = international/mixed regions (VLR.gg's flag for events spanning multiple regions).
+FLAG_TO_REGION = {
+    "us": "United States", "ca": "Canada", "br": "Brazil", "mx": "Mexico",
+    "gb": "United Kingdom", "fr": "France", "de": "Germany", "es": "Spain",
+    "eu": "Europe", "au": "Australia", "cn": "China", "kr": "Korea",
+    "jp": "Japan", "tw": "Taiwan", "in": "India", "id": "Indonesia",
+    "vn": "Vietnam", "sa": "Saudi Arabia", "un": "International",
+}
 
-    Resilient parser: accepts several item shapes (`a.event-item`, `div.event-item`,
-    or any anchor pointing at an /event/ page as a last resort) and has multiple
-    name/logo fallbacks, so minor markup changes don't break it. Region is
-    best-effort (from the nearest `wf-card` header).
+
+def _parse_tournament_items(soup):
+    """Parse tournament cards from the VLR.gg /events page (formerly /tournaments).
+
+    Resilient parser: accepts the current item shape (`a.wf-card.event-item` with
+    `event-item-title` / `event-item-desc-item-status` / `event-item-desc-item`
+    blocks and a flag icon), the older shapes (`event-item-name`,
+    `event-item-status`, `event-item-date`, region from a `wf-card` header), or any
+    anchor pointing at an /event/ page as a last resort. Unknown markup degrades
+    gracefully instead of aborting.
     """
     tournaments = []
     seen = set()
@@ -1313,7 +1326,7 @@ def _parse_tournament_items(soup):
             continue
         seen.add(tid)
 
-        # Logo (any img inside the item)
+        # Logo (any img inside the item — current markup puts it in event-item-thumb)
         logo = ""
         img = item.find("img")
         if img:
@@ -1323,9 +1336,11 @@ def _parse_tournament_items(soup):
             elif logo.startswith("/"):
                 logo = "https://www.vlr.gg" + logo
 
-        # Name — multiple fallbacks
+        # Name — current `event-item-title` first, then older fallbacks
         name = ""
-        name_div = item.find("div", class_="event-item-name")
+        name_div = item.find("div", class_="event-item-title")
+        if not name_div:
+            name_div = item.find("div", class_="event-item-name")
         if name_div:
             name = name_div.get_text(" ", strip=True)
         if not name:
@@ -1349,25 +1364,46 @@ def _parse_tournament_items(soup):
         if desc_div:
             desc = " ".join(desc_div.get_text(" ", strip=True).split())
 
+        # Status — current: span.event-item-desc-item-status (text: ongoing/upcoming/...)
         status = ""
-        status_div = item.find("div", class_="event-item-status")
-        if status_div:
-            status_txt = status_div.find("span", class_="event-item-status-text")
-            raw = status_txt.get_text(" ", strip=True) if status_txt else status_div.get_text(" ", strip=True)
-            status = " ".join(raw.split())
+        status_span = item.find("span", class_="event-item-desc-item-status")
+        if status_span:
+            status = " ".join(status_span.get_text(" ", strip=True).split())
+        if not status:
+            status_div = item.find("div", class_="event-item-status")
+            if status_div:
+                status_txt = status_div.find("span", class_="event-item-status-text")
+                raw = status_txt.get_text(" ", strip=True) if status_txt else status_div.get_text(" ", strip=True)
+                status = " ".join(raw.split())
+        if status:
+            status = status.capitalize()
 
+        # Dates — current: div.event-item-desc-item.mod-dates (drop the "Dates" label)
         date = ""
-        date_div = item.find("div", class_="event-item-date")
+        date_div = item.find("div", class_="event-item-desc-item mod-dates")
         if date_div:
+            label = date_div.find("div", class_="event-item-desc-item-label")
+            if label:
+                label.extract()
             date = " ".join(date_div.get_text(" ", strip=True).split())
+        if not date:
+            date_div = item.find("div", class_="event-item-date")
+            if date_div:
+                date = " ".join(date_div.get_text(" ", strip=True).split())
 
-        # Region: nearest enclosing wf-card header (best effort)
+        # Region — current: flag icon in the mod-location block; older: wf-card header
         region = ""
-        card = item.find_parent("div", class_="wf-card")
-        if card:
-            header = card.find(class_="wf-card-header") or card.find(class_="wf-title") or card.find("h4")
-            if header:
-                region = " ".join(header.get_text(" ", strip=True).split())
+        flag_icon = item.find("i", class_="flag")
+        if flag_icon:
+            flag_cls = [c for c in (flag_icon.get("class") or []) if c.startswith("mod-")]
+            if flag_cls:
+                region = FLAG_TO_REGION.get(flag_cls[0][4:], "") or flag_cls[0][4:].upper()
+        if not region:
+            card = item.find_parent("div", class_="wf-card")
+            if card:
+                header = card.find(class_="wf-card-header") or card.find(class_="wf-title") or card.find("h4")
+                if header:
+                    region = " ".join(header.get_text(" ", strip=True).split())
 
         tournaments.append({
             "id": tid,
@@ -1410,12 +1446,12 @@ def get_tournaments(refresh=False):
         if not refresh and cached_list and (now - fetched_at) < TOURNAMENTS_CACHE_TTL:
             return cached_list, fetched_at, None
 
-        soup = _fetch_page("https://www.vlr.gg/tournaments")
+        soup, fetch_error = _fetch_tournaments_page()
         if soup is None:
             if cached_list:
-                print("Could not fetch tournaments from VLR.gg; using cached list.")
-                return cached_list, fetched_at, "Couldn't reach VLR.gg (may be rate-limiting) — showing the cached list."
-            return [], 0, "Couldn't reach VLR.gg (may be rate-limiting)."
+                print(f"Could not fetch tournaments from VLR.gg ({fetch_error}); using cached list.")
+                return cached_list, fetched_at, f"Couldn't reach VLR.gg ({fetch_error}) — showing the cached list."
+            return [], 0, f"Couldn't reach VLR.gg ({fetch_error})."
 
         tournaments = _parse_tournament_items(soup)
         if tournaments:
@@ -1433,6 +1469,60 @@ def get_tournaments(refresh=False):
         return [], 0, "No tournaments parsed from the page (markup may have changed)."
 
 
+def _fetch_with_retry(url, timeout=25, attempts=3):
+    """Fetch a page with browser-like headers, retries and backoff.
+
+    vlr.gg sometimes drops a single connection (especially right after it has
+    been throttling an IP), so one-shot requests are fragile. This retries a
+    few times with increasing delays and returns (soup_or_None, error_detail)
+    where error_detail is a short human-readable reason (HTTP status, timeout,
+    connection failure, exception) for the UI.
+    """
+    headers = dict(HEADERS)
+    headers.setdefault("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
+    headers.setdefault("Accept-Language", "en-US,en;q=0.9")
+
+    last_error = None
+    for attempt in range(1, attempts + 1):
+        try:
+            response = requests.get(url, headers=headers, timeout=timeout)
+            if response.status_code == 200:
+                response.encoding = "utf-8"
+                return BeautifulSoup(response.text, "html.parser"), None
+            last_error = f"HTTP {response.status_code}"
+            print(f"Failed to fetch {url}. Server returned status: {response.status_code} (attempt {attempt}/{attempts})")
+        except requests.exceptions.Timeout:
+            last_error = f"timed out after {timeout}s"
+            print(f"Timeout fetching {url} (attempt {attempt}/{attempts})")
+        except requests.exceptions.SSLError:
+            last_error = "SSL error"
+            print(f"SSL error fetching {url} (attempt {attempt}/{attempts})")
+        except requests.exceptions.ConnectionError:
+            last_error = "connection failed"
+            print(f"Connection error fetching {url} (attempt {attempt}/{attempts})")
+        except Exception as e:
+            # Keep the detail short — a raw urllib3 message is a wall of text in the UI
+            last_error = (f"{type(e).__name__}: {e}")[:80]
+            print(f"Error fetching {url}: {e} (attempt {attempt}/{attempts})")
+        if attempt < attempts:
+            time.sleep(2 * attempt)  # 2s, then 4s backoff
+    return None, last_error or "unknown error"
+
+
+def _fetch_tournaments_page():
+    """Fetch the VLR.gg /events page (the tournaments listing) with retries.
+
+    The events page is one of the largest pages on the site (it lists every
+    tournament in the world across all regions), so it gets a much longer
+    timeout than the default 10s used for match listings, plus retries with
+    backoff. A single dropped/timeout request previously killed the whole
+    fetch and left the UI saying "couldn't reach VLR.gg".
+
+    Returns (soup_or_None, error_detail_or_None); see _fetch_with_retry.
+    """
+    return _fetch_with_retry("https://www.vlr.gg/events")
+
+
 def get_known_tournament_names():
     """Set of tournament names that already exist in the main matches DB."""
     _ensure_db()
@@ -1441,6 +1531,111 @@ def get_known_tournament_names():
             "SELECT DISTINCT tournament FROM matches WHERE tournament IS NOT NULL AND tournament != ''"
         ).fetchall()
     return {row["tournament"] for row in rows}
+
+
+def _parse_event_matches_from_soup(soup):
+    """Parse match items from a VLR.gg event page.
+
+    Event pages use a different layout from /matches: completed/live bracket
+    matches are `a.bracket-item` (scores + a `data-utc-ts` unix timestamp on the
+    status div), while upcoming matches appear as `a.wf-module-item` sidebar
+    entries (team names + an eta countdown, no timestamp).
+
+    Returns a list of match dicts with the same keys as `_parse_matches_from_soup`.
+    """
+    parsed = []
+    seen = set()
+    # Only match-page links (href like /729664/slug) — NOT /team/.., /player/..,
+    # /event/.. or other internal links that also contain digits
+    links = [a for a in soup.find_all("a", href=True)
+             if re.match(r"^/(\d+)/", a.get("href", ""))]
+    for a in links:
+        href = a.get("href", "")
+        m = re.match(r"^/(\d+)/", href)
+        if not m:
+            continue
+        mid = m.group(1)
+        if mid in seen:
+            continue
+        seen.add(mid)
+        classes = a.get("class", []) or []
+
+        team_names = []
+        team_scores = []
+        series = ""
+        eta = ""
+        unix_ts = 0
+        status = ""
+
+        if "bracket-item" in classes:
+            # Completed / live bracket match
+            for tdiv in a.find_all("div", class_="bracket-item-team"):
+                name_div = tdiv.find("div", class_="bracket-item-team-name")
+                if name_div:
+                    span = name_div.find("span")
+                    name = span.get_text(" ", strip=True) if span else name_div.get_text(" ", strip=True)
+                    team_names.append(" ".join(name.split()))
+                score_div = tdiv.find("div", class_="bracket-item-team-score")
+                team_scores.append(score_div.get_text(" ", strip=True) if score_div else "")
+            st_div = a.find("div", class_="bracket-item-status")
+            if st_div:
+                ts = st_div.get("data-utc-ts") or ""
+                if ts.isdigit():
+                    unix_ts = int(ts)
+                eta = " ".join(st_div.get_text(" ", strip=True).split())
+                if "live" in " ".join(st_div.get("class", []) or []).lower():
+                    status = "Live"
+        else:
+            # Upcoming sidebar match (wf-module-item)
+            series_div = a.find("div", class_="event-sidebar-matches-series")
+            if series_div:
+                series = " ".join(series_div.get_text(" ", strip=True).split())
+            for tdiv in a.find_all("div", class_="event-sidebar-matches-team"):
+                name_div = tdiv.find("div", class_="name")
+                if name_div:
+                    span = name_div.find("span")
+                    name = span.get_text(" ", strip=True) if span else name_div.get_text(" ", strip=True)
+                    team_names.append(" ".join(name.split()))
+                score_div = tdiv.find("div", class_="score")
+                team_scores.append(score_div.get_text(" ", strip=True) if score_div else "")
+                if not eta:
+                    eta_div = tdiv.find("div", class_="eta")
+                    if eta_div:
+                        eta = " ".join(eta_div.get_text(" ", strip=True).split())
+
+        if not team_names:
+            continue
+
+        # Normalize placeholder scores ("–", "—") to empty; TBD teams to "TBD"
+        scores = ["" if s in ("–", "—", "-") else s for s in team_scores]
+        scores = (scores + ["", ""])[:2]
+        team_names = ["TBD" if not n else n for n in team_names]
+        team_names = (team_names + ["TBD", "TBD"])[:2]
+
+        # Status: Live if flagged, else Completed if any numeric score, else Upcoming
+        if not status:
+            if any(s.isdigit() for s in scores):
+                status = "Completed"
+            else:
+                status = "Upcoming"
+
+        parsed.append({
+            "id": mid,
+            "href": href,
+            "date": "",
+            "time": "",
+            "team1": team_names[0],
+            "team2": team_names[1],
+            "score1": scores[0],
+            "score2": scores[1],
+            "tournament": "",
+            "series": series,
+            "tournament_logo": "",
+            "eta": eta,
+            "status": status,
+            "unix_timestamp": unix_ts,
+        })
+    return parsed
 
 
 def add_tournament(tournament):
@@ -1459,12 +1654,12 @@ def add_tournament(tournament):
     if not href:
         return 0, "No event link for this tournament."
     url = f"https://www.vlr.gg{href}" if href.startswith("/") else href
-    # Event pages can be large (100+ matches) — allow more time than the default 10s
-    soup = _fetch_page(url, timeout=25)
+    # Event pages can be large (100+ matches) — long timeout plus retries.
+    soup, fetch_error = _fetch_with_retry(url, timeout=25)
     if soup is None:
-        print(f"Failed to fetch event page {url}")
-        return 0, "Could not reach the tournament page (vlr.gg may be rate-limiting)."
-    matches = _parse_matches_from_soup(soup)
+        print(f"Failed to fetch event page {url}: {fetch_error}")
+        return 0, f"Could not reach the tournament page ({fetch_error})."
+    matches = _parse_matches_from_soup(soup) or _parse_event_matches_from_soup(soup)
     if not matches:
         print(f"No matches parsed from event page {url}")
         return 0, "No matches found on the tournament page."
