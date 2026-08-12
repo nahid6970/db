@@ -226,6 +226,15 @@
                             <button id="advance-pages-btn" title="Advance Range" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0 4px; font-size: 14px; transition: color var(--transition-fast);"><i class="fa-solid fa-arrow-right"></i></button>
                         </div>
                     </div>
+                    <div class="modal-section" style="margin-bottom: 24px;">
+                        <h3>Tournament Browser</h3>
+                        <p class="modal-section-desc">How many pages of the tournament list (each ~50 tournaments) to fetch per &ldquo;Load more&rdquo; click in the Add Tournaments window.</p>
+                        <div style="display: inline-flex; border: 1px solid var(--card-border); background: var(--bg-darker); border-radius: var(--border-radius-md); padding: 8px 12px; gap: 8px; align-items: center;">
+                            <label style="font-size: 13px; font-weight: 700; color: var(--text-secondary);">Pages per click:</label>
+                            <input type="number" id="tournament-pages-per-load" min="1" max="59" value="{{ settings.get('tournament_pages_per_load', 5) }}" title="Pages of tournaments to fetch per Load more click" style="width: 48px; background: transparent; border: none; color: var(--text-primary); text-align: center; font-size: 14px; font-weight: 700; outline: none; box-sizing: border-box;">
+                            <button id="save-tournament-pages-btn" title="Save Pages per Click" style="background: none; border: none; color: var(--text-muted); cursor: pointer; padding: 0 4px; font-size: 14px; transition: color var(--transition-fast);"><i class="fa-solid fa-floppy-disk"></i></button>
+                        </div>
+                    </div>
                     <div class="modal-section">
                         <h3>Visual Preferences</h3>
                         <p class="modal-section-desc">Customize user interface highlighting.</p>

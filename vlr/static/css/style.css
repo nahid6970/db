@@ -3182,8 +3182,20 @@ body.light .tbr-item:hover {
 .tbr-status {
     font-size: 10px;
     text-transform: uppercase;
-    color: var(--accent-green);
+    color: var(--text-secondary);
     flex-shrink: 0;
+}
+.tbr-status.mod-ongoing {
+    color: var(--accent-green);
+}
+.tbr-status.mod-upcoming {
+    color: #58a6ff;
+}
+.tbr-status.mod-completed {
+    color: var(--text-muted);
+}
+.tbr-status.mod-paused {
+    color: #ffc247;
 }
 .tbr-badge {
     font-size: 10px;
