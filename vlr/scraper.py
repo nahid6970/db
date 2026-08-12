@@ -1286,6 +1286,18 @@ TOURNAMENTS_CACHE_PATH = os.path.join(BASE_DIR, "tournaments_cache.json")
 TOURNAMENTS_CACHE_TTL = 365 * 24 * 60 * 60
 tournaments_cache_lock = threading.Lock()
 
+# Live progress of an in-flight tournament-list refresh (page N of M), polled
+# by /api/tournaments/progress so the UI can show real progress while the
+# server re-fetches every loaded page instead of just a spinner.
+_refresh_progress_lock = threading.Lock()
+_refresh_progress = {"active": False, "total": 0, "done": 0, "current": 0}
+
+
+def get_refresh_progress():
+    """Copy of the current refresh progress (safe to jsonify)."""
+    with _refresh_progress_lock:
+        return dict(_refresh_progress)
+
 
 # Flag codes used on the /events page's `mod-location` items, mapped to region names.
 # `un` = international/mixed regions (VLR.gg's flag for events spanning multiple regions).
@@ -1495,30 +1507,47 @@ def get_tournaments(refresh=False, pages=1):
 
         highest_ok = start_page - 1
         last_error = None
-        for page in range(start_page, pages + 1):
-            soup, fetch_error = _fetch_tournaments_page(page)
-            if soup is None:
-                last_error = fetch_error
-                print(f"Could not fetch tournaments page {page} ({fetch_error}); stopping.")
-                break
-            # Every /events page carries the pagination block, so ANY fetched
-            # page can report the (possibly grown) total — if VLR.gg adds a new
-            # page, the next "Load more" notices it without needing a refresh.
-            total_pages = max(total_pages, _get_total_pages(soup))
-            parsed = _parse_tournament_items(soup)
-            added = 0
-            for t in parsed:
-                tid = t.get("id")
-                if tid and tid not in seen:
-                    seen.add(tid)
-                    all_tournaments.append(t)
-                    added += 1
-            if added == 0 and page > 1:
-                print(f"No new tournaments on page {page}; reached the end of the list.")
-                break
-            highest_ok = page
-            if page < pages:
-                time.sleep(1)  # gentle pacing between pages
+        if refresh:
+            with _refresh_progress_lock:
+                _refresh_progress.update({
+                    "active": True,
+                    "total": max(pages - start_page + 1, 1),
+                    "done": 0,
+                    "current": start_page,
+                })
+        try:
+            for page in range(start_page, pages + 1):
+                if refresh:
+                    with _refresh_progress_lock:
+                        _refresh_progress["current"] = page
+                        _refresh_progress["done"] = page - start_page
+                soup, fetch_error = _fetch_tournaments_page(page)
+                if soup is None:
+                    last_error = fetch_error
+                    print(f"Could not fetch tournaments page {page} ({fetch_error}); stopping.")
+                    break
+                # Every /events page carries the pagination block, so ANY fetched
+                # page can report the (possibly grown) total — if VLR.gg adds a new
+                # page, the next "Load more" notices it without needing a refresh.
+                total_pages = max(total_pages, _get_total_pages(soup))
+                parsed = _parse_tournament_items(soup)
+                added = 0
+                for t in parsed:
+                    tid = t.get("id")
+                    if tid and tid not in seen:
+                        seen.add(tid)
+                        all_tournaments.append(t)
+                        added += 1
+                if added == 0 and page > 1:
+                    print(f"No new tournaments on page {page}; reached the end of the list.")
+                    break
+                highest_ok = page
+                if page < pages:
+                    time.sleep(1)  # gentle pacing between pages
+        finally:
+            if refresh:
+                with _refresh_progress_lock:
+                    _refresh_progress.update({"active": False, "total": 0, "done": 0, "current": 0})
 
         if all_tournaments:
             pages_loaded = highest_ok if refresh else max(highest_ok, cached_pages)

@@ -1241,6 +1241,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentBrowserLoadMore = document.getElementById("tournament-browser-loadmore");
     const tournamentBrowserLoadMoreLabel = document.getElementById("tournament-browser-loadmore-label");
     const tournamentBrowserStatus = document.getElementById("tournament-browser-status");
+    const tournamentBrowserProgress = document.getElementById("tournament-browser-progress");
+    const tournamentBrowserProgressFill = document.getElementById("tournament-browser-progress-fill");
     const tournamentBrowserAdd = document.getElementById("tournament-browser-add");
     const tournamentBrowserSelectedCount = document.getElementById("tournament-browser-selected-count");
 
@@ -1325,6 +1327,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 tournamentBrowserStatus.textContent = "Loading…";
             }
         }
+        if (refresh) {
+            // Poll the server for live refresh progress (page N of M)
+            stopRefreshProgressPolling();
+            refreshProgressTimer = setInterval(pollRefreshProgress, 700);
+        }
         try {
             // First open fetches just page 1; "Load more" fetches the next batch.
             // Refresh re-fetches EXACTLY the pages the user already has loaded —
@@ -1368,6 +1375,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (tournamentBrowserRefresh) tournamentBrowserRefresh.disabled = false;
             if (tournamentBrowserLoadMore) tournamentBrowserLoadMore.disabled = false;
             if (refreshIcon) refreshIcon.classList.remove("spinning");
+            stopRefreshProgressPolling();
             updateTournamentLoadMoreButton();
         }
     }
@@ -1382,6 +1390,34 @@ document.addEventListener("DOMContentLoaded", () => {
             tournamentBrowserLoadMoreLabel.textContent = allLoaded
                 ? "Load more tournaments"
                 : `Load more tournaments (page ${Math.min(tournamentBrowserPagesFetched + tournamentPagesPerLoad, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages})`;
+        }
+    }
+
+    // Live progress while the Refresh button re-fetches every loaded page
+    let refreshProgressTimer = null;
+
+    function stopRefreshProgressPolling() {
+        if (refreshProgressTimer) {
+            clearInterval(refreshProgressTimer);
+            refreshProgressTimer = null;
+        }
+        if (tournamentBrowserProgress) tournamentBrowserProgress.style.display = "none";
+    }
+
+    async function pollRefreshProgress() {
+        try {
+            const p = await fetch("/api/tournaments/progress").then(r => r.json());
+            if (!p || !p.active || !tournamentBrowserLoading) return;
+            if (tournamentBrowserStatus) {
+                tournamentBrowserStatus.textContent = `Refreshing — page ${p.current} of ${p.total}…`;
+            }
+            if (tournamentBrowserProgress && tournamentBrowserProgressFill && p.total > 0) {
+                tournamentBrowserProgress.style.display = "";
+                const pct = Math.max(0, Math.min(100, Math.round((p.done / p.total) * 100)));
+                tournamentBrowserProgressFill.style.width = pct + "%";
+            }
+        } catch (e) {
+            // polling is best-effort; the main refresh fetch still completes
         }
     }
 

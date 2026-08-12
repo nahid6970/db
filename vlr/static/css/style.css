@@ -3029,6 +3029,21 @@ body.light .standings-win-rate-pill {
     padding: 0 4px 12px 4px;
     min-height: 18px;
 }
+.tbr-progress {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--bg-darker);
+    border: 1px solid var(--card-border);
+    overflow: hidden;
+    margin: 0 4px 12px 4px;
+}
+.tbr-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--accent-red);
+    box-shadow: 0 0 8px var(--accent-red-glow);
+    transition: width 0.3s ease;
+}
 .tbr-status-bar.tbr-status-error {
     color: var(--accent-red);
 }

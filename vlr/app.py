@@ -324,6 +324,11 @@ def api_tournaments():
         "pages_fetched": result["pages_fetched"],
     })
 
+@app.route("/api/tournaments/progress")
+def api_tournaments_progress():
+    """Live progress of an in-flight tournament-list refresh, for the UI."""
+    return jsonify(scraper.get_refresh_progress())
+
 @app.route("/api/tournaments/add", methods=["POST"])
 def api_tournaments_add():
     """Add one or more tournaments: un-ignore them, un-hide them, and fetch
@@ -407,4 +412,4 @@ if __name__ == "__main__":
     # Start the background sync thread
     start_background_sync()
     # Run server on port 5025
-    app.run(host="0.0.0.0", port=5025, debug=True)
+    app.run(host="0.0.0.0", port=5025, debug=True, threaded=True)  # threaded so /api/tournaments/progress answers while a refresh runs
