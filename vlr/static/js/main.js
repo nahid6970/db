@@ -1250,7 +1250,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let tournamentBrowserAdding = false;
     let tournamentBrowserPagesFetched = 1;       // how many /events pages the server has loaded
     let tournamentBrowserTotalPages = 1;         // total pages available on VLR.gg
-    const TOURNAMENT_PAGES_PER_LOAD = 3;         // pages fetched per "Load more" click
+    const TOURNAMENT_PAGES_PER_LOAD = 5;         // pages fetched per "Load more" click (1 -> 1-5, 1-10, 1-15...)
 
     function escapeHtml(s) {
         return String(s == null ? "" : s)
