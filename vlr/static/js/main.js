@@ -1318,7 +1318,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tournamentBrowserStatus) {
             tournamentBrowserStatus.classList.remove("tbr-status-error");
             if (refresh) {
-                tournamentBrowserStatus.textContent = " Fetching the tournament list from VLR.gg (one-time)... this can take a moment.";
+                tournamentBrowserStatus.textContent = ` Re-fetching ${Math.max(tournamentBrowserPagesFetched, 1)} page(s) of the tournament list from VLR.gg... this can take a moment.`;
             } else if (tournamentBrowserData.length) {
                 tournamentBrowserStatus.textContent = ` Loading more tournaments (fetching page ${Math.min(tournamentBrowserPagesFetched + 1, tournamentBrowserTotalPages)} of ${tournamentBrowserTotalPages})...`;
             } else {
@@ -1327,8 +1327,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         try {
             // First open fetches just page 1; "Load more" fetches the next batch.
+            // Refresh re-fetches EXACTLY the pages the user already has loaded —
+            // requesting page 1 alone would silently shrink the cache back to 69.
             const targetPages = (refresh || tournamentBrowserData.length === 0)
-                ? 1
+                ? Math.max(tournamentBrowserPagesFetched, 1)
                 : tournamentBrowserPagesFetched + tournamentPagesPerLoad;
             const url = `/api/tournaments?pages=${targetPages}${refresh ? "&refresh=true" : ""}`;
             const data = await fetch(url).then(r => r.json());
@@ -1407,7 +1409,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadTournamentBrowser(false);
     });
     tournamentBrowserRefresh?.addEventListener("click", () => {
-        if (!confirm("Re-fetch the tournament list from VLR.gg? The list is otherwise cached for 24 hours.")) return;
+        if (!confirm("Re-fetch the tournament list from VLR.gg? The list is cached locally and only updates when you click this.")) return;
         loadTournamentBrowser(true);
     });
 

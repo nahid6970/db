@@ -1279,7 +1279,11 @@ def load_missing_stats(delay=1.5):
 # ============================================================================
 
 TOURNAMENTS_CACHE_PATH = os.path.join(BASE_DIR, "tournaments_cache.json")
-TOURNAMENTS_CACHE_TTL = 24 * 60 * 60  # seconds — re-fetch from VLR.gg at most once per day
+# Seconds a cached tournament list stays "fresh". Set to ~1 year so the list
+# effectively never auto-expires: it refreshes ONLY when the user clicks the
+# Refresh button in the Add Tournaments window (refresh=True), which the user
+# explicitly preferred over re-fetching every 24h.
+TOURNAMENTS_CACHE_TTL = 365 * 24 * 60 * 60
 tournaments_cache_lock = threading.Lock()
 
 
