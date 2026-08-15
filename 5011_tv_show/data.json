@@ -1793,6 +1793,27 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Reacher",
         "episodes": [
             {
+                "id": 11,
+                "title": "Reacher - S04E03 - One Small Step",
+                "watched": false,
+                "added_date": "2026-08-15T16:24:58.390816",
+                "notify": "unseen"
+            },
+            {
+                "id": 10,
+                "title": "Reacher - S04E02 - Cage Fight",
+                "watched": false,
+                "added_date": "2026-08-15T16:24:58.390810",
+                "notify": "unseen"
+            },
+            {
+                "id": 9,
+                "title": "Reacher - S04E01 - City of Brotherly Love",
+                "watched": false,
+                "added_date": "2026-08-15T16:24:58.390791",
+                "notify": "unseen"
+            },
+            {
                 "id": 8,
                 "title": "Reacher - S03E08 - Unfinished Business WEBDL-1080p",
                 "watched": false,
