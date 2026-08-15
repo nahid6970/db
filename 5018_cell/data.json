@@ -199,53 +199,53 @@
     "258": "Turning Point",
     "259": "Turning Point",
     "26": "সাধারণ জ্ঞান",
-    "260": "সাধারণ জ্ঞান",
+    "260": "Turning Point",
     "261": "সাধারণ জ্ঞান",
     "262": "সাধারণ জ্ঞান",
-    "265": "Literature",
+    "263": "সাধারণ জ্ঞান",
     "266": "Literature",
-    "267": "সাধারণ জ্ঞান",
-    "268": "Bangla Grammar",
-    "269": "Turning Point",
+    "267": "Literature",
+    "268": "সাধারণ জ্ঞান",
+    "269": "Bangla Grammar",
     "27": "সাধারণ জ্ঞান",
-    "271": "সাধারণ জ্ঞান",
+    "270": "Turning Point",
     "272": "সাধারণ জ্ঞান",
-    "273": "Turning Point",
-    "276": "সাধারণ জ্ঞান",
-    "277": "Bangla Grammar",
-    "278": "Literature",
+    "273": "সাধারণ জ্ঞান",
+    "274": "Turning Point",
+    "277": "সাধারণ জ্ঞান",
+    "278": "Bangla Grammar",
     "279": "Literature",
     "28": "সাধারণ জ্ঞান",
     "280": "Literature",
-    "281": "@@",
-    "282": "GK",
-    "283": "Turning Point",
+    "281": "Literature",
+    "282": "@@",
+    "283": "GK",
     "284": "Turning Point",
     "285": "Turning Point",
-    "286": "Bangla Grammar",
-    "288": "Job Preparation for Beginners",
+    "286": "Turning Point",
+    "287": "Bangla Grammar",
     "289": "Job Preparation for Beginners",
     "29": "সাধারণ জ্ঞান",
     "290": "Job Preparation for Beginners",
-    "291": "My-Classroom",
-    "292": "Job Preparation for Beginners",
-    "293": "সাধারণ জ্ঞান",
+    "291": "Job Preparation for Beginners",
+    "292": "My-Classroom",
+    "293": "Job Preparation for Beginners",
     "294": "সাধারণ জ্ঞান",
     "295": "সাধারণ জ্ঞান",
-    "296": "উত্তরণ | Uttoron Career & Skills Academy",
-    "297": "Sukumar Academy",
-    "298": "BananAndolon",
-    "299": "My-Classroom",
+    "296": "সাধারণ জ্ঞান",
+    "297": "উত্তরণ | Uttoron Career & Skills Academy",
+    "298": "Sukumar Academy",
+    "299": "BananAndolon",
     "3": "EXAM & MCQ",
     "30": "সাধারণ জ্ঞান",
-    "300": "সাধারণ জ্ঞান",
-    "301": "English Grammar",
-    "302": "@@",
-    "303": "সাধারণ জ্ঞান",
+    "300": "My-Classroom",
+    "301": "সাধারণ জ্ঞান",
+    "302": "English Grammar",
+    "303": "@@",
     "304": "সাধারণ জ্ঞান",
-    "305": "Biddabari",
-    "306": "সাধারণ জ্ঞান",
-    "307": "Turning Point",
+    "305": "সাধারণ জ্ঞান",
+    "306": "Biddabari",
+    "307": "সাধারণ জ্ঞান",
     "308": "@@",
     "31": "সাধারণ জ্ঞান",
     "32": "সাধারণ জ্ঞান",
@@ -334,7 +334,7 @@
       "size": 20,
       "title": "Memorization"
     },
-    "English Grammar_261": true,
+    "English Grammar_262": true,
     "English Grammar_62": {
       "color": "#ff5c5c",
       "size": 20,
@@ -375,21 +375,26 @@
     "Turning Point_258": {
       "color": "#00ff9d",
       "size": 20,
+      "title": "ICT"
+    },
+    "Turning Point_259": {
+      "color": "#00ff9d",
+      "size": 20,
       "title": "GK"
     },
-    "Turning Point_273": {
+    "Turning Point_274": {
       "color": "#00ff9d",
       "size": 20,
       "title": "Finance + Banking & Analytics"
     },
-    "Turning Point_284": {
-      "color": "#00ff9d",
+    "Turning Point_285": {
+      "color": "#f7f7f7",
       "size": 20,
       "title": "Others"
     },
     "uncategorized_112": true,
     "uncategorized_242": true,
-    "uncategorized_258": true,
+    "uncategorized_259": true,
     "uncategorized_45": true,
     "সাধারণ জ্ঞান_106": true,
     "সাধারণ জ্ঞান_118": true,
@@ -21318,6 +21323,33 @@
           "width": 150
         }
       ],
+      "customIndex": "20260809193511",
+      "mergedCells": {},
+      "name": "ICT",
+      "rows": [
+        [
+          "##ICT Short Syllabus##\n- **Hardware**: IPOS Cycle (Input, Process, Output, Storage Unit)\n- **Software & Firmware**: System Software, Application Software, Firmware\n- **MS Office**: MS Word, MS Excel (Functions, Keyboard Shortcuts)\n- **Number System & Digital Electronics**: Binary, Octal, Decimal, Hexadecimal, Logic Gates\n- **Network & Data Communication**: Network Topologies, Protocols, Data Transmission\n- **Advanced Topics**: Algorithm, Flowchart, Pseudocode, Algorithm Complexity, Data Structure, Programming Languages, Artificial Intelligence (AI) & Learning Modules\n- **History & Generations of Computer**: 5 Generations and Computer Classifications\n\n##History & Generations of Computer##\nকম্পিউটারের ইতিহাস ও বিকাশকে মূলত পাঁচটি প্রজন্মে (Generations) ভাগ করা হয়েছে।\n\nᴃᴃ1st Generation (1G)ᴃᴃ\n- **Main Component**: Vacuum Tube\n- **Limitations**:\n-- Heat Problem: অতিরিক্ত তাপ সৃষ্টি হতো\n-- Size & Weight: বিশাল আকার এবং ওজন 10 থেকে 50 Tons পর্যন্ত হতো\n-- User Capacity: একটি কম্পিউটার পরিচালনায় প্রায় 100 জন ব্যবহারকারী লাগতো\n- **Language**: Machine Language / Object Code / Binary (0 or 1)\n- **Important Computers & Firsts**:\n-- **Mark I**: প্রথম Digital Computer। আবিষ্কারক ¿¿Howard Aiken¿¿। অর্থায়নকারী প্রতিষ্ঠান IBM।\n-- **IBM**: পূর্বনাম CTM (Computer Tabulating Recording Company)। পরিচিতি Big Blue নামে। IBM 1911 সালে প্রতিষ্ঠিত হয়। 1957 সালে প্রথম Hard Disk Drive (HDD) তৈরি করে যার ধারণক্ষমতা ছিল 5 MB।\n-- **¿¿ENIAC¿¿**: প্রথম Electronic Computer।\n-- **¿¿EDSAC¿¿**: প্রথম Storable / Memory যুক্ত কম্পিউটার। মেমোরি হিসেবে Mercury Delay Lines ব্যবহৃত হতো।\n-- **ABC**: প্রথম Automated Computer।\n-- **UNIVAC (UNIVAC I & II)**: প্রথম বাণিজ্যিক (Commercial) কম্পিউটার।\n\nᴃᴃ2nd Generation (2G)ᴃᴃ\n- **Main Component**: Transistor (Vacuum Tube-এর পরিপূরক হিসেবে ব্যবহৃত)\n- **Transistor Invention**: Bell Laboratories-এ 1947/1948 সালে William Shockley এটি আবিষ্কার করেন। এটি Silicon (বালি/Silica থেকে প্রাপ্ত) দিয়ে তৈরি।\n- **Function of Transistor**: Signal Amplifying (সংকেত বিবর্ধক) হিসেবে কাজ করে।\n- **Important Computers & Firsts**:\n-- **TX-0**: প্রথম Transistor-ভিত্তিক কম্পিউটার (Transistorized Experimental Computer 0)।\n-- **First Computers in Bangladesh**:\n--- **IBM 1620**: বাংলাদেশে আসা প্রথম কম্পিউটার। 1964 সালে Atomic Energy Commission-এ স্থাপিত হয়। এটি Mainframe ক্যাটাগরির।\n--- **IBM 1400 Series**: বাংলাদেশে আসা দ্বিতীয় কম্পিউটার। 1965 সালে Adamjee Jute Mills-এ স্থাপিত হয়। এটিও Mainframe ক্যাটাগরির।\n\nᴃᴃ3rd Generation (3G)ᴃᴃ\n- **Main Component**: Integrated Circuit (IC)\n- **Structure of IC**: লক্ষ লক্ষ Transistor, Capacitor এবং Resistor মিলে একটি IC তৈরি হয়।\n-- **Capacitor**: চার্জ ধারক হিসেবে কাজ করে এবং ভোল্টেজ সুরক্ষায় ব্যবহৃত হয়।\n-- **Resistor**: মেমোরি ইউনিট হিসেবে কাজ করে। এটি সবচেয়ে ক্ষুদ্রতম ও High-Speed মেমোরি। এটি Volatile মেমোরি হিসেবে তথ্য সংরক্ষণ করে। (বৈশিষ্ট্য: High Speed, High Cost, Low Capacity)।\n- **¿¿Technologies¿¿**: SSI (Small Scale Integration), MSI (Medium Scale Integration), LSI (Large Scale Integration)।\n- **Important Computers & Firsts**:\n-- **PDP-1**: বিশ্বের প্রথম IC-ভিত্তিক কম্পিউটার।\n-- **IBM System/360**: বাংলাদেশে প্রথম IC-ভিত্তিক কম্পিউটার (1979 সালে BUET-এ স্থাপিত)। এটি Miniframe/Minicomputer ক্যাটাগরির।\n-- এই প্রজন্মে CD, DVD, MP3 Player / iPod ব্যবহারের সূচনা হয়।\n\nᴃᴃ4th Generation (4G)ᴃᴃ\n- **Main Component**: Microprocessor (লক্ষ লক্ষ IC একত্রিত করে তৈরি)\n- **Microprocessor Invention**: Intel Corporation-এর গবেষক Ted Hoff এটি আবিষ্কার করেন।\n- **First Microprocessor**: Intel 4004 (4-bit প্রসেসর)।\n- **First Microprocessor Computer**: Altair 8800।\n- **¿¿Technology¿¿**: VLSI (Very Large Scale Integration)।\n- **Era**: বর্তমান সময়ে ব্যবহৃত কম্পিউটারসমূহ 4th Generation-এর অন্তর্ভুক্ত।\n\nᴃᴃ5th Generation (5G)ᴃᴃ\n- **Main Concept**: Future Computer & Advanced Artificial Intelligence (AI)\n- **¿¿Technologies¿¿**:\n-- ULSI (Ultra Large Scale Integration)\n-- Quantum Computing (Binary 0 and 1-এর বদলে Trinary/Qubit প্রযুক্তি)\n-- AI (Artificial Intelligence) & Neural Networks\n-- NLP (Natural Language Processing) & Intellectual Compiler\n-- LLM (Large Language Model) & Generative AI (যেমন: ChatGPT, Gemini, DeepSeek)\n-- IoT (Internet of Things), Virtual Reality (VR), Augmented Reality (AR)\n-- GPU (Graphics Processing Unit)\n- **Father of AI**: John McCarthy।\n- **Definition of AI**: Simulation of Human Brain।\n- **Key Concept**: Expert Systems (বিশেষজ্ঞদের জ্ঞান ও অভিজ্ঞতা একত্রে সংরক্ষিত রেখে সিদ্ধান্ত গ্রহণকারী সিস্টেম)।\n\n##Quick Review Summary Table##\n| Generation | Main Component | Core Technology / Language | Notable Computers / Firsts |\n| --- | --- | --- | --- |\n| 1st Generation (1G) | Vacuum Tube | Machine Language (Binary 0 & 1) | Mark I, ENIAC, EDSAC, ABC, UNIVAC |\n| 2nd Generation (2G) | Transistor | Assembly / High-level Language | TX-0, IBM 1620 (BD 1st, 1964), IBM 1400 |\n| 3rd Generation (3G) | Integrated Circuit (IC) | SSI, MSI, LSI | PDP-1, IBM System/360 (BD IC 1st, 1979) |\n| 4th Generation (4G) | Microprocessor | VLSI | Intel 4004, Altair 8800, Modern PCs |\n| 5th Generation (5G) | Bio-chip / Quantum / AI | ULSI, Quantum Logic, NLP, LLM | Future Quantum Computers, AI Systems |\n\n#1.5#MS Word & MS Excel Important Keyboard Shortcuts for Job Exams#/#\n\n##MS Word A-Z Keyboard Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **Ctrl + A** | Select All (সকল টেক্সট সিলেক্ট করা) |\n| **Ctrl + B** | Bold (লেখা গাঢ় করা) |\n| **Ctrl + C** | Copy (কপি করা) |\n| **Ctrl + D** | Font Dialog Box ওপেন করা |\n| **Ctrl + E** | Center Alignment (লেখা মাঝে আনা) |\n| **Ctrl + F** | Find (নির্দিষ্ট শব্দ খোঁজা) |\n| **Ctrl + G** | Go To (নির্দিষ্ট পেজ বা লাইনে যাওয়া) |\n| **Ctrl + H** | Replace (শব্দ পরিবর্তন করা) |\n| **Ctrl + I** | Italic (লেখা বাঁকা করা) |\n| **Ctrl + J** | Justify Alignment (লেখা দুই পাশে সমান করা) |\n| **Ctrl + K** | Insert Hyperlink (লিঙ্ক যুক্ত করা) |\n| **Ctrl + L** | Left Alignment (লেখা বামে নেওয়া) |\n| **Ctrl + M** | Indent Paragraph (প্যারাগ্রাফ ডানদিকে সরানো) |\n| **Ctrl + N** | New Document (নতুন ফাইল খোলা) |\n| **Ctrl + O** | Open Document (সংরক্ষিত ফাইল খোলা) |\n| **Ctrl + P** | Print Document (প্রিন্ট করা) |\n| **Ctrl + Q** | Clear Paragraph Formatting |\n| **Ctrl + R** | Right Alignment (লেখা ডানে নেওয়া) |\n| **Ctrl + S** | Save Document (সেভ করা) |\n| **Ctrl + T** | Hanging Indent তৈরি করা |\n| **Ctrl + U** | Underline (লেখার নিচে দাগ দেওয়া) |\n| **Ctrl + V** | Paste (পেস্ট করা) |\n| **Ctrl + W** | Close Document (চলতি ফাইল বন্ধ করা) |\n| **Ctrl + X** | Cut (কাট করা) |\n| **Ctrl + Y** | Redo (বাতিল করা কাজ পুনরায় করা) |\n| **Ctrl + Z** | Undo (পূর্বাবস্থায় ফিরে যাওয়া) |\n\n##MS Word High-Frequency Exam Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **F7** | Spelling and Grammar Check |\n| **Shift + F7** | Thesaurus (সমার্থক শব্দ বা Synonym খোঁজা) |\n| **F12** | Save As (নতুন নামে ফাইল সেভ করা) |\n| **Shift + F3** | Change Case (Uppercase, Lowercase, Title Case) |\n| **Ctrl + =** | Subscript (যেমন: H₂O) |\n| **Ctrl + Shift + +** | Superscript (যেমন: A²) |\n| **Ctrl + ]** or **Ctrl + Shift + >** | Font Size বৃদ্ধি করা |\n| **Ctrl + [** or **Ctrl + Shift + <** | Font Size হ্রাস করা |\n| **Ctrl + Enter** | Page Break তৈরি করা |\n| **Ctrl + Shift + C** | Format Painter Copy (ফরম্যাট কপি করা) |\n| **Ctrl + Shift + V** | Format Painter Paste (ফরম্যাট পেস্ট করা) |\n\n##MS Excel High-Frequency Exam Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **F2** | Edit Selected Cell (সেলে এডিট মোড অন করা) |\n| **F4** | Repeat Last Action / Toggle Cell Reference (Absolute/Relative) |\n| **F11** | Create Chart in New Sheet (নতুন সিটে চার্ট তৈরি) |\n| **Alt + =** | AutoSum (স্বয়ংক্রিয় যোগফল বের করা) |\n| **Ctrl + 1** | Format Cells Dialog Box ওপেন করা |\n| **Ctrl + ;** | Insert Current Date (বর্তমান তারিখ যোগ করা) |\n| **Ctrl + Shift + :** | Insert Current Time (বর্তমান সময় যোগ করা) |\n| **Ctrl + D** | Fill Down (উপরের সেলের ডেটা নিচে কপি করা) |\n| **Ctrl + R** | Fill Right (বামের সেলের ডেটা ডানে কপি করা) |\n| **Ctrl + Spacebar** | Select Entire Column (পুরো কলাম সিলেক্ট) |\n| **Shift + Spacebar** | Select Entire Row (পুরো রো সিলেক্ট) |\n| **Ctrl + Shift + +** | Insert Row or Column (নতুন রো বা কলাম যুক্ত করা) |\n| **Ctrl + -** | Delete Row or Column (রো বা কলাম ডিলিট করা) |\n| **Ctrl + Page Down** | Next Worksheet-এ যাওয়া |\n| **Ctrl + Page Up** | Previous Worksheet-এ যাওয়া |\n| **Ctrl + Shift + L** | Toggle AutoFilter (ফিল্টার অপশন চালু/বন্ধ) |\n| **Ctrl + T** | Create Table (ডেটা দিয়ে টেবিল তৈরি করা) |\n| **Ctrl + ~** | Toggle Show/Hide Formulas (ফর্মুলা প্রদর্শন/গোপন করা) |\n\n##Quick Review Summary Table##\n| Application | Category | Top Exam Shortcut Keys | Primary Function |\n| --- | --- | --- | --- |\n| MS Word | Editing | **F7**, **Shift + F7**, **F12** | Spelling Check, Thesaurus, Save As |\n| MS Word | Formatting | **Ctrl + Shift + >**, **Ctrl + =**, **Shift + F3** | Font Resize, Subscript, Change Case |\n| MS Excel | Data Entry | **F2**, **Alt + =**, **Ctrl + ;** | Cell Edit, AutoSum, Insert Current Date |\n| MS Excel | Selection & Structure | **Ctrl + Spacebar**, **Shift + Spacebar**, **Ctrl + Shift + L** | Select Column, Select Row, Toggle Filter |\n"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": 20,
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": 150
+        }
+      ],
       "mergedCells": {},
       "name": "General Knowledge",
       "rows": [
@@ -22278,7 +22310,7 @@
       ],
       "mergedCells": {},
       "name": "Unemployment Problem and its Way Forward",
-      "parentSheet": 279,
+      "parentSheet": 280,
       "rows": [
         [
           "#1.5#বাংলাদেশের বেকারত্ব সমস্যা এবং এর সমাধান (Unemployment Problem and its Way Forward)#/#\n##১. বেকারত্ব কী এবং বাংলাদেশের প্রেক্ষাপট##\n- **বেকারত্বের সংজ্ঞা:** @@International Labour Organization (ILO)@@-এর মতে, একজন কর্মক্ষম ব্যক্তি (শারীরিক ও মানসিকভাবে সক্ষম) যিনি সক্রিয়ভাবে কাজ খুঁজছেন কিন্তু কাজ পেতে ব্যর্থ হচ্ছেন, তাকে বেকার বলা হয় এবং এই পরিস্থিতিকে বেকারত্ব (Unemployment) বলা হয়।\n-- স্বেচ্ছায় কাজ না করা ব্যক্তিদের (Willful Unemployed) আইএলও-র সংজ্ঞা অনুযায়ী বেকার বলা যাবে না।\n- __বাংলাদেশের বর্তমান বাস্তবতা:__\n-- সরকারি হিসাব অনুযায়ী জাতীয় বেকারত্বের হার প্রায় **৪.২%**।\n-- তবে বাস্তব চিত্র অনেক বেশি ভয়াবহ, বিশেষ করে শিক্ষিত ও বিশ্ববিদ্যালয় গ্রাজুয়েটদের মধ্যে বেকারত্বের হার অনেক বেশি।\n-- প্রতি বছর প্রায় **২০ লক্ষ (2 Million)** তরুণ-তরুণী নতুন করে চাকরির বাজারে প্রবেশ করে।\n-- বাংলাদেশের প্রায় **৫০ লক্ষ কোটি টাকার** ছোট অর্থনীতির পক্ষে প্রতি বছর এই বিশাল কর্মক্ষম জনগোষ্ঠীর কর্মসংস্থান নিশ্চিত করা অত্যন্ত কঠিন চ্যালেঞ্জ।\n​\n##২. বাংলাদেশে বেকারত্বের প্রধান কারণসমূহ##\nএখানে প্রধানত কাঠামোগত সমস্যাগুলোর কারণে বেকারত্ব বাড়ছে। কারণসমূহ নিচে টেবিল আকারে আলোচনা করা হলো:\n​\n| কারণ (Causes) | মূল বিষয়বস্তু ও ব্যাখ্যা (Explanation) |\n| --- | --- |\n| **১. দক্ষতার অমিল (Skills Mismatch)** | আমাদের শিক্ষা ব্যবস্থা মূলত তাত্ত্বিক (Theoretical)। বিশ্ববিদ্যালয়গুলোর পাঠ্যসূচির সাথে বাস্তব শিল্পক্ষেত্রের (Industry) চাহিদার বড় ফারাক রয়েছে। ফলে দেশের গ্রাজুয়েটরা বেকার থাকছে, অথচ শিল্প ও ব্যবসা প্রতিষ্ঠানগুলো দক্ষ লোকের অভাবে ভারত বা শ্রীলঙ্কা থেকে কর্মী নিয়োগ করতে বাধ্য হচ্ছে। |\n| **২. ধীরগতির কর্মসংস্থান (Slow Job Creation)** | বিগত দশকে (২০১০-২০২৩) বাংলাদেশে গড়ে **৬.৭%** জিডিপি প্রবৃদ্ধি হলেও কর্মসংস্থান বৃদ্ধির হার ছিল মাত্র **২.২%**। অর্থাৎ জিডিপি প্রবৃদ্ধি সরাসরি নতুন কর্মসংস্থান সৃষ্টিতে রূপান্তরিত হতে পারেনি। |\n| **৩. কারিগরি শিক্ষার অভাব (Lack of Technical Education)** | অধিকাংশ তরুণের আধুনিক প্রযুক্তি ও কারিগরি শিক্ষার অভাব রয়েছে। দ্রুত পরিবর্তনশীল বৈশ্বিক ও দেশীয় বাজারের প্রতিযোগিতায় টিকে থাকার মতো বাস্তব দক্ষতা তাদের নেই। |\n| **৪. সরকারি চাকরির প্রতি মোহ (Preference for Public Jobs)** | অনেক শিক্ষিত তরুণ বছরের পর বছর শুধুমাত্র একটি নিরাপদ সরকারি চাকরির প্রস্তুতিতে সময় নষ্ট করে। তারা বেসরকারি খাতে যুক্ত হতে বা নিজে নতুন কিছু করতে অনীহা প্রকাশ করে, যা সাময়িকভাবে বেকার সংখ্যা বাড়িয়ে দেয়। |\n\n##৩. বেকারত্বের প্রভাব (Social & Economic Impact)##\n- **মানসিক ও সামাজিক অস্থিরতা:** দীর্ঘমেয়াদী কর্মহীনতা তরুণদের মাঝে তীব্র হতাশা এবং মানসিক চাপের জন্ম দেয়, যা পরবর্তীতে সামাজিক অস্থিরতায় রূপ নেয়।\n-- উদাহরণস্বরূপ, ২০২৪ সালের কোটা সংস্কার আন্দোলন এবং পরবর্তী গণ-অভ্যুত্থানের পেছনে অন্যতম বড় চালিকাশক্তি ছিল কর্মসংস্থানের অভাবজনিত পুঞ্জীভূত ক্ষোভ।\n- **মেধা পাচার (Brain Drain):** দেশের মেধাবী ও দক্ষ তরুণরা সুন্দর জীবন ও উপযুক্ত কর্মসংস্থানের আশায় বিদেশে পাড়ি জমাচ্ছে, যা দেশের সামগ্রিক অর্থনৈতিক সম্ভাবনাকে ব্যাহত করছে।\n​\n##৪. সমাধান ও ভবিষ্যৎ কর্মপন্থা (Way Forward)##\nবেকারত্ব সমস্যা সমাধানে সরকারি ও বেসরকারি খাতের সমন্বিত উদ্যোগ প্রয়োজন। নিচে প্রধান সমাধানগুলো আলোচনা করা হলো:\n​\n| ক্ষেত্র (Sector) | প্রয়োজনীয় পদক্ষেপ ও কৌশল (Required Actions) |\n| --- | --- |\n| **১. শিক্ষা ব্যবস্থার সংস্কার (Education Reform)** | পাঠ্যক্রমকে আধুনিক করতে হবে এবং কারিগরি ও বৃত্তিমূলক শিক্ষার (TVET) ওপর জোর দিতে হবে। শিক্ষা প্রতিষ্ঠানগুলোর সাথে শিল্পক্ষেত্রের অংশীদারিত্ব (Partnership) নিশ্চিত করতে হবে যাতে শিক্ষার্থীরা কর্মমুখী দক্ষতা অর্জন করতে পারে। |\n| **২. উদ্যোক্তা তৈরি (Promoting Entrepreneurship)** | যুব সমাজকে \"চাকরি প্রার্থী\" না বানিয়ে \"চাকরি দাতা\" হতে উৎসাহিত করতে হবে। এর জন্য সহজ শর্তে ঋণ সুবিধা (Easy Access to Finance) এবং মেন্টরশিপ প্রোগ্রামের ব্যবস্থা করতে হবে। |\n| **৩. শিল্প বহুমুখীকরণ (Industrial Diversification)** | শুধু তৈরি পোশাক (RMG) খাতের ওপর নির্ভরশীল না থেকে আইসিটি (ICT), কৃষিভিত্তিক শিল্প এবং সেবা খাতের দ্রুত বিকাশ ও বিনিয়োগ বাড়াতে হবে। |\n| **৪. এফডিআই আকর্ষণ (Attracting FDI)** | বৈদেশিক সরাসরি বিনিয়োগ (FDI) বাড়াতে ব্যবসার সহজীকরণ সূচক (Ease of Doing Business) উন্নত করতে হবে। অবকাঠামো ও জ্বালানি নিরাপত্তা (নিরবিচ্ছিন্ন গ্যাস-বিদ্যুৎ সরবরাহ) নিশ্চিত করতে হবে। |\n\n##৫. জনমিতিক লভ্যাংশ (Demographic Dividend)##\n- **ধারণা:** যখন কোনো দেশের কর্মক্ষম মানুষের সংখ্যা অকর্মক্ষম মানুষের চেয়ে বেশি থাকে, তখন তাকে ডেমোগ্রাফিক ডিভিডেন্ড বলে। বাংলাদেশ বর্তমানে এই সোনালী সময় পার করছে।\n- __সতর্কতা ও করণীয়:__\n-- আগামী ১০-১৫ বছরের মধ্যে এই সুযোগ শেষ হয়ে যাবে। যদি এই তরুণ জনগোষ্ঠীকে উপযুক্ত কর্মসংস্থান দেওয়া না যায়, তবে এই মানবসম্পদ দেশের জন্য বড় **বোঝা (Liability)** বা বার্ডেনে পরিণত হবে।\n-- সরকার ও বেসরকারি খাতের সমন্বিত প্রচেষ্টায় শিক্ষা ব্যবস্থার সংস্কার ও বিনিয়োগ বৃদ্ধির মাধ্যমে ডেমোগ্রাফিক ডিভিডেন্ডের পূর্ণ সুবিধা নিয়ে বাংলাদেশকে একটি উন্নত ও সমৃদ্ধ রাষ্ট্রে পরিণত করা সম্ভব।\n​"
@@ -22929,33 +22961,6 @@
       "rows": [
         [
           "Bangladesh Bank => 16 December 1971\n"
-        ]
-      ]
-    },
-    {
-      "cellStyles": {},
-      "columns": [
-        {
-          "color": "#ffffff",
-          "font": "JetBrains Mono",
-          "fontSize": 20,
-          "headerBgColor": "#f8f9fa",
-          "headerBold": true,
-          "headerCenter": false,
-          "headerItalic": false,
-          "headerTextColor": "#333333",
-          "name": "A",
-          "textColor": "#000000",
-          "type": "text",
-          "width": 150
-        }
-      ],
-      "customIndex": "20260809193511",
-      "mergedCells": {},
-      "name": "ICT",
-      "rows": [
-        [
-          "##ICT Short Syllabus##\n- **Hardware**: IPOS Cycle (Input, Process, Output, Storage Unit)\n- **Software & Firmware**: System Software, Application Software, Firmware\n- **MS Office**: MS Word, MS Excel (Functions, Keyboard Shortcuts)\n- **Number System & Digital Electronics**: Binary, Octal, Decimal, Hexadecimal, Logic Gates\n- **Network & Data Communication**: Network Topologies, Protocols, Data Transmission\n- **Advanced Topics**: Algorithm, Flowchart, Pseudocode, Algorithm Complexity, Data Structure, Programming Languages, Artificial Intelligence (AI) & Learning Modules\n- **History & Generations of Computer**: 5 Generations and Computer Classifications\n\n##History & Generations of Computer##\nকম্পিউটারের ইতিহাস ও বিকাশকে মূলত পাঁচটি প্রজন্মে (Generations) ভাগ করা হয়েছে।\n\nᴃᴃ1st Generation (1G)ᴃᴃ\n- **Main Component**: Vacuum Tube\n- **Limitations**:\n-- Heat Problem: অতিরিক্ত তাপ সৃষ্টি হতো\n-- Size & Weight: বিশাল আকার এবং ওজন 10 থেকে 50 Tons পর্যন্ত হতো\n-- User Capacity: একটি কম্পিউটার পরিচালনায় প্রায় 100 জন ব্যবহারকারী লাগতো\n- **Language**: Machine Language / Object Code / Binary (0 or 1)\n- **Important Computers & Firsts**:\n-- **Mark I**: প্রথম Digital Computer। আবিষ্কারক ¿¿Howard Aiken¿¿। অর্থায়নকারী প্রতিষ্ঠান IBM।\n-- **IBM**: পূর্বনাম CTM (Computer Tabulating Recording Company)। পরিচিতি Big Blue নামে। IBM 1911 সালে প্রতিষ্ঠিত হয়। 1957 সালে প্রথম Hard Disk Drive (HDD) তৈরি করে যার ধারণক্ষমতা ছিল 5 MB।\n-- **¿¿ENIAC¿¿**: প্রথম Electronic Computer।\n-- **¿¿EDSAC¿¿**: প্রথম Storable / Memory যুক্ত কম্পিউটার। মেমোরি হিসেবে Mercury Delay Lines ব্যবহৃত হতো।\n-- **ABC**: প্রথম Automated Computer।\n-- **UNIVAC (UNIVAC I & II)**: প্রথম বাণিজ্যিক (Commercial) কম্পিউটার।\n\nᴃᴃ2nd Generation (2G)ᴃᴃ\n- **Main Component**: Transistor (Vacuum Tube-এর পরিপূরক হিসেবে ব্যবহৃত)\n- **Transistor Invention**: Bell Laboratories-এ 1947/1948 সালে William Shockley এটি আবিষ্কার করেন। এটি Silicon (বালি/Silica থেকে প্রাপ্ত) দিয়ে তৈরি।\n- **Function of Transistor**: Signal Amplifying (সংকেত বিবর্ধক) হিসেবে কাজ করে।\n- **Important Computers & Firsts**:\n-- **TX-0**: প্রথম Transistor-ভিত্তিক কম্পিউটার (Transistorized Experimental Computer 0)।\n-- **First Computers in Bangladesh**:\n--- **IBM 1620**: বাংলাদেশে আসা প্রথম কম্পিউটার। 1964 সালে Atomic Energy Commission-এ স্থাপিত হয়। এটি Mainframe ক্যাটাগরির।\n--- **IBM 1400 Series**: বাংলাদেশে আসা দ্বিতীয় কম্পিউটার। 1965 সালে Adamjee Jute Mills-এ স্থাপিত হয়। এটিও Mainframe ক্যাটাগরির।\n\nᴃᴃ3rd Generation (3G)ᴃᴃ\n- **Main Component**: Integrated Circuit (IC)\n- **Structure of IC**: লক্ষ লক্ষ Transistor, Capacitor এবং Resistor মিলে একটি IC তৈরি হয়।\n-- **Capacitor**: চার্জ ধারক হিসেবে কাজ করে এবং ভোল্টেজ সুরক্ষায় ব্যবহৃত হয়।\n-- **Resistor**: মেমোরি ইউনিট হিসেবে কাজ করে। এটি সবচেয়ে ক্ষুদ্রতম ও High-Speed মেমোরি। এটি Volatile মেমোরি হিসেবে তথ্য সংরক্ষণ করে। (বৈশিষ্ট্য: High Speed, High Cost, Low Capacity)।\n- **¿¿Technologies¿¿**: SSI (Small Scale Integration), MSI (Medium Scale Integration), LSI (Large Scale Integration)।\n- **Important Computers & Firsts**:\n-- **PDP-1**: বিশ্বের প্রথম IC-ভিত্তিক কম্পিউটার।\n-- **IBM System/360**: বাংলাদেশে প্রথম IC-ভিত্তিক কম্পিউটার (1979 সালে BUET-এ স্থাপিত)। এটি Miniframe/Minicomputer ক্যাটাগরির।\n-- এই প্রজন্মে CD, DVD, MP3 Player / iPod ব্যবহারের সূচনা হয়।\n\nᴃᴃ4th Generation (4G)ᴃᴃ\n- **Main Component**: Microprocessor (লক্ষ লক্ষ IC একত্রিত করে তৈরি)\n- **Microprocessor Invention**: Intel Corporation-এর গবেষক Ted Hoff এটি আবিষ্কার করেন।\n- **First Microprocessor**: Intel 4004 (4-bit প্রসেসর)।\n- **First Microprocessor Computer**: Altair 8800।\n- **¿¿Technology¿¿**: VLSI (Very Large Scale Integration)।\n- **Era**: বর্তমান সময়ে ব্যবহৃত কম্পিউটারসমূহ 4th Generation-এর অন্তর্ভুক্ত।\n\nᴃᴃ5th Generation (5G)ᴃᴃ\n- **Main Concept**: Future Computer & Advanced Artificial Intelligence (AI)\n- **¿¿Technologies¿¿**:\n-- ULSI (Ultra Large Scale Integration)\n-- Quantum Computing (Binary 0 and 1-এর বদলে Trinary/Qubit প্রযুক্তি)\n-- AI (Artificial Intelligence) & Neural Networks\n-- NLP (Natural Language Processing) & Intellectual Compiler\n-- LLM (Large Language Model) & Generative AI (যেমন: ChatGPT, Gemini, DeepSeek)\n-- IoT (Internet of Things), Virtual Reality (VR), Augmented Reality (AR)\n-- GPU (Graphics Processing Unit)\n- **Father of AI**: John McCarthy।\n- **Definition of AI**: Simulation of Human Brain।\n- **Key Concept**: Expert Systems (বিশেষজ্ঞদের জ্ঞান ও অভিজ্ঞতা একত্রে সংরক্ষিত রেখে সিদ্ধান্ত গ্রহণকারী সিস্টেম)।\n\n##Quick Review Summary Table##\n| Generation | Main Component | Core Technology / Language | Notable Computers / Firsts |\n| --- | --- | --- | --- |\n| 1st Generation (1G) | Vacuum Tube | Machine Language (Binary 0 & 1) | Mark I, ENIAC, EDSAC, ABC, UNIVAC |\n| 2nd Generation (2G) | Transistor | Assembly / High-level Language | TX-0, IBM 1620 (BD 1st, 1964), IBM 1400 |\n| 3rd Generation (3G) | Integrated Circuit (IC) | SSI, MSI, LSI | PDP-1, IBM System/360 (BD IC 1st, 1979) |\n| 4th Generation (4G) | Microprocessor | VLSI | Intel 4004, Altair 8800, Modern PCs |\n| 5th Generation (5G) | Bio-chip / Quantum / AI | ULSI, Quantum Logic, NLP, LLM | Future Quantum Computers, AI Systems |\n\n#1.5#MS Word & MS Excel Important Keyboard Shortcuts for Job Exams#/#\n\n##MS Word A-Z Keyboard Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **Ctrl + A** | Select All (সকল টেক্সট সিলেক্ট করা) |\n| **Ctrl + B** | Bold (লেখা গাঢ় করা) |\n| **Ctrl + C** | Copy (কপি করা) |\n| **Ctrl + D** | Font Dialog Box ওপেন করা |\n| **Ctrl + E** | Center Alignment (লেখা মাঝে আনা) |\n| **Ctrl + F** | Find (নির্দিষ্ট শব্দ খোঁজা) |\n| **Ctrl + G** | Go To (নির্দিষ্ট পেজ বা লাইনে যাওয়া) |\n| **Ctrl + H** | Replace (শব্দ পরিবর্তন করা) |\n| **Ctrl + I** | Italic (লেখা বাঁকা করা) |\n| **Ctrl + J** | Justify Alignment (লেখা দুই পাশে সমান করা) |\n| **Ctrl + K** | Insert Hyperlink (লিঙ্ক যুক্ত করা) |\n| **Ctrl + L** | Left Alignment (লেখা বামে নেওয়া) |\n| **Ctrl + M** | Indent Paragraph (প্যারাগ্রাফ ডানদিকে সরানো) |\n| **Ctrl + N** | New Document (নতুন ফাইল খোলা) |\n| **Ctrl + O** | Open Document (সংরক্ষিত ফাইল খোলা) |\n| **Ctrl + P** | Print Document (প্রিন্ট করা) |\n| **Ctrl + Q** | Clear Paragraph Formatting |\n| **Ctrl + R** | Right Alignment (লেখা ডানে নেওয়া) |\n| **Ctrl + S** | Save Document (সেভ করা) |\n| **Ctrl + T** | Hanging Indent তৈরি করা |\n| **Ctrl + U** | Underline (লেখার নিচে দাগ দেওয়া) |\n| **Ctrl + V** | Paste (পেস্ট করা) |\n| **Ctrl + W** | Close Document (চলতি ফাইল বন্ধ করা) |\n| **Ctrl + X** | Cut (কাট করা) |\n| **Ctrl + Y** | Redo (বাতিল করা কাজ পুনরায় করা) |\n| **Ctrl + Z** | Undo (পূর্বাবস্থায় ফিরে যাওয়া) |\n\n##MS Word High-Frequency Exam Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **F7** | Spelling and Grammar Check |\n| **Shift + F7** | Thesaurus (সমার্থক শব্দ বা Synonym খোঁজা) |\n| **F12** | Save As (নতুন নামে ফাইল সেভ করা) |\n| **Shift + F3** | Change Case (Uppercase, Lowercase, Title Case) |\n| **Ctrl + =** | Subscript (যেমন: H₂O) |\n| **Ctrl + Shift + +** | Superscript (যেমন: A²) |\n| **Ctrl + ]** or **Ctrl + Shift + >** | Font Size বৃদ্ধি করা |\n| **Ctrl + [** or **Ctrl + Shift + <** | Font Size হ্রাস করা |\n| **Ctrl + Enter** | Page Break তৈরি করা |\n| **Ctrl + Shift + C** | Format Painter Copy (ফরম্যাট কপি করা) |\n| **Ctrl + Shift + V** | Format Painter Paste (ফরম্যাট পেস্ট করা) |\n\n##MS Excel High-Frequency Exam Shortcuts##\n| Shortcut Key | Function / বর্ণনা |\n| --- | --- |\n| **F2** | Edit Selected Cell (সেলে এডিট মোড অন করা) |\n| **F4** | Repeat Last Action / Toggle Cell Reference (Absolute/Relative) |\n| **F11** | Create Chart in New Sheet (নতুন সিটে চার্ট তৈরি) |\n| **Alt + =** | AutoSum (স্বয়ংক্রিয় যোগফল বের করা) |\n| **Ctrl + 1** | Format Cells Dialog Box ওপেন করা |\n| **Ctrl + ;** | Insert Current Date (বর্তমান তারিখ যোগ করা) |\n| **Ctrl + Shift + :** | Insert Current Time (বর্তমান সময় যোগ করা) |\n| **Ctrl + D** | Fill Down (উপরের সেলের ডেটা নিচে কপি করা) |\n| **Ctrl + R** | Fill Right (বামের সেলের ডেটা ডানে কপি করা) |\n| **Ctrl + Spacebar** | Select Entire Column (পুরো কলাম সিলেক্ট) |\n| **Shift + Spacebar** | Select Entire Row (পুরো রো সিলেক্ট) |\n| **Ctrl + Shift + +** | Insert Row or Column (নতুন রো বা কলাম যুক্ত করা) |\n| **Ctrl + -** | Delete Row or Column (রো বা কলাম ডিলিট করা) |\n| **Ctrl + Page Down** | Next Worksheet-এ যাওয়া |\n| **Ctrl + Page Up** | Previous Worksheet-এ যাওয়া |\n| **Ctrl + Shift + L** | Toggle AutoFilter (ফিল্টার অপশন চালু/বন্ধ) |\n| **Ctrl + T** | Create Table (ডেটা দিয়ে টেবিল তৈরি করা) |\n| **Ctrl + ~** | Toggle Show/Hide Formulas (ফর্মুলা প্রদর্শন/গোপন করা) |\n\n##Quick Review Summary Table##\n| Application | Category | Top Exam Shortcut Keys | Primary Function |\n| --- | --- | --- | --- |\n| MS Word | Editing | **F7**, **Shift + F7**, **F12** | Spelling Check, Thesaurus, Save As |\n| MS Word | Formatting | **Ctrl + Shift + >**, **Ctrl + =**, **Shift + F3** | Font Resize, Subscript, Change Case |\n| MS Excel | Data Entry | **F2**, **Alt + =**, **Ctrl + ;** | Cell Edit, AutoSum, Insert Current Date |\n| MS Excel | Selection & Structure | **Ctrl + Spacebar**, **Shift + Spacebar**, **Ctrl + Shift + L** | Select Column, Select Row, Toggle Filter |\n"
         ]
       ]
     },
