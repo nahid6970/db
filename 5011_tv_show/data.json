@@ -5311,6 +5311,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 4,
+                "title": "Silo - S03E07 - Radio",
+                "watched": true,
+                "added_date": "2026-08-15T12:01:44.362409",
+                "notify": "seen"
+            },
+            {
                 "id": 3,
                 "title": "Silo - S03E06 - The Drive",
                 "watched": true,
