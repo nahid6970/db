@@ -2310,6 +2310,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
+                "id": 12,
+                "title": "The Walking Dead - Dead City - S03E04 - Found+Lost",
+                "watched": false,
+                "added_date": "2026-08-16T14:32:37.984801",
+                "notify": "unseen"
+            },
+            {
                 "id": 11,
                 "title": "The Walking Dead - Dead City - S03E03 - Emigrants",
                 "watched": false,
