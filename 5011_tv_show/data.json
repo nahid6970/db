@@ -7,6 +7,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
             {
+                "id": 48,
+                "title": "One Piece - s23e19 - [1174] - Save the Children! The Elbaph Warriors Rise Up WEBDL-1080p - [ToonsHub]",
+                "watched": false,
+                "added_date": "2026-08-16T22:38:42.772914",
+                "notify": "unseen"
+            },
+            {
                 "id": 47,
                 "title": "One Piece - s23e18 - [1173] - A Nightmarish Game - The Dark Plot of the Knights of God WEBDL-1080p - [ToonsHub]",
                 "watched": false,
@@ -1583,6 +1590,13 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/371310/posters/64903a85960eb.jpg",
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mushoku Tensei - Jobless Reincarnation",
         "episodes": [
+            {
+                "id": 19,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e08 - [57] - The Flying Fortress HDTV-1080p - [SubsPlease]",
+                "watched": false,
+                "added_date": "2026-08-16T21:38:42.774643",
+                "notify": "unseen"
+            },
             {
                 "id": 18,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s03e07 - [56] - Phase Four WEBDL-1080p - [Erai-raws]",
