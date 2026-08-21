@@ -56,20 +56,6 @@
                 "notify": "seen"
             },
             {
-                "id": 41,
-                "title": "One Piece - s23e15 - [1170] - Get the Key! Luffy vs. Scopper Gaban WEBRip-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-07-20T14:44:39.373246",
-                "notify": "seen"
-            },
-            {
-                "id": 40,
-                "title": "One Piece - s23e13 - [1168] - Ancient History - The Harley Passed Down by Elbaph WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "added_date": "2026-06-28T22:19:46.174797",
-                "notify": "seen"
-            },
-            {
                 "id": 39,
                 "title": "One Piece - s23e12 - [1167] - Shamrock Appears - Commander of the Knights of God WEBDL-1080p - [ToonsHub]",
                 "watched": true,
@@ -1807,6 +1793,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Reacher",
         "episodes": [
             {
+                "id": 12,
+                "title": "Reacher - S04E04 - Karambits and Pieces",
+                "watched": false,
+                "added_date": "2026-08-19T14:25:41.800668",
+                "notify": "seen"
+            },
+            {
                 "id": 11,
                 "title": "Reacher - S04E03 - One Small Step",
                 "watched": false,
@@ -2558,6 +2551,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE Raw",
         "rating": "3",
         "episodes": [
+            {
+                "id": 38,
+                "title": "WWE Raw - 2026-08-17 - RAW 1734 HDTV-1080p",
+                "watched": false,
+                "added_date": "2026-08-18T15:40:32.455415",
+                "notify": "seen"
+            },
             {
                 "id": 37,
                 "title": "WWE Raw - 2026-07-20 - RAW 1730 WEBDL-1080p",
@@ -5352,6 +5352,13 @@
         "rating": null,
         "status": "Continuing",
         "episodes": [
+            {
+                "id": 5,
+                "title": "Silo - S03E08 - Gray Goo",
+                "watched": false,
+                "added_date": "2026-08-21T10:52:33.695658",
+                "notify": "unseen"
+            },
             {
                 "id": 4,
                 "title": "Silo - S03E07 - Radio",
