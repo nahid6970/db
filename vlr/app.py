@@ -101,18 +101,15 @@ def _get_visible_matches():
     settings = load_settings()
     ignore_list = load_ignorelist()
     ignore_names = {t["name"] for t in ignore_list}
-    unchecked_tournaments = settings.get("unchecked_tournaments", [])
-
     all_tournament_rows = scraper.load_tournament_overview()
     tournament_rows = [row for row in all_tournament_rows if row["tournament"] not in ignore_names]
     tournament_names = [row["tournament"] for row in tournament_rows]
-    if unchecked_tournaments:
-        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
-    else:
-        visible_tournaments = tournament_names
 
     matches = scraper.get_matches_for_display(
-        tournament_names=visible_tournaments if visible_tournaments else [],
+        # Send all non-ignored matches to the client. The sidebar checkbox
+        # controls visibility in JS, while the missing-stats loader must still
+        # inspect every DB match, including unchecked tournaments.
+        tournament_names=tournament_names if tournament_names else [],
     )
     return settings, ignore_list, tournament_rows, matches
 
@@ -208,6 +205,7 @@ def api_match_detail(match_id):
                 match["status"] = details["status"]
             scraper.upsert_match(match)
     match["has_stats"] = scraper.has_complete_match_stats(match)
+    match["has_details"] = scraper.has_complete_match_data(match)
     return jsonify(match)
 
 @app.route("/api/matches")
@@ -239,15 +237,10 @@ def api_matches():
     if request.args.get("load_missing") == "true":
         scraper.load_missing_stats()
         
-    unchecked_tournaments = settings.get("unchecked_tournaments", [])
     tournament_rows = scraper.load_tournament_overview(exclude_tournaments=ignore_names)
     tournament_names = [row["tournament"] for row in tournament_rows]
-    if unchecked_tournaments:
-        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
-    else:
-        visible_tournaments = tournament_names
     matches = scraper.get_matches_for_display(
-        tournament_names=visible_tournaments if visible_tournaments else [],
+        tournament_names=tournament_names if tournament_names else [],
         exclude_tournaments=ignore_names
     )
     return jsonify(matches)
@@ -257,16 +250,11 @@ def api_matches_view():
     settings = load_settings()
     ignore_list = load_ignorelist()
     ignore_names = {t["name"] for t in ignore_list}
-    unchecked_tournaments = settings.get("unchecked_tournaments", [])
     tournament_rows = scraper.load_tournament_overview()
     tournament_rows = [row for row in tournament_rows if row["tournament"] not in ignore_names]
     tournament_names = [row["tournament"] for row in tournament_rows]
-    if unchecked_tournaments:
-        visible_tournaments = [name for name in tournament_names if name not in unchecked_tournaments]
-    else:
-        visible_tournaments = tournament_names
     matches = scraper.get_matches_for_display(
-        tournament_names=visible_tournaments if visible_tournaments else [],
+        tournament_names=tournament_names if tournament_names else [],
     )
     return jsonify(matches)
 

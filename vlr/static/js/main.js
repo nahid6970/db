@@ -276,7 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (data.status === "Live") {
                             statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
                         } else if (data.status === "Completed") {
-                            const hasStats = matchHasCompleteStats(data);
+                            const hasStats = matchHasCompleteDetails(data);
                             if (hasStats) {
                                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                             } else {
@@ -733,23 +733,34 @@ document.addEventListener("DOMContentLoaded", () => {
             && Array.isArray(allStats?.team2) && allStats.team2.length > 0;
     }
 
+    function matchHasCompleteDetails(match) {
+        if (!match) return false;
+        if (typeof match.has_details !== "undefined") return Boolean(match.has_details);
+        if (!matchHasCompleteStats(match)) return false;
+        const players = match.players || {};
+        return Object.values(players).every(mapData =>
+            !mapData || ["team1", "team2"].every(team =>
+                (mapData[team] || []).every(player => Boolean(player.photo))
+            )
+        );
+    }
+
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
         return INITIAL_MATCHES.filter(m => {
-            const isChecked = checkedTournaments.has(m.tournament);
-            if (!isChecked) return false;
-
             const status = (m.status || "").toLowerCase();
             const timestamp = m.unix_timestamp ? m.unix_timestamp * 1000 : 0;
             const isPast = timestamp > 0 && timestamp <= Date.now();
+            const hasUnknownTime = timestamp === 0;
             const hasResultScore = /^\d+$/.test(String(m.score1 ?? ""))
                 && /^\d+$/.test(String(m.score2 ?? ""))
                 && (parseInt(m.score1, 10) > 0 || parseInt(m.score2, 10) > 0);
             const looksCompleted = status !== "live" && hasResultScore;
-            // Do not advertise future matches as missing stats.  A match whose
-            // scheduled time has passed is included even if the listing still
-            // calls it Upcoming, because its detail page can now resolve it.
-            return (status === "completed" || isPast || looksCompleted) && !matchHasCompleteStats(m);
+            // Known future matches are not eligible yet. Unknown-time records
+            // are included because an old event import may have lost its time
+            // even though the match has already finished.
+            return (status === "completed" || isPast || looksCompleted || hasUnknownTime)
+                && (!matchHasCompleteStats(m) || !matchHasCompleteDetails(m));
         });
     }
 
@@ -816,12 +827,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let loadedOk = false;
             try {
-                const data = await fetch(`/api/match/${match.id}?refresh=true&stats_only=true`).then(r => r.json());
-                // Scores/maps may be available before the player tables.  Only
-                // complete player stats count as a successful load.
-                loadedOk = Boolean(data && !data.error && matchHasCompleteStats(data));
+                const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
+                // Match-card loading and this button now use the same complete
+                // detail fetch, including player photos.
+                loadedOk = Boolean(data && !data.error && matchHasCompleteDetails(data));
                 if (data && !data.error) {
                     data.has_stats = matchHasCompleteStats(data);
+                    data.has_details = matchHasCompleteDetails(data);
                     const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
                     if (idx !== -1) {
                         INITIAL_MATCHES[idx] = data;
@@ -835,7 +847,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const statusBadge = card.querySelector(".match-status-badge");
                         if (statusBadge && data.status) {
                             statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
-                            const hasStats = matchHasCompleteStats(data);
+                            const hasStats = matchHasCompleteDetails(data);
                             if (hasStats) {
                                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                             } else {
@@ -911,7 +923,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 const status = (m.status || "").toLowerCase();
                                 if (status === "completed") {
                                     // Completed matches must have stats
-                                    const hasStats = matchHasCompleteStats(m);
+                                    const hasStats = matchHasCompleteDetails(m);
                                     if (!hasStats) {
                                         isFullyLoaded = false;
                                         break;
@@ -1616,7 +1628,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (m.status === "Live") {
                 statusBadgeHTML = '<span class="live-dot"></span> LIVE';
             } else if (m.status === "Completed") {
-                const hasStats = !!m.has_stats;
+                const hasStats = !!m.has_details;
                 if (hasStats) {
                     statusBadgeHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                 } else {
@@ -1779,7 +1791,7 @@ document.addEventListener("DOMContentLoaded", () => {
             for (const m of mList) {
                 const status = (m.status || "").toLowerCase();
                 if (status === "completed") {
-                    const hasStats = !!m.has_stats;
+                    const hasStats = !!m.has_details;
                     if (!hasStats) {
                         isFullyLoaded = false;
                         break;

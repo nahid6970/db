@@ -264,7 +264,30 @@ def has_complete_match_stats(match):
     all_stats = players.get("all") if isinstance(players, dict) else None
     if not maps or not isinstance(all_stats, dict):
         return False
-    return bool(all_stats.get("team1")) and bool(all_stats.get("team2"))
+    if not all_stats.get("team1") or not all_stats.get("team2"):
+        return False
+    # Every parsed map must also have both teams' player rows.  Older imports
+    # can contain the aggregate "all" table while individual map tables are
+    # still absent.
+    for index in range(len(maps)):
+        map_stats = players.get(str(index))
+        if not isinstance(map_stats, dict) or not map_stats.get("team1") or not map_stats.get("team2"):
+            return False
+    return True
+
+def has_complete_match_data(match):
+    """Return whether stats and the player detail data used by the modal exist."""
+    if not has_complete_match_stats(match):
+        return False
+    players = match.get("players") or {}
+    for map_data in players.values():
+        if not isinstance(map_data, dict):
+            continue
+        for team in ("team1", "team2"):
+            for player in map_data.get(team, []):
+                if not player.get("photo"):
+                    return False
+    return True
 
 def _team_name_key(name):
     """Normalize a team name for matching logos across different matches."""
@@ -1343,6 +1366,7 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None, inc
         # definition: stats exist when maps + an "all" key do.
         if not include_stats:
             m["has_stats"] = has_complete_match_stats(m)
+            m["has_details"] = has_complete_match_data(m)
             m.pop("maps", None)
             m.pop("players", None)
 
