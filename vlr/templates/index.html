@@ -34,7 +34,18 @@
             </div>
             <div class="header-right">
                 <div class="status-filters">
-                    <button id="btn-load-missing-stats" class="status-btn" style="display:none; color: var(--accent-green); border-color: rgba(0, 245, 155, 0.3); background: rgba(0, 245, 155, 0.05); margin-right: 2px; text-transform: uppercase;" title="Load missing stats"><span id="load-missing-stats-progress"></span></button>
+                    <div class="missing-stats-control">
+                        <button id="btn-load-missing-stats" class="status-btn" style="display:none; color: var(--accent-green); border-color: rgba(0, 245, 155, 0.3); background: rgba(0, 245, 155, 0.05); margin-right: 2px; text-transform: uppercase;" title="Load missing stats"><i class="fa-solid fa-database"></i><span id="load-missing-stats-progress"></span></button>
+                        <div id="load-missing-stats-status" class="missing-stats-status" hidden aria-live="polite">
+                            <div class="missing-stats-status-header">
+                                <span><i class="fa-solid fa-cloud-arrow-down"></i> Loading match stats</span>
+                                <span id="missing-stats-status-progress"></span>
+                            </div>
+                            <div id="missing-stats-current" class="missing-stats-current"></div>
+                            <div class="missing-stats-progress-track"><span id="missing-stats-progress-bar"></span></div>
+                            <div id="missing-stats-activity" class="missing-stats-activity"></div>
+                        </div>
+                    </div>
                     <select id="status-filter-select" class="per-page-select" title="Filter matches by status">
                         <option value="all">All</option>
                         <option value="live">🔴 Live</option>

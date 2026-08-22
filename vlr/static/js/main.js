@@ -38,6 +38,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const deselectAllBtn = document.getElementById("btn-deselect-all");
     const loadMissingStatsBtn = document.getElementById("btn-load-missing-stats");
     const loadMissingStatsProgress = document.getElementById("load-missing-stats-progress");
+    const missingStatsStatus = document.getElementById("load-missing-stats-status");
+    const missingStatsStatusProgress = document.getElementById("missing-stats-status-progress");
+    const missingStatsCurrent = document.getElementById("missing-stats-current");
+    const missingStatsProgressBar = document.getElementById("missing-stats-progress-bar");
+    const missingStatsActivity = document.getElementById("missing-stats-activity");
+    let missingStatsStatusTimer = null;
     const refreshBtn = document.getElementById("refresh-data-btn");
     const matchesGrid = document.getElementById("matches-grid-container");
 
@@ -751,6 +757,56 @@ document.addEventListener("DOMContentLoaded", () => {
         ).map(cb => cb.value));
     }
 
+    function missingStatsLogoMarkup(name, logo) {
+        const safeName = escapeHtml(name || "TBD");
+        const initial = escapeHtml((name || "T").trim().charAt(0).toUpperCase() || "T");
+        if (!logo) return `<span class="missing-stats-team-fallback">${initial}</span>`;
+        return `<img class="missing-stats-team-logo" src="${escapeHtml(logo)}" alt="${safeName} logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><span class="missing-stats-team-fallback" style="display:none;">${initial}</span>`;
+    }
+
+    function updateMissingStatsStatus(match, index, total, state = "loading") {
+        if (!missingStatsStatus || !missingStatsCurrent) return;
+        if (missingStatsStatusTimer) {
+            clearTimeout(missingStatsStatusTimer);
+            missingStatsStatusTimer = null;
+        }
+        missingStatsStatus.hidden = false;
+        const safeTeam1 = escapeHtml(match?.team1 || "TBD");
+        const safeTeam2 = escapeHtml(match?.team2 || "TBD");
+        const safeTournament = escapeHtml(match?.tournament || "");
+        const stateText = state === "success" ? "Loaded" : state === "failed" ? "Failed" : "Loading";
+        const stateClass = state === "failed" ? " failed" : state === "success" ? " success" : "";
+        missingStatsCurrent.innerHTML = `
+            <div class="missing-stats-current-label${stateClass}">
+                <span>${stateText}</span>
+                <small>${safeTournament}</small>
+            </div>
+            <div class="missing-stats-current-teams">
+                <div class="missing-stats-team">
+                    ${missingStatsLogoMarkup(match?.team1, match?.team1_logo)}
+                    <span class="missing-stats-team-name">${safeTeam1}</span>
+                </div>
+                <span class="missing-stats-vs">VS</span>
+                <div class="missing-stats-team">
+                    <span class="missing-stats-team-name">${safeTeam2}</span>
+                    ${missingStatsLogoMarkup(match?.team2, match?.team2_logo)}
+                </div>
+            </div>`;
+        if (missingStatsStatusProgress) missingStatsStatusProgress.textContent = `${index}/${total}`;
+        if (missingStatsProgressBar) missingStatsProgressBar.style.width = `${total ? Math.round((index / total) * 100) : 0}%`;
+    }
+
+    function addMissingStatsActivity(text, state = "success") {
+        if (!missingStatsActivity) return;
+        const row = document.createElement("div");
+        row.className = `missing-stats-activity-row${state === "failed" ? " failed" : ""}`;
+        row.innerHTML = `<i class="fa-solid ${state === "failed" ? "fa-circle-xmark" : "fa-circle-check"}"></i><span>${escapeHtml(text)}</span>`;
+        missingStatsActivity.prepend(row);
+        while (missingStatsActivity.children.length > 4) {
+            missingStatsActivity.lastElementChild.remove();
+        }
+    }
+
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
         const checkedNames = getCheckedTournamentNames();
@@ -799,6 +855,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         loadMissingStatsBtn.disabled = true;
         loadMissingStatsBtn.setAttribute("data-fetching", "true");
+
+        if (missingStatsActivity) missingStatsActivity.innerHTML = "";
+        if (missingStatsStatus) missingStatsStatus.hidden = false;
+        if (missingStatsProgressBar) missingStatsProgressBar.style.width = "0%";
         
         // Dynamically create and prepend spinner icon while fetching
         const spinner = document.createElement("i");
@@ -819,6 +879,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         for (let i = 0; i < total; i++) {
             const match = missing[i];
+            updateMissingStatsStatus(match, i + 1, total, "loading");
             if (loadMissingStatsProgress) {
                 loadMissingStatsProgress.textContent = ` ${i + 1}/${total}`;
             }
@@ -830,12 +891,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const matchTimestamp = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
             const nowMs = Date.now();
             if (matchStatus !== "completed" && matchTimestamp > nowMs) {
+                updateMissingStatsStatus(match, i + 1, total, "failed");
+                addMissingStatsActivity(`${match.team1 || "TBD"} vs ${match.team2 || "TBD"} — not finished`, "failed");
                 continue;
             }
 
             let loadedOk = false;
+            let displayMatch = match;
             try {
                 const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
+                if (data && !data.error) displayMatch = { ...match, ...data };
                 // Match-card loading and this button now use the same complete
                 // detail fetch, including player photos.
                 loadedOk = Boolean(data && !data.error && matchHasCompleteDetails(data));
@@ -962,6 +1027,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 console.error(`Failed to load details for match ${match.id}:`, err);
             }
 
+            updateMissingStatsStatus(displayMatch, i + 1, total, loadedOk ? "success" : "failed");
+            addMissingStatsActivity(
+                `${displayMatch.team1 || "TBD"} vs ${displayMatch.team2 || "TBD"}${loadedOk ? " — loaded" : " — failed"}`,
+                loadedOk ? "success" : "failed"
+            );
+
             if (loadedOk) {
                 loadedCount++;
                 consecutiveFailures = 0;
@@ -997,6 +1068,16 @@ document.addEventListener("DOMContentLoaded", () => {
         loadMissingStatsBtn.disabled = false;
         loadMissingStatsBtn.removeAttribute("data-fetching");
         updateMissingStatsLoaderButton();
+
+        if (missingStatsStatus) {
+            if (missingStatsStatusProgress) missingStatsStatusProgress.textContent = `${loadedCount}/${total} loaded`;
+            if (missingStatsProgressBar) {
+                missingStatsProgressBar.style.width = `${total ? Math.round(((loadedCount + failedCount) / total) * 100) : 0}%`;
+            }
+            missingStatsStatusTimer = setTimeout(() => {
+                missingStatsStatus.hidden = true;
+            }, 4500);
+        }
 
         // Stats in the DB changed — the leaderboard/standings cache is stale
         cachedAllMatches = null;
