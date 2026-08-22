@@ -732,6 +732,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // 2b. Missing Stats Loader Logic
     function matchHasCompleteStats(match) {
         if (!match) return false;
+        // Live data is only a partial snapshot. Keep it eligible until the
+        // match becomes Completed and a final stats page can be collected.
+        if ((match.status || "").toLowerCase() === "live") return false;
         if (typeof match.has_stats !== "undefined") return Boolean(match.has_stats);
         const maps = Array.isArray(match.maps) ? match.maps : [];
         const allStats = match.players && match.players.all;
@@ -820,11 +823,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 && /^\d+$/.test(String(m.score2 ?? ""))
                 && (parseInt(m.score1, 10) > 0 || parseInt(m.score2, 10) > 0);
             const looksCompleted = status !== "live" && hasResultScore;
-            // Known future matches are not eligible yet. Unknown-time records
-            // are included because an old event import may have lost its time
-            // even though the match has already finished.
-            return (status === "completed" || isPast || looksCompleted || hasUnknownTime)
-                && (!matchHasCompleteStats(m) || !matchHasCompleteDetails(m));
+            // Known future matches are not eligible yet. Live matches remain
+            // eligible even if their current snapshot looks complete because
+            // the final map/player data does not exist until they finish.
+            const eligible = status === "live" || status === "completed" || isPast || looksCompleted || hasUnknownTime;
+            const incomplete = status === "live" || !matchHasCompleteStats(m) || !matchHasCompleteDetails(m);
+            return eligible && incomplete;
         });
     }
 
@@ -890,7 +894,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const matchStatus = (match.status || "").toLowerCase();
             const matchTimestamp = match.unix_timestamp ? match.unix_timestamp * 1000 : 0;
             const nowMs = Date.now();
-            if (matchStatus !== "completed" && matchTimestamp > nowMs) {
+            if (matchStatus === "upcoming" && matchTimestamp > nowMs) {
                 updateMissingStatsStatus(match, i + 1, total, "failed");
                 addMissingStatsActivity(`${match.team1 || "TBD"} vs ${match.team2 || "TBD"} — not finished`, "failed");
                 continue;
@@ -916,13 +920,17 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (card) {
                         card.setAttribute("data-score1", data.score1 || "");
                         card.setAttribute("data-score2", data.score2 || "");
+                        if (data.status) card.setAttribute("data-status", data.status.toLowerCase());
                         
                         const statusBadge = card.querySelector(".match-status-badge");
                         if (statusBadge && data.status) {
                             statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
                             const hasStats = matchHasCompleteDetails(data);
-                            if (hasStats) {
+                            const dataStatus = (data.status || "").toLowerCase();
+                            if (dataStatus === "completed" && hasStats) {
                                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
+                            } else if (dataStatus === "live") {
+                                statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
                             } else {
                                 statusBadge.textContent = data.status.toUpperCase();
                             }
@@ -1001,6 +1009,10 @@ document.addEventListener("DOMContentLoaded", () => {
                                         isFullyLoaded = false;
                                         break;
                                     }
+                                } else if (status === "live") {
+                                    // A live match cannot be fully collected until it ends.
+                                    isFullyLoaded = false;
+                                    break;
                                 } else {
                                     // Non-completed (upcoming/live): if the match time has passed
                                     // but it still isn't completed with stats, it needs a fetch
@@ -1083,8 +1095,11 @@ document.addEventListener("DOMContentLoaded", () => {
         cachedAllMatches = null;
 
         // Send completion notification
+        const remainingLiveCount = getMissingStatsMatches().filter(m => (m.status || "").toLowerCase() === "live").length;
         const msg = failedCount > 0
             ? `Loaded stats for ${loadedCount} match${loadedCount === 1 ? "" : "es"}${loadedCount > 0 ? " successfully" : ""}; ${failedCount} failed (vlr.gg may be rate-limiting). Wait a few minutes and click again to retry.`
+            : remainingLiveCount > 0
+                ? `Loaded the current data for ${loadedCount} match${loadedCount === 1 ? "" : "es"}. ${remainingLiveCount} live match${remainingLiveCount === 1 ? " remains" : "es remain"} pending until finished.`
             : `Successfully loaded stats for all ${loadedCount} matches.`;
         if (typeof Notification !== "undefined" && Notification.permission === "granted") {
             new Notification("Stats Collection Completed", {
@@ -1885,6 +1900,11 @@ document.addEventListener("DOMContentLoaded", () => {
                         isFullyLoaded = false;
                         break;
                     }
+                } else if (status === "live") {
+                    // A live match is not final, so keep its tournament marked
+                    // as needing a stats scan until the match is completed.
+                    isFullyLoaded = false;
+                    break;
                 } else {
                     const hasTime = m.unix_timestamp && m.unix_timestamp !== 0 && m.bst_time;
                     if (!hasTime) {

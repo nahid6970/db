@@ -258,7 +258,12 @@ def has_complete_match_stats(match):
 
     A match can have map scores before VLR publishes its player tables.  Treat
     that state as incomplete so the missing-stats loader keeps retrying it.
+    Live matches are also incomplete by definition: their currently visible
+    maps are not the final match data yet and must be checked again after the
+    match finishes.
     """
+    if str(match.get("status") or "").casefold() == "live":
+        return False
     maps = match.get("maps") or []
     players = match.get("players") or {}
     all_stats = players.get("all") if isinstance(players, dict) else None
@@ -594,10 +599,12 @@ def load_tournament_overview(exclude_tournaments=None):
                 -- Completed matches with maps but no player stats (players_json has no "all" key data)
                 WHEN LOWER(status) = 'completed' AND maps_json IS NOT NULL AND maps_json != '[]'
                      AND (players_json IS NULL OR players_json = '{{}}' OR players_json NOT LIKE '%"all"%') THEN 1
+                -- A live match is never final, even if its current maps have stats.
+                WHEN LOWER(status) = 'live' THEN 1
                 -- Non-completed matches whose scheduled time has already passed need a re-scan
-                WHEN LOWER(status) IN ('upcoming', 'live') AND unix_timestamp IS NOT NULL AND unix_timestamp > 0 AND unix_timestamp <= ? THEN 1
+                WHEN LOWER(status) = 'upcoming' AND unix_timestamp IS NOT NULL AND unix_timestamp > 0 AND unix_timestamp <= ? THEN 1
                 -- Non-completed matches with no timestamp at all need a scan too
-                WHEN LOWER(status) IN ('upcoming', 'live') AND (unix_timestamp IS NULL OR unix_timestamp = 0) THEN 1
+                WHEN LOWER(status) = 'upcoming' AND (unix_timestamp IS NULL OR unix_timestamp = 0) THEN 1
                 ELSE 0
             END) AS missing_stats
         FROM matches
@@ -1454,7 +1461,7 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None, inc
 
 
 def load_missing_stats(delay=1.5):
-    """Find all completed matches that are missing stats, and load their details.
+    """Find completed/live matches that are missing stats, and load details.
 
     Fetches ONE match at a time with a small delay between requests instead of
     fetching many in parallel. Fetching everything at once made vlr.gg rate-limit
@@ -1466,7 +1473,7 @@ def load_missing_stats(delay=1.5):
     # Query completed matches and apply the same complete-stats predicate used
     # by the API/UI. Checking only for an "all" JSON key is not enough because
     # VLR can return an empty player table while scores/maps are already live.
-    query = "SELECT id, href, maps_json, players_json FROM matches WHERE LOWER(status) = 'completed'"
+    query = "SELECT id, href, status, maps_json, players_json FROM matches WHERE LOWER(status) IN ('completed', 'live')"
     with _get_conn() as conn:
         rows = conn.execute(query).fetchall()
 
@@ -1474,16 +1481,17 @@ def load_missing_stats(delay=1.5):
         (row["id"], row["href"])
         for row in rows
         if row["href"] and not has_complete_match_stats({
+            "status": row["status"],
             "maps": _json_loads(row["maps_json"], []),
             "players": _json_loads(row["players_json"], {}),
         })
     ]
 
     if not pending:
-        print("No completed matches missing stats.")
+        print("No completed/live matches missing stats.")
         return
         
-    print(f"Loading missing stats for {len(pending)} completed matches...")
+    print(f"Loading missing stats for {len(pending)} completed/live matches...")
     results = {}
     consecutive_failures = 0
     for mid, href in pending:
