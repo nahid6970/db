@@ -2554,7 +2554,7 @@
             {
                 "id": 38,
                 "title": "WWE Raw - 2026-08-17 - RAW 1734 HDTV-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-08-18T15:40:32.455415",
                 "notify": "seen"
             },
@@ -2895,6 +2895,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE SmackDown",
         "rating": "3",
         "episodes": [
+            {
+                "id": 33,
+                "title": "WWE SmackDown - 2026-08-21 - SmackDown 1409 HDTV-1080p",
+                "watched": true,
+                "added_date": "2026-08-22T19:36:41.231693",
+                "notify": "seen"
+            },
             {
                 "id": 32,
                 "title": "WWE SmackDown - 2026-07-31 - SmackDown 1406 WEBDL-1080p",
