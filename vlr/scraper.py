@@ -1267,6 +1267,9 @@ def _upsert_matches_to_db(scraped_matches):
     if ignored_rows:
         _ensure_ignored_db()
         with sqlite3.connect(IGNORED_DB_PATH, timeout=30) as conn:
+            # _bulk_upsert_rows reads existing rows by column name. Keep the
+            # ignored database connection consistent with _get_conn().
+            conn.row_factory = sqlite3.Row
             conn.execute("PRAGMA journal_mode=WAL")
             conn.execute("PRAGMA synchronous=NORMAL")
             _bulk_upsert_rows(conn, ignored_rows)
