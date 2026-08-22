@@ -283,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         if (data.status === "Live") {
                             statusBadge.innerHTML = '<span class="live-dot"></span> LIVE';
                         } else if (data.status === "Completed") {
-                            const hasStats = data.maps && data.maps.length > 0;
+                            const hasStats = matchHasCompleteStats(data);
                             if (hasStats) {
                                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                             } else {
@@ -335,9 +335,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const maps = data.maps || [];
         const playersByMap = data.players || {};
-        const hasStats = maps.length > 0 || Object.keys(playersByMap).length > 0;
+        const hasStats = matchHasCompleteStats(data);
+        const hasMaps = maps.length > 0;
 
-        if (!hasStats) { document.getElementById("mdm-no-stats").style.display = ""; return; }
+        if (!hasMaps && !hasStats) { document.getElementById("mdm-no-stats").style.display = ""; return; }
 
         // Render combined Maps row acting as tabs
         document.getElementById("mdm-maps-section").style.display = "";
@@ -362,6 +363,11 @@ document.addEventListener("DOMContentLoaded", () => {
             `);
         });
         document.getElementById("mdm-maps").innerHTML = mapsHtml.join("");
+
+        if (!hasStats) {
+            document.getElementById("mdm-no-stats").style.display = "";
+            return;
+        }
 
         const statsEl = document.getElementById("mdm-stats");
         const maxAcs = arr => Math.max(...arr.map(p => parseInt(p.acs) || 0));
@@ -725,6 +731,15 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCountdowns();
 
     // 2b. Missing Stats Loader Logic
+    function matchHasCompleteStats(match) {
+        if (!match) return false;
+        if (typeof match.has_stats !== "undefined") return Boolean(match.has_stats);
+        const maps = Array.isArray(match.maps) ? match.maps : [];
+        const allStats = match.players && match.players.all;
+        return maps.length > 0 && Array.isArray(allStats?.team1) && allStats.team1.length > 0
+            && Array.isArray(allStats?.team2) && allStats.team2.length > 0;
+    }
+
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
         return INITIAL_MATCHES.filter(m => {
@@ -732,17 +747,12 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!isChecked) return false;
 
             const status = (m.status || "").toLowerCase();
-            if (status === "completed") {
-                // Completed matches need fetching when stats haven't loaded yet
-                // (has_stats is computed server-side; list responses are slimmed)
-                return !m.has_stats;
-            } else {
-                // Upcoming/live matches are always considered pending:
-                // - If their time has passed, they may now have results to fetch
-                // - If their time is in the future, they will need fetching later
-                // Either way, count them so the button stays visible for future scans
-                return true;
-            }
+            const timestamp = m.unix_timestamp ? m.unix_timestamp * 1000 : 0;
+            const isPast = timestamp > 0 && timestamp <= Date.now();
+            // Do not advertise future matches as missing stats.  A match whose
+            // scheduled time has passed is included even if the listing still
+            // calls it Upcoming, because its detail page can now resolve it.
+            return (status === "completed" || isPast) && !matchHasCompleteStats(m);
         });
     }
 
@@ -809,12 +819,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
             let loadedOk = false;
             try {
-                const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
-                // Only counts as a success if the server actually returned stats.
-                // When vlr.gg throttles us, the server-side fetch fails silently and
-                // we get back the cached match with no maps — treat that as a failure.
-                loadedOk = Boolean(data && !data.error && data.maps && data.maps.length > 0);
+                const data = await fetch(`/api/match/${match.id}?refresh=true&stats_only=true`).then(r => r.json());
+                // Scores/maps may be available before the player tables.  Only
+                // complete player stats count as a successful load.
+                loadedOk = Boolean(data && !data.error && matchHasCompleteStats(data));
                 if (data && !data.error) {
+                    data.has_stats = matchHasCompleteStats(data);
                     const idx = INITIAL_MATCHES.findIndex(m => m.id === data.id);
                     if (idx !== -1) {
                         INITIAL_MATCHES[idx] = data;
@@ -828,7 +838,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         const statusBadge = card.querySelector(".match-status-badge");
                         if (statusBadge && data.status) {
                             statusBadge.className = `match-status-badge status-${data.status.toLowerCase()}`;
-                            const hasStats = data.maps && data.maps.length > 0;
+                            const hasStats = matchHasCompleteStats(data);
                             if (hasStats) {
                                 statusBadge.innerHTML = '<i class="fa-solid fa-circle-check stats-loaded-check" title="Stats Loaded"></i> COMPLETED';
                             } else {
@@ -904,7 +914,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 const status = (m.status || "").toLowerCase();
                                 if (status === "completed") {
                                     // Completed matches must have stats
-                                    const hasStats = !!m.has_stats;
+                                    const hasStats = matchHasCompleteStats(m);
                                     if (!hasStats) {
                                         isFullyLoaded = false;
                                         break;
@@ -938,7 +948,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (loadedOk) {
                 loadedCount++;
                 consecutiveFailures = 0;
-            } else if (matchStatus === "completed") {
+            } else if (((match && match.status) || "").toLowerCase() === "completed") {
                 // A completed match that returned no stats means the server-side fetch
                 // failed (e.g. vlr.gg rate-limiting) — count it as a failure.
                 failedCount++;

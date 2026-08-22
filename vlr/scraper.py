@@ -253,6 +253,28 @@ def _json_loads(value, default):
     except Exception:
         return default
 
+def has_complete_match_stats(match):
+    """Return whether a match has map results and actual player stat rows.
+
+    A match can have map scores before VLR publishes its player tables.  Treat
+    that state as incomplete so the missing-stats loader keeps retrying it.
+    """
+    maps = match.get("maps") or []
+    players = match.get("players") or {}
+    all_stats = players.get("all") if isinstance(players, dict) else None
+    if not maps or not isinstance(all_stats, dict):
+        return False
+    return bool(all_stats.get("team1")) and bool(all_stats.get("team2"))
+
+def _team_name_key(name):
+    """Normalize a team name for matching logos across different matches."""
+    value = " ".join(str(name or "").split()).strip().casefold()
+    return "" if value in {"", "tbd", "tba", "bye"} else value
+
+def _is_placeholder_team_logo(logo):
+    value = str(logo or "").lower()
+    return not value or value.endswith("/vlr.png") or "/img/vlr/tmp/" in value
+
 def _match_to_row_dict(match, fallback_id=None):
     mid = str(match.get("id") or fallback_id or "")
     if not mid:
@@ -291,6 +313,41 @@ def _row_to_match(row):
 def _bulk_upsert_rows(conn, rows):
     if not rows:
         return 0
+    # Reuse logos already learned for the same team on other matches.  Sync
+    # pages intentionally do not fetch match detail pages, so without this
+    # cache every newly discovered match would render team initials again.
+    logo_by_team = {}
+    for row in conn.execute(
+        "SELECT team1, team1_logo, team2, team2_logo FROM matches "
+        "WHERE (team1_logo IS NOT NULL AND team1_logo != '') "
+        "   OR (team2_logo IS NOT NULL AND team2_logo != '')"
+    ):
+        for name_key, logo in (
+            (_team_name_key(row["team1"]), row["team1_logo"]),
+            (_team_name_key(row["team2"]), row["team2_logo"]),
+        ):
+            if name_key and not _is_placeholder_team_logo(logo) and name_key not in logo_by_team:
+                logo_by_team[name_key] = logo
+
+    # Include logos arriving in this same batch before filling its blank sides.
+    for row in rows:
+        for name_key, logo in (
+            (_team_name_key(row.get("team1")), row.get("team1_logo")),
+            (_team_name_key(row.get("team2")), row.get("team2_logo")),
+        ):
+            if name_key and not _is_placeholder_team_logo(logo):
+                logo_by_team[name_key] = logo
+
+    for row in rows:
+        if _is_placeholder_team_logo(row.get("team1_logo")):
+            row["team1_logo"] = ""
+        if _is_placeholder_team_logo(row.get("team2_logo")):
+            row["team2_logo"] = ""
+        if not row.get("team1_logo"):
+            row["team1_logo"] = logo_by_team.get(_team_name_key(row.get("team1")), "")
+        if not row.get("team2_logo"):
+            row["team2_logo"] = logo_by_team.get(_team_name_key(row.get("team2")), "")
+
     conn.executemany(
         """
         INSERT INTO matches (
@@ -315,8 +372,8 @@ def _bulk_upsert_rows(conn, rows):
             tournament_logo=CASE WHEN COALESCE(excluded.tournament_logo, '') != '' THEN excluded.tournament_logo ELSE matches.tournament_logo END,
             eta=excluded.eta,
             status=excluded.status,
-            team1_logo=CASE WHEN COALESCE(excluded.team1_logo, '') != '' THEN excluded.team1_logo ELSE matches.team1_logo END,
-            team2_logo=CASE WHEN COALESCE(excluded.team2_logo, '') != '' THEN excluded.team2_logo ELSE matches.team2_logo END,
+            team1_logo=CASE WHEN COALESCE(excluded.team1_logo, '') != '' THEN excluded.team1_logo WHEN LOWER(COALESCE(matches.team1_logo, '')) LIKE '%/vlr.png' THEN '' ELSE matches.team1_logo END,
+            team2_logo=CASE WHEN COALESCE(excluded.team2_logo, '') != '' THEN excluded.team2_logo WHEN LOWER(COALESCE(matches.team2_logo, '')) LIKE '%/vlr.png' THEN '' ELSE matches.team2_logo END,
             unix_timestamp=CASE WHEN excluded.unix_timestamp != 0 THEN excluded.unix_timestamp ELSE matches.unix_timestamp END,
             bst_time=CASE WHEN COALESCE(excluded.bst_time, '') != '' THEN excluded.bst_time ELSE matches.bst_time END,
             maps_json=CASE WHEN COALESCE(excluded.maps_json, '[]') != '[]' AND COALESCE(excluded.maps_json, '') != '' THEN excluded.maps_json ELSE matches.maps_json END,
@@ -325,6 +382,19 @@ def _bulk_upsert_rows(conn, rows):
         """,
         rows,
     )
+
+    # Also repair older blank matches immediately when a logo is learned.
+    logo_updates = []
+    for row in conn.execute("SELECT id, team1, team1_logo, team2, team2_logo FROM matches"):
+        team1_logo = row["team1_logo"] or logo_by_team.get(_team_name_key(row["team1"]), "")
+        team2_logo = row["team2_logo"] or logo_by_team.get(_team_name_key(row["team2"]), "")
+        if team1_logo != (row["team1_logo"] or "") or team2_logo != (row["team2_logo"] or ""):
+            logo_updates.append((team1_logo, team2_logo, row["id"]))
+    if logo_updates:
+        conn.executemany(
+            "UPDATE matches SET team1_logo = ?, team2_logo = ? WHERE id = ?",
+            logo_updates,
+        )
     return len(rows)
 
 def load_json_matches(force_reload=False):
@@ -486,7 +556,66 @@ def download_image(url):
         
     return url
 
-def fetch_match_detail_page(href):
+def _parse_vlr_timestamp(raw_value):
+    """Convert VLR's Unix or New-York timestamp to Unix + Bangladesh time."""
+    if raw_value is None or raw_value == "":
+        return 0, "N/A"
+    try:
+        if str(raw_value).strip().isdigit():
+            unix_timestamp = int(raw_value)
+            dt_utc = datetime.fromtimestamp(unix_timestamp, tz=timezone.utc)
+        else:
+            dt_raw = datetime.strptime(str(raw_value).strip(), "%Y-%m-%d %H:%M:%S")
+            dt_ny = dt_raw.replace(tzinfo=zoneinfo.ZoneInfo("America/New_York"))
+            dt_utc = dt_ny.astimezone(timezone.utc)
+            unix_timestamp = int(dt_utc.timestamp())
+        dt_bst = dt_utc.astimezone(timezone(timedelta(hours=6)))
+        return unix_timestamp, dt_bst.strftime("%Y-%m-%d %I:%M %p")
+    except (TypeError, ValueError, OSError):
+        return 0, "N/A"
+
+def fetch_match_metadata_page(href):
+    """Fetch only match time and team logos, without maps/player statistics."""
+    if not href:
+        return None
+    url = f"https://www.vlr.gg{href}"
+    try:
+        response = requests.get(url, headers=HEADERS, timeout=10)
+        response.encoding = "utf-8"
+        if response.status_code != 200:
+            return None
+        soup = BeautifulSoup(response.text, "html.parser")
+        header = soup.find("div", class_="match-header")
+        if not header:
+            return None
+
+        logos = []
+        for class_name in ("mod-1", "mod-2"):
+            link = header.find("a", class_=class_name)
+            img = link.find("img") if link else None
+            logo = (img.get("src") or img.get("data-src") or "") if img else ""
+            if logo.startswith("//"):
+                logo = "https:" + logo
+            elif logo.startswith("/"):
+                logo = "https://www.vlr.gg" + logo
+            # VLR's generic placeholder is not a team logo.
+            if _is_placeholder_team_logo(logo):
+                logo = ""
+            logos.append(download_image(logo) if logo else "")
+
+        moment = header.find(class_="moment-tz-convert") or soup.find(class_="moment-tz-convert")
+        unix_timestamp, bst_time = _parse_vlr_timestamp(moment.get("data-utc-ts") if moment else "")
+        return {
+            "team1_logo": logos[0] if len(logos) > 0 else "",
+            "team2_logo": logos[1] if len(logos) > 1 else "",
+            "unix_timestamp": unix_timestamp,
+            "bst_time": bst_time,
+        }
+    except Exception as e:
+        print(f"Error fetching match metadata {url}: {e}")
+        return None
+
+def fetch_match_detail_page(href, include_player_photos=True):
     url = f"https://www.vlr.gg{href}"
     
     try:
@@ -784,7 +913,7 @@ def fetch_match_detail_page(href):
                         unique_players.setdefault(p["href"], []).append(p)
 
         # Fetch photos in parallel (max 2 workers to avoid hammering vlr.gg)
-        if unique_players:
+        if unique_players and include_player_photos:
             with ThreadPoolExecutor(max_workers=2) as executor:
                 future_to_href = {executor.submit(fetch_player_photo, href): href
                                   for href in unique_players}
@@ -900,7 +1029,7 @@ def fetch_details_in_background(scraped_matches):
                 for team in ("team1", "team2")
                 for p in map_data.get(team, [])
             )
-            has_stats = bool(current.get("maps")) and not old_format and not missing_all and not missing_photos and not missing_new_stats
+            has_stats = has_complete_match_stats(current) and not old_format and not missing_all and not missing_new_stats
 
             if not has_details or not files_exist or not has_stats:
                 pending_ids.append((mid, m["href"]))
@@ -1093,10 +1222,10 @@ def _upsert_matches_to_db(scraped_matches):
             "tournament_logo": m.get("tournament_logo", ""),
             "eta": m.get("eta", ""),
             "status": m.get("status", ""),
-            "team1_logo": "",
-            "team2_logo": "",
+            "team1_logo": m.get("team1_logo", ""),
+            "team2_logo": m.get("team2_logo", ""),
             "unix_timestamp": int(m.get("unix_timestamp") or 0),
-            "bst_time": "",
+            "bst_time": m.get("bst_time", ""),
             "maps_json": _json_dumps([]),
             "players_json": _json_dumps({}),
             "last_updated": now_ts,
@@ -1213,7 +1342,7 @@ def get_matches_for_display(tournament_names=None, exclude_tournaments=None, inc
         # work. Matches the load_tournament_overview / load_missing_stats
         # definition: stats exist when maps + an "all" key do.
         if not include_stats:
-            m["has_stats"] = bool(m.get("maps")) and "all" in (m.get("players") or {})
+            m["has_stats"] = has_complete_match_stats(m)
             m.pop("maps", None)
             m.pop("players", None)
 
@@ -1230,24 +1359,24 @@ def load_missing_stats(delay=1.5):
     it again later.
     """
     _ensure_db()
-    # Query completed matches with missing maps or players stats
-    query = """
-        SELECT id, href FROM matches 
-        WHERE LOWER(status) = 'completed' 
-          AND (
-            maps_json IS NULL OR maps_json = '[]' OR maps_json = ''
-            OR players_json IS NULL OR players_json = '{}' OR players_json = '' OR players_json NOT LIKE '%"all"%'
-          )
-    """
+    # Query completed matches and apply the same complete-stats predicate used
+    # by the API/UI. Checking only for an "all" JSON key is not enough because
+    # VLR can return an empty player table while scores/maps are already live.
+    query = "SELECT id, href, maps_json, players_json FROM matches WHERE LOWER(status) = 'completed'"
     with _get_conn() as conn:
         rows = conn.execute(query).fetchall()
-    
-    if not rows:
-        print("No completed matches missing stats.")
-        return
-        
-    pending = [(row["id"], row["href"]) for row in rows if row["href"]]
+
+    pending = [
+        (row["id"], row["href"])
+        for row in rows
+        if row["href"] and not has_complete_match_stats({
+            "maps": _json_loads(row["maps_json"], []),
+            "players": _json_loads(row["players_json"], {}),
+        })
+    ]
+
     if not pending:
+        print("No completed matches missing stats.")
         return
         
     print(f"Loading missing stats for {len(pending)} completed matches...")
@@ -1716,6 +1845,7 @@ def _parse_event_matches_from_soup(soup):
 
         team_names = []
         team_scores = []
+        team_logos = []
         series = ""
         eta = ""
         unix_ts = 0
@@ -1731,6 +1861,13 @@ def _parse_event_matches_from_soup(soup):
                     team_names.append(" ".join(name.split()))
                 score_div = tdiv.find("div", class_="bracket-item-team-score")
                 team_scores.append(score_div.get_text(" ", strip=True) if score_div else "")
+                img = tdiv.find("img")
+                logo = (img.get("src") or img.get("data-src") or "") if img else ""
+                if logo.startswith("//"):
+                    logo = "https:" + logo
+                elif logo.startswith("/"):
+                    logo = "https://www.vlr.gg" + logo
+                team_logos.append(logo if "/img/vlr/tmp/" not in logo else "")
             st_div = a.find("div", class_="bracket-item-status")
             if st_div:
                 ts = st_div.get("data-utc-ts") or ""
@@ -1788,6 +1925,8 @@ def _parse_event_matches_from_soup(soup):
             "eta": eta,
             "status": status,
             "unix_timestamp": unix_ts,
+            "team1_logo": team_logos[0] if len(team_logos) > 0 else "",
+            "team2_logo": team_logos[1] if len(team_logos) > 1 else "",
         })
     return parsed
 
@@ -1836,9 +1975,70 @@ def add_tournament(tournament):
             logo = "https://www.vlr.gg" + logo
         for m in matches:
             m["tournament_logo"] = logo
+
+    # Sidebar upcoming matches expose only a relative countdown. Fetch the
+    # small match header for exact time/team logos, without loading statistics.
+    metadata_pending = []
+    for m in matches:
+        team1_known = _team_name_key(m.get("team1")) and not m.get("team1_logo")
+        team2_known = _team_name_key(m.get("team2")) and not m.get("team2_logo")
+        if not m.get("unix_timestamp") or team1_known or team2_known:
+            metadata_pending.append(m)
+    for i, m in enumerate(metadata_pending):
+        metadata = fetch_match_metadata_page(m.get("href", ""))
+        if metadata:
+            m.update({k: v for k, v in metadata.items() if v})
+        if i + 1 < len(metadata_pending):
+            time.sleep(0.35)
+
     _upsert_matches_to_db(matches)
     print(f"Added {len(matches)} matches for tournament '{event_name}'")
     return len(matches), None
+
+
+def backfill_match_metadata(limit=12, delay=0.35):
+    """Repair missing match times/logos from lightweight match headers.
+
+    This is intentionally capped per sync so old event imports are repaired
+    over a few manual syncs without turning the normal listing sync into a
+    large detail scrape.
+    """
+    _ensure_db()
+    with _get_conn() as conn:
+        rows = conn.execute(
+            "SELECT * FROM matches WHERE unix_timestamp = 0 "
+            "OR LOWER(COALESCE(team1_logo, '')) LIKE '%/vlr.png' "
+            "OR LOWER(COALESCE(team2_logo, '')) LIKE '%/vlr.png' "
+            "OR ((team1_logo IS NULL OR team1_logo = '' OR LOWER(team1_logo) LIKE '%/vlr.png') AND LOWER(TRIM(team1)) NOT IN ('', 'tbd', 'tba', 'bye')) "
+            "OR ((team2_logo IS NULL OR team2_logo = '' OR LOWER(team2_logo) LIKE '%/vlr.png') AND LOWER(TRIM(team2)) NOT IN ('', 'tbd', 'tba', 'bye')) "
+            "ORDER BY last_updated ASC LIMIT ?",
+            (max(1, int(limit)),),
+        ).fetchall()
+
+    repaired = 0
+    for row in rows:
+        current = _row_to_match(row)
+        metadata = fetch_match_metadata_page(current.get("href", ""))
+        changed = False
+        for key in ("team1_logo", "team2_logo"):
+            if _is_placeholder_team_logo(current.get(key)) and current.get(key):
+                current[key] = ""
+                changed = True
+        if not metadata:
+            if changed:
+                upsert_match(current)
+                repaired += 1
+            continue
+        for key, value in metadata.items():
+            if value and current.get(key) != value:
+                current[key] = value
+                changed = True
+        if changed:
+            upsert_match(current)
+            repaired += 1
+        if delay:
+            time.sleep(delay)
+    return repaired
 
 
 def _loose_name_match(a, b):

@@ -199,13 +199,15 @@ def api_match_detail(match_id):
         for team in ("team1", "team2")
         for p in map_data.get(team, [])
     )
-    if (force_refresh or not match.get("maps") or old_format or missing_all or missing_photos or missing_new_stats) and match.get("href"):
-        details = scraper.fetch_match_detail_page(match["href"])
+    stats_only = request.args.get("stats_only") == "true"
+    if (force_refresh or not scraper.has_complete_match_stats(match) or old_format or missing_all or (missing_photos and not stats_only) or missing_new_stats) and match.get("href"):
+        details = scraper.fetch_match_detail_page(match["href"], include_player_photos=not stats_only)
         if details:
             match.update(details)
             if details.get("status"):
                 match["status"] = details["status"]
             scraper.upsert_match(match)
+    match["has_stats"] = scraper.has_complete_match_stats(match)
     return jsonify(match)
 
 @app.route("/api/matches")
@@ -220,6 +222,12 @@ def api_matches():
     start_page = max(1, start_page)
     end_page = max(start_page, end_page)
     scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
+
+    # Repair times and team logos for older event imports in small batches.
+    try:
+        scraper.backfill_match_metadata()
+    except Exception as e:
+        print(f"Error backfilling match metadata: {e}")
     
     # Fill logos for tournaments added before logos were stored (older adds)
     try:
