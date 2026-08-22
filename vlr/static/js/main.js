@@ -68,13 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     collapseBtn?.addEventListener("click", () => setSidebarCollapsed(true));
     expandBtn?.addEventListener("click", () => setSidebarCollapsed(false));
     
-    function updateLoadMissingStatsButton() {
-        if (loadMissingStatsBtn) {
-            const hasNotLoaded = document.querySelector(".tourney-not-loaded") !== null;
-            loadMissingStatsBtn.style.display = hasNotLoaded ? "" : "none";
-        }
-    }
-    
     // NOTE: Missing-stats loading is handled by the one-by-one client-side loop below
     // (in "2b. Missing Stats Loader Logic"). We intentionally do NOT trigger the
     // server-side bulk scraper (load_missing_stats) from this button anymore —
@@ -118,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Apply initial filters based on saved settings
     applyFilters();
-    updateLoadMissingStatsButton();
+    updateMissingStatsLoaderButton();
 
     // Check if we should auto-open a match or team history modal based on URL query parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -488,7 +481,7 @@ document.addEventListener("DOMContentLoaded", () => {
             INITIAL_MATCHES = matches;
             renderMatchesGrid(matches);
             applyFilters();
-            updateLoadMissingStatsButton();
+            updateMissingStatsLoaderButton();
             return matches;
         } catch (err) {
             console.error("Failed to refresh matches view:", err);
@@ -749,10 +742,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const status = (m.status || "").toLowerCase();
             const timestamp = m.unix_timestamp ? m.unix_timestamp * 1000 : 0;
             const isPast = timestamp > 0 && timestamp <= Date.now();
+            const hasResultScore = /^\d+$/.test(String(m.score1 ?? ""))
+                && /^\d+$/.test(String(m.score2 ?? ""))
+                && (parseInt(m.score1, 10) > 0 || parseInt(m.score2, 10) > 0);
+            const looksCompleted = status !== "live" && hasResultScore;
             // Do not advertise future matches as missing stats.  A match whose
             // scheduled time has passed is included even if the listing still
             // calls it Upcoming, because its detail page can now resolve it.
-            return (status === "completed" || isPast) && !matchHasCompleteStats(m);
+            return (status === "completed" || isPast || looksCompleted) && !matchHasCompleteStats(m);
         });
     }
 
