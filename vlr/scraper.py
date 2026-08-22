@@ -298,6 +298,74 @@ def _is_placeholder_team_logo(logo):
     value = str(logo or "").lower()
     return not value or value.endswith("/vlr.png") or "/img/vlr/tmp/" in value
 
+def _team_logo_key(logo):
+    """Return a stable identity for a team logo, regardless of its URL form."""
+    value = str(logo or "").split("?", 1)[0].rstrip("/").strip().lower()
+    if _is_placeholder_team_logo(value):
+        return ""
+    return value.rsplit("/", 1)[-1]
+
+def _team_name_preference(name):
+    """Rank names so an abbreviation loses to the full team name."""
+    value = " ".join(str(name or "").split()).strip()
+    return (len(value), value.count(" "), value.casefold())
+
+def _canonical_team_names_by_logo(conn, rows=()):
+    """Build the preferred team name for each real VLR logo identity."""
+    canonical = {}
+
+    def add(name, logo):
+        logo_key = _team_logo_key(logo)
+        name = " ".join(str(name or "").split()).strip()
+        if not logo_key or not _team_name_key(name):
+            return
+        current = canonical.get(logo_key)
+        if current is None or _team_name_preference(name) > _team_name_preference(current):
+            canonical[logo_key] = name
+
+    for row in conn.execute("SELECT team1, team1_logo, team2, team2_logo FROM matches"):
+        add(row["team1"], row["team1_logo"])
+        add(row["team2"], row["team2_logo"])
+    for row in rows:
+        add(row.get("team1"), row.get("team1_logo"))
+        add(row.get("team2"), row.get("team2_logo"))
+    return canonical
+
+def _canonicalize_rows_by_logo(conn, rows):
+    """Replace imported abbreviations with the preferred name for their logo."""
+    canonical = _canonical_team_names_by_logo(conn, rows)
+    for row in rows:
+        for team_key, logo_key in (("team1", "team1_logo"), ("team2", "team2_logo")):
+            preferred = canonical.get(_team_logo_key(row.get(logo_key)))
+            if preferred:
+                row[team_key] = preferred
+
+def backfill_team_name_aliases():
+    """Repair existing rows where one logo was stored under multiple names."""
+    _ensure_db()
+    updates = []
+    with _get_conn() as conn:
+        rows = conn.execute(
+            "SELECT id, team1, team1_logo, team2, team2_logo FROM matches"
+        ).fetchall()
+        canonical = _canonical_team_names_by_logo(conn)
+        for row in rows:
+            team1 = canonical.get(_team_logo_key(row["team1_logo"]), row["team1"] or "")
+            team2 = canonical.get(_team_logo_key(row["team2_logo"]), row["team2"] or "")
+            if team1 != (row["team1"] or "") or team2 != (row["team2"] or ""):
+                updates.append((team1, team2, row["id"]))
+        if updates:
+            conn.executemany(
+                "UPDATE matches SET team1 = ?, team2 = ? WHERE id = ?",
+                updates,
+            )
+            conn.commit()
+    if updates:
+        global _cached_matches
+        with _cache_lock:
+            _cached_matches = None
+    return len(updates)
+
 def _match_to_row_dict(match, fallback_id=None):
     mid = str(match.get("id") or fallback_id or "")
     if not mid:
@@ -370,6 +438,11 @@ def _bulk_upsert_rows(conn, rows):
             row["team1_logo"] = logo_by_team.get(_team_name_key(row.get("team1")), "")
         if not row.get("team2_logo"):
             row["team2_logo"] = logo_by_team.get(_team_name_key(row.get("team2")), "")
+
+    # A team can be abbreviated on one event phase and written in full on
+    # another (for example FNC/FNATIC).  VLR's real logo is the stable key,
+    # so use the longest known non-placeholder name before saving the rows.
+    _canonicalize_rows_by_logo(conn, rows)
 
     conn.executemany(
         """
@@ -1329,6 +1402,10 @@ def fetch_and_update_matches(pages=None, start_page=1, end_page=None):
         sync_lock.release()
 
 def get_matches_for_display(tournament_names=None, exclude_tournaments=None, include_stats=False):
+    # Older imports may already contain both an abbreviation and full name.
+    # Repair them before any UI payload is built so Team History, standings,
+    # and all other consumers see one identity.
+    backfill_team_name_aliases()
     matches_list = load_matches(tournament_names=tournament_names, exclude_tournaments=exclude_tournaments)
     
     # Sort: Live matches first, then Upcoming matches (by unix_timestamp asc), then Completed matches (by unix_timestamp desc).
