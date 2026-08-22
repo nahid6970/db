@@ -1987,12 +1987,14 @@ def _parse_event_matches_from_soup(soup):
     return parsed
 
 
-def add_tournament(tournament):
+def add_tournament(tournament, only_missing=False):
     """Fetch all matches of a tournament from its VLR.gg event page and upsert them.
 
     `tournament` is one item from get_tournaments() (has href/name). Returns
     (added_count, error_or_None). Uses the same lightweight listing parse as the
-    sync button — player stats are NOT fetched here.
+    sync button — player stats are NOT fetched here. When `only_missing` is
+    true, existing match IDs are skipped so Sync can backfill old tournaments
+    without repeatedly reprocessing every phase match.
 
     Matches are stored under the FULL event name (e.g. "VCT 2026 — EMEA Stage 2")
     rather than the page parser's series-stripped stage name, so the sidebar shows
@@ -2066,6 +2068,18 @@ def add_tournament(tournament):
         for m in matches:
             m["tournament_logo"] = logo
 
+    if only_missing:
+        _ensure_db()
+        with _get_conn() as conn:
+            existing_ids = {
+                str(row["id"])
+                for row in conn.execute("SELECT id FROM matches")
+            }
+        matches = [m for m in matches if str(m.get("id") or "") not in existing_ids]
+        if not matches:
+            print(f"No new phase matches found for tournament '{event_name}'")
+            return 0, None
+
     # Sidebar upcoming matches expose only a relative countdown. Fetch the
     # small match header for exact time/team logos, without loading statistics.
     metadata_pending = []
@@ -2084,6 +2098,59 @@ def add_tournament(tournament):
     _upsert_matches_to_db(matches)
     print(f"Added {len(matches)} matches for tournament '{event_name}'")
     return len(matches), None
+
+
+def sync_existing_tournament_phases():
+    """Backfill missing phase matches for tournaments already in the main DB.
+
+    The regular /matches sync cannot discover older group/play-in matches that
+    are no longer on VLR's recent-results pages. Use the cached /events list to
+    find each imported tournament's event URL, then let add_tournament fetch all
+    linked phases while skipping IDs already present in SQLite.
+    """
+    if not sync_lock.acquire(blocking=False):
+        print("Tournament phase sync already in progress. Skipping.")
+        return 0
+
+    try:
+        known_names = get_known_tournament_names()
+        if not known_names:
+            return 0
+
+        result = get_tournaments(pages=1)
+        cached_tournaments = result.get("tournaments") or []
+        targets = []
+        for known_name in sorted(known_names):
+            hits = [
+                t for t in cached_tournaments
+                if _loose_name_match(known_name, t.get("name", "")) and t.get("href")
+            ]
+            if hits:
+                # Prefer the most specific cached event name when a generic
+                # imported name matches more than one cached tournament.
+                targets.append(max(hits, key=lambda t: len(t.get("name", ""))))
+
+        total_added = 0
+        seen_targets = set()
+        for index, tournament in enumerate(targets):
+            target_key = tournament.get("href") or tournament.get("name")
+            if target_key in seen_targets:
+                continue
+            seen_targets.add(target_key)
+            added, error = add_tournament(tournament, only_missing=True)
+            total_added += added
+            if error:
+                print(f"Could not backfill phases for '{tournament.get('name', '')}': {error}")
+            if index + 1 < len(targets):
+                time.sleep(0.8)
+
+        if total_added:
+            print(f"Backfilled {total_added} missing tournament-phase matches.")
+        else:
+            print("No missing tournament-phase matches found.")
+        return total_added
+    finally:
+        sync_lock.release()
 
 
 def backfill_match_metadata(limit=12, delay=0.35):

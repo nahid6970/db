@@ -221,6 +221,13 @@ def api_matches():
     end_page = max(start_page, end_page)
     scraper.fetch_and_update_matches(start_page=start_page, end_page=end_page)
 
+    # Existing imported event pages can contain older Group Stage/Play-In
+    # matches that are no longer present in VLR's recent-results feed.
+    try:
+        scraper.sync_existing_tournament_phases()
+    except Exception as e:
+        print(f"Error backfilling tournament phases: {e}")
+
     # Repair times and team logos for older event imports in small batches.
     try:
         scraper.backfill_match_metadata()
