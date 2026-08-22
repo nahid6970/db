@@ -107,8 +107,8 @@ def _get_visible_matches():
 
     matches = scraper.get_matches_for_display(
         # Send all non-ignored matches to the client. The sidebar checkbox
-        # controls visibility in JS, while the missing-stats loader must still
-        # inspect every DB match, including unchecked tournaments.
+        # controls visibility in JS; the missing-stats loader applies the
+        # checked-tournament filter on the client before counting/loading.
         tournament_names=tournament_names if tournament_names else [],
     )
     return settings, ignore_list, tournament_rows, matches

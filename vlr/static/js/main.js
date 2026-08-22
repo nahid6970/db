@@ -745,9 +745,17 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
+    function getCheckedTournamentNames() {
+        return new Set(Array.from(
+            document.querySelectorAll("#tournament-checklist .tourney-checkbox:checked")
+        ).map(cb => cb.value));
+    }
+
     function getMissingStatsMatches() {
         if (typeof INITIAL_MATCHES === "undefined" || !INITIAL_MATCHES) return [];
+        const checkedNames = getCheckedTournamentNames();
         return INITIAL_MATCHES.filter(m => {
+            if (!m || !checkedNames.has(m.tournament)) return false;
             const status = (m.status || "").toLowerCase();
             const timestamp = m.unix_timestamp ? m.unix_timestamp * 1000 : 0;
             const isPast = timestamp > 0 && timestamp <= Date.now();
@@ -1830,6 +1838,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 applyFilters();
                 saveTournamentSettings();
+                updateMissingStatsLoaderButton();
             });
         });
         
@@ -2107,6 +2116,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector(`.tourney-item[data-tourney-name="${CSS.escape(t.name)}"]`)?.remove();
             checkedTournaments.delete(t.name);
         });
+        updateMissingStatsLoaderButton();
         const countEl = document.getElementById("tourney-count");
         if (countEl) countEl.textContent = `(${document.querySelectorAll(".tourney-item").length})`;
         const names = targets.map(t => t.name);
