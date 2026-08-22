@@ -1903,6 +1903,35 @@ def _parse_event_matches_from_soup(soup):
                 eta = " ".join(st_div.get_text(" ", strip=True).split())
                 if "live" in " ".join(st_div.get("class", []) or []).lower():
                     status = "Live"
+        elif "event-group-series-match" in classes:
+            # Group-stage match card. These are wf-card links with a different
+            # team/score structure from both bracket-item and sidebar matches.
+            for tdiv in a.find_all("div", class_="team", recursive=False):
+                name_div = tdiv.find("div", class_="team-name")
+                if name_div:
+                    team_names.append(" ".join(name_div.get_text(" ", strip=True).split()))
+                img = tdiv.find("img")
+                logo = (img.get("src") or img.get("data-src") or "") if img else ""
+                if logo.startswith("//"):
+                    logo = "https:" + logo
+                elif logo.startswith("/"):
+                    logo = "https://www.vlr.gg" + logo
+                team_logos.append(logo if "/img/vlr/tmp/" not in logo else "")
+            score_div = a.find("div", class_="score")
+            if score_div:
+                left = score_div.find("div", class_="score-left")
+                right = score_div.find("div", class_="score-right")
+                team_scores = [
+                    left.get_text(" ", strip=True) if left else "",
+                    right.get_text(" ", strip=True) if right else "",
+                ]
+            series_div = a.find("span", class_="ss-name mod-full")
+            if series_div:
+                series = " ".join(series_div.get_text(" ", strip=True).split())
+            date_div = a.find("b")
+            if date_div:
+                eta = " ".join(date_div.parent.get_text(" ", strip=True).split())
+
         else:
             # Upcoming sidebar match (wf-module-item)
             series_div = a.find("div", class_="event-sidebar-matches-series")
@@ -1979,7 +2008,41 @@ def add_tournament(tournament):
     if soup is None:
         print(f"Failed to fetch event page {url}: {fetch_error}")
         return 0, f"Could not reach the tournament page ({fetch_error})."
-    matches = _parse_matches_from_soup(soup) or _parse_event_matches_from_soup(soup)
+    # VLR splits many tournaments into separate phase URLs. The main event
+    # page usually contains only the currently active phase (often playoffs),
+    # while Group Stage and Play-Ins are linked from the phase navigation.
+    page_soups = [soup]
+    base_event_path = href.split("?", 1)[0].rstrip("/")
+    stage_hrefs = []
+    for anchor in soup.find_all("a", href=True):
+        candidate = (anchor.get("href") or "").split("?", 1)[0].rstrip("/")
+        if candidate.startswith(base_event_path + "/") and candidate.count("/") == base_event_path.count("/") + 1:
+            if candidate not in stage_hrefs:
+                stage_hrefs.append(candidate)
+
+    for stage_href in stage_hrefs:
+        stage_url = f"https://www.vlr.gg{stage_href}"
+        stage_soup, stage_error = _fetch_with_retry(stage_url, timeout=25)
+        if stage_soup is not None:
+            page_soups.append(stage_soup)
+        else:
+            print(f"Could not fetch tournament phase {stage_url}: {stage_error}")
+        if stage_href != stage_hrefs[-1]:
+            time.sleep(0.5)
+
+    # Run both parsers on every phase and merge by match ID. Some pages use
+    # the /matches-style wf-card parser while others use event-specific cards.
+    matches = []
+    seen_match_ids = set()
+    for page_soup in page_soups:
+        page_matches = _parse_matches_from_soup(page_soup)
+        page_matches.extend(_parse_event_matches_from_soup(page_soup))
+        for match in page_matches:
+            match_id = str(match.get("id") or "")
+            if not match_id or match_id in seen_match_ids:
+                continue
+            seen_match_ids.add(match_id)
+            matches.append(match)
     if not matches:
         print(f"No matches parsed from event page {url}")
         return 0, "No matches found on the tournament page."
