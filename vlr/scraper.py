@@ -678,7 +678,12 @@ def _parse_vlr_timestamp(raw_value):
         return 0, "N/A"
 
 def fetch_match_metadata_page(href):
-    """Fetch only match time and team logos, without maps/player statistics."""
+    """Fetch lightweight match metadata without maps/player statistics.
+
+    The match page is also the quickest source for resolving TBD teams after
+    an earlier bracket match finishes, so include the current team names in
+    addition to the existing logo/time fields.
+    """
     if not href:
         return None
     url = f"https://www.vlr.gg{href}"
@@ -692,9 +697,24 @@ def fetch_match_metadata_page(href):
         if not header:
             return None
 
+        team_names = []
         logos = []
         for class_name in ("mod-1", "mod-2"):
             link = header.find("a", class_=class_name)
+            name = ""
+            if link:
+                name_node = link.select_one(
+                    ".match-header-link-item-name .wf-title-med, "
+                    ".match-header-link-item-name, "
+                    ".match-header-link-name, "
+                    ".team-name"
+                )
+                if name_node:
+                    name = " ".join(name_node.get_text(" ", strip=True).split())
+                if not name:
+                    name = " ".join(link.get_text(" ", strip=True).split())
+            team_names.append(name or "TBD")
+
             img = link.find("img") if link else None
             logo = (img.get("src") or img.get("data-src") or "") if img else ""
             if logo.startswith("//"):
@@ -709,6 +729,8 @@ def fetch_match_metadata_page(href):
         moment = header.find(class_="moment-tz-convert") or soup.find(class_="moment-tz-convert")
         unix_timestamp, bst_time = _parse_vlr_timestamp(moment.get("data-utc-ts") if moment else "")
         return {
+            "team1": team_names[0] if len(team_names) > 0 else "TBD",
+            "team2": team_names[1] if len(team_names) > 1 else "TBD",
             "team1_logo": logos[0] if len(logos) > 0 else "",
             "team2_logo": logos[1] if len(logos) > 1 else "",
             "unix_timestamp": unix_timestamp,
@@ -717,6 +739,73 @@ def fetch_match_metadata_page(href):
     except Exception as e:
         print(f"Error fetching match metadata {url}: {e}")
         return None
+
+
+def refresh_future_match_teams(tournaments, delay=0.35):
+    """Resolve TBD teams in upcoming matches for the supplied tournaments.
+
+    This deliberately fetches only future matches that still contain a
+    placeholder team. It is used by the missing-stats button after completed
+    results are loaded, avoiding the much broader /matches sync.
+    """
+    names = [str(name).strip() for name in (tournaments or []) if name and str(name).strip()]
+    if not names:
+        return {"updated": 0, "checked": 0}
+
+    _ensure_db()
+    placeholders = {"", "tbd", "tba", "bye", "-", "—"}
+
+    def is_placeholder(name):
+        return " ".join(str(name or "").split()).strip().casefold() in placeholders
+
+    placeholders_sql = "LOWER(TRIM(COALESCE(team1, ''))) IN ('', 'tbd', 'tba', 'bye', '-', '—')"
+    placeholders_sql += " OR LOWER(TRIM(COALESCE(team2, ''))) IN ('', 'tbd', 'tba', 'bye', '-', '—')"
+    tournament_sql = ",".join("?" for _ in names)
+    now_ts = int(datetime.now().timestamp())
+    query = (
+        "SELECT * FROM matches "
+        f"WHERE tournament IN ({tournament_sql}) "
+        "AND LOWER(COALESCE(status, '')) = 'upcoming' "
+        "AND (unix_timestamp = 0 OR unix_timestamp >= ?) "
+        f"AND ({placeholders_sql}) "
+        "ORDER BY CASE WHEN unix_timestamp = 0 THEN 1 ELSE 0 END, unix_timestamp ASC"
+    )
+    with _get_conn() as conn:
+        rows = conn.execute(query, [*names, now_ts]).fetchall()
+
+    updated = 0
+    for index, row in enumerate(rows):
+        current = _row_to_match(row)
+        metadata = fetch_match_metadata_page(current.get("href"))
+        if metadata:
+            changed = False
+            for side in ("team1", "team2"):
+                new_name = metadata.get(side, "")
+                old_name = current.get(side, "")
+                # Never replace a name already resolved in our DB with a
+                # transient TBD response from VLR.
+                if new_name and (not is_placeholder(old_name) or not is_placeholder(new_name)):
+                    if is_placeholder(new_name) and not is_placeholder(old_name):
+                        continue
+                    if new_name != old_name:
+                        current[side] = new_name
+                        changed = True
+
+            for key in ("team1_logo", "team2_logo", "unix_timestamp", "bst_time"):
+                value = metadata.get(key)
+                if value and value != current.get(key):
+                    current[key] = value
+                    changed = True
+
+            if changed:
+                current["last_updated"] = int(datetime.now().timestamp())
+                upsert_match(current)
+                updated += 1
+
+        if index + 1 < len(rows):
+            time.sleep(delay)
+
+    return {"updated": updated, "checked": len(rows)}
 
 def fetch_match_detail_page(href, include_player_photos=True):
     url = f"https://www.vlr.gg{href}"

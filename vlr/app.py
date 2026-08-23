@@ -265,6 +265,22 @@ def api_matches_view():
     )
     return jsonify(matches)
 
+
+@app.route("/api/matches/refresh-future", methods=["POST"])
+def api_refresh_future_matches():
+    """Resolve upcoming TBD teams without running the full match sync."""
+    payload = request.get_json(silent=True) or {}
+    tournaments = payload.get("tournaments", [])
+    if not isinstance(tournaments, list):
+        return jsonify({"error": "tournaments must be a list"}), 400
+
+    try:
+        result = scraper.refresh_future_match_teams(tournaments)
+        return jsonify(result)
+    except Exception as e:
+        print(f"Error refreshing future match teams: {e}")
+        return jsonify({"error": "future match refresh failed"}), 500
+
 @app.route("/api/matches/all")
 def api_matches_all():
     """Return ALL matches from DB WITH full stats (leaderboard/standings).

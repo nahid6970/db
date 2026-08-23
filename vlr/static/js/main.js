@@ -874,6 +874,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let loadedCount = 0;
         let failedCount = 0;
         let consecutiveFailures = 0;
+        const futureRefreshTournaments = new Set();
 
         // Gentler pacing: wait between matches so vlr.gg doesn't rate-limit/block us.
         // After a failed fetch we wait much longer to give the site time to recover.
@@ -905,6 +906,10 @@ document.addEventListener("DOMContentLoaded", () => {
             try {
                 const data = await fetch(`/api/match/${match.id}?refresh=true`).then(r => r.json());
                 if (data && !data.error) displayMatch = { ...match, ...data };
+                const affectedTournament = data && !data.error ? (data.tournament || match.tournament) : "";
+                if (affectedTournament && String(data.status || match.status || "").toLowerCase() === "completed") {
+                    futureRefreshTournaments.add(affectedTournament);
+                }
                 // Match-card loading and this button now use the same complete
                 // detail fetch, including player photos.
                 loadedOk = Boolean(data && !data.error && matchHasCompleteDetails(data));
@@ -1075,6 +1080,34 @@ document.addEventListener("DOMContentLoaded", () => {
             await new Promise(r => setTimeout(r, waitMs));
         }
 
+        // A completed bracket match can decide the teams in later TBD matches.
+        // Resolve only those future matches in the affected tournaments; the
+        // full refresh button also scrapes the global match feeds and is much
+        // slower than this targeted metadata pass.
+        let futureMatchesUpdated = 0;
+        if (futureRefreshTournaments.size > 0) {
+            if (loadMissingStatsProgress) loadMissingStatsProgress.textContent = " Updating next matches…";
+            try {
+                const response = await fetch("/api/matches/refresh-future", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ tournaments: Array.from(futureRefreshTournaments) })
+                });
+                if (!response.ok) throw new Error("Future match refresh failed");
+                const result = await response.json();
+                futureMatchesUpdated = Number(result.updated) || 0;
+                if (futureMatchesUpdated > 0) {
+                    await reloadMatchesFromView();
+                    addMissingStatsActivity(
+                        `Updated ${futureMatchesUpdated} future TBD match${futureMatchesUpdated === 1 ? "" : "es"}`,
+                        "success"
+                    );
+                }
+            } catch (err) {
+                console.error("Failed to refresh future match teams:", err);
+            }
+        }
+
         // Clean up spinner
         spinner.remove();
         loadMissingStatsBtn.disabled = false;
@@ -1101,12 +1134,15 @@ document.addEventListener("DOMContentLoaded", () => {
             : remainingLiveCount > 0
                 ? `Loaded the current data for ${loadedCount} match${loadedCount === 1 ? "" : "es"}. ${remainingLiveCount} live match${remainingLiveCount === 1 ? " remains" : "es remain"} pending until finished.`
             : `Successfully loaded stats for all ${loadedCount} matches.`;
+        const futureUpdateMsg = futureMatchesUpdated > 0
+            ? ` Updated ${futureMatchesUpdated} future match${futureMatchesUpdated === 1 ? "" : "es"}.`
+            : "";
         if (typeof Notification !== "undefined" && Notification.permission === "granted") {
             new Notification("Stats Collection Completed", {
-                body: msg
+                body: msg + futureUpdateMsg
             });
         } else {
-            alert("Stats Collection Completed: " + msg);
+            alert("Stats Collection Completed: " + msg + futureUpdateMsg);
         }
     });
 
