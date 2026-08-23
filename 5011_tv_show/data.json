@@ -2317,6 +2317,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
+                "id": 13,
+                "title": "The Walking Dead - Dead City - S03E05 - Imperialis",
+                "watched": false,
+                "added_date": "2026-08-23T15:12:53.770116",
+                "notify": "unseen"
+            },
+            {
                 "id": 12,
                 "title": "The Walking Dead - Dead City - S03E04 - Found+Lost",
                 "watched": false,
