@@ -7,6 +7,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\One Piece",
         "episodes": [
             {
+                "id": 47,
+                "title": "One Piece - s23e20 - [1175] - Elbaph in Flames! Jinbe's Shoulder Throw Explodes! WEBDL-1080p - [Erai-raws]",
+                "watched": true,
+                "added_date": "2026-08-24T12:24:20.029770",
+                "notify": "seen"
+            },
+            {
                 "id": 48,
                 "title": "One Piece - s23e19 - [1174] - Save the Children! The Elbaph Warriors Rise Up WEBDL-1080p - [ToonsHub]",
                 "watched": true,
@@ -1577,6 +1584,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Mushoku Tensei - Jobless Reincarnation",
         "episodes": [
             {
+                "id": 20,
+                "title": "Mushoku Tensei - Jobless Reincarnation - s03e09 - [58] - Lament WEBDL-1080p - [Erai-raws]",
+                "watched": false,
+                "added_date": "2026-08-23T21:23:20.478053",
+                "notify": "seen"
+            },
+            {
                 "id": 19,
                 "title": "Mushoku Tensei - Jobless Reincarnation - s03e08 - [57] - The Flying Fortress HDTV-1080p - [SubsPlease]",
                 "watched": false,
@@ -2321,7 +2335,7 @@
                 "title": "The Walking Dead - Dead City - S03E05 - Imperialis",
                 "watched": false,
                 "added_date": "2026-08-23T15:12:53.770116",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 12,
