@@ -250,6 +250,7 @@
     "309": "@@",
     "31": "সাধারণ জ্ঞান",
     "310": "@@",
+    "311": "@@",
     "32": "সাধারণ জ্ঞান",
     "33": "সাধারণ জ্ঞান",
     "34": "সাধারণ জ্ঞান",
@@ -23074,6 +23075,33 @@
       "rows": [
         [
           "ᴃᴃYasirᴃᴃ\n1.  **Sales Overview (The Dashboard):** \n    *   Explain the \"Sales Analysis\" graph at the top.\n    *   Document the cards (Quotations, Quotations Sent, Sales Orders).\n2.  **Quotation Lifecycle:** \n    *   How to create a Quotation.\n    *   The \"Action Buttons\": What do **\"Send by Email\"**, **\"Print\"**, and **\"Confirm\"** do?\n    *   Document the **Status Bar** (Draft $\\rightarrow$ Sent $\\rightarrow$ Sales Order).\n3.  **Customer Communication:** \n    *   Documenting the **Chatter** within a Sale.\n    *   The **\"Customer Preview\"** button (how the customer sees the quote online).\n    *   Electronic Signatures (Odoo Sign integration).\n4.  **Reporting:** \n    *   Documenting the **Sales Analysis** menu (how to use Pivot and Graph views to see sales data).\n\nᴃᴃNahidᴃᴃ\n### **Person B: Products, Pricing & Invoicing Logic (The \"Back-End\")**\nThis person documents the settings, the products, and the business rules that make Sales work.\n\n1.  **Product Management:** \n    *   Documenting the Product form (Product Type, Sales Price, Cost).\n    *   **Product Variants:** How to set up different sizes/colors.\n    *   Units of Measure (UoM).\n2.  **Pricing & Loyalty:** \n    *   **Pricelists:** Documenting how to set up automatic discounts or multi-currency pricing.\n    *   **Promotions & Coupons:** How to document \"Buy X Get Y Free\" or discount codes.\n3.  **Invoicing Logic (The \"BA\" Core):** \n    *   **Invoicing Policies:** Explaining the difference between \"Ordered Quantities\" and \"Delivered Quantities.\"\n    *   Documenting **Down Payments** (how to ask for a percentage of the money upfront).\n4.  **Optional/Settings:** \n    *   Documenting the **\"Settings\"** menu (e.g., enabling \"Online Signature,\" \"Pricelists,\" or \"Shipping Costs\").\n"
+        ]
+      ]
+    },
+    {
+      "cellStyles": {},
+      "columns": [
+        {
+          "color": "#ffffff",
+          "font": "JetBrains Mono",
+          "fontSize": 20,
+          "headerBgColor": "#f8f9fa",
+          "headerBold": true,
+          "headerCenter": false,
+          "headerItalic": false,
+          "headerTextColor": "#333333",
+          "name": "A",
+          "textColor": "#000000",
+          "type": "text",
+          "width": 150
+        }
+      ],
+      "customIndex": "20260825193317",
+      "mergedCells": {},
+      "name": "Presentation",
+      "rows": [
+        [
+          "#1.5#Odoo Presentation Study Notes#/#\n\n##Topic 1: User Creation, Access Rights, and Password Setup##\n\n??Online Screen-Share Presentation??\n\n##1. Introduction and Screen Check##\nᴃᴃAction: Share screen on Odoo Dashboardᴃᴃ\n\n\"Hello everyone, good [morning/afternoon]. Can everyone hear me  and see my screen?\n\nGreat. Today, I will show you how **__CRM, SALES & PURCHASE__** Modules Work but before that let me show u how to create users and manage access rights in Odoo. As you will see, it is very simple, fast, and keeps our company data completely safe.\"\n\n##2. Creating a New User##\nᴃᴃAction: Click Settings ➔ Users & Companies ➔ Users ➔ Click 'New'ᴃᴃ\n\n\"Right now, I am on the Users page. To add a new team member, we just click the **New** button here at the top. We only need to enter their basic details: the employee’s **Name** and their **Work Email address**.\"\n\n##3. Setting Access Rights (Permissions)##\nᴃᴃAction: Point mouse to the 'Access Rights' section belowᴃᴃ\n\n\"Now, looking below at the **Access Rights** section—this is the most important part. Here, we decide exactly what this person can see and do in the system.\n\nFor example:\n- In the **Sales** section, we can set it so a salesperson only sees their own leads, not the entire company's pipeline.\n- In **Inventory and Purchase**, we can allow warehouse staff to see stock levels, but hide the buying prices and profit margins.\n- And for **Accounting**, we can completely hide all financial reports and invoices from non-finance staff.\n\nThis ensures that every employee only sees the tools they need for their daily job, and our sensitive company data stays private.\"\n\n##4. Password Setup and Login##\nᴃᴃAction: Point mouse to top buttons: 'Send Invitation' and 'Action' menuᴃᴃ\n\n\"Finally, for the password and login:\n- We can click **Send Invitation Email**. Odoo will send an email with a secure link so the employee can create their own private password.\n- Or, if someone is locked out, an admin can click **Actions** at the top and reset their password manually in just a few seconds.\n\nThe entire process takes less than two minutes to set up a user safely.\"\n\n##5. Wrap-up##\nᴃᴃAction: Stay on the current pageᴃᴃ\n\n\"That covers user creation and access rights. Do you have any questions on this before we move to the next part?\"\n\n---\n\n#1.5#Topic 2: Contacts Module Overview#/#\n\n??Online Screen-Share Presentation - Approx 2 Minutes??\n\n##1. Centralized Address Book##\nᴃᴃAction: Click on 'Contacts' app on the dashboardᴃᴃ\n\n\"Now, let’s move to the **Contacts** module.\n\nIn Odoo, the Contacts app serves as our single, centralized address book for the entire company. Instead of having separate lists for customers, vendors, and partners, everything is saved in this one place. This means we never duplicate contact details across different departments.\"\n\n##2. Company and Individual Hierarchy##\nᴃᴃAction: Click 'New' or open an existing company contact cardᴃᴃ\n\n\"When we create or open a contact, the first thing we choose is whether it is an **Individual** or a **Company**.\n\nIf it is a company, we can add multiple contact persons under it. For example, right here below, we can add:\n- The general manager’s direct number,\n- The accounts person with their specific email,\n- And different addresses—like a separate billing address and a separate delivery warehouse address.\n\nThis helps our team send invoices and deliveries to the right place every time without making mistakes.\"\n\n##3. Smart Buttons (360-Degree View)##\nᴃᴃAction: Point mouse to the 'Smart Buttons' at the top right of the cardᴃᴃ\n\n\"Now, if you look at the top right corner of the contact card, you will see these icons—in Odoo, these are called **Smart Buttons**.\n\nThis is one of the most powerful features for management:\n- With just one click, you can see the complete history of this customer: all their past quotations, confirmed sales orders, pending invoices, and even support tickets.\n- If it is a supplier, you can instantly see all our purchase orders and bills with them.\n\nYou don't need to ask the sales team or finance team for reports—everything is connected in one place.\"\n\n##4. Search, Filters, and Closing##\nᴃᴃAction: Show the main search bar and click 'Filters'ᴃᴃ\n\n\"Lastly, finding contacts is very fast. Using the search bar and filters at the top, we can instantly filter by **Customers**, **Vendors**, or group them by country, city, or sales representative.\n\nTo sum it up, the Contacts module gives us a complete, 360-degree view of everyone we do business with.\n\nThat is how Odoo handles contacts. Are there any questions here before we move on?\"\n"
         ]
       ]
     }
