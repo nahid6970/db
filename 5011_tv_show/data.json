@@ -1807,6 +1807,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Reacher",
         "episodes": [
             {
+                "id": 13,
+                "title": "Reacher - S04E05 - Bridge",
+                "watched": false,
+                "added_date": "2026-08-26T14:55:31.352271",
+                "notify": "seen"
+            },
+            {
                 "id": 12,
                 "title": "Reacher - S04E04 - Karambits and Pieces",
                 "watched": false,
@@ -2575,9 +2582,9 @@
             {
                 "id": 39,
                 "title": "WWE Raw - 2026-08-24 - RAW 1735 WEBDL-1080p",
-                "watched": false,
+                "watched": true,
                 "added_date": "2026-08-25T19:39:44.010268",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "id": 38,
