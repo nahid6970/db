@@ -299,6 +299,24 @@ def _team_name_key(name):
     value = " ".join(str(name or "").split()).strip().casefold()
     return "" if value in {"", "tbd", "tba", "bye"} else value
 
+
+def _team_name_variant_key(name):
+    """Keep distinct roster/league variants separate during logo aliasing.
+
+    VLR sometimes reuses a parent organization's logo for variants such as
+    Game Changers teams. Those qualifiers are meaningful, so ``Gen.G`` and
+    ``Gen.G GC`` must not be collapsed into one canonical name.
+    """
+    normalized = re.sub(r"[^a-z0-9]+", " ", str(name or "").casefold())
+    tokens = set(normalized.split())
+    variant_tokens = tokens & {
+        "academy", "changers", "college", "collegiate", "female", "ladies",
+        "junior", "juniors", "rising", "university", "women", "womens", "youth"
+    }
+    if "gc" in tokens or {"game", "changers"}.issubset(tokens):
+        variant_tokens.add("gc")
+    return "|".join(sorted(variant_tokens))
+
 def _is_placeholder_team_logo(logo):
     value = str(logo or "").lower()
     return not value or value.endswith("/vlr.png") or "/img/vlr/tmp/" in value
@@ -324,9 +342,10 @@ def _canonical_team_names_by_logo(conn, rows=()):
         name = " ".join(str(name or "").split()).strip()
         if not logo_key or not _team_name_key(name):
             return
-        current = canonical.get(logo_key)
+        key = (logo_key, _team_name_variant_key(name))
+        current = canonical.get(key)
         if current is None or _team_name_preference(name) > _team_name_preference(current):
-            canonical[logo_key] = name
+            canonical[key] = name
 
     for row in conn.execute("SELECT team1, team1_logo, team2, team2_logo FROM matches"):
         add(row["team1"], row["team1_logo"])
@@ -341,7 +360,11 @@ def _canonicalize_rows_by_logo(conn, rows):
     canonical = _canonical_team_names_by_logo(conn, rows)
     for row in rows:
         for team_key, logo_key in (("team1", "team1_logo"), ("team2", "team2_logo")):
-            preferred = canonical.get(_team_logo_key(row.get(logo_key)))
+            key = (
+                _team_logo_key(row.get(logo_key)),
+                _team_name_variant_key(row.get(team_key)),
+            )
+            preferred = canonical.get(key)
             if preferred:
                 row[team_key] = preferred
 
@@ -355,8 +378,10 @@ def backfill_team_name_aliases():
         ).fetchall()
         canonical = _canonical_team_names_by_logo(conn)
         for row in rows:
-            team1 = canonical.get(_team_logo_key(row["team1_logo"]), row["team1"] or "")
-            team2 = canonical.get(_team_logo_key(row["team2_logo"]), row["team2"] or "")
+            team1_key = (_team_logo_key(row["team1_logo"]), _team_name_variant_key(row["team1"]))
+            team2_key = (_team_logo_key(row["team2_logo"]), _team_name_variant_key(row["team2"]))
+            team1 = canonical.get(team1_key, row["team1"] or "")
+            team2 = canonical.get(team2_key, row["team2"] or "")
             if team1 != (row["team1"] or "") or team2 != (row["team2"] or ""):
                 updates.append((team1, team2, row["id"]))
         if updates:
@@ -704,6 +729,7 @@ def fetch_match_metadata_page(href):
             name = ""
             if link:
                 name_node = link.select_one(
+                    ".match-header-link-name .wf-title-med, "
                     ".match-header-link-item-name .wf-title-med, "
                     ".match-header-link-item-name, "
                     ".match-header-link-name, "
