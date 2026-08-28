@@ -5395,6 +5395,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 6,
+                "title": "Silo - S03E09 - Farewell",
+                "watched": true,
+                "added_date": "2026-08-28T13:05:43.414000",
+                "notify": "seen"
+            },
+            {
                 "id": 5,
                 "title": "Silo - S03E08 - Gray Goo",
                 "watched": true,
