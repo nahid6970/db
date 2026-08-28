@@ -2369,6 +2369,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         photo: p.photo || "",
                                         teamLogo: splitByTeam ? currentTeamLogo : "",
                                         teamName: splitByTeam ? currentTeamName : "",
+                                        teamNames: new Set(),
                                         agents: {}, // name -> { icon, count }
                                         matchesPlayed: 0,
                                         ratingsList: [],
@@ -2386,6 +2387,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                                 const agg = playersMap[key];
                                 agg.matchesPlayed++;
+                                if (currentTeamName) agg.teamNames.add(currentTeamName);
                                 
                                 if (!agg.photo && p.photo) agg.photo = p.photo;
                                 if (splitByTeam) {
@@ -2462,6 +2464,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 photo: agg.photo,
                 teamLogo: agg.teamLogo,
                 teamName: agg.teamName,
+                teamNames: Array.from(agg.teamNames),
                 agents: sortedAgents,
                 matchesPlayed: agg.matchesPlayed,
                 rating: avgRating ? avgRating.toFixed(2) : "N/A",
@@ -2539,7 +2542,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             tbody.innerHTML = aggregates.map(p => {
                 const teamWhite = whiteLogoTeams.has(p.teamName);
-                return `<tr>
+                const searchableTeamNames = (p.teamNames || []).join(" ");
+                return `<tr data-team-names="${escapeHtml(searchableTeamNames)}">
                     <td><div class="mdm-player-cell">${p.teamLogo ? `<img class="mdm-player-team-logo ${teamWhite ? 'white-bg-logo' : ''}" src="${p.teamLogo}" alt="" title="${p.teamName || 'Team Logo'}">` : ''}${p.photo ? `<img class="mdm-player-photo" src="${p.photo}" alt="${p.name}">` : '<div class="mdm-player-photo-placeholder"></div>'}<span>${p.name}</span></div></td>
                     <td>${renderAgents(p.agents)}</td>
                     <td class="r">${p.matchesPlayed}</td>
@@ -2558,21 +2562,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 </tr>`;
             }).join("");
 
-            // Apply current search query if any
-            const searchInput = document.getElementById("leaderboard-search");
-            if (searchInput && searchInput.value) {
-                const query = searchInput.value.toLowerCase().trim();
-                const rows = tbody.querySelectorAll("tr");
-                rows.forEach(row => {
-                    const nameEl = row.querySelector(".mdm-player-cell span");
-                    const name = nameEl ? nameEl.textContent.toLowerCase() : "";
-                    if (name.includes(query)) {
-                        row.style.display = "";
-                    } else {
-                        row.style.display = "none";
-                    }
-                });
-            }
+            // Apply current player/team search query if any
+            filterLeaderboardRows();
 
             const modal = document.getElementById("player-leaderboard-modal");
             if (modal) modal.style.display = "flex";
@@ -2616,20 +2607,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Listen to leaderboard search input changes
-    leaderboardSearchInput?.addEventListener("input", (e) => {
-        const query = e.target.value.toLowerCase().trim();
+    function filterLeaderboardRows() {
+        const query = (leaderboardSearchInput?.value || "").toLowerCase().trim();
         const rows = document.querySelectorAll("#leaderboard-tbody tr");
         rows.forEach(row => {
             const nameEl = row.querySelector(".mdm-player-cell span");
             const name = nameEl ? nameEl.textContent.toLowerCase() : "";
-            if (name.includes(query)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
+            const teamNames = (row.getAttribute("data-team-names") || "").toLowerCase();
+            row.style.display = !query || name.includes(query) || teamNames.includes(query) ? "" : "none";
         });
-    });
+    }
+
+    // Listen to leaderboard player/team search input changes
+    leaderboardSearchInput?.addEventListener("input", filterLeaderboardRows);
 
     leaderboardBtn?.addEventListener("click", openLeaderboard);
     leaderboardClose?.addEventListener("click", () => {
