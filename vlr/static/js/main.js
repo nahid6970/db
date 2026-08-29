@@ -3452,11 +3452,62 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
     }
 
+    function layoutBracketColumns(columns) {
+        const bracketColumns = Array.from(columns.querySelectorAll(":scope > .bracket-column"));
+        let previousCenters = [];
+
+        bracketColumns.forEach((column, columnIndex) => {
+            const rows = column.querySelector(":scope > .bracket-column-rows");
+            const slots = rows
+                ? Array.from(rows.querySelectorAll(":scope > .bracket-slot:not(.is-empty)"))
+                : [];
+            if (!rows || !slots.length) {
+                if (rows) rows.style.height = "0px";
+                previousCenters = [];
+                return;
+            }
+
+            // Measure while the slots are still in normal flow, then place each
+            // round from the centers of the matches that feed it.
+            const heights = slots.map(slot => slot.getBoundingClientRect().height);
+            const defaultStep = Math.max(...heights) + 12;
+            let centers;
+            if (columnIndex === 0 || !previousCenters.length) {
+                centers = slots.map((slot, index) => heights[index] / 2 + index * defaultStep);
+            } else {
+                centers = slots.map((slot, targetIndex) => {
+                    const feederCenters = previousCenters.filter((center, sourceIndex) => {
+                        const mappedTarget = Math.min(
+                            slots.length - 1,
+                            Math.floor(sourceIndex * slots.length / previousCenters.length)
+                        );
+                        return mappedTarget === targetIndex;
+                    });
+                    return feederCenters.length
+                        ? feederCenters.reduce((sum, center) => sum + center, 0) / feederCenters.length
+                        : heights[targetIndex] / 2 + targetIndex * defaultStep;
+                });
+            }
+
+            rows.style.position = "relative";
+            rows.style.height = `${Math.max(...centers.map((center, index) => center + heights[index] / 2))}px`;
+            slots.forEach((slot, index) => {
+                slot.style.position = "absolute";
+                slot.style.left = "0";
+                slot.style.right = "0";
+                slot.style.top = `${centers[index] - heights[index] / 2}px`;
+            });
+            previousCenters = centers;
+        });
+    }
+
     function drawBracketConnectors() {
         document.querySelectorAll(".bracket-columns").forEach(columns => {
             columns.querySelector(".bracket-connector-svg")?.remove();
             const bracketColumns = Array.from(columns.querySelectorAll(":scope > .bracket-column"));
             if (bracketColumns.length < 2) return;
+
+            layoutBracketColumns(columns);
 
             const columnsRect = columns.getBoundingClientRect();
             const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
@@ -3469,22 +3520,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 const toSlots = Array.from(bracketColumns[columnIndex + 1].querySelectorAll(":scope > .bracket-column-rows > .bracket-slot:not(.is-empty)"));
                 if (!fromSlots.length || !toSlots.length) return;
 
-                fromSlots.forEach((fromSlot, index) => {
-                    const targetIndex = Math.min(
-                        toSlots.length - 1,
-                        Math.floor(index * toSlots.length / fromSlots.length)
-                    );
-                    const toSlot = toSlots[targetIndex];
-                    const fromRect = fromSlot.getBoundingClientRect();
+                toSlots.forEach((toSlot, targetIndex) => {
+                    const feederSlots = fromSlots.filter((fromSlot, sourceIndex) => {
+                        const mappedTarget = Math.min(
+                            toSlots.length - 1,
+                            Math.floor(sourceIndex * toSlots.length / fromSlots.length)
+                        );
+                        return mappedTarget === targetIndex;
+                    });
+                    if (!feederSlots.length) return;
+
                     const toRect = toSlot.getBoundingClientRect();
-                    const x1 = fromRect.right - columnsRect.left;
-                    const y1 = fromRect.top + fromRect.height / 2 - columnsRect.top;
                     const x2 = toRect.left - columnsRect.left;
                     const y2 = toRect.top + toRect.height / 2 - columnsRect.top;
+                    const feederRects = feederSlots.map(slot => slot.getBoundingClientRect());
+                    const x1 = feederRects[0].right - columnsRect.left;
+                    const feederYs = feederRects.map(rect => rect.top + rect.height / 2 - columnsRect.top);
                     const midX = x1 + Math.max(8, (x2 - x1) / 2);
+                    const minY = Math.min(y2, ...feederYs);
+                    const maxY = Math.max(y2, ...feederYs);
                     const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
                     path.classList.add("bracket-connector-path");
-                    path.setAttribute("d", `M ${x1} ${y1} H ${midX} V ${y2} H ${x2}`);
+                    path.setAttribute("d", [
+                        ...feederYs.map(y => `M ${x1} ${y} H ${midX}`),
+                        `M ${midX} ${minY} V ${maxY}`,
+                        `M ${midX} ${y2} H ${x2}`
+                    ].join(" "));
                     svg.appendChild(path);
                 });
             });

@@ -2350,11 +2350,11 @@ body.light #tournament-bracket-btn {
 }
 
 .bracket-slot.is-empty {
-    min-height: 28px;
+    display: none;
 }
 
 .bracket-slot.is-empty.is-spacing {
-    min-height: 38px;
+    display: none;
 }
 
 .bracket-match {
