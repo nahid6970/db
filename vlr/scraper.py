@@ -2197,9 +2197,10 @@ def _parse_bracket_from_soup(soup):
             label = " ".join(label_div.get_text(" ", strip=True).split()) if label_div else ""
             rows = []
             for row in column.find_all("div", class_="bracket-row", recursive=False):
-                item = row.find("a", class_="bracket-item", recursive=False)
+                item = row.find(["a", "span", "div"], class_="bracket-item", recursive=False)
                 row_classes = row.get("class", []) or []
-                if not item or "mod-empty" in (item.get("class", []) or []):
+                item_classes = item.get("class", []) if item else []
+                if not item or "mod-empty" in item_classes or "mod-placeholder" in item_classes:
                     rows.append({"empty": True, "spacing": "mod-spacing" in row_classes})
                     continue
 
@@ -2231,6 +2232,8 @@ def _parse_bracket_from_soup(soup):
                         state = "loser"
                     teams.append({"name": name, "score": score, "logo": logo, "state": state})
 
+                is_single = "mod-single" in item_classes or len(teams) == 1
+
                 status_div = item.find("div", class_="bracket-item-status", recursive=False)
                 unix_timestamp = 0
                 time_text = ""
@@ -2246,10 +2249,11 @@ def _parse_bracket_from_soup(soup):
                 match_id = re.search(r"^/(\d+)/", item.get("href", ""))
                 rows.append({
                     "empty": False,
+                    "single": is_single,
                     "spacing": "mod-spacing" in row_classes,
                     "id": match_id.group(1) if match_id else "",
                     "href": item.get("href", ""),
-                    "teams": (teams + [{"name": "TBD", "score": "", "logo": "", "state": ""}] * 2)[:2],
+                    "teams": teams if is_single else (teams + [{"name": "TBD", "score": "", "logo": "", "state": ""}] * 2)[:2],
                     "time": time_text,
                     "unix_timestamp": unix_timestamp,
                     "status": status,

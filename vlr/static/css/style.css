@@ -2485,6 +2485,10 @@ img.bracket-tournament-option-logo {
     transform: translateY(-2px);
 }
 
+.bracket-qualification .bracket-team {
+    border-bottom: 0;
+}
+
 .bracket-team {
     display: flex;
     align-items: center;

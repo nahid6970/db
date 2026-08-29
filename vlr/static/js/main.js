@@ -3482,6 +3482,13 @@ document.addEventListener("DOMContentLoaded", () => {
             return `<div class="bracket-slot is-empty${match?.spacing ? " is-spacing" : ""}"></div>`;
         }
         const teams = Array.isArray(match.teams) ? match.teams : [];
+        if (match.single) {
+            return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}">
+                <div class="bracket-match bracket-qualification">
+                    ${renderBracketTeam(teams[0] || {})}
+                </div>
+            </div>`;
+        }
         const localHref = match.id ? `/?match=${encodeURIComponent(match.id)}` : "#";
         const safeHref = escapeHtml(localHref);
         const timeClass = match.status === "Live" ? " live" : "";
