@@ -2187,6 +2187,134 @@ def _parse_event_matches_from_soup(soup):
     return parsed
 
 
+def _parse_bracket_from_soup(soup):
+    """Extract VLR's visual bracket columns for Playoffs/Play-Ins pages."""
+    brackets = []
+    for container in soup.select("div.bracket-container"):
+        columns = []
+        for column in container.find_all("div", class_="bracket-col", recursive=False):
+            label_div = column.find("div", class_="bracket-col-label", recursive=False)
+            label = " ".join(label_div.get_text(" ", strip=True).split()) if label_div else ""
+            rows = []
+            for row in column.find_all("div", class_="bracket-row", recursive=False):
+                item = row.find("a", class_="bracket-item", recursive=False)
+                row_classes = row.get("class", []) or []
+                if not item or "mod-empty" in (item.get("class", []) or []):
+                    rows.append({"empty": True, "spacing": "mod-spacing" in row_classes})
+                    continue
+
+                teams = []
+                for team_div in item.find_all("div", class_="bracket-item-team", recursive=False):
+                    name_div = team_div.find("div", class_="bracket-item-team-name")
+                    name = ""
+                    if name_div:
+                        span = name_div.find("span")
+                        name = span.get_text(" ", strip=True) if span else name_div.get_text(" ", strip=True)
+                    name = " ".join(name.split()) or "TBD"
+                    score_div = team_div.find("div", class_="bracket-item-team-score")
+                    score = score_div.get_text(" ", strip=True) if score_div else ""
+                    if score in {"-", "–", "—"}:
+                        score = ""
+                    img = team_div.find("img")
+                    logo = (img.get("src") or img.get("data-src") or "") if img else ""
+                    if logo.startswith("//"):
+                        logo = "https:" + logo
+                    elif logo.startswith("/"):
+                        logo = "https://www.vlr.gg" + logo
+                    if "/img/vlr/tmp/" in logo:
+                        logo = ""
+                    state = ""
+                    team_classes = team_div.get("class", []) or []
+                    if "mod-winner" in team_classes:
+                        state = "winner"
+                    elif "mod-loser" in team_classes:
+                        state = "loser"
+                    teams.append({"name": name, "score": score, "logo": logo, "state": state})
+
+                status_div = item.find("div", class_="bracket-item-status", recursive=False)
+                unix_timestamp = 0
+                time_text = ""
+                if status_div:
+                    unix_timestamp, time_text = _parse_vlr_timestamp(status_div.get("data-utc-ts") or "")
+                    if not time_text or time_text == "N/A":
+                        time_text = " ".join(status_div.get_text(" ", strip=True).split())
+
+                match_classes = item.get("class", []) or []
+                is_live = "mod-live" in match_classes or "live" in " ".join(match_classes).lower()
+                numeric_scores = [team.get("score", "").isdigit() for team in teams]
+                status = "Live" if is_live else ("Completed" if len(teams) >= 2 and all(numeric_scores[:2]) else "Upcoming")
+                match_id = re.search(r"^/(\d+)/", item.get("href", ""))
+                rows.append({
+                    "empty": False,
+                    "spacing": "mod-spacing" in row_classes,
+                    "id": match_id.group(1) if match_id else "",
+                    "href": item.get("href", ""),
+                    "teams": (teams + [{"name": "TBD", "score": "", "logo": "", "state": ""}] * 2)[:2],
+                    "time": time_text,
+                    "unix_timestamp": unix_timestamp,
+                    "status": status,
+                })
+
+            if label and rows:
+                columns.append({"label": label, "rows": rows})
+
+        if columns:
+            classes = container.get("class", []) or []
+            first_label = columns[0]["label"].lower()
+            is_lower = "mod-lower" in classes or first_label.startswith("lower")
+            brackets.append({
+                "label": "Lower Bracket" if is_lower else "Upper Bracket",
+                "columns": columns,
+            })
+    return brackets
+
+
+def fetch_tournament_brackets(tournament):
+    """Fetch Playoffs and Play-Ins bracket data for one tournament on demand."""
+    href = (tournament or {}).get("href", "")
+    if not href:
+        return {"phases": [], "error": "No event link for this tournament."}
+
+    base_path = href.split("?", 1)[0].rstrip("/")
+    url = f"https://www.vlr.gg{base_path}" if base_path.startswith("/") else base_path
+    main_soup, fetch_error = _fetch_with_retry(url, timeout=25)
+    if main_soup is None:
+        return {"phases": [], "error": f"Could not reach the tournament page ({fetch_error})."}
+
+    phase_targets = []
+    for anchor in main_soup.select("a.wf-subnav-item[href]"):
+        candidate = (anchor.get("href") or "").split("?", 1)[0].rstrip("/")
+        if not candidate.startswith(base_path + "/"):
+            continue
+        raw_label = " ".join(anchor.get_text(" ", strip=True).split())
+        path_name = candidate.rsplit("/", 1)[-1].replace("-", " ").casefold()
+        if "playoff" not in raw_label.casefold() and "play in" not in raw_label.casefold() and "play in" not in path_name:
+            continue
+        phase_name = "Play-Ins" if "play in" in (raw_label + " " + path_name).casefold() else "Playoffs"
+        if candidate not in {target[0] for target in phase_targets}:
+            phase_targets.append((candidate, phase_name))
+
+    if not phase_targets:
+        phase_targets = [(base_path, "Playoffs")]
+
+    phases = []
+    for index, (phase_href, phase_name) in enumerate(phase_targets):
+        phase_soup = main_soup if phase_href == base_path else None
+        if phase_soup is None:
+            phase_url = f"https://www.vlr.gg{phase_href}"
+            phase_soup, phase_error = _fetch_with_retry(phase_url, timeout=25)
+            if phase_soup is None:
+                print(f"Could not fetch bracket phase {phase_url}: {phase_error}")
+                continue
+        brackets = _parse_bracket_from_soup(phase_soup)
+        if brackets:
+            phases.append({"name": phase_name, "brackets": brackets})
+        if index + 1 < len(phase_targets):
+            time.sleep(0.5)
+
+    return {"phases": phases, "error": None}
+
+
 def add_tournament(tournament, only_missing=False):
     """Fetch all matches of a tournament from its VLR.gg event page and upsert them.
 

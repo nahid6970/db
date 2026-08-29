@@ -3407,4 +3407,121 @@ document.addEventListener("DOMContentLoaded", () => {
             tournamentStandingsModal.style.display = "none";
         }
     });
+
+    // Tournament bracket modal. Brackets are fetched only when requested and
+    // cached for the current page session, since the event pages are heavier
+    // than the normal match list.
+    const tournamentBracketBtn = document.getElementById("tournament-bracket-btn");
+    const tournamentBracketModal = document.getElementById("tournament-bracket-modal");
+    const tournamentBracketClose = document.getElementById("tournament-bracket-close");
+    const bracketTournamentSelect = document.getElementById("bracket-tournament-select");
+    const tournamentBracketContent = document.getElementById("tournament-bracket-content");
+    const tournamentBracketCache = new Map();
+    let activeBracketPhase = 0;
+
+    function renderBracketTeam(team) {
+        const safeName = escapeHtml(team?.name || "TBD");
+        const safeLogo = escapeHtml(team?.logo || "");
+        const state = team?.state === "winner" ? " winner" : team?.state === "loser" ? " loser" : "";
+        const logo = safeLogo
+            ? `<img class="bracket-team-logo" src="${safeLogo}" alt="" onerror="this.style.display='none';">`
+            : "";
+        return `<div class="bracket-team${state}">
+            ${logo}<span class="bracket-team-name" title="${safeName}">${safeName}</span>
+            <span class="bracket-team-score">${escapeHtml(team?.score || "–")}</span>
+        </div>`;
+    }
+
+    function renderBracketMatch(match) {
+        if (!match || match.empty) {
+            return `<div class="bracket-slot is-empty${match?.spacing ? " is-spacing" : ""}"></div>`;
+        }
+        const teams = Array.isArray(match.teams) ? match.teams : [];
+        const safeHref = escapeHtml(match.href || "#");
+        const timeClass = match.status === "Live" ? " live" : "";
+        const timeText = escapeHtml(match.time || "Time unavailable");
+        return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}">
+            <a class="bracket-match" href="https://www.vlr.gg${safeHref}" target="_blank" rel="noopener" title="Open match on VLR.gg">
+                ${renderBracketTeam(teams[0] || {})}
+                ${renderBracketTeam(teams[1] || {})}
+                <div class="bracket-match-time${timeClass}">
+                    <span>${timeText}</span>
+                    <i class="fa-solid fa-video" aria-hidden="true"></i>
+                </div>
+            </a>
+        </div>`;
+    }
+
+    function renderBracketPhase(data, phaseIndex = activeBracketPhase) {
+        if (!tournamentBracketContent) return;
+        const phases = Array.isArray(data?.phases) ? data.phases : [];
+        if (!phases.length) {
+            tournamentBracketContent.innerHTML = `<p class="bracket-empty-state">No Playoffs or Play-Ins bracket is available for this tournament.</p>`;
+            return;
+        }
+
+        activeBracketPhase = Math.max(0, Math.min(phaseIndex, phases.length - 1));
+        const phase = phases[activeBracketPhase];
+        const tabs = phases.map((item, index) =>
+            `<button class="bracket-phase-tab${index === activeBracketPhase ? " active" : ""}" data-phase-index="${index}">${escapeHtml(item.name)}</button>`
+        ).join("");
+        const lanes = (phase.brackets || []).map(bracket => {
+            const columns = (bracket.columns || []).map(column => {
+                const slots = (column.rows || []).map(renderBracketMatch).join("");
+                return `<div class="bracket-column">
+                    <div class="bracket-column-title">${escapeHtml(column.label)}</div>
+                    <div class="bracket-column-rows">${slots}</div>
+                </div>`;
+            }).join("");
+            return `<section class="bracket-lane">
+                <h3 class="bracket-lane-title">${escapeHtml(bracket.label)}</h3>
+                <div class="bracket-columns">${columns}</div>
+            </section>`;
+        }).join("");
+
+        tournamentBracketContent.innerHTML = `<div class="bracket-phase-tabs">${tabs}</div>${lanes}`;
+        tournamentBracketContent.querySelectorAll(".bracket-phase-tab").forEach(tab => {
+            tab.addEventListener("click", () => renderBracketPhase(data, parseInt(tab.dataset.phaseIndex, 10) || 0));
+        });
+    }
+
+    async function loadTournamentBracket(tournamentName) {
+        if (!tournamentBracketContent || !tournamentName) return;
+        const cached = tournamentBracketCache.get(tournamentName);
+        if (cached) {
+            renderBracketPhase(cached);
+            return;
+        }
+
+        tournamentBracketContent.innerHTML = `<p class="bracket-empty-state"><i class="fa-solid fa-spinner fa-spin"></i> Loading bracket…</p>`;
+        try {
+            const response = await fetch(`/api/tournament-bracket?tournament=${encodeURIComponent(tournamentName)}`);
+            const data = await response.json();
+            if (!response.ok || data.error) throw new Error(data.error || "Failed to load bracket");
+            tournamentBracketCache.set(tournamentName, data);
+            renderBracketPhase(data, 0);
+        } catch (err) {
+            console.error("Failed to load tournament bracket:", err);
+            tournamentBracketContent.innerHTML = `<p class="bracket-empty-state">Could not load this tournament bracket. Please try again.</p>`;
+        }
+    }
+
+    tournamentBracketBtn?.addEventListener("click", () => {
+        if (tournamentBracketModal) tournamentBracketModal.style.display = "flex";
+        activeBracketPhase = 0;
+        loadTournamentBracket(bracketTournamentSelect?.value || "");
+    });
+    bracketTournamentSelect?.addEventListener("change", () => {
+        activeBracketPhase = 0;
+        loadTournamentBracket(bracketTournamentSelect.value);
+    });
+    tournamentBracketClose?.addEventListener("click", () => {
+        if (tournamentBracketModal) tournamentBracketModal.style.display = "none";
+    });
+    tournamentBracketModal?.addEventListener("click", (e) => {
+        const modalBox = tournamentBracketModal.querySelector(".match-detail-modal");
+        if (modalBox && !modalBox.contains(e.target)) {
+            tournamentBracketModal.style.display = "none";
+        }
+    });
 });

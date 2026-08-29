@@ -79,6 +79,9 @@
                 <button class="refresh-btn" id="tournament-standings-btn" title="Tournament Standings" style="background: rgba(255, 165, 0, 0.1); border-color: orange; color: orange;">
                     <i class="fa-solid fa-ranking-star"></i>
                 </button>
+                <button class="refresh-btn" id="tournament-bracket-btn" title="Tournament Brackets" style="background: rgba(14, 165, 233, 0.1); border-color: #0ea5e9; color: #0ea5e9;">
+                    <i class="fa-solid fa-diagram-project"></i>
+                </button>
                 <button class="refresh-btn" id="browse-tournaments-btn" title="Browse & add tournaments" style="background: rgba(168, 85, 247, 0.12); border-color: #a855f7; color: #a855f7;">
                     <i class="fa-solid fa-trophy"></i>
                 </button>
@@ -487,6 +490,26 @@
             </div>
             <div class="modal-body" style="padding: 0 4px 12px 4px; max-height: 75vh; overflow-y: auto; color: var(--text-primary);">
                 <div id="tournament-standings-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tournament Bracket Modal -->
+    <div id="tournament-bracket-modal" class="match-detail-overlay" style="display:none;">
+        <div class="match-detail-modal bracket-modal" style="max-width: 1280px;">
+            <div class="modal-header bracket-modal-header">
+                <div class="bracket-modal-title">
+                    <h2><i class="fa-solid fa-diagram-project"></i> Tournament Brackets</h2>
+                    <select id="bracket-tournament-select" class="per-page-select" title="Select tournament">
+                        {% for tournament_name, tournament_logo in tournaments %}
+                        <option value="{{ tournament_name }}">{{ tournament_name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button id="tournament-bracket-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted); padding: 0 4px; border: none; background: none; line-height: 1; cursor: pointer;">&times;</button>
+            </div>
+            <div id="tournament-bracket-content" class="bracket-modal-content">
+                <p class="bracket-empty-state">Select a tournament to load its bracket.</p>
             </div>
         </div>
     </div>

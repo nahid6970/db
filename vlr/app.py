@@ -353,6 +353,30 @@ def api_tournaments_progress():
     """Live progress of an in-flight tournament-list refresh, for the UI."""
     return jsonify(scraper.get_refresh_progress())
 
+
+@app.route("/api/tournament-bracket")
+def api_tournament_bracket():
+    """Return on-demand Playoffs/Play-Ins bracket data for one tournament."""
+    name = (request.args.get("tournament") or "").strip()
+    if not name:
+        return jsonify({"error": "tournament is required"}), 400
+
+    result = scraper.get_tournaments(pages=1)
+    items = result.get("tournaments", [])
+    tournament = next((item for item in items if item.get("name") == name), None)
+    if tournament is None:
+        tournament = next(
+            (item for item in items if _name_matches([item.get("name", "")], name)),
+            None,
+        )
+    if tournament is None:
+        return jsonify({"error": "tournament not found"}), 404
+
+    bracket = scraper.fetch_tournament_brackets(tournament)
+    if bracket.get("error"):
+        return jsonify(bracket), 502
+    return jsonify({"tournament": name, "phases": bracket.get("phases", [])})
+
 @app.route("/api/tournaments/add", methods=["POST"])
 def api_tournaments_add():
     """Add one or more tournaments: un-ignore them, un-hide them, and fetch
