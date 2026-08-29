@@ -3529,10 +3529,13 @@ document.addEventListener("DOMContentLoaded", () => {
             let centers;
             const previousCenters = centersByColumn[columnIndex - 1] || [];
             if (columnIndex === 0 || !previousCenters.length) {
-                centers = slots.map((slot, index) => {
+                const rowOffsets = slots.map((slot, index) => {
                     const sourceRowIndex = Number.parseInt(slot.dataset.rowIndex || "", 10);
-                    const rowOffset = Number.isNaN(sourceRowIndex) ? index : sourceRowIndex;
-                    return heights[index] / 2 + rowOffset * defaultStep;
+                    return Number.isNaN(sourceRowIndex) ? index : sourceRowIndex;
+                });
+                const firstRowOffset = Math.min(...rowOffsets);
+                centers = slots.map((slot, index) => {
+                    return heights[index] / 2 + (rowOffsets[index] - firstRowOffset) * defaultStep;
                 });
             } else if (slots.length > previousCenters.length) {
                 // A round with more cards than the previous round contains
