@@ -2317,6 +2317,7 @@ body.light #tournament-bracket-btn {
     gap: 18px;
     min-width: max-content;
     padding: 18px 16px 24px;
+    position: relative;
 }
 
 .bracket-column {
@@ -2348,15 +2349,6 @@ body.light #tournament-bracket-btn {
     min-height: 38px;
 }
 
-.bracket-slot:not(.is-empty)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -18px;
-    width: 18px;
-    border-top: 1px solid rgba(148, 163, 184, 0.45);
-}
-
 .bracket-slot.is-empty {
     min-height: 28px;
 }
@@ -2368,6 +2360,8 @@ body.light #tournament-bracket-btn {
 .bracket-match {
     display: block;
     width: 100%;
+    position: relative;
+    z-index: 1;
     color: var(--text-primary);
     text-decoration: none;
     border: 1px solid rgba(148, 163, 184, 0.45);
@@ -2436,6 +2430,22 @@ body.light #tournament-bracket-btn {
 
 .bracket-match-time.live {
     color: var(--accent-green);
+}
+
+.bracket-connector-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.bracket-connector-path {
+    fill: none;
+    stroke: rgba(148, 163, 184, 0.52);
+    stroke-width: 1.2;
+    vector-effect: non-scaling-stroke;
 }
 
 .bracket-empty-state {

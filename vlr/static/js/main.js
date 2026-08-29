@@ -3452,6 +3452,47 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>`;
     }
 
+    function drawBracketConnectors() {
+        document.querySelectorAll(".bracket-columns").forEach(columns => {
+            columns.querySelector(".bracket-connector-svg")?.remove();
+            const bracketColumns = Array.from(columns.querySelectorAll(":scope > .bracket-column"));
+            if (bracketColumns.length < 2) return;
+
+            const columnsRect = columns.getBoundingClientRect();
+            const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            svg.classList.add("bracket-connector-svg");
+            svg.setAttribute("width", String(columns.scrollWidth));
+            svg.setAttribute("height", String(columns.scrollHeight));
+
+            bracketColumns.slice(0, -1).forEach((column, columnIndex) => {
+                const fromSlots = Array.from(column.querySelectorAll(":scope > .bracket-column-rows > .bracket-slot:not(.is-empty)"));
+                const toSlots = Array.from(bracketColumns[columnIndex + 1].querySelectorAll(":scope > .bracket-column-rows > .bracket-slot:not(.is-empty)"));
+                if (!fromSlots.length || !toSlots.length) return;
+
+                fromSlots.forEach((fromSlot, index) => {
+                    const targetIndex = Math.min(
+                        toSlots.length - 1,
+                        Math.floor(index * toSlots.length / fromSlots.length)
+                    );
+                    const toSlot = toSlots[targetIndex];
+                    const fromRect = fromSlot.getBoundingClientRect();
+                    const toRect = toSlot.getBoundingClientRect();
+                    const x1 = fromRect.right - columnsRect.left;
+                    const y1 = fromRect.top + fromRect.height / 2 - columnsRect.top;
+                    const x2 = toRect.left - columnsRect.left;
+                    const y2 = toRect.top + toRect.height / 2 - columnsRect.top;
+                    const midX = x1 + Math.max(8, (x2 - x1) / 2);
+                    const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                    path.classList.add("bracket-connector-path");
+                    path.setAttribute("d", `M ${x1} ${y1} H ${midX} V ${y2} H ${x2}`);
+                    svg.appendChild(path);
+                });
+            });
+
+            columns.prepend(svg);
+        });
+    }
+
     function renderBracketPhase(data, phaseIndex = activeBracketPhase) {
         if (!tournamentBracketContent) return;
         const phases = Array.isArray(data?.phases) ? data.phases : [];
@@ -3480,6 +3521,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join("");
 
         tournamentBracketContent.innerHTML = `<div class="bracket-phase-tabs">${tabs}</div>${lanes}`;
+        requestAnimationFrame(drawBracketConnectors);
         tournamentBracketContent.querySelectorAll(".bracket-phase-tab").forEach(tab => {
             tab.addEventListener("click", () => renderBracketPhase(data, parseInt(tab.dataset.phaseIndex, 10) || 0));
         });
@@ -3523,5 +3565,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (modalBox && !modalBox.contains(e.target)) {
             tournamentBracketModal.style.display = "none";
         }
+    });
+    window.addEventListener("resize", () => {
+        if (tournamentBracketModal?.style.display === "flex") drawBracketConnectors();
     });
 });
