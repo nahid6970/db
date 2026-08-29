@@ -3423,6 +3423,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentBracketCache = new Map();
     let activeBracketPhase = 0;
     let selectedBracketTournament = "";
+    let currentTournamentBracketData = null;
 
     function getBracketTournamentAccent(name, index = 0) {
         const configuredColor = tournamentColors[name];
@@ -3601,6 +3602,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function renderBracketPhase(data, phaseIndex = activeBracketPhase) {
         if (!tournamentBracketContent) return;
+        currentTournamentBracketData = data;
         const phases = Array.isArray(data?.phases) ? data.phases : [];
         if (!phases.length) {
             tournamentBracketContent.innerHTML = `<p class="bracket-empty-state">No Playoffs or Play-Ins bracket is available for this tournament.</p>`;
@@ -3610,7 +3612,7 @@ document.addEventListener("DOMContentLoaded", () => {
         activeBracketPhase = Math.max(0, Math.min(phaseIndex, phases.length - 1));
         const phase = phases[activeBracketPhase];
         const tabs = phases.map((item, index) =>
-            `<button class="bracket-phase-tab${index === activeBracketPhase ? " active" : ""}" data-phase-index="${index}">${escapeHtml(item.name)}</button>`
+            `<button type="button" class="bracket-phase-tab${index === activeBracketPhase ? " active" : ""}" data-phase-index="${index}">${escapeHtml(item.name)}</button>`
         ).join("");
         const lanes = (phase.brackets || []).map(bracket => {
             const columns = (bracket.columns || []).map(column => {
@@ -3628,10 +3630,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         tournamentBracketContent.innerHTML = `<div class="bracket-phase-tabs">${tabs}</div>${lanes}`;
         requestAnimationFrame(drawBracketConnectors);
-        tournamentBracketContent.querySelectorAll(".bracket-phase-tab").forEach(tab => {
-            tab.addEventListener("click", () => renderBracketPhase(data, parseInt(tab.dataset.phaseIndex, 10) || 0));
-        });
     }
+
+    tournamentBracketContent?.addEventListener("click", e => {
+        const tab = e.target.closest(".bracket-phase-tab");
+        if (!tab || !currentTournamentBracketData) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const phaseIndex = Number.parseInt(tab.dataset.phaseIndex || "0", 10);
+        renderBracketPhase(currentTournamentBracketData, Number.isNaN(phaseIndex) ? 0 : phaseIndex);
+    });
 
     async function loadTournamentBracket(tournamentName) {
         if (!tournamentBracketContent || !tournamentName) return;
@@ -3647,6 +3655,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const data = await response.json();
             if (!response.ok || data.error) throw new Error(data.error || "Failed to load bracket");
             tournamentBracketCache.set(tournamentName, data);
+            currentTournamentBracketData = data;
             renderBracketPhase(data, 0);
         } catch (err) {
             console.error("Failed to load tournament bracket:", err);
@@ -3656,6 +3665,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetTournamentBracketModal() {
         activeBracketPhase = 0;
+        currentTournamentBracketData = null;
         selectedBracketTournament = "";
         setBracketPickerOpen(false);
         if (bracketTournamentSelectedName) bracketTournamentSelectedName.textContent = "Select a tournament…";
