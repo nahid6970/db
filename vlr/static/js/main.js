@@ -3414,10 +3414,54 @@ document.addEventListener("DOMContentLoaded", () => {
     const tournamentBracketBtn = document.getElementById("tournament-bracket-btn");
     const tournamentBracketModal = document.getElementById("tournament-bracket-modal");
     const tournamentBracketClose = document.getElementById("tournament-bracket-close");
-    const bracketTournamentSelect = document.getElementById("bracket-tournament-select");
+    const bracketTournamentPicker = document.getElementById("bracket-tournament-picker");
+    const bracketTournamentTrigger = document.getElementById("bracket-tournament-trigger");
+    const bracketTournamentOptions = document.getElementById("bracket-tournament-options");
+    const bracketTournamentSelectedLogo = document.getElementById("bracket-tournament-selected-logo");
+    const bracketTournamentSelectedName = document.getElementById("bracket-tournament-selected-name");
     const tournamentBracketContent = document.getElementById("tournament-bracket-content");
     const tournamentBracketCache = new Map();
     let activeBracketPhase = 0;
+    let selectedBracketTournament = "";
+
+    function getBracketTournamentAccent(name, index = 0) {
+        const configuredColor = tournamentColors[name];
+        if (configuredColor && configuredColor !== "#1e293b") return configuredColor;
+        const normalizedName = (name || "").toLowerCase();
+        if (normalizedName.includes("americas")) return "#ff7043";
+        if (normalizedName.includes("pacific")) return "#14d9e5";
+        if (normalizedName.includes("emea")) return "#cbd5e1";
+        if (normalizedName.includes("china")) return "#f43f5e";
+        if (normalizedName.includes("champions")) return "#e7bf65";
+        return ["#ff4655", "#00f5d4", "#58a6ff", "#f97316", "#a78bfa"][index % 5];
+    }
+
+    function setBracketPickerOpen(isOpen) {
+        if (!bracketTournamentPicker || !bracketTournamentTrigger) return;
+        bracketTournamentPicker.classList.toggle("is-open", isOpen);
+        bracketTournamentTrigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    function setSelectedBracketTournament(option) {
+        if (!option) return;
+        selectedBracketTournament = option.dataset.value || "";
+        const name = option.dataset.name || option.textContent.trim();
+        const logo = option.dataset.logo || "";
+        const accent = option.style.getPropertyValue("--bracket-option-accent") || getBracketTournamentAccent(name);
+
+        if (bracketTournamentSelectedName) bracketTournamentSelectedName.textContent = name;
+        if (bracketTournamentSelectedLogo) {
+            bracketTournamentSelectedLogo.style.color = accent;
+            bracketTournamentSelectedLogo.innerHTML = logo
+                ? `<img src="${escapeHtml(logo)}" alt="" class="bracket-tournament-option-logo" onerror="this.style.display='none';">`
+                : `<i class="fa-solid fa-trophy"></i>`;
+        }
+        if (bracketTournamentTrigger) bracketTournamentTrigger.style.setProperty("--bracket-option-accent", accent);
+        bracketTournamentOptions?.querySelectorAll(".bracket-tournament-option").forEach(item => {
+            item.setAttribute("aria-selected", item === option ? "true" : "false");
+        });
+        setBracketPickerOpen(false);
+    }
 
     function renderBracketTeam(team) {
         const safeName = escapeHtml(team?.name || "TBD");
@@ -3612,7 +3656,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function resetTournamentBracketModal() {
         activeBracketPhase = 0;
-        if (bracketTournamentSelect) bracketTournamentSelect.value = "";
+        selectedBracketTournament = "";
+        setBracketPickerOpen(false);
+        if (bracketTournamentSelectedName) bracketTournamentSelectedName.textContent = "Select a tournament…";
+        if (bracketTournamentSelectedLogo) {
+            bracketTournamentSelectedLogo.style.color = "";
+            bracketTournamentSelectedLogo.innerHTML = `<i class="fa-solid fa-trophy"></i>`;
+        }
+        if (bracketTournamentTrigger) bracketTournamentTrigger.style.removeProperty("--bracket-option-accent");
+        bracketTournamentOptions?.querySelectorAll(".bracket-tournament-option").forEach(option => {
+            option.setAttribute("aria-selected", "false");
+        });
         if (tournamentBracketContent) {
             tournamentBracketContent.innerHTML = `<p class="bracket-empty-state">Select a tournament to load its bracket.</p>`;
         }
@@ -3622,16 +3676,35 @@ document.addEventListener("DOMContentLoaded", () => {
         if (tournamentBracketModal) tournamentBracketModal.style.display = "flex";
         resetTournamentBracketModal();
     });
-    bracketTournamentSelect?.addEventListener("change", () => {
-        activeBracketPhase = 0;
-        loadTournamentBracket(bracketTournamentSelect.value);
+    bracketTournamentTrigger?.addEventListener("click", e => {
+        e.stopPropagation();
+        setBracketPickerOpen(!bracketTournamentPicker?.classList.contains("is-open"));
+    });
+    bracketTournamentOptions?.querySelectorAll(".bracket-tournament-option").forEach((option, index) => {
+        option.style.setProperty("--bracket-option-accent", getBracketTournamentAccent(option.dataset.name, index));
+        option.setAttribute("aria-selected", "false");
+        option.addEventListener("click", () => {
+            setSelectedBracketTournament(option);
+            activeBracketPhase = 0;
+            loadTournamentBracket(selectedBracketTournament);
+        });
+    });
+    document.addEventListener("click", e => {
+        if (bracketTournamentPicker && !bracketTournamentPicker.contains(e.target)) {
+            setBracketPickerOpen(false);
+        }
+    });
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape") setBracketPickerOpen(false);
     });
     tournamentBracketClose?.addEventListener("click", () => {
+        setBracketPickerOpen(false);
         if (tournamentBracketModal) tournamentBracketModal.style.display = "none";
     });
     tournamentBracketModal?.addEventListener("click", (e) => {
         const modalBox = tournamentBracketModal.querySelector(".match-detail-modal");
         if (modalBox && !modalBox.contains(e.target)) {
+            setBracketPickerOpen(false);
             tournamentBracketModal.style.display = "none";
         }
     });

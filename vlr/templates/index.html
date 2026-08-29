@@ -500,12 +500,27 @@
             <div class="modal-header bracket-modal-header">
                 <div class="bracket-modal-title">
                     <h2><i class="fa-solid fa-diagram-project"></i> Tournament Brackets</h2>
-                    <select id="bracket-tournament-select" class="per-page-select" title="Select tournament">
-                        <option value="" selected disabled>Select a tournament…</option>
+                    <div id="bracket-tournament-picker" class="bracket-tournament-picker">
+                        <button id="bracket-tournament-trigger" class="bracket-tournament-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+                            <span class="bracket-tournament-selected">
+                                <span id="bracket-tournament-selected-logo" class="bracket-tournament-option-logo"><i class="fa-solid fa-trophy"></i></span>
+                                <span id="bracket-tournament-selected-name">Select a tournament…</span>
+                            </span>
+                            <i class="fa-solid fa-chevron-down bracket-tournament-chevron" aria-hidden="true"></i>
+                        </button>
+                        <div id="bracket-tournament-options" class="bracket-tournament-options" role="listbox" aria-label="Tournaments">
                         {% for tournament_name, tournament_logo in tournaments %}
-                        <option value="{{ tournament_name }}">{{ tournament_name }}</option>
+                        <button class="bracket-tournament-option" type="button" role="option" data-value="{{ tournament_name }}" data-name="{{ tournament_name }}" data-logo="{{ tournament_logo or '' }}">
+                            {% if tournament_logo %}
+                            <img src="{{ tournament_logo }}" alt="" class="bracket-tournament-option-logo" onerror="this.style.display='none';" loading="lazy">
+                            {% else %}
+                            <span class="bracket-tournament-option-logo"><i class="fa-solid fa-trophy"></i></span>
+                            {% endif %}
+                            <span class="bracket-tournament-option-name">{{ tournament_name }}</span>
+                        </button>
                         {% endfor %}
-                    </select>
+                        </div>
+                    </div>
                 </div>
                 <button id="tournament-bracket-close" class="modal-close-btn" style="font-size: 24px; color: var(--text-muted); padding: 0 4px; border: none; background: none; line-height: 1; cursor: pointer;">&times;</button>
             </div>
