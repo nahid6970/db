@@ -2931,6 +2931,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 34,
+                "title": "WWE SmackDown - 2026-08-28 - SmackDown 1410 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-08-29T17:46:45.948194",
+                "notify": "seen"
+            },
+            {
                 "id": 33,
                 "title": "WWE SmackDown - 2026-08-21 - SmackDown 1409 HDTV-1080p",
                 "watched": true,
