@@ -3482,8 +3482,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return `<div class="bracket-slot is-empty${match?.spacing ? " is-spacing" : ""}"></div>`;
         }
         const teams = Array.isArray(match.teams) ? match.teams : [];
+        const rowIndex = Number.isInteger(match.row_index) ? ` data-row-index="${match.row_index}"` : "";
         if (match.single) {
-            return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}">
+            return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}"${rowIndex}>
                 <div class="bracket-match bracket-qualification">
                     ${renderBracketTeam(teams[0] || {})}
                 </div>
@@ -3493,7 +3494,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const safeHref = escapeHtml(localHref);
         const timeClass = match.status === "Live" ? " live" : "";
         const timeText = escapeHtml(match.time || "Time unavailable");
-        return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}">
+        return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}"${rowIndex}>
             <a class="bracket-match" href="${safeHref}" target="_blank" rel="noopener" title="Open match in this app">
                 ${renderBracketTeam(teams[0] || {})}
                 ${renderBracketTeam(teams[1] || {})}
@@ -3507,26 +3508,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function layoutBracketColumns(columns) {
         const bracketColumns = Array.from(columns.querySelectorAll(":scope > .bracket-column"));
-        let previousCenters = [];
-
-        bracketColumns.forEach((column, columnIndex) => {
+        const columnSlots = bracketColumns.map(column => {
             const rows = column.querySelector(":scope > .bracket-column-rows");
-            const slots = rows
-                ? Array.from(rows.querySelectorAll(":scope > .bracket-slot:not(.is-empty)"))
-                : [];
+            return {
+                rows,
+                slots: rows ? Array.from(rows.querySelectorAll(":scope > .bracket-slot:not(.is-empty)")) : []
+            };
+        });
+        const centersByColumn = [];
+
+        columnSlots.forEach(({ rows, slots }, columnIndex) => {
             if (!rows || !slots.length) {
                 if (rows) rows.style.height = "0px";
-                previousCenters = [];
+                centersByColumn[columnIndex] = [];
                 return;
             }
 
-            // Measure while the slots are still in normal flow, then place each
-            // round from the centers of the matches that feed it.
             const heights = slots.map(slot => slot.getBoundingClientRect().height);
             const defaultStep = Math.max(...heights) + 12;
             let centers;
+            const previousCenters = centersByColumn[columnIndex - 1] || [];
             if (columnIndex === 0 || !previousCenters.length) {
-                centers = slots.map((slot, index) => heights[index] / 2 + index * defaultStep);
+                centers = slots.map((slot, index) => {
+                    const sourceRowIndex = Number.parseInt(slot.dataset.rowIndex || "", 10);
+                    const rowOffset = Number.isNaN(sourceRowIndex) ? index : sourceRowIndex;
+                    return heights[index] / 2 + rowOffset * defaultStep;
+                });
+            } else if (slots.length > previousCenters.length) {
+                // A round with more cards than the previous round contains
+                // byes/seeded entries. Keep the new round on one regular grid,
+                // inserting those entries between the feeder matches.
+                if (previousCenters.length === 1) {
+                    const sourceCenter = previousCenters[0];
+                    centers = slots.map((slot, index) =>
+                        sourceCenter + (index - (slots.length - 1) / 2) * defaultStep
+                    );
+                } else {
+                    const firstCenter = previousCenters[0];
+                    centers = slots.map((slot, index) => firstCenter + index * defaultStep);
+                }
             } else {
                 centers = slots.map((slot, targetIndex) => {
                     const feederCenters = previousCenters.filter((center, sourceIndex) => {
@@ -3542,15 +3562,31 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             }
 
+            centersByColumn[columnIndex] = centers;
+        });
+
+        const allPositions = columnSlots.flatMap(({ slots }, columnIndex) => {
+            const centers = centersByColumn[columnIndex] || [];
+            return slots.map((slot, index) => ({
+                center: centers[index],
+                height: slot.getBoundingClientRect().height
+            }));
+        });
+        const minTop = Math.min(...allPositions.map(item => item.center - item.height / 2));
+        const shift = Math.max(0, -minTop);
+
+        columnSlots.forEach(({ rows, slots }, columnIndex) => {
+            if (!rows || !slots.length) return;
+            const centers = centersByColumn[columnIndex] || [];
+            const heights = slots.map(slot => slot.getBoundingClientRect().height);
             rows.style.position = "relative";
-            rows.style.height = `${Math.max(...centers.map((center, index) => center + heights[index] / 2))}px`;
+            rows.style.height = `${Math.max(...centers.map((center, index) => center + shift + heights[index] / 2))}px`;
             slots.forEach((slot, index) => {
                 slot.style.position = "absolute";
                 slot.style.left = "0";
                 slot.style.right = "0";
-                slot.style.top = `${centers[index] - heights[index] / 2}px`;
+                slot.style.top = `${centers[index] + shift - heights[index] / 2}px`;
             });
-            previousCenters = centers;
         });
     }
 

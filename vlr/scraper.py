@@ -2196,68 +2196,75 @@ def _parse_bracket_from_soup(soup):
             label_div = column.find("div", class_="bracket-col-label", recursive=False)
             label = " ".join(label_div.get_text(" ", strip=True).split()) if label_div else ""
             rows = []
-            for row in column.find_all("div", class_="bracket-row", recursive=False):
-                item = row.find(["a", "span", "div"], class_="bracket-item", recursive=False)
+            for row_index, row in enumerate(column.find_all("div", class_="bracket-row", recursive=False)):
+                items = row.find_all(["a", "span", "div"], class_="bracket-item", recursive=False)
                 row_classes = row.get("class", []) or []
-                item_classes = item.get("class", []) if item else []
-                if not item or "mod-empty" in item_classes or "mod-placeholder" in item_classes:
-                    rows.append({"empty": True, "spacing": "mod-spacing" in row_classes})
+                usable_items = [
+                    item for item in items
+                    if "mod-empty" not in (item.get("class", []) or [])
+                    and "mod-placeholder" not in (item.get("class", []) or [])
+                ]
+                if not usable_items:
+                    rows.append({"empty": True, "spacing": "mod-spacing" in row_classes, "row_index": row_index})
                     continue
 
-                teams = []
-                for team_div in item.find_all("div", class_="bracket-item-team", recursive=False):
-                    name_div = team_div.find("div", class_="bracket-item-team-name")
-                    name = ""
-                    if name_div:
-                        span = name_div.find("span")
-                        name = span.get_text(" ", strip=True) if span else name_div.get_text(" ", strip=True)
-                    name = " ".join(name.split()) or "TBD"
-                    score_div = team_div.find("div", class_="bracket-item-team-score")
-                    score = score_div.get_text(" ", strip=True) if score_div else ""
-                    if score in {"-", "–", "—"}:
-                        score = ""
-                    img = team_div.find("img")
-                    logo = (img.get("src") or img.get("data-src") or "") if img else ""
-                    if logo.startswith("//"):
-                        logo = "https:" + logo
-                    elif logo.startswith("/"):
-                        logo = "https://www.vlr.gg" + logo
-                    if "/img/vlr/tmp/" in logo:
-                        logo = ""
-                    state = ""
-                    team_classes = team_div.get("class", []) or []
-                    if "mod-winner" in team_classes:
-                        state = "winner"
-                    elif "mod-loser" in team_classes:
-                        state = "loser"
-                    teams.append({"name": name, "score": score, "logo": logo, "state": state})
+                for item in usable_items:
+                    item_classes = item.get("class", []) or []
+                    teams = []
+                    for team_div in item.find_all("div", class_="bracket-item-team", recursive=False):
+                        name_div = team_div.find("div", class_="bracket-item-team-name")
+                        name = ""
+                        if name_div:
+                            span = name_div.find("span")
+                            name = span.get_text(" ", strip=True) if span else name_div.get_text(" ", strip=True)
+                        name = " ".join(name.split()) or "TBD"
+                        score_div = team_div.find("div", class_="bracket-item-team-score")
+                        score = score_div.get_text(" ", strip=True) if score_div else ""
+                        if score in {"-", "–", "—"}:
+                            score = ""
+                        img = team_div.find("img")
+                        logo = (img.get("src") or img.get("data-src") or "") if img else ""
+                        if logo.startswith("//"):
+                            logo = "https:" + logo
+                        elif logo.startswith("/"):
+                            logo = "https://www.vlr.gg" + logo
+                        if "/img/vlr/tmp/" in logo:
+                            logo = ""
+                        state = ""
+                        team_classes = team_div.get("class", []) or []
+                        if "mod-winner" in team_classes:
+                            state = "winner"
+                        elif "mod-loser" in team_classes:
+                            state = "loser"
+                        teams.append({"name": name, "score": score, "logo": logo, "state": state})
 
-                is_single = "mod-single" in item_classes or len(teams) == 1
+                    is_single = "mod-single" in item_classes or len(teams) == 1
 
-                status_div = item.find("div", class_="bracket-item-status", recursive=False)
-                unix_timestamp = 0
-                time_text = ""
-                if status_div:
-                    unix_timestamp, time_text = _parse_vlr_timestamp(status_div.get("data-utc-ts") or "")
-                    if not time_text or time_text == "N/A":
-                        time_text = " ".join(status_div.get_text(" ", strip=True).split())
+                    status_div = item.find("div", class_="bracket-item-status", recursive=False)
+                    unix_timestamp = 0
+                    time_text = ""
+                    if status_div:
+                        unix_timestamp, time_text = _parse_vlr_timestamp(status_div.get("data-utc-ts") or "")
+                        if not time_text or time_text == "N/A":
+                            time_text = " ".join(status_div.get_text(" ", strip=True).split())
 
-                match_classes = item.get("class", []) or []
-                is_live = "mod-live" in match_classes or "live" in " ".join(match_classes).lower()
-                numeric_scores = [team.get("score", "").isdigit() for team in teams]
-                status = "Live" if is_live else ("Completed" if len(teams) >= 2 and all(numeric_scores[:2]) else "Upcoming")
-                match_id = re.search(r"^/(\d+)/", item.get("href", ""))
-                rows.append({
-                    "empty": False,
-                    "single": is_single,
-                    "spacing": "mod-spacing" in row_classes,
-                    "id": match_id.group(1) if match_id else "",
-                    "href": item.get("href", ""),
-                    "teams": teams if is_single else (teams + [{"name": "TBD", "score": "", "logo": "", "state": ""}] * 2)[:2],
-                    "time": time_text,
-                    "unix_timestamp": unix_timestamp,
-                    "status": status,
-                })
+                    match_classes = item.get("class", []) or []
+                    is_live = "mod-live" in match_classes or "live" in " ".join(match_classes).lower()
+                    numeric_scores = [team.get("score", "").isdigit() for team in teams]
+                    status = "Live" if is_live else ("Completed" if len(teams) >= 2 and all(numeric_scores[:2]) else "Upcoming")
+                    match_id = re.search(r"^/(\d+)/", item.get("href", ""))
+                    rows.append({
+                        "empty": False,
+                        "single": is_single,
+                        "spacing": "mod-spacing" in row_classes,
+                        "row_index": row_index,
+                        "id": match_id.group(1) if match_id else "",
+                        "href": item.get("href", ""),
+                        "teams": teams if is_single else (teams + [{"name": "TBD", "score": "", "logo": "", "state": ""}] * 2)[:2],
+                        "time": time_text,
+                        "unix_timestamp": unix_timestamp,
+                        "status": status,
+                    })
 
             if label and rows:
                 columns.append({"label": label, "rows": rows})
