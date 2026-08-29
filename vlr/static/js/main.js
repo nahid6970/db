@@ -3610,10 +3610,17 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    function resetTournamentBracketModal() {
+        activeBracketPhase = 0;
+        if (bracketTournamentSelect) bracketTournamentSelect.value = "";
+        if (tournamentBracketContent) {
+            tournamentBracketContent.innerHTML = `<p class="bracket-empty-state">Select a tournament to load its bracket.</p>`;
+        }
+    }
+
     tournamentBracketBtn?.addEventListener("click", () => {
         if (tournamentBracketModal) tournamentBracketModal.style.display = "flex";
-        activeBracketPhase = 0;
-        loadTournamentBracket(bracketTournamentSelect?.value || "");
+        resetTournamentBracketModal();
     });
     bracketTournamentSelect?.addEventListener("change", () => {
         activeBracketPhase = 0;

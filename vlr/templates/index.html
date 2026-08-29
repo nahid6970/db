@@ -501,6 +501,7 @@
                 <div class="bracket-modal-title">
                     <h2><i class="fa-solid fa-diagram-project"></i> Tournament Brackets</h2>
                     <select id="bracket-tournament-select" class="per-page-select" title="Select tournament">
+                        <option value="" selected disabled>Select a tournament…</option>
                         {% for tournament_name, tournament_logo in tournaments %}
                         <option value="{{ tournament_name }}">{{ tournament_name }}</option>
                         {% endfor %}
