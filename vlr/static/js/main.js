@@ -3437,11 +3437,12 @@ document.addEventListener("DOMContentLoaded", () => {
             return `<div class="bracket-slot is-empty${match?.spacing ? " is-spacing" : ""}"></div>`;
         }
         const teams = Array.isArray(match.teams) ? match.teams : [];
-        const safeHref = escapeHtml(match.href || "#");
+        const localHref = match.id ? `/?match=${encodeURIComponent(match.id)}` : "#";
+        const safeHref = escapeHtml(localHref);
         const timeClass = match.status === "Live" ? " live" : "";
         const timeText = escapeHtml(match.time || "Time unavailable");
         return `<div class="bracket-slot${match.spacing ? " is-spacing" : ""}">
-            <a class="bracket-match" href="https://www.vlr.gg${safeHref}" target="_blank" rel="noopener" title="Open match on VLR.gg">
+            <a class="bracket-match" href="${safeHref}" target="_blank" rel="noopener" title="Open match in this app">
                 ${renderBracketTeam(teams[0] || {})}
                 ${renderBracketTeam(teams[1] || {})}
                 <div class="bracket-match-time${timeClass}">
