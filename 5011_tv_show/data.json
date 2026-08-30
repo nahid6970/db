@@ -2338,6 +2338,13 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Dead City",
         "episodes": [
             {
+                "id": 14,
+                "title": "The Walking Dead - Dead City - S03E06 - Genesis",
+                "watched": false,
+                "added_date": "2026-08-30T14:26:10.873402",
+                "notify": "unseen"
+            },
+            {
                 "id": 13,
                 "title": "The Walking Dead - Dead City - S03E05 - Imperialis",
                 "watched": false,
