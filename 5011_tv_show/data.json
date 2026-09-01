@@ -2601,6 +2601,13 @@
         "rating": "3",
         "episodes": [
             {
+                "id": 40,
+                "title": "WWE Raw - 2026-08-31 - RAW 1736 WEBDL-1080p",
+                "watched": true,
+                "added_date": "2026-09-01T16:59:26.089881",
+                "notify": "seen"
+            },
+            {
                 "id": 39,
                 "title": "WWE Raw - 2026-08-24 - RAW 1735 WEBDL-1080p",
                 "watched": true,
