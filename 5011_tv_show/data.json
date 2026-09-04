@@ -543,137 +543,6 @@
         "status": "Continuing"
     },
     {
-        "id": 8,
-        "title": "Dragon Ball Daima",
-        "year": "2024",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/440820/posters/669da50441a97.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Dragon Ball Daima",
-        "episodes": [
-            {
-                "id": 20,
-                "title": "Dragon Ball DAIMA - s01e20 - [20] - Maximum WEBDL-720p - [ToonsHub]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 19,
-                "title": "Dragon Ball DAIMA - s01e19 - [19] - Betrayal WEBDL-1080p - [Erai-raws]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 18,
-                "title": "Dragon Ball DAIMA - s01e18 - [18] - Awakening WEBRip-1080p - [Erai-raws]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 17,
-                "title": "Dragon Ball DAIMA - s01e17 - [17] - Gomah WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 16,
-                "title": "Dragon Ball DAIMA - s01e16 - [16] - Degesu WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 15,
-                "title": "Dragon Ball DAIMA - s01e15 - [15] - Third Eye HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 14,
-                "title": "Dragon Ball DAIMA - s01e14 - [14] - Taboo HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 13,
-                "title": "Dragon Ball DAIMA - s01e13 - [13] - Surprise HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 12,
-                "title": "Dragon Ball DAIMA - s01e12 - [12] - True Strength HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 11,
-                "title": "Dragon Ball DAIMA - s01e11 - [11] - Legend HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 10,
-                "title": "Dragon Ball DAIMA - s01e10 - [10] - Ocean HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 9,
-                "title": "Dragon Ball DAIMA - s01e09 - [9] - Thieves HDTV-720p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 8,
-                "title": "Dragon Ball DAIMA - s01e08 - [8] - Tamagami HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "Dragon Ball DAIMA - s01e07 - [7] - Collar HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "Dragon Ball DAIMA - s01e06 - [6] - Lightning HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "Dragon Ball DAIMA - s01e05 - [5] - Panzy HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 4,
-                "title": "Dragon Ball DAIMA - s01e04 - [4] - Chatty WEBRip-1080p - [EMBER]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Dragon Ball DAIMA - s01e03 - [3] - Daima HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "Dragon Ball DAIMA - s01e02 - [2] - Glorio WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "Dragon Ball Daima - s01e01 - [1] - Conspiracy WEBDL-1080p - [VARYG]",
-                "watched": false,
-                "notify": "seen"
-            }
-        ],
-        "rating": null,
-        "status": "Ended"
-    },
-    {
         "id": 10,
         "title": "Invincible",
         "year": "2021",
@@ -54155,6 +54024,314 @@
         "tvmaze_id": 52341,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:35:03.692687",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
+    },
+    {
+        "id": 84,
+        "tmdb_id": 236994,
+        "external_ids": {
+            "tmdb": 236994
+        },
+        "title": "Dragon Ball DAIMA",
+        "year": "2024",
+        "overview": "Mysteriously transformed into mini versions of themselves, Goku and his friends travel to the Demon Realm to uncover the truth and find a cure.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/lMULbSFZNXUC87MqOZQ4SSV9DXI.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action & Adventure",
+            "Comedy",
+            "Sci-Fi & Fantasy"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 20,
+                "title": "Maximum",
+                "air_date": "2025-02-28",
+                "airtime": "23:40",
+                "air_datetime": "2025-02-28T14:40:00+00:00",
+                "overview": "Having been restored, Goku finally surpasses his limits! To defeat the mighty Giant Gomah, who keeps regenerating through the power of the Third Eye, everyone puts in their maximum effort in an all-out battle!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/557/1394693.jpg",
+                "tvmaze_episode_id": 3027439,
+                "id": 20,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 19,
+                "title": "Betrayal",
+                "air_date": "2025-02-21",
+                "airtime": "23:40",
+                "air_datetime": "2025-02-21T14:40:00+00:00",
+                "overview": "The battle continues to go poorly for Goku and his companions. After much hesitation, Glorio puts Arinsu's secret plan into action! As his friends watch in awe, what will Glorio's betrayal set in motion?!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/556/1392477.jpg",
+                "tvmaze_episode_id": 3027438,
+                "id": 19,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 18,
+                "title": "Awakening",
+                "air_date": "2025-02-14",
+                "airtime": "23:40",
+                "air_datetime": "2025-02-14T14:40:00+00:00",
+                "overview": "King Gomah enters the battlefield and an all-out battle ensues! Goku and his companions stuggle against the power of the Third Eye. Just when it seems that all is lost, an amazing new power is awakened within Goku!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/555/1389795.jpg",
+                "tvmaze_episode_id": 3027437,
+                "id": 18,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 17,
+                "title": "Gomah",
+                "air_date": "2025-02-07",
+                "airtime": "23:40",
+                "air_datetime": "2025-02-07T14:40:00+00:00",
+                "overview": "Goku and his companions face off with Arinsu. With everything on the line, their battle begins. But all of a sudden, a transformed King Gomah stands before both parties!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/555/1387612.jpg",
+                "tvmaze_episode_id": 3027436,
+                "id": 17,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 16,
+                "title": "Degesu",
+                "air_date": "2025-01-31",
+                "airtime": "23:40",
+                "air_datetime": "2025-01-31T14:40:00+00:00",
+                "overview": "Goku and his companions finally reach Gomah's palace. But Kadem and the mighty Gendarmerie Force bar their way! Meanwhile, in the palace, Degesu takes action for his own ambitions!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/554/1385551.jpg",
+                "tvmaze_episode_id": 3027435,
+                "id": 16,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 15,
+                "title": "Third Eye",
+                "air_date": "2025-01-24",
+                "airtime": "23:40",
+                "air_datetime": "2025-01-24T14:40:00+00:00",
+                "overview": "The Evil Third Eye offers absolute power in the Demon Realm. King Gomah confirms its location and moves to obtain it! Will the Third Eye open on Gomah's forehead?!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/553/1383414.jpg",
+                "tvmaze_episode_id": 3027434,
+                "id": 15,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 14,
+                "title": "Taboo",
+                "air_date": "2025-01-17",
+                "airtime": "23:40",
+                "air_datetime": "2025-01-17T14:40:00+00:00",
+                "overview": "To stop Goku's advancement, Gomah commits an unbelievable taboo! Goku and his companions can no longer proceed. Just when it seems their adventure is over, a certain someone reveals their true power!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/552/1381424.jpg",
+                "tvmaze_episode_id": 3027433,
+                "id": 14,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 13,
+                "title": "Surprise",
+                "air_date": "2025-01-10",
+                "airtime": "23:40",
+                "air_datetime": "2025-01-10T14:40:00+00:00",
+                "overview": "As Goku and his companions head to where Gomah is, engine trouble causes them to land on a certain planet. The place they land happens to be a surprise-filled planet where even Supreme Demon Kings are afraid to tread!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/551/1378455.jpg",
+                "tvmaze_episode_id": 3027432,
+                "id": 13,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 12,
+                "title": "True Strength",
+                "air_date": "2024-12-27",
+                "airtime": "23:40",
+                "air_datetime": "2024-12-27T14:40:00+00:00",
+                "overview": "Vegeta's battle with the Tamagami is evenly matched, but forced underwater where he's not used to fighting, he finds himself struggling! Vegeta is cornered and sinks to the ocean floor. But then he finally unleashes his true strength!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/549/1373342.jpg",
+                "tvmaze_episode_id": 3027431,
+                "id": 12,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 11,
+                "title": "Legend",
+                "air_date": "2024-12-20",
+                "airtime": "23:40",
+                "air_datetime": "2024-12-20T14:40:00+00:00",
+                "overview": "Having regrouped with Vegeta and the others, Goku and his companions arrive at a planet that seems familiar. As they move to head out, a suspicious shadow approaches! It's the Legendary Namek who remained alone in the Demon Realm!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/549/1372711.jpg",
+                "tvmaze_episode_id": 3027430,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "Ocean",
+                "air_date": "2024-12-13",
+                "airtime": "23:40",
+                "air_datetime": "2024-12-13T14:40:00+00:00",
+                "overview": "Goku and his companions arrive at the mystic Second Demon World where a giant ocean spreads as far as the eye can see! The party is amazed at the new world but is immediately attacked by Gendarmerie that have been sent by Gomah!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/547/1369172.jpg",
+                "tvmaze_episode_id": 3027429,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 9,
+                "title": "Thieves",
+                "air_date": "2024-12-06",
+                "airtime": "23:40",
+                "air_datetime": "2024-12-06T14:40:00+00:00",
+                "overview": "Rumors of what Goku did in the Third Demon World spread across the Demon Realm. To avoid trouble, Goku wears a disguise at the hotel, but they can't let their guard down in the Third Demon World. Thieves see through his disguise!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/546/1366677.jpg",
+                "tvmaze_episode_id": 3027428,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Tamagami",
+                "air_date": "2024-11-29",
+                "airtime": "23:40",
+                "air_datetime": "2024-11-29T14:40:00+00:00",
+                "overview": "The fight with a Tamagami begins! The Tamagamis are the undefeated guardians of the Dragon Balls. Seeing Goku fight toe-to-toe with one, Panzy and the others are unable to hide their surprise. As the battle heats up, what will happen?!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/545/1364551.jpg",
+                "tvmaze_episode_id": 3027427,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Collar",
+                "air_date": "2024-11-22",
+                "airtime": "23:40",
+                "air_datetime": "2024-11-22T14:40:00+00:00",
+                "overview": "Goku and his companions continue their journey. But the Gendarmerie appear and bar their way again, perhaps due to them knowing the location of the Magic Collar around Panzy's neck. Can the bond with her friends save Panzy from peril?!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/545/1364553.jpg",
+                "tvmaze_episode_id": 3027426,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Lightning",
+                "air_date": "2024-11-15",
+                "airtime": "23:40",
+                "air_datetime": "2024-11-15T14:40:00+00:00",
+                "overview": "After encountering the Gendarmerie, the wardens of the Demon Realm, the four are forced to camp in a cave where they encounter further trouble! The enigmatic Glorio unleashes lightning magic against Goku to resolve the situation!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/545/1364552.jpg",
+                "tvmaze_episode_id": 3027425,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Panzy",
+                "air_date": "2024-11-08",
+                "airtime": "23:40",
+                "air_datetime": "2024-11-08T14:40:00+00:00",
+                "overview": "The masked Majin who appeared before Goku and his companions is a young girl named Panzy! While Glorio gives her the cold shoulder, Panzy insists on acting as their guide. The group reaches a suspicious castle",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/544/1360587.jpg",
+                "tvmaze_episode_id": 3027424,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Chatty",
+                "air_date": "2024-11-01",
+                "airtime": "23:40",
+                "air_datetime": "2024-11-01T14:40:00+00:00",
+                "overview": "Forced to make their way through the Third Demon World on foot, Goku and his companions stop by a lone drive-in on the way. There they encounter some strange souvenirs and a rather chatty and quirky Majin woman and her husband!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/543/1357651.jpg",
+                "tvmaze_episode_id": 3027423,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Daima",
+                "air_date": "2024-10-25",
+                "airtime": "23:40",
+                "air_datetime": "2024-10-25T14:40:00+00:00",
+                "overview": "Goku, Supreme Kai, and Glorio head out to the \"Demon Realm\" first. Their plane travels through space and a mysterious dimension. They arrive at the entrance to the Demon Realm, the \"Third Demon World\"!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/541/1354611.jpg",
+                "tvmaze_episode_id": 3027422,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Glorio",
+                "air_date": "2024-10-18",
+                "airtime": "23:40",
+                "air_datetime": "2024-10-18T14:40:00+00:00",
+                "overview": "Goku and his friends have been turned small due to Gomah's scheme. They begin preparing to go to the demon world. Goku collects his Nyoibo and looks forward to a new adventure. Then the mysterious young Majin Glorio appears!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/540/1352449.jpg",
+                "tvmaze_episode_id": 3027421,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Conspiracy",
+                "air_date": "2024-10-11",
+                "airtime": "23:40",
+                "air_datetime": "2024-10-11T14:40:00+00:00",
+                "overview": "After watching a video of Goku's group fighting Majin Buu, two Majin named Gomah and Degesu decide to head to Earth to carry out a diabolical plan.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/571/1429270.jpg",
+                "tvmaze_episode_id": 2994266,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 75093,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-05T03:36:43.983603",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     }
