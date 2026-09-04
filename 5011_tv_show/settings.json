@@ -1,5 +1,9 @@
 {
+    "tmdb_api_key": "981669ad5d7e89f2d735c56490dc7930",
     "sonarr_url": "http://192.168.0.101:8989",
     "sonarr_api_key": "09ee4367a6bf49bdb6cfbc181e144115",
-    "root_shows_folder": "C:\\Users\\nahid\\Downloads\\@sonarr"
+    "root_shows_folder": "C:\\Users\\nahid\\Downloads\\@sonarr",
+    "radarr_url": "http://192.168.0.101:7878",
+    "radarr_api_key": "",
+    "root_movies_folder": "C:\\Users\\nahid\\Downloads\\@radarr"
 }

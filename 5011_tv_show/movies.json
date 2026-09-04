@@ -1,0 +1,204 @@
+[
+    {
+        "id": 2,
+        "tmdb_id": 569094,
+        "external_ids": {
+            "tmdb": 569094,
+            "imdb": "tt9362722"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man: Across the Spider-Verse",
+        "year": "2023",
+        "overview": "After reuniting with Gwen Stacy, Brooklyn\u2019s full-time, friendly neighborhood Spider-Man is catapulted across the Multiverse, where he encounters the Spider Society, a team of Spider-People charged with protecting the Multiverse's very existence. But when the heroes clash on how to handle a new threat, Miles finds himself pitted against the other Spiders and must set out on his own to save those he loves most.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 140,
+        "rating": "5",
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:07:56.799195"
+    },
+    {
+        "id": 3,
+        "tmdb_id": 559,
+        "external_ids": {
+            "tmdb": 559,
+            "imdb": "tt0413300"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man 3",
+        "year": "2007",
+        "overview": "The seemingly invincible Spider-Man goes up against an all-new crop of villains\u2014including the shape-shifting Sandman. While Spider-Man\u2019s superpowers are altered by an alien organism, his alter ego, Peter Parker, deals with nemesis Eddie Brock and also gets caught up in a love triangle.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qFmwhVUoUSXjkKRmca5yGDEXBIj.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 139,
+        "rating": 3,
+        "tmdb_rating": 6.5,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:37:17.677999"
+    },
+    {
+        "id": 4,
+        "tmdb_id": 429617,
+        "external_ids": {
+            "tmdb": 429617,
+            "imdb": "tt6320628"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man: Far From Home",
+        "year": "2019",
+        "overview": "Peter Parker and his friends go on a summer trip to Europe. However, they will hardly be able to rest - Peter will have to agree to help Nick Fury uncover the mystery of creatures that cause natural disasters and destruction throughout the continent.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/4q2NNj4S5dG2RLF9CpXsej7yXl.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 129,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:37:24.115384"
+    },
+    {
+        "id": 5,
+        "tmdb_id": 324857,
+        "external_ids": {
+            "tmdb": 324857,
+            "imdb": "tt4633694"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man: Into the Spider-Verse",
+        "year": "2018",
+        "overview": "Struggling to find his place in the world while juggling school and family, Brooklyn teenager Miles Morales is unexpectedly bitten by a radioactive spider and develops unfathomable powers just like the one and only Spider-Man. While wrestling with the implications of his new abilities, Miles discovers a super collider created by the madman Wilson \"Kingpin\" Fisk, causing others from across the Spider-Verse to be inadvertently transported to his dimension.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/iiZZdoQBEYBv6id8su7ImL0oCbD.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 117,
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:37:38.799831"
+    },
+    {
+        "id": 6,
+        "tmdb_id": 558,
+        "external_ids": {
+            "tmdb": 558,
+            "imdb": "tt0316654"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man 2",
+        "year": "2004",
+        "overview": "Peter Parker is going through a major identity crisis. Burned out from being Spider-Man, he decides to shelve his superhero alter ego, which leaves the city suffering in the wake of carnage left by the evil Doc Ock. In the meantime, Parker still can't act on his feelings for Mary Jane Watson, a girl he's loved since childhood. A certain anger begins to brew in his best friend Harry Osborn as well...",
+        "cover_image": "https://image.tmdb.org/t/p/w500/aGuvNAaaZuWXYQQ6N2v7DeuP6mB.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 127,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:37:55.824466"
+    },
+    {
+        "id": 7,
+        "tmdb_id": 911916,
+        "external_ids": {
+            "tmdb": 911916,
+            "imdb": "tt16360004"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man: Beyond the Spider-Verse",
+        "year": "2027",
+        "overview": "Hunted by Miguel O'Hara's Spider Society and betrayed by his friends, Miles finds himself in the darkest corners of the Spider-Verse in search of a way home. Knowing that his family has been not only fractured but endangered by his calling, it's a race against the clock for Miles to travel across the wildest reaches of time and space to fight for and reunite everything he holds most dear.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/9KAe39xqyZnv9J4W3DRGdQqX82h.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-04T11:41:19.193398"
+    },
+    {
+        "id": 8,
+        "tmdb_id": 1311031,
+        "external_ids": {
+            "tmdb": 1311031,
+            "imdb": "tt32820897"
+        },
+        "radarr_id": null,
+        "title": "Demon Slayer: Kimetsu no Yaiba Infinity Castle",
+        "year": "2025",
+        "overview": "The Demon Slayer Corps are drawn into the Infinity Castle, where Tanjiro, Nezuko, and the Hashira face terrifying Upper Rank demons in a desperate fight as the final battle against Muzan Kibutsuji begins.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/fWVSwgjpT2D78VUh6X8UBd2rorW.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Fantasy"
+        ],
+        "runtime": 156,
+        "rating": 4,
+        "tmdb_rating": 8.8,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-09-04T11:47:51.527048"
+    },
+    {
+        "id": 9,
+        "tmdb_id": 969681,
+        "external_ids": {
+            "tmdb": 969681,
+            "imdb": "tt22084616"
+        },
+        "radarr_id": null,
+        "title": "Spider-Man: Brand New Day",
+        "year": "2026",
+        "overview": "Fighting crime full-time as Spider-Man in a world that doesn't remember him\u2014and the pressure of seeing his old friends move on without him\u2014sparks a change in Peter Parker he may not have the power to control. But that transformation might also be the only thing that can stop a shocking new threat to the city and those he loves - a powerful villain no one can even see.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Action",
+            "Adventure"
+        ],
+        "runtime": 145,
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T11:57:00.365617"
+    }
+]
