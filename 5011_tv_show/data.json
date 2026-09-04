@@ -6383,27 +6383,9 @@
         ],
         "tvmaze_id": 69956,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T12:37:50.645448",
+        "episodes_updated_at": "2026-09-04T15:39:19.462716",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
-    },
-    {
-        "id": 58,
-        "title": "Frieren - Beyond Journey's End",
-        "year": "",
-        "cover_image": "",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Frieren - Beyond Journey's End",
-        "rating": null,
-        "status": "Continuing",
-        "episodes": [
-            {
-                "id": 1,
-                "title": "Frieren - Beyond Journey's End - s02e09 - [37] - Himmel's Memoirs HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "added_date": "2026-09-04T12:49:02.689841",
-                "notify": "seen"
-            }
-        ]
     },
     {
         "id": 59,
