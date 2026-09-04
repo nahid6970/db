@@ -200,5 +200,130 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T11:57:00.365617"
+    },
+    {
+        "id": 10,
+        "tmdb_id": 1155089,
+        "external_ids": {
+            "tmdb": 1155089,
+            "imdb": "tt29195117"
+        },
+        "radarr_id": null,
+        "title": "Justice League: Crisis on Infinite Earths Part One",
+        "year": "2024",
+        "overview": "Death is coming. Worse than death: oblivion. Not just for our Earth, but for everyone, everywhere, in every universe! Against this ultimate destruction, the mysterious Monitor has gathered the greatest team of Super Heroes ever assembled. But what can the combined might of Superman, Wonder Woman, Batman, The Flash, Green Lantern and hundreds of Super Heroes from multiple Earths even do to save all of reality from an unstoppable antimatter armageddon?!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/mcRVsjMbhFstRK9z2oGRHiIvulr.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 93,
+        "rating": 4,
+        "tmdb_rating": 7.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T12:52:34.460815"
+    },
+    {
+        "id": 11,
+        "tmdb_id": 1209288,
+        "external_ids": {
+            "tmdb": 1209288,
+            "imdb": "tt30150907"
+        },
+        "radarr_id": null,
+        "title": "Justice League: Crisis on Infinite Earths Part Two",
+        "year": "2024",
+        "overview": "An endless army of shadow demons bent on the destruction of all reality swarms over our world and all parallel Earths! The only thing opposing them is the mightiest team of metahumans ever assembled. But not even the combined power of Superman, Batman, Wonder Woman, Green Lantern and all their fellow superheroes can slow down the onslaught of this invincible horde. What mysterious force is driving them? And how do the long-buried secrets of the Monitor and Supergirl threaten to crush our last defense?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/g8ak4QAGLZpqMs3CpnFHWWfIzJQ.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 94,
+        "rating": 3,
+        "tmdb_rating": 6.7,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T12:52:36.544064"
+    },
+    {
+        "id": 12,
+        "tmdb_id": 1209290,
+        "external_ids": {
+            "tmdb": 1209290,
+            "imdb": "tt30150917"
+        },
+        "radarr_id": null,
+        "title": "Justice League: Crisis on Infinite Earths Part Three",
+        "year": "2024",
+        "overview": "Now fully revealed as the ultimate threat to existence, the Anti-Monitor wages an unrelenting attack on the surviving Earths that struggle for survival in a pocket universe. One by one, these worlds and all their inhabitants are vaporized! On the planets that remain, even time itself is shattered, and heroes from the past join the Justice League and their rag-tag allies against the epitome of evil. But as they make their last stand, will the sacrifice of the superheroes be enough to save us all?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/a3q8NkM8uTh9E23VsbUOdDSbBeN.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 99,
+        "rating": 4,
+        "tmdb_rating": 7.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T12:52:38.762427"
+    },
+    {
+        "id": 13,
+        "tmdb_id": 791373,
+        "external_ids": {
+            "tmdb": 791373,
+            "imdb": "tt12361974"
+        },
+        "radarr_id": null,
+        "title": "Zack Snyder's Justice League",
+        "year": "2021",
+        "overview": "Determined to ensure Superman's ultimate sacrifice was not in vain, Bruce Wayne aligns forces with Diana Prince with plans to recruit a team of metahumans to protect the world from an approaching threat of catastrophic proportions.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tnAuB8q5vv7Ax9UAEje5Xi4BXik.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+        ],
+        "runtime": 242,
+        "rating": 4,
+        "tmdb_rating": 8.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T12:52:58.035293"
+    },
+    {
+        "id": 14,
+        "tmdb_id": 1061474,
+        "external_ids": {
+            "tmdb": 1061474,
+            "imdb": "tt5950044"
+        },
+        "radarr_id": null,
+        "title": "Superman",
+        "year": "2025",
+        "overview": "Superman, a journalist in Metropolis, embarks on a journey to reconcile his Kryptonian heritage with his human upbringing as Clark Kent.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/ldyfo0BKmz5rWtJJKCvwaNS4cJT.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure",
+            "Action"
+        ],
+        "runtime": 130,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-04T12:53:49.808380"
     }
 ]
