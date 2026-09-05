@@ -1023,5 +1023,285 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:05:22.816587"
+    },
+    {
+        "id": 41,
+        "tmdb_id": 1496735,
+        "external_ids": {
+            "tmdb": 1496735
+        },
+        "radarr_id": null,
+        "title": "Genshin Impact: Star Odyssey",
+        "year": "2025",
+        "release_date": "2025-06-12",
+        "overview": "Looking up, she could see the night sky embracing all that is. In that moment, a thousand emotions crystallized into questions. Where hang the sun and moon? What canvas depicts the stars? The infinite universe and breadth of time question the smallness of man. Yet it is these small specimens of mortality who may embark on long voyages, the power to create miracles firmly within their grasp.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/oTCflNYIEncwO1i1qhZ3d71g5t6.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Music"
+        ],
+        "runtime": 3,
+        "rating": 4,
+        "tmdb_rating": 7.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:23:18.532749"
+    },
+    {
+        "id": 42,
+        "tmdb_id": 1406916,
+        "external_ids": {
+            "tmdb": 1406916
+        },
+        "radarr_id": null,
+        "title": "Genshin Impact: Sunset",
+        "year": "2024",
+        "release_date": "2024-12-22",
+        "overview": "Time flies straight like an arrow, winding like a road with no end.  No one could have known the profound solitude of journeying through the passage of time,  Or how time itself could wash away the meaning of their long odyssey.  Yet, if their will has never been broken and their steps have never once faltered...  At the journey's end, they will rediscover the very purpose that first set them on their way.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/31vw2uDSgwaFJCKSsK3ii6IJ7YC.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Fantasy"
+        ],
+        "runtime": 11,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:23:27.480516"
+    },
+    {
+        "id": 43,
+        "tmdb_id": 1714892,
+        "external_ids": {
+            "tmdb": 1714892
+        },
+        "radarr_id": null,
+        "title": "Genshin Impact: The Final Gift",
+        "year": "2026",
+        "release_date": "2026-06-15",
+        "overview": "Here lies Alain Guillotin, Founding Director of the Research Institute of Kinetic Energy Engineering, White Cavalier of Protection, Lord-Artificer.  May the waters protect his soul. May he be troubled by suffering no more. May the waters guide his soul safely across to the other shore.  \"Regrettably, there's nothing more to say.\"",
+        "cover_image": "https://image.tmdb.org/t/p/w500/lsjt99T337bVbizmvYZAlikneTL.jpg",
+        "directory_path": "",
+        "genres": [],
+        "runtime": 7,
+        "rating": 4,
+        "tmdb_rating": 7.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:23:49.947560"
+    },
+    {
+        "id": 44,
+        "tmdb_id": 1198159,
+        "external_ids": {
+            "tmdb": 1198159
+        },
+        "radarr_id": null,
+        "title": "Genshin Impact Full Story Before Fontaine",
+        "year": "2023",
+        "release_date": "2023-06-03",
+        "overview": "Genshin All Cutscenes Full Movie Before Fontaine",
+        "cover_image": "https://image.tmdb.org/t/p/w500/jHwSxhkjjc8I78GYR7JYhdnWTXu.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation"
+        ],
+        "runtime": 107,
+        "rating": 5,
+        "tmdb_rating": 10.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:23:54.538942"
+    },
+    {
+        "id": 45,
+        "tmdb_id": 71172,
+        "external_ids": {
+            "tmdb": 71172,
+            "imdb": "tt1636780"
+        },
+        "radarr_id": null,
+        "title": "Gintama: The Movie",
+        "year": "2010",
+        "release_date": "2010-04-24",
+        "overview": "Odd Jobs Gin has taken on a lot of odd work in the past, and when you're a Jack of All Trades agency based in a feudal Japan that's been conquered and colonized by aliens, the term \"Odd Jobs\" means REALLY ODD jobs. But when some more than slightly suspicious secrets from the shadows of Gintoki Sakata's somewhat shady former samurai past and a new pair of odd jobs collide, the action is bound to get so wild and demented that only a feature film will do it justice!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/E3RT3f8oOuPS2pMhgH47TKBPgu.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Animation",
+            "Comedy"
+        ],
+        "runtime": 95,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:24:44.502579"
+    },
+    {
+        "id": 46,
+        "tmdb_id": 732203,
+        "external_ids": {
+            "tmdb": 732203,
+            "imdb": "tt10766468"
+        },
+        "radarr_id": null,
+        "title": "Gintama: The Very Final",
+        "year": "2021",
+        "release_date": "2021-01-08",
+        "overview": "The countdown to destruction has begun! Gintoki and the others set out to fulfill the wishes of their teacher Shoyo and thwart Utsuro's plans. Shinpachi, Kagura, the Shinsengumi, members of the Kabuki District, and even former enemies will join their fight. As Utsuro's power grows, Takasugi fights for his very life. Will Gintoki be able to put an end to all this?!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/kxBHS1PGebEN0lrFdk0o9FZY6Rn.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Science Fiction",
+            "Comedy"
+        ],
+        "runtime": 104,
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:24:47.961393"
+    },
+    {
+        "id": 47,
+        "tmdb_id": 1530941,
+        "external_ids": {
+            "tmdb": 1530941,
+            "imdb": "tt37931873"
+        },
+        "radarr_id": null,
+        "title": "Gintama the Movie 2026: Yoshiwara in Flames",
+        "year": "2026",
+        "release_date": "2026-02-13",
+        "overview": "Upon meeting a young boy named Seita who makes a living as a pickpocket, Gintoki discovers that he is pickpocketing out of a desire to meet his long-lost mother, Hinowa, Yoshiwara's number one courtesan. Gintoki and his friends venture to Yoshiwara to fulfill Seita's wish, but standing in their way is Housen, the Night King who rules Yoshiwara.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/ih3mFlEZzsN9uQT7P4Zvaq4GkSm.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Science Fiction",
+            "Comedy"
+        ],
+        "runtime": 0,
+        "rating": 5,
+        "tmdb_rating": 9.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:24:57.220222"
+    },
+    {
+        "id": 48,
+        "tmdb_id": 245917,
+        "external_ids": {
+            "tmdb": 245917,
+            "imdb": "tt2374144"
+        },
+        "radarr_id": null,
+        "title": "Gintama: The Final Chapter - Be Forever Yorozuya",
+        "year": "2013",
+        "release_date": "2013-07-04",
+        "overview": "What would have happened if the Shiroyasha never existed?  Edo is thrown to chaos by a mysterious cause. Sakata Gintoki, now lives in a world where the future has changed, without him. What has happened to the Yorozuya?  Gintoki, who is now a ghost of the past, must once again carry the burden in order to save his friends. He must finish the biggest job ever, which may be the final job of Yorozuya.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/1wEl5WHQO2SdWQ6S3gLBaaobf4c.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Animation",
+            "Science Fiction",
+            "Comedy"
+        ],
+        "runtime": 110,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:25:23.109375"
+    },
+    {
+        "id": 49,
+        "tmdb_id": 1119841,
+        "external_ids": {
+            "tmdb": 1119841
+        },
+        "radarr_id": null,
+        "title": "Gintama: Love Incense Arc - Eternal Flower",
+        "year": "2016",
+        "release_date": "2016-11-04",
+        "overview": "When a love potion is unleashed across Edo, hilarity ensues as everyone's romantic affections go out of control.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tRHdqwvz4qnqPNZhZVOLvz78QFv.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Comedy"
+        ],
+        "runtime": 26,
+        "rating": 3,
+        "tmdb_rating": 6.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:25:26.360543"
+    },
+    {
+        "id": 50,
+        "tmdb_id": 20986,
+        "external_ids": {
+            "tmdb": 20986,
+            "imdb": "tt1288461"
+        },
+        "radarr_id": null,
+        "title": "Gurren Lagann The Movie: Childhood's End",
+        "year": "2008",
+        "release_date": "2008-09-06",
+        "overview": "Simon and Kamina live in an underground city monitored by the village chief. When Simon stumbles upon an artifact and beastmen invade from the surface, Simon and Kamina rebel against them.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/nNjFlv4mJlkGLzfnLoU68YSy9KH.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Comedy",
+            "Animation",
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 112,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:26:40.276696"
+    },
+    {
+        "id": 51,
+        "tmdb_id": 23452,
+        "external_ids": {
+            "tmdb": 23452,
+            "imdb": "tt1422651"
+        },
+        "radarr_id": null,
+        "title": "Gurren Lagann the Movie: The Lights in the Sky Are Stars",
+        "year": "2009",
+        "release_date": "2009-04-25",
+        "overview": "Seven years have passed after the battle of Teppelin... Humans have since reclaimed the surface of the earth and enjoy an unprecedented period of peace and prosperity. However, humanity's increasing population growth triggers the sudden emergence of an unknown, powerful enemy. The fearsome, manipulative power of the mysterious Anti-Spiral proves too overwhelming for humans to even fight back. When everyone becomes desperate and loses hope, Team Dai-Gurren members reunite to stand up once again!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/fJ1NsL2A7dwY63mBkHdP1K4kD3T.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Animation",
+            "Adventure"
+        ],
+        "runtime": 126,
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:26:42.099471"
     }
 ]
