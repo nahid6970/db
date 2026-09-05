@@ -269,123 +269,6 @@
         ]
     },
     {
-        "id": 5,
-        "title": "Blood of Zeus",
-        "year": "2020",
-        "cover_image": "https://artworks.thetvdb.com/banners/series/361140/posters/5f9b1a73efeed.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Blood of Zeus",
-        "episodes": [
-            {
-                "id": 8,
-                "title": "Blood of Zeus - S03E08 - A Champion\u2019s Challenge WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "Blood of Zeus - S03E07 - Land of the Dead WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "Blood of Zeus - S03E06 - The Tower of the Winds WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "Blood of Zeus - S03E05 - The Head of the Maenads WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 4,
-                "title": "Blood of Zeus - S03E04 - Brothers\u2019 Journey WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Blood of Zeus - S03E03 - Hellebore WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "Blood of Zeus - S03E02 - Hades\u2019 Choice WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "Blood of Zeus - S03E01 - A Breath Before Dying WEBDL-1080p",
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "id": 11,
-                "title": "Blood of Zeus - S02E08 - The Three Trials WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-07T19:01:49.484510",
-                "notify": "seen"
-            },
-            {
-                "id": 10,
-                "title": "Blood of Zeus - S02E07 - The Hidden Realm WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-07T14:14:22.447447",
-                "notify": "seen"
-            },
-            {
-                "id": 9,
-                "title": "Blood of Zeus - S02E06 - Crossing Paths WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-07T14:14:22.447447",
-                "notify": "seen"
-            },
-            {
-                "id": 16,
-                "title": "Blood of Zeus - S02E05 - Judgement Day WEBDL-720p",
-                "watched": false,
-                "added_date": "2025-08-18T19:55:42.469395",
-                "notify": "seen"
-            },
-            {
-                "id": 13,
-                "title": "Blood of Zeus - S02E04 - Funeral Games WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-14T17:02:11.248214",
-                "notify": "seen"
-            },
-            {
-                "id": 14,
-                "title": "Blood of Zeus - S02E03 - Winter Is Born WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-14T19:02:11.283495",
-                "notify": "seen"
-            },
-            {
-                "id": 12,
-                "title": "Blood of Zeus - S02E02 - Weights & Measures WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-10T23:56:05.167425",
-                "notify": "seen"
-            },
-            {
-                "id": 15,
-                "title": "Blood of Zeus - S02E01 - A Shadow Emerges WEBDL-720p",
-                "watched": false,
-                "added_date": "2025-08-18T19:55:42.469395",
-                "notify": "seen"
-            }
-        ],
-        "rating": "4",
-        "episode_sort_type": "alphabetical",
-        "episode_sort_order": "desc",
-        "status": "Ended"
-    },
-    {
         "id": 6,
         "title": "Cobra Kai",
         "year": "2018",
@@ -2617,7 +2500,7 @@
         "sonarr_url": "",
         "tvmaze_id": 44778,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T03:44:57.127746",
+        "episodes_updated_at": "2026-09-05T12:51:28.142088",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     },
@@ -56541,6 +56424,369 @@
         "tvmaze_id": 5312,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:50:46.962270",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
+    },
+    {
+        "id": 91,
+        "tmdb_id": 111111,
+        "external_ids": {
+            "tmdb": 111111
+        },
+        "title": "Blood of Zeus",
+        "year": "2020",
+        "overview": "In a brewing war between the gods of Olympus and the titans, Heron, a commoner living on the outskirts of ancient Greece, becomes mankind's best hope of surviving an evil demon army, when he discovers the secrets of his past.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/zXRR5tgGLtKrRmuN4ko9SLAdCiZ.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action & Adventure",
+            "Sci-Fi & Fantasy"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.8,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 3,
+                "episode_number": 8,
+                "title": "A Champion's Challenge",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "With the fate of the gods at stake, the immortals and the Titans invoke the ways of old and settle their dispute through an epic battle of champions.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419524.jpg",
+                "tvmaze_episode_id": 3228354,
+                "id": 24,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 7,
+                "title": "Land of the Dead",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "Two star-crossed soulmates reunite on the bank of the River Styx. Facing insurmountable odds, the last remaining Olympians square off against Cronos.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419523.jpg",
+                "tvmaze_episode_id": 3228353,
+                "id": 23,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 6,
+                "title": "The Tower of the Winds",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "A humbled Hera pleads for aid on Zeus' behalf. In the home of the wind gods, Heron's search party fights a dark force that pits friend against friend.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419522.jpg",
+                "tvmaze_episode_id": 3228352,
+                "id": 22,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 5,
+                "title": "The Head of the Maenads",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "While seeking an oracle to help guide them on their quest, Heron and his companions intrude upon a mysterious cult and their gruesome blood sacrifice.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419521.jpg",
+                "tvmaze_episode_id": 3228351,
+                "id": 21,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 4,
+                "title": "Brothers' Journey",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "Cronos schemes to weaken Zeus as the Olympians bid farewell to their fallen brethren. Old allies lend their swords in a clash against a colossal foe.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419519.jpg",
+                "tvmaze_episode_id": 3228349,
+                "id": 20,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 3,
+                "title": "Hellebore",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "In the Underworld, the vengeful king of the Titans puts Hades' love to the ultimate test. Seraphim reveals his perilous plan to save Gorgo from torment.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419518.jpg",
+                "tvmaze_episode_id": 3228350,
+                "id": 19,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 2,
+                "title": "Hades' Choice",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "To protect those she holds dear, a selfless immortal confronts a towering terror. Freed from bondage, Cronos vows to teach the gods the meaning of fear.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419517.jpg",
+                "tvmaze_episode_id": 3228348,
+                "id": 18,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 1,
+                "title": "A Breath Before Dying",
+                "air_date": "2025-05-08",
+                "airtime": "",
+                "air_datetime": "2025-05-08T12:00:00+00:00",
+                "overview": "Heron and Seraphim set forth on a mission of mercy while the heavens tremble with the rage of Typhon, who rains destruction down on the gods of Olympus.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/567/1419516.jpg",
+                "tvmaze_episode_id": 3228347,
+                "id": 17,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 8,
+                "title": "The Three Trials",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "With the crown of Olympus at stake, the gods clash swords in an epic battle for the Eleusinian Stone and the power it grants to whomever possesses it.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296245.jpg",
+                "tvmaze_episode_id": 2829346,
+                "id": 16,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 7,
+                "title": "The Hidden Realm",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Aided by an Amazon fleet, Heron, Alexia and Kofi face the giant automaton Talos. To enter the Hidden Realm, Seraphim must first outsmart the Curetes.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296244.jpg",
+                "tvmaze_episode_id": 2829345,
+                "id": 15,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 6,
+                "title": "Crossing Paths",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Heron and his companions fight a vicious swarm of Keres and encounter a surprising traveler along their journey. Demeter makes a bold play for power.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296243.jpg",
+                "tvmaze_episode_id": 2829344,
+                "id": 14,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 5,
+                "title": "Judgement Day",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Zeus is sentenced to his fate in the Underworld while Heron visits the land of his birth. Fueled by vengeance, Seraphim unleashes wrath upon an enemy.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296242.jpg",
+                "tvmaze_episode_id": 2829343,
+                "id": 13,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 4,
+                "title": "Funeral Games",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "While mourning their fallen king, the immortals honor Zeus with celebratory games. But the competition between Ares and Heron grows brutally violent.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296241.jpg",
+                "tvmaze_episode_id": 2829342,
+                "id": 12,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 3,
+                "title": "Winter is Born",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Heron seeks guidance from the smithing god Hephaestus. To win Seraphim's allegiance, Hades tempts him with a promise to bring peace to a lost love.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296240.jpg",
+                "tvmaze_episode_id": 2829341,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 2,
+                "title": "Weights & Measures",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Seraphim faces harsh judgment in the Underworld and receives an unexpected offer from Hades, who reveals the true origin of the Eleusinian Stone.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296239.jpg",
+                "tvmaze_episode_id": 2829340,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 1,
+                "title": "A Shadow Emerges",
+                "air_date": "2024-05-10",
+                "airtime": "",
+                "air_datetime": "2024-05-10T12:00:00+00:00",
+                "overview": "Hades plots to steal a powerful stone from Zeus's temple while the battle for Olympus rages. Gaia sets Heron on a quest to save a former adversary.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1296238.jpg",
+                "tvmaze_episode_id": 2828132,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "War for Olympus",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Hera resurrects the giants of the sea and assails Olympus, leading to an earth-shattering battle for the ages and the rise of a new demigod: Heron.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700082.jpg",
+                "tvmaze_episode_id": 1940031,
+                "id": 8,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "The Fields of the Dead",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Seraphim's loyalties are tested when Zeus reveals Hera's deceptions. Alexia's company crosses the Fields of the Dead. War breaks out between the gods.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700081.jpg",
+                "tvmaze_episode_id": 1940030,
+                "id": 7,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Back to Olympus",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Zeus brings Heron to Olympus for training, angering the other gods. Alexia embarks on a mission to Melidoni with Heron's companions, Evios and Kofi.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700080.jpg",
+                "tvmaze_episode_id": 1940029,
+                "id": 6,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Escape or Die",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Hera directs Seraphim to the powerful sword Zeus once forged for Heron, who is enslaved aboard a galley. Alexia seeks counsel from her mentor, Chiron.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700079.jpg",
+                "tvmaze_episode_id": 1940028,
+                "id": 5,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "A Monster is Born",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Heron is taken captive by the army of Seraphim, who chases Alexia but instead encounters Hera. The goddess informs the demon leader of his true past.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700078.jpg",
+                "tvmaze_episode_id": 1940027,
+                "id": 4,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "The Raid",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "The goddess Hera discovers the existence of Zeus's bastard son Heron and vows revenge. The polis falls to the forces of the malevolent Seraphim.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700077.jpg",
+                "tvmaze_episode_id": 1940026,
+                "id": 3,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Past is Prologue",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "After he completes a quest for adamantine ore, Heron learns the truth about his birth from his mother Electra, as well as the identity of his father.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700076.jpg",
+                "tvmaze_episode_id": 1940025,
+                "id": 2,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "A Call to Arms",
+                "air_date": "2020-10-27",
+                "airtime": "",
+                "air_datetime": "2020-10-27T12:00:00+00:00",
+                "overview": "Demons attack the polis near the home of the outcast Heron, who finds allies in the wise elder Elias and the fierce Amazonian warrior Alexia.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/280/700075.jpg",
+                "tvmaze_episode_id": 1940024,
+                "id": 1,
+                "watched": true,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 50777,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-05T12:54:58.328681",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     }
