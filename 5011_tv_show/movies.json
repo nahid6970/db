@@ -676,5 +676,245 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-05T02:51:36.004360"
+    },
+    {
+        "id": 28,
+        "tmdb_id": 553837,
+        "external_ids": {
+            "tmdb": 553837,
+            "imdb": "tt6344664"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Lelouch of the Re;surrection",
+        "year": "2019",
+        "release_date": "2019-02-09",
+        "overview": "The story takes place several years after Lelouch's \"Zero Requiem\" plan. He gave up his life to save the world and protect the ones he loved. The day Lelouch vi Brittannia fell was the day this war-torn world found peace. Now, as his friends work to keep the peace, a terrorist attack could risk everything. Can the brilliant tactician outwit death and save them all? Or will Lelouch\u2019s legacy fall here?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/ghD2HJyAk6EYVHrzBhddNDJ73Go.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Crime",
+            "Mystery",
+            "War"
+        ],
+        "runtime": 112,
+        "rating": 4,
+        "tmdb_rating": 7.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:20.309896"
+    },
+    {
+        "id": 29,
+        "tmdb_id": 212161,
+        "external_ids": {
+            "tmdb": 212161,
+            "imdb": "tt3354254"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Akito the Exiled 2: The Wyvern Divided",
+        "year": "2013",
+        "release_date": "2013-09-14",
+        "overview": "The war between Euro Britannia and the European Union  continues. New orders are given to the W-0 Unit. To land in the middle of the enemy territory as a diversion.  The pilots of the W-0 Unit consist only of the commanding officer, Leila, the only surviving Japanese from their last battle, Akito, and the three that escaped from the Eleven ghettos and lived in the underworld, Ryou, Yukiya, and Ayano. With everyone holding their respective expectations, the operation moves forward.  On the other side in Euro Britannia, Shin, who made his benefactor commit suicide with the mysterious power of \u201cGeass\u201d, is appointed the leader of the Knights of St. Michael. As Shin steadily advances for the sake of his own ambition, he and his subordinates in the Ashura squad are given orders to deploy.  The one that lives in order to fight, and the one that fights in order to live.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/oyklF3LHto3jdwrVmQaze5Q3EDM.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Animation",
+            "Science Fiction"
+        ],
+        "runtime": 60,
+        "rating": 3,
+        "tmdb_rating": 6.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:30.339926"
+    },
+    {
+        "id": 30,
+        "tmdb_id": 185526,
+        "external_ids": {
+            "tmdb": 185526,
+            "imdb": "tt3354096"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Akito the Exiled 1: The Wyvern Arrives",
+        "year": "2012",
+        "release_date": "2012-08-04",
+        "overview": "The side story takes place in 2017 a.t.b., between the rise of the \u201cBlack Knights\u201d organization and the return of the supposedly \"dead\" Zero. The setting is in Europe, where the European Union (E.U.) allied nations are being invaded by the overwhelming forces of the Holy Britannian Empire. On the verge of defeat, the E.U. army forms a special unit known as \u201cW-0\u2033, of which a young pilot named Akito Hyuga is a member. Leila Malkal , a former Britannian Aristocrat comes to the E.U.'s aid, commanding the \u201cWyvern\u201d Knightmare corps comprised of Japanese teenagers. They recklessly plunge into a battlefield, where the survival rate is extremely low, at about 5% only. They fight for their freedom and for a \"home\" to which they can return.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/v8zIVsuEZjELEpQzEKEM0aQhX01.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Animation",
+            "War"
+        ],
+        "runtime": 51,
+        "rating": 3,
+        "tmdb_rating": 6.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:38.102316"
+    },
+    {
+        "id": 31,
+        "tmdb_id": 347200,
+        "external_ids": {
+            "tmdb": 347200,
+            "imdb": "tt3354302"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Akito the Exiled 3: The Brightness Falls",
+        "year": "2015",
+        "release_date": "2015-05-02",
+        "overview": "After discovering the face of their true enemy, someone who is related to Akito and responsible for the Geass placed upon him, W-0 attempts to return to their base at Castle Weisswolf. However, stranded in Warsaw due to a complication involving their military identification, they are forced to accept the help of local gypsies, allowing the squad to take some time to deepen their bonds. Meanwhile, Britannian advisor Julius Kingsley and his guard Suzaku Kururugi begin working together with the Knights of St. Michael in order to crush the European resistance once and for all, armed with the destructive power of a giant weapon known as the Ark Fleet.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/n7ajLedWF7AFMwkUVXhowNZG3cA.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Animation",
+            "Science Fiction"
+        ],
+        "runtime": 60,
+        "rating": 3,
+        "tmdb_rating": 6.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:42.074242"
+    },
+    {
+        "id": 32,
+        "tmdb_id": 372751,
+        "external_ids": {
+            "tmdb": 372751,
+            "imdb": "tt5920384"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Akito the Exiled 5: To Beloved Ones",
+        "year": "2016",
+        "release_date": "2016-02-06",
+        "overview": "The Ark Fleet has been destroyed, and a significant number of the enemy's troops have been wiped out due to its crash landing. As the remaining forces of the Holy Order of Michael regroup in order to launch a final assault on Weiswolf Castle, the wZERO unit, along with their new ally Ashley Ashra, stand ready to intercept them. Meanwhile, with his Geass out of control, Shin moves to erase his younger brother's existence once and for all. But Akito, having promised Leila that he will come back alive, refuses to accept such a fate, and the two clash in their final battle.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/4jb6fwNcvnF6tKF9L9leC6bdiS.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Animation",
+            "Science Fiction"
+        ],
+        "runtime": 60,
+        "rating": 3,
+        "tmdb_rating": 6.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:44.613244"
+    },
+    {
+        "id": 33,
+        "tmdb_id": 477777,
+        "external_ids": {
+            "tmdb": 477777,
+            "imdb": "tt9598270"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Lelouch of the Rebellion II - Transgression",
+        "year": "2018",
+        "release_date": "2018-02-10",
+        "overview": "Having achieved miraculous victories in a series of battles against the Britannian Army, Lelouch Lamperouge has brought the Black Knights, his paramilitary organization, to a more powerful state than ever before. Nothing seems impossible for him when he utilizes his military strength, intellect, and Geass power of absolute obedience. However, obstacles in the face of the uprising never cease, putting Lelouch in a difficult predicament. Most worryingly, Kururugi Suzaku's combat prowess and the appearance of a mysterious child named V.V. threaten to put an end Lelouch's great rebellion.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/wENcjUrDmCj6gyhSSdA39U8RbIQ.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Animation",
+            "Drama",
+            "Action"
+        ],
+        "runtime": 132,
+        "rating": 4,
+        "tmdb_rating": 7.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:47:54.406059"
+    },
+    {
+        "id": 34,
+        "tmdb_id": 347187,
+        "external_ids": {
+            "tmdb": 347187,
+            "imdb": "tt3354306"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Akito the Exiled 4: Memories of Hatred",
+        "year": "2015",
+        "release_date": "2015-07-04",
+        "overview": "While W-0 is away, Leila and the remaining crew at base find themselves surrounded by Britannian Knightmares. Piloting the Vercingetorix, Shin Hyuuga leads the enemy charge, having usurped the position of Grand Master in the Knights of St. Michael. With her core members unavailable, it's up to Leila to protect her comrades, but this may be much tougher than she realizes: a spy lurking among them is finally ready to reveal himself.  Left with no choice but to surrender, Leila arranges a meeting with Shin in order to ensure the safety of her squad. But as negotiations begin to fall apart, Akito and an unexpected ally return in the nick of time to turn things around.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/4eNsnGy5zwzn0ro4BOv5rHfwhAV.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Animation",
+            "Science Fiction"
+        ],
+        "runtime": 60,
+        "rating": 3,
+        "tmdb_rating": 6.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:48:04.166985"
+    },
+    {
+        "id": 35,
+        "tmdb_id": 477776,
+        "external_ids": {
+            "tmdb": 477776,
+            "imdb": "tt8100900"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Lelouch of the Rebellion I - Initiation",
+        "year": "2017",
+        "release_date": "2017-10-21",
+        "overview": "The world is at war. Lelouch Lamperouge, an exiled prince, encounters a strange girl known as C.C., who gifts him with a great power. With this ability, Lelouch can get anyone to do as he wills. But the power of Geass: is it a blessing\u2026or a curse?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/lRfTNdwfcXnECZXeZswMOSV3q36.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Animation",
+            "Drama",
+            "Action"
+        ],
+        "runtime": 135,
+        "rating": 4,
+        "tmdb_rating": 7.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:48:14.300725"
+    },
+    {
+        "id": 36,
+        "tmdb_id": 477779,
+        "external_ids": {
+            "tmdb": 477779,
+            "imdb": "tt9844256"
+        },
+        "radarr_id": null,
+        "title": "Code Geass: Lelouch of the Rebellion III - Glorification",
+        "year": "2018",
+        "release_date": "2018-05-01",
+        "overview": "With his spell of impressive successes seemingly behind him, Lelouch Lamperouge's hopes of destroying the Brittanian Empire presided over by his father are crumbling at an alarming rate. With his sister kidnapped, his former friend Suzaku ignoring his pleas for help, and his organisation The Black Knights losing their faith in him, the man behind Zero's mask is left with nowhere to turn.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qGoOP4VWAMQifbCRJkDPVSAkSi2.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Animation",
+            "Drama",
+            "Action"
+        ],
+        "runtime": 140,
+        "rating": 4,
+        "tmdb_rating": 7.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T18:48:18.667306"
     }
 ]
