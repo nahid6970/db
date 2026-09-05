@@ -945,5 +945,83 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:01:44.834397"
+    },
+    {
+        "id": 38,
+        "tmdb_id": 610150,
+        "external_ids": {
+            "tmdb": 610150,
+            "imdb": "tt14614892"
+        },
+        "radarr_id": null,
+        "title": "Dragon Ball Super: Super Hero",
+        "year": "2022",
+        "release_date": "2022-06-11",
+        "overview": "The Red Ribbon Army, an evil organization that was once destroyed by Goku in the past, has been reformed by a group of people who have created new and mightier Androids, Gamma 1 and Gamma 2, and seek vengeance against Goku and his family.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/pi0iZOEHeA3ih4p1IwAG4x2DZNH.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 100,
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:04:28.188780"
+    },
+    {
+        "id": 39,
+        "tmdb_id": 503314,
+        "external_ids": {
+            "tmdb": 503314,
+            "imdb": "tt7961060"
+        },
+        "radarr_id": null,
+        "title": "Dragon Ball Super: Broly",
+        "year": "2018",
+        "release_date": "2018-12-14",
+        "overview": "Earth is peaceful following the Tournament of Power. Realizing that the universes still hold many more strong people yet to see, Goku spends all his days training to reach even greater heights. Then one day, Goku and Vegeta are faced by a Saiyan called 'Broly' who they've never seen before. The Saiyans were supposed to have been almost completely wiped out in the destruction of Planet Vegeta, so what's this one doing on Earth? This encounter between the three Saiyans who have followed completely different destinies turns into a stupendous battle, with even Frieza (back from Hell) getting caught up in the mix.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/uMEgkyiPznZP5AiMSWAk2jsj5gC.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Animation"
+        ],
+        "runtime": 101,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:05:09.222396"
+    },
+    {
+        "id": 40,
+        "tmdb_id": 34433,
+        "external_ids": {
+            "tmdb": 34433,
+            "imdb": "tt0142242"
+        },
+        "radarr_id": null,
+        "title": "Dragon Ball Z: Broly - The Legendary Super Saiyan",
+        "year": "1993",
+        "release_date": "1993-03-06",
+        "overview": "While the Saiyan Paragus persuades Vegeta to rule a new planet, King Kai alerts Goku of the South Galaxy's destruction by an unknown Super Saiyan.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/6iO8TJCyLI4BiPYOvdwzPV2bhoV.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 70,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T19:05:22.816587"
     }
 ]
