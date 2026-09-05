@@ -182,6 +182,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 3,
+                "title": "Uzumaki - S01E04 - Episode 4",
+                "watched": false,
+                "added_date": "2026-09-06T02:35:08.412256",
+                "notify": "unseen"
+            },
+            {
                 "id": 2,
                 "title": "Uzumaki - S01E02 - Episode 2",
                 "watched": false,
