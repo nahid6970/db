@@ -1303,5 +1303,114 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:26:42.099471"
+    },
+    {
+        "id": 52,
+        "tmdb_id": 672322,
+        "external_ids": {
+            "tmdb": 672322,
+            "imdb": "tt11991748"
+        },
+        "radarr_id": null,
+        "title": "Rurouni Kenshin: The Beginning",
+        "year": "2021",
+        "release_date": "2021-06-04",
+        "overview": "Before he was a protector, Kenshin was a fearsome assassin known as Battosai. But when he meets gentle Tomoe Yukishiro, a beautiful young woman who carries a huge burden in her heart, his life will change forever.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/rODS466qSdrwMlGdbUwPENhDN2c.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Drama",
+            "Romance"
+        ],
+        "runtime": 138,
+        "rating": 4,
+        "tmdb_rating": 7.7,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T20:14:39.846756"
+    },
+    {
+        "id": 53,
+        "tmdb_id": 221731,
+        "external_ids": {
+            "tmdb": 221731,
+            "imdb": "tt3029558"
+        },
+        "radarr_id": null,
+        "title": "Rurouni Kenshin Part II: Kyoto Inferno",
+        "year": "2014",
+        "release_date": "2014-08-01",
+        "overview": "Kenshin has settled into his new life with Kaoru and his other friends when he is approached with a request from the Meiji government. Makoto Shishio, a former assassin like Kenshin, was betrayed, set on fire and left for dead. He survived, and is now in Kyoto, plotting with his gathered warriors to overthrow the new government. Against Kaoru's wishes, Kenshin reluctantly agrees to go to Kyoto and help keep his country from falling back into civil war.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/gI2xYpJPQOsmFblvowkW2IgEHkC.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Adventure",
+            "Drama",
+            "Fantasy"
+        ],
+        "runtime": 138,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T20:14:46.363032"
+    },
+    {
+        "id": 54,
+        "tmdb_id": 1502038,
+        "external_ids": {
+            "tmdb": 1502038,
+            "imdb": "tt0294885"
+        },
+        "radarr_id": null,
+        "title": "Rurouni Kenshin: Reflection",
+        "year": "2001",
+        "release_date": "2001-12-19",
+        "overview": "Kenshin and Kaoru are married. Kenshin leaves Kaoru with their son, Kenji, to lead a revolution in China. But both of them suffer from a seemingly incurable disease. 15 years later, Kenshin tries to return home to his wife before she dies of grief. Flashbacks of Kenshin's previous encounters with friends and foes occur while Kenshin struggles to make it back home.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/yCZFHgtIWkWxSkcQ7vUQGPUf9fu.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama",
+            "Animation",
+            "Romance"
+        ],
+        "runtime": 0,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T20:15:04.930398"
+    },
+    {
+        "id": 55,
+        "tmdb_id": 1637720,
+        "external_ids": {
+            "tmdb": 1637720,
+            "imdb": "tt37051817"
+        },
+        "radarr_id": null,
+        "title": "Rurouni Kenshin: Trust & Betrayal",
+        "year": "1999",
+        "release_date": "1999-11-20",
+        "overview": "In the era of Japan's Meiji Restoration, an assassin regains his humanity.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/ueCcJjCWf16dTZsCYfshVRIUqM9.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Adventure",
+            "Drama",
+            "History",
+            "Romance"
+        ],
+        "runtime": 117,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-05T20:15:29.698443"
     }
 ]
