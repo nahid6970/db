@@ -643,111 +643,6 @@
         "sonarr_url": ""
     },
     {
-        "id": 43,
-        "title": "Fate+strange Fake",
-        "year": "",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/436779/posters/6774f2c56ff96.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Fate+strange Fake",
-        "rating": null,
-        "status": "Continuing",
-        "episodes": [
-            {
-                "id": 4,
-                "title": "Fate+strange Fake - S01E13 - This Illusion Becomes Reality WEBDL-1080p Proper",
-                "watched": false,
-                "added_date": "2026-03-29T20:31:47.547767",
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Fate+strange Fake - S01E12 - At the End of the Rope WEBDL-1080p Proper",
-                "watched": false,
-                "added_date": "2026-03-29T19:31:47.549462",
-                "notify": "seen"
-            },
-            {
-                "id": 9,
-                "title": "Fate+strange Fake - S01E11 - The Pale Knight WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-30T22:45:30.188748",
-                "notify": "seen"
-            },
-            {
-                "id": 8,
-                "title": "Fate+strange Fake - S01E10 - Gold and Lion WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-30T22:45:30.188748",
-                "notify": "seen"
-            },
-            {
-                "id": 13,
-                "title": "Fate+strange Fake - S01E09 - The Nightmare Comes With the Dawn of London WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-31T02:15:35.965144",
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "Fate+strange Fake - S01E08 - Backstage of a Third-rate Comedy WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-30T22:45:30.188748",
-                "notify": "seen"
-            },
-            {
-                "id": 12,
-                "title": "Fate+strange Fake - S01E07 - Back from Twilight, the God Is Come WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-31T01:44:35.283152",
-                "notify": "seen"
-            },
-            {
-                "id": 11,
-                "title": "Fate+strange Fake - S01E06 - The Wandering King's Rock 'n' Roll WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-31T00:44:35.278484",
-                "notify": "seen"
-            },
-            {
-                "id": 10,
-                "title": "Fate+strange Fake - S01E05 - Stars' Banquet WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-30T23:44:35.287105",
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "Fate+strange Fake - S01E04 - The Canon of Demigods WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-30T22:45:30.188748",
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "Fate+strange Fake - S01E03 - A Battle Without Heroes WEBDL-1080p",
-                "watched": false,
-                "added_date": "2026-03-29T21:31:47.562230",
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "Fate+strange Fake - S01E02 - Ensemble VS Pretense WEBDL-720p",
-                "watched": false,
-                "added_date": "2026-01-11T04:14:10.910029",
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "Fate+strange Fake - S01E01 - The Heroic Spirit Incident WEBRip-1080p",
-                "watched": false,
-                "added_date": "2026-01-08T10:02:41.306469",
-                "notify": "seen"
-            }
-        ],
-        "sonarr_url": "http://192.168.0.101:8989/series/fatestrange-fake",
-        "episode_sort_type": "alphabetical",
-        "episode_sort_order": "desc"
-    },
-    {
         "id": 54,
         "tmdb_id": 220102,
         "external_ids": {
@@ -66404,6 +66299,216 @@
         "tvmaze_id": 37196,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:45:46.214212",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
+    },
+    {
+        "id": 111,
+        "tmdb_id": 229858,
+        "external_ids": {
+            "tmdb": 229858
+        },
+        "title": "Fate/strange Fake",
+        "year": "2024",
+        "overview": "In a Holy Grail War, Mages (Masters) and their Heroic Spirits (Servants) fight for the control of the Holy Grail\u2014an omnipotent wish-granting device said to fulfill any desire. Years have passed since the end of the Fifth Holy Grail War in Japan. Now, signs portend the emergence of a new Holy Grail in the western American city of Snowfield. Sure enough, Masters and Servants begin to gather... A missing Servant class... Impossible Servant summonings... A nation shrouded in secrecy... And a city created as a battleground. In the face of such irregularities, the Holy Grail War is twisted and driven into the depth of madness. Let the curtain rise on a masquerade of humans and heroes, made to dance upon the stage of a false Holy Grail.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/2r5MEaLYl5lZxzgfSmrDybipngl.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action & Adventure",
+            "Sci-Fi & Fantasy",
+            "Drama"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 13,
+                "title": "This Illusion Becomes Reality",
+                "air_date": "2026-03-28",
+                "airtime": "23:30",
+                "air_datetime": "2026-03-28T14:30:00+00:00",
+                "overview": "Francesca and the others descend into a dream realm filled with chaos.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/619/1549165.jpg",
+                "tvmaze_episode_id": 3518741,
+                "id": 13,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 12,
+                "title": "At the End of the Rope",
+                "air_date": "2026-03-21",
+                "airtime": "23:30",
+                "air_datetime": "2026-03-21T14:30:00+00:00",
+                "overview": "Cerberus stands before Saber and Ayaka inside the dreamworld. Though the police were fighting alongside them, the wounds Saber bore from his previous battle has put him in a critical situation. In an attempt to shake off the weakness that dwells within her, Ayaka hurries to be by his side. But before she can reach him, the shadow of \"Little Red\" appears before her. Faced with the terrifying specter of her past, the symbol of her deepest fears, she says...",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/618/1547341.jpg",
+                "tvmaze_episode_id": 3518740,
+                "id": 12,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 11,
+                "title": "The Pale Knight",
+                "air_date": "2026-03-14",
+                "airtime": "23:30",
+                "air_datetime": "2026-03-14T14:30:00+00:00",
+                "overview": "Though Archer had defeated Saber, the King of Heroes was also forced to fall when his treasury was sealed off by Philia's intervention. However, before the shifting tides of the battle could be seen through, a massive fog suddenly enveloped the city. The police force, Flat, Hansa, and members of each faction were all helplessly swallowed by the black fog. When Sigma awoke, he found himself in a garden where the girl at the center of the conflict, Tsubaki Kuruoka, was playing with animals.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/617/1544780.jpg",
+                "tvmaze_episode_id": 3518739,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "Gold and Lion",
+                "air_date": "2026-03-07",
+                "airtime": "23:30",
+                "air_datetime": "2026-03-07T14:30:00+00:00",
+                "overview": "True Archer, having defeated Berserker, stands before the police force menacingly, as if embodying despair itself. Meanwhile, Saber, facing off against Archer, races across the battlefield, using his speed and rapid-fire Noble Phantasm to fend off the King of Heroes. Hansa, witnessing Saber's seemingly relentless barrage of Noble Phantasms, looks over to Ayaka, who is supplying the magical energy that fuels them, and asks her a question.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/616/1542080.jpg",
+                "tvmaze_episode_id": 3518738,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 9,
+                "title": "The Nightmare Comes With the Dawn of London",
+                "air_date": "2026-02-28",
+                "airtime": "23:30",
+                "air_datetime": "2026-02-28T14:30:00+00:00",
+                "overview": "Clan Calatin has arrived in front of the entrance of the hospital in hopes of executing a rescue mission for Tsubaki. However, before them appears Alcides, along with his giant dog. The police force and Berserker confront Alcides, who is intent on slaying Tsubaki after identifying her as an enemy in this Holy Grail War, and one by one Servants begin to gather, as if drawn in by the chaos. And thus, the Holy Grail War in Snowfield plunges into a vortex of mayhem.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/615/1539703.jpg",
+                "tvmaze_episode_id": 3518737,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Backstage of a Third-rate Comedy",
+                "air_date": "2026-02-21",
+                "airtime": "23:30",
+                "air_datetime": "2026-02-21T14:30:00+00:00",
+                "overview": "To repair their damaged Noble Phantasms, several members of Clan Calatin are sent to Caster's magecraft workshop. After the police officer John Wingard lost his right arm in the previous battle, Caster questions whether he is still determined to take part in the Holy Grail War. Meanwhile, Flat and Berserker attempt to infiltrate the police station after sensing an ominous magical energy enveloping the city.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/614/1537409.jpg",
+                "tvmaze_episode_id": 3518736,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Back from Twilight, the God Is Come",
+                "air_date": "2026-02-14",
+                "airtime": "23:30",
+                "air_datetime": "2026-02-14T14:30:00+00:00",
+                "overview": "Prior to the battle between Saber and Lancer, Halri Vorzak, a girl who harbors deep hatred for the world of magecraft, summons a Servant of her own. However, what answers her call is an utterly uncontrollable and aberrant Heroic Spirit. As its claws tear through her abdomen, her life begins to trickle away until a lone homunculus reaches out to grasp her dying hand.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/613/1534452.jpg",
+                "tvmaze_episode_id": 3518735,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "The Wandering King's Rock 'n' Roll",
+                "air_date": "2026-02-07",
+                "airtime": "23:30",
+                "air_datetime": "2026-02-07T14:30:00+00:00",
+                "overview": "After leaving the detention center, Saber and Ayaka wander through Snowfield in search of allies. Before long, the two entered a forest made home by Lancer, the Servant who recently engaged in a spectacular battle against Archer. Challenged to prove his prowess and determine whether they would make suitable allies, Saber unleashes his Noble Phantasm as Lionheart.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/613/1534462.jpg",
+                "tvmaze_episode_id": 3518734,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Stars' Banquet",
+                "air_date": "2026-01-31",
+                "airtime": "23:30",
+                "air_datetime": "2026-01-31T14:30:00+00:00",
+                "overview": "Shortly before the battle in the canyon, in a mansion situated in a swamp, a lone mercenary attempted to summon a Servant. His codename is Sigma. He holds no desires for this world, nor any intention of leaving anything behind. Chosen by the fake Holy Grail for this empty shell of a man was a Servant so singularly unique that it could never be summoned in a normal Holy Grail War...",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/611/1528798.jpg",
+                "tvmaze_episode_id": 3518733,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "The Canon of Demigods",
+                "air_date": "2026-01-24",
+                "airtime": "23:30",
+                "air_datetime": "2026-01-24T14:30:00+00:00",
+                "overview": "The sun has risen, closing the curtains on the night of the battle at the police station. Orlando, busy with caring for the aftermath of the battle, is visited by Francesca. He fails to conceal his frustration towards Francesca's flippant attitude. Suddenly, a single arrow soars past them, aimed at Gilgamesh and Tin\u00e9 who are positioned at the Crystal Hill. After intercepting the second arrow fired shortly thereafter, Gilgamesh and Tin\u00e9 proceed toward the canyon where they discover another Archer waiting for them.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/610/1525763.jpg",
+                "tvmaze_episode_id": 3518732,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "A Battle without Heroes",
+                "air_date": "2026-01-17",
+                "airtime": "23:30",
+                "air_datetime": "2026-01-17T14:30:00+00:00",
+                "overview": "Clan Calatin finds itself in dire straits after interference from Assassin's Master, Jester Karture. Hansa intervenes, taking up arms not as the Overseer of the Holy Grail War, but as an Executor hunting Dead Apostles. With the Servants dismissed from the stage, the two men clash in a battle fought without Heroic Spirits.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/609/1522797.jpg",
+                "tvmaze_episode_id": 3518731,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Ensemble VS Pretense",
+                "air_date": "2026-01-10",
+                "airtime": "23:30",
+                "air_datetime": "2026-01-10T14:30:00+00:00",
+                "overview": "Following the uproar at the opera house, Saber and Ayaka are detained by the Snowfield Police Department. Saber answers the police's questioning candidly, showing no regard for maintaining the secrecy of the Holy Grail War. As Orlando expresses exasperation in dealing with Saber and the fallout he is causing, Orlando is visited by a certain man\u2014Hansa Cervantes, a priest dispatched by the Holy Church as Overseer in this fake Holy Grail War.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/607/1519355.jpg",
+                "tvmaze_episode_id": 3485658,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "The Heroic Spirit Incident",
+                "air_date": "2024-12-31",
+                "airtime": "23:30",
+                "air_datetime": "2024-12-31T14:30:00+00:00",
+                "overview": "Due to the anomalous battle taking place in the desert between Archer and Lancer, various factions become aware of the commencement of the Holy Grail War. Faldeus, tirelessly acquiring information and manipulating the press, catches sight of a girl new to Snowfield. This girl is Ayaka Sajyou, who wanders the city aimlessly. A mark resembling a Command Spell is engraved on her body.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/608/1522319.jpg",
+                "tvmaze_episode_id": 3478997,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 89089,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-05T17:46:57.160832",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     }
