@@ -595,74 +595,6 @@
         "sonarr_url": ""
     },
     {
-        "id": 29,
-        "title": "Peacemaker",
-        "year": "2022",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/391153/posters/6883da0cd5deb.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Peacemaker",
-        "rating": "3",
-        "status": "Continuing",
-        "episodes": [
-            {
-                "id": 8,
-                "title": "Peacemaker - S02E08 - Full Nelson WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-10-10T17:01:29.120942",
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "Peacemaker - S02E07 - Like a Keith in the Night WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-10-03T12:35:25.488997",
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "Peacemaker - S02E06 - Ignorance is Chris WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-09-27T19:25:13.227409",
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "Peacemaker - S02E05 - Back to the Suture WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-09-19T13:59:00.259576",
-                "notify": "seen"
-            },
-            {
-                "id": 4,
-                "title": "Peacemaker - S02E04 - Need I Say Door WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-09-12T11:37:55.239473",
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Peacemaker - S02E03 - Another Rick Up My Sleeve WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-09-05T11:30:39.669608",
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "Peacemaker - S02E02 - A Man Is Only as Good as His Bird WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-29T12:45:40.638415",
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "Peacemaker - S02E01 - The Ties That Grind WEBDL-1080p",
-                "watched": false,
-                "added_date": "2025-08-23T00:21:15.135304",
-                "notify": "seen"
-            }
-        ],
-        "sonarr_url": ""
-    },
-    {
         "id": 30,
         "title": "Scissor Seven",
         "year": "2018",
@@ -62765,6 +62697,257 @@
         "tvmaze_id": 2993,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T13:51:59.268240",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
+    },
+    {
+        "id": 102,
+        "tmdb_id": 110492,
+        "external_ids": {
+            "tmdb": 110492
+        },
+        "title": "Peacemaker",
+        "year": "2022",
+        "overview": "The continuing story of Peacemaker, a vainglorious superhero/supervillain who believes in peace at any cost \u2014 no matter how many people he has to kill. After a miraculous recovery from his duel with Bloodsport, Peacemaker soon discovers that his freedom comes at a price.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/eYzbGcYnOUlvj2fa76pTgIXogd7.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action & Adventure",
+            "Sci-Fi & Fantasy",
+            "Comedy"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 2,
+                "episode_number": 8,
+                "title": "Chapter 08: Full Nelson",
+                "air_date": "2025-10-09",
+                "airtime": "",
+                "air_datetime": "2025-10-09T12:00:00+00:00",
+                "overview": "As Flag puts everyone around him in increasing danger, the 11th Street Kids must convince Peacemaker that he's one of them.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/591/1479331.jpg",
+                "tvmaze_episode_id": 3296789,
+                "id": 16,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 7,
+                "title": "Chapter 07: Like a Keith in the Night",
+                "air_date": "2025-10-02",
+                "airtime": "",
+                "air_datetime": "2025-10-02T12:00:00+00:00",
+                "overview": "As Flag and A.R.G.U.S. close in, the 11th Street Kids attempt to keep the ever-increasing dangers of the alternate world around them at bay.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/593/1484834.jpg",
+                "tvmaze_episode_id": 3296788,
+                "id": 15,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 6,
+                "title": "Chapter 06: Ignorance Is Chris",
+                "air_date": "2025-09-25",
+                "airtime": "",
+                "air_datetime": "2025-09-25T12:00:00+00:00",
+                "overview": "As the 11th Street Kids fight to bring their missing member home, Flag doubles down on his efforts to hold Peacemaker accountable.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1473439.jpg",
+                "tvmaze_episode_id": 3296787,
+                "id": 14,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 5,
+                "title": "Chapter 05: Back to the Suture",
+                "air_date": "2025-09-18",
+                "airtime": "",
+                "air_datetime": "2025-09-18T12:00:00+00:00",
+                "overview": "After a catastrophic showdown with Flag, Peacemaker makes a shocking decision, while his friends scramble to keep the 11th Street Kids together.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/588/1471115.jpg",
+                "tvmaze_episode_id": 3296786,
+                "id": 13,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 4,
+                "title": "Chapter 04: Need I Say Door",
+                "air_date": "2025-09-11",
+                "airtime": "",
+                "air_datetime": "2025-09-11T12:00:00+00:00",
+                "overview": "As A.R.G.U.S. ramps up efforts to find the QUC, Harcourt receives a tempting offer from Flag \u2013 which comes at a steep cost to Peacemaker.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468513.jpg",
+                "tvmaze_episode_id": 3296785,
+                "id": 12,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 3,
+                "title": "Chapter 03: Another Rick Up My Sleeve",
+                "air_date": "2025-09-04",
+                "airtime": "",
+                "air_datetime": "2025-09-04T12:00:00+00:00",
+                "overview": "Economos pays for the team's bungled mission, while Peacemaker explores the depths of his relationship with Harcourt in the other dimension.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468514.jpg",
+                "tvmaze_episode_id": 3296784,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 2,
+                "title": "Chapter 02: A Man Is Only as Good as His Bird",
+                "air_date": "2025-08-28",
+                "airtime": "",
+                "air_datetime": "2025-08-28T12:00:00+00:00",
+                "overview": "As Economos clashes with his new handler, Peacemaker must deal with the consequences of his actions in the alternate dimension.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468515.jpg",
+                "tvmaze_episode_id": 3296783,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 1,
+                "title": "Chapter 01: The Ties That Grind",
+                "air_date": "2025-08-21",
+                "airtime": "",
+                "air_datetime": "2025-08-21T12:00:00+00:00",
+                "overview": "While Peacemaker attempts to join the Justice Gang, Harcourt struggles to find work, and Economos takes on a challenging new assignment.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468516.jpg",
+                "tvmaze_episode_id": 3200175,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Chapter 08: It's Cow or Never",
+                "air_date": "2022-02-17",
+                "airtime": "",
+                "air_datetime": "2022-02-17T12:00:00+00:00",
+                "overview": "With Peacemaker and Adebayo at odds, can the team kill the cow once and for all?",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468518.jpg",
+                "tvmaze_episode_id": 2246768,
+                "id": 8,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Chapter 07: Stop Dragon My Heart Around",
+                "air_date": "2022-02-10",
+                "airtime": "",
+                "air_datetime": "2022-02-10T12:00:00+00:00",
+                "overview": "Harcourt, Murn and Adebayo find themselves surrounded by an alien force, while Peacemaker squares off against his father.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468519.jpg",
+                "tvmaze_episode_id": 2242377,
+                "id": 7,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Chapter 06: Murn After Reading",
+                "air_date": "2022-02-03",
+                "airtime": "",
+                "air_datetime": "2022-02-03T12:00:00+00:00",
+                "overview": "Murn reveals his deepest secret. Auggie is set free. The botched arrest of Peacemaker sends alien Goff into an unexpected new host.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468520.jpg",
+                "tvmaze_episode_id": 2242376,
+                "id": 6,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Chapter 05: Monkey Dory",
+                "air_date": "2022-01-27",
+                "airtime": "",
+                "air_datetime": "2022-01-27T12:00:00+00:00",
+                "overview": "The team scouts the apparent hub for the aliens' food supply, only to come face-to-face with a full-fledged invasion.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/392/982042.jpg",
+                "tvmaze_episode_id": 2242375,
+                "id": 5,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Chapter 04: The Choad Less Traveled",
+                "air_date": "2022-01-20",
+                "airtime": "",
+                "air_datetime": "2022-01-20T12:00:00+00:00",
+                "overview": "After learning that the team helped land his father in prison, Peacemaker confronts his complicated past.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468521.jpg",
+                "tvmaze_episode_id": 2230143,
+                "id": 4,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Chapter 03: Better Goff Dead",
+                "air_date": "2022-01-13",
+                "airtime": "",
+                "air_datetime": "2022-01-13T12:00:00+00:00",
+                "overview": "On their first official mission to assassinate suspected \"butterflies,\" Economos and Murn bond, and Peacemaker and Harcourt reach an understanding.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468522.jpg",
+                "tvmaze_episode_id": 2230142,
+                "id": 3,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Chapter 02: Best Friends for Never",
+                "air_date": "2022-01-13",
+                "airtime": "",
+                "air_datetime": "2022-01-13T12:00:00+00:00",
+                "overview": "After Peacemaker's hazardous escape from a disastrous metahuman hookup, tension and mistrust build within the team.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468523.jpg",
+                "tvmaze_episode_id": 2230141,
+                "id": 2,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Chapter 01: A Whole New Whirled",
+                "air_date": "2022-01-13",
+                "airtime": "",
+                "air_datetime": "2022-01-13T12:00:00+00:00",
+                "overview": "After making a miraculous recovery, Peacemaker returns home -- only to discover that his freedom comes at a price.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468524.jpg",
+                "tvmaze_episode_id": 2175463,
+                "id": 1,
+                "watched": true,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 50603,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-05T15:05:18.179849",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     }
