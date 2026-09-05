@@ -458,7 +458,7 @@
         "status": "Ended",
         "tvmaze_id": 46565,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T12:07:20.690459"
+        "episodes_updated_at": "2026-09-05T13:10:11.421099"
     },
     {
         "id": 25,
@@ -2557,9 +2557,9 @@
             "Sci-Fi & Fantasy",
             "Drama"
         ],
-        "rating": 4,
+        "rating": "4",
         "tmdb_rating": 7.6,
-        "status": "Continuing",
+        "status": "Ended",
         "episodes": [
             {
                 "season_number": 1,
@@ -2900,7 +2900,12 @@
         ],
         "tvmaze_id": 35083,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T12:08:59.216449"
+        "episodes_updated_at": "2026-09-04T12:08:59.216449",
+        "sonarr_url": "",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily",
+        "episode_update_weekday": 5,
+        "episode_update_month_day": 5
     },
     {
         "id": 57,
