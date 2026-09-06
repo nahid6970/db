@@ -338,74 +338,6 @@
         "episode_sort_order": "desc"
     },
     {
-        "id": 31,
-        "title": "The Walking Dead - Daryl Dixon",
-        "year": "2023",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/427464/posters/66e308a4e2c1b.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\The Walking Dead - Daryl Dixon",
-        "rating": "4",
-        "status": "Continuing",
-        "episodes": [
-            {
-                "id": 8,
-                "title": "The Walking Dead - Daryl Dixon - S03E07 - Solaz del Mar WEBDL-1080p Proper",
-                "watched": true,
-                "added_date": "2025-10-19T23:28:36.298629",
-                "notify": "seen"
-            },
-            {
-                "id": 7,
-                "title": "The Walking Dead - Daryl Dixon - S03E07 - Solaz del Mar WEBDL-1080p",
-                "watched": true,
-                "added_date": "2025-10-19T17:54:41.168417",
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "The Walking Dead - Daryl Dixon - S03E06 - Contrabando WEBDL-1080p",
-                "watched": true,
-                "added_date": "2025-10-12T20:06:25.480834",
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "The Walking Dead - Daryl Dixon - S03E05 - Limbo HDTV-720p",
-                "watched": true,
-                "added_date": "2025-10-05T14:55:15.394352",
-                "notify": "seen"
-            },
-            {
-                "id": 4,
-                "title": "The Walking Dead - Daryl Dixon - S03E04 - La Justicia Fronteriza WEBDL-1080p",
-                "watched": true,
-                "added_date": "2025-09-28T16:55:53.569050",
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "The Walking Dead - Daryl Dixon - S03E03 - El Sacrificio WEBRip-1080p",
-                "watched": true,
-                "added_date": "2025-09-21T20:00:34.913616",
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "The Walking Dead - Daryl Dixon - S03E02 - La Ofrenda WEBRip-1080p",
-                "watched": true,
-                "added_date": "2025-09-14T17:41:08.112633",
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "The Walking Dead - Daryl Dixon - S03E01 - Costa Da Morte WEBRip-1080p",
-                "watched": true,
-                "added_date": "2025-09-08T00:51:20.424008",
-                "notify": "seen"
-            }
-        ],
-        "sonarr_url": "http://192.168.0.101:8989/series/the-walking-dead-daryl-dixon"
-    },
-    {
         "id": 54,
         "tmdb_id": 220102,
         "external_ids": {
@@ -3125,62 +3057,6 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 69,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e10 - [59] - An Audience with an Immortal Demon King WEBDL-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842644",
-                "notify": "unseen"
-            },
-            {
-                "id": 68,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e09 - [58] - Lament WEBDL-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842641",
-                "notify": "unseen"
-            },
-            {
-                "id": 67,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e08 - [57] - The Flying Fortress HDTV-1080p - [SubsPlease]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842637",
-                "notify": "unseen"
-            },
-            {
-                "id": 66,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e07 - [56] - Phase Four WEBDL-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842634",
-                "notify": "unseen"
-            },
-            {
-                "id": 65,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e06 - [55] - Another Domestic Disaster WEBRip-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842629",
-                "notify": "unseen"
-            },
-            {
-                "id": 64,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e05 - [54] - Celebrations WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842625",
-                "notify": "unseen"
-            },
-            {
-                "id": 63,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e04 - [53] - A King-Class Water Mage WEBRip-1080p - [Erai-raws]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842619",
-                "notify": "unseen"
-            },
-            {
-                "id": 62,
-                "title": "Mushoku Tensei - Jobless Reincarnation - s03e03 - [52] - Life Back at Home WEBDL-1080p - [ToonsHub]",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842602",
-                "notify": "unseen"
-            },
-            {
                 "season_number": 3,
                 "episode_number": 14,
                 "title": "Episode 14",
@@ -3192,7 +3068,7 @@
                 "tvmaze_episode_id": 3668638,
                 "id": 61,
                 "watched": false,
-                "notify": "seen"
+                "notify": "unseen"
             },
             {
                 "season_number": 3,
@@ -3206,7 +3082,7 @@
                 "tvmaze_episode_id": 3668637,
                 "id": 60,
                 "watched": false,
-                "notify": "seen"
+                "notify": "unseen"
             },
             {
                 "season_number": 3,
@@ -3220,7 +3096,7 @@
                 "tvmaze_episode_id": 3668636,
                 "id": 59,
                 "watched": false,
-                "notify": "seen"
+                "notify": "unseen"
             },
             {
                 "season_number": 3,
@@ -3234,7 +3110,7 @@
                 "tvmaze_episode_id": 3668635,
                 "id": 58,
                 "watched": false,
-                "notify": "seen"
+                "notify": "unseen"
             },
             {
                 "season_number": 3,
@@ -4053,7 +3929,7 @@
         ],
         "tvmaze_id": 52279,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T12:29:18.059618",
+        "episodes_updated_at": "2026-09-06T14:35:10.043621",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
@@ -4934,7 +4810,7 @@
             "Animation"
         ],
         "rating": "5",
-        "tmdb_rating": 8.8,
+        "tmdb_rating": 8.7,
         "status": "Continuing",
         "episodes": [
             {
@@ -21474,14 +21350,21 @@
         ],
         "tvmaze_id": 1505,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T11:26:18.767260",
+        "episodes_updated_at": "2026-09-06T14:25:03.202780",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
         "episode_update_time": "12:01",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5,
-        "episode_update_month_day": 1
+        "episode_update_month_day": 1,
+        "last_run_result": {
+            "timestamp": "2026-09-06T14:25:03.202780",
+            "added": 0,
+            "updated": 1181,
+            "error": null
+        },
+        "episode_update_last_run": "2026-09-06"
     },
     {
         "id": 65,
@@ -21499,7 +21382,7 @@
             "Drama",
             "Comedy"
         ],
-        "rating": 4,
+        "rating": "4",
         "tmdb_rating": 8.5,
         "status": "Continuing",
         "episodes": [
@@ -23522,9 +23405,24 @@
         ],
         "tvmaze_id": 32938,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T14:38:55.351497",
+        "episodes_updated_at": "2026-09-06T14:25:03.202780",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "lock_status": false,
+        "sonarr_url": "",
+        "episode_update_time": "13:00",
+        "episode_file_pattern": "",
+        "scan_mode": "sxxexx",
+        "episode_update_frequency": "monthly",
+        "episode_update_weekday": 6,
+        "episode_update_month_day": 2,
+        "last_run_result": {
+            "timestamp": "2026-09-06T14:25:03.202780",
+            "added": 0,
+            "updated": 144,
+            "error": null
+        },
+        "episode_update_last_run": "2026-09-06"
     },
     {
         "id": 66,
@@ -70256,7 +70154,7 @@
         ],
         "tvmaze_id": 52343,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T18:02:21.572952",
+        "episodes_updated_at": "2026-09-06T14:25:03.202780",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
@@ -70264,7 +70162,14 @@
         "episode_update_time": "01:00",
         "episode_update_frequency": "monthly",
         "episode_update_weekday": 6,
-        "episode_update_month_day": 1
+        "episode_update_month_day": 1,
+        "last_run_result": {
+            "timestamp": "2026-09-06T14:25:03.202780",
+            "added": 0,
+            "updated": 9,
+            "error": null
+        },
+        "episode_update_last_run": "2026-09-06"
     },
     {
         "id": 119,
@@ -181646,7 +181551,7 @@
         "episodes": [],
         "tvmaze_id": 78642,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T20:35:32.437776",
+        "episodes_updated_at": "2026-09-06T14:25:03.202780",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
@@ -181654,7 +181559,14 @@
         "episode_update_time": "13:00",
         "episode_update_frequency": "monthly",
         "episode_update_weekday": 5,
-        "episode_update_month_day": 1
+        "episode_update_month_day": 1,
+        "last_run_result": {
+            "timestamp": "2026-09-06T14:25:03.202780",
+            "added": 0,
+            "updated": 0,
+            "error": null
+        },
+        "episode_update_last_run": "2026-09-06"
     },
     {
         "id": 212,
@@ -213849,5 +213761,313 @@
         "episode_update_month_day": 6,
         "tmdb_id": 4656,
         "tmdb_rating": 6.8
+    },
+    {
+        "id": 220,
+        "tmdb_id": 211684,
+        "external_ids": {
+            "tmdb": 211684
+        },
+        "title": "The Walking Dead: Daryl Dixon",
+        "year": "2023",
+        "overview": "After washing ashore in France, Daryl struggles to piece together how he got there and why, as he navigates a fractured, walker-infested landscape to find his way home. During his journey, Daryl has to protect a young boy, Laurent, who is seen as a messiah, while facing new, dangerous walker variants and the \"Power of the Living\" paramilitary group, as the connections he forms along the way complicate his plan to return home.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/sP5QdW9FN18XWcA4ROz3MPAQBTx.jpg",
+        "directory_path": "",
+        "genres": [
+            "Sci-Fi & Fantasy",
+            "Action & Adventure",
+            "Drama"
+        ],
+        "rating": "4",
+        "tmdb_rating": 8.0,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "season_number": 3,
+                "episode_number": 7,
+                "title": "Solaz Del Mar",
+                "air_date": "2025-10-19",
+                "airtime": "21:00",
+                "air_datetime": "2025-10-20T01:00:00+00:00",
+                "overview": "Our heroes fight to protect the people they love.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/593/1482629.jpg",
+                "tvmaze_episode_id": 3359178,
+                "id": 19,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 6,
+                "title": "Contrabando",
+                "air_date": "2025-10-12",
+                "airtime": "21:00",
+                "air_datetime": "2025-10-13T01:00:00+00:00",
+                "overview": "Daryl and Paz in Barcelona. Carol and Antonio face the fallout of Solaz.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/591/1479547.jpg",
+                "tvmaze_episode_id": 3359177,
+                "id": 18,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 5,
+                "title": "Limbo",
+                "air_date": "2025-10-05",
+                "airtime": "21:00",
+                "air_datetime": "2025-10-06T01:00:00+00:00",
+                "overview": "Carol helps Antonio and Roberto while Daryl journeys into the desert in search of someone.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/591/1479563.jpg",
+                "tvmaze_episode_id": 3359176,
+                "id": 17,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 4,
+                "title": "La Justicia Fronteriza",
+                "air_date": "2025-09-28",
+                "airtime": "21:00",
+                "air_datetime": "2025-09-29T01:00:00+00:00",
+                "overview": "Daryl and Carol disagree on how to move forward; a surprise attack changes everything.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1473477.jpg",
+                "tvmaze_episode_id": 3345924,
+                "id": 16,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 3,
+                "title": "El Sacrificio",
+                "air_date": "2025-09-21",
+                "airtime": "21:00",
+                "air_datetime": "2025-09-22T01:00:00+00:00",
+                "overview": "Daryl focuses on getting home while Carol gets more invested in Solaz.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/588/1471495.jpg",
+                "tvmaze_episode_id": 3345923,
+                "id": 15,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 2,
+                "title": "La Ofrenda",
+                "air_date": "2025-09-14",
+                "airtime": "21:00",
+                "air_datetime": "2025-09-15T01:00:00+00:00",
+                "overview": "Shipwrecked in Spain, Daryl and Carol seek refuge in a peaceful village.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/587/1468555.jpg",
+                "tvmaze_episode_id": 3345922,
+                "id": 14,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 3,
+                "episode_number": 1,
+                "title": "Costa Da Morte",
+                "air_date": "2025-09-07",
+                "airtime": "21:00",
+                "air_datetime": "2025-09-08T01:00:00+00:00",
+                "overview": "A chance encounter provides a potential way home; Daryl makes a tough decision.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/586/1466520.jpg",
+                "tvmaze_episode_id": 3286079,
+                "id": 13,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 6,
+                "title": "Au Revoir Les Enfants",
+                "air_date": "2024-11-03",
+                "airtime": "21:00",
+                "air_datetime": "2024-11-04T02:00:00+00:00",
+                "overview": "An exit strategy is charted from France.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/540/1350407.jpg",
+                "tvmaze_episode_id": 3007655,
+                "id": 12,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 5,
+                "title": "Vouloir, C'est Pouvoir",
+                "air_date": "2024-10-27",
+                "airtime": "21:00",
+                "air_datetime": "2024-10-28T01:00:00+00:00",
+                "overview": "A new faction of survivors hunt down Laurent; Carol's lies come to a head.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/539/1348186.jpg",
+                "tvmaze_episode_id": 3007654,
+                "id": 11,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 4,
+                "title": "Le Paradis Pour Toi",
+                "air_date": "2024-10-20",
+                "airtime": "21:00",
+                "air_datetime": "2024-10-21T01:00:00+00:00",
+                "overview": "All hope is lost amidst Genet's attack on the Nest.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/538/1345861.jpg",
+                "tvmaze_episode_id": 3007653,
+                "id": 10,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 3,
+                "title": "L'Invisible",
+                "air_date": "2024-10-13",
+                "airtime": "21:00",
+                "air_datetime": "2024-10-14T01:00:00+00:00",
+                "overview": "Carol hunts for information; Daryl and Isabelle race to save one of their own; Pouvoir regroups.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/537/1343677.jpg",
+                "tvmaze_episode_id": 2994194,
+                "id": 9,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 2,
+                "title": "Moulin Rouge",
+                "air_date": "2024-10-06",
+                "airtime": "21:00",
+                "air_datetime": "2024-10-07T01:00:00+00:00",
+                "overview": "Carol and Ash take an unexpected detour; Daryl and Isabelle uncover a new threat at the Nest.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/537/1343483.jpg",
+                "tvmaze_episode_id": 2994190,
+                "id": 8,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 1,
+                "title": "La Gentillesse Des \u00c9trangers",
+                "air_date": "2024-09-29",
+                "airtime": "21:00",
+                "air_datetime": "2024-09-30T01:00:00+00:00",
+                "overview": "Carol Peletier and Daryl Dixon confront old demons in their fight to reunite with each other halfway around the world and protect the people they love.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/537/1343481.jpg",
+                "tvmaze_episode_id": 2905431,
+                "id": 7,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Coming Home",
+                "air_date": "2023-10-15",
+                "airtime": "21:00",
+                "air_datetime": "2023-10-16T01:00:00+00:00",
+                "overview": "Genet solidifies her base of power; Daryl has a job to do before he can return to America.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/481/1203005.jpg",
+                "tvmaze_episode_id": 2637342,
+                "id": 6,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Deux Amours",
+                "air_date": "2023-10-08",
+                "airtime": "21:00",
+                "air_datetime": "2023-10-09T01:00:00+00:00",
+                "overview": "Daryl and Laurent travel to the Nest as Isabelle considers her options. Genet enacts her plan.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/480/1200440.jpg",
+                "tvmaze_episode_id": 2637341,
+                "id": 5,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "La Dame de Fer",
+                "air_date": "2023-10-01",
+                "airtime": "21:00",
+                "air_datetime": "2023-10-02T01:00:00+00:00",
+                "overview": "Daryl and Isabelle negotiate with the owner of the Demimonde club.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/479/1198328.jpg",
+                "tvmaze_episode_id": 2636734,
+                "id": 4,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Paris Sera Toujours Paris",
+                "air_date": "2023-09-24",
+                "airtime": "21:00",
+                "air_datetime": "2023-09-25T01:00:00+00:00",
+                "overview": "The group's arrival in Paris brings help from old friends and attention from new foes.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/478/1195684.jpg",
+                "tvmaze_episode_id": 2629728,
+                "id": 3,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Alouette",
+                "air_date": "2023-09-17",
+                "airtime": "21:00",
+                "air_datetime": "2023-09-18T01:00:00+00:00",
+                "overview": "Daryl, Isabelle, Laurent and Sylvie face trouble on the road; Isabelle remembers the day the hungry ones appeared; Laurent struggles to fit in.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/477/1193137.jpg",
+                "tvmaze_episode_id": 2629727,
+                "id": 2,
+                "watched": true,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "L'\u00e2me Perdue",
+                "air_date": "2023-09-10",
+                "airtime": "21:00",
+                "air_datetime": "2023-09-11T01:00:00+00:00",
+                "overview": "Following his departure from The Commonwealth, Daryl Dixon washes ashore in France, raising the ire of a splintered but growing autocratic movement centered in Paris and endangering a young boy at the heart of a benevolent religious movement.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/476/1190962.jpg",
+                "tvmaze_episode_id": 2579483,
+                "id": 1,
+                "watched": true,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 64501,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-06T14:31:07.087773",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc",
+        "lock_status": false,
+        "sonarr_url": "",
+        "episode_update_time": "03:00",
+        "episode_file_pattern": "",
+        "scan_mode": "sxxexx",
+        "episode_update_frequency": "monthly",
+        "episode_update_weekday": 6,
+        "episode_update_month_day": 5,
+        "last_run_result": {
+            "timestamp": "2026-09-06T14:31:07.087773",
+            "added": 0,
+            "updated": 19,
+            "error": null
+        },
+        "episode_update_last_run": "2026-09-06"
     }
 ]
