@@ -4086,6 +4086,13 @@
         "status": "Continuing",
         "episodes": [
             {
+                "id": 29,
+                "title": "The Walking Dead - Dead City - S03E07 - Hourglass",
+                "watched": false,
+                "added_date": "2026-09-06T14:18:06.837886",
+                "notify": "unseen"
+            },
+            {
                 "id": 28,
                 "title": "The Walking Dead - Dead City - S03E06 - Genesis",
                 "watched": false,
