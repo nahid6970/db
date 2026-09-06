@@ -233,9 +233,10 @@
         ],
         "tvmaze_id": 46562,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T12:10:58.270469",
+        "episodes_updated_at": "2026-09-06T11:31:31.780793",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "status": "Continuing"
     },
     {
         "id": 22,
@@ -244,6 +245,27 @@
         "cover_image": "https://artworks.thetvdb.com/banners/v4/series/369026/posters/671df3714b021.jpg",
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Uzumaki",
         "episodes": [
+            {
+                "id": 7,
+                "title": "Uzumaki - S01E04 - Episode 4",
+                "watched": false,
+                "added_date": "2026-09-06T11:23:42.610342",
+                "notify": "unseen"
+            },
+            {
+                "id": 6,
+                "title": "Uzumaki - S01E02 - Episode 2",
+                "watched": false,
+                "added_date": "2026-09-06T11:23:42.610333",
+                "notify": "unseen"
+            },
+            {
+                "id": 5,
+                "title": "Uzumaki - S01E01 - Episode 1",
+                "watched": false,
+                "added_date": "2026-09-06T11:23:42.610305",
+                "notify": "unseen"
+            },
             {
                 "season_number": 1,
                 "episode_number": 4,
@@ -305,7 +327,7 @@
         "status": "Ended",
         "tvmaze_id": 46565,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T13:10:11.421099",
+        "episodes_updated_at": "2026-09-06T11:33:13.521016",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     },
@@ -376,46 +398,6 @@
             }
         ],
         "sonarr_url": "http://192.168.0.101:8989/series/the-walking-dead-daryl-dixon"
-    },
-    {
-        "id": 34,
-        "title": "Marvel Zombies",
-        "year": "",
-        "cover_image": "https://artworks.thetvdb.com/banners/v4/series/412428/posters/68cd9e6f1070a.jpg",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Marvel Zombies",
-        "rating": null,
-        "status": "Continuing",
-        "episodes": [
-            {
-                "id": 4,
-                "title": "Marvel Zombies - S01E04 - Episode 4 WEBRip-1080p",
-                "watched": false,
-                "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "seen"
-            },
-            {
-                "id": 3,
-                "title": "Marvel Zombies - S01E03 - Episode 3 WEBRip-1080p",
-                "watched": false,
-                "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "seen"
-            },
-            {
-                "id": 2,
-                "title": "Marvel Zombies - S01E02 - Episode 2 WEBRip-1080p",
-                "watched": false,
-                "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "seen"
-            },
-            {
-                "id": 1,
-                "title": "Marvel Zombies - S01E01 - Episode 1 WEBRip-1080p",
-                "watched": false,
-                "added_date": "2025-09-28T18:00:33.612089",
-                "notify": "seen"
-            }
-        ],
-        "sonarr_url": ""
     },
     {
         "id": 54,
@@ -21335,7 +21317,7 @@
         ],
         "tvmaze_id": 1505,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T03:44:15.222529",
+        "episodes_updated_at": "2026-09-06T11:26:18.767260",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
@@ -29173,7 +29155,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616363,
                 "id": 1411,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29187,7 +29169,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616362,
                 "id": 1410,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29201,7 +29183,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616361,
                 "id": 1409,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29215,7 +29197,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616360,
                 "id": 1408,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29229,7 +29211,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616358,
                 "id": 1407,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29243,7 +29225,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616357,
                 "id": 1406,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29257,7 +29239,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616356,
                 "id": 1405,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29271,7 +29253,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616354,
                 "id": 1404,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -29285,7 +29267,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616353,
                 "id": 1403,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -173406,7 +173388,7 @@
         ],
         "tvmaze_id": 47014,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T20:07:19.831864",
+        "episodes_updated_at": "2026-09-06T11:31:58.916874",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     },
@@ -189338,20 +189320,85 @@
     },
     {
         "id": 217,
-        "title": "WWE SmackDown",
-        "year": "",
-        "cover_image": "",
-        "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE SmackDown",
-        "rating": null,
+        "tmdb_id": 138505,
+        "external_ids": {
+            "tmdb": 138505
+        },
+        "title": "Marvel Zombies",
+        "year": "2025",
+        "overview": "After the Avengers are overtaken by a zombie plague, a desperate group of survivors discover the key to bringing an end to the super-powered undead, racing across a dystopian landscape and risking life and limb to save their world.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/mwKj9ERGFXsWot0nXgQ5yMQf9I7.jpg",
+        "directory_path": "",
+        "genres": [
+            "Sci-Fi & Fantasy",
+            "Animation",
+            "Action & Adventure"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.3,
         "status": "Continuing",
         "episodes": [
             {
-                "id": 1,
-                "title": "WWE SmackDown - 2026-09-04 - SmackDown 1411 WEBRip-1080p",
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Episode 4",
+                "air_date": "2025-09-24",
+                "airtime": "",
+                "air_datetime": "2025-09-24T12:00:00+00:00",
+                "overview": "A bloody end.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1472545.jpg",
+                "tvmaze_episode_id": 3331136,
+                "id": 4,
                 "watched": false,
-                "added_date": "2026-09-05T21:35:09.465763",
-                "notify": "seen"
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Episode 3",
+                "air_date": "2025-09-24",
+                "airtime": "",
+                "air_datetime": "2025-09-24T12:00:00+00:00",
+                "overview": "The rotting dead will taste their fear.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1472544.jpg",
+                "tvmaze_episode_id": 3331135,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Episode 2",
+                "air_date": "2025-09-24",
+                "airtime": "",
+                "air_datetime": "2025-09-24T12:00:00+00:00",
+                "overview": "On the open road, the hunger for flesh rules all.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1472543.jpg",
+                "tvmaze_episode_id": 3331134,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2025-09-24",
+                "airtime": "",
+                "air_datetime": "2025-09-24T12:00:00+00:00",
+                "overview": "Lone survivors face an unforgiving world of horrors.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/589/1472542.jpg",
+                "tvmaze_episode_id": 3257653,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
             }
-        ]
+        ],
+        "tvmaze_id": 58949,
+        "episode_source": "tvmaze",
+        "episodes_updated_at": "2026-09-06T11:37:17.207414",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
     }
 ]
