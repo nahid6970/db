@@ -70071,7 +70071,7 @@
             "Sci-Fi & Fantasy",
             "Action & Adventure"
         ],
-        "rating": 4,
+        "rating": "4",
         "tmdb_rating": 7.4,
         "status": "Continuing",
         "episodes": [
@@ -70206,7 +70206,13 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:02:21.572952",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "lock_status": false,
+        "sonarr_url": "",
+        "episode_update_time": "01:00",
+        "episode_update_frequency": "monthly",
+        "episode_update_weekday": 6,
+        "episode_update_month_day": 1
     },
     {
         "id": 119,
@@ -113661,7 +113667,7 @@
         ],
         "tvmaze_id": 88337,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T18:53:42.922656",
+        "episodes_updated_at": "2026-09-06T11:55:03.680118",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
     },
