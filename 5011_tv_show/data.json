@@ -245,51 +245,16 @@
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\Uzumaki",
         "episodes": [
             {
-                "id": 7,
-                "title": "Uzumaki - S01E04 - Episode 4",
-                "watched": false,
-                "added_date": "2026-09-06T11:19:59.672250",
-                "notify": "seen"
-            },
-            {
-                "id": 6,
-                "title": "Uzumaki - S01E02 - Episode 2",
-                "watched": false,
-                "added_date": "2026-09-06T11:19:59.672238",
-                "notify": "seen"
-            },
-            {
-                "id": 5,
-                "title": "Uzumaki - S01E01 - Episode 1",
-                "watched": false,
-                "added_date": "2026-09-06T11:19:59.672198",
-                "notify": "seen"
-            },
-            {
                 "season_number": 1,
-                "episode_number": 1,
-                "title": "Episode 1",
-                "air_date": "2024-09-28",
+                "episode_number": 4,
+                "title": "Episode 4",
+                "air_date": "2024-10-19",
                 "airtime": "00:30",
-                "air_datetime": "2024-09-29T04:30:00+00:00",
-                "overview": "Shuichi asks Kirie to escape this town together. Meanwhile, his father suddenly dies from being fixated on spirals, and then a mysterious spiral appears on the forehead of the class beauty Azami Kurotani. The real horror has just begun...",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/537/1343897.jpg",
-                "tvmaze_episode_id": 2956403,
-                "id": 1,
-                "watched": false,
-                "notify": "seen"
-            },
-            {
-                "season_number": 1,
-                "episode_number": 2,
-                "title": "Episode 2",
-                "air_date": "2024-10-05",
-                "airtime": "00:30",
-                "air_datetime": "2024-10-06T04:30:00+00:00",
-                "overview": "Spiraling hair\u2026 an eerie spiral pattern emerging on the back of a classmate\u2026 a couple whose bodies intertwine\u2026 The spirals transformation is developing all over the town.",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/539/1348795.jpg",
-                "tvmaze_episode_id": 3015197,
-                "id": 2,
+                "air_datetime": "2024-10-20T04:30:00+00:00",
+                "overview": "The curse of the spirals is destroying the town and taking peoples' minds with it. The chaos reaches a fever pitch.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/542/1355143.jpg",
+                "tvmaze_episode_id": 3015199,
+                "id": 4,
                 "watched": false,
                 "notify": "seen"
             },
@@ -309,15 +274,29 @@
             },
             {
                 "season_number": 1,
-                "episode_number": 4,
-                "title": "Episode 4",
-                "air_date": "2024-10-19",
+                "episode_number": 2,
+                "title": "Episode 2",
+                "air_date": "2024-10-05",
                 "airtime": "00:30",
-                "air_datetime": "2024-10-20T04:30:00+00:00",
-                "overview": "The curse of the spirals is destroying the town and taking peoples' minds with it. The chaos reaches a fever pitch.",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/542/1355143.jpg",
-                "tvmaze_episode_id": 3015199,
-                "id": 4,
+                "air_datetime": "2024-10-06T04:30:00+00:00",
+                "overview": "Spiraling hair\u2026 an eerie spiral pattern emerging on the back of a classmate\u2026 a couple whose bodies intertwine\u2026 The spirals transformation is developing all over the town.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/539/1348795.jpg",
+                "tvmaze_episode_id": 3015197,
+                "id": 2,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2024-09-28",
+                "airtime": "00:30",
+                "air_datetime": "2024-09-29T04:30:00+00:00",
+                "overview": "Shuichi asks Kirie to escape this town together. Meanwhile, his father suddenly dies from being fixated on spirals, and then a mysterious spiral appears on the forehead of the class beauty Azami Kurotani. The real horror has just begun...",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/537/1343897.jpg",
+                "tvmaze_episode_id": 2956403,
+                "id": 1,
                 "watched": false,
                 "notify": "seen"
             }
@@ -326,7 +305,9 @@
         "status": "Ended",
         "tvmaze_id": 46565,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-05T13:10:11.421099"
+        "episodes_updated_at": "2026-09-05T13:10:11.421099",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
     },
     {
         "id": 31,
