@@ -3910,7 +3910,7 @@
         ],
         "tvmaze_id": 52279,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T14:35:10.043621",
+        "episodes_updated_at": "2026-09-06T16:58:06.613979",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
@@ -23376,48 +23376,6 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 38,
-                "title": "Reacher - S04E06 - Plum Out of Luck",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838664",
-                "notify": "unseen"
-            },
-            {
-                "id": 37,
-                "title": "Reacher - S04E05 - Bridge",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838661",
-                "notify": "unseen"
-            },
-            {
-                "id": 36,
-                "title": "Reacher - S04E04 - Karambits and Pieces",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838658",
-                "notify": "unseen"
-            },
-            {
-                "id": 35,
-                "title": "Reacher - S04E03 - One Small Step",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838655",
-                "notify": "unseen"
-            },
-            {
-                "id": 34,
-                "title": "Reacher - S04E02 - Cage Fight",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838651",
-                "notify": "unseen"
-            },
-            {
-                "id": 33,
-                "title": "Reacher - S04E01 - City of Brotherly Love",
-                "watched": false,
-                "added_date": "2026-09-06T15:18:06.838642",
-                "notify": "unseen"
-            },
-            {
                 "season_number": 4,
                 "episode_number": 8,
                 "title": "Cut",
@@ -23880,7 +23838,7 @@
         ],
         "tvmaze_id": 43031,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T14:42:37.884788",
+        "episodes_updated_at": "2026-09-06T16:58:51.742042",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
