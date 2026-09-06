@@ -23444,48 +23444,6 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 38,
-                "title": "Reacher - S04E06 - Plum Out of Luck",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843189",
-                "notify": "unseen"
-            },
-            {
-                "id": 37,
-                "title": "Reacher - S04E05 - Bridge",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843185",
-                "notify": "unseen"
-            },
-            {
-                "id": 36,
-                "title": "Reacher - S04E04 - Karambits and Pieces",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843182",
-                "notify": "unseen"
-            },
-            {
-                "id": 35,
-                "title": "Reacher - S04E03 - One Small Step",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843179",
-                "notify": "unseen"
-            },
-            {
-                "id": 34,
-                "title": "Reacher - S04E02 - Cage Fight",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843172",
-                "notify": "unseen"
-            },
-            {
-                "id": 33,
-                "title": "Reacher - S04E01 - City of Brotherly Love",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.843166",
-                "notify": "unseen"
-            },
-            {
                 "season_number": 4,
                 "episode_number": 8,
                 "title": "Cut",
@@ -23948,7 +23906,7 @@
         ],
         "tvmaze_id": 43031,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T12:26:38.212637",
+        "episodes_updated_at": "2026-09-06T14:42:37.884788",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
