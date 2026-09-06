@@ -3962,55 +3962,6 @@
         "status": "Continuing",
         "episodes": [
             {
-                "id": 29,
-                "title": "The Walking Dead - Dead City - S03E07 - Hourglass",
-                "watched": false,
-                "added_date": "2026-09-06T14:18:06.837886",
-                "notify": "unseen"
-            },
-            {
-                "id": 28,
-                "title": "The Walking Dead - Dead City - S03E06 - Genesis",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842924",
-                "notify": "unseen"
-            },
-            {
-                "id": 27,
-                "title": "The Walking Dead - Dead City - S03E05 - Imperialis",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842921",
-                "notify": "unseen"
-            },
-            {
-                "id": 26,
-                "title": "The Walking Dead - Dead City - S03E04 - Found+Lost",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842911",
-                "notify": "unseen"
-            },
-            {
-                "id": 25,
-                "title": "The Walking Dead - Dead City - S03E03 - Emigrants",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842907",
-                "notify": "unseen"
-            },
-            {
-                "id": 24,
-                "title": "The Walking Dead - Dead City - S03E02 - Haven",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842904",
-                "notify": "unseen"
-            },
-            {
-                "id": 23,
-                "title": "The Walking Dead - Dead City - S03E01 - Trillium",
-                "watched": false,
-                "added_date": "2026-09-06T13:18:06.842897",
-                "notify": "unseen"
-            },
-            {
                 "season_number": 3,
                 "episode_number": 8,
                 "title": "Tenebrae",
@@ -4032,7 +3983,7 @@
                 "airtime": "",
                 "air_datetime": "2026-09-06T16:00:00+00:00",
                 "overview": "As Negan faces his fate, Maggie pleads with him to save the community.",
-                "still_image": "",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/640/1600204.jpg",
                 "tvmaze_episode_id": 3684170,
                 "id": 21,
                 "watched": false,
@@ -4335,7 +4286,7 @@
         ],
         "tvmaze_id": 60879,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-04T14:13:45.771103",
+        "episodes_updated_at": "2026-09-06T14:50:01.999397",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "lock_status": false,
