@@ -4830,7 +4830,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3614766,
                 "id": 1177,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -21300,7 +21300,7 @@
         ],
         "tvmaze_id": 1505,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T23:46:36.490731",
+        "episodes_updated_at": "2026-09-07T10:01:44.683748",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
