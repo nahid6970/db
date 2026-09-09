@@ -23419,7 +23419,9 @@
                 "tvmaze_episode_id": 3658428,
                 "id": 31,
                 "watched": false,
-                "notify": "seen"
+                "notify": "seen",
+                "has_file": true,
+                "file_name": "Reacher - S04E07 - Vote for Sampson"
             },
             {
                 "season_number": 4,
