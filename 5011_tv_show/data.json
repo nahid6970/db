@@ -4035,7 +4035,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/635/1589987.jpg",
                 "tvmaze_episode_id": 3670336,
                 "id": 17,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "The Walking Dead - Dead City - S03E03 - Emigrants"
@@ -4051,7 +4051,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/635/1587651.jpg",
                 "tvmaze_episode_id": 3663491,
                 "id": 16,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "The Walking Dead - Dead City - S03E02 - Haven"
@@ -4067,7 +4067,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/633/1584796.jpg",
                 "tvmaze_episode_id": 3618119,
                 "id": 15,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "The Walking Dead - Dead City - S03E01 - Trillium"
@@ -214863,7 +214863,7 @@
                 "file_name": "WWE Raw - 2026-09-07 - RAW 1737 WEBDL-1080p",
                 "watched": false,
                 "added_date": "2026-09-09T10:13:21.129739",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214877,7 +214877,7 @@
                 "tvmaze_episode_id": 1849205,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214891,7 +214891,7 @@
                 "tvmaze_episode_id": 1849206,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214905,7 +214905,7 @@
                 "tvmaze_episode_id": 1849207,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214919,7 +214919,7 @@
                 "tvmaze_episode_id": 1849208,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214933,7 +214933,7 @@
                 "tvmaze_episode_id": 1849209,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214947,7 +214947,7 @@
                 "tvmaze_episode_id": 1849210,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214961,7 +214961,7 @@
                 "tvmaze_episode_id": 1849211,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214975,7 +214975,7 @@
                 "tvmaze_episode_id": 1849212,
                 "id": 8,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -214989,7 +214989,7 @@
                 "tvmaze_episode_id": 1849213,
                 "id": 9,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215003,7 +215003,7 @@
                 "tvmaze_episode_id": 1849214,
                 "id": 10,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215017,7 +215017,7 @@
                 "tvmaze_episode_id": 1849215,
                 "id": 11,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215031,7 +215031,7 @@
                 "tvmaze_episode_id": 1849216,
                 "id": 12,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215045,7 +215045,7 @@
                 "tvmaze_episode_id": 1849217,
                 "id": 13,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215059,7 +215059,7 @@
                 "tvmaze_episode_id": 1853134,
                 "id": 14,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215073,7 +215073,7 @@
                 "tvmaze_episode_id": 1857756,
                 "id": 15,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215087,7 +215087,7 @@
                 "tvmaze_episode_id": 1862246,
                 "id": 16,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215101,7 +215101,7 @@
                 "tvmaze_episode_id": 1865044,
                 "id": 17,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215115,7 +215115,7 @@
                 "tvmaze_episode_id": 1869884,
                 "id": 18,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215129,7 +215129,7 @@
                 "tvmaze_episode_id": 1875086,
                 "id": 19,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215143,7 +215143,7 @@
                 "tvmaze_episode_id": 1880514,
                 "id": 20,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215157,7 +215157,7 @@
                 "tvmaze_episode_id": 1887649,
                 "id": 21,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215171,7 +215171,7 @@
                 "tvmaze_episode_id": 1888315,
                 "id": 22,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215185,7 +215185,7 @@
                 "tvmaze_episode_id": 1895887,
                 "id": 23,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2020,
@@ -215199,7 +215199,7 @@
                 "tvmaze_episode_id": 1902651,
                 "id": 24,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215213,7 +215213,7 @@
                 "tvmaze_episode_id": 2293794,
                 "id": 25,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215227,7 +215227,7 @@
                 "tvmaze_episode_id": 2303213,
                 "id": 26,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215241,7 +215241,7 @@
                 "tvmaze_episode_id": 2303214,
                 "id": 27,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215255,7 +215255,7 @@
                 "tvmaze_episode_id": 2303215,
                 "id": 28,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215269,7 +215269,7 @@
                 "tvmaze_episode_id": 2308023,
                 "id": 29,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215283,7 +215283,7 @@
                 "tvmaze_episode_id": 2311519,
                 "id": 30,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215297,7 +215297,7 @@
                 "tvmaze_episode_id": 2311520,
                 "id": 31,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215311,7 +215311,7 @@
                 "tvmaze_episode_id": 2313814,
                 "id": 32,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215325,7 +215325,7 @@
                 "tvmaze_episode_id": 2325408,
                 "id": 33,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215339,7 +215339,7 @@
                 "tvmaze_episode_id": 2325409,
                 "id": 34,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215353,7 +215353,7 @@
                 "tvmaze_episode_id": 2325410,
                 "id": 35,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215367,7 +215367,7 @@
                 "tvmaze_episode_id": 2329466,
                 "id": 36,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215381,7 +215381,7 @@
                 "tvmaze_episode_id": 2333096,
                 "id": 37,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215395,7 +215395,7 @@
                 "tvmaze_episode_id": 2348035,
                 "id": 38,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215409,7 +215409,7 @@
                 "tvmaze_episode_id": 2348036,
                 "id": 39,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215423,7 +215423,7 @@
                 "tvmaze_episode_id": 2348037,
                 "id": 40,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215437,7 +215437,7 @@
                 "tvmaze_episode_id": 2354245,
                 "id": 41,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215451,7 +215451,7 @@
                 "tvmaze_episode_id": 2356004,
                 "id": 42,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215465,7 +215465,7 @@
                 "tvmaze_episode_id": 2360152,
                 "id": 43,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215479,7 +215479,7 @@
                 "tvmaze_episode_id": 2363230,
                 "id": 44,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215493,7 +215493,7 @@
                 "tvmaze_episode_id": 2365883,
                 "id": 45,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215507,7 +215507,7 @@
                 "tvmaze_episode_id": 2369818,
                 "id": 46,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215521,7 +215521,7 @@
                 "tvmaze_episode_id": 2372147,
                 "id": 47,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215535,7 +215535,7 @@
                 "tvmaze_episode_id": 2375907,
                 "id": 48,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215549,7 +215549,7 @@
                 "tvmaze_episode_id": 2375910,
                 "id": 49,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215563,7 +215563,7 @@
                 "tvmaze_episode_id": 2381963,
                 "id": 50,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215577,7 +215577,7 @@
                 "tvmaze_episode_id": 2393695,
                 "id": 51,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215591,7 +215591,7 @@
                 "tvmaze_episode_id": 2393696,
                 "id": 52,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215605,7 +215605,7 @@
                 "tvmaze_episode_id": 2396811,
                 "id": 53,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215619,7 +215619,7 @@
                 "tvmaze_episode_id": 2433460,
                 "id": 54,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215633,7 +215633,7 @@
                 "tvmaze_episode_id": 2433461,
                 "id": 55,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215647,7 +215647,7 @@
                 "tvmaze_episode_id": 2433462,
                 "id": 56,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215661,7 +215661,7 @@
                 "tvmaze_episode_id": 2433463,
                 "id": 57,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215675,7 +215675,7 @@
                 "tvmaze_episode_id": 2433464,
                 "id": 58,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215689,7 +215689,7 @@
                 "tvmaze_episode_id": 2433465,
                 "id": 59,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215703,7 +215703,7 @@
                 "tvmaze_episode_id": 2433466,
                 "id": 60,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215717,7 +215717,7 @@
                 "tvmaze_episode_id": 2433467,
                 "id": 61,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215731,7 +215731,7 @@
                 "tvmaze_episode_id": 2440410,
                 "id": 62,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215745,7 +215745,7 @@
                 "tvmaze_episode_id": 2440413,
                 "id": 63,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215759,7 +215759,7 @@
                 "tvmaze_episode_id": 2440416,
                 "id": 64,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215773,7 +215773,7 @@
                 "tvmaze_episode_id": 2443345,
                 "id": 65,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2022,
@@ -215787,7 +215787,7 @@
                 "tvmaze_episode_id": 2446630,
                 "id": 66,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2023,
@@ -215801,7 +215801,7 @@
                 "tvmaze_episode_id": 2446631,
                 "id": 67,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2023,
@@ -215815,7 +215815,7 @@
                 "tvmaze_episode_id": 2455970,
                 "id": 68,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2023,
@@ -215829,7 +215829,7 @@
                 "tvmaze_episode_id": 2471700,
                 "id": 69,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 47553
