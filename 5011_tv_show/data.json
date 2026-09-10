@@ -48763,7 +48763,8 @@
         "scan_mode": "date",
         "episode_update_frequency": "daily",
         "episode_update_weekday": 6,
-        "episode_update_month_day": 6
+        "episode_update_month_day": 6,
+        "hide_future_episodes": true
     },
     {
         "id": 77,
@@ -214160,7 +214161,8 @@
         "episode_update_weekday": 6,
         "episode_update_month_day": 6,
         "tmdb_id": 4656,
-        "tmdb_rating": 6.8
+        "tmdb_rating": 6.8,
+        "hide_future_episodes": true
     },
     {
         "id": 220,
