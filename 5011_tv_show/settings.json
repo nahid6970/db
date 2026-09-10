@@ -11,5 +11,7 @@
     "radarr_url": "http://192.168.0.101:7878",
     "radarr_api_key": "",
     "root_movies_folder": "C:\\Users\\nahid\\Downloads\\@radarr",
-    "episode_file_icons_enabled": true
+    "episode_file_icons_enabled": true,
+    "discover_image_scale": 2.0,
+    "discover_image_ratio": "3 / 4"
 }
