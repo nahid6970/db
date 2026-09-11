@@ -12,6 +12,8 @@
     "radarr_api_key": "",
     "root_movies_folder": "C:\\Users\\nahid\\Downloads\\@radarr",
     "episode_file_icons_enabled": true,
+    "auto_schedule_start_time": "09:00",
+    "auto_schedule_end_time": "23:00",
     "discover_image_scale": 2.0,
     "discover_image_ratio": "3 / 4"
 }

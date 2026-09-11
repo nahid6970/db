@@ -1375,11 +1375,11 @@
         "episode_sort_order": "desc",
         "sonarr_url": "",
         "lock_status": false,
-        "episode_update_time": "01:00",
+        "episode_update_time": "09:00",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
-        "episode_update_weekday": 3,
+        "episode_update_weekday": 0,
         "episode_update_month_day": 10
     },
     {
@@ -21327,9 +21327,9 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
-        "episode_update_time": "12:01",
+        "episode_update_time": "11:48",
         "episode_update_frequency": "weekly",
-        "episode_update_weekday": 5,
+        "episode_update_weekday": 1,
         "episode_update_month_day": 1,
         "last_run_result": {
             "timestamp": "2026-09-06T14:25:03.202780",
@@ -23383,11 +23383,11 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "13:00",
+        "episode_update_time": "14:36",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
-        "episode_update_frequency": "monthly",
-        "episode_update_weekday": 6,
+        "episode_update_frequency": "weekly",
+        "episode_update_weekday": 2,
         "episode_update_month_day": 2,
         "last_run_result": {
             "timestamp": "2026-09-06T14:25:03.202780",
@@ -69791,10 +69791,10 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "01:00",
-        "episode_update_frequency": "monthly",
-        "episode_update_weekday": 6,
-        "episode_update_month_day": 1,
+        "episode_update_time": "17:24",
+        "episode_update_frequency": "weekly",
+        "episode_update_weekday": 3,
+        "episode_update_month_day": 4,
         "last_run_result": {
             "timestamp": "2026-09-06T14:25:03.202780",
             "added": 0,
@@ -182249,9 +182249,9 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "13:00",
-        "episode_update_frequency": "monthly",
-        "episode_update_weekday": 5,
+        "episode_update_time": "20:12",
+        "episode_update_frequency": "weekly",
+        "episode_update_weekday": 4,
         "episode_update_month_day": 1,
         "last_run_result": {
             "timestamp": "2026-09-06T14:25:03.202780",
@@ -214759,11 +214759,11 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "03:00",
+        "episode_update_time": "23:00",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
-        "episode_update_frequency": "monthly",
-        "episode_update_weekday": 6,
+        "episode_update_frequency": "weekly",
+        "episode_update_weekday": 5,
         "episode_update_month_day": 5,
         "last_run_result": {
             "timestamp": "2026-09-06T14:31:07.087773",
@@ -217353,7 +217353,7 @@
                 "tvmaze_episode_id": 67862,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217367,7 +217367,7 @@
                 "tvmaze_episode_id": 67863,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217381,7 +217381,7 @@
                 "tvmaze_episode_id": 67864,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217395,7 +217395,7 @@
                 "tvmaze_episode_id": 67865,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217409,7 +217409,7 @@
                 "tvmaze_episode_id": 67866,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217423,7 +217423,7 @@
                 "tvmaze_episode_id": 67867,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217437,7 +217437,7 @@
                 "tvmaze_episode_id": 67868,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217451,7 +217451,7 @@
                 "tvmaze_episode_id": 67869,
                 "id": 8,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217465,7 +217465,7 @@
                 "tvmaze_episode_id": 67870,
                 "id": 9,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217479,7 +217479,7 @@
                 "tvmaze_episode_id": 67871,
                 "id": 10,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217493,11 +217493,13 @@
                 "tvmaze_episode_id": 67872,
                 "id": 11,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 768,
-        "episode_source": "tvmaze"
+        "episode_source": "tvmaze",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 227,
@@ -217530,7 +217532,7 @@
                 "tvmaze_episode_id": 961229,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217544,7 +217546,7 @@
                 "tvmaze_episode_id": 976084,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217558,7 +217560,7 @@
                 "tvmaze_episode_id": 976085,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217572,7 +217574,7 @@
                 "tvmaze_episode_id": 976086,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217586,7 +217588,7 @@
                 "tvmaze_episode_id": 976087,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217600,11 +217602,13 @@
                 "tvmaze_episode_id": 976088,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 22036,
-        "episode_source": "tvmaze"
+        "episode_source": "tvmaze",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 228,
@@ -217637,7 +217641,7 @@
                 "tvmaze_episode_id": 1318209,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217651,7 +217655,7 @@
                 "tvmaze_episode_id": 1336250,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217665,7 +217669,7 @@
                 "tvmaze_episode_id": 1341294,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217679,7 +217683,7 @@
                 "tvmaze_episode_id": 1341295,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217693,7 +217697,7 @@
                 "tvmaze_episode_id": 1341296,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217707,7 +217711,7 @@
                 "tvmaze_episode_id": 1341297,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217721,11 +217725,13 @@
                 "tvmaze_episode_id": 1341298,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 25504,
-        "episode_source": "tvmaze"
+        "episode_source": "tvmaze",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 229,
@@ -217757,7 +217763,7 @@
                 "tvmaze_episode_id": 408020,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217771,7 +217777,7 @@
                 "tvmaze_episode_id": 408021,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217785,7 +217791,7 @@
                 "tvmaze_episode_id": 408022,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217799,7 +217805,7 @@
                 "tvmaze_episode_id": 408023,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217813,7 +217819,7 @@
                 "tvmaze_episode_id": 408024,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217827,7 +217833,7 @@
                 "tvmaze_episode_id": 408025,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217841,7 +217847,7 @@
                 "tvmaze_episode_id": 408026,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -217855,10 +217861,150 @@
                 "tvmaze_episode_id": 408027,
                 "id": 8,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 7103,
-        "episode_source": "tvmaze"
+        "episode_source": "tvmaze",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
+    },
+    {
+        "id": 230,
+        "tmdb_id": 273240,
+        "external_ids": {
+            "tmdb": 273240
+        },
+        "title": "Off Campus",
+        "year": "2026",
+        "overview": "Hannah Wells tutors hockey captain Garrett Graham to win over her crush. Their deal becomes real connection as they face their pasts. Friends Logan, Dean, Tucker, and Allie navigate college life and love.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tcPc5ZMBO4y2BtCJMe3o2nwZb2B.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.9,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "The Line Change",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "As the semester ends, fallout from the St. Anthony's game rattles the Hawks, and Hannah strives to find her voice.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562554.jpg",
+                "tvmaze_episode_id": 3582681,
+                "id": 8,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "The Faceoff",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "Hannah confronts her past while Garrett faces the most challenging game of his season and Allie meets her hero.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562553.jpg",
+                "tvmaze_episode_id": 3582680,
+                "id": 7,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "The Breakaway",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "At a hockey fundraiser, Garrett and Logan butt heads, Hannah and Justin's musical collaboration encounters its biggest hurdle, and romance simmers.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562552.jpg",
+                "tvmaze_episode_id": 3582679,
+                "id": 6,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "The Cold Turkey",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "Garrett brings Hannah home for Thanksgiving while Tucker hosts an epic Friendsgiving at the Off Campus house.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562551.jpg",
+                "tvmaze_episode_id": 3582678,
+                "id": 5,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "The Breakup",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "Hannah and Garrett get closer than either anticipated and things get messy when they're forced to confront their feelings at Drunk Shakespeare.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562550.jpg",
+                "tvmaze_episode_id": 3582677,
+                "id": 4,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "The Orgasm",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "Just as Hannah and Garrett's deal begins working like a charm, Hannah ups the stakes by redefining the terms.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562549.jpg",
+                "tvmaze_episode_id": 3582676,
+                "id": 3,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "The Practice",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "Hannah and Garrett's faux relationship is put to the test as they are forced to share a room at an overnight house party.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562548.jpg",
+                "tvmaze_episode_id": 3582675,
+                "id": 2,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "The Deal",
+                "air_date": "2026-05-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-05-13T12:00:00+00:00",
+                "overview": "A hockey-averse music major and Briar U's womanizing star center strike an unlikely deal to get her crush's attention and his grades up.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/625/1562547.jpg",
+                "tvmaze_episode_id": 3582674,
+                "id": 1,
+                "watched": false,
+                "notify": "seen"
+            }
+        ],
+        "tvmaze_id": 79932,
+        "episode_source": "tvmaze",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     }
 ]
