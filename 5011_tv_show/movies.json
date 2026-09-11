@@ -1412,5 +1412,58 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T20:15:29.698443"
+    },
+    {
+        "id": 56,
+        "tmdb_id": 1269325,
+        "external_ids": {
+            "tmdb": 1269325,
+            "imdb": "tt27050858"
+        },
+        "radarr_id": null,
+        "title": "Drishyam: The Conclusion",
+        "year": "2026",
+        "release_date": "2026-10-02",
+        "overview": "Years after outsmarting the police, Vijay Salgaonkar's past resurfaces when a new evidence threatens to expose his secret. As the investigation reopens, he must outwit the system once again to save his family.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/7T62GSduOWDMB0gGDBs9pmtLTSB.jpg",
+        "directory_path": "",
+        "genres": [
+            "Thriller",
+            "Drama",
+            "Mystery"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-11T10:52:12.378580"
+    },
+    {
+        "id": 57,
+        "tmdb_id": 1378537,
+        "external_ids": {
+            "tmdb": 1378537,
+            "imdb": "tt34339725"
+        },
+        "radarr_id": null,
+        "title": "Mirzapur: The Movie",
+        "year": "2026",
+        "release_date": "2026-09-03",
+        "overview": "The battle for Mirzapur\u2019s throne intensifies as old enemies resurface and a new threat emerges in the form of Babban Babua, a ruthless businessman from Jaisalmer with ambitions of his own. As the Tripathis face enemies from both the past and present, loyalties are tested while Guddu and Bablu Pandit fight to establish themselves in the power struggle for Mirzapur.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/cdDKdCRyq6BYuNblpKUYqRPWvEg.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Crime",
+            "Drama",
+            "Thriller"
+        ],
+        "runtime": 197,
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-11T10:52:52.618339"
     }
 ]
