@@ -239,7 +239,9 @@
         "status": "Continuing",
         "tmdb_id": 100088,
         "tmdb_rating": 8.4,
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 22,
@@ -319,7 +321,9 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "tmdb_id": 93241,
-        "tmdb_rating": 7.0
+        "tmdb_rating": 7.0,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 54,
@@ -457,7 +461,9 @@
         ],
         "tvmaze_id": 77003,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T23:24:23.283156"
+        "episodes_updated_at": "2026-09-06T23:24:23.283156",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 55,
@@ -2299,7 +2305,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:25:58.832229",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 59,
@@ -2774,7 +2782,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:39:19.445971",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 60,
@@ -3025,7 +3035,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:30:01.664307",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 61,
@@ -4750,7 +4762,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T17:21:14.710833",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 64,
@@ -23875,7 +23889,8 @@
         "episode_update_time": "",
         "episode_update_frequency": "daily",
         "episode_update_weekday": 6,
-        "episode_update_month_day": 6
+        "episode_update_month_day": 6,
+        "hide_future_episodes": false
     },
     {
         "id": 67,
@@ -24308,7 +24323,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:33:58.408550",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 71,
@@ -24699,7 +24716,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-04T15:03:07.164515",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 72,
@@ -26043,7 +26062,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-04T15:05:18.946856",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 73,
@@ -28212,7 +28233,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-04T15:11:03.070149",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 75,
@@ -49136,7 +49159,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:04.968642",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 78,
@@ -49513,7 +49538,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:30:05.661616",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 79,
@@ -49891,7 +49918,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:29:48.816094",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 80,
@@ -50269,7 +50298,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:29:18.126843",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 81,
@@ -50506,7 +50537,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:33:12.357870",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 82,
@@ -50645,7 +50678,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:33:05.278584",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 83,
@@ -51008,7 +51043,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:31:52.098603",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 84,
@@ -51316,7 +51353,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:32:47.649218",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 85,
@@ -51848,7 +51887,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:29:06.111136",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 86,
@@ -52155,7 +52196,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-10T10:23:52.123225",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 87,
@@ -52405,7 +52448,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T03:46:16.122018",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 88,
@@ -52768,7 +52813,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T18:25:12.267862",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 89,
@@ -53131,7 +53178,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:33:34.362174",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 90,
@@ -54195,7 +54244,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:32:20.957661",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 91,
@@ -54558,7 +54609,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:31:43.550702",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 92,
@@ -54949,7 +55002,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T18:25:04.884714",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 93,
@@ -55045,7 +55100,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:29:33.321673",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 94,
@@ -55772,7 +55829,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:29:25.973639",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 95,
@@ -56037,7 +56096,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T18:25:52.862225",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 96,
@@ -57255,7 +57316,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T18:25:38.005115",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 97,
@@ -59662,7 +59725,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:29:41.116588",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 98,
@@ -60055,7 +60120,9 @@
         "episodes_updated_at": "2026-09-06T23:25:27.921791",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 99,
@@ -60908,7 +60975,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:26:07.169067",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 100,
@@ -61159,7 +61228,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:28:38.912390",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 101,
@@ -61774,7 +61845,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:28:50.677751",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 102,
@@ -62025,7 +62098,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:30:24.536446",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 104,
@@ -62360,7 +62435,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:34:26.904777",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 105,
@@ -63297,7 +63374,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:36:28.518592",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 106,
@@ -64225,7 +64304,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:30:42.902417",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 108,
@@ -64476,7 +64557,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:30:51.238999",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 109,
@@ -65062,7 +65145,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:44:34.546092",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 110,
@@ -65538,7 +65623,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:25:17.051215",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 111,
@@ -65748,7 +65835,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:25:50.839070",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 112,
@@ -66643,7 +66732,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:25:43.374743",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 113,
@@ -67118,7 +67209,9 @@
         "episode_sort_order": "desc",
         "tvmaze_id": 28276,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T23:29:52.981937"
+        "episodes_updated_at": "2026-09-06T23:29:52.981937",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 114,
@@ -68546,7 +68639,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:56:49.132338",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 115,
@@ -68572,7 +68667,7 @@
                 "episode_number": 10,
                 "title": "Graduation",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "Strengthened by the struggles they've endured, the friends say goodbye to high school and look toward the future in an emotional series finale.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650478.jpg",
@@ -68586,7 +68681,7 @@
                 "episode_number": 9,
                 "title": "Prom",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "When the dean begins a new investigation and threatens to cancel prom, the friends decide to confide in their parents ... but not about everything.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650477.jpg",
@@ -68600,7 +68695,7 @@
                 "episode_number": 8,
                 "title": "Acceptance/Rejection",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "In the wake of the lockdown, the school is on edge \u2014 and a troubling abuse of power pushes the students to take action.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650476.jpg",
@@ -68614,7 +68709,7 @@
                 "episode_number": 7,
                 "title": "College Interview",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "Clay's mental health continues to decline as the friends wrestle with difficult emotions during their college admissions interviews.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650475.jpg",
@@ -68628,7 +68723,7 @@
                 "episode_number": 6,
                 "title": "Thursday",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "The school goes into lockdown, and Clay, Tony and Justin worry about Tyler's whereabouts.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650474.jpg",
@@ -68642,7 +68737,7 @@
                 "episode_number": 5,
                 "title": "House Party",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "The Jensens make the boys take a drug test. When the Liberty parents learn about an upcoming party, Clay suspects that they're tracking the students.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650473.jpg",
@@ -68656,7 +68751,7 @@
                 "episode_number": 4,
                 "title": "Senior Camping Trip",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "Clay is forced to confront his anxiety on the senior camping trip as a suspicious email threatens to turn the friends against each other.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650472.jpg",
@@ -68670,7 +68765,7 @@
                 "episode_number": 3,
                 "title": "Valentine's Day",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "As the school gears up for the Love Is Love dance on Valentine's Day, disturbing phone calls keep Clay from getting in the spirit.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650471.jpg",
@@ -68684,7 +68779,7 @@
                 "episode_number": 2,
                 "title": "College Tour",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "After an incident at school, Clay thinks someone's trying to set him up. Zach and Clay land in hot water during a college tour.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650470.jpg",
@@ -68698,7 +68793,7 @@
                 "episode_number": 1,
                 "title": "Winter Break",
                 "air_date": "2020-06-05",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2020-06-05T12:00:00+00:00",
                 "overview": "The police question Tyler about the guns, leaving the friends rattled. Winston transfers to Liberty High after getting expelled from Hillcrest.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/260/650469.jpg",
@@ -68712,7 +68807,7 @@
                 "episode_number": 13,
                 "title": "Let the Dead Bury the Dead",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "Clay is released on bail, Ani puts a plan to exonerate him into action, and the truth about Bryce's murder finally comes to light.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521973.jpg",
@@ -68726,7 +68821,7 @@
                 "episode_number": 12,
                 "title": "And Then the Hurricane Hit",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The pressure of Clay's arrest leads his friends to make risky decisions, and the full story of the brawl that erupted at homecoming emerges.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521972.jpg",
@@ -68740,7 +68835,7 @@
                 "episode_number": 11,
                 "title": "There Are a Few Things I Haven't Told You",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "As the cops close in on Clay -- their main suspect -- violent confrontations at the homecoming game expose that everyone had a reason to kill Bryce.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521971.jpg",
@@ -68754,7 +68849,7 @@
                 "episode_number": 10,
                 "title": "The World Closing In",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "Hannah's mother returns to town. Urging Clay to protect himself, she reveals that there was more to Tony and Bryce's relationship than Clay knew.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521970.jpg",
@@ -68768,7 +68863,7 @@
                 "episode_number": 9,
                 "title": "Always Waiting for the Next Bad News",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The cops name Clay as a person of interest in the murder. Ani catches Justin in a lie after learning Bryce bailed him out of a dangerous situation.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521969.jpg",
@@ -68782,7 +68877,7 @@
                 "episode_number": 8,
                 "title": "In High School, Even on a Good Day, It's Hard to Tell Who's on Your Side",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "Mr. Porter interviews students about Clay, who pleads his innocence to Mrs. Walker. Learning Porter counseled Bryce, Clay and Ani question his motives.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521968.jpg",
@@ -68796,7 +68891,7 @@
                 "episode_number": 7,
                 "title": "There Are a Number of Problems with Clay Jensen",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The police interrogate Justin and Clay about the night Clay pulled a gun on Bryce. Clay discovers that Ani and Bryce's bond ran deeper than he realized.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521967.jpg",
@@ -68810,7 +68905,7 @@
                 "episode_number": 6,
                 "title": "You Can Tell the Heart of a Man by How He Grieves",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The police bring in Tony for questioning. At Bryce's funeral, Ani uncovers two damning secrets.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521966.jpg",
@@ -68824,7 +68919,7 @@
                 "episode_number": 5,
                 "title": "Nobody's Clean",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The police search the school after finding steroids in Bryce's car. Alex remembers how Bryce supported Alex after Jessica dumped him.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521965.jpg",
@@ -68838,7 +68933,7 @@
                 "episode_number": 4,
                 "title": "Angry, Young and Man",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "After Tyler admits he still has a gun, the group keeps tabs on him at school. But their worry deepens when they learn he had a motive to kill Bryce.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521964.jpg",
@@ -68852,7 +68947,7 @@
                 "episode_number": 3,
                 "title": "The Good Person Is Indistinguishable from the Bad",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "As the police investigation sets the school on edge, Ani remembers that Jessica confronted Bryce. Growing suspicious of Jess, Ani and Clay follow her.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521963.jpg",
@@ -68866,7 +68961,7 @@
                 "episode_number": 2,
                 "title": "If You're Breathing, You're a Liar",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "After learning about Chloe's pregnancy, Clay and Ani pay her a visit. Chloe recalls how she leaned on Zach for support -- and that Bryce never knew.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521962.jpg",
@@ -68880,7 +68975,7 @@
                 "episode_number": 1,
                 "title": "Yeah. I'm the New Girl",
                 "air_date": "2019-08-23",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2019-08-23T12:00:00+00:00",
                 "overview": "The cops question Clay about Bryce's disappearance. Clay remembers the aftermath of Spring Fling, when he raced to cover Tyler's tracks and met Ani.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/208/521961.jpg",
@@ -68894,7 +68989,7 @@
                 "episode_number": 13,
                 "title": "Bye",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "One month later, Hannah's loved ones celebrate her life and find comfort in each other. Meanwhile, a brutal assault pushes one student over the edge.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/158/397373.jpg",
@@ -68908,7 +69003,7 @@
                 "episode_number": 12,
                 "title": "The Box of Polaroids",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Threats against Clay and the others escalate. Tyler faces disciplinary action. Justin testifies about Bryce, putting his own future at risk.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003911.jpg",
@@ -68922,7 +69017,7 @@
                 "episode_number": 11,
                 "title": "Bryce and Chloe",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Chaos erupts at school in the aftermath of Bryce's testimony. Jessica tells Chloe about the clubhouse. Alex's memories come rushing back.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003910.jpg",
@@ -68936,7 +69031,7 @@
                 "episode_number": 10,
                 "title": "Smile, Bitches!",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Tony opens up about his past. Sheri devises a plan to get into the clubhouse. Mr. Porter tries to help Justin. Zach and Bryce butt heads.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003909.jpg",
@@ -68950,7 +69045,7 @@
                 "episode_number": 9,
                 "title": "The Missing Page",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Tyler goes out with Cyrus's sister. Chloe confronts Bryce about the tapes. Jess wonders if she's ready to date again. Mr. Porter wrestles with regret.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003908.jpg",
@@ -68964,7 +69059,7 @@
                 "episode_number": 8,
                 "title": "The Little Girl",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "When Hannah's parents come under scrutiny, Jessica reaches out to Mrs. Baker. Justin struggles to stay clean. Clay reconnects with Skye.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003907.jpg",
@@ -68978,7 +69073,7 @@
                 "episode_number": 7,
                 "title": "The Third Polaroid",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Alex blows up at Bryce. Someone blackmails Marcus. Clay testifies about a night he and Hannah spent together. Jessica experiences a flashback.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003906.jpg",
@@ -68992,7 +69087,7 @@
                 "episode_number": 6,
                 "title": "The Smile at the End of the Dock",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Clay tries to figure out where the Polaroids were taken. Justin shows up at school. Zach's revelation about Hannah takes everyone by surprise.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003905.jpg",
@@ -69006,7 +69101,7 @@
                 "episode_number": 5,
                 "title": "The Chalk Machine",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Tyler and Cyrus embrace their outsider status. Alex fights to recover his lost memories. Ryan and Mrs. Baker look to Hannah's poems for clues.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003904.jpg",
@@ -69020,7 +69115,7 @@
                 "episode_number": 4,
                 "title": "The Second Polaroid",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Clay hides a secret from his parents. Concerned about his reputation, Marcus lies in court. Jessica and Alex skip school together.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003903.jpg",
@@ -69034,7 +69129,7 @@
                 "episode_number": 3,
                 "title": "The Drunk Slut",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Worried about threats against them, Alex and Clay urge Jessica to testify about Bryce. Clay enlists Tony's help to find a potential witness.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003902.jpg",
@@ -69048,7 +69143,7 @@
                 "episode_number": 2,
                 "title": "Two Girls Kissing",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Courtney makes a brave decision. Clay's memories of Hannah drive a wedge between him and Skye. Someone trashes the yearbook office.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003901.jpg",
@@ -69062,7 +69157,7 @@
                 "episode_number": 1,
                 "title": "The First Polaroid",
                 "air_date": "2018-05-18",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2018-05-18T12:00:00+00:00",
                 "overview": "Five months after Hannah's death, the case against Liberty goes to trial, with Tyler as the first witness. Clay finds a troubling photo in his locker.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/158/397372.jpg",
@@ -69076,7 +69171,7 @@
                 "episode_number": 13,
                 "title": "Tape 7, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah seeks help from Mr. Porter, the school counselor. Clay plays the new tape for Tony and weighs what to do next.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003900.jpg",
@@ -69090,7 +69185,7 @@
                 "episode_number": 12,
                 "title": "Tape 6, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah winds up at a party after an argument with her parents. The students are served with subpoenas, and Justin wrestles with conflicting loyalties.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003899.jpg",
@@ -69104,7 +69199,7 @@
                 "episode_number": 11,
                 "title": "Tape 6, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Clay and Hannah grow closer. While Clay spends a heartbreaking night listening to his tape with Tony, tensions boil over at Bryce's house.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003898.jpg",
@@ -69118,7 +69213,7 @@
                 "episode_number": 10,
                 "title": "Tape 5, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "A distraught Hannah gets a ride home from the party. Jessica's behavior grows increasingly erratic, and Clay learns the truth behind a tragedy.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003897.jpg",
@@ -69132,7 +69227,7 @@
                 "episode_number": 9,
                 "title": "Tape 5, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah witnesses a traumatic event at a summertime party. Clay tries to reason with Justin, and Marcus warns him that the worst is yet to come.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003896.jpg",
@@ -69146,7 +69241,7 @@
                 "episode_number": 8,
                 "title": "Tape 4, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Inspired by a friend's poetry reading, Hannah pours her heart out. Tony confides in Clay about the night of Hannah's death.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003895.jpg",
@@ -69160,7 +69255,7 @@
                 "episode_number": 7,
                 "title": "Tape 4, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Another student sabotages Hannah during a class project. Clay's nightmares about Hannah spill over into the daytime.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003894.jpg",
@@ -69174,7 +69269,7 @@
                 "episode_number": 6,
                 "title": "Tape 3, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah's date on Valentine's Day doesn't go as planned. Alex gets in a big fight at school and has to face the honor board.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003893.jpg",
@@ -69188,7 +69283,7 @@
                 "episode_number": 5,
                 "title": "Tape 3, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah and Clay connect at the school dance, but a crass rumor ruins the mood. Clay takes Courtney to visit Hannah's grave.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003892.jpg",
@@ -69202,7 +69297,7 @@
                 "episode_number": 4,
                 "title": "Tape 2, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah thinks someone is stalking her and sets a trap. Hannah's mother confronts the principal, and Clay strikes back at someone who wronged Hannah.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003891.jpg",
@@ -69216,7 +69311,7 @@
                 "episode_number": 3,
                 "title": "Tape 2, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Jealousy and gossip take a toll on Hannah's relationships. As Alex struggles with feelings of regret, the guys pressure Clay into getting drunk.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003890.jpg",
@@ -69230,7 +69325,7 @@
                 "episode_number": 2,
                 "title": "Tape 1, Side B",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "Hannah makes friends with Jessica and Alex, two other new students. Justin doesn't show up at school, and Hannah's mother finds something troubling.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003889.jpg",
@@ -69244,7 +69339,7 @@
                 "episode_number": 1,
                 "title": "Tape 1, Side A",
                 "air_date": "2017-03-31",
-                "airtime": "",
+                "airtime": "18:00",
                 "air_datetime": "2017-03-31T12:00:00+00:00",
                 "overview": "As the school mourns the death of Hannah Baker, her friend Clay receives a box of tapes with messages she recorded before she committed suicide.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/401/1003888.jpg",
@@ -69258,7 +69353,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T17:58:43.458484",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 116,
@@ -69396,7 +69493,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:00:00.383116",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 117,
@@ -69535,7 +69634,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:34:18.083894",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 118,
@@ -70112,7 +70213,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:38.135123",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 121,
@@ -70391,7 +70494,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:06:37.240277",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 122,
@@ -72421,7 +72526,9 @@
         "episodes_updated_at": "2026-09-06T23:34:33.822870",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 123,
@@ -74828,7 +74935,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:09:59.313703",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 124,
@@ -75514,7 +75623,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:10:44.936022",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 125,
@@ -76787,7 +76898,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:12:33.701669",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 126,
@@ -77668,7 +77781,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:14:22.984836",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 127,
@@ -78241,7 +78356,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:15:13.566757",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 128,
@@ -78407,7 +78524,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:16:02.778376",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 129,
@@ -78965,7 +79084,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:17:05.817161",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 130,
@@ -79680,7 +79801,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:20:56.053124",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 131,
@@ -80437,7 +80560,9 @@
         "episodes_updated_at": "2026-09-05T18:20:41.941839",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 132,
@@ -81109,7 +81234,9 @@
         "episodes_updated_at": "2026-09-08T13:38:32.349039",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 133,
@@ -82017,7 +82144,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:22:55.649269",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 134,
@@ -84866,7 +84995,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:25:42.605795",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 136,
@@ -84990,7 +85121,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:27:29.091155",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 137,
@@ -85884,7 +86017,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:28:35.201905",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 138,
@@ -86359,7 +86494,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:29:30.543354",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 139,
@@ -86610,7 +86747,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:32:55.294376",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 140,
@@ -86806,7 +86945,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:34:10.670739",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 141,
@@ -109051,7 +109192,9 @@
         "episodes_updated_at": "2026-09-06T23:29:16.962313",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 142,
@@ -110260,7 +110403,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:40:30.860284",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 144,
@@ -110988,7 +111133,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:42:51.965806",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 145,
@@ -111714,7 +111861,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:22.523573",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 146,
@@ -112441,7 +112590,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:13.791065",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 147,
@@ -112833,7 +112984,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:52:34.317795",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 148,
@@ -113001,7 +113154,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:53:13.181609",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 149,
@@ -113169,7 +113324,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:37:29.899759",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 150,
@@ -114079,7 +114236,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:26:16.620742",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 151,
@@ -114471,7 +114630,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:55:46.417189",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 152,
@@ -115016,7 +115177,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:56:56.903256",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 153,
@@ -116668,7 +116831,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T18:58:47.868170",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 154,
@@ -127829,7 +127994,9 @@
         "episodes_updated_at": "2026-09-08T13:37:14.738582",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 155,
@@ -140670,7 +140837,9 @@
         "episodes_updated_at": "2026-09-06T23:24:34.082652",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 156,
@@ -142531,7 +142700,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:05:55.730077",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 157,
@@ -143314,7 +143485,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:33:49.962488",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 158,
@@ -145483,7 +145656,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:06:20.830891",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 161,
@@ -147034,7 +147209,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:09:43.532122",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 162,
@@ -147927,7 +148104,9 @@
         ],
         "tvmaze_id": 1825,
         "episode_source": "tvmaze",
-        "episodes_updated_at": "2026-09-06T23:43:54.042646"
+        "episodes_updated_at": "2026-09-06T23:43:54.042646",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 163,
@@ -150529,7 +150708,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:18:21.216587",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 164,
@@ -151116,7 +151297,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T18:25:45.608959",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 165,
@@ -151996,7 +152179,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:20:15.996690",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 166,
@@ -152920,7 +153105,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:21:27.345561",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 167,
@@ -153662,7 +153849,9 @@
         "episodes_updated_at": "2026-09-08T13:37:59.016635",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 168,
@@ -154711,7 +154900,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:22:33.439137",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 169,
@@ -159876,7 +160067,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:25:57.111504",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 170,
@@ -160281,7 +160474,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:27:03.760988",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 171,
@@ -160545,7 +160740,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:28:24.034987",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 172,
@@ -160922,7 +161119,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:25:35.079495",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 173,
@@ -161131,7 +161330,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:37:47.546671",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 174,
@@ -161298,7 +161499,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:48.663422",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 175,
@@ -161506,7 +161709,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:37:53.398464",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 176,
@@ -161629,7 +161834,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:34:44.875698",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 177,
@@ -161825,7 +162032,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:36:14.462618",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 178,
@@ -162019,7 +162228,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:36:59.915627",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 179,
@@ -162675,7 +162886,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:39:29.214298",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 180,
@@ -162884,7 +163097,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:38:28.426204",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 181,
@@ -163246,7 +163461,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:39:17.425910",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 182,
@@ -163637,7 +163854,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:40:45.866592",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 183,
@@ -164183,7 +164402,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:41:26.979294",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 184,
@@ -164447,7 +164668,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:35:20.213288",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 185,
@@ -165047,7 +165270,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:42:54.542547",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 186,
@@ -165158,7 +165383,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:43:46.780357",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 187,
@@ -165814,7 +166041,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T19:44:20.627762",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 188,
@@ -166485,7 +166714,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:38:54.765829",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 189,
@@ -166876,7 +167107,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:02:55.926363",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 190,
@@ -167631,7 +167864,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:35:28.171921",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 191,
@@ -168273,7 +168508,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:06:25.816707",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 192,
@@ -168747,7 +168984,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:31:09.613886",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 193,
@@ -169277,7 +169516,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:11:42.704270",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 194,
@@ -170536,7 +170777,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:12:29.133715",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 195,
@@ -171234,7 +171477,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:32:39.982460",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 196,
@@ -172591,7 +172836,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:16:29.594957",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 197,
@@ -172842,7 +173089,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:18:04.540611",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 198,
@@ -173205,7 +173454,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:19:08.542155",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 199,
@@ -173692,7 +173943,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:20:37.274115",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 200,
@@ -174027,7 +174280,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:21:34.463925",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 201,
@@ -174712,7 +174967,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:23:09.794052",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 202,
@@ -176601,7 +176858,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:24:24.270103",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 203,
@@ -176965,7 +177224,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:26:15.119830",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 204,
@@ -177314,7 +177575,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:26:24.401703",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 205,
@@ -178686,7 +178949,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:28:40.209698",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 206,
@@ -179399,7 +179664,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:30:15.119394",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 207,
@@ -180672,7 +180939,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:31:58.415599",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 208,
@@ -181035,7 +181304,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:32:15.958373",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 209,
@@ -181735,7 +182006,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:35:06.386860",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 210,
@@ -181945,7 +182218,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:39:04.927280",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 211,
@@ -184489,7 +184764,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-05T20:40:32.309697",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 217,
@@ -184572,7 +184849,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:30:33.605581",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 218,
@@ -188673,7 +188952,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T12:48:41.658639",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 219,
@@ -189597,7 +189878,9 @@
         "episodes_updated_at": "2026-09-08T13:37:22.449564",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "archived": true
+        "archived": true,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 160,
@@ -214865,7 +215148,9 @@
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:32:31.356256",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 223,
@@ -215914,7 +216199,9 @@
         "tvmaze_id": 41491,
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 224,
@@ -216655,7 +216942,9 @@
         "tvmaze_id": 6909,
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
     },
     {
         "id": 225,
@@ -217030,6 +217319,546 @@
         "tvmaze_id": 90096,
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
-        "episode_sort_order": "desc"
+        "episode_sort_order": "desc",
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
+    },
+    {
+        "id": 226,
+        "tmdb_id": 1044,
+        "external_ids": {
+            "tmdb": 1044
+        },
+        "title": "Planet Earth",
+        "year": "2006",
+        "overview": "David Attenborough celebrates the amazing variety of the natural world in this epic documentary series, filmed over four years across 64 different countries.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/bNcNxUtZ520d5de5s78onoiSiwQ.jpg",
+        "directory_path": "",
+        "genres": [
+            "Documentary"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.6,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "From Pole to Pole",
+                "air_date": "2006-03-05",
+                "airtime": "03:00",
+                "air_datetime": "2006-03-05T21:00:00+00:00",
+                "overview": "This episode journeys across the planet, from pole to pole, following the influence of the sun and discovering how its seasonal journey affects the lives of all who live on earth.As spring arrives in the Arctic, a mother polar bear emerges from her den with two tiny cubs. At the other end of the planet, winter arrives and emperor penguins are plunged into darkness for four months, enduring the coldest temperatures on the planet. From the Amur leopard in Russia to the birds of paradise in Papua New Guinea. No stone is left unturned to bring you the rarest and the weirdest creatures on earth.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576891.jpg",
+                "tvmaze_episode_id": 67862,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Mountains",
+                "air_date": "2006-03-12",
+                "airtime": "03:00",
+                "air_datetime": "2006-03-12T21:00:00+00:00",
+                "overview": "Humans like to think that once they've climbed a mountain, they've somehow conquered it. But they can only ever be visitors to this alien, frozen world. This week, Planet Earth takes you on a tour of itsmightiest ranges, beginning with the birth of a mountain at one of the lowest places on earth, and ending at the summit of Everest. Unprecedented access brings you closer than ever before to the most awe-inspiring mountain landscapes on our planet, and the secretive, almost mythical creatures that inhabit them - the \"real\" mountaineers.In Ethiopia, Planet Earth ventures into the heart of a volcano to discover one of earth's rarest phenomena - a lava lake that's been erupting for over a hundred years. The same forces created Ethiopia's Simien Mountains, home to troops of gelada baboons nearly a thousand strong. In the Andes, a family of five puma struggle to survive the most unstable mountain weather on the planet.Experience the full force of an avalanche in the Rockies, where grizzlies survive the harsh winters deep inside the dangerous slopes. In summer, the bears climb the peaks in search of moths which they devour by the thousand.Descend into the icy core of a glacier in the Alps and emerge in Pakistan, at the snout of the largest glacier on earth. This realm of giant peaks is home to the highest land predator on the planet - the snow leopard. Astounding images of a female snow leopard hunting to feed her cub are a world first.Enter a mountain cave in China for the first ever glimpse of a wild giant panda mother nursing her week-old baby, and fly alongside demoiselle cranes as they attempt to cross the largest range on our planet, the Himalayas. The cranes, like all visitors to the hostile world of the high mountains, dare not linger.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576890.jpg",
+                "tvmaze_episode_id": 67863,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Fresh Water",
+                "air_date": "2006-03-19",
+                "airtime": "03:00",
+                "air_datetime": "2006-03-19T21:00:00+00:00",
+                "overview": "This edition takes an epic river journey following the descent of the planet's mightiest rivers from their mountain sources to the sea. Breathtaking river scenery is revealed by a revolutionary helicopter camera mount - from the world's highest and broadest waterfalls to the awe-inspiring spectacle of the 10,000-strong flocks of greater snow geese in flight.We witness underwater swimming monkeys; giant salamanders, at two metres the world's largest amphibian, on the hunt in a remote mountain river of Japan; and river dolphins in the Amazon, showing off lumps of rocks to win over a mate.New underwater worlds are discovered - we break the ice of the world's deepest lake, Baikal in Siberia, home to the only freshwater seal and bizarre giant amphipods. We dive into the Pantanal, the world's largest wetland patrolled by caiman and piranhas.We also encounter dramatic showdowns between gangs of Indian otters and mugger crocodiles; while in Africa the lightning ambushes of Nile crocodiles on wildebeest are filmed for the first time at ultra-high speed.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576889.jpg",
+                "tvmaze_episode_id": 67864,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Caves",
+                "air_date": "2006-03-26",
+                "airtime": "02:00",
+                "air_datetime": "2006-03-26T20:00:00+00:00",
+                "overview": "The Cave of Swallows in Mexico is a 400-metre vertical shaft. It's deep enough to engulf the Empire State Building, yet few people even know of its existence. Caves are earth's final frontier and this programmegoes where few have been before.Deer Cave in Borneo is a daytime retreat for five million bats; their droppings support an entire community of creatures. Shine a light on one massive pile of droppings and the whole place shimmers with millions of dung-eating insects.Caves also harbour some of the most remarkable and bizarre animals on earth; from cave swiftlets who build nests out of just saliva to the troglodytic animals that never see daylight or ever set foot on the surface. Troglodytes like the Texas cave salamander and Thailand's cave angel have neither eyes nor pigment, and the entire populations of both are found in just a couple of caves.From Lechuguilla Cave's astonishing six-metre-long crystals to the extraordinary snottites of Villa Luz, this documentary provides unprecedented access to the hidden world of caves.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576888.jpg",
+                "tvmaze_episode_id": 67865,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Deserts",
+                "air_date": "2006-04-02",
+                "airtime": "02:00",
+                "air_datetime": "2006-04-02T20:00:00+00:00",
+                "overview": "David Attenborough takes a look at deserts, which cover a third of the Earth's land surface. From space they appear lifeless but a closer look reveals a different picture.Deserts, in fact, are surprisingly varied; from Mongolia's Gobi desert where wild Bactrian camels have to eat snow in lieu of water, to the Atacama in Chile where guanacos survive by licking the dew off cactus spines.Changes are rare in deserts but they play a crucial part in their story; from Saharan sandstorms nearly a mile high to desert rivers that run for a single day; from the brief blooming of Death Valley in the USA, to a plague of desert locusts 40 miles wide and 100 miles long - two events that might occur once in 30 years.The highlight of the programme is a unique aerial voyage over the dunes and rocky escarpments of a Namibian desert. From this lofty viewpoint, we follow elephants on a desperate trek for food and - most amazingly of all - desert lions searching the wilderness for wandering bands of oryx.The programme unravels the secrets behind desert survival - and reveals the ephemeral nature of this stunning environment.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576887.jpg",
+                "tvmaze_episode_id": 67866,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Ice Worlds",
+                "air_date": "2006-11-05",
+                "airtime": "03:00",
+                "air_datetime": "2006-11-05T21:00:00+00:00",
+                "overview": "Although the frozen worlds of the Arctic and Antarctic experience the greatest seasonal extremes, it is the advance and retreat of the ice that is the real challenge to life. As the sea freezes, Antarctica doubles in size and all animals except for the emperor penguin flee.In the Arctic, the polar bear's ice world literally melts beneath its feet, forcing it to swim vast distances and take on one of the deadliest adversaries on the planet.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576886.jpg",
+                "tvmaze_episode_id": 67867,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Great Plains",
+                "air_date": "2006-11-12",
+                "airtime": "03:00",
+                "air_datetime": "2006-11-12T21:00:00+00:00",
+                "overview": "The great plains are the vast open spaces of our planet. These immense wilderness areas are seemingly empty. But any feeling of emptiness is an illusion - the plains of our planet support the greatestgatherings of wildlife on earth: two million gazelles on the Mongolian steppes, three million caribou in North America and one and a half million wildebeest in East Africa. Close on their heels come an array of plains predators including eagles, wolves and lions.At the heart of all that happens here is a single living thing - grass. Flooded, burnt, baked and frozen - grass is almost indestructible, able to survive from the baking savannahs of Africa to the frozen tundra of the Arctic, from the floodplains of India to the high altitude steppes of the Tibetan plateau. Together, these hugely productive grassland plains encompass a quarter of the land on earth and bear witness to some of the most dramatic wildlife stories on our planet.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576885.jpg",
+                "tvmaze_episode_id": 67868,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Jungles",
+                "air_date": "2006-11-19",
+                "airtime": "03:00",
+                "air_datetime": "2006-11-19T21:00:00+00:00",
+                "overview": "David Attenborough's natural history series.Tropical rainforests cover just three per cent of our planet, yet are home to a staggering 50 per cent of the world's species. They are the richest environments on earth but also the most competitive. Travelling through this enchanted world, we uncover the amazing strategies its inhabitants adopt in order to survive. Look out for the flying frog mating orgy and the sinister bodysnatching cordyceps fungi that eat their victims alive.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576884.jpg",
+                "tvmaze_episode_id": 67869,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 9,
+                "title": "Shallow Seas",
+                "air_date": "2006-11-26",
+                "airtime": "03:00",
+                "air_datetime": "2006-11-26T21:00:00+00:00",
+                "overview": "Documentary series which celebrates our planet in all its glory, both its spectacular scenery and its captivating natural history.David Attenborough narrates the epic journey of a humpback whale and calf as they cross the richest seas that fringe our coasts. From tropical paradises, where the newborn calf takes his first faltering breaths, to the storm-ravaged icy polar seas, the whales' great feeding grounds, the programme reveals seas of great contrast and surprise.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576883.jpg",
+                "tvmaze_episode_id": 67870,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "Seasonal Forests",
+                "air_date": "2006-12-03",
+                "airtime": "03:00",
+                "air_datetime": "2006-12-03T21:00:00+00:00",
+                "overview": "David Attenborough's documentary series which celebrates our planet in all its eclectic wonder. He reveals the greatest woodlands on earth, from the evergreen forests of the frozen north to the deciduous dryforests of the equator.The Taiga forest is a silent world of stunted conifers cloaked in snow and ice. The trees form a belt that circles the globe, broken only by ocean, and contains a third of all trees on Earth. Here, animals are scarce, with just a few charismatic loners like the wolverine and lynx.By contrast, the broadleaf forests of North America and Europe bustle with life. The most startling illustration happens just once every seventeen years, when the nymphs of the periodical cicada burst from the soil in the biggest insect emergence on the planet.In California, witness the cameras fly up the tallest trees on Earth: giant redwoods over 100 metres high. See General Sherman, a giant sequoia, ten times the size of a blue whale, and the largest living thing on the planet. Close by are bristlecone pines, so old they pre-date the pyramids and were already 2,500 years old when Jesus Christ was born.The baobab forests of Madagascar are the strangest of all. The bizarre upside-down trees store water in their swollen trunks and harbour strange wildlife, such as the tiny mouse lemur, the world's smallest primate.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576882.jpg",
+                "tvmaze_episode_id": 67871,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 11,
+                "title": "Ocean Deep",
+                "air_date": "2006-12-10",
+                "airtime": "03:00",
+                "air_datetime": "2006-12-10T21:00:00+00:00",
+                "overview": "David Attenborough narrates the final episode in the documentary series that shows our planet in all its glory. In this part, he looks at the largest of all habitats - the ocean. From the surface to the distantabyss, it encompasses 90 per cent of all the living space on our planet. Its depths plunge to over 11 kilometres down and it hides over 30,000 immense volcanic mountains, some far taller than Mount Everest. Much of this vastness is a virtual desert, but the creatures that do live here include the most bizarre, most powerful, and most charismatic of all; it is the home of the greatest animal ever to have existed, the blue whale, twice the size of the largest known dinosaurs.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576881.jpg",
+                "tvmaze_episode_id": 67872,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 768,
+        "episode_source": "tvmaze"
+    },
+    {
+        "id": 227,
+        "tmdb_id": 68595,
+        "external_ids": {
+            "tmdb": 68595
+        },
+        "title": "Planet Earth II",
+        "year": "2016",
+        "overview": "David Attenborough presents a documentary series exploring how animals meet the challenges of surviving in the most iconic habitats on earth.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/5maYKYzWpE68ycxGh1luu4P2LOS.jpg",
+        "directory_path": "",
+        "genres": [
+            "Documentary",
+            "Family"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.6,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Islands",
+                "air_date": "2016-11-06",
+                "airtime": "02:00",
+                "air_datetime": "2016-11-06T20:00:00+00:00",
+                "overview": "Remote islands offer sanctuary for some of the Planet's strangest and rarest creatures. The rare pygmy three-toed sloth enjoys a peaceful existence on an idyllic Caribbean island, while nesting albatross thrive in predator-free isolation.But island life always comes at a cost. On the Galapagos Islands, young marine iguana must escape an onslaught of deadly racer snakes the moment they hatch from the sand.On the Sub-Antarctic island of Zavodovski life gets more extreme still; every day 1.5 million penguins risk being battered against the rocks by fierce waves as they try to get on and off the island.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576907.jpg",
+                "tvmaze_episode_id": 961229,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Mountains",
+                "air_date": "2016-11-13",
+                "airtime": "02:00",
+                "air_datetime": "2016-11-13T20:00:00+00:00",
+                "overview": "The great mountain ranges are some of the planet's most spectacular landscapes but they are unforgiving places to live in. Only few pioneering animals have what it takes to endure at extreme altitude.Mountain animals are also among the most elusive in the world, yet this second episode in the Planet Earth II series provides unique and intimate glimpses into their secretive lives. Witness the moment four snow leopards come together when a mother and cub become trapped between two rival males. Join Grizzly bears as they \u2018pole-dance' against trees to rub off their winter fur and soar with Golden eagles hunting among Europe's snow-capped peaks.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576906.jpg",
+                "tvmaze_episode_id": 976084,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Jungles",
+                "air_date": "2016-11-20",
+                "airtime": "02:00",
+                "air_datetime": "2016-11-20T20:00:00+00:00",
+                "overview": "Wildlife documentary series presented by David Attenborough. Jungles provide the richest habitats on the planet - mysterious worlds of high drama where extraordinary animals attempt to survive in the most competitive place on earth. Flooded forests are home to caiman-hunting jaguars and strange dolphins that swim amongst the tree tops, while in the dense underworld, ninja frogs fight off wasps and flying dragons soar between trees. Acrobatic indri leap through the forests of Madagascar, while the jungle night conceals strange fungi and glow-in-the-dark creatures never filmed before.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576905.jpg",
+                "tvmaze_episode_id": 976085,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Deserts",
+                "air_date": "2016-11-27",
+                "airtime": "02:00",
+                "air_datetime": "2016-11-27T20:00:00+00:00",
+                "overview": "The world's deserts are lands of extremes, forcing animals to come up with ingenious ways to cope with the hostile conditions and giving rise to the most incredible survival stories on Earth.A pride of desert lions is so hungry they risk hunting a giraffe several times their size, while male sand grouse fly 120 miles each day to the nearest waterhole and dice with death to collect water for their chicks.Filmed for the first time, a tiny bat does battle with one of the world's deadliest scorpions. And in Madagascar a locust swarm of biblical proportions is revealed as never before.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576904.jpg",
+                "tvmaze_episode_id": 976086,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Grasslands",
+                "air_date": "2016-12-04",
+                "airtime": "02:00",
+                "air_datetime": "2016-12-04T20:00:00+00:00",
+                "overview": "Grasslands cover one quarter of all land and support the vast gatherings of wildlife, but to survive here animals must endure the most hostile seasonal changes on the planet.From Asia's bizarre looking saiga antelope, to the giant ant-eaters of Brazil, grassland animals have adapted in extraordinary ways to cope with these extremes. In the flooded Okavango, lions take on formidable buffalo in epic battles, on the Savannah bee-eaters take advantage of elephants to help catch insects and on the freezing northern tundra, caribou embark on great migrations shadowed by hungry Arctic wolves.Captured in stunning ultra-high definition detail, Planet Earth II is an immersive exploration of the islands, mountains, jungles, deserts, grasslands and cities of the world.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576903.jpg",
+                "tvmaze_episode_id": 976087,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Cities",
+                "air_date": "2016-12-11",
+                "airtime": "02:00",
+                "air_datetime": "2016-12-11T20:00:00+00:00",
+                "overview": "Cities are growing at a faster rate than any other habitat on Earth. They may seem an unlikely place for animals to thrive, but they can be a world of surprising opportunity. Leopards prowl the streets of Mumbai, peregrine falcons hunt amongst New York's skyscrapers, and a million starlings perform spectacular aerial dances over Rome. In Jodhpur, langurs are revered as religious deities and in Harar, locals live in harmony with wild hyenas. Many animals, however, struggle to cope in the urban jungle. As the architects of this environment, can humans choose to build cities that are homes for both them and wildlife?",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/230/576901.jpg",
+                "tvmaze_episode_id": 976088,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 22036,
+        "episode_source": "tvmaze"
+    },
+    {
+        "id": 228,
+        "tmdb_id": 74313,
+        "external_ids": {
+            "tmdb": 74313
+        },
+        "title": "Blue Planet II",
+        "year": "2017",
+        "overview": "There is nowhere more powerful and unforgiving yet more beautiful and compelling than the ocean. Join us and explore the greatest yet least known parts of our planet.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/j1NsoYYDYHnPkRr7Enqr8tlexgO.jpg",
+        "directory_path": "",
+        "genres": [
+            "Documentary",
+            "Family"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.6,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "One Ocean",
+                "air_date": "2017-10-29",
+                "airtime": "02:00",
+                "air_datetime": "2017-10-29T20:00:00+00:00",
+                "overview": "Documentary series presented by David Attenborough which explores the planet's oceans. From the equator to the poles, new worlds and animal behaviours are revealed, from tool-using fish to mother walruses fighting for space on the ice for their tiring pups.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600770.jpg",
+                "tvmaze_episode_id": 1318209,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "The Deep",
+                "air_date": "2017-11-05",
+                "airtime": "02:00",
+                "air_datetime": "2017-11-05T20:00:00+00:00",
+                "overview": "The Deep takes us on an epic journey into the unknown, a world of crushing pressure, brutal cold and utter darkness. It's the largest living space on our planet, and today, scientists think there's more life here than anywhere else on Earth. This is our final frontier.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600769.jpg",
+                "tvmaze_episode_id": 1336250,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Coral Reefs",
+                "air_date": "2017-11-12",
+                "airtime": "02:00",
+                "air_datetime": "2017-11-12T20:00:00+00:00",
+                "overview": "Coral reefs are home to a quarter of all marine species. Survival in these undersea mega-cities is a challenge with many different solutions.A turtle heads to the reef's equivalent of a health spa - but she must use trickery to avoid the queue. A remarkable Grouper uses the fish equivalent of sign language to collaborate with an octopus, flushing their prey out of hiding holes.A metre-long, ferocious-jawed Bobbit Worm hides in its tunnel. Monocle Bream retaliate by squirting water to expose its sandy lair.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600768.jpg",
+                "tvmaze_episode_id": 1341294,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Big Blue",
+                "air_date": "2017-11-19",
+                "airtime": "02:00",
+                "air_datetime": "2017-11-19T20:00:00+00:00",
+                "overview": "Survival in the remote open oceans is tough and baby turtles use debris as rafts to stay afloat while the Portuguese man-of-war sail along hunting for fish. There's also footage of the \"boiling sea\" effect created by lanternfish being trapped on the surface of the water by predators.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600766.jpg",
+                "tvmaze_episode_id": 1341295,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Green Seas",
+                "air_date": "2017-11-26",
+                "airtime": "02:00",
+                "air_datetime": "2017-11-26T20:00:00+00:00",
+                "overview": "In the undersea forests of kelp, algae and sea-grass, there is competition between species and sea otters are seen helping Garibaldi fish protect their seaweed garden from sea urchins while the common octopus uses shells to create a coat of armour against sharks.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600765.jpg",
+                "tvmaze_episode_id": 1341296,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Coasts",
+                "air_date": "2017-12-03",
+                "airtime": "02:00",
+                "air_datetime": "2017-12-03T20:00:00+00:00",
+                "overview": "The 620,000 kilometres of the world's diverse coastlines are a window to our oceans. After 60-mile journeys for food, puffins try to feed their young while dodging the attention of skuas.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600764.jpg",
+                "tvmaze_episode_id": 1341297,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Our Blue Planet",
+                "air_date": "2017-12-10",
+                "airtime": "02:00",
+                "air_datetime": "2017-12-10T20:00:00+00:00",
+                "overview": "The human impact on our oceans is brought to light in a sobering finale \u2013 like the eight million tonnes of plastic that ends up in the oceans every year.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600763.jpg",
+                "tvmaze_episode_id": 1341298,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 25504,
+        "episode_source": "tvmaze"
+    },
+    {
+        "id": 229,
+        "tmdb_id": 13579,
+        "external_ids": {
+            "tmdb": 13579
+        },
+        "title": "The Blue Planet",
+        "year": "2001",
+        "overview": "Sir David Attenborough narrates this critically acclaimed series that dives deep into the marine environment of Planet Earth. Although two-thirds of the world's surface is covered with water, scientists know less about the oceans than they do about the surface of the moon. This limited series travels from various coasts to the poles to examine watery denizens ranging from the gigantic blue whale to microscopic coral polyps.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/jiedd3kJ2Xr4y05CdFCbu0vQPiD.jpg",
+        "directory_path": "",
+        "genres": [
+            "Documentary"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Introduction",
+                "air_date": "2001-09-12",
+                "airtime": "02:00",
+                "air_datetime": "2001-09-12T20:00:00+00:00",
+                "overview": "Although 70 per cent of our planet is covered by water, the oceans and many of their inhabitants - such as the blue whale - remain an unexplored mystery. This edition travels to the very depths of the seas to reveal a spectacular variety of life - from alien monsters of the deep to pack-hunting killer whales attacking a grey whale calf.Also features Making Waves, which shows how some of the sequences in the series were captured.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600778.jpg",
+                "tvmaze_episode_id": 408020,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "The Deep",
+                "air_date": "2001-09-19",
+                "airtime": "02:00",
+                "air_datetime": "2001-09-19T20:00:00+00:00",
+                "overview": "More people have walked on the moon than have travelled to the very depths of the deep ocean. David Attenborough journeys into the abyss to show us, for the very first time, strange creatures straight out of the film Alien, many of which are new to science. Terrifying fish with massive teeth that eat prey twice their size and weird jellyfish that flash in the darkness. And deep sea sharks never filmed before and submerged mountain ranges and volcanoes far larger than anything on land.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600777.jpg",
+                "tvmaze_episode_id": 408021,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Open Ocean",
+                "air_date": "2001-09-26",
+                "airtime": "02:00",
+                "air_datetime": "2001-09-26T20:00:00+00:00",
+                "overview": "This programme focuses on the predatory skills of some of the most charismatic hunters found on the planet: whales, dolphins, tuna, shark and rapier-nosed billfish. The open ocean is unimaginably immense - itcovers more than 360 million square kilometres of the Earth's surface. Much of this huge expanse of seawater is marine desert with virtually no sign of life. Yet the fastest and most powerful survive, playing a deadly game of hide-and-seek with their prey. This charts how they track down prey in the seemingly featureless seas, following the extraordinary life of yellowfin tuna from a minute egg to a 200 kilogram, voracious predatory giant.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600776.jpg",
+                "tvmaze_episode_id": 408022,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Frozen Seas",
+                "air_date": "2001-10-03",
+                "airtime": "02:00",
+                "air_datetime": "2001-10-03T20:00:00+00:00",
+                "overview": "A look at the survival techniques of creatures that endure the harsh conditions of the Arctic and Antarctic. For six months a year, all is dark at the poles and the temperature drops to minus 40 degrees Celsius. Some animals manage to survive the winter, while others are forced to migrate ahead of the advancing ice.In the Arctic the polar bear is the top predator, catching seals on the ice and forcing seabirds to nest high up on cliffs. In Antartica the flightless penguins have no ground-based predators to deal with but lurking in the water is the constant threat from leopard seals.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600775.jpg",
+                "tvmaze_episode_id": 408023,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Seasonal Seas",
+                "air_date": "2001-10-10",
+                "airtime": "02:00",
+                "air_datetime": "2001-10-10T20:00:00+00:00",
+                "overview": "This programme explores seasonal changes in the richest waters on Earth, where the annual cycle of the sun drives an explosion of life. Featuring an extraordinary variety of marine animals, including seals, dolphins, jellyfish and the bizarre walking handfish.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600774.jpg",
+                "tvmaze_episode_id": 408024,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Coral Seas",
+                "air_date": "2001-10-17",
+                "airtime": "02:00",
+                "air_datetime": "2001-10-17T20:00:00+00:00",
+                "overview": "Amazingly beautiful and complex, coral reefs develop from humble beginnings. Tiny larvae settle and then over hundreds of years the intricate and fragile reefs that we so enjoy grow, inch by inch. Reefs areadorned with spectacularly colourful life, but it is no tropical paradise. Space is at a premium and even the coral itself fights to survive. And then, at night, the sharks come out to hunt. Layer upon layer the coral supports innumerable animals, but one big storm can threaten the entire community.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600773.jpg",
+                "tvmaze_episode_id": 408025,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Tidal Seas",
+                "air_date": "2001-10-24",
+                "airtime": "02:00",
+                "air_datetime": "2001-10-24T20:00:00+00:00",
+                "overview": "This edition explores a force so powerful that it moves oceans - the tides. All over the world tides create opportunities for marine life: giant sting rays glide on currents for a rest, the fastest snail of all surfs waves in pursuit of dinner, minute crabs play football on the beach, racoons binge and, in a unique sequence, dolphins play a deadly game of catch. For in the ocean, each turn of the tide spells life or death, somewhere.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600772.jpg",
+                "tvmaze_episode_id": 408026,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Coasts",
+                "air_date": "2001-10-31",
+                "airtime": "03:00",
+                "air_datetime": "2001-10-31T21:00:00+00:00",
+                "overview": "From the open oceans, millions of sea birds are forced to come into land to breed. Sea eagles steal kittiwake chicks from their nesting ledges. Turtles lay their eggs in the sand and marine mammals haul themselves out to fight on the beaches. Sea lions emerge from the kelp to give birth, while killer whales come crashing in on the surf to snatch the sea lion's young.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/240/600771.jpg",
+                "tvmaze_episode_id": 408027,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 7103,
+        "episode_source": "tvmaze"
     }
 ]
