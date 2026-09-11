@@ -3991,7 +3991,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/640/1600204.jpg",
                 "tvmaze_episode_id": 3684170,
                 "id": 21,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "The Walking Dead - Dead City - S03E07 - Hourglass"
@@ -4007,7 +4007,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/639/1597604.jpg",
                 "tvmaze_episode_id": 3684169,
                 "id": 20,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "The Walking Dead - Dead City - S03E06 - Genesis"
