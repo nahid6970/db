@@ -354,7 +354,8 @@
         "watched": false,
         "added_date": "2026-09-04T12:53:49.808380",
         "release_date": "2025-07-09",
-        "digital_release_date": "2025-08-14"
+        "digital_release_date": "2025-08-14",
+        "category": "Hollywood"
     },
     {
         "id": 15,
@@ -1524,7 +1525,8 @@
         "digital_release_date": "",
         "metadata_update_time": "17:00",
         "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 4
+        "metadata_update_weekday": 4,
+        "category": "Bollywood"
     },
     {
         "id": 57,
@@ -1718,8 +1720,9 @@
         "rating": 4,
         "tmdb_rating": 7.6,
         "status": "Released",
-        "watched": false,
-        "added_date": "2026-09-12T12:05:44.289911"
+        "watched": true,
+        "added_date": "2026-09-12T12:05:44.289911",
+        "category": "Hollywood"
     },
     {
         "id": 64,
@@ -1779,6 +1782,7 @@
         "added_date": "2026-09-12T12:06:33.207190",
         "metadata_update_time": "23:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 8
+        "metadata_update_month_day": 8,
+        "category": "Hollywood"
     }
 ]
