@@ -249,7 +249,8 @@
         "watched": false,
         "added_date": "2026-09-04T12:52:34.460815",
         "release_date": "2024-01-08",
-        "digital_release_date": "2024-01-08"
+        "digital_release_date": "2024-01-08",
+        "category": "Hollywood"
     },
     {
         "id": 11,
@@ -276,7 +277,8 @@
         "watched": false,
         "added_date": "2026-09-04T12:52:36.544064",
         "release_date": "2024-04-22",
-        "digital_release_date": "2024-04-22"
+        "digital_release_date": "2024-04-22",
+        "category": "Hollywood"
     },
     {
         "id": 12,
@@ -303,7 +305,8 @@
         "watched": false,
         "added_date": "2026-09-04T12:52:38.762427",
         "release_date": "2024-07-15",
-        "digital_release_date": "2024-07-15"
+        "digital_release_date": "2024-07-15",
+        "category": "Hollywood"
     },
     {
         "id": 13,
@@ -632,9 +635,9 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:25.452947",
         "digital_release_date": "",
-        "metadata_update_time": "13:00",
+        "metadata_update_time": "11:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 3,
+        "metadata_update_month_day": 2,
         "category": "Hollywood"
     },
     {
@@ -717,9 +720,9 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:36.004360",
         "digital_release_date": "",
-        "metadata_update_time": "15:00",
+        "metadata_update_time": "13:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 4,
+        "metadata_update_month_day": 3,
         "category": "Hollywood"
     },
     {
@@ -1109,7 +1112,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:23:18.532749",
-        "digital_release_date": "2025-06-11"
+        "digital_release_date": "2025-06-11",
+        "category": "Chinese"
     },
     {
         "id": 42,
@@ -1134,7 +1138,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:23:27.480516",
-        "digital_release_date": "2024-12-22"
+        "digital_release_date": "2024-12-22",
+        "category": "Chinese"
     },
     {
         "id": 43,
@@ -1182,7 +1187,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:23:54.538942",
-        "digital_release_date": "2023-06-03"
+        "digital_release_date": "2023-06-03",
+        "category": "Chinese"
     },
     {
         "id": 45,
@@ -1530,9 +1536,9 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
         "digital_release_date": "",
-        "metadata_update_time": "17:00",
+        "metadata_update_time": "15:00",
         "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 4,
+        "metadata_update_weekday": 3,
         "category": "Bollywood"
     },
     {
@@ -1562,9 +1568,9 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
         "digital_release_date": "",
-        "metadata_update_time": "19:00",
+        "metadata_update_time": "17:00",
         "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 5,
+        "metadata_update_weekday": 4,
         "category": "Bollywood"
     },
     {
@@ -1758,9 +1764,9 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:06.587421",
-        "metadata_update_time": "21:00",
+        "metadata_update_time": "19:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 7,
+        "metadata_update_month_day": 6,
         "category": "Hollywood"
     },
     {
@@ -1789,9 +1795,9 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:33.207190",
-        "metadata_update_time": "23:00",
+        "metadata_update_time": "21:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 8,
+        "metadata_update_month_day": 7,
         "category": "Hollywood"
     },
     {
@@ -1873,7 +1879,10 @@
         "tmdb_rating": 0.0,
         "status": "Missing",
         "watched": false,
-        "added_date": "2026-09-12T15:19:40.842658"
+        "added_date": "2026-09-12T15:19:40.842658",
+        "metadata_update_time": "23:00",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 0
     },
     {
         "id": 69,
@@ -1901,6 +1910,8 @@
         "tmdb_rating": 7.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-12T15:20:02.512042"
+        "added_date": "2026-09-12T15:20:02.512042",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     }
 ]
