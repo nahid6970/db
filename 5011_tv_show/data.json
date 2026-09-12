@@ -174766,5 +174766,27 @@
         "episode_sort_order": "desc",
         "episode_update_time": "",
         "episode_update_frequency": "daily"
+    },
+    {
+        "id": 231,
+        "tmdb_id": 90228,
+        "external_ids": {
+            "tmdb": 90228
+        },
+        "title": "Dune: Prophecy",
+        "year": "2024",
+        "overview": "Ten thousand years before the ascension of Paul Atreides, sisters Valya and Tula Harkonnen establish the fabled sect and female order that would become known as the Bene Gesserit to control the future of humankind.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/oWVohNsxkxA3u92EzRo8fTuXIS0.jpg",
+        "directory_path": "",
+        "genres": [
+            "Sci-Fi & Fantasy",
+            "Drama",
+            "Action & Adventure"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.2,
+        "status": "Continuing",
+        "episodes": [],
+        "tvmaze_id": 42846
     }
 ]

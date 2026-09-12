@@ -165,7 +165,8 @@
         "digital_release_date": "",
         "metadata_update_time": "09:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 1
+        "metadata_update_month_day": 1,
+        "category": "Hollywood"
     },
     {
         "id": 8,
@@ -220,7 +221,8 @@
         "watched": false,
         "added_date": "2026-09-04T11:57:00.365617",
         "release_date": "2026-07-29",
-        "digital_release_date": "2026-09-29"
+        "digital_release_date": "2026-09-29",
+        "category": "Hollywood"
     },
     {
         "id": 10,
@@ -519,7 +521,9 @@
         "added_date": "2026-09-05T02:48:17.485411",
         "metadata_update_time": "11:00",
         "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 1
+        "metadata_update_weekday": 1,
+        "category": "Hollywood",
+        "digital_release_date": "2026-11-15"
     },
     {
         "id": 21,
@@ -630,7 +634,8 @@
         "digital_release_date": "",
         "metadata_update_time": "13:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 3
+        "metadata_update_month_day": 3,
+        "category": "Hollywood"
     },
     {
         "id": 25,
@@ -714,7 +719,8 @@
         "digital_release_date": "",
         "metadata_update_time": "15:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 4
+        "metadata_update_month_day": 4,
+        "category": "Hollywood"
     },
     {
         "id": 28,
@@ -1558,7 +1564,8 @@
         "digital_release_date": "",
         "metadata_update_time": "19:00",
         "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 5
+        "metadata_update_weekday": 5,
+        "category": "Bollywood"
     },
     {
         "id": 58,
@@ -1753,7 +1760,8 @@
         "added_date": "2026-09-12T12:06:06.587421",
         "metadata_update_time": "21:00",
         "metadata_update_frequency": "monthly",
-        "metadata_update_month_day": 7
+        "metadata_update_month_day": 7,
+        "category": "Hollywood"
     },
     {
         "id": 65,
@@ -1785,5 +1793,114 @@
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 8,
         "category": "Hollywood"
+    },
+    {
+        "id": 66,
+        "tmdb_id": 438631,
+        "external_ids": {
+            "tmdb": 438631,
+            "imdb": "tt1160419"
+        },
+        "radarr_id": null,
+        "title": "Dune",
+        "year": "2021",
+        "release_date": "2021-09-15",
+        "digital_release_date": "2021-10-21",
+        "category": "Hollywood",
+        "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 155,
+        "rating": 4,
+        "tmdb_rating": 7.8,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-12T15:19:03.541574"
+    },
+    {
+        "id": 67,
+        "tmdb_id": 693134,
+        "external_ids": {
+            "tmdb": 693134,
+            "imdb": "tt15239678"
+        },
+        "radarr_id": null,
+        "title": "Dune: Part Two",
+        "year": "2024",
+        "release_date": "2024-02-27",
+        "digital_release_date": "2024-02-06",
+        "category": "Hollywood",
+        "overview": "Follow the mythic journey of Paul Atreides as he unites with Chani and the Fremen while on a path of revenge against the conspirators who destroyed his family. Facing a choice between the love of his life and the fate of the known universe, Paul endeavors to prevent a terrible future only he can foresee.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/6izwz7rsy95ARzTR3poZ8H6c5pp.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 167,
+        "rating": 4,
+        "tmdb_rating": 8.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-12T15:19:33.844134"
+    },
+    {
+        "id": 68,
+        "tmdb_id": 1170608,
+        "external_ids": {
+            "tmdb": 1170608,
+            "imdb": "tt31378509"
+        },
+        "radarr_id": null,
+        "title": "Dune: Part Three",
+        "year": "2026",
+        "release_date": "2026-12-15",
+        "digital_release_date": "",
+        "category": "Hollywood",
+        "overview": "Emperor Paul Atreides faces the fallout from his ascent to power as political plots and a galaxy-wide holy war endanger the future only he can see.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/d43fvHQsIMa4kpyhKXw0haEJIvI.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 140,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-12T15:19:40.842658"
+    },
+    {
+        "id": 69,
+        "tmdb_id": 697620,
+        "external_ids": {
+            "tmdb": 697620,
+            "imdb": "tt12451788"
+        },
+        "radarr_id": null,
+        "title": "Dune",
+        "year": "2020",
+        "release_date": "2020-06-15",
+        "digital_release_date": "",
+        "category": "International",
+        "overview": "Sounds as witnesses. They blurr into memories, half-dreams, it is undecided if they are real or not. A fluctuation between imagination and reality.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/CecUPdnnP22wV1NoRFQaG231zj.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Mystery",
+            "Thriller"
+        ],
+        "runtime": 4,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-12T15:20:02.512042"
     }
 ]
