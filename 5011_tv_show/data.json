@@ -21327,7 +21327,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
-        "episode_update_time": "11:48",
+        "episode_update_time": "11:20",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1,
         "episode_update_month_day": 1,
@@ -23383,7 +23383,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "14:36",
+        "episode_update_time": "13:40",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -48796,7 +48796,8 @@
         "episode_update_frequency": "daily",
         "episode_update_weekday": 6,
         "episode_update_month_day": 6,
-        "hide_future_episodes": true
+        "hide_future_episodes": true,
+        "season_offset": 1
     },
     {
         "id": 77,
@@ -57318,7 +57319,8 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_time": "",
-        "episode_update_frequency": "daily"
+        "episode_update_frequency": "daily",
+        "archived": true
     },
     {
         "id": 97,
@@ -69791,7 +69793,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "17:24",
+        "episode_update_time": "16:00",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 3,
         "episode_update_month_day": 4,
@@ -82169,6 +82171,20 @@
         "status": "Continuing",
         "episodes": [
             {
+                "season_number": 2,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2026-10-03",
+                "airtime": "15:25",
+                "air_datetime": "2026-10-03T09:25:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3744161,
+                "id": 171,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
                 "season_number": 1,
                 "episode_number": 170,
                 "title": "The Faraway Future",
@@ -84122,7 +84138,7 @@
                 "airtime": "15:25",
                 "air_datetime": "2018-05-08T09:25:00+00:00",
                 "overview": "Asta, Theresa and Gauche follow a mana trial in pursuit of the abducted children. They then discover the reason for the abductions.",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/210/527492.jpg",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/640/1601674.jpg",
                 "tvmaze_episode_id": 1443447,
                 "id": 31,
                 "watched": true,
@@ -84136,7 +84152,7 @@
                 "airtime": "15:25",
                 "air_datetime": "2018-05-01T09:25:00+00:00",
                 "overview": "The Black Bulls get a day off after getting paid, and Gauche goes to visit his beloved little sister Marie. To his surprise, he finds Asta already there and playing with her.",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/210/527491.jpg",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/640/1601669.jpg",
                 "tvmaze_episode_id": 1443446,
                 "id": 30,
                 "watched": true,
@@ -84149,8 +84165,8 @@
                 "air_date": "2018-04-24",
                 "airtime": "15:25",
                 "air_datetime": "2018-04-24T09:25:00+00:00",
-                "overview": "Months have passed since Asta and Yuno became Magic Knights and took their first steps toward becoming the Wizard King. Father and Sister Lily couldn't be happier about all of their hard work.",
-                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/210/527490.jpg",
+                "overview": "Months have passed since Asta and Yuno became Magic Knights and took their first steps toward becoming the Wizard King. Father and Sister Lily couldn't be happier about all of their hard work. This is mainly a recap episode that briefly goes through things that happened so far.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/640/1601400.jpg",
                 "tvmaze_episode_id": 1443445,
                 "id": 29,
                 "watched": true,
@@ -84556,11 +84572,11 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "",
+        "episode_update_time": "18:20",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
-        "episode_update_frequency": "daily",
-        "episode_update_weekday": 6,
+        "episode_update_frequency": "weekly",
+        "episode_update_weekday": 4,
         "episode_update_month_day": 6
     },
     {
@@ -178951,7 +178967,8 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_time": "",
-        "episode_update_frequency": "daily"
+        "episode_update_frequency": "daily",
+        "archived": true
     },
     {
         "id": 206,
@@ -182249,9 +182266,9 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "20:12",
+        "episode_update_time": "20:40",
         "episode_update_frequency": "weekly",
-        "episode_update_weekday": 4,
+        "episode_update_weekday": 5,
         "episode_update_month_day": 1,
         "last_run_result": {
             "timestamp": "2026-09-06T14:25:03.202780",
@@ -214463,7 +214480,8 @@
         "episode_update_month_day": 6,
         "tmdb_id": 4656,
         "tmdb_rating": 6.8,
-        "hide_future_episodes": true
+        "hide_future_episodes": true,
+        "season_offset": 1
     },
     {
         "id": 220,
@@ -214763,7 +214781,7 @@
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
-        "episode_update_weekday": 5,
+        "episode_update_weekday": 6,
         "episode_update_month_day": 5,
         "last_run_result": {
             "timestamp": "2026-09-06T14:31:07.087773",

@@ -1627,5 +1627,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T10:24:03.981242"
+    },
+    {
+        "id": 62,
+        "tmdb_id": 980431,
+        "external_ids": {
+            "tmdb": 980431,
+            "imdb": "tt18259538"
+        },
+        "radarr_id": null,
+        "title": "Avatar Aang: The Last Airbender",
+        "year": "2026",
+        "release_date": "2026-07-24",
+        "digital_release_date": "2026-07-25",
+        "overview": "Avatar Aang, the world's last Airbender, learns of an ancient power that could save his culture from extinction. With the help of his friends, he embarks on a global quest to find it before it falls into the wrong hands and threatens to upend the peace they sacrificed everything to achieve.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/3sgnSfNT27Bx5O5ukr7B26mhEQq.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Adventure",
+            "Fantasy",
+            "Action"
+        ],
+        "runtime": 99,
+        "rating": 5,
+        "tmdb_rating": 9.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-12T10:50:52.530103"
     }
 ]
