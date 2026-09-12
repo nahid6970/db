@@ -162,7 +162,10 @@
         "watched": false,
         "added_date": "2026-09-04T11:41:19.193398",
         "release_date": "2027-06-17",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "09:00",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_month_day": 1
     },
     {
         "id": 8,
@@ -511,7 +514,10 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T02:48:17.485411"
+        "added_date": "2026-09-05T02:48:17.485411",
+        "metadata_update_time": "11:00",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 1
     },
     {
         "id": 21,
@@ -619,7 +625,10 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-05T02:51:25.452947",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "13:00",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_month_day": 3
     },
     {
         "id": 25,
@@ -700,7 +709,10 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-05T02:51:36.004360",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "15:00",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_month_day": 4
     },
     {
         "id": 28,
@@ -729,7 +741,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:20.309896",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 29,
@@ -979,7 +993,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:01:44.834397",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 38,
@@ -1131,7 +1147,10 @@
         "tmdb_rating": 7.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:23:49.947560"
+        "added_date": "2026-09-05T19:23:49.947560",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily",
+        "digital_release_date": "2026-06-15"
     },
     {
         "id": 44,
@@ -1234,11 +1253,14 @@
             "Comedy"
         ],
         "runtime": 0,
-        "rating": 5,
-        "tmdb_rating": 9.4,
+        "rating": 4,
+        "tmdb_rating": 8.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:24:57.220222"
+        "added_date": "2026-09-05T19:24:57.220222",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily",
+        "digital_release_date": "2026-08-27"
     },
     {
         "id": 48,
@@ -1292,7 +1314,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:25:26.360543",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 50,
@@ -1321,7 +1345,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:26:40.276696",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 51,
@@ -1349,7 +1375,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:26:42.099471",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 52,
@@ -1432,7 +1460,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T20:15:04.930398",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 55,
@@ -1462,7 +1492,9 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T20:15:29.698443",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "",
+        "metadata_update_frequency": "daily"
     },
     {
         "id": 56,
@@ -1489,7 +1521,10 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "17:00",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 4
     },
     {
         "id": 57,
@@ -1517,7 +1552,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
-        "digital_release_date": ""
+        "digital_release_date": "",
+        "metadata_update_time": "19:00",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 5
     },
     {
         "id": 58,
@@ -1655,5 +1693,92 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T10:50:52.530103"
+    },
+    {
+        "id": 63,
+        "tmdb_id": 83533,
+        "external_ids": {
+            "tmdb": 83533,
+            "imdb": "tt1757678"
+        },
+        "radarr_id": null,
+        "title": "Avatar: Fire and Ash",
+        "year": "2025",
+        "release_date": "2025-12-17",
+        "digital_release_date": "2026-03-31",
+        "overview": "In the wake of the devastating war against the RDA and the loss of their eldest son, Jake Sully and Neytiri face a new threat on Pandora: the Ash People, a violent and power-hungry Na'vi tribe led by the ruthless Varang. Jake's family must fight for their survival and the future of Pandora in a conflict that pushes them to their emotional and physical limits.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/bRBeSHfGHwkEpImlhxPmOcUsaeg.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure",
+            "Fantasy"
+        ],
+        "runtime": 198,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-12T12:05:44.289911"
+    },
+    {
+        "id": 64,
+        "tmdb_id": 216527,
+        "external_ids": {
+            "tmdb": 216527,
+            "imdb": "tt3095356"
+        },
+        "radarr_id": null,
+        "title": "Avatar 4",
+        "year": "2029",
+        "release_date": "2029-12-19",
+        "digital_release_date": "",
+        "overview": "The fourth installment of the franchise. Plot TBA.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qzMYKnT4MG1d0gnhwytr4cKhUvS.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Adventure",
+            "Action"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-12T12:06:06.587421",
+        "metadata_update_time": "21:00",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_month_day": 7
+    },
+    {
+        "id": 65,
+        "tmdb_id": 393209,
+        "external_ids": {
+            "tmdb": 393209,
+            "imdb": "tt5637536"
+        },
+        "radarr_id": null,
+        "title": "Avatar 5",
+        "year": "2031",
+        "release_date": "2031-12-17",
+        "digital_release_date": "",
+        "overview": "The fifth installment of the franchise. Plot TBA.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/rtmmvqkIC5zDMEd638Es2woxbz8.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Science Fiction",
+            "Action"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-12T12:06:33.207190",
+        "metadata_update_time": "23:00",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_month_day": 8
     }
 ]
