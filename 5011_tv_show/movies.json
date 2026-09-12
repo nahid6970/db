@@ -24,7 +24,8 @@
         "watched": true,
         "added_date": "2026-09-04T11:07:56.799195",
         "release_date": "2023-05-31",
-        "tmdb_rating": 8.3
+        "tmdb_rating": 8.3,
+        "digital_release_date": "2023-08-08"
     },
     {
         "id": 3,
@@ -50,7 +51,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T11:37:17.677999",
-        "release_date": "2007-05-01"
+        "release_date": "2007-05-01",
+        "digital_release_date": "2007-04-16"
     },
     {
         "id": 4,
@@ -76,7 +78,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T11:37:24.115384",
-        "release_date": "2019-06-28"
+        "release_date": "2019-06-28",
+        "digital_release_date": "2019-07-05"
     },
     {
         "id": 5,
@@ -103,7 +106,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T11:37:38.799831",
-        "release_date": "2018-12-06"
+        "release_date": "2018-12-06",
+        "digital_release_date": "2019-02-26"
     },
     {
         "id": 6,
@@ -129,7 +133,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T11:37:55.824466",
-        "release_date": "2004-06-25"
+        "release_date": "2004-06-25",
+        "digital_release_date": "2016-12-13"
     },
     {
         "id": 7,
@@ -182,7 +187,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T11:47:51.527048",
-        "release_date": "2025-07-18"
+        "release_date": "2025-07-18",
+        "digital_release_date": "2026-07-28"
     },
     {
         "id": 9,
@@ -204,11 +210,12 @@
         ],
         "runtime": 145,
         "rating": 4,
-        "tmdb_rating": 7.9,
+        "tmdb_rating": 7.8,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T11:57:00.365617",
-        "release_date": "2026-07-29"
+        "release_date": "2026-07-29",
+        "digital_release_date": "2026-09-29"
     },
     {
         "id": 10,
@@ -234,7 +241,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T12:52:34.460815",
-        "release_date": "2024-01-08"
+        "release_date": "2024-01-08",
+        "digital_release_date": "2024-01-08"
     },
     {
         "id": 11,
@@ -260,7 +268,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T12:52:36.544064",
-        "release_date": "2024-04-22"
+        "release_date": "2024-04-22",
+        "digital_release_date": "2024-04-22"
     },
     {
         "id": 12,
@@ -282,11 +291,12 @@
         ],
         "runtime": 99,
         "rating": 4,
-        "tmdb_rating": 7.1,
+        "tmdb_rating": 7.2,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T12:52:38.762427",
-        "release_date": "2024-07-15"
+        "release_date": "2024-07-15",
+        "digital_release_date": "2024-07-15"
     },
     {
         "id": 13,
@@ -312,7 +322,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T12:52:58.035293",
-        "release_date": "2021-03-18"
+        "release_date": "2021-03-18",
+        "digital_release_date": "2021-03-18"
     },
     {
         "id": 14,
@@ -338,7 +349,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T12:53:49.808380",
-        "release_date": "2025-07-09"
+        "release_date": "2025-07-09",
+        "digital_release_date": "2025-08-14"
     },
     {
         "id": 15,
@@ -363,7 +375,8 @@
         "tmdb_rating": 7.4,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-04T13:28:28.377309"
+        "added_date": "2026-09-04T13:28:28.377309",
+        "digital_release_date": "2016-12-13"
     },
     {
         "id": 16,
@@ -389,7 +402,8 @@
         "tmdb_rating": 7.9,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-04T13:28:35.175817"
+        "added_date": "2026-09-04T13:28:35.175817",
+        "digital_release_date": "2022-03-14"
     },
     {
         "id": 17,
@@ -415,7 +429,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-04T13:28:54.947540"
+        "added_date": "2026-09-04T13:28:54.947540",
+        "digital_release_date": "2017-09-26"
     },
     {
         "id": 18,
@@ -441,7 +456,8 @@
         "tmdb_rating": 6.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-04T13:29:16.307164"
+        "added_date": "2026-09-04T13:29:16.307164",
+        "digital_release_date": "2014-04-17"
     },
     {
         "id": 19,
@@ -467,7 +483,8 @@
         "tmdb_rating": 6.8,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-04T13:29:26.185433"
+        "added_date": "2026-09-04T13:29:26.185433",
+        "digital_release_date": "2022-06-17"
     },
     {
         "id": 20,
@@ -519,7 +536,8 @@
         "tmdb_rating": 7.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T02:49:19.655507"
+        "added_date": "2026-09-05T02:49:19.655507",
+        "digital_release_date": "2011-07-27"
     },
     {
         "id": 22,
@@ -545,7 +563,8 @@
         "tmdb_rating": 8.1,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-05T02:51:18.257982"
+        "added_date": "2026-09-05T02:51:18.257982",
+        "digital_release_date": "2024-06-14"
     },
     {
         "id": 23,
@@ -571,7 +590,8 @@
         "tmdb_rating": 8.2,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-05T02:51:19.943605"
+        "added_date": "2026-09-05T02:51:19.943605",
+        "digital_release_date": "2019-07-30"
     },
     {
         "id": 24,
@@ -597,7 +617,8 @@
         "tmdb_rating": 0.0,
         "status": "Missing",
         "watched": false,
-        "added_date": "2026-09-05T02:51:25.452947"
+        "added_date": "2026-09-05T02:51:25.452947",
+        "digital_release_date": ""
     },
     {
         "id": 25,
@@ -623,7 +644,8 @@
         "tmdb_rating": 8.2,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-05T02:51:29.953211"
+        "added_date": "2026-09-05T02:51:29.953211",
+        "digital_release_date": "2018-07-31"
     },
     {
         "id": 26,
@@ -649,7 +671,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-05T02:51:32.211111"
+        "added_date": "2026-09-05T02:51:32.211111",
+        "digital_release_date": "2015-04-23"
     },
     {
         "id": 27,
@@ -703,7 +726,8 @@
         "tmdb_rating": 7.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:20.309896"
+        "added_date": "2026-09-05T18:47:20.309896",
+        "digital_release_date": ""
     },
     {
         "id": 29,
@@ -729,7 +753,8 @@
         "tmdb_rating": 6.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:30.339926"
+        "added_date": "2026-09-05T18:47:30.339926",
+        "digital_release_date": "2025-05-30"
     },
     {
         "id": 30,
@@ -756,7 +781,8 @@
         "tmdb_rating": 6.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:38.102316"
+        "added_date": "2026-09-05T18:47:38.102316",
+        "digital_release_date": "2025-05-30"
     },
     {
         "id": 31,
@@ -782,7 +808,8 @@
         "tmdb_rating": 6.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:42.074242"
+        "added_date": "2026-09-05T18:47:42.074242",
+        "digital_release_date": "2025-05-30"
     },
     {
         "id": 32,
@@ -808,7 +835,8 @@
         "tmdb_rating": 6.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:44.613244"
+        "added_date": "2026-09-05T18:47:44.613244",
+        "digital_release_date": "2025-05-30"
     },
     {
         "id": 33,
@@ -835,7 +863,8 @@
         "tmdb_rating": 7.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:47:54.406059"
+        "added_date": "2026-09-05T18:47:54.406059",
+        "digital_release_date": "2020-01-01"
     },
     {
         "id": 34,
@@ -861,7 +890,8 @@
         "tmdb_rating": 6.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:48:04.166985"
+        "added_date": "2026-09-05T18:48:04.166985",
+        "digital_release_date": "2025-05-30"
     },
     {
         "id": 35,
@@ -888,7 +918,8 @@
         "tmdb_rating": 7.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:48:14.300725"
+        "added_date": "2026-09-05T18:48:14.300725",
+        "digital_release_date": "2020-01-01"
     },
     {
         "id": 36,
@@ -915,7 +946,8 @@
         "tmdb_rating": 7.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T18:48:18.667306"
+        "added_date": "2026-09-05T18:48:18.667306",
+        "digital_release_date": "2020-01-01"
     },
     {
         "id": 37,
@@ -944,7 +976,8 @@
         "tmdb_rating": 7.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:01:44.834397"
+        "added_date": "2026-09-05T19:01:44.834397",
+        "digital_release_date": ""
     },
     {
         "id": 38,
@@ -970,7 +1003,8 @@
         "tmdb_rating": 7.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:04:28.188780"
+        "added_date": "2026-09-05T19:04:28.188780",
+        "digital_release_date": "2023-07-12"
     },
     {
         "id": 39,
@@ -996,7 +1030,8 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:05:09.222396"
+        "added_date": "2026-09-05T19:05:09.222396",
+        "digital_release_date": "2019-01-29"
     },
     {
         "id": 40,
@@ -1022,7 +1057,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:05:22.816587"
+        "added_date": "2026-09-05T19:05:22.816587",
+        "digital_release_date": "2014-01-14"
     },
     {
         "id": 41,
@@ -1046,7 +1082,8 @@
         "tmdb_rating": 7.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:23:18.532749"
+        "added_date": "2026-09-05T19:23:18.532749",
+        "digital_release_date": "2025-06-11"
     },
     {
         "id": 42,
@@ -1070,7 +1107,8 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:23:27.480516"
+        "added_date": "2026-09-05T19:23:27.480516",
+        "digital_release_date": "2024-12-22"
     },
     {
         "id": 43,
@@ -1114,7 +1152,8 @@
         "tmdb_rating": 10.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:23:54.538942"
+        "added_date": "2026-09-05T19:23:54.538942",
+        "digital_release_date": "2023-06-03"
     },
     {
         "id": 45,
@@ -1141,7 +1180,8 @@
         "tmdb_rating": 7.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:24:44.502579"
+        "added_date": "2026-09-05T19:24:44.502579",
+        "digital_release_date": "2013-02-21"
     },
     {
         "id": 46,
@@ -1168,7 +1208,8 @@
         "tmdb_rating": 8.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:24:47.961393"
+        "added_date": "2026-09-05T19:24:47.961393",
+        "digital_release_date": "2022-01-25"
     },
     {
         "id": 47,
@@ -1222,7 +1263,8 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:25:23.109375"
+        "added_date": "2026-09-05T19:25:23.109375",
+        "digital_release_date": "2014-02-27"
     },
     {
         "id": 49,
@@ -1247,7 +1289,8 @@
         "tmdb_rating": 6.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:25:26.360543"
+        "added_date": "2026-09-05T19:25:26.360543",
+        "digital_release_date": ""
     },
     {
         "id": 50,
@@ -1275,7 +1318,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:26:40.276696"
+        "added_date": "2026-09-05T19:26:40.276696",
+        "digital_release_date": ""
     },
     {
         "id": 51,
@@ -1302,7 +1346,8 @@
         "tmdb_rating": 7.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T19:26:42.099471"
+        "added_date": "2026-09-05T19:26:42.099471",
+        "digital_release_date": ""
     },
     {
         "id": 52,
@@ -1329,7 +1374,8 @@
         "tmdb_rating": 7.7,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T20:14:39.846756"
+        "added_date": "2026-09-05T20:14:39.846756",
+        "digital_release_date": "2021-07-30"
     },
     {
         "id": 53,
@@ -1356,7 +1402,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T20:14:46.363032"
+        "added_date": "2026-09-05T20:14:46.363032",
+        "digital_release_date": "2021-06-18"
     },
     {
         "id": 54,
@@ -1382,7 +1429,8 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T20:15:04.930398"
+        "added_date": "2026-09-05T20:15:04.930398",
+        "digital_release_date": ""
     },
     {
         "id": 55,
@@ -1411,7 +1459,8 @@
         "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-05T20:15:29.698443"
+        "added_date": "2026-09-05T20:15:29.698443",
+        "digital_release_date": ""
     },
     {
         "id": 56,
@@ -1437,7 +1486,8 @@
         "tmdb_rating": 0.0,
         "status": "Missing",
         "watched": false,
-        "added_date": "2026-09-11T10:52:12.378580"
+        "added_date": "2026-09-11T10:52:12.378580",
+        "digital_release_date": ""
     },
     {
         "id": 57,
@@ -1464,6 +1514,7 @@
         "tmdb_rating": 7.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-11T10:52:52.618339"
+        "added_date": "2026-09-11T10:52:52.618339",
+        "digital_release_date": ""
     }
 ]
