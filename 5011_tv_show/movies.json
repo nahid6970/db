@@ -771,7 +771,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 29,
@@ -799,7 +800,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:30.339926",
         "digital_release_date": "2025-05-30",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 30,
@@ -828,7 +830,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:38.102316",
         "digital_release_date": "2025-05-30",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 31,
@@ -856,7 +859,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:42.074242",
         "digital_release_date": "2025-05-30",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 32,
@@ -884,7 +888,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:44.613244",
         "digital_release_date": "2025-05-30",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 33,
@@ -913,7 +918,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:54.406059",
         "digital_release_date": "2020-01-01",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 34,
@@ -941,7 +947,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:48:04.166985",
         "digital_release_date": "2025-05-30",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 35,
@@ -970,7 +977,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:48:14.300725",
         "digital_release_date": "2020-01-01",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 36,
@@ -999,7 +1007,8 @@
         "watched": false,
         "added_date": "2026-09-05T18:48:18.667306",
         "digital_release_date": "2020-01-01",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 37,
@@ -1032,7 +1041,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 38,
@@ -1060,7 +1070,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:04:28.188780",
         "digital_release_date": "2023-07-12",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 39,
@@ -1116,7 +1127,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:05:22.816587",
         "digital_release_date": "2014-01-14",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 41,
@@ -1142,7 +1154,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:23:18.532749",
         "digital_release_date": "2025-06-11",
-        "category": "Chinese"
+        "category": "Chinese",
+        "archived": true
     },
     {
         "id": 42,
@@ -1168,7 +1181,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:23:27.480516",
         "digital_release_date": "2024-12-22",
-        "category": "Chinese"
+        "category": "Chinese",
+        "archived": true
     },
     {
         "id": 43,
@@ -1193,7 +1207,8 @@
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
         "digital_release_date": "2026-06-15",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "archived": true
     },
     {
         "id": 44,
@@ -1218,7 +1233,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:23:54.538942",
         "digital_release_date": "2023-06-03",
-        "category": "Chinese"
+        "category": "Chinese",
+        "archived": true
     },
     {
         "id": 45,
@@ -1247,7 +1263,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:24:44.502579",
         "digital_release_date": "2013-02-21",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 46,
@@ -1276,7 +1293,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:24:47.961393",
         "digital_release_date": "2022-01-25",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 47,
@@ -1307,7 +1325,8 @@
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
         "digital_release_date": "2026-08-27",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 48,
@@ -1336,7 +1355,8 @@
         "watched": false,
         "added_date": "2026-09-05T19:25:23.109375",
         "digital_release_date": "2014-02-27",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 49,
@@ -1365,7 +1385,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 50,
@@ -1397,7 +1418,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 51,
@@ -1428,7 +1450,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 52,
@@ -1457,7 +1480,8 @@
         "watched": false,
         "added_date": "2026-09-05T20:14:39.846756",
         "digital_release_date": "2021-07-30",
-        "category": "Japanese Live Action"
+        "category": "Japanese Live Action",
+        "archived": true
     },
     {
         "id": 53,
@@ -1486,7 +1510,8 @@
         "watched": false,
         "added_date": "2026-09-05T20:14:46.363032",
         "digital_release_date": "2021-06-18",
-        "category": "Japanese Live Action"
+        "category": "Japanese Live Action",
+        "archived": true
     },
     {
         "id": 54,
@@ -1516,7 +1541,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 55,
@@ -1549,7 +1575,8 @@
         "digital_release_date": "",
         "metadata_update_time": "",
         "metadata_update_frequency": "daily",
-        "category": "Anime"
+        "category": "Anime",
+        "archived": true
     },
     {
         "id": 56,
