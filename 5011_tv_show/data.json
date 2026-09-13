@@ -3980,7 +3980,9 @@
                 "tvmaze_episode_id": 3684171,
                 "id": 22,
                 "watched": false,
-                "notify": "seen"
+                "notify": "seen",
+                "has_file": true,
+                "file_name": "The Walking Dead - Dead City - S03E08 - Tenebrae"
             },
             {
                 "season_number": 3,
