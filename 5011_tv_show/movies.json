@@ -52,7 +52,8 @@
         "watched": true,
         "added_date": "2026-09-04T11:37:17.677999",
         "release_date": "2007-05-01",
-        "digital_release_date": "2007-04-16"
+        "digital_release_date": "2007-04-16",
+        "category": "Hollywood"
     },
     {
         "id": 4,
@@ -107,7 +108,8 @@
         "watched": true,
         "added_date": "2026-09-04T11:37:38.799831",
         "release_date": "2018-12-06",
-        "digital_release_date": "2019-02-26"
+        "digital_release_date": "2019-02-26",
+        "category": "Hollywood"
     },
     {
         "id": 6,
@@ -134,7 +136,8 @@
         "watched": true,
         "added_date": "2026-09-04T11:37:55.824466",
         "release_date": "2004-06-25",
-        "digital_release_date": "2016-12-13"
+        "digital_release_date": "2016-12-13",
+        "category": "Hollywood"
     },
     {
         "id": 7,
@@ -387,7 +390,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T13:28:28.377309",
-        "digital_release_date": "2016-12-13"
+        "digital_release_date": "2016-12-13",
+        "category": "Hollywood"
     },
     {
         "id": 16,
@@ -441,7 +445,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-04T13:28:54.947540",
-        "digital_release_date": "2017-09-26"
+        "digital_release_date": "2017-09-26",
+        "category": "Hollywood"
     },
     {
         "id": 18,
@@ -468,7 +473,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T13:29:16.307164",
-        "digital_release_date": "2014-04-17"
+        "digital_release_date": "2014-04-17",
+        "category": "Hollywood"
     },
     {
         "id": 19,
@@ -495,7 +501,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-04T13:29:26.185433",
-        "digital_release_date": "2022-06-17"
+        "digital_release_date": "2022-06-17",
+        "category": "Hollywood"
     },
     {
         "id": 20,
@@ -553,7 +560,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T02:49:19.655507",
-        "digital_release_date": "2011-07-27"
+        "digital_release_date": "2011-07-27",
+        "category": "Hollywood"
     },
     {
         "id": 22,
@@ -580,7 +588,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-05T02:51:18.257982",
-        "digital_release_date": "2024-06-14"
+        "digital_release_date": "2024-06-14",
+        "category": "Hollywood"
     },
     {
         "id": 23,
@@ -665,7 +674,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-05T02:51:29.953211",
-        "digital_release_date": "2018-07-31"
+        "digital_release_date": "2018-07-31",
+        "category": "Hollywood"
     },
     {
         "id": 26,
@@ -692,7 +702,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-05T02:51:32.211111",
-        "digital_release_date": "2015-04-23"
+        "digital_release_date": "2015-04-23",
+        "category": "Hollywood"
     },
     {
         "id": 27,
@@ -754,7 +765,8 @@
         "added_date": "2026-09-05T18:47:20.309896",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 29,
@@ -781,7 +793,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:30.339926",
-        "digital_release_date": "2025-05-30"
+        "digital_release_date": "2025-05-30",
+        "category": "Anime"
     },
     {
         "id": 30,
@@ -809,7 +822,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:38.102316",
-        "digital_release_date": "2025-05-30"
+        "digital_release_date": "2025-05-30",
+        "category": "Anime"
     },
     {
         "id": 31,
@@ -836,7 +850,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:42.074242",
-        "digital_release_date": "2025-05-30"
+        "digital_release_date": "2025-05-30",
+        "category": "Anime"
     },
     {
         "id": 32,
@@ -863,7 +878,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:44.613244",
-        "digital_release_date": "2025-05-30"
+        "digital_release_date": "2025-05-30",
+        "category": "Anime"
     },
     {
         "id": 33,
@@ -891,7 +907,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:47:54.406059",
-        "digital_release_date": "2020-01-01"
+        "digital_release_date": "2020-01-01",
+        "category": "Anime"
     },
     {
         "id": 34,
@@ -918,7 +935,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:48:04.166985",
-        "digital_release_date": "2025-05-30"
+        "digital_release_date": "2025-05-30",
+        "category": "Anime"
     },
     {
         "id": 35,
@@ -946,7 +964,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:48:14.300725",
-        "digital_release_date": "2020-01-01"
+        "digital_release_date": "2020-01-01",
+        "category": "Anime"
     },
     {
         "id": 36,
@@ -974,7 +993,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T18:48:18.667306",
-        "digital_release_date": "2020-01-01"
+        "digital_release_date": "2020-01-01",
+        "category": "Anime"
     },
     {
         "id": 37,
@@ -1006,7 +1026,8 @@
         "added_date": "2026-09-05T19:01:44.834397",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 38,
@@ -1060,7 +1081,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:05:09.222396",
-        "digital_release_date": "2019-01-29"
+        "digital_release_date": "2019-01-29",
+        "category": "Anime"
     },
     {
         "id": 40,
@@ -1087,7 +1109,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:05:22.816587",
-        "digital_release_date": "2014-01-14"
+        "digital_release_date": "2014-01-14",
+        "category": "Anime"
     },
     {
         "id": 41,
@@ -1216,7 +1239,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:24:44.502579",
-        "digital_release_date": "2013-02-21"
+        "digital_release_date": "2013-02-21",
+        "category": "Anime"
     },
     {
         "id": 46,
@@ -1302,7 +1326,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:25:23.109375",
-        "digital_release_date": "2014-02-27"
+        "digital_release_date": "2014-02-27",
+        "category": "Anime"
     },
     {
         "id": 49,
@@ -1330,7 +1355,8 @@
         "added_date": "2026-09-05T19:25:26.360543",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 50,
@@ -1361,7 +1387,8 @@
         "added_date": "2026-09-05T19:26:40.276696",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 51,
@@ -1391,7 +1418,8 @@
         "added_date": "2026-09-05T19:26:42.099471",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 52,
@@ -1447,7 +1475,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T20:14:46.363032",
-        "digital_release_date": "2021-06-18"
+        "digital_release_date": "2021-06-18",
+        "category": "Japanese Live Action"
     },
     {
         "id": 54,
@@ -1476,7 +1505,8 @@
         "added_date": "2026-09-05T20:15:04.930398",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 55,
@@ -1508,7 +1538,8 @@
         "added_date": "2026-09-05T20:15:29.698443",
         "digital_release_date": "",
         "metadata_update_time": "",
-        "metadata_update_frequency": "daily"
+        "metadata_update_frequency": "daily",
+        "category": "Anime"
     },
     {
         "id": 56,
@@ -1599,7 +1630,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-12T10:23:55.359210"
+        "added_date": "2026-09-12T10:23:55.359210",
+        "category": "Hollywood"
     },
     {
         "id": 59,
@@ -1626,7 +1658,8 @@
         "tmdb_rating": 6.8,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-12T10:23:58.716312"
+        "added_date": "2026-09-12T10:23:58.716312",
+        "category": "Hollywood"
     },
     {
         "id": 60,
@@ -1680,7 +1713,8 @@
         "tmdb_rating": 6.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-12T10:24:03.981242"
+        "added_date": "2026-09-12T10:24:03.981242",
+        "category": "Hollywood"
     },
     {
         "id": 62,
