@@ -1987,5 +1987,143 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-13T00:50:33.329411"
+    },
+    {
+        "id": 71,
+        "tmdb_id": 1291608,
+        "external_ids": {
+            "tmdb": 1291608,
+            "imdb": "tt33014583"
+        },
+        "radarr_id": null,
+        "title": "Dhurandhar",
+        "year": "2025",
+        "release_date": "2025-12-05",
+        "digital_release_date": "2026-01-29",
+        "category": "Bollywood",
+        "overview": "In the early 2000s, an undercover operative infiltrates Karachi's underworld, breaking into its inner circle to dismantle a violent nexus from within.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/8FHOtUpNIk5ZPEay2N2EY5lrxkv.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Crime",
+            "Thriller"
+        ],
+        "runtime": 214,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-13T10:10:12.798030"
+    },
+    {
+        "id": 72,
+        "tmdb_id": 1582770,
+        "external_ids": {
+            "tmdb": 1582770,
+            "imdb": "tt39139925"
+        },
+        "radarr_id": null,
+        "title": "Dhurandhar: The Revenge",
+        "year": "2026",
+        "release_date": "2026-03-18",
+        "digital_release_date": "2026-05-15",
+        "category": "Bollywood",
+        "overview": "As rival gangs, corrupt officials and a ruthless Major Iqbal close in, Hamza's mission for his country spirals into a bloody personal war where the line between patriot and monster disappears in the streets of Lyari.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/ov8vrRLZGoXHpYjSY9Vpv1tHJX7.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Crime",
+            "Thriller"
+        ],
+        "runtime": 229,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-13T10:10:16.888720"
+    },
+    {
+        "id": 73,
+        "tmdb_id": 1109086,
+        "external_ids": {
+            "tmdb": 1109086,
+            "imdb": "tt27425164"
+        },
+        "radarr_id": null,
+        "title": "War 2",
+        "year": "2025",
+        "release_date": "2025-08-13",
+        "digital_release_date": "2025-11-01",
+        "category": "Bollywood",
+        "overview": "Years ago Agent Kabir went rogue, became India\u2019s greatest villain ever.  As he descends further into the deepest shadows... India sends its deadliest, most lethal agent after him, Agent Vikram  A Special Units Officer who is more than Kabir\u2019s equal and a relentless Terminator driven by his own demons, determined to put a bullet into Kabir\u2019s skull.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/fxxVbjhIOl8ZPS69dH8xeeuxvmh.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Thriller",
+            "Adventure"
+        ],
+        "runtime": 173,
+        "rating": 3,
+        "tmdb_rating": 6.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-13T10:14:35.613958"
+    },
+    {
+        "id": 74,
+        "tmdb_id": 1241634,
+        "external_ids": {
+            "tmdb": 1241634,
+            "imdb": "tt28037987"
+        },
+        "radarr_id": null,
+        "title": "Saiyaara",
+        "year": "2025",
+        "release_date": "2025-07-18",
+        "digital_release_date": "2025-09-12",
+        "category": "Bollywood",
+        "overview": "Two artistic souls find harmony through music despite their contrasting worlds. As feelings deepen, age and circumstances challenge their undeniable bond.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/hQBIsi3ZfBYEayMc3GhcEmJVkss.jpg",
+        "directory_path": "",
+        "genres": [
+            "Romance",
+            "Drama",
+            "Music"
+        ],
+        "runtime": 150,
+        "rating": 3,
+        "tmdb_rating": 6.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-13T10:14:38.261123"
+    },
+    {
+        "id": 75,
+        "tmdb_id": 1163258,
+        "external_ids": {
+            "tmdb": 1163258,
+            "imdb": "tt23849204"
+        },
+        "radarr_id": null,
+        "title": "12th Fail",
+        "year": "2023",
+        "release_date": "2023-08-11",
+        "digital_release_date": "2023-12-29",
+        "category": "Bollywood",
+        "overview": "Based on the true story of IPS officer Manoj Kumar Sharma, 12th Fail sheds limelight on fearlessly embracing the idea of restarting the academic journey despite the setbacks and challenges and reclaiming one's destiny at a place where millions of students attempt the world's toughest competitive exam: UPSC.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/eebUPRI4Z5e1Z7Hev4JZAwMIFkX.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "runtime": 146,
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-13T10:15:03.566587"
     }
 ]
