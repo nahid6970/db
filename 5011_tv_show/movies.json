@@ -1597,7 +1597,7 @@
             "Drama",
             "Mystery"
         ],
-        "runtime": 0,
+        "runtime": 170,
         "rating": null,
         "tmdb_rating": 0.0,
         "status": "Missing",
@@ -1630,8 +1630,8 @@
             "Thriller"
         ],
         "runtime": 197,
-        "rating": 4,
-        "tmdb_rating": 7.9,
+        "rating": 3,
+        "tmdb_rating": 6.9,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
