@@ -4844,7 +4844,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3614767,
                 "id": 1178,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -178508,6 +178508,144 @@
             }
         ],
         "tvmaze_id": 39013,
+        "episode_source": "tvmaze",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
+    },
+    {
+        "id": 241,
+        "tmdb_id": 239287,
+        "external_ids": {
+            "tmdb": 239287
+        },
+        "title": "Terminator Zero",
+        "year": "2024",
+        "overview": "A warrior from a post-apocalyptic future travels to 1997 to protect an AI scientist being hunted by an unfeeling \u2014 and indestructible \u2014 cyborg.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/v4sbn6IsJGAIZNHjdB4CprvS7zo.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Sci-Fi & Fantasy",
+            "Action & Adventure"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.0,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Model 108",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "Kenta wrestles with a brutal choice and the Terminator reveals a shocking truth as the future of humankind hangs in the balance.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333455.jpg",
+                "tvmaze_episode_id": 2870172,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Model 107",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "Malcolm recalls past efforts to thwart the machines \u2014 and his desire to build a god. With Kenta captured, the Terminator prepares for the endgame.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333454.jpg",
+                "tvmaze_episode_id": 2870171,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Model 106",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "The Prophet debates the paradox of time travel with Eiko. Malcolm shares a painful memory with Kokoro as the children hope to reunite at Cat Town.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333453.jpg",
+                "tvmaze_episode_id": 2870170,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Model 105",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "Malcolm brings Kokoro online. The boys disagree about Misaki's motivations. Eiko realizes she's entering unknown territory.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333452.jpg",
+                "tvmaze_episode_id": 2870169,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Model 104",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "As a desperate Eiko attempts to elude the police, Misaki's mysterious past comes into focus. Malcolm wrestles with the nature of fate.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333451.jpg",
+                "tvmaze_episode_id": 2870168,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Model 103",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "Malcolm confides in Kokoro about his recurring nightmare. The three children continue their underground trek, unaware of looming danger.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333450.jpg",
+                "tvmaze_episode_id": 2870167,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Model 102",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "Eiko and the Terminator arrive in 1997 with identical missions: find Dr. Malcolm Lee. Meanwhile, Lee's three children sneak out of their apartment.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333449.jpg",
+                "tvmaze_episode_id": 2870166,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Model 101",
+                "air_date": "2024-08-29",
+                "airtime": "18:00",
+                "air_datetime": "2024-08-29T12:00:00+00:00",
+                "overview": "In 1997, a haunted scientist brushes his family aside for an all-consuming project. In 2022, a renegade fighter battles a powerful robot for vital data.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/533/1333448.jpg",
+                "tvmaze_episode_id": 2870164,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 56448,
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
         "episode_sort_order": "desc"
