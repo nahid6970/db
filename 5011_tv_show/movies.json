@@ -2263,5 +2263,62 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-13T23:52:21.917839"
+    },
+    {
+        "id": 80,
+        "tmdb_id": 1242898,
+        "external_ids": {
+            "tmdb": 1242898,
+            "imdb": "tt31227572"
+        },
+        "radarr_id": null,
+        "title": "Predator: Badlands",
+        "year": "2025",
+        "release_date": "2025-11-05",
+        "digital_release_date": "2026-01-05",
+        "category": "Hollywood",
+        "overview": "Cast out from his clan, a young Predator finds an unlikely ally in a damaged android and embarks on a treacherous journey in search of the ultimate adversary.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/pHpq9yNUIo6aDoCXEBzjSolywgz.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 107,
+        "rating": 4,
+        "tmdb_rating": 7.8,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-14T16:48:36.501140"
+    },
+    {
+        "id": 81,
+        "tmdb_id": 1376434,
+        "external_ids": {
+            "tmdb": 1376434,
+            "imdb": "tt36463894"
+        },
+        "radarr_id": null,
+        "title": "Predator: Killer of Killers",
+        "year": "2025",
+        "release_date": "2025-06-05",
+        "digital_release_date": "2025-06-05",
+        "category": "Hollywood",
+        "overview": "While three of the fiercest warriors in human history\u2014a Viking raider, a ninja in feudal Japan, and a WWII pilot\u2014are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/2XDQa6EmFHSA37j1t0w88vpWqj9.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Science Fiction",
+            "Thriller"
+        ],
+        "runtime": 85,
+        "rating": 4,
+        "tmdb_rating": 7.8,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-14T16:49:15.132271"
     }
 ]
