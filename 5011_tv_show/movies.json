@@ -2448,5 +2448,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-16T10:24:32.827041"
+    },
+    {
+        "id": 86,
+        "tmdb_id": 1001241,
+        "external_ids": {
+            "tmdb": 1001241,
+            "imdb": "tt22743064"
+        },
+        "radarr_id": null,
+        "title": "Yaariyan 2",
+        "year": "2023",
+        "release_date": "2023-10-20",
+        "digital_release_date": "",
+        "category": "Bollywood",
+        "overview": "As three cousins embrace the warmth of a new city, they also face challenges that transform their lives.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/zcy8ZFwnzMhB32RaPArpj2XASP4.jpg",
+        "directory_path": "",
+        "genres": [
+            "Romance",
+            "Drama",
+            "Family"
+        ],
+        "runtime": 150,
+        "rating": 2,
+        "tmdb_rating": 4.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-16T18:13:04.292223"
     }
 ]

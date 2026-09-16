@@ -23435,7 +23435,9 @@
                 "tvmaze_episode_id": 3658433,
                 "id": 32,
                 "watched": false,
-                "notify": "seen"
+                "notify": "seen",
+                "has_file": true,
+                "file_name": "Reacher - S04E08 - Cut"
             },
             {
                 "season_number": 4,
