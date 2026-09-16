@@ -2334,5 +2334,119 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-14T16:49:15.132271"
+    },
+    {
+        "id": 82,
+        "tmdb_id": 986056,
+        "external_ids": {
+            "tmdb": 986056,
+            "imdb": "tt20969586"
+        },
+        "radarr_id": null,
+        "title": "Thunderbolts*",
+        "year": "2025",
+        "release_date": "2025-04-30",
+        "digital_release_date": "2025-06-30",
+        "category": "Hollywood",
+        "overview": "After finding themselves ensnared in a death trap, seven disillusioned castoffs must embark on a dangerous mission that will force them to confront the darkest corners of their pasts.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/hqcexYHbiTBfDIdDWxrxPtVndBX.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 127,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-15T22:23:15.386110"
+    },
+    {
+        "id": 83,
+        "tmdb_id": 1375646,
+        "external_ids": {
+            "tmdb": 1375646,
+            "imdb": "tt34385135"
+        },
+        "radarr_id": null,
+        "title": "Colony",
+        "year": "2026",
+        "release_date": "2026-05-21",
+        "digital_release_date": "2026-07-23",
+        "category": "Korean",
+        "overview": "Professor Se-jeong is thrust into a bloody nightmare when a rapidly mutating virus is released during a biotech conference causing authorities to seal the facility. Trapped inside with no escape, Se-jeong along with a small group of survivors must fight to stay alive while the infected undergo horrific transformations.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tN799oUR0f1gUKDYdMNrDaY7I51.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Horror",
+            "Science Fiction"
+        ],
+        "runtime": 123,
+        "rating": 4,
+        "tmdb_rating": 8.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-16T10:20:59.414674"
+    },
+    {
+        "id": 84,
+        "tmdb_id": 396535,
+        "external_ids": {
+            "tmdb": 396535,
+            "imdb": "tt5700672"
+        },
+        "radarr_id": null,
+        "title": "Train to Busan",
+        "year": "2016",
+        "release_date": "2016-07-20",
+        "digital_release_date": "2016-07-20",
+        "category": "Korean",
+        "overview": "When a zombie virus pushes Korea into a state of emergency, those trapped on an express train to Busan must fight for their own survival.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/vNVFt6dtcqnI7hqa6LFBUibuFiw.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Horror",
+            "Thriller",
+            "Adventure"
+        ],
+        "runtime": 118,
+        "rating": 4,
+        "tmdb_rating": 7.7,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-16T10:21:16.062551"
+    },
+    {
+        "id": 85,
+        "tmdb_id": 537190,
+        "external_ids": {
+            "tmdb": 537190,
+            "imdb": "tt6927152"
+        },
+        "radarr_id": null,
+        "title": "Rampant",
+        "year": "2018",
+        "release_date": "2018-10-25",
+        "digital_release_date": "2019-10-02",
+        "category": "Korean",
+        "overview": "Ancient Korea, 17th century. While the paranoid King Lee Jo of Joseon, vassal of the Qing dynasty, feels surrounded by conspirators and rebels, a dark evil emerges from the bowels of a merchant ship and the exiled Prince Lee Cheung returns to the royal court, ignoring that he will have to lead the few capable of defeating the ambitious humans and the bloody monsters who threaten to destroy the kingdom.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/88F0FLFknAIdnPfXxWuSqnICD4W.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Horror",
+            "Drama",
+            "Fantasy"
+        ],
+        "runtime": 122,
+        "rating": 3,
+        "tmdb_rating": 6.8,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-16T10:24:32.827041"
     }
 ]
