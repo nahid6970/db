@@ -2538,5 +2538,173 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-17T08:10:21.535284"
+    },
+    {
+        "id": 89,
+        "tmdb_id": 12477,
+        "external_ids": {
+            "tmdb": 12477,
+            "imdb": "tt0095327"
+        },
+        "radarr_id": null,
+        "title": "Grave of the Fireflies",
+        "year": "1988",
+        "release_date": "1988-04-16",
+        "digital_release_date": "2019-12-01",
+        "category": "Anime",
+        "overview": "In the final months of World War II, 14-year-old Seita and his sister Setsuko are orphaned when their mother is killed during an air raid in Kobe, Japan. After a falling out with their aunt, they move into an abandoned bomb shelter. With no surviving relatives and their emergency rations depleted, Seita and Setsuko struggle to survive.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/k9tv1rXZbOhH7eiCk378x61kNQ1.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Drama",
+            "War"
+        ],
+        "runtime": 89,
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:34:53.211317"
+    },
+    {
+        "id": 90,
+        "tmdb_id": 372058,
+        "external_ids": {
+            "tmdb": 372058,
+            "imdb": "tt5311514"
+        },
+        "radarr_id": null,
+        "title": "Your Name.",
+        "year": "2016",
+        "release_date": "2016-07-01",
+        "digital_release_date": "2017-08-26",
+        "category": "Anime",
+        "overview": "High schoolers Mitsuha and Taki are complete strangers living separate lives. But one night, they suddenly switch places. Mitsuha wakes up in Taki\u2019s body, and he in hers. This bizarre occurrence continues to happen randomly, and the two must adjust their lives around each other.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/vfJFJPepRKapMd5G2ro7klIRysq.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Romance",
+            "Drama"
+        ],
+        "runtime": 106,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:34:58.561734"
+    },
+    {
+        "id": 91,
+        "tmdb_id": 129,
+        "external_ids": {
+            "tmdb": 129,
+            "imdb": "tt0245429"
+        },
+        "radarr_id": null,
+        "title": "Spirited Away",
+        "year": "2001",
+        "release_date": "2001-07-20",
+        "digital_release_date": "2019-12-17",
+        "category": "Anime",
+        "overview": "A young girl, Chihiro, becomes trapped in a strange new world of spirits. When her parents undergo a mysterious transformation, she must call upon the courage she never knew she had to free her family.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyRUHLkWBcuVCM.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Family",
+            "Fantasy"
+        ],
+        "runtime": 125,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:35:01.897388"
+    },
+    {
+        "id": 92,
+        "tmdb_id": 378064,
+        "external_ids": {
+            "tmdb": 378064,
+            "imdb": "tt5323662"
+        },
+        "radarr_id": null,
+        "title": "A Silent Voice: The Movie",
+        "year": "2016",
+        "release_date": "2016-09-17",
+        "digital_release_date": "2017-09-26",
+        "category": "Anime",
+        "overview": "Shouya Ishida starts bullying the new girl in class, Shouko Nishimiya, because she is deaf. But as the teasing continues, the rest of the class starts to turn on Shouya for his lack of compassion. When they leave elementary school, Shouko and Shouya do not speak to each other again... until an older, wiser Shouya, tormented by his past behaviour, decides he must see Shouko once more. He wants to atone for his sins, but is it already too late...?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tuFaWiqX0TXoWu7DGNcmX3UW7sT.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Drama",
+            "Romance"
+        ],
+        "runtime": 129,
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:35:43.222721"
+    },
+    {
+        "id": 93,
+        "tmdb_id": 635302,
+        "external_ids": {
+            "tmdb": 635302,
+            "imdb": "tt11032374"
+        },
+        "radarr_id": null,
+        "title": "Demon Slayer -Kimetsu no Yaiba- The Movie: Mugen Train",
+        "year": "2020",
+        "release_date": "2020-10-16",
+        "digital_release_date": "2021-06-22",
+        "category": "Anime",
+        "overview": "Tanjiro Kamado, joined with Inosuke Hashibira, a boy raised by boars who wears a boar's head, and Zenitsu Agatsuma, a scared boy who reveals his true power when he sleeps, boards the Infinity Train on a new mission with the Fire Hashira, Kyojuro Rengoku, to defeat a demon who has been tormenting the people and killing the demon slayers who oppose it!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/h8Rb9gBr48ODIwYUttZNYeMWeUU.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Fantasy"
+        ],
+        "runtime": 117,
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:38:43.100280"
+    },
+    {
+        "id": 94,
+        "tmdb_id": 504253,
+        "external_ids": {
+            "tmdb": 504253,
+            "imdb": "tt7236034"
+        },
+        "radarr_id": null,
+        "title": "I Want to Eat Your Pancreas",
+        "year": "2018",
+        "release_date": "2018-09-01",
+        "digital_release_date": "",
+        "category": "Anime",
+        "overview": "After his classmate and crush is diagnosed with a pancreatic disease, an average high schooler sets out to make the most of her final days.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qpV8kvRfAntV7D4aOOsLIz7OdPc.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Drama",
+            "Romance"
+        ],
+        "runtime": 108,
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T21:38:51.606340"
     }
 ]
