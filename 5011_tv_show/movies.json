@@ -649,7 +649,7 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:25.452947",
         "digital_release_date": "",
-        "metadata_update_time": "09:49",
+        "metadata_update_time": "09:44",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 2,
         "category": "Hollywood"
@@ -736,7 +736,7 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:36.004360",
         "digital_release_date": "",
-        "metadata_update_time": "10:39",
+        "metadata_update_time": "10:28",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 3,
         "category": "Hollywood"
@@ -769,7 +769,7 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:20.309896",
         "digital_release_date": "",
-        "metadata_update_time": "11:28",
+        "metadata_update_time": "11:13",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1040,7 +1040,7 @@
         "watched": false,
         "added_date": "2026-09-05T19:01:44.834397",
         "digital_release_date": "",
-        "metadata_update_time": "12:18",
+        "metadata_update_time": "11:57",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1385,7 +1385,7 @@
         "watched": false,
         "added_date": "2026-09-05T19:25:26.360543",
         "digital_release_date": "",
-        "metadata_update_time": "13:07",
+        "metadata_update_time": "12:41",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1419,7 +1419,7 @@
         "watched": false,
         "added_date": "2026-09-05T19:26:40.276696",
         "digital_release_date": "",
-        "metadata_update_time": "13:56",
+        "metadata_update_time": "13:25",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1452,7 +1452,7 @@
         "watched": false,
         "added_date": "2026-09-05T19:26:42.099471",
         "digital_release_date": "",
-        "metadata_update_time": "14:46",
+        "metadata_update_time": "14:09",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1544,7 +1544,7 @@
         "watched": false,
         "added_date": "2026-09-05T20:15:04.930398",
         "digital_release_date": "",
-        "metadata_update_time": "15:35",
+        "metadata_update_time": "14:54",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1579,7 +1579,7 @@
         "watched": false,
         "added_date": "2026-09-05T20:15:29.698443",
         "digital_release_date": "",
-        "metadata_update_time": "16:25",
+        "metadata_update_time": "15:38",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
@@ -1611,7 +1611,7 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
         "digital_release_date": "",
-        "metadata_update_time": "17:14",
+        "metadata_update_time": "16:22",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 3,
         "category": "Bollywood"
@@ -1643,7 +1643,7 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
         "digital_release_date": "",
-        "metadata_update_time": "18:04",
+        "metadata_update_time": "17:06",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 4,
         "category": "Bollywood"
@@ -1844,7 +1844,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:06.587421",
-        "metadata_update_time": "18:53",
+        "metadata_update_time": "17:51",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 13,
         "category": "Hollywood"
@@ -1875,7 +1875,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:33.207190",
-        "metadata_update_time": "19:42",
+        "metadata_update_time": "18:35",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 14,
         "category": "Hollywood"
@@ -1960,7 +1960,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T15:19:40.842658",
-        "metadata_update_time": "20:32",
+        "metadata_update_time": "19:19",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 0
     },
@@ -1991,7 +1991,7 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T15:20:02.512042",
-        "metadata_update_time": "21:21",
+        "metadata_update_time": "20:03",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 1
     },
@@ -2215,7 +2215,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-13T23:49:34.120903",
-        "metadata_update_time": "22:11",
+        "metadata_update_time": "20:47",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 2
     },
@@ -2274,7 +2274,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-13T23:52:21.917839",
-        "metadata_update_time": "23:00",
+        "metadata_update_time": "21:32",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 3
     },
@@ -2475,6 +2475,68 @@
         "tmdb_rating": 4.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-16T18:13:04.292223"
+        "added_date": "2026-09-16T18:13:04.292223",
+        "metadata_update_time": "22:16",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 4
+    },
+    {
+        "id": 87,
+        "tmdb_id": 1425859,
+        "external_ids": {
+            "tmdb": 1425859,
+            "imdb": "tt35621542"
+        },
+        "radarr_id": null,
+        "title": "Remain",
+        "year": "2027",
+        "release_date": "2027-02-03",
+        "digital_release_date": "",
+        "category": "Hollywood",
+        "overview": "When reclusive architect Tate Gordon moves to small coastal town to complete his latest project, he encounters an alluring young woman who pulls him out of his shell, and into the center of a deadly mystery that hangs over the town.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/5hPNq5h2y8Ux6nPBRMEwZ8npVTp.jpg",
+        "directory_path": "",
+        "genres": [
+            "Romance",
+            "Mystery",
+            "Thriller"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Missing",
+        "watched": false,
+        "added_date": "2026-09-16T18:32:56.783124",
+        "metadata_update_time": "23:00",
+        "metadata_update_frequency": "weekly",
+        "metadata_update_weekday": 5
+    },
+    {
+        "id": 88,
+        "tmdb_id": 1058424,
+        "external_ids": {
+            "tmdb": 1058424,
+            "imdb": "tt27369017"
+        },
+        "radarr_id": null,
+        "title": "Hope",
+        "year": "2026",
+        "release_date": "2026-07-15",
+        "digital_release_date": "2026-10-13",
+        "category": "Korean",
+        "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/1n37BJchWHLiSYQkuFxe5KjB951.jpg",
+        "directory_path": "",
+        "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Action"
+        ],
+        "runtime": 157,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-09-17T08:10:21.535284"
     }
 ]
