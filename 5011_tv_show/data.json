@@ -180631,5 +180631,88 @@
         "episode_update_frequency": "weekly",
         "episode_update_time": "23:00",
         "episode_update_weekday": 3
+    },
+    {
+        "id": 246,
+        "tmdb_id": 110642,
+        "external_ids": {
+            "tmdb": 110642
+        },
+        "title": "RESIDENT EVIL: Infinite Darkness",
+        "year": "2021",
+        "overview": "Years after the horrors of Raccoon City, Leon and Claire find themselves consumed by a dark conspiracy when a viral attack ravages the White House.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/wWwTjKER5a8LRUGHrw86VU0gUy1.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Drama",
+            "Action & Adventure",
+            "Sci-Fi & Fantasy"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.5,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Episode 4",
+                "air_date": "2021-07-08",
+                "airtime": "18:00",
+                "air_datetime": "2021-07-08T12:00:00+00:00",
+                "overview": "Secretary Wilson threatens Claire's life, demanding that she drop her investigation. Leon and Shen May rush to the vast subterranean bioweapons lab.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/338/845278.jpg",
+                "tvmaze_episode_id": 2115667,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Episode 3",
+                "air_date": "2021-07-08",
+                "airtime": "18:00",
+                "air_datetime": "2021-07-08T12:00:00+00:00",
+                "overview": "Claire discovers a grim scene at the home of one of the last surviving members of the Mad Dogs Unit. Shen May warns Leon about an ominous conspiracy.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/338/845277.jpg",
+                "tvmaze_episode_id": 2115666,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Episode 2",
+                "air_date": "2021-07-08",
+                "airtime": "18:00",
+                "air_datetime": "2021-07-08T12:00:00+00:00",
+                "overview": "Leon, along with agents Jason and Shen May, embarks on a covert mission to infiltrate a research facility in Shanghai aboard a nuclear submarine.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/338/845276.jpg",
+                "tvmaze_episode_id": 2115665,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2021-07-08",
+                "airtime": "18:00",
+                "air_datetime": "2021-07-08T12:00:00+00:00",
+                "overview": "Now at an NGO in Penamstan, Claire discovers signs reminiscent of Raccoon City. Leon makes his way to the White House, unaware that it's under attack.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/338/845275.jpg",
+                "tvmaze_episode_id": 2094862,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 50743,
+        "episode_source": "tvmaze",
+        "episode_sort_type": "default",
+        "episode_sort_order": "desc"
     }
 ]
