@@ -29021,7 +29021,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3680012,
                 "id": 1413,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -180665,7 +180665,7 @@
                 "tvmaze_episode_id": 2115667,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180679,7 +180679,7 @@
                 "tvmaze_episode_id": 2115666,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180693,7 +180693,7 @@
                 "tvmaze_episode_id": 2115665,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180707,7 +180707,7 @@
                 "tvmaze_episode_id": 2094862,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 50743,
