@@ -21166,6 +21166,11 @@
           "bgColor": "#FFF7B3",
           "superscriptMode": true,
           "textColor": "rgb(0, 0, 0)"
+        },
+        "8-0": {
+          "bgColor": "#F0FFE5",
+          "superscriptMode": true,
+          "textColor": "rgb(0, 0, 0)"
         }
       },
       "columns": [
