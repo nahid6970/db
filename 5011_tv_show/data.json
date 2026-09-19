@@ -175775,7 +175775,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/524/1310358.jpg",
                 "tvmaze_episode_id": 2630013,
                 "id": 9,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175789,7 +175789,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/523/1308141.jpg",
                 "tvmaze_episode_id": 2630012,
                 "id": 8,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175803,7 +175803,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/523/1308140.jpg",
                 "tvmaze_episode_id": 2630011,
                 "id": 7,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175817,7 +175817,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/521/1303354.jpg",
                 "tvmaze_episode_id": 2630010,
                 "id": 6,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175831,7 +175831,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/521/1303353.jpg",
                 "tvmaze_episode_id": 2630009,
                 "id": 5,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175845,7 +175845,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/519/1298505.jpg",
                 "tvmaze_episode_id": 2630008,
                 "id": 4,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175859,7 +175859,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1295473.jpg",
                 "tvmaze_episode_id": 2630007,
                 "id": 3,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175873,7 +175873,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1295472.jpg",
                 "tvmaze_episode_id": 2630006,
                 "id": 2,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -175887,7 +175887,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/518/1295471.jpg",
                 "tvmaze_episode_id": 2630005,
                 "id": 1,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             }
         ],
