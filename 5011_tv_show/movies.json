@@ -1701,7 +1701,7 @@
         "rating": 3,
         "tmdb_rating": 6.8,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-12T10:23:58.716312",
         "category": "Hollywood"
     },
@@ -2564,7 +2564,7 @@
         "rating": 4,
         "tmdb_rating": 8.4,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-17T21:34:53.211317"
     },
     {
