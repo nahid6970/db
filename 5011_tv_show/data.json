@@ -4834,7 +4834,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3614768,
                 "id": 1179,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -180740,7 +180740,7 @@
                 "file_name": "One Piece - s23e24 - [1179] - One Do-or-Die Second - Gaban vs. the Knights of God HDTV-1080p - [SubsPlease]",
                 "watched": false,
                 "added_date": "2026-09-20T22:34:52.208942",
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180754,7 +180754,7 @@
                 "tvmaze_episode_id": 2572224,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180768,7 +180768,7 @@
                 "tvmaze_episode_id": 2572225,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180782,7 +180782,7 @@
                 "tvmaze_episode_id": 2572226,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180796,7 +180796,7 @@
                 "tvmaze_episode_id": 2572227,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180810,7 +180810,7 @@
                 "tvmaze_episode_id": 2572228,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180824,7 +180824,7 @@
                 "tvmaze_episode_id": 2572229,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180838,7 +180838,7 @@
                 "tvmaze_episode_id": 2572230,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -180852,7 +180852,7 @@
                 "tvmaze_episode_id": 2572231,
                 "id": 8,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180866,7 +180866,7 @@
                 "tvmaze_episode_id": 3113043,
                 "id": 9,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180880,7 +180880,7 @@
                 "tvmaze_episode_id": 3424711,
                 "id": 10,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180894,7 +180894,7 @@
                 "tvmaze_episode_id": 3424712,
                 "id": 11,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180908,7 +180908,7 @@
                 "tvmaze_episode_id": 3424713,
                 "id": 12,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180922,7 +180922,7 @@
                 "tvmaze_episode_id": 3424714,
                 "id": 13,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180936,7 +180936,7 @@
                 "tvmaze_episode_id": 3424715,
                 "id": 14,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180950,7 +180950,7 @@
                 "tvmaze_episode_id": 3424716,
                 "id": 15,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -180964,7 +180964,7 @@
                 "tvmaze_episode_id": 3424717,
                 "id": 16,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 46065
