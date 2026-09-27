@@ -4826,12 +4826,12 @@
             {
                 "season_number": 2026,
                 "episode_number": 24,
-                "title": "Episode 1179",
+                "title": "One Do-or-Die Second - Gaban vs. the Knights of God",
                 "air_date": "2026-09-20",
                 "airtime": "20:15",
                 "air_datetime": "2026-09-20T14:15:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Scopper Gaban, the Pirate King's Left Arm, appears before the captured and immobilized Straw Hats, launching a counteroffensive against the Knights of God. Gunko, however, uncovers his weakness.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/642/1605731.jpg",
                 "tvmaze_episode_id": 3614768,
                 "id": 1179,
                 "watched": true,
@@ -181071,5 +181071,25 @@
         "episode_update_frequency": "weekly",
         "episode_update_time": "23:00",
         "episode_update_weekday": 4
+    },
+    {
+        "id": 249,
+        "tmdb_id": 37680,
+        "external_ids": {
+            "tmdb": 37680
+        },
+        "title": "Suits",
+        "year": "2011",
+        "overview": "While running from a drug deal gone bad, Mike Ross, a brilliant young college-dropout, slips into a job interview with one of New York City's best legal closers, Harvey Specter. Tired of cookie-cutter law school grads, Harvey takes a gamble by hiring Mike on the spot after he recognizes his raw talent and photographic memory.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/vQiryp6LioFxQThywxbC6TuoDjy.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Ended",
+        "episodes": [],
+        "tvmaze_id": 172
     }
 ]
