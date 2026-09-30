@@ -226,7 +226,7 @@
         "watched": false,
         "added_date": "2026-09-04T11:57:00.365617",
         "release_date": "2026-07-29",
-        "digital_release_date": "2026-09-29",
+        "digital_release_date": "2026-10-06",
         "category": "Hollywood"
     },
     {
@@ -1098,7 +1098,7 @@
         "rating": 4,
         "tmdb_rating": 8.0,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-05T19:05:09.222396",
         "digital_release_date": "2019-01-29",
         "category": "Anime"
@@ -1602,12 +1602,13 @@
         "genres": [
             "Thriller",
             "Drama",
-            "Mystery"
+            "Mystery",
+            "Crime"
         ],
-        "runtime": 170,
+        "runtime": 150,
         "rating": null,
         "tmdb_rating": 0.0,
-        "status": "Missing",
+        "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
         "digital_release_date": "",
@@ -1729,7 +1730,7 @@
         "rating": 3,
         "tmdb_rating": 6.4,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-12T10:24:01.941852",
         "category": "Hollywood"
     },
@@ -1904,7 +1905,7 @@
         "rating": 4,
         "tmdb_rating": 7.8,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-12T15:19:03.541574"
     },
     {
@@ -1963,37 +1964,6 @@
         "metadata_update_time": "18:48",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 0
-    },
-    {
-        "id": 69,
-        "tmdb_id": 697620,
-        "external_ids": {
-            "tmdb": 697620,
-            "imdb": "tt12451788"
-        },
-        "radarr_id": null,
-        "title": "Dune",
-        "year": "2020",
-        "release_date": "2020-06-15",
-        "digital_release_date": "",
-        "category": "International",
-        "overview": "Sounds as witnesses. They blurr into memories, half-dreams, it is undecided if they are real or not. A fluctuation between imagination and reality.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/CecUPdnnP22wV1NoRFQaG231zj.jpg",
-        "directory_path": "",
-        "genres": [
-            "Animation",
-            "Mystery",
-            "Thriller"
-        ],
-        "runtime": 4,
-        "rating": 4,
-        "tmdb_rating": 7.4,
-        "status": "Released",
-        "watched": false,
-        "added_date": "2026-09-12T15:20:02.512042",
-        "metadata_update_time": "19:30",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 1
     },
     {
         "id": 70,
@@ -2534,7 +2504,7 @@
         ],
         "runtime": 157,
         "rating": 4,
-        "tmdb_rating": 7.4,
+        "tmdb_rating": 7.2,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-17T08:10:21.535284"
@@ -2676,7 +2646,7 @@
         "rating": 4,
         "tmdb_rating": 8.2,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-17T21:38:43.100280"
     },
     {
