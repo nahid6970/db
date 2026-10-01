@@ -3,466 +3,811 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Russian Roulette Simulator - Perfect Sync</title>
+    <title>Russian Roulette</title>
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap');
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --red: #e74c3c;
+            --red-dark: #c0392b;
+            --gold: #f39c12;
+            --blue: #3498db;
+            --green: #2ecc71;
+            --bg: #0a0d11;
+            --card: #111820;
+            --border: #1e2d3d;
+            --text: #cdd6e0;
+            --dim: #4a5568;
         }
+
         body {
-            background: radial-gradient(circle, #2c3e50 0%, #1a252f 100%);
-            color: #ecf0f1;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 2.5rem;
-            color: #e74c3c;
-            margin-bottom: 5px;
-            text-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
-            letter-spacing: 2px;
-        }
-        .subtitle {
-            font-size: 1rem;
-            color: #bdc3c7;
-            margin-bottom: 25px;
-        }
-        .game-container {
-            background: #212f3d;
-            border: 3px solid #34495e;
-            border-radius: 16px;
-            padding: 30px;
-            width: 90%;
-            max-width: 450px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
-        }
-        .cylinder-container {
-            position: relative;
-            width: 180px;
-            height: 180px;
-            margin: 20px 0;
-        }
-        .cylinder {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #7f8c8d 0%, #34495e 100%);
-            border: 6px solid #2c3e50;
-            position: relative;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5);
-            /* Transition is managed dynamically via JS for perfect sync */
-        }
-        .chamber {
-            width: 32px;
-            height: 32px;
-            background: #111;
-            border-radius: 50%;
-            position: absolute;
-            border: 3px solid #4f5d73;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);
-            display: flex;
-            align-items: center;
             justify-content: center;
-            font-size: 12px;
-            font-weight: bold;
-            color: #7f8c8d;
-        }
-        .chamber.bullet {
-            background: #e74c3c;
-            border-color: #c0392b;
-            color: #fff;
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 10px #e74c3c;
-        }
-        /* Chamber positioning in a circle */
-        .chamber:nth-child(1) { top: 12px; left: 68px; }
-        .chamber:nth-child(2) { top: 44px; left: 118px; }
-        .chamber:nth-child(3) { top: 102px; left: 118px; }
-        .chamber:nth-child(4) { top: 124px; left: 68px; }
-        .chamber:nth-child(5) { top: 102px; left: 18px; }
-        .chamber:nth-child(6) { top: 44px; left: 18px; }
-
-        .hammer-indicator {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 10px solid transparent;
-            border-right: 10px solid transparent;
-            border-bottom: 18px solid #f39c12;
-            z-index: 5;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            overflow: hidden;
+            position: relative;
         }
 
-        .status-box {
-            font-size: 1.2rem;
-            margin: 20px 0;
-            min-height: 50px;
-            text-align: center;
-            font-weight: bold;
-            color: #f1c40f;
+        /* ── Ambient grid background ── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(231,76,60,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(231,76,60,0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .btn-group {
+        /* ── Particle canvas ── */
+        #particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
+
+        /* ── Blood vignette ── */
+        #bloodOverlay {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(180,20,20,0.92) 100%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+            z-index: 200;
+        }
+        #bloodOverlay.active { opacity: 1; }
+
+        /* ── Flash ── */
+        #flashOverlay {
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 201;
+            transition: opacity 0.05s;
+        }
+
+        /* ── Main wrapper ── */
+        .wrapper {
+            position: relative;
+            z-index: 10;
             display: flex;
-            gap: 15px;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
             width: 100%;
-        }
-        button {
-            flex: 1;
-            padding: 14px 0;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-        }
-        #spinBtn {
-            background-color: #3498db;
-            color: white;
-        }
-        #spinBtn:hover:not(:disabled) {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-        #shootBtn {
-            background-color: #e74c3c;
-            color: white;
-        }
-        #shootBtn:hover:not(:disabled) {
-            background-color: #c0392b;
-            transform: translateY(-2px);
-        }
-        button:disabled {
-            background-color: #7f8c8d;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-            opacity: 0.6;
+            max-width: 480px;
+            padding: 0 20px;
         }
 
-        .stats {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: #95a5a6;
+        /* ── Title ── */
+        .title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(2.4rem, 8vw, 3.8rem);
+            letter-spacing: 6px;
+            color: var(--red);
+            text-shadow: 0 0 30px rgba(231,76,60,0.5), 0 0 60px rgba(231,76,60,0.2);
+            line-height: 1;
+            user-select: none;
+        }
+
+        /* ── Gun SVG section ── */
+        .gun-section {
+            position: relative;
+            width: 100%;
             display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 110px;
+        }
+        .gun-svg {
+            width: 280px;
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.8));
+            transition: transform 0.1s ease;
+        }
+        .gun-svg.recoil {
+            animation: recoil 0.25s ease-out;
+        }
+        @keyframes recoil {
+            0%   { transform: translate(0,0) rotate(0deg); }
+            30%  { transform: translate(-8px,-12px) rotate(-8deg); }
+            65%  { transform: translate(4px,5px) rotate(3deg); }
+            100% { transform: translate(0,0) rotate(0deg); }
+        }
+        /* muzzle flash */
+        .muzzle-flash {
+            position: absolute;
+            left: calc(50% + 126px);
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff 0%, #ffe066 30%, #e74c3c 70%, transparent 100%);
+            opacity: 0;
+            pointer-events: none;
+            filter: blur(2px);
+            transition: opacity 0.05s;
+        }
+        .muzzle-flash.active { opacity: 1; }
+
+        /* ── Card ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px 28px 22px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             gap: 20px;
         }
 
-        .blood-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
+        /* ── Cylinder ── */
+        .cylinder-wrap {
+            position: relative;
+            width: 170px;
+            height: 170px;
+        }
+        .pointer {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0; height: 0;
+            border-left: 9px solid transparent;
+            border-right: 9px solid transparent;
+            border-bottom: 16px solid var(--gold);
+            filter: drop-shadow(0 0 6px rgba(243,156,18,0.8));
+            z-index: 3;
+        }
+        .cylinder {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: conic-gradient(
+                #1c2a38 0deg, #2c3e50 30deg, #1a2533 60deg,
+                #1c2a38 90deg, #2c3e50 120deg, #1a2533 150deg,
+                #1c2a38 180deg, #2c3e50 210deg, #1a2533 240deg,
+                #1c2a38 270deg, #2c3e50 300deg, #1a2533 330deg, #1c2a38 360deg
+            );
+            border: 5px solid #253445;
+            position: relative;
+            box-shadow:
+                inset 0 0 25px rgba(0,0,0,0.9),
+                0 5px 20px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.04);
+        }
+        .chamber {
+            width: 30px; height: 30px;
+            background: #080c10;
+            border-radius: 50%;
+            position: absolute;
+            border: 2.5px solid #2a3a4a;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.95);
+            transition: background 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+        .chamber.bullet {
+            background: radial-gradient(circle at 40% 35%, #f39c12, #e74c3c 60%, #7b1111);
+            border-color: #c0392b;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3), 0 0 14px rgba(231,76,60,0.7);
+        }
+        /* 6 chamber positions */
+        .chamber:nth-child(1) { top: 14px;  left: 70px; }
+        .chamber:nth-child(2) { top: 46px;  left: 116px; }
+        .chamber:nth-child(3) { top: 100px; left: 116px; }
+        .chamber:nth-child(4) { top: 126px; left: 70px; }
+        .chamber:nth-child(5) { top: 100px; left: 22px; }
+        .chamber:nth-child(6) { top: 46px;  left: 22px; }
+
+        /* ── Status ── */
+        .status {
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--gold);
+            text-shadow: 0 0 12px rgba(243,156,18,0.4);
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .status.danger {
+            color: var(--red);
+            text-shadow: 0 0 16px rgba(231,76,60,0.6);
+            animation: pulse-text 0.6s infinite alternate;
+        }
+        .status.safe {
+            color: var(--green);
+            text-shadow: 0 0 12px rgba(46,204,113,0.5);
+        }
+        @keyframes pulse-text { to { opacity: 0.6; } }
+
+        /* ── Buttons ── */
+        .btn-group { display: flex; gap: 14px; width: 100%; }
+        .btn {
+            flex: 1;
+            padding: 14px 10px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.25rem;
+            letter-spacing: 2px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+            border-radius: inherit;
+        }
+        .btn-spin {
+            background: linear-gradient(135deg, #1a6fa0, #2980b9);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(41,128,185,0.4);
+        }
+        .btn-spin:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(41,128,185,0.55);
+        }
+        .btn-shoot {
+            background: linear-gradient(135deg, #a02020, #e74c3c);
+            color: #fff;
+            box-shadow: 0 4px 15px rgba(231,76,60,0.4);
+        }
+        .btn-shoot:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231,76,60,0.55);
+        }
+        .btn:disabled {
+            background: #1a2230 !important;
+            color: var(--dim) !important;
+            box-shadow: none !important;
+            transform: none !important;
+            cursor: not-allowed;
+        }
+
+        /* ── Stats strip ── */
+        .stats {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
             width: 100%;
+        }
+        .stat-pill {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 8px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.82rem;
+            color: var(--dim);
+            transition: border-color 0.3s, color 0.3s;
+        }
+        .stat-pill .icon { font-size: 1rem; }
+        .stat-pill .val {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text);
+            letter-spacing: 1px;
+        }
+
+        /* ── Odds bar ── */
+        .odds-row {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .odds-label {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dim);
+            text-align: center;
+        }
+        .odds-bar-track {
+            width: 100%;
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 99px;
+            overflow: hidden;
+        }
+        .odds-bar-fill {
             height: 100%;
-            background: radial-gradient(circle, transparent 40%, rgba(192, 57, 43, 0.85) 90%);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.5s ease;
-            z-index: 100;
+            background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+            border-radius: 99px;
+            transition: width 0.5s ease;
+            width: 83.3%;
         }
-        .blood-overlay.active {
-            opacity: 1;
+
+        /* ── Streak badges ── */
+        .streak-row {
+            display: flex;
+            gap: 6px;
         }
+        .streak-dot {
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .streak-dot.survived { background: var(--green); box-shadow: 0 0 6px rgba(46,204,113,0.6); }
+        .streak-dot.dead     { background: var(--red);   box-shadow: 0 0 6px rgba(231,76,60,0.6); }
+
+        /* ── Shake ── */
+        @keyframes shake {
+            0%,100% { transform: translate(0,0) rotate(0); }
+            15%      { transform: translate(-6px,3px) rotate(-1deg); }
+            30%      { transform: translate(6px,-2px) rotate(1.5deg); }
+            45%      { transform: translate(-5px,4px) rotate(-0.5deg); }
+            60%      { transform: translate(5px,-3px) rotate(1deg); }
+            75%      { transform: translate(-3px,2px) rotate(-0.5deg); }
+        }
+        .card.shake { animation: shake 0.5s ease; }
+
+        /* ── Survive glow ── */
+        @keyframes survive-glow {
+            0%,100% { box-shadow: 0 20px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.04); }
+            50%      { box-shadow: 0 20px 60px rgba(46,204,113,0.25), inset 0 1px 0 rgba(255,255,255,0.04); }
+        }
+        .card.survive-flash { animation: survive-glow 0.7s ease; }
     </style>
 </head>
 <body>
 
-    <div class="blood-overlay" id="bloodOverlay"></div>
+<canvas id="particles"></canvas>
+<div id="bloodOverlay"></div>
+<div id="flashOverlay"></div>
 
-    <h1>RUSSIAN ROULETTE</h1>
-    <div class="subtitle">Simulator • Synchronized Audio & Animation</div>
+<div class="wrapper">
+    <div class="title">RUSSIAN ROULETTE</div>
 
-    <div class="game-container">
-        <div class="hammer-indicator"></div>
-        <div class="cylinder-container">
+    <!-- Gun -->
+    <div class="gun-section">
+        <div class="muzzle-flash" id="muzzleFlash"></div>
+        <svg class="gun-svg" id="gunSvg" viewBox="0 0 300 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- barrel -->
+            <rect x="110" y="38" width="170" height="18" rx="5" fill="#2c3e50"/>
+            <rect x="110" y="38" width="170" height="6" rx="2" fill="#3d5166"/>
+            <rect x="268" y="33" width="12" height="28" rx="3" fill="#253445"/>
+            <!-- cylinder housing -->
+            <ellipse cx="130" cy="57" rx="30" ry="22" fill="#253445" stroke="#1a2a3a" stroke-width="1.5"/>
+            <ellipse cx="130" cy="57" rx="22" ry="16" fill="#1c2d3e"/>
+            <!-- frame / grip connection -->
+            <path d="M95 47 Q105 47 110 47 L110 76 Q108 80 105 82 L75 82 Q70 82 68 76 L65 58 Q68 47 80 47 Z" fill="#2c3e50"/>
+            <!-- grip -->
+            <path d="M68 76 L62 105 Q62 110 67 110 L100 110 Q105 110 105 105 L105 82 Z" fill="#1e2d3a"/>
+            <!-- grip texture lines -->
+            <line x1="72" y1="86" x2="100" y2="86" stroke="#1a2530" stroke-width="1.2"/>
+            <line x1="70" y1="92" x2="100" y2="92" stroke="#1a2530" stroke-width="1.2"/>
+            <line x1="68" y1="98" x2="100" y2="98" stroke="#1a2530" stroke-width="1.2"/>
+            <line x1="67" y1="104" x2="100" y2="104" stroke="#1a2530" stroke-width="1.2"/>
+            <!-- trigger guard -->
+            <path d="M80 82 Q78 95 90 100 Q100 100 100 82" stroke="#3d5166" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- trigger -->
+            <line x1="88" y1="82" x2="86" y2="96" stroke="#e8c97a" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- hammer -->
+            <rect x="97" y="38" width="14" height="10" rx="3" fill="#3d5166"/>
+            <rect x="100" y="30" width="8" height="12" rx="2" fill="#2c3e50"/>
+            <!-- barrel shine -->
+            <line x1="114" y1="41" x2="274" y2="41" stroke="rgba(255,255,255,0.08)" stroke-width="2" stroke-linecap="round"/>
+            <!-- muzzle opening -->
+            <circle cx="278" cy="47" r="6" fill="#0a0d11" stroke="#1e2d3d" stroke-width="1.5"/>
+            <!-- sight -->
+            <rect x="240" y="35" width="6" height="5" rx="1" fill="#4a5568"/>
+            <rect x="112" y="35" width="8" height="5" rx="1" fill="#4a5568"/>
+        </svg>
+    </div>
+
+    <div class="card" id="card">
+        <!-- Cylinder -->
+        <div class="cylinder-wrap">
+            <div class="pointer"></div>
             <div class="cylinder" id="cylinder">
-                <div class="chamber" data-index="0">1</div>
-                <div class="chamber" data-index="1">2</div>
-                <div class="chamber" data-index="2">3</div>
-                <div class="chamber" data-index="3">4</div>
-                <div class="chamber" data-index="4">5</div>
-                <div class="chamber" data-index="5">6</div>
+                <div class="chamber" data-index="0"></div>
+                <div class="chamber" data-index="1"></div>
+                <div class="chamber" data-index="2"></div>
+                <div class="chamber" data-index="3"></div>
+                <div class="chamber" data-index="4"></div>
+                <div class="chamber" data-index="5"></div>
             </div>
         </div>
 
-        <div class="status-box" id="statusText">Spin the cylinder to test your luck...</div>
+        <!-- Odds bar -->
+        <div class="odds-row">
+            <div class="odds-label">Survival Odds</div>
+            <div class="odds-bar-track">
+                <div class="odds-bar-fill" id="oddsBar"></div>
+            </div>
+        </div>
 
+        <!-- Status -->
+        <div class="status" id="statusText">🎰 Spin to begin</div>
+
+        <!-- Buttons -->
         <div class="btn-group">
-            <button id="spinBtn">SPIN CYLINDER</button>
-            <button id="shootBtn" disabled>PULL TRIGGER</button>
+            <button class="btn btn-spin" id="spinBtn">⟳ SPIN</button>
+            <button class="btn btn-shoot" id="shootBtn" disabled>🔫 FIRE</button>
         </div>
 
+        <!-- Stats + streak -->
         <div class="stats">
-            <div>Survivals: <span id="surviveCount">0</span></div>
-            <div>Spins: <span id="spinCount">0</span></div>
+            <div class="stat-pill">
+                <span class="icon">💀</span>
+                <span class="val" id="surviveCount">0</span>
+            </div>
+            <div class="stat-pill">
+                <span class="icon">🔄</span>
+                <span class="val" id="spinCount">0</span>
+            </div>
+            <div class="stat-pill">
+                <span class="icon">🔥</span>
+                <span class="val" id="streakCount">0</span>
+            </div>
         </div>
+
+        <!-- Streak history dots -->
+        <div class="streak-row" id="streakRow"></div>
     </div>
+</div>
 
-    <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+<script>
+/* ────────────────── Audio ────────────────── */
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function resume() { if (audioCtx.state === 'suspended') audioCtx.resume(); }
 
-        function playRatchetClick() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const now = audioCtx.currentTime;
-            
-            const osc = audioCtx.createOscillator();
-            const filter = audioCtx.createBiquadFilter();
-            const gain = audioCtx.createGain();
+function playRatchet() {
+    resume();
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator();
+    const filter = audioCtx.createBiquadFilter();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(1400 + Math.random()*200, now);
+    osc.frequency.exponentialRampToValueAtTime(350, now + 0.025);
+    filter.type = 'bandpass'; filter.frequency.value = 2200; filter.Q.value = 5;
+    gain.gain.setValueAtTime(0.28, now);
+    gain.gain.linearRampToValueAtTime(0.001, now + 0.025);
+    osc.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + 0.025);
+}
 
-            osc.type = 'triangle';
-            osc.frequency.setValueAtTime(1400 + Math.random() * 200, now);
-            osc.frequency.exponentialRampToValueAtTime(350, now + 0.025);
+function playThud() {
+    resume();
+    const now = audioCtx.currentTime;
+    const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(180, now);
+    osc.frequency.exponentialRampToValueAtTime(45, now + 0.08);
+    gain.gain.setValueAtTime(0.5, now);
+    gain.gain.linearRampToValueAtTime(0.001, now + 0.08);
+    osc.connect(gain); gain.connect(audioCtx.destination);
+    osc.start(now); osc.stop(now + 0.08);
+}
 
-            filter.type = 'bandpass';
-            filter.frequency.setValueAtTime(2200, now);
-            filter.Q.value = 5;
+function playTrigger() {
+    resume();
+    const now = audioCtx.currentTime;
+    [
+        [1800, 400, 0.04, 'sine', 0, 0.4],
+        [150, 40, 0.07, 'triangle', 0.03, 0.5]
+    ].forEach(([f1,f2,d,type,delay,vol]) => {
+        const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+        o.type = type;
+        o.frequency.setValueAtTime(f1, now+delay);
+        o.frequency.exponentialRampToValueAtTime(f2, now+delay+d);
+        g.gain.setValueAtTime(vol, now+delay);
+        g.gain.linearRampToValueAtTime(0.001, now+delay+d);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(now+delay); o.stop(now+delay+d);
+    });
+}
 
-            gain.gain.setValueAtTime(0.3, now);
-            gain.gain.linearRampToValueAtTime(0.001, now + 0.025);
+function playBang() {
+    resume();
+    const now = audioCtx.currentTime;
+    const dur = 2.0;
+    const buf = audioCtx.createBuffer(1, audioCtx.sampleRate*dur, audioCtx.sampleRate);
+    const data = buf.getChannelData(0);
+    for (let i=0;i<data.length;i++) data[i] = Math.random()*2-1;
+    const noise = audioCtx.createBufferSource(); noise.buffer = buf;
+    const filter = audioCtx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1200,now);
+    filter.frequency.exponentialRampToValueAtTime(60, now+dur);
+    const gain = audioCtx.createGain();
+    gain.gain.setValueAtTime(1.0,now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now+dur);
+    noise.connect(filter); filter.connect(gain); gain.connect(audioCtx.destination); noise.start(now);
+    // sub boom
+    const sub = audioCtx.createOscillator(); const sg = audioCtx.createGain();
+    sub.type='sine'; sub.frequency.setValueAtTime(120,now); sub.frequency.exponentialRampToValueAtTime(30,now+0.3);
+    sg.gain.setValueAtTime(0.9,now); sg.gain.linearRampToValueAtTime(0.001,now+0.3);
+    sub.connect(sg); sg.connect(audioCtx.destination); sub.start(now); sub.stop(now+0.3);
+}
 
-            osc.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
+function playClick() {
+    resume();
+    const now = audioCtx.currentTime;
+    const o = audioCtx.createOscillator(); const g = audioCtx.createGain();
+    o.type = 'square'; o.frequency.setValueAtTime(600,now); o.frequency.exponentialRampToValueAtTime(200, now+0.05);
+    g.gain.setValueAtTime(0.2,now); g.gain.linearRampToValueAtTime(0.001,now+0.05);
+    o.connect(g); g.connect(audioCtx.destination); o.start(now); o.stop(now+0.05);
+}
 
-            osc.start(now);
-            osc.stop(now + 0.025);
+/* ────────────────── Particles ────────────────── */
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+let W, H;
+const pList = [];
+
+function resizeCanvas() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+
+class Particle {
+    constructor(x, y, color) {
+        this.x = x; this.y = y;
+        this.vx = (Math.random()-0.5)*6;
+        this.vy = (Math.random()-1)*8;
+        this.alpha = 1;
+        this.size = Math.random()*4+2;
+        this.color = color;
+        this.gravity = 0.18;
+        this.life = 1;
+    }
+    update() {
+        this.vx *= 0.97; this.vy += this.gravity;
+        this.x += this.vx; this.y += this.vy;
+        this.life -= 0.022; this.alpha = this.life;
+    }
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, this.alpha);
+        ctx.fillStyle = this.color;
+        ctx.shadowColor = this.color;
+        ctx.shadowBlur = 8;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.fill();
+        ctx.restore();
+    }
+}
+
+function burst(x, y, color, count=40) {
+    for (let i=0;i<count;i++) pList.push(new Particle(x, y, color));
+}
+
+function particleLoop() {
+    ctx.clearRect(0,0,W,H);
+    for (let i=pList.length-1;i>=0;i--) {
+        pList[i].update(); pList[i].draw();
+        if (pList[i].life<=0) pList.splice(i,1);
+    }
+    requestAnimationFrame(particleLoop);
+}
+particleLoop();
+
+/* ────────────────── Ambient floating embers ────────────────── */
+const embers = [];
+class Ember {
+    constructor() { this.reset(); }
+    reset() {
+        this.x = Math.random()*window.innerWidth;
+        this.y = window.innerHeight + 10;
+        this.size = Math.random()*2+0.5;
+        this.vx = (Math.random()-0.5)*0.4;
+        this.vy = -(Math.random()*0.6+0.3);
+        this.alpha = Math.random()*0.4+0.1;
+        this.life = 1;
+    }
+    update() { this.x+=this.vx; this.y+=this.vy; this.life-=0.003; }
+    draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha*this.life;
+        ctx.fillStyle = '#e74c3c'; ctx.shadowColor='#e74c3c'; ctx.shadowBlur=6;
+        ctx.beginPath(); ctx.arc(this.x,this.y,this.size,0,Math.PI*2); ctx.fill();
+        ctx.restore();
+    }
+}
+for(let i=0;i<30;i++) { const e=new Ember(); e.y=Math.random()*window.innerHeight; embers.push(e); }
+function emberLoop() {
+    for(const e of embers) { e.update(); e.draw(); if(e.life<=0) e.reset(); }
+    requestAnimationFrame(emberLoop);
+}
+emberLoop();
+
+/* ────────────────── Game state ────────────────── */
+const cylinder    = document.getElementById('cylinder');
+const spinBtn     = document.getElementById('spinBtn');
+const shootBtn    = document.getElementById('shootBtn');
+const statusEl    = document.getElementById('statusText');
+const surviveEl   = document.getElementById('surviveCount');
+const spinEl      = document.getElementById('spinCount');
+const streakEl    = document.getElementById('streakCount');
+const oddsBar     = document.getElementById('oddsBar');
+const bloodOverlay= document.getElementById('bloodOverlay');
+const flashOverlay= document.getElementById('flashOverlay');
+const gunSvg      = document.getElementById('gunSvg');
+const muzzle      = document.getElementById('muzzleFlash');
+const card        = document.getElementById('card');
+const streakRow   = document.getElementById('streakRow');
+const chambers    = document.querySelectorAll('.chamber');
+
+let bulletPos     = Math.floor(Math.random()*6);
+let currentPos    = 0;
+let currentRot    = 0;
+let isSpun        = false;
+let survives      = 0;
+let spins         = 0;
+let streak        = 0;
+let history       = [];
+
+function setStatus(text, cls='') {
+    statusEl.textContent = text;
+    statusEl.className = 'status ' + cls;
+}
+
+function updateOdds(chambersLeft) {
+    const pct = ((chambersLeft-1)/chambersLeft)*100;
+    oddsBar.style.width = pct + '%';
+}
+
+function updateChambers(showBullet=false) {
+    chambers.forEach((ch,i) => {
+        ch.classList.toggle('bullet', showBullet && i===bulletPos);
+    });
+}
+
+function addHistoryDot(survived) {
+    history.push(survived);
+    if(history.length>12) history.shift();
+    streakRow.innerHTML = '';
+    history.forEach(s => {
+        const d = document.createElement('div');
+        d.className = 'streak-dot ' + (s ? 'survived' : 'dead');
+        streakRow.appendChild(d);
+    });
+}
+
+function flash() {
+    flashOverlay.style.opacity = '0.85';
+    setTimeout(()=>{ flashOverlay.style.opacity='0'; }, 80);
+}
+
+spinBtn.addEventListener('click', () => {
+    if(spinBtn.disabled) return;
+    spinBtn.disabled = true; shootBtn.disabled = true;
+    bloodOverlay.classList.remove('active');
+    setStatus('Spinning...', '');
+    updateChambers(false);
+
+    bulletPos = Math.floor(Math.random()*6);
+
+    const extraTurns = (Math.floor(Math.random()*3)+3)*360;
+    const chamberOff = Math.floor(Math.random()*6)*60;
+    const target = currentRot + extraTurns + chamberOff;
+
+    cylinder.style.transition = 'transform 1.2s cubic-bezier(0.15,0.85,0.35,1)';
+    cylinder.style.transform = `rotate(${target}deg)`;
+
+    // ratchet clicks
+    const start = performance.now();
+    let clicks = 0;
+    (function tick(ts){
+        const p = Math.min((ts-start)/1200, 1);
+        if(clicks<20 && p<1){
+            playRatchet(); clicks++;
+            setTimeout(()=>requestAnimationFrame(tick), 20+p*p*140);
         }
+    })(performance.now());
 
-        function playStopThud() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const now = audioCtx.currentTime;
+    setTimeout(()=>{
+        playThud();
+        currentRot = target;
+        const norm = (360 - (currentRot%360))%360;
+        currentPos = Math.round(norm/60)%6;
+        isSpun = true;
+        spinBtn.disabled = false; shootBtn.disabled = false;
+        setStatus('— PULL THE TRIGGER —', '');
+        spins++;
+        spinEl.textContent = spins;
+        updateOdds(6);
+    }, 1200);
+});
 
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
+shootBtn.addEventListener('click', () => {
+    if(!isSpun || shootBtn.disabled) return;
+    spinBtn.disabled = true; shootBtn.disabled = true;
+    setStatus('...', '');
+    playTrigger();
 
-            osc.type = 'sine';
-            osc.frequency.setValueAtTime(180, now);
-            osc.frequency.exponentialRampToValueAtTime(45, now + 0.08);
+    setTimeout(()=>{
+        if(currentPos === bulletPos){
+            // DEAD
+            playBang(); flash();
+            setTimeout(()=>{ bloodOverlay.classList.add('active'); }, 60);
+            card.classList.add('shake');
+            setTimeout(()=>card.classList.remove('shake'), 600);
+            updateChambers(true);
+            setStatus('BANG 💀', 'danger');
+            // blood burst at center of screen
+            burst(W/2, H/2, '#c0392b', 70);
+            burst(W/2, H/2, '#e74c3c', 40);
 
-            gain.gain.setValueAtTime(0.5, now);
-            gain.gain.linearRampToValueAtTime(0.001, now + 0.08);
+            addHistoryDot(false);
+            streak = 0; streakEl.textContent = streak;
+            surviveEl.textContent = survives;
+            isSpun = false;
+            spinBtn.disabled = false;
+            spinBtn.textContent = '⟳ AGAIN';
+            updateOdds(1);
 
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
+        } else {
+            // SURVIVED
+            playClick();
+            card.classList.add('survive-flash');
+            setTimeout(()=>card.classList.remove('survive-flash'), 800);
+            setStatus('CLICK — 😮‍💨 Survived', 'safe');
 
-            osc.start(now);
-            osc.stop(now + 0.08);
+            const rect = card.getBoundingClientRect();
+            burst(rect.left+rect.width/2, rect.top+60, '#2ecc71', 30);
+            burst(rect.left+rect.width/2, rect.top+60, '#27ae60', 20);
+
+            // muzzle flash (empty click)
+            muzzle.style.background = 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(200,200,200,0.2) 50%, transparent 100%)';
+            muzzle.classList.add('active');
+            setTimeout(()=>muzzle.classList.remove('active'), 120);
+
+            survives++; streak++;
+            surviveEl.textContent = survives;
+            streakEl.textContent = streak;
+            addHistoryDot(true);
+
+            isSpun = false;
+            currentPos = (currentPos+1)%6;
+            currentRot += 60;
+            cylinder.style.transition = 'transform 0.3s ease-out';
+            cylinder.style.transform = `rotate(${currentRot}deg)`;
+            playThud();
+
+            spinBtn.disabled = false; shootBtn.disabled = true;
+            spinBtn.textContent = '⟳ SPIN';
+            updateOdds(5);
         }
+    }, 500);
+});
 
-        function playTriggerClickSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const now = audioCtx.currentTime;
+// gun recoil + muzzle on bang
+const origShoot = shootBtn.onclick;
+document.addEventListener('click', ()=>{});
 
-            // Hammer cock
-            const osc1 = audioCtx.createOscillator();
-            const gain1 = audioCtx.createGain();
-            osc1.type = 'sine';
-            osc1.frequency.setValueAtTime(1800, now);
-            osc1.frequency.exponentialRampToValueAtTime(400, now + 0.04);
-            gain1.gain.setValueAtTime(0.4, now);
-            gain1.gain.linearRampToValueAtTime(0.001, now + 0.04);
-            osc1.connect(gain1);
-            gain1.connect(audioCtx.destination);
-            osc1.start(now);
-            osc1.stop(now + 0.04);
-
-            // Chamber lock thud
-            const osc2 = audioCtx.createOscillator();
-            const gain2 = audioCtx.createGain();
-            osc2.type = 'triangle';
-            osc2.frequency.setValueAtTime(150, now + 0.03);
-            osc2.frequency.exponentialRampToValueAtTime(40, now + 0.1);
-            gain2.gain.setValueAtTime(0.5, now + 0.03);
-            gain2.gain.linearRampToValueAtTime(0.001, now + 0.1);
-            osc2.connect(gain2);
-            gain2.connect(audioCtx.destination);
-            osc2.start(now + 0.03);
-            osc2.stop(now + 0.1);
-        }
-
-        function playBangSound() {
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            const now = audioCtx.currentTime;
-            const duration = 2.0;
-
-            const bufferSize = audioCtx.sampleRate * duration;
-            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
-            const data = buffer.getChannelData(0);
-            for (let i = 0; i < bufferSize; i++) {
-                data[i] = Math.random() * 2 - 1;
-            }
-
-            const noise = audioCtx.createBufferSource();
-            noise.buffer = buffer;
-
-            const filter = audioCtx.createBiquadFilter();
-            filter.type = 'lowpass';
-            filter.frequency.setValueAtTime(1200, now);
-            filter.frequency.exponentialRampToValueAtTime(60, now + duration);
-
-            const gain = audioCtx.createGain();
-            gain.gain.setValueAtTime(1.0, now);
-            gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
-
-            noise.connect(filter);
-            filter.connect(gain);
-            gain.connect(audioCtx.destination);
-
-            noise.start(now);
-
-            const sub = audioCtx.createOscillator();
-            const subGain = audioCtx.createGain();
-            sub.type = 'sine';
-            sub.frequency.setValueAtTime(120, now);
-            sub.frequency.exponentialRampToValueAtTime(30, now + 0.3);
-            subGain.gain.setValueAtTime(0.8, now);
-            subGain.gain.linearRampToValueAtTime(0.001, now + 0.3);
-            sub.connect(subGain);
-            subGain.connect(audioCtx.destination);
-            sub.start(now);
-            sub.stop(now + 0.3);
-        }
-
-        const cylinder = document.getElementById('cylinder');
-        const spinBtn = document.getElementById('spinBtn');
-        const shootBtn = document.getElementById('shootBtn');
-        const statusText = document.getElementById('statusText');
-        const surviveCountEl = document.getElementById('surviveCount');
-        const spinCountEl = document.getElementById('spinCount');
-        const bloodOverlay = document.getElementById('bloodOverlay');
-        const chambers = document.querySelectorAll('.chamber');
-
-        let bulletPosition = Math.floor(Math.random() * 6);
-        let currentPosition = 0;
-        let currentRotation = 0;
-        let isSpun = false;
-        let survives = 0;
-        let spins = 0;
-
-        function updateChamberVisuals(showBullet = false) {
-            chambers.forEach((ch, idx) => {
-                if (showBullet && idx === bulletPosition) {
-                    ch.classList.add('bullet');
-                } else {
-                    ch.classList.remove('bullet');
-                }
-            });
-        }
-
-        spinBtn.addEventListener('click', () => {
-            if (spinBtn.disabled) return;
-            spinBtn.disabled = true;
-            shootBtn.disabled = true;
-            statusText.textContent = "Spinning cylinder...";
-            bloodOverlay.classList.remove('active');
-            updateChamberVisuals(false);
-
-            bulletPosition = Math.floor(Math.random() * 6);
-
-            // Calculate precise rotation matching CSS cubic-bezier(0.15, 0.85, 0.35, 1)
-            const randomFullTurns = (Math.floor(Math.random() * 3) + 3) * 360;
-            const randomChamberOffset = Math.floor(Math.random() * 6) * 60;
-            const targetRotation = currentRotation + randomFullTurns + randomChamberOffset;
-
-            // Dynamically apply CSS transition tied to exact duration (1.2s)
-            cylinder.style.transition = 'transform 1.2s cubic-bezier(0.15, 0.85, 0.35, 1)';
-            cylinder.style.transform = `rotate(${targetRotation}deg)`;
-
-            // Perfectly synchronized audio click scheduler matching cubic-bezier deceleration curve
-            const startTime = performance.now();
-            const duration = 1200; // 1.2 seconds
-            const totalClicks = 20;
-            let clickCount = 0;
-
-            function scheduleNextClick(timestamp) {
-                const elapsed = timestamp - startTime;
-                const progress = Math.min(elapsed / duration, 1);
-                
-                // Ease-out curve approximation for click intervals
-                // As progress goes 0 -> 1, time between clicks increases
-                if (clickCount < totalClicks && progress < 1) {
-                    playRatchetClick();
-                    clickCount++;
-                    // Next click interval grows exponentially as it slows down
-                    const nextInterval = (20 + (progress * progress * 140));
-                    setTimeout(() => {
-                        if (clickCount < totalClicks) {
-                            requestAnimationFrame(scheduleNextClick);
-                        }
-                    }, nextInterval);
-                }
-            }
-            requestAnimationFrame(scheduleNextClick);
-
-            // Stop thud and unlock buttons exactly when animation ends (1.2s)
-            setTimeout(() => {
-                playStopThud();
-                currentRotation = targetRotation;
-                const normalizedRot = (360 - (currentRotation % 360)) % 360;
-                currentPosition = Math.round(normalizedRot / 60) % 6;
-
-                isSpun = true;
-                spinBtn.disabled = false;
-                shootBtn.disabled = false;
-                spinBtn.textContent = "SPIN CYLINDER";
-                statusText.textContent = "Cylinder spun! Pull the trigger if you dare.";
-            }, 1200);
-
-            spins++;
-            spinCountEl.textContent = spins;
-        });
-
-        shootBtn.addEventListener('click', () => {
-            if (!isSpun || shootBtn.disabled) return;
-
-            spinBtn.disabled = true;
-            shootBtn.disabled = true;
-            statusText.textContent = "Pulling trigger...";
-            playTriggerClickSound();
-
-            setTimeout(() => {
-                if (currentPosition === bulletPosition) {
-                    playBangSound();
-                    statusText.innerHTML = "<span style='color: #e74c3c;'>BANG! You are dead. 💀</span>";
-                    bloodOverlay.classList.add('active');
-                    updateChamberVisuals(true);
-                    survives = 0;
-                    surviveCountEl.textContent = survives;
-                    spinBtn.textContent = "TRY AGAIN";
-                    isSpun = false;
-                    spinBtn.disabled = false;
-                } else {
-                    statusText.innerHTML = "<span style='color: #2ecc71;'>*CLICK* 😅 You survived!</span>";
-                    survives++;
-                    surviveCountEl.textContent = survives;
-                    isSpun = false;
-                    spinBtn.disabled = false;
-                    shootBtn.disabled = true;
-                    spinBtn.textContent = "SPIN CYLINDER";
-
-                    // Smooth step rotation to next chamber
-                    currentPosition = (currentPosition + 1) % 6;
-                    currentRotation += 60;
-                    cylinder.style.transition = 'transform 0.3s ease-out';
-                    cylinder.style.transform = `rotate(${currentRotation}deg)`;
-                    playStopThud();
-                }
-            }, 500);
-        });
-    </script>
+// gun recoil on shoot (patched into shoot flow)
+shootBtn.addEventListener('mousedown', ()=>{
+    if(!isSpun) return;
+    setTimeout(()=>{
+        gunSvg.classList.add('recoil');
+        muzzle.classList.add('active');
+        muzzle.style.background = 'radial-gradient(circle, #fff 0%, #ffe066 30%, #e74c3c 70%, transparent 100%)';
+        setTimeout(()=>{ gunSvg.classList.remove('recoil'); muzzle.classList.remove('active'); }, 350);
+    }, 500);
+});
+</script>
 </body>
 </html>
