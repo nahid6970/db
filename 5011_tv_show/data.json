@@ -3947,7 +3947,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "09:42",
+        "episode_update_time": "09:41",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -4306,7 +4306,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "09:56",
+        "episode_update_time": "09:55",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -4773,7 +4773,7 @@
         "episodes_updated_at": "2026-09-06T17:21:14.710833",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "10:10",
+        "episode_update_time": "10:09",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -21338,7 +21338,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
-        "episode_update_time": "10:24",
+        "episode_update_time": "10:23",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 6,
         "episode_update_month_day": 1,
@@ -23399,7 +23399,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "10:38",
+        "episode_update_time": "10:36",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -23904,7 +23904,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "10:52",
+        "episode_update_time": "10:50",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1,
         "episode_update_month_day": 6,
@@ -24342,7 +24342,7 @@
         "episodes_updated_at": "2026-09-06T23:33:58.408550",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "11:06",
+        "episode_update_time": "11:04",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2
     },
@@ -28800,7 +28800,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "sonarr_url": "",
-        "episode_update_time": "11:20",
+        "episode_update_time": "11:18",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 3,
         "episode_update_month_day": 5
@@ -29435,7 +29435,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "11:34",
+        "episode_update_time": "11:31",
         "episode_file_pattern": "",
         "scan_mode": "date",
         "episode_update_frequency": "weekly",
@@ -31185,7 +31185,7 @@
         "episodes_updated_at": "2026-09-06T23:33:12.357870",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "11:48",
+        "episode_update_time": "11:45",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -31327,7 +31327,7 @@
         "episodes_updated_at": "2026-09-06T23:33:05.278584",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "12:02",
+        "episode_update_time": "11:59",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 6
     },
@@ -32537,7 +32537,7 @@
         "episodes_updated_at": "2026-09-06T23:29:06.111136",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "12:16",
+        "episode_update_time": "12:13",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -32847,7 +32847,7 @@
         "episodes_updated_at": "2026-09-10T10:23:52.123225",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "12:30",
+        "episode_update_time": "12:27",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1
     },
@@ -33465,7 +33465,7 @@
         "episodes_updated_at": "2026-09-08T18:25:12.267862",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "12:44",
+        "episode_update_time": "12:40",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2
     },
@@ -34897,7 +34897,7 @@
         "episodes_updated_at": "2026-09-06T23:32:20.957661",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "12:58",
+        "episode_update_time": "12:54",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 3
     },
@@ -35656,7 +35656,7 @@
         "episodes_updated_at": "2026-09-08T18:25:04.884714",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "13:12",
+        "episode_update_time": "13:08",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 4
     },
@@ -36484,7 +36484,7 @@
         "episodes_updated_at": "2026-09-06T23:29:25.973639",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "13:26",
+        "episode_update_time": "13:22",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -36752,7 +36752,7 @@
         "episodes_updated_at": "2026-09-08T18:25:52.862225",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "13:40",
+        "episode_update_time": "13:35",
         "episode_update_frequency": "monthly",
         "episode_update_month_day": 21
     },
@@ -41633,7 +41633,7 @@
         "episodes_updated_at": "2026-09-06T23:26:07.169067",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "13:54",
+        "episode_update_time": "13:49",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -41887,7 +41887,7 @@
         "episodes_updated_at": "2026-09-06T23:28:38.912390",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "14:08",
+        "episode_update_time": "14:03",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1
     },
@@ -44822,7 +44822,7 @@
         "episode_sort_order": "desc",
         "lock_status": true,
         "sonarr_url": "",
-        "episode_update_time": "14:22",
+        "episode_update_time": "14:17",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2,
         "episode_update_month_day": 5
@@ -44964,7 +44964,7 @@
         "episodes_updated_at": "2026-09-06T23:30:42.902417",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "14:36",
+        "episode_update_time": "14:30",
         "episode_update_frequency": "monthly",
         "episode_update_month_day": 25
     },
@@ -45218,7 +45218,7 @@
         "episodes_updated_at": "2026-09-06T23:30:51.238999",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "14:50",
+        "episode_update_time": "14:44",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 4
     },
@@ -46285,7 +46285,7 @@
         "episodes_updated_at": "2026-09-06T23:25:17.051215",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "15:04",
+        "episode_update_time": "14:58",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -46498,7 +46498,7 @@
         "episodes_updated_at": "2026-09-06T23:25:50.839070",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "15:18",
+        "episode_update_time": "15:12",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 6
     },
@@ -47396,7 +47396,7 @@
         "episodes_updated_at": "2026-09-06T23:25:43.374743",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "15:32",
+        "episode_update_time": "15:26",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -47874,7 +47874,7 @@
         "tvmaze_id": 28276,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-06T23:29:52.981937",
-        "episode_update_time": "15:46",
+        "episode_update_time": "15:39",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1
     },
@@ -50300,7 +50300,7 @@
         "episodes_updated_at": "2026-09-06T23:34:18.083894",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "16:00",
+        "episode_update_time": "15:53",
         "episode_update_frequency": "monthly",
         "episode_update_month_day": 3
     },
@@ -50457,7 +50457,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "16:14",
+        "episode_update_time": "16:07",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 3,
         "episode_update_month_day": 4,
@@ -50665,7 +50665,7 @@
         "episode_sort_order": "desc",
         "lock_status": true,
         "sonarr_url": "",
-        "episode_update_time": "16:28",
+        "episode_update_time": "16:21",
         "episode_update_frequency": "monthly",
         "episode_update_weekday": 5,
         "episode_update_month_day": 5
@@ -65236,7 +65236,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "16:42",
+        "episode_update_time": "16:34",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -67626,7 +67626,7 @@
         "episodes_updated_at": "2026-09-05T18:34:10.670739",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "16:56",
+        "episode_update_time": "16:48",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 6
     },
@@ -94006,7 +94006,7 @@
         "episodes_updated_at": "2026-09-08T13:37:29.899759",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "17:10",
+        "episode_update_time": "17:02",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -94919,7 +94919,7 @@
         "episodes_updated_at": "2026-09-06T23:26:16.620742",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "17:24",
+        "episode_update_time": "17:16",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1
     },
@@ -131981,7 +131981,7 @@
         "episodes_updated_at": "2026-09-08T18:25:45.608959",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "17:38",
+        "episode_update_time": "17:30",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2
     },
@@ -141804,7 +141804,7 @@
         "episodes_updated_at": "2026-09-06T23:25:35.079495",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "17:52",
+        "episode_update_time": "17:43",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 3
     },
@@ -143572,7 +143572,7 @@
         "episodes_updated_at": "2026-09-08T13:39:29.214298",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "18:06",
+        "episode_update_time": "17:57",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 4
     },
@@ -143784,7 +143784,7 @@
         "episodes_updated_at": "2026-09-05T19:38:28.426204",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "18:20",
+        "episode_update_time": "18:11",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -159637,7 +159637,7 @@
         "episodes_updated_at": "2026-09-05T20:28:40.209698",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "18:34",
+        "episode_update_time": "18:25",
         "episode_update_frequency": "weekly",
         "archived": true,
         "episode_update_weekday": 6
@@ -162696,7 +162696,7 @@
         "episodes_updated_at": "2026-09-06T23:35:06.386860",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "18:48",
+        "episode_update_time": "18:38",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -162939,7 +162939,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "19:02",
+        "episode_update_time": "18:52",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1,
         "episode_update_month_day": 1,
@@ -165540,7 +165540,7 @@
         "episodes_updated_at": "2026-09-06T23:30:33.605581",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "19:16",
+        "episode_update_time": "19:06",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2
     },
@@ -171194,7 +171194,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "19:30",
+        "episode_update_time": "19:20",
         "episode_file_pattern": "",
         "scan_mode": "date",
         "episode_update_frequency": "weekly",
@@ -171500,7 +171500,7 @@
         "episode_sort_order": "desc",
         "lock_status": false,
         "sonarr_url": "",
-        "episode_update_time": "19:44",
+        "episode_update_time": "19:33",
         "episode_file_pattern": "",
         "scan_mode": "sxxexx",
         "episode_update_frequency": "weekly",
@@ -171890,7 +171890,7 @@
         "episodes_updated_at": "2026-09-06T23:32:31.356256",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "19:58",
+        "episode_update_time": "19:47",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 5
     },
@@ -172942,7 +172942,7 @@
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "20:12",
+        "episode_update_time": "20:01",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 6
     },
@@ -174063,7 +174063,7 @@
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "20:26",
+        "episode_update_time": "20:15",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 0
     },
@@ -174748,7 +174748,7 @@
         "episode_source": "tvmaze",
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
-        "episode_update_time": "20:40",
+        "episode_update_time": "20:29",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 1
     },
@@ -174858,7 +174858,7 @@
             }
         ],
         "tvmaze_id": 42846,
-        "episode_update_time": "20:54",
+        "episode_update_time": "20:42",
         "episode_update_frequency": "weekly",
         "episode_update_weekday": 2
     },
@@ -175853,7 +175853,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "21:08",
+        "episode_update_time": "20:56",
         "episode_update_weekday": 3
     },
     {
@@ -176386,7 +176386,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "21:22",
+        "episode_update_time": "21:10",
         "episode_update_weekday": 4
     },
     {
@@ -176681,7 +176681,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "21:36",
+        "episode_update_time": "21:24",
         "episode_update_weekday": 5
     },
     {
@@ -177410,7 +177410,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "21:50",
+        "episode_update_time": "21:37",
         "episode_update_weekday": 6
     },
     {
@@ -177564,7 +177564,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "22:04",
+        "episode_update_time": "21:51",
         "episode_update_weekday": 0
     },
     {
@@ -177733,7 +177733,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "22:18",
+        "episode_update_time": "22:05",
         "episode_update_weekday": 1
     },
     {
@@ -178181,7 +178181,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "22:32",
+        "episode_update_time": "22:19",
         "episode_update_weekday": 2
     },
     {
@@ -180586,7 +180586,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "22:46",
+        "episode_update_time": "22:32",
         "episode_update_weekday": 3
     },
     {
@@ -181031,7 +181031,7 @@
         "episode_sort_type": "default",
         "episode_sort_order": "desc",
         "episode_update_frequency": "weekly",
-        "episode_update_time": "23:00",
+        "episode_update_time": "22:46",
         "episode_update_weekday": 4
     },
     {
@@ -181052,6 +181052,176 @@
         "tmdb_rating": 8.2,
         "status": "Ended",
         "episodes": [],
-        "tvmaze_id": 172
+        "tvmaze_id": 172,
+        "episode_update_time": "",
+        "episode_update_frequency": "daily"
+    },
+    {
+        "id": 250,
+        "tmdb_id": 292741,
+        "external_ids": {
+            "tmdb": 292741
+        },
+        "title": "Nocturne",
+        "year": "2026",
+        "overview": "When a victim of notorious serial killer Jurek Walter unexpectedly turns up alive, detective Jonah Lynn races against time to find the one person still missing, while his prot\u00e9g\u00e9 Saga Bauer goes undercover to get answers from the killer himself.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/i6uMsFRn6fV4kQI9rmLYvrguqzL.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Mystery"
+        ],
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Continuing",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2026-10-30",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-30T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665755,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Episode 2",
+                "air_date": "2026-10-30",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-30T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665756,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Episode 3",
+                "air_date": "2026-11-06",
+                "airtime": "18:00",
+                "air_datetime": "2026-11-06T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665757,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Episode 4",
+                "air_date": "2026-11-13",
+                "airtime": "18:00",
+                "air_datetime": "2026-11-13T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665758,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Episode 5",
+                "air_date": "2026-11-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-11-20T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665759,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Episode 6",
+                "air_date": "2026-11-27",
+                "airtime": "18:00",
+                "air_datetime": "2026-11-27T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665760,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Episode 7",
+                "air_date": "2026-12-04",
+                "airtime": "18:00",
+                "air_datetime": "2026-12-04T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665761,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Episode 8",
+                "air_date": "2026-12-11",
+                "airtime": "18:00",
+                "air_datetime": "2026-12-11T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665762,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 9,
+                "title": "Episode 9",
+                "air_date": "2026-12-18",
+                "airtime": "18:00",
+                "air_datetime": "2026-12-18T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665763,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "Episode 10",
+                "air_date": "2026-12-25",
+                "airtime": "18:00",
+                "air_datetime": "2026-12-25T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3665764,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 66811,
+        "episode_source": "tvmaze",
+        "episode_sort_type": "default",
+        "episode_sort_order": "asc",
+        "episode_update_frequency": "weekly",
+        "episode_update_time": "23:00",
+        "episode_update_weekday": 5
     }
 ]
