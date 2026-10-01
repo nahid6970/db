@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Roulette Simulator - Perfect Sync</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background: radial-gradient(circle, #2c3e50 0%, #1a252f 100%);
+            color: #ecf0f1;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        h1 {
+            font-size: 2.5rem;
+            color: #e74c3c;
+            margin-bottom: 5px;
+            text-shadow: 0 0 15px rgba(231, 76, 60, 0.6);
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            font-size: 1rem;
+            color: #bdc3c7;
+            margin-bottom: 25px;
+        }
+        .game-container {
+            background: #212f3d;
+            border: 3px solid #34495e;
+            border-radius: 16px;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .cylinder-container {
+            position: relative;
+            width: 180px;
+            height: 180px;
+            margin: 20px 0;
+        }
+        .cylinder {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #7f8c8d 0%, #34495e 100%);
+            border: 6px solid #2c3e50;
+            position: relative;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 5px 15px rgba(0,0,0,0.5);
+            /* Transition is managed dynamically via JS for perfect sync */
+        }
+        .chamber {
+            width: 32px;
+            height: 32px;
+            background: #111;
+            border-radius: 50%;
+            position: absolute;
+            border: 3px solid #4f5d73;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #7f8c8d;
+        }
+        .chamber.bullet {
+            background: #e74c3c;
+            border-color: #c0392b;
+            color: #fff;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5), 0 0 10px #e74c3c;
+        }
+        /* Chamber positioning in a circle */
+        .chamber:nth-child(1) { top: 12px; left: 68px; }
+        .chamber:nth-child(2) { top: 44px; left: 118px; }
+        .chamber:nth-child(3) { top: 102px; left: 118px; }
+        .chamber:nth-child(4) { top: 124px; left: 68px; }
+        .chamber:nth-child(5) { top: 102px; left: 18px; }
+        .chamber:nth-child(6) { top: 44px; left: 18px; }
+
+        .hammer-indicator {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 18px solid #f39c12;
+            z-index: 5;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+        }
+
+        .status-box {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            min-height: 50px;
+            text-align: center;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+        }
+        button {
+            flex: 1;
+            padding: 14px 0;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #spinBtn {
+            background-color: #3498db;
+            color: white;
+        }
+        #spinBtn:hover:not(:disabled) {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        #shootBtn {
+            background-color: #e74c3c;
+            color: white;
+        }
+        #shootBtn:hover:not(:disabled) {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            background-color: #7f8c8d;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .stats {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+            display: flex;
+            gap: 20px;
+        }
+
+        .blood-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 40%, rgba(192, 57, 43, 0.85) 90%);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+            z-index: 100;
+        }
+        .blood-overlay.active {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blood-overlay" id="bloodOverlay"></div>
+
+    <h1>RUSSIAN ROULETTE</h1>
+    <div class="subtitle">Simulator • Synchronized Audio & Animation</div>
+
+    <div class="game-container">
+        <div class="hammer-indicator"></div>
+        <div class="cylinder-container">
+            <div class="cylinder" id="cylinder">
+                <div class="chamber" data-index="0">1</div>
+                <div class="chamber" data-index="1">2</div>
+                <div class="chamber" data-index="2">3</div>
+                <div class="chamber" data-index="3">4</div>
+                <div class="chamber" data-index="4">5</div>
+                <div class="chamber" data-index="5">6</div>
+            </div>
+        </div>
+
+        <div class="status-box" id="statusText">Spin the cylinder to test your luck...</div>
+
+        <div class="btn-group">
+            <button id="spinBtn">SPIN CYLINDER</button>
+            <button id="shootBtn" disabled>PULL TRIGGER</button>
+        </div>
+
+        <div class="stats">
+            <div>Survivals: <span id="surviveCount">0</span></div>
+            <div>Spins: <span id="spinCount">0</span></div>
+        </div>
+    </div>
+
+    <script>
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+        function playRatchetClick() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const now = audioCtx.currentTime;
+            
+            const osc = audioCtx.createOscillator();
+            const filter = audioCtx.createBiquadFilter();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'triangle';
+            osc.frequency.setValueAtTime(1400 + Math.random() * 200, now);
+            osc.frequency.exponentialRampToValueAtTime(350, now + 0.025);
+
+            filter.type = 'bandpass';
+            filter.frequency.setValueAtTime(2200, now);
+            filter.Q.value = 5;
+
+            gain.gain.setValueAtTime(0.3, now);
+            gain.gain.linearRampToValueAtTime(0.001, now + 0.025);
+
+            osc.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.025);
+        }
+
+        function playStopThud() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const now = audioCtx.currentTime;
+
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(180, now);
+            osc.frequency.exponentialRampToValueAtTime(45, now + 0.08);
+
+            gain.gain.setValueAtTime(0.5, now);
+            gain.gain.linearRampToValueAtTime(0.001, now + 0.08);
+
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            osc.start(now);
+            osc.stop(now + 0.08);
+        }
+
+        function playTriggerClickSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const now = audioCtx.currentTime;
+
+            // Hammer cock
+            const osc1 = audioCtx.createOscillator();
+            const gain1 = audioCtx.createGain();
+            osc1.type = 'sine';
+            osc1.frequency.setValueAtTime(1800, now);
+            osc1.frequency.exponentialRampToValueAtTime(400, now + 0.04);
+            gain1.gain.setValueAtTime(0.4, now);
+            gain1.gain.linearRampToValueAtTime(0.001, now + 0.04);
+            osc1.connect(gain1);
+            gain1.connect(audioCtx.destination);
+            osc1.start(now);
+            osc1.stop(now + 0.04);
+
+            // Chamber lock thud
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.type = 'triangle';
+            osc2.frequency.setValueAtTime(150, now + 0.03);
+            osc2.frequency.exponentialRampToValueAtTime(40, now + 0.1);
+            gain2.gain.setValueAtTime(0.5, now + 0.03);
+            gain2.gain.linearRampToValueAtTime(0.001, now + 0.1);
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.start(now + 0.03);
+            osc2.stop(now + 0.1);
+        }
+
+        function playBangSound() {
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            const now = audioCtx.currentTime;
+            const duration = 2.0;
+
+            const bufferSize = audioCtx.sampleRate * duration;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            for (let i = 0; i < bufferSize; i++) {
+                data[i] = Math.random() * 2 - 1;
+            }
+
+            const noise = audioCtx.createBufferSource();
+            noise.buffer = buffer;
+
+            const filter = audioCtx.createBiquadFilter();
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(1200, now);
+            filter.frequency.exponentialRampToValueAtTime(60, now + duration);
+
+            const gain = audioCtx.createGain();
+            gain.gain.setValueAtTime(1.0, now);
+            gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+            noise.connect(filter);
+            filter.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            noise.start(now);
+
+            const sub = audioCtx.createOscillator();
+            const subGain = audioCtx.createGain();
+            sub.type = 'sine';
+            sub.frequency.setValueAtTime(120, now);
+            sub.frequency.exponentialRampToValueAtTime(30, now + 0.3);
+            subGain.gain.setValueAtTime(0.8, now);
+            subGain.gain.linearRampToValueAtTime(0.001, now + 0.3);
+            sub.connect(subGain);
+            subGain.connect(audioCtx.destination);
+            sub.start(now);
+            sub.stop(now + 0.3);
+        }
+
+        const cylinder = document.getElementById('cylinder');
+        const spinBtn = document.getElementById('spinBtn');
+        const shootBtn = document.getElementById('shootBtn');
+        const statusText = document.getElementById('statusText');
+        const surviveCountEl = document.getElementById('surviveCount');
+        const spinCountEl = document.getElementById('spinCount');
+        const bloodOverlay = document.getElementById('bloodOverlay');
+        const chambers = document.querySelectorAll('.chamber');
+
+        let bulletPosition = Math.floor(Math.random() * 6);
+        let currentPosition = 0;
+        let currentRotation = 0;
+        let isSpun = false;
+        let survives = 0;
+        let spins = 0;
+
+        function updateChamberVisuals(showBullet = false) {
+            chambers.forEach((ch, idx) => {
+                if (showBullet && idx === bulletPosition) {
+                    ch.classList.add('bullet');
+                } else {
+                    ch.classList.remove('bullet');
+                }
+            });
+        }
+
+        spinBtn.addEventListener('click', () => {
+            if (spinBtn.disabled) return;
+            spinBtn.disabled = true;
+            shootBtn.disabled = true;
+            statusText.textContent = "Spinning cylinder...";
+            bloodOverlay.classList.remove('active');
+            updateChamberVisuals(false);
+
+            bulletPosition = Math.floor(Math.random() * 6);
+
+            // Calculate precise rotation matching CSS cubic-bezier(0.15, 0.85, 0.35, 1)
+            const randomFullTurns = (Math.floor(Math.random() * 3) + 3) * 360;
+            const randomChamberOffset = Math.floor(Math.random() * 6) * 60;
+            const targetRotation = currentRotation + randomFullTurns + randomChamberOffset;
+
+            // Dynamically apply CSS transition tied to exact duration (1.2s)
+            cylinder.style.transition = 'transform 1.2s cubic-bezier(0.15, 0.85, 0.35, 1)';
+            cylinder.style.transform = `rotate(${targetRotation}deg)`;
+
+            // Perfectly synchronized audio click scheduler matching cubic-bezier deceleration curve
+            const startTime = performance.now();
+            const duration = 1200; // 1.2 seconds
+            const totalClicks = 20;
+            let clickCount = 0;
+
+            function scheduleNextClick(timestamp) {
+                const elapsed = timestamp - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Ease-out curve approximation for click intervals
+                // As progress goes 0 -> 1, time between clicks increases
+                if (clickCount < totalClicks && progress < 1) {
+                    playRatchetClick();
+                    clickCount++;
+                    // Next click interval grows exponentially as it slows down
+                    const nextInterval = (20 + (progress * progress * 140));
+                    setTimeout(() => {
+                        if (clickCount < totalClicks) {
+                            requestAnimationFrame(scheduleNextClick);
+                        }
+                    }, nextInterval);
+                }
+            }
+            requestAnimationFrame(scheduleNextClick);
+
+            // Stop thud and unlock buttons exactly when animation ends (1.2s)
+            setTimeout(() => {
+                playStopThud();
+                currentRotation = targetRotation;
+                const normalizedRot = (360 - (currentRotation % 360)) % 360;
+                currentPosition = Math.round(normalizedRot / 60) % 6;
+
+                isSpun = true;
+                spinBtn.disabled = false;
+                shootBtn.disabled = false;
+                spinBtn.textContent = "SPIN CYLINDER";
+                statusText.textContent = "Cylinder spun! Pull the trigger if you dare.";
+            }, 1200);
+
+            spins++;
+            spinCountEl.textContent = spins;
+        });
+
+        shootBtn.addEventListener('click', () => {
+            if (!isSpun || shootBtn.disabled) return;
+
+            spinBtn.disabled = true;
+            shootBtn.disabled = true;
+            statusText.textContent = "Pulling trigger...";
+            playTriggerClickSound();
+
+            setTimeout(() => {
+                if (currentPosition === bulletPosition) {
+                    playBangSound();
+                    statusText.innerHTML = "<span style='color: #e74c3c;'>BANG! You are dead. 💀</span>";
+                    bloodOverlay.classList.add('active');
+                    updateChamberVisuals(true);
+                    survives = 0;
+                    surviveCountEl.textContent = survives;
+                    spinBtn.textContent = "TRY AGAIN";
+                    isSpun = false;
+                    spinBtn.disabled = false;
+                } else {
+                    statusText.innerHTML = "<span style='color: #2ecc71;'>*CLICK* 😅 You survived!</span>";
+                    survives++;
+                    surviveCountEl.textContent = survives;
+                    isSpun = false;
+                    spinBtn.disabled = false;
+                    shootBtn.disabled = true;
+                    spinBtn.textContent = "SPIN CYLINDER";
+
+                    // Smooth step rotation to next chamber
+                    currentPosition = (currentPosition + 1) % 6;
+                    currentRotation += 60;
+                    cylinder.style.transition = 'transform 0.3s ease-out';
+                    cylinder.style.transform = `rotate(${currentRotation}deg)`;
+                    playStopThud();
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
