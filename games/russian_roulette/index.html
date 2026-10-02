@@ -293,7 +293,10 @@
         .setting-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
         .setting-desc{font-size:.6rem;color:var(--dim);opacity:.7;margin-top:-2px}
         .setting-control{display:flex;gap:6px;flex-wrap:wrap}
-        /* (s-opt buttons removed — using text input) */
+        /* hide number input spin arrows */
+        #elimInput::-webkit-outer-spin-button,
+        #elimInput::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+        #elimInput{-moz-appearance:textfield}
 
         /* Vertical player stats list */
         #seatRow{
