@@ -259,42 +259,39 @@
         /* ══════════════════════════════════════
            PLAYER TURN INDICATOR (in right panel)
         ══════════════════════════════════════ */
-        #playerTurn{
-            display:none;
-            background:var(--card);border:1px solid var(--border);border-radius:16px;
-            padding:14px 16px;gap:14px;align-items:center;
-            box-shadow:0 8px 32px rgba(0,0,0,.5);
-        }
-        #playerTurn.visible{display:flex}
-        #playerTurnPhoto{
-            width:52px;height:52px;border-radius:50%;object-fit:cover;
-            border:2px solid var(--border);flex-shrink:0;
-        }
-        .turn-info{flex:1;min-width:0}
-        .turn-label{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
-        .turn-name{
-            font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:2px;
-            color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
-        }
-        .turn-deaths{font-size:.68rem;color:var(--dim);margin-top:1px}
 
-        /* Seat indicators row below turn */
+        /* Vertical player stats list */
         #seatRow{
-            display:none;flex-direction:row;gap:6px;flex-wrap:wrap;
+            display:none;flex-direction:column;gap:7px;
         }
         #seatRow.visible{display:flex}
         .seat-pip{
-            display:flex;flex-direction:column;align-items:center;gap:4px;
-            opacity:.45;transition:opacity .2s,transform .2s;
+            display:flex;align-items:center;gap:10px;
+            background:var(--card2);border:1px solid var(--border);
+            border-radius:12px;padding:8px 12px;
+            transition:border-color .2s,box-shadow .2s,opacity .2s;
         }
-        .seat-pip.active{opacity:1;transform:scale(1.1)}
+        .seat-pip.active{
+            border-color:var(--gold);
+            box-shadow:0 0 14px rgba(240,180,41,.18);
+        }
+        .seat-pip.dead{opacity:.4;filter:grayscale(.8)}
         .seat-pip img{
-            width:30px;height:30px;border-radius:50%;object-fit:cover;
-            border:2px solid var(--border);
+            width:36px;height:36px;border-radius:50%;object-fit:cover;
+            border:2px solid var(--border);flex-shrink:0;
         }
         .seat-pip.active img{border-color:var(--gold)}
-        .seat-pip.dead img{border-color:var(--red);filter:grayscale(1) brightness(.5)}
-        .seat-pip span{font-size:.5rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);max-width:38px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .seat-pip.dead   img{border-color:var(--red)}
+        .pip-info{flex:1;min-width:0}
+        .pip-name{
+            font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1.5px;
+            color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .pip-stats{font-size:.6rem;letter-spacing:1px;color:var(--dim);margin-top:2px}
+        .pip-turn{
+            font-size:.55rem;letter-spacing:2px;text-transform:uppercase;
+            color:var(--gold);font-weight:600;flex-shrink:0;
+        }
 
         #bgPickerBtn{
             position:fixed;bottom:18px;left:18px;z-index:300;
@@ -379,17 +376,7 @@
             <div class="tagline">Smith & Wesson .38 Military & Police</div>
         </div>
 
-        <!-- Player turn indicator -->
-        <div id="playerTurn">
-            <img id="playerTurnPhoto" src="" alt="">
-            <div class="turn-info">
-                <div class="turn-label">Current Turn</div>
-                <div class="turn-name" id="playerTurnName">—</div>
-                <div class="turn-deaths" id="playerTurnDeaths"></div>
-            </div>
-        </div>
-
-        <!-- Seat pip row -->
+        <!-- Seat / player stats list -->
         <div id="seatRow"></div>
 
         <div class="card" id="card">
@@ -1456,7 +1443,7 @@ shootBtn.addEventListener('click', () => {
                 // Track this player's death
                 if (gamePlayers.length) {
                     gamePlayers[currentPlayerIdx].deaths++;
-                    playerTurnDead.textContent = `💀 ${gamePlayers[currentPlayerIdx].deaths} death${gamePlayers[currentPlayerIdx].deaths > 1 ? 's' : ''}`;
+                    updatePips();
                 }
                 isSpun = false;
                 animState.isFiring = false;
@@ -1533,10 +1520,6 @@ const setupScreen    = document.getElementById('setupScreen');
 const setupSeats     = document.getElementById('setupSeats');
 const startBtn       = document.getElementById('startBtn');
 const countBtns      = document.querySelectorAll('.count-btn');
-const playerTurnEl   = document.getElementById('playerTurn');
-const playerTurnPhoto= document.getElementById('playerTurnPhoto');
-const playerTurnName = document.getElementById('playerTurnName');
-const playerTurnDead = document.getElementById('playerTurnDeaths');
 const seatRowEl      = document.getElementById('seatRow');
 
 let selectedCount = 4;
@@ -1603,14 +1586,13 @@ startBtn.addEventListener('click', () => {
 
     // Hide setup, show game
     setupScreen.style.display = 'none';
-    playerTurnEl.classList.add('visible');
     seatRowEl.classList.add('visible');
 
     buildSeatPips();
     showCurrentPlayer();
 });
 
-/* ── Seat pip row ── */
+/* ── Seat pip row — vertical player stat cards ── */
 function buildSeatPips() {
     seatRowEl.innerHTML = '';
     gamePlayers.forEach((p, i) => {
@@ -1622,33 +1604,46 @@ function buildSeatPips() {
         img.src = p.photo;
         img.alt = p.name;
 
-        const lbl = document.createElement('span');
-        lbl.textContent = p.name;
+        const info = document.createElement('div');
+        info.className = 'pip-info';
+
+        const name = document.createElement('div');
+        name.className = 'pip-name';
+        name.textContent = p.name;
+
+        const stats = document.createElement('div');
+        stats.className = 'pip-stats';
+        stats.id = `pipStats${i}`;
+        stats.textContent = '💀 0  ✅ 0';
+
+        info.appendChild(name);
+        info.appendChild(stats);
+
+        const turn = document.createElement('div');
+        turn.className = 'pip-turn';
+        turn.id = `pipTurn${i}`;
 
         pip.appendChild(img);
-        pip.appendChild(lbl);
+        pip.appendChild(info);
+        pip.appendChild(turn);
         seatRowEl.appendChild(pip);
     });
 }
 
 function updatePips() {
     gamePlayers.forEach((p, i) => {
-        const pip = document.getElementById(`pip${i}`);
+        const pip      = document.getElementById(`pip${i}`);
+        const statsEl  = document.getElementById(`pipStats${i}`);
+        const turnEl   = document.getElementById(`pipTurn${i}`);
         if (!pip) return;
         pip.classList.toggle('active', i === currentPlayerIdx);
-        pip.classList.toggle('dead', false); // players stay in rotation
+        if (statsEl) statsEl.textContent = `💀 ${p.deaths}  ✅ ${p.survived}`;
+        if (turnEl)  turnEl.textContent  = i === currentPlayerIdx ? '▶ TURN' : '';
     });
 }
 
 /* ── Show current player ── */
 function showCurrentPlayer() {
-    const p = gamePlayers[currentPlayerIdx];
-    if (!p) return;
-    playerTurnPhoto.src   = p.photo;
-    playerTurnName.textContent = p.name;
-    playerTurnDead.textContent = p.deaths > 0
-        ? `💀 ${p.deaths} death${p.deaths > 1 ? 's' : ''}`
-        : 'No deaths yet';
     updatePips();
 }
 
