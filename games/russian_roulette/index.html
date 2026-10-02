@@ -1341,7 +1341,7 @@ shootBtn.addEventListener('click', () => {
                 const chambersLeft = 6 - streak;
                 const safeLeft = Math.max(chambersLeft - 1, 0);
                 if (safeLeft > 0) {
-                    setStatus(`CLICK — ${safeLeft} LEFT`, 'safe');
+                    setStatus(`${safeLeft} LEFT`, 'safe');
                     setOdds(safeLeft, chambersLeft);
                 } else {
                     setStatus('NEXT IS LIVE', 'danger');
