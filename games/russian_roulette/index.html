@@ -293,21 +293,7 @@
         .setting-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
         .setting-desc{font-size:.6rem;color:var(--dim);opacity:.7;margin-top:-2px}
         .setting-control{display:flex;gap:6px;flex-wrap:wrap}
-        .s-opt{
-            font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;
-            padding:5px 13px;border-radius:8px;border:1px solid var(--border);
-            background:var(--card2);color:var(--dim);cursor:pointer;
-            transition:all .15s;
-        }
-        .s-opt:hover{border-color:var(--text);color:var(--text)}
-        .s-opt.active{
-            background:linear-gradient(170deg,#bf3a2a,#6e1515);
-            border-color:rgba(192,57,43,.4);color:#fff;
-        }
-        .s-opt.s-never.active{
-            background:linear-gradient(170deg,#1d7db8,#153f60);
-            border-color:rgba(52,152,219,.3);
-        }
+        /* (s-opt buttons removed — using text input) */
 
         /* Vertical player stats list */
         #seatRow{
@@ -317,7 +303,7 @@
         .seat-pip{
             display:flex;align-items:center;gap:12px;
             background:var(--card2);border:1px solid var(--border);
-            border-radius:14px;padding:10px 14px;
+            border-radius:4px;padding:10px 14px;
             transition:border-color .2s,box-shadow .2s,opacity .2s;
         }
         .seat-pip.active{
@@ -340,7 +326,6 @@
             color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
             flex:1;
         }
-        /* Inline stat badges */
         .pip-badge{
             display:flex;align-items:center;gap:4px;
             background:rgba(0,0,0,.25);border-radius:8px;
@@ -353,10 +338,7 @@
         }
         .pip-badge.deaths .pip-badge-val{color:#e87070}
         .pip-badge.survived .pip-badge-val{color:#6ed886}
-        .pip-turn{
-            font-size:.52rem;letter-spacing:2px;text-transform:uppercase;
-            color:var(--gold);font-weight:700;flex-shrink:0;
-        }
+        .pip-turn{display:none}
         .pip-elim-tag{
             font-size:.5rem;letter-spacing:2px;text-transform:uppercase;
             color:var(--red);font-weight:600;flex-shrink:0;
@@ -448,13 +430,12 @@
             <div class="settings-title">Settings</div>
             <div class="setting-row">
                 <div class="setting-label">Eliminate after deaths</div>
-                <div class="setting-desc">Player is removed from rotation after this many deaths</div>
-                <div class="setting-control" id="elimOpts">
-                    <button class="s-opt s-never active" data-v="0">Never</button>
-                    <button class="s-opt" data-v="1">1</button>
-                    <button class="s-opt" data-v="2">2</button>
-                    <button class="s-opt" data-v="3">3</button>
-                    <button class="s-opt" data-v="5">5</button>
+                <div class="setting-desc">Player is removed from rotation after this many deaths. Leave blank or 0 for never.</div>
+                <div class="setting-control">
+                    <input type="number" id="elimInput" min="0" placeholder="0 = never"
+                        style="background:var(--card2);border:1px solid var(--border);border-radius:8px;
+                               color:var(--text);font-family:'Inter',sans-serif;font-size:.85rem;
+                               padding:7px 12px;width:100%;outline:none;transition:border-color .15s">
                 </div>
             </div>
         </div>
@@ -1527,9 +1508,14 @@ shootBtn.addEventListener('click', () => {
 
                 addDot(false); streak = 0; stCountEl.textContent = streak;
                 deaths++; svCountEl.textContent = deaths;
-                // Track this player's death
+                // Track this player's death + check elimination
                 if (gamePlayers.length) {
-                    gamePlayers[currentPlayerIdx].deaths++;
+                    const cp = gamePlayers[currentPlayerIdx];
+                    cp.deaths++;
+                    // Eliminate if threshold set and reached
+                    if (elimAfter > 0 && cp.deaths >= elimAfter) {
+                        cp.eliminated = true;
+                    }
                     updatePips();
                 }
                 isSpun = false;
@@ -1667,7 +1653,7 @@ startBtn.addEventListener('click', () => {
     for (let i = 0; i < selectedCount; i++) {
         const sel = document.getElementById(`seatSel${i}`);
         const p   = ALL_PLAYERS[sel.value];
-        gamePlayers.push({ name: p.name, photo: p.photo, deaths: 0, survived: 0 });
+        gamePlayers.push({ name: p.name, photo: p.photo, deaths: 0, survived: 0, eliminated: false });
     }
     currentPlayerIdx = 0;
 
@@ -1691,12 +1677,10 @@ settingsBtn.addEventListener('click', e => {
 document.addEventListener('click', () => settingsPanel.classList.remove('open'));
 settingsPanel.addEventListener('click', e => e.stopPropagation());
 
-document.querySelectorAll('#elimOpts .s-opt').forEach(btn => {
-    btn.addEventListener('click', () => {
-        document.querySelectorAll('#elimOpts .s-opt').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        elimAfter = parseInt(btn.dataset.v);
-    });
+const elimInput = document.getElementById('elimInput');
+elimInput.addEventListener('input', () => {
+    const v = parseInt(elimInput.value);
+    elimAfter = (isNaN(v) || v <= 0) ? 0 : v;
 });
 
 /* ── Seat pip row — vertical player stat cards ── */
@@ -1775,9 +1759,18 @@ function showCurrentPlayer() {
     updatePips();
 }
 
-/* ── Advance to next player ── */
+/* ── Advance to next player (skips eliminated) ── */
 function nextPlayer() {
-    currentPlayerIdx = (currentPlayerIdx + 1) % gamePlayers.length;
+    if (!gamePlayers.length) return;
+    const total = gamePlayers.length;
+    let next = (currentPlayerIdx + 1) % total;
+    let attempts = 0;
+    while (gamePlayers[next].eliminated && attempts < total) {
+        next = (next + 1) % total;
+        attempts++;
+    }
+    // If all eliminated, just advance anyway
+    currentPlayerIdx = next;
     showCurrentPlayer();
 }
 
