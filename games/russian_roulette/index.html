@@ -288,13 +288,19 @@ const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
 camera.position.set(4.2, 2.0, 4.8);
 camera.lookAt(0, 0.1, -0.8);
 
-// OrbitControls — drag to rotate, scroll to zoom, right-drag to pan
+// OrbitControls — left drag: orbit, scroll: zoom, right drag: pan
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.target.set(0, 0.05, -0.8);
-controls.minDistance = 1.5;
-controls.maxDistance = 14;
+controls.minDistance = 2.5;
+controls.maxDistance = 12;
+
+// Lock vertical angle: prevents top-down and upside-down views
+// PI * 0.18 = ~32° from top (gentle high angle)
+// PI * 0.62 = ~112° (slightly below level — shows underside of barrel)
+controls.minPolarAngle = Math.PI * 0.18;
+controls.maxPolarAngle = Math.PI * 0.62;
 controls.update();
 
 /* ═══════════════════════════════════
@@ -323,7 +329,7 @@ scene.add(rimLight);
 
 // Muzzle flash point light (activated on BANG)
 const flashLight = new THREE.PointLight(0xff8800, 0, 6);
-flashLight.position.set(0, 0.35, 2.8);
+flashLight.position.set(0, 0.82, 2.8);
 scene.add(flashLight);
 
 /* ── MATERIALS ── */
@@ -370,34 +376,38 @@ scene.add(gunRoot);
     for front-facing camera framing)
 ═══════════════════════════════════ */
 
-// Rear frame / recoil shield
+// Rear frame / recoil shield — sits behind cylinder (Z+), full height
 const recoilShield = new THREE.Mesh(
-    new THREE.BoxGeometry(0.50, 1.05, 0.35), matFrame);
-recoilShield.position.set(0, 0.05, 0.72);
+    new THREE.BoxGeometry(0.50, 1.40, 0.38), matFrame);
+recoilShield.position.set(0, 0.05, 0.78);
 gunRoot.add(recoilShield);
 
-// Top strap — runs above the cylinder window
+// Top strap — must sit ABOVE the cylinder top edge
+// Cylinder: center Y=0.05, radius=0.62 → top edge at Y = 0.67
+// Top strap bottom = center_Y - height/2, so center_Y = 0.67 + 0.085 + 0.04 gap = 0.795
 const topStrap = new THREE.Mesh(
-    new THREE.BoxGeometry(0.42, 0.17, 1.65), matFrame);
-topStrap.position.set(0, 0.63, -0.05);
+    new THREE.BoxGeometry(0.40, 0.16, 1.72), matFrame);
+topStrap.position.set(0, 0.82, -0.05);
 gunRoot.add(topStrap);
 
-// Bottom frame / crane housing — below cylinder
+// Bottom frame / crane housing — sits BELOW cylinder bottom edge
+// Cylinder: center Y=0.05, radius=0.62 → bottom edge at Y = -0.57
+// Bottom frame top = center_Y + height/2, so center_Y = -0.57 - 0.095 - 0.04 gap = -0.705
 const bottomFrame = new THREE.Mesh(
-    new THREE.BoxGeometry(0.42, 0.19, 1.50), matFrame);
-bottomFrame.position.set(0, -0.52, -0.05);
+    new THREE.BoxGeometry(0.42, 0.19, 1.55), matFrame);
+bottomFrame.position.set(0, -0.72, -0.05);
 gunRoot.add(bottomFrame);
 
-// Front frame junction — connects frame to barrel
+// Front frame junction — connects frame to barrel, in front of cylinder
 const frontFrame = new THREE.Mesh(
-    new THREE.BoxGeometry(0.44, 1.00, 0.30), matFrame);
+    new THREE.BoxGeometry(0.44, 1.62, 0.30), matFrame);
 frontFrame.position.set(0, 0.05, -0.88);
 gunRoot.add(frontFrame);
 
-// Rear sight housing
+// Rear sight housing — on top of recoil shield
 const rearSight = new THREE.Mesh(
     new THREE.BoxGeometry(0.10, 0.09, 0.22), matFrame);
-rearSight.position.set(0, 0.74, 0.60);
+rearSight.position.set(0, 0.92, 0.62);
 gunRoot.add(rearSight);
 
 /* ═══════════════════════════════════
@@ -466,61 +476,58 @@ for (let i = 0; i < 6; i++) {
 
 /* ═══════════════════════════════════
    BARREL
-   Long cylinder running along Z axis away from camera.
-   Muzzle end closest to camera (toward +Z), breach end at -Z.
-   Barrel center Y = 0.35 (above cylinder center).
+   Runs along Z axis. Barrel center Y aligns with top strap Y (0.82)
+   so it sits cleanly above the cylinder, not merging with it.
 ═══════════════════════════════════ */
 const BARREL_LEN = 3.0;
-// barrel center Z: front face at Z≈-1.0, runs to Z≈-(1.0+barrelLen)
 const barrelZ = -1.0 - BARREL_LEN / 2;
+const BARREL_Y = 0.82; // matches top strap center Y
 
 const barrel = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.24, 0.25, BARREL_LEN, 28), matFrame);
+    new THREE.CylinderGeometry(0.22, 0.23, BARREL_LEN, 28), matFrame);
 barrel.rotation.x = Math.PI / 2;
-barrel.position.set(0, 0.35, barrelZ);
+barrel.position.set(0, BARREL_Y, barrelZ);
 gunRoot.add(barrel);
 
-// Underlug / ejector shroud below barrel
+// Underlug / ejector shroud — hangs below barrel, above bottom frame
 const underlug = new THREE.Mesh(
-    new THREE.BoxGeometry(0.22, 0.33, BARREL_LEN), matFrame);
-underlug.position.set(0, 0.10, barrelZ);
+    new THREE.BoxGeometry(0.20, 0.28, BARREL_LEN), matFrame);
+underlug.position.set(0, BARREL_Y - 0.26, barrelZ);
 gunRoot.add(underlug);
 
-// Ejector rod (silver)
+// Ejector rod
 const ejectorRod = new THREE.Mesh(
     new THREE.CylinderGeometry(0.055, 0.055, 0.65, 12), matCyl);
 ejectorRod.rotation.x = Math.PI / 2;
-ejectorRod.position.set(0, 0.05, -1.35);
+ejectorRod.position.set(0, BARREL_Y - 0.30, -1.35);
 gunRoot.add(ejectorRod);
 
-// Muzzle crown ring (at the FRONT, closest to camera)
-// The muzzle is what the camera stares into!
-// Muzzle Z position = front face of barrel = -1.0 + small offset
+// Muzzle crown ring
 const muzzleZ = -1.0;
 const muzzleCrown = new THREE.Mesh(
-    new THREE.TorusGeometry(0.245, 0.025, 12, 32), matCyl);
-muzzleCrown.rotation.x = Math.PI / 2; // orient ring to face +Z (camera)
-muzzleCrown.position.set(0, 0.35, muzzleZ);
+    new THREE.TorusGeometry(0.225, 0.025, 12, 32), matCyl);
+muzzleCrown.rotation.x = Math.PI / 2;
+muzzleCrown.position.set(0, BARREL_Y, muzzleZ);
 gunRoot.add(muzzleCrown);
 
-// Bore hole at muzzle (very dark, looks into the barrel)
+// Bore hole at muzzle
 const muzzleBore = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.135, 0.135, 0.12, 20), matDark);
+    new THREE.CylinderGeometry(0.125, 0.125, 0.12, 20), matDark);
 muzzleBore.rotation.x = Math.PI / 2;
-muzzleBore.position.set(0, 0.35, muzzleZ - 0.04);
+muzzleBore.position.set(0, BARREL_Y, muzzleZ - 0.04);
 gunRoot.add(muzzleBore);
 
 // Front sight blade
 const frontSight = new THREE.Mesh(
-    new THREE.BoxGeometry(0.07, 0.22, 0.30), matFrame);
-frontSight.position.set(0, 0.68, -BARREL_LEN - 0.75);
+    new THREE.BoxGeometry(0.07, 0.18, 0.28), matFrame);
+frontSight.position.set(0, BARREL_Y + 0.20, -BARREL_LEN - 0.75);
 gunRoot.add(frontSight);
 
 // Red front sight insert
 const redInsert = new THREE.Mesh(
-    new THREE.BoxGeometry(0.075, 0.08, 0.10),
+    new THREE.BoxGeometry(0.075, 0.07, 0.09),
     new THREE.MeshBasicMaterial({ color: 0xef4444 }));
-redInsert.position.set(0, 0.72, -BARREL_LEN - 0.80);
+redInsert.position.set(0, BARREL_Y + 0.22, -BARREL_LEN - 0.80);
 gunRoot.add(redInsert);
 
 /* ═══════════════════════════════════
@@ -593,9 +600,8 @@ gunRoot.add(gripGroup);
 ═══════════════════════════════════ */
 const flashMesh = new THREE.Mesh(
     new THREE.ConeGeometry(0.52, 2.0, 8), matFlash);
-// ConeGeometry points up (+Y), rotate to point toward +Z (camera)
 flashMesh.rotation.x = Math.PI / 2;
-flashMesh.position.set(0, 0.35, muzzleZ + 1.2); // in front of muzzle toward camera
+flashMesh.position.set(0, BARREL_Y, muzzleZ + 1.2);
 gunRoot.add(flashMesh);
 
 /* ═══════════════════════════════════
@@ -889,6 +895,25 @@ function triggerMuzzleCSS() {
 /* ═══════════════════════════════════════════════════════════════
    SPIN BUTTON
 ═══════════════════════════════════════════════════════════════ */
+
+// Smoothly reset camera to the good 3/4 view
+function resetCamera() {
+    const startPos = camera.position.clone();
+    const endPos   = new THREE.Vector3(4.2, 2.0, 4.8);
+    const startTgt = controls.target.clone();
+    const endTgt   = new THREE.Vector3(0, 0.05, -0.8);
+    const t0 = performance.now();
+    const dur = 600;
+    (function camTick(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        camera.position.lerpVectors(startPos, endPos, e);
+        controls.target.lerpVectors(startTgt, endTgt, e);
+        controls.update();
+        if (p < 1) requestAnimationFrame(camTick);
+    })(performance.now());
+}
+
 spinBtn.addEventListener('click', () => {
     if (spinBtn.disabled) return;
     spinBtn.disabled = true;
@@ -896,6 +921,9 @@ spinBtn.addEventListener('click', () => {
     bloodOv.classList.remove('active');
     setStatus('SPINNING...', '');
     animState.isSpinning = true;
+
+    // Snap camera back to good view so spin is visible
+    resetCamera();
 
     bulletPos = Math.floor(Math.random()*6);
 
