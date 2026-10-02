@@ -193,6 +193,51 @@
         .hdot.d{background:var(--red);  box-shadow:0 0 5px rgba(231,76,60,.6)}
         .hdot.new{animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
         @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
+
+        /* ── Background color picker ── */
+        #bgPickerBtn{
+            position:fixed;bottom:18px;left:18px;z-index:300;
+            display:flex;align-items:center;gap:8px;
+            background:rgba(13,21,32,.85);border:1px solid var(--border);
+            border-radius:99px;padding:6px 12px 6px 8px;
+            cursor:pointer;backdrop-filter:blur(8px);
+            font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+            color:var(--dim);transition:border-color .2s,color .2s;
+            user-select:none;
+        }
+        #bgPickerBtn:hover{border-color:var(--text);color:var(--text)}
+        #bgSwatch{
+            width:16px;height:16px;border-radius:50%;
+            background:#07090c;border:1.5px solid rgba(255,255,255,.15);
+            flex-shrink:0;transition:background .2s;
+        }
+        /* hide the native color input but keep it clickable */
+        #bgColorInput{
+            position:absolute;width:0;height:0;opacity:0;pointer-events:none;
+        }
+        /* preset swatches panel */
+        #bgPresets{
+            position:fixed;bottom:56px;left:18px;z-index:301;
+            display:none;flex-wrap:wrap;gap:7px;
+            background:rgba(13,21,32,.92);border:1px solid var(--border);
+            border-radius:14px;padding:12px;
+            backdrop-filter:blur(10px);
+            width:192px;
+        }
+        #bgPresets.open{display:flex}
+        .bgp{
+            width:28px;height:28px;border-radius:50%;cursor:pointer;
+            border:2px solid transparent;transition:transform .12s,border-color .15s;
+        }
+        .bgp:hover{transform:scale(1.18);border-color:rgba(255,255,255,.4)}
+        #bgCustomRow{
+            width:100%;display:flex;align-items:center;gap:8px;
+            padding-top:6px;border-top:1px solid var(--border);margin-top:2px;
+        }
+        #bgCustomRow label{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);flex:1}
+        #bgColorInput2{
+            width:32px;height:24px;border:none;padding:0;background:none;cursor:pointer;border-radius:4px;
+        }
     </style>
 </head>
 <body>
@@ -329,7 +374,7 @@ scene.add(rimLight);
 
 // Muzzle flash point light (activated on BANG)
 const flashLight = new THREE.PointLight(0xff8800, 0, 6);
-flashLight.position.set(0, 0.82, 2.8);
+flashLight.position.set(0, 0.42, 2.8);
 scene.add(flashLight);
 
 /* ── MATERIALS ── */
@@ -364,233 +409,324 @@ const matFlash = new THREE.MeshBasicMaterial({
 
 /* ── GUN ROOT GROUP ── */
 const gunRoot = new THREE.Group();
-// Tilt gun slightly so barrel center is easy to aim camera at
-// No rotation needed — we orient gun so barrel runs along Z axis.
-// Barrel tip at Z≈-4.8, muzzle (toward camera) at Z≈-1.0
-// Camera at Z=3.2 looking at Z=0 → sees straight into the bore.
 scene.add(gunRoot);
 
-/* ═══════════════════════════════════
-   FRAME COMPONENTS
-   (Same geometry as file.txt but tweaked
-    for front-facing camera framing)
-═══════════════════════════════════ */
+/*
+  COORDINATE SYSTEM (all in gunRoot local space):
+  - Gun points LEFT in world space (barrel along -Z)
+  - Y = up
+  - X = toward camera (right side of gun faces camera)
 
-// Rear frame / recoil shield — sits behind cylinder (Z+), full height
-const recoilShield = new THREE.Mesh(
-    new THREE.BoxGeometry(0.50, 1.40, 0.38), matFrame);
-recoilShield.position.set(0, 0.05, 0.78);
-gunRoot.add(recoilShield);
+  Key reference points (matching S&W K-frame proportions):
+  - Cylinder center:   Y=0,    Z=0
+  - Barrel axis:       Y=0.42, Z along -Z  (top chamber alignment)
+  - Frame rear:        Z=+0.78
+  - Frame front:       Z=-0.90
+  - Grip pivot:        Y=-0.58, Z=+0.55
+*/
 
-// Top strap — must sit ABOVE the cylinder top edge
-// Cylinder: center Y=0.05, radius=0.62 → top edge at Y = 0.67
-// Top strap bottom = center_Y - height/2, so center_Y = 0.67 + 0.085 + 0.04 gap = 0.795
+const CYL_Y   = 0;       // cylinder center Y
+const CYL_R   = 0.60;    // cylinder radius
+const BAR_Y   = 0.42;    // barrel axis Y (top chamber)
+const FRAME_W = 0.38;    // frame half-width (X)
+
+/* ═══════════════════════════════════════
+   1. MAIN FRAME BODY
+   Shaped like a revolver frame: wide at cylinder,
+   narrows toward barrel, has grip tang below.
+   Built from several overlapping boxes.
+═══════════════════════════════════════ */
+
+// Main body slab — the receiver around the cylinder window
+const frameBody = new THREE.Mesh(
+    new THREE.BoxGeometry(FRAME_W, 1.35, 1.72), matFrame);
+frameBody.position.set(0, 0.02, -0.05);
+gunRoot.add(frameBody);
+
+// Top strap — runs from rear frame to barrel junction, above cylinder
+// Sits just above barrel: top of cylinder = CYL_Y + CYL_R = 0.60
+// Top strap bottom edge at 0.62, center at 0.62+0.08=0.70
 const topStrap = new THREE.Mesh(
-    new THREE.BoxGeometry(0.40, 0.16, 1.72), matFrame);
-topStrap.position.set(0, 0.82, -0.05);
+    new THREE.BoxGeometry(FRAME_W - 0.02, 0.16, 1.72), matFrame);
+topStrap.position.set(0, 0.70, -0.05);
 gunRoot.add(topStrap);
 
-// Bottom frame / crane housing — sits BELOW cylinder bottom edge
-// Cylinder: center Y=0.05, radius=0.62 → bottom edge at Y = -0.57
-// Bottom frame top = center_Y + height/2, so center_Y = -0.57 - 0.095 - 0.04 gap = -0.705
-const bottomFrame = new THREE.Mesh(
-    new THREE.BoxGeometry(0.42, 0.19, 1.55), matFrame);
-bottomFrame.position.set(0, -0.72, -0.05);
-gunRoot.add(bottomFrame);
+// Barrel-to-frame transition lug (thickening where barrel meets frame front)
+const barrelLug = new THREE.Mesh(
+    new THREE.BoxGeometry(FRAME_W, 0.72, 0.32), matFrame);
+barrelLug.position.set(0, BAR_Y - 0.04, -0.88);
+gunRoot.add(barrelLug);
 
-// Front frame junction — connects frame to barrel, in front of cylinder
-const frontFrame = new THREE.Mesh(
-    new THREE.BoxGeometry(0.44, 1.62, 0.30), matFrame);
-frontFrame.position.set(0, 0.05, -0.88);
-gunRoot.add(frontFrame);
+// Rear frame / recoil shield (thick plate behind cylinder)
+const recoilShield = new THREE.Mesh(
+    new THREE.BoxGeometry(FRAME_W + 0.06, 1.30, 0.36), matFrame);
+recoilShield.position.set(0, 0.02, 0.76);
+gunRoot.add(recoilShield);
 
-// Rear sight housing — on top of recoil shield
+// Rear sight housing on top of recoil shield
 const rearSight = new THREE.Mesh(
-    new THREE.BoxGeometry(0.10, 0.09, 0.22), matFrame);
-rearSight.position.set(0, 0.92, 0.62);
+    new THREE.BoxGeometry(0.08, 0.10, 0.20), matFrame);
+rearSight.position.set(0, 0.82, 0.65);
 gunRoot.add(rearSight);
 
-/* ═══════════════════════════════════
-   CYLINDER ASSEMBLY
-   The star of the show — centered in the frame window.
-   Rotated about Z axis for spinning.
-═══════════════════════════════════ */
+/* ═══════════════════════════════════════
+   2. BARREL
+   Cylinder along Z, axis at BAR_Y.
+   4" barrel (matching reference photo proportions).
+═══════════════════════════════════════ */
+const BARREL_LEN = 2.8;
+const barrelZ    = -0.90 - BARREL_LEN / 2;
+const BARREL_Y   = BAR_Y;
+const muzzleZ    = -0.90 - BARREL_LEN;
+
+const barrel = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.21, 0.22, BARREL_LEN, 24), matFrame);
+barrel.rotation.x = Math.PI / 2;
+barrel.position.set(0, BARREL_Y, barrelZ);
+gunRoot.add(barrel);
+
+// Underlug / full-lug shroud below barrel (S&W style)
+const underlug = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.185, 0.195, BARREL_LEN, 16), matFrame);
+underlug.rotation.x = Math.PI / 2;
+underlug.position.set(0, BARREL_Y - 0.26, barrelZ);
+gunRoot.add(underlug);
+
+// Ejector rod inside underlug
+const ejectorRod = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.04, 0.04, BARREL_LEN - 0.3, 10), matCyl);
+ejectorRod.rotation.x = Math.PI / 2;
+ejectorRod.position.set(0, BARREL_Y - 0.26, barrelZ + 0.15);
+gunRoot.add(ejectorRod);
+
+// Muzzle face ring
+const muzzleCrown = new THREE.Mesh(
+    new THREE.TorusGeometry(0.21, 0.022, 10, 28), matCyl);
+muzzleCrown.rotation.x = Math.PI / 2;
+muzzleCrown.position.set(0, BARREL_Y, muzzleZ);
+gunRoot.add(muzzleCrown);
+
+// Bore opening
+const muzzleBore = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.12, 0.12, 0.10, 18), matDark);
+muzzleBore.rotation.x = Math.PI / 2;
+muzzleBore.position.set(0, BARREL_Y, muzzleZ - 0.02);
+gunRoot.add(muzzleBore);
+
+// Front sight (ramp style — tapers toward muzzle)
+const frontSight = new THREE.Mesh(
+    new THREE.BoxGeometry(0.055, 0.14, 0.22), matFrame);
+frontSight.position.set(0, BARREL_Y + 0.185, muzzleZ + 0.16);
+gunRoot.add(frontSight);
+
+const redInsert = new THREE.Mesh(
+    new THREE.BoxGeometry(0.058, 0.055, 0.08),
+    new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+redInsert.position.set(0, BARREL_Y + 0.205, muzzleZ + 0.12);
+gunRoot.add(redInsert);
+
+/* ═══════════════════════════════════════
+   3. CYLINDER ASSEMBLY
+   Sits in the frame window. Spins around Z axis.
+═══════════════════════════════════════ */
 const cylinderGroup = new THREE.Group();
-cylinderGroup.position.set(0, 0.05, -0.07);
+cylinderGroup.position.set(0, CYL_Y, -0.06);
 gunRoot.add(cylinderGroup);
 
-// Main cylinder drum
 const cylBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.62, 0.62, 1.28, 36), matCyl);
+    new THREE.CylinderGeometry(CYL_R, CYL_R, 1.22, 32), matCyl);
 cylBody.rotation.x = Math.PI / 2;
 cylinderGroup.add(cylBody);
 
-// Central extractor pin
+// Center extractor pin
 const axisPin = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.11, 0.11, 1.45, 16), matFrame);
+    new THREE.CylinderGeometry(0.09, 0.09, 1.35, 14), matFrame);
 axisPin.rotation.x = Math.PI / 2;
 cylinderGroup.add(axisPin);
 
-// 6 chambers: flutes + brass cartridge faces
-const CHAMBER_R = 0.365;
+// 6 chambers
+const CHAMBER_R = 0.345;
 for (let i = 0; i < 6; i++) {
     const angle = (i * Math.PI) / 3;
     const cx = Math.cos(angle) * CHAMBER_R;
     const cy = Math.sin(angle) * CHAMBER_R;
 
-    // Bore tunnel through cylinder (dark)
+    // Bore tunnel
     const boreTunnel = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.12, 0.12, 1.32, 16), matDark);
+        new THREE.CylinderGeometry(0.105, 0.105, 1.26, 14), matDark);
     boreTunnel.rotation.x = Math.PI / 2;
     boreTunnel.position.set(cx, cy, 0);
     cylinderGroup.add(boreTunnel);
 
-    // Brass cartridge rim (back face, toward viewer in front-facing camera)
-    // In front-facing view the FRONT face of cylinder is toward camera.
-    // z = +0.62 is the front face (closest to camera at +Z).
+    // Brass cartridge head (visible on front face)
     const cartridge = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.115, 0.115, 0.055, 16), matBrass);
+        new THREE.CylinderGeometry(0.10, 0.10, 0.05, 14), matBrass);
     cartridge.rotation.x = Math.PI / 2;
-    cartridge.position.set(cx, cy, 0.645);
+    cartridge.position.set(cx, cy, 0.64);
     cylinderGroup.add(cartridge);
 
-    // Primer dot
+    // Primer
     const primer = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.042, 0.042, 0.062, 12), matPrimer);
+        new THREE.CylinderGeometry(0.036, 0.036, 0.055, 10), matPrimer);
     primer.rotation.x = Math.PI / 2;
-    primer.position.set(cx, cy, 0.648);
+    primer.position.set(cx, cy, 0.645);
     cylinderGroup.add(primer);
 
-    // Flute groove between chambers
-    const fluteAngle = angle + Math.PI / 6;
+    // Flute groove (between chambers)
+    const fa = angle + Math.PI / 6;
     const flute = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.12, 0.12, 0.90, 12), matDark);
+        new THREE.CylinderGeometry(0.105, 0.105, 0.88, 10), matDark);
     flute.rotation.x = Math.PI / 2;
-    flute.position.set(
-        Math.cos(fluteAngle) * 0.59,
-        Math.sin(fluteAngle) * 0.59,
-        -0.05
-    );
+    flute.position.set(Math.cos(fa) * 0.57, Math.sin(fa) * 0.57, -0.04);
     cylinderGroup.add(flute);
 }
 
-/* ═══════════════════════════════════
-   BARREL
-   Runs along Z axis. Barrel center Y aligns with top strap Y (0.82)
-   so it sits cleanly above the cylinder, not merging with it.
-═══════════════════════════════════ */
-const BARREL_LEN = 3.0;
-const barrelZ = -1.0 - BARREL_LEN / 2;
-const BARREL_Y = 0.82; // matches top strap center Y
-
-const barrel = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.22, 0.23, BARREL_LEN, 28), matFrame);
-barrel.rotation.x = Math.PI / 2;
-barrel.position.set(0, BARREL_Y, barrelZ);
-gunRoot.add(barrel);
-
-// Underlug / ejector shroud — hangs below barrel, above bottom frame
-const underlug = new THREE.Mesh(
-    new THREE.BoxGeometry(0.20, 0.28, BARREL_LEN), matFrame);
-underlug.position.set(0, BARREL_Y - 0.26, barrelZ);
-gunRoot.add(underlug);
-
-// Ejector rod
-const ejectorRod = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.055, 0.055, 0.65, 12), matCyl);
-ejectorRod.rotation.x = Math.PI / 2;
-ejectorRod.position.set(0, BARREL_Y - 0.30, -1.35);
-gunRoot.add(ejectorRod);
-
-// Muzzle crown ring
-const muzzleZ = -1.0;
-const muzzleCrown = new THREE.Mesh(
-    new THREE.TorusGeometry(0.225, 0.025, 12, 32), matCyl);
-muzzleCrown.rotation.x = Math.PI / 2;
-muzzleCrown.position.set(0, BARREL_Y, muzzleZ);
-gunRoot.add(muzzleCrown);
-
-// Bore hole at muzzle
-const muzzleBore = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.125, 0.125, 0.12, 20), matDark);
-muzzleBore.rotation.x = Math.PI / 2;
-muzzleBore.position.set(0, BARREL_Y, muzzleZ - 0.04);
-gunRoot.add(muzzleBore);
-
-// Front sight blade
-const frontSight = new THREE.Mesh(
-    new THREE.BoxGeometry(0.07, 0.18, 0.28), matFrame);
-frontSight.position.set(0, BARREL_Y + 0.20, -BARREL_LEN - 0.75);
-gunRoot.add(frontSight);
-
-// Red front sight insert
-const redInsert = new THREE.Mesh(
-    new THREE.BoxGeometry(0.075, 0.07, 0.09),
-    new THREE.MeshBasicMaterial({ color: 0xef4444 }));
-redInsert.position.set(0, BARREL_Y + 0.22, -BARREL_LEN - 0.80);
-gunRoot.add(redInsert);
-
-/* ═══════════════════════════════════
-   TRIGGER GUARD + TRIGGER
-═══════════════════════════════════ */
-const guardGeo = new THREE.TorusGeometry(0.48, 0.05, 10, 24, Math.PI * 0.85);
-const guard = new THREE.Mesh(guardGeo, matFrame);
-guard.position.set(0, -0.58, 0.12);
-guard.rotation.y = Math.PI / 2;
-guard.rotation.x = 0.35;
-gunRoot.add(guard);
-
-const triggerPivot = new THREE.Group();
-triggerPivot.position.set(0, -0.38, 0.22);
-gunRoot.add(triggerPivot);
-
-const triggerBlade = new THREE.Mesh(
-    new THREE.BoxGeometry(0.075, 0.43, 0.14), matCyl);
-triggerBlade.position.set(0, -0.15, -0.05);
-triggerBlade.rotation.x = 0.4;
-triggerPivot.add(triggerBlade);
-
-/* ═══════════════════════════════════
-   HAMMER
-═══════════════════════════════════ */
+/* ═══════════════════════════════════════
+   4. HAMMER
+   Pivots at rear-top of frame.
+═══════════════════════════════════════ */
 const hammerPivot = new THREE.Group();
-hammerPivot.position.set(0, 0.42, 0.82);
+hammerPivot.position.set(0, 0.44, 0.70);
 gunRoot.add(hammerPivot);
 
+// Hammer body — wider at spur, narrow at nose
 const hammerBody = new THREE.Mesh(
-    new THREE.BoxGeometry(0.13, 0.45, 0.23), matCyl);
-hammerBody.position.set(0, 0.16, 0.06);
-hammerBody.rotation.x = -0.45;
+    new THREE.BoxGeometry(0.115, 0.42, 0.20), matCyl);
+hammerBody.position.set(0, 0.14, 0.04);
+hammerBody.rotation.x = -0.38;
 hammerPivot.add(hammerBody);
 
+// Serrated spur (thumb-cocking pad)
 const hammerSpur = new THREE.Mesh(
-    new THREE.BoxGeometry(0.15, 0.10, 0.17), matCyl);
-hammerSpur.position.set(0, 0.32, 0.15);
+    new THREE.BoxGeometry(0.135, 0.09, 0.20), matCyl);
+hammerSpur.position.set(0, 0.30, 0.14);
 hammerPivot.add(hammerSpur);
 
-/* ═══════════════════════════════════
-   GRIP
-═══════════════════════════════════ */
-const gripGroup = new THREE.Group();
-gripGroup.position.set(0, -0.42, 0.95);
-gripGroup.rotation.x = -0.48;
+// Spur serration lines
+for (let i = 0; i < 5; i++) {
+    const serr = new THREE.Mesh(
+        new THREE.BoxGeometry(0.140, 0.008, 0.035), matDark);
+    serr.position.set(0, 0.295, 0.055 + i * 0.038);
+    hammerPivot.add(serr);
+}
 
+/* ═══════════════════════════════════════
+   5. TRIGGER GUARD + TRIGGER
+   The guard is a D-shaped loop clearly visible below frame.
+   On the reference: guard starts just below/front of cylinder,
+   loops forward and down, returns to grip.
+═══════════════════════════════════════ */
+
+// Trigger guard — torus arc in X-Y plane (visible from side)
+// radius=0.32 gives a nice D-loop size
+// Arc = 0.75*PI so it's a 3/4 circle (not a full semicircle)
+const guardGeo = new THREE.TorusGeometry(0.30, 0.038, 12, 32, Math.PI * 0.82);
+const guard = new THREE.Mesh(guardGeo, matFrame);
+// Default torus is in X-Y plane — perfect (visible from side camera)
+// Rotate so the opening faces upward-rearward to connect to frame
+guard.rotation.z = Math.PI * 1.12;  // open end faces upper-rear
+guard.position.set(0, -0.60, 0.12);
+gunRoot.add(guard);
+
+// Front guard connection to frame (front of trigger guard)
+const guardFront = new THREE.Mesh(
+    new THREE.BoxGeometry(FRAME_W - 0.06, 0.12, 0.08), matFrame);
+guardFront.position.set(0, -0.62, -0.20);
+gunRoot.add(guardFront);
+
+// Rear guard connection to grip tang
+const guardRear = new THREE.Mesh(
+    new THREE.BoxGeometry(FRAME_W - 0.06, 0.12, 0.08), matFrame);
+guardRear.position.set(0, -0.62, 0.38);
+gunRoot.add(guardRear);
+
+// Trigger — thin blade, hangs inside the guard from the frame
+const triggerPivot = new THREE.Group();
+triggerPivot.position.set(0, -0.46, 0.08);
+gunRoot.add(triggerPivot);
+
+// Trigger shank (upper straight part)
+const triggerShank = new THREE.Mesh(
+    new THREE.BoxGeometry(0.048, 0.24, 0.052), matCyl);
+triggerShank.position.set(0, -0.08, 0.01);
+triggerShank.rotation.x = 0.12;
+triggerPivot.add(triggerShank);
+
+// Trigger shoe (the curved finger-contact surface)
+const triggerShoe = new THREE.Mesh(
+    new THREE.BoxGeometry(0.055, 0.10, 0.068), matCyl);
+triggerShoe.position.set(0, -0.22, -0.03);
+triggerShoe.rotation.x = -0.50;
+triggerPivot.add(triggerShoe);
+
+/* ═══════════════════════════════════════
+   6. GRIP
+   S&W style: angled rearward ~30°, wider at bottom,
+   ergonomic curve. Made of several shapes.
+═══════════════════════════════════════ */
+const gripGroup = new THREE.Group();
+// Grip pivot at bottom of frame — angled backward
+gripGroup.position.set(0, -0.58, 0.58);
+gripGroup.rotation.x = -0.52;  // tilt backward ~30°
+gunRoot.add(gripGroup);
+
+// Main grip body — tapers slightly, wider at bottom
 const gripMain = new THREE.Mesh(
-    new THREE.BoxGeometry(0.55, 1.85, 0.78), matWood);
-gripMain.position.set(0, -0.7, 0);
+    new THREE.BoxGeometry(0.52, 1.62, 0.72), matWood);
+gripMain.position.set(0, -0.68, 0.02);
 gripGroup.add(gripMain);
 
+// Front strap bulge (fills the finger-groove area)
+const gripFront = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.22, 0.28, 1.58, 14, 1, false,
+        Math.PI * 0.5, Math.PI * 0.5), matWood);
+gripFront.rotation.y = -Math.PI / 2;
+gripFront.position.set(0, -0.68, -0.32);
+gripGroup.add(gripFront);
+
+// Grip butt (rounded bottom)
+const gripButt = new THREE.Mesh(
+    new THREE.SphereGeometry(0.32, 14, 10), matWood);
+gripButt.scale.set(0.82, 0.45, 1.10);
+gripButt.position.set(0, -1.48, 0.04);
+gripGroup.add(gripButt);
+
+// Grip cap (metal bottom cap)
+const gripCap = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.28, 0.24, 0.10, 14), matFrame);
+gripCap.position.set(0, -1.44, 0.04);
+gripGroup.add(gripCap);
+
+// Grip panel screw (brass medallion on side)
 const medallion = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.08, 0.08, 0.60, 16), matBrass);
+    new THREE.CylinderGeometry(0.075, 0.075, 0.54, 14), matBrass);
 medallion.rotation.z = Math.PI / 2;
-medallion.position.set(0, -0.45, 0);
+medallion.position.set(0, -0.55, 0.02);
 gripGroup.add(medallion);
 
-const gripButt = new THREE.Mesh(
-    new THREE.SphereGeometry(0.38, 14, 14), matFrame);
-gripButt.scale.set(0.70, 0.30, 1.05);
-gripButt.position.set(0, -1.65, 0.05);
-gripGroup.add(gripButt);
+// Grip checkering (horizontal grooves)
+for (let i = 0; i < 8; i++) {
+    const groove = new THREE.Mesh(
+        new THREE.BoxGeometry(0.525, 0.012, 0.70), matDark);
+    groove.position.set(0, -0.30 - i * 0.155, 0.02);
+    gripGroup.add(groove);
+}
+
+/* ═══════════════════════════════════════
+   7. LOADING GATE + CRANE LATCH
+   Small detail on right side of frame
+═══════════════════════════════════════ */
+const loadingGate = new THREE.Mesh(
+    new THREE.BoxGeometry(0.045, 0.28, 0.22), matFrame);
+loadingGate.position.set(FRAME_W / 2 + 0.022, 0.05, 0.48);
+gunRoot.add(loadingGate);
+
+// Cylinder crane/yoke latch
+const craneLatch = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.055, 0.055, 0.08, 10), matCyl);
+craneLatch.rotation.z = Math.PI / 2;
+craneLatch.position.set(FRAME_W / 2 + 0.04, -0.15, 0.12);
+gunRoot.add(craneLatch);
 
 gunRoot.add(gripGroup);
 
@@ -1036,6 +1172,64 @@ shootBtn.addEventListener('click', () => {
 });
 
 setOdds(5, 6);
+
+/* ═══════════════════════════════════════════════════════════════
+   BACKGROUND COLOR PICKER
+═══════════════════════════════════════════════════════════════ */
+const PRESETS = [
+    '#07090c','#0a0f1a','#0d1520','#111827',
+    '#1a0a0a','#0a1a0a','#0a0a1a','#1a1000',
+    '#1e1e2e','#2d1b33','#0f2027','#1a1a1a',
+    '#ffffff','#f0e8d8','#d0e8f0','#e8d0e0',
+];
+
+// Build preset swatches panel
+const presetsEl = document.createElement('div');
+presetsEl.id = 'bgPresets';
+PRESETS.forEach(hex => {
+    const s = document.createElement('div');
+    s.className = 'bgp';
+    s.style.background = hex;
+    s.title = hex;
+    s.addEventListener('click', () => { applyBg(hex); presetsEl.classList.remove('open'); });
+    presetsEl.appendChild(s);
+});
+// Custom color row
+const customRow = document.createElement('div');
+customRow.id = 'bgCustomRow';
+customRow.innerHTML = '<label>Custom</label><input type="color" id="bgColorInput2" value="#07090c">';
+presetsEl.appendChild(customRow);
+document.body.appendChild(presetsEl);
+
+// Picker trigger button (bottom-left)
+const btnEl = document.createElement('div');
+btnEl.id = 'bgPickerBtn';
+btnEl.innerHTML = '<div id="bgSwatch"></div><span>Background</span>';
+document.body.appendChild(btnEl);
+
+const swatchEl  = document.getElementById('bgSwatch');
+const colorIn   = document.getElementById('bgColorInput2');
+
+btnEl.addEventListener('click', e => {
+    e.stopPropagation();
+    presetsEl.classList.toggle('open');
+});
+document.addEventListener('click', () => presetsEl.classList.remove('open'));
+presetsEl.addEventListener('click', e => e.stopPropagation());
+colorIn.addEventListener('input', () => applyBg(colorIn.value));
+
+function applyBg(hex) {
+    // CSS background
+    document.documentElement.style.setProperty('--bg', hex);
+    document.body.style.background = hex;
+    // Three.js scene
+    const c = new THREE.Color(hex);
+    scene.background = c;
+    scene.fog = new THREE.FogExp2(c.getHex(), 0.032);
+    // Swatch preview
+    swatchEl.style.background = hex;
+    colorIn.value = hex;
+}
 </script>
 </body>
 </html>
