@@ -330,16 +330,13 @@
             flex:1;
         }
         .pip-badge{
-            display:flex;align-items:center;gap:4px;
-            background:rgba(0,0,0,.25);border-radius:8px;
-            padding:3px 8px;flex-shrink:0;
+            display:flex;align-items:center;
+            border-radius:6px;padding:2px 8px;flex-shrink:0;
         }
-        .pip-badge-icon{font-size:.75rem}
         .pip-badge-val{
-            font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;
-            color:var(--text);
+            font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;
         }
-        .pip-badge.deaths .pip-badge-val{color:#e87070}
+        .pip-badge.deaths   .pip-badge-val{color:#e87070}
         .pip-badge.survived .pip-badge-val{color:#6ed886}
         .pip-turn{display:none}
         .pip-elim-tag{
@@ -1710,13 +1707,13 @@ function buildSeatPips() {
         const deathBadge = document.createElement('div');
         deathBadge.className = 'pip-badge deaths';
         deathBadge.id = `pipD${i}`;
-        deathBadge.innerHTML = `<span class="pip-badge-icon">💀</span><span class="pip-badge-val">0</span>`;
+        deathBadge.innerHTML = `<span class="pip-badge-val">0</span>`;
 
         // Survived badge
         const survBadge = document.createElement('div');
         survBadge.className = 'pip-badge survived';
         survBadge.id = `pipS${i}`;
-        survBadge.innerHTML = `<span class="pip-badge-icon">✅</span><span class="pip-badge-val">0</span>`;
+        survBadge.innerHTML = `<span class="pip-badge-val">0</span>`;
 
         info.appendChild(name);
         info.appendChild(deathBadge);
