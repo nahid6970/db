@@ -189,6 +189,113 @@
         .hdot.new{animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
         @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
+        /* ══════════════════════════════════════
+           SETUP SCREEN
+        ══════════════════════════════════════ */
+        #setupScreen{
+            position:fixed;inset:0;z-index:400;
+            background:var(--bg);
+            display:flex;align-items:center;justify-content:center;
+            padding:24px;
+        }
+        .setup-box{
+            background:var(--card);border:1px solid var(--border);border-radius:24px;
+            padding:32px 28px;width:100%;max-width:420px;
+            box-shadow:0 24px 80px rgba(0,0,0,.8);
+            display:flex;flex-direction:column;gap:20px;
+        }
+        .setup-title{
+            font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:8px;
+            color:var(--red);text-align:center;
+            text-shadow:0 0 30px rgba(231,76,60,.5);
+        }
+        .setup-sub{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);text-align:center;margin-top:-14px}
+        .setup-count-row{display:flex;gap:10px;justify-content:center}
+        .count-btn{
+            font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:1px;
+            width:52px;height:52px;border-radius:12px;border:1px solid var(--border);
+            background:var(--card2);color:var(--dim);cursor:pointer;
+            transition:all .15s;display:flex;align-items:center;justify-content:center;
+        }
+        .count-btn:hover{border-color:var(--text);color:var(--text)}
+        .count-btn.active{
+            background:linear-gradient(170deg,#bf3a2a,#6e1515);
+            border-color:rgba(192,57,43,.4);color:#fff;
+            box-shadow:0 4px 18px rgba(140,30,20,.5);
+        }
+        .setup-seats{display:flex;flex-direction:column;gap:10px}
+        .seat-row{
+            display:flex;align-items:center;gap:12px;
+            background:var(--card2);border:1px solid var(--border);
+            border-radius:12px;padding:10px 14px;
+        }
+        .seat-num{
+            font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:1px;
+            color:var(--dim);min-width:22px;
+        }
+        .seat-select{
+            flex:1;background:transparent;border:none;outline:none;
+            color:var(--text);font-size:.88rem;font-family:'Inter',sans-serif;
+            cursor:pointer;
+        }
+        .seat-select option{background:var(--card);color:var(--text)}
+        .seat-avatar{
+            width:36px;height:36px;border-radius:50%;object-fit:cover;
+            border:2px solid var(--border);flex-shrink:0;
+            background:var(--card);
+        }
+        .btn-start{
+            font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:3px;
+            padding:16px;border-radius:12px;border:1px solid rgba(192,57,43,.3);
+            background:linear-gradient(170deg,#bf3a2a,#962020 55%,#6e1515);
+            color:#fff;cursor:pointer;
+            box-shadow:0 4px 18px rgba(140,30,20,.5);
+            transition:transform .12s,box-shadow .12s;
+        }
+        .btn-start:hover{transform:translateY(-2px);box-shadow:0 7px 26px rgba(231,76,60,.45)}
+        .btn-start:active{transform:translateY(1px)}
+        .btn-start:disabled{opacity:.35;cursor:not-allowed;transform:none}
+
+        /* ══════════════════════════════════════
+           PLAYER TURN INDICATOR (in right panel)
+        ══════════════════════════════════════ */
+        #playerTurn{
+            display:none;
+            background:var(--card);border:1px solid var(--border);border-radius:16px;
+            padding:14px 16px;gap:14px;align-items:center;
+            box-shadow:0 8px 32px rgba(0,0,0,.5);
+        }
+        #playerTurn.visible{display:flex}
+        #playerTurnPhoto{
+            width:52px;height:52px;border-radius:50%;object-fit:cover;
+            border:2px solid var(--border);flex-shrink:0;
+        }
+        .turn-info{flex:1;min-width:0}
+        .turn-label{font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim)}
+        .turn-name{
+            font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:2px;
+            color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+        }
+        .turn-deaths{font-size:.68rem;color:var(--dim);margin-top:1px}
+
+        /* Seat indicators row below turn */
+        #seatRow{
+            display:none;flex-direction:row;gap:6px;flex-wrap:wrap;
+        }
+        #seatRow.visible{display:flex}
+        .seat-pip{
+            display:flex;flex-direction:column;align-items:center;gap:4px;
+            opacity:.45;transition:opacity .2s,transform .2s;
+        }
+        .seat-pip.active{opacity:1;transform:scale(1.1)}
+        .seat-pip img{
+            width:30px;height:30px;border-radius:50%;object-fit:cover;
+            border:2px solid var(--border);
+        }
+        .seat-pip.active img{border-color:var(--gold)}
+        .seat-pip.dead img{border-color:var(--red);filter:grayscale(1) brightness(.5)}
+        .seat-pip span{font-size:.5rem;letter-spacing:1px;text-transform:uppercase;color:var(--dim);max-width:38px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
         #bgPickerBtn{
             position:fixed;bottom:18px;left:18px;z-index:300;
             display:flex;align-items:center;gap:8px;
@@ -232,6 +339,31 @@
 <div id="bloodOverlay"></div>
 <div id="flashOverlay"></div>
 
+<!-- ══════════════════════════════════════
+     SETUP SCREEN (shown first)
+══════════════════════════════════════ -->
+<div id="setupScreen">
+    <div class="setup-box">
+        <div class="setup-title">RUSSIAN ROULETTE</div>
+        <div class="setup-sub">Select players</div>
+
+        <!-- How many players -->
+        <div>
+            <div style="font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);margin-bottom:10px;text-align:center">Number of Players</div>
+            <div class="setup-count-row" id="countBtns">
+                <button class="count-btn" data-n="2">2</button>
+                <button class="count-btn" data-n="3">3</button>
+                <button class="count-btn active" data-n="4">4</button>
+            </div>
+        </div>
+
+        <!-- Seat assignment dropdowns (built by JS) -->
+        <div class="setup-seats" id="setupSeats"></div>
+
+        <button class="btn-start" id="startBtn">START GAME</button>
+    </div>
+</div>
+
 <div class="layout">
     <div class="gun-col">
         <div id="gunWrap">
@@ -246,6 +378,19 @@
             <div class="title">RUSSIAN<br>ROULETTE</div>
             <div class="tagline">Smith & Wesson .38 Military & Police</div>
         </div>
+
+        <!-- Player turn indicator -->
+        <div id="playerTurn">
+            <img id="playerTurnPhoto" src="" alt="">
+            <div class="turn-info">
+                <div class="turn-label">Current Turn</div>
+                <div class="turn-name" id="playerTurnName">—</div>
+                <div class="turn-deaths" id="playerTurnDeaths"></div>
+            </div>
+        </div>
+
+        <!-- Seat pip row -->
+        <div id="seatRow"></div>
 
         <div class="card" id="card">
             <div class="status idle" id="statusEl">SPIN TO BEGIN</div>
@@ -264,7 +409,7 @@
                 </div>
                 <div class="stats">
                     <div class="stat-pill">💀 <span class="sval" id="svCount">0</span></div>
-                    <div class="stat-pill">🔄 <span class="sval" id="spCount">0</span></div>
+                    <div class="stat-pill">✅ <span class="sval" id="spCount">0</span></div>
                     <div class="stat-pill">🔥 <span class="sval" id="stCount">0</span></div>
                 </div>
                 <div class="history" id="history"></div>
@@ -1186,7 +1331,7 @@ const smokeEl   = document.getElementById('smokeEl');
 const gunWrap   = document.getElementById('gunWrap');
 
 let bulletPos = Math.floor(Math.random() * 6), currentPos = 0;
-let isSpun = false, survives = 0, spins = 0, streak = 0, histArr = [];
+let isSpun = false, deaths = 0, survives = 0, spins = 0, streak = 0, histArr = [];
 
 const setStatus = (t, c = '') => { statusEl.textContent = t; statusEl.className = 'status ' + c; };
 const setOdds   = (n, d)      => { oddsFill.style.width = ((n / d) * 100) + '%'; oddsVal.textContent = n + ' in ' + d; };
@@ -1307,12 +1452,19 @@ shootBtn.addEventListener('click', () => {
                 burst(W2 / 2, H2 / 2, '#ff7070', 20);
 
                 addDot(false); streak = 0; stCountEl.textContent = streak;
-                svCountEl.textContent = survives;
+                deaths++; svCountEl.textContent = deaths;
+                // Track this player's death
+                if (gamePlayers.length) {
+                    gamePlayers[currentPlayerIdx].deaths++;
+                    playerTurnDead.textContent = `💀 ${gamePlayers[currentPlayerIdx].deaths} death${gamePlayers[currentPlayerIdx].deaths > 1 ? 's' : ''}`;
+                }
                 isSpun = false;
                 animState.isFiring = false;
                 spinBtn.disabled = false;
                 spinBtn.textContent = '⟳  SPIN';
                 setOdds(0, 1);
+                // Move to next player after a beat
+                if (gamePlayers.length) setTimeout(nextPlayer, 1200);
             });
         } else {
             /* ══ CLICK — survived, cylinder advances, keep firing ══ */
@@ -1323,9 +1475,10 @@ shootBtn.addEventListener('click', () => {
                 setTimeout(() => card.classList.remove('sglow'), 900);
 
                 survives++; streak++;
-                svCountEl.textContent = survives;
+                spCountEl.textContent = survives;
                 stCountEl.textContent = streak;
                 addDot(true);
+                if (gamePlayers.length) gamePlayers[currentPlayerIdx].survived++;
 
                 const r = card.getBoundingClientRect();
                 burst(r.left + r.width / 2, r.top + 60, '#2ecc71', 28);
@@ -1336,8 +1489,6 @@ shootBtn.addEventListener('click', () => {
                 animCylSpin(Math.PI / 3, 280, null);
                 playThud();
 
-                // Calculate remaining safe chambers out of (6 - shots fired this spin)
-                // After each click the odds get worse — 1 bullet in fewer remaining chambers
                 const chambersLeft = 6 - streak;
                 const safeLeft = Math.max(chambersLeft - 1, 0);
                 if (safeLeft > 0) {
@@ -1349,10 +1500,11 @@ shootBtn.addEventListener('click', () => {
                 }
 
                 animState.isFiring = false;
-                // Keep shooting — don't require a spin
                 spinBtn.disabled = false;
                 shootBtn.disabled = false;
                 spinBtn.textContent = '⟳  SPIN';
+                // Rotate to next player
+                if (gamePlayers.length) nextPlayer();
             });
         }
     }, 450);
@@ -1361,8 +1513,152 @@ shootBtn.addEventListener('click', () => {
 setOdds(5, 6);
 
 /* ═══════════════════════════════════════════════════════════════
-   BACKGROUND COLOR PICKER
+   PLAYER SYSTEM
 ═══════════════════════════════════════════════════════════════ */
+
+// All available players (add more images to /player/ folder to expand)
+const ALL_PLAYERS = [
+    { name: 'Nahid', photo: 'player/Nahid.png' },
+    { name: 'Nehal', photo: 'player/Nehal.png' },
+    { name: 'Nupur', photo: 'player/Nupur.png' },
+    { name: 'Saif',  photo: 'player/Saif.png'  },
+];
+
+// Game state
+let gamePlayers = [];      // [{name, photo, deaths, survived}]
+let currentPlayerIdx = 0;
+
+/* ── Setup Screen ── */
+const setupScreen    = document.getElementById('setupScreen');
+const setupSeats     = document.getElementById('setupSeats');
+const startBtn       = document.getElementById('startBtn');
+const countBtns      = document.querySelectorAll('.count-btn');
+const playerTurnEl   = document.getElementById('playerTurn');
+const playerTurnPhoto= document.getElementById('playerTurnPhoto');
+const playerTurnName = document.getElementById('playerTurnName');
+const playerTurnDead = document.getElementById('playerTurnDeaths');
+const seatRowEl      = document.getElementById('seatRow');
+
+let selectedCount = 4;
+
+// Build seat dropdowns
+function buildSeats(n) {
+    selectedCount = n;
+    setupSeats.innerHTML = '';
+    for (let i = 0; i < n; i++) {
+        const row = document.createElement('div');
+        row.className = 'seat-row';
+
+        const num = document.createElement('div');
+        num.className = 'seat-num';
+        num.textContent = `P${i + 1}`;
+
+        const img = document.createElement('img');
+        img.className = 'seat-avatar';
+        img.id = `seatAvatar${i}`;
+        img.src = ALL_PLAYERS[i % ALL_PLAYERS.length].photo;
+
+        const sel = document.createElement('select');
+        sel.className = 'seat-select';
+        sel.id = `seatSel${i}`;
+        ALL_PLAYERS.forEach((p, pi) => {
+            const opt = document.createElement('option');
+            opt.value = pi;
+            opt.textContent = p.name;
+            if (pi === i % ALL_PLAYERS.length) opt.selected = true;
+            sel.appendChild(opt);
+        });
+        sel.addEventListener('change', () => {
+            img.src = ALL_PLAYERS[sel.value].photo;
+        });
+
+        row.appendChild(num);
+        row.appendChild(img);
+        row.appendChild(sel);
+        setupSeats.appendChild(row);
+    }
+}
+
+// Count button selection
+countBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        countBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        buildSeats(parseInt(btn.dataset.n));
+    });
+});
+
+// Init with 4 seats
+buildSeats(4);
+
+// Start game
+startBtn.addEventListener('click', () => {
+    gamePlayers = [];
+    for (let i = 0; i < selectedCount; i++) {
+        const sel = document.getElementById(`seatSel${i}`);
+        const p   = ALL_PLAYERS[sel.value];
+        gamePlayers.push({ name: p.name, photo: p.photo, deaths: 0, survived: 0 });
+    }
+    currentPlayerIdx = 0;
+
+    // Hide setup, show game
+    setupScreen.style.display = 'none';
+    playerTurnEl.classList.add('visible');
+    seatRowEl.classList.add('visible');
+
+    buildSeatPips();
+    showCurrentPlayer();
+});
+
+/* ── Seat pip row ── */
+function buildSeatPips() {
+    seatRowEl.innerHTML = '';
+    gamePlayers.forEach((p, i) => {
+        const pip = document.createElement('div');
+        pip.className = 'seat-pip';
+        pip.id = `pip${i}`;
+
+        const img = document.createElement('img');
+        img.src = p.photo;
+        img.alt = p.name;
+
+        const lbl = document.createElement('span');
+        lbl.textContent = p.name;
+
+        pip.appendChild(img);
+        pip.appendChild(lbl);
+        seatRowEl.appendChild(pip);
+    });
+}
+
+function updatePips() {
+    gamePlayers.forEach((p, i) => {
+        const pip = document.getElementById(`pip${i}`);
+        if (!pip) return;
+        pip.classList.toggle('active', i === currentPlayerIdx);
+        pip.classList.toggle('dead', false); // players stay in rotation
+    });
+}
+
+/* ── Show current player ── */
+function showCurrentPlayer() {
+    const p = gamePlayers[currentPlayerIdx];
+    if (!p) return;
+    playerTurnPhoto.src   = p.photo;
+    playerTurnName.textContent = p.name;
+    playerTurnDead.textContent = p.deaths > 0
+        ? `💀 ${p.deaths} death${p.deaths > 1 ? 's' : ''}`
+        : 'No deaths yet';
+    updatePips();
+}
+
+/* ── Advance to next player ── */
+function nextPlayer() {
+    currentPlayerIdx = (currentPlayerIdx + 1) % gamePlayers.length;
+    showCurrentPlayer();
+}
+
+
 const PRESETS = [
     '#07090c','#0a0f1a','#0d1520','#111827',
     '#1a0a0a','#0a1a0a','#0a0a1a','#1a1000',
