@@ -260,37 +260,106 @@
            PLAYER TURN INDICATOR (in right panel)
         ══════════════════════════════════════ */
 
+        /* ── Settings button (top-right of UI panel) ── */
+        #settingsBtn{
+            position:absolute;top:18px;right:18px;z-index:50;
+            width:36px;height:36px;border-radius:50%;
+            background:rgba(13,21,32,.85);border:1px solid var(--border);
+            display:flex;align-items:center;justify-content:center;
+            cursor:pointer;backdrop-filter:blur(8px);
+            color:var(--dim);font-size:1rem;
+            transition:border-color .2s,color .2s;
+            user-select:none;
+        }
+        #settingsBtn:hover{border-color:var(--text);color:var(--text)}
+
+        /* Settings panel */
+        #settingsPanel{
+            display:none;
+            position:absolute;top:60px;right:18px;z-index:60;
+            background:var(--card);border:1px solid var(--border);
+            border-radius:16px;padding:18px 18px;width:260px;
+            box-shadow:0 16px 48px rgba(0,0,0,.7);
+            backdrop-filter:blur(12px);
+            flex-direction:column;gap:16px;
+        }
+        #settingsPanel.open{display:flex}
+        .settings-title{
+            font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:4px;
+            color:var(--text);border-bottom:1px solid var(--border);
+            padding-bottom:10px;
+        }
+        .setting-row{display:flex;flex-direction:column;gap:6px}
+        .setting-label{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+        .setting-desc{font-size:.6rem;color:var(--dim);opacity:.7;margin-top:-2px}
+        .setting-control{display:flex;gap:6px;flex-wrap:wrap}
+        .s-opt{
+            font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;
+            padding:5px 13px;border-radius:8px;border:1px solid var(--border);
+            background:var(--card2);color:var(--dim);cursor:pointer;
+            transition:all .15s;
+        }
+        .s-opt:hover{border-color:var(--text);color:var(--text)}
+        .s-opt.active{
+            background:linear-gradient(170deg,#bf3a2a,#6e1515);
+            border-color:rgba(192,57,43,.4);color:#fff;
+        }
+        .s-opt.s-never.active{
+            background:linear-gradient(170deg,#1d7db8,#153f60);
+            border-color:rgba(52,152,219,.3);
+        }
+
         /* Vertical player stats list */
         #seatRow{
-            display:none;flex-direction:column;gap:7px;
+            display:none;flex-direction:column;gap:8px;
         }
         #seatRow.visible{display:flex}
         .seat-pip{
-            display:flex;align-items:center;gap:10px;
+            display:flex;align-items:center;gap:12px;
             background:var(--card2);border:1px solid var(--border);
-            border-radius:12px;padding:8px 12px;
+            border-radius:14px;padding:10px 14px;
             transition:border-color .2s,box-shadow .2s,opacity .2s;
         }
         .seat-pip.active{
             border-color:var(--gold);
-            box-shadow:0 0 14px rgba(240,180,41,.18);
+            box-shadow:0 0 16px rgba(240,180,41,.20);
         }
-        .seat-pip.dead{opacity:.4;filter:grayscale(.8)}
+        .seat-pip.eliminated{
+            opacity:.35;filter:grayscale(.9);
+            border-color:var(--red) !important;
+        }
         .seat-pip img{
-            width:36px;height:36px;border-radius:50%;object-fit:cover;
+            width:42px;height:42px;border-radius:50%;object-fit:cover;
             border:2px solid var(--border);flex-shrink:0;
         }
         .seat-pip.active img{border-color:var(--gold)}
-        .seat-pip.dead   img{border-color:var(--red)}
-        .pip-info{flex:1;min-width:0}
+        .seat-pip.eliminated img{border-color:var(--red)}
+        .pip-info{flex:1;min-width:0;display:flex;align-items:center;gap:10px}
         .pip-name{
-            font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:1.5px;
+            font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;
             color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+            flex:1;
         }
-        .pip-stats{font-size:.62rem;letter-spacing:1px;color:var(--text);margin-top:2px}
+        /* Inline stat badges */
+        .pip-badge{
+            display:flex;align-items:center;gap:4px;
+            background:rgba(0,0,0,.25);border-radius:8px;
+            padding:3px 8px;flex-shrink:0;
+        }
+        .pip-badge-icon{font-size:.75rem}
+        .pip-badge-val{
+            font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;
+            color:var(--text);
+        }
+        .pip-badge.deaths .pip-badge-val{color:#e87070}
+        .pip-badge.survived .pip-badge-val{color:#6ed886}
         .pip-turn{
-            font-size:.55rem;letter-spacing:2px;text-transform:uppercase;
-            color:var(--gold);font-weight:600;flex-shrink:0;
+            font-size:.52rem;letter-spacing:2px;text-transform:uppercase;
+            color:var(--gold);font-weight:700;flex-shrink:0;
+        }
+        .pip-elim-tag{
+            font-size:.5rem;letter-spacing:2px;text-transform:uppercase;
+            color:var(--red);font-weight:600;flex-shrink:0;
         }
 
         #bgPickerBtn{
@@ -370,7 +439,25 @@
         </div>
     </div>
 
-    <div class="ui-col">
+    <div class="ui-col" style="position:relative">
+        <!-- Settings button -->
+        <div id="settingsBtn" title="Settings">⚙</div>
+
+        <!-- Settings panel -->
+        <div id="settingsPanel">
+            <div class="settings-title">Settings</div>
+            <div class="setting-row">
+                <div class="setting-label">Eliminate after deaths</div>
+                <div class="setting-desc">Player is removed from rotation after this many deaths</div>
+                <div class="setting-control" id="elimOpts">
+                    <button class="s-opt s-never active" data-v="0">Never</button>
+                    <button class="s-opt" data-v="1">1</button>
+                    <button class="s-opt" data-v="2">2</button>
+                    <button class="s-opt" data-v="3">3</button>
+                    <button class="s-opt" data-v="5">5</button>
+                </div>
+            </div>
+        </div>
         <div>
             <div class="title">RUSSIAN<br>ROULETTE</div>
             <div class="tagline">Smith & Wesson .38 Military & Police</div>
@@ -1592,6 +1679,26 @@ startBtn.addEventListener('click', () => {
     showCurrentPlayer();
 });
 
+/* ── Settings ── */
+const settingsBtn   = document.getElementById('settingsBtn');
+const settingsPanel = document.getElementById('settingsPanel');
+let elimAfter = 0; // 0 = never
+
+settingsBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    settingsPanel.classList.toggle('open');
+});
+document.addEventListener('click', () => settingsPanel.classList.remove('open'));
+settingsPanel.addEventListener('click', e => e.stopPropagation());
+
+document.querySelectorAll('#elimOpts .s-opt').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#elimOpts .s-opt').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        elimAfter = parseInt(btn.dataset.v);
+    });
+});
+
 /* ── Seat pip row — vertical player stat cards ── */
 function buildSeatPips() {
     seatRowEl.innerHTML = '';
@@ -1600,10 +1707,11 @@ function buildSeatPips() {
         pip.className = 'seat-pip';
         pip.id = `pip${i}`;
 
+        // Photo
         const img = document.createElement('img');
-        img.src = p.photo;
-        img.alt = p.name;
+        img.src = p.photo; img.alt = p.name;
 
+        // Info row: name + badges
         const info = document.createElement('div');
         info.className = 'pip-info';
 
@@ -1611,14 +1719,23 @@ function buildSeatPips() {
         name.className = 'pip-name';
         name.textContent = p.name;
 
-        const stats = document.createElement('div');
-        stats.className = 'pip-stats';
-        stats.id = `pipStats${i}`;
-        stats.textContent = '💀 0  ✅ 0';
+        // Deaths badge
+        const deathBadge = document.createElement('div');
+        deathBadge.className = 'pip-badge deaths';
+        deathBadge.id = `pipD${i}`;
+        deathBadge.innerHTML = `<span class="pip-badge-icon">💀</span><span class="pip-badge-val">0</span>`;
+
+        // Survived badge
+        const survBadge = document.createElement('div');
+        survBadge.className = 'pip-badge survived';
+        survBadge.id = `pipS${i}`;
+        survBadge.innerHTML = `<span class="pip-badge-icon">✅</span><span class="pip-badge-val">0</span>`;
 
         info.appendChild(name);
-        info.appendChild(stats);
+        info.appendChild(deathBadge);
+        info.appendChild(survBadge);
 
+        // Turn / elim label
         const turn = document.createElement('div');
         turn.className = 'pip-turn';
         turn.id = `pipTurn${i}`;
@@ -1632,13 +1749,24 @@ function buildSeatPips() {
 
 function updatePips() {
     gamePlayers.forEach((p, i) => {
-        const pip      = document.getElementById(`pip${i}`);
-        const statsEl  = document.getElementById(`pipStats${i}`);
-        const turnEl   = document.getElementById(`pipTurn${i}`);
+        const pip    = document.getElementById(`pip${i}`);
+        const dEl    = document.getElementById(`pipD${i}`);
+        const sEl    = document.getElementById(`pipS${i}`);
+        const turnEl = document.getElementById(`pipTurn${i}`);
         if (!pip) return;
-        pip.classList.toggle('active', i === currentPlayerIdx);
-        if (statsEl) statsEl.textContent = `💀 ${p.deaths}  ✅ ${p.survived}`;
-        if (turnEl)  turnEl.textContent  = i === currentPlayerIdx ? '▶ TURN' : '';
+
+        const isElim = p.eliminated;
+        pip.classList.toggle('active',      i === currentPlayerIdx && !isElim);
+        pip.classList.toggle('eliminated',  isElim);
+
+        if (dEl) dEl.querySelector('.pip-badge-val').textContent = p.deaths;
+        if (sEl) sEl.querySelector('.pip-badge-val').textContent = p.survived;
+        if (turnEl) {
+            if (isElim)                     turnEl.textContent = 'OUT';
+            else if (i === currentPlayerIdx) turnEl.textContent = '▶';
+            else                             turnEl.textContent = '';
+            turnEl.className = isElim ? 'pip-elim-tag' : 'pip-turn';
+        }
     });
 }
 
