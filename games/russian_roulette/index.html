@@ -4,1019 +4,989 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Russian Roulette</title>
+
+    <!-- Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap');
-
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        :root {
-            --red: #e74c3c;
-            --gold: #f0b429;
-            --green: #2ecc71;
-            --bg: #07090c;
-            --card: #0d1520;
-            --card2: #111d2a;
-            --border: #192536;
-            --border2: #1e2e42;
-            --text: #c0d0e0;
-            --dim: #364d63;
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        :root{
+            --red:#e74c3c;--gold:#f0b429;--green:#2ecc71;
+            --bg:#07090c;--card:#0d1520;--card2:#111d2a;
+            --border:#192536;--b2:#1e2e42;--text:#c0d0e0;--dim:#364d63;
         }
-
-        html, body { height: 100%; }
-
-        body {
-            background: var(--bg);
-            color: var(--text);
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-            display: flex; flex-direction: column;
-            align-items: center; justify-content: center;
-            overflow: hidden; position: relative;
+        html,body{height:100%;overflow:hidden}
+        body{
+            background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;
+            min-height:100vh;position:relative;
         }
-
-        body::before {
-            content: '';
-            position: fixed; inset: 0;
-            background-image:
-                linear-gradient(rgba(231,76,60,0.022) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(231,76,60,0.022) 1px, transparent 1px);
-            background-size: 48px 48px;
-            pointer-events: none; z-index: 0;
+        body::before{
+            content:'';position:fixed;inset:0;
+            background-image:linear-gradient(rgba(231,76,60,.02) 1px,transparent 1px),linear-gradient(90deg,rgba(231,76,60,.02) 1px,transparent 1px);
+            background-size:48px 48px;pointer-events:none;z-index:0;
         }
-        body::after {
-            content: '';
-            position: fixed; inset: 0;
-            background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(231,76,60,0.06) 0%, transparent 65%);
-            pointer-events: none; z-index: 0;
+        body::after{
+            content:'';position:fixed;inset:0;
+            background:radial-gradient(ellipse 70% 45% at 50% 0%,rgba(231,76,60,.06) 0%,transparent 65%);
+            pointer-events:none;z-index:0;
+        }
+        #particles{position:fixed;inset:0;pointer-events:none;z-index:1}
+        #bloodOverlay{
+            position:fixed;inset:0;
+            background:radial-gradient(ellipse at center,transparent 20%,rgba(130,5,5,.97) 100%);
+            opacity:0;pointer-events:none;transition:opacity .5s ease;z-index:200;
+        }
+        #bloodOverlay.active{opacity:1}
+        #flashOverlay{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:202;transition:opacity .04s}
+
+        /* ── Two-column layout ── */
+        .layout{
+            position:relative;z-index:10;
+            display:flex;flex-direction:row;align-items:center;
+            width:100vw;height:100vh;
         }
 
-        #particles { position: fixed; inset: 0; pointer-events: none; z-index: 1; }
-
-        #bloodOverlay {
-            position: fixed; inset: 0;
-            background: radial-gradient(ellipse at center, transparent 20%, rgba(140,8,8,0.96) 100%);
-            opacity: 0; pointer-events: none;
-            transition: opacity 0.5s ease; z-index: 200;
-        }
-        #bloodOverlay.active { opacity: 1; }
-
-        #flashOverlay {
-            position: fixed; inset: 0;
-            background: #fff; opacity: 0; pointer-events: none;
-            z-index: 202; transition: opacity 0.04s;
+        /* LEFT / CENTER — gun takes ~60% */
+        .gun-col{
+            flex:1 1 0;
+            display:flex;align-items:center;justify-content:center;
+            height:100%;
+            position:relative;
         }
 
-        /* ── Layout ── */
-        .wrapper {
-            position: relative; z-index: 10;
-            display: flex; flex-direction: column;
-            align-items: center; gap: 10px;
-            width: 100%; max-width: 440px;
-            padding: 0 16px;
+        /* RIGHT PANEL */
+        .ui-col{
+            flex:0 0 320px;
+            display:flex;flex-direction:column;
+            justify-content:center;
+            align-items:stretch;
+            height:100%;
+            padding:24px 28px 24px 8px;
+            gap:14px;
         }
 
-        .title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(2.8rem, 9vw, 4.2rem);
-            letter-spacing: 10px;
-            color: var(--red);
-            text-shadow: 0 0 40px rgba(231,76,60,0.6), 0 0 80px rgba(231,76,60,0.15);
-            line-height: 1; user-select: none;
+        .title{
+            font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,3.2vw,2.8rem);
+            letter-spacing:8px;color:var(--red);
+            text-shadow:0 0 40px rgba(231,76,60,.6),0 0 80px rgba(231,76,60,.15);
+            line-height:1;user-select:none;
         }
-        .tagline {
-            font-size: 0.68rem; letter-spacing: 4px;
-            text-transform: uppercase; color: var(--dim);
+        .tagline{font-size:.60rem;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-top:2px}
+
+        /* ── 3D Gun wrapper ── */
+        #gunWrap{
+            position:relative;
+            width:min(58vw,700px);
+            height:min(88vh,700px);
+        }
+        #gunWrap.recoil {animation:recoil  .35s cubic-bezier(.1,.7,.3,1) forwards}
+        #gunWrap.dryfire{animation:dryfire .18s ease-out forwards}
+        @keyframes recoil{
+            0%  {transform:translate(0,0) scale(1) rotate(0deg)}
+            20% {transform:translate(0px,14px) scale(.97) rotate(1deg)}
+            50% {transform:translate(0px,-6px) scale(1.01) rotate(-.5deg)}
+            100%{transform:translate(0,0) scale(1) rotate(0deg)}
+        }
+        @keyframes dryfire{
+            0%  {transform:translate(0,0) scale(1)}
+            50% {transform:translate(0,4px) scale(.99)}
+            100%{transform:translate(0,0) scale(1)}
         }
 
-        /* ── Gun scene ── */
-        .gun-scene {
-            position: relative; width: 100%;
-            display: flex; justify-content: center; align-items: center;
-            height: 130px; margin-top: 4px;
+        /* Muzzle flash — at barrel muzzle position in the 3/4 view (front-left area) */
+        #muzzleFlash{
+            position:absolute;left:34%;top:46%;
+            transform:translate(-50%,-50%);
+            width:0;height:0;border-radius:50%;pointer-events:none;opacity:0;z-index:20;
+        }
+        #muzzleFlash.bang{animation:muzzBang .28s ease-out forwards}
+        @keyframes muzzBang{
+            0%  {opacity:1;width:0;height:0;box-shadow:0 0 0 0 #fff,0 0 0 0 #ffe066,0 0 0 0 rgba(231,76,60,.9)}
+            30% {opacity:1;width:120px;height:120px;margin:-60px;box-shadow:0 0 50px 18px #fff,0 0 90px 36px #ffe066,0 0 140px 50px rgba(231,76,60,.6)}
+            100%{opacity:0;width:160px;height:160px;margin:-80px;box-shadow:0 0 0 0 transparent,0 0 0 0 transparent,0 0 0 0 transparent}
+        }
+        #smokeEl{
+            position:absolute;left:34%;top:46%;transform:translate(-50%,-50%);
+            width:12px;height:12px;border-radius:50%;background:rgba(180,200,220,.5);
+            filter:blur(6px);opacity:0;pointer-events:none;z-index:19;
+        }
+        #smokeEl.puff{animation:smokeDrift 1.4s ease-out forwards}
+        @keyframes smokeDrift{
+            0%  {opacity:.6;transform:translate(-50%,-50%) scale(1)}
+            100%{opacity:0;transform:translate(-50%,-130px) scale(7)}
         }
 
-        .gun-wrap {
-            position: relative; display: inline-block;
-        }
-        .gun-svg {
-            width: 340px;
-            filter:
-                drop-shadow(0 8px 28px rgba(0,0,0,0.95))
-                drop-shadow(0 2px 6px rgba(0,0,0,0.7))
-                drop-shadow(0 0 1px rgba(100,160,220,0.06));
-        }
-        .gun-wrap.recoil { animation: recoil 0.32s cubic-bezier(0.1,0.7,0.3,1) forwards; }
-        .gun-wrap.dryfire { animation: dryfire 0.18s ease-out forwards; }
-        @keyframes recoil {
-            0%   { transform: translate(0,0)         rotate(0deg);    }
-            20%  { transform: translate(-12px,-18px) rotate(-11deg);  }
-            50%  { transform: translate(6px,7px)     rotate(4.5deg);  }
-            75%  { transform: translate(-3px,-2px)   rotate(-1deg);   }
-            100% { transform: translate(0,0)         rotate(0deg);    }
-        }
-        @keyframes dryfire {
-            0%   { transform: translate(0,0)       rotate(0deg);   }
-            50%  { transform: translate(-3px,-3px) rotate(-2deg);  }
-            100% { transform: translate(0,0)       rotate(0deg);   }
-        }
-
-        /* muzzle flash — BANG only */
-        .muzzle {
-            position: absolute;
-            /* placed at barrel tip — adjusted to match gun SVG viewBox */
-            right: -2px; top: 50%;
-            transform: translateY(-50%);
-            width: 0; height: 0;
-            border-radius: 50%;
-            pointer-events: none; opacity: 0;
-        }
-        .muzzle.bang { animation: muzzBang 0.2s ease-out forwards; }
-        @keyframes muzzBang {
-            0%  { opacity:1; width:0; height:0;
-                  box-shadow: 0 0 0 0 #fff, 0 0 0 0 #ffe066, 0 0 0 0 rgba(231,76,60,0.8); }
-            35% { opacity:1; width:72px; height:72px; margin:-36px;
-                  box-shadow: 0 0 28px 8px #fff, 0 0 55px 18px #ffe066, 0 0 85px 28px rgba(231,76,60,0.6); }
-            100%{ opacity:0; width:100px; height:100px; margin:-50px;
-                  box-shadow: 0 0 0 0 rgba(255,230,100,0), 0 0 0 0 rgba(231,76,60,0), 0 0 0 0 transparent; }
-        }
-
-        .smoke-puff {
-            position: absolute; right: 8px; top: 38%;
-            width: 6px; height: 6px; border-radius: 50%;
-            background: rgba(180,200,220,0.5);
-            filter: blur(3px); opacity: 0; pointer-events: none;
-        }
-        .smoke-puff.puff { animation: smokeDrift 0.9s ease-out forwards; }
-        @keyframes smokeDrift {
-            0%   { opacity:0.6; transform:translate(0,0) scale(1); }
-            100% { opacity:0;   transform:translate(12px,-24px) scale(3.5); }
+        #threeCanvas{
+            width:100%!important;height:100%!important;
+            display:block;
         }
 
         /* ── Card ── */
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 22px 22px 18px;
-            width: 100%;
-            box-shadow:
-                0 20px 60px rgba(0,0,0,0.75),
-                inset 0 1px 0 rgba(255,255,255,0.04),
-                inset 0 -1px 0 rgba(0,0,0,0.4);
-            display: flex; flex-direction: column;
-            align-items: center; gap: 16px;
+        .card{
+            background:var(--card);border:1px solid var(--border);border-radius:20px;
+            padding:20px 20px 16px;width:100%;
+            box-shadow:0 20px 60px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04);
+            display:flex;flex-direction:column;align-items:center;gap:14px;
         }
-        .card.shake { animation: shake 0.45s ease; }
-        .card.sglow  { animation: sglow  0.8s ease; }
-        @keyframes shake {
-            0%,100%{ transform:translate(0,0); }
-            15%    { transform:translate(-7px,3px); }
-            30%    { transform:translate(7px,-3px); }
-            50%    { transform:translate(-5px,4px); }
-            70%    { transform:translate(5px,-3px); }
-            85%    { transform:translate(-3px,2px); }
+        .card.shake{animation:shake .45s ease}
+        .card.sglow {animation:sglow  .8s ease}
+        @keyframes shake{
+            0%,100%{transform:translate(0,0)}
+            15%{transform:translate(-7px,3px)}30%{transform:translate(7px,-3px)}
+            50%{transform:translate(-5px,4px)}70%{transform:translate(5px,-3px)}85%{transform:translate(-3px,2px)}
         }
-        @keyframes sglow {
-            0%,100%{ box-shadow:0 20px 60px rgba(0,0,0,0.75),inset 0 1px 0 rgba(255,255,255,0.04); }
-            45%    { box-shadow:0 20px 60px rgba(0,0,0,0.75),0 0 40px rgba(46,204,113,0.18),inset 0 1px 0 rgba(255,255,255,0.04); }
+        @keyframes sglow{
+            0%,100%{box-shadow:0 20px 60px rgba(0,0,0,.75),inset 0 1px 0 rgba(255,255,255,.04)}
+            45%    {box-shadow:0 20px 60px rgba(0,0,0,.75),0 0 40px rgba(46,204,113,.2),inset 0 1px 0 rgba(255,255,255,.04)}
         }
-
-        .divider {
-            width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--border2) 30%, var(--border2) 70%, transparent);
+        .divider{width:100%;height:1px;background:linear-gradient(90deg,transparent,var(--b2) 30%,var(--b2) 70%,transparent)}
+        .status{
+            height:28px;display:flex;align-items:center;justify-content:center;
+            font-size:.86rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+            color:var(--gold);text-shadow:0 0 12px rgba(240,180,41,.3);transition:color .3s,text-shadow .3s;
         }
-
-        /* ── SVG Cylinder ── */
-        .cyl-wrap {
-            position: relative;
-            display: flex; align-items: center; justify-content: center;
+        .status.danger{color:var(--red);text-shadow:0 0 18px rgba(231,76,60,.65);animation:pulseRed .45s infinite alternate}
+        .status.safe  {color:var(--green);text-shadow:0 0 14px rgba(46,204,113,.5)}
+        .status.idle  {color:var(--dim);text-shadow:none}
+        @keyframes pulseRed{to{opacity:.5}}
+        .btn-group{display:flex;gap:12px;width:100%}
+        .btn{
+            flex:1;padding:14px 10px;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:2px;
+            border:1px solid transparent;border-radius:10px;cursor:pointer;
+            transition:transform .12s,box-shadow .12s;position:relative;overflow:hidden;color:#fff;
         }
-        .cyl-pointer {
-            position: absolute; top: -20px; left: 50%;
-            transform: translateX(-50%);
-            width: 0; height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-bottom: 14px solid var(--gold);
-            filter: drop-shadow(0 0 7px rgba(240,180,41,0.9));
-            z-index: 3;
+        .btn::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.07) 0%,transparent 55%);border-radius:inherit;pointer-events:none}
+        .btn-spin{
+            background:linear-gradient(170deg,#1d7db8,#1a5f8c 55%,#153f60);
+            border-color:rgba(52,152,219,.25);box-shadow:0 4px 16px rgba(25,80,120,.55),inset 0 1px 0 rgba(255,255,255,.09);
         }
-        #cylSvg {
-            width: 160px; height: 160px;
-            overflow: visible;
+        .btn-spin:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 22px rgba(52,152,219,.4),inset 0 1px 0 rgba(255,255,255,.09)}
+        .btn-shoot{
+            background:linear-gradient(170deg,#bf3a2a,#962020 55%,#6e1515);
+            border-color:rgba(192,57,43,.3);box-shadow:0 4px 16px rgba(140,30,20,.55),inset 0 1px 0 rgba(255,255,255,.07);
         }
-
-        /* ── Status ── */
-        .status {
-            height: 30px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.88rem; font-weight: 600;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: var(--gold);
-            text-shadow: 0 0 12px rgba(240,180,41,0.3);
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-        .status.danger {
-            color: var(--red);
-            text-shadow: 0 0 18px rgba(231,76,60,0.65);
-            animation: pulseRed 0.45s infinite alternate;
-        }
-        .status.safe {
-            color: var(--green);
-            text-shadow: 0 0 14px rgba(46,204,113,0.5);
-        }
-        .status.idle { color: var(--dim); text-shadow: none; }
-        @keyframes pulseRed { to { opacity: 0.5; } }
-
-        /* ── Buttons ── */
-        .btn-group { display: flex; gap: 12px; width: 100%; }
-        .btn {
-            flex: 1; padding: 14px 10px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.25rem; letter-spacing: 2px;
-            border: 1px solid transparent;
-            border-radius: 10px; cursor: pointer;
-            transition: transform 0.12s, box-shadow 0.12s;
-            position: relative; overflow: hidden; color: #fff;
-        }
-        .btn::after {
-            content: '';
-            position: absolute; inset: 0;
-            background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, transparent 55%);
-            border-radius: inherit; pointer-events: none;
-        }
-        .btn-spin {
-            background: linear-gradient(170deg, #1d7db8 0%, #1a5f8c 55%, #153f60 100%);
-            border-color: rgba(52,152,219,0.25);
-            box-shadow: 0 4px 16px rgba(25,80,120,0.55), inset 0 1px 0 rgba(255,255,255,0.09);
-        }
-        .btn-spin:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 22px rgba(52,152,219,0.4), inset 0 1px 0 rgba(255,255,255,0.09);
-        }
-        .btn-shoot {
-            background: linear-gradient(170deg, #bf3a2a 0%, #962020 55%, #6e1515 100%);
-            border-color: rgba(192,57,43,0.3);
-            box-shadow: 0 4px 16px rgba(140,30,20,0.55), inset 0 1px 0 rgba(255,255,255,0.07);
-        }
-        .btn-shoot:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 22px rgba(231,76,60,0.45), inset 0 1px 0 rgba(255,255,255,0.07);
-        }
-        .btn:active:not(:disabled) { transform: translateY(1px) !important; }
-        .btn:disabled {
-            background: rgba(255,255,255,0.035) !important;
-            border-color: var(--border) !important;
-            color: var(--dim) !important;
-            box-shadow: none !important; transform: none !important;
-            cursor: not-allowed;
-        }
-
-        /* ── Bottom ── */
-        .bottom { width: 100%; display: flex; flex-direction: column; gap: 12px; }
-
-        .odds-row { width: 100%; display: flex; flex-direction: column; gap: 5px; }
-        .odds-header {
-            display: flex; justify-content: space-between;
-            font-size: 0.65rem; letter-spacing: 2px;
-            text-transform: uppercase; color: var(--dim);
-        }
-        .odds-val {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 0.82rem; color: var(--text);
-        }
-        .odds-track {
-            width: 100%; height: 5px;
-            background: rgba(255,255,255,0.04);
-            border-radius: 99px; overflow: hidden;
-            border: 1px solid var(--border);
-        }
-        .odds-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--green), var(--gold) 65%, var(--red));
-            border-radius: 99px;
-            transition: width 0.45s cubic-bezier(0.4,0,0.2,1);
-            width: 83.33%;
-        }
-
-        .stats { display: flex; gap: 9px; justify-content: center; }
-        .stat-pill {
-            background: var(--card2);
-            border: 1px solid var(--border);
-            border-radius: 99px;
-            padding: 6px 15px;
-            display: flex; align-items: center; gap: 6px;
-            font-size: 0.72rem; color: var(--dim);
-        }
-        .sval {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1rem; letter-spacing: 1px;
-            color: var(--text);
-        }
-
-        .history { display: flex; gap: 5px; justify-content: center; min-height: 11px; }
-        .hdot {
-            width: 9px; height: 9px; border-radius: 50%;
-            background: var(--border2);
-        }
-        .hdot.s { background: var(--green); box-shadow: 0 0 5px rgba(46,204,113,0.6); }
-        .hdot.d { background: var(--red);   box-shadow: 0 0 5px rgba(231,76,60,0.6); }
-        .hdot.new { animation: pop 0.22s cubic-bezier(0.34,1.56,0.64,1); }
-        @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+        .btn-shoot:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 7px 22px rgba(231,76,60,.45),inset 0 1px 0 rgba(255,255,255,.07)}
+        .btn:active:not(:disabled){transform:translateY(1px)!important}
+        .btn:disabled{background:rgba(255,255,255,.035)!important;border-color:var(--border)!important;color:var(--dim)!important;box-shadow:none!important;transform:none!important;cursor:not-allowed}
+        .bottom{width:100%;display:flex;flex-direction:column;gap:12px}
+        .odds-row{width:100%;display:flex;flex-direction:column;gap:5px}
+        .odds-header{display:flex;justify-content:space-between;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+        .odds-val{font-family:'Bebas Neue',sans-serif;font-size:.82rem;color:var(--text)}
+        .odds-track{width:100%;height:5px;background:rgba(255,255,255,.04);border-radius:99px;overflow:hidden;border:1px solid var(--border)}
+        .odds-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--gold) 65%,var(--red));border-radius:99px;transition:width .45s cubic-bezier(.4,0,.2,1);width:83.33%}
+        .stats{display:flex;gap:9px;justify-content:center}
+        .stat-pill{background:var(--card2);border:1px solid var(--border);border-radius:99px;padding:6px 15px;display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--dim)}
+        .sval{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:1px;color:var(--text)}
+        .history{display:flex;gap:5px;justify-content:center;min-height:11px}
+        .hdot{width:9px;height:9px;border-radius:50%;background:var(--b2)}
+        .hdot.s{background:var(--green);box-shadow:0 0 5px rgba(46,204,113,.6)}
+        .hdot.d{background:var(--red);  box-shadow:0 0 5px rgba(231,76,60,.6)}
+        .hdot.new{animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
+        @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
     </style>
 </head>
 <body>
-
 <canvas id="particles"></canvas>
 <div id="bloodOverlay"></div>
 <div id="flashOverlay"></div>
 
-<div class="wrapper">
-
-    <div style="text-align:center; margin-bottom:2px">
-        <div class="title">RUSSIAN ROULETTE</div>
-        <div class="tagline">How lucky are you?</div>
-    </div>
-
-    <!-- ══ GUN SCENE ══ -->
-    <div class="gun-scene">
-        <div class="gun-wrap" id="gunWrap">
-            <div class="muzzle" id="muzzle"></div>
-            <div class="smoke-puff" id="smoke"></div>
-
-            <!--
-                Proper side-view revolver SVG.
-                ViewBox: 0 0 380 140
-                Oriented: barrel points RIGHT, grip hangs DOWN-LEFT.
-                Major parts: barrel, frame, cylinder (side view circle), grip, hammer, trigger.
-            -->
-            <svg class="gun-svg" viewBox="0 0 380 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <!-- Steel gradient for large surfaces -->
-                <linearGradient id="gSteel" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stop-color="#3a5060"/>
-                  <stop offset="40%"  stop-color="#253545"/>
-                  <stop offset="100%" stop-color="#111d28"/>
-                </linearGradient>
-                <!-- Darker steel for underside / shadows -->
-                <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stop-color="#1e2e3e"/>
-                  <stop offset="100%" stop-color="#0b1420"/>
-                </linearGradient>
-                <!-- Barrel top highlight -->
-                <linearGradient id="gBarrelTop" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stop-color="#4a6278"/>
-                  <stop offset="100%" stop-color="#2a3e52"/>
-                </linearGradient>
-                <!-- Cylinder side radial -->
-                <radialGradient id="gCylSide" cx="40%" cy="35%" r="65%">
-                  <stop offset="0%"   stop-color="#3a5468"/>
-                  <stop offset="100%" stop-color="#0e1c28"/>
-                </radialGradient>
-                <!-- Grip wood -->
-                <linearGradient id="gGrip" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%"   stop-color="#2a1f14"/>
-                  <stop offset="50%"  stop-color="#1e1610"/>
-                  <stop offset="100%" stop-color="#110e08"/>
-                </linearGradient>
-                <!-- Grip highlight -->
-                <linearGradient id="gGripHi" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0%"   stop-color="rgba(255,200,120,0.08)"/>
-                  <stop offset="100%" stop-color="rgba(255,200,120,0)"/>
-                </linearGradient>
-                <!-- Hammer -->
-                <linearGradient id="gHammer" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%"   stop-color="#3d5568"/>
-                  <stop offset="100%" stop-color="#162030"/>
-                </linearGradient>
-                <!-- Bore -->
-                <radialGradient id="gBore" cx="45%" cy="40%" r="60%">
-                  <stop offset="0%"   stop-color="#1a2a38"/>
-                  <stop offset="100%" stop-color="#030608"/>
-                </radialGradient>
-              </defs>
-
-              <!-- ════════════════════════════════
-                   1. BARREL  (pointing right)
-                   Top edge: y=44, bottom: y=68, length ~220px
-                   ════════════════════════════════ -->
-              <!-- Main barrel body -->
-              <rect x="118" y="44" width="222" height="24" rx="4" fill="url(#gSteel)"/>
-              <!-- Top rib (raised sight rib running barrel length) -->
-              <rect x="120" y="44" width="218" height="5" rx="2" fill="url(#gBarrelTop)"/>
-              <!-- Barrel underside lug -->
-              <rect x="130" y="63" width="160" height="8" rx="3" fill="url(#gDark)"/>
-              <!-- Extractor rod housing (below barrel) -->
-              <rect x="136" y="68" width="140" height="7" rx="3" fill="url(#gDark)"/>
-              <!-- Muzzle end cap -->
-              <rect x="332" y="40" width="12" height="32" rx="4" fill="#1a2a38"/>
-              <rect x="333" y="41" width="10" height="7"  rx="2" fill="#243444"/>
-              <!-- Muzzle bore opening -->
-              <circle cx="338" cy="56" r="8"   fill="url(#gBore)" stroke="#111d28" stroke-width="1.5"/>
-              <circle cx="338" cy="56" r="4.5" fill="#050a0e"/>
-              <circle cx="336" cy="54" r="1.2" fill="rgba(255,255,255,0.06)"/>
-
-              <!-- ════════════════════════════════
-                   2. FRAME (main receiver body)
-                   Connects barrel to grip
-                   ════════════════════════════════ -->
-              <!-- Top-frame / receiver behind cylinder -->
-              <path d="
-                M118 44
-                L118 68
-                L 98 80
-                L 88 90
-                L 88 68
-                Q 88 48 100 44
-                Z
-              " fill="url(#gSteel)"/>
-              <!-- Front strap (connects barrel floor to trigger guard) -->
-              <path d="
-                M118 68
-                L118 92
-                L108 98
-                L 98 98
-                L 92 90
-                L 88 80
-                L 98 80
-                L118 68
-                Z
-              " fill="url(#gDark)"/>
-              <!-- Backstrap (rear of frame above grip) -->
-              <path d="
-                M88 68
-                L88 44
-                L100 44
-                L100 68
-                Z
-              " fill="url(#gSteel)"/>
-
-              <!-- ════════════════════════════════
-                   3. CYLINDER SIDE VIEW
-                   Circle at cx=148, cy=56 r=28
-                   (sits in the frame window)
-                   ════════════════════════════════ -->
-              <!-- Cylinder shadow ring -->
-              <circle cx="148" cy="56" r="30" fill="rgba(0,0,0,0.5)"/>
-              <!-- Cylinder body -->
-              <circle cx="148" cy="56" r="28" fill="url(#gCylSide)" stroke="#1a2838" stroke-width="2"/>
-              <!-- Cylinder front face rim -->
-              <circle cx="148" cy="56" r="28" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-              <!-- Flute lines (6 flutes on cylinder surface) -->
-              <g stroke="#0e1c28" stroke-width="1.8" opacity="0.8">
-                <line x1="148" y1="28" x2="148" y2="84"/>
-                <line x1="120.7" y1="40" x2="175.3" y2="72"/>
-                <line x1="120.7" y1="72" x2="175.3" y2="40"/>
-              </g>
-              <!-- Cylinder center pin -->
-              <circle cx="148" cy="56" r="6"   fill="#1a2838" stroke="#0e1c28" stroke-width="1.5"/>
-              <circle cx="148" cy="56" r="3.5" fill="#0a1420"/>
-              <circle cx="147" cy="55" r="1"   fill="rgba(255,255,255,0.08)"/>
-              <!-- Ejector rod (thin rod below barrel connecting to cylinder) -->
-              <rect x="120" y="71" width="44" height="3" rx="1.5" fill="#1a2838"/>
-
-              <!-- ════════════════════════════════
-                   4. HAMMER
-                   ════════════════════════════════ -->
-              <!-- Hammer body (sits at top-rear of frame) -->
-              <path d="
-                M88 44
-                L88 60
-                L82 62
-                L78 56
-                L78 44
-                Q80 38 84 38
-                L88 44
-                Z
-              " fill="url(#gHammer)"/>
-              <!-- Hammer spur (serrated top) -->
-              <path d="
-                M78 44
-                L78 36
-                Q80 30 86 30
-                L90 30
-                L90 42
-                L88 44
-                Z
-              " fill="url(#gHammer)"/>
-              <!-- Hammer spur serrations -->
-              <line x1="80" y1="30" x2="80" y2="42" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
-              <line x1="83" y1="30" x2="83" y2="42" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
-              <line x1="86" y1="30" x2="86" y2="42" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
-              <line x1="89" y1="30" x2="89" y2="42" stroke="rgba(0,0,0,0.4)" stroke-width="1"/>
-              <!-- Hammer highlight -->
-              <line x1="88" y1="38" x2="88" y2="62" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
-
-              <!-- ════════════════════════════════
-                   5. GRIP
-                   Angled downward from frame
-                   ════════════════════════════════ -->
-              <!-- Grip frame (metal backstrap) -->
-              <path d="
-                M88 90
-                L84 130
-                Q83 138 90 138
-                L110 138
-                Q118 138 118 130
-                L118 98
-                Z
-              " fill="url(#gGrip)"/>
-              <!-- Grip panel overlay (wood grain illusion) -->
-              <path d="
-                M90 92
-                L86 130
-                Q86 136 91 136
-                L108 136
-                Q115 136 115 130
-                L115 100
-                Z
-              " fill="url(#gGripHi)"/>
-              <!-- Grip checkering lines (horizontal) -->
-              <g stroke="rgba(0,0,0,0.35)" stroke-width="1.1">
-                <line x1="87" y1="100" x2="116" y2="100"/>
-                <line x1="86" y1="108" x2="116" y2="108"/>
-                <line x1="85" y1="116" x2="116" y2="116"/>
-                <line x1="84" y1="124" x2="115" y2="124"/>
-                <line x1="84" y1="132" x2="113" y2="132"/>
-              </g>
-              <!-- Grip screw -->
-              <circle cx="102" cy="114" r="4"   fill="#1a2838" stroke="#0e1c28" stroke-width="1"/>
-              <line   x1="99"  y1="114" x2="105" y2="114" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
-              <line   x1="102" y1="111" x2="102" y2="117" stroke="rgba(255,255,255,0.08)" stroke-width="0.8"/>
-
-              <!-- ════════════════════════════════
-                   6. TRIGGER GUARD + TRIGGER
-                   ════════════════════════════════ -->
-              <!-- Trigger guard bow -->
-              <path d="
-                M98 98
-                Q96 114 102 120
-                Q110 126 118 120
-                L118 98
-              " fill="none" stroke="#253545" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-              <!-- Trigger guard fill -->
-              <path d="
-                M98 98
-                Q96 114 102 120
-                Q110 126 118 120
-                L118 98
-              " fill="none" stroke="#1a2838" stroke-width="2"/>
-              <!-- Trigger (gold/brass) -->
-              <path d="
-                M106 98
-                L103 116
-              " stroke="#c8922a" stroke-width="3.5" stroke-linecap="round"/>
-              <!-- Trigger highlight -->
-              <path d="
-                M106 98
-                L103 116
-              " stroke="rgba(255,210,80,0.25)" stroke-width="1.5" stroke-linecap="round"/>
-
-              <!-- ════════════════════════════════
-                   7. FRAME SIDE PANEL details
-                   ════════════════════════════════ -->
-              <!-- Frame window opening (where cylinder sits) -->
-              <ellipse cx="148" cy="56" rx="30" ry="30" fill="none" stroke="#0e1c28" stroke-width="3"/>
-              <!-- Loading gate (small door on right side, behind cylinder) -->
-              <path d="M175 50 L182 50 L182 62 L175 62 Z" fill="#1e3044" stroke="#0e1c28" stroke-width="1" rx="1"/>
-              <line x1="178" y1="50" x2="178" y2="62" stroke="#253a50" stroke-width="1"/>
-
-              <!-- ════════════════════════════════
-                   8. SIGHTS
-                   ════════════════════════════════ -->
-              <!-- Rear sight (at top of frame above cylinder) -->
-              <rect x="86" y="38" width="14" height="6" rx="2" fill="#1e3044"/>
-              <rect x="90" y="39" width="4"  height="3" rx="1" fill="#0a1420"/>
-              <!-- Front sight (at muzzle end) -->
-              <rect x="326" y="38" width="6"  height="8" rx="1.5" fill="#1e3044"/>
-              <!-- Red front sight dot -->
-              <circle cx="329" cy="40" r="1.5" fill="#e74c3c" opacity="0.85"/>
-
-              <!-- ════════════════════════════════
-                   9. SUBTLE SURFACE HIGHLIGHTS
-                   ════════════════════════════════ -->
-              <!-- Barrel top edge shine -->
-              <line x1="122" y1="45" x2="330" y2="45" stroke="rgba(255,255,255,0.07)" stroke-width="1.5" stroke-linecap="round"/>
-              <!-- Frame side upper edge -->
-              <line x1="100" y1="44" x2="118" y2="44" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-            </svg>
+<div class="layout">
+    <!-- LEFT: 3D Gun (fills most of the screen) -->
+    <div class="gun-col">
+        <div id="gunWrap">
+            <div id="muzzleFlash"></div>
+            <div id="smokeEl"></div>
+            <div id="threeContainer" style="width:100%;height:100%;position:absolute;inset:0;"></div>
         </div>
     </div>
 
-    <!-- ══ GAME CARD ══ -->
-    <div class="card" id="card">
-
-        <!-- SVG Cylinder — chambers drawn with JS at exact circle positions -->
-        <div class="cyl-wrap">
-            <div class="cyl-pointer"></div>
-            <svg id="cylSvg" viewBox="-85 -85 170 170">
-                <defs>
-                    <radialGradient id="cGrad" cx="38%" cy="32%" r="65%">
-                        <stop offset="0%"   stop-color="#2e4558"/>
-                        <stop offset="100%" stop-color="#0b1520"/>
-                    </radialGradient>
-                    <radialGradient id="cInner" cx="40%" cy="35%" r="60%">
-                        <stop offset="0%"   stop-color="#1e3040"/>
-                        <stop offset="100%" stop-color="#080e16"/>
-                    </radialGradient>
-                    <radialGradient id="cPin" cx="38%" cy="33%" r="65%">
-                        <stop offset="0%"   stop-color="#38526a"/>
-                        <stop offset="100%" stop-color="#0a1420"/>
-                    </radialGradient>
-                    <!-- empty chamber -->
-                    <radialGradient id="chEmpty" cx="38%" cy="32%" r="60%">
-                        <stop offset="0%"   stop-color="#0e1c2a"/>
-                        <stop offset="100%" stop-color="#030609"/>
-                    </radialGradient>
-                    <!-- bullet chamber -->
-                    <radialGradient id="chBullet" cx="35%" cy="28%" r="65%">
-                        <stop offset="0%"   stop-color="#ffe090"/>
-                        <stop offset="30%"  stop-color="#d08020"/>
-                        <stop offset="65%"  stop-color="#b03020"/>
-                        <stop offset="100%" stop-color="#4a0808"/>
-                    </radialGradient>
-                    <filter id="chamberShadow" x="-30%" y="-30%" width="160%" height="160%">
-                        <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="rgba(0,0,0,0.8)"/>
-                    </filter>
-                    <filter id="bulletGlow">
-                        <feGaussianBlur stdDeviation="2" result="blur"/>
-                        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                    </filter>
-                </defs>
-
-                <!-- Outer rim shadow -->
-                <circle r="82" fill="rgba(0,0,0,0.55)"/>
-                <!-- Cylinder body -->
-                <circle r="80" fill="url(#cGrad)" stroke="#14202e" stroke-width="3"/>
-                <!-- Inner face -->
-                <circle r="72" fill="url(#cInner)"/>
-                <!-- Flute grooves (6 segments) -->
-                <g stroke="#0a1520" stroke-width="2" opacity="0.7">
-                    <line x1="0" y1="-80" x2="0" y2="80"/>
-                    <line x1="-69.3" y1="-40" x2="69.3" y2="40"/>
-                    <line x1="-69.3" y1="40"  x2="69.3" y2="-40"/>
-                </g>
-                <!-- Rim highlight -->
-                <circle r="80" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="2"/>
-
-                <!-- 6 chambers — drawn by JS below -->
-                <g id="chamberGroup"></g>
-
-                <!-- Center pin -->
-                <circle r="10" fill="url(#cPin)" stroke="#0a1420" stroke-width="1.5"/>
-                <circle r="6"  fill="#060e18"/>
-                <circle r="2"  cx="-1.5" cy="-1.5" fill="rgba(255,255,255,0.08)"/>
-
-                <!-- Rotation group — JS animates transform on this -->
-                <!-- (chambers are children of chamberGroup which is inside cylSvg; we rotate cylSvg) -->
-            </svg>
+    <!-- RIGHT: Title + all game UI -->
+    <div class="ui-col">
+        <div>
+            <div class="title">RUSSIAN<br>ROULETTE</div>
+            <div class="tagline">How lucky are you?</div>
         </div>
 
-        <div class="divider"></div>
-
-        <div class="status idle" id="statusEl">SPIN TO BEGIN</div>
-
-        <div class="btn-group">
-            <button class="btn btn-spin"  id="spinBtn">⟳  SPIN</button>
-            <button class="btn btn-shoot" id="shootBtn" disabled>FIRE  🔫</button>
-        </div>
-
-        <div class="divider"></div>
-
-        <div class="bottom">
-            <div class="odds-row">
-                <div class="odds-header">
-                    <span>Survival Odds</span>
-                    <span class="odds-val" id="oddsVal">5 in 6</span>
-                </div>
-                <div class="odds-track">
-                    <div class="odds-fill" id="oddsFill"></div>
-                </div>
+        <div class="card" id="card">
+            <div class="status idle" id="statusEl">SPIN TO BEGIN</div>
+            <div class="btn-group">
+                <button class="btn btn-spin"  id="spinBtn">⟳  SPIN</button>
+                <button class="btn btn-shoot" id="shootBtn" disabled>FIRE  🔫</button>
             </div>
-            <div class="stats">
-                <div class="stat-pill">💀 <span class="sval" id="svCount">0</span></div>
-                <div class="stat-pill">🔄 <span class="sval" id="spCount">0</span></div>
-                <div class="stat-pill">🔥 <span class="sval" id="stCount">0</span></div>
+            <div class="divider"></div>
+            <div class="bottom">
+                <div class="odds-row">
+                    <div class="odds-header">
+                        <span>Survival Odds</span>
+                        <span class="odds-val" id="oddsVal">5 in 6</span>
+                    </div>
+                    <div class="odds-track"><div class="odds-fill" id="oddsFill"></div></div>
+                </div>
+                <div class="stats">
+                    <div class="stat-pill">💀 <span class="sval" id="svCount">0</span></div>
+                    <div class="stat-pill">🔄 <span class="sval" id="spCount">0</span></div>
+                    <div class="stat-pill">🔥 <span class="sval" id="stCount">0</span></div>
+                </div>
+                <div class="history" id="history"></div>
             </div>
-            <div class="history" id="history"></div>
         </div>
     </div>
-
 </div>
 
 <script>
-/* ══════════════════════════════════════════════════════
-   BUILD SVG CYLINDER CHAMBERS
-   6 chambers on a circle of radius 46, starting at top (−90°)
-   spacing 60° each
-══════════════════════════════════════════════════════ */
-const CYL_R = 46;      // orbit radius
-const CH_R  = 15;      // chamber hole radius
-const chamberGroup = document.getElementById('chamberGroup');
-const chamberEls = [];
+/* ═══════════════════════════════════════════════════════════════
+   THREE.JS 3D REVOLVER
+   Camera: looking straight down the barrel (front-facing view).
+   The gun points toward the camera — barrel axis along +Z.
+   Camera sits at Z+ looking toward Z- (into the muzzle).
+═══════════════════════════════════════════════════════════════ */
 
+const threeContainer = document.getElementById('threeContainer');
+
+// Scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x07090c);
+scene.fog = new THREE.FogExp2(0x07090c, 0.032);
+
+// Renderer — fills the gunWrap container, sized dynamically
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure = 1.15;
+renderer.domElement.id = 'threeCanvas';
+threeContainer.appendChild(renderer.domElement);
+
+// Size renderer to fill its container
+function resizeRenderer() {
+    const w = threeContainer.clientWidth;
+    const h = threeContainer.clientHeight;
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+}
+
+// Camera — proper 3/4 view from file.txt, slightly tweaked for the layout
+// Gun sits at origin. Camera above-right-front looking down at the cylinder.
+const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+// Position: front-right, elevated — shows barrel going left, cylinder facing viewer
+// Based on file.txt: camera.position.set(3.4, 1.4, 3.8)
+// Tweaked: pull back a bit more so full gun is visible
+camera.position.set(3.2, 1.6, 3.6);
+camera.lookAt(0, 0.1, -0.2);
+
+/* ═══════════════════════════════════
+   LIGHTING
+   Key from upper-left, fill from right,
+   rim from behind — matches 3/4 camera position
+═══════════════════════════════════ */
+const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+scene.add(ambient);
+
+// Key — upper-left, like the reference photo
+const keyLight = new THREE.DirectionalLight(0xd0e8ff, 3.2);
+keyLight.position.set(-3, 6, 4);
+keyLight.castShadow = true;
+scene.add(keyLight);
+
+// Fill — right side, warmer
+const fillLight = new THREE.DirectionalLight(0xffd8a0, 1.2);
+fillLight.position.set(4, 1, 3);
+scene.add(fillLight);
+
+// Rim — from behind the gun (Z-), rim-lights the silhouette edges
+const rimLight = new THREE.DirectionalLight(0x6090c0, 1.8);
+rimLight.position.set(0, 3, -6);
+scene.add(rimLight);
+
+// Muzzle flash point light (activated on BANG)
+const flashLight = new THREE.PointLight(0xff8800, 0, 6);
+flashLight.position.set(0, 0.35, 2.8);
+scene.add(flashLight);
+
+/* ── MATERIALS ── */
+// Blued steel frame
+const matFrame = new THREE.MeshStandardMaterial({
+    color: 0x1a2230, metalness: 0.92, roughness: 0.30,
+});
+// Cylinder — slightly lighter, higher contrast to show chambers
+const matCyl = new THREE.MeshStandardMaterial({
+    color: 0x384858, metalness: 0.96, roughness: 0.18,
+});
+// Dark recesses / bore
+const matDark = new THREE.MeshStandardMaterial({
+    color: 0x080c12, metalness: 0.7, roughness: 0.6,
+});
+// Brass cartridge
+const matBrass = new THREE.MeshStandardMaterial({
+    color: 0xc49020, metalness: 0.98, roughness: 0.15,
+});
+// Bullet primer (silver)
+const matPrimer = new THREE.MeshStandardMaterial({
+    color: 0x8090a0, metalness: 0.95, roughness: 0.25,
+});
+// Wood grip
+const matWood = new THREE.MeshStandardMaterial({
+    color: 0x3a1808, roughness: 0.70, metalness: 0.04,
+});
+// Muzzle flash cone
+const matFlash = new THREE.MeshBasicMaterial({
+    color: 0xffe080, transparent: true, opacity: 0,
+});
+
+/* ── GUN ROOT GROUP ── */
+const gunRoot = new THREE.Group();
+// Tilt gun slightly so barrel center is easy to aim camera at
+// No rotation needed — we orient gun so barrel runs along Z axis.
+// Barrel tip at Z≈-4.8, muzzle (toward camera) at Z≈-1.0
+// Camera at Z=3.2 looking at Z=0 → sees straight into the bore.
+scene.add(gunRoot);
+
+/* ═══════════════════════════════════
+   FRAME COMPONENTS
+   (Same geometry as file.txt but tweaked
+    for front-facing camera framing)
+═══════════════════════════════════ */
+
+// Rear frame / recoil shield
+const recoilShield = new THREE.Mesh(
+    new THREE.BoxGeometry(0.50, 1.05, 0.35), matFrame);
+recoilShield.position.set(0, 0.05, 0.72);
+gunRoot.add(recoilShield);
+
+// Top strap — runs above the cylinder window
+const topStrap = new THREE.Mesh(
+    new THREE.BoxGeometry(0.42, 0.17, 1.65), matFrame);
+topStrap.position.set(0, 0.63, -0.05);
+gunRoot.add(topStrap);
+
+// Bottom frame / crane housing — below cylinder
+const bottomFrame = new THREE.Mesh(
+    new THREE.BoxGeometry(0.42, 0.19, 1.50), matFrame);
+bottomFrame.position.set(0, -0.52, -0.05);
+gunRoot.add(bottomFrame);
+
+// Front frame junction — connects frame to barrel
+const frontFrame = new THREE.Mesh(
+    new THREE.BoxGeometry(0.44, 1.00, 0.30), matFrame);
+frontFrame.position.set(0, 0.05, -0.88);
+gunRoot.add(frontFrame);
+
+// Rear sight housing
+const rearSight = new THREE.Mesh(
+    new THREE.BoxGeometry(0.10, 0.09, 0.22), matFrame);
+rearSight.position.set(0, 0.74, 0.60);
+gunRoot.add(rearSight);
+
+/* ═══════════════════════════════════
+   CYLINDER ASSEMBLY
+   The star of the show — centered in the frame window.
+   Rotated about Z axis for spinning.
+═══════════════════════════════════ */
+const cylinderGroup = new THREE.Group();
+cylinderGroup.position.set(0, 0.05, -0.07);
+gunRoot.add(cylinderGroup);
+
+// Main cylinder drum
+const cylBody = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.62, 0.62, 1.28, 36), matCyl);
+cylBody.rotation.x = Math.PI / 2;
+cylinderGroup.add(cylBody);
+
+// Central extractor pin
+const axisPin = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.11, 0.11, 1.45, 16), matFrame);
+axisPin.rotation.x = Math.PI / 2;
+cylinderGroup.add(axisPin);
+
+// 6 chambers: flutes + brass cartridge faces
+const CHAMBER_R = 0.365;
 for (let i = 0; i < 6; i++) {
-    const angleDeg = -90 + i * 60;          // start at top
-    const a = angleDeg * Math.PI / 180;
-    const cx = CYL_R * Math.cos(a);
-    const cy = CYL_R * Math.sin(a);
+    const angle = (i * Math.PI) / 3;
+    const cx = Math.cos(angle) * CHAMBER_R;
+    const cy = Math.sin(angle) * CHAMBER_R;
 
-    // Outer ring
-    const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    ring.setAttribute('cx', cx.toFixed(2));
-    ring.setAttribute('cy', cy.toFixed(2));
-    ring.setAttribute('r', (CH_R + 3).toFixed(2));
-    ring.setAttribute('fill', '#0e1a26');
-    ring.setAttribute('stroke', '#192838');
-    ring.setAttribute('stroke-width', '1.5');
-    chamberGroup.appendChild(ring);
+    // Bore tunnel through cylinder (dark)
+    const boreTunnel = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.12, 0.12, 1.32, 16), matDark);
+    boreTunnel.rotation.x = Math.PI / 2;
+    boreTunnel.position.set(cx, cy, 0);
+    cylinderGroup.add(boreTunnel);
 
-    // Chamber bore
-    const hole = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    hole.setAttribute('cx', cx.toFixed(2));
-    hole.setAttribute('cy', cy.toFixed(2));
-    hole.setAttribute('r', CH_R.toFixed(2));
-    hole.setAttribute('fill', 'url(#chEmpty)');
-    hole.setAttribute('filter', 'url(#chamberShadow)');
-    chamberGroup.appendChild(hole);
+    // Brass cartridge rim (back face, toward viewer in front-facing camera)
+    // In front-facing view the FRONT face of cylinder is toward camera.
+    // z = +0.62 is the front face (closest to camera at +Z).
+    const cartridge = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.115, 0.115, 0.055, 16), matBrass);
+    cartridge.rotation.x = Math.PI / 2;
+    cartridge.position.set(cx, cy, 0.645);
+    cylinderGroup.add(cartridge);
 
-    // Inner depth dot
-    const depth = document.createElementNS('http://www.w3.org/2000/svg','circle');
-    depth.setAttribute('cx', (cx - 1.5).toFixed(2));
-    depth.setAttribute('cy', (cy - 1.5).toFixed(2));
-    depth.setAttribute('r', '4');
-    depth.setAttribute('fill', 'rgba(0,0,0,0.5)');
-    chamberGroup.appendChild(depth);
+    // Primer dot
+    const primer = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.042, 0.042, 0.062, 12), matPrimer);
+    primer.rotation.x = Math.PI / 2;
+    primer.position.set(cx, cy, 0.648);
+    cylinderGroup.add(primer);
 
-    chamberEls.push({ hole, ring, depth, cx, cy });
+    // Flute groove between chambers
+    const fluteAngle = angle + Math.PI / 6;
+    const flute = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.12, 0.12, 0.90, 12), matDark);
+    flute.rotation.x = Math.PI / 2;
+    flute.position.set(
+        Math.cos(fluteAngle) * 0.59,
+        Math.sin(fluteAngle) * 0.59,
+        -0.05
+    );
+    cylinderGroup.add(flute);
 }
 
-function setChambers(bulletPos, reveal) {
-    chamberEls.forEach(({ hole, ring }, i) => {
-        if (reveal && i === bulletPos) {
-            hole.setAttribute('fill', 'url(#chBullet)');
-            hole.setAttribute('filter', 'url(#bulletGlow)');
-            ring.setAttribute('stroke', '#8b2020');
-        } else {
-            hole.setAttribute('fill', 'url(#chEmpty)');
-            hole.setAttribute('filter', 'url(#chamberShadow)');
-            ring.setAttribute('stroke', '#192838');
-        }
-    });
-}
+/* ═══════════════════════════════════
+   BARREL
+   Long cylinder running along Z axis away from camera.
+   Muzzle end closest to camera (toward +Z), breach end at -Z.
+   Barrel center Y = 0.35 (above cylinder center).
+═══════════════════════════════════ */
+const BARREL_LEN = 3.0;
+// barrel center Z: front face at Z≈-1.0, runs to Z≈-(1.0+barrelLen)
+const barrelZ = -1.0 - BARREL_LEN / 2;
 
-/* ══════════════════════════════════════════════════════
-   CYLINDER ROTATION — animate SVG transform directly
-══════════════════════════════════════════════════════ */
-const cylSvg = document.getElementById('cylSvg');
-let currentRot = 0;
+const barrel = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.24, 0.25, BARREL_LEN, 28), matFrame);
+barrel.rotation.x = Math.PI / 2;
+barrel.position.set(0, 0.35, barrelZ);
+gunRoot.add(barrel);
 
-function setCylRotation(deg, animated, duration = 1200, easing = 'cubic-bezier(0.15,0.85,0.35,1)') {
-    if (animated) {
-        cylSvg.style.transition = `transform ${duration}ms ${easing}`;
-    } else {
-        cylSvg.style.transition = 'none';
+// Underlug / ejector shroud below barrel
+const underlug = new THREE.Mesh(
+    new THREE.BoxGeometry(0.22, 0.33, BARREL_LEN), matFrame);
+underlug.position.set(0, 0.10, barrelZ);
+gunRoot.add(underlug);
+
+// Ejector rod (silver)
+const ejectorRod = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.055, 0.055, 0.65, 12), matCyl);
+ejectorRod.rotation.x = Math.PI / 2;
+ejectorRod.position.set(0, 0.05, -1.35);
+gunRoot.add(ejectorRod);
+
+// Muzzle crown ring (at the FRONT, closest to camera)
+// The muzzle is what the camera stares into!
+// Muzzle Z position = front face of barrel = -1.0 + small offset
+const muzzleZ = -1.0;
+const muzzleCrown = new THREE.Mesh(
+    new THREE.TorusGeometry(0.245, 0.025, 12, 32), matCyl);
+muzzleCrown.rotation.x = Math.PI / 2; // orient ring to face +Z (camera)
+muzzleCrown.position.set(0, 0.35, muzzleZ);
+gunRoot.add(muzzleCrown);
+
+// Bore hole at muzzle (very dark, looks into the barrel)
+const muzzleBore = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.135, 0.135, 0.12, 20), matDark);
+muzzleBore.rotation.x = Math.PI / 2;
+muzzleBore.position.set(0, 0.35, muzzleZ - 0.04);
+gunRoot.add(muzzleBore);
+
+// Front sight blade
+const frontSight = new THREE.Mesh(
+    new THREE.BoxGeometry(0.07, 0.22, 0.30), matFrame);
+frontSight.position.set(0, 0.68, -BARREL_LEN - 0.75);
+gunRoot.add(frontSight);
+
+// Red front sight insert
+const redInsert = new THREE.Mesh(
+    new THREE.BoxGeometry(0.075, 0.08, 0.10),
+    new THREE.MeshBasicMaterial({ color: 0xef4444 }));
+redInsert.position.set(0, 0.72, -BARREL_LEN - 0.80);
+gunRoot.add(redInsert);
+
+/* ═══════════════════════════════════
+   TRIGGER GUARD + TRIGGER
+═══════════════════════════════════ */
+const guardGeo = new THREE.TorusGeometry(0.48, 0.05, 10, 24, Math.PI * 0.85);
+const guard = new THREE.Mesh(guardGeo, matFrame);
+guard.position.set(0, -0.58, 0.12);
+guard.rotation.y = Math.PI / 2;
+guard.rotation.x = 0.35;
+gunRoot.add(guard);
+
+const triggerPivot = new THREE.Group();
+triggerPivot.position.set(0, -0.38, 0.22);
+gunRoot.add(triggerPivot);
+
+const triggerBlade = new THREE.Mesh(
+    new THREE.BoxGeometry(0.075, 0.43, 0.14), matCyl);
+triggerBlade.position.set(0, -0.15, -0.05);
+triggerBlade.rotation.x = 0.4;
+triggerPivot.add(triggerBlade);
+
+/* ═══════════════════════════════════
+   HAMMER
+═══════════════════════════════════ */
+const hammerPivot = new THREE.Group();
+hammerPivot.position.set(0, 0.42, 0.82);
+gunRoot.add(hammerPivot);
+
+const hammerBody = new THREE.Mesh(
+    new THREE.BoxGeometry(0.13, 0.45, 0.23), matCyl);
+hammerBody.position.set(0, 0.16, 0.06);
+hammerBody.rotation.x = -0.45;
+hammerPivot.add(hammerBody);
+
+const hammerSpur = new THREE.Mesh(
+    new THREE.BoxGeometry(0.15, 0.10, 0.17), matCyl);
+hammerSpur.position.set(0, 0.32, 0.15);
+hammerPivot.add(hammerSpur);
+
+/* ═══════════════════════════════════
+   GRIP
+═══════════════════════════════════ */
+const gripGroup = new THREE.Group();
+gripGroup.position.set(0, -0.42, 0.95);
+gripGroup.rotation.x = -0.48;
+
+const gripMain = new THREE.Mesh(
+    new THREE.BoxGeometry(0.55, 1.85, 0.78), matWood);
+gripMain.position.set(0, -0.7, 0);
+gripGroup.add(gripMain);
+
+const medallion = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.08, 0.08, 0.60, 16), matBrass);
+medallion.rotation.z = Math.PI / 2;
+medallion.position.set(0, -0.45, 0);
+gripGroup.add(medallion);
+
+const gripButt = new THREE.Mesh(
+    new THREE.SphereGeometry(0.38, 14, 14), matFrame);
+gripButt.scale.set(0.70, 0.30, 1.05);
+gripButt.position.set(0, -1.65, 0.05);
+gripGroup.add(gripButt);
+
+gunRoot.add(gripGroup);
+
+/* ═══════════════════════════════════
+   MUZZLE FLASH CONE
+   Points toward camera (+Z)
+═══════════════════════════════════ */
+const flashMesh = new THREE.Mesh(
+    new THREE.ConeGeometry(0.52, 2.0, 8), matFlash);
+// ConeGeometry points up (+Y), rotate to point toward +Z (camera)
+flashMesh.rotation.x = Math.PI / 2;
+flashMesh.position.set(0, 0.35, muzzleZ + 1.2); // in front of muzzle toward camera
+gunRoot.add(flashMesh);
+
+/* ═══════════════════════════════════
+   RENDER LOOP
+═══════════════════════════════════ */
+// Init size once DOM is ready
+setTimeout(resizeRenderer, 0);
+const animState = {
+    recoilRot: 0,
+    recoilZ: 0,
+    cylSpinVel: 0,       // current spin velocity (rad/s)
+    cylTargetRot: 0,     // target rotation for settle
+    isSpinning: false,
+    isFiring: false,
+    breathT: 0,
+};
+
+function renderLoop() {
+    requestAnimationFrame(renderLoop);
+
+    const now = performance.now();
+    const delta = 0.016; // ~60fps target
+
+    // Spring recoil recovery
+    animState.recoilRot += (0 - animState.recoilRot) * 14 * delta;
+    animState.recoilZ   += (0 - animState.recoilZ)   * 14 * delta;
+    gunRoot.rotation.x = animState.recoilRot;
+    gunRoot.position.z = animState.recoilZ;
+
+    // Subtle idle breathing
+    if (!animState.isFiring && !animState.isSpinning) {
+        animState.breathT += delta;
+        gunRoot.position.y = Math.sin(animState.breathT * 0.9) * 0.012;
     }
-    cylSvg.style.transform = `rotate(${deg}deg)`;
+
+    renderer.render(scene, camera);
+}
+renderLoop();
+
+/* ═══════════════════════════════════
+   3D ANIMATION HELPERS
+═══════════════════════════════════ */
+
+// Animate cylinder spinning: fast spin then settle to a specific final rotation
+function animCylSpin(totalExtraRot, duration, onDone) {
+    const start = performance.now();
+    const startRot = cylinderGroup.rotation.z;
+    const endRot = startRot + totalExtraRot;
+
+    function tick(now) {
+        const p = Math.min((now - start) / duration, 1);
+        // Ease: fast start, slow deceleration (like spinning and slowing)
+        const e = 1 - Math.pow(1 - p, 3);
+        cylinderGroup.rotation.z = startRot + (endRot - startRot) * e;
+        if (p < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            cylinderGroup.rotation.z = endRot;
+            if (onDone) onDone();
+        }
+    }
+    requestAnimationFrame(tick);
 }
 
-/* ══════════════════════════════════════════════════════
+// Trigger pull animation: pull back → release → reset
+function animTriggerPull(onFire) {
+    const start = performance.now();
+    const pullDur = 200;
+    const startRot = triggerPivot.rotation.x;
+
+    function tick(now) {
+        const p = Math.min((now - start) / pullDur, 1);
+        const s = p * p * (3 - 2 * p);
+        triggerPivot.rotation.x = startRot - s * 0.45;
+        hammerPivot.rotation.x  = -s * 0.80;
+        if (p < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            // Fire!
+            hammerPivot.rotation.x = 0.15; // snap forward
+            triggerPivot.rotation.x = 0;
+            if (onFire) onFire();
+            // Reset hammer
+            setTimeout(() => { hammerPivot.rotation.x = 0; }, 180);
+        }
+    }
+    requestAnimationFrame(tick);
+}
+
+// Trigger dry-fire: smaller motion
+function animDryfire(onDone) {
+    const start = performance.now();
+    function tick(now) {
+        const p = Math.min((now - start) / 140, 1);
+        const s = p < 0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
+        triggerPivot.rotation.x = -s * 0.22;
+        hammerPivot.rotation.x  = -s * 0.35;
+        if (p < 1) {
+            requestAnimationFrame(tick);
+        } else {
+            triggerPivot.rotation.x = 0;
+            hammerPivot.rotation.x  = 0;
+            if (onDone) onDone();
+        }
+    }
+    requestAnimationFrame(tick);
+}
+
+function triggerMuzzleFlash3D() {
+    matFlash.opacity = 1.0;
+    flashLight.intensity = 10.0;
+    flashMesh.scale.set(
+        1 + Math.random() * 0.4,
+        1 + Math.random() * 0.4,
+        1 + Math.random() * 0.3
+    );
+    setTimeout(() => {
+        matFlash.opacity = 0;
+        flashLight.intensity = 0;
+    }, 55);
+}
+
+/* ═══════════════════════════════════════════════════════════════
    AUDIO
-══════════════════════════════════════════════════════ */
+═══════════════════════════════════════════════════════════════ */
 const AC = new (window.AudioContext || window.webkitAudioContext)();
-const resume = () => { if(AC.state==='suspended') AC.resume(); };
+const resumeAC = () => { if (AC.state === 'suspended') AC.resume(); };
 
-function playRatchet() {
-    resume();
-    const t=AC.currentTime;
-    const o=AC.createOscillator(), f=AC.createBiquadFilter(), g=AC.createGain();
-    o.type='triangle'; o.frequency.setValueAtTime(1400+Math.random()*200,t); o.frequency.exponentialRampToValueAtTime(350,t+0.025);
-    f.type='bandpass'; f.frequency.value=2200; f.Q.value=5;
-    g.gain.setValueAtTime(0.25,t); g.gain.linearRampToValueAtTime(0.001,t+0.025);
-    o.connect(f); f.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+0.025);
-}
-function playThud() {
-    resume();
-    const t=AC.currentTime;
-    const o=AC.createOscillator(), g=AC.createGain();
-    o.type='sine'; o.frequency.setValueAtTime(190,t); o.frequency.exponentialRampToValueAtTime(48,t+0.09);
-    g.gain.setValueAtTime(0.5,t); g.gain.linearRampToValueAtTime(0.001,t+0.09);
-    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+0.09);
-}
-function playTrigger() {
-    resume();
-    const t=AC.currentTime;
-    [[1800,400,0.04,'sine',0,0.38],[140,38,0.07,'triangle',0.03,0.48]].forEach(([f1,f2,d,tp,dl,v])=>{
-        const o=AC.createOscillator(), g=AC.createGain();
-        o.type=tp; o.frequency.setValueAtTime(f1,t+dl); o.frequency.exponentialRampToValueAtTime(f2,t+dl+d);
-        g.gain.setValueAtTime(v,t+dl); g.gain.linearRampToValueAtTime(0.001,t+dl+d);
+const playRatchet = () => {
+    resumeAC(); const t = AC.currentTime;
+    const o = AC.createOscillator(), f = AC.createBiquadFilter(), g = AC.createGain();
+    o.type = 'triangle';
+    o.frequency.setValueAtTime(1400 + Math.random()*200, t);
+    o.frequency.exponentialRampToValueAtTime(350, t+.025);
+    f.type = 'bandpass'; f.frequency.value = 2200; f.Q.value = 5;
+    g.gain.setValueAtTime(.25, t); g.gain.linearRampToValueAtTime(.001, t+.025);
+    o.connect(f); f.connect(g); g.connect(AC.destination);
+    o.start(t); o.stop(t+.025);
+};
+const playThud = () => {
+    resumeAC(); const t = AC.currentTime;
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = 'sine';
+    o.frequency.setValueAtTime(190, t);
+    o.frequency.exponentialRampToValueAtTime(48, t+.09);
+    g.gain.setValueAtTime(.5, t); g.gain.linearRampToValueAtTime(.001, t+.09);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+.09);
+};
+const playTrigger = () => {
+    resumeAC(); const t = AC.currentTime;
+    [[1800,400,.04,'sine',0,.38],[140,38,.07,'triangle',.03,.48]].forEach(([f1,f2,d,tp,dl,v]) => {
+        const o = AC.createOscillator(), g = AC.createGain();
+        o.type = tp;
+        o.frequency.setValueAtTime(f1, t+dl);
+        o.frequency.exponentialRampToValueAtTime(f2, t+dl+d);
+        g.gain.setValueAtTime(v, t+dl); g.gain.linearRampToValueAtTime(.001, t+dl+d);
         o.connect(g); g.connect(AC.destination); o.start(t+dl); o.stop(t+dl+d);
     });
-}
-function playEmptyClick() {
-    resume();
-    const t=AC.currentTime;
-    const o=AC.createOscillator(), g=AC.createGain();
-    o.type='square'; o.frequency.setValueAtTime(700,t); o.frequency.exponentialRampToValueAtTime(220,t+0.06);
-    g.gain.setValueAtTime(0.16,t); g.gain.linearRampToValueAtTime(0.001,t+0.06);
-    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+0.06);
-}
-function playBang() {
-    resume();
-    const t=AC.currentTime, dur=2.0;
-    const buf=AC.createBuffer(1,AC.sampleRate*dur,AC.sampleRate);
-    const d=buf.getChannelData(0); for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1;
-    const ns=AC.createBufferSource(); ns.buffer=buf;
-    const fl=AC.createBiquadFilter(); fl.type='lowpass'; fl.frequency.setValueAtTime(1100,t); fl.frequency.exponentialRampToValueAtTime(55,t+dur);
-    const gn=AC.createGain(); gn.gain.setValueAtTime(1.0,t); gn.gain.exponentialRampToValueAtTime(0.001,t+dur);
+};
+const playEmpty = () => {
+    resumeAC(); const t = AC.currentTime;
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.type = 'square';
+    o.frequency.setValueAtTime(700, t);
+    o.frequency.exponentialRampToValueAtTime(220, t+.06);
+    g.gain.setValueAtTime(.15, t); g.gain.linearRampToValueAtTime(.001, t+.06);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+.06);
+};
+const playBang = () => {
+    resumeAC(); const t = AC.currentTime, dur = 2;
+    const buf = AC.createBuffer(1, AC.sampleRate*dur, AC.sampleRate);
+    const d = buf.getChannelData(0);
+    for (let i = 0; i < d.length; i++) d[i] = Math.random()*2-1;
+    const ns = AC.createBufferSource(); ns.buffer = buf;
+    const fl = AC.createBiquadFilter(); fl.type='lowpass';
+    fl.frequency.setValueAtTime(1100, t);
+    fl.frequency.exponentialRampToValueAtTime(55, t+dur);
+    const gn = AC.createGain();
+    gn.gain.setValueAtTime(1, t); gn.gain.exponentialRampToValueAtTime(.001, t+dur);
     ns.connect(fl); fl.connect(gn); gn.connect(AC.destination); ns.start(t);
-    const sb=AC.createOscillator(), sg=AC.createGain();
-    sb.type='sine'; sb.frequency.setValueAtTime(110,t); sb.frequency.exponentialRampToValueAtTime(28,t+0.35);
-    sg.gain.setValueAtTime(1.0,t); sg.gain.linearRampToValueAtTime(0.001,t+0.35);
-    sb.connect(sg); sg.connect(AC.destination); sb.start(t); sb.stop(t+0.35);
-}
+    const sb = AC.createOscillator(), sg = AC.createGain();
+    sb.type='sine';
+    sb.frequency.setValueAtTime(110, t); sb.frequency.exponentialRampToValueAtTime(28, t+.35);
+    sg.gain.setValueAtTime(1, t); sg.gain.linearRampToValueAtTime(.001, t+.35);
+    sb.connect(sg); sg.connect(AC.destination); sb.start(t); sb.stop(t+.35);
+};
 
-/* ══════════════════════════════════════════════════════
-   PARTICLES
-══════════════════════════════════════════════════════ */
-const cv=document.getElementById('particles'), cx2=cv.getContext('2d');
-let W, H;
-const resize=()=>{ W=cv.width=window.innerWidth; H=cv.height=window.innerHeight; };
+/* ═══════════════════════════════════════════════════════════════
+   PARTICLES (background canvas, unchanged)
+═══════════════════════════════════════════════════════════════ */
+const cv = document.getElementById('particles'), ctx = cv.getContext('2d');
+let W2, H2;
+const resize = () => {
+    W2 = cv.width = window.innerWidth;
+    H2 = cv.height = window.innerHeight;
+    resizeRenderer();
+};
 resize(); window.addEventListener('resize', resize);
-
-const allP=[];
+const allP = [];
 class Particle {
     constructor(x,y,col) {
         this.x=x; this.y=y; this.col=col;
         this.vx=(Math.random()-.5)*7; this.vy=(Math.random()-1.1)*8;
         this.r=Math.random()*4+1.5; this.life=1;
     }
-    step(){ this.vx*=0.97; this.vy+=0.16; this.x+=this.vx; this.y+=this.vy; this.life-=0.02; }
-    draw(){
-        cx2.save(); cx2.globalAlpha=Math.max(0,this.life);
-        cx2.shadowColor=this.col; cx2.shadowBlur=7; cx2.fillStyle=this.col;
-        cx2.beginPath(); cx2.arc(this.x,this.y,this.r,0,Math.PI*2); cx2.fill(); cx2.restore();
+    step() { this.vx*=.97; this.vy+=.16; this.x+=this.vx; this.y+=this.vy; this.life-=.02; }
+    draw() {
+        ctx.save(); ctx.globalAlpha=Math.max(0,this.life);
+        ctx.shadowColor=this.col; ctx.shadowBlur=7;
+        ctx.fillStyle=this.col; ctx.beginPath();
+        ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill(); ctx.restore();
     }
 }
-function burst(x,y,col,n=35){ for(let i=0;i<n;i++) allP.push(new Particle(x,y,col)); }
-
-const embers=Array.from({length:22},()=>{
-    const e={reset(){
+function burst(x,y,col,n=35) { for(let i=0;i<n;i++) allP.push(new Particle(x,y,col)); }
+const embers = Array.from({length:22}, () => {
+    const e = { reset() {
         this.x=Math.random()*window.innerWidth; this.y=window.innerHeight+8;
-        this.r=Math.random()*1.6+0.3; this.vx=(Math.random()-.5)*.4; this.vy=-(Math.random()*.5+.2);
-        this.alpha=Math.random()*.3+.07; this.life=1;
-    }}; e.reset(); e.y=Math.random()*window.innerHeight; return e;
+        this.r=Math.random()*1.6+.3; this.vx=(Math.random()-.5)*.4;
+        this.vy=-(Math.random()*.5+.2); this.alpha=Math.random()*.3+.07; this.life=1;
+    }};
+    e.reset(); e.y=Math.random()*window.innerHeight; return e;
 });
-
-(function loop(){
-    cx2.clearRect(0,0,W,H);
-    for(let i=allP.length-1;i>=0;i--){ allP[i].step(); allP[i].draw(); if(allP[i].life<=0) allP.splice(i,1); }
-    for(const e of embers){
-        e.x+=e.vx; e.y+=e.vy; e.life-=0.0025;
-        cx2.save(); cx2.globalAlpha=e.alpha*e.life;
-        cx2.fillStyle='#e74c3c'; cx2.shadowColor='#e74c3c'; cx2.shadowBlur=5;
-        cx2.beginPath(); cx2.arc(e.x,e.y,e.r,0,Math.PI*2); cx2.fill(); cx2.restore();
-        if(e.life<=0) e.reset();
+(function pLoop() {
+    ctx.clearRect(0,0,W2,H2);
+    for (let i=allP.length-1;i>=0;i--) {
+        allP[i].step(); allP[i].draw();
+        if (allP[i].life<=0) allP.splice(i,1);
     }
-    requestAnimationFrame(loop);
+    for (const e of embers) {
+        e.x+=e.vx; e.y+=e.vy; e.life-=.0025;
+        ctx.save(); ctx.globalAlpha=e.alpha*e.life;
+        ctx.fillStyle='#e74c3c'; ctx.shadowColor='#e74c3c'; ctx.shadowBlur=5;
+        ctx.beginPath(); ctx.arc(e.x,e.y,e.r,0,Math.PI*2); ctx.fill(); ctx.restore();
+        if (e.life<=0) e.reset();
+    }
+    requestAnimationFrame(pLoop);
 })();
 
-/* ══════════════════════════════════════════════════════
-   DOM refs & State
-══════════════════════════════════════════════════════ */
-const gunWrap  = document.getElementById('gunWrap');
-const muzzle   = document.getElementById('muzzle');
-const smoke    = document.getElementById('smoke');
-const spinBtn  = document.getElementById('spinBtn');
-const shootBtn = document.getElementById('shootBtn');
-const statusEl = document.getElementById('statusEl');
-const svCountEl= document.getElementById('svCount');
-const spCountEl= document.getElementById('spCount');
-const stCountEl= document.getElementById('stCount');
-const oddsFill = document.getElementById('oddsFill');
-const oddsVal  = document.getElementById('oddsVal');
-const historyEl= document.getElementById('history');
-const card     = document.getElementById('card');
-const bloodOv  = document.getElementById('bloodOverlay');
-const flashOv  = document.getElementById('flashOverlay');
+/* ═══════════════════════════════════════════════════════════════
+   DOM REFS + GAME STATE
+═══════════════════════════════════════════════════════════════ */
+const spinBtn   = document.getElementById('spinBtn');
+const shootBtn  = document.getElementById('shootBtn');
+const statusEl  = document.getElementById('statusEl');
+const svCountEl = document.getElementById('svCount');
+const spCountEl = document.getElementById('spCount');
+const stCountEl = document.getElementById('stCount');
+const oddsFill  = document.getElementById('oddsFill');
+const oddsVal   = document.getElementById('oddsVal');
+const historyEl = document.getElementById('history');
+const card      = document.getElementById('card');
+const bloodOv   = document.getElementById('bloodOverlay');
+const flashOv   = document.getElementById('flashOverlay');
+const muzzEl    = document.getElementById('muzzleFlash');
+const smokeEl   = document.getElementById('smokeEl');
+const gunWrap   = document.getElementById('gunWrap');
 
-let bulletPos=Math.floor(Math.random()*6), currentPos=0;
-let isSpun=false, survives=0, spins=0, streak=0, histArr=[];
+let bulletPos = Math.floor(Math.random()*6), currentPos = 0;
+let isSpun = false, survives = 0, spins = 0, streak = 0, histArr = [];
 
-function setStatus(t,c='')  { statusEl.textContent=t; statusEl.className='status '+c; }
-function setOdds(n,d)       { oddsFill.style.width=((n/d)*100)+'%'; oddsVal.textContent=n+' in '+d; }
+const setStatus = (t,c='') => { statusEl.textContent=t; statusEl.className='status '+c; };
+const setOdds   = (n,d)    => { oddsFill.style.width=((n/d)*100)+'%'; oddsVal.textContent=n+' in '+d; };
 
 function addDot(s) {
     histArr.push(s); if(histArr.length>14) histArr.shift();
     historyEl.innerHTML='';
-    histArr.forEach((v,i)=>{
-        const d=document.createElement('div');
-        d.className='hdot '+(v?'s':'d')+(i===histArr.length-1?' new':'');
-        historyEl.appendChild(d);
+    histArr.forEach((v,i) => {
+        const dot=document.createElement('div');
+        dot.className='hdot '+(v?'s':'d')+(i===histArr.length-1?' new':'');
+        historyEl.appendChild(dot);
     });
 }
 
 function screenFlash() {
-    flashOv.style.opacity='0.9';
-    setTimeout(()=>{ flashOv.style.opacity='0'; },70);
+    flashOv.style.opacity='.9';
+    setTimeout(()=>{ flashOv.style.opacity='0'; }, 70);
 }
 
-function triggerMuzzle() {
-    muzzle.classList.remove('bang'); void muzzle.offsetWidth; muzzle.classList.add('bang');
-    setTimeout(()=>{ smoke.classList.remove('puff'); void smoke.offsetWidth; smoke.classList.add('puff'); },90);
-}
-
-function animGun(type) {
+function animGunCss(t) {
     gunWrap.classList.remove('recoil','dryfire'); void gunWrap.offsetWidth;
-    gunWrap.classList.add(type);
-    setTimeout(()=>gunWrap.classList.remove(type), type==='recoil' ? 380 : 220);
+    gunWrap.classList.add(t);
+    setTimeout(()=>gunWrap.classList.remove(t), t==='recoil'?400:220);
 }
 
-/* ══════════════════════════════════════════════════════
-   SPIN
-══════════════════════════════════════════════════════ */
-spinBtn.addEventListener('click', ()=>{
-    if(spinBtn.disabled) return;
-    spinBtn.disabled=true; shootBtn.disabled=true;
+function triggerMuzzleCSS() {
+    muzzEl.classList.remove('bang'); void muzzEl.offsetWidth; muzzEl.classList.add('bang');
+    setTimeout(()=>{ smokeEl.classList.remove('puff'); void smokeEl.offsetWidth; smokeEl.classList.add('puff'); }, 100);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SPIN BUTTON
+═══════════════════════════════════════════════════════════════ */
+spinBtn.addEventListener('click', () => {
+    if (spinBtn.disabled) return;
+    spinBtn.disabled = true;
+    shootBtn.disabled = true;
     bloodOv.classList.remove('active');
-    setStatus('SPINNING...','');
-    setChambers(-1, false);
+    setStatus('SPINNING...', '');
+    animState.isSpinning = true;
 
     bulletPos = Math.floor(Math.random()*6);
 
-    const extra = (Math.floor(Math.random()*3)+3)*360;
-    const off   = Math.floor(Math.random()*6)*60;
-    const target = currentRot + extra + off;
+    // Total rotation: 3–5 full turns + random chamber offset
+    const fullTurns = (Math.floor(Math.random()*3) + 3) * Math.PI * 2;
+    const chamberOffset = Math.floor(Math.random()*6) * (Math.PI / 3);
+    const totalRot = fullTurns + chamberOffset;
+    const spinDur  = 1300;
 
-    setCylRotation(target, true, 1200);
+    // Play ratchet clicks during spin
+    let clicks = 0;
+    const maxClicks = 22;
+    const ratchetInterval = setInterval(() => {
+        if (clicks++ < maxClicks) playRatchet();
+        else clearInterval(ratchetInterval);
+    }, spinDur / maxClicks);
 
-    // ratchet clicks
-    const t0=performance.now(); let cl=0;
-    (function tick(ts){
-        const p=Math.min((ts-t0)/1200,1);
-        if(cl<20&&p<1){ playRatchet(); cl++; setTimeout(()=>requestAnimationFrame(tick),18+p*p*150); }
-    })(performance.now());
-
-    setTimeout(()=>{
+    animCylSpin(totalRot, spinDur, () => {
         playThud();
-        currentRot = target;
-        currentPos = Math.round((360-(currentRot%360))%360/60)%6;
-        isSpun=true;
-        spinBtn.disabled=false; shootBtn.disabled=false;
-        setStatus('PULL THE TRIGGER','');
-        spins++; spCountEl.textContent=spins;
-        setOdds(5,6);
-    }, 1200);
+        animState.isSpinning = false;
+        currentPos = Math.round(
+            ((2 * Math.PI - (cylinderGroup.rotation.z % (2 * Math.PI))) % (2 * Math.PI))
+            / (Math.PI / 3)
+        ) % 6;
+        isSpun = true;
+        spinBtn.disabled = false;
+        shootBtn.disabled = false;
+        setStatus('PULL THE TRIGGER', '');
+        spins++;
+        spCountEl.textContent = spins;
+        setOdds(5, 6);
+    });
 });
 
-/* ══════════════════════════════════════════════════════
-   SHOOT
-══════════════════════════════════════════════════════ */
-shootBtn.addEventListener('click', ()=>{
-    if(!isSpun||shootBtn.disabled) return;
-    spinBtn.disabled=true; shootBtn.disabled=true;
-    setStatus('...','');
+/* ═══════════════════════════════════════════════════════════════
+   SHOOT BUTTON
+═══════════════════════════════════════════════════════════════ */
+shootBtn.addEventListener('click', () => {
+    if (!isSpun || shootBtn.disabled) return;
+    spinBtn.disabled  = true;
+    shootBtn.disabled = true;
+    setStatus('...', '');
     playTrigger();
+    animState.isFiring = true;
 
-    setTimeout(()=>{
-        if(currentPos === bulletPos) {
-            /* ── BANG ── */
-            playBang(); screenFlash(); animGun('recoil'); triggerMuzzle();
-            setTimeout(()=>{ bloodOv.classList.add('active'); },55);
-            card.classList.add('shake'); setTimeout(()=>card.classList.remove('shake'),500);
-            setChambers(bulletPos, true);
-            setStatus('BANG','danger');
-            burst(W/2,H/2,'#c0392b',85); burst(W/2,H/2,'#e74c3c',50); burst(W/2,H/2,'#ff7070',20);
-            addDot(false);
-            streak=0; stCountEl.textContent=streak;
-            svCountEl.textContent=survives;
-            isSpun=false; spinBtn.disabled=false;
-            spinBtn.textContent='⟳  TRY AGAIN';
-            setOdds(0,1);
+    setTimeout(() => {
+        if (currentPos === bulletPos) {
+            /* ══ BANG ══ */
+            animTriggerPull(() => {
+                playBang();
+                screenFlash();
+                animGunCss('recoil');
+                triggerMuzzleFlash3D();
+                triggerMuzzleCSS();
+
+                // 3D recoil
+                animState.recoilRot = 0.38;
+                animState.recoilZ   = 0.25;
+
+                setTimeout(()=>{ bloodOv.classList.add('active'); }, 55);
+                card.classList.add('shake');
+                setTimeout(()=>card.classList.remove('shake'), 500);
+                setStatus('BANG', 'danger');
+
+                const r = card.getBoundingClientRect();
+                burst(W2/2, H2/2, '#c0392b', 85);
+                burst(W2/2, H2/2, '#e74c3c', 50);
+                burst(W2/2, H2/2, '#ff7070', 20);
+
+                addDot(false); streak=0; stCountEl.textContent=streak;
+                svCountEl.textContent=survives;
+                isSpun=false;
+                animState.isFiring = false;
+                spinBtn.disabled=false;
+                spinBtn.textContent='⟳  TRY AGAIN';
+                setOdds(0,1);
+            });
         } else {
-            /* ── CLICK (empty) ── */
-            playEmptyClick(); animGun('dryfire');
-            // NO muzzle flash — chamber is empty
-            card.classList.add('sglow'); setTimeout(()=>card.classList.remove('sglow'),900);
-            setStatus('CLICK — SURVIVED','safe');
-            const r=card.getBoundingClientRect();
-            burst(r.left+r.width/2,r.top+80,'#2ecc71',28); burst(r.left+r.width/2,r.top+80,'#27ae60',18);
-            survives++; streak++;
-            svCountEl.textContent=survives; stCountEl.textContent=streak;
-            addDot(true);
-            isSpun=false;
-            currentPos=(currentPos+1)%6;
-            currentRot += 60;
-            setCylRotation(currentRot, true, 280, 'ease-out');
-            playThud();
-            spinBtn.disabled=false; shootBtn.disabled=true;
-            spinBtn.textContent='⟳  SPIN';
-            setOdds(4,5);
+            /* ══ CLICK — empty ══ */
+            animDryfire(() => {
+                playEmpty();
+                animGunCss('dryfire');
+                card.classList.add('sglow');
+                setTimeout(()=>card.classList.remove('sglow'), 900);
+                setStatus('CLICK — SURVIVED', 'safe');
+
+                const r = card.getBoundingClientRect();
+                burst(r.left+r.width/2, r.top+60, '#2ecc71', 28);
+                burst(r.left+r.width/2, r.top+60, '#27ae60', 18);
+
+                survives++; streak++;
+                svCountEl.textContent=survives;
+                stCountEl.textContent=streak;
+                addDot(true);
+
+                isSpun = false;
+                // Advance cylinder one click
+                animCylSpin(Math.PI/3, 300, null);
+                currentPos = (currentPos+1)%6;
+
+                playThud();
+                animState.isFiring = false;
+                spinBtn.disabled = false;
+                shootBtn.disabled = true;
+                spinBtn.textContent = '⟳  SPIN';
+                setOdds(4,5);
+            });
         }
-    },500);
+    }, 480);
 });
 
-setOdds(5,6);
+setOdds(5, 6);
 </script>
 </body>
 </html>
