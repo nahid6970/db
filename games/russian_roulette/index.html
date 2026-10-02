@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Russian Roulette</title>
+    <title>Russian Roulette — Classic S&W .38</title>
 
-    <!-- Three.js -->
+    <!-- Three.js & Controls -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -15,7 +15,7 @@
         :root{
             --red:#e74c3c;--gold:#f0b429;--green:#2ecc71;
             --bg:#07090c;--card:#0d1520;--card2:#111d2a;
-            --border:#192536;--b2:#1e2e42;--text:#c0d0e0;--dim:#364d63;
+            --border:#192536;--b2:#1e2e42;--text:#c0d0e0;--dim:#42586e;
         }
         html,body{height:100%;overflow:hidden}
         body{
@@ -48,7 +48,6 @@
             width:100vw;height:100vh;
         }
 
-        /* LEFT / CENTER — gun takes all remaining space */
         .gun-col{
             flex:1 1 0;
             display:flex;align-items:stretch;justify-content:stretch;
@@ -57,7 +56,6 @@
             overflow:hidden;
         }
 
-        /* RIGHT PANEL */
         .ui-col{
             flex:0 0 320px;
             display:flex;flex-direction:column;
@@ -74,9 +72,8 @@
             text-shadow:0 0 40px rgba(231,76,60,.6),0 0 80px rgba(231,76,60,.15);
             line-height:1;user-select:none;
         }
-        .tagline{font-size:.60rem;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-top:2px}
+        .tagline{font-size:.60rem;letter-spacing:4px;text-transform:uppercase;color:var(--dim);margin-top:4px}
 
-        /* ── 3D Gun wrapper — fills the whole gun column ── */
         #gunWrap{
             position:relative;
             width:100%;
@@ -93,30 +90,29 @@
         #gunWrap.dryfire{animation:dryfire .18s ease-out forwards}
         @keyframes recoil{
             0%  {transform:translate(0,0) scale(1) rotate(0deg)}
-            20% {transform:translate(0px,14px) scale(.97) rotate(1deg)}
-            50% {transform:translate(0px,-6px) scale(1.01) rotate(-.5deg)}
+            20% {transform:translate(-4px,14px) scale(.98) rotate(1deg)}
+            50% {transform:translate(2px,-6px) scale(1.01) rotate(-.5deg)}
             100%{transform:translate(0,0) scale(1) rotate(0deg)}
         }
         @keyframes dryfire{
             0%  {transform:translate(0,0) scale(1)}
-            50% {transform:translate(0,4px) scale(.99)}
+            50% {transform:translate(0,3px) scale(.995)}
             100%{transform:translate(0,0) scale(1)}
         }
 
-        /* Muzzle flash — at barrel muzzle position in the 3/4 view (front-left area) */
         #muzzleFlash{
-            position:absolute;left:34%;top:46%;
+            position:absolute;left:29%;top:46%;
             transform:translate(-50%,-50%);
             width:0;height:0;border-radius:50%;pointer-events:none;opacity:0;z-index:20;
         }
         #muzzleFlash.bang{animation:muzzBang .28s ease-out forwards}
         @keyframes muzzBang{
             0%  {opacity:1;width:0;height:0;box-shadow:0 0 0 0 #fff,0 0 0 0 #ffe066,0 0 0 0 rgba(231,76,60,.9)}
-            30% {opacity:1;width:120px;height:120px;margin:-60px;box-shadow:0 0 50px 18px #fff,0 0 90px 36px #ffe066,0 0 140px 50px rgba(231,76,60,.6)}
-            100%{opacity:0;width:160px;height:160px;margin:-80px;box-shadow:0 0 0 0 transparent,0 0 0 0 transparent,0 0 0 0 transparent}
+            30% {opacity:1;width:130px;height:130px;margin:-65px;box-shadow:0 0 55px 22px #fff,0 0 95px 40px #ffe066,0 0 150px 55px rgba(231,76,60,.6)}
+            100%{opacity:0;width:170px;height:170px;margin:-85px;box-shadow:0 0 0 0 transparent}
         }
         #smokeEl{
-            position:absolute;left:34%;top:46%;transform:translate(-50%,-50%);
+            position:absolute;left:29%;top:46%;transform:translate(-50%,-50%);
             width:12px;height:12px;border-radius:50%;background:rgba(180,200,220,.5);
             filter:blur(6px);opacity:0;pointer-events:none;z-index:19;
         }
@@ -128,10 +124,10 @@
 
         #threeCanvas{
             width:100%!important;height:100%!important;
-            display:block;
+            display:block;cursor:grab;
         }
+        #threeCanvas:active{cursor:grabbing;}
 
-        /* ── Card ── */
         .card{
             background:var(--card);border:1px solid var(--border);border-radius:20px;
             padding:20px 20px 16px;width:100%;
@@ -194,7 +190,7 @@
         .hdot.new{animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
         @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
-        /* ── Background color picker ── */
+        /* Background color picker */
         #bgPickerBtn{
             position:fixed;bottom:18px;left:18px;z-index:300;
             display:flex;align-items:center;gap:8px;
@@ -211,11 +207,6 @@
             background:#07090c;border:1.5px solid rgba(255,255,255,.15);
             flex-shrink:0;transition:background .2s;
         }
-        /* hide the native color input but keep it clickable */
-        #bgColorInput{
-            position:absolute;width:0;height:0;opacity:0;pointer-events:none;
-        }
-        /* preset swatches panel */
         #bgPresets{
             position:fixed;bottom:56px;left:18px;z-index:301;
             display:none;flex-wrap:wrap;gap:7px;
@@ -235,9 +226,7 @@
             padding-top:6px;border-top:1px solid var(--border);margin-top:2px;
         }
         #bgCustomRow label{font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);flex:1}
-        #bgColorInput2{
-            width:32px;height:24px;border:none;padding:0;background:none;cursor:pointer;border-radius:4px;
-        }
+        #bgColorInput2{width:32px;height:24px;border:none;padding:0;background:none;cursor:pointer;border-radius:4px}
     </style>
 </head>
 <body>
@@ -246,7 +235,6 @@
 <div id="flashOverlay"></div>
 
 <div class="layout">
-    <!-- LEFT: 3D Gun (fills most of the screen) -->
     <div class="gun-col">
         <div id="gunWrap">
             <div id="muzzleFlash"></div>
@@ -255,11 +243,10 @@
         </div>
     </div>
 
-    <!-- RIGHT: Title + all game UI -->
     <div class="ui-col">
         <div>
             <div class="title">RUSSIAN<br>ROULETTE</div>
-            <div class="tagline">How lucky are you?</div>
+            <div class="tagline">Smith & Wesson .38 Military & Police</div>
         </div>
 
         <div class="card" id="card">
@@ -290,30 +277,39 @@
 
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   THREE.JS 3D REVOLVER
-   Camera: looking straight down the barrel (front-facing view).
-   The gun points toward the camera — barrel axis along +Z.
-   Camera sits at Z+ looking toward Z- (into the muzzle).
+   AUTHENTIC S&W .38 REVOLVER (THREE.JS PROCEDURAL MODEL)
 ═══════════════════════════════════════════════════════════════ */
 
 const threeContainer = document.getElementById('threeContainer');
 
-// Scene
+// Scene & Renderer
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x07090c);
-scene.fog = new THREE.FogExp2(0x07090c, 0.032);
+scene.fog = new THREE.FogExp2(0x07090c, 0.026);
 
-// Renderer — fills the gunWrap container, sized dynamically
-const renderer = new THREE.WebGLRenderer({ antialias: true });
+const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.15;
+renderer.toneMappingExposure = 1.25;
 renderer.domElement.id = 'threeCanvas';
 threeContainer.appendChild(renderer.domElement);
 
-// Size renderer to fill its container
+// Camera setup
+const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
+camera.position.set(4.3, 1.6, 3.8);
+
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.05;
+controls.target.set(-0.35, 0.05, -0.6);
+controls.minDistance = 2.0;
+controls.maxDistance = 9.0;
+controls.minPolarAngle = Math.PI * 0.16;
+controls.maxPolarAngle = Math.PI * 0.65;
+controls.update();
+
 function resizeRenderer() {
     const w = threeContainer.clientWidth;
     const h = threeContainer.clientHeight;
@@ -321,435 +317,570 @@ function resizeRenderer() {
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    if (typeof controls !== 'undefined') controls.update();
+    controls.update();
 }
 
-// Camera — proper 3/4 view from file.txt, slightly tweaked for the layout
-// Gun sits at origin. Camera above-right-front looking down at the cylinder.
-const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
-// Position: front-right, elevated — shows barrel going left, cylinder facing viewer
-// Based on file.txt: camera.position.set(3.4, 1.4, 3.8)
-// Tweaked: pull back a bit more so full gun is visible
-camera.position.set(4.2, 2.0, 4.8);
-camera.lookAt(0, 0.1, -0.8);
-
-// OrbitControls — left drag: orbit, scroll: zoom, right drag: pan
-const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableDamping = true;
-controls.dampingFactor = 0.06;
-controls.target.set(0, 0.05, -0.8);
-controls.minDistance = 2.5;
-controls.maxDistance = 12;
-
-// Lock vertical angle: prevents top-down and upside-down views
-// PI * 0.18 = ~32° from top (gentle high angle)
-// PI * 0.62 = ~112° (slightly below level — shows underside of barrel)
-controls.minPolarAngle = Math.PI * 0.18;
-controls.maxPolarAngle = Math.PI * 0.62;
-controls.update();
-
-/* ═══════════════════════════════════
-   LIGHTING
-   Key from upper-left, fill from right,
-   rim from behind — matches 3/4 camera position
-═══════════════════════════════════ */
-const ambient = new THREE.AmbientLight(0xffffff, 0.6);
+/* ── LIGHTING ── */
+const ambient = new THREE.AmbientLight(0xffffff, 0.95);
 scene.add(ambient);
 
-// Key — upper-left, like the reference photo
-const keyLight = new THREE.DirectionalLight(0xd0e8ff, 3.2);
-keyLight.position.set(-3, 6, 4);
+const keyLight = new THREE.DirectionalLight(0xe4efff, 2.8);
+keyLight.position.set(4, 6, 5);
 keyLight.castShadow = true;
 scene.add(keyLight);
 
-// Fill — right side, warmer
-const fillLight = new THREE.DirectionalLight(0xffd8a0, 1.2);
-fillLight.position.set(4, 1, 3);
-scene.add(fillLight);
-
-// Rim — from behind the gun (Z-), rim-lights the silhouette edges
-const rimLight = new THREE.DirectionalLight(0x6090c0, 1.8);
-rimLight.position.set(0, 3, -6);
+const rimLight = new THREE.DirectionalLight(0x7aa5cf, 2.2);
+rimLight.position.set(-6, 3, -5);
 scene.add(rimLight);
 
-// Muzzle flash point light (activated on BANG)
-const flashLight = new THREE.PointLight(0xff8800, 0, 6);
-flashLight.position.set(0, 0.42, 2.8);
+const fillLight = new THREE.DirectionalLight(0xffdfb8, 1.4);
+fillLight.position.set(2, -3, 3);
+scene.add(fillLight);
+
+// Muzzle flash point light
+const flashLight = new THREE.PointLight(0xffaa22, 0, 7);
+flashLight.position.set(0, 0.38, -3.3);
 scene.add(flashLight);
 
 /* ── MATERIALS ── */
-// Blued steel frame
-const matFrame = new THREE.MeshStandardMaterial({
-    color: 0x1a2230, metalness: 0.92, roughness: 0.30,
+// Vintage gunmetal blued steel
+const matSteel = new THREE.MeshStandardMaterial({
+    color: 0x1b2028,
+    metalness: 0.92,
+    roughness: 0.28,
 });
-// Cylinder — slightly lighter, higher contrast to show chambers
-const matCyl = new THREE.MeshStandardMaterial({
-    color: 0x384858, metalness: 0.96, roughness: 0.18,
+// Slightly polished cylinder steel
+const matCylinder = new THREE.MeshStandardMaterial({
+    color: 0x222a36,
+    metalness: 0.95,
+    roughness: 0.22,
 });
-// Dark recesses / bore
-const matDark = new THREE.MeshStandardMaterial({
-    color: 0x080c12, metalness: 0.7, roughness: 0.6,
+// Case-hardened hammer & trigger
+const matCaseHardened = new THREE.MeshStandardMaterial({
+    color: 0x6e7682,
+    metalness: 0.88,
+    roughness: 0.32,
 });
-// Brass cartridge
-const matBrass = new THREE.MeshStandardMaterial({
-    color: 0xc49020, metalness: 0.98, roughness: 0.15,
-});
-// Bullet primer (silver)
-const matPrimer = new THREE.MeshStandardMaterial({
-    color: 0x8090a0, metalness: 0.95, roughness: 0.25,
-});
-// Wood grip
+// Rich American walnut wood grip
 const matWood = new THREE.MeshStandardMaterial({
-    color: 0x3a1808, roughness: 0.70, metalness: 0.04,
+    color: 0x482413,
+    roughness: 0.44,
+    metalness: 0.04,
 });
-// Muzzle flash cone
+// Darker checkering wood inlay
+const matCheckering = new THREE.MeshStandardMaterial({
+    color: 0x32180c,
+    roughness: 0.72,
+    metalness: 0.02,
+});
+// Polished brass cartridges & screw
+const matBrass = new THREE.MeshStandardMaterial({
+    color: 0xdfab38,
+    metalness: 0.96,
+    roughness: 0.16,
+});
+// Silver primer & medallion
+const matSilver = new THREE.MeshStandardMaterial({
+    color: 0xcfd6dc,
+    metalness: 0.94,
+    roughness: 0.24,
+});
+// Deep black bore / flutes
+const matDark = new THREE.MeshStandardMaterial({
+    color: 0x06080b,
+    roughness: 0.8,
+    metalness: 0.3,
+});
 const matFlash = new THREE.MeshBasicMaterial({
-    color: 0xffe080, transparent: true, opacity: 0,
+    color: 0xffea88,
+    transparent: true,
+    opacity: 0,
 });
 
 /* ── GUN ROOT GROUP ── */
 const gunRoot = new THREE.Group();
 scene.add(gunRoot);
 
-/*
-  COORDINATE SYSTEM (all in gunRoot local space):
-  - Gun points LEFT in world space (barrel along -Z)
-  - Y = up
-  - X = toward camera (right side of gun faces camera)
+/* ═══════════════════════════════════════════════════════════════
+   1. MAIN FRAME WITH CYLINDER WINDOW (S&W K-FRAME)
+   Constructed with extruded beveled shape for authentic contours
+═══════════════════════════════════════════════════════════════ */
+const frameShape = new THREE.Shape();
+// Perimeter in Z-Y coordinates
+frameShape.moveTo(-0.95, 0.58);     // Front barrel collar top
+frameShape.lineTo(0.92, 0.58);      // Top strap to recoil shield
+frameShape.quadraticCurveTo(1.10, 0.52, 1.12, 0.30); // Recoil shield curve
+frameShape.lineTo(1.12, 0.05);      // Rear frame back
+frameShape.lineTo(0.96, -0.22);     // Frame tang toward grip
+frameShape.lineTo(0.72, -0.58);     // Bottom grip junction
+frameShape.lineTo(0.50, -0.58);     // Trigger frame junction
+frameShape.lineTo(-0.62, -0.52);    // Bottom rail under cylinder
+frameShape.quadraticCurveTo(-0.88, -0.52, -0.92, -0.35); // Crane pivot forward
+frameShape.lineTo(-0.95, -0.15);    // Front frame face bottom
+frameShape.lineTo(-0.95, 0.58);     // Back to top front
 
-  Key reference points (matching S&W K-frame proportions):
-  - Cylinder center:   Y=0,    Z=0
-  - Barrel axis:       Y=0.42, Z along -Z  (top chamber alignment)
-  - Frame rear:        Z=+0.78
-  - Frame front:       Z=-0.90
-  - Grip pivot:        Y=-0.58, Z=+0.55
-*/
+// CYLINDER WINDOW HOLE CUTOUT
+const windowHole = new THREE.Path();
+windowHole.moveTo(-0.66, 0.44);     // Front top
+windowHole.lineTo(0.66, 0.44);      // Rear top
+windowHole.lineTo(0.66, -0.42);     // Rear bottom
+windowHole.lineTo(-0.66, -0.42);    // Front bottom
+windowHole.lineTo(-0.66, 0.44);     // Close
+frameShape.holes.push(windowHole);
 
-const CYL_Y   = 0;       // cylinder center Y
-const CYL_R   = 0.60;    // cylinder radius
-const BAR_Y   = 0.42;    // barrel axis Y (top chamber)
-const FRAME_W = 0.38;    // frame half-width (X)
+const extrudeSettings = {
+    steps: 1,
+    depth: 0.36,
+    bevelEnabled: true,
+    bevelThickness: 0.024,
+    bevelSize: 0.024,
+    bevelSegments: 4
+};
 
-/* ═══════════════════════════════════════
-   1. MAIN FRAME BODY
-   Shaped like a revolver frame: wide at cylinder,
-   narrows toward barrel, has grip tang below.
-   Built from several overlapping boxes.
-═══════════════════════════════════════ */
+const frameGeo = new THREE.ExtrudeGeometry(frameShape, extrudeSettings);
+frameGeo.center(); // Center at (0,0,0)
+const frameMesh = new THREE.Mesh(frameGeo, matSteel);
+// Extruded along Z by default -> rotate so shape is in Z-Y plane and depth is X
+frameMesh.rotation.y = Math.PI / 2;
+frameMesh.position.set(0, 0.02, 0.06);
+gunRoot.add(frameMesh);
 
-// Main body slab — the receiver around the cylinder window
-const frameBody = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W, 1.35, 1.72), matFrame);
-frameBody.position.set(0, 0.02, -0.05);
-gunRoot.add(frameBody);
+// Top strap rear sight groove
+const sightGroove = new THREE.Mesh(
+    new THREE.BoxGeometry(0.045, 0.04, 1.6),
+    matDark
+);
+sightGroove.position.set(0, 0.61, 0.1);
+gunRoot.add(sightGroove);
 
-// Top strap — runs from rear frame to barrel junction, above cylinder
-// Sits just above barrel: top of cylinder = CYL_Y + CYL_R = 0.60
-// Top strap bottom edge at 0.62, center at 0.62+0.08=0.70
-const topStrap = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W - 0.02, 0.16, 1.72), matFrame);
-topStrap.position.set(0, 0.70, -0.05);
-gunRoot.add(topStrap);
+// Recoil shield bulbs (left & right rounded shields behind cylinder)
+[-0.14, 0.14].forEach(x => {
+    const shield = new THREE.Mesh(
+        new THREE.SphereGeometry(0.30, 16, 16),
+        matSteel
+    );
+    shield.scale.set(0.55, 1.1, 0.8);
+    shield.position.set(x, 0.02, 0.72);
+    gunRoot.add(shield);
+});
 
-// Barrel-to-frame transition lug (thickening where barrel meets frame front)
-const barrelLug = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W, 0.72, 0.32), matFrame);
-barrelLug.position.set(0, BAR_Y - 0.04, -0.88);
-gunRoot.add(barrelLug);
+// Sideplate screws on the right side
+[[-0.42, 0.18], [-0.46, 0.58], [-0.15, 0.78]].forEach(([y, z]) => {
+    const screw = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.038, 0.038, 0.02, 12),
+        matSteel
+    );
+    screw.rotation.z = Math.PI / 2;
+    screw.position.set(0.20, y, z);
+    gunRoot.add(screw);
 
-// Rear frame / recoil shield (thick plate behind cylinder)
-const recoilShield = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W + 0.06, 1.30, 0.36), matFrame);
-recoilShield.position.set(0, 0.02, 0.76);
-gunRoot.add(recoilShield);
+    const slot = new THREE.Mesh(
+        new THREE.BoxGeometry(0.025, 0.008, 0.06),
+        matDark
+    );
+    slot.position.set(0.21, y, z);
+    gunRoot.add(slot);
+});
 
-// Rear sight housing on top of recoil shield
-const rearSight = new THREE.Mesh(
-    new THREE.BoxGeometry(0.08, 0.10, 0.20), matFrame);
-rearSight.position.set(0, 0.82, 0.65);
-gunRoot.add(rearSight);
+// S&W Thumb cylinder release latch (on left side)
+const latchGroup = new THREE.Group();
+latchGroup.position.set(-0.205, 0.12, 0.78);
 
-/* ═══════════════════════════════════════
-   2. BARREL
-   Cylinder along Z, axis at BAR_Y.
-   4" barrel (matching reference photo proportions).
-═══════════════════════════════════════ */
-const BARREL_LEN = 2.8;
-const barrelZ    = -0.90 - BARREL_LEN / 2;
-const BARREL_Y   = BAR_Y;
-const muzzleZ    = -0.90 - BARREL_LEN;
+const latchBody = new THREE.Mesh(
+    new THREE.BoxGeometry(0.04, 0.16, 0.22),
+    matCaseHardened
+);
+latchGroup.add(latchBody);
 
-const barrel = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.21, 0.22, BARREL_LEN, 24), matFrame);
+// Checkered texture lines on latch
+for (let i = 0; i < 4; i++) {
+    const lLine = new THREE.Mesh(
+        new THREE.BoxGeometry(0.045, 0.012, 0.18),
+        matDark
+    );
+    lLine.position.set(0, -0.05 + i * 0.035, 0);
+    latchGroup.add(lLine);
+}
+gunRoot.add(latchGroup);
+
+/* ═══════════════════════════════════════════════════════════════
+   2. SLENDER S&W TAPERED PENCIL BARREL & FRONT SIGHT
+═══════════════════════════════════════════════════════════════ */
+const BARREL_LEN = 2.45;
+const BARREL_Y = 0.38;
+const barrelZ = -0.90 - BARREL_LEN / 2;
+const muzzleZ = -0.90 - BARREL_LEN;
+
+// Barrel collar ring at frame junction
+const barrelCollar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.23, 0.23, 0.25, 24),
+    matSteel
+);
+barrelCollar.rotation.x = Math.PI / 2;
+barrelCollar.position.set(0, BARREL_Y, -0.96);
+gunRoot.add(barrelCollar);
+
+// Classic tapered pencil barrel (wider at frame, slender at muzzle)
+const barrelGeo = new THREE.CylinderGeometry(0.185, 0.215, BARREL_LEN, 28);
+const barrel = new THREE.Mesh(barrelGeo, matSteel);
 barrel.rotation.x = Math.PI / 2;
 barrel.position.set(0, BARREL_Y, barrelZ);
 gunRoot.add(barrel);
 
-// Underlug / full-lug shroud below barrel (S&W style)
-const underlug = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.185, 0.195, BARREL_LEN, 16), matFrame);
-underlug.rotation.x = Math.PI / 2;
-underlug.position.set(0, BARREL_Y - 0.26, barrelZ);
-gunRoot.add(underlug);
-
-// Ejector rod inside underlug
-const ejectorRod = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.04, 0.04, BARREL_LEN - 0.3, 10), matCyl);
-ejectorRod.rotation.x = Math.PI / 2;
-ejectorRod.position.set(0, BARREL_Y - 0.26, barrelZ + 0.15);
-gunRoot.add(ejectorRod);
-
-// Muzzle face ring
+// Muzzle crown bevel
 const muzzleCrown = new THREE.Mesh(
-    new THREE.TorusGeometry(0.21, 0.022, 10, 28), matCyl);
-muzzleCrown.rotation.x = Math.PI / 2;
+    new THREE.TorusGeometry(0.18, 0.02, 12, 28),
+    matSteel
+);
 muzzleCrown.position.set(0, BARREL_Y, muzzleZ);
 gunRoot.add(muzzleCrown);
 
-// Bore opening
-const muzzleBore = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.12, 0.12, 0.10, 18), matDark);
-muzzleBore.rotation.x = Math.PI / 2;
-muzzleBore.position.set(0, BARREL_Y, muzzleZ - 0.02);
-gunRoot.add(muzzleBore);
+// Deep dark rifled bore
+const bore = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.11, 0.11, 0.25, 18),
+    matDark
+);
+bore.rotation.x = Math.PI / 2;
+bore.position.set(0, BARREL_Y, muzzleZ + 0.1);
+gunRoot.add(bore);
 
-// Front sight (ramp style — tapers toward muzzle)
-const frontSight = new THREE.Mesh(
-    new THREE.BoxGeometry(0.055, 0.14, 0.22), matFrame);
-frontSight.position.set(0, BARREL_Y + 0.185, muzzleZ + 0.16);
-gunRoot.add(frontSight);
+// Front Sight: Classic half-moon blade on ramp base
+const sightBase = new THREE.Mesh(
+    new THREE.BoxGeometry(0.045, 0.05, 0.42),
+    matSteel
+);
+sightBase.position.set(0, BARREL_Y + 0.19, muzzleZ + 0.25);
+gunRoot.add(sightBase);
 
-const redInsert = new THREE.Mesh(
-    new THREE.BoxGeometry(0.058, 0.055, 0.08),
-    new THREE.MeshBasicMaterial({ color: 0xef4444 }));
-redInsert.position.set(0, BARREL_Y + 0.205, muzzleZ + 0.12);
-gunRoot.add(redInsert);
+// Semicircular Half-Moon Blade
+const bladeGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.038, 20, 1, false, 0, Math.PI);
+const sightBlade = new THREE.Mesh(bladeGeo, matSteel);
+sightBlade.rotation.y = Math.PI / 2;
+sightBlade.rotation.x = -Math.PI / 2;
+sightBlade.position.set(0, BARREL_Y + 0.20, muzzleZ + 0.22);
+gunRoot.add(sightBlade);
 
-/* ═══════════════════════════════════════
-   3. CYLINDER ASSEMBLY
-   Sits in the frame window. Spins around Z axis.
-═══════════════════════════════════════ */
+// Barrel rollmark stamp bar (Smith & Wesson rollmark line)
+const rollmark = new THREE.Mesh(
+    new THREE.BoxGeometry(0.005, 0.025, 0.95),
+    matDark
+);
+rollmark.position.set(0.19, BARREL_Y + 0.05, barrelZ);
+gunRoot.add(rollmark);
+
+/* ═══════════════════════════════════════════════════════════════
+   3. EJECTOR ROD & LOCKING LUG (UNDER BARREL)
+═══════════════════════════════════════════════════════════════ */
+// Free-hanging ejector rod
+const ejectorRod = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.035, 0.035, 1.05, 16),
+    matCylinder
+);
+ejectorRod.rotation.x = Math.PI / 2;
+ejectorRod.position.set(0, BARREL_Y - 0.22, -1.45);
+gunRoot.add(ejectorRod);
+
+// Knurled tip collar on ejector rod
+const rodTip = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.052, 0.052, 0.18, 16),
+    matSteel
+);
+rodTip.rotation.x = Math.PI / 2;
+rodTip.position.set(0, BARREL_Y - 0.22, -1.95);
+gunRoot.add(rodTip);
+
+// Underside barrel lug locking the rod tip
+const rodLug = new THREE.Mesh(
+    new THREE.BoxGeometry(0.06, 0.10, 0.18),
+    matSteel
+);
+rodLug.position.set(0, BARREL_Y - 0.13, -1.95);
+gunRoot.add(rodLug);
+
+// Crane hinge piece under cylinder front
+const cranePivot = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.08, 0.08, 0.45, 16),
+    matSteel
+);
+cranePivot.rotation.x = Math.PI / 2;
+cranePivot.position.set(0, -0.32, -0.68);
+gunRoot.add(cranePivot);
+
+/* ═══════════════════════════════════════════════════════════════
+   4. CYLINDER ASSEMBLY (6 CHAMBERS, FLUTES & EXTRACTOR)
+═══════════════════════════════════════════════════════════════ */
 const cylinderGroup = new THREE.Group();
-cylinderGroup.position.set(0, CYL_Y, -0.06);
+cylinderGroup.position.set(0, 0, 0.02);
 gunRoot.add(cylinderGroup);
 
+const CYL_RADIUS = 0.425;
+const CYL_LENGTH = 1.08;
+
+// Main cylinder body
 const cylBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(CYL_R, CYL_R, 1.22, 32), matCyl);
+    new THREE.CylinderGeometry(CYL_RADIUS, CYL_RADIUS, CYL_LENGTH, 36),
+    matCylinder
+);
 cylBody.rotation.x = Math.PI / 2;
 cylinderGroup.add(cylBody);
 
-// Center extractor pin
-const axisPin = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.09, 0.09, 1.35, 14), matFrame);
-axisPin.rotation.x = Math.PI / 2;
-cylinderGroup.add(axisPin);
+// Center extractor shaft pin
+const centerPin = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.075, 0.075, CYL_LENGTH + 0.2, 14),
+    matSteel
+);
+centerPin.rotation.x = Math.PI / 2;
+cylinderGroup.add(centerPin);
 
-// 6 chambers
-const CHAMBER_R = 0.345;
+// Rear extractor star ratchet
+const extractorStar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.24, 0.26, 0.04, 12),
+    matSteel
+);
+extractorStar.rotation.x = Math.PI / 2;
+extractorStar.position.set(0, 0, CYL_LENGTH / 2 + 0.02);
+cylinderGroup.add(extractorStar);
+
+// 6 Chambers, flutes, cartridges, stop notches
+const CHAMBER_DIST = 0.245;
 for (let i = 0; i < 6; i++) {
     const angle = (i * Math.PI) / 3;
-    const cx = Math.cos(angle) * CHAMBER_R;
-    const cy = Math.sin(angle) * CHAMBER_R;
+    const cx = Math.cos(angle) * CHAMBER_DIST;
+    const cy = Math.sin(angle) * CHAMBER_DIST;
 
-    // Bore tunnel
-    const boreTunnel = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.105, 0.105, 1.26, 14), matDark);
-    boreTunnel.rotation.x = Math.PI / 2;
-    boreTunnel.position.set(cx, cy, 0);
-    cylinderGroup.add(boreTunnel);
+    // Chamber tunnel bore
+    const chamberBore = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.085, 0.085, CYL_LENGTH + 0.05, 14),
+        matDark
+    );
+    chamberBore.rotation.x = Math.PI / 2;
+    chamberBore.position.set(cx, cy, 0);
+    cylinderGroup.add(chamberBore);
 
-    // Brass cartridge head (visible on front face)
+    // Brass cartridge case rim
     const cartridge = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.10, 0.10, 0.05, 14), matBrass);
+        new THREE.CylinderGeometry(0.082, 0.082, 0.06, 14),
+        matBrass
+    );
     cartridge.rotation.x = Math.PI / 2;
-    cartridge.position.set(cx, cy, 0.64);
+    cartridge.position.set(cx, cy, CYL_LENGTH / 2 + 0.015);
     cylinderGroup.add(cartridge);
 
-    // Primer
+    // Silver nickel primer
     const primer = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.036, 0.036, 0.055, 10), matPrimer);
+        new THREE.CylinderGeometry(0.03, 0.03, 0.065, 10),
+        matSilver
+    );
     primer.rotation.x = Math.PI / 2;
-    primer.position.set(cx, cy, 0.645);
+    primer.position.set(cx, cy, CYL_LENGTH / 2 + 0.018);
     cylinderGroup.add(primer);
 
-    // Flute groove (between chambers)
-    const fa = angle + Math.PI / 6;
+    // Scalloped Flute groove between chambers
+    const fluteAngle = angle + Math.PI / 6;
+    const fluteX = Math.cos(fluteAngle) * (CYL_RADIUS + 0.02);
+    const fluteY = Math.sin(fluteAngle) * (CYL_RADIUS + 0.02);
+
     const flute = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.105, 0.105, 0.88, 10), matDark);
+        new THREE.CylinderGeometry(0.12, 0.12, CYL_LENGTH * 0.72, 12),
+        matDark
+    );
     flute.rotation.x = Math.PI / 2;
-    flute.position.set(Math.cos(fa) * 0.57, Math.sin(fa) * 0.57, -0.04);
+    flute.position.set(fluteX, fluteY, -0.06);
     cylinderGroup.add(flute);
+
+    // Cylinder stop notches near rear edge
+    const notch = new THREE.Mesh(
+        new THREE.BoxGeometry(0.03, 0.04, 0.08),
+        matDark
+    );
+    notch.position.set(
+        Math.cos(angle) * (CYL_RADIUS - 0.01),
+        Math.sin(angle) * (CYL_RADIUS - 0.01),
+        CYL_LENGTH / 2 - 0.14
+    );
+    notch.rotation.z = angle;
+    cylinderGroup.add(notch);
 }
 
-/* ═══════════════════════════════════════
-   4. HAMMER
-   Pivots at rear-top of frame.
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   5. HAMMER ASSEMBLY
+═══════════════════════════════════════════════════════════════ */
 const hammerPivot = new THREE.Group();
-hammerPivot.position.set(0, 0.44, 0.70);
+hammerPivot.position.set(0, 0.38, 0.88);
 gunRoot.add(hammerPivot);
 
-// Hammer body — wider at spur, narrow at nose
-const hammerBody = new THREE.Mesh(
-    new THREE.BoxGeometry(0.115, 0.42, 0.20), matCyl);
-hammerBody.position.set(0, 0.14, 0.04);
-hammerBody.rotation.x = -0.38;
-hammerPivot.add(hammerBody);
+// Hammer base body
+const hammerStem = new THREE.Mesh(
+    new THREE.BoxGeometry(0.09, 0.32, 0.18),
+    matCaseHardened
+);
+hammerStem.position.set(0, 0.12, -0.04);
+hammerStem.rotation.x = -0.32;
+hammerPivot.add(hammerStem);
 
-// Serrated spur (thumb-cocking pad)
+// Serrated thumb spur arching backward
 const hammerSpur = new THREE.Mesh(
-    new THREE.BoxGeometry(0.135, 0.09, 0.20), matCyl);
-hammerSpur.position.set(0, 0.30, 0.14);
+    new THREE.BoxGeometry(0.12, 0.08, 0.24),
+    matCaseHardened
+);
+hammerSpur.position.set(0, 0.28, 0.08);
+hammerSpur.rotation.x = -0.15;
 hammerPivot.add(hammerSpur);
 
-// Spur serration lines
+// Checkered grip cuts on hammer spur
 for (let i = 0; i < 5; i++) {
-    const serr = new THREE.Mesh(
-        new THREE.BoxGeometry(0.140, 0.008, 0.035), matDark);
-    serr.position.set(0, 0.295, 0.055 + i * 0.038);
-    hammerPivot.add(serr);
+    const cut = new THREE.Mesh(
+        new THREE.BoxGeometry(0.125, 0.01, 0.02),
+        matDark
+    );
+    cut.position.set(0, 0.275 + (i * 0.012), 0.02 + (i * 0.035));
+    hammerPivot.add(cut);
 }
 
-/* ═══════════════════════════════════════
-   5. TRIGGER GUARD + TRIGGER
-   The guard is a D-shaped loop clearly visible below frame.
-   On the reference: guard starts just below/front of cylinder,
-   loops forward and down, returns to grip.
-═══════════════════════════════════════ */
+// Firing pin nose
+const firingPin = new THREE.Mesh(
+    new THREE.ConeGeometry(0.025, 0.12, 8),
+    matCaseHardened
+);
+firingPin.rotation.x = -Math.PI / 2;
+firingPin.position.set(0, 0.04, -0.18);
+hammerPivot.add(firingPin);
 
-// Trigger guard — torus arc in X-Y plane (visible from side)
-// radius=0.32 gives a nice D-loop size
-// Arc = 0.75*PI so it's a 3/4 circle (not a full semicircle)
-const guardGeo = new THREE.TorusGeometry(0.30, 0.038, 12, 32, Math.PI * 0.82);
-const guard = new THREE.Mesh(guardGeo, matFrame);
-// Default torus is in X-Y plane — perfect (visible from side camera)
-// Rotate so the opening faces upward-rearward to connect to frame
-guard.rotation.z = Math.PI * 1.12;  // open end faces upper-rear
-guard.position.set(0, -0.60, 0.12);
-gunRoot.add(guard);
+/* ═══════════════════════════════════════════════════════════════
+   6. CURVED TRIGGER GUARD & TRIGGER
+═══════════════════════════════════════════════════════════════ */
+// Smooth curved 3D tube for graceful vintage trigger guard
+const guardCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0, -0.52, -0.32),
+    new THREE.Vector3(0, -0.74, -0.22),
+    new THREE.Vector3(0, -0.98,  0.08),
+    new THREE.Vector3(0, -0.92,  0.34),
+    new THREE.Vector3(0, -0.56,  0.50)
+]);
+const guardGeo = new THREE.TubeGeometry(guardCurve, 28, 0.038, 12, false);
+const guardMesh = new THREE.Mesh(guardGeo, matSteel);
+gunRoot.add(guardMesh);
 
-// Front guard connection to frame (front of trigger guard)
-const guardFront = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W - 0.06, 0.12, 0.08), matFrame);
-guardFront.position.set(0, -0.62, -0.20);
-gunRoot.add(guardFront);
-
-// Rear guard connection to grip tang
-const guardRear = new THREE.Mesh(
-    new THREE.BoxGeometry(FRAME_W - 0.06, 0.12, 0.08), matFrame);
-guardRear.position.set(0, -0.62, 0.38);
-gunRoot.add(guardRear);
-
-// Trigger — thin blade, hangs inside the guard from the frame
+// Trigger pivot and crescent blade
 const triggerPivot = new THREE.Group();
-triggerPivot.position.set(0, -0.46, 0.08);
+triggerPivot.position.set(0, -0.48, 0.18);
 gunRoot.add(triggerPivot);
 
-// Trigger shank (upper straight part)
-const triggerShank = new THREE.Mesh(
-    new THREE.BoxGeometry(0.048, 0.24, 0.052), matCyl);
-triggerShank.position.set(0, -0.08, 0.01);
-triggerShank.rotation.x = 0.12;
-triggerPivot.add(triggerShank);
+const trigShape = new THREE.Shape();
+trigShape.moveTo(0, 0);
+trigShape.quadraticCurveTo(-0.10, -0.22, 0.06, -0.36);
+trigShape.quadraticCurveTo(-0.02, -0.20, 0.06, 0);
+trigShape.closePath();
 
-// Trigger shoe (the curved finger-contact surface)
-const triggerShoe = new THREE.Mesh(
-    new THREE.BoxGeometry(0.055, 0.10, 0.068), matCyl);
-triggerShoe.position.set(0, -0.22, -0.03);
-triggerShoe.rotation.x = -0.50;
-triggerPivot.add(triggerShoe);
+const trigExtrude = { depth: 0.05, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.012, bevelSegments: 3 };
+const trigGeo = new THREE.ExtrudeGeometry(trigShape, trigExtrude);
+trigGeo.center();
+const triggerMesh = new THREE.Mesh(trigGeo, matCaseHardened);
+triggerMesh.rotation.y = Math.PI / 2;
+triggerMesh.position.set(0, -0.16, -0.04);
+triggerPivot.add(triggerMesh);
 
-/* ═══════════════════════════════════════
-   6. GRIP
-   S&W style: angled rearward ~30°, wider at bottom,
-   ergonomic curve. Made of several shapes.
-═══════════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   7. VINTAGE WALNUT SERVICE STOCKS (GRIPS)
+═══════════════════════════════════════════════════════════════ */
 const gripGroup = new THREE.Group();
-// Grip pivot at bottom of frame — angled backward
-gripGroup.position.set(0, -0.58, 0.58);
-gripGroup.rotation.x = -0.52;  // tilt backward ~30°
+gripGroup.position.set(0, -0.42, 0.82);
 gunRoot.add(gripGroup);
 
-// Main grip body — tapers slightly, wider at bottom
-const gripMain = new THREE.Mesh(
-    new THREE.BoxGeometry(0.52, 1.62, 0.72), matWood);
-gripMain.position.set(0, -0.68, 0.02);
-gripGroup.add(gripMain);
+// Grip Profile matching S&W K-frame round-to-square butt
+const gripShape = new THREE.Shape();
+gripShape.moveTo(-0.12, 0.42);      // Upper tang front
+gripShape.lineTo(0.24, 0.48);       // Upper tang rear
+gripShape.quadraticCurveTo(0.48, 0.15, 0.64, -0.42);  // Curved backstrap swell
+gripShape.quadraticCurveTo(0.72, -0.95, 0.68, -1.35); // Lower backstrap flare
+gripShape.lineTo(0.12, -1.35);      // Flat butt base
+gripShape.quadraticCurveTo(0.02, -1.15, 0.00, -0.85); // Front strap curve
+gripShape.quadraticCurveTo(-0.04, -0.40, -0.16, -0.10);// Under-guard finger junction
+gripShape.lineTo(-0.12, 0.42);      // Close
 
-// Front strap bulge (fills the finger-groove area)
-const gripFront = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.22, 0.28, 1.58, 14, 1, false,
-        Math.PI * 0.5, Math.PI * 0.5), matWood);
-gripFront.rotation.y = -Math.PI / 2;
-gripFront.position.set(0, -0.68, -0.32);
-gripGroup.add(gripFront);
+const gripExtrudeSettings = {
+    steps: 1,
+    depth: 0.44,
+    bevelEnabled: true,
+    bevelThickness: 0.045,
+    bevelSize: 0.04,
+    bevelSegments: 5
+};
 
-// Grip butt (rounded bottom)
-const gripButt = new THREE.Mesh(
-    new THREE.SphereGeometry(0.32, 14, 10), matWood);
-gripButt.scale.set(0.82, 0.45, 1.10);
-gripButt.position.set(0, -1.48, 0.04);
-gripGroup.add(gripButt);
+const gripGeo = new THREE.ExtrudeGeometry(gripShape, gripExtrudeSettings);
+gripGeo.center();
+const gripMesh = new THREE.Mesh(gripGeo, matWood);
+gripMesh.rotation.y = Math.PI / 2;
+gripMesh.position.set(0, -0.45, 0.16);
+gripGroup.add(gripMesh);
 
-// Grip cap (metal bottom cap)
-const gripCap = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.28, 0.24, 0.10, 14), matFrame);
-gripCap.position.set(0, -1.44, 0.04);
-gripGroup.add(gripCap);
+// Metal bottom frame cap on butt
+const buttCap = new THREE.Mesh(
+    new THREE.BoxGeometry(0.38, 0.04, 0.64),
+    matSteel
+);
+buttCap.position.set(0, -1.12, 0.42);
+gripGroup.add(buttCap);
 
-// Grip panel screw (brass medallion on side)
-const medallion = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.075, 0.075, 0.54, 14), matBrass);
-medallion.rotation.z = Math.PI / 2;
-medallion.position.set(0, -0.55, 0.02);
-gripGroup.add(medallion);
+// Checkered diamond panels on both sides
+[-0.23, 0.23].forEach(x => {
+    // Checkered inlay panel
+    const checkPanel = new THREE.Mesh(
+        new THREE.BoxGeometry(0.015, 0.65, 0.32),
+        matCheckering
+    );
+    checkPanel.position.set(x, -0.48, 0.22);
+    checkPanel.rotation.z = x > 0 ? 0.06 : -0.06;
+    gripGroup.add(checkPanel);
 
-// Grip checkering (horizontal grooves)
-for (let i = 0; i < 8; i++) {
-    const groove = new THREE.Mesh(
-        new THREE.BoxGeometry(0.525, 0.012, 0.70), matDark);
-    groove.position.set(0, -0.30 - i * 0.155, 0.02);
-    gripGroup.add(groove);
-}
+    // Center smooth diamond around screw
+    const diamond = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.07, 0.07, 0.02, 4),
+        matWood
+    );
+    diamond.rotation.y = Math.PI / 4;
+    diamond.rotation.z = Math.PI / 2;
+    diamond.position.set(x * 1.05, -0.48, 0.22);
+    gripGroup.add(diamond);
 
-/* ═══════════════════════════════════════
-   7. LOADING GATE + CRANE LATCH
-   Small detail on right side of frame
-═══════════════════════════════════════ */
-const loadingGate = new THREE.Mesh(
-    new THREE.BoxGeometry(0.045, 0.28, 0.22), matFrame);
-loadingGate.position.set(FRAME_W / 2 + 0.022, 0.05, 0.48);
-gunRoot.add(loadingGate);
+    // Brass screw escutcheon
+    const escutcheon = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.042, 0.042, 0.03, 16),
+        matBrass
+    );
+    escutcheon.rotation.z = Math.PI / 2;
+    escutcheon.position.set(x * 1.06, -0.48, 0.22);
+    gripGroup.add(escutcheon);
 
-// Cylinder crane/yoke latch
-const craneLatch = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.055, 0.055, 0.08, 10), matCyl);
-craneLatch.rotation.z = Math.PI / 2;
-craneLatch.position.set(FRAME_W / 2 + 0.04, -0.15, 0.12);
-gunRoot.add(craneLatch);
+    // Silver S&W Monogram medallion near upper grip neck
+    const medallion = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.062, 0.062, 0.025, 18),
+        matSilver
+    );
+    medallion.rotation.z = Math.PI / 2;
+    medallion.position.set(x * 1.02, -0.12, 0.14);
+    gripGroup.add(medallion);
+});
 
-gunRoot.add(gripGroup);
-
-/* ═══════════════════════════════════
-   MUZZLE FLASH CONE
-   Points toward camera (+Z)
-═══════════════════════════════════ */
+/* ═══════════════════════════════════════════════════════════════
+   8. 3D MUZZLE FLASH
+═══════════════════════════════════════════════════════════════ */
 const flashMesh = new THREE.Mesh(
-    new THREE.ConeGeometry(0.52, 2.0, 8), matFlash);
-flashMesh.rotation.x = Math.PI / 2;
-flashMesh.position.set(0, BARREL_Y, muzzleZ + 1.2);
+    new THREE.ConeGeometry(0.48, 1.8, 8),
+    matFlash
+);
+flashMesh.rotation.x = -Math.PI / 2; // points outward toward camera from muzzle
+flashMesh.position.set(0, BARREL_Y, muzzleZ - 0.9);
 gunRoot.add(flashMesh);
 
-/* ═══════════════════════════════════
-   RENDER LOOP
-═══════════════════════════════════ */
-// Init size once DOM is ready
+/* ═══════════════════════════════════════════════════════════════
+   RENDER LOOP & ANIMATIONS
+═══════════════════════════════════════════════════════════════ */
 setTimeout(resizeRenderer, 0);
+
 const animState = {
     recoilRot: 0,
     recoilZ: 0,
-    cylSpinVel: 0,       // current spin velocity (rad/s)
-    cylTargetRot: 0,     // target rotation for settle
     isSpinning: false,
     isFiring: false,
     breathT: 0,
@@ -757,20 +888,18 @@ const animState = {
 
 function renderLoop() {
     requestAnimationFrame(renderLoop);
+    const delta = 0.016;
 
-    const now = performance.now();
-    const delta = 0.016; // ~60fps target
-
-    // Spring recoil recovery
-    animState.recoilRot += (0 - animState.recoilRot) * 14 * delta;
-    animState.recoilZ   += (0 - animState.recoilZ)   * 14 * delta;
+    // Smooth spring recoil recovery
+    animState.recoilRot += (0 - animState.recoilRot) * 16 * delta;
+    animState.recoilZ   += (0 - animState.recoilZ)   * 16 * delta;
     gunRoot.rotation.x = animState.recoilRot;
     gunRoot.position.z = animState.recoilZ;
 
-    // Subtle idle breathing
+    // Subtle natural idle float
     if (!animState.isFiring && !animState.isSpinning) {
         animState.breathT += delta;
-        gunRoot.position.y = Math.sin(animState.breathT * 0.9) * 0.012;
+        gunRoot.position.y = Math.sin(animState.breathT * 1.1) * 0.012;
     }
 
     controls.update();
@@ -778,11 +907,7 @@ function renderLoop() {
 }
 renderLoop();
 
-/* ═══════════════════════════════════
-   3D ANIMATION HELPERS
-═══════════════════════════════════ */
-
-// Animate cylinder spinning: fast spin then settle to a specific final rotation
+// Cylinder Spin helper
 function animCylSpin(totalExtraRot, duration, onDone) {
     const start = performance.now();
     const startRot = cylinderGroup.rotation.z;
@@ -790,7 +915,6 @@ function animCylSpin(totalExtraRot, duration, onDone) {
 
     function tick(now) {
         const p = Math.min((now - start) / duration, 1);
-        // Ease: fast start, slow deceleration (like spinning and slowing)
         const e = 1 - Math.pow(1 - p, 3);
         cylinderGroup.rotation.z = startRot + (endRot - startRot) * e;
         if (p < 1) {
@@ -803,39 +927,36 @@ function animCylSpin(totalExtraRot, duration, onDone) {
     requestAnimationFrame(tick);
 }
 
-// Trigger pull animation: pull back → release → reset
+// Trigger pull & hammer cock animation
 function animTriggerPull(onFire) {
     const start = performance.now();
-    const pullDur = 200;
-    const startRot = triggerPivot.rotation.x;
+    const pullDur = 190;
 
     function tick(now) {
         const p = Math.min((now - start) / pullDur, 1);
         const s = p * p * (3 - 2 * p);
-        triggerPivot.rotation.x = startRot - s * 0.45;
-        hammerPivot.rotation.x  = -s * 0.80;
+        triggerPivot.rotation.x = -s * 0.42;
+        hammerPivot.rotation.x  = -s * 0.75;
         if (p < 1) {
             requestAnimationFrame(tick);
         } else {
-            // Fire!
-            hammerPivot.rotation.x = 0.15; // snap forward
+            hammerPivot.rotation.x = 0.16; // hammer slams forward
             triggerPivot.rotation.x = 0;
             if (onFire) onFire();
-            // Reset hammer
             setTimeout(() => { hammerPivot.rotation.x = 0; }, 180);
         }
     }
     requestAnimationFrame(tick);
 }
 
-// Trigger dry-fire: smaller motion
+// Dry fire snap
 function animDryfire(onDone) {
     const start = performance.now();
     function tick(now) {
-        const p = Math.min((now - start) / 140, 1);
+        const p = Math.min((now - start) / 130, 1);
         const s = p < 0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
         triggerPivot.rotation.x = -s * 0.22;
-        hammerPivot.rotation.x  = -s * 0.35;
+        hammerPivot.rotation.x  = -s * 0.32;
         if (p < 1) {
             requestAnimationFrame(tick);
         } else {
@@ -848,21 +969,21 @@ function animDryfire(onDone) {
 }
 
 function triggerMuzzleFlash3D() {
-    matFlash.opacity = 1.0;
-    flashLight.intensity = 10.0;
+    matFlash.opacity = 0.95;
+    flashLight.intensity = 12.0;
     flashMesh.scale.set(
-        1 + Math.random() * 0.4,
-        1 + Math.random() * 0.4,
-        1 + Math.random() * 0.3
+        1 + Math.random() * 0.5,
+        1 + Math.random() * 0.5,
+        1 + Math.random() * 0.4
     );
     setTimeout(() => {
         matFlash.opacity = 0;
         flashLight.intensity = 0;
-    }, 55);
+    }, 60);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   AUDIO
+   SYNTHESIZED AUDIO
 ═══════════════════════════════════════════════════════════════ */
 const AC = new (window.AudioContext || window.webkitAudioContext)();
 const resumeAC = () => { if (AC.state === 'suspended') AC.resume(); };
@@ -871,63 +992,68 @@ const playRatchet = () => {
     resumeAC(); const t = AC.currentTime;
     const o = AC.createOscillator(), f = AC.createBiquadFilter(), g = AC.createGain();
     o.type = 'triangle';
-    o.frequency.setValueAtTime(1400 + Math.random()*200, t);
-    o.frequency.exponentialRampToValueAtTime(350, t+.025);
-    f.type = 'bandpass'; f.frequency.value = 2200; f.Q.value = 5;
-    g.gain.setValueAtTime(.25, t); g.gain.linearRampToValueAtTime(.001, t+.025);
+    o.frequency.setValueAtTime(1500 + Math.random() * 200, t);
+    o.frequency.exponentialRampToValueAtTime(320, t + 0.024);
+    f.type = 'bandpass'; f.frequency.value = 2400; f.Q.value = 6;
+    g.gain.setValueAtTime(0.24, t); g.gain.linearRampToValueAtTime(0.001, t + 0.024);
     o.connect(f); f.connect(g); g.connect(AC.destination);
-    o.start(t); o.stop(t+.025);
+    o.start(t); o.stop(t + 0.024);
 };
+
 const playThud = () => {
     resumeAC(); const t = AC.currentTime;
     const o = AC.createOscillator(), g = AC.createGain();
     o.type = 'sine';
-    o.frequency.setValueAtTime(190, t);
-    o.frequency.exponentialRampToValueAtTime(48, t+.09);
-    g.gain.setValueAtTime(.5, t); g.gain.linearRampToValueAtTime(.001, t+.09);
-    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+.09);
+    o.frequency.setValueAtTime(220, t);
+    o.frequency.exponentialRampToValueAtTime(45, t + 0.08);
+    g.gain.setValueAtTime(0.5, t); g.gain.linearRampToValueAtTime(0.001, t + 0.08);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + 0.08);
 };
+
 const playTrigger = () => {
     resumeAC(); const t = AC.currentTime;
-    [[1800,400,.04,'sine',0,.38],[140,38,.07,'triangle',.03,.48]].forEach(([f1,f2,d,tp,dl,v]) => {
+    [[1900, 420, 0.038, 'sine', 0, 0.36], [160, 36, 0.065, 'triangle', 0.03, 0.45]].forEach(([f1, f2, d, tp, dl, v]) => {
         const o = AC.createOscillator(), g = AC.createGain();
         o.type = tp;
-        o.frequency.setValueAtTime(f1, t+dl);
-        o.frequency.exponentialRampToValueAtTime(f2, t+dl+d);
-        g.gain.setValueAtTime(v, t+dl); g.gain.linearRampToValueAtTime(.001, t+dl+d);
-        o.connect(g); g.connect(AC.destination); o.start(t+dl); o.stop(t+dl+d);
+        o.frequency.setValueAtTime(f1, t + dl);
+        o.frequency.exponentialRampToValueAtTime(f2, t + dl + d);
+        g.gain.setValueAtTime(v, t + dl); g.gain.linearRampToValueAtTime(0.001, t + dl + d);
+        o.connect(g); g.connect(AC.destination); o.start(t + dl); o.stop(t + dl + d);
     });
 };
+
 const playEmpty = () => {
     resumeAC(); const t = AC.currentTime;
     const o = AC.createOscillator(), g = AC.createGain();
     o.type = 'square';
-    o.frequency.setValueAtTime(700, t);
-    o.frequency.exponentialRampToValueAtTime(220, t+.06);
-    g.gain.setValueAtTime(.15, t); g.gain.linearRampToValueAtTime(.001, t+.06);
-    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t+.06);
+    o.frequency.setValueAtTime(740, t);
+    o.frequency.exponentialRampToValueAtTime(210, t + 0.055);
+    g.gain.setValueAtTime(0.16, t); g.gain.linearRampToValueAtTime(0.001, t + 0.055);
+    o.connect(g); g.connect(AC.destination); o.start(t); o.stop(t + 0.055);
 };
+
 const playBang = () => {
-    resumeAC(); const t = AC.currentTime, dur = 2;
-    const buf = AC.createBuffer(1, AC.sampleRate*dur, AC.sampleRate);
+    resumeAC(); const t = AC.currentTime, dur = 2.2;
+    const buf = AC.createBuffer(1, AC.sampleRate * dur, AC.sampleRate);
     const d = buf.getChannelData(0);
-    for (let i = 0; i < d.length; i++) d[i] = Math.random()*2-1;
+    for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
     const ns = AC.createBufferSource(); ns.buffer = buf;
-    const fl = AC.createBiquadFilter(); fl.type='lowpass';
-    fl.frequency.setValueAtTime(1100, t);
-    fl.frequency.exponentialRampToValueAtTime(55, t+dur);
+    const fl = AC.createBiquadFilter(); fl.type = 'lowpass';
+    fl.frequency.setValueAtTime(1300, t);
+    fl.frequency.exponentialRampToValueAtTime(45, t + dur);
     const gn = AC.createGain();
-    gn.gain.setValueAtTime(1, t); gn.gain.exponentialRampToValueAtTime(.001, t+dur);
+    gn.gain.setValueAtTime(1, t); gn.gain.exponentialRampToValueAtTime(0.001, t + dur);
     ns.connect(fl); fl.connect(gn); gn.connect(AC.destination); ns.start(t);
+
     const sb = AC.createOscillator(), sg = AC.createGain();
-    sb.type='sine';
-    sb.frequency.setValueAtTime(110, t); sb.frequency.exponentialRampToValueAtTime(28, t+.35);
-    sg.gain.setValueAtTime(1, t); sg.gain.linearRampToValueAtTime(.001, t+.35);
-    sb.connect(sg); sg.connect(AC.destination); sb.start(t); sb.stop(t+.35);
+    sb.type = 'sine';
+    sb.frequency.setValueAtTime(120, t); sb.frequency.exponentialRampToValueAtTime(26, t + 0.38);
+    sg.gain.setValueAtTime(1, t); sg.gain.linearRampToValueAtTime(0.001, t + 0.38);
+    sb.connect(sg); sg.connect(AC.destination); sb.start(t); sb.stop(t + 0.38);
 };
 
 /* ═══════════════════════════════════════════════════════════════
-   PARTICLES (background canvas, unchanged)
+   BACKGROUND PARTICLES
 ═══════════════════════════════════════════════════════════════ */
 const cv = document.getElementById('particles'), ctx = cv.getContext('2d');
 let W2, H2;
@@ -937,48 +1063,53 @@ const resize = () => {
     resizeRenderer();
 };
 resize(); window.addEventListener('resize', resize);
+
 const allP = [];
 class Particle {
-    constructor(x,y,col) {
-        this.x=x; this.y=y; this.col=col;
-        this.vx=(Math.random()-.5)*7; this.vy=(Math.random()-1.1)*8;
-        this.r=Math.random()*4+1.5; this.life=1;
+    constructor(x, y, col) {
+        this.x = x; this.y = y; this.col = col;
+        this.vx = (Math.random() - 0.5) * 7;
+        this.vy = (Math.random() - 1.1) * 8;
+        this.r = Math.random() * 4 + 1.5;
+        this.life = 1;
     }
-    step() { this.vx*=.97; this.vy+=.16; this.x+=this.vx; this.y+=this.vy; this.life-=.02; }
+    step() { this.vx *= 0.97; this.vy += 0.16; this.x += this.vx; this.y += this.vy; this.life -= 0.02; }
     draw() {
-        ctx.save(); ctx.globalAlpha=Math.max(0,this.life);
-        ctx.shadowColor=this.col; ctx.shadowBlur=7;
-        ctx.fillStyle=this.col; ctx.beginPath();
-        ctx.arc(this.x,this.y,this.r,0,Math.PI*2); ctx.fill(); ctx.restore();
+        ctx.save(); ctx.globalAlpha = Math.max(0, this.life);
+        ctx.shadowColor = this.col; ctx.shadowBlur = 7;
+        ctx.fillStyle = this.col; ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
     }
 }
-function burst(x,y,col,n=35) { for(let i=0;i<n;i++) allP.push(new Particle(x,y,col)); }
-const embers = Array.from({length:22}, () => {
+function burst(x, y, col, n = 35) { for (let i = 0; i < n; i++) allP.push(new Particle(x, y, col)); }
+
+const embers = Array.from({ length: 22 }, () => {
     const e = { reset() {
-        this.x=Math.random()*window.innerWidth; this.y=window.innerHeight+8;
-        this.r=Math.random()*1.6+.3; this.vx=(Math.random()-.5)*.4;
-        this.vy=-(Math.random()*.5+.2); this.alpha=Math.random()*.3+.07; this.life=1;
+        this.x = Math.random() * window.innerWidth; this.y = window.innerHeight + 8;
+        this.r = Math.random() * 1.6 + 0.3; this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = -(Math.random() * 0.5 + 0.2); this.alpha = Math.random() * 0.3 + 0.07; this.life = 1;
     }};
-    e.reset(); e.y=Math.random()*window.innerHeight; return e;
+    e.reset(); e.y = Math.random() * window.innerHeight; return e;
 });
+
 (function pLoop() {
-    ctx.clearRect(0,0,W2,H2);
-    for (let i=allP.length-1;i>=0;i--) {
+    ctx.clearRect(0, 0, W2, H2);
+    for (let i = allP.length - 1; i >= 0; i--) {
         allP[i].step(); allP[i].draw();
-        if (allP[i].life<=0) allP.splice(i,1);
+        if (allP[i].life <= 0) allP.splice(i, 1);
     }
     for (const e of embers) {
-        e.x+=e.vx; e.y+=e.vy; e.life-=.0025;
-        ctx.save(); ctx.globalAlpha=e.alpha*e.life;
-        ctx.fillStyle='#e74c3c'; ctx.shadowColor='#e74c3c'; ctx.shadowBlur=5;
-        ctx.beginPath(); ctx.arc(e.x,e.y,e.r,0,Math.PI*2); ctx.fill(); ctx.restore();
-        if (e.life<=0) e.reset();
+        e.x += e.vx; e.y += e.vy; e.life -= 0.0025;
+        ctx.save(); ctx.globalAlpha = e.alpha * e.life;
+        ctx.fillStyle = '#e74c3c'; ctx.shadowColor = '#e74c3c'; ctx.shadowBlur = 5;
+        ctx.beginPath(); ctx.arc(e.x, e.y, e.r, 0, Math.PI * 2); ctx.fill(); ctx.restore();
+        if (e.life <= 0) e.reset();
     }
     requestAnimationFrame(pLoop);
 })();
 
 /* ═══════════════════════════════════════════════════════════════
-   DOM REFS + GAME STATE
+   GAME STATE & LOGIC
 ═══════════════════════════════════════════════════════════════ */
 const spinBtn   = document.getElementById('spinBtn');
 const shootBtn  = document.getElementById('shootBtn');
@@ -996,53 +1127,48 @@ const muzzEl    = document.getElementById('muzzleFlash');
 const smokeEl   = document.getElementById('smokeEl');
 const gunWrap   = document.getElementById('gunWrap');
 
-let bulletPos = Math.floor(Math.random()*6), currentPos = 0;
+let bulletPos = Math.floor(Math.random() * 6), currentPos = 0;
 let isSpun = false, survives = 0, spins = 0, streak = 0, histArr = [];
 
-const setStatus = (t,c='') => { statusEl.textContent=t; statusEl.className='status '+c; };
-const setOdds   = (n,d)    => { oddsFill.style.width=((n/d)*100)+'%'; oddsVal.textContent=n+' in '+d; };
+const setStatus = (t, c = '') => { statusEl.textContent = t; statusEl.className = 'status ' + c; };
+const setOdds   = (n, d)      => { oddsFill.style.width = ((n / d) * 100) + '%'; oddsVal.textContent = n + ' in ' + d; };
 
 function addDot(s) {
-    histArr.push(s); if(histArr.length>14) histArr.shift();
-    historyEl.innerHTML='';
-    histArr.forEach((v,i) => {
-        const dot=document.createElement('div');
-        dot.className='hdot '+(v?'s':'d')+(i===histArr.length-1?' new':'');
+    histArr.push(s); if (histArr.length > 14) histArr.shift();
+    historyEl.innerHTML = '';
+    histArr.forEach((v, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'hdot ' + (v ? 's' : 'd') + (i === histArr.length - 1 ? ' new' : '');
         historyEl.appendChild(dot);
     });
 }
 
 function screenFlash() {
-    flashOv.style.opacity='.9';
-    setTimeout(()=>{ flashOv.style.opacity='0'; }, 70);
+    flashOv.style.opacity = '.9';
+    setTimeout(() => { flashOv.style.opacity = '0'; }, 70);
 }
 
 function animGunCss(t) {
-    gunWrap.classList.remove('recoil','dryfire'); void gunWrap.offsetWidth;
+    gunWrap.classList.remove('recoil', 'dryfire'); void gunWrap.offsetWidth;
     gunWrap.classList.add(t);
-    setTimeout(()=>gunWrap.classList.remove(t), t==='recoil'?400:220);
+    setTimeout(() => gunWrap.classList.remove(t), t === 'recoil' ? 400 : 220);
 }
 
 function triggerMuzzleCSS() {
     muzzEl.classList.remove('bang'); void muzzEl.offsetWidth; muzzEl.classList.add('bang');
-    setTimeout(()=>{ smokeEl.classList.remove('puff'); void smokeEl.offsetWidth; smokeEl.classList.add('puff'); }, 100);
+    setTimeout(() => { smokeEl.classList.remove('puff'); void smokeEl.offsetWidth; smokeEl.classList.add('puff'); }, 100);
 }
 
-/* ═══════════════════════════════════════════════════════════════
-   SPIN BUTTON
-═══════════════════════════════════════════════════════════════ */
-
-// Smoothly reset camera to the good 3/4 view
 function resetCamera() {
     const startPos = camera.position.clone();
-    const endPos   = new THREE.Vector3(4.2, 2.0, 4.8);
+    const endPos   = new THREE.Vector3(4.3, 1.6, 3.8);
     const startTgt = controls.target.clone();
-    const endTgt   = new THREE.Vector3(0, 0.05, -0.8);
+    const endTgt   = new THREE.Vector3(-0.35, 0.05, -0.6);
     const t0 = performance.now();
     const dur = 600;
     (function camTick(now) {
         const p = Math.min((now - t0) / dur, 1);
-        const e = 1 - Math.pow(1 - p, 3); // ease-out cubic
+        const e = 1 - Math.pow(1 - p, 3);
         camera.position.lerpVectors(startPos, endPos, e);
         controls.target.lerpVectors(startTgt, endTgt, e);
         controls.update();
@@ -1058,18 +1184,14 @@ spinBtn.addEventListener('click', () => {
     setStatus('SPINNING...', '');
     animState.isSpinning = true;
 
-    // Snap camera back to good view so spin is visible
     resetCamera();
+    bulletPos = Math.floor(Math.random() * 6);
 
-    bulletPos = Math.floor(Math.random()*6);
-
-    // Total rotation: 3–5 full turns + random chamber offset
-    const fullTurns = (Math.floor(Math.random()*3) + 3) * Math.PI * 2;
-    const chamberOffset = Math.floor(Math.random()*6) * (Math.PI / 3);
+    const fullTurns = (Math.floor(Math.random() * 3) + 3) * Math.PI * 2;
+    const chamberOffset = Math.floor(Math.random() * 6) * (Math.PI / 3);
     const totalRot = fullTurns + chamberOffset;
     const spinDur  = 1300;
 
-    // Play ratchet clicks during spin
     let clicks = 0;
     const maxClicks = 22;
     const ratchetInterval = setInterval(() => {
@@ -1094,9 +1216,6 @@ spinBtn.addEventListener('click', () => {
     });
 });
 
-/* ═══════════════════════════════════════════════════════════════
-   SHOOT BUTTON
-═══════════════════════════════════════════════════════════════ */
 shootBtn.addEventListener('click', () => {
     if (!isSpun || shootBtn.disabled) return;
     spinBtn.disabled  = true;
@@ -1115,60 +1234,58 @@ shootBtn.addEventListener('click', () => {
                 triggerMuzzleFlash3D();
                 triggerMuzzleCSS();
 
-                // 3D recoil
-                animState.recoilRot = 0.38;
-                animState.recoilZ   = 0.25;
+                // 3D physical recoil
+                animState.recoilRot = 0.34;
+                animState.recoilZ   = 0.22;
 
-                setTimeout(()=>{ bloodOv.classList.add('active'); }, 55);
+                setTimeout(() => { bloodOv.classList.add('active'); }, 55);
                 card.classList.add('shake');
-                setTimeout(()=>card.classList.remove('shake'), 500);
+                setTimeout(() => card.classList.remove('shake'), 500);
                 setStatus('BANG', 'danger');
 
-                const r = card.getBoundingClientRect();
-                burst(W2/2, H2/2, '#c0392b', 85);
-                burst(W2/2, H2/2, '#e74c3c', 50);
-                burst(W2/2, H2/2, '#ff7070', 20);
+                burst(W2 / 2, H2 / 2, '#c0392b', 85);
+                burst(W2 / 2, H2 / 2, '#e74c3c', 50);
+                burst(W2 / 2, H2 / 2, '#ff7070', 20);
 
-                addDot(false); streak=0; stCountEl.textContent=streak;
-                svCountEl.textContent=survives;
-                isSpun=false;
+                addDot(false); streak = 0; stCountEl.textContent = streak;
+                svCountEl.textContent = survives;
+                isSpun = false;
                 animState.isFiring = false;
-                spinBtn.disabled=false;
-                spinBtn.textContent='⟳  TRY AGAIN';
-                setOdds(0,1);
+                spinBtn.disabled = false;
+                spinBtn.textContent = '⟳  TRY AGAIN';
+                setOdds(0, 1);
             });
         } else {
-            /* ══ CLICK — empty ══ */
+            /* ══ CLICK ══ */
             animDryfire(() => {
                 playEmpty();
                 animGunCss('dryfire');
                 card.classList.add('sglow');
-                setTimeout(()=>card.classList.remove('sglow'), 900);
+                setTimeout(() => card.classList.remove('sglow'), 900);
                 setStatus('CLICK — SURVIVED', 'safe');
 
                 const r = card.getBoundingClientRect();
-                burst(r.left+r.width/2, r.top+60, '#2ecc71', 28);
-                burst(r.left+r.width/2, r.top+60, '#27ae60', 18);
+                burst(r.left + r.width / 2, r.top + 60, '#2ecc71', 28);
+                burst(r.left + r.width / 2, r.top + 60, '#27ae60', 18);
 
                 survives++; streak++;
-                svCountEl.textContent=survives;
-                stCountEl.textContent=streak;
+                svCountEl.textContent = survives;
+                stCountEl.textContent = streak;
                 addDot(true);
 
                 isSpun = false;
-                // Advance cylinder one click
-                animCylSpin(Math.PI/3, 300, null);
-                currentPos = (currentPos+1)%6;
+                animCylSpin(Math.PI / 3, 280, null);
+                currentPos = (currentPos + 1) % 6;
 
                 playThud();
                 animState.isFiring = false;
                 spinBtn.disabled = false;
                 shootBtn.disabled = true;
                 spinBtn.textContent = '⟳  SPIN';
-                setOdds(4,5);
+                setOdds(4, 5);
             });
         }
-    }, 480);
+    }, 450);
 });
 
 setOdds(5, 6);
@@ -1183,7 +1300,6 @@ const PRESETS = [
     '#ffffff','#f0e8d8','#d0e8f0','#e8d0e0',
 ];
 
-// Build preset swatches panel
 const presetsEl = document.createElement('div');
 presetsEl.id = 'bgPresets';
 PRESETS.forEach(hex => {
@@ -1194,39 +1310,32 @@ PRESETS.forEach(hex => {
     s.addEventListener('click', () => { applyBg(hex); presetsEl.classList.remove('open'); });
     presetsEl.appendChild(s);
 });
-// Custom color row
+
 const customRow = document.createElement('div');
 customRow.id = 'bgCustomRow';
 customRow.innerHTML = '<label>Custom</label><input type="color" id="bgColorInput2" value="#07090c">';
 presetsEl.appendChild(customRow);
 document.body.appendChild(presetsEl);
 
-// Picker trigger button (bottom-left)
 const btnEl = document.createElement('div');
 btnEl.id = 'bgPickerBtn';
 btnEl.innerHTML = '<div id="bgSwatch"></div><span>Background</span>';
 document.body.appendChild(btnEl);
 
-const swatchEl  = document.getElementById('bgSwatch');
-const colorIn   = document.getElementById('bgColorInput2');
+const swatchEl = document.getElementById('bgSwatch');
+const colorIn  = document.getElementById('bgColorInput2');
 
-btnEl.addEventListener('click', e => {
-    e.stopPropagation();
-    presetsEl.classList.toggle('open');
-});
+btnEl.addEventListener('click', e => { e.stopPropagation(); presetsEl.classList.toggle('open'); });
 document.addEventListener('click', () => presetsEl.classList.remove('open'));
 presetsEl.addEventListener('click', e => e.stopPropagation());
 colorIn.addEventListener('input', () => applyBg(colorIn.value));
 
 function applyBg(hex) {
-    // CSS background
     document.documentElement.style.setProperty('--bg', hex);
     document.body.style.background = hex;
-    // Three.js scene
     const c = new THREE.Color(hex);
     scene.background = c;
-    scene.fog = new THREE.FogExp2(c.getHex(), 0.032);
-    // Swatch preview
+    scene.fog = new THREE.FogExp2(c.getHex(), 0.026);
     swatchEl.style.background = hex;
     colorIn.value = hex;
 }
