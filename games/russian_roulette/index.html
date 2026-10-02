@@ -7,6 +7,7 @@
 
     <!-- Three.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600&display=swap');
@@ -263,9 +264,11 @@ threeContainer.appendChild(renderer.domElement);
 function resizeRenderer() {
     const w = threeContainer.clientWidth;
     const h = threeContainer.clientHeight;
+    if (!w || !h) return;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    if (typeof controls !== 'undefined') controls.update();
 }
 
 // Camera — proper 3/4 view from file.txt, slightly tweaked for the layout
@@ -276,6 +279,15 @@ const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
 // Tweaked: pull back a bit more so full gun is visible
 camera.position.set(3.2, 1.6, 3.6);
 camera.lookAt(0, 0.1, -0.2);
+
+// OrbitControls — drag to rotate, scroll to zoom, right-drag to pan
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.06;
+controls.target.set(0, 0.05, -0.2);
+controls.minDistance = 1.5;
+controls.maxDistance = 10;
+controls.update();
 
 /* ═══════════════════════════════════
    LIGHTING
@@ -611,6 +623,7 @@ function renderLoop() {
         gunRoot.position.y = Math.sin(animState.breathT * 0.9) * 0.012;
     }
 
+    controls.update();
     renderer.render(scene, camera);
 }
 renderLoop();
