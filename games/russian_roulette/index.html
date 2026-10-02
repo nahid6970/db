@@ -1241,6 +1241,7 @@ spinBtn.addEventListener('click', () => {
     bloodOv.classList.remove('active');
     setStatus('SPINNING...', '');
     animState.isSpinning = true;
+    streak = 0; stCountEl.textContent = streak; // reset streak on new spin
 
     resetCamera();
     bulletPos = Math.floor(Math.random() * 6);
@@ -1314,33 +1315,44 @@ shootBtn.addEventListener('click', () => {
                 setOdds(0, 1);
             });
         } else {
-            /* ══ CLICK ══ */
+            /* ══ CLICK — survived, cylinder advances, keep firing ══ */
             animDryfire(() => {
                 playEmpty();
                 animGunCss('dryfire');
                 card.classList.add('sglow');
                 setTimeout(() => card.classList.remove('sglow'), 900);
-                setStatus('CLICK — SURVIVED', 'safe');
-
-                const r = card.getBoundingClientRect();
-                burst(r.left + r.width / 2, r.top + 60, '#2ecc71', 28);
-                burst(r.left + r.width / 2, r.top + 60, '#27ae60', 18);
 
                 survives++; streak++;
                 svCountEl.textContent = survives;
                 stCountEl.textContent = streak;
                 addDot(true);
 
-                isSpun = false;
-                animCylSpin(Math.PI / 3, 280, null);
-                currentPos = (currentPos + 1) % 6;
+                const r = card.getBoundingClientRect();
+                burst(r.left + r.width / 2, r.top + 60, '#2ecc71', 28);
+                burst(r.left + r.width / 2, r.top + 60, '#27ae60', 18);
 
+                // Advance cylinder one chamber
+                currentPos = (currentPos + 1) % 6;
+                animCylSpin(Math.PI / 3, 280, null);
                 playThud();
+
+                // Calculate remaining safe chambers out of (6 - shots fired this spin)
+                // After each click the odds get worse — 1 bullet in fewer remaining chambers
+                const chambersLeft = 6 - streak;
+                const safeLeft = Math.max(chambersLeft - 1, 0);
+                if (safeLeft > 0) {
+                    setStatus(`CLICK — ${safeLeft} LEFT`, 'safe');
+                    setOdds(safeLeft, chambersLeft);
+                } else {
+                    setStatus('NEXT IS LIVE', 'danger');
+                    setOdds(0, 1);
+                }
+
                 animState.isFiring = false;
+                // Keep shooting — don't require a spin
                 spinBtn.disabled = false;
-                shootBtn.disabled = true;
+                shootBtn.disabled = false;
                 spinBtn.textContent = '⟳  SPIN';
-                setOdds(4, 5);
             });
         }
     }, 450);
