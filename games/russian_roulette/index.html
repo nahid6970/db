@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Russian Roulette — Classic S&W .38</title>
+    <title>Russian Roulette — S&W .38 Military & Police</title>
 
     <!-- Three.js & Controls -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -41,7 +41,6 @@
         #bloodOverlay.active{opacity:1}
         #flashOverlay{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:202;transition:opacity .04s}
 
-        /* ── Two-column layout ── */
         .layout{
             position:relative;z-index:10;
             display:flex;flex-direction:row;align-items:center;
@@ -101,7 +100,7 @@
         }
 
         #muzzleFlash{
-            position:absolute;left:29%;top:46%;
+            position:absolute;left:28%;top:46%;
             transform:translate(-50%,-50%);
             width:0;height:0;border-radius:50%;pointer-events:none;opacity:0;z-index:20;
         }
@@ -112,7 +111,7 @@
             100%{opacity:0;width:170px;height:170px;margin:-85px;box-shadow:0 0 0 0 transparent}
         }
         #smokeEl{
-            position:absolute;left:29%;top:46%;transform:translate(-50%,-50%);
+            position:absolute;left:28%;top:46%;transform:translate(-50%,-50%);
             width:12px;height:12px;border-radius:50%;background:rgba(180,200,220,.5);
             filter:blur(6px);opacity:0;pointer-events:none;z-index:19;
         }
@@ -190,7 +189,6 @@
         .hdot.new{animation:pop .22s cubic-bezier(.34,1.56,.64,1)}
         @keyframes pop{from{transform:scale(0)}to{transform:scale(1)}}
 
-        /* Background color picker */
         #bgPickerBtn{
             position:fixed;bottom:18px;left:18px;z-index:300;
             display:flex;align-items:center;gap:8px;
@@ -282,30 +280,29 @@
 
 const threeContainer = document.getElementById('threeContainer');
 
-// Scene & Renderer
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x07090c);
-scene.fog = new THREE.FogExp2(0x07090c, 0.026);
+scene.fog = new THREE.FogExp2(0x07090c, 0.024);
 
 const renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: 'high-performance' });
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
-renderer.toneMappingExposure = 1.25;
+renderer.toneMappingExposure = 1.35;
 renderer.domElement.id = 'threeCanvas';
 threeContainer.appendChild(renderer.domElement);
 
 // Camera setup
-const camera = new THREE.PerspectiveCamera(46, 1, 0.1, 100);
-camera.position.set(4.3, 1.6, 3.8);
+const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+camera.position.set(3.8, 1.4, 3.2);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.05;
-controls.target.set(-0.35, 0.05, -0.6);
+controls.target.set(-0.25, -0.05, -0.6);
 controls.minDistance = 2.0;
-controls.maxDistance = 9.0;
+controls.maxDistance = 8.5;
 controls.minPolarAngle = Math.PI * 0.16;
 controls.maxPolarAngle = Math.PI * 0.65;
 controls.update();
@@ -320,77 +317,143 @@ function resizeRenderer() {
     controls.update();
 }
 
+/* ── STUDIO REFLECTION ENVIRONMENT MAP ── */
+// This gives metals specular reflections so they don't render pitch black!
+function generateStudioEnv() {
+    const pmremGen = new THREE.PMREMGenerator(renderer);
+    pmremGen.compileEquirectangularShader();
+
+    const c = document.createElement('canvas');
+    c.width = 1024; c.height = 512;
+    const ctx = c.getContext('2d');
+
+    const grad = ctx.createLinearGradient(0, 0, 0, 512);
+    grad.addColorStop(0, '#c8d8ea');
+    grad.addColorStop(0.3, '#788ca0');
+    grad.addColorStop(0.5, '#2e3844');
+    grad.addColorStop(0.7, '#151b22');
+    grad.addColorStop(1, '#090c10');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 1024, 512);
+
+    function addLight(x, y, w, h, col, blur) {
+        ctx.save();
+        ctx.filter = `blur(${blur}px)`;
+        ctx.fillStyle = col;
+        ctx.fillRect(x, y, w, h);
+        ctx.restore();
+    }
+    addLight(600, 40, 260, 160, 'rgba(255,255,255,0.95)', 25);
+    addLight(80, 20, 400, 90, 'rgba(210,230,255,0.8)', 20);
+    addLight(180, 280, 280, 110, 'rgba(245,220,190,0.35)', 35);
+    addLight(860, 100, 130, 200, 'rgba(180,210,245,0.55)', 28);
+
+    const tex = new THREE.CanvasTexture(c);
+    tex.mapping = THREE.EquirectangularReflectionMapping;
+    const envMap = pmremGen.fromEquirectangular(tex).texture;
+    pmremGen.dispose();
+    return envMap;
+}
+scene.environment = generateStudioEnv();
+
+/* ── PROCEDURAL WALNUT WOODGRAIN TEXTURE ── */
+function generateWalnutTexture() {
+    const c = document.createElement('canvas');
+    c.width = 512; c.height = 512;
+    const ctx = c.getContext('2d');
+
+    // Base rich walnut
+    ctx.fillStyle = '#4a2614';
+    ctx.fillRect(0, 0, 512, 512);
+
+    // Grain lines
+    for (let i = 0; i < 90; i++) {
+        const y = Math.random() * 512;
+        ctx.strokeStyle = Math.random() > 0.5 ? 'rgba(32, 14, 6, 0.45)' : 'rgba(102, 55, 30, 0.35)';
+        ctx.lineWidth = Math.random() * 3 + 1;
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.bezierCurveTo(170, y + (Math.random() - 0.5) * 40, 340, y + (Math.random() - 0.5) * 40, 512, y + (Math.random() - 0.5) * 20);
+        ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(c);
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.wrapT = THREE.RepeatWrapping;
+    return tex;
+}
+const walnutTex = generateWalnutTexture();
+
 /* ── LIGHTING ── */
-const ambient = new THREE.AmbientLight(0xffffff, 0.95);
+const ambient = new THREE.AmbientLight(0xffffff, 1.2);
 scene.add(ambient);
 
-const keyLight = new THREE.DirectionalLight(0xe4efff, 2.8);
-keyLight.position.set(4, 6, 5);
+const keyLight = new THREE.DirectionalLight(0xf2f7ff, 3.2);
+keyLight.position.set(4, 5, 4);
 keyLight.castShadow = true;
 scene.add(keyLight);
 
-const rimLight = new THREE.DirectionalLight(0x7aa5cf, 2.2);
-rimLight.position.set(-6, 3, -5);
+const rimLight = new THREE.DirectionalLight(0x8cb8e6, 2.5);
+rimLight.position.set(-5, 3, -4);
 scene.add(rimLight);
 
-const fillLight = new THREE.DirectionalLight(0xffdfb8, 1.4);
+const fillLight = new THREE.DirectionalLight(0xffe2c0, 1.5);
 fillLight.position.set(2, -3, 3);
 scene.add(fillLight);
 
-// Muzzle flash point light
-const flashLight = new THREE.PointLight(0xffaa22, 0, 7);
-flashLight.position.set(0, 0.38, -3.3);
+const flashLight = new THREE.PointLight(0xffaa22, 0, 8);
+flashLight.position.set(0, 0.245, -3.4);
 scene.add(flashLight);
 
 /* ── MATERIALS ── */
-// Vintage gunmetal blued steel
 const matSteel = new THREE.MeshStandardMaterial({
-    color: 0x1b2028,
+    color: 0x22262d,
     metalness: 0.92,
-    roughness: 0.28,
+    roughness: 0.25,
 });
-// Slightly polished cylinder steel
+
 const matCylinder = new THREE.MeshStandardMaterial({
-    color: 0x222a36,
-    metalness: 0.95,
+    color: 0x252b34,
+    metalness: 0.94,
     roughness: 0.22,
 });
-// Case-hardened hammer & trigger
+
 const matCaseHardened = new THREE.MeshStandardMaterial({
-    color: 0x6e7682,
-    metalness: 0.88,
-    roughness: 0.32,
+    color: 0x585c64,
+    metalness: 0.86,
+    roughness: 0.30,
 });
-// Rich American walnut wood grip
+
 const matWood = new THREE.MeshStandardMaterial({
-    color: 0x482413,
-    roughness: 0.44,
-    metalness: 0.04,
+    color: 0x6e3c22,
+    map: walnutTex,
+    roughness: 0.36,
+    metalness: 0.05,
 });
-// Darker checkering wood inlay
+
 const matCheckering = new THREE.MeshStandardMaterial({
-    color: 0x32180c,
-    roughness: 0.72,
+    color: 0x2a1409,
+    roughness: 0.85,
     metalness: 0.02,
 });
-// Polished brass cartridges & screw
+
 const matBrass = new THREE.MeshStandardMaterial({
-    color: 0xdfab38,
+    color: 0xd6a438,
     metalness: 0.96,
-    roughness: 0.16,
+    roughness: 0.18,
 });
-// Silver primer & medallion
+
 const matSilver = new THREE.MeshStandardMaterial({
-    color: 0xcfd6dc,
+    color: 0xdde4ec,
     metalness: 0.94,
-    roughness: 0.24,
+    roughness: 0.22,
 });
-// Deep black bore / flutes
+
 const matDark = new THREE.MeshStandardMaterial({
-    color: 0x06080b,
-    roughness: 0.8,
-    metalness: 0.3,
+    color: 0x07090c,
+    roughness: 0.85,
+    metalness: 0.2,
 });
+
 const matFlash = new THREE.MeshBasicMaterial({
     color: 0xffea88,
     transparent: true,
@@ -402,303 +465,313 @@ const gunRoot = new THREE.Group();
 scene.add(gunRoot);
 
 /* ═══════════════════════════════════════════════════════════════
-   1. MAIN FRAME WITH CYLINDER WINDOW (S&W K-FRAME)
-   Constructed with extruded beveled shape for authentic contours
+   1. AUTHENTIC S&W K-FRAME (HOLLOW CYLINDER WINDOW)
 ═══════════════════════════════════════════════════════════════ */
 const frameShape = new THREE.Shape();
 // Perimeter in Z-Y coordinates
-frameShape.moveTo(-0.95, 0.58);     // Front barrel collar top
-frameShape.lineTo(0.92, 0.58);      // Top strap to recoil shield
-frameShape.quadraticCurveTo(1.10, 0.52, 1.12, 0.30); // Recoil shield curve
-frameShape.lineTo(1.12, 0.05);      // Rear frame back
-frameShape.lineTo(0.96, -0.22);     // Frame tang toward grip
-frameShape.lineTo(0.72, -0.58);     // Bottom grip junction
-frameShape.lineTo(0.50, -0.58);     // Trigger frame junction
-frameShape.lineTo(-0.62, -0.52);    // Bottom rail under cylinder
-frameShape.quadraticCurveTo(-0.88, -0.52, -0.92, -0.35); // Crane pivot forward
-frameShape.lineTo(-0.95, -0.15);    // Front frame face bottom
-frameShape.lineTo(-0.95, 0.58);     // Back to top front
+frameShape.moveTo(-0.92, 0.45);     // Top front at barrel root
+frameShape.lineTo(0.92, 0.45);      // Top strap top edge
+frameShape.quadraticCurveTo(1.08, 0.42, 1.05, 0.20);  // Curve over recoil shield
+frameShape.lineTo(1.02, 0.02);      // Rear frame back
+frameShape.lineTo(0.88, -0.22);     // Sloping frame tang toward grip
+frameShape.lineTo(0.68, -0.52);     // Frame & grip junction
+frameShape.lineTo(0.48, -0.52);     // Behind trigger
+frameShape.lineTo(-0.62, -0.48);    // Bottom rail under cylinder
+frameShape.quadraticCurveTo(-0.84, -0.48, -0.88, -0.32); // Crane pivot forward
+frameShape.lineTo(-0.92, 0.05);     // Front frame crane face
+frameShape.lineTo(-0.92, 0.45);     // Close
 
-// CYLINDER WINDOW HOLE CUTOUT
+// Hollow Cylinder Window
 const windowHole = new THREE.Path();
-windowHole.moveTo(-0.66, 0.44);     // Front top
-windowHole.lineTo(0.66, 0.44);      // Rear top
-windowHole.lineTo(0.66, -0.42);     // Rear bottom
-windowHole.lineTo(-0.66, -0.42);    // Front bottom
-windowHole.lineTo(-0.66, 0.44);     // Close
+windowHole.moveTo(-0.62, 0.45);
+windowHole.lineTo(0.62, 0.45);
+windowHole.lineTo(0.62, -0.46);
+windowHole.lineTo(-0.62, -0.46);
+windowHole.lineTo(-0.62, 0.45);
 frameShape.holes.push(windowHole);
 
-const extrudeSettings = {
+const frameExtrudeSettings = {
     steps: 1,
-    depth: 0.36,
+    depth: 0.32,
     bevelEnabled: true,
-    bevelThickness: 0.024,
-    bevelSize: 0.024,
+    bevelThickness: 0.022,
+    bevelSize: 0.020,
     bevelSegments: 4
 };
 
-const frameGeo = new THREE.ExtrudeGeometry(frameShape, extrudeSettings);
-frameGeo.center(); // Center at (0,0,0)
+const frameGeo = new THREE.ExtrudeGeometry(frameShape, frameExtrudeSettings);
+frameGeo.center();
 const frameMesh = new THREE.Mesh(frameGeo, matSteel);
-// Extruded along Z by default -> rotate so shape is in Z-Y plane and depth is X
 frameMesh.rotation.y = Math.PI / 2;
-frameMesh.position.set(0, 0.02, 0.06);
+frameMesh.position.set(0, -0.01, 0.05);
 gunRoot.add(frameMesh);
 
-// Top strap rear sight groove
-const sightGroove = new THREE.Mesh(
-    new THREE.BoxGeometry(0.045, 0.04, 1.6),
+// Top strap rear sight channel
+const sightChannel = new THREE.Mesh(
+    new THREE.BoxGeometry(0.045, 0.03, 1.55),
     matDark
 );
-sightGroove.position.set(0, 0.61, 0.1);
-gunRoot.add(sightGroove);
+sightChannel.position.set(0, 0.47, 0.12);
+gunRoot.add(sightChannel);
 
-// Recoil shield bulbs (left & right rounded shields behind cylinder)
+// Recoil shield side contours
 [-0.14, 0.14].forEach(x => {
     const shield = new THREE.Mesh(
-        new THREE.SphereGeometry(0.30, 16, 16),
+        new THREE.CylinderGeometry(0.36, 0.36, 0.08, 20),
         matSteel
     );
-    shield.scale.set(0.55, 1.1, 0.8);
-    shield.position.set(x, 0.02, 0.72);
+    shield.rotation.z = Math.PI / 2;
+    shield.position.set(x, 0.02, 0.70);
     gunRoot.add(shield);
-});
-
-// Sideplate screws on the right side
-[[-0.42, 0.18], [-0.46, 0.58], [-0.15, 0.78]].forEach(([y, z]) => {
-    const screw = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.038, 0.038, 0.02, 12),
-        matSteel
-    );
-    screw.rotation.z = Math.PI / 2;
-    screw.position.set(0.20, y, z);
-    gunRoot.add(screw);
-
-    const slot = new THREE.Mesh(
-        new THREE.BoxGeometry(0.025, 0.008, 0.06),
-        matDark
-    );
-    slot.position.set(0.21, y, z);
-    gunRoot.add(slot);
 });
 
 // S&W Thumb cylinder release latch (on left side)
 const latchGroup = new THREE.Group();
-latchGroup.position.set(-0.205, 0.12, 0.78);
+latchGroup.position.set(-0.19, 0.12, 0.72);
 
 const latchBody = new THREE.Mesh(
-    new THREE.BoxGeometry(0.04, 0.16, 0.22),
+    new THREE.BoxGeometry(0.035, 0.14, 0.20),
     matCaseHardened
 );
 latchGroup.add(latchBody);
 
-// Checkered texture lines on latch
 for (let i = 0; i < 4; i++) {
     const lLine = new THREE.Mesh(
-        new THREE.BoxGeometry(0.045, 0.012, 0.18),
+        new THREE.BoxGeometry(0.04, 0.012, 0.16),
         matDark
     );
-    lLine.position.set(0, -0.05 + i * 0.035, 0);
+    lLine.position.set(0, -0.045 + i * 0.03, 0);
     latchGroup.add(lLine);
 }
 gunRoot.add(latchGroup);
 
+// Sideplate screws on the right side
+[[-0.38, 0.18], [-0.44, 0.58], [-0.14, 0.74]].forEach(([y, z]) => {
+    const screw = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.034, 0.034, 0.02, 12),
+        matSteel
+    );
+    screw.rotation.z = Math.PI / 2;
+    screw.position.set(0.18, y, z);
+    gunRoot.add(screw);
+
+    const slot = new THREE.Mesh(
+        new THREE.BoxGeometry(0.025, 0.008, 0.05),
+        matDark
+    );
+    slot.position.set(0.19, y, z);
+    gunRoot.add(slot);
+});
+
 /* ═══════════════════════════════════════════════════════════════
    2. SLENDER S&W TAPERED PENCIL BARREL & FRONT SIGHT
 ═══════════════════════════════════════════════════════════════ */
+const BARREL_Y = 0.245; // Perfectly aligned with the top cylinder chamber!
 const BARREL_LEN = 2.45;
-const BARREL_Y = 0.38;
-const barrelZ = -0.90 - BARREL_LEN / 2;
-const muzzleZ = -0.90 - BARREL_LEN;
+const barrelZ = -0.92 - BARREL_LEN / 2;
+const muzzleZ = -0.92 - BARREL_LEN;
 
-// Barrel collar ring at frame junction
+// Stepped barrel collar ring at frame junction
 const barrelCollar = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.23, 0.23, 0.25, 24),
+    new THREE.CylinderGeometry(0.22, 0.22, 0.22, 28),
     matSteel
 );
 barrelCollar.rotation.x = Math.PI / 2;
 barrelCollar.position.set(0, BARREL_Y, -0.96);
 gunRoot.add(barrelCollar);
 
-// Classic tapered pencil barrel (wider at frame, slender at muzzle)
-const barrelGeo = new THREE.CylinderGeometry(0.185, 0.215, BARREL_LEN, 28);
+// Classic tapered pencil barrel
+const barrelGeo = new THREE.CylinderGeometry(0.175, 0.21, BARREL_LEN, 32);
 const barrel = new THREE.Mesh(barrelGeo, matSteel);
 barrel.rotation.x = Math.PI / 2;
 barrel.position.set(0, BARREL_Y, barrelZ);
 gunRoot.add(barrel);
 
-// Muzzle crown bevel
+// Muzzle Crown
 const muzzleCrown = new THREE.Mesh(
-    new THREE.TorusGeometry(0.18, 0.02, 12, 28),
+    new THREE.TorusGeometry(0.17, 0.022, 14, 32),
     matSteel
 );
 muzzleCrown.position.set(0, BARREL_Y, muzzleZ);
 gunRoot.add(muzzleCrown);
 
-// Deep dark rifled bore
+// Deep dark bore
 const bore = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.11, 0.11, 0.25, 18),
+    new THREE.CylinderGeometry(0.10, 0.10, 0.25, 18),
     matDark
 );
 bore.rotation.x = Math.PI / 2;
 bore.position.set(0, BARREL_Y, muzzleZ + 0.1);
 gunRoot.add(bore);
 
-// Front Sight: Classic half-moon blade on ramp base
+// Front Sight: Classic half-moon blade
 const sightBase = new THREE.Mesh(
-    new THREE.BoxGeometry(0.045, 0.05, 0.42),
+    new THREE.BoxGeometry(0.042, 0.04, 0.38),
     matSteel
 );
-sightBase.position.set(0, BARREL_Y + 0.19, muzzleZ + 0.25);
+sightBase.position.set(0, BARREL_Y + 0.18, muzzleZ + 0.22);
 gunRoot.add(sightBase);
 
-// Semicircular Half-Moon Blade
-const bladeGeo = new THREE.CylinderGeometry(0.14, 0.14, 0.038, 20, 1, false, 0, Math.PI);
+const bladeGeo = new THREE.CylinderGeometry(0.13, 0.13, 0.036, 20, 1, false, 0, Math.PI);
 const sightBlade = new THREE.Mesh(bladeGeo, matSteel);
 sightBlade.rotation.y = Math.PI / 2;
 sightBlade.rotation.x = -Math.PI / 2;
-sightBlade.position.set(0, BARREL_Y + 0.20, muzzleZ + 0.22);
+sightBlade.position.set(0, BARREL_Y + 0.19, muzzleZ + 0.20);
 gunRoot.add(sightBlade);
 
-// Barrel rollmark stamp bar (Smith & Wesson rollmark line)
-const rollmark = new THREE.Mesh(
-    new THREE.BoxGeometry(0.005, 0.025, 0.95),
-    matDark
-);
-rollmark.position.set(0.19, BARREL_Y + 0.05, barrelZ);
-gunRoot.add(rollmark);
-
 /* ═══════════════════════════════════════════════════════════════
-   3. EJECTOR ROD & LOCKING LUG (UNDER BARREL)
+   3. EJECTOR ROD & LOCKING LUG
 ═══════════════════════════════════════════════════════════════ */
-// Free-hanging ejector rod
 const ejectorRod = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.035, 0.035, 1.05, 16),
+    new THREE.CylinderGeometry(0.034, 0.034, 1.05, 16),
     matCylinder
 );
 ejectorRod.rotation.x = Math.PI / 2;
-ejectorRod.position.set(0, BARREL_Y - 0.22, -1.45);
+ejectorRod.position.set(0, BARREL_Y - 0.20, -1.45);
 gunRoot.add(ejectorRod);
 
-// Knurled tip collar on ejector rod
 const rodTip = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.052, 0.052, 0.18, 16),
+    new THREE.CylinderGeometry(0.05, 0.05, 0.16, 16),
     matSteel
 );
 rodTip.rotation.x = Math.PI / 2;
-rodTip.position.set(0, BARREL_Y - 0.22, -1.95);
+rodTip.position.set(0, BARREL_Y - 0.20, -1.94);
 gunRoot.add(rodTip);
 
-// Underside barrel lug locking the rod tip
 const rodLug = new THREE.Mesh(
-    new THREE.BoxGeometry(0.06, 0.10, 0.18),
+    new THREE.BoxGeometry(0.055, 0.09, 0.16),
     matSteel
 );
-rodLug.position.set(0, BARREL_Y - 0.13, -1.95);
+rodLug.position.set(0, BARREL_Y - 0.12, -1.94);
 gunRoot.add(rodLug);
 
-// Crane hinge piece under cylinder front
 const cranePivot = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.08, 0.08, 0.45, 16),
+    new THREE.CylinderGeometry(0.075, 0.075, 0.42, 16),
     matSteel
 );
 cranePivot.rotation.x = Math.PI / 2;
-cranePivot.position.set(0, -0.32, -0.68);
+cranePivot.position.set(0, -0.28, -0.66);
 gunRoot.add(cranePivot);
 
 /* ═══════════════════════════════════════════════════════════════
-   4. CYLINDER ASSEMBLY (6 CHAMBERS, FLUTES & EXTRACTOR)
+   4. MATHEMATICALLY SCALLOPED 6-SHOT FLUTED CYLINDER
 ═══════════════════════════════════════════════════════════════ */
 const cylinderGroup = new THREE.Group();
-cylinderGroup.position.set(0, 0, 0.02);
+cylinderGroup.position.set(0, 0, 0.0);
 gunRoot.add(cylinderGroup);
 
-const CYL_RADIUS = 0.425;
-const CYL_LENGTH = 1.08;
+const CYL_R = 0.435;
+const CYL_L = 1.12;
 
-// Main cylinder body
-const cylBody = new THREE.Mesh(
-    new THREE.CylinderGeometry(CYL_RADIUS, CYL_RADIUS, CYL_LENGTH, 36),
-    matCylinder
-);
-cylBody.rotation.x = Math.PI / 2;
-cylinderGroup.add(cylBody);
+// Generate 2D fluted cylinder profile with 6 smooth concave flutes
+const cylShape = new THREE.Shape();
+const STEPS = 96;
+for (let i = 0; i <= STEPS; i++) {
+    const a = (i / STEPS) * Math.PI * 2;
+    // Calculate distance to nearest flute angle
+    let minDiff = Infinity;
+    for (let k = 0; k < 6; k++) {
+        const fa = (k * Math.PI / 3) + (Math.PI / 6);
+        let diff = Math.abs(a - fa);
+        if (diff > Math.PI) diff = Math.PI * 2 - diff;
+        if (diff < minDiff) minDiff = diff;
+    }
+    let r = CYL_R;
+    const fluteWidth = 0.21;
+    if (minDiff < fluteWidth) {
+        // Concave smooth curve
+        const factor = Math.cos((minDiff / fluteWidth) * (Math.PI / 2));
+        r -= 0.062 * (factor * factor);
+    }
+    const px = Math.cos(a) * r;
+    const py = Math.sin(a) * r;
+    if (i === 0) cylShape.moveTo(px, py);
+    else cylShape.lineTo(px, py);
+}
+
+// Cut 6 circular chamber holes through the cylinder
+const CHAMBER_DIST = 0.245;
+for (let k = 0; k < 6; k++) {
+    const ca = (k * Math.PI / 3) + (Math.PI / 2); // align top chamber straight up!
+    const cx = Math.cos(ca) * CHAMBER_DIST;
+    const cy = Math.sin(ca) * CHAMBER_DIST;
+
+    const chamberHole = new THREE.Path();
+    const chSteps = 20;
+    for (let j = 0; j <= chSteps; j++) {
+        const ja = (j / chSteps) * Math.PI * 2;
+        const hx = cx + Math.cos(ja) * 0.082;
+        const hy = cy + Math.sin(ja) * 0.082;
+        if (j === 0) chamberHole.moveTo(hx, hy);
+        else chamberHole.lineTo(hx, hy);
+    }
+    cylShape.holes.push(chamberHole);
+}
+
+const cylExtrudeSettings = {
+    steps: 1,
+    depth: CYL_L,
+    bevelEnabled: true,
+    bevelThickness: 0.02,
+    bevelSize: 0.018,
+    bevelSegments: 3
+};
+
+const cylGeo = new THREE.ExtrudeGeometry(cylShape, cylExtrudeSettings);
+cylGeo.center();
+const cylMesh = new THREE.Mesh(cylGeo, matCylinder);
+cylinderGroup.add(cylMesh);
 
 // Center extractor shaft pin
 const centerPin = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.075, 0.075, CYL_LENGTH + 0.2, 14),
+    new THREE.CylinderGeometry(0.065, 0.065, CYL_L + 0.16, 16),
     matSteel
 );
 centerPin.rotation.x = Math.PI / 2;
 cylinderGroup.add(centerPin);
 
 // Rear extractor star ratchet
-const extractorStar = new THREE.Mesh(
-    new THREE.CylinderGeometry(0.24, 0.26, 0.04, 12),
+const starRatchet = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.22, 0.24, 0.035, 12),
     matSteel
 );
-extractorStar.rotation.x = Math.PI / 2;
-extractorStar.position.set(0, 0, CYL_LENGTH / 2 + 0.02);
-cylinderGroup.add(extractorStar);
+starRatchet.rotation.x = Math.PI / 2;
+starRatchet.position.set(0, 0, CYL_L / 2 + 0.015);
+cylinderGroup.add(starRatchet);
 
-// 6 Chambers, flutes, cartridges, stop notches
-const CHAMBER_DIST = 0.245;
-for (let i = 0; i < 6; i++) {
-    const angle = (i * Math.PI) / 3;
-    const cx = Math.cos(angle) * CHAMBER_DIST;
-    const cy = Math.sin(angle) * CHAMBER_DIST;
+// 6 Brass Cartridges visible inside the chambers
+for (let k = 0; k < 6; k++) {
+    const ca = (k * Math.PI / 3) + (Math.PI / 2);
+    const cx = Math.cos(ca) * CHAMBER_DIST;
+    const cy = Math.sin(ca) * CHAMBER_DIST;
 
-    // Chamber tunnel bore
-    const chamberBore = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.085, 0.085, CYL_LENGTH + 0.05, 14),
-        matDark
-    );
-    chamberBore.rotation.x = Math.PI / 2;
-    chamberBore.position.set(cx, cy, 0);
-    cylinderGroup.add(chamberBore);
-
-    // Brass cartridge case rim
-    const cartridge = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.082, 0.082, 0.06, 14),
+    const cart = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.08, 0.08, 0.05, 14),
         matBrass
     );
-    cartridge.rotation.x = Math.PI / 2;
-    cartridge.position.set(cx, cy, CYL_LENGTH / 2 + 0.015);
-    cylinderGroup.add(cartridge);
+    cart.rotation.x = Math.PI / 2;
+    cart.position.set(cx, cy, CYL_L / 2 + 0.01);
+    cylinderGroup.add(cart);
 
-    // Silver nickel primer
     const primer = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.03, 0.03, 0.065, 10),
+        new THREE.CylinderGeometry(0.028, 0.028, 0.055, 10),
         matSilver
     );
     primer.rotation.x = Math.PI / 2;
-    primer.position.set(cx, cy, CYL_LENGTH / 2 + 0.018);
+    primer.position.set(cx, cy, CYL_L / 2 + 0.012);
     cylinderGroup.add(primer);
 
-    // Scalloped Flute groove between chambers
-    const fluteAngle = angle + Math.PI / 6;
-    const fluteX = Math.cos(fluteAngle) * (CYL_RADIUS + 0.02);
-    const fluteY = Math.sin(fluteAngle) * (CYL_RADIUS + 0.02);
-
-    const flute = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.12, 0.12, CYL_LENGTH * 0.72, 12),
-        matDark
-    );
-    flute.rotation.x = Math.PI / 2;
-    flute.position.set(fluteX, fluteY, -0.06);
-    cylinderGroup.add(flute);
-
-    // Cylinder stop notches near rear edge
+    // Stop notches near rear edge
     const notch = new THREE.Mesh(
-        new THREE.BoxGeometry(0.03, 0.04, 0.08),
+        new THREE.BoxGeometry(0.03, 0.035, 0.08),
         matDark
     );
     notch.position.set(
-        Math.cos(angle) * (CYL_RADIUS - 0.01),
-        Math.sin(angle) * (CYL_RADIUS - 0.01),
-        CYL_LENGTH / 2 - 0.14
+        Math.cos(ca) * (CYL_R - 0.01),
+        Math.sin(ca) * (CYL_R - 0.01),
+        CYL_L / 2 - 0.12
     );
-    notch.rotation.z = angle;
+    notch.rotation.z = ca;
     cylinderGroup.add(notch);
 }
 
@@ -706,159 +779,147 @@ for (let i = 0; i < 6; i++) {
    5. HAMMER ASSEMBLY
 ═══════════════════════════════════════════════════════════════ */
 const hammerPivot = new THREE.Group();
-hammerPivot.position.set(0, 0.38, 0.88);
+hammerPivot.position.set(0, 0.32, 0.82);
 gunRoot.add(hammerPivot);
 
-// Hammer base body
 const hammerStem = new THREE.Mesh(
-    new THREE.BoxGeometry(0.09, 0.32, 0.18),
+    new THREE.BoxGeometry(0.085, 0.28, 0.16),
     matCaseHardened
 );
-hammerStem.position.set(0, 0.12, -0.04);
-hammerStem.rotation.x = -0.32;
+hammerStem.position.set(0, 0.10, -0.02);
+hammerStem.rotation.x = -0.30;
 hammerPivot.add(hammerStem);
 
-// Serrated thumb spur arching backward
 const hammerSpur = new THREE.Mesh(
-    new THREE.BoxGeometry(0.12, 0.08, 0.24),
+    new THREE.BoxGeometry(0.11, 0.07, 0.22),
     matCaseHardened
 );
-hammerSpur.position.set(0, 0.28, 0.08);
+hammerSpur.position.set(0, 0.24, 0.08);
 hammerSpur.rotation.x = -0.15;
 hammerPivot.add(hammerSpur);
 
-// Checkered grip cuts on hammer spur
 for (let i = 0; i < 5; i++) {
     const cut = new THREE.Mesh(
-        new THREE.BoxGeometry(0.125, 0.01, 0.02),
+        new THREE.BoxGeometry(0.115, 0.01, 0.02),
         matDark
     );
-    cut.position.set(0, 0.275 + (i * 0.012), 0.02 + (i * 0.035));
+    cut.position.set(0, 0.235 + (i * 0.012), 0.02 + (i * 0.035));
     hammerPivot.add(cut);
 }
 
-// Firing pin nose
 const firingPin = new THREE.Mesh(
-    new THREE.ConeGeometry(0.025, 0.12, 8),
+    new THREE.ConeGeometry(0.022, 0.10, 8),
     matCaseHardened
 );
 firingPin.rotation.x = -Math.PI / 2;
-firingPin.position.set(0, 0.04, -0.18);
+firingPin.position.set(0, 0.03, -0.14);
 hammerPivot.add(firingPin);
 
 /* ═══════════════════════════════════════════════════════════════
-   6. CURVED TRIGGER GUARD & TRIGGER
+   6. CURVED TRIGGER GUARD & CRESCENT TRIGGER
 ═══════════════════════════════════════════════════════════════ */
-// Smooth curved 3D tube for graceful vintage trigger guard
 const guardCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0, -0.52, -0.32),
-    new THREE.Vector3(0, -0.74, -0.22),
-    new THREE.Vector3(0, -0.98,  0.08),
-    new THREE.Vector3(0, -0.92,  0.34),
-    new THREE.Vector3(0, -0.56,  0.50)
+    new THREE.Vector3(0, -0.48, -0.12),
+    new THREE.Vector3(0, -0.72, -0.16),
+    new THREE.Vector3(0, -0.92,  0.10),
+    new THREE.Vector3(0, -0.90,  0.32),
+    new THREE.Vector3(0, -0.52,  0.50)
 ]);
-const guardGeo = new THREE.TubeGeometry(guardCurve, 28, 0.038, 12, false);
+const guardGeo = new THREE.TubeGeometry(guardCurve, 28, 0.034, 12, false);
 const guardMesh = new THREE.Mesh(guardGeo, matSteel);
 gunRoot.add(guardMesh);
 
-// Trigger pivot and crescent blade
 const triggerPivot = new THREE.Group();
-triggerPivot.position.set(0, -0.48, 0.18);
+triggerPivot.position.set(0, -0.46, 0.18);
 gunRoot.add(triggerPivot);
 
 const trigShape = new THREE.Shape();
 trigShape.moveTo(0, 0);
-trigShape.quadraticCurveTo(-0.10, -0.22, 0.06, -0.36);
-trigShape.quadraticCurveTo(-0.02, -0.20, 0.06, 0);
+trigShape.quadraticCurveTo(-0.09, -0.20, 0.05, -0.34);
+trigShape.quadraticCurveTo(-0.02, -0.18, 0.05, 0);
 trigShape.closePath();
 
-const trigExtrude = { depth: 0.05, bevelEnabled: true, bevelThickness: 0.015, bevelSize: 0.012, bevelSegments: 3 };
-const trigGeo = new THREE.ExtrudeGeometry(trigShape, trigExtrude);
+const trigGeo = new THREE.ExtrudeGeometry(trigShape, {
+    depth: 0.045,
+    bevelEnabled: true,
+    bevelThickness: 0.012,
+    bevelSize: 0.010,
+    bevelSegments: 3
+});
 trigGeo.center();
 const triggerMesh = new THREE.Mesh(trigGeo, matCaseHardened);
 triggerMesh.rotation.y = Math.PI / 2;
-triggerMesh.position.set(0, -0.16, -0.04);
+triggerMesh.position.set(0, -0.15, -0.03);
 triggerPivot.add(triggerMesh);
 
 /* ═══════════════════════════════════════════════════════════════
-   7. VINTAGE WALNUT SERVICE STOCKS (GRIPS)
+   7. AUTHENTIC ANGLED S&W WALNUT SERVICE GRIPS
 ═══════════════════════════════════════════════════════════════ */
 const gripGroup = new THREE.Group();
-gripGroup.position.set(0, -0.42, 0.82);
+// Anchor directly to frame tang behind trigger guard
+gripGroup.position.set(0, -0.50, 0.65);
+// Authentic backward tilt (~24 degrees)
+gripGroup.rotation.x = -0.42;
 gunRoot.add(gripGroup);
 
-// Grip Profile matching S&W K-frame round-to-square butt
+// Profile matching the vintage K-frame service stock
 const gripShape = new THREE.Shape();
-gripShape.moveTo(-0.12, 0.42);      // Upper tang front
-gripShape.lineTo(0.24, 0.48);       // Upper tang rear
-gripShape.quadraticCurveTo(0.48, 0.15, 0.64, -0.42);  // Curved backstrap swell
-gripShape.quadraticCurveTo(0.72, -0.95, 0.68, -1.35); // Lower backstrap flare
-gripShape.lineTo(0.12, -1.35);      // Flat butt base
-gripShape.quadraticCurveTo(0.02, -1.15, 0.00, -0.85); // Front strap curve
-gripShape.quadraticCurveTo(-0.04, -0.40, -0.16, -0.10);// Under-guard finger junction
-gripShape.lineTo(-0.12, 0.42);      // Close
+gripShape.moveTo(-0.10, 0.35);     // Top front neck
+gripShape.lineTo(0.22, 0.40);      // Top rear tang
+gripShape.quadraticCurveTo(0.42, 0.12, 0.52, -0.42);  // Palm swell on backstrap
+gripShape.quadraticCurveTo(0.58, -0.85, 0.55, -1.25); // Lower backstrap flare
+gripShape.lineTo(0.08, -1.25);     // Flat butt base
+gripShape.quadraticCurveTo(-0.02, -0.85, -0.04, -0.55); // Front strap curve
+gripShape.quadraticCurveTo(-0.06, -0.20, -0.12, 0.05); // Under-guard finger junction
+gripShape.lineTo(-0.10, 0.35);
 
-const gripExtrudeSettings = {
+const gripGeo = new THREE.ExtrudeGeometry(gripShape, {
     steps: 1,
-    depth: 0.44,
+    depth: 0.40,
     bevelEnabled: true,
-    bevelThickness: 0.045,
-    bevelSize: 0.04,
+    bevelThickness: 0.042,
+    bevelSize: 0.038,
     bevelSegments: 5
-};
-
-const gripGeo = new THREE.ExtrudeGeometry(gripShape, gripExtrudeSettings);
+});
 gripGeo.center();
 const gripMesh = new THREE.Mesh(gripGeo, matWood);
 gripMesh.rotation.y = Math.PI / 2;
-gripMesh.position.set(0, -0.45, 0.16);
+gripMesh.position.set(0, -0.42, 0.15);
 gripGroup.add(gripMesh);
 
-// Metal bottom frame cap on butt
+// Metal bottom frame butt
 const buttCap = new THREE.Mesh(
-    new THREE.BoxGeometry(0.38, 0.04, 0.64),
+    new THREE.BoxGeometry(0.32, 0.03, 0.48),
     matSteel
 );
-buttCap.position.set(0, -1.12, 0.42);
+buttCap.position.set(0, -1.04, 0.38);
 gripGroup.add(buttCap);
 
-// Checkered diamond panels on both sides
-[-0.23, 0.23].forEach(x => {
-    // Checkered inlay panel
+// Checkered side diamond inlays & medallions
+[-0.21, 0.21].forEach(x => {
     const checkPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.015, 0.65, 0.32),
+        new THREE.BoxGeometry(0.015, 0.58, 0.28),
         matCheckering
     );
-    checkPanel.position.set(x, -0.48, 0.22);
-    checkPanel.rotation.z = x > 0 ? 0.06 : -0.06;
+    checkPanel.position.set(x, -0.44, 0.18);
     gripGroup.add(checkPanel);
-
-    // Center smooth diamond around screw
-    const diamond = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.07, 0.07, 0.02, 4),
-        matWood
-    );
-    diamond.rotation.y = Math.PI / 4;
-    diamond.rotation.z = Math.PI / 2;
-    diamond.position.set(x * 1.05, -0.48, 0.22);
-    gripGroup.add(diamond);
 
     // Brass screw escutcheon
     const escutcheon = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.042, 0.042, 0.03, 16),
+        new THREE.CylinderGeometry(0.038, 0.038, 0.025, 16),
         matBrass
     );
     escutcheon.rotation.z = Math.PI / 2;
-    escutcheon.position.set(x * 1.06, -0.48, 0.22);
+    escutcheon.position.set(x * 1.05, -0.44, 0.18);
     gripGroup.add(escutcheon);
 
-    // Silver S&W Monogram medallion near upper grip neck
+    // S&W Silver monogram medallion
     const medallion = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.062, 0.062, 0.025, 18),
+        new THREE.CylinderGeometry(0.055, 0.055, 0.022, 18),
         matSilver
     );
     medallion.rotation.z = Math.PI / 2;
-    medallion.position.set(x * 1.02, -0.12, 0.14);
+    medallion.position.set(x * 1.02, -0.10, 0.12);
     gripGroup.add(medallion);
 });
 
@@ -866,10 +927,10 @@ gripGroup.add(buttCap);
    8. 3D MUZZLE FLASH
 ═══════════════════════════════════════════════════════════════ */
 const flashMesh = new THREE.Mesh(
-    new THREE.ConeGeometry(0.48, 1.8, 8),
+    new THREE.ConeGeometry(0.46, 1.8, 8),
     matFlash
 );
-flashMesh.rotation.x = -Math.PI / 2; // points outward toward camera from muzzle
+flashMesh.rotation.x = -Math.PI / 2;
 flashMesh.position.set(0, BARREL_Y, muzzleZ - 0.9);
 gunRoot.add(flashMesh);
 
@@ -896,7 +957,7 @@ function renderLoop() {
     gunRoot.rotation.x = animState.recoilRot;
     gunRoot.position.z = animState.recoilZ;
 
-    // Subtle natural idle float
+    // Gentle idle breathing
     if (!animState.isFiring && !animState.isSpinning) {
         animState.breathT += delta;
         gunRoot.position.y = Math.sin(animState.breathT * 1.1) * 0.012;
@@ -907,7 +968,6 @@ function renderLoop() {
 }
 renderLoop();
 
-// Cylinder Spin helper
 function animCylSpin(totalExtraRot, duration, onDone) {
     const start = performance.now();
     const startRot = cylinderGroup.rotation.z;
@@ -927,7 +987,6 @@ function animCylSpin(totalExtraRot, duration, onDone) {
     requestAnimationFrame(tick);
 }
 
-// Trigger pull & hammer cock animation
 function animTriggerPull(onFire) {
     const start = performance.now();
     const pullDur = 190;
@@ -936,11 +995,11 @@ function animTriggerPull(onFire) {
         const p = Math.min((now - start) / pullDur, 1);
         const s = p * p * (3 - 2 * p);
         triggerPivot.rotation.x = -s * 0.42;
-        hammerPivot.rotation.x  = -s * 0.75;
+        hammerPivot.rotation.x  = -s * 0.72;
         if (p < 1) {
             requestAnimationFrame(tick);
         } else {
-            hammerPivot.rotation.x = 0.16; // hammer slams forward
+            hammerPivot.rotation.x = 0.16;
             triggerPivot.rotation.x = 0;
             if (onFire) onFire();
             setTimeout(() => { hammerPivot.rotation.x = 0; }, 180);
@@ -949,14 +1008,13 @@ function animTriggerPull(onFire) {
     requestAnimationFrame(tick);
 }
 
-// Dry fire snap
 function animDryfire(onDone) {
     const start = performance.now();
     function tick(now) {
         const p = Math.min((now - start) / 130, 1);
         const s = p < 0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
-        triggerPivot.rotation.x = -s * 0.22;
-        hammerPivot.rotation.x  = -s * 0.32;
+        triggerPivot.rotation.x = -s * 0.20;
+        hammerPivot.rotation.x  = -s * 0.30;
         if (p < 1) {
             requestAnimationFrame(tick);
         } else {
@@ -1161,9 +1219,9 @@ function triggerMuzzleCSS() {
 
 function resetCamera() {
     const startPos = camera.position.clone();
-    const endPos   = new THREE.Vector3(4.3, 1.6, 3.8);
+    const endPos   = new THREE.Vector3(3.8, 1.4, 3.2);
     const startTgt = controls.target.clone();
-    const endTgt   = new THREE.Vector3(-0.35, 0.05, -0.6);
+    const endTgt   = new THREE.Vector3(-0.25, -0.05, -0.6);
     const t0 = performance.now();
     const dur = 600;
     (function camTick(now) {
@@ -1235,8 +1293,8 @@ shootBtn.addEventListener('click', () => {
                 triggerMuzzleCSS();
 
                 // 3D physical recoil
-                animState.recoilRot = 0.34;
-                animState.recoilZ   = 0.22;
+                animState.recoilRot = 0.32;
+                animState.recoilZ   = 0.20;
 
                 setTimeout(() => { bloodOv.classList.add('active'); }, 55);
                 card.classList.add('shake');
@@ -1335,7 +1393,7 @@ function applyBg(hex) {
     document.body.style.background = hex;
     const c = new THREE.Color(hex);
     scene.background = c;
-    scene.fog = new THREE.FogExp2(c.getHex(), 0.026);
+    scene.fog = new THREE.FogExp2(c.getHex(), 0.024);
     swatchEl.style.background = hex;
     colorIn.value = hex;
 }
