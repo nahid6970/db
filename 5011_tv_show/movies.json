@@ -2710,5 +2710,173 @@
         "metadata_update_time": "23:00",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 6
+    },
+    {
+        "id": 96,
+        "tmdb_id": 122,
+        "external_ids": {
+            "tmdb": 122,
+            "imdb": "tt0167260"
+        },
+        "radarr_id": null,
+        "title": "The Lord of the Rings: The Return of the King",
+        "year": "2003",
+        "release_date": "2003-12-17",
+        "digital_release_date": "2013-12-20",
+        "category": "Hollywood",
+        "overview": "As armies mass for a final battle that will decide the fate of the world--and powerful, ancient forces of Light and Dark compete to determine the outcome--one member of the Fellowship of the Ring is revealed as the noble heir to the throne of the Kings of Men. Yet, the sole hope for triumph over evil lies with a brave hobbit, Frodo, who, accompanied by his loyal friend Sam and the hideous, wretched Gollum, ventures deep into the very dark heart of Mordor on his seemingly impossible quest to destroy the Ring of Power.\u200b",
+        "cover_image": "https://image.tmdb.org/t/p/w500/rCzpDGLbOoPwLjy3OAm5NUPOTrC.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Fantasy",
+            "Action"
+        ],
+        "runtime": 201,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:24:47.384746"
+    },
+    {
+        "id": 97,
+        "tmdb_id": 157336,
+        "external_ids": {
+            "tmdb": 157336,
+            "imdb": "tt0816692"
+        },
+        "radarr_id": null,
+        "title": "Interstellar",
+        "year": "2014",
+        "release_date": "2014-11-05",
+        "digital_release_date": "2014-11-07",
+        "category": "Hollywood",
+        "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Drama",
+            "Science Fiction"
+        ],
+        "runtime": 169,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:24:53.880213"
+    },
+    {
+        "id": 98,
+        "tmdb_id": 155,
+        "external_ids": {
+            "tmdb": 155,
+            "imdb": "tt0468569"
+        },
+        "radarr_id": null,
+        "title": "The Dark Knight",
+        "year": "2008",
+        "release_date": "2008-07-16",
+        "digital_release_date": "2011-11-30",
+        "category": "Hollywood",
+        "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+        ],
+        "runtime": 152,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:25:09.352861"
+    },
+    {
+        "id": 99,
+        "tmdb_id": 497,
+        "external_ids": {
+            "tmdb": 497,
+            "imdb": "tt0120689"
+        },
+        "radarr_id": null,
+        "title": "The Green Mile",
+        "year": "1999",
+        "release_date": "1999-12-10",
+        "digital_release_date": "2016-10-07",
+        "category": "Hollywood",
+        "overview": "A supernatural tale set on death row in a Southern prison, where gentle giant John Coffey possesses the mysterious power to heal people's ailments. When the cell block's head guard, Paul Edgecomb, recognizes Coffey's miraculous gift, he tries desperately to help stave off the condemned man's execution.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/8VG8fDNiy50H4FedGwdSVUPoaJe.jpg",
+        "directory_path": "",
+        "genres": [
+            "Fantasy",
+            "Drama",
+            "Crime"
+        ],
+        "runtime": 189,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:25:15.207231"
+    },
+    {
+        "id": 100,
+        "tmdb_id": 120,
+        "external_ids": {
+            "tmdb": 120,
+            "imdb": "tt0120737"
+        },
+        "radarr_id": null,
+        "title": "The Lord of the Rings: The Fellowship of the Ring",
+        "year": "2001",
+        "release_date": "2001-12-18",
+        "digital_release_date": "2013-12-20",
+        "category": "Hollywood",
+        "overview": "Young hobbit Frodo Baggins, after inheriting a mysterious ring from his uncle Bilbo, must leave his home in order to keep it from falling into the hands of its evil creator. Along the way, a fellowship is formed to protect the ringbearer and make sure that the ring arrives at its final destination: Mt. Doom, the only place where it can be destroyed.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/6oom5QYQ2yQTMJIbnvbkBL9cHo6.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Fantasy",
+            "Action"
+        ],
+        "runtime": 179,
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:27:38.349961"
+    },
+    {
+        "id": 101,
+        "tmdb_id": 121,
+        "external_ids": {
+            "tmdb": 121,
+            "imdb": "tt0167261"
+        },
+        "radarr_id": null,
+        "title": "The Lord of the Rings: The Two Towers",
+        "year": "2002",
+        "release_date": "2002-12-18",
+        "digital_release_date": "2002-12-18",
+        "category": "Hollywood",
+        "overview": "Frodo Baggins and the other members of the Fellowship continue on their sacred quest to destroy the One Ring--but on separate paths. Their destinies lie at two towers--Orthanc Tower in Isengard, where the corrupt wizard Saruman awaits, and Sauron's fortress at Barad-dur, deep within the dark lands of Mordor.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/5VTN0pR8gcqV3EPUHHfMGnJYN9L.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Fantasy",
+            "Action"
+        ],
+        "runtime": 179,
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-03T15:27:47.886290"
     }
 ]
