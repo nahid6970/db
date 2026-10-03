@@ -127,6 +127,42 @@
         }
         #threeCanvas:active{cursor:grabbing;}
 
+        /* ── Camera Quick-View HUD ── */
+        .cam-bar{
+            position:absolute;bottom:18px;left:50%;transform:translateX(-50%);
+            display:flex;gap:8px;background:rgba(13,21,32,.78);
+            border:1px solid var(--border);border-radius:99px;
+            padding:5px 8px;backdrop-filter:blur(10px);z-index:30;
+            box-shadow:0 8px 30px rgba(0,0,0,.6);
+        }
+        .cam-btn{
+            background:transparent;border:none;outline:none;
+            color:var(--dim);font-family:'Bebas Neue',sans-serif;
+            font-size:.85rem;letter-spacing:1.5px;padding:6px 12px;
+            border-radius:99px;cursor:pointer;transition:all .18s;
+            display:flex;align-items:center;gap:5px;
+        }
+        .cam-btn:hover{color:var(--text);background:rgba(255,255,255,.05)}
+        .cam-btn.active{
+            color:#fff;background:linear-gradient(135deg,rgba(231,76,60,.4),rgba(192,57,43,.8));
+            box-shadow:0 2px 10px rgba(231,76,60,.4);
+        }
+
+        /* ── Cylinder Visualizer HUD ── */
+        .chamber-hud{
+            display:flex;gap:7px;align-items:center;justify-content:center;
+            padding:4px 0 2px;width:100%;
+        }
+        .ch-pip{
+            width:14px;height:14px;border-radius:50%;
+            border:1.5px solid var(--border);background:var(--card2);
+            transition:all .25s cubic-bezier(.34,1.56,.64,1);position:relative;
+        }
+        .ch-pip.ready{border-color:var(--gold);box-shadow:0 0 8px rgba(240,180,41,.4);background:rgba(240,180,41,.18)}
+        .ch-pip.current{transform:scale(1.28);border-color:#fff;box-shadow:0 0 12px #fff}
+        .ch-pip.safe{border-color:var(--green);background:var(--green);box-shadow:0 0 8px rgba(46,204,113,.5)}
+        .ch-pip.dead{border-color:var(--red);background:var(--red);box-shadow:0 0 10px rgba(231,76,60,.7)}
+
         .card{
             background:var(--card);border:1px solid var(--border);border-radius:20px;
             padding:20px 20px 16px;width:100%;
@@ -418,6 +454,12 @@
             <div id="muzzleFlash"></div>
             <div id="smokeEl"></div>
             <div id="threeContainer"></div>
+            <div class="cam-bar" id="camBar">
+                <button class="cam-btn active" data-view="default">📐 PERSPECTIVE</button>
+                <button class="cam-btn" data-view="sight">🎯 SIGHT</button>
+                <button class="cam-btn" data-view="rear">🔍 BACK & HAMMER</button>
+                <button class="cam-btn" data-view="cylinder">⚙ CYLINDER</button>
+            </div>
         </div>
     </div>
 
@@ -449,6 +491,17 @@
 
         <div class="card" id="card">
             <div class="status idle" id="statusEl">SPIN TO BEGIN</div>
+
+            <!-- Mini 6-Chamber Revolver Cylinder HUD -->
+            <div class="chamber-hud" id="chamberHud" title="Cylinder chambers status">
+                <div class="ch-pip" id="ch0"></div>
+                <div class="ch-pip" id="ch1"></div>
+                <div class="ch-pip" id="ch2"></div>
+                <div class="ch-pip" id="ch3"></div>
+                <div class="ch-pip" id="ch4"></div>
+                <div class="ch-pip" id="ch5"></div>
+            </div>
+
             <div class="btn-group">
                 <button class="btn btn-spin"  id="spinBtn">⟳  SPIN</button>
                 <button class="btn btn-shoot" id="shootBtn" disabled>FIRE  🔫</button>
@@ -518,7 +571,6 @@ function resizeRenderer() {
 }
 
 /* ── STUDIO REFLECTION ENVIRONMENT MAP ── */
-// This gives metals specular reflections so they don't render pitch black!
 function generateStudioEnv() {
     const pmremGen = new THREE.PMREMGenerator(renderer);
     pmremGen.compileEquirectangularShader();
@@ -556,29 +608,52 @@ function generateStudioEnv() {
 }
 scene.environment = generateStudioEnv();
 
-/* ── PROCEDURAL WALNUT WOODGRAIN TEXTURE ── */
+/* ── AUTHENTIC HIGH-GRADE OILED WALNUT TEXTURE ── */
 function generateWalnutTexture() {
     const c = document.createElement('canvas');
-    c.width = 512; c.height = 512;
+    c.width = 1024; c.height = 1024;
     const ctx = c.getContext('2d');
 
-    // Base rich walnut
-    ctx.fillStyle = '#4a2614';
-    ctx.fillRect(0, 0, 512, 512);
+    // Deep, rich dark walnut foundation
+    const bgGrad = ctx.createLinearGradient(0, 0, 1024, 0);
+    bgGrad.addColorStop(0, '#2d180c');
+    bgGrad.addColorStop(0.3, '#3a1f11');
+    bgGrad.addColorStop(0.6, '#281309');
+    bgGrad.addColorStop(1, '#331a0e');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, 1024, 1024);
 
-    // Grain lines
-    for (let i = 0; i < 90; i++) {
-        const y = Math.random() * 512;
-        ctx.strokeStyle = Math.random() > 0.5 ? 'rgba(32, 14, 6, 0.45)' : 'rgba(102, 55, 30, 0.35)';
-        ctx.lineWidth = Math.random() * 3 + 1;
+    // Subtle natural wood growth rings
+    for (let i = 0; i < 220; i++) {
+        const y = Math.random() * 1024;
+        const alpha = Math.random() * 0.32 + 0.08;
+        ctx.strokeStyle = Math.random() > 0.4 ? `rgba(20, 8, 4, ${alpha})` : `rgba(78, 42, 22, ${alpha * 0.8})`;
+        ctx.lineWidth = Math.random() * 4.5 + 0.8;
         ctx.beginPath();
         ctx.moveTo(0, y);
-        ctx.bezierCurveTo(170, y + (Math.random() - 0.5) * 40, 340, y + (Math.random() - 0.5) * 40, 512, y + (Math.random() - 0.5) * 20);
+        ctx.bezierCurveTo(
+            320, y + (Math.random() - 0.5) * 35,
+            680, y + (Math.random() - 0.5) * 35,
+            1024, y + (Math.random() - 0.5) * 20
+        );
         ctx.stroke();
     }
+
+    // Fine wood pores & satin gunstock sheen
+    const imgData = ctx.getImageData(0, 0, 1024, 1024);
+    const data = imgData.data;
+    for (let i = 0; i < data.length; i += 4) {
+        const noise = (Math.random() - 0.5) * 16;
+        data[i] = Math.min(255, Math.max(0, data[i] + noise));
+        data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise * 0.7));
+        data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise * 0.5));
+    }
+    ctx.putImageData(imgData, 0, 0);
+
     const tex = new THREE.CanvasTexture(c);
     tex.wrapS = THREE.RepeatWrapping;
     tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(1.4, 1.4);
     return tex;
 }
 const walnutTex = generateWalnutTexture();
@@ -624,9 +699,9 @@ const matCaseHardened = new THREE.MeshStandardMaterial({
 });
 
 const matWood = new THREE.MeshStandardMaterial({
-    color: 0x6e3c22,
+    color: 0x5a2d18,
     map: walnutTex,
-    roughness: 0.36,
+    roughness: 0.34,
     metalness: 0.05,
 });
 
@@ -665,102 +740,159 @@ const gunRoot = new THREE.Group();
 scene.add(gunRoot);
 
 /* ═══════════════════════════════════════════════════════════════
-   1. AUTHENTIC S&W K-FRAME (HOLLOW CYLINDER WINDOW)
+   1. AUTHENTIC S&W K-FRAME, OPEN HAMMER CHANNEL & RECOIL SHIELD
 ═══════════════════════════════════════════════════════════════ */
-const frameShape = new THREE.Shape();
-// Perimeter in Z-Y coordinates
-frameShape.moveTo(-0.92, 0.45);     // Top front at barrel root
-frameShape.lineTo(0.92, 0.45);      // Top strap top edge
-frameShape.quadraticCurveTo(1.08, 0.42, 1.05, 0.20);  // Curve over recoil shield
-frameShape.lineTo(1.02, 0.02);      // Rear frame back
-frameShape.lineTo(0.88, -0.22);     // Sloping frame tang toward grip
-frameShape.lineTo(0.68, -0.52);     // Frame & grip junction
-frameShape.lineTo(0.48, -0.52);     // Behind trigger
-frameShape.lineTo(-0.62, -0.48);    // Bottom rail under cylinder
-frameShape.quadraticCurveTo(-0.84, -0.48, -0.88, -0.32); // Crane pivot forward
-frameShape.lineTo(-0.92, 0.05);     // Front frame crane face
-frameShape.lineTo(-0.92, 0.45);     // Close
+const frameGroup = new THREE.Group();
+gunRoot.add(frameGroup);
 
-// Hollow Cylinder Window
-const windowHole = new THREE.Path();
-windowHole.moveTo(-0.62, 0.45);
-windowHole.lineTo(0.62, 0.45);
-windowHole.lineTo(0.62, -0.46);
-windowHole.lineTo(-0.62, -0.46);
-windowHole.lineTo(-0.62, 0.45);
-frameShape.holes.push(windowHole);
+// ── Top Strap (bridge over cylinder with integrated rear sight channel) ──
+const topStrap = new THREE.Mesh(
+    new THREE.BoxGeometry(0.32, 0.065, 1.54),
+    matSteel
+);
+topStrap.position.set(0, 0.465, -0.16);
+frameGroup.add(topStrap);
 
-const frameExtrudeSettings = {
-    steps: 1,
-    depth: 0.32,
-    bevelEnabled: true,
-    bevelThickness: 0.022,
-    bevelSize: 0.020,
-    bevelSegments: 4
-};
-
-const frameGeo = new THREE.ExtrudeGeometry(frameShape, frameExtrudeSettings);
-frameGeo.center();
-const frameMesh = new THREE.Mesh(frameGeo, matSteel);
-frameMesh.rotation.y = Math.PI / 2;
-frameMesh.position.set(0, -0.01, 0.05);
-gunRoot.add(frameMesh);
-
-// Top strap rear sight channel
+// Sight channel (milled U-groove on top of frame)
 const sightChannel = new THREE.Mesh(
-    new THREE.BoxGeometry(0.045, 0.03, 1.55),
+    new THREE.BoxGeometry(0.045, 0.032, 1.55),
     matDark
 );
-sightChannel.position.set(0, 0.47, 0.12);
-gunRoot.add(sightChannel);
+sightChannel.position.set(0, 0.485, -0.16);
+frameGroup.add(sightChannel);
 
-// Recoil shield side contours
-[-0.14, 0.14].forEach(x => {
-    const shield = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.36, 0.36, 0.08, 20),
+// Rear sight notch at back of top strap
+const rearSightBlade = new THREE.Mesh(
+    new THREE.BoxGeometry(0.13, 0.042, 0.04),
+    matSteel
+);
+rearSightBlade.position.set(0, 0.48, 0.61);
+frameGroup.add(rearSightBlade);
+
+// ── Front Crane Block (connects barrel root to crane hinge) ──
+const frontCraneBlock = new THREE.Mesh(
+    new THREE.BoxGeometry(0.32, 0.94, 0.34),
+    matSteel
+);
+frontCraneBlock.position.set(0, -0.01, -0.75);
+frameGroup.add(frontCraneBlock);
+
+// ── Bottom Frame Rail (under cylinder, leading to trigger guard) ──
+const bottomRail = new THREE.Mesh(
+    new THREE.BoxGeometry(0.32, 0.075, 1.25),
+    matSteel
+);
+bottomRail.position.set(0, -0.475, -0.10);
+frameGroup.add(bottomRail);
+
+// ── Recoil Shield & Breech Face (flush, clean steel wall directly behind cylinder) ──
+// Central breech face (covers the back of the 6 chambers, width 0.33)
+const breechFace = new THREE.Mesh(
+    new THREE.BoxGeometry(0.33, 0.88, 0.16),
+    matSteel
+);
+breechFace.position.set(0, 0.02, 0.64);
+frameGroup.add(breechFace);
+
+// Breech firing pin bushing directly aligned with top chamber (Y = 0.245)
+const firingPinBushing = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.038, 0.038, 0.04, 16),
+    matSilver
+);
+firingPinBushing.rotation.x = Math.PI / 2;
+firingPinBushing.position.set(0, 0.245, 0.558);
+frameGroup.add(firingPinBushing);
+
+const firingPinHole = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.015, 0.015, 0.05, 12),
+    matDark
+);
+firingPinHole.rotation.x = Math.PI / 2;
+firingPinHole.position.set(0, 0.245, 0.56);
+frameGroup.add(firingPinHole);
+
+// Scalloped recoil shield shoulders (clean outer flanks matching frame width)
+[-0.165, 0.165].forEach(x => {
+    const shieldFlank = new THREE.Mesh(
+        new THREE.BoxGeometry(0.035, 0.82, 0.20),
         matSteel
     );
-    shield.rotation.z = Math.PI / 2;
-    shield.position.set(x, 0.02, 0.70);
-    gunRoot.add(shield);
+    shieldFlank.position.set(x, 0.02, 0.64);
+    frameGroup.add(shieldFlank);
 });
+
+// ── Rear Frame Tang & Open Hammer Well Channel ──
+// Left frame wall
+const leftTangWall = new THREE.Mesh(
+    new THREE.BoxGeometry(0.105, 0.38, 0.38),
+    matSteel
+);
+leftTangWall.position.set(-0.11, 0.26, 0.84);
+frameGroup.add(leftTangWall);
+
+// Right sideplate wall
+const rightTangWall = new THREE.Mesh(
+    new THREE.BoxGeometry(0.105, 0.38, 0.38),
+    matSteel
+);
+rightTangWall.position.set(0.11, 0.26, 0.84);
+frameGroup.add(rightTangWall);
+
+// Sloping top bevels of the tang walls flowing down toward the grip
+[-0.11, 0.11].forEach(x => {
+    const tangSlope = new THREE.Mesh(
+        new THREE.BoxGeometry(0.104, 0.06, 0.22),
+        matSteel
+    );
+    tangSlope.position.set(x, 0.36, 0.94);
+    tangSlope.rotation.x = -0.52;
+    frameGroup.add(tangSlope);
+});
+
+// Frame tang lower foundation & trigger junction
+const tangFloor = new THREE.Mesh(
+    new THREE.BoxGeometry(0.32, 0.24, 0.38),
+    matSteel
+);
+tangFloor.position.set(0, 0.04, 0.84);
+frameGroup.add(tangFloor);
 
 // S&W Thumb cylinder release latch (on left side)
 const latchGroup = new THREE.Group();
-latchGroup.position.set(-0.19, 0.12, 0.72);
+latchGroup.position.set(-0.19, 0.12, 0.68);
 
 const latchBody = new THREE.Mesh(
-    new THREE.BoxGeometry(0.035, 0.14, 0.20),
+    new THREE.BoxGeometry(0.038, 0.13, 0.22),
     matCaseHardened
 );
 latchGroup.add(latchBody);
 
-for (let i = 0; i < 4; i++) {
+for (let i = 0; i < 5; i++) {
     const lLine = new THREE.Mesh(
-        new THREE.BoxGeometry(0.04, 0.012, 0.16),
+        new THREE.BoxGeometry(0.042, 0.012, 0.18),
         matDark
     );
-    lLine.position.set(0, -0.045 + i * 0.03, 0);
+    lLine.position.set(0, -0.048 + i * 0.024, 0);
     latchGroup.add(lLine);
 }
-gunRoot.add(latchGroup);
+frameGroup.add(latchGroup);
 
 // Sideplate screws on the right side
-[[-0.38, 0.18], [-0.44, 0.58], [-0.14, 0.74]].forEach(([y, z]) => {
+[[-0.38, 0.18], [-0.44, 0.58], [-0.14, 0.74], [0.10, 0.84]].forEach(([y, z]) => {
     const screw = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.034, 0.034, 0.02, 12),
+        new THREE.CylinderGeometry(0.032, 0.032, 0.02, 12),
         matSteel
     );
     screw.rotation.z = Math.PI / 2;
-    screw.position.set(0.18, y, z);
-    gunRoot.add(screw);
+    screw.position.set(0.175, y, z);
+    frameGroup.add(screw);
 
     const slot = new THREE.Mesh(
-        new THREE.BoxGeometry(0.025, 0.008, 0.05),
+        new THREE.BoxGeometry(0.024, 0.007, 0.046),
         matDark
     );
-    slot.position.set(0.19, y, z);
-    gunRoot.add(slot);
+    slot.position.set(0.185, y, z);
+    frameGroup.add(slot);
 });
 
 /* ═══════════════════════════════════════════════════════════════
@@ -868,7 +1000,6 @@ const cylShape = new THREE.Shape();
 const STEPS = 96;
 for (let i = 0; i <= STEPS; i++) {
     const a = (i / STEPS) * Math.PI * 2;
-    // Calculate distance to nearest flute angle
     let minDiff = Infinity;
     for (let k = 0; k < 6; k++) {
         const fa = (k * Math.PI / 3) + (Math.PI / 6);
@@ -879,7 +1010,6 @@ for (let i = 0; i <= STEPS; i++) {
     let r = CYL_R;
     const fluteWidth = 0.21;
     if (minDiff < fluteWidth) {
-        // Concave smooth curve
         const factor = Math.cos((minDiff / fluteWidth) * (Math.PI / 2));
         r -= 0.062 * (factor * factor);
     }
@@ -892,7 +1022,7 @@ for (let i = 0; i <= STEPS; i++) {
 // Cut 6 circular chamber holes through the cylinder
 const CHAMBER_DIST = 0.245;
 for (let k = 0; k < 6; k++) {
-    const ca = (k * Math.PI / 3) + (Math.PI / 2); // align top chamber straight up!
+    const ca = (k * Math.PI / 3) + (Math.PI / 2);
     const cx = Math.cos(ca) * CHAMBER_DIST;
     const cy = Math.sin(ca) * CHAMBER_DIST;
 
@@ -976,44 +1106,61 @@ for (let k = 0; k < 6; k++) {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   5. HAMMER ASSEMBLY
+   5. AUTHENTIC CURVED S&W HAMMER & PROMINENT CHECKERED SPUR
 ═══════════════════════════════════════════════════════════════ */
 const hammerPivot = new THREE.Group();
-hammerPivot.position.set(0, 0.32, 0.82);
+// Pivot positioned inside the open central hammer channel
+hammerPivot.position.set(0, 0.18, 0.74);
 gunRoot.add(hammerPivot);
 
-const hammerStem = new THREE.Mesh(
-    new THREE.BoxGeometry(0.085, 0.28, 0.16),
+// ── Central Hammer Body (fits inside 0.11 slot, rises proudly above frame) ──
+const hammerBody = new THREE.Mesh(
+    new THREE.BoxGeometry(0.085, 0.34, 0.16),
     matCaseHardened
 );
-hammerStem.position.set(0, 0.10, -0.02);
-hammerStem.rotation.x = -0.30;
-hammerPivot.add(hammerStem);
+hammerBody.position.set(0, 0.12, 0.04);
+hammerBody.rotation.x = -0.38;
+hammerPivot.add(hammerBody);
 
+// ── Wide, Curved Thumb Spur (sweeps rearward over the backstrap) ──
 const hammerSpur = new THREE.Mesh(
-    new THREE.BoxGeometry(0.11, 0.07, 0.22),
+    new THREE.BoxGeometry(0.138, 0.055, 0.22),
     matCaseHardened
 );
-hammerSpur.position.set(0, 0.24, 0.08);
-hammerSpur.rotation.x = -0.15;
+hammerSpur.position.set(0, 0.245, 0.16);
+hammerSpur.rotation.x = -0.22;
 hammerPivot.add(hammerSpur);
 
-for (let i = 0; i < 5; i++) {
-    const cut = new THREE.Mesh(
-        new THREE.BoxGeometry(0.115, 0.01, 0.02),
+// 6 non-slip horizontal knurled serrations on the spur thumb pad
+for (let i = 0; i < 6; i++) {
+    const serration = new THREE.Mesh(
+        new THREE.BoxGeometry(0.144, 0.007, 0.016),
         matDark
     );
-    cut.position.set(0, 0.235 + (i * 0.012), 0.02 + (i * 0.035));
-    hammerPivot.add(cut);
+    serration.position.set(0, 0.274 - i * 0.004, 0.075 + i * 0.028);
+    serration.rotation.x = -0.22;
+    hammerPivot.add(serration);
 }
 
-const firingPin = new THREE.Mesh(
-    new THREE.ConeGeometry(0.022, 0.10, 8),
+// ── Pointed Hammer Nose (conical firing pin striking top primer) ──
+const firingPinNose = new THREE.Mesh(
+    new THREE.ConeGeometry(0.020, 0.14, 10),
     matCaseHardened
 );
-firingPin.rotation.x = -Math.PI / 2;
-firingPin.position.set(0, 0.03, -0.14);
-hammerPivot.add(firingPin);
+firingPinNose.rotation.x = -Math.PI / 2;
+firingPinNose.position.set(0, 0.065, -0.16);
+hammerPivot.add(firingPinNose);
+
+// Hammer pivot pin visible on receiver sides
+[-0.17, 0.17].forEach(x => {
+    const pinCap = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.026, 0.026, 0.03, 14),
+        matSilver
+    );
+    pinCap.rotation.z = Math.PI / 2;
+    pinCap.position.set(x, 0, 0);
+    hammerPivot.add(pinCap);
+});
 
 /* ═══════════════════════════════════════════════════════════════
    6. CURVED TRIGGER GUARD & CRESCENT TRIGGER
@@ -1053,73 +1200,107 @@ triggerMesh.position.set(0, -0.15, -0.03);
 triggerPivot.add(triggerMesh);
 
 /* ═══════════════════════════════════════════════════════════════
-   7. AUTHENTIC ANGLED S&W WALNUT SERVICE GRIPS
+   7. PROPER STEEL BACKSTRAP & 3D SCULPTED DUAL WALNUT STOCKS
 ═══════════════════════════════════════════════════════════════ */
 const gripGroup = new THREE.Group();
-// Anchor directly to frame tang behind trigger guard
-gripGroup.position.set(0, -0.50, 0.65);
-// Authentic backward tilt (~24 degrees)
-gripGroup.rotation.x = -0.42;
+gripGroup.position.set(0, -0.48, 0.64);
+gripGroup.rotation.x = -0.40;
 gunRoot.add(gripGroup);
 
-// Profile matching the vintage K-frame service stock
-const gripShape = new THREE.Shape();
-gripShape.moveTo(-0.10, 0.35);     // Top front neck
-gripShape.lineTo(0.22, 0.40);      // Top rear tang
-gripShape.quadraticCurveTo(0.42, 0.12, 0.52, -0.42);  // Palm swell on backstrap
-gripShape.quadraticCurveTo(0.58, -0.85, 0.55, -1.25); // Lower backstrap flare
-gripShape.lineTo(0.08, -1.25);     // Flat butt base
-gripShape.quadraticCurveTo(-0.02, -0.85, -0.04, -0.55); // Front strap curve
-gripShape.quadraticCurveTo(-0.06, -0.20, -0.12, 0.05); // Under-guard finger junction
-gripShape.lineTo(-0.10, 0.35);
+// ── Full Blued Steel Grip Frame Spine (Exposed Backstrap & Frontstrap) ──
+const spineShape = new THREE.Shape();
+spineShape.moveTo(-0.10, 0.42);                          // Front strap root under trigger guard
+spineShape.lineTo(0.24, 0.45);                           // Frame tang under hammer
+spineShape.quadraticCurveTo(0.44, 0.12, 0.50, -0.38);   // Backstrap curve & palm taper
+spineShape.quadraticCurveTo(0.55, -0.85, 0.50, -1.26);  // Backstrap lower contour
+spineShape.lineTo(0.06, -1.26);                          // Butt frame width
+spineShape.quadraticCurveTo(-0.04, -0.85, -0.05, -0.55); // Front strap curve
+spineShape.quadraticCurveTo(-0.06, -0.18, -0.10, 0.12);  // Finger groove junction
+spineShape.closePath();
 
-const gripGeo = new THREE.ExtrudeGeometry(gripShape, {
-    steps: 1,
-    depth: 0.40,
+const spineGeo = new THREE.ExtrudeGeometry(spineShape, {
+    depth: 0.19,
     bevelEnabled: true,
-    bevelThickness: 0.042,
-    bevelSize: 0.038,
-    bevelSegments: 5
+    bevelThickness: 0.015,
+    bevelSize: 0.014,
+    bevelSegments: 4
 });
-gripGeo.center();
-const gripMesh = new THREE.Mesh(gripGeo, matWood);
-gripMesh.rotation.y = Math.PI / 2;
-gripMesh.position.set(0, -0.42, 0.15);
-gripGroup.add(gripMesh);
+spineGeo.center();
+const steelSpine = new THREE.Mesh(spineGeo, matSteel);
+steelSpine.rotation.y = Math.PI / 2;
+steelSpine.position.set(0, -0.40, 0.18);
+gripGroup.add(steelSpine);
 
-// Metal bottom frame butt
-const buttCap = new THREE.Mesh(
-    new THREE.BoxGeometry(0.32, 0.03, 0.48),
+// Heavy blued steel butt cap
+const buttPlate = new THREE.Mesh(
+    new THREE.BoxGeometry(0.26, 0.035, 0.46),
     matSteel
 );
-buttCap.position.set(0, -1.04, 0.38);
-gripGroup.add(buttCap);
+buttPlate.position.set(0, -1.04, 0.38);
+gripGroup.add(buttPlate);
 
-// Checkered side diamond inlays & medallions
-[-0.21, 0.21].forEach(x => {
+// ── Left & Right Bookmatched Walnut Grips (Sculpted with smooth bevels) ──
+const panelShape = new THREE.Shape();
+panelShape.moveTo(-0.08, 0.38);                          // Horn under cylinder latch
+panelShape.quadraticCurveTo(0.08, 0.44, 0.22, 0.42);    // Tang curve
+panelShape.quadraticCurveTo(0.46, 0.10, 0.52, -0.38);   // Swell contour
+panelShape.quadraticCurveTo(0.57, -0.84, 0.52, -1.22);  // Flare to base
+panelShape.lineTo(0.08, -1.22);                          // Bottom butt line
+panelShape.quadraticCurveTo(-0.02, -0.84, -0.03, -0.54);// Front curve
+panelShape.quadraticCurveTo(-0.05, -0.16, -0.08, 0.12);
+panelShape.closePath();
+
+const panelExtrudeSettings = {
+    steps: 1,
+    depth: 0.098,
+    bevelEnabled: true,
+    bevelThickness: 0.046,
+    bevelSize: 0.036,
+    bevelSegments: 6
+};
+
+// Mount Left and Right symmetrical grip panels
+[-1, 1].forEach(side => {
+    const panelGeo = new THREE.ExtrudeGeometry(panelShape, panelExtrudeSettings);
+    panelGeo.center();
+    const panelMesh = new THREE.Mesh(panelGeo, matWood);
+    panelMesh.rotation.y = Math.PI / 2;
+    // Offset precisely so the blued steel backstrap remains authentically visible in the center!
+    panelMesh.position.set(side * 0.142, -0.40, 0.18);
+    gripGroup.add(panelMesh);
+
+    // Fine checkered grip texture inlay
     const checkPanel = new THREE.Mesh(
-        new THREE.BoxGeometry(0.015, 0.58, 0.28),
+        new THREE.BoxGeometry(0.012, 0.54, 0.26),
         matCheckering
     );
-    checkPanel.position.set(x, -0.44, 0.18);
+    checkPanel.position.set(side * 0.198, -0.44, 0.21);
     gripGroup.add(checkPanel);
 
-    // Brass screw escutcheon
+    // Traditional S&W brass grip screw escutcheon & center screw
     const escutcheon = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.038, 0.038, 0.025, 16),
+        new THREE.CylinderGeometry(0.036, 0.036, 0.022, 16),
         matBrass
     );
     escutcheon.rotation.z = Math.PI / 2;
-    escutcheon.position.set(x * 1.05, -0.44, 0.18);
+    escutcheon.position.set(side * 0.205, -0.44, 0.21);
     gripGroup.add(escutcheon);
 
-    // S&W Silver monogram medallion
+    // Grip screw center slot
+    const screwSlot = new THREE.Mesh(
+        new THREE.BoxGeometry(0.008, 0.008, 0.045),
+        matDark
+    );
+    screwSlot.position.set(side * 0.217, -0.44, 0.21);
+    gripGroup.add(screwSlot);
+
+    // Vintage S&W Silver Medallion Seal at the top horn
     const medallion = new THREE.Mesh(
-        new THREE.CylinderGeometry(0.055, 0.055, 0.022, 18),
+        new THREE.CylinderGeometry(0.048, 0.048, 0.02, 20),
         matSilver
     );
     medallion.rotation.z = Math.PI / 2;
-    medallion.position.set(x * 1.02, -0.10, 0.12);
+    medallion.position.set(side * 0.196, -0.11, 0.14);
     gripGroup.add(medallion);
 });
 
@@ -1417,13 +1598,18 @@ function triggerMuzzleCSS() {
     setTimeout(() => { smokeEl.classList.remove('puff'); void smokeEl.offsetWidth; smokeEl.classList.add('puff'); }, 100);
 }
 
-function resetCamera() {
+/* ── CAMERA QUICK-VIEW SYSTEM ── */
+const CAM_PRESETS = {
+    default: { pos: new THREE.Vector3(3.8, 1.4, 3.2),  tgt: new THREE.Vector3(-0.25, -0.05, -0.6) },
+    sight:   { pos: new THREE.Vector3(0.0, 0.62, 2.5), tgt: new THREE.Vector3(0.0, 0.38, -3.2) },
+    rear:    { pos: new THREE.Vector3(1.6, 0.95, 2.4), tgt: new THREE.Vector3(0.0, -0.22, 0.45) },
+    cylinder:{ pos: new THREE.Vector3(2.2, 0.35, 0.3), tgt: new THREE.Vector3(0.0, 0.0, -0.1) }
+};
+
+function transitionCamera(endPos, endTgt, dur = 650) {
     const startPos = camera.position.clone();
-    const endPos   = new THREE.Vector3(3.8, 1.4, 3.2);
     const startTgt = controls.target.clone();
-    const endTgt   = new THREE.Vector3(-0.25, -0.05, -0.6);
     const t0 = performance.now();
-    const dur = 600;
     (function camTick(now) {
         const p = Math.min((now - t0) / dur, 1);
         const e = 1 - Math.pow(1 - p, 3);
@@ -1434,6 +1620,44 @@ function resetCamera() {
     })(performance.now());
 }
 
+function resetCamera() {
+    const preset = CAM_PRESETS.default;
+    transitionCamera(preset.pos, preset.tgt, 600);
+}
+
+// Camera toolbar buttons
+const camBtns = document.querySelectorAll('.cam-btn');
+camBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        camBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const view = btn.dataset.view;
+        const targetView = CAM_PRESETS[view] || CAM_PRESETS.default;
+        transitionCamera(targetView.pos, targetView.tgt);
+    });
+});
+
+/* ── CHAMBER HUD VISUALIZER ── */
+function updateChamberHUD(outcome = '') {
+    for (let i = 0; i < 6; i++) {
+        const pip = document.getElementById(`ch${i}`);
+        if (!pip) continue;
+        pip.className = 'ch-pip';
+        if (isSpun) {
+            pip.classList.add('ready');
+            if (i === currentPos) pip.classList.add('current');
+        }
+    }
+    if (outcome === 'dead') {
+        const curPip = document.getElementById(`ch${currentPos}`);
+        if (curPip) curPip.className = 'ch-pip dead';
+    } else if (outcome === 'safe') {
+        const prev = (currentPos + 5) % 6;
+        const prevPip = document.getElementById(`ch${prev}`);
+        if (prevPip) prevPip.className = 'ch-pip safe';
+    }
+}
+
 spinBtn.addEventListener('click', () => {
     if (spinBtn.disabled) return;
     spinBtn.disabled = true;
@@ -1441,7 +1665,7 @@ spinBtn.addEventListener('click', () => {
     bloodOv.classList.remove('active');
     setStatus('SPINNING...', '');
     animState.isSpinning = true;
-    streak = 0; stCountEl.textContent = streak; // reset streak on new spin
+    streak = 0; stCountEl.textContent = streak;
 
     resetCamera();
     bulletPos = Math.floor(Math.random() * 6);
@@ -1472,6 +1696,7 @@ spinBtn.addEventListener('click', () => {
         spins++;
         spCountEl.textContent = spins;
         setOdds(5, 6);
+        updateChamberHUD();
     });
 });
 
@@ -1506,13 +1731,12 @@ shootBtn.addEventListener('click', () => {
                 burst(W2 / 2, H2 / 2, '#e74c3c', 50);
                 burst(W2 / 2, H2 / 2, '#ff7070', 20);
 
+                updateChamberHUD('dead');
                 addDot(false); streak = 0; stCountEl.textContent = streak;
                 deaths++; svCountEl.textContent = deaths;
-                // Track this player's death + check elimination
                 if (gamePlayers.length) {
                     const cp = gamePlayers[currentPlayerIdx];
                     cp.deaths++;
-                    // Eliminate if threshold set and reached
                     if (elimAfter > 0 && cp.deaths >= elimAfter) {
                         cp.eliminated = true;
                     }
@@ -1523,7 +1747,6 @@ shootBtn.addEventListener('click', () => {
                 spinBtn.disabled = false;
                 spinBtn.textContent = '⟳  SPIN';
                 setOdds(0, 1);
-                // Move to next player after a beat
                 if (gamePlayers.length) setTimeout(nextPlayer, 1200);
             });
         } else {
@@ -1548,6 +1771,7 @@ shootBtn.addEventListener('click', () => {
                 currentPos = (currentPos + 1) % 6;
                 animCylSpin(Math.PI / 3, 280, null);
                 playThud();
+                updateChamberHUD('safe');
 
                 const chambersLeft = 6 - streak;
                 const safeLeft = Math.max(chambersLeft - 1, 0);
@@ -1563,7 +1787,6 @@ shootBtn.addEventListener('click', () => {
                 spinBtn.disabled = false;
                 shootBtn.disabled = false;
                 spinBtn.textContent = '⟳  SPIN';
-                // Rotate to next player
                 if (gamePlayers.length) nextPlayer();
             });
         }
@@ -1575,8 +1798,6 @@ setOdds(5, 6);
 /* ═══════════════════════════════════════════════════════════════
    PLAYER SYSTEM
 ═══════════════════════════════════════════════════════════════ */
-
-// All available players (add more images to /player/ folder to expand)
 const ALL_PLAYERS = [
     { name: 'Nahid', photo: 'player/Nahid.png' },
     { name: 'Nehal', photo: 'player/Nehal.png' },
@@ -1584,8 +1805,7 @@ const ALL_PLAYERS = [
     { name: 'Saif',  photo: 'player/Saif.png'  },
 ];
 
-// Game state
-let gamePlayers = [];      // [{name, photo, deaths, survived}]
+let gamePlayers = [];
 let currentPlayerIdx = 0;
 
 /* ── Setup Screen ── */
@@ -1597,7 +1817,6 @@ const seatRowEl      = document.getElementById('seatRow');
 
 let selectedCount = 4;
 
-// Build seat dropdowns
 function buildSeats(n) {
     selectedCount = n;
     setupSeats.innerHTML = '';
@@ -1635,7 +1854,6 @@ function buildSeats(n) {
     }
 }
 
-// Count button selection
 countBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         countBtns.forEach(b => b.classList.remove('active'));
@@ -1644,10 +1862,8 @@ countBtns.forEach(btn => {
     });
 });
 
-// Init with 4 seats
 buildSeats(4);
 
-// Start game
 startBtn.addEventListener('click', () => {
     gamePlayers = [];
     for (let i = 0; i < selectedCount; i++) {
@@ -1657,7 +1873,6 @@ startBtn.addEventListener('click', () => {
     }
     currentPlayerIdx = 0;
 
-    // Hide setup, show game
     setupScreen.style.display = 'none';
     seatRowEl.classList.add('visible');
 
@@ -1668,7 +1883,7 @@ startBtn.addEventListener('click', () => {
 /* ── Settings ── */
 const settingsBtn   = document.getElementById('settingsBtn');
 const settingsPanel = document.getElementById('settingsPanel');
-let elimAfter = 0; // 0 = never
+let elimAfter = 0;
 
 settingsBtn.addEventListener('click', e => {
     e.stopPropagation();
@@ -1683,7 +1898,7 @@ elimInput.addEventListener('input', () => {
     elimAfter = (isNaN(v) || v <= 0) ? 0 : v;
 });
 
-/* ── Seat pip row — vertical player stat cards ── */
+/* ── Seat pip row ── */
 function buildSeatPips() {
     seatRowEl.innerHTML = '';
     gamePlayers.forEach((p, i) => {
@@ -1691,11 +1906,9 @@ function buildSeatPips() {
         pip.className = 'seat-pip';
         pip.id = `pip${i}`;
 
-        // Photo
         const img = document.createElement('img');
         img.src = p.photo; img.alt = p.name;
 
-        // Info row: name + badges
         const info = document.createElement('div');
         info.className = 'pip-info';
 
@@ -1703,13 +1916,11 @@ function buildSeatPips() {
         name.className = 'pip-name';
         name.textContent = p.name;
 
-        // Deaths badge
         const deathBadge = document.createElement('div');
         deathBadge.className = 'pip-badge deaths';
         deathBadge.id = `pipD${i}`;
         deathBadge.innerHTML = `<span class="pip-badge-val">0</span>`;
 
-        // Survived badge
         const survBadge = document.createElement('div');
         survBadge.className = 'pip-badge survived';
         survBadge.id = `pipS${i}`;
@@ -1719,7 +1930,6 @@ function buildSeatPips() {
         info.appendChild(deathBadge);
         info.appendChild(survBadge);
 
-        // Turn / elim label
         const turn = document.createElement('div');
         turn.className = 'pip-turn';
         turn.id = `pipTurn${i}`;
@@ -1754,12 +1964,10 @@ function updatePips() {
     });
 }
 
-/* ── Show current player ── */
 function showCurrentPlayer() {
     updatePips();
 }
 
-/* ── Advance to next player (skips eliminated) ── */
 function nextPlayer() {
     if (!gamePlayers.length) return;
     const total = gamePlayers.length;
@@ -1769,11 +1977,9 @@ function nextPlayer() {
         next = (next + 1) % total;
         attempts++;
     }
-    // If all eliminated, just advance anyway
     currentPlayerIdx = next;
     showCurrentPlayer();
 }
-
 
 const PRESETS = [
     '#07090c','#0a0f1a','#0d1520','#111827',
