@@ -1605,9 +1605,9 @@
             "Mystery",
             "Crime"
         ],
-        "runtime": 150,
-        "rating": null,
-        "tmdb_rating": 0.0,
+        "runtime": 148,
+        "rating": 5,
+        "tmdb_rating": 10.0,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
