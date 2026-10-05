@@ -2878,5 +2878,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-03T15:27:47.886290"
+    },
+    {
+        "id": 102,
+        "tmdb_id": 412862,
+        "external_ids": {
+            "tmdb": 412862,
+            "imdb": "tt7060344"
+        },
+        "radarr_id": null,
+        "title": "Ratsasan",
+        "year": "2018",
+        "release_date": "2018-10-05",
+        "digital_release_date": "",
+        "category": "Tamil / Telugu",
+        "overview": "A serial killer is murdering school girls, and a newbie cop has to track him down before the victim count increases.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/mRObdeazn263na5zXzZSRJTBvi7.jpg",
+        "directory_path": "",
+        "genres": [
+            "Thriller",
+            "Crime",
+            "Mystery"
+        ],
+        "runtime": 170,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-05T12:31:48.147034"
     }
 ]
