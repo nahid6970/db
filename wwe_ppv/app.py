@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from pathlib import Path
+from datetime import datetime
 import scraper
 
 app = Flask(__name__)
@@ -19,7 +20,14 @@ def api_export_static():
 @app.route('/api/events')
 def api_events():
     events = scraper.get_events()
-    # Sort events by date if possible, but they are generally already in order
+
+    def event_date(event):
+        try:
+            return datetime.strptime(event.get('date_str', ''), '%B %d, %Y')
+        except (TypeError, ValueError):
+            return datetime.max
+
+    events.sort(key=event_date)
     return jsonify(events)
 
 @app.route('/api/events/<event_id>/toggle', methods=['POST'])

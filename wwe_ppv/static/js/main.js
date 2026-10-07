@@ -9,6 +9,21 @@ document.addEventListener('DOMContentLoaded', () => {
     let events = [];
     let activeFilter = localStorage.getItem('wwe_active_filter') || 'all';
 
+    function sortEventsByDate(eventList) {
+        return [...eventList].sort((a, b) => {
+            const dateA = Date.parse(a.date_str || '');
+            const dateB = Date.parse(b.date_str || '');
+            const validA = Number.isFinite(dateA);
+            const validB = Number.isFinite(dateB);
+
+            // Keep records with no parseable date at the end.
+            if (!validA && !validB) return 0;
+            if (!validA) return 1;
+            if (!validB) return -1;
+            return dateA - dateB;
+        });
+    }
+
     // Set initial active class on filter buttons
     filterBtns.forEach(b => {
         if (b.getAttribute('data-filter') === activeFilter) {
@@ -20,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadEvents() {
         if (isStatic) {
-            events = staticEvents;
+            events = sortEventsByDate(staticEvents);
             const localSeen = JSON.parse(localStorage.getItem('wwe_seen_events') || '{}');
             const localHidden = JSON.parse(localStorage.getItem('wwe_hidden_events') || '{}');
             events.forEach(e => {
@@ -33,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             const res = await fetch('/api/events');
-            events = await res.json();
+            events = sortEventsByDate(await res.json());
             render();
         } catch (err) {
             console.error(err);
