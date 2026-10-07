@@ -633,7 +633,7 @@
         "radarr_id": null,
         "title": "Avengers: Doomsday",
         "year": "2026",
-        "release_date": "2026-12-15",
+        "release_date": "2026-12-16",
         "overview": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
         "cover_image": "https://image.tmdb.org/t/p/w500/jzPwsojjFStf5lR5Nm07w2hH56G.jpg",
         "directory_path": "",
@@ -1035,7 +1035,7 @@
         ],
         "runtime": 94,
         "rating": 4,
-        "tmdb_rating": 7.4,
+        "tmdb_rating": 7.5,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T19:01:44.834397",
@@ -1606,8 +1606,8 @@
             "Crime"
         ],
         "runtime": 148,
-        "rating": 5,
-        "tmdb_rating": 10.0,
+        "rating": 4,
+        "tmdb_rating": 8.0,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
@@ -1639,7 +1639,7 @@
         ],
         "runtime": 197,
         "rating": 3,
-        "tmdb_rating": 6.9,
+        "tmdb_rating": 6.8,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
@@ -1949,7 +1949,7 @@
         "digital_release_date": "",
         "category": "Hollywood",
         "overview": "Nearly two decades after he seized control of the Imperium, Paul Atreides is now a ruthless Emperor, and must face the consequences of his reign as old allies return, terrifying new threats emerge, and betrayal lurks in every shadow. Haunted by visions of Imperial collapse and the reappearance of his long-lost love, Paul is drawn into a sweeping conspiracy, with Chani at the heart of its unfolding mystery. As enemies close in, Paul must confront the true cost of power and the fate of those he loves the most.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/mbUCNRuNMdPc1HBhS1E30cknCt.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/d43fvHQsIMa4kpyhKXw0haEJIvI.jpg",
         "directory_path": "",
         "genres": [
             "Science Fiction",
@@ -2172,8 +2172,8 @@
         "release_date": "2026-12-25",
         "digital_release_date": "",
         "category": "Hollywood",
-        "overview": "The confusing firing and rehiring cycle of Sam Altman at OpenAI where the board gained control of the company and removed him, and Altman still returned.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/q3EYu8yrLqhDCkKp2MGlx3ZHJmj.jpg",
+        "overview": "When computer scientist Ilya Sutskever and AI pioneer Professor Geoffrey Hinton make a breakthrough they are certain will alter humanity forever, the most prominent figures in Silicon Valley race to become a part of their vision.  Years later, after a chance meeting with Sam Altman, Ilya and a group of idealistic entrepreneurs create OpenAI with backing from Elon Musk and assistance from engineer Mira Murati.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/2bz0HPE8OFOqnyvl8sCdVDIg1KX.jpg",
         "directory_path": "",
         "genres": [
             "Comedy",
@@ -2182,7 +2182,7 @@
         "runtime": 140,
         "rating": null,
         "tmdb_rating": 0.0,
-        "status": "Missing",
+        "status": "Released",
         "watched": false,
         "added_date": "2026-09-13T23:49:34.120903",
         "metadata_update_time": "20:12",
@@ -2906,5 +2906,62 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-05T12:31:48.147034"
+    },
+    {
+        "id": 103,
+        "tmdb_id": 1398725,
+        "external_ids": {
+            "tmdb": 1398725,
+            "imdb": "tt39673613"
+        },
+        "radarr_id": null,
+        "title": "Swallowed Star The Movie: Xueluo Continent",
+        "year": "2024",
+        "release_date": "2024-12-07",
+        "digital_release_date": "2024-12-07",
+        "category": "Chinese",
+        "overview": "Luo Feng embarks on a journey to the Xue Luo Continent to undergo trials in order to protect Earth. On this vast continent, he continually pushes his limits, forming bonds with friendly allies and facing formidable enemies. Despite the challenges, he never retreats. Instead, he moves forward steadily, overcoming obstacles step by step. Ultimately, he achieves limitless advancement and gains the immense power needed to safeguard Earth.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/pZw1L8zjBThVjDNGna2fIRcOWKx.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Action",
+            "Science Fiction",
+            "Adventure"
+        ],
+        "runtime": 93,
+        "rating": 5,
+        "tmdb_rating": 9.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-07T18:15:05.445366"
+    },
+    {
+        "id": 104,
+        "tmdb_id": 1665092,
+        "external_ids": {
+            "tmdb": 1665092,
+            "imdb": "tt43124502"
+        },
+        "radarr_id": null,
+        "title": "Swallowed Star The Movie  - Battle on Primal Star",
+        "year": "2026",
+        "release_date": "2026-05-01",
+        "digital_release_date": "2026-05-01",
+        "category": "Chinese",
+        "overview": "During his training on the Original Star, Luo Feng faces constant threats from alien races coveting his strength and resources. Remaining calm and strategic, he uses both intelligence and power to counterattack and defend humanity\u2019s honor. Wielding a formidable and beautiful battle blade, Luo Feng carves a path of destruction through his enemies, declaring, \u201cI have a single strike that can sever the universe.\u201d  As tensions escalate, the demon race, mechanical race, and insect race reappear and form a three-race alliance. Their leaders, along with 6,000 universe-level experts, join forces to encircle and eliminate Luo Feng. In the face of overwhelming odds, Luo Feng unleashes his ultimate technique, \u201cI Am the Universe,\u201d annihilating the coalition in one decisive strike.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/sksOXCnevAsFMHEvNcm3f9Ruo3D.jpg",
+        "directory_path": "",
+        "genres": [
+            "Animation",
+            "Adventure",
+            "Science Fiction"
+        ],
+        "runtime": 0,
+        "rating": 5,
+        "tmdb_rating": 9.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-07T18:15:08.481702"
     }
 ]
