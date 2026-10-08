@@ -2963,5 +2963,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-07T18:15:08.481702"
+    },
+    {
+        "id": 105,
+        "tmdb_id": 1508168,
+        "external_ids": {
+            "tmdb": 1508168,
+            "imdb": "tt37535100"
+        },
+        "radarr_id": null,
+        "title": "Bethlehem Kudumba Unit",
+        "year": "2026",
+        "release_date": "2026-08-21",
+        "digital_release_date": "2026-10-01",
+        "category": "International",
+        "overview": "Ashley's homecoming from abroad takes an emotional turn when a wedding next door stirs memories of her first love, Justin.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/uaSZiH6yoGaVJcqzKtrfSkqDuHX.jpg",
+        "directory_path": "",
+        "genres": [
+            "Romance",
+            "Comedy",
+            "Drama"
+        ],
+        "runtime": 155,
+        "rating": 4,
+        "tmdb_rating": 8.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-08T09:42:20.811834"
     }
 ]
