@@ -187751,5 +187751,27 @@
         "episode_update_frequency": "weekly",
         "episode_update_time": "23:00",
         "episode_update_weekday": 0
+    },
+    {
+        "id": 258,
+        "tmdb_id": 285147,
+        "external_ids": {
+            "tmdb": 285147
+        },
+        "title": "Shaque: Trust No One",
+        "year": "2026",
+        "overview": "A mother receives yearly photos of her missing child. After nine years of searching, she discovers the truth about the abduction lies not far away, but hidden among her closest circle.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/xddc9KBcqffXjLEYLX8cZzRwYkS.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Mystery",
+            "Drama"
+        ],
+        "rating": 3,
+        "tmdb_rating": 6.7,
+        "status": "Continuing",
+        "episodes": [],
+        "tvmaze_id": 94641
     }
 ]
