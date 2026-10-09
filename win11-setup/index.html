@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0d1117">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <title>Windows 11 Fresh Setup</title>
   <style>
     :root {
@@ -100,7 +103,7 @@
     body {
       background: #f4f6f9;
       color: var(--text);
-      font: 15px/1.55 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+      font: 15px/1.6 "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
     }
     .shell {
       width: min(1180px, calc(100% - 56px));
@@ -112,7 +115,7 @@
     }
     header { grid-column: 2; grid-row: 1; padding: 0 0 26px; }
     .eyebrow { color: #315fae; font-size: .7rem; letter-spacing: .14em; }
-    h1 { margin: 7px 0 8px; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -.055em; color: #142236; }
+    h1 { margin: 7px 0 8px; font-family: "Inter", "Segoe UI Variable Display", "Segoe UI", sans-serif; font-size: clamp(2rem, 4vw, 2.7rem); font-weight: 700; letter-spacing: -.055em; color: #142236; }
     .subtitle { margin: 0; max-width: 650px; color: #647387; font-size: 1rem; }
     .toolbar {
       margin-top: 22px; padding: 12px 15px; max-width: 560px; gap: 12px;
@@ -257,7 +260,7 @@
     .section-icon { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 34px; border: 1px solid #334b6b; border-radius: 9px; background: #1a2b43; color: #93baff; }
     body[data-theme="light"] .section-icon { border-color: #d7e3f4; background: #edf4ff; color: #3769b5; }
     .section-icon svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
-    h2 { font-size: 1.07rem; letter-spacing: -.015em; }
+    h2 { font-family: "Inter", "Segoe UI Variable Display", "Segoe UI", sans-serif; font-size: 1.07rem; font-weight: 650; letter-spacing: -.015em; }
     .section-note { font-size: .75rem; }
     section { border-radius: 12px; transition: border-color .18s ease, transform .18s ease; }
     body[data-theme="dark"] section:hover { border-color: #35465c; }
