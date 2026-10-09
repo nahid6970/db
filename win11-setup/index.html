@@ -290,7 +290,7 @@
       .copy { min-width: 36px; }
     }
     .toolbar {
-      position: fixed; z-index: 50; top: 14px; right: max(18px, calc((100vw - 1180px) / 2));
+      position: fixed; z-index: 50; top: 14px; right: 18px;
       display: flex; width: max-content; max-width: calc(100vw - 28px); margin: 0; padding: 7px 9px;
       gap: 8px; border: 1px solid #303c4b; border-radius: 11px; background: #111720ed;
       box-shadow: 0 8px 30px #0005; backdrop-filter: blur(14px);
@@ -357,9 +357,7 @@
   <main class="shell">
     <header>
       <div class="intro-copy">
-        <div class="eyebrow">Personal checklist</div>
         <h1>Windows 11 Fresh Setup</h1>
-        <p class="subtitle">A practical runbook for getting the machine updated, secure, and ready for your everyday tools.</p>
       </div>
       <div class="toolbar" aria-label="Checklist progress">
         <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
@@ -465,7 +463,6 @@
       <div class="code-row"><div class="codebox"><code>irm 'https://cli.kiro.dev/install.ps1' | iex</code></div><button class="copy" type="button" data-copy="irm 'https://cli.kiro.dev/install.ps1' | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="callout">PowerShell install commands execute downloaded scripts. Use them only if you intend to install that tool.</div>
     </section>
-    <footer>Checklist progress is saved in this browser on this device. The Windows guidance links open Microsoft Support.</footer>
   </main>
   <script>
     (() => {
