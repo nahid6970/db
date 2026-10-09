@@ -195,9 +195,120 @@
       .copy .copy-label { display: none; }
       code { font-size: .77rem; }
     }
+    body[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #090c11;
+      --panel: #111720;
+      --panel-raised: #171f2a;
+      --line: #26313e;
+      --text: #e4eaf2;
+      --muted: #9aa8b8;
+      --accent: #79aaf4;
+      --green: #50b879;
+      --code: #0c1118;
+      background: #090c11;
+      color: #e4eaf2;
+    }
+    body[data-theme="dark"] h1 { color: #f0f4fa; }
+    body[data-theme="dark"] .subtitle { color: #9aa8b8; }
+    body[data-theme="dark"] .eyebrow { color: #8cb6ff; }
+    body[data-theme="dark"] .toolbar { border-color: #26313e; background: #111720; box-shadow: 0 2px 8px #0003; }
+    body[data-theme="dark"] .bar { background: #26313e; }
+    body[data-theme="dark"] .progress, body[data-theme="dark"] .quiet-button { color: #9aa8b8; }
+    body[data-theme="dark"] .progress strong { color: #e4eaf2; }
+    body[data-theme="dark"] nav { border-color: #26313e; }
+    body[data-theme="dark"] nav::before { color: #718096; }
+    body[data-theme="dark"] nav a { color: #a6b3c2; }
+    body[data-theme="dark"] nav a:hover { color: #c7dcff; background: #182437; }
+    body[data-theme="dark"] section { border-color: #26313e; background: #111720; box-shadow: 0 3px 12px #0003; }
+    body[data-theme="dark"] h2 { color: #e8eef6; }
+    body[data-theme="dark"] .section-note { color: #8795a7; }
+    body[data-theme="dark"] .item { color: #c3ceda; }
+    body[data-theme="dark"] .item:hover { background: #ffffff08; }
+    body[data-theme="dark"] .item strong { color: #e1e9f3; }
+    body[data-theme="dark"] .item.done label { color: #798797; }
+    body[data-theme="dark"] .item a { color: #8cb6ff; }
+    body[data-theme="dark"] code { color: #c5d7ee; }
+    body[data-theme="dark"] .codebox { border-color: #293545; background: #0c1118; }
+    body[data-theme="dark"] .copy { border-color: #303c4b; color: #a6b3c2; background: #171f2a; }
+    body[data-theme="dark"] .copy:hover { color: #b6d2ff; border-color: #49658a; background: #1b2a40; }
+    body[data-theme="dark"] .copy.copied { color: #83d69f; border-color: #315b40; background: #122319; }
+    body[data-theme="dark"] ol.steps { color: #c3ceda; }
+    body[data-theme="dark"] ol.steps li::marker { color: #8cb6ff; }
+    body[data-theme="dark"] .subgroup { color: #b4c2d3; }
+    body[data-theme="dark"] .callout { border-color: #544522; border-left-color: #d19a35; background: #211b0f; color: #d0bd91; }
+    body[data-theme="dark"] footer { color: #758397; }
+    body[data-theme="dark"] .quiet-button:hover { color: #ffaaaa; border-color: #563535; background: #201515; }
+    @media (max-width: 760px) {
+      body[data-theme="dark"] nav a { border-color: #26313e; background: #111720; }
+    }
+    /* Icon led navigation and clearer controls */
+    nav { gap: 7px; padding-top: 12px; }
+    nav a { display: flex; align-items: center; gap: 11px; min-height: 43px; margin-right: 14px; padding: 9px 12px; border: 1px solid transparent; }
+    nav a svg { width: 17px; height: 17px; flex: 0 0 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; opacity: .88; }
+    nav a[aria-current="location"] { color: #bdd5ff; background: #19283d; border-color: #273d5a; }
+    body[data-theme="light"] nav a[aria-current="location"] { color: #244d91; background: #e9eff9; border-color: #d8e4f5; }
+    body[data-theme="dark"] nav a:hover { border-color: #293d58; }
+    body[data-theme="light"] nav a:hover { border-color: #dae4f0; }
+    .section-head { position: relative; min-height: 39px; margin: -4px -4px 14px; padding: 4px 4px 12px; border-bottom: 1px solid #293442; }
+    body[data-theme="light"] .section-head { border-color: #edf0f4; }
+    .section-head::before { display: none; }
+    .section-icon { width: 34px; height: 34px; display: grid; place-items: center; flex: 0 0 34px; border: 1px solid #334b6b; border-radius: 9px; background: #1a2b43; color: #93baff; }
+    body[data-theme="light"] .section-icon { border-color: #d7e3f4; background: #edf4ff; color: #3769b5; }
+    .section-icon svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    h2 { font-size: 1.07rem; letter-spacing: -.015em; }
+    .section-note { font-size: .75rem; }
+    section { border-radius: 12px; transition: border-color .18s ease, transform .18s ease; }
+    body[data-theme="dark"] section:hover { border-color: #35465c; }
+    .toolbar { border-radius: 12px; }
+    .quiet-button { min-height: 34px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; padding: 6px 10px; border: 1px solid #303c4b; border-radius: 7px; background: #171f2a; color: #bac6d4; font-size: .77rem; }
+    #themeButton { margin-left: auto; }
+    #resetButton { margin-left: 0; }
+    body[data-theme="light"] .quiet-button { border-color: #e1e6ec; background: #fff; color: #687789; }
+    .quiet-button:hover { border-color: #49658a; background: #1b2a40; color: #d5e4fb; }
+    body[data-theme="light"] .quiet-button:hover { border-color: #b7cae9; background: #f5f8fe; color: #245fcb; }
+    .quiet-button svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    body[data-theme="dark"] .theme-sun, body[data-theme="light"] .theme-moon { display: block; }
+    body[data-theme="dark"] .theme-moon, body[data-theme="light"] .theme-sun { display: none; }
+    .copy { min-width: 70px; min-height: 35px; padding: 6px 10px; border-radius: 7px; font-weight: 600; }
+    .copy svg { width: 15px; height: 15px; }
+    .copy:active, .quiet-button:active { transform: translateY(1px); }
+    body[data-theme="dark"] .codebox { box-shadow: inset 3px 0 #304a6c; }
+    body[data-theme="light"] .codebox { box-shadow: inset 3px 0 #c6d8f2; }
+    .callout { display: flex; align-items: flex-start; gap: 9px; }
+    .callout::before { content: ""; width: 16px; height: 16px; flex: 0 0 16px; margin-top: 1px; background: currentColor; opacity: .8; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4m0-4h.01'/%3E%3C/svg%3E") center/contain no-repeat; }
+    @media (max-width: 760px) {
+      nav { padding: 0 0 15px; }
+      nav a { gap: 7px; min-height: 36px; }
+      nav a svg { width: 15px; height: 15px; flex-basis: 15px; }
+      .section-head { margin-inline: 0; }
+    }
+    @media (max-width: 420px) {
+      .quiet-button { min-width: 34px; padding-inline: 8px; }
+      #resetButton { font-size: 0; }
+      #resetButton::after { content: "Reset"; font-size: .77rem; }
+      .copy { min-width: 36px; }
+    }
+    .toolbar {
+      position: fixed; z-index: 50; top: 14px; right: max(18px, calc((100vw - 1180px) / 2));
+      display: flex; width: max-content; max-width: calc(100vw - 28px); margin: 0; padding: 7px 9px;
+      gap: 8px; border: 1px solid #303c4b; border-radius: 11px; background: #111720ed;
+      box-shadow: 0 8px 30px #0005; backdrop-filter: blur(14px);
+    }
+    body[data-theme="light"] .toolbar { border-color: #dfe5ed; background: #ffffffed; box-shadow: 0 8px 28px #2035521f; }
+    .toolbar .bar { width: 74px; }
+    .toolbar .progress { min-width: 45px; text-align: center; font-size: .74rem; }
+    .toolbar .quiet-button { width: 34px; min-width: 34px; height: 34px; min-height: 34px; padding: 0; }
+    .toolbar .quiet-button svg { width: 16px; height: 16px; }
+    .toolbar #themeLabel { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    @media (max-width: 760px) {
+      .toolbar { top: 9px; right: 10px; gap: 6px; padding: 6px; }
+      .toolbar .bar { width: 52px; }
+      .shell { padding-top: 62px; }
+    }
   </style>
 </head>
-<body>
+<body data-theme="dark">
   <main class="shell">
     <header>
       <div class="eyebrow">Personal checklist</div>
@@ -206,18 +317,22 @@
       <div class="toolbar" aria-label="Checklist progress">
         <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
         <div class="progress"><strong id="progressCount">0 / 0</strong> completed</div>
-        <button class="quiet-button" id="resetButton" type="button">Reset checklist</button>
+        <button class="quiet-button" id="themeButton" type="button" aria-label="Switch to light theme"><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z"></path></svg><span id="themeLabel">Light theme</span></button>
+        <button class="quiet-button" id="resetButton" type="button" aria-label="Reset checklist" title="Reset checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg></button>
       </div>
     </header>
 
     <nav aria-label="Jump to section">
-      <a href="#initial">1. Install Windows</a><a href="#essentials">2. Windows essentials</a>
-      <a href="#developer">3. Developer setup</a><a href="#apps">4. Apps &amp; devices</a>
-      <a href="#media">5. Media stack</a><a href="#preferences">6. Preferences</a>
+      <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
+      <a href="#essentials"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Windows essentials</span></a>
+      <a href="#developer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg><span>Developer setup</span></a>
+      <a href="#apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Apps &amp; devices</span></a>
+      <a href="#media"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg><span>Media stack</span></a>
+      <a href="#preferences"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.6-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1-.1 1.8Z"></path></svg><span>Preferences</span></a>
     </nav>
 
     <section id="initial">
-      <div class="section-head"><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
       <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">For a local account, press <strong>Shift + F10</strong> and run the setup command.</label></div>
       <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
@@ -227,7 +342,7 @@
     </section>
 
     <section id="essentials">
-      <div class="section-head"><h2>Windows essentials</h2><span class="section-note">Do these before personalizing</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><h2>Windows essentials</h2><span class="section-note">Do these before personalizing</span></div>
       <div class="items">
         <div class="item"><input type="checkbox" id="item-update"><label for="item-update">Open <strong>Settings → Windows Update</strong>, install updates, restart, then check again until current.</label></div>
         <div class="item"><input type="checkbox" id="item-activation"><label for="item-activation">Confirm Windows is activated in <strong>Settings → System → Activation</strong>. <a href="https://support.microsoft.com/en-us/windows/activation/activate-windows" target="_blank" rel="noreferrer">Microsoft activation guide ↗</a></label></div>
@@ -240,7 +355,7 @@
     </section>
 
     <section id="developer">
-      <div class="section-head"><h2>Developer setup</h2><span class="section-note">Shell, package managers, runtimes</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg></span><h2>Developer setup</h2><span class="section-note">Shell, package managers, runtimes</span></div>
       <div class="items">
         <div class="item"><input type="checkbox" id="item-policy"><label for="item-policy">Set the current-user PowerShell execution policy for local scripts.</label></div>
       </div>
@@ -257,7 +372,7 @@
     </section>
 
     <section id="apps">
-      <div class="section-head"><h2>Apps &amp; devices</h2><span class="section-note">Install only the tools you use</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></span><h2>Apps &amp; devices</h2><span class="section-note">Install only the tools you use</span></div>
       <div class="items">
         <div class="item"><input type="checkbox" id="item-tools"><label for="item-tools">Install <strong>fzf</strong>, <strong>bat</strong>, and <strong>oh-my-posh</strong>.</label></div>
         <div class="item"><input type="checkbox" id="item-font"><label for="item-font">Install JetBrains Mono for oh-my-posh.</label></div>
@@ -275,7 +390,7 @@
     </section>
 
     <section id="media">
-      <div class="section-head"><h2>Media stack</h2><span class="section-note">Sonarr · Radarr · Prowlarr · qBittorrent</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg></span><h2>Media stack</h2><span class="section-note">Sonarr · Radarr · Prowlarr · qBittorrent</span></div>
       <div class="items">
         <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">Set up qBittorrent first, then add it in Prowlarr and use Prowlarr's test connection. Fix the qBittorrent connection settings if the test fails.</label></div>
         <div class="item"><input type="checkbox" id="item-seed"><label for="item-seed">Set qBittorrent to stop seeding when the ratio reaches <strong>0</strong>.</label></div>
@@ -284,7 +399,7 @@
     </section>
 
     <section id="preferences">
-      <div class="section-head"><h2>Preferences &amp; final checks</h2><span class="section-note">Restore your daily workflow</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.6-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1-.1 1.8Z"></path></svg></span><h2>Preferences &amp; final checks</h2><span class="section-note">Restore your daily workflow</span></div>
       <div class="subgroup" style="margin-left:0">Remove File Explorer grouping</div>
       <ol class="steps">
         <li>Open a folder and choose <strong>Sort → Group by → None</strong>.</li>
@@ -305,11 +420,27 @@
   <script>
     (() => {
       const storageKey = 'win11-fresh-setup-checklist-v1';
+      const themeKey = 'win11-fresh-setup-theme';
+      const themeButton = document.getElementById('themeButton');
+      const themeLabel = document.getElementById('themeLabel');
       const boxes = [...document.querySelectorAll('input[type="checkbox"]')];
       const progressCount = document.getElementById('progressCount');
       const progressBar = document.getElementById('progressBar');
       let saved = {};
       try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch { saved = {}; }
+      let savedTheme = 'dark';
+      try { savedTheme = localStorage.getItem(themeKey) || 'dark'; } catch { /* Use dark by default. */ }
+      if (savedTheme !== 'light' && savedTheme !== 'dark') savedTheme = 'dark';
+
+      function applyTheme(theme) {
+        document.body.dataset.theme = theme;
+        const next = theme === 'dark' ? 'light' : 'dark';
+        themeLabel.textContent = `${next[0].toUpperCase()}${next.slice(1)} theme`;
+        themeButton.setAttribute('aria-label', `Switch to ${next} theme`);
+        try { localStorage.setItem(themeKey, theme); } catch { /* Theme still works for this page view. */ }
+      }
+      applyTheme(savedTheme);
+      themeButton.addEventListener('click', () => applyTheme(document.body.dataset.theme === 'dark' ? 'light' : 'dark'));
 
       function updateProgress() {
         const complete = boxes.filter(box => box.checked).length;
