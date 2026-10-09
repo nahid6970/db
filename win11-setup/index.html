@@ -202,7 +202,7 @@
     <header>
       <div class="eyebrow">Personal checklist</div>
       <h1>Windows 11 Fresh Setup</h1>
-      <p class="subtitle">A tidy run-through of the setup steps, tools, and preferences to restore after a fresh Windows install.</p>
+      <p class="subtitle">A practical runbook for getting the machine updated, secure, and ready for your everyday tools.</p>
       <div class="toolbar" aria-label="Checklist progress">
         <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
         <div class="progress"><strong id="progressCount">0 / 0</strong> completed</div>
@@ -211,84 +211,96 @@
     </header>
 
     <nav aria-label="Jump to section">
-      <a href="#initial">Initial setup</a><a href="#after-setup">After setup</a><a href="#media">Media server</a>
-      <a href="#explorer">File Explorer</a><a href="#agents">AI agents</a><a href="#packages">Packages</a>
+      <a href="#initial">1. Install Windows</a><a href="#essentials">2. Windows essentials</a>
+      <a href="#developer">3. Developer setup</a><a href="#apps">4. Apps &amp; devices</a>
+      <a href="#media">5. Media stack</a><a href="#preferences">6. Preferences</a>
     </nav>
 
     <section id="initial">
-      <div class="section-head"><h2>Initial setup</h2><span class="section-note">During Windows installation</span></div>
-      <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">Open Command Prompt with <strong>Shift + F10</strong>, then start local account setup.</label></div>
+      <div class="section-head"><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
+      <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">For a local account, press <strong>Shift + F10</strong> and run the setup command.</label></div>
       <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-device"><label for="item-device">Set device name to <strong>win6970</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-user"><label for="item-user">Set user name to <strong>nahid</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-device"><label for="item-device">Name the PC <strong>win6970</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-user"><label for="item-user">Create the user <strong>nahid</strong>.</label></div>
       </div>
     </section>
 
-    <section id="after-setup">
-      <div class="section-head"><h2>After setup</h2><span class="section-note">Core tools and machine setup</span></div>
+    <section id="essentials">
+      <div class="section-head"><h2>Windows essentials</h2><span class="section-note">Do these before personalizing</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-policy"><label for="item-policy">Allow locally run PowerShell scripts for the current user.</label></div>
+        <div class="item"><input type="checkbox" id="item-update"><label for="item-update">Open <strong>Settings → Windows Update</strong>, install updates, restart, then check again until current.</label></div>
+        <div class="item"><input type="checkbox" id="item-activation"><label for="item-activation">Confirm Windows is activated in <strong>Settings → System → Activation</strong>. <a href="https://support.microsoft.com/en-us/windows/activation/activate-windows" target="_blank" rel="noreferrer">Microsoft activation guide ↗</a></label></div>
+        <div class="item"><input type="checkbox" id="item-device-encryption"><label for="item-device-encryption">Check <strong>Privacy &amp; security → Device encryption</strong>. If enabled, make sure you can access the recovery key. <a href="https://support.microsoft.com/en-us/windows/security/encryption/device-encryption-in-windows" target="_blank" rel="noreferrer">About device encryption ↗</a></label></div>
+        <div class="item"><input type="checkbox" id="item-backup"><label for="item-backup">Set up a backup for important files and confirm it includes anything you need to restore. <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/back-up-and-restore-with-windows-backup" target="_blank" rel="noreferrer">Windows Backup guide ↗</a></label></div>
+        <div class="item"><input type="checkbox" id="item-defender"><label for="item-defender">Open Windows Security and confirm virus protection and firewall are on.</label></div>
+        <div class="item"><input type="checkbox" id="item-store"><label for="item-store">Update Microsoft Store apps, then install UniGet from the Store.</label></div>
+      </div>
+      <div class="callout">Device encryption can be enabled automatically on some devices. Save or verify the recovery key before you need it.</div>
+    </section>
+
+    <section id="developer">
+      <div class="section-head"><h2>Developer setup</h2><span class="section-note">Shell, package managers, runtimes</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-policy"><label for="item-policy">Set the current-user PowerShell execution policy for local scripts.</label></div>
       </div>
       <div class="code-row"><div class="codebox"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></div><button class="copy" type="button" data-copy="Set-ExecutionPolicy RemoteSigned -Scope CurrentUser" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-winget"><label for="item-winget">Update the winget source, then install UniGet from the Store.</label></div>
+        <div class="item"><input type="checkbox" id="item-winget"><label for="item-winget">Refresh the existing WinGet sources. Add a source only if a tool specifically requires one.</label></div>
         <div class="code-row"><div class="codebox"><code>winget source update</code></div><button class="copy" type="button" data-copy="winget source update" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-        <div class="item"><input type="checkbox" id="item-updates"><label for="item-updates">Update everything first.</label></div>
-        <div class="item"><input type="checkbox" id="item-source"><label for="item-source">Add the winget source.</label></div>
-        <div class="item"><input type="checkbox" id="item-scoop"><label for="item-scoop">Install Git from the Scoop main bucket; set up Scoop with UniGet.</label></div>
-        <div class="item"><input type="checkbox" id="item-python"><label for="item-python">Install Python and PowerShell, then install uv with pip.</label></div>
+        <div class="item"><input type="checkbox" id="item-scoop"><label for="item-scoop">Set up Scoop with UniGet; install Git from Scoop's <strong>main</strong> bucket.</label></div>
+        <div class="item"><input type="checkbox" id="item-python"><label for="item-python">Install Python and PowerShell, then install uv.</label></div>
         <div class="code-row"><div class="codebox"><code>pip install uv</code></div><button class="copy" type="button" data-copy="pip install uv" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-        <div class="item"><input type="checkbox" id="item-deps"><label for="item-deps">Run the dependency installer (replace <code>XXX</code> with the intended argument).</label></div>
+        <div class="item"><input type="checkbox" id="item-deps"><label for="item-deps">Run the personal dependency installer; replace <code>XXX</code> with the right argument.</label></div>
         <div class="code-row"><div class="codebox"><code>python C:\@delta\ms1\install_deps.py XXX</code></div><button class="copy" type="button" data-copy="python C:\@delta\ms1\install_deps.py XXX" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-        <div class="item"><input type="checkbox" id="item-misc"><label for="item-misc">Set up <strong>mklink</strong>, Helium, the Bitwarden extension, <strong>ms1 + db</strong>, and Android CLI / android-clt.</label></div>
-        <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Install a Bangla font from Windows Settings so Bangla renders properly in Flask 5018.</label></div>
+      </div>
+    </section>
+
+    <section id="apps">
+      <div class="section-head"><h2>Apps &amp; devices</h2><span class="section-note">Install only the tools you use</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-tools"><label for="item-tools">Install <strong>fzf</strong>, <strong>bat</strong>, and <strong>oh-my-posh</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-font"><label for="item-font">Install JetBrains Mono for oh-my-posh.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>oh-my-posh.exe font install jetbrainsmono</code></div><button class="copy" type="button" data-copy="oh-my-posh.exe font install jetbrainsmono" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-browser"><label for="item-browser">Install Helium and add the Bitwarden extension.</label></div>
+        <div class="item"><input type="checkbox" id="item-android"><label for="item-android">Install Android CLI tools.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o "%TEMP%\i.cmd" &amp;&amp; "%TEMP%\i.cmd"</code></div><button class="copy" type="button" data-copy="curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o &quot;%TEMP%\i.cmd&quot; &amp;&amp; &quot;%TEMP%\i.cmd&quot;" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Install a Bangla font in Windows Settings for proper Bangla rendering in Flask 5018.</label></div>
+        <div class="item"><input type="checkbox" id="item-projects"><label for="item-projects">Restore <strong>ms1 + db</strong> and create any required <code>mklink</code> links.</label></div>
       </div>
     </section>
 
     <section id="media">
-      <div class="section-head"><h2>Sonarr / Radarr / Prowlarr / qBittorrent</h2><span class="section-note">Media automation setup</span></div>
+      <div class="section-head"><h2>Media stack</h2><span class="section-note">Sonarr · Radarr · Prowlarr · qBittorrent</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">In Prowlarr, test qBittorrent first; then troubleshoot qBittorrent if needed. Check authentication settings if there are connection issues.</label></div>
-        <div class="item"><input type="checkbox" id="item-seed"><label for="item-seed">In qBittorrent, set completed downloads to stop seeding at a ratio of 0.</label></div>
+        <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">Set up qBittorrent first, then add it in Prowlarr and use Prowlarr's test connection. Fix the qBittorrent connection settings if the test fails.</label></div>
+        <div class="item"><input type="checkbox" id="item-seed"><label for="item-seed">Set qBittorrent to stop seeding when the ratio reaches <strong>0</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-media-test"><label for="item-media-test">Test the download client and indexer connections in each app after setup.</label></div>
       </div>
     </section>
 
-    <section id="explorer">
-      <div class="section-head"><h2>File Explorer</h2><span class="section-note">Turn off folder grouping globally</span></div>
+    <section id="preferences">
+      <div class="section-head"><h2>Preferences &amp; final checks</h2><span class="section-note">Restore your daily workflow</span></div>
+      <div class="subgroup" style="margin-left:0">Remove File Explorer grouping</div>
       <ol class="steps">
-        <li>Open File Explorer and choose any folder.</li>
-        <li>From the toolbar, select <strong>Sort → Group by → None</strong>.</li>
-        <li>Open the three dots (<strong>See more</strong>) menu and choose <strong>Options</strong>.</li>
-        <li>In Folder Options, open the <strong>View</strong> tab and select <strong>Apply to Folders</strong>.</li>
-        <li>Confirm with <strong>Yes</strong>, then select <strong>OK</strong>.</li>
+        <li>Open a folder and choose <strong>Sort → Group by → None</strong>.</li>
+        <li>Open <strong>… → Options → View → Apply to Folders</strong>, confirm, then select OK.</li>
       </ol>
-      <div class="item" style="padding-left:0"><input type="checkbox" id="item-explorer"><label for="item-explorer">Apply the grouping preference to all folders.</label></div>
-    </section>
-
-    <section id="agents">
-      <div class="section-head"><h2>AI agents</h2><span class="section-note">PowerShell and npm installers</span></div>
-      <div class="subgroup">Google Antigravity CLI</div>
-      <div class="code-row"><div class="codebox"><code>irm https://antigravity.google/cli/install.ps1 | iex</code></div><button class="copy" type="button" data-copy="irm https://antigravity.google/cli/install.ps1 | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-      <div class="subgroup">OpenAI Codex CLI</div>
-      <div class="code-row"><div class="codebox"><code>npm install -g @openai/codex</code></div><button class="copy" type="button" data-copy="npm install -g @openai/codex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-      <div class="subgroup">Kiro CLI</div>
-      <div class="code-row"><div class="codebox"><code>irm 'https://cli.kiro.dev/install.ps1' | iex</code></div><button class="copy" type="button" data-copy="irm 'https://cli.kiro.dev/install.ps1' | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-      <div class="callout">These installer commands come from your notes. Review remote install scripts before running them.</div>
-    </section>
-
-    <section id="packages">
-      <div class="section-head"><h2>Packages to install</h2><span class="section-note">Useful command-line tools and fonts</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-fzf"><label for="item-fzf">Install <strong>fzf</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-bat"><label for="item-bat">Install <strong>bat</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-posh"><label for="item-posh">Install <strong>oh-my-posh</strong>, then install the JetBrains Mono font.</label></div>
+        <div class="item"><input type="checkbox" id="item-explorer"><label for="item-explorer">Apply the grouping preference to all folders.</label></div>
+        <div class="item"><input type="checkbox" id="item-final-backup"><label for="item-final-backup">Sign in to the apps you use, restore browser bookmarks/password manager access, and confirm your important files are present.</label></div>
       </div>
-      <div class="code-row"><div class="codebox"><code>oh-my-posh.exe font install jetbrainsmono</code></div><button class="copy" type="button" data-copy="oh-my-posh.exe font install jetbrainsmono" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-      <div class="items"><div class="item"><input type="checkbox" id="item-android"><label for="item-android">Install Android CLI tools.</label></div></div>
-      <div class="code-row"><div class="codebox"><code>curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o "%TEMP%\i.cmd" &amp;&amp; "%TEMP%\i.cmd"</code></div><button class="copy" type="button" data-copy="curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o &quot;%TEMP%\i.cmd&quot; &amp;&amp; &quot;%TEMP%\i.cmd&quot;" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="subgroup" style="margin-left:0">AI command-line tools (optional)</div>
+      <div class="code-row"><div class="codebox"><code>irm https://antigravity.google/cli/install.ps1 | iex</code></div><button class="copy" type="button" data-copy="irm https://antigravity.google/cli/install.ps1 | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="code-row"><div class="codebox"><code>npm install -g @openai/codex</code></div><button class="copy" type="button" data-copy="npm install -g @openai/codex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="code-row"><div class="codebox"><code>irm 'https://cli.kiro.dev/install.ps1' | iex</code></div><button class="copy" type="button" data-copy="irm 'https://cli.kiro.dev/install.ps1' | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="callout">PowerShell install commands execute downloaded scripts. Use them only if you intend to install that tool.</div>
     </section>
-    <footer>Checklist progress is saved in this browser on this device.</footer>
+    <footer>Checklist progress is saved in this browser on this device. The Windows guidance links open Microsoft Support.</footer>
   </main>
   <script>
     (() => {
