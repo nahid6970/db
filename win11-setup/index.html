@@ -352,6 +352,7 @@
     }
     header.compact { height: 0; margin: 0; padding: 0; }
     header.compact .intro-copy { display: none; }
+    .intro-copy h1 { text-align: center; }
   </style>
 </head>
 <body data-theme="dark">
@@ -507,6 +508,14 @@
       let activeSection = 0;
       const previousButton = document.getElementById('previousSection');
       const nextButton = document.getElementById('nextSection');
+      function alignArrowsToCard() {
+        const card = sections[activeSection];
+        if (!card) return;
+        const bounds = card.getBoundingClientRect();
+        const center = Math.max(40, Math.min(window.innerHeight - 40, bounds.top + bounds.height / 2));
+        previousButton.style.top = `${center}px`;
+        nextButton.style.top = `${center}px`;
+      }
       function showSection(index) {
         activeSection = Math.max(0, Math.min(index, sections.length - 1));
         document.querySelector('header').classList.toggle('compact', activeSection !== 0);
@@ -516,8 +525,11 @@
         });
         previousButton.disabled = activeSection === 0;
         nextButton.disabled = activeSection === sections.length - 1;
+        alignArrowsToCard();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
+      window.addEventListener('resize', alignArrowsToCard);
+      window.addEventListener('scroll', alignArrowsToCard, { passive: true });
       previousButton.addEventListener('click', () => showSection(activeSection - 1));
       nextButton.addEventListener('click', () => showSection(activeSection + 1));
       document.addEventListener('keydown', event => {
