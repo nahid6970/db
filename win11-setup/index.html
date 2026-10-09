@@ -306,21 +306,63 @@
       .toolbar .bar { width: 52px; }
       .shell { padding-top: 62px; }
     }
+    /* One section at a time, with edge navigation */
+    .shell { display: block; width: min(940px, calc(100% - 100px)); padding-top: 86px; }
+    header { padding-bottom: 23px; }
+    header .toolbar { padding: 7px 9px; }
+    nav { display: none; }
+    section { min-height: 300px; animation: card-in .22s ease both; }
+    section[hidden] { display: none !important; }
+    @keyframes card-in { from { opacity: .55; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    .card-arrow {
+      position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 46px; height: 46px;
+      display: grid; place-items: center; border: 1px solid #344255; border-radius: 50%;
+      color: #d1dceb; background: #151d28eF; box-shadow: 0 6px 22px #0004; cursor: pointer;
+      transition: color .15s ease, border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .card-arrow:hover { color: #fff; border-color: #6588b7; background: #21334b; transform: scale(1.06); }
+    .card-arrow:disabled { opacity: .32; cursor: default; transform: none; }
+    .card-arrow svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    #previousSection { left: 18px; }
+    #nextSection { right: 18px; }
+    body[data-theme="light"] .card-arrow { color: #4d6078; border-color: #d9e1eb; background: #fff; box-shadow: 0 6px 22px #2035521a; }
+    body[data-theme="light"] .card-arrow:hover { color: #245fcb; border-color: #b7cae9; background: #f5f8fe; }
+    @media (max-width: 760px) {
+      .shell { width: calc(100% - 74px); padding-top: 92px; }
+      .card-arrow { width: 38px; height: 38px; }
+      #previousSection { left: 8px; }
+      #nextSection { right: 8px; }
+      section { min-height: 0; }
+    }
+    @media (max-width: 420px) {
+      .shell { width: calc(100% - 68px); }
+      .card-arrow { width: 34px; height: 34px; }
+      #previousSection { left: 6px; }
+      #nextSection { right: 6px; }
+      .toolbar .bar { width: 42px; }
+    }
+    header.compact { height: 0; margin: 0; padding: 0; }
+    header.compact .intro-copy { display: none; }
   </style>
 </head>
 <body data-theme="dark">
   <main class="shell">
     <header>
-      <div class="eyebrow">Personal checklist</div>
-      <h1>Windows 11 Fresh Setup</h1>
-      <p class="subtitle">A practical runbook for getting the machine updated, secure, and ready for your everyday tools.</p>
+      <div class="intro-copy">
+        <div class="eyebrow">Personal checklist</div>
+        <h1>Windows 11 Fresh Setup</h1>
+        <p class="subtitle">A practical runbook for getting the machine updated, secure, and ready for your everyday tools.</p>
+      </div>
       <div class="toolbar" aria-label="Checklist progress">
         <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
-        <div class="progress"><strong id="progressCount">0 / 0</strong> completed</div>
+        <div class="progress"><strong id="progressCount">0/0</strong></div>
         <button class="quiet-button" id="themeButton" type="button" aria-label="Switch to light theme"><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.9 13A8.5 8.5 0 0 1 11 3.1 8.5 8.5 0 1 0 20.9 13Z"></path></svg><span id="themeLabel">Light theme</span></button>
         <button class="quiet-button" id="resetButton" type="button" aria-label="Reset checklist" title="Reset checklist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 2.64-6.36L3 8"></path><path d="M3 3v5h5"></path><path d="M12 7v5l3 2"></path></svg></button>
       </div>
     </header>
+
+    <button class="card-arrow" id="previousSection" type="button" aria-label="Previous section" title="Previous section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
+    <button class="card-arrow" id="nextSection" type="button" aria-label="Next section" title="Next section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
 
     <nav aria-label="Jump to section">
       <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
@@ -444,7 +486,7 @@
 
       function updateProgress() {
         const complete = boxes.filter(box => box.checked).length;
-        progressCount.textContent = `${complete} / ${boxes.length}`;
+        progressCount.textContent = `${complete}/${boxes.length}`;
         progressBar.style.width = `${boxes.length ? complete / boxes.length * 100 : 0}%`;
         boxes.forEach(box => box.closest('.item')?.classList.toggle('done', box.checked));
         try { localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(boxes.map(box => [box.id, box.checked])))); } catch { /* Storage may be disabled. */ }
@@ -454,6 +496,30 @@
         box.addEventListener('change', updateProgress);
       });
       updateProgress();
+
+      const sections = [...document.querySelectorAll('main > section')];
+      let activeSection = 0;
+      const previousButton = document.getElementById('previousSection');
+      const nextButton = document.getElementById('nextSection');
+      function showSection(index) {
+        activeSection = Math.max(0, Math.min(index, sections.length - 1));
+        document.querySelector('header').classList.toggle('compact', activeSection !== 0);
+        sections.forEach((section, i) => {
+          section.hidden = i !== activeSection;
+          if (i === activeSection) section.classList.remove('card-in');
+        });
+        previousButton.disabled = activeSection === 0;
+        nextButton.disabled = activeSection === sections.length - 1;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+      previousButton.addEventListener('click', () => showSection(activeSection - 1));
+      nextButton.addEventListener('click', () => showSection(activeSection + 1));
+      document.addEventListener('keydown', event => {
+        if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input, button, a, textarea, select')) return;
+        if (event.key === 'ArrowLeft') showSection(activeSection - 1);
+        if (event.key === 'ArrowRight') showSection(activeSection + 1);
+      });
+      showSection(0);
 
       document.getElementById('resetButton').addEventListener('click', () => {
         boxes.forEach(box => { box.checked = false; });
