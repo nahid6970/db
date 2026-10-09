@@ -320,28 +320,28 @@
     section[hidden] { display: none !important; }
     @keyframes card-in { from { opacity: .55; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
     .card-arrow {
-      position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 46px; height: 46px;
-      display: grid; place-items: center; border: 1px solid #344255; border-radius: 50%;
-      color: #d1dceb; background: #151d28eF; box-shadow: 0 6px 22px #0004; cursor: pointer;
-      transition: color .15s ease, border-color .15s ease, background .15s ease, transform .15s ease;
+      position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 42px; height: 68px;
+      display: grid; place-items: center; padding: 0; border: 0; border-radius: 0;
+      color: #8c9aab; background: transparent; box-shadow: none; cursor: pointer;
+      transition: color .15s ease, transform .15s ease;
     }
-    .card-arrow:hover { color: #fff; border-color: #6588b7; background: #21334b; transform: scale(1.06); }
-    .card-arrow:disabled { opacity: .32; cursor: default; transform: none; }
-    .card-arrow svg { width: 21px; height: 21px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    #previousSection { left: 18px; }
-    #nextSection { right: 18px; }
-    body[data-theme="light"] .card-arrow { color: #4d6078; border-color: #d9e1eb; background: #fff; box-shadow: 0 6px 22px #2035521a; }
-    body[data-theme="light"] .card-arrow:hover { color: #245fcb; border-color: #b7cae9; background: #f5f8fe; }
+    .card-arrow:hover { color: #edf4ff; transform: scale(1.08); }
+    .card-arrow:disabled { opacity: .24; cursor: default; transform: none; }
+    .card-arrow svg { width: 30px; height: 48px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    #previousSection { left: max(12px, calc((100vw - 940px) / 2 - 58px)); }
+    #nextSection { right: max(12px, calc((100vw - 940px) / 2 - 58px)); }
+    body[data-theme="light"] .card-arrow { color: #77869a; }
+    body[data-theme="light"] .card-arrow:hover { color: #245fcb; }
     @media (max-width: 760px) {
-      .shell { width: calc(100% - 74px); padding: 82px 0 24px; }
-      .card-arrow { width: 38px; height: 38px; }
-      #previousSection { left: 8px; }
-      #nextSection { right: 8px; }
+      .shell { width: calc(100% - 110px); padding: 82px 0 24px; }
+      .card-arrow { width: 38px; height: 54px; }
+      #previousSection { left: 7px; }
+      #nextSection { right: 7px; }
       section { min-height: 0; }
     }
     @media (max-width: 420px) {
-      .shell { width: calc(100% - 68px); }
-      .card-arrow { width: 34px; height: 34px; }
+      .shell { width: calc(100% - 110px); }
+      .card-arrow { width: 36px; height: 48px; }
       #previousSection { left: 6px; }
       #nextSection { right: 6px; }
       .toolbar .bar { width: 42px; }
@@ -367,8 +367,8 @@
       </div>
     </header>
 
-    <button class="card-arrow" id="previousSection" type="button" aria-label="Previous section" title="Previous section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"></path></svg></button>
-    <button class="card-arrow" id="nextSection" type="button" aria-label="Next section" title="Next section"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg></button>
+    <button class="card-arrow" id="previousSection" type="button" aria-label="Previous section" title="Previous section"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="m17 8-10 16 10 16"></path></svg></button>
+    <button class="card-arrow" id="nextSection" type="button" aria-label="Next section" title="Next section"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="m7 8 10 16-10 16"></path></svg></button>
 
     <nav aria-label="Jump to section">
       <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
