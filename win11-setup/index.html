@@ -83,6 +83,118 @@
       .copy { padding-inline: 8px; }
       .copy .copy-label { display: none; }
     }
+    /* Refined dashboard layout */
+    :root {
+      color-scheme: light;
+      --bg: #f4f6f9;
+      --panel: #fff;
+      --panel-raised: #f7f9fc;
+      --line: #e3e8ef;
+      --text: #172334;
+      --muted: #687789;
+      --accent: #245fcb;
+      --green: #18864b;
+      --code: #f5f7fa;
+    }
+    body {
+      background: #f4f6f9;
+      color: var(--text);
+      font: 15px/1.55 "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    }
+    .shell {
+      width: min(1180px, calc(100% - 56px));
+      padding: 48px 0 64px;
+      display: grid;
+      grid-template-columns: 205px minmax(0, 1fr);
+      column-gap: 42px;
+      align-items: start;
+    }
+    header { grid-column: 2; grid-row: 1; padding: 0 0 26px; }
+    .eyebrow { color: #315fae; font-size: .7rem; letter-spacing: .14em; }
+    h1 { margin: 7px 0 8px; font-size: clamp(2rem, 4vw, 2.7rem); letter-spacing: -.055em; color: #142236; }
+    .subtitle { margin: 0; max-width: 650px; color: #647387; font-size: 1rem; }
+    .toolbar {
+      margin-top: 22px; padding: 12px 15px; max-width: 560px; gap: 12px;
+      border: 1px solid #e1e7ef; border-radius: 10px; background: #fff;
+      box-shadow: 0 2px 7px #19304d08;
+    }
+    .bar { width: 120px; height: 6px; background: #e8edf3; }
+    .bar span { background: #2f8d5a; }
+    .progress { color: #738196; font-size: .83rem; }
+    .progress strong { color: #29394e; }
+    .quiet-button { margin-left: auto; border-color: transparent; background: transparent; color: #738196; font-size: .8rem; }
+    .quiet-button:hover { color: #a33b3b; border-color: #f0dddd; background: #fff8f8; }
+    nav {
+      grid-column: 1; grid-row: 1 / span 20; position: sticky; top: 24px; align-self: start;
+      display: grid; gap: 5px; padding: 9px 0 0; border-right: 1px solid #e0e6ed;
+    }
+    nav::before { content: "YOUR CHECKLIST"; padding: 0 12px 9px; color: #98a3b1; font-size: .67rem; font-weight: 750; letter-spacing: .13em; }
+    nav a {
+      display: block; margin-right: 13px; padding: 9px 12px; border: 0; border-radius: 7px;
+      background: transparent; color: #66758a; font-size: .87rem; font-weight: 550;
+      transition: background .15s ease, color .15s ease;
+    }
+    nav a:hover { color: #244d91; background: #e9eff9; }
+    section {
+      grid-column: 2; scroll-margin-top: 20px; margin: 0 0 14px; padding: 21px 23px 19px;
+      border: 1px solid #e3e8ef; border-radius: 11px; background: #fff;
+      box-shadow: 0 2px 7px #19304d08;
+    }
+    .section-head { align-items: center; gap: 11px; margin-bottom: 12px; }
+    h2 { color: #1b2b40; font-size: 1.06rem; font-weight: 700; }
+    .section-head::before {
+      content: ""; width: 4px; height: 19px; flex: 0 0 4px; border-radius: 5px; background: #4780d7;
+    }
+    .section-note { margin-left: auto; color: #8b97a6; font-size: .78rem; }
+    .items { gap: 3px; }
+    .item { align-items: flex-start; gap: 10px; padding: 7px 8px; border-radius: 6px; color: #354458; }
+    .item:hover { background: #f7f9fc; }
+    .item input { width: 15px; height: 15px; margin-top: 4px; accent-color: #24764a; }
+    .item label { line-height: 1.5; }
+    .item strong { color: #1c2e44; font-weight: 650; }
+    .item.done label { color: #8b98a7; }
+    .code-row { align-items: center; gap: 7px; margin: 4px 0 9px 33px; }
+    .codebox { padding: 8px 11px; border-color: #e7ebf0; border-radius: 6px; background: #f7f9fb; }
+    code { color: #354b67; font-size: .83rem; }
+    .copy {
+      min-height: 34px; align-self: center; gap: 5px; padding: 6px 9px;
+      border-color: #e1e6ec; border-radius: 6px; color: #687789; background: #fff; font-size: .77rem;
+      transition: background .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .copy:hover { color: #245fcb; border-color: #b7cae9; background: #f5f8fe; }
+    .copy svg { width: 14px; height: 14px; }
+    .copy.copied { color: #187744; border-color: #b5ddc4; background: #f2fbf5; }
+    ol.steps { color: #354458; }
+    ol.steps li { padding: 3px 0 3px 4px; }
+    ol.steps li::marker { color: #4777bd; }
+    .subgroup { margin: 13px 0 5px 33px; color: #475b75; font-size: .82rem; letter-spacing: .01em; }
+    .callout { margin: 12px 0 0 33px; padding: 9px 12px; border: 1px solid #f1e2bd; border-left: 3px solid #d19a35; border-radius: 6px; background: #fffbf2; color: #78633d; font-size: .82rem; }
+    footer { grid-column: 2; padding: 8px 2px; color: #97a1ad; font-size: .77rem; }
+    :focus-visible { outline: 3px solid #8bb5f5; outline-offset: 2px; }
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 28px, 620px); display: flex; flex-direction: column; gap: 0; padding-top: 26px; }
+      header, nav, section, footer { width: 100%; }
+      header { padding-bottom: 17px; }
+      nav { position: static; display: flex; overflow-x: auto; flex-wrap: nowrap; gap: 5px; border: 0; padding: 0 0 16px; }
+      nav::before { display: none; }
+      nav a { flex: 0 0 auto; margin: 0; padding: 7px 10px; border: 1px solid #e1e6ec; background: #fff; font-size: .8rem; }
+      section { padding: 17px 14px 15px; }
+      .section-head { flex-wrap: wrap; }
+      .section-note { margin-left: 0; width: 100%; padding-left: 15px; }
+      .toolbar { max-width: none; gap: 9px; }
+      .bar { width: 76px; }
+      .code-row { margin-left: 0; }
+      .subgroup, .callout { margin-left: 0; }
+    }
+    @media (max-width: 420px) {
+      .shell { width: calc(100% - 20px); }
+      .toolbar { padding: 10px; }
+      .bar { width: 54px; }
+      .quiet-button { padding-inline: 5px; }
+      .copy { width: 36px; padding: 6px; }
+      .copy .copy-label { display: none; }
+      code { font-size: .77rem; }
+    }
   </style>
 </head>
 <body>
