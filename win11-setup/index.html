@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0d1117">
+  <title>Windows 11 Fresh Setup</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0d1117;
+      --panel: #161b22;
+      --panel-raised: #1c232d;
+      --line: #303945;
+      --text: #e6edf3;
+      --muted: #9aa7b5;
+      --accent: #70b7ff;
+      --green: #3fb950;
+      --code: #0a0f14;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: radial-gradient(ellipse at 50% -20%, #1d3550 0, transparent 52%), var(--bg);
+      color: var(--text);
+      font: 15px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    .shell { width: min(1060px, calc(100% - 32px)); margin: 0 auto; padding: 42px 0 80px; }
+    header { padding: 8px 0 30px; }
+    .eyebrow { color: var(--accent); font-size: .76rem; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 8px 0 4px; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.12; letter-spacing: -.045em; }
+    .subtitle { margin: 10px 0 0; color: var(--muted); max-width: 640px; }
+    .toolbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+    .progress { color: var(--muted); font-size: .88rem; }
+    .progress strong { color: var(--text); }
+    .bar { width: 150px; height: 7px; border-radius: 99px; background: #26303b; overflow: hidden; }
+    .bar span { display: block; height: 100%; width: 0; background: var(--green); transition: width .2s ease; }
+    button { font: inherit; }
+    .quiet-button {
+      border: 1px solid var(--line); border-radius: 7px; padding: 6px 10px;
+      background: var(--panel); color: var(--muted); cursor: pointer;
+    }
+    .quiet-button:hover { color: var(--text); border-color: #69798a; }
+    nav { display: flex; gap: 8px; flex-wrap: wrap; padding: 0 0 24px; }
+    nav a { color: var(--muted); text-decoration: none; border: 1px solid var(--line); background: #111820; border-radius: 99px; padding: 5px 11px; font-size: .84rem; }
+    nav a:hover { color: var(--text); border-color: #69798a; }
+    section { scroll-margin-top: 18px; margin: 0 0 18px; padding: 23px; border: 1px solid var(--line); border-radius: 13px; background: color-mix(in srgb, var(--panel) 94%, transparent); box-shadow: 0 8px 28px #0002; }
+    .section-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 15px; }
+    h2 { margin: 0; font-size: 1.22rem; letter-spacing: -.015em; }
+    .section-note { color: var(--muted); font-size: .84rem; }
+    .items { display: grid; gap: 8px; }
+    .item { display: flex; align-items: flex-start; gap: 11px; padding: 8px 10px; border-radius: 8px; }
+    .item:hover { background: #ffffff06; }
+    .item input { accent-color: var(--green); margin: 5px 0 0; width: 16px; height: 16px; flex: 0 0 auto; cursor: pointer; }
+    .item label { cursor: pointer; flex: 1; }
+    .item.done label { color: #81909f; text-decoration: line-through; text-decoration-color: #657383; }
+    .detail { color: var(--muted); font-size: .9rem; }
+    .tag { display: inline-block; margin-left: 6px; color: #9acbff; background: #19324a; border-radius: 4px; padding: 0 6px; font-size: .72rem; vertical-align: 1px; }
+    .code-row { display: flex; gap: 10px; align-items: stretch; margin: 8px 0 8px 27px; }
+    code { color: #d2e4f5; font: .9rem/1.55 ui-monospace, SFMono-Regular, Consolas, monospace; overflow-wrap: anywhere; }
+    .codebox { flex: 1; min-width: 0; padding: 11px 13px; border: 1px solid #26313d; border-radius: 8px; background: var(--code); }
+    .copy {
+      display: inline-flex; align-items: center; justify-content: center; gap: 7px; align-self: flex-start;
+      min-height: 38px; padding: 7px 10px; border: 1px solid var(--line); border-radius: 7px;
+      color: var(--muted); background: var(--panel-raised); cursor: pointer; white-space: nowrap; font-size: .82rem;
+    }
+    .copy:hover { color: var(--text); border-color: #718195; }
+    .copy svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+    .copy.copied { color: #7ee787; border-color: #28643a; }
+    ol.steps { margin: 0; padding-left: 25px; }
+    ol.steps li { padding: 4px 0 4px 4px; }
+    ol.steps li::marker { color: var(--accent); font-weight: 700; }
+    .subgroup { margin: 15px 0 7px; color: #b7c4d1; font-size: .93rem; font-weight: 700; }
+    .callout { margin-top: 14px; padding: 11px 13px; border-left: 3px solid #d29922; border-radius: 5px; background: #d2992212; color: #c5b998; font-size: .88rem; }
+    footer { padding: 13px 3px; color: #758291; font-size: .8rem; }
+    @media (max-width: 600px) {
+      .shell { width: min(100% - 20px, 1060px); padding-top: 26px; }
+      section { padding: 17px 13px; }
+      .section-head { display: block; }
+      .section-note { display: block; margin-top: 3px; }
+      .code-row { margin-left: 0; }
+      .copy { padding-inline: 8px; }
+      .copy .copy-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="eyebrow">Personal checklist</div>
+      <h1>Windows 11 Fresh Setup</h1>
+      <p class="subtitle">A tidy run-through of the setup steps, tools, and preferences to restore after a fresh Windows install.</p>
+      <div class="toolbar" aria-label="Checklist progress">
+        <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+        <div class="progress"><strong id="progressCount">0 / 0</strong> completed</div>
+        <button class="quiet-button" id="resetButton" type="button">Reset checklist</button>
+      </div>
+    </header>
+
+    <nav aria-label="Jump to section">
+      <a href="#initial">Initial setup</a><a href="#after-setup">After setup</a><a href="#media">Media server</a>
+      <a href="#explorer">File Explorer</a><a href="#agents">AI agents</a><a href="#packages">Packages</a>
+    </nav>
+
+    <section id="initial">
+      <div class="section-head"><h2>Initial setup</h2><span class="section-note">During Windows installation</span></div>
+      <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">Open Command Prompt with <strong>Shift + F10</strong>, then start local account setup.</label></div>
+      <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-device"><label for="item-device">Set device name to <strong>win6970</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-user"><label for="item-user">Set user name to <strong>nahid</strong>.</label></div>
+      </div>
+    </section>
+
+    <section id="after-setup">
+      <div class="section-head"><h2>After setup</h2><span class="section-note">Core tools and machine setup</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-policy"><label for="item-policy">Allow locally run PowerShell scripts for the current user.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>Set-ExecutionPolicy RemoteSigned -Scope CurrentUser</code></div><button class="copy" type="button" data-copy="Set-ExecutionPolicy RemoteSigned -Scope CurrentUser" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-winget"><label for="item-winget">Update the winget source, then install UniGet from the Store.</label></div>
+        <div class="code-row"><div class="codebox"><code>winget source update</code></div><button class="copy" type="button" data-copy="winget source update" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+        <div class="item"><input type="checkbox" id="item-updates"><label for="item-updates">Update everything first.</label></div>
+        <div class="item"><input type="checkbox" id="item-source"><label for="item-source">Add the winget source.</label></div>
+        <div class="item"><input type="checkbox" id="item-scoop"><label for="item-scoop">Install Git from the Scoop main bucket; set up Scoop with UniGet.</label></div>
+        <div class="item"><input type="checkbox" id="item-python"><label for="item-python">Install Python and PowerShell, then install uv with pip.</label></div>
+        <div class="code-row"><div class="codebox"><code>pip install uv</code></div><button class="copy" type="button" data-copy="pip install uv" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+        <div class="item"><input type="checkbox" id="item-deps"><label for="item-deps">Run the dependency installer (replace <code>XXX</code> with the intended argument).</label></div>
+        <div class="code-row"><div class="codebox"><code>python C:\@delta\ms1\install_deps.py XXX</code></div><button class="copy" type="button" data-copy="python C:\@delta\ms1\install_deps.py XXX" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+        <div class="item"><input type="checkbox" id="item-misc"><label for="item-misc">Set up <strong>mklink</strong>, Helium, the Bitwarden extension, <strong>ms1 + db</strong>, and Android CLI / android-clt.</label></div>
+        <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Install a Bangla font from Windows Settings so Bangla renders properly in Flask 5018.</label></div>
+      </div>
+    </section>
+
+    <section id="media">
+      <div class="section-head"><h2>Sonarr / Radarr / Prowlarr / qBittorrent</h2><span class="section-note">Media automation setup</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">In Prowlarr, test qBittorrent first; then troubleshoot qBittorrent if needed. Check authentication settings if there are connection issues.</label></div>
+        <div class="item"><input type="checkbox" id="item-seed"><label for="item-seed">In qBittorrent, set completed downloads to stop seeding at a ratio of 0.</label></div>
+      </div>
+    </section>
+
+    <section id="explorer">
+      <div class="section-head"><h2>File Explorer</h2><span class="section-note">Turn off folder grouping globally</span></div>
+      <ol class="steps">
+        <li>Open File Explorer and choose any folder.</li>
+        <li>From the toolbar, select <strong>Sort → Group by → None</strong>.</li>
+        <li>Open the three dots (<strong>See more</strong>) menu and choose <strong>Options</strong>.</li>
+        <li>In Folder Options, open the <strong>View</strong> tab and select <strong>Apply to Folders</strong>.</li>
+        <li>Confirm with <strong>Yes</strong>, then select <strong>OK</strong>.</li>
+      </ol>
+      <div class="item" style="padding-left:0"><input type="checkbox" id="item-explorer"><label for="item-explorer">Apply the grouping preference to all folders.</label></div>
+    </section>
+
+    <section id="agents">
+      <div class="section-head"><h2>AI agents</h2><span class="section-note">PowerShell and npm installers</span></div>
+      <div class="subgroup">Google Antigravity CLI</div>
+      <div class="code-row"><div class="codebox"><code>irm https://antigravity.google/cli/install.ps1 | iex</code></div><button class="copy" type="button" data-copy="irm https://antigravity.google/cli/install.ps1 | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="subgroup">OpenAI Codex CLI</div>
+      <div class="code-row"><div class="codebox"><code>npm install -g @openai/codex</code></div><button class="copy" type="button" data-copy="npm install -g @openai/codex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="subgroup">Kiro CLI</div>
+      <div class="code-row"><div class="codebox"><code>irm 'https://cli.kiro.dev/install.ps1' | iex</code></div><button class="copy" type="button" data-copy="irm 'https://cli.kiro.dev/install.ps1' | iex" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="callout">These installer commands come from your notes. Review remote install scripts before running them.</div>
+    </section>
+
+    <section id="packages">
+      <div class="section-head"><h2>Packages to install</h2><span class="section-note">Useful command-line tools and fonts</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-fzf"><label for="item-fzf">Install <strong>fzf</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-bat"><label for="item-bat">Install <strong>bat</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-posh"><label for="item-posh">Install <strong>oh-my-posh</strong>, then install the JetBrains Mono font.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>oh-my-posh.exe font install jetbrainsmono</code></div><button class="copy" type="button" data-copy="oh-my-posh.exe font install jetbrainsmono" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items"><div class="item"><input type="checkbox" id="item-android"><label for="item-android">Install Android CLI tools.</label></div></div>
+      <div class="code-row"><div class="codebox"><code>curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o "%TEMP%\i.cmd" &amp;&amp; "%TEMP%\i.cmd"</code></div><button class="copy" type="button" data-copy="curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o &quot;%TEMP%\i.cmd&quot; &amp;&amp; &quot;%TEMP%\i.cmd&quot;" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+    </section>
+    <footer>Checklist progress is saved in this browser on this device.</footer>
+  </main>
+  <script>
+    (() => {
+      const storageKey = 'win11-fresh-setup-checklist-v1';
+      const boxes = [...document.querySelectorAll('input[type="checkbox"]')];
+      const progressCount = document.getElementById('progressCount');
+      const progressBar = document.getElementById('progressBar');
+      let saved = {};
+      try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch { saved = {}; }
+
+      function updateProgress() {
+        const complete = boxes.filter(box => box.checked).length;
+        progressCount.textContent = `${complete} / ${boxes.length}`;
+        progressBar.style.width = `${boxes.length ? complete / boxes.length * 100 : 0}%`;
+        boxes.forEach(box => box.closest('.item')?.classList.toggle('done', box.checked));
+        try { localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(boxes.map(box => [box.id, box.checked])))); } catch { /* Storage may be disabled. */ }
+      }
+      boxes.forEach(box => {
+        box.checked = saved[box.id] === true;
+        box.addEventListener('change', updateProgress);
+      });
+      updateProgress();
+
+      document.getElementById('resetButton').addEventListener('click', () => {
+        boxes.forEach(box => { box.checked = false; });
+        updateProgress();
+      });
+
+      document.querySelectorAll('.copy').forEach(button => {
+        button.addEventListener('click', async () => {
+          const original = button.innerHTML;
+          try {
+            await navigator.clipboard.writeText(button.dataset.copy);
+            button.classList.add('copied');
+            button.querySelector('.copy-label').textContent = 'Copied';
+            button.setAttribute('aria-label', 'Copied to clipboard');
+            window.setTimeout(() => {
+              button.innerHTML = original;
+              button.classList.remove('copied');
+              button.setAttribute('aria-label', 'Copy command');
+            }, 1400);
+          } catch {
+            button.querySelector('.copy-label').textContent = 'Copy failed';
+            window.setTimeout(() => { button.innerHTML = original; }, 1400);
+          }
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
