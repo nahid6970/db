@@ -364,8 +364,8 @@
     #media { --section-accent: #bd4965; }
     #preferences { --section-accent: #3865be; }
     h1 {
-      font-family: "Roboto", "Segoe UI Variable Display", "Segoe UI", sans-serif;
-      font-weight: 800; letter-spacing: -.035em;
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: clamp(2rem, 3.8vw, 2.55rem); font-weight: 400; line-height: 1.12; letter-spacing: .015em; text-transform: uppercase;
       background: linear-gradient(100deg, #176ac2 5%, #8b4ec3 52%, #d34f73 96%);
       background-clip: text; -webkit-background-clip: text; color: transparent;
     }
@@ -413,7 +413,7 @@
       --tab-accent: #3865be;
       flex: 1 1 0; justify-content: center; gap: 7px; min-width: 0; min-height: 42px; margin: 0; padding: 8px 8px;
       border: 1px solid transparent; border-radius: 8px; color: #526176; background: transparent;
-      font-size: .76rem; font-weight: 650; line-height: 1.25; text-align: center; transition: color .15s ease, background .15s ease, border-color .15s ease;
+      font-family: "Roboto", Helvetica, Arial, sans-serif; font-size: .78rem; font-weight: 700; line-height: 1.25; text-align: center; transition: color .15s ease, background .15s ease, border-color .15s ease;
     }
     nav a:nth-of-type(1) { --tab-accent: #0785a8; }
     nav a:nth-of-type(2) { --tab-accent: #25814e; }
@@ -459,7 +459,7 @@
       <a href="#developer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg><span>Developer setup</span></a>
       <a href="#apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Apps &amp; devices</span></a>
       <a href="#media"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg><span>Media stack</span></a>
-      <a href="#preferences"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.6-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1-.1 1.8Z"></path></svg><span>Preferences</span></a>
+      <a href="#preferences"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h7m4 0h5M4 12h3m4 0h9M4 18h9m4 0h3"></path><circle cx="13" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="15" cy="18" r="2"></circle></svg><span>Preferences</span></a>
     </nav>
 
     <section id="initial">
@@ -522,7 +522,7 @@
     </section>
 
     <section id="preferences">
-      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"></circle><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.6a8 8 0 0 1-1.6.9l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.6-.9l-1.7.6-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.9l-1.4-1.1 1.4-2.4 1.7.6a8 8 0 0 1 1.6-.9l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.6.9l1.7-.6 1.4 2.4-1.4 1.1a7 7 0 0 1-.1 1.8Z"></path></svg></span><h2>Preferences &amp; final checks</h2><span class="section-note">Restore your daily workflow</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h7m4 0h5M4 12h3m4 0h9M4 18h9m4 0h3"></path><circle cx="13" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="15" cy="18" r="2"></circle></svg></span><h2>Preferences &amp; final checks</h2><span class="section-note">Restore your daily workflow</span></div>
       <div class="subgroup" style="margin-left:0">Remove File Explorer grouping</div>
       <ol class="steps">
         <li>Open a folder and choose <strong>Sort → Group by → None</strong>.</li>
