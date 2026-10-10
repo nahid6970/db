@@ -28988,7 +28988,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3680015,
                 "id": 1416,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -187759,5 +187759,140 @@
         "status": "Continuing",
         "episodes": [],
         "tvmaze_id": 94641
+    },
+    {
+        "id": 259,
+        "tmdb_id": 226529,
+        "external_ids": {
+            "tmdb": 226529
+        },
+        "title": "Light Shop",
+        "year": "2024",
+        "overview": "In a mysterious shop that sells lamps, the dead may return to the world of the living, while the living may not walk out alive.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/iRgH73xibpeNZ8zzPDkIpxuoKgC.jpg",
+        "directory_path": "",
+        "genres": [
+            "Mystery",
+            "Drama"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Strangers",
+                "air_date": "2024-12-04",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-04T12:00:00+00:00",
+                "overview": "A man is curious about a woman sitting at a bus stop every night.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/546/1366301.jpg",
+                "tvmaze_episode_id": 3046988,
+                "id": 1,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "The Door",
+                "air_date": "2024-12-04",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-04T12:00:00+00:00",
+                "overview": "A woman moves into an old house and experiences strange things. Then she faces hidden secrets.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/546/1366302.jpg",
+                "tvmaze_episode_id": 3046989,
+                "id": 2,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "The Detective",
+                "air_date": "2024-12-04",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-04T12:00:00+00:00",
+                "overview": "A detective investigates the unnatural death of an old man.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/546/1366303.jpg",
+                "tvmaze_episode_id": 3046990,
+                "id": 3,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Outsiders",
+                "air_date": "2024-12-04",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-04T12:00:00+00:00",
+                "overview": "An undertaker and a nurse working at the same hospital face mysterious situations.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/546/1366304.jpg",
+                "tvmaze_episode_id": 3046991,
+                "id": 4,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Reunion",
+                "air_date": "2024-12-11",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-11T12:00:00+00:00",
+                "overview": "A bus driver gets anxious on a rainy night when things take an unexpected turn.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/547/1368830.jpg",
+                "tvmaze_episode_id": 3046992,
+                "id": 5,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Three-day Funeral",
+                "air_date": "2024-12-11",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-11T12:00:00+00:00",
+                "overview": "Will the people who tried to protect their beloved ones be able to reunite with them?",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/547/1368831.jpg",
+                "tvmaze_episode_id": 3046993,
+                "id": 6,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Afterlife",
+                "air_date": "2024-12-18",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-18T12:00:00+00:00",
+                "overview": "The light shop owner tells a customer the story of how he ended up in the light shop.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/548/1371114.jpg",
+                "tvmaze_episode_id": 3046994,
+                "id": 7,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Light",
+                "air_date": "2024-12-18",
+                "airtime": "18:00",
+                "air_datetime": "2024-12-18T12:00:00+00:00",
+                "overview": "Young Ji, who once was in a coma, brings hope and support to the patients.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/548/1371115.jpg",
+                "tvmaze_episode_id": 3046995,
+                "id": 8,
+                "watched": false,
+                "notify": "seen"
+            }
+        ],
+        "tvmaze_id": 74807,
+        "episode_source": "tvmaze"
     }
 ]
