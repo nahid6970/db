@@ -7,7 +7,7 @@
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <title>Windows 11 Fresh Setup</title>
   <style>
     :root {
@@ -356,6 +356,49 @@
     header.compact { height: 0; margin: 0; padding: 0; }
     header.compact .intro-copy { display: none; }
     .intro-copy h1 { text-align: center; }
+    /* Colorful section identity with readable light and dark palettes */
+    #initial { --section-accent: #0785a8; }
+    #essentials { --section-accent: #25814e; }
+    #developer { --section-accent: #7652bf; }
+    #apps { --section-accent: #bd6818; }
+    #media { --section-accent: #bd4965; }
+    #preferences { --section-accent: #3865be; }
+    h1 {
+      font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-weight: 400; letter-spacing: .015em; text-transform: uppercase;
+      background: linear-gradient(100deg, #176ac2 5%, #8b4ec3 52%, #d34f73 96%);
+      background-clip: text; -webkit-background-clip: text; color: transparent;
+    }
+    h2 { font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace; font-weight: 700; letter-spacing: -.04em; color: var(--section-accent); }
+    section {
+      border-top: 3px solid var(--section-accent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--section-accent) 7%, #fff), #fff 58%);
+    }
+    .section-head { border-bottom-color: color-mix(in srgb, var(--section-accent) 24%, #edf0f4); }
+    .section-icon {
+      border-color: color-mix(in srgb, var(--section-accent) 32%, #fff);
+      background: color-mix(in srgb, var(--section-accent) 11%, #fff);
+      color: var(--section-accent);
+    }
+    .item input { accent-color: var(--section-accent); }
+    body[data-theme="dark"] h1 { color: transparent; }
+    body[data-theme="dark"] h2 { color: var(--section-accent); }
+    body[data-theme="dark"] #initial { --section-accent: #5bc8e4; }
+    body[data-theme="dark"] #essentials { --section-accent: #65cb8b; }
+    body[data-theme="dark"] #developer { --section-accent: #b198f2; }
+    body[data-theme="dark"] #apps { --section-accent: #f0aa60; }
+    body[data-theme="dark"] #media { --section-accent: #f08da4; }
+    body[data-theme="dark"] #preferences { --section-accent: #8eb4ff; }
+    body[data-theme="dark"] section {
+      border-top-color: var(--section-accent);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--section-accent) 10%, #111720), #111720 62%);
+    }
+    body[data-theme="dark"] .section-head { border-bottom-color: color-mix(in srgb, var(--section-accent) 25%, #26313e); }
+    body[data-theme="dark"] .section-icon {
+      border-color: color-mix(in srgb, var(--section-accent) 34%, #111720);
+      background: color-mix(in srgb, var(--section-accent) 14%, #111720);
+      color: var(--section-accent);
+    }
   </style>
 </head>
 <body data-theme="dark">
