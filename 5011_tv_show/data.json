@@ -187916,5 +187916,25 @@
         "status": "Continuing",
         "episodes": [],
         "tvmaze_id": 45562
+    },
+    {
+        "id": 261,
+        "tmdb_id": 270667,
+        "external_ids": {
+            "tmdb": 270667
+        },
+        "title": "Manvat Murders",
+        "year": "2024",
+        "overview": "Seven murders; Unsolved for over one & half year. Will the ace cop from Mumbai, Ramakant Kulkarni be able to bring Justice?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/nuxlCzA7PZLjhfoju7QF5BaTFwE.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Drama"
+        ],
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Continuing",
+        "episodes": []
     }
 ]

@@ -3074,5 +3074,226 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-10T14:31:51.445910"
+    },
+    {
+        "id": 109,
+        "tmdb_id": 1515692,
+        "external_ids": {
+            "tmdb": 1515692,
+            "imdb": "tt32012509"
+        },
+        "radarr_id": null,
+        "title": "Baththa",
+        "year": "2026",
+        "release_date": "2026-10-01",
+        "digital_release_date": "",
+        "category": "Tamil / Telugu",
+        "overview": "In 1986 Madras, a timid eight-year-old boy accidentally traps a feared gangster inside a deserted school toilet. As the gangster is forced to confront hunger, loneliness and his own vulnerability, an unlikely bond begins to grow between the two, changing their lives forever.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/cWY636zXGECkRHbrqhQdFyP9n69.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama",
+            "Comedy",
+            "Action"
+        ],
+        "runtime": 159,
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:33:18.078228"
+    },
+    {
+        "id": 110,
+        "tmdb_id": 1022074,
+        "external_ids": {
+            "tmdb": 1022074,
+            "imdb": "tt29383191"
+        },
+        "radarr_id": null,
+        "title": "Maareesan",
+        "year": "2025",
+        "release_date": "2025-07-25",
+        "digital_release_date": "2025-08-22",
+        "category": "Tamil / Telugu",
+        "overview": "A petty thief embarks on a road trip with an elderly man suffering from memory loss under deceptive pretenses. As they journey across Tamil Nadu, the promise of an easy con unravels into a quietly shifting connection, with both men hiding secrets of their own.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/c7JGfFgMnNuyF2Q4FSu7Kgip3mK.jpg",
+        "directory_path": "",
+        "genres": [
+            "Thriller",
+            "Drama",
+            "Action"
+        ],
+        "runtime": 152,
+        "rating": 4,
+        "tmdb_rating": 7.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:38:00.878107"
+    },
+    {
+        "id": 111,
+        "tmdb_id": 1339055,
+        "external_ids": {
+            "tmdb": 1339055,
+            "imdb": "tt33294533"
+        },
+        "radarr_id": null,
+        "title": "Ronth",
+        "year": "2025",
+        "release_date": "2025-06-13",
+        "digital_release_date": "",
+        "category": "International",
+        "overview": "Two patrol officers face mounting tensions during a night shift as they navigate dangerous calls while confronting their strained partnership and personal demons.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/50MxvHckUkNgPI4EzjMwcWAq7ea.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Drama"
+        ],
+        "runtime": 121,
+        "rating": 4,
+        "tmdb_rating": 7.1,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:45:11.697830"
+    },
+    {
+        "id": 112,
+        "tmdb_id": 1261125,
+        "external_ids": {
+            "tmdb": 1261125,
+            "imdb": "tt31969600"
+        },
+        "radarr_id": null,
+        "title": "Thudarum",
+        "year": "2025",
+        "release_date": "2025-04-23",
+        "digital_release_date": "2025-05-30",
+        "category": "International",
+        "overview": "A taxi driver finds himself embroiled in a dangerous conspiracy after his car is confiscated by a corrupt police officer.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/uOTDBabtxHA6szYKQNQe9Y7rFlv.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Drama",
+            "Thriller"
+        ],
+        "runtime": 164,
+        "rating": 4,
+        "tmdb_rating": 7.4,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:45:23.195450"
+    },
+    {
+        "id": 113,
+        "tmdb_id": 1070186,
+        "external_ids": {
+            "tmdb": 1070186,
+            "imdb": "tt36616410"
+        },
+        "radarr_id": null,
+        "title": "Eko",
+        "year": "2025",
+        "release_date": "2025-11-21",
+        "digital_release_date": "2025-12-31",
+        "category": "International",
+        "overview": "In the misty hills of Kaattukunnu, an aging woman and her servant boy struggle to survive the ghosts of the past, as the hunt for Kuriachan \u2014 a legendary dog breeder and outlaw \u2014 blurs the line between myth, memory, and vengeance, revealing that even in absence, he still rules the hills.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tXdFEmtqLm8tewIErDJgnbTS9qs.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama",
+            "Mystery"
+        ],
+        "runtime": 127,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:45:33.347663"
+    },
+    {
+        "id": 114,
+        "tmdb_id": 1469458,
+        "external_ids": {
+            "tmdb": 1469458,
+            "imdb": "tt36628923"
+        },
+        "radarr_id": null,
+        "title": "Sambhavam Adhyayam Onnu",
+        "year": "2026",
+        "release_date": "2026-03-06",
+        "digital_release_date": "2026-04-15",
+        "category": "International",
+        "overview": "Three Kerala Police officers venture into a mysterious forest on the Kerala-Tamil Nadu border to find a missing officer. They encounter strange time-related phenomena, uncovering the hidden secrets of Velloorkkatt forest.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/4ASKGsPMbzChx0YX5Pqc9HFXQm3.jpg",
+        "directory_path": "",
+        "genres": [
+            "Fantasy",
+            "Thriller",
+            "Drama"
+        ],
+        "runtime": 127,
+        "rating": 4,
+        "tmdb_rating": 7.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:45:46.992653"
+    },
+    {
+        "id": 115,
+        "tmdb_id": 1410937,
+        "external_ids": {
+            "tmdb": 1410937,
+            "imdb": "tt35254624"
+        },
+        "radarr_id": null,
+        "title": "Balan - The Boy",
+        "year": "2026",
+        "release_date": "2026-06-19",
+        "digital_release_date": "2026-07-31",
+        "category": "International",
+        "overview": "A teenage boy searches for his missing mother following a turbulent childhood and her subsequent disappearance, exploring his search for closure and the truth about his past.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/boKxdR9tgXfkazf6yWgiDdleBy0.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama",
+            "Thriller"
+        ],
+        "runtime": 140,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:46:32.069889"
+    },
+    {
+        "id": 116,
+        "tmdb_id": 1065913,
+        "external_ids": {
+            "tmdb": 1065913,
+            "imdb": "tt25153418"
+        },
+        "radarr_id": null,
+        "title": "Purusha Pretham",
+        "year": "2023",
+        "release_date": "2023-03-24",
+        "digital_release_date": "2023-03-24",
+        "category": "International",
+        "overview": "Purusha Pretham, focuses on Inspector Sebastian as he handles an unidentified male body and becomes entangled in a procedural, personal and emotional maze. Somewhere between his personal troubles and procedural flaws, all hell breaks loose when he misplaces the corpse. Will Sebastian be able to sort out the mess before the deceased man's family arrives to identify him?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/vRcYxEyWqVFKpH8HwP4EXRAhNHx.jpg",
+        "directory_path": "",
+        "genres": [
+            "Comedy",
+            "Crime",
+            "Drama"
+        ],
+        "runtime": 152,
+        "rating": 3,
+        "tmdb_rating": 6.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:48:53.551086"
     }
 ]
