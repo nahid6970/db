@@ -399,6 +399,38 @@
       background: color-mix(in srgb, var(--section-accent) 14%, #111720);
       color: var(--section-accent);
     }
+    nav {
+      display: flex; align-items: center; gap: 7px; width: 100%; margin: 0 0 14px; padding: 8px;
+      overflow-x: auto; overscroll-behavior-inline: contain; scrollbar-width: thin;
+      border: 1px solid #e3e8ef; border-radius: 12px; background: #ffffffd9;
+      box-shadow: 0 3px 12px #2035520d;
+    }
+    nav::before { content: "SECTIONS"; flex: 0 0 auto; align-self: center; padding: 0 7px; color: #8a97a8; font-size: .65rem; font-weight: 800; letter-spacing: .12em; }
+    nav a {
+      --tab-accent: #3865be;
+      flex: 1 1 0; justify-content: center; gap: 7px; min-width: 0; min-height: 42px; margin: 0; padding: 8px 8px;
+      border: 1px solid transparent; border-radius: 8px; color: #526176; background: transparent;
+      font-size: .76rem; font-weight: 650; line-height: 1.25; text-align: center; transition: color .15s ease, background .15s ease, border-color .15s ease;
+    }
+    nav a:nth-of-type(1) { --tab-accent: #0785a8; }
+    nav a:nth-of-type(2) { --tab-accent: #25814e; }
+    nav a:nth-of-type(3) { --tab-accent: #7652bf; }
+    nav a:nth-of-type(4) { --tab-accent: #bd6818; }
+    nav a:nth-of-type(5) { --tab-accent: #bd4965; }
+    nav a:nth-of-type(6) { --tab-accent: #3865be; }
+    nav a[aria-current="location"] { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 24%, white); background: color-mix(in srgb, var(--tab-accent) 10%, white); }
+    nav a:hover { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 22%, white); background: color-mix(in srgb, var(--tab-accent) 7%, white); }
+    nav a svg { width: 16px; height: 16px; flex: 0 0 16px; }
+    body[data-theme="dark"] nav { border-color: #26313e; background: #111720ed; box-shadow: 0 3px 12px #0003; }
+    body[data-theme="dark"] nav::before { color: #8391a3; }
+    body[data-theme="dark"] nav a { color: #a6b3c2; }
+    body[data-theme="dark"] nav a[aria-current="location"] { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 30%, #111720); background: color-mix(in srgb, var(--tab-accent) 15%, #111720); }
+    body[data-theme="dark"] nav a:hover { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 32%, #111720); background: color-mix(in srgb, var(--tab-accent) 12%, #111720); }
+    @media (max-width: 760px) {
+      nav { gap: 5px; padding: 6px; }
+      nav::before { display: none; }
+      nav a { flex: 0 0 auto; min-height: 38px; padding: 7px 9px; white-space: nowrap; }
+    }
   </style>
 </head>
 <body data-theme="dark">
@@ -545,6 +577,7 @@
       updateProgress();
 
       const sections = [...document.querySelectorAll('main > section')];
+      const sectionLinks = [...document.querySelectorAll('nav a')];
       let activeSection = 0;
       const previousButton = document.getElementById('previousSection');
       const nextButton = document.getElementById('nextSection');
@@ -563,6 +596,15 @@
           section.hidden = i !== activeSection;
           if (i === activeSection) section.classList.remove('card-in');
         });
+        sectionLinks.forEach((link, i) => {
+          if (i === activeSection) {
+            link.setAttribute('aria-current', 'location');
+            const nav = link.closest('nav');
+            nav.scrollTo({ left: link.offsetLeft - nav.clientWidth / 2 + link.clientWidth / 2, behavior: 'smooth' });
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
         previousButton.disabled = activeSection === 0;
         nextButton.disabled = activeSection === sections.length - 1;
         alignArrowsToCard();
@@ -572,6 +614,10 @@
       window.addEventListener('scroll', alignArrowsToCard, { passive: true });
       previousButton.addEventListener('click', () => showSection(activeSection - 1));
       nextButton.addEventListener('click', () => showSection(activeSection + 1));
+      sectionLinks.forEach((link, index) => link.addEventListener('click', event => {
+        event.preventDefault();
+        showSection(index);
+      }));
       document.addEventListener('keydown', event => {
         if (event.altKey || event.ctrlKey || event.metaKey || event.target.closest('input, button, a, textarea, select')) return;
         if (event.key === 'ArrowLeft') showSection(activeSection - 1);
