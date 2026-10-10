@@ -386,12 +386,8 @@
 
     <section id="initial">
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
-      <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">For a local account, press <strong>Shift + F10</strong> and run the setup command.</label></div>
+      <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">Complete first-run setup: create a local account, name the PC <strong>win6970</strong>, and create the user <strong>nahid</strong>.</label></div>
       <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-      <div class="items">
-        <div class="item"><input type="checkbox" id="item-device"><label for="item-device">Name the PC <strong>win6970</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-user"><label for="item-user">Create the user <strong>nahid</strong>.</label></div>
-      </div>
     </section>
 
     <section id="essentials">
@@ -427,8 +423,7 @@
     <section id="apps">
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></span><h2>Apps &amp; devices</h2><span class="section-note">Install only the tools you use</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-tools"><label for="item-tools">Install <strong>fzf</strong>, <strong>bat</strong>, and <strong>oh-my-posh</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-font"><label for="item-font">Install JetBrains Mono for oh-my-posh.</label></div>
+        <div class="item"><input type="checkbox" id="item-tools"><label for="item-tools">Set up the shell tools: install <strong>fzf</strong>, <strong>bat</strong>, <strong>oh-my-posh</strong>, and its JetBrains Mono font.</label></div>
       </div>
       <div class="code-row"><div class="codebox"><code>oh-my-posh.exe font install jetbrainsmono</code></div><button class="copy" type="button" data-copy="oh-my-posh.exe font install jetbrainsmono" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
@@ -437,8 +432,7 @@
       </div>
       <div class="code-row"><div class="codebox"><code>curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o "%TEMP%\i.cmd" &amp;&amp; "%TEMP%\i.cmd"</code></div><button class="copy" type="button" data-copy="curl.exe -fsSL https://dl.google.com/android/cli/latest/windows_x86_64/install.cmd -o &quot;%TEMP%\i.cmd&quot; &amp;&amp; &quot;%TEMP%\i.cmd&quot;" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Download <a href="https://raw.githubusercontent.com/tazihad/bangla-fonts/main/vrinda.ttf" target="_blank" rel="noopener">Vrinda (vrinda.ttf)</a>, then open the downloaded file and choose <strong>Install</strong>.</label></div>
-        <div class="item"><input type="checkbox" id="item-bangla-restart"><label for="item-bangla-restart">Restart the PC to finish setting up the Vrinda font.</label></div>
+        <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Install Vrinda: <a href="https://raw.githubusercontent.com/tazihad/bangla-fonts/main/vrinda.ttf" target="_blank" rel="noopener">download vrinda.ttf</a>, open it and choose <strong>Install</strong>, then restart the PC.</label></div>
         <div class="item"><input type="checkbox" id="item-projects"><label for="item-projects">Restore <strong>ms1 + db</strong> and create any required <code>mklink</code> links.</label></div>
       </div>
     </section>
@@ -446,8 +440,7 @@
     <section id="media">
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg></span><h2>Media stack</h2><span class="section-note">Sonarr · Radarr · Prowlarr · qBittorrent</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">Set up qBittorrent first, then add it in Prowlarr and use Prowlarr's test connection. Fix the qBittorrent connection settings if the test fails.</label></div>
-        <div class="item"><input type="checkbox" id="item-seed"><label for="item-seed">Set qBittorrent to stop seeding when the ratio reaches <strong>0</strong>.</label></div>
+        <div class="item"><input type="checkbox" id="item-qbit-test"><label for="item-qbit-test">Configure qBittorrent to stop seeding at ratio <strong>0</strong>, connect it to Prowlarr, and confirm the test connection succeeds.</label></div>
         <div class="item"><input type="checkbox" id="item-media-test"><label for="item-media-test">Test the download client and indexer connections in each app after setup.</label></div>
       </div>
     </section>
