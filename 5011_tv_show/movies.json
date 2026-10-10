@@ -3046,5 +3046,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-08T10:34:02.423122"
+    },
+    {
+        "id": 108,
+        "tmdb_id": 1544847,
+        "external_ids": {
+            "tmdb": 1544847,
+            "imdb": "tt38265603"
+        },
+        "radarr_id": null,
+        "title": "Pradhama Drishtiya Kuttakkar",
+        "year": "2026",
+        "release_date": "2026-09-11",
+        "digital_release_date": "2026-10-09",
+        "category": "International",
+        "overview": "Follows a woman constable who joins the police force through appointment after the death of her husband.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/j1MIXRxgcFROKTR5XCfDBh8LNkF.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+        ],
+        "runtime": 161,
+        "rating": 3,
+        "tmdb_rating": 6.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-10T14:31:51.445910"
     }
 ]

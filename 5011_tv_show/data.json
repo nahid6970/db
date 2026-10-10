@@ -180986,7 +180986,7 @@
             "Mystery"
         ],
         "rating": null,
-        "tmdb_rating": 7.1,
+        "tmdb_rating": 7.2,
         "status": "Ended",
         "episodes": [
             {
@@ -187894,5 +187894,27 @@
         ],
         "tvmaze_id": 74807,
         "episode_source": "tvmaze"
+    },
+    {
+        "id": 260,
+        "tmdb_id": 288673,
+        "external_ids": {
+            "tmdb": 288673
+        },
+        "title": "Carrie",
+        "year": "2026",
+        "overview": "After her father's sudden, untimely death thrusts her into the unforgiving ecosystem of public high school, Carrie is forced to navigate a viral bullying scandal that tears through her community, the relentless pressure and casual cruelty of the social\u2011media age, and the awakening of mysterious telekinetic powers that rise alongside her adolescence.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/eXjk4W4robXs7l1YXwaXMv4f2qb.jpg",
+        "directory_path": "",
+        "genres": [
+            "Mystery",
+            "Drama",
+            "Sci-Fi & Fantasy"
+        ],
+        "rating": 4,
+        "tmdb_rating": 8.4,
+        "status": "Continuing",
+        "episodes": [],
+        "tvmaze_id": 45562
     }
 ]
