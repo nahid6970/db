@@ -358,7 +358,6 @@
     .intro-copy h1 { text-align: center; }
     /* Colorful section identity with readable light and dark palettes */
     #initial { --section-accent: #0785a8; }
-    #essentials { --section-accent: #25814e; }
     #developer { --section-accent: #7652bf; }
     #apps { --section-accent: #bd6818; }
     #media { --section-accent: #bd4965; }
@@ -387,7 +386,6 @@
     body[data-theme="dark"] h1 { color: transparent; }
     body[data-theme="dark"] h2 { color: var(--section-accent); }
     body[data-theme="dark"] #initial { --section-accent: #5bc8e4; }
-    body[data-theme="dark"] #essentials { --section-accent: #65cb8b; }
     body[data-theme="dark"] #developer { --section-accent: #b198f2; }
     body[data-theme="dark"] #apps { --section-accent: #f0aa60; }
     body[data-theme="dark"] #media { --section-accent: #f08da4; }
@@ -416,11 +414,10 @@
       font-family: "Roboto", Helvetica, Arial, sans-serif; font-size: .78rem; font-weight: 700; line-height: 1.25; text-align: center; transition: color .15s ease, background .15s ease, border-color .15s ease;
     }
     nav a:nth-of-type(1) { --tab-accent: #0785a8; }
-    nav a:nth-of-type(2) { --tab-accent: #25814e; }
-    nav a:nth-of-type(3) { --tab-accent: #7652bf; }
-    nav a:nth-of-type(4) { --tab-accent: #bd6818; }
-    nav a:nth-of-type(5) { --tab-accent: #bd4965; }
-    nav a:nth-of-type(6) { --tab-accent: #3865be; }
+    nav a:nth-of-type(2) { --tab-accent: #7652bf; }
+    nav a:nth-of-type(3) { --tab-accent: #bd6818; }
+    nav a:nth-of-type(4) { --tab-accent: #bd4965; }
+    nav a:nth-of-type(5) { --tab-accent: #3865be; }
     nav a[aria-current="location"] { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 24%, white); background: color-mix(in srgb, var(--tab-accent) 10%, white); }
     nav a:hover { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 22%, white); background: color-mix(in srgb, var(--tab-accent) 7%, white); }
     nav a svg { width: 16px; height: 16px; flex: 0 0 16px; }
@@ -455,7 +452,6 @@
 
     <nav aria-label="Jump to section">
       <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
-      <a href="#essentials"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg><span>Windows essentials</span></a>
       <a href="#developer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg><span>Developer setup</span></a>
       <a href="#apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Apps &amp; devices</span></a>
       <a href="#media"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg><span>Media stack</span></a>
@@ -466,19 +462,6 @@
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
       <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">Complete first-run setup: create a local account, name the PC <strong>win6970</strong>, and create the user <strong>nahid</strong>.</label></div>
       <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
-    </section>
-
-    <section id="essentials">
-      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path><path d="m9 12 2 2 4-4"></path></svg></span><h2>Windows essentials</h2><span class="section-note">Do these before personalizing</span></div>
-      <div class="items">
-        <div class="item"><input type="checkbox" id="item-update"><label for="item-update">Open <strong>Settings → Windows Update</strong>, install updates, restart, then check again until current.</label></div>
-        <div class="item"><input type="checkbox" id="item-activation"><label for="item-activation">Confirm Windows is activated in <strong>Settings → System → Activation</strong>. <a href="https://support.microsoft.com/en-us/windows/activation/activate-windows" target="_blank" rel="noreferrer">Microsoft activation guide ↗</a></label></div>
-        <div class="item"><input type="checkbox" id="item-device-encryption"><label for="item-device-encryption">Check <strong>Privacy &amp; security → Device encryption</strong>. If enabled, make sure you can access the recovery key. <a href="https://support.microsoft.com/en-us/windows/security/encryption/device-encryption-in-windows" target="_blank" rel="noreferrer">About device encryption ↗</a></label></div>
-        <div class="item"><input type="checkbox" id="item-backup"><label for="item-backup">Set up a backup for important files and confirm it includes anything you need to restore. <a href="https://support.microsoft.com/en-us/windows/experience/backup-recovery/back-up-and-restore-with-windows-backup" target="_blank" rel="noreferrer">Windows Backup guide ↗</a></label></div>
-        <div class="item"><input type="checkbox" id="item-defender"><label for="item-defender">Open Windows Security and confirm virus protection and firewall are on.</label></div>
-        <div class="item"><input type="checkbox" id="item-store"><label for="item-store">Update Microsoft Store apps, then install UniGet from the Store.</label></div>
-      </div>
-      <div class="callout">Device encryption can be enabled automatically on some devices. Save or verify the recovery key before you need it.</div>
     </section>
 
     <section id="developer">
@@ -499,6 +482,7 @@
     <section id="apps">
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></span><h2>Apps &amp; devices</h2><span class="section-note">Install only the tools you use</span></div>
       <div class="items">
+        <div class="item"><input type="checkbox" id="item-store"><label for="item-store">Update Microsoft Store apps, then install UniGet from the Store.</label></div>
         <div class="item"><input type="checkbox" id="item-tools"><label for="item-tools">Set up the shell tools: install <strong>fzf</strong>, <strong>bat</strong>, <strong>oh-my-posh</strong>, and its JetBrains Mono font.</label></div>
       </div>
       <div class="code-row"><div class="codebox"><code>oh-my-posh.exe font install jetbrainsmono</code></div><button class="copy" type="button" data-copy="oh-my-posh.exe font install jetbrainsmono" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
