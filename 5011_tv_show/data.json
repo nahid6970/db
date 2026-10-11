@@ -172340,7 +172340,7 @@
         "lock_status": false,
         "sonarr_url": "",
         "episode_file_pattern": "",
-        "scan_mode": "sxxexx",
+        "scan_mode": "date",
         "season_offset": 0,
         "keep_released_episodes": 10,
         "episode_update_frequency": "weekly",
