@@ -62889,7 +62889,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3780609,
                 "id": 172,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -62903,7 +62903,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/644/1610501.jpg",
                 "tvmaze_episode_id": 3744161,
                 "id": 171,
-                "watched": false,
+                "watched": true,
                 "notify": "seen",
                 "has_file": true,
                 "file_name": "Black Clover - S02E01 - The Battle Begins"
