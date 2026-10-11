@@ -12724,6 +12724,20 @@
         "status": "Continuing",
         "episodes": [
             {
+                "season_number": 28,
+                "episode_number": 1,
+                "title": "#1426 - Benchmark International Arena in Tampa, FL",
+                "air_date": "2027-01-01",
+                "airtime": "07:00",
+                "air_datetime": "2027-01-02T01:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3784669,
+                "id": 2814,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
                 "season_number": 27,
                 "episode_number": 52,
                 "title": "#1425",
@@ -12824,7 +12838,7 @@
             {
                 "season_number": 27,
                 "episode_number": 45,
-                "title": "#1418",
+                "title": "#1418 - Barclays Center in Brooklyn, NY",
                 "air_date": "2026-11-06",
                 "airtime": "07:00",
                 "air_datetime": "2026-11-07T01:00:00+00:00",
@@ -46781,12 +46795,12 @@
             {
                 "season_number": 2,
                 "episode_number": 2,
-                "title": "Episode 2",
+                "title": "The Door to Hell",
                 "air_date": "2026-10-10",
                 "airtime": "15:25",
                 "air_datetime": "2026-10-10T09:25:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Mereoleona takes on the ancient demon and the Magic Knights rush to stop the Door to Hell from opening.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/645/1613610.jpg",
                 "tvmaze_episode_id": 3780609,
                 "id": 172,
                 "watched": true,
@@ -154547,7 +154561,7 @@
             {
                 "season_number": 33,
                 "episode_number": 52,
-                "title": "#1752",
+                "title": "#1752 - Benchmark International Arena in Tampa, FL",
                 "air_date": "2026-12-28",
                 "airtime": "18:00",
                 "air_datetime": "2026-12-28T12:00:00+00:00",

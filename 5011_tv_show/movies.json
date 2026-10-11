@@ -166,7 +166,7 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-04T11:41:19.193398",
-        "release_date": "2027-06-17",
+        "release_date": "2027-06-16",
         "digital_release_date": "",
         "metadata_update_time": "09:00",
         "metadata_update_frequency": "monthly",
@@ -3295,5 +3295,32 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-10T14:48:53.551086"
+    },
+    {
+        "id": 117,
+        "tmdb_id": 1291595,
+        "external_ids": {
+            "tmdb": 1291595,
+            "imdb": "tt32393988"
+        },
+        "radarr_id": null,
+        "title": "Insidious: Out of the Further",
+        "year": "2026",
+        "release_date": "2026-08-19",
+        "digital_release_date": "2026-10-06",
+        "category": "Hollywood",
+        "overview": "Gemma, a young mother raising her daughter in the house she grew up in, discovers she can travel into The Further, the purgatorial realm of lost souls at the heart of the Insidious universe. When something evil comes after her, Gemma discovers an ability that changes everything: she doesn't just enter The Further, she can bring what lives there back to the real world. Once the demons realize her power, our world becomes their playground.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/4tTrW9dXCByS5wt2pXVWb58zNjz.jpg",
+        "directory_path": "",
+        "genres": [
+            "Horror",
+            "Thriller"
+        ],
+        "runtime": 106,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-11T20:31:45.704039"
     }
 ]
