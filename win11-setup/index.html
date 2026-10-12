@@ -641,7 +641,7 @@
         previousButton.style.top = `${center}px`;
         nextButton.style.top = `${center}px`;
         if (window.matchMedia('(min-width: 1321px)').matches) {
-          const top = Math.max(18, Math.min(bounds.top, window.innerHeight - sectionNav.offsetHeight - 18));
+          const top = Math.max(18, Math.min(center - sectionNav.offsetHeight / 2, window.innerHeight - sectionNav.offsetHeight - 18));
           sectionNav.style.top = `${top}px`;
           sectionNav.style.translate = 'none';
         } else {
