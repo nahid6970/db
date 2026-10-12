@@ -551,14 +551,22 @@
     <section id="n8n">
       <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 11-12h-8l0-8Z"></path></svg></span><h2>n8n installation</h2><span class="section-note">Local Windows setup</span></div>
       <div class="items">
-        <div class="item"><input type="checkbox" id="item-n8n-node"><label for="item-n8n-node">Confirm Node.js is between <strong>20.19 and 24.x</strong>, as required for npm installation.</label></div>
+        <div class="item"><input type="checkbox" id="item-n8n-node"><label for="item-n8n-node">Use Node.js <strong>20.19–24.x</strong> for n8n; Node 26 is outside n8n's supported range. With Scoop, install and activate Node.js LTS, then confirm the active version is <strong>v24.x</strong>. <a href="https://docs.n8n.io/hosting/installation/npm/" target="_blank" rel="noreferrer">n8n requirements ↗</a></label></div>
       </div>
-      <div class="code-row"><div class="codebox"><code>node --version</code></div><button class="copy" type="button" data-copy="node --version" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="code-row"><div class="codebox"><code>scoop install nodejs-lts<br>scoop reset nodejs-lts<br>node --version</code></div><button class="copy" type="button" data-copy="scoop install nodejs-lts&#10;scoop reset nodejs-lts&#10;node --version" aria-label="Copy commands"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="items">
         <div class="item"><input type="checkbox" id="item-n8n-install"><label for="item-n8n-install">Install n8n globally, start it, then open <strong>http://localhost:5678</strong> and complete the owner setup. <a href="https://docs.n8n.io/hosting/installation/npm/" target="_blank" rel="noreferrer">Official n8n npm guide ↗</a></label></div>
       </div>
       <div class="code-row"><div class="codebox"><code>npm install -g n8n</code></div><button class="copy" type="button" data-copy="npm install -g n8n" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
       <div class="code-row"><div class="codebox"><code>n8n</code></div><button class="copy" type="button" data-copy="n8n" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="subgroup" style="margin-left:0">If n8n reports SQLite is missing</div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-n8n-sqlite"><label for="item-n8n-sqlite">That message can mean SQLite's native binding is missing. Run the checks from n8n's own install folder; installing SQLite in <code>C:\Users\nahid</code> or globally does not repair n8n's copy. Approve its install script, rebuild under Node 24, then verify the module loads.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>Set-Location 'C:\Users\nahid\scoop\persist\nodejs\bin\node_modules\n8n'<br>npm install-scripts approve sqlite3<br>npm rebuild sqlite3<br>node -e "try { const s = require('sqlite3'); console.log('SQLite loaded:', s.VERSION) } catch (e) { console.error(e); process.exitCode = 1 }"</code></div><button class="copy" type="button" data-copy="Set-Location 'C:\Users\nahid\scoop\persist\nodejs\bin\node_modules\n8n'&#10;npm install-scripts approve sqlite3&#10;npm rebuild sqlite3&#10;node -e &quot;try { const s = require('sqlite3'); console.log('SQLite loaded:', s.VERSION) } catch (e) { console.error(e); process.exitCode = 1 }&quot;" aria-label="Copy commands"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-n8n-sqlite-verify"><label for="item-n8n-sqlite-verify">If the check prints <strong>SQLite loaded</strong>, start n8n again. If rebuilding still fails, copy the full error and verify <code>node --version</code> is still v24.x.</label></div>
+      </div>
     </section>
 
     <section id="media">
