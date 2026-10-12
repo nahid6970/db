@@ -360,6 +360,7 @@
     #initial { --section-accent: #0785a8; }
     #developer { --section-accent: #7652bf; }
     #apps { --section-accent: #bd6818; }
+    #n8n { --section-accent: #078b80; }
     #media { --section-accent: #bd4965; }
     #preferences { --section-accent: #3865be; }
     h1 {
@@ -388,6 +389,7 @@
     body[data-theme="dark"] #initial { --section-accent: #5bc8e4; }
     body[data-theme="dark"] #developer { --section-accent: #b198f2; }
     body[data-theme="dark"] #apps { --section-accent: #f0aa60; }
+    body[data-theme="dark"] #n8n { --section-accent: #61d4c6; }
     body[data-theme="dark"] #media { --section-accent: #f08da4; }
     body[data-theme="dark"] #preferences { --section-accent: #8eb4ff; }
     body[data-theme="dark"] section {
@@ -416,8 +418,9 @@
     nav a:nth-of-type(1) { --tab-accent: #0785a8; }
     nav a:nth-of-type(2) { --tab-accent: #7652bf; }
     nav a:nth-of-type(3) { --tab-accent: #bd6818; }
-    nav a:nth-of-type(4) { --tab-accent: #bd4965; }
-    nav a:nth-of-type(5) { --tab-accent: #3865be; }
+    nav a:nth-of-type(4) { --tab-accent: #078b80; }
+    nav a:nth-of-type(5) { --tab-accent: #bd4965; }
+    nav a:nth-of-type(6) { --tab-accent: #3865be; }
     nav a[aria-current="location"] { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 24%, white); background: color-mix(in srgb, var(--tab-accent) 10%, white); }
     nav a:hover { color: var(--tab-accent); border-color: color-mix(in srgb, var(--tab-accent) 22%, white); background: color-mix(in srgb, var(--tab-accent) 7%, white); }
     nav a svg { width: 16px; height: 16px; flex: 0 0 16px; }
@@ -454,6 +457,7 @@
       <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
       <a href="#developer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg><span>Developer setup</span></a>
       <a href="#apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Apps &amp; devices</span></a>
+      <a href="#n8n"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 11-12h-8l0-8Z"></path></svg><span>n8n installation</span></a>
       <a href="#media"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"></rect><path d="m10 9 5 3-5 3z"></path></svg><span>Media stack</span></a>
       <a href="#preferences"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h7m4 0h5M4 12h3m4 0h9M4 18h9m4 0h3"></path><circle cx="13" cy="6" r="2"></circle><circle cx="9" cy="12" r="2"></circle><circle cx="15" cy="18" r="2"></circle></svg><span>Preferences</span></a>
     </nav>
@@ -495,6 +499,19 @@
         <div class="item"><input type="checkbox" id="item-bangla"><label for="item-bangla">Install Vrinda: <a href="https://raw.githubusercontent.com/tazihad/bangla-fonts/main/vrinda.ttf" target="_blank" rel="noopener">download vrinda.ttf</a>, open it and choose <strong>Install</strong>, then restart the PC.</label></div>
         <div class="item"><input type="checkbox" id="item-projects"><label for="item-projects">Restore <strong>ms1 + db</strong> and create any required <code>mklink</code> links.</label></div>
       </div>
+    </section>
+
+    <section id="n8n">
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 11-12h-8l0-8Z"></path></svg></span><h2>n8n installation</h2><span class="section-note">Local Windows setup</span></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-n8n-node"><label for="item-n8n-node">Confirm Node.js is between <strong>20.19 and 24.x</strong>, as required for npm installation.</label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>node --version</code></div><button class="copy" type="button" data-copy="node --version" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="items">
+        <div class="item"><input type="checkbox" id="item-n8n-install"><label for="item-n8n-install">Install n8n globally, start it, then open <strong>http://localhost:5678</strong> and complete the owner setup. <a href="https://docs.n8n.io/hosting/installation/npm/" target="_blank" rel="noreferrer">Official n8n npm guide ↗</a></label></div>
+      </div>
+      <div class="code-row"><div class="codebox"><code>npm install -g n8n</code></div><button class="copy" type="button" data-copy="npm install -g n8n" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
+      <div class="code-row"><div class="codebox"><code>n8n</code></div><button class="copy" type="button" data-copy="n8n" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
     </section>
 
     <section id="media">
