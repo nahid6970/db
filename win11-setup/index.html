@@ -446,7 +446,9 @@
       max-height: calc(100svh - 36px); overflow-x: hidden; overflow-y: auto; margin: 0; padding: 8px;
     }
     nav a { flex: 0 0 auto; width: 100%; justify-content: flex-start; min-height: 42px; text-align: left; white-space: normal; }
-    section { min-height: 340px; }
+    section { min-height: 340px; border-radius: 0; }
+    section:hover { border-top-color: var(--section-accent); }
+    body[data-theme="dark"] section:hover { border-top-color: var(--section-accent); }
     .card-arrow {
       position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 42px; height: 68px;
       display: grid; place-items: center; padding: 0; border: 0; border-radius: 0;
@@ -487,9 +489,6 @@
 <body data-theme="dark">
   <main class="shell">
     <header>
-      <div class="intro-copy">
-        <h1>Windows 11 Fresh Setup</h1>
-      </div>
       <div class="toolbar" aria-label="Checklist progress">
         <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
         <div class="progress"><strong id="progressCount">0/0</strong></div>
@@ -502,7 +501,7 @@
     <button class="card-arrow" id="nextSection" type="button" aria-label="Next section" title="Next section"><svg viewBox="0 0 24 48" aria-hidden="true"><path d="m7 8 10 16-10 16"></path></svg></button>
 
     <nav aria-label="Jump to section">
-      <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>Install Windows</span></a>
+      <a href="#initial"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg><span>WIN-11</span></a>
       <a href="#developer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 17-5-5 5-5m8 10 5-5-5-5m-2-7-4 24"></path></svg><span>Developer setup</span></a>
       <a href="#apps"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg><span>Apps &amp; devices</span></a>
       <a href="#n8n"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2 3 14h8l-1 8 11-12h-8l0-8Z"></path></svg><span>n8n installation</span></a>
@@ -511,7 +510,7 @@
     </nav>
 
     <section id="initial">
-      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><h2>Install Windows</h2><span class="section-note">During first-run setup</span></div>
+      <div class="section-head"><span class="section-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"></rect><path d="M8 21h8m-4-4v4"></path></svg></span><h2>WIN-11</h2><span class="section-note">During first-run setup</span></div>
       <div class="item"><input type="checkbox" id="item-oobe"><label for="item-oobe">Complete first-run setup: create a local account, name the PC <strong>win6970</strong>, and create the user <strong>nahid</strong>.</label></div>
       <div class="code-row"><div class="codebox"><code>start ms-cxh:localonly</code></div><button class="copy" type="button" data-copy="start ms-cxh:localonly" aria-label="Copy command"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2"></rect><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"></path></svg><span class="copy-label">Copy</span></button></div>
     </section>
