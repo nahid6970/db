@@ -26,7 +26,8 @@
         "release_date": "2023-05-31",
         "tmdb_rating": 8.3,
         "digital_release_date": "2023-08-08",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 3,
@@ -54,7 +55,8 @@
         "added_date": "2026-09-04T11:37:17.677999",
         "release_date": "2007-05-01",
         "digital_release_date": "2007-04-16",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 4,
@@ -82,7 +84,8 @@
         "added_date": "2026-09-04T11:37:24.115384",
         "release_date": "2019-06-28",
         "digital_release_date": "2019-07-05",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 5,
@@ -111,7 +114,8 @@
         "added_date": "2026-09-04T11:37:38.799831",
         "release_date": "2018-12-06",
         "digital_release_date": "2019-02-26",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 6,
@@ -139,7 +143,8 @@
         "added_date": "2026-09-04T11:37:55.824466",
         "release_date": "2004-06-25",
         "digital_release_date": "2016-12-13",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 7,
@@ -171,7 +176,8 @@
         "metadata_update_time": "09:00",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 1,
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_weekday": 0
     },
     {
         "id": 8,
@@ -199,7 +205,8 @@
         "added_date": "2026-09-04T11:47:51.527048",
         "release_date": "2025-07-18",
         "digital_release_date": "2026-07-28",
-        "category": "Anime"
+        "category": "Anime",
+        "metadata_update_time": ""
     },
     {
         "id": 9,
@@ -227,7 +234,8 @@
         "added_date": "2026-09-04T11:57:00.365617",
         "release_date": "2026-07-29",
         "digital_release_date": "2026-10-06",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 10,
@@ -255,7 +263,8 @@
         "added_date": "2026-09-04T12:52:34.460815",
         "release_date": "2024-01-08",
         "digital_release_date": "2024-01-08",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 11,
@@ -283,7 +292,8 @@
         "added_date": "2026-09-04T12:52:36.544064",
         "release_date": "2024-04-22",
         "digital_release_date": "2024-04-22",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 12,
@@ -311,7 +321,8 @@
         "added_date": "2026-09-04T12:52:38.762427",
         "release_date": "2024-07-15",
         "digital_release_date": "2024-07-15",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 13,
@@ -339,7 +350,8 @@
         "added_date": "2026-09-04T12:52:58.035293",
         "release_date": "2021-03-18",
         "digital_release_date": "2021-03-18",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 14,
@@ -367,7 +379,8 @@
         "added_date": "2026-09-04T12:53:49.808380",
         "release_date": "2025-07-09",
         "digital_release_date": "2025-08-14",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 15,
@@ -394,7 +407,8 @@
         "watched": true,
         "added_date": "2026-09-04T13:28:28.377309",
         "digital_release_date": "2016-12-13",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 16,
@@ -422,7 +436,8 @@
         "watched": true,
         "added_date": "2026-09-04T13:28:35.175817",
         "digital_release_date": "2022-03-14",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 17,
@@ -450,7 +465,8 @@
         "watched": true,
         "added_date": "2026-09-04T13:28:54.947540",
         "digital_release_date": "2017-09-26",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 18,
@@ -478,7 +494,8 @@
         "watched": false,
         "added_date": "2026-09-04T13:29:16.307164",
         "digital_release_date": "2014-04-17",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 19,
@@ -506,7 +523,8 @@
         "watched": false,
         "added_date": "2026-09-04T13:29:26.185433",
         "digital_release_date": "2022-06-17",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 20,
@@ -533,7 +551,7 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-05T02:48:17.485411",
-        "metadata_update_time": "11:00",
+        "metadata_update_time": "",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 1,
         "category": "Hollywood",
@@ -565,7 +583,8 @@
         "watched": false,
         "added_date": "2026-09-05T02:49:19.655507",
         "digital_release_date": "2011-07-27",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 22,
@@ -593,7 +612,8 @@
         "watched": true,
         "added_date": "2026-09-05T02:51:18.257982",
         "digital_release_date": "2024-06-14",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 23,
@@ -621,7 +641,8 @@
         "watched": true,
         "added_date": "2026-09-05T02:51:19.943605",
         "digital_release_date": "2019-07-30",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 24,
@@ -649,10 +670,11 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:25.452947",
         "digital_release_date": "",
-        "metadata_update_time": "09:34",
+        "metadata_update_time": "09:31",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 2,
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_weekday": 1
     },
     {
         "id": 25,
@@ -680,7 +702,8 @@
         "watched": true,
         "added_date": "2026-09-05T02:51:29.953211",
         "digital_release_date": "2018-07-31",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 26,
@@ -708,7 +731,8 @@
         "watched": true,
         "added_date": "2026-09-05T02:51:32.211111",
         "digital_release_date": "2015-04-23",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 27,
@@ -736,10 +760,11 @@
         "watched": false,
         "added_date": "2026-09-05T02:51:36.004360",
         "digital_release_date": "",
-        "metadata_update_time": "10:07",
+        "metadata_update_time": "10:02",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 3,
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_weekday": 2
     },
     {
         "id": 28,
@@ -769,11 +794,12 @@
         "watched": false,
         "added_date": "2026-09-05T18:47:20.309896",
         "digital_release_date": "",
-        "metadata_update_time": "10:41",
+        "metadata_update_time": "10:33",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 4
+        "metadata_update_month_day": 4,
+        "metadata_update_weekday": 3
     },
     {
         "id": 29,
@@ -802,7 +828,8 @@
         "added_date": "2026-09-05T18:47:30.339926",
         "digital_release_date": "2025-05-30",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 30,
@@ -832,7 +859,8 @@
         "added_date": "2026-09-05T18:47:38.102316",
         "digital_release_date": "2025-05-30",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 31,
@@ -861,7 +889,8 @@
         "added_date": "2026-09-05T18:47:42.074242",
         "digital_release_date": "2025-05-30",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 32,
@@ -890,7 +919,8 @@
         "added_date": "2026-09-05T18:47:44.613244",
         "digital_release_date": "2025-05-30",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 33,
@@ -920,7 +950,8 @@
         "added_date": "2026-09-05T18:47:54.406059",
         "digital_release_date": "2020-01-01",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 34,
@@ -949,7 +980,8 @@
         "added_date": "2026-09-05T18:48:04.166985",
         "digital_release_date": "2025-05-30",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 35,
@@ -979,7 +1011,8 @@
         "added_date": "2026-09-05T18:48:14.300725",
         "digital_release_date": "2020-01-01",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 36,
@@ -1009,7 +1042,8 @@
         "added_date": "2026-09-05T18:48:18.667306",
         "digital_release_date": "2020-01-01",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 37,
@@ -1040,11 +1074,12 @@
         "watched": false,
         "added_date": "2026-09-05T19:01:44.834397",
         "digital_release_date": "",
-        "metadata_update_time": "11:14",
+        "metadata_update_time": "11:04",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 5
+        "metadata_update_month_day": 5,
+        "metadata_update_weekday": 4
     },
     {
         "id": 38,
@@ -1073,7 +1108,8 @@
         "added_date": "2026-09-05T19:04:28.188780",
         "digital_release_date": "2023-07-12",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 39,
@@ -1101,7 +1137,8 @@
         "watched": true,
         "added_date": "2026-09-05T19:05:09.222396",
         "digital_release_date": "2019-01-29",
-        "category": "Anime"
+        "category": "Anime",
+        "metadata_update_time": ""
     },
     {
         "id": 40,
@@ -1130,7 +1167,8 @@
         "added_date": "2026-09-05T19:05:22.816587",
         "digital_release_date": "2014-01-14",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 41,
@@ -1157,7 +1195,8 @@
         "added_date": "2026-09-05T19:23:18.532749",
         "digital_release_date": "2025-06-11",
         "category": "Chinese",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 42,
@@ -1184,7 +1223,8 @@
         "added_date": "2026-09-05T19:23:27.480516",
         "digital_release_date": "2024-12-22",
         "category": "Chinese",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 43,
@@ -1236,7 +1276,8 @@
         "added_date": "2026-09-05T19:23:54.538942",
         "digital_release_date": "2023-06-03",
         "category": "Chinese",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 45,
@@ -1266,7 +1307,8 @@
         "added_date": "2026-09-05T19:24:44.502579",
         "digital_release_date": "2013-02-21",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 46,
@@ -1296,7 +1338,8 @@
         "added_date": "2026-09-05T19:24:47.961393",
         "digital_release_date": "2022-01-25",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 47,
@@ -1358,7 +1401,8 @@
         "added_date": "2026-09-05T19:25:23.109375",
         "digital_release_date": "2014-02-27",
         "category": "Anime",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 49,
@@ -1385,11 +1429,12 @@
         "watched": false,
         "added_date": "2026-09-05T19:25:26.360543",
         "digital_release_date": "",
-        "metadata_update_time": "11:48",
+        "metadata_update_time": "11:36",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 6
+        "metadata_update_month_day": 6,
+        "metadata_update_weekday": 5
     },
     {
         "id": 50,
@@ -1419,11 +1464,12 @@
         "watched": false,
         "added_date": "2026-09-05T19:26:40.276696",
         "digital_release_date": "",
-        "metadata_update_time": "12:22",
+        "metadata_update_time": "12:07",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 7
+        "metadata_update_month_day": 7,
+        "metadata_update_weekday": 6
     },
     {
         "id": 51,
@@ -1452,11 +1498,12 @@
         "watched": false,
         "added_date": "2026-09-05T19:26:42.099471",
         "digital_release_date": "",
-        "metadata_update_time": "12:55",
+        "metadata_update_time": "12:38",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 8
+        "metadata_update_month_day": 8,
+        "metadata_update_weekday": 0
     },
     {
         "id": 52,
@@ -1486,7 +1533,8 @@
         "added_date": "2026-09-05T20:14:39.846756",
         "digital_release_date": "2021-07-30",
         "category": "Japanese Live Action",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 53,
@@ -1516,7 +1564,8 @@
         "added_date": "2026-09-05T20:14:46.363032",
         "digital_release_date": "2021-06-18",
         "category": "Japanese Live Action",
-        "archived": true
+        "archived": true,
+        "metadata_update_time": ""
     },
     {
         "id": 54,
@@ -1544,11 +1593,12 @@
         "watched": false,
         "added_date": "2026-09-05T20:15:04.930398",
         "digital_release_date": "",
-        "metadata_update_time": "13:29",
+        "metadata_update_time": "13:09",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 9
+        "metadata_update_month_day": 9,
+        "metadata_update_weekday": 1
     },
     {
         "id": 55,
@@ -1579,11 +1629,12 @@
         "watched": false,
         "added_date": "2026-09-05T20:15:29.698443",
         "digital_release_date": "",
-        "metadata_update_time": "14:02",
+        "metadata_update_time": "13:40",
         "metadata_update_frequency": "monthly",
         "category": "Anime",
         "archived": true,
-        "metadata_update_month_day": 10
+        "metadata_update_month_day": 10,
+        "metadata_update_weekday": 2
     },
     {
         "id": 56,
@@ -1612,10 +1663,11 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:12.378580",
         "digital_release_date": "",
-        "metadata_update_time": "14:36",
-        "metadata_update_frequency": "weekly",
+        "metadata_update_time": "14:11",
+        "metadata_update_frequency": "monthly",
         "metadata_update_weekday": 3,
-        "category": "Bollywood"
+        "category": "Bollywood",
+        "metadata_update_month_day": 11
     },
     {
         "id": 57,
@@ -1644,10 +1696,11 @@
         "watched": false,
         "added_date": "2026-09-11T10:52:52.618339",
         "digital_release_date": "",
-        "metadata_update_time": "15:10",
-        "metadata_update_frequency": "weekly",
+        "metadata_update_time": "14:42",
+        "metadata_update_frequency": "monthly",
         "metadata_update_weekday": 4,
-        "category": "Bollywood"
+        "category": "Bollywood",
+        "metadata_update_month_day": 12
     },
     {
         "id": 58,
@@ -1676,7 +1729,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T10:23:55.359210",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 59,
@@ -1704,7 +1758,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-12T10:23:58.716312",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 60,
@@ -1732,7 +1787,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-12T10:24:01.941852",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 61,
@@ -1760,7 +1816,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T10:24:03.981242",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 62,
@@ -1789,7 +1846,8 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-12T10:50:52.530103",
-        "category": "Korean"
+        "category": "Korean",
+        "metadata_update_time": ""
     },
     {
         "id": 63,
@@ -1817,7 +1875,8 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-09-12T12:05:44.289911",
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_time": ""
     },
     {
         "id": 64,
@@ -1845,10 +1904,11 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:06.587421",
-        "metadata_update_time": "15:43",
+        "metadata_update_time": "15:13",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 13,
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_weekday": 5
     },
     {
         "id": 65,
@@ -1876,10 +1936,11 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T12:06:33.207190",
-        "metadata_update_time": "16:17",
+        "metadata_update_time": "15:44",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 14,
-        "category": "Hollywood"
+        "category": "Hollywood",
+        "metadata_update_weekday": 6
     },
     {
         "id": 66,
@@ -1906,7 +1967,8 @@
         "tmdb_rating": 7.8,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-12T15:19:03.541574"
+        "added_date": "2026-09-12T15:19:03.541574",
+        "metadata_update_time": ""
     },
     {
         "id": 67,
@@ -1933,7 +1995,8 @@
         "tmdb_rating": 8.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-12T15:19:33.844134"
+        "added_date": "2026-09-12T15:19:33.844134",
+        "metadata_update_time": ""
     },
     {
         "id": 68,
@@ -1961,9 +2024,10 @@
         "status": "Missing",
         "watched": false,
         "added_date": "2026-09-12T15:19:40.842658",
-        "metadata_update_time": "16:50",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 0
+        "metadata_update_time": "16:16",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 0,
+        "metadata_update_month_day": 15
     },
     {
         "id": 70,
@@ -1991,7 +2055,8 @@
         "tmdb_rating": 6.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T00:50:33.329411"
+        "added_date": "2026-09-13T00:50:33.329411",
+        "metadata_update_time": ""
     },
     {
         "id": 71,
@@ -2019,7 +2084,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T10:10:12.798030"
+        "added_date": "2026-09-13T10:10:12.798030",
+        "metadata_update_time": ""
     },
     {
         "id": 72,
@@ -2047,7 +2113,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T10:10:16.888720"
+        "added_date": "2026-09-13T10:10:16.888720",
+        "metadata_update_time": ""
     },
     {
         "id": 73,
@@ -2075,7 +2142,8 @@
         "tmdb_rating": 6.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T10:14:35.613958"
+        "added_date": "2026-09-13T10:14:35.613958",
+        "metadata_update_time": ""
     },
     {
         "id": 74,
@@ -2103,7 +2171,8 @@
         "tmdb_rating": 6.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T10:14:38.261123"
+        "added_date": "2026-09-13T10:14:38.261123",
+        "metadata_update_time": ""
     },
     {
         "id": 75,
@@ -2129,7 +2198,8 @@
         "tmdb_rating": 7.9,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T10:15:03.566587"
+        "added_date": "2026-09-13T10:15:03.566587",
+        "metadata_update_time": ""
     },
     {
         "id": 76,
@@ -2157,7 +2227,8 @@
         "tmdb_rating": 6.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T23:21:14.004127"
+        "added_date": "2026-09-13T23:21:14.004127",
+        "metadata_update_time": ""
     },
     {
         "id": 77,
@@ -2185,9 +2256,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-13T23:49:34.120903",
-        "metadata_update_time": "17:24",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 1
+        "metadata_update_time": "16:47",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 1,
+        "metadata_update_month_day": 16
     },
     {
         "id": 78,
@@ -2215,7 +2287,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-13T23:52:18.019754"
+        "added_date": "2026-09-13T23:52:18.019754",
+        "metadata_update_time": ""
     },
     {
         "id": 79,
@@ -2244,9 +2317,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-13T23:52:21.917839",
-        "metadata_update_time": "17:58",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 2
+        "metadata_update_time": "17:18",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 2,
+        "metadata_update_month_day": 17
     },
     {
         "id": 80,
@@ -2274,7 +2348,8 @@
         "tmdb_rating": 7.8,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-14T16:48:36.501140"
+        "added_date": "2026-09-14T16:48:36.501140",
+        "metadata_update_time": ""
     },
     {
         "id": 81,
@@ -2303,7 +2378,8 @@
         "tmdb_rating": 7.8,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-14T16:49:15.132271"
+        "added_date": "2026-09-14T16:49:15.132271",
+        "metadata_update_time": ""
     },
     {
         "id": 82,
@@ -2331,7 +2407,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-15T22:23:15.386110"
+        "added_date": "2026-09-15T22:23:15.386110",
+        "metadata_update_time": ""
     },
     {
         "id": 83,
@@ -2359,7 +2436,8 @@
         "tmdb_rating": 8.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-16T10:20:59.414674"
+        "added_date": "2026-09-16T10:20:59.414674",
+        "metadata_update_time": ""
     },
     {
         "id": 84,
@@ -2388,7 +2466,8 @@
         "tmdb_rating": 7.7,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-16T10:21:16.062551"
+        "added_date": "2026-09-16T10:21:16.062551",
+        "metadata_update_time": ""
     },
     {
         "id": 85,
@@ -2417,7 +2496,8 @@
         "tmdb_rating": 6.8,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-16T10:24:32.827041"
+        "added_date": "2026-09-16T10:24:32.827041",
+        "metadata_update_time": ""
     },
     {
         "id": 86,
@@ -2446,9 +2526,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-16T18:13:04.292223",
-        "metadata_update_time": "18:31",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 3
+        "metadata_update_time": "17:49",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 3,
+        "metadata_update_month_day": 18
     },
     {
         "id": 87,
@@ -2478,9 +2559,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-16T18:32:56.783124",
-        "metadata_update_time": "19:05",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 4
+        "metadata_update_time": "18:20",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 4,
+        "metadata_update_month_day": 19
     },
     {
         "id": 88,
@@ -2508,7 +2590,8 @@
         "tmdb_rating": 7.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-17T08:10:21.535284"
+        "added_date": "2026-09-17T08:10:21.535284",
+        "metadata_update_time": ""
     },
     {
         "id": 89,
@@ -2536,7 +2619,8 @@
         "tmdb_rating": 8.4,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-17T21:34:53.211317"
+        "added_date": "2026-09-17T21:34:53.211317",
+        "metadata_update_time": ""
     },
     {
         "id": 90,
@@ -2564,7 +2648,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-17T21:34:58.561734"
+        "added_date": "2026-09-17T21:34:58.561734",
+        "metadata_update_time": ""
     },
     {
         "id": 91,
@@ -2592,7 +2677,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-17T21:35:01.897388"
+        "added_date": "2026-09-17T21:35:01.897388",
+        "metadata_update_time": ""
     },
     {
         "id": 92,
@@ -2620,7 +2706,8 @@
         "tmdb_rating": 8.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-09-17T21:35:43.222721"
+        "added_date": "2026-09-17T21:35:43.222721",
+        "metadata_update_time": ""
     },
     {
         "id": 93,
@@ -2648,7 +2735,8 @@
         "tmdb_rating": 8.2,
         "status": "Released",
         "watched": true,
-        "added_date": "2026-09-17T21:38:43.100280"
+        "added_date": "2026-09-17T21:38:43.100280",
+        "metadata_update_time": ""
     },
     {
         "id": 94,
@@ -2677,9 +2765,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-17T21:38:51.606340",
-        "metadata_update_time": "19:38",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 5
+        "metadata_update_time": "18:51",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 5,
+        "metadata_update_month_day": 20
     },
     {
         "id": 95,
@@ -2708,9 +2797,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-18T11:18:06.921164",
-        "metadata_update_time": "20:12",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 6
+        "metadata_update_time": "19:22",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 6,
+        "metadata_update_month_day": 21
     },
     {
         "id": 96,
@@ -2738,7 +2828,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:24:47.384746"
+        "added_date": "2026-10-03T15:24:47.384746",
+        "metadata_update_time": ""
     },
     {
         "id": 97,
@@ -2766,7 +2857,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:24:53.880213"
+        "added_date": "2026-10-03T15:24:53.880213",
+        "metadata_update_time": ""
     },
     {
         "id": 98,
@@ -2794,7 +2886,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:25:09.352861"
+        "added_date": "2026-10-03T15:25:09.352861",
+        "metadata_update_time": ""
     },
     {
         "id": 99,
@@ -2822,7 +2915,8 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:25:15.207231"
+        "added_date": "2026-10-03T15:25:15.207231",
+        "metadata_update_time": ""
     },
     {
         "id": 100,
@@ -2850,7 +2944,8 @@
         "tmdb_rating": 8.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:27:38.349961"
+        "added_date": "2026-10-03T15:27:38.349961",
+        "metadata_update_time": ""
     },
     {
         "id": 101,
@@ -2878,7 +2973,8 @@
         "tmdb_rating": 8.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-03T15:27:47.886290"
+        "added_date": "2026-10-03T15:27:47.886290",
+        "metadata_update_time": ""
     },
     {
         "id": 102,
@@ -2907,9 +3003,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-05T12:31:48.147034",
-        "metadata_update_time": "20:46",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 0
+        "metadata_update_time": "19:53",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 0,
+        "metadata_update_month_day": 22
     },
     {
         "id": 103,
@@ -2938,7 +3035,8 @@
         "tmdb_rating": 9.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-07T18:15:05.445366"
+        "added_date": "2026-10-07T18:15:05.445366",
+        "metadata_update_time": ""
     },
     {
         "id": 104,
@@ -2966,7 +3064,8 @@
         "tmdb_rating": 9.1,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-07T18:15:08.481702"
+        "added_date": "2026-10-07T18:15:08.481702",
+        "metadata_update_time": ""
     },
     {
         "id": 105,
@@ -2994,7 +3093,8 @@
         "tmdb_rating": 8.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-08T09:42:20.811834"
+        "added_date": "2026-10-08T09:42:20.811834",
+        "metadata_update_time": ""
     },
     {
         "id": 106,
@@ -3021,7 +3121,8 @@
         "tmdb_rating": 4.7,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-08T10:10:18.024381"
+        "added_date": "2026-10-08T10:10:18.024381",
+        "metadata_update_time": ""
     },
     {
         "id": 107,
@@ -3050,9 +3151,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-08T10:34:02.423122",
-        "metadata_update_time": "21:19",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 1
+        "metadata_update_time": "20:24",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 1,
+        "metadata_update_month_day": 23
     },
     {
         "id": 108,
@@ -3080,7 +3182,8 @@
         "tmdb_rating": 6.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:31:51.445910"
+        "added_date": "2026-10-10T14:31:51.445910",
+        "metadata_update_time": ""
     },
     {
         "id": 109,
@@ -3109,9 +3212,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-10T14:33:18.078228",
-        "metadata_update_time": "21:53",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 2
+        "metadata_update_time": "20:56",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 2,
+        "metadata_update_month_day": 24
     },
     {
         "id": 110,
@@ -3139,7 +3243,8 @@
         "tmdb_rating": 7.0,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:38:00.878107"
+        "added_date": "2026-10-10T14:38:00.878107",
+        "metadata_update_time": ""
     },
     {
         "id": 111,
@@ -3167,9 +3272,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-10T14:45:11.697830",
-        "metadata_update_time": "22:26",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 3
+        "metadata_update_time": "21:27",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 3,
+        "metadata_update_month_day": 25
     },
     {
         "id": 112,
@@ -3197,7 +3303,8 @@
         "tmdb_rating": 7.4,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:45:23.195450"
+        "added_date": "2026-10-10T14:45:23.195450",
+        "metadata_update_time": ""
     },
     {
         "id": 113,
@@ -3224,7 +3331,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:45:33.347663"
+        "added_date": "2026-10-10T14:45:33.347663",
+        "metadata_update_time": ""
     },
     {
         "id": 114,
@@ -3252,7 +3360,8 @@
         "tmdb_rating": 7.3,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:45:46.992653"
+        "added_date": "2026-10-10T14:45:46.992653",
+        "metadata_update_time": ""
     },
     {
         "id": 115,
@@ -3279,7 +3388,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:46:32.069889"
+        "added_date": "2026-10-10T14:46:32.069889",
+        "metadata_update_time": ""
     },
     {
         "id": 116,
@@ -3307,7 +3417,8 @@
         "tmdb_rating": 6.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-10T14:48:53.551086"
+        "added_date": "2026-10-10T14:48:53.551086",
+        "metadata_update_time": ""
     },
     {
         "id": 117,
@@ -3334,7 +3445,8 @@
         "tmdb_rating": 7.6,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-11T20:31:45.704039"
+        "added_date": "2026-10-11T20:31:45.704039",
+        "metadata_update_time": ""
     },
     {
         "id": 118,
@@ -3361,9 +3473,10 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-12T14:51:41.624014",
-        "metadata_update_time": "23:00",
-        "metadata_update_frequency": "weekly",
-        "metadata_update_weekday": 4
+        "metadata_update_time": "21:58",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_weekday": 4,
+        "metadata_update_month_day": 26
     },
     {
         "id": 119,
@@ -3390,7 +3503,11 @@
         "tmdb_rating": 8.2,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-12T15:19:00.659462"
+        "added_date": "2026-10-12T15:19:00.659462",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_time": "22:29",
+        "metadata_update_weekday": 5,
+        "metadata_update_month_day": 27
     },
     {
         "id": 120,
@@ -3418,6 +3535,38 @@
         "tmdb_rating": 8.5,
         "status": "Released",
         "watched": false,
-        "added_date": "2026-10-12T15:21:34.202414"
+        "added_date": "2026-10-12T15:21:34.202414",
+        "metadata_update_time": ""
+    },
+    {
+        "id": 121,
+        "tmdb_id": 1153576,
+        "external_ids": {
+            "tmdb": 1153576,
+            "imdb": "tt27419420"
+        },
+        "radarr_id": null,
+        "title": "Street Fighter",
+        "year": "2026",
+        "release_date": "2026-10-13",
+        "digital_release_date": "",
+        "category": "Hollywood",
+        "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Fantasy"
+        ],
+        "runtime": 120,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-12T15:33:49.152562",
+        "metadata_update_frequency": "monthly",
+        "metadata_update_time": "23:00",
+        "metadata_update_weekday": 6,
+        "metadata_update_month_day": 28
     }
 ]
