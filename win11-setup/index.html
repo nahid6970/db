@@ -446,6 +446,7 @@
       max-height: calc(100svh - 36px); overflow-x: hidden; overflow-y: auto; margin: 0; padding: 8px;
     }
     nav a { flex: 0 0 auto; width: 100%; justify-content: flex-start; min-height: 42px; text-align: left; white-space: normal; }
+    section { min-height: 340px; }
     .card-arrow {
       position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 42px; height: 68px;
       display: grid; place-items: center; padding: 0; border: 0; border-radius: 0;
@@ -641,7 +642,7 @@
         previousButton.style.top = `${center}px`;
         nextButton.style.top = `${center}px`;
         if (window.matchMedia('(min-width: 1321px)').matches) {
-          const top = Math.max(18, Math.min(center - sectionNav.offsetHeight / 2, window.innerHeight - sectionNav.offsetHeight - 18));
+          const top = Math.max(18, Math.min(center - sectionNav.getBoundingClientRect().height / 2, window.innerHeight - sectionNav.getBoundingClientRect().height - 18));
           sectionNav.style.top = `${top}px`;
           sectionNav.style.translate = 'none';
         } else {
