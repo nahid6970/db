@@ -3364,5 +3364,60 @@
         "metadata_update_time": "23:00",
         "metadata_update_frequency": "weekly",
         "metadata_update_weekday": 4
+    },
+    {
+        "id": 119,
+        "tmdb_id": 1709391,
+        "external_ids": {
+            "tmdb": 1709391,
+            "imdb": "tt39390582"
+        },
+        "radarr_id": null,
+        "title": "Hanuman Ansh",
+        "year": "2026",
+        "release_date": "2026-08-07",
+        "digital_release_date": "",
+        "category": "Bollywood",
+        "overview": "A grieving boy seeks God to meet his departed mother, and in finding the divine, learns to serve humanity with miracles of love, food and silent blessings, becoming Hanuman Ansh, Neem Karoli Baba.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/as2Y3zGUa2IUS3uAx2sh6Ano3es.jpg",
+        "directory_path": "",
+        "genres": [
+            "Family",
+            "Drama"
+        ],
+        "runtime": 150,
+        "rating": 4,
+        "tmdb_rating": 8.2,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-12T15:19:00.659462"
+    },
+    {
+        "id": 120,
+        "tmdb_id": 1448430,
+        "external_ids": {
+            "tmdb": 1448430,
+            "imdb": "tt35419807"
+        },
+        "radarr_id": null,
+        "title": "Bou Buttu Bhuta",
+        "year": "2025",
+        "release_date": "2025-06-12",
+        "digital_release_date": "2025-12-26",
+        "category": "International",
+        "overview": "Buttu and his mother live a modest life in an Odisha village, with Buttu dreaming of leaving for a better life elsewhere. However, a series of unforeseen events disrupt their lives. Will they overcome the challenges and realise their dreams?",
+        "cover_image": "https://image.tmdb.org/t/p/w500/g8wFbBlKcngQnSJFUK2d5JrAWaT.jpg",
+        "directory_path": "",
+        "genres": [
+            "Comedy",
+            "Drama",
+            "Horror"
+        ],
+        "runtime": 176,
+        "rating": 4,
+        "tmdb_rating": 8.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-12T15:21:34.202414"
     }
 ]
