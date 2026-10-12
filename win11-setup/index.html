@@ -434,6 +434,53 @@
       nav::before { display: none; }
       nav a { flex: 0 0 auto; min-height: 38px; padding: 7px 9px; white-space: nowrap; }
     }
+    /* Keep the card centered, with a separate section picker in the left margin. */
+    .shell {
+      display: flex; flex-direction: column; justify-content: center; align-items: stretch;
+      width: min(940px, calc(100% - 100px)); min-height: 100vh; min-height: 100svh; padding: 78px 0 30px;
+    }
+    header { padding-bottom: 23px; }
+    nav {
+      position: fixed; z-index: 30; left: max(12px, calc((100vw - 940px) / 2 - 288px)); top: 50%; translate: 0 -50%;
+      display: flex; flex-direction: column; align-items: stretch; gap: 5px; width: 210px;
+      max-height: calc(100svh - 36px); overflow-x: hidden; overflow-y: auto; margin: 0; padding: 8px;
+    }
+    nav a { flex: 0 0 auto; width: 100%; justify-content: flex-start; min-height: 42px; text-align: left; white-space: normal; }
+    .card-arrow {
+      position: fixed; z-index: 40; top: 50%; translate: 0 -50%; width: 42px; height: 68px;
+      display: grid; place-items: center; padding: 0; border: 0; border-radius: 0;
+      color: #8c9aab; background: transparent; box-shadow: none; cursor: pointer;
+      transition: color .15s ease, transform .15s ease;
+    }
+    .card-arrow svg { width: 30px; height: 48px; }
+    #previousSection { left: max(12px, calc((100vw - 940px) / 2 - 58px)); }
+    #nextSection { right: max(12px, calc((100vw - 940px) / 2 - 58px)); }
+    body[data-theme="light"] .card-arrow { color: #77869a; }
+    body[data-theme="light"] .card-arrow:hover { color: #245fcb; }
+    .card-arrow:hover { transform: scale(1.08); }
+    .card-arrow:disabled { opacity: .24; cursor: default; transform: none; }
+    body[data-theme="dark"] .card-arrow { color: #8c9aab; }
+    @media (max-width: 1320px) {
+      nav {
+        position: static; translate: none; flex-direction: row; align-items: center; gap: 5px;
+        width: 100%; max-height: none; overflow-x: auto; overflow-y: hidden; margin: 0 0 14px; padding: 6px;
+      }
+      nav a { flex: 0 0 auto; width: auto; min-height: 38px; padding: 7px 9px; white-space: nowrap; }
+    }
+    @media (max-width: 760px) {
+      .shell { width: calc(100% - 110px); padding: 82px 0 24px; }
+      nav { position: sticky; top: 8px; z-index: 30; }
+      .card-arrow { width: 38px; height: 54px; }
+      #previousSection { left: 7px; }
+      #nextSection { right: 7px; }
+      section { min-height: 0; }
+    }
+    @media (max-width: 420px) {
+      .shell { width: calc(100% - 110px); }
+      .card-arrow { width: 36px; height: 48px; }
+      #previousSection { left: 6px; }
+      #nextSection { right: 6px; }
+    }
   </style>
 </head>
 <body data-theme="dark">
@@ -585,13 +632,22 @@
       let activeSection = 0;
       const previousButton = document.getElementById('previousSection');
       const nextButton = document.getElementById('nextSection');
-      function alignArrowsToCard() {
+      const sectionNav = document.querySelector('nav');
+      function alignControlsToCard() {
         const card = sections[activeSection];
         if (!card) return;
         const bounds = card.getBoundingClientRect();
         const center = Math.max(40, Math.min(window.innerHeight - 40, bounds.top + bounds.height / 2));
         previousButton.style.top = `${center}px`;
         nextButton.style.top = `${center}px`;
+        if (window.matchMedia('(min-width: 1321px)').matches) {
+          const top = Math.max(18, Math.min(bounds.top, window.innerHeight - sectionNav.offsetHeight - 18));
+          sectionNav.style.top = `${top}px`;
+          sectionNav.style.translate = 'none';
+        } else {
+          sectionNav.style.removeProperty('top');
+          sectionNav.style.removeProperty('translate');
+        }
       }
       function showSection(index) {
         activeSection = Math.max(0, Math.min(index, sections.length - 1));
@@ -604,18 +660,24 @@
           if (i === activeSection) {
             link.setAttribute('aria-current', 'location');
             const nav = link.closest('nav');
-            nav.scrollTo({ left: link.offsetLeft - nav.clientWidth / 2 + link.clientWidth / 2, behavior: 'smooth' });
+            const linkBounds = link.getBoundingClientRect();
+            const navBounds = nav.getBoundingClientRect();
+            if (window.matchMedia('(max-width: 1320px)').matches) {
+              nav.scrollTo({ left: nav.scrollLeft + linkBounds.left - navBounds.left - nav.clientWidth / 2 + link.clientWidth / 2, behavior: 'smooth' });
+            } else {
+              nav.scrollTo({ top: nav.scrollTop + linkBounds.top - navBounds.top - nav.clientHeight / 2 + link.clientHeight / 2, behavior: 'smooth' });
+            }
           } else {
             link.removeAttribute('aria-current');
           }
         });
         previousButton.disabled = activeSection === 0;
         nextButton.disabled = activeSection === sections.length - 1;
-        alignArrowsToCard();
+        alignControlsToCard();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      window.addEventListener('resize', alignArrowsToCard);
-      window.addEventListener('scroll', alignArrowsToCard, { passive: true });
+      window.addEventListener('resize', alignControlsToCard);
+      window.addEventListener('scroll', alignControlsToCard, { passive: true });
       previousButton.addEventListener('click', () => showSection(activeSection - 1));
       nextButton.addEventListener('click', () => showSection(activeSection + 1));
       sectionLinks.forEach((link, index) => link.addEventListener('click', event => {
