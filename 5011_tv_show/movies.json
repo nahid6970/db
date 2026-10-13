@@ -3559,8 +3559,8 @@
             "Fantasy"
         ],
         "runtime": 120,
-        "rating": null,
-        "tmdb_rating": 0.0,
+        "rating": 3,
+        "tmdb_rating": 6.0,
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-12T15:33:49.152562",
