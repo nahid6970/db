@@ -3568,5 +3568,32 @@
         "metadata_update_time": "23:00",
         "metadata_update_weekday": 6,
         "metadata_update_month_day": 28
+    },
+    {
+        "id": 122,
+        "tmdb_id": 958196,
+        "external_ids": {
+            "tmdb": 958196,
+            "imdb": "tt14781036"
+        },
+        "radarr_id": null,
+        "title": "Inside",
+        "year": "2023",
+        "release_date": "2023-03-09",
+        "digital_release_date": "2023-03-09",
+        "category": "Hollywood",
+        "overview": "An art thief trapped in a New York penthouse after his heist doesn't go as planned. Locked inside with nothing but priceless works of art, he must use all his cunning and invention to survive.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/dXsiWJWwGwYwOQ6DfYFt5pPBMwT.jpg",
+        "directory_path": "",
+        "genres": [
+            "Thriller",
+            "Drama"
+        ],
+        "runtime": 106,
+        "rating": 3,
+        "tmdb_rating": 5.7,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-13T16:55:54.870313"
     }
 ]
