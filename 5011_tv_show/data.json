@@ -166987,16 +166987,16 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": null,
-        "tmdb_rating": 0.0,
+        "tmdb_rating": 10.0,
         "status": "Continuing",
         "episodes": [
             {
                 "season_number": 1,
                 "episode_number": 1,
-                "title": "TBA",
-                "air_date": "2026-10-14",
+                "title": "No Strings",
+                "air_date": "2026-10-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-14T12:00:00+00:00",
+                "air_datetime": "2026-10-13T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616304,
@@ -167007,10 +167007,10 @@
             {
                 "season_number": 1,
                 "episode_number": 2,
-                "title": "TBA",
-                "air_date": "2026-10-14",
+                "title": "Theseus",
+                "air_date": "2026-10-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-14T12:00:00+00:00",
+                "air_datetime": "2026-10-13T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616305,
@@ -167021,10 +167021,10 @@
             {
                 "season_number": 1,
                 "episode_number": 3,
-                "title": "TBA",
-                "air_date": "2026-10-21",
+                "title": "Reboot",
+                "air_date": "2026-10-20",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-21T12:00:00+00:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616306,
@@ -167035,10 +167035,10 @@
             {
                 "season_number": 1,
                 "episode_number": 4,
-                "title": "TBA",
-                "air_date": "2026-10-21",
+                "title": "Malware",
+                "air_date": "2026-10-20",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-21T12:00:00+00:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616307,
@@ -167049,10 +167049,10 @@
             {
                 "season_number": 1,
                 "episode_number": 5,
-                "title": "TBA",
-                "air_date": "2026-10-28",
+                "title": "Firewall",
+                "air_date": "2026-10-27",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-28T12:00:00+00:00",
+                "air_datetime": "2026-10-27T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616308,
@@ -167063,10 +167063,10 @@
             {
                 "season_number": 1,
                 "episode_number": 6,
-                "title": "TBA",
-                "air_date": "2026-10-28",
+                "title": "Deadlock",
+                "air_date": "2026-10-27",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-28T12:00:00+00:00",
+                "air_datetime": "2026-10-27T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616309,
@@ -167077,10 +167077,10 @@
             {
                 "season_number": 1,
                 "episode_number": 7,
-                "title": "TBA",
-                "air_date": "2026-11-04",
+                "title": "Immolation",
+                "air_date": "2026-11-03",
                 "airtime": "18:00",
-                "air_datetime": "2026-11-04T12:00:00+00:00",
+                "air_datetime": "2026-11-03T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616310,
@@ -167091,10 +167091,10 @@
             {
                 "season_number": 1,
                 "episode_number": 8,
-                "title": "TBA",
-                "air_date": "2026-11-11",
+                "title": "Forever",
+                "air_date": "2026-11-10",
                 "airtime": "18:00",
-                "air_datetime": "2026-11-11T12:00:00+00:00",
+                "air_datetime": "2026-11-10T12:00:00+00:00",
                 "overview": "",
                 "still_image": "",
                 "tvmaze_episode_id": 3616311,
@@ -172810,7 +172810,7 @@
                 "tvmaze_episode_id": 3726259,
                 "id": 1,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172824,7 +172824,7 @@
                 "tvmaze_episode_id": 3787507,
                 "id": 2,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172838,7 +172838,7 @@
                 "tvmaze_episode_id": 3787508,
                 "id": 3,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172852,7 +172852,7 @@
                 "tvmaze_episode_id": 3787509,
                 "id": 4,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172866,7 +172866,7 @@
                 "tvmaze_episode_id": 3787510,
                 "id": 5,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172880,7 +172880,7 @@
                 "tvmaze_episode_id": 3787511,
                 "id": 6,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172894,7 +172894,7 @@
                 "tvmaze_episode_id": 3787512,
                 "id": 7,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172908,7 +172908,7 @@
                 "tvmaze_episode_id": 3787513,
                 "id": 8,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172922,7 +172922,7 @@
                 "tvmaze_episode_id": 3787514,
                 "id": 9,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172936,7 +172936,7 @@
                 "tvmaze_episode_id": 3787515,
                 "id": 10,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172950,7 +172950,7 @@
                 "tvmaze_episode_id": 3787516,
                 "id": 11,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172964,7 +172964,7 @@
                 "tvmaze_episode_id": 3787517,
                 "id": 12,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172978,7 +172978,7 @@
                 "tvmaze_episode_id": 3787518,
                 "id": 13,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -172992,7 +172992,7 @@
                 "tvmaze_episode_id": 3787519,
                 "id": 14,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -173006,7 +173006,7 @@
                 "tvmaze_episode_id": 3787520,
                 "id": 15,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -173020,7 +173020,7 @@
                 "tvmaze_episode_id": 3787521,
                 "id": 16,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -173034,7 +173034,7 @@
                 "tvmaze_episode_id": 3787522,
                 "id": 17,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -173048,7 +173048,7 @@
                 "tvmaze_episode_id": 3787523,
                 "id": 18,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -173062,10 +173062,550 @@
                 "tvmaze_episode_id": 3787524,
                 "id": 19,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 93969,
+        "episode_source": "tvmaze"
+    },
+    {
+        "id": 265,
+        "tmdb_id": 65555,
+        "external_ids": {
+            "tmdb": 65555
+        },
+        "title": "Endless Love",
+        "year": "2015",
+        "overview": "A young artist finds herself obligated to sacrifice her love story for hiding a family secret.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/qEkRGqfoV9ziKiPLOa3fZaaYjhG.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "rating": 4,
+        "tmdb_rating": 7.9,
+        "status": "Ended",
+        "episodes": [
+            {
+                "season_number": 1,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2014-06-21",
+                "airtime": "18:55",
+                "air_datetime": "2014-06-21T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203485,
+                "id": 1,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 2,
+                "title": "Episode 2",
+                "air_date": "2014-06-22",
+                "airtime": "18:55",
+                "air_datetime": "2014-06-22T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203486,
+                "id": 2,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 3,
+                "title": "Episode 3",
+                "air_date": "2014-06-28",
+                "airtime": "18:55",
+                "air_datetime": "2014-06-28T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203487,
+                "id": 3,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 4,
+                "title": "Episode 4",
+                "air_date": "2014-06-29",
+                "airtime": "18:55",
+                "air_datetime": "2014-06-29T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203488,
+                "id": 4,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 5,
+                "title": "Episode 5",
+                "air_date": "2014-07-05",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-05T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203489,
+                "id": 5,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 6,
+                "title": "Episode 6",
+                "air_date": "2014-07-06",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-06T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203490,
+                "id": 6,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 7,
+                "title": "Episode 7",
+                "air_date": "2014-07-12",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-12T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203491,
+                "id": 7,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 8,
+                "title": "Episode 8",
+                "air_date": "2014-07-13",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-13T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203492,
+                "id": 8,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 9,
+                "title": "Episode 9",
+                "air_date": "2014-07-19",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-19T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203493,
+                "id": 9,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "Episode 10",
+                "air_date": "2014-07-20",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-20T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203494,
+                "id": 10,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 11,
+                "title": "Episode 11",
+                "air_date": "2014-07-26",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-26T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203495,
+                "id": 11,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 12,
+                "title": "Episode 12",
+                "air_date": "2014-07-27",
+                "airtime": "18:55",
+                "air_datetime": "2014-07-27T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203496,
+                "id": 12,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 13,
+                "title": "Episode 13",
+                "air_date": "2014-08-02",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-02T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203497,
+                "id": 13,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 14,
+                "title": "Episode 14",
+                "air_date": "2014-08-03",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-03T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203498,
+                "id": 14,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 15,
+                "title": "Episode 15",
+                "air_date": "2014-08-09",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-09T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203499,
+                "id": 15,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 16,
+                "title": "Episode 16",
+                "air_date": "2014-08-10",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-10T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203500,
+                "id": 16,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 17,
+                "title": "Episode 17",
+                "air_date": "2014-08-16",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-16T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203501,
+                "id": 17,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 18,
+                "title": "Episode 18",
+                "air_date": "2014-08-17",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-17T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203502,
+                "id": 18,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 19,
+                "title": "Episode 19",
+                "air_date": "2014-08-23",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-23T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203503,
+                "id": 19,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 20,
+                "title": "Episode 20",
+                "air_date": "2014-08-24",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-24T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203504,
+                "id": 20,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 21,
+                "title": "Episode 21",
+                "air_date": "2014-08-30",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-30T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203505,
+                "id": 21,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 22,
+                "title": "Episode 22",
+                "air_date": "2014-08-31",
+                "airtime": "18:55",
+                "air_datetime": "2014-08-31T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203506,
+                "id": 22,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 23,
+                "title": "Episode 23",
+                "air_date": "2014-09-06",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-06T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203507,
+                "id": 23,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 24,
+                "title": "Episode 24",
+                "air_date": "2014-09-07",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-07T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203508,
+                "id": 24,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 25,
+                "title": "Episode 25",
+                "air_date": "2014-09-13",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-13T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203509,
+                "id": 25,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 26,
+                "title": "Episode 26",
+                "air_date": "2014-09-14",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-14T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203510,
+                "id": 26,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 27,
+                "title": "Episode 27",
+                "air_date": "2014-09-20",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-20T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203511,
+                "id": 27,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 28,
+                "title": "Episode 28",
+                "air_date": "2014-09-21",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-21T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203512,
+                "id": 28,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 29,
+                "title": "Episode 29",
+                "air_date": "2014-09-27",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-27T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203513,
+                "id": 29,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 30,
+                "title": "Episode 30",
+                "air_date": "2014-09-28",
+                "airtime": "18:55",
+                "air_datetime": "2014-09-28T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203514,
+                "id": 30,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 31,
+                "title": "Episode 31",
+                "air_date": "2014-10-04",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-04T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203515,
+                "id": 31,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 32,
+                "title": "Episode 32",
+                "air_date": "2014-10-05",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-05T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203516,
+                "id": 32,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 33,
+                "title": "Episode 33",
+                "air_date": "2014-10-11",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-11T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203517,
+                "id": 33,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 34,
+                "title": "Episode 34",
+                "air_date": "2014-10-12",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-12T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203518,
+                "id": 34,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 35,
+                "title": "Episode 35",
+                "air_date": "2014-10-18",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-18T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203519,
+                "id": 35,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 36,
+                "title": "Episode 36",
+                "air_date": "2014-10-19",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-19T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203520,
+                "id": 36,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 37,
+                "title": "Episode 37",
+                "air_date": "2014-10-26",
+                "airtime": "18:55",
+                "air_datetime": "2014-10-26T12:55:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 1203521,
+                "id": 37,
+                "watched": false,
+                "notify": "unseen"
+            }
+        ],
+        "tvmaze_id": 28929,
         "episode_source": "tvmaze"
     }
 ]

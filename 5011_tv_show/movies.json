@@ -3590,10 +3590,10 @@
             "Drama"
         ],
         "runtime": 106,
-        "rating": 3,
+        "rating": "2",
         "tmdb_rating": 5.7,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-10-13T16:55:54.870313"
     }
 ]
