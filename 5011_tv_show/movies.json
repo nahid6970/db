@@ -3595,5 +3595,31 @@
         "status": "Released",
         "watched": true,
         "added_date": "2026-10-13T16:55:54.870313"
+    },
+    {
+        "id": 123,
+        "tmdb_id": 11321,
+        "external_ids": {
+            "tmdb": 11321,
+            "imdb": "tt0814314"
+        },
+        "radarr_id": null,
+        "title": "Seven Pounds",
+        "year": "2008",
+        "release_date": "2008-12-18",
+        "digital_release_date": "2009-01-08",
+        "category": "Hollywood",
+        "overview": "An IRS agent with a fateful secret embarks on an extraordinary journey of redemption by forever changing the lives of seven strangers.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/85zUipgVy2QbvAJ6djZXYaGckMv.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "runtime": 123,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-14T18:01:44.478942"
     }
 ]
