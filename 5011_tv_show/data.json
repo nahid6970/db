@@ -154861,7 +154861,7 @@
                 "air_date": "2026-10-12",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-12T12:00:00+00:00",
-                "overview": "",
+                "overview": "Tonight, The Usos will join forces with their estranged brother Sikoa against The 946 in what promises to be a wild Six-Man Tag Team Match.\u00a0Intercontinental Champion Chad Gable will defend the title against AAA Cruiserweight Champion Rey Fenix.After Big Cass assaulted Rey Mysterio and Dragon Lee last week, The Master of the 619 will seek payback in a collision with the seven-footer.",
                 "still_image": "",
                 "tvmaze_episode_id": 3680022,
                 "id": 1743,
@@ -155273,20 +155273,6 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3443451,
                 "id": 1714,
-                "watched": true,
-                "notify": "seen"
-            },
-            {
-                "season_number": 33,
-                "episode_number": 11,
-                "title": "#1712 - Frost Bank Center in San Antonio, TX",
-                "air_date": "2026-03-16",
-                "airtime": "18:00",
-                "air_datetime": "2026-03-16T12:00:00+00:00",
-                "overview": "Two weeks after World Heavyweight Champion CM Punk's comments about burying Roman Reigns next to his father, The OTC returns to Raw.After winning a Gauntlet Match last week on Raw, Bayley will challenge AJ Lee for the Women's Intercontinental Championship, this Monday.The Beast is back. Brock Lesnar will return to Raw to see who'll answer his WrestleMania challenge.Women's World Champion Stephanie Vaquer will once again step into the squared circle with Raquel Rodriguez of The Judgment Day, with her WrestleMania title defense against Liv Morgan looming.\u00a0\"Original\" El Grande Americano and El Grande Americano will collide in a one-on-one showdown to settle things once and for all. Who will prove himself the true El Grande Americano?Last week, Maxxine Dupri attacked Nattie as she was badmouthing her adversary. As a result, the two Superstars will square off in a highly personal showdown.",
-                "still_image": "",
-                "tvmaze_episode_id": 3443450,
-                "id": 1713,
                 "watched": true,
                 "notify": "seen"
             }
@@ -166987,7 +166973,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": null,
-        "tmdb_rating": 10.0,
+        "tmdb_rating": 9.2,
         "status": "Continuing",
         "episodes": [
             {
@@ -166997,8 +166983,8 @@
                 "air_date": "2026-10-13",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-13T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Vision embarks on a journey of self-discovery and finds himself hunted by a deadly force.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/646/1615067.jpg",
                 "tvmaze_episode_id": 3616304,
                 "id": 1,
                 "watched": false,
@@ -167011,8 +166997,8 @@
                 "air_date": "2026-10-13",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-13T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Vision comes face to face with his assailant while investigating whether Tommy Shepherd is his son.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/646/1615068.jpg",
                 "tvmaze_episode_id": 3616305,
                 "id": 2,
                 "watched": false,

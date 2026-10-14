@@ -3621,5 +3621,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-14T18:01:44.478942"
+    },
+    {
+        "id": 124,
+        "tmdb_id": 3050,
+        "external_ids": {
+            "tmdb": 3050,
+            "imdb": "tt0118998"
+        },
+        "radarr_id": null,
+        "title": "Doctor Dolittle",
+        "year": "1998",
+        "release_date": "1998-06-26",
+        "digital_release_date": "",
+        "category": "Hollywood",
+        "overview": "A successful physician and devoted family man, John Dolittle seems to have the world by the tail, until a long suppressed talent he possessed as a child, the ability to communicate with animals is suddenly reawakened with a vengeance! Now every creature within squawking distance wants the good doctor's advice, unleashing an outrageous chain of events that turns his world upside down!",
+        "cover_image": "https://image.tmdb.org/t/p/w500/tLrchGMIkdo1KamQJA6fwvDQEy0.jpg",
+        "directory_path": "",
+        "genres": [
+            "Comedy",
+            "Family",
+            "Fantasy"
+        ],
+        "runtime": 85,
+        "rating": 3,
+        "tmdb_rating": 5.7,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-14T22:29:14.838520"
     }
 ]
