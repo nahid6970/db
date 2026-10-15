@@ -3649,5 +3649,32 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-14T22:29:14.838520"
+    },
+    {
+        "id": 125,
+        "tmdb_id": 34016,
+        "external_ids": {
+            "tmdb": 34016,
+            "imdb": "tt0815236"
+        },
+        "radarr_id": null,
+        "title": "She's Out of My League",
+        "year": "2010",
+        "release_date": "2010-03-11",
+        "digital_release_date": "2010-04-30",
+        "category": "Hollywood",
+        "overview": "When he starts dating drop-dead gorgeous Molly, insecure airport security agent Kirk can't believe it. As his friends and family share their doubts about the relationship lasting, Kirk does everything he can to avoid losing Molly forever.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/mpYHjyPX0DAxbsnWKmSK5jZ1s4T.jpg",
+        "directory_path": "",
+        "genres": [
+            "Romance",
+            "Comedy"
+        ],
+        "runtime": 104,
+        "rating": 3,
+        "tmdb_rating": 6.5,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-15T12:41:09.961095"
     }
 ]
