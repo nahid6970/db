@@ -3676,5 +3676,32 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-15T12:41:09.961095"
+    },
+    {
+        "id": 126,
+        "tmdb_id": 1317149,
+        "external_ids": {
+            "tmdb": 1317149,
+            "imdb": "tt31514146"
+        },
+        "radarr_id": null,
+        "title": "I Swear",
+        "year": "2025",
+        "release_date": "2025-09-22",
+        "digital_release_date": "2026-03-10",
+        "category": "Hollywood",
+        "overview": "Diagnosed with Tourette Syndrome at 15, John Davidson navigates his way against the odds through troubled teenage years and into adulthood, finding inspiration in the kindness of others to discover his true purpose in life.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/vUwyhNWBKkSwK8ELvEeBRwV724h.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama",
+            "History"
+        ],
+        "runtime": 121,
+        "rating": 4,
+        "tmdb_rating": 8.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-15T23:37:16.650121"
     }
 ]
