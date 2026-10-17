@@ -3703,5 +3703,32 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-15T23:37:16.650121"
+    },
+    {
+        "id": 127,
+        "tmdb_id": 1081010,
+        "external_ids": {
+            "tmdb": 1081010,
+            "imdb": "tt28773062"
+        },
+        "radarr_id": null,
+        "title": "Prahaar",
+        "year": "2026",
+        "release_date": "2026-10-16",
+        "digital_release_date": "",
+        "category": "Bollywood",
+        "overview": "Public prosecutor Ujjwal Nikam takes on one of the most high-profile criminal cases in India\u2019s history, leading the prosecution in the trial of Ajmal Kasab following the 26/11 Mumbai terror attacks. As he battles to uncover the truth and secure justice, Nikam must confront the immense personal and professional burden of a case that will define his legacy.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/wTrBTNfHHmpPwiB9rpn0tGbSW1m.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Drama"
+        ],
+        "runtime": 140,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-16T21:48:53.872247"
     }
 ]
