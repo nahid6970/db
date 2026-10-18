@@ -46841,12 +46841,12 @@
             {
                 "season_number": 2,
                 "episode_number": 3,
-                "title": "Episode 3",
+                "title": "Black Guardian",
                 "air_date": "2026-10-17",
                 "airtime": "15:25",
                 "air_datetime": "2026-10-17T09:25:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The gate to the underworld finally opens. What will the Magic Knights do?",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/646/1616265.jpg",
                 "tvmaze_episode_id": 3780610,
                 "id": 173,
                 "watched": true,
@@ -166959,7 +166959,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": null,
-        "tmdb_rating": 9.2,
+        "tmdb_rating": 9.0,
         "status": "Continuing",
         "episodes": [
             {
