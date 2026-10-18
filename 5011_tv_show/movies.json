@@ -3758,5 +3758,34 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-18T14:56:15.526772"
+    },
+    {
+        "id": 129,
+        "tmdb_id": 1654581,
+        "external_ids": {
+            "tmdb": 1654581,
+            "imdb": "tt40855841"
+        },
+        "radarr_id": null,
+        "title": "Nayyi Navelli",
+        "year": "2026",
+        "release_date": "2026-10-16",
+        "digital_release_date": "",
+        "category": "Bollywood",
+        "overview": "A new bride's arrival turns a turbulent household in Meerut into a picture of domestic harmony, until her brother-in-law grows convinced that his seemingly perfect sister-in-law is secretly a witch.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/aZEKuzGt7ObqoKjTM4kcMd0klYy.jpg",
+        "directory_path": "",
+        "genres": [
+            "Adventure",
+            "Fantasy",
+            "Comedy",
+            "Drama"
+        ],
+        "runtime": 0,
+        "rating": null,
+        "tmdb_rating": 0.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-18T17:10:35.600046"
     }
 ]
