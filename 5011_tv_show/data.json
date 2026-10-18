@@ -166973,7 +166973,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/646/1615067.jpg",
                 "tvmaze_episode_id": 3616304,
                 "id": 1,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -166987,7 +166987,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/646/1615068.jpg",
                 "tvmaze_episode_id": 3616305,
                 "id": 2,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
