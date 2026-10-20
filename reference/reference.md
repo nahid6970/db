@@ -1,5 +1,3 @@
-Based on the text provided, here is the organized information for your two references:
-
 REF1
 Sinosoft Co., Ltd.
 BISDP 
@@ -9,11 +7,11 @@ Business Manager ( Acting Project Manager, Local)
 razib6150@gmail.com
 
 REF2
-*   **Name:** Riyad Hossain
-*   **Position:** Computer Operator
-*   **Contact Phone:** 01521111259
-*   **E-mail:** dorakhaichi272@gmail.com
-*   **Address:** AAM Tower, Flat: A-8, Giridhara Residential Area
+Riyad Hossain
+Computer Operator
+01521111259
+dorakhaichi272@gmail.com
+AAM Tower, Flat: A-8, Giridhara Residential Area
 
 REF3
 Md. Imran Hossain
