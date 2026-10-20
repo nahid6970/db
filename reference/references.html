@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reference Contacts</title>
+  <style>
+    :root { color-scheme: light; --ink:#172033; --muted:#667085; --line:#e4e8ef; --accent:#2955d9; --surface:#fff; --bg:#f4f6fa; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif; }
+    main { width:min(980px,calc(100% - 32px)); margin:48px auto; }
+    h1 { margin:0 0 8px; font-size:clamp(1.7rem,4vw,2.3rem); letter-spacing:-.03em; }
+    .intro { margin:0 0 28px; color:var(--muted); }
+    .cards { display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(min(100%,390px),1fr)); }
+    .contact-card { background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:22px; box-shadow:0 8px 24px #1720330a; }
+    .card-heading { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+    h2 { margin:0; font-size:1.1rem; }
+    .copy-all, .copy-field { border:0; border-radius:8px; background:#edf1ff; color:var(--accent); font:inherit; font-weight:650; cursor:pointer; }
+    .copy-all { padding:8px 11px; white-space:nowrap; }
+    .copy-field { padding:5px 9px; font-size:.82rem; }
+    button:hover { filter:brightness(.96); }
+    button:focus-visible { outline:3px solid #8da4ff; outline-offset:2px; }
+    .field { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:start; gap:12px; padding:11px 0; border-top:1px solid var(--line); }
+    .field-label { display:block; color:var(--muted); font-size:.78rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; }
+    .field-value { display:block; margin-top:2px; overflow-wrap:anywhere; white-space:pre-wrap; }
+    #copy-status { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); padding:10px 15px; border-radius:999px; background:#172033; color:white; box-shadow:0 5px 20px #0003; opacity:0; pointer-events:none; transition:opacity .18s ease; }
+    #copy-status.is-visible { opacity:1; }
+    @media(max-width:480px) { main { margin:28px auto; } .contact-card { padding:17px; } .field { gap:8px; } }
+  </style>
+</head>
+<body>
+  <main id="reference-page">
+    <h1>Reference Contacts</h1>
+    <p class="intro">Copy an individual field or use “Copy reference” to copy a complete contact.</p>
+    <section class="cards" id="reference-list" aria-label="References">
+      <article class="contact-card" id="ref1-card" data-testid="reference-card">
+        <div class="card-heading"><h2>REF1</h2><button class="copy-all" id="copy-ref1" type="button" data-copy-card="ref1-card">Copy reference</button></div>
+        <div class="field" id="ref1-company"><div><span class="field-label">Company</span><span class="field-value">Sinosoft Co., Ltd.</span></div><button class="copy-field" id="copy-ref1-company" type="button" data-copy-value="Sinosoft Co., Ltd." aria-label="Copy company">Copy</button></div>
+        <div class="field" id="ref1-program"><div><span class="field-label">Program</span><span class="field-value">BISDP</span></div><button class="copy-field" id="copy-ref1-program" type="button" data-copy-value="BISDP" aria-label="Copy program">Copy</button></div>
+        <div class="field" id="ref1-name"><div><span class="field-label">Name</span><span class="field-value">Razib Hossain</span></div><button class="copy-field" id="copy-ref1-name" type="button" data-copy-value="Razib Hossain" aria-label="Copy name">Copy</button></div>
+        <div class="field" id="ref1-designation"><div><span class="field-label">Designation</span><span class="field-value">Business Manager (Acting Project Manager, Local)</span></div><button class="copy-field" id="copy-ref1-designation" type="button" data-copy-value="Business Manager (Acting Project Manager, Local)" aria-label="Copy designation">Copy</button></div>
+        <div class="field" id="ref1-phone"><div><span class="field-label">Phone</span><span class="field-value">01674303354</span></div><button class="copy-field" id="copy-ref1-phone" type="button" data-copy-value="01674303354" aria-label="Copy phone">Copy</button></div>
+        <div class="field" id="ref1-email"><div><span class="field-label">Email</span><span class="field-value">razib6150@gmail.com</span></div><button class="copy-field" id="copy-ref1-email" type="button" data-copy-value="razib6150@gmail.com" aria-label="Copy email">Copy</button></div>
+      </article>
+      <article class="contact-card" id="ref2-card" data-testid="reference-card">
+        <div class="card-heading"><h2>REF2</h2><button class="copy-all" id="copy-ref2" type="button" data-copy-card="ref2-card">Copy reference</button></div>
+        <div class="field" id="ref2-name"><div><span class="field-label">Name</span><span class="field-value">Riyad Hossain</span></div><button class="copy-field" id="copy-ref2-name" type="button" data-copy-value="Riyad Hossain" aria-label="Copy name">Copy</button></div>
+        <div class="field" id="ref2-designation"><div><span class="field-label">Designation</span><span class="field-value">Computer Operator</span></div><button class="copy-field" id="copy-ref2-designation" type="button" data-copy-value="Computer Operator" aria-label="Copy designation">Copy</button></div>
+        <div class="field" id="ref2-phone"><div><span class="field-label">Phone</span><span class="field-value">01521111259</span></div><button class="copy-field" id="copy-ref2-phone" type="button" data-copy-value="01521111259" aria-label="Copy phone">Copy</button></div>
+        <div class="field" id="ref2-email"><div><span class="field-label">Email</span><span class="field-value">dorakhaichi272@gmail.com</span></div><button class="copy-field" id="copy-ref2-email" type="button" data-copy-value="dorakhaichi272@gmail.com" aria-label="Copy email">Copy</button></div>
+        <div class="field" id="ref2-address"><div><span class="field-label">Address</span><span class="field-value">AAM Tower, Flat: A-8, Giridhara Residential Area</span></div><button class="copy-field" id="copy-ref2-address" type="button" data-copy-value="AAM Tower, Flat: A-8, Giridhara Residential Area" aria-label="Copy address">Copy</button></div>
+      </article>
+      <article class="contact-card" id="ref3-card" data-testid="reference-card">
+        <div class="card-heading"><h2>REF3</h2><button class="copy-all" id="copy-ref3" type="button" data-copy-card="ref3-card">Copy reference</button></div>
+        <div class="field" id="ref3-name"><div><span class="field-label">Name</span><span class="field-value">Md. Imran Hossain</span></div><button class="copy-field" id="copy-ref3-name" type="button" data-copy-value="Md. Imran Hossain" aria-label="Copy name">Copy</button></div>
+        <div class="field" id="ref3-designation"><div><span class="field-label">Designation</span><span class="field-value">Associate Professor (Study Leave)</span></div><button class="copy-field" id="copy-ref3-designation" type="button" data-copy-value="Associate Professor (Study Leave)" aria-label="Copy designation">Copy</button></div>
+        <div class="field" id="ref3-department"><div><span class="field-label">Department</span><span class="field-value">Department of Finance</span></div><button class="copy-field" id="copy-ref3-department" type="button" data-copy-value="Department of Finance" aria-label="Copy department">Copy</button></div>
+        <div class="field" id="ref3-faculty"><div><span class="field-label">Faculty</span><span class="field-value">Faculty of Business Studies</span></div><button class="copy-field" id="copy-ref3-faculty" type="button" data-copy-value="Faculty of Business Studies" aria-label="Copy faculty">Copy</button></div>
+        <div class="field" id="ref3-email"><div><span class="field-label">Email</span><span class="field-value">imran@du.ac.bd</span></div><button class="copy-field" id="copy-ref3-email" type="button" data-copy-value="imran@du.ac.bd" aria-label="Copy email">Copy</button></div>
+        <div class="field" id="ref3-phone"><div><span class="field-label">Phone</span><span class="field-value">+8801675550775</span></div><button class="copy-field" id="copy-ref3-phone" type="button" data-copy-value="+8801675550775" aria-label="Copy phone">Copy</button></div>
+        <div class="field" id="ref3-address"><div><span class="field-label">Address</span><span class="field-value">MBA Building, Dhaka University Campus</span></div><button class="copy-field" id="copy-ref3-address" type="button" data-copy-value="MBA Building, Dhaka University Campus" aria-label="Copy address">Copy</button></div>
+      </article>
+    </section>
+  </main>
+  <div id="copy-status" role="status" aria-live="polite"></div>
+  <script>
+    const statusMessage = document.getElementById('copy-status');
+    let statusTimer;
+    async function copyText(value, label) {
+      try {
+        await navigator.clipboard.writeText(value);
+      } catch {
+        const helper = document.createElement('textarea');
+        helper.value = value;
+        helper.style.position = 'fixed';
+        helper.style.opacity = '0';
+        document.body.append(helper);
+        helper.select();
+        document.execCommand('copy');
+        helper.remove();
+      }
+      statusMessage.textContent = `${label} copied`;
+      statusMessage.classList.add('is-visible');
+      clearTimeout(statusTimer);
+      statusTimer = setTimeout(() => statusMessage.classList.remove('is-visible'), 1800);
+    }
+    document.querySelectorAll('[data-copy-value]').forEach(button => {
+      button.addEventListener('click', () => copyText(button.dataset.copyValue, button.getAttribute('aria-label').replace('Copy ', '')));
+    });
+    document.querySelectorAll('[data-copy-card]').forEach(button => {
+      button.addEventListener('click', () => {
+        const card = document.getElementById(button.dataset.copyCard);
+        const title = card.querySelector('h2').textContent;
+        const content = [...card.querySelectorAll('.field')].map(field => `${field.querySelector('.field-label').textContent}: ${field.querySelector('.field-value').textContent}`).join('\n');
+        copyText(`${title}\n${content}`, title);
+      });
+    });
+  </script>
+</body>
+</html>
