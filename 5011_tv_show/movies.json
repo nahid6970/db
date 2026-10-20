@@ -2585,10 +2585,10 @@
             "Action"
         ],
         "runtime": 157,
-        "rating": 3,
+        "rating": "2",
         "tmdb_rating": 6.9,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-17T08:10:21.535284",
         "metadata_update_time": ""
     },
