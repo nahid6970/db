@@ -1,12 +1,21 @@
 Based on the text provided, here is the organized information for your two references:
 
-### **Reference 1**
+REF1
+Sinosoft Co., Ltd.
+BISDP 
+Razib Hossain 
+Business Manager ( Acting Project Manager, Local)
+01674303354
+razib6150@gmail.com
+
+REF2
 *   **Name:** Riyad Hossain
 *   **Position:** Computer Operator
 *   **Contact Phone:** 01521111259
 *   **E-mail:** dorakhaichi272@gmail.com
 *   **Address:** AAM Tower, Flat: A-8, Giridhara Residential Area
 
+REF3
 Md. Imran Hossain
 Associate Professor (Study Leave)
 Department of Finance
