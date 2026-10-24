@@ -1568,6 +1568,7 @@ const gunWrap   = document.getElementById('gunWrap');
 
 let bulletPos = Math.floor(Math.random() * 6), currentPos = 0;
 let isSpun = false, deaths = 0, survives = 0, spins = 0, streak = 0, histArr = [];
+const safeChambers = new Set();
 
 const setStatus = (t, c = '') => { statusEl.textContent = t; statusEl.className = 'status ' + c; };
 const setOdds   = (n, d)      => { oddsFill.style.width = ((n / d) * 100) + '%'; oddsVal.textContent = n + ' in ' + d; };
@@ -1643,6 +1644,7 @@ function updateChamberHUD(outcome = '') {
         const pip = document.getElementById(`ch${i}`);
         if (!pip) continue;
         pip.className = 'ch-pip';
+        if (safeChambers.has(i)) pip.classList.add('safe');
         if (isSpun) {
             pip.classList.add('ready');
             if (i === currentPos) pip.classList.add('current');
@@ -1653,6 +1655,7 @@ function updateChamberHUD(outcome = '') {
         if (curPip) curPip.className = 'ch-pip dead';
     } else if (outcome === 'safe') {
         const prev = (currentPos + 5) % 6;
+        safeChambers.add(prev);
         const prevPip = document.getElementById(`ch${prev}`);
         if (prevPip) prevPip.className = 'ch-pip safe';
     }
@@ -1671,6 +1674,7 @@ spinBtn.addEventListener('click', () => {
     bulletPos = Math.floor(Math.random() * 6);
     // Start every new round from the first chamber, regardless of the prior spin.
     currentPos = 0;
+    safeChambers.clear();
     cylinderGroup.rotation.z = 0;
 
     const fullTurns = (Math.floor(Math.random() * 3) + 3) * Math.PI * 2;
