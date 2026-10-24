@@ -257,6 +257,9 @@
       document.querySelectorAll('.color-swatch').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
     }));
     document.querySelector('#undo-action').addEventListener('click',()=>{removeBrick(bricks.at(-1));});
+    document.addEventListener('keydown', event => {
+      if ((event.ctrlKey || event.metaKey) && event.key === 'z') { event.preventDefault(); removeBrick(bricks.at(-1)); }
+    });
     document.querySelector('#clear-action').addEventListener('click',()=>{[...bricks].forEach(removeBrick);showToast('Fresh board! Start building again.');});
     const partPicker=document.querySelector('#part-picker');
     const partMenu=document.querySelector('#part-menu');
