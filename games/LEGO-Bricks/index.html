@@ -126,12 +126,12 @@
     const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
     renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.shadowMap.type = THREE.PCFShadowMap;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.15;
     const controls = new OrbitControls(camera, renderer.domElement);
-    controls.target.set(0, 0.4, 0);
+    controls.target.set(0, 0.1, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.08;
     controls.minDistance = 7;
@@ -143,9 +143,9 @@
     const sun = new THREE.DirectionalLight(0xffffff, 3.1);
     sun.position.set(-7, 14, 8);
     sun.castShadow = true;
-    sun.shadow.mapSize.set(2048, 2048);
-    sun.shadow.camera.left = -13; sun.shadow.camera.right = 13; sun.shadow.camera.top = 13; sun.shadow.camera.bottom = -13;
-    sun.shadow.bias = -0.0003;
+    sun.shadow.mapSize.set(4096, 4096);
+    sun.shadow.camera.left = -5; sun.shadow.camera.right = 5; sun.shadow.camera.top = 5; sun.shadow.camera.bottom = -5;
+    sun.shadow.bias = -0.0005;
     scene.add(sun);
 
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color:'#dceaf0', roughness:1 }));
@@ -154,14 +154,14 @@
     const brickHeight = 0.32, pitch = 0.25, boardStuds = 12;
     const gridSize = 3;
     const base = new THREE.Mesh(new THREE.BoxGeometry(gridSize, 0.34, gridSize), new THREE.MeshStandardMaterial({ color:'#7cc8ba', roughness:0.82 }));
-    base.position.y = -0.02; base.receiveShadow = true; base.castShadow = true; base.userData.isBase = true; scene.add(base);
+    base.position.y = -0.08; base.receiveShadow = true; base.castShadow = true; base.userData.isBase = true; scene.add(base);
     const grid = new THREE.GridHelper(gridSize, boardStuds, '#63a99e', '#9ad6ca');
-    grid.position.y = 0.156; grid.material.transparent = true; grid.material.opacity = 0.43; scene.add(grid);
+    grid.position.y = 0.096; grid.material.transparent = true; grid.material.opacity = 0.43; scene.add(grid);
     // Subtle circular studs make the baseplate read like a toy board while keeping the grid clear.
     const baseStudMat = new THREE.MeshStandardMaterial({ color:'#8bd2c3', roughness:0.7 });
-    const studGeo = new THREE.CylinderGeometry(0.105, 0.105, 0.06, 16);
+    const studGeo = new THREE.CylinderGeometry(0.105, 0.105, 0.04, 16);
     for (let x=-5.5;x<=5.5;x++) for (let z=-5.5;z<=5.5;z++) {
-      const stud = new THREE.Mesh(studGeo,baseStudMat); stud.position.set(x*pitch,0.18,z*pitch); stud.receiveShadow=true; stud.castShadow=true; scene.add(stud);
+      const stud = new THREE.Mesh(studGeo,baseStudMat); stud.position.set(x*pitch,0.11,z*pitch); stud.receiveShadow=true; stud.castShadow=true; scene.add(stud);
     }
 
     const bricks = [];
@@ -192,7 +192,7 @@
       const material = new THREE.MeshStandardMaterial({ color, roughness:0.37, metalness:0.02 });
       const geometry = new THREE.BoxGeometry(width*pitch-0.035, brickHeight, depth*pitch-0.035);
       const body = new THREE.Mesh(geometry,material);
-      body.position.set((x+width/2-boardStuds/2)*pitch, 0.21 + brickHeight/2 + y*brickHeight, (z+depth/2-boardStuds/2)*pitch);
+      body.position.set((x+width/2-boardStuds/2)*pitch, 0.09 + brickHeight/2 + y*brickHeight, (z+depth/2-boardStuds/2)*pitch);
       body.castShadow = true; body.receiveShadow = true; body.userData.brick = true; body.userData.cell = {x,z,y,width,depth};
       const studs = new THREE.Group();
       for (let sx=0;sx<width;sx++) for (let sz=0;sz<depth;sz++) {
