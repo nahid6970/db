@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#d9f3ff">
+  <title>Brick Builder 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light; --ink:#26364d; --muted:#718096; --blue:#3079ec; --line:#e7edf5; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:Nunito,system-ui,sans-serif; color:var(--ink); background:#edf8fc; overflow:hidden; }
+    button { font:inherit; color:inherit; }
+    #game-view { width:100vw; height:100dvh; position:relative; overflow:hidden; background:linear-gradient(180deg,#d9f3ff 0%,#e9f8ff 46%,#f5faff 100%); }
+    #scene-canvas { display:block; width:100%; height:100%; outline:none; touch-action:none; }
+    #topbar { position:absolute; z-index:3; top:18px; left:20px; right:20px; display:flex; align-items:center; justify-content:space-between; pointer-events:none; }
+    #brand { display:flex; gap:11px; align-items:center; pointer-events:auto; }
+    #brand-mark { display:grid; place-items:center; width:43px;height:43px;border-radius:14px;background:#fff;box-shadow:0 5px 18px #38577718;font-size:23px; }
+    #brand-name { font-weight:900; font-size:19px; letter-spacing:-.4px; line-height:1.1; }
+    #brand-caption { font-size:11px; color:var(--muted); font-weight:800; letter-spacing:.7px; text-transform:uppercase; }
+    #top-actions { display:flex; gap:8px; pointer-events:auto; }
+    .top-button { border:1px solid #e6edf4; background:#fff; border-radius:12px; padding:10px 14px; font-weight:900; font-size:13px; box-shadow:0 5px 18px #38577712; cursor:pointer; transition:transform .15s,box-shadow .15s; }
+    .top-button:hover { transform:translateY(-2px); box-shadow:0 8px 18px #38577722; }
+    .top-button.danger { color:#e14f51; }
+    #builder-panel { position:absolute; z-index:3; top:50%; left:20px; transform:translateY(-50%); width:222px; padding:17px; border:1px solid #ffffffc9; border-radius:20px; background:#ffffffed; box-shadow:0 14px 38px #39587618; backdrop-filter:blur(16px); }
+    .eyebrow { text-transform:uppercase; letter-spacing:1.05px; color:#8290a2; font-size:10px; font-weight:900; }
+    #palette-heading { font-size:16px; margin:4px 0 12px; font-weight:900; }
+    #color-palette { display:grid; grid-template-columns:repeat(5,1fr); gap:8px; }
+    .color-swatch { --swatch:#ee3e4b; width:32px;height:32px;border:3px solid white;border-radius:11px;background:var(--swatch);cursor:pointer;box-shadow:0 2px 8px #1d334422; transition:transform .15s,outline .15s; }
+    .color-swatch:hover { transform:scale(1.13); }
+    .color-swatch[aria-pressed="true"] { outline:3px solid #26364d; transform:scale(1.06); }
+    #part-divider { height:1px;background:var(--line);margin:15px 0 13px; }
+    #part-picker { width:100%; border:1px solid #e3ebf4; background:#f8fbff; padding:10px 11px; border-radius:11px; text-align:left; font-size:12px; font-weight:900; cursor:pointer; }
+    #part-picker:hover { background:#eef6ff; }
+    #part-picker .part-icon { margin-right:8px;font-size:17px;vertical-align:-2px; }
+    #part-menu { position:absolute;top:calc(100% - 7px);left:17px;right:17px;z-index:4;padding:6px;border:1px solid #e3ebf4;border-radius:13px;background:#fff;box-shadow:0 12px 28px #39587624; }
+    #part-menu[hidden] { display:none; }
+    .part-option { width:100%;padding:9px 10px;border:0;border-radius:8px;background:transparent;text-align:left;font-size:12px;font-weight:900;cursor:pointer; }
+    .part-option:hover,.part-option[aria-pressed="true"] { background:#eef6ff;color:#2869cf; }
+    #tool-hint { margin-top:12px; color:#78879a; font-size:11px; font-weight:800; line-height:1.55; }
+    #stats-card { position:absolute;z-index:3;top:83px;right:20px;padding:11px 14px;border-radius:13px;background:#ffffffdc;box-shadow:0 7px 20px #39587612;display:flex;gap:7px;align-items:center;font-size:12px;font-weight:900; }
+    #brick-count { color:var(--blue);font-size:15px; }
+    #bottom-hint { position:absolute;z-index:2;bottom:19px;left:50%;transform:translateX(-50%);white-space:nowrap;border:1px solid #ffffffd9;border-radius:12px;background:#ffffffdb;padding:10px 15px;color:#718096;font-size:11px;font-weight:900;box-shadow:0 6px 20px #39587612; }
+    #toast { position:absolute;z-index:5;left:50%;top:86px;transform:translate(-50%,-8px);opacity:0;pointer-events:none;background:#26364d;color:white;border-radius:12px;padding:9px 14px;font-size:12px;font-weight:900;transition:opacity .2s,transform .2s; }
+    #toast.is-visible { opacity:1;transform:translate(-50%,0); }
+    #loading { position:absolute;inset:0;display:grid;place-items:center;color:#60738a;font-weight:900;z-index:1; }
+    @media(max-width:700px) {
+      #topbar { top:12px;left:12px;right:12px; }
+      #brand-mark { width:38px;height:38px; }
+      #brand-name { font-size:16px; }
+      #top-actions { gap:5px; }
+      .top-button { padding:9px 10px;font-size:11px; }
+      #builder-panel { left:12px;top:auto;bottom:58px;transform:none;width:calc(100% - 24px);padding:12px 14px;display:grid;grid-template-columns:1fr auto;gap:2px 12px;align-items:center; }
+      #palette-heading { margin:2px 0 8px; }
+      #color-palette { grid-column:1;grid-row:2;grid-template-columns:repeat(10,1fr); }
+      .color-swatch { width:27px;height:27px; }
+      #part-divider { display:none; }
+      #part-picker { grid-column:2;grid-row:1 / 3;width:auto; }
+      #part-menu { top:auto;bottom:calc(100% - 4px);left:auto;right:14px;width:150px; }
+      #tool-hint { display:none; }
+      #part-menu { bottom:calc(100% - 4px); }
+      #stats-card { top:64px;right:12px; }
+      #bottom-hint { bottom:15px;font-size:10px;padding:8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <main id="game-view" aria-label="3D brick building game">
+    <div id="loading">Loading your building world…</div>
+    <canvas id="scene-canvas" aria-label="Building board. Click to place a brick, right click to remove one, and drag to orbit."></canvas>
+    <header id="topbar">
+      <div id="brand"><div id="brand-mark" aria-hidden="true">🧱</div><div><div id="brand-name">Brick Builder</div><div id="brand-caption">Your tiny 3D world</div></div></div>
+      <nav id="top-actions" aria-label="Build controls">
+        <button id="undo-action" class="top-button" type="button" title="Remove the last brick">↶ Undo</button>
+        <button id="clear-action" class="top-button danger" type="button" title="Clear the whole board">Clear</button>
+      </nav>
+    </header>
+    <aside id="builder-panel" aria-label="Brick selection">
+      <div><div class="eyebrow">Build mode</div><div id="palette-heading">Pick a color</div></div>
+      <div id="color-palette" role="group" aria-label="Brick colors">
+        <button id="color-red" class="color-swatch" style="--swatch:#ed3b4b" aria-label="Red bricks" aria-pressed="true" data-color="#ed3b4b" type="button"></button>
+        <button id="color-orange" class="color-swatch" style="--swatch:#ff922f" aria-label="Orange bricks" aria-pressed="false" data-color="#ff922f" type="button"></button>
+        <button id="color-yellow" class="color-swatch" style="--swatch:#ffd23f" aria-label="Yellow bricks" aria-pressed="false" data-color="#ffd23f" type="button"></button>
+        <button id="color-green" class="color-swatch" style="--swatch:#3dbb7d" aria-label="Green bricks" aria-pressed="false" data-color="#3dbb7d" type="button"></button>
+        <button id="color-mint" class="color-swatch" style="--swatch:#52c8c4" aria-label="Teal bricks" aria-pressed="false" data-color="#52c8c4" type="button"></button>
+        <button id="color-blue" class="color-swatch" style="--swatch:#3687f5" aria-label="Blue bricks" aria-pressed="false" data-color="#3687f5" type="button"></button>
+        <button id="color-purple" class="color-swatch" style="--swatch:#9368ec" aria-label="Purple bricks" aria-pressed="false" data-color="#9368ec" type="button"></button>
+        <button id="color-pink" class="color-swatch" style="--swatch:#ef72ae" aria-label="Pink bricks" aria-pressed="false" data-color="#ef72ae" type="button"></button>
+        <button id="color-white" class="color-swatch" style="--swatch:#f6f7fb" aria-label="White bricks" aria-pressed="false" data-color="#f6f7fb" type="button"></button>
+        <button id="color-charcoal" class="color-swatch" style="--swatch:#536277" aria-label="Dark gray bricks" aria-pressed="false" data-color="#536277" type="button"></button>
+      </div>
+      <div id="part-divider"></div>
+      <button id="part-picker" type="button" aria-label="Choose brick size" aria-expanded="false" aria-controls="part-menu"><span class="part-icon" aria-hidden="true">▦</span><span id="selected-part-label">2 × 2 brick</span> <span aria-hidden="true">⌄</span></button>
+      <div id="part-menu" role="group" aria-label="Brick sizes" hidden>
+        <button id="part-option-1x1" class="part-option" type="button" data-width="1" data-depth="1" aria-pressed="false">1 × 1 brick</button>
+        <button id="part-option-1x2" class="part-option" type="button" data-width="1" data-depth="2" aria-pressed="false">1 × 2 brick</button>
+        <button id="part-option-2x2" class="part-option" type="button" data-width="2" data-depth="2" aria-pressed="true">2 × 2 brick</button>
+        <button id="part-option-2x4" class="part-option" type="button" data-width="2" data-depth="4" aria-pressed="false">2 × 4 brick</button>
+      </div>
+      <div id="tool-hint">Click an empty stud to place<br>Click a top to stack, a side to build beside<br>Right-click to remove</div>
+    </aside>
+    <div id="stats-card" aria-live="polite"><span id="brick-count">0</span><span>bricks built</span></div>
+    <div id="bottom-hint">🖱 Drag to look around <span aria-hidden="true">·</span> Scroll to zoom</div>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js';
+    import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js';
+
+    const canvas = document.querySelector('#scene-canvas');
+    const game = document.querySelector('#game-view');
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color('#e4f6ff');
+    scene.fog = new THREE.Fog('#e4f6ff', 22, 42);
+    const camera = new THREE.PerspectiveCamera(38, innerWidth / innerHeight, 0.1, 100);
+    camera.position.set(10, 11, 13);
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.15;
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.target.set(0, 0.4, 0);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.08;
+    controls.minDistance = 7;
+    controls.maxDistance = 28;
+    controls.maxPolarAngle = Math.PI * 0.49;
+    controls.update();
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xb3c6d6, 2.05));
+    const sun = new THREE.DirectionalLight(0xffffff, 3.1);
+    sun.position.set(-7, 14, 8);
+    sun.castShadow = true;
+    sun.shadow.mapSize.set(2048, 2048);
+    sun.shadow.camera.left = -13; sun.shadow.camera.right = 13; sun.shadow.camera.top = 13; sun.shadow.camera.bottom = -13;
+    sun.shadow.bias = -0.0003;
+    scene.add(sun);
+
+    const ground = new THREE.Mesh(new THREE.PlaneGeometry(200, 200), new THREE.MeshStandardMaterial({ color:'#dceaf0', roughness:1 }));
+    ground.rotation.x = -Math.PI / 2; ground.position.y = -0.25; ground.receiveShadow = true; scene.add(ground);
+
+    const brickHeight = 0.32, pitch = 0.25, boardStuds = 12;
+    const gridSize = 3;
+    const base = new THREE.Mesh(new THREE.BoxGeometry(gridSize, 0.34, gridSize), new THREE.MeshStandardMaterial({ color:'#7cc8ba', roughness:0.82 }));
+    base.position.y = -0.02; base.receiveShadow = true; base.castShadow = true; base.userData.isBase = true; scene.add(base);
+    const grid = new THREE.GridHelper(gridSize, boardStuds, '#63a99e', '#9ad6ca');
+    grid.position.y = 0.156; grid.material.transparent = true; grid.material.opacity = 0.43; scene.add(grid);
+    // Subtle circular studs make the baseplate read like a toy board while keeping the grid clear.
+    const baseStudMat = new THREE.MeshStandardMaterial({ color:'#8bd2c3', roughness:0.7 });
+    const studGeo = new THREE.CylinderGeometry(0.105, 0.105, 0.06, 16);
+    for (let x=-5.5;x<=5.5;x++) for (let z=-5.5;z<=5.5;z++) {
+      const stud = new THREE.Mesh(studGeo,baseStudMat); stud.position.set(x*pitch,0.18,z*pitch); stud.receiveShadow=true; stud.castShadow=true; scene.add(stud);
+    }
+
+    const bricks = [];
+    const occupied = new Map();
+    let selectedColor = '#ed3b4b';
+    const brickGroup = new THREE.Group(); scene.add(brickGroup);
+    const studGeometry = new THREE.CylinderGeometry(0.068,0.068,0.09,20);
+    let selectedWidth = 2, selectedDepth = 2;
+    const raycaster = new THREE.Raycaster();
+    const pointer = new THREE.Vector2();
+    const toast = document.querySelector('#toast');
+    let toastTimer;
+    const keyFor = (x,z,y) => `${x},${z},${y}`;
+
+    function showToast(message) {
+      toast.textContent = message; toast.classList.add('is-visible'); clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('is-visible'), 1400);
+    }
+    function updateCount() { document.querySelector('#brick-count').textContent = String(bricks.length); }
+    function placeBrick(x,z,y,color=selectedColor,width=selectedWidth,depth=selectedDepth) {
+      if (x < 0 || z < 0 || x + width > boardStuds || z + depth > boardStuds || y < 0 || y > 9) return false;
+      const cells=[];
+      for(let dx=0;dx<width;dx++) for(let dz=0;dz<depth;dz++) cells.push(keyFor(x+dx,z+dz,y));
+      if(cells.some(key=>occupied.has(key))) { showToast('That spot is already occupied.'); return false; }
+      // Every stud footprint must be supported by the baseplate or a brick below.
+      if(y>0 && cells.some(key=>!occupied.has(key.replace(/,\d+$/, `,${y-1}`)))) { showToast('Could not build the support underneath.'); return false; }
+      const material = new THREE.MeshStandardMaterial({ color, roughness:0.37, metalness:0.02 });
+      const geometry = new THREE.BoxGeometry(width*pitch-0.035, brickHeight, depth*pitch-0.035);
+      const body = new THREE.Mesh(geometry,material);
+      body.position.set((x+width/2-boardStuds/2)*pitch, 0.21 + brickHeight/2 + y*brickHeight, (z+depth/2-boardStuds/2)*pitch);
+      body.castShadow = true; body.receiveShadow = true; body.userData.brick = true; body.userData.cell = {x,z,y,width,depth};
+      const studs = new THREE.Group();
+      for (let sx=0;sx<width;sx++) for (let sz=0;sz<depth;sz++) {
+        const stud = new THREE.Mesh(studGeometry,material);
+        stud.position.set((sx-(width-1)/2)*pitch, brickHeight/2+0.045, (sz-(depth-1)/2)*pitch); stud.castShadow=true; studs.add(stud);
+      }
+      body.add(studs); brickGroup.add(body);
+      const record = { mesh:body, keys:cells, cell:{x,z,y,width,depth}, color };
+      bricks.push(record); cells.forEach(key=>occupied.set(key,record)); updateCount(); return true;
+    }
+    function removeBrick(record) {
+      if (!record) return;
+      brickGroup.remove(record.mesh); record.mesh.geometry.dispose();
+      record.mesh.material.dispose(); record.mesh.children[0]?.children.forEach(m=>m.material.dispose());
+      record.keys.forEach(key=>occupied.delete(key)); const i=bricks.indexOf(record); if(i>=0)bricks.splice(i,1); updateCount();
+    }
+    function pointerRay(event) {
+      const rect=canvas.getBoundingClientRect(); pointer.x=((event.clientX-rect.left)/rect.width)*2-1; pointer.y=-((event.clientY-rect.top)/rect.height)*2+1;
+      raycaster.setFromCamera(pointer,camera); return raycaster.intersectObjects([brickGroup,base],true);
+    }
+    canvas.addEventListener('pointerdown', event => {
+      if (event.button !== 0) return;
+      const hits=pointerRay(event); if(!hits.length)return;
+      let hit=hits.find(h=>h.object.userData.brick || h.object.userData.isBase);
+      if(!hit)return;
+      let obj=hit.object; while(obj && !obj.userData.brick && !obj.userData.isBase)obj=obj.parent;
+      if(obj?.userData.brick) {
+        const cell=obj.userData.cell;
+        const normal=hit.face.normal.clone().applyQuaternion(hit.object.getWorldQuaternion(new THREE.Quaternion()));
+        if(normal.y>0.45) {
+          const x=Math.round(cell.x+cell.width/2-selectedWidth/2);
+          const z=Math.round(cell.z+cell.depth/2-selectedDepth/2);
+          placeBrick(x,z,cell.y+1);
+        } else if(Math.abs(normal.x)>Math.abs(normal.z)) {
+          const x=normal.x>0 ? cell.x+cell.width : cell.x-selectedWidth;
+          const z=Math.round(cell.z+cell.depth/2-selectedDepth/2);
+          placeBrick(x,z,cell.y);
+        } else {
+          const x=Math.round(cell.x+cell.width/2-selectedWidth/2);
+          const z=normal.z>0 ? cell.z+cell.depth : cell.z-selectedDepth;
+          placeBrick(x,z,cell.y);
+        }
+        return;
+      }
+      const point=hit.point;
+      const gx=Math.floor(point.x/pitch+boardStuds/2), gz=Math.floor(point.z/pitch+boardStuds/2);
+      const x=Math.floor(gx/selectedWidth)*selectedWidth, z=Math.floor(gz/selectedDepth)*selectedDepth;
+      placeBrick(x,z,0);
+    });
+    canvas.addEventListener('contextmenu', event => {
+      event.preventDefault(); const hits=pointerRay(event); const hit=hits.find(h=>h.object.userData.brick);
+      if(!hit)return; let obj=hit.object; while(obj && !obj.userData.brick)obj=obj.parent;
+      const record=bricks.find(b=>b.mesh===obj); removeBrick(record);
+    });
+    document.querySelectorAll('.color-swatch').forEach(button=>button.addEventListener('click',()=>{
+      selectedColor=button.dataset.color;
+      document.querySelectorAll('.color-swatch').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
+    }));
+    document.querySelector('#undo-action').addEventListener('click',()=>{removeBrick(bricks.at(-1));});
+    document.querySelector('#clear-action').addEventListener('click',()=>{[...bricks].forEach(removeBrick);showToast('Fresh board! Start building again.');});
+    const partPicker=document.querySelector('#part-picker');
+    const partMenu=document.querySelector('#part-menu');
+    partPicker.addEventListener('click',()=>{partMenu.hidden=!partMenu.hidden;partPicker.setAttribute('aria-expanded',String(!partMenu.hidden));});
+    document.querySelectorAll('.part-option').forEach(option=>option.addEventListener('click',()=>{
+      selectedWidth=Number(option.dataset.width); selectedDepth=Number(option.dataset.depth);
+      const label=`${selectedWidth} × ${selectedDepth} brick`;
+      document.querySelector('#selected-part-label').textContent=label;
+      partPicker.setAttribute('aria-label',`Selected part: ${label}`);
+      document.querySelectorAll('.part-option').forEach(item=>item.setAttribute('aria-pressed',String(item===option)));
+      partMenu.hidden=true; partPicker.setAttribute('aria-expanded','false');
+    }));
+    window.addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+    renderer.setSize(innerWidth,innerHeight);
+    document.querySelector('#loading').remove();
+    function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera);}
+    animate();
+    // A small starter build hints at what is possible and can be cleared with one tap.
+    placeBrick(2,4,0,'#ed3b4b',2,2); placeBrick(2,4,1,'#ff922f',2,2); placeBrick(6,4,0,'#3687f5',2,2); placeBrick(6,4,1,'#ffd23f',2,2);
+  </script>
+  <script>
+    const loadingScreen = document.querySelector('#loading');
+    function showStartupError(reason) {
+      if (!loadingScreen.isConnected) return;
+      loadingScreen.style.cssText = 'position:absolute;inset:0;display:grid;place-content:center;gap:10px;text-align:center;padding:24px;color:#26364d;background:#edf8fc;z-index:10';
+      loadingScreen.innerHTML = '<strong style="font-size:20px">The 3D world could not start</strong><span style="max-width:420px;font-size:14px;line-height:1.5">' + reason + '<br>Check your internet connection and reload the page.</span>';
+    }
+    window.addEventListener('error', event => showStartupError(event.message || 'A browser error stopped the game from loading.'));
+    window.addEventListener('unhandledrejection', event => showStartupError(event.reason?.message || 'The 3D files could not be downloaded.'));
+  </script>
+</body>
+</html>
