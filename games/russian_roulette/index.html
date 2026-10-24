@@ -1669,10 +1669,12 @@ spinBtn.addEventListener('click', () => {
 
     resetCamera();
     bulletPos = Math.floor(Math.random() * 6);
+    // Start every new round from the first chamber, regardless of the prior spin.
+    currentPos = 0;
+    cylinderGroup.rotation.z = 0;
 
     const fullTurns = (Math.floor(Math.random() * 3) + 3) * Math.PI * 2;
-    const chamberOffset = Math.floor(Math.random() * 6) * (Math.PI / 3);
-    const totalRot = fullTurns + chamberOffset;
+    const totalRot = fullTurns;
     const spinDur  = 1300;
 
     let clicks = 0;
@@ -1685,10 +1687,7 @@ spinBtn.addEventListener('click', () => {
     animCylSpin(totalRot, spinDur, () => {
         playThud();
         animState.isSpinning = false;
-        currentPos = Math.round(
-            ((2 * Math.PI - (cylinderGroup.rotation.z % (2 * Math.PI))) % (2 * Math.PI))
-            / (Math.PI / 3)
-        ) % 6;
+        currentPos = 0;
         isSpun = true;
         spinBtn.disabled = false;
         shootBtn.disabled = false;
