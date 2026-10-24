@@ -186,8 +186,9 @@
       const cells=[];
       for(let dx=0;dx<width;dx++) for(let dz=0;dz<depth;dz++) cells.push(keyFor(x+dx,z+dz,y));
       if(cells.some(key=>occupied.has(key))) { showToast('That spot is already occupied.'); return false; }
-      // Every stud footprint must be supported by the baseplate or a brick below.
-      if(y>0 && cells.some(key=>!occupied.has(key.replace(/,\d+$/, `,${y-1}`)))) { showToast('Could not build the support underneath.'); return false; }
+      // At least one stud footprint must be supported by the baseplate or a brick below
+      // (allows spanning across two adjacent bricks — just like real LEGO).
+      if(y>0 && cells.every(key=>!occupied.has(key.replace(/,\d+$/, `,${y-1}`)))) { showToast('Needs support underneath.'); return false; }
       const material = new THREE.MeshStandardMaterial({ color, roughness:0.37, metalness:0.02 });
       const geometry = new THREE.BoxGeometry(width*pitch-0.035, brickHeight, depth*pitch-0.035);
       const body = new THREE.Mesh(geometry,material);
@@ -222,8 +223,14 @@
         const cell=obj.userData.cell;
         const normal=hit.face.normal.clone().applyQuaternion(hit.object.getWorldQuaternion(new THREE.Quaternion()));
         if(normal.y>0.45) {
-          const x=Math.round(cell.x+cell.width/2-selectedWidth/2);
-          const z=Math.round(cell.z+cell.depth/2-selectedDepth/2);
+          // Use the actual hit point on the top face to determine placement column,
+          // so you can stack precisely between adjacent bricks.
+          const wx=hit.point.x, wz=hit.point.z;
+          const gx=Math.floor(wx/pitch+boardStuds/2);
+          const gz=Math.floor(wz/pitch+boardStuds/2);
+          // Snap the brick origin so the brick is aligned to the grid at the click position.
+          const x=Math.max(0, Math.min(boardStuds-selectedWidth, Math.round(gx-(selectedWidth-1)/2)));
+          const z=Math.max(0, Math.min(boardStuds-selectedDepth, Math.round(gz-(selectedDepth-1)/2)));
           placeBrick(x,z,cell.y+1);
         } else if(Math.abs(normal.x)>Math.abs(normal.z)) {
           const x=normal.x>0 ? cell.x+cell.width : cell.x-selectedWidth;
