@@ -3786,5 +3786,32 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-18T17:10:35.600046"
+    },
+    {
+        "id": 130,
+        "tmdb_id": 1578079,
+        "external_ids": {
+            "tmdb": 1578079,
+            "imdb": "tt38915678"
+        },
+        "radarr_id": null,
+        "title": "Dorothy",
+        "year": "2026",
+        "release_date": "2026-09-25",
+        "digital_release_date": "2026-10-22",
+        "category": "Tamil / Telugu",
+        "overview": "Set in a world shaped by caste, violence, and toxic masculinity, two childhood friends grow up inseparable in rural Tamil Nadu. Their lives are transformed by the arrival of Dorothy, a woman whose compassion quietly challenges the world around them.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/o3r5DmWhOKdFmeIUoRJj4CvCqOP.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Drama"
+        ],
+        "runtime": 146,
+        "rating": 4,
+        "tmdb_rating": 8.3,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-10-25T15:59:54.451257"
     }
 ]
