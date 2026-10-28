@@ -154949,7 +154949,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3680024,
                 "id": 1745,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -159769,8 +159769,8 @@
                 "air_date": "2026-10-30",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-30T12:00:00+00:00",
-                "overview": "A high-stakes gambit leads to unintended consequences.",
-                "still_image": "",
+                "overview": "Season finale. A high-stakes gambit leads to unintended consequences.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618906.jpg",
                 "tvmaze_episode_id": 3591073,
                 "id": 19,
                 "watched": false,
@@ -167127,7 +167127,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616308,
                 "id": 5,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -167141,7 +167141,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616309,
                 "id": 6,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
