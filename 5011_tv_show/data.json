@@ -12878,7 +12878,7 @@
                 "air_date": "2026-10-30",
                 "airtime": "06:00",
                 "air_datetime": "2026-10-31T00:00:00+00:00",
-                "overview": "",
+                "overview": "Halloween is in the air, and the best show on Friday night is embracing the scary. Danhausen presents \"Danhausen's Very Nice, Very Evil SmackDown.\" Expect the unexpected with the unsettling special edition of SmackDown.After barely escaping with the Undisputed WWE Championship by defeating Je'Von Evans in an impromptu title match on Raw this past Monday, Sami Zayn will now defend the title against Trick Williams. With everybody gunning for him, can Zayn survive a challenge from the dynamic Williams?\u00a0With successful title defenses against Nia Jax and Roxanne Perez, WWE Women's Champion Chelsea Green will now put her title on the line against WWE Hall of Famer Nikki Bella. Who will emerge with the title to battle Women's World Champion Liv Morgan at WWE Crown Jewel?\u00a0As the rivalry intensifies, Fenix will once again defend the title against Ricky Saints as part of \"Danhausen's Very Nice, Very Evil SmackDown.",
                 "still_image": "",
                 "tvmaze_episode_id": 3680018,
                 "id": 1419,
@@ -13292,20 +13292,6 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3517837,
                 "id": 1390,
-                "watched": true,
-                "notify": "seen"
-            },
-            {
-                "season_number": 27,
-                "episode_number": 14,
-                "title": "#1387 - Enterprise Center in St. Louis, MO",
-                "air_date": "2026-04-03",
-                "airtime": "06:00",
-                "air_datetime": "2026-04-04T00:00:00+00:00",
-                "overview": "How will the Undisputed WWE Champion respond to Orton's attack on Jelly Roll last week? How will he take the fight to Orton in The Viper's hometown?For the second week in a row, WWE Women's Champion Jade Cargill, B-Fab and Michin took out Rhea Ripley.\u00a0 How will The Eradicator respond to the WWE Women's Champion and her new allies on The Road to WrestleMania?\u00a0Brace yourself for the fallout after General Manager Nick Aldis put Jacob Fatu into an Unsanctioned Match against Drew McIntyre at WrestleMania.",
-                "still_image": "",
-                "tvmaze_episode_id": 3434354,
-                "id": 1389,
                 "watched": true,
                 "notify": "seen"
             }
@@ -159773,7 +159759,7 @@
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618906.jpg",
                 "tvmaze_episode_id": 3591073,
                 "id": 19,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -167051,13 +167037,13 @@
         "title": "VisionQuest",
         "year": "2026",
         "overview": "With a bounty on his head, Vision must confront his nature and resist Ultron's influence to survive.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/xK27l5uwaVyZSlENWnmLlWwDQNS.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/WGyAyBPncfuu8MZhLY9RtfZPM0.jpg",
         "directory_path": "",
         "genres": [
             "Sci-Fi & Fantasy"
         ],
         "rating": null,
-        "tmdb_rating": 8.8,
+        "tmdb_rating": 8.7,
         "status": "Continuing",
         "episodes": [
             {
@@ -167123,8 +167109,8 @@
                 "air_date": "2026-10-27",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-27T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Ultron and Jocasta join forces. Lisa comes to Vision's aid to help him evade capture.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/648/1620878.jpg",
                 "tvmaze_episode_id": 3616308,
                 "id": 5,
                 "watched": true,
@@ -167137,8 +167123,8 @@
                 "air_date": "2026-10-27",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-27T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Vision and Paladin form an uneasy alliance as Thomas finally learns the truth about his past.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/648/1620880.jpg",
                 "tvmaze_episode_id": 3616309,
                 "id": 6,
                 "watched": true,
