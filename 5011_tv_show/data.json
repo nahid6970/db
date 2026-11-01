@@ -12882,7 +12882,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3680018,
                 "id": 1419,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -46793,7 +46793,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3780612,
                 "id": 175,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -166876,18 +166876,18 @@
             "Mystery"
         ],
         "rating": null,
-        "tmdb_rating": 10.0,
+        "tmdb_rating": 7.1,
         "status": "Continuing",
         "episodes": [
             {
                 "season_number": 1,
                 "episode_number": 1,
-                "title": "Episode 1",
+                "title": "Lazarus, Come Forth!",
                 "air_date": "2026-10-30",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-30T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "A missing boy returns home after three years, reigniting a frantic search for his sister.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/648/1621819.jpg",
                 "tvmaze_episode_id": 3665755,
                 "id": 1,
                 "watched": false,
@@ -166896,12 +166896,12 @@
             {
                 "season_number": 1,
                 "episode_number": 2,
-                "title": "Episode 2",
+                "title": "For Such a Time as This",
                 "air_date": "2026-10-30",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-30T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The discovery of an old accomplice throws a wrench in the case. Saga volunteers to go undercover.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/648/1621820.jpg",
                 "tvmaze_episode_id": 3665756,
                 "id": 2,
                 "watched": false,
@@ -166910,12 +166910,12 @@
             {
                 "season_number": 1,
                 "episode_number": 3,
-                "title": "Episode 3",
+                "title": "Eyes on the Inside",
                 "air_date": "2026-11-06",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-06T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "When communication goes dark, Saga must get creative. Jonah investigates a cryptic symbol.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/648/1621821.jpg",
                 "tvmaze_episode_id": 3665757,
                 "id": 3,
                 "watched": false,
