@@ -152748,7 +152748,7 @@
                 "tvmaze_episode_id": 3803429,
                 "id": 3474,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 34,
@@ -152762,7 +152762,7 @@
                 "tvmaze_episode_id": 3803428,
                 "id": 3473,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 34,
@@ -152776,7 +152776,7 @@
                 "tvmaze_episode_id": 3803426,
                 "id": 3472,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 34,
@@ -152790,7 +152790,7 @@
                 "tvmaze_episode_id": 3803425,
                 "id": 3471,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 33,
@@ -152804,7 +152804,7 @@
                 "tvmaze_episode_id": 3717637,
                 "id": 3470,
                 "watched": false,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 33,
@@ -152929,7 +152929,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3680025,
                 "id": 1746,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
