@@ -12747,6 +12747,48 @@
         "episodes": [
             {
                 "season_number": 28,
+                "episode_number": 4,
+                "title": "#1429 - Co-Op Live in Manchester, England",
+                "air_date": "2027-01-22",
+                "airtime": "07:00",
+                "air_datetime": "2027-01-23T01:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3803424,
+                "id": 4206,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 28,
+                "episode_number": 3,
+                "title": "#1428 - Forest National in Brussels, Belgium",
+                "air_date": "2027-01-15",
+                "airtime": "07:00",
+                "air_datetime": "2027-01-16T01:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3803423,
+                "id": 4205,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 28,
+                "episode_number": 2,
+                "title": "#1427",
+                "air_date": "2027-01-08",
+                "airtime": "07:00",
+                "air_datetime": "2027-01-09T01:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3803422,
+                "id": 4204,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 28,
                 "episode_number": 1,
                 "title": "#1426 - Benchmark International Arena in Tampa, FL",
                 "air_date": "2027-01-01",
@@ -12762,7 +12804,7 @@
             {
                 "season_number": 27,
                 "episode_number": 52,
-                "title": "#1425",
+                "title": "#1425 - Capital One Arena in Washington, DC",
                 "air_date": "2026-12-25",
                 "airtime": "07:00",
                 "air_datetime": "2026-12-26T01:00:00+00:00",
@@ -12776,7 +12818,7 @@
             {
                 "season_number": 27,
                 "episode_number": 51,
-                "title": "#1424",
+                "title": "#1424 - PeoplesBank Arena in Hartford, CT",
                 "air_date": "2026-12-18",
                 "airtime": "07:00",
                 "air_datetime": "2026-12-19T01:00:00+00:00",
@@ -16995,7 +17037,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 8.0,
+        "tmdb_rating": 8.1,
         "status": "Continuing",
         "episodes": [
             {
@@ -17728,7 +17770,7 @@
             "Action & Adventure"
         ],
         "rating": 4,
-        "tmdb_rating": 7.3,
+        "tmdb_rating": 7.4,
         "status": "Continuing",
         "episodes": [
             {
@@ -49704,7 +49746,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 7.5,
+        "tmdb_rating": 7.4,
         "status": "Ended",
         "episodes": [
             {
@@ -75112,7 +75154,7 @@
         "title": "Code Geass: Lelouch of the Rebellion",
         "year": "2006",
         "overview": "Japan has been invaded and conquered by the Britannian Empire. Japan is now known as Area 11 and its citizens known as Elevens. The Britannian Empire takes away Japan's autonomous power and imposes its rule through the use of Knightmares. The Empire's rule has never faltered, but cracks have begun to show...",
-        "cover_image": "https://image.tmdb.org/t/p/w500/lMS9ZBA4QogPudvoPzfZxA6PlCL.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/1cFqtyKUbdo1IurdpkK4tDthUJO.jpg",
         "directory_path": "",
         "genres": [
             "Animation",
@@ -78018,18 +78060,158 @@
         ],
         "rating": null,
         "tmdb_rating": 0.0,
-        "status": "Ended",
+        "status": "Continuing",
         "episodes": [
             {
-                "season_number": 1,
+                "season_number": 2,
                 "episode_number": 10,
                 "title": "Then Everyone Went Home",
                 "air_date": "2026-10-20",
                 "airtime": "18:00",
                 "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707611,
+                "overview": "A chilling transformation turns the city into a war zone, erupting in an explosive confrontation.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618400.jpg",
+                "tvmaze_episode_id": 3794699,
+                "id": 20,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 9,
+                "title": "Strictly Reserved for You",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "Omi and D go off the grid, and Kiril takes Talia into custody. Kyoko pushes Project Capricorn forward with frightening results.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618399.jpg",
+                "tvmaze_episode_id": 3794698,
+                "id": 19,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 8,
+                "title": "Serce",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "A riot ignites on the streets as D digs deeper into Project Capricorn's dark past. With time running out, Avida and Weak fight for Talia's future.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618398.jpg",
+                "tvmaze_episode_id": 3794697,
+                "id": 18,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 7,
+                "title": "To the Depths with You",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "Talia's condition takes a startling turn under Capri's watch. D reconnects with an old friend. Weak and Avida chase a miracle cure.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618397.jpg",
+                "tvmaze_episode_id": 3794695,
+                "id": 17,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 6,
+                "title": "Everything Hate",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "D becomes an anti-corporate vigilante and asks Roman to film his every move. Weak looks into rumors of tech that can transfer digitized consciousness.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618396.jpg",
+                "tvmaze_episode_id": 3794694,
+                "id": 16,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 5,
+                "title": "Fades (Pass the Distance)",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "An impulsive act sends Talia into a terrifying spiral. D's obsession with revenge reaches an unsettling new level of violence.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618395.jpg",
+                "tvmaze_episode_id": 3794693,
+                "id": 15,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 4,
+                "title": "Someone that I Used to Know",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "Armed with abilities he doesn't fully understand, D uses Capri's power to infiltrate an Arasaka research facility. Talia and Weak find common ground.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618394.jpg",
+                "tvmaze_episode_id": 3794692,
+                "id": 14,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 3,
+                "title": "0 + 2 = 1",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "Weak tries to rescue Talia from a dangerous surgery, but the confrontation ends in disaster. D and Roman discover a chaotic chip that sparks mayhem.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618393.jpg",
+                "tvmaze_episode_id": 3794691,
+                "id": 13,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 2,
+                "title": "Give Me Another Day",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "A desperate call drags Weak back into danger to save a rebellious teen. As D bonds with a young cinephile, painful flashbacks fuel his thirst for revenge.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618392.jpg",
+                "tvmaze_episode_id": 3794690,
+                "id": 12,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 2,
+                "episode_number": 1,
+                "title": "Last Chance for a Slow Dance",
+                "air_date": "2026-10-20",
+                "airtime": "18:00",
+                "air_datetime": "2026-10-20T12:00:00+00:00",
+                "overview": "A former edgerunner slipping into cyberpsychosis and a lonely survivor with a fractured past start their stories at opposite ends of Night City.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618391.jpg",
+                "tvmaze_episode_id": 3794689,
+                "id": 11,
+                "watched": false,
+                "notify": "seen"
+            },
+            {
+                "season_number": 1,
+                "episode_number": 10,
+                "title": "My Moon My Man",
+                "air_date": "2022-09-13",
+                "airtime": "18:00",
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "On the edge of cyberpsychosis but determined to save Lucy, David storms into Night City as Arasaka plots to deploy their ultimate lethal weapon.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054919.jpg",
+                "tvmaze_episode_id": 2375033,
                 "id": 10,
                 "watched": false,
                 "notify": "seen"
@@ -78037,13 +78219,13 @@
             {
                 "season_number": 1,
                 "episode_number": 9,
-                "title": "Strictly Reserved for You",
-                "air_date": "2026-10-20",
+                "title": "Humanity",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707610,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Lucy's captors learn about her secret mission and dark past. David and his team head out to complete Faraday's job but realize that something is off.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054918.jpg",
+                "tvmaze_episode_id": 2375032,
                 "id": 9,
                 "watched": false,
                 "notify": "seen"
@@ -78051,13 +78233,13 @@
             {
                 "season_number": 1,
                 "episode_number": 8,
-                "title": "Serce",
-                "air_date": "2026-10-20",
+                "title": "Stay",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707609,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Faraday finds himself stuck between Arasaka and Militech. Lucy and Rebecca confront David about his change in behavior, but he refuses to listen.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054917.jpg",
+                "tvmaze_episode_id": 2375031,
                 "id": 8,
                 "watched": false,
                 "notify": "seen"
@@ -78065,13 +78247,13 @@
             {
                 "season_number": 1,
                 "episode_number": 7,
-                "title": "To the Depths with You",
-                "air_date": "2026-10-20",
+                "title": "Stronger",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707608,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Now an all-star edgerunner enhanced with more cybernetics, David leads his team into a new mission. An old contact reaches out to him for a big job.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054916.jpg",
+                "tvmaze_episode_id": 2375030,
                 "id": 7,
                 "watched": false,
                 "notify": "seen"
@@ -78079,13 +78261,13 @@
             {
                 "season_number": 1,
                 "episode_number": 6,
-                "title": "Everything Hate",
-                "air_date": "2026-10-20",
+                "title": "Girl on Fire",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707607,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Maine doesn't seem to be himself. But the team has bigger fish to fry: They must race against time to extract vital information from their prisoner.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054915.jpg",
+                "tvmaze_episode_id": 2375029,
                 "id": 6,
                 "watched": false,
                 "notify": "seen"
@@ -78093,13 +78275,13 @@
             {
                 "season_number": 1,
                 "episode_number": 5,
-                "title": "Fades (Pass the Distance)",
-                "air_date": "2026-10-20",
+                "title": "All Eyez On Me",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707606,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "David makes a clever suggestion when the team strategizes for their next mission. However, he soon learns that their target can't be underestimated.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054914.jpg",
+                "tvmaze_episode_id": 2375028,
                 "id": 5,
                 "watched": false,
                 "notify": "seen"
@@ -78107,13 +78289,13 @@
             {
                 "season_number": 1,
                 "episode_number": 4,
-                "title": "Someone that I Used to Know",
-                "air_date": "2026-10-20",
+                "title": "Lucky You",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707605,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Eager to learn the edgerunner ropes, David pesters Maine for another mission. Instead, Maine tasks Lucy with training him.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054913.jpg",
+                "tvmaze_episode_id": 2375027,
                 "id": 4,
                 "watched": false,
                 "notify": "seen"
@@ -78121,13 +78303,13 @@
             {
                 "season_number": 1,
                 "episode_number": 3,
-                "title": "0 + 2 = 1",
-                "air_date": "2026-10-20",
+                "title": "Smooth Criminal",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707604,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "Surrounded by a group of rowdy edgerunners, David makes a plea to join their team. Meanwhile, sinister forces plot to lure him back to Arasaka Academy.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054912.jpg",
+                "tvmaze_episode_id": 2375026,
                 "id": 3,
                 "watched": false,
                 "notify": "seen"
@@ -78135,13 +78317,13 @@
             {
                 "season_number": 1,
                 "episode_number": 2,
-                "title": "Give Me Another Day",
-                "air_date": "2026-10-20",
+                "title": "Like a Boy",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707602,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "With his newly enhanced body, David heads to the Academy seeking revenge on his bully. Later, he meets a mysterious woman who wants to recruit him.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054911.jpg",
+                "tvmaze_episode_id": 2375025,
                 "id": 2,
                 "watched": false,
                 "notify": "seen"
@@ -78149,19 +78331,19 @@
             {
                 "season_number": 1,
                 "episode_number": 1,
-                "title": "Last Chance for a Slow Dance",
-                "air_date": "2026-10-20",
+                "title": "Let You Down",
+                "air_date": "2022-09-13",
                 "airtime": "18:00",
-                "air_datetime": "2026-10-20T12:00:00+00:00",
-                "overview": "",
-                "still_image": "",
-                "tvmaze_episode_id": 3707058,
+                "air_datetime": "2022-09-13T12:00:00+00:00",
+                "overview": "After a night of streaming illegal braindance, David wakes up to reality: a rundown apartment with a broken washing machine and an overworked mother.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/421/1054910.jpg",
+                "tvmaze_episode_id": 2375024,
                 "id": 1,
                 "watched": false,
                 "notify": "seen"
             }
         ],
-        "tvmaze_id": 88337,
+        "tvmaze_id": 48945,
         "episode_source": "tvmaze",
         "episodes_updated_at": "2026-09-08T13:37:29.899759",
         "episode_sort_type": "default",
@@ -154891,8 +155073,8 @@
                 "air_date": "2009-03-30",
                 "airtime": "09:00",
                 "air_datetime": "2009-03-30T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "With her friends fallen, Maka must find the strength to face the Kishin alone. The world is in jeopardy and evil is poised for certain victory - until something stirs deep inside the young Meister's heart.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618566.jpg",
                 "tvmaze_episode_id": 400502,
                 "id": 51,
                 "watched": false,
@@ -154905,8 +155087,8 @@
                 "air_date": "2009-03-23",
                 "airtime": "09:00",
                 "air_datetime": "2009-03-23T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka struggles to save Soul, but even if she manages to bring her partner back from the edge of insanity, it might be too late to rescue Black\u2606Star, Death the Kid, and their Weapons from the Kishin!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618565.jpg",
                 "tvmaze_episode_id": 400501,
                 "id": 50,
                 "watched": false,
@@ -154919,8 +155101,8 @@
                 "air_date": "2009-03-16",
                 "airtime": "09:00",
                 "air_datetime": "2009-03-16T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Arachnophobia is crumbling, but the Kishin is stronger than ever. Maka, Death the Kid, Black\u2606Star, and their Weapons attack with all their might, but when Soul slips into unconsciousness, all could be lost.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618564.jpg",
                 "tvmaze_episode_id": 400500,
                 "id": 49,
                 "watched": false,
@@ -154933,8 +155115,8 @@
                 "air_date": "2009-03-09",
                 "airtime": "09:00",
                 "air_datetime": "2009-03-09T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The Kishin and the Grim Reaper tear into each other with unimaginable levels of power. Before this ultimate clash between good and evil concludes, great sacrifices will be made.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618563.jpg",
                 "tvmaze_episode_id": 400499,
                 "id": 48,
                 "watched": false,
@@ -154947,8 +155129,8 @@
                 "air_date": "2009-03-02",
                 "airtime": "09:00",
                 "air_datetime": "2009-03-02T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "After the fight between Black\u2606Star and Mifune ends, the DWMA gains a powerful new ally. And when Death utilizes Brew in an astounding way, he turns the tides of the battle against Arachnophobia.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618562.jpg",
                 "tvmaze_episode_id": 400498,
                 "id": 47,
                 "watched": false,
@@ -154961,8 +155143,8 @@
                 "air_date": "2009-02-23",
                 "airtime": "09:00",
                 "air_datetime": "2009-02-23T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The final confrontation between Black\u2606Star and Mifune begins! As the warriors clash, Mifune reveals a startling connection to the young Meister's past.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618561.jpg",
                 "tvmaze_episode_id": 400497,
                 "id": 46,
                 "watched": false,
@@ -154975,8 +155157,8 @@
                 "air_date": "2009-02-16",
                 "airtime": "09:00",
                 "air_datetime": "2009-02-16T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Crona is forced to make the ultimate sacrifice as the battle against Medusa rages on. If the witch is to be destroyed, and Dr. Stein saved, Maka and Soul must reach rare heights of power.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618560.jpg",
                 "tvmaze_episode_id": 400496,
                 "id": 45,
                 "watched": false,
@@ -154989,8 +155171,8 @@
                 "air_date": "2009-02-09",
                 "airtime": "09:00",
                 "air_datetime": "2009-02-09T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Physical pain and mental anguish are guaranteed when Crona and Marie enter the treacherous confines of Medusa's lair to confront the little witch and the insane Dr. Stein.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618559.jpg",
                 "tvmaze_episode_id": 400495,
                 "id": 44,
                 "watched": false,
@@ -155003,8 +155185,8 @@
                 "air_date": "2009-02-02",
                 "airtime": "09:00",
                 "air_datetime": "2009-02-02T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The Last Magic Tool - Mission Impossible for Unarmed Kid?",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618558.jpg",
                 "tvmaze_episode_id": 400494,
                 "id": 43,
                 "watched": false,
@@ -155017,8 +155199,8 @@
                 "air_date": "2009-01-26",
                 "airtime": "09:00",
                 "air_datetime": "2009-01-26T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The forces of DWMA prepare to open several fronts in the war against Arachnophobia - but Maka decides the time has arrived to fight a very personal battle of her own design!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618557.jpg",
                 "tvmaze_episode_id": 400493,
                 "id": 42,
                 "watched": false,
@@ -155031,8 +155213,8 @@
                 "air_date": "2009-01-19",
                 "airtime": "09:00",
                 "air_datetime": "2009-01-19T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Dr. Stein's mind is deteriorating quickly. As he explores his mental landscape for a way out of the increasing madness, Crona begs Death for a chance to right past wrongs.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618556.jpg",
                 "tvmaze_episode_id": 400492,
                 "id": 41,
                 "watched": false,
@@ -155045,8 +155227,8 @@
                 "air_date": "2009-01-12",
                 "airtime": "09:00",
                 "air_datetime": "2009-01-12T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Medusa offers Death a deal: in exchange for her release, she'll reveal the Kishin's location. The Grim Reaper won't have long to decide - Arachne is on the verge of releasing madness on a global scale!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618555.jpg",
                 "tvmaze_episode_id": 400491,
                 "id": 40,
                 "watched": false,
@@ -155059,8 +155241,8 @@
                 "air_date": "2009-01-05",
                 "airtime": "09:00",
                 "air_datetime": "2009-01-05T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Arachne risks her life to gain a new ally in the plot against DWMA. Meanwhile, when Crona runs away from the school, Maka sets out to bring her friend back safely.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618554.jpg",
                 "tvmaze_episode_id": 400490,
                 "id": 39,
                 "watched": false,
@@ -155073,8 +155255,8 @@
                 "air_date": "2008-12-22",
                 "airtime": "09:00",
                 "air_datetime": "2008-12-22T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Death the Kid's dealing with a lot: he suspects Joe's involved with the Magic Tools mystery, and he's forced into yet another brutal fight with depressed Black\u2606Star.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618553.jpg",
                 "tvmaze_episode_id": 400489,
                 "id": 38,
                 "watched": false,
@@ -155087,8 +155269,8 @@
                 "air_date": "2008-12-15",
                 "airtime": "09:00",
                 "air_datetime": "2008-12-15T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Following the battle to claim Brew, Arachne moves forward with her plan, and the students of DWMA try to recover from defeat. Meanwhile, Death the Kid confronts Dr. Stein with some burning questions.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618552.jpg",
                 "tvmaze_episode_id": 400488,
                 "id": 37,
                 "watched": false,
@@ -155101,8 +155283,8 @@
                 "air_date": "2008-12-08",
                 "airtime": "09:00",
                 "air_datetime": "2008-12-08T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Soul's gamble pays off, allowing a magnificent display of resonance against Mosquito and unlocking unseen levels of power within Maka. But it might not be enough to keep Brew out of the wrong hands.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618550.jpg",
                 "tvmaze_episode_id": 400487,
                 "id": 36,
                 "watched": false,
@@ -155115,8 +155297,8 @@
                 "air_date": "2008-12-01",
                 "airtime": "09:00",
                 "air_datetime": "2008-12-01T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka, Black\u2606Star, Death the Kid, and their Weapons engage Mosquito within the magnetic field. With even their strongest attacks falling short, Soul is forced to consider a risky move.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618549.jpg",
                 "tvmaze_episode_id": 400486,
                 "id": 35,
                 "watched": false,
@@ -155129,8 +155311,8 @@
                 "air_date": "2008-11-24",
                 "airtime": "09:00",
                 "air_datetime": "2008-11-24T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "War erupts in a frozen wasteland! An army of DWMA staff, Weapons, and Meisters battle the forces of Arachnophobia for control of Brew, the greatest of Eibon's creations.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618548.jpg",
                 "tvmaze_episode_id": 400485,
                 "id": 34,
                 "watched": false,
@@ -155143,8 +155325,8 @@
                 "air_date": "2008-11-17",
                 "airtime": "09:00",
                 "air_datetime": "2008-11-17T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "With Arachnophobia on the verge of starting a war, Dr. Stein intensifies the students' training. But before the gang can fully prepare for combat, a battle must be fought - between Maka and Black\u2606Star!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618547.jpg",
                 "tvmaze_episode_id": 400484,
                 "id": 33,
                 "watched": false,
@@ -155157,8 +155339,8 @@
                 "air_date": "2008-11-10",
                 "airtime": "09:00",
                 "air_datetime": "2008-11-10T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The Holy Sword is unleashed! Hero tires of the other students at DWMA taking advantage of him, so he teams up with Excalibur to rule the school. Seriously!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618546.jpg",
                 "tvmaze_episode_id": 400483,
                 "id": 32,
                 "watched": false,
@@ -155171,8 +155353,8 @@
                 "air_date": "2008-11-03",
                 "airtime": "09:00",
                 "air_datetime": "2008-11-03T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Crona's basking in the love offered so freely by the other students at DWMA. But when Medusa appears and orders Crona to do her bidding, the chill of old fear might overpower the warmth of new friendship.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618545.jpg",
                 "tvmaze_episode_id": 400482,
                 "id": 31,
                 "watched": false,
@@ -155185,8 +155367,8 @@
                 "air_date": "2008-10-27",
                 "airtime": "09:00",
                 "air_datetime": "2008-10-27T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Under the desert sun, Death the Kid and the Thompsons fight Fisher King for a Magic Tool that's kept a train running for a century. When Death the Kid learns who made the device, it stops him in his tracks.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618543.jpg",
                 "tvmaze_episode_id": 400481,
                 "id": 30,
                 "watched": false,
@@ -155199,8 +155381,8 @@
                 "air_date": "2008-10-20",
                 "airtime": "09:00",
                 "air_datetime": "2008-10-20T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Dr. Stein's trying to whip the Meisters and Weapons into shape for their eventual fight against Arachne. They'll definitely need to toughen up - Arachne isn't the only witch who's back on the scene.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618542.jpg",
                 "tvmaze_episode_id": 400480,
                 "id": 29,
                 "watched": false,
@@ -155213,8 +155395,8 @@
                 "air_date": "2008-10-13",
                 "airtime": "09:00",
                 "air_datetime": "2008-10-13T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Sid's secret sabotage mission into Arachne's research facility is jeopardized when Black\u2606Star arrives. Hoping to avenge Maka, the hot-headed Meister is looking for a fight - and Mifune is ready to oblige.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618541.jpg",
                 "tvmaze_episode_id": 400479,
                 "id": 28,
                 "watched": false,
@@ -155227,8 +155409,8 @@
                 "air_date": "2008-10-06",
                 "airtime": "09:00",
                 "air_datetime": "2008-10-06T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Death's students find an ally in their battle against Giriko - the youngest Death Scythe, Justin Law. Unfortunately, Giriko gets some help too - after 800 years, the witch Arachne is awakened!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618539.jpg",
                 "tvmaze_episode_id": 400478,
                 "id": 27,
                 "watched": false,
@@ -155241,8 +155423,8 @@
                 "air_date": "2008-09-29",
                 "airtime": "09:00",
                 "air_datetime": "2008-09-29T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka, Soul, and Crona investigate rumors of recent attacks by a massive earthen golem. Serious danger arises, and Death Weapon Meister Academy's newest student stands up to the threat.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618538.jpg",
                 "tvmaze_episode_id": 400477,
                 "id": 26,
                 "watched": false,
@@ -155255,8 +155437,8 @@
                 "air_date": "2008-09-22",
                 "airtime": "09:00",
                 "air_datetime": "2008-09-22T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "The Death Scythes convene to hear Death's plan for dealing with the escaped Kishin. Death also shares his concerns with that Dr. Stein might be slipping back into his old ways.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618537.jpg",
                 "tvmaze_episode_id": 400476,
                 "id": 25,
                 "watched": false,
@@ -155269,8 +155451,8 @@
                 "air_date": "2008-09-15",
                 "airtime": "09:00",
                 "air_datetime": "2008-09-15T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Free from his underground prison, Asura unleashes his terrible powers on Death City! High in the air, above the destruction, Death himself engages the Kishin in battle.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618536.jpg",
                 "tvmaze_episode_id": 400475,
                 "id": 24,
                 "watched": false,
@@ -155283,8 +155465,8 @@
                 "air_date": "2008-09-08",
                 "airtime": "09:00",
                 "air_datetime": "2008-09-08T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Dr. Stein and Medusa's fight reaches a deadly climax, but the battle still rages in Asura's chamber - if Black\u2606Star and Kid can't defeat Eruka and Free, the Kishin will be unsealed.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618534.jpg",
                 "tvmaze_episode_id": 400474,
                 "id": 23,
                 "watched": false,
@@ -155297,8 +155479,8 @@
                 "air_date": "2008-09-01",
                 "airtime": "09:00",
                 "air_datetime": "2008-09-01T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Free and Eruka are perilously close to releasing Asura - close enough to witness a terrifying display of the Kishin's madness and power.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618533.jpg",
                 "tvmaze_episode_id": 400473,
                 "id": 22,
                 "watched": false,
@@ -155311,8 +155493,8 @@
                 "air_date": "2008-08-25",
                 "airtime": "09:00",
                 "air_datetime": "2008-08-25T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka's fight with Crona takes a very surprising turn when she puts herself in danger, hoping her actions will free the odd little Meister from a life of pain.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618532.jpg",
                 "tvmaze_episode_id": 400472,
                 "id": 21,
                 "watched": false,
@@ -155325,8 +155507,8 @@
                 "air_date": "2008-08-18",
                 "airtime": "09:00",
                 "air_datetime": "2008-08-18T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Empowered by black blood, Crona proves difficult to defeat. With their survival on the line, Maka and Soul push themselves to the brink of madness.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618531.jpg",
                 "tvmaze_episode_id": 400471,
                 "id": 20,
                 "watched": false,
@@ -155339,8 +155521,8 @@
                 "air_date": "2008-08-11",
                 "airtime": "09:00",
                 "air_datetime": "2008-08-11T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "As her ghouls rush to unseal Asura, Medusa stands in the way of Dr. Stein and his students. Elsewhere, Maka decides to settle it once and for all with Crona.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618530.jpg",
                 "tvmaze_episode_id": 400470,
                 "id": 19,
                 "watched": false,
@@ -155353,8 +155535,8 @@
                 "air_date": "2008-08-04",
                 "airtime": "09:00",
                 "air_datetime": "2008-08-04T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "A party to celebrate the founding of Death Weapon Meister Academy erupts into chaos when Medusa and her minions unleash an assault on the school.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618529.jpg",
                 "tvmaze_episode_id": 400469,
                 "id": 18,
                 "watched": false,
@@ -155367,8 +155549,8 @@
                 "air_date": "2008-07-28",
                 "airtime": "09:00",
                 "air_datetime": "2008-07-28T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Ox Ford triumphantly raises Excalibur to the heavens! Instead of fame and glory, he gets a painfully detailed account of Excalibur's past lives and loves.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618528.jpg",
                 "tvmaze_episode_id": 400468,
                 "id": 17,
                 "watched": false,
@@ -155381,8 +155563,8 @@
                 "air_date": "2008-07-21",
                 "airtime": "09:00",
                 "air_datetime": "2008-07-21T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Unsettled by something he heard on the ghost ship, Kid asks his father an unimaginable question. Dr. Stein has his own questions regarding Medusa's qualifications as a nurse.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618526.jpg",
                 "tvmaze_episode_id": 400467,
                 "id": 16,
                 "watched": false,
@@ -155395,8 +155577,8 @@
                 "air_date": "2008-07-14",
                 "airtime": "09:00",
                 "air_datetime": "2008-07-14T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Death the Kid and the Thompson sisters board a ghost ship full of human souls. After facing the vessel's demented captain, true evil unfurls its wings.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618525.jpg",
                 "tvmaze_episode_id": 400466,
                 "id": 15,
                 "watched": false,
@@ -155409,8 +155591,8 @@
                 "air_date": "2008-07-07",
                 "airtime": "09:00",
                 "air_datetime": "2008-07-07T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "There's an important exam coming, and legend says whoever gets the highest grade is destined to reach Death Scythe. Maka won't settle for anything but the best score.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618524.jpg",
                 "tvmaze_episode_id": 400465,
                 "id": 14,
                 "watched": false,
@@ -155423,8 +155605,8 @@
                 "air_date": "2008-06-30",
                 "airtime": "09:00",
                 "air_datetime": "2008-06-30T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka and Soul are having trouble syncing their wavelengths, a fact that proves problematic when they find themselves fighting an immortal werewolf.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618523.jpg",
                 "tvmaze_episode_id": 400464,
                 "id": 13,
                 "watched": false,
@@ -155437,8 +155619,8 @@
                 "air_date": "2008-06-23",
                 "airtime": "09:00",
                 "air_datetime": "2008-06-23T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "After seeing Soul's new scar, Maka searches for the strength to keep her partner safe. It could be a tough prospect - the witch responsible for the wound is dangerously close.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618493.jpg",
                 "tvmaze_episode_id": 400463,
                 "id": 12,
                 "watched": false,
@@ -155451,8 +155633,8 @@
                 "air_date": "2008-06-16",
                 "airtime": "09:00",
                 "air_datetime": "2008-06-16T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Black\u2606Star and Tsubaki will claim their first soul if they defeat Masamune - but if Tsubaki falls, she will be absorbed forever by her powerful and bitter brother.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618492.jpg",
                 "tvmaze_episode_id": 400462,
                 "id": 11,
                 "watched": false,
@@ -155465,8 +155647,8 @@
                 "air_date": "2008-06-09",
                 "airtime": "09:00",
                 "air_datetime": "2008-06-09T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Black\u2606Star and Tsubaki face Masamune, and as the battle against the dark Weapon escalates, it becomes clear that Tsubaki must finish the fight alone.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618491.jpg",
                 "tvmaze_episode_id": 400461,
                 "id": 10,
                 "watched": false,
@@ -155479,8 +155661,8 @@
                 "air_date": "2008-06-02",
                 "airtime": "09:00",
                 "air_datetime": "2008-06-02T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Black\u2606Star and Death the Kid discover the worst part of searching for the legendary Excalibur: finding the legendary Excalibur.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618488.jpg",
                 "tvmaze_episode_id": 400460,
                 "id": 9,
                 "watched": false,
@@ -155493,8 +155675,8 @@
                 "air_date": "2008-05-26",
                 "airtime": "09:00",
                 "air_datetime": "2008-05-26T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Soul is seriously injured and Maka's fading fast. Death Scythe and Dr. Stein step in to make sure the weird rampage of Crona and Ragnarok comes to an end.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618487.jpg",
                 "tvmaze_episode_id": 400459,
                 "id": 8,
                 "watched": false,
@@ -155507,8 +155689,8 @@
                 "air_date": "2008-05-19",
                 "airtime": "09:00",
                 "air_datetime": "2008-05-19T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka and Soul's trip to Italy turns ugly when they run into Crona and Ragnarok, a Meister and Weapon team that shares a highly unusual bond.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618486.jpg",
                 "tvmaze_episode_id": 400458,
                 "id": 7,
                 "watched": false,
@@ -155521,8 +155703,8 @@
                 "air_date": "2008-05-12",
                 "airtime": "09:00",
                 "air_datetime": "2008-05-12T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Death the Kid shows up for his first day at Death Weapon Meister Academy, and Black\u2606Star and Soul decide to welcome him with closed fists instead of open arms.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618485.jpg",
                 "tvmaze_episode_id": 400457,
                 "id": 6,
                 "watched": false,
@@ -155535,8 +155717,8 @@
                 "air_date": "2008-05-05",
                 "airtime": "09:00",
                 "air_datetime": "2008-05-05T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Maka, Soul, Black\u2606Star, and Tsubaki tangle with the mad scientist responsible for turning Sid into a zombie - the amazingly powerful Dr. Stein!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618484.jpg",
                 "tvmaze_episode_id": 400456,
                 "id": 5,
                 "watched": false,
@@ -155549,8 +155731,8 @@
                 "air_date": "2008-04-28",
                 "airtime": "09:00",
                 "air_datetime": "2008-04-28T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "It's a graveyard rumble when Maka, Soul, Black\u2606Star, and Tsubaki take on Sid. He used to be a respected teacher at the Academy, but now he's a zombie - and he's actively recruiting for the undead!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618483.jpg",
                 "tvmaze_episode_id": 400455,
                 "id": 4,
                 "watched": false,
@@ -155563,8 +155745,8 @@
                 "air_date": "2008-04-21",
                 "airtime": "09:00",
                 "air_datetime": "2008-04-21T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Death the Kid, Patty, and Liz travel to the desert to battle a witch who's raising the dead. If a horde of mummies doesn't stop them, Kid's freaky symmetry obsession might.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618482.jpg",
                 "tvmaze_episode_id": 400454,
                 "id": 3,
                 "watched": false,
@@ -155577,8 +155759,8 @@
                 "air_date": "2008-04-14",
                 "airtime": "09:00",
                 "air_datetime": "2008-04-14T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "A mobster and his goons are gunning for a witch, and Black\u2606Star and Tsubaki want the souls of all involved. Their plan runs into trouble when the witch's bodyguard draws his sword.",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618481.jpg",
                 "tvmaze_episode_id": 400453,
                 "id": 2,
                 "watched": false,
@@ -155591,8 +155773,8 @@
                 "air_date": "2008-04-07",
                 "airtime": "09:00",
                 "air_datetime": "2008-04-07T03:00:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "With 99 evil souls consumed, Soul just needs to defeat a witch to become a Death Scythe. He and Maka make their move against Blair - but a pointy hat doesn't always mean witch!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/647/1618480.jpg",
                 "tvmaze_episode_id": 400452,
                 "id": 1,
                 "watched": false,
@@ -164632,7 +164814,7 @@
             "Mystery"
         ],
         "rating": null,
-        "tmdb_rating": 7.1,
+        "tmdb_rating": 7.6,
         "status": "Continuing",
         "episodes": [
             {
@@ -164680,7 +164862,7 @@
             {
                 "season_number": 1,
                 "episode_number": 4,
-                "title": "Episode 4",
+                "title": "The Courier",
                 "air_date": "2026-11-13",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-13T12:00:00+00:00",
@@ -164694,7 +164876,7 @@
             {
                 "season_number": 1,
                 "episode_number": 5,
-                "title": "Episode 5",
+                "title": "Solitude",
                 "air_date": "2026-11-20",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-20T12:00:00+00:00",
@@ -164708,7 +164890,7 @@
             {
                 "season_number": 1,
                 "episode_number": 6,
-                "title": "Episode 6",
+                "title": "Only Connect",
                 "air_date": "2026-11-27",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-27T12:00:00+00:00",
@@ -164798,8 +164980,8 @@
         "genres": [
             "Sci-Fi & Fantasy"
         ],
-        "rating": null,
-        "tmdb_rating": 8.7,
+        "rating": "5",
+        "tmdb_rating": 8.6,
         "status": "Continuing",
         "episodes": [
             {
@@ -164919,7 +165101,13 @@
         "episode_source": "tvmaze",
         "episode_update_frequency": "weekly",
         "episode_update_time": "22:01",
-        "episode_update_weekday": 4
+        "episode_update_weekday": 4,
+        "lock_status": false,
+        "sonarr_url": "",
+        "episode_file_pattern": "",
+        "scan_mode": "sxxexx",
+        "season_offset": 0,
+        "keep_released_episodes": 0
     },
     {
         "id": 252,
@@ -170607,7 +170795,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 5,
-        "tmdb_rating": 9.7,
+        "tmdb_rating": 9.6,
         "status": "Continuing",
         "episodes": [
             {
@@ -170659,8 +170847,8 @@
                 "air_date": "2026-11-01",
                 "airtime": "20:15",
                 "air_datetime": "2026-11-01T14:15:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Over a trivial matter, Beerus decides to destroy Earth. In this desperate situation, Goku suggests asking Shenron about the \"Super Saiyan God\" that Beerus seeks. Is it possible to create this warrior, considered a mythical god?!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/649/1623437.jpg",
                 "tvmaze_episode_id": 3787509,
                 "id": 4,
                 "watched": false,
@@ -171597,7 +171785,7 @@
                 "tvmaze_episode_id": 52788,
                 "id": 1,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171611,7 +171799,7 @@
                 "tvmaze_episode_id": 52789,
                 "id": 2,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171625,7 +171813,7 @@
                 "tvmaze_episode_id": 52790,
                 "id": 3,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171639,7 +171827,7 @@
                 "tvmaze_episode_id": 52791,
                 "id": 4,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171653,7 +171841,7 @@
                 "tvmaze_episode_id": 52792,
                 "id": 5,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171667,7 +171855,7 @@
                 "tvmaze_episode_id": 52793,
                 "id": 6,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171681,7 +171869,7 @@
                 "tvmaze_episode_id": 52794,
                 "id": 7,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171695,7 +171883,7 @@
                 "tvmaze_episode_id": 52795,
                 "id": 8,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171709,7 +171897,7 @@
                 "tvmaze_episode_id": 52796,
                 "id": 9,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171723,7 +171911,7 @@
                 "tvmaze_episode_id": 52797,
                 "id": 10,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171737,7 +171925,7 @@
                 "tvmaze_episode_id": 52798,
                 "id": 11,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171751,7 +171939,7 @@
                 "tvmaze_episode_id": 52799,
                 "id": 12,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171765,7 +171953,7 @@
                 "tvmaze_episode_id": 52800,
                 "id": 13,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171779,7 +171967,7 @@
                 "tvmaze_episode_id": 52801,
                 "id": 14,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171793,7 +171981,7 @@
                 "tvmaze_episode_id": 52802,
                 "id": 15,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171807,7 +171995,7 @@
                 "tvmaze_episode_id": 52803,
                 "id": 16,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171821,7 +172009,7 @@
                 "tvmaze_episode_id": 52804,
                 "id": 17,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171835,7 +172023,7 @@
                 "tvmaze_episode_id": 52805,
                 "id": 18,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171849,7 +172037,7 @@
                 "tvmaze_episode_id": 52806,
                 "id": 19,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171863,7 +172051,7 @@
                 "tvmaze_episode_id": 52807,
                 "id": 20,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171877,7 +172065,7 @@
                 "tvmaze_episode_id": 52808,
                 "id": 21,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 1,
@@ -171891,7 +172079,7 @@
                 "tvmaze_episode_id": 52809,
                 "id": 22,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171905,7 +172093,7 @@
                 "tvmaze_episode_id": 52810,
                 "id": 23,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171919,7 +172107,7 @@
                 "tvmaze_episode_id": 52811,
                 "id": 24,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171933,7 +172121,7 @@
                 "tvmaze_episode_id": 52812,
                 "id": 25,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171947,7 +172135,7 @@
                 "tvmaze_episode_id": 52813,
                 "id": 26,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171961,7 +172149,7 @@
                 "tvmaze_episode_id": 52814,
                 "id": 27,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171975,7 +172163,7 @@
                 "tvmaze_episode_id": 52815,
                 "id": 28,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -171989,7 +172177,7 @@
                 "tvmaze_episode_id": 52816,
                 "id": 29,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172003,7 +172191,7 @@
                 "tvmaze_episode_id": 52817,
                 "id": 30,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172017,7 +172205,7 @@
                 "tvmaze_episode_id": 52818,
                 "id": 31,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172031,7 +172219,7 @@
                 "tvmaze_episode_id": 52819,
                 "id": 32,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172045,7 +172233,7 @@
                 "tvmaze_episode_id": 52820,
                 "id": 33,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172059,7 +172247,7 @@
                 "tvmaze_episode_id": 52821,
                 "id": 34,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172073,7 +172261,7 @@
                 "tvmaze_episode_id": 52822,
                 "id": 35,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172087,7 +172275,7 @@
                 "tvmaze_episode_id": 52823,
                 "id": 36,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172101,7 +172289,7 @@
                 "tvmaze_episode_id": 52824,
                 "id": 37,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172115,7 +172303,7 @@
                 "tvmaze_episode_id": 52825,
                 "id": 38,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172129,7 +172317,7 @@
                 "tvmaze_episode_id": 52826,
                 "id": 39,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172143,7 +172331,7 @@
                 "tvmaze_episode_id": 52827,
                 "id": 40,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172157,7 +172345,7 @@
                 "tvmaze_episode_id": 52828,
                 "id": 41,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172171,7 +172359,7 @@
                 "tvmaze_episode_id": 52829,
                 "id": 42,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172185,7 +172373,7 @@
                 "tvmaze_episode_id": 52830,
                 "id": 43,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 2,
@@ -172199,7 +172387,7 @@
                 "tvmaze_episode_id": 52831,
                 "id": 44,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172213,7 +172401,7 @@
                 "tvmaze_episode_id": 52832,
                 "id": 45,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172227,7 +172415,7 @@
                 "tvmaze_episode_id": 52833,
                 "id": 46,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172241,7 +172429,7 @@
                 "tvmaze_episode_id": 52834,
                 "id": 47,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172255,7 +172443,7 @@
                 "tvmaze_episode_id": 52835,
                 "id": 48,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172269,7 +172457,7 @@
                 "tvmaze_episode_id": 52836,
                 "id": 49,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172283,7 +172471,7 @@
                 "tvmaze_episode_id": 52837,
                 "id": 50,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172297,7 +172485,7 @@
                 "tvmaze_episode_id": 52838,
                 "id": 51,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172311,7 +172499,7 @@
                 "tvmaze_episode_id": 52839,
                 "id": 52,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172325,7 +172513,7 @@
                 "tvmaze_episode_id": 52840,
                 "id": 53,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172339,7 +172527,7 @@
                 "tvmaze_episode_id": 52841,
                 "id": 54,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172353,7 +172541,7 @@
                 "tvmaze_episode_id": 52842,
                 "id": 55,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172367,7 +172555,7 @@
                 "tvmaze_episode_id": 52843,
                 "id": 56,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172381,7 +172569,7 @@
                 "tvmaze_episode_id": 52844,
                 "id": 57,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172395,7 +172583,7 @@
                 "tvmaze_episode_id": 52845,
                 "id": 58,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172409,7 +172597,7 @@
                 "tvmaze_episode_id": 52846,
                 "id": 59,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172423,7 +172611,7 @@
                 "tvmaze_episode_id": 52847,
                 "id": 60,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172437,7 +172625,7 @@
                 "tvmaze_episode_id": 52848,
                 "id": 61,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172451,7 +172639,7 @@
                 "tvmaze_episode_id": 52849,
                 "id": 62,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172465,7 +172653,7 @@
                 "tvmaze_episode_id": 52850,
                 "id": 63,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172479,7 +172667,7 @@
                 "tvmaze_episode_id": 52851,
                 "id": 64,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172493,7 +172681,7 @@
                 "tvmaze_episode_id": 52852,
                 "id": 65,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 3,
@@ -172507,7 +172695,7 @@
                 "tvmaze_episode_id": 52853,
                 "id": 66,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172521,7 +172709,7 @@
                 "tvmaze_episode_id": 52854,
                 "id": 67,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172535,7 +172723,7 @@
                 "tvmaze_episode_id": 52855,
                 "id": 68,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172549,7 +172737,7 @@
                 "tvmaze_episode_id": 52856,
                 "id": 69,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172563,7 +172751,7 @@
                 "tvmaze_episode_id": 52857,
                 "id": 70,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172577,7 +172765,7 @@
                 "tvmaze_episode_id": 52858,
                 "id": 71,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172591,7 +172779,7 @@
                 "tvmaze_episode_id": 52859,
                 "id": 72,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172605,7 +172793,7 @@
                 "tvmaze_episode_id": 52860,
                 "id": 73,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172619,7 +172807,7 @@
                 "tvmaze_episode_id": 52861,
                 "id": 74,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172633,7 +172821,7 @@
                 "tvmaze_episode_id": 52862,
                 "id": 75,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172647,7 +172835,7 @@
                 "tvmaze_episode_id": 52863,
                 "id": 76,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172661,7 +172849,7 @@
                 "tvmaze_episode_id": 52864,
                 "id": 77,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172675,7 +172863,7 @@
                 "tvmaze_episode_id": 52865,
                 "id": 78,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172689,7 +172877,7 @@
                 "tvmaze_episode_id": 52866,
                 "id": 79,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172703,7 +172891,7 @@
                 "tvmaze_episode_id": 52867,
                 "id": 80,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172717,7 +172905,7 @@
                 "tvmaze_episode_id": 52868,
                 "id": 81,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172731,7 +172919,7 @@
                 "tvmaze_episode_id": 52869,
                 "id": 82,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172745,7 +172933,7 @@
                 "tvmaze_episode_id": 52870,
                 "id": 83,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172759,7 +172947,7 @@
                 "tvmaze_episode_id": 52871,
                 "id": 84,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172773,7 +172961,7 @@
                 "tvmaze_episode_id": 52872,
                 "id": 85,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172787,7 +172975,7 @@
                 "tvmaze_episode_id": 52873,
                 "id": 86,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172801,7 +172989,7 @@
                 "tvmaze_episode_id": 52874,
                 "id": 87,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 4,
@@ -172815,7 +173003,7 @@
                 "tvmaze_episode_id": 52875,
                 "id": 88,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172829,7 +173017,7 @@
                 "tvmaze_episode_id": 52876,
                 "id": 89,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172843,7 +173031,7 @@
                 "tvmaze_episode_id": 52877,
                 "id": 90,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172857,7 +173045,7 @@
                 "tvmaze_episode_id": 52878,
                 "id": 91,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172871,7 +173059,7 @@
                 "tvmaze_episode_id": 52879,
                 "id": 92,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172885,7 +173073,7 @@
                 "tvmaze_episode_id": 52880,
                 "id": 93,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172899,7 +173087,7 @@
                 "tvmaze_episode_id": 52881,
                 "id": 94,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172913,7 +173101,7 @@
                 "tvmaze_episode_id": 52882,
                 "id": 95,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172927,7 +173115,7 @@
                 "tvmaze_episode_id": 52883,
                 "id": 96,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172941,7 +173129,7 @@
                 "tvmaze_episode_id": 52884,
                 "id": 97,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172955,7 +173143,7 @@
                 "tvmaze_episode_id": 52885,
                 "id": 98,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172969,7 +173157,7 @@
                 "tvmaze_episode_id": 52886,
                 "id": 99,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172983,7 +173171,7 @@
                 "tvmaze_episode_id": 52887,
                 "id": 100,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -172997,7 +173185,7 @@
                 "tvmaze_episode_id": 52888,
                 "id": 101,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173011,7 +173199,7 @@
                 "tvmaze_episode_id": 52889,
                 "id": 102,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173025,7 +173213,7 @@
                 "tvmaze_episode_id": 52890,
                 "id": 103,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173039,7 +173227,7 @@
                 "tvmaze_episode_id": 52891,
                 "id": 104,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173053,7 +173241,7 @@
                 "tvmaze_episode_id": 52892,
                 "id": 105,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173067,7 +173255,7 @@
                 "tvmaze_episode_id": 52893,
                 "id": 106,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173081,7 +173269,7 @@
                 "tvmaze_episode_id": 52894,
                 "id": 107,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 5,
@@ -173095,7 +173283,7 @@
                 "tvmaze_episode_id": 52895,
                 "id": 108,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173109,7 +173297,7 @@
                 "tvmaze_episode_id": 52896,
                 "id": 109,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173123,7 +173311,7 @@
                 "tvmaze_episode_id": 52897,
                 "id": 110,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173137,7 +173325,7 @@
                 "tvmaze_episode_id": 52898,
                 "id": 111,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173151,7 +173339,7 @@
                 "tvmaze_episode_id": 52899,
                 "id": 112,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173165,7 +173353,7 @@
                 "tvmaze_episode_id": 52900,
                 "id": 113,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173179,7 +173367,7 @@
                 "tvmaze_episode_id": 52901,
                 "id": 114,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173193,7 +173381,7 @@
                 "tvmaze_episode_id": 52902,
                 "id": 115,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173207,7 +173395,7 @@
                 "tvmaze_episode_id": 52903,
                 "id": 116,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173221,7 +173409,7 @@
                 "tvmaze_episode_id": 52904,
                 "id": 117,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173235,7 +173423,7 @@
                 "tvmaze_episode_id": 52905,
                 "id": 118,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173249,7 +173437,7 @@
                 "tvmaze_episode_id": 52906,
                 "id": 119,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173263,7 +173451,7 @@
                 "tvmaze_episode_id": 52907,
                 "id": 120,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 6,
@@ -173277,7 +173465,7 @@
                 "tvmaze_episode_id": 52908,
                 "id": 121,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173291,7 +173479,7 @@
                 "tvmaze_episode_id": 1785856,
                 "id": 122,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173305,7 +173493,7 @@
                 "tvmaze_episode_id": 1793583,
                 "id": 123,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173319,7 +173507,7 @@
                 "tvmaze_episode_id": 1806579,
                 "id": 124,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173333,7 +173521,7 @@
                 "tvmaze_episode_id": 1806580,
                 "id": 125,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173347,7 +173535,7 @@
                 "tvmaze_episode_id": 1806581,
                 "id": 126,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173361,7 +173549,7 @@
                 "tvmaze_episode_id": 1806582,
                 "id": 127,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173375,7 +173563,7 @@
                 "tvmaze_episode_id": 1806583,
                 "id": 128,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173389,7 +173577,7 @@
                 "tvmaze_episode_id": 1806584,
                 "id": 129,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173403,7 +173591,7 @@
                 "tvmaze_episode_id": 1806585,
                 "id": 130,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173417,7 +173605,7 @@
                 "tvmaze_episode_id": 1806586,
                 "id": 131,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173431,7 +173619,7 @@
                 "tvmaze_episode_id": 1806587,
                 "id": 132,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             },
             {
                 "season_number": 7,
@@ -173445,7 +173633,7 @@
                 "tvmaze_episode_id": 1806588,
                 "id": 133,
                 "watched": true,
-                "notify": "unseen"
+                "notify": "seen"
             }
         ],
         "tvmaze_id": 563,
