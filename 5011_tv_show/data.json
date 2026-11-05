@@ -165135,7 +165135,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3616310,
                 "id": 7,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -170851,7 +170851,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 5,
-        "tmdb_rating": 9.6,
+        "tmdb_rating": 9.7,
         "status": "Continuing",
         "episodes": [
             {
