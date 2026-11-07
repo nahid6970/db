@@ -656,7 +656,7 @@
         "year": "2026",
         "release_date": "2026-12-16",
         "overview": "Beloved heroes from three distinct universes are set on a deadly collision course and face an existential threat unlike anything they've ever encountered.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/jzPwsojjFStf5lR5Nm07w2hH56G.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/9jlZ59UALLLOE279HMT19rP9XQs.jpg",
         "directory_path": "",
         "genres": [
             "Science Fiction",
@@ -2248,7 +2248,7 @@
         "genres": [
             "Comedy",
             "Drama",
-            "Horror"
+            "History"
         ],
         "runtime": 140,
         "rating": null,
@@ -2312,8 +2312,8 @@
             "Action"
         ],
         "runtime": 135,
-        "rating": 5,
-        "tmdb_rating": 9.5,
+        "rating": 4,
+        "tmdb_rating": 8.2,
         "status": "Released",
         "watched": false,
         "added_date": "2026-09-13T23:52:21.917839",
@@ -3134,7 +3134,7 @@
         "title": "The Vvaan",
         "year": "2026",
         "release_date": "2026-09-25",
-        "digital_release_date": "",
+        "digital_release_date": "2026-11-06",
         "category": "Bollywood",
         "overview": "A rational urban man defies his ancestral forbidden forest and awakens a divine goddess, only to realise that not only do some powers exist beyond logic but he must rise as the village\u2019s only saviour to protect his people from annihilation.",
         "cover_image": "https://image.tmdb.org/t/p/w500/fygsmzrKBGV3O4ky6l26wKF8QBA.jpg",
@@ -3146,7 +3146,7 @@
         ],
         "runtime": 136,
         "rating": 4,
-        "tmdb_rating": 8.0,
+        "tmdb_rating": 8.1,
         "status": "Released",
         "watched": false,
         "added_date": "2026-10-08T10:34:02.423122",
@@ -3829,8 +3829,8 @@
         },
         "radarr_id": null,
         "title": "ONE PIECE FILM GOD VALLEY",
-        "year": "",
-        "release_date": "",
+        "year": "2027",
+        "release_date": "2027-12-31",
         "digital_release_date": "",
         "category": "Anime",
         "overview": "An adaptation of the God Valley Incident from the One Piece manga.",
@@ -3851,5 +3851,34 @@
         "metadata_update_time": "23:00",
         "metadata_update_frequency": "monthly",
         "metadata_update_month_day": 26
+    },
+    {
+        "id": 132,
+        "tmdb_id": 534780,
+        "external_ids": {
+            "tmdb": 534780,
+            "imdb": "tt8108198"
+        },
+        "radarr_id": null,
+        "title": "Andhadhun",
+        "year": "2018",
+        "release_date": "2018-10-05",
+        "digital_release_date": "2018-10-05",
+        "category": "Bollywood",
+        "overview": "A series of mysterious events changes the life of a blind pianist who now must report a crime that was actually never witnessed by him.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/dy3K6hNvwE05siGgiLJcEiwgpdO.jpg",
+        "directory_path": "",
+        "genres": [
+            "Crime",
+            "Mystery",
+            "Thriller",
+            "Comedy"
+        ],
+        "runtime": 139,
+        "rating": 4,
+        "tmdb_rating": 7.6,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-11-05T19:02:42.493605"
     }
 ]
