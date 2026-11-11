@@ -152971,7 +152971,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3717630,
                 "id": 1747,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -165107,7 +165107,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": "5",
-        "tmdb_rating": 8.6,
+        "tmdb_rating": 8.5,
         "status": "Continuing",
         "episodes": [
             {
@@ -165215,11 +165215,11 @@
                 "air_date": "2026-11-10",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-10T12:00:00+00:00",
-                "overview": "",
+                "overview": "Vision's quest to embrace his true identity comes to a close.",
                 "still_image": "",
                 "tvmaze_episode_id": 3616311,
                 "id": 8,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             }
         ],
