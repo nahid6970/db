@@ -12750,7 +12750,7 @@
         "title": "WWE Friday Night SmackDown",
         "year": "1999",
         "overview": "The superstars of World Wrestling Entertainment's \"SmackDown\" brand collide each and every Friday on WWE Friday Night SmackDown.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/oOiGZPiQUaIfajBSZMqC9pGUqsy.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/nO1dO7DjG9A3FyiJWSMo0GoaKQW.jpg",
         "directory_path": "C:\\Users\\nahid\\Downloads\\@sonarr\\WWE SmackDown",
         "genres": [
             "Reality"
@@ -12962,11 +12962,11 @@
                 "air_date": "2026-11-13",
                 "airtime": "07:00",
                 "air_datetime": "2026-11-14T01:00:00+00:00",
-                "overview": "",
+                "overview": "After traveling to Raw and NXT, John Cena is set to journey to Friday Night SmackDown to invite more Superstars to the John Cena Classic, airing from Disney's ESPN Wide World of Sports Complex on Monday, Dec. 14.After betraying her friend Chelsea Green at WWE Crown Jewel and successfully cashing in her Money in the Bank contract for the second year in a row, Tiffany Stratton returns to SmackDown as\u00a0the new WWE Women's Champion.",
                 "still_image": "",
                 "tvmaze_episode_id": 3717639,
                 "id": 1421,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -13376,20 +13376,6 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3554511,
                 "id": 1392,
-                "watched": true,
-                "notify": "seen"
-            },
-            {
-                "season_number": 27,
-                "episode_number": 16,
-                "title": "#1389 - T-Mobile Arena in Las Vegas, NV",
-                "air_date": "2026-04-17",
-                "airtime": "06:00",
-                "air_datetime": "2026-04-18T00:00:00+00:00",
-                "overview": "Undisputed WWE Champion Cody Rhodes is primed to deliver a message to Randy Orton just one night before their title showdown on The Grandest Stage of Them All.\u00a0How will Jacob Fatu respond to Drew McIntyre's brutal attack last week on SmackDown as The Samoan Werewolf prepares to battle The Scottish Psychopath in an Unsanctioned Match at WrestleMania?\u00a0A WrestleMania-sized edition of SmackDown will feature the 12th Andre the Giant Memorial Battle Royal. With Superstars from Raw and SmackDown appearing to kick off WrestleMania weekend, who will hoist the trophy?\u00a0On the eve of WrestleMania 42, The Wyatt Sicks will battle longtime adversaries The MFTs in an Eight-Man Tag Team Street Fight.",
-                "still_image": "",
-                "tvmaze_episode_id": 3538512,
-                "id": 1391,
                 "watched": true,
                 "notify": "seen"
             }
@@ -46852,6 +46838,20 @@
         "tmdb_rating": 8.5,
         "status": "Continuing",
         "episodes": [
+            {
+                "season_number": 2,
+                "episode_number": 8,
+                "title": "Episode 8",
+                "air_date": "2026-11-21",
+                "airtime": "15:25",
+                "air_datetime": "2026-11-21T09:25:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3808539,
+                "id": 178,
+                "watched": false,
+                "notify": "unseen"
+            },
             {
                 "season_number": 2,
                 "episode_number": 7,
@@ -116746,7 +116746,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 7.1,
+        "tmdb_rating": 7.2,
         "status": "Ended",
         "episodes": [
             {
@@ -163090,7 +163090,7 @@
                 "air_date": "2011-06-23",
                 "airtime": "08:00",
                 "air_datetime": "2011-06-24T02:00:00+00:00",
-                "overview": "In the premiere of this legal drama, successful lawyer Harvey Specter (Gabriel Macht) hires brilliant college dropout Mike Ross (Patrick J. Adams) as a new associate at a top law firm despite the fact that Mike doesn't have a degree. In order to work together, both parties have to keep up the ruse to convince their coworkers that Mike is a real lawyer.",
+                "overview": "Successful lawyer Harvey Specter hires brilliant college dropout Mike Ross as a new associate at a top law firm despite the fact that Mike doesn't have a degree. In order to work together, both parties have to keep up the ruse to convince their coworkers that Mike is a real lawyer.",
                 "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/418/1046842.jpg",
                 "tvmaze_episode_id": 12493,
                 "id": 1,
@@ -165035,7 +165035,7 @@
                 "airtime": "18:00",
                 "air_datetime": "2026-11-13T12:00:00+00:00",
                 "overview": "Saga inches closer to Jurek while a risky plan takes shape to ensnare his messenger.",
-                "still_image": "",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/651/1628504.jpg",
                 "tvmaze_episode_id": 3665758,
                 "id": 4,
                 "watched": false,
@@ -165049,7 +165049,7 @@
                 "airtime": "18:00",
                 "air_datetime": "2026-11-20T12:00:00+00:00",
                 "overview": "Determined to find answers, Jonah pieces together a chilling theory about Jurek's true motive.",
-                "still_image": "",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/651/1628505.jpg",
                 "tvmaze_episode_id": 3665759,
                 "id": 5,
                 "watched": false,
