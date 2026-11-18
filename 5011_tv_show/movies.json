@@ -3881,5 +3881,33 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-11-05T19:02:42.493605"
+    },
+    {
+        "id": 133,
+        "tmdb_id": 1234139,
+        "external_ids": {
+            "tmdb": 1234139,
+            "imdb": "tt33318732"
+        },
+        "radarr_id": null,
+        "title": "Jailer 2",
+        "year": "2026",
+        "release_date": "2026-10-14",
+        "digital_release_date": "2026-11-12",
+        "category": "Tamil / Telugu",
+        "overview": "When a dangerous syndicate threatens his family, retired jailer Tiger Muthuvel Pandian goes undercover as a driver to battle enemies from the shadows.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/1f0FXDSqINFNIxJFSQd6HNvrd5d.jpg",
+        "directory_path": "",
+        "genres": [
+            "Action",
+            "Comedy",
+            "Drama"
+        ],
+        "runtime": 165,
+        "rating": 4,
+        "tmdb_rating": 8.0,
+        "status": "Released",
+        "watched": false,
+        "added_date": "2026-11-18T15:23:37.795225"
     }
 ]
