@@ -12952,7 +12952,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3717640,
                 "id": 1422,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -46877,7 +46877,7 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3808539,
                 "id": 178,
-                "watched": false,
+                "watched": true,
                 "notify": "seen"
             },
             {
@@ -166517,7 +166517,7 @@
             "Sci-Fi & Fantasy",
             "Action & Adventure"
         ],
-        "rating": 4,
+        "rating": "4",
         "tmdb_rating": 8.6,
         "status": "Continuing",
         "episodes": [
@@ -170026,7 +170026,13 @@
         "episode_source": "tvmaze",
         "episode_update_frequency": "weekly",
         "episode_update_time": "22:22",
-        "episode_update_weekday": 2
+        "episode_update_weekday": 2,
+        "lock_status": false,
+        "sonarr_url": "https://www.youtube.com/watch?v=_Cj93_bZzAY&list=PLxIumIYapv_sYGSqBSXIS2RVnVtni6Gqp&index=122",
+        "episode_file_pattern": "",
+        "scan_mode": "sxxexx",
+        "season_offset": 0,
+        "keep_released_episodes": 0
     },
     {
         "id": 258,
