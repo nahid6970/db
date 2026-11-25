@@ -12948,7 +12948,7 @@
                 "air_date": "2026-11-20",
                 "airtime": "07:00",
                 "air_datetime": "2026-11-21T01:00:00+00:00",
-                "overview": "",
+                "overview": "At Survivor Series, Charlotte Flair, Stephanie Vaquer, Alexa Bliss, Tatum Paxley and Bayley will battle Fatal Influence, Jade Cargill and Michin in a WarGames Match. En route to the career-altering showdown, The Queen will take on The Storm to determine which team will get the WarGames advantage.\u00a0Following comments from Damian Priest questioning whether United States Champion Trick Williams deserves the opportunities he has been receiving, the two Superstars will go one-on-one in a non-title match.Last week, The War Raiders interrupted The MFTs' WWE Tag Team Championship Match against Bakusai with a brutal attack.\u00a0Tonight, Shinsuke Nakamura and Kyoki will be out for retribution against Erik and Ivar in an explosive tag team showdown.",
                 "still_image": "",
                 "tvmaze_episode_id": 3717640,
                 "id": 1422,
@@ -13362,20 +13362,6 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3554512,
                 "id": 1393,
-                "watched": true,
-                "notify": "seen"
-            },
-            {
-                "season_number": 27,
-                "episode_number": 17,
-                "title": "#1390 - Dickies Arena in Fort Worth, TX",
-                "air_date": "2026-04-24",
-                "airtime": "06:00",
-                "air_datetime": "2026-04-25T00:00:00+00:00",
-                "overview": "After defeating Jade Cargill on The Grandest Stage of Them All, Rhea Ripley journeys to SmackDown as the new WWE Women's Champion.\u00a0Trick Williams will celebrate his title victory\u00a0with Lil Yachty on the SmackDown after WrestleMania.After overcoming Jordynne Grace last week, new No. 1 Contender Tiffany Stratton is set to challenge Giulia for the Women's United States Championship.After returning to WWE to help Brie Bella capture the WWE Women's Tag Team Championship at The Show of Shows, Paige returns to SmackDown\u00a0for the first time in nearly a decade.\u00a0Jacob Fatu the Samoan Werewolf will be LIVE on SmackDown.",
-                "still_image": "",
-                "tvmaze_episode_id": 3554511,
-                "id": 1392,
                 "watched": true,
                 "notify": "seen"
             }
@@ -17079,7 +17065,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 8.1,
+        "tmdb_rating": 8.0,
         "status": "Continuing",
         "episodes": [
             {
@@ -24770,7 +24756,7 @@
         "title": "JUJUTSU KAISEN",
         "year": "2020",
         "overview": "Yuji Itadori is a boy with tremendous physical strength, though he lives a completely ordinary high school life. One day, to save a classmate who has been attacked by curses, he eats the finger of Ryomen Sukuna, taking the curse into his own soul. From then on, he shares one body with Ryomen Sukuna. Guided by the most powerful of sorcerers, Satoru Gojo, Itadori is admitted to Tokyo Jujutsu High School, an organization that fights the curses... and thus begins the heroic tale of a boy who became a curse to exorcise a curse, a life from which he could never turn back.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/6qQzMJG27XOJsyAEEIisoJB45j2.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/fHpKWq9ayzSk8nSwqRuaAUemRKh.jpg",
         "directory_path": "",
         "genres": [
             "Animation",
@@ -29818,6 +29804,20 @@
         "status": "Continuing",
         "episodes": [
             {
+                "season_number": 5,
+                "episode_number": 1,
+                "title": "Episode 1",
+                "air_date": "2027-02-17",
+                "airtime": "18:00",
+                "air_datetime": "2027-02-17T12:00:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3824818,
+                "id": 33,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
                 "season_number": 4,
                 "episode_number": 8,
                 "title": "Don't Leave Me Hanging Here",
@@ -30293,7 +30293,7 @@
             "Drama"
         ],
         "rating": 4,
-        "tmdb_rating": 8.2,
+        "tmdb_rating": 8.4,
         "status": "Continuing",
         "episodes": [
             {
@@ -46854,8 +46854,22 @@
         "episodes": [
             {
                 "season_number": 2,
+                "episode_number": 10,
+                "title": "Episode 10",
+                "air_date": "2026-12-05",
+                "airtime": "15:25",
+                "air_datetime": "2026-12-05T09:25:00+00:00",
+                "overview": "",
+                "still_image": "",
+                "tvmaze_episode_id": 3827480,
+                "id": 180,
+                "watched": false,
+                "notify": "unseen"
+            },
+            {
+                "season_number": 2,
                 "episode_number": 9,
-                "title": "Episode 9",
+                "title": "Yuno Grinberryall",
                 "air_date": "2026-11-28",
                 "airtime": "15:25",
                 "air_datetime": "2026-11-28T09:25:00+00:00",
@@ -51785,7 +51799,7 @@
             "Comedy"
         ],
         "rating": 4,
-        "tmdb_rating": 7.6,
+        "tmdb_rating": 7.7,
         "status": "Continuing",
         "episodes": [
             {
@@ -112676,7 +112690,7 @@
         "title": "The Expanse",
         "year": "2015",
         "overview": "A thriller set two hundred years in the future following the case of a missing young woman who brings a hardened detective and a rogue ship's captain together in a race across the solar system to expose the greatest conspiracy in human history.",
-        "cover_image": "https://image.tmdb.org/t/p/w500/5vQlVWkIMPhZ88OWchJsgwGEK9.jpg",
+        "cover_image": "https://image.tmdb.org/t/p/w500/8djpxDeWpINnGhjpFXQjnBe6zbx.jpg",
         "directory_path": "",
         "genres": [
             "Drama",
@@ -120382,7 +120396,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 8.2,
+        "tmdb_rating": 8.1,
         "status": "Ended",
         "episodes": [
             {
@@ -131543,7 +131557,7 @@
             "Sci-Fi & Fantasy"
         ],
         "rating": 4,
-        "tmdb_rating": 8.1,
+        "tmdb_rating": 8.0,
         "status": "Ended",
         "episodes": [
             {
@@ -153023,7 +153037,7 @@
                 "air_date": "2026-11-23",
                 "airtime": "18:00",
                 "air_datetime": "2026-11-23T12:00:00+00:00",
-                "overview": "",
+                "overview": "Find out how World Heavyweight Champion Roman Reigns and The Bloodline will respond days before their epic clash at Survivor Series, tonight.Intercontinental Champion Ethan Page will put his title on the line against AAA World Cruiserweight Champion Rey Fenix.\u00a0Sol Ruca takes on Lyra Valkyria after a verbal altercation last week over who is more deserving of a title match against new Women's Intercontinental Champion IYO SKY.Stephanie Vaquer is set to join forces with Bayley against Fallon Henley and Lainey Reid of Fatal Influence prior to Saturday's Women's WarGames Match at Survivor Series.",
                 "still_image": "",
                 "tvmaze_episode_id": 3717632,
                 "id": 1749,
@@ -153435,20 +153449,6 @@
                 "still_image": "",
                 "tvmaze_episode_id": 3554519,
                 "id": 1720,
-                "watched": true,
-                "notify": "seen"
-            },
-            {
-                "season_number": 33,
-                "episode_number": 17,
-                "title": "#1718 - Sames Auto Arena in Laredo, TX",
-                "air_date": "2026-04-27",
-                "airtime": "18:00",
-                "air_datetime": "2026-04-27T12:00:00+00:00",
-                "overview": "After giving Fatu a week to think about it, The OTC will make his decision about the challenge.\u00a0The Intercontinental Champion Penta flies back into the ring tonight looking for retribution against Rusev the Bulgarian Brute.\u00a0Returning from a strong showing in the turbulent WWE Women's Tag Team Title Fatal 4-Way Match at WrestleMania, Bayley and Lyra Valkyria are set to take on Raquel Rodriguez and Roxanne Perez of The Judgment Day, tonight on Raw.Becky Lynch will be live tonight on Raw after reclaiming the Women's Intercontinental Championship from AJ Lee on The Grandest Stage of Them All.\u00a0Say his name and he will appear on Monday Night Raw.",
-                "still_image": "",
-                "tvmaze_episode_id": 3554518,
-                "id": 1719,
                 "watched": true,
                 "notify": "seen"
             }
@@ -164996,7 +164996,7 @@
             "Mystery"
         ],
         "rating": null,
-        "tmdb_rating": 7.6,
+        "tmdb_rating": 7.7,
         "status": "Continuing",
         "episodes": [
             {
@@ -165086,11 +165086,11 @@
             {
                 "season_number": 1,
                 "episode_number": 7,
-                "title": "Episode 7",
+                "title": "Grey Skies",
                 "air_date": "2026-12-04",
                 "airtime": "18:00",
                 "air_datetime": "2026-12-04T12:00:00+00:00",
-                "overview": "",
+                "overview": "Tensions inside the facility reach a breaking point as Jurek makes his boldest move yet.",
                 "still_image": "",
                 "tvmaze_episode_id": 3665761,
                 "id": 7,
@@ -166163,11 +166163,11 @@
             {
                 "season_number": 3,
                 "episode_number": 7,
-                "title": "TBA",
-                "air_date": "2026-11-25",
+                "title": "Orodruin",
+                "air_date": "2026-11-24",
                 "airtime": "18:00",
-                "air_datetime": "2026-11-25T12:00:00+00:00",
-                "overview": "",
+                "air_datetime": "2026-11-24T12:00:00+00:00",
+                "overview": "Sauron attempts to forge the One Ring.",
                 "still_image": "",
                 "tvmaze_episode_id": 3682723,
                 "id": 23,
@@ -166177,11 +166177,11 @@
             {
                 "season_number": 3,
                 "episode_number": 8,
-                "title": "TBA",
-                "air_date": "2026-11-25",
+                "title": "The Doom of Men",
+                "air_date": "2026-11-24",
                 "airtime": "18:00",
-                "air_datetime": "2026-11-25T12:00:00+00:00",
-                "overview": "",
+                "air_datetime": "2026-11-24T12:00:00+00:00",
+                "overview": "As Sauron's triumph draws near, the forces of good and evil assemble to determine Middle-earth's fate.",
                 "still_image": "",
                 "tvmaze_episode_id": 3682724,
                 "id": 24,
@@ -171063,8 +171063,8 @@
                 "air_date": "2026-11-22",
                 "airtime": "20:15",
                 "air_datetime": "2026-11-22T14:15:00+00:00",
-                "overview": "",
-                "still_image": "",
+                "overview": "Though Earth was spared from Beerus's destruction thanks to Goku's efforts, a new threat approaches...! The remnants of the Frieza Force head to Earth in search of the Dragon Balls for one purpose... to resurrect Frieza!",
+                "still_image": "https://static.tvmaze.com/uploads/images/original_untouched/652/1632174.jpg",
                 "tvmaze_episode_id": 3787512,
                 "id": 7,
                 "watched": false,
@@ -171073,7 +171073,7 @@
             {
                 "season_number": 1,
                 "episode_number": 8,
-                "title": "Episode 8",
+                "title": "Revenge 'F'",
                 "air_date": "2026-11-29",
                 "airtime": "20:15",
                 "air_datetime": "2026-11-29T14:15:00+00:00",
