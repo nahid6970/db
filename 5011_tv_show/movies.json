@@ -3909,5 +3909,31 @@
         "status": "Released",
         "watched": false,
         "added_date": "2026-11-18T15:23:37.795225"
+    },
+    {
+        "id": 134,
+        "tmdb_id": 22881,
+        "external_ids": {
+            "tmdb": 22881,
+            "imdb": "tt0878804"
+        },
+        "radarr_id": null,
+        "title": "The Blind Side",
+        "year": "2009",
+        "release_date": "2009-11-20",
+        "digital_release_date": "2010-02-27",
+        "category": "Hollywood",
+        "overview": "The story of Michael Oher, a homeless and traumatized boy who became an All American football player and first round NFL draft pick with the help of a caring woman and her family.",
+        "cover_image": "https://image.tmdb.org/t/p/w500/PhpAdRopu0sOWf0BY7vVtxrRD3.jpg",
+        "directory_path": "",
+        "genres": [
+            "Drama"
+        ],
+        "runtime": 129,
+        "rating": 4,
+        "tmdb_rating": 7.7,
+        "status": "Released",
+        "watched": true,
+        "added_date": "2026-11-26T04:02:13.899919"
     }
 ]
