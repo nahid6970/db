@@ -1660,7 +1660,7 @@
         "rating": 4,
         "tmdb_rating": 7.7,
         "status": "Released",
-        "watched": false,
+        "watched": true,
         "added_date": "2026-09-11T10:52:12.378580",
         "digital_release_date": "2026-11-27",
         "metadata_update_time": "14:36",
